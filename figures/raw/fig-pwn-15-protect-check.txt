@@ -1,0 +1,31 @@
+mzj@Ubuntu-24.04:~$ cd ~/pwn-lab && gcc -O0 -o overflow-pie overflow.c
+wsl: Failed to start the systemd user session for 'mzj'. See journalctl for more details.
+overflow.c: In function ‘main’:
+overflow.c:18:9: warning: ‘read’ writing 32 bytes into a region of size 24 overflows the destination [-Wstringop-overflow=]
+   18 |     if (read(STDIN_FILENO, session.name, sizeof session) < 0) return 1;
+      |         ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+overflow.c:9:10: note: destination object ‘name’ of size 24
+    9 |     char name[24];
+      |          ^~~~
+In file included from overflow.c:2:
+/usr/include/unistd.h:371:16: note: in a call to function ‘read’ declared with attribute ‘access (write_only, 2, 3)’
+  371 | extern ssize_t read (int __fd, void *__buf, size_t __nbytes) __wur
+      |                ^~~~
+
+mzj@Ubuntu-24.04:~$ cd ~/pwn-lab && file overflow overflow-pie
+overflow:     ELF 64-bit LSB executable, x86-64, version 1 (SYSV), dynamically linked, interpreter /lib64/ld-linux-x86-64.so.2, BuildID[sha1]=40996d15db6f40bfce3ffb05c98be4019950b248, for GNU/Linux 3.2.0, not stripped
+overflow-pie: ELF 64-bit LSB pie executable, x86-64, version 1 (SYSV), dynamically linked, interpreter /lib64/ld-linux-x86-64.so.2, BuildID[sha1]=cc0c67230ce2d0332d0f2891a14034927c847999, for GNU/Linux 3.2.0, not stripped
+
+mzj@Ubuntu-24.04:~$ cd ~/pwn-lab && LANG=C readelf -h overflow | grep Type
+  Type:                              EXEC (Executable file)
+
+mzj@Ubuntu-24.04:~$ cd ~/pwn-lab && LANG=C readelf -h overflow-pie | grep Type
+  Type:                              DYN (Position-Independent Executable file)
+
+mzj@Ubuntu-24.04:~$ cd ~/pwn-lab && LANG=C readelf -l overflow | grep GNU_STACK
+  GNU_STACK      0x0000000000000000 0x0000000000000000 0x0000000000000000
+
+mzj@Ubuntu-24.04:~$ cd ~/pwn-lab && objdump -d overflow-pie | grep stack_chk | head -4
+0000000000001090 <__stack_chk_fail@plt>:
+    1094:	ff 25 26 2f 00 00    	jmp    *0x2f26(%rip)        # 3fc0 <__stack_chk_fail@GLIBC_2.4>
+    1275:	e8 16 fe ff ff       	call   1090 <__stack_chk_fail@plt>

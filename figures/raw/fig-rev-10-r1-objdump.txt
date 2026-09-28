@@ -1,0 +1,31 @@
+mzj@Ubuntu-24.04:~$ cd /mnt/c/Users/mzj/Desktop/CTF/CTF-training-problem-first-full && LC_ALL=C objdump -d labs/reverse/check1 | sed -n '/1232:/,/125b:/p'
+    1232:	48 8d 85 70 ff ff ff 	lea    -0x90(%rbp),%rax
+    1239:	48 89 c7             	mov    %rax,%rdi
+    123c:	e8 5f fe ff ff       	call   10a0 <strlen@plt>
+    1241:	48 83 f8 11          	cmp    $0x11,%rax
+    1245:	74 16                	je     125d <main+0x94>
+    1247:	48 8d 05 d5 0d 00 00 	lea    0xdd5(%rip),%rax        # 2023 <expected+0x13>
+    124e:	48 89 c7             	mov    %rax,%rdi
+    1251:	e8 3a fe ff ff       	call   1090 <puts@plt>
+    1256:	b8 01 00 00 00       	mov    $0x1,%eax
+    125b:	eb 7a                	jmp    12d7 <main+0x10e>
+
+mzj@Ubuntu-24.04:~$ cd /mnt/c/Users/mzj/Desktop/CTF/CTF-training-problem-first-full && LC_ALL=C objdump -d labs/reverse/check1 | sed -n '/126a:/,/12b1:/p'
+    126a:	48 8d 95 70 ff ff ff 	lea    -0x90(%rbp),%rdx
+    1271:	48 8b 85 68 ff ff ff 	mov    -0x98(%rbp),%rax
+    1278:	48 01 d0             	add    %rdx,%rax
+    127b:	0f b6 00             	movzbl (%rax),%eax
+    127e:	83 f0 23             	xor    $0x23,%eax
+    1281:	89 c2                	mov    %eax,%edx
+    1283:	48 8d 0d 86 0d 00 00 	lea    0xd86(%rip),%rcx        # 2010 <expected>
+    128a:	48 8b 85 68 ff ff ff 	mov    -0x98(%rbp),%rax
+    1291:	48 01 c8             	add    %rcx,%rax
+    1294:	0f b6 00             	movzbl (%rax),%eax
+    1297:	38 c2                	cmp    %al,%dl
+    1299:	74 16                	je     12b1 <main+0xe8>
+    129b:	48 8d 05 81 0d 00 00 	lea    0xd81(%rip),%rax        # 2023 <expected+0x13>
+    12a2:	48 89 c7             	mov    %rax,%rdi
+    12a5:	e8 e6 fd ff ff       	call   1090 <puts@plt>
+    12aa:	b8 01 00 00 00       	mov    $0x1,%eax
+    12af:	eb 26                	jmp    12d7 <main+0x10e>
+    12b1:	48 83 85 68 ff ff ff 	addq   $0x1,-0x98(%rbp)

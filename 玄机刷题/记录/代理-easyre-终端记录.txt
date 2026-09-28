@@ -1,0 +1,1347 @@
+**********************
+PowerShell transcript start
+Start time: 20260927192903
+Username: DESKTOP-412KTAR\mzj
+RunAs User: DESKTOP-412KTAR\mzj
+Configuration Name: 
+Machine: DESKTOP-412KTAR (Microsoft Windows NT 10.0.26200.0)
+Host Application: C:\Users\mzj\.cache\codex-runtimes\codex-primary-runtime\dependencies\native\powershell\pwsh.dll -Command try { [Console]::OutputEncoding=[System.Text.Encoding]::UTF8 } catch {}
+$ErrorActionPreference = 'Stop'
+$workDir = 'C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\OpenHarmony_easyre_560'
+$logPath = 'C:\Users\mzj\Desktop\CTF\玄机刷题\记录\代理-easyre-终端记录.txt'
+New-Item -ItemType Directory -Force -Path $workDir | Out-Null
+Start-Transcript -Path $logPath -Append
+Write-Output '=== TASK: Offline analysis of Xuanji #560 easyre ==='
+Write-Output 'Policy: local attachment only; no web, public writeup, platform submission, or guide edits.'
+Write-Output "Working directory: $workDir"
+Write-Output "Archive: D:\Downloads\easyre.zip"
+if (-not (Test-Path -LiteralPath 'D:\Downloads\easyre.zip')) { throw 'Missing D:\Downloads\easyre.zip' }
+Get-Item -LiteralPath 'D:\Downloads\easyre.zip' | Format-List FullName,Length,LastWriteTime
+Get-FileHash -LiteralPath 'D:\Downloads\easyre.zip' -Algorithm SHA256 | Format-List
+Add-Type -AssemblyName System.IO.Compression.FileSystem
+$zip = [System.IO.Compression.ZipFile]::OpenRead('D:\Downloads\easyre.zip')
+try { $zip.Entries | Select-Object FullName,Length,CompressedLength,LastWriteTime | Format-Table -AutoSize } finally { $zip.Dispose() }
+Stop-Transcript
+Process ID: 1048
+PSVersion: 7.6.5
+PSEdition: Core
+GitCommitId: 7.6.5
+OS: Microsoft Windows 10.0.26200
+Platform: Win32NT
+PSCompatibleVersions: 1.0, 2.0, 3.0, 4.0, 5.0, 5.1, 6.0, 7.0
+PSRemotingProtocolVersion: 2.4
+SerializationVersion: 1.1.0.1
+WSManStackVersion: 3.0
+**********************
+Transcript started, output file is C:\Users\mzj\Desktop\CTF\玄机刷题\记录\代理-easyre-终端记录.txt
+=== TASK: Offline analysis of Xuanji #560 easyre ===
+Policy: local attachment only; no web, public writeup, platform submission, or guide edits.
+Working directory: C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\OpenHarmony_easyre_560
+Archive: D:\Downloads\easyre.zip
+
+FullName      : D:\Downloads\easyre.zip
+Length        : 117343
+LastWriteTime : 2026/9/27 19:27:31
+
+
+Algorithm : SHA256
+Hash      : 7401DF22E0BEEA48C439938B622931414F3EC89D383B5AA4CD72E138C42805EA
+Path      : D:\Downloads\easyre.zip
+
+
+FullName                 Length CompressedLength LastWriteTime
+--------                 ------ ---------------- -------------
+entry-default-signed.hap 154037           117197 2025/5/26 20:12:02 +08:00
+
+**********************
+PowerShell transcript end
+End time: 20260927192903
+**********************
+**********************
+PowerShell transcript start
+Start time: 20260927192916
+Username: DESKTOP-412KTAR\mzj
+RunAs User: DESKTOP-412KTAR\mzj
+Configuration Name: 
+Machine: DESKTOP-412KTAR (Microsoft Windows NT 10.0.26200.0)
+Host Application: C:\Users\mzj\.cache\codex-runtimes\codex-primary-runtime\dependencies\native\powershell\pwsh.dll -Command try { [Console]::OutputEncoding=[System.Text.Encoding]::UTF8 } catch {}
+$ErrorActionPreference = 'Stop'
+$workDir = 'C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\OpenHarmony_easyre_560'
+$logPath = 'C:\Users\mzj\Desktop\CTF\玄机刷题\记录\代理-easyre-终端记录.txt'
+Start-Transcript -Path $logPath -Append
+Write-Output '=== Extracting outer ZIP and inventorying HAP ==='
+Expand-Archive -LiteralPath 'D:\Downloads\easyre.zip' -DestinationPath $workDir -Force
+Get-ChildItem -LiteralPath $workDir -Recurse -File | Select-Object FullName,Length | Format-Table -AutoSize
+$hapPath = Join-Path $workDir 'entry-default-signed.hap'
+Get-FileHash -LiteralPath $hapPath -Algorithm SHA256 | Format-List
+Write-Output '=== Available local analysis tools ==='
+Get-Command python,python3,py,java,7z,7za,strings,llvm-objdump,objdump,xxd -ErrorAction SilentlyContinue | Select-Object Name,Source | Format-Table -AutoSize
+Write-Output '=== HAP ZIP entries ==='
+Add-Type -AssemblyName System.IO.Compression.FileSystem
+$hap = [System.IO.Compression.ZipFile]::OpenRead($hapPath)
+try { $hap.Entries | Select-Object FullName,Length,CompressedLength,LastWriteTime | Format-Table -AutoSize } finally { $hap.Dispose() }
+Stop-Transcript
+Process ID: 6132
+PSVersion: 7.6.5
+PSEdition: Core
+GitCommitId: 7.6.5
+OS: Microsoft Windows 10.0.26200
+Platform: Win32NT
+PSCompatibleVersions: 1.0, 2.0, 3.0, 4.0, 5.0, 5.1, 6.0, 7.0
+PSRemotingProtocolVersion: 2.4
+SerializationVersion: 1.1.0.1
+WSManStackVersion: 3.0
+**********************
+Transcript started, output file is C:\Users\mzj\Desktop\CTF\玄机刷题\记录\代理-easyre-终端记录.txt
+=== Extracting outer ZIP and inventorying HAP ===
+
+FullName                                                                                   Length
+--------                                                                                   ------
+C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\OpenHarmony_easyre_560\entry-default-signed.hap 154037
+
+
+Algorithm : SHA256
+Hash      : 04449FE1DDF911A36A9A9644657F316F052B46640C224EAE61BCE3B08904D87E
+Path      : C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\OpenHarmony_easyre_560\entry-default-signed.hap
+
+=== Available local analysis tools ===
+
+Name        Source
+----        ------
+python.exe  C:\Users\mzj\AppData\Local\Programs\Python\Python312\python.exe
+python3.exe C:\Users\mzj\AppData\Local\Microsoft\WindowsApps\python3.exe
+py.exe      C:\WINDOWS\py.exe
+strings.exe C:\msys64\mingw64\bin\strings.exe
+objdump.exe C:\msys64\mingw64\bin\objdump.exe
+
+=== HAP ZIP entries ===
+
+FullName                                  Length CompressedLength LastWriteTime
+--------                                  ------ ---------------- -------------
+ets/modules.abc                            29248            29248 2025/5/26 20:12:02 +08:00
+.pages.info                                    8                8 2025/5/26 20:12:02 +08:00
+ets/sourceMaps.map                         14330            14330 2025/5/26 20:12:02 +08:00
+module.json                                 1527             1527 2025/5/26 20:12:02 +08:00
+pack.info                                    636              636 2025/5/26 20:12:02 +08:00
+pkgContextInfo.json                          444              444 2025/5/26 20:12:02 +08:00
+resources.index                             1027             1027 2025/5/26 20:12:02 +08:00
+resources/base/media/background.png        75603            75603 2025/5/26 20:12:02 +08:00
+resources/base/media/foreground.png         9325             9325 2025/5/26 20:12:02 +08:00
+resources/base/media/layered_image.json       81               81 2025/5/26 20:12:02 +08:00
+resources/base/media/startIcon.png         20093            20093 2025/5/26 20:12:02 +08:00
+resources/base/profile/backup_config.json     29               29 2025/5/26 20:12:02 +08:00
+resources/base/profile/main_pages.json        36               36 2025/5/26 20:12:02 +08:00
+
+**********************
+PowerShell transcript end
+End time: 20260927192917
+**********************
+**********************
+PowerShell transcript start
+Start time: 20260927192932
+Username: DESKTOP-412KTAR\mzj
+RunAs User: DESKTOP-412KTAR\mzj
+Configuration Name: 
+Machine: DESKTOP-412KTAR (Microsoft Windows NT 10.0.26200.0)
+Host Application: C:\Users\mzj\.cache\codex-runtimes\codex-primary-runtime\dependencies\native\powershell\pwsh.dll -Command try { [Console]::OutputEncoding=[System.Text.Encoding]::UTF8 } catch {}
+$ErrorActionPreference = 'Stop'
+$workDir = 'C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\OpenHarmony_easyre_560'
+$logPath = 'C:\Users\mzj\Desktop\CTF\玄机刷题\记录\代理-easyre-终端记录.txt'
+Start-Transcript -Path $logPath -Append
+Write-Output '=== Extracting HAP into isolated work folder ==='
+$hapDir = Join-Path $workDir 'hap_extracted'
+Expand-Archive -LiteralPath (Join-Path $workDir 'entry-default-signed.hap') -DestinationPath $hapDir -Force
+Write-Output '=== module.json ==='
+Get-Content -LiteralPath (Join-Path $hapDir 'module.json') -Raw
+Write-Output '=== pack.info ==='
+Get-Content -LiteralPath (Join-Path $hapDir 'pack.info') -Raw
+Write-Output '=== pkgContextInfo.json ==='
+Get-Content -LiteralPath (Join-Path $hapDir 'pkgContextInfo.json') -Raw
+Write-Output '=== sourceMaps.map: file encoding, first 8000 chars ==='
+$mapPath = Join-Path $hapDir 'ets/sourceMaps.map'
+$map = [System.IO.File]::ReadAllText($mapPath)
+Write-Output "chars=$($map.Length)"
+Write-Output $map.Substring(0, [Math]::Min(8000, $map.Length))
+Write-Output '=== ASCII strings from Ark bytecode ==='
+& 'C:\msys64\mingw64\bin\strings.exe' -a (Join-Path $hapDir 'ets/modules.abc') | Select-Object -First 200
+Stop-Transcript
+Process ID: 17380
+PSVersion: 7.6.5
+PSEdition: Core
+GitCommitId: 7.6.5
+OS: Microsoft Windows 10.0.26200
+Platform: Win32NT
+PSCompatibleVersions: 1.0, 2.0, 3.0, 4.0, 5.0, 5.1, 6.0, 7.0
+PSRemotingProtocolVersion: 2.4
+SerializationVersion: 1.1.0.1
+WSManStackVersion: 3.0
+**********************
+Transcript started, output file is C:\Users\mzj\Desktop\CTF\玄机刷题\记录\代理-easyre-终端记录.txt
+=== Extracting HAP into isolated work folder ===
+=== module.json ===
+{"app":{"iconId":16777219,"debug":true,"minAPIVersion":50005017,"icon":"$media:layered_image","buildMode":"debug","label":"$string:app_name","bundleType":"app","versionName":"1.0.0","versionCode":1000000,"appEnvironments":[],"compileSdkType":"HarmonyOS","labelId":16777216,"compileSdkVersion":"5.0.5.165","targetAPIVersion":50005017,"vendor":"example","bundleName":"com.example.ctfdemo","apiReleaseType":"Release"},"module":{"virtualMachine":"ark12.0.6.0","mainElement":"EntryAbility","installationFree":false,"deliveryWithInstall":true,"description":"$string:module_desc","extensionAbilities":[{"exported":false,"metadata":[{"resourceId":16777226,"resource":"$profile:backup_config","name":"ohos.extension.backup"}],"srcEntry":"./ets/entrybackupability/EntryBackupAbility.ets","name":"EntryBackupAbility","type":"backup"}],"compileMode":"esmodule","type":"entry","dependencies":[],"abilities":[{"exported":true,"iconId":16777219,"startWindowIconId":16777225,"icon":"$media:layered_image","startWindowIcon":"$media:startIcon","startWindowBackgroundId":16777223,"description":"$string:EntryAbility_desc","label":"$string:EntryAbility_label","skills":[{"entities":["entity.system.home"],"actions":["action.system.home"]}],"srcEntry":"./ets/entryability/EntryAbility.ets","descriptionId":16777220,"labelId":16777221,"startWindowBackground":"$color:start_window_background","name":"EntryAbility"}],"deviceTypes":["phone","tablet","2in1"],"pages":"$profile:main_pages","descriptionId":16777222,"name":"entry","packageName":"entry"}}
+=== pack.info ===
+{"summary":{"app":{"bundleName":"com.example.ctfdemo","bundleType":"app","version":{"code":1000000,"name":"1.0.0"}},"modules":[{"mainAbility":"EntryAbility","deviceType":["phone","tablet","2in1"],"abilities":[{"name":"EntryAbility","label":"$string:EntryAbility_label"}],"extensionAbilities":[{"name":"EntryBackupAbility","forms":[]}],"distro":{"moduleType":"entry","installationFree":false,"deliveryWithInstall":true,"moduleName":"entry"},"apiVersion":{"compatible":17,"releaseType":"Release","target":17}}]},"packages":[{"deviceType":["phone","tablet","2in1"],"moduleType":"entry","deliveryWithInstall":true,"name":"entry-default"}]}
+=== pkgContextInfo.json ===
+{"entry":{"isSO":false,"moduleName":"","bundleName":"","dependencyAlias":"","packageName":"entry","entryPath":"src/main/","version":""},"@ohos/hypium":{"isSO":false,"moduleName":"","bundleName":"","dependencyAlias":"","packageName":"@ohos/hypium","entryPath":"index.js","version":"1.0.21"},"@ohos/hamock":{"isSO":false,"moduleName":"","bundleName":"","dependencyAlias":"","packageName":"@ohos/hamock","entryPath":"index.ets","version":"1.0.0"}}
+=== sourceMaps.map: file encoding, first 8000 chars ===
+chars=14330
+{
+  "entry|entry|1.0.0|src/main/ets/entryability/EntryAbility.ts": {
+    "version": 3,
+    "file": "EntryAbility.ets",
+    "sourceRoot": "",
+    "sources": [
+      "entry/src/main/ets/entryability/EntryAbility.ets"
+    ],
+    "names": [],
+    "mappings": "YAAS,eAAe;OAAE,qBAAqB;OAAE,SAAS;YAAE,IAAI;OACvD,KAAK;YACL,MAAM;AAEf,MAAM,MAAM,GAAG,MAAM,CAAC;AAEtB,MAAM,CAAC,OAAO,OAAO,YAAa,SAAQ,SAAS;IACjD,QAAQ,CAAC,IAAI,EAAE,IAAI,EAAE,WAAW,EAAE,eAAe,CAAC,WAAW,GAAG,IAAI;QAClE,IAAI,CAAC,OAAO,CAAC,qBAAqB,EAAE,CAAC,YAAY,CAAC,qBAAqB,CAAC,SAAS,CAAC,kBAAkB,CAAC,CAAC;QACtG,KAAK,CAAC,IAAI,CAAC,MAAM,EAAE,SAAS,EAAE,YAAY,EAAE,kBAAkB,CAAC,CAAC;IAClE,CAAC;IAED,SAAS,IAAI,IAAI;QACf,KAAK,CAAC,IAAI,CAAC,MAAM,EAAE,SAAS,EAAE,YAAY,EAAE,mBAAmB,CAAC,CAAC;IACnE,CAAC;IAED,mBAAmB,CAAC,WAAW,EAAE,MAAM,CAAC,WAAW,GAAG,IAAI;QACxD,yDAAyD;QACzD,KAAK,CAAC,IAAI,CAAC,MAAM,EAAE,SAAS,EAAE,YAAY,EAAE,6BAA6B,CAAC,CAAC;QAE3E,WAAW,CAAC,WAAW,CAAC,aAAa,EAAE,CAAC,GAAG,EAAE,EAAE;YAC7C,IAAI,GAAG,CAAC,IAAI,EAAE;gBACZ,KAAK,CAAC,KAAK,CAAC,MAAM,EAAE,SAAS,EAAE,+CAA+C,EAAE,IAAI,CAAC,SAAS,CAAC,GAAG,CAAC,CAAC,CAAC;gBACrG,OAAO;aACR;YACD,KAAK,CAAC,IAAI,CAAC,MAAM,EAAE,SAAS,EAAE,mCAAmC,CAAC,CAAC;QACrE,CAAC,CAAC,CAAC;IACL,CAAC;IAED,oBAAoB,IAAI,IAAI;QAC1B,yDAAyD;QACzD,KAAK,CAAC,IAAI,CAAC,MAAM,EAAE,SAAS,EAAE,YAAY,EAAE,8BAA8B,CAAC,CAAC;IAC9E,CAAC;IAED,YAAY,IAAI,IAAI;QAClB,oCAAoC;QACpC,KAAK,CAAC,IAAI,CAAC,MAAM,EAAE,SAAS,EAAE,YAAY,EAAE,sBAAsB,CAAC,CAAC;IACtE,CAAC;IAED,YAAY,IAAI,IAAI;QAClB,iCAAiC;QACjC,KAAK,CAAC,IAAI,CAAC,MAAM,EAAE,SAAS,EAAE,YAAY,EAAE,sBAAsB,CAAC,CAAC;IACtE,CAAC;CACF",
+    "entry-package-info": "entry|1.0.0"
+  },
+  "entry|entry|1.0.0|src/main/ets/entrybackupability/EntryBackupAbility.ts": {
+    "version": 3,
+    "file": "EntryBackupAbility.ets",
+    "sourceRoot": "",
+    "sources": [
+      "entry/src/main/ets/entrybackupability/EntryBackupAbility.ets"
+    ],
+    "names": [],
+    "mappings": "OAAS,KAAK;OACL,sBAAsB;cAAE,aAAa,IAAb,aAAa;AAE9C,MAAM,MAAM,GAAG,MAAM,CAAC;AAEtB,MAAM,CAAC,OAAO,OAAO,kBAAmB,SAAQ,sBAAsB;IACpE,KAAK,CAAC,QAAQ;QACZ,KAAK,CAAC,IAAI,CAAC,MAAM,EAAE,SAAS,EAAE,aAAa,CAAC,CAAC;QAC7C,MAAM,OAAO,CAAC,OAAO,EAAE,CAAC;IAC1B,CAAC;IAED,KAAK,CAAC,SAAS,CAAC,aAAa,EAAE,aAAa;QAC1C,KAAK,CAAC,IAAI,CAAC,MAAM,EAAE,SAAS,EAAE,yBAAyB,EAAE,IAAI,CAAC,SAAS,CAAC,aAAa,CAAC,CAAC,CAAC;QACxF,MAAM,OAAO,CAAC,OAAO,EAAE,CAAC;IAC1B,CAAC;CACF",
+    "entry-package-info": "entry|1.0.0"
+  },
+  "entry|entry|1.0.0|src/main/ets/pages/Flag.ts": {
+    "version": 3,
+    "file": "Flag.ets",
+    "sourceRoot": "",
+    "sources": [
+      "entry/src/main/ets/pages/Flag.ets"
+    ],
+    "names": [],
+    "mappings": ";;;;IAQS,OAAO,GAAE,MAAM;IAEtB,KAAK,GAAE,MAAM;IACb,KAAK,GAAE,MAAM;;OAXN,YAAY;OAAE,MAAM;OACtB,EAAE,cAAc,EAAE;cACjB,SAAS,QAAO,SAAS;MAK1B,IAAI;IAFX;;;;;sDAG2B,qCAAqC;qBAE9C,CAAC;qBACD,iDAAiD;;;KARf;;;;;;;;;;;;;;;;;;;;;;IAKlD,4CAAgB,MAAM,EAAyC;QAAxD,OAAO;;;QAAP,OAAO,WAAE,MAAM;;;IAEtB,eAAO,MAAM,CAAK;IAClB,eAAO,MAAM,CAAqD;IAElE;;YACE,MAAM,QAAC,EAAE,KAAK,EAAE,EAAE,EAAE;YAApB,MAAM,CAgCL,KAAK,CAAC,MAAM;YAhCb,MAAM,CAiCL,MAAM,CAAC,MAAM;YAjCd,MAAM,CAkCL,cAAc,CAAC,SAAS,CAAC,MAAM;YAlChC,MAAM,CAmCL,UAAU,CAAC,eAAe,CAAC,MAAM;;;YAlChC,IAAI,QAAC,IAAI,CAAC,OAAO;YAAjB,IAAI,CACD,EAAE,CAAC,WAAW;YADjB,IAAI,CAED,QAAQ;YAFX,IAAI,CAGD,UAAU,CAAC,UAAU,CAAC,IAAI;;QAH7B,IAAI;;YAIJ,MAAM,iBAAC,IAAI,EAAE,EAAE,IAAI,EAAE,UAAU,CAAC,MAAM,EAAE,WAAW,EAAE,IAAI,EAAE;YAA3D,MAAM,CACH,YAAY,CAAC,CAAC;YADjB,MAAM,CAEH,eAAe,CAAC,QAAQ;YAF3B,MAAM,CAGH,KAAK,CAAC,EAAE;YAHX,MAAM,CAIH,MAAM,CAAC,EAAE;YAJZ,MAAM,CAKH,OAAO,CAAC,GAAG,EAAE;gBACZ,IAAI,CAAC,KAAK,EAAE,CAAC;gBAEb,MAAM,MAAM,EAAE,SAAS,GAAG,MAAM,CAAC,SAAS,EAAE,IAAI,SAAS,CAAC;gBAC1D,IAAI,IAAI,GAAG,MAAM,CAAC,KAAK,CAAC;gBAExB,IAAI,IAAI,CAAC,KAAK,IAAI,OAAO,EAAE;oBACzB,IAAI,IAAI,IAAI,CAAC,KAAK,CAAC,IAAI,CAAC,KAAK,CAAC,CAAC;oBAC/B,YAAY,CAAC,SAAS,CAAC;wBACrB,OAAO,EAAE,oBAAoB,IAAI,GAAG;wBACpC,QAAQ,EAAE,IAAI;qBACf,CAAC,CAAC;iBACJ;qBACI;oBACH,YAAY,CAAC,SAAS,CAAC;wBACrB,OAAO,EAAE,IAAI,CAAC,KAAK,GAAG,EAAE;wBACxB,QAAQ,EAAE,IAAI;qBACf,CACA,CAAC;iBACH;YACH,CAAC;;QAzBH,MAAM;QALR,MAAM;KAoCP;IAED,KAAK,CAAC,KAAK,EAAE,MAAM,GAAG,MAAM;QAC1B,OAAO,cAAc,CAAC,KAAK,CAAC,CAAC;IAC/B,CAAC",
+    "entry-package-info": "entry|1.0.0"
+  },
+  "entry|entry|1.0.0|src/main/ets/pages/Index.ts": {
+    "version": 3,
+    "file": "Index.ets",
+    "sourceRoot": "",
+    "sources": [
+      "entry/src/main/ets/pages/Index.ets"
+    ],
+    "names": [],
+    "mappings": ";;;;IAUS,OAAO,GAAE,MAAM;IAEtB,KAAK,GAAE,MAAM;;OAZN,MAAM;cACN,aAAa,IAAb,aAAa;AAEtB,MAAM,OAAO,SAAS;IACpB,KAAK,EAAE,MAAM,GAAG,EAAE,CAAC;CACpB;MAIM,KAAK;IAFZ;;;;;sDAG2B,kBAAkB;qBAE3B,oBAAoB;;;KAPrC;;;;;;;;;;;;;;;;;;;IAKC,4CAAgB,MAAM,EAAsB;QAArC,OAAO;;;QAAP,OAAO,WAAE,MAAM;;;IAEtB,eAAO,MAAM,CAAwB;IAErC;;YACI,MAAM,QAAC,EAAE,KAAK,EAAE,EAAE,EAAE;YAApB,MAAM,CA8BL,KAAK,CAAC,MAAM;YA9Bb,MAAM,CA+BL,MAAM,CAAC,MAAM;YA/Bd,MAAM,CAgCP,cAAc,CAAC,SAAS,CAAC,MAAM;YAhC9B,MAAM,CAiCP,UAAU,CAAC,eAAe,CAAC,MAAM;;;YAhC9B,IAAI,QAAC,IAAI,CAAC,OAAO;YAAjB,IAAI,CACD,EAAE,CAAC,kBAAkB;YADxB,IAAI,CAED,QAAQ;YAFX,IAAI,CAGD,UAAU,CAAC,UAAU,CAAC,IAAI;;QAH7B,IAAI;;YAIJ,MAAM,iBAAC,IAAI,EAAE,EAAE,IAAI,EAAE,UAAU,CAAC,MAAM,EAAE,WAAW,EAAE,IAAI,EAAE;YAA3D,MAAM,CACH,YAAY,CAAC,CAAC;YADjB,MAAM,CAEH,eAAe,CAAC,QAAQ;YAF3B,MAAM,CAGH,KAAK,CAAC,EAAE;YAHX,MAAM,CAIH,MAAM,CAAC,EAAE;YAJZ,MAAM,CAKH,OAAO,CAAC,GAAG,EAAE;gBAEZ,IAAI,EAAE,GAAG,EAAE,CAAC;gBACZ,KAAK,IAAI,CAAC,GAAG,CAAC,EAAE,CAAC,GAAG,IAAI,CAAC,KAAK,CAAC,MAAM,EAAE,CAAC,EAAE,EAAE;oBAC1C,EAAE,IAAI,MAAM,CAAC,YAAY,CAAC,IAAI,CAAC,KAAK,CAAC,UAAU,CAAC,CAAC,CAAC,GAAG,IAAI,CAAC,KAAK,CAAC,MAAM,CAAC,CAAC;iBACzE;gBACD,IAAI,GAAG,GAAG,IAAI,CAAC,UAAU,CAAC,EAAE,CAAC,CAAC;gBAC9B,EAAE,GAAG,EAAE,CAAC;gBACR,KAAK,IAAI,CAAC,GAAG,CAAC,EAAE,CAAC,GAAG,IAAI,CAAC,KAAK,CAAC,MAAM,EAAE,CAAC,EAAE,EAAE;oBAC1C,EAAE,IAAI,MAAM,CAAC,YAAY,CAAC,GAAG,CAAC,UAAU,CAAC,CAAC,CAAC,GAAG,CAAC,CAAC,CAAC;iBAClD;gBACD,EAAE,GAAG,IAAI,CAAC,UAAU,CAAC,EAAE,CAAC,CAAC;gBAEzB,IAAI,UAAU,EAAE,SAAS,GAAG,EAAE,KAAK,EAAE,EAAE,GAAG,CAAC;gBAE3C,MAAM,CAAC,OAAO,CAAC,EAAC,GAAG,EAAE,YAAY,EAAE,MAAM,EAAE,UAAU,EAAC,CAAE,CAAC,IAAI,EAAE,CAAC,KAAK,CAAC,CAAC,GAAG,EAAE,aAAa,EAAE,EAAE;oBAC3F,OAAO,CAAC,KAAK,CAAC,sDAAsD,GAAG,CAAC,IAAI,yBAAyB,GAAG,CAAC,OAAO,EAAE,CAAC,CAAA;gBACrH,CAAC,CAAE,CAAA;YACL,CAAC;;QAvBH,MAAM;QALR,MAAM;KAkCT;IAED,UAAU,CAAC,GAAG,EAAE,MAAM,GAAG,MAAM;QAC7B,IAAI,QAAQ,GAAG,EAAE,CAAC;QAClB,KAAK,IAAI,CAAC,GAAG,GAAG,CAAC,MAAM,GAAG,CAAC,EAAE,CAAC,IAAI,CAAC,EAAE,CAAC,EAAE,EAAE;YACxC,QAAQ,IAAI,GAAG,CAAC,CAAC,CAAC,CAAC;SACpB;QACD,OAAO,QAAQ,CAAC;IAClB,CAAC",
+    "entry-package-info": "entry|1.0.0"
+  },
+  "entry|entry|1.0.0|src/main/ets/utils/Coder.ts": {
+    "version": 3,
+    "file": "Coder.ets",
+    "sourceRoot": "",
+    "sources": [
+      "entry/src/main/ets/utils/Coder.ets"
+    ],
+    "names": [],
+    "mappings": "OAAO,IAAI;AAEX,MAAM,WAAW,aAAa;IAC5B,OAAO,EAAE,OAAO,CAAC;IACjB,OAAO,EAAE,OAAO,CAAC;CAClB;AAED,MAAM,GAAG,GAAG,gEAAgE,CAAC;AAC7E,MAAM,uBAAuB,GAAG,IAAI,KAAK,CAAC,MAAM,EAAE,EAAE,CAAC,CAAC;AACtD,MAAM,oBAAoB,GAAG,IAAI,KAAK,CAAC,MAAM,EAAE,EAAE,CAAC,CAAC;AACnD,MAAM,iBAAiB,GAAG;IACxB,CAAC,EAAE,CAAC,EAAE,CAAC,EAAE,CAAC,EAAE,CAAC,EAAE,CAAC,EAAE,CAAC,EAAE,CAAC,EAAE,CAAC,EAAE,CAAC,EAAE,CAAC,EAAE,CAAC,EAAE,CAAC,EAAE,CAAC,EAAE,CAAC,EAAE,CAAC,EAAE,CAAC,EAAE,CAAC,EAAE,CAAC,EAAE,CAAC,EAAE,CAAC,EAAE,CAAC,EAAE,CAAC,EAAE,CAAC,EAAE,CAAC,EAAE,CAAC,EAAE,CAAC,EAAE,CAAC,EAAE,CAAC,EAAE,CAAC,EAAE,CAAC,EAAE,CAAC,EAAE,CAAC,EAAE,CAAC,EAAE,CAAC,EAAE,CAAC,EAAE,CAAC,EAAE,CAAC,EAAE,CAAC;IACnH,CAAC,EAAE,CAAC,EAAE,CAAC,EAAE,CAAC,EAAE,EAAE,EAAE,CAAC,EAAE,EAAE,EAAE,CAAC,EAAE,EAAE,EAAE,EAAE,EAAE,EAAE,EAAE,EAAE,EAAE,EAAE,EAAE,EAAE,EAAE,EAAE,EAAE,EAAE,EAAE,EAAE,EAAE,EAAE,EAAE,EAAE,EAAE,CAAC,EAAE,CAAC,EAAE,CAAC,EAAE,CAAC,EAAE,CAAC,EAAE,CAAC,EAAE,CAAC,EAAE,CAAC,EAAE,CAAC,EAAE,CAAC,EAAE,CAAC,EAAE,CAAC,EAAE,CAAC,EAAE,CAAC,EAAE,CAAC,EAAE,CAAC;IACpH,CAAC,EAAE,EAAE,EAAE,EAAE,EAAE,EAAE,EAAE,EAAE,EAAE,EAAE,EAAE,EAAE,EAAE,EAAE,EAAE,EAAE,EAAE,EAAE,EAAE,EAAE,EAAE,EAAE,EAAE,EAAE,EAAE,EAAE,EAAE,EAAE,EAAE,EAAE,EAAE,EAAE,EAAE,CAAC,EAAE,CAAC,EAAE,CAAC,EAAE,CAAC,EAAE,EAAE,EAAE,CAAC,EAAE,EAAE,EAAE,EAAE,EAAE,EAAE,EAAE,EAAE,EAAE,EAAE,EAAE,EAAE,EAAE,EAAE,EAAE,EAAE;IACpH,EAAE,EAAE,EAAE,EAAE,EAAE,EAAE,EAAE,EAAE,EAAE,EAAE,EAAE,EAAE,EAAE,EAAE,EAAE,EAAE
+=== ASCII strings from Ark bytecode ===
+PANDA
+aL&entry/src/main/ets/entryability/EntryAbility&;
+OL_ESConcurrentModuleRequestsAnnotation;
+3L_ESSlotNumberAnnotation;
+yL&entry/src/main/ets/entrybackupability/EntryBackupAbility&;
+CL&entry/src/main/ets/pages/Flag&;
+EL&entry/src/main/ets/pages/Index&;
+EL&entry/src/main/ets/utils/Coder&;
+L@ohos.app;
+L@ohos.curves;
+L@ohos.matrix4;
+L@system.app;
+!L@system.curves;
+#L@system.matrix4;
+!L@system.router;
+%{public}s
+&entry/src/main/ets/entryability/EntryAbility&.#~@0=#EntryAbility
+q&entry/src/main/ets/entryability/EntryAbility&.#~@0>@1*#
+)Ability onBackground
+!Ability onCreate
+#Ability onDestroy
+)Ability onForeground
+7Ability onWindowStageCreate
+9Ability onWindowStageDestroy
+%COLOR_MODE_NOT_SET
+ColorMode
++ConfigurationConstant
+DOMAIN
+[Failed to load the content. Cause: %{public}s
+	JSON
+CSucceeded in loading the content.
+UIAbility
+	code
+context
+error
++getApplicationContext
+hilog
+	info
+loadContent
+pages/Index
+prototype
+setColorMode
+stringify
+testTag
+pkgName@entry
+isCommonjs
+!hasTopLevelAwait
+isSharedModule
+scopeNames
+moduleRecordIdx
+%#~@0=#EntryAbility
+4funcObj
+4newTarget
+	args
+	this
+wentry|entry|1.0.0|src/main/ets/entryability/EntryAbility.ts
+%#~@0>#onBackground
+#~@0>#onCreate
+launchParam
+	want
+#~@0>#onDestroy
+%#~@0>#onForeground
+3#~@0>#onWindowStageCreate
+windowStage
+5#~@0>#onWindowStageDestroy
+#~@0>@1*#
+0newTarget
+0this
+func_main_0
+EntryAbility
+not supported
+'onWindowStageCreate
+O@ohos:app.ability.ConfigurationConstant
+7@ohos:app.ability.UIAbility
+@ohos:hilog
+default
+onCreate
+onDestroy
+)onWindowStageDestroy
+onForeground
+onBackground
+&entry/src/main/ets/entrybackupability/EntryBackupAbility&.#~@0=#EntryBackupAbility
+-BackupExtensionAbility
+Promise
+onBackup ok
+/onRestore ok %{public}s
+resolve
+1#~@0=#EntryBackupAbility
+entry|entry|1.0.0|src/main/ets/entrybackupability/EntryBackupAbility.ts
+#~@0>#onBackup
+#~@0>#onRestore
+bundleVersion
+%EntryBackupAbility
+Q@ohos:application.BackupExtensionAbility
+onBackup
+onRestore
+G&entry/src/main/ets/pages/Flag&.#*#
+K&entry/src/main/ets/pages/Flag&.#*#^1
+e&entry/src/main/ets/pages/Flag&.#~@0<#getEntryName
+U&entry/src/main/ets/pages/Flag&.#~@0=#Flag
+W&entry/src/main/ets/pages/Flag&.#~@0>#getH2
+g&entry/src/main/ets/pages/Flag&.#~@0>#initialRender
+[&entry/src/main/ets/pages/Flag&.#~@0>#message
+_&entry/src/main/ets/pages/Flag&.#~@0>#message^1
+]&entry/src/main/ets/pages/Flag&.#~@0>#rerender
+S&entry/src/main/ets/pages/Flag&.#~@0>@1*#
+W&entry/src/main/ets/pages/Flag&.#~@0>@1*#^1
+W&entry/src/main/ets/pages/Flag&.#~@0>@1*#^2
+Y&entry/src/main/ets/pages/Flag&.#~@0>@1*^2*#
+	100%
+	Bold
+Button
+ButtonType
+Center
+GClick 1000000 times to get the flag
+Column
+	Flag
+FlexAlign
+FontWeight
+HorizontalAlign
+MessageID
+Normal
+1ObservedPropertySimplePU
+Reflect
+#SubscriberManager
+	Text
+#The flag is flag{
+ViewPU
+_NzAyZDBlODgxZDNjNzNjOWIzOTBkZjIwNTRiZGQxNWNjY2I
+__message
+!aboutToBeDeleted
+1aboutToBeDeletedInternal
+alignItems
+backgroundColor
+borderRadius
+count
+create
+createWithLabel
+decodeToString
+delete
+)finalizeConstruction
+fontSize
+fontWeight
+function
+getEntryName
+getH2
+getParams
+height
+hint1
+	id__
+initialRender
+justifyContent
+magic
+message
+3observeComponentCreation2
+onClick
+params
+!paramsGenerator_
+promptAction
+/purgeDependencyOnElmtId
+%registerNamedRoute
+rerender
+router
+3setInitiallyProvidedValue
+showToast
+	type
+'updateDirtyElements
+width
+Yentry|entry|1.0.0|src/main/ets/pages/Flag.ts
+#*#^1
+%#~@0<#getEntryName
+#~@0=#Flag
+__localStorage
+elmtId
+extraInfo
+paramsLambda
+parent
+-#~@0>#aboutToBeDeleted
+#~@0>#getH2
+'#~@0>#initialRender
+#~@0>#message
+#~@0>#message^1
+newValue
+O#~@0>#purgeVariableDependenciesOnElmtId
+rmElmtId
+#~@0>#rerender
+?#~@0>#setInitiallyProvidedValue
++#~@0>#updateStateVars
+isInitialRender
+#~@0>@1*#^1
+#~@0>@1*#^2
+#~@0>@1*^2*#
+	flag
+#Flag_Params
+%@ohos:promptAction
+@ohos:router
+_@normalized:N&&&entry/src/main/ets/utils/Coder&
+duration
+stateEffect
+bundleName
+**********************
+PowerShell transcript end
+End time: 20260927192932
+**********************
+**********************
+PowerShell transcript start
+Start time: 20260927193023
+Username: DESKTOP-412KTAR\mzj
+RunAs User: DESKTOP-412KTAR\mzj
+Configuration Name: 
+Machine: DESKTOP-412KTAR (Microsoft Windows NT 10.0.26200.0)
+Host Application: C:\Users\mzj\.cache\codex-runtimes\codex-primary-runtime\dependencies\native\powershell\pwsh.dll -Command try { [Console]::OutputEncoding=[System.Text.Encoding]::UTF8 } catch {}
+$ErrorActionPreference = 'Stop'
+$workDir = 'C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\OpenHarmony_easyre_560'
+$logPath = 'C:\Users\mzj\Desktop\CTF\玄机刷题\记录\代理-easyre-终端记录.txt'
+Start-Transcript -Path $logPath -Append
+Write-Output '=== Source-map inventory and Ark string extraction script (full source follows) ==='
+$script = @'
+import base64, hashlib, json, pathlib, re, zipfile
+root = pathlib.Path(r"C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\OpenHarmony_easyre_560")
+hap_dir = root / "hap_extracted"
+source_map = json.loads((hap_dir / "ets/sourceMaps.map").read_text(encoding="utf-8"))
+print("SOURCE MAP KEYS")
+for key, value in source_map.items():
+    print(f"key={key}\n file={value.get('file')} sources={value.get('sources')} names={len(value.get('names', []))} mappings_chars={len(value.get('mappings', ''))} sourcesContent={bool(value.get('sourcesContent'))}")
+abc_path = hap_dir / "ets/modules.abc"
+data = abc_path.read_bytes()
+print(f"ABC size={len(data)} SHA256={hashlib.sha256(data).hexdigest()}")
+print("ASCII RUNS (>=4 bytes)")
+for match in re.finditer(rb"[ -~]{4,}", data):
+    raw = match.group().decode("ascii", "replace")
+    print(f"0x{match.start():06x}: {raw}")
+print("BASE64-LIKE TOKENS AND DECODE ATTEMPTS")
+text = "\n".join(m.group().decode("ascii", "replace") for m in re.finditer(rb"[A-Za-z0-9_+/=-]{8,}", data))
+seen = set()
+for token in re.findall(r"[A-Za-z0-9_+/=-]{8,}", text):
+    if token in seen: continue
+    seen.add(token)
+    normalized = token.replace("-", "+").replace("_", "/")
+    normalized += "=" * ((-len(normalized)) % 4)
+    try:
+        decoded = base64.b64decode(normalized, validate=True)
+    except Exception:
+        continue
+    print(f"{token!r} -> {decoded!r} hex={decoded.hex()}")
+'@
+Write-Output $script
+$scriptPath = Join-Path $workDir 'inspect_hap.py'
+Set-Content -LiteralPath $scriptPath -Value $script -Encoding UTF8
+Write-Output '=== Execute inspect_hap.py ==='
+& 'C:\Users\mzj\AppData\Local\Programs\Python\Python312\python.exe' $scriptPath 2>&1
+Write-Output '=== Full strings output ==='
+& 'C:\msys64\mingw64\bin\strings.exe' -a (Join-Path $workDir 'hap_extracted\ets\modules.abc') 2>&1
+Stop-Transcript
+Process ID: 26016
+PSVersion: 7.6.5
+PSEdition: Core
+GitCommitId: 7.6.5
+OS: Microsoft Windows 10.0.26200
+Platform: Win32NT
+PSCompatibleVersions: 1.0, 2.0, 3.0, 4.0, 5.0, 5.1, 6.0, 7.0
+PSRemotingProtocolVersion: 2.4
+SerializationVersion: 1.1.0.1
+WSManStackVersion: 3.0
+**********************
+Transcript started, output file is C:\Users\mzj\Desktop\CTF\玄机刷题\记录\代理-easyre-终端记录.txt
+=== Source-map inventory and Ark string extraction script (full source follows) ===
+import base64, hashlib, json, pathlib, re, zipfile
+root = pathlib.Path(r"C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\OpenHarmony_easyre_560")
+hap_dir = root / "hap_extracted"
+source_map = json.loads((hap_dir / "ets/sourceMaps.map").read_text(encoding="utf-8"))
+print("SOURCE MAP KEYS")
+for key, value in source_map.items():
+    print(f"key={key}\n file={value.get('file')} sources={value.get('sources')} names={len(value.get('names', []))} mappings_chars={len(value.get('mappings', ''))} sourcesContent={bool(value.get('sourcesContent'))}")
+abc_path = hap_dir / "ets/modules.abc"
+data = abc_path.read_bytes()
+print(f"ABC size={len(data)} SHA256={hashlib.sha256(data).hexdigest()}")
+print("ASCII RUNS (>=4 bytes)")
+for match in re.finditer(rb"[ -~]{4,}", data):
+    raw = match.group().decode("ascii", "replace")
+    print(f"0x{match.start():06x}: {raw}")
+print("BASE64-LIKE TOKENS AND DECODE ATTEMPTS")
+text = "\n".join(m.group().decode("ascii", "replace") for m in re.finditer(rb"[A-Za-z0-9_+/=-]{8,}", data))
+seen = set()
+for token in re.findall(r"[A-Za-z0-9_+/=-]{8,}", text):
+    if token in seen: continue
+    seen.add(token)
+    normalized = token.replace("-", "+").replace("_", "/")
+    normalized += "=" * ((-len(normalized)) % 4)
+    try:
+        decoded = base64.b64decode(normalized, validate=True)
+    except Exception:
+        continue
+    print(f"{token!r} -> {decoded!r} hex={decoded.hex()}")
+=== Execute inspect_hap.py ===
+=== Full strings output ===
+**********************
+PowerShell transcript end
+End time: 20260927193023
+**********************
+**********************
+PowerShell transcript start
+Start time: 20260927193055
+Username: DESKTOP-412KTAR\mzj
+RunAs User: DESKTOP-412KTAR\mzj
+Configuration Name: 
+Machine: DESKTOP-412KTAR (Microsoft Windows NT 10.0.26200.0)
+Host Application: C:\Users\mzj\.cache\codex-runtimes\codex-primary-runtime\dependencies\native\powershell\pwsh.dll -Command try { [Console]::OutputEncoding=[System.Text.Encoding]::UTF8 } catch {}
+$ErrorActionPreference = 'Continue'
+$workDir = 'C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\OpenHarmony_easyre_560'
+$logPath = 'C:\Users\mzj\Desktop\CTF\玄机刷题\记录\代理-easyre-终端记录.txt'
+Start-Transcript -Path $logPath -Append
+Write-Output '=== Search common local Harmony SDK locations for Ark bytecode tools ==='
+Write-Output 'Relevant environment variables:'
+Get-ChildItem Env: | Where-Object { $_.Name -match 'OHOS|HOS|SDK|DEVECO|ARK' } | Sort-Object Name | Format-Table -AutoSize
+$searchRoots = @('C:\Program Files\Huawei', 'C:\Program Files\DevEco Studio', 'C:\Users\mzj\AppData\Local\Huawei', 'C:\Users\mzj\AppData\Local\OpenHarmony', 'C:\Users\mzj\AppData\Local\Programs')
+foreach ($root in $searchRoots) {
+  if (Test-Path -LiteralPath $root) {
+    Write-Output "Searching $root"
+    Get-ChildItem -LiteralPath $root -Recurse -File -ErrorAction SilentlyContinue | Where-Object { $_.Name -match '^(ark_disasm|ark_aot_compiler|es2abc|abc2proto|ark_js_vm)(\.exe)?$' } | Select-Object FullName,Length | Format-Table -AutoSize
+  } else { Write-Output "Not present: $root" }
+}
+Write-Output '=== Relevant executable commands ==='
+Get-Command rg,7z,jar,git -ErrorAction SilentlyContinue | Select-Object Name,Source | Format-Table -AutoSize
+Stop-Transcript
+Process ID: 19780
+PSVersion: 7.6.5
+PSEdition: Core
+GitCommitId: 7.6.5
+OS: Microsoft Windows 10.0.26200
+Platform: Win32NT
+PSCompatibleVersions: 1.0, 2.0, 3.0, 4.0, 5.0, 5.1, 6.0, 7.0
+PSRemotingProtocolVersion: 2.4
+SerializationVersion: 1.1.0.1
+WSManStackVersion: 3.0
+**********************
+Transcript started, output file is C:\Users\mzj\Desktop\CTF\玄机刷题\记录\代理-easyre-终端记录.txt
+=== Search common local Harmony SDK locations for Ark bytecode tools ===
+Relevant environment variables:
+Not present: C:\Program Files\Huawei
+Not present: C:\Program Files\DevEco Studio
+Not present: C:\Users\mzj\AppData\Local\Huawei
+Not present: C:\Users\mzj\AppData\Local\OpenHarmony
+Searching C:\Users\mzj\AppData\Local\Programs
+=== Relevant executable commands ===
+
+Name    Source
+----    ------
+rg.exe  C:\Users\mzj\AppData\Local\OpenAI\Codex\bin\0ddb895c950eaeba\rg.exe
+git.exe D:\Program Files\Git\cmd\git.exe
+
+**********************
+PowerShell transcript end
+End time: 20260927193102
+**********************
+**********************
+PowerShell transcript start
+Start time: 20260927193215
+Username: DESKTOP-412KTAR\mzj
+RunAs User: DESKTOP-412KTAR\mzj
+Configuration Name: 
+Machine: DESKTOP-412KTAR (Microsoft Windows NT 10.0.26200.0)
+Host Application: C:\Users\mzj\.cache\codex-runtimes\codex-primary-runtime\dependencies\native\powershell\pwsh.dll -Command try { [Console]::OutputEncoding=[System.Text.Encoding]::UTF8 } catch {}
+$ErrorActionPreference = 'Stop'
+$workDir = 'C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\OpenHarmony_easyre_560'
+$logPath = 'C:\Users\mzj\Desktop\CTF\玄机刷题\记录\代理-easyre-终端记录.txt'
+Start-Transcript -Path $logPath -Append
+Write-Output '=== Candidate constant decoder and raw byte context (full script follows) ==='
+$script = @'
+import base64, pathlib, re
+p = pathlib.Path(r"C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\OpenHarmony_easyre_560\hap_extracted\ets\modules.abc")
+b = p.read_bytes()
+for start, end in [(0x1750,0x18a0),(0x20c0,0x2160),(0x2310,0x2540),(0x2550,0x2780)]:
+    print(f"\nRAW {start:#x}..{end:#x}")
+    for off in range(start, min(end,len(b)), 16):
+        chunk = b[off:min(off+16,end,len(b))]
+        hx = " ".join(f"{x:02x}" for x in chunk)
+        asc = "".join(chr(x) if 32 <= x < 127 else "." for x in chunk)
+        print(f"{off:06x}  {hx:<47} {asc}")
+for token in [b"NzAyZDBlODgxZDNjNzNjOWIzOTBkZjIwNTRiZGQxNWNjY2I", b"#`d^ba_^YZZZVWXRRT"]:
+    print(f"\nTOKEN {token!r}")
+    try:
+        decoded = base64.urlsafe_b64decode(token + b"="*((-len(token))%4))
+        print(f"base64url={decoded!r} hex={decoded.hex()}")
+    except Exception as e: print(f"decode error {e!r}")
+    print(f"reverse={token[::-1]!r}")
+'@
+Write-Output $script
+$scriptPath = Join-Path $workDir 'decode_candidates.py'
+Set-Content -LiteralPath $scriptPath -Value $script -Encoding UTF8
+& 'C:\Users\mzj\AppData\Local\Programs\Python\Python312\python.exe' $scriptPath 2>&1
+Stop-Transcript
+Process ID: 4488
+PSVersion: 7.6.5
+PSEdition: Core
+GitCommitId: 7.6.5
+OS: Microsoft Windows 10.0.26200
+Platform: Win32NT
+PSCompatibleVersions: 1.0, 2.0, 3.0, 4.0, 5.0, 5.1, 6.0, 7.0
+PSRemotingProtocolVersion: 2.4
+SerializationVersion: 1.1.0.1
+WSManStackVersion: 3.0
+**********************
+Transcript started, output file is C:\Users\mzj\Desktop\CTF\玄机刷题\记录\代理-easyre-终端记录.txt
+=== Candidate constant decoder and raw byte context (full script follows) ===
+import base64, pathlib, re
+p = pathlib.Path(r"C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\OpenHarmony_easyre_560\hap_extracted\ets\modules.abc")
+b = p.read_bytes()
+for start, end in [(0x1750,0x18a0),(0x20c0,0x2160),(0x2310,0x2540),(0x2550,0x2780)]:
+    print(f"\nRAW {start:#x}..{end:#x}")
+    for off in range(start, min(end,len(b)), 16):
+        chunk = b[off:min(off+16,end,len(b))]
+        hx = " ".join(f"{x:02x}" for x in chunk)
+        asc = "".join(chr(x) if 32 <= x < 127 else "." for x in chunk)
+        print(f"{off:06x}  {hx:<47} {asc}")
+for token in [b"NzAyZDBlODgxZDNjNzNjOWIzOTBkZjIwNTRiZGQxNWNjY2I", b"#`d^ba_^YZZZVWXRRT"]:
+    print(f"\nTOKEN {token!r}")
+    try:
+        decoded = base64.urlsafe_b64decode(token + b"="*((-len(token))%4))
+        print(f"base64url={decoded!r} hex={decoded.hex()}")
+    except Exception as e: print(f"decode error {e!r}")
+    print(f"reverse={token[::-1]!r}")
+**********************
+PowerShell transcript end
+End time: 20260927193215
+**********************
+**********************
+PowerShell transcript start
+Start time: 20260927193303
+Username: DESKTOP-412KTAR\mzj
+RunAs User: DESKTOP-412KTAR\mzj
+Configuration Name: 
+Machine: DESKTOP-412KTAR (Microsoft Windows NT 10.0.26200.0)
+Host Application: C:\Users\mzj\.cache\codex-runtimes\codex-primary-runtime\dependencies\native\powershell\pwsh.dll -Command try { [Console]::OutputEncoding=[System.Text.Encoding]::UTF8 } catch {}
+$ErrorActionPreference = 'Continue'
+$workDir = 'C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\OpenHarmony_easyre_560'
+$logPath = 'C:\Users\mzj\Desktop\CTF\玄机刷题\记录\代理-easyre-终端记录.txt'
+Start-Transcript -Path $logPath -Append
+Write-Output '=== Check installed tools and SDK-like directories for Ark tooling ==='
+Get-Command ark_disasm,ark_aot_compiler,es2abc,abc2proto,ark_js_vm,hdc,ohos-sdk,openharmony -ErrorAction SilentlyContinue | Select-Object Name,Source | Format-Table -AutoSize
+$roots = @('C:\Program Files','C:\Program Files (x86)','C:\openharmony','C:\OpenHarmony','C:\Huawei','D:\Program Files','D:\SDK','D:\tools','C:\Users\mzj\.hvigor','C:\Users\mzj\.deveco')
+foreach ($root in $roots) {
+  if (Test-Path -LiteralPath $root) {
+    Write-Output "Root present: $root"
+    Get-ChildItem -LiteralPath $root -Directory -ErrorAction SilentlyContinue | Select-Object -First 20 FullName | Format-Table -HideTableHeaders
+    Get-ChildItem -LiteralPath $root -Recurse -File -ErrorAction SilentlyContinue | Where-Object { $_.Name -match '^(ark_disasm|es2abc|ark_aot_compiler|abc2proto|ark_js_vm)(\.exe)?$' } | Select-Object FullName,Length | Format-Table -AutoSize
+  } else { Write-Output "Root absent: $root" }
+}
+Write-Output '=== Locally installed Python modules with Ark/OpenHarmony names ==='
+& 'C:\Users\mzj\AppData\Local\Programs\Python\Python312\python.exe' -m pip list --format=columns 2>&1 | Select-String -Pattern 'ark|ohos|panda|harmony' -CaseSensitive:$false
+Stop-Transcript
+Process ID: 22816
+PSVersion: 7.6.5
+PSEdition: Core
+GitCommitId: 7.6.5
+OS: Microsoft Windows 10.0.26200
+Platform: Win32NT
+PSCompatibleVersions: 1.0, 2.0, 3.0, 4.0, 5.0, 5.1, 6.0, 7.0
+PSRemotingProtocolVersion: 2.4
+SerializationVersion: 1.1.0.1
+WSManStackVersion: 3.0
+**********************
+Transcript started, output file is C:\Users\mzj\Desktop\CTF\玄机刷题\记录\代理-easyre-终端记录.txt
+=== Check installed tools and SDK-like directories for Ark tooling ===
+Root present: C:\Program Files
+
+C:\Program Files\AMD
+C:\Program Files\Ant Group
+C:\Program Files\CMake
+C:\Program Files\Common Files
+C:\Program Files\Docker
+C:\Program Files\dotnet
+C:\Program Files\Google
+C:\Program Files\Huorong
+C:\Program Files\Hyper-V
+C:\Program Files\Internet Explorer
+C:\Program Files\JianyingPro
+C:\Program Files\Microsoft
+C:\Program Files\Microsoft Help Viewer
+C:\Program Files\Microsoft Office
+C:\Program Files\Microsoft Office 15
+C:\Program Files\Microsoft OfficePLUS
+C:\Program Files\Microsoft OneDrive
+C:\Program Files\Microsoft SQL Server Compact Edition
+C:\Program Files\Microsoft Synchronization Services
+C:\Program Files\Microsoft Update Health Tools
+
+Root present: C:\Program Files (x86)
+
+C:\Program Files (x86)\AMD
+C:\Program Files (x86)\Common Files
+C:\Program Files (x86)\Google
+C:\Program Files (x86)\HCL
+C:\Program Files (x86)\Internet Download Manager
+C:\Program Files (x86)\Internet Explorer
+C:\Program Files (x86)\Kingsoft
+C:\Program Files (x86)\LG Electronics
+C:\Program Files (x86)\Microsoft
+C:\Program Files (x86)\Microsoft Garage
+C:\Program Files (x86)\Microsoft Office
+C:\Program Files (x86)\Microsoft SDKs
+C:\Program Files (x86)\Microsoft SQL Server Compact Edition
+C:\Program Files (x86)\Microsoft Synchronization Services
+C:\Program Files (x86)\Microsoft.NET
+C:\Program Files (x86)\MSBuild
+C:\Program Files (x86)\Reference Assemblies
+C:\Program Files (x86)\SanDisk
+C:\Program Files (x86)\Tencent
+C:\Program Files (x86)\Windows Defender
+
+Root absent: C:\openharmony
+Root absent: C:\OpenHarmony
+Root absent: C:\Huawei
+Root present: D:\Program Files
+
+D:\Program Files\图吧工具箱202507
+D:\Program Files\Bandizip
+D:\Program Files\Cherry Studio
+D:\Program Files\Clash Verge
+D:\Program Files\cursor
+D:\Program Files\Git
+D:\Program Files\Huorong
+D:\Program Files\Microsoft VS Code
+D:\Program Files\Minimax code
+D:\Program Files\MobaXterm_Portable_v25.2
+D:\Program Files\Netease
+D:\Program Files\OCS Desktop
+D:\Program Files\PotPlayer
+D:\Program Files\Recordly
+D:\Program Files\Rufus
+D:\Program Files\Telegram
+D:\Program Files\Tencent
+D:\Program Files\texlive
+D:\Program Files\ToDesk
+D:\Program Files\Trae CN
+
+**********************
+PowerShell transcript start
+Start time: 20260927193420
+Username: DESKTOP-412KTAR\mzj
+RunAs User: DESKTOP-412KTAR\mzj
+Configuration Name: 
+Machine: DESKTOP-412KTAR (Microsoft Windows NT 10.0.26200.0)
+Host Application: C:\Users\mzj\.cache\codex-runtimes\codex-primary-runtime\dependencies\native\powershell\pwsh.dll -Command try { [Console]::OutputEncoding=[System.Text.Encoding]::UTF8 } catch {}
+$ErrorActionPreference = 'Stop'
+$logPath = 'C:\Users\mzj\Desktop\CTF\玄机刷题\记录\代理-easyre-终端记录.txt'
+Start-Transcript -Path $logPath -Append
+Write-Output '=== Stop the verified recursive search after it exceeded useful local SDK directories ==='
+$pidToStop = 22816
+$p = Get-CimInstance Win32_Process -Filter "ProcessId = $pidToStop"
+if ($p -and $p.CommandLine -like '*Check installed tools and SDK-like directories for Ark tooling*') {
+  Write-Output "Verified PID $pidToStop is the recursive SDK search launched by this task. Stopping it to avoid scanning unrelated Program Files trees."
+  Stop-Process -Id $pidToStop -Force
+  Start-Sleep -Milliseconds 500
+  Get-Process -Id $pidToStop -ErrorAction SilentlyContinue | Select-Object Id,ProcessName
+} else {
+  Write-Output "PID $pidToStop is not the expected recursive SDK search; no process was stopped."
+}
+Stop-Transcript
+Process ID: 4736
+PSVersion: 7.6.5
+PSEdition: Core
+GitCommitId: 7.6.5
+OS: Microsoft Windows 10.0.26200
+Platform: Win32NT
+PSCompatibleVersions: 1.0, 2.0, 3.0, 4.0, 5.0, 5.1, 6.0, 7.0
+PSRemotingProtocolVersion: 2.4
+SerializationVersion: 1.1.0.1
+WSManStackVersion: 3.0
+**********************
+Transcript started, output file is C:\Users\mzj\Desktop\CTF\玄机刷题\记录\代理-easyre-终端记录.txt
+=== Stop the verified recursive search after it exceeded useful local SDK directories ===
+Verified PID 22816 is the recursive SDK search launched by this task. Stopping it to avoid scanning unrelated Program Files trees.
+**********************
+PowerShell transcript end
+End time: 20260927193420
+**********************
+**********************
+PowerShell transcript start
+Start time: 20260927193527
+Username: DESKTOP-412KTAR\mzj
+RunAs User: DESKTOP-412KTAR\mzj
+Configuration Name: 
+Machine: DESKTOP-412KTAR (Microsoft Windows NT 10.0.26200.0)
+Host Application: C:\Users\mzj\.cache\codex-runtimes\codex-primary-runtime\dependencies\native\powershell\pwsh.dll -Command try { [Console]::OutputEncoding=[System.Text.Encoding]::UTF8 } catch {}
+$ErrorActionPreference = 'Continue'
+$logPath = 'C:\Users\mzj\Desktop\CTF\玄机刷题\记录\代理-easyre-终端记录.txt'
+Start-Transcript -Path $logPath -Append
+Write-Output '=== Check locally installed WSL Ark tools; no package/network operations ==='
+$wslCmd = "wsl --exec /bin/sh -c 'for x in ark_disasm ark_aot_compiler es2abc abc2proto ark_js_vm; do command -v `$x || true; done; find /usr /opt /root/.local -type f \( -iname `"*ark*disasm*`" -o -iname `"abc2proto*`" -o -iname `"es2abc*`" \) -print 2>/dev/null | head -100'"
+Write-Output "COMMAND: $wslCmd"
+& wsl --exec /bin/sh -c 'for x in ark_disasm ark_aot_compiler es2abc abc2proto ark_js_vm; do command -v $x || true; done; find /usr /opt /root/.local -type f \( -iname "*ark*disasm*" -o -iname "abc2proto*" -o -iname "es2abc*" \) -print 2>/dev/null | head -100' 2>&1
+Write-Output '=== Locally installed WSL packages that may include relevant compiler tools ==='
+& wsl --exec /usr/bin/dpkg-query -W -f='${Package}\n' 2>&1 | Select-String -Pattern 'ark|panda|openharmony|ohos' -CaseSensitive:$false
+Stop-Transcript
+Process ID: 20096
+PSVersion: 7.6.5
+PSEdition: Core
+GitCommitId: 7.6.5
+OS: Microsoft Windows 10.0.26200
+Platform: Win32NT
+PSCompatibleVersions: 1.0, 2.0, 3.0, 4.0, 5.0, 5.1, 6.0, 7.0
+PSRemotingProtocolVersion: 2.4
+SerializationVersion: 1.1.0.1
+WSManStackVersion: 3.0
+**********************
+Transcript started, output file is C:\Users\mzj\Desktop\CTF\玄机刷题\记录\代理-easyre-终端记录.txt
+=== Check locally installed WSL Ark tools; no package/network operations ===
+COMMAND: wsl --exec /bin/sh -c 'for x in ark_disasm ark_aot_compiler es2abc abc2proto ark_js_vm; do command -v $x || true; done; find /usr /opt /root/.local -type f \( -iname "*ark*disasm*" -o -iname "abc2proto*" -o -iname "es2abc*" \) -print 2>/dev/null | head -100'
+=== Locally installed WSL packages that may include relevant compiler tools ===
+
+python3-markdown-it
+python3-markupsafe
+**********************
+PowerShell transcript end
+End time: 20260927193610
+**********************
+**********************
+PowerShell transcript start
+Start time: 20260927193615
+Username: DESKTOP-412KTAR\mzj
+RunAs User: DESKTOP-412KTAR\mzj
+Configuration Name: 
+Machine: DESKTOP-412KTAR (Microsoft Windows NT 10.0.26200.0)
+Host Application: C:\Users\mzj\.cache\codex-runtimes\codex-primary-runtime\dependencies\native\powershell\pwsh.dll -Command try { [Console]::OutputEncoding=[System.Text.Encoding]::UTF8 } catch {}
+$ErrorActionPreference = 'Stop'
+$logPath = 'C:\Users\mzj\Desktop\CTF\玄机刷题\记录\代理-easyre-终端记录.txt'
+Start-Transcript -Path $logPath -Append
+Write-Output '=== Stop only the verified local WSL filesystem search ==='
+$targetIds = @(13848,13340)
+foreach ($targetId in $targetIds) {
+  $p = Get-CimInstance Win32_Process -Filter "ProcessId = $targetId"
+  if ($p -and $p.CommandLine -like '*find /usr /opt /root/.local*') {
+    Write-Output "Verified PID $targetId belongs to the WSL Ark-tool find command; stopping it."
+    Stop-Process -Id $targetId -Force
+  } else { Write-Output "PID $targetId no longer matches the expected WSL find command; left untouched." }
+}
+Stop-Transcript
+Process ID: 2364
+PSVersion: 7.6.5
+PSEdition: Core
+GitCommitId: 7.6.5
+OS: Microsoft Windows 10.0.26200
+Platform: Win32NT
+PSCompatibleVersions: 1.0, 2.0, 3.0, 4.0, 5.0, 5.1, 6.0, 7.0
+PSRemotingProtocolVersion: 2.4
+SerializationVersion: 1.1.0.1
+WSManStackVersion: 3.0
+**********************
+Transcript started, output file is C:\Users\mzj\Desktop\CTF\玄机刷题\记录\代理-easyre-终端记录.txt
+=== Stop only the verified local WSL filesystem search ===
+PID 13848 no longer matches the expected WSL find command; left untouched.
+PID 13340 no longer matches the expected WSL find command; left untouched.
+**********************
+PowerShell transcript end
+End time: 20260927193615
+**********************
+**********************
+PowerShell transcript start
+Start time: 20260927193748
+Username: DESKTOP-412KTAR\mzj
+RunAs User: DESKTOP-412KTAR\mzj
+Configuration Name: 
+Machine: DESKTOP-412KTAR (Microsoft Windows NT 10.0.26200.0)
+Host Application: C:\Users\mzj\.cache\codex-runtimes\codex-primary-runtime\dependencies\native\powershell\pwsh.dll -Command try { [Console]::OutputEncoding=[System.Text.Encoding]::UTF8 } catch {}
+$ErrorActionPreference = 'Stop'
+$workDir = 'C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\OpenHarmony_easyre_560'
+$logPath = 'C:\Users\mzj\Desktop\CTF\玄机刷题\记录\代理-easyre-终端记录.txt'
+Start-Transcript -Path $logPath -Append
+Write-Output '=== Exploratory transform checks only; no candidate asserted as a flag (script source follows) ==='
+$script = @'
+import base64, pathlib, re
+p = pathlib.Path(r"C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\OpenHarmony_easyre_560\hap_extracted\ets\modules.abc")
+b = p.read_bytes()
+hint = re.search(rb"NzAyZDBlODgxZDNjNzNjOWIzOTBkZjIwNTRiZGQxNWNjY2I", b).group()
+raw = base64.b64decode(hint + b"="*((-len(hint))%4))
+magic = b"#`d^ba_^YZZZVWXRRT"
+keys = {"magic":magic,"reversed_magic":magic[::-1]}
+print(f"hint_b64_len={len(hint)} decoded_len={len(raw)} decoded={raw!r}")
+for name,key in keys.items():
+    print(f"\nkey={name} length={len(key)} value={key!r}")
+    for label,data in [("decoded_ascii",raw),("hex_decoded",bytes.fromhex(raw.decode()))]:
+        xored=bytes(c ^ key[i%len(key)] for i,c in enumerate(data))
+        add=bytes((c + key[i%len(key)]) & 0xff for i,c in enumerate(data))
+        sub=bytes((c - key[i%len(key)]) & 0xff for i,c in enumerate(data))
+        def summary(v):
+            printable=sum(32 <= c < 127 for c in v)
+            return f"printable={printable}/{len(v)} repr={v!r} hex={v.hex()}"
+        print(f" {label} xor: {summary(xored)}")
+        print(f" {label} add: {summary(add)}")
+        print(f" {label} sub: {summary(sub)}")
+'@
+Write-Output $script
+$scriptPath = Join-Path $workDir 'candidate_transforms.py'
+Set-Content -LiteralPath $scriptPath -Value $script -Encoding UTF8
+& 'C:\Users\mzj\AppData\Local\Programs\Python\Python312\python.exe' $scriptPath 2>&1
+Stop-Transcript
+Process ID: 16548
+PSVersion: 7.6.5
+PSEdition: Core
+GitCommitId: 7.6.5
+OS: Microsoft Windows 10.0.26200
+Platform: Win32NT
+PSCompatibleVersions: 1.0, 2.0, 3.0, 4.0, 5.0, 5.1, 6.0, 7.0
+PSRemotingProtocolVersion: 2.4
+SerializationVersion: 1.1.0.1
+WSManStackVersion: 3.0
+**********************
+Transcript started, output file is C:\Users\mzj\Desktop\CTF\玄机刷题\记录\代理-easyre-终端记录.txt
+=== Exploratory transform checks only; no candidate asserted as a flag (script source follows) ===
+import base64, pathlib, re
+p = pathlib.Path(r"C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\OpenHarmony_easyre_560\hap_extracted\ets\modules.abc")
+b = p.read_bytes()
+hint = re.search(rb"NzAyZDBlODgxZDNjNzNjOWIzOTBkZjIwNTRiZGQxNWNjY2I", b).group()
+raw = base64.b64decode(hint + b"="*((-len(hint))%4))
+magic = b"#`d^ba_^YZZZVWXRRT"
+keys = {"magic":magic,"reversed_magic":magic[::-1]}
+print(f"hint_b64_len={len(hint)} decoded_len={len(raw)} decoded={raw!r}")
+for name,key in keys.items():
+    print(f"\nkey={name} length={len(key)} value={key!r}")
+    for label,data in [("decoded_ascii",raw),("hex_decoded",bytes.fromhex(raw.decode()))]:
+        xored=bytes(c ^ key[i%len(key)] for i,c in enumerate(data))
+        add=bytes((c + key[i%len(key)]) & 0xff for i,c in enumerate(data))
+        sub=bytes((c - key[i%len(key)]) & 0xff for i,c in enumerate(data))
+        def summary(v):
+            printable=sum(32 <= c < 127 for c in v)
+            return f"printable={printable}/{len(v)} repr={v!r} hex={v.hex()}"
+        print(f" {label} xor: {summary(xored)}")
+        print(f" {label} add: {summary(add)}")
+        print(f" {label} sub: {summary(sub)}")
+Traceback (most recent call last):
+  File "C:\Users\mzj\Desktop\CTF\����ˢ��\��Ŀ����\OpenHarmony_easyre_560\candidate_transforms.py", line 11, in <module>
+    for label,data in [("decoded_ascii",raw),("hex_decoded",bytes.fromhex(raw.decode()))]:
+                                                            ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+ValueError: non-hexadecimal number found in fromhex() arg at position 35
+**********************
+PowerShell transcript end
+End time: 20260927193749
+**********************
+**********************
+PowerShell transcript start
+Start time: 20260927193856
+Username: DESKTOP-412KTAR\mzj
+RunAs User: DESKTOP-412KTAR\mzj
+Configuration Name: 
+Machine: DESKTOP-412KTAR (Microsoft Windows NT 10.0.26200.0)
+Host Application: C:\Users\mzj\.cache\codex-runtimes\codex-primary-runtime\dependencies\native\powershell\pwsh.dll -Command try { [Console]::OutputEncoding=[System.Text.Encoding]::UTF8 } catch {}
+$ErrorActionPreference = 'Stop'
+$workDir = 'C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\OpenHarmony_easyre_560'
+$logPath = 'C:\Users\mzj\Desktop\CTF\玄机刷题\记录\代理-easyre-终端记录.txt'
+Start-Transcript -Path $logPath -Append
+Write-Output '=== Correct length-prefixed constants and exploratory byte transforms (full script follows) ==='
+$script = @'
+import base64
+hint = b"NzAyZDBlODgxZDNjNzNjOWIzOTBkZjIwNTRiZGQxNWNjY2I"
+raw = base64.b64decode(hint + b"="*((-len(hint))%4))
+magic = b"`d^ba_^YZZZVWXRRT"
+print(f"hint={hint.decode()} length={len(hint)} decoded={raw.decode()} length={len(raw)}")
+print(f"magic={magic.decode()} length={len(magic)} reversed={magic[::-1].decode()}")
+for name,key in [("magic",magic),("magic_reversed",magic[::-1])]:
+  for op in ("xor","add","sub"):
+    if op == "xor": out=bytes(c ^ key[i%len(key)] for i,c in enumerate(raw))
+    elif op == "add": out=bytes((c + key[i%len(key)])&255 for i,c in enumerate(raw))
+    else: out=bytes((c - key[i%len(key)])&255 for i,c in enumerate(raw))
+    n=sum(32<=x<127 for x in out)
+    print(f"{name:14} {op:3} printable={n}/{len(out)} repr={out!r}")
+print("Hint reversed:", raw[::-1].decode())
+'@
+Write-Output $script
+$scriptPath = Join-Path $workDir 'candidate_transforms.py'
+Set-Content -LiteralPath $scriptPath -Value $script -Encoding UTF8
+& 'C:\Users\mzj\AppData\Local\Programs\Python\Python312\python.exe' $scriptPath 2>&1
+Stop-Transcript
+Process ID: 11928
+PSVersion: 7.6.5
+PSEdition: Core
+GitCommitId: 7.6.5
+OS: Microsoft Windows 10.0.26200
+Platform: Win32NT
+PSCompatibleVersions: 1.0, 2.0, 3.0, 4.0, 5.0, 5.1, 6.0, 7.0
+PSRemotingProtocolVersion: 2.4
+SerializationVersion: 1.1.0.1
+WSManStackVersion: 3.0
+**********************
+Transcript started, output file is C:\Users\mzj\Desktop\CTF\玄机刷题\记录\代理-easyre-终端记录.txt
+=== Correct length-prefixed constants and exploratory byte transforms (full script follows) ===
+import base64
+hint = b"NzAyZDBlODgxZDNjNzNjOWIzOTBkZjIwNTRiZGQxNWNjY2I"
+raw = base64.b64decode(hint + b"="*((-len(hint))%4))
+magic = b"`d^ba_^YZZZVWXRRT"
+print(f"hint={hint.decode()} length={len(hint)} decoded={raw.decode()} length={len(raw)}")
+print(f"magic={magic.decode()} length={len(magic)} reversed={magic[::-1].decode()}")
+for name,key in [("magic",magic),("magic_reversed",magic[::-1])]:
+  for op in ("xor","add","sub"):
+    if op == "xor": out=bytes(c ^ key[i%len(key)] for i,c in enumerate(raw))
+    elif op == "add": out=bytes((c + key[i%len(key)])&255 for i,c in enumerate(raw))
+    else: out=bytes((c - key[i%len(key)])&255 for i,c in enumerate(raw))
+    n=sum(32<=x<127 for x in out)
+    print(f"{name:14} {op:3} printable={n}/{len(out)} repr={out!r}")
+print("Hint reversed:", raw[::-1].decode())
+**********************
+PowerShell transcript end
+End time: 20260927193856
+**********************
+**********************
+PowerShell transcript start
+Start time: 20260927193950
+Username: DESKTOP-412KTAR\mzj
+RunAs User: DESKTOP-412KTAR\mzj
+Configuration Name: 
+Machine: DESKTOP-412KTAR (Microsoft Windows NT 10.0.26200.0)
+Host Application: C:\Users\mzj\.cache\codex-runtimes\codex-primary-runtime\dependencies\native\powershell\pwsh.dll -Command try { [Console]::OutputEncoding=[System.Text.Encoding]::UTF8 } catch {}
+$ErrorActionPreference = 'Continue'
+$logPath = 'C:\Users\mzj\Desktop\CTF\玄机刷题\记录\代理-easyre-终端记录.txt'
+Start-Transcript -Path $logPath -Append
+Write-Output '=== Check related local attachment names and hash every extracted HAP file ==='
+Get-ChildItem -LiteralPath 'D:\Downloads' -File -Filter 'easyre*' -ErrorAction SilentlyContinue | Select-Object FullName,Length,LastWriteTime | Format-Table -AutoSize
+Get-ChildItem -LiteralPath 'C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\OpenHarmony_easyre_560\hap_extracted' -Recurse -File | ForEach-Object { Get-FileHash -LiteralPath $_.FullName -Algorithm SHA256 } | Select-Object Path,Hash | Format-Table -AutoSize
+Stop-Transcript
+Process ID: 26488
+PSVersion: 7.6.5
+PSEdition: Core
+GitCommitId: 7.6.5
+OS: Microsoft Windows 10.0.26200
+Platform: Win32NT
+PSCompatibleVersions: 1.0, 2.0, 3.0, 4.0, 5.0, 5.1, 6.0, 7.0
+PSRemotingProtocolVersion: 2.4
+SerializationVersion: 1.1.0.1
+WSManStackVersion: 3.0
+**********************
+Transcript started, output file is C:\Users\mzj\Desktop\CTF\玄机刷题\记录\代理-easyre-终端记录.txt
+=== Check related local attachment names and hash every extracted HAP file ===
+
+FullName                Length LastWriteTime
+--------                ------ -------------
+D:\Downloads\easyre.zip 117343 2026/9/27 19:27:31
+
+
+Path
+----                                                                                                                   
+C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\OpenHarmony_easyre_560\hap_extracted\.pages.info
+C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\OpenHarmony_easyre_560\hap_extracted\module.json
+C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\OpenHarmony_easyre_560\hap_extracted\pack.info
+C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\OpenHarmony_easyre_560\hap_extracted\pkgContextInfo.json
+C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\OpenHarmony_easyre_560\hap_extracted\resources.index
+C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\OpenHarmony_easyre_560\hap_extracted\ets\modules.abc
+C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\OpenHarmony_easyre_560\hap_extracted\ets\sourceMaps.map
+C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\OpenHarmony_easyre_560\hap_extracted\resources\base\media\background.png
+C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\OpenHarmony_easyre_560\hap_extracted\resources\base\media\foreground.png
+C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\OpenHarmony_easyre_560\hap_extracted\resources\base\media\layered_image.json
+C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\OpenHarmony_easyre_560\hap_extracted\resources\base\media\startIcon.png
+C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\OpenHarmony_easyre_560\hap_extracted\resources\base\profile\backup_config.j…
+C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\OpenHarmony_easyre_560\hap_extracted\resources\base\profile\main_pages.json
+
+**********************
+PowerShell transcript end
+End time: 20260927193951
+**********************
+**********************
+PowerShell transcript start
+Start time: 20260927194003
+Username: DESKTOP-412KTAR\mzj
+RunAs User: DESKTOP-412KTAR\mzj
+Configuration Name: 
+Machine: DESKTOP-412KTAR (Microsoft Windows NT 10.0.26200.0)
+Host Application: C:\Users\mzj\.cache\codex-runtimes\codex-primary-runtime\dependencies\native\powershell\pwsh.dll -Command try { [Console]::OutputEncoding=[System.Text.Encoding]::UTF8 } catch {}
+$ErrorActionPreference = 'Continue'
+$logPath = 'C:\Users\mzj\Desktop\CTF\玄机刷题\记录\代理-easyre-终端记录.txt'
+Start-Transcript -Path $logPath -Append
+Write-Output '=== SHA256 for every file inside extracted HAP (explicit paths and hashes) ==='
+$extractDir = 'C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\OpenHarmony_easyre_560\hap_extracted'
+Get-ChildItem -LiteralPath $extractDir -Recurse -File | Sort-Object FullName | ForEach-Object {
+  $hash = (Get-FileHash -LiteralPath $_.FullName -Algorithm SHA256).Hash
+  Write-Output ("{0}  {1}" -f $hash, $_.FullName)
+}
+Stop-Transcript
+Process ID: 27164
+PSVersion: 7.6.5
+PSEdition: Core
+GitCommitId: 7.6.5
+OS: Microsoft Windows 10.0.26200
+Platform: Win32NT
+PSCompatibleVersions: 1.0, 2.0, 3.0, 4.0, 5.0, 5.1, 6.0, 7.0
+PSRemotingProtocolVersion: 2.4
+SerializationVersion: 1.1.0.1
+WSManStackVersion: 3.0
+**********************
+Transcript started, output file is C:\Users\mzj\Desktop\CTF\玄机刷题\记录\代理-easyre-终端记录.txt
+=== SHA256 for every file inside extracted HAP (explicit paths and hashes) ===
+18BCCA594B280EFF6AE1AF738976DB92A46CBAEB6D5679719A9A8DEBA18DFF6C  C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\OpenHarmony_easyre_560\hap_extracted\.pages.info
+AE4C37ED75BF3623AF43AE3C1DBB4E3E0A5EA7954581A5CE99CD340269D017FE  C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\OpenHarmony_easyre_560\hap_extracted\ets\modules.abc
+613AE43F7AECB08E62189B6306C3D88B22C73EA89D54963FB70A35939805D756  C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\OpenHarmony_easyre_560\hap_extracted\ets\sourceMaps.map
+D80C13F2C5BB7479EC9F959CCB18295FC79178030CD40297541DAB9415A90732  C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\OpenHarmony_easyre_560\hap_extracted\module.json
+B98EBB44F585606BD447AC870FC3B705DFA87BD20B03EB088E15AE083E8E2DF6  C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\OpenHarmony_easyre_560\hap_extracted\pack.info
+E3241701B7B7AF0D5124F2675AF364D31B09201DF969FFED51B114A4D9F909D8  C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\OpenHarmony_easyre_560\hap_extracted\pkgContextInfo.json
+8B9FFFABE56B7E5AA7CF33654FFAA9A7F8BE761F20C38C5A301A4E1FC12BBBE5  C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\OpenHarmony_easyre_560\hap_extracted\resources.index
+BFF5F1C185C3AE6C2AFDC3408B895CE4CD820BAA63A03299AB20E48F5964890F  C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\OpenHarmony_easyre_560\hap_extracted\resources\base\media\background.png
+9C43C083D3BA8621108B73027FCB70FC74D0A68BC0E01430E80F647B8B783B60  C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\OpenHarmony_easyre_560\hap_extracted\resources\base\media\foreground.png
+BAFB39AB0834F3F2617265AA6E9601A2B2873364B8AFFC894BF1D3CC5C9A48CE  C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\OpenHarmony_easyre_560\hap_extracted\resources\base\media\layered_image.json
+567C7C0C7A321CA180E010AD880F0F7519F6D351AC2B9665E2EE710E7CFE7778  C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\OpenHarmony_easyre_560\hap_extracted\resources\base\media\startIcon.png
+05CBFFF8A8B8A6FC5480A052ECA238097D3456C16071D61FEA74E2455666C611  C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\OpenHarmony_easyre_560\hap_extracted\resources\base\profile\backup_config.json
+8D612C6B9A528D90C2B1157653D50257414A7F8D96EAA1DE10CE3A4537D0E70C  C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\OpenHarmony_easyre_560\hap_extracted\resources\base\profile\main_pages.json
+**********************
+PowerShell transcript end
+End time: 20260927194003
+**********************
+**********************
+PowerShell transcript start
+Start time: 20260927194038
+Username: DESKTOP-412KTAR\mzj
+RunAs User: DESKTOP-412KTAR\mzj
+Configuration Name: 
+Machine: DESKTOP-412KTAR (Microsoft Windows NT 10.0.26200.0)
+Host Application: C:\Users\mzj\.cache\codex-runtimes\codex-primary-runtime\dependencies\native\powershell\pwsh.dll -Command try { [Console]::OutputEncoding=[System.Text.Encoding]::UTF8 } catch {}
+$ErrorActionPreference = 'Stop'
+$workDir = 'C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\OpenHarmony_easyre_560'
+$logPath = 'C:\Users\mzj\Desktop\CTF\玄机刷题\记录\代理-easyre-终端记录.txt'
+Start-Transcript -Path $logPath -Append
+Write-Output '=== Decode source-map VLQ positions; source content itself is absent (full script follows) ==='
+$script = @'
+import json, pathlib
+path = pathlib.Path(r"C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\OpenHarmony_easyre_560\hap_extracted\ets\sourceMaps.map")
+root=json.loads(path.read_text(encoding="utf-8"))
+alphabet="ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/"
+def decode_vlq(s):
+    out=[]; value=0; shift=0
+    for ch in s:
+        digit=alphabet.index(ch); cont=digit&32; value|=(digit&31)<<shift
+        if cont: shift+=5; continue
+        negative=value&1; magnitude=value>>1
+        out.append(-magnitude if negative else magnitude)
+        value=shift=0
+    if shift: raise ValueError("unterminated VLQ")
+    return out
+for key,entry in root.items():
+    prev_source=prev_line=prev_col=prev_name=0
+    rows=[]
+    for gen_line,row in enumerate(entry.get("mappings","").split(";"),1):
+        prev_gen_col=0; points=[]
+        for seg in filter(None,row.split(",")):
+            vals=decode_vlq(seg); prev_gen_col+=vals[0]
+            if len(vals)>=4:
+                prev_source+=vals[1]; prev_line+=vals[2]; prev_col+=vals[3]
+                if len(vals)>=5: prev_name+=vals[4]
+                points.append((prev_line+1,prev_col,prev_gen_col))
+        if points: rows.append((gen_line,points))
+    originals=sorted({(line,col) for _,pts in rows for line,col,_ in pts})
+    print(f"\nFILE {entry.get('file')} source={entry.get('sources')} generated_rows={len(rows)} mapped_positions={len(originals)} source_content_present={bool(entry.get('sourcesContent'))}")
+    for line in sorted({x[0] for x in originals}):
+        cols=sorted({col for ln,col in originals if ln==line})
+        print(f" source_line {line}: columns={cols}")
+'@
+Write-Output $script
+$scriptPath = Join-Path $workDir 'decode_sourcemap.py'
+Set-Content -LiteralPath $scriptPath -Value $script -Encoding UTF8
+& 'C:\Users\mzj\AppData\Local\Programs\Python\Python312\python.exe' $scriptPath 2>&1
+Stop-Transcript
+Process ID: 25032
+PSVersion: 7.6.5
+PSEdition: Core
+GitCommitId: 7.6.5
+OS: Microsoft Windows 10.0.26200
+Platform: Win32NT
+PSCompatibleVersions: 1.0, 2.0, 3.0, 4.0, 5.0, 5.1, 6.0, 7.0
+PSRemotingProtocolVersion: 2.4
+SerializationVersion: 1.1.0.1
+WSManStackVersion: 3.0
+**********************
+Transcript started, output file is C:\Users\mzj\Desktop\CTF\玄机刷题\记录\代理-easyre-终端记录.txt
+=== Decode source-map VLQ positions; source content itself is absent (full script follows) ===
+import json, pathlib
+path = pathlib.Path(r"C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\OpenHarmony_easyre_560\hap_extracted\ets\sourceMaps.map")
+root=json.loads(path.read_text(encoding="utf-8"))
+alphabet="ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/"
+def decode_vlq(s):
+    out=[]; value=0; shift=0
+    for ch in s:
+        digit=alphabet.index(ch); cont=digit&32; value|=(digit&31)<<shift
+        if cont: shift+=5; continue
+        negative=value&1; magnitude=value>>1
+        out.append(-magnitude if negative else magnitude)
+        value=shift=0
+    if shift: raise ValueError("unterminated VLQ")
+    return out
+for key,entry in root.items():
+    prev_source=prev_line=prev_col=prev_name=0
+    rows=[]
+    for gen_line,row in enumerate(entry.get("mappings","").split(";"),1):
+        prev_gen_col=0; points=[]
+        for seg in filter(None,row.split(",")):
+            vals=decode_vlq(seg); prev_gen_col+=vals[0]
+            if len(vals)>=4:
+                prev_source+=vals[1]; prev_line+=vals[2]; prev_col+=vals[3]
+                if len(vals)>=5: prev_name+=vals[4]
+                points.append((prev_line+1,prev_col,prev_gen_col))
+        if points: rows.append((gen_line,points))
+    originals=sorted({(line,col) for _,pts in rows for line,col,_ in pts})
+    print(f"\nFILE {entry.get('file')} source={entry.get('sources')} generated_rows={len(rows)} mapped_positions={len(originals)} source_content_present={bool(entry.get('sourcesContent'))}")
+    for line in sorted({x[0] for x in originals}):
+        cols=sorted({col for ln,col in originals if ln==line})
+        print(f" source_line {line}: columns={cols}")
+**********************
+PowerShell transcript end
+End time: 20260927194039
+**********************
+**********************
+PowerShell transcript start
+Start time: 20260927194321
+Username: DESKTOP-412KTAR\mzj
+RunAs User: DESKTOP-412KTAR\mzj
+Configuration Name: 
+Machine: DESKTOP-412KTAR (Microsoft Windows NT 10.0.26200.0)
+Host Application: C:\Users\mzj\.cache\codex-runtimes\codex-primary-runtime\dependencies\native\powershell\pwsh.dll -Command try { [Console]::OutputEncoding=[System.Text.Encoding]::UTF8 } catch {}
+$ErrorActionPreference = 'Continue'
+$logPath = 'C:\Users\mzj\Desktop\CTF\玄机刷题\记录\代理-easyre-终端记录.txt'
+$abcPath = 'C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\OpenHarmony_easyre_560\hap_extracted\ets\modules.abc'
+Start-Transcript -Path $logPath -Append
+Write-Output '=== Search little-endian UTF-16 strings in Ark bytecode ==='
+& 'C:\msys64\mingw64\bin\strings.exe' -e l $abcPath 2>&1
+Write-Output '=== Search extracted HAP text and binary files for literal flag/endpoint clues ==='
+$extractDir = 'C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\OpenHarmony_easyre_560\hap_extracted'
+Get-ChildItem -LiteralPath $extractDir -Recurse -File | ForEach-Object {
+  $bytes = [System.IO.File]::ReadAllBytes($_.FullName)
+  $ascii = [System.Text.Encoding]::ASCII.GetString($bytes)
+  $matches = [regex]::Matches($ascii, '(?i)(flag\{|flag|https?://|\b\d{1,3}(?:\.\d{1,3}){3}\b|0x[0-9a-f]{4,})') | ForEach-Object { $_.Value } | Select-Object -Unique
+  if ($matches) { Write-Output ("{0}: {1}" -f $_.FullName, ($matches -join ', ')) }
+}
+Stop-Transcript
+Process ID: 12168
+PSVersion: 7.6.5
+PSEdition: Core
+GitCommitId: 7.6.5
+OS: Microsoft Windows 10.0.26200
+Platform: Win32NT
+PSCompatibleVersions: 1.0, 2.0, 3.0, 4.0, 5.0, 5.1, 6.0, 7.0
+PSRemotingProtocolVersion: 2.4
+SerializationVersion: 1.1.0.1
+WSManStackVersion: 3.0
+**********************
+Transcript started, output file is C:\Users\mzj\Desktop\CTF\玄机刷题\记录\代理-easyre-终端记录.txt
+=== Search little-endian UTF-16 strings in Ark bytecode ===
+=== Search extracted HAP text and binary files for literal flag/endpoint clues ===
+C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\OpenHarmony_easyre_560\hap_extracted\module.json: 5.0.5.165
+C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\OpenHarmony_easyre_560\hap_extracted\ets\modules.abc: Flag, flag, flag{
+C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\OpenHarmony_easyre_560\hap_extracted\ets\sourceMaps.map: Flag
+C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\OpenHarmony_easyre_560\hap_extracted\resources\base\profile\main_pages.json: Flag
+**********************
+PowerShell transcript end
+End time: 20260927194321
+**********************
+**********************
+PowerShell transcript start
+Start time: 20260927194353
+Username: DESKTOP-412KTAR\mzj
+RunAs User: DESKTOP-412KTAR\mzj
+Configuration Name: 
+Machine: DESKTOP-412KTAR (Microsoft Windows NT 10.0.26200.0)
+Host Application: C:\Users\mzj\.cache\codex-runtimes\codex-primary-runtime\dependencies\native\powershell\pwsh.dll -Command try { [Console]::OutputEncoding=[System.Text.Encoding]::UTF8 } catch {}
+$ErrorActionPreference = 'Stop'
+$logPath = 'C:\Users\mzj\Desktop\CTF\玄机刷题\记录\代理-easyre-终端记录.txt'
+Start-Transcript -Path $logPath -Append
+Write-Output '=== Final offline findings for #560 easyre ==='
+Write-Output 'Input ZIP SHA256: 7401DF22E0BEEA48C439938B622931414F3EC89D383B5AA4CD72E138C42805EA'
+Write-Output 'Extracted HAP SHA256: 04449FE1DDF911A36A9A9644657F316F052B46640C224EAE61BCE3B08904D87E'
+Write-Output 'Ark bytecode SHA256: AE4C37ED75BF3623AF43AE3C1DBB4E3E0A5EA7954581A5CE99CD340269D017FE'
+Write-Output 'HAP metadata: bundle com.example.ctfdemo; debug=true; Ark VM ark12.0.6.0; HarmonyOS compile SDK 5.0.5.165; entry pages Index and Flag.'
+Write-Output 'sourceMaps.map covers EntryAbility, EntryBackupAbility, Flag, Index, Coder but has no sourcesContent. It maps positions only; no original .ets source was included.'
+Write-Output 'Ark strings expose UI prompt Click 1000000 times to get the flag; static prefix The flag is flag{; member names include hint1, magic, count, flag, getH2, onClick; Coder methods include base64 encode/decode helpers.'
+Write-Output 'The length-prefixed constant in ABC has payload NzAyZDBlODgxZDNjNzNjOWIzOTBkZjIwNTRiZGQxNWNjY2I; standard Base64 gives 702d0e881d3c73c9b390df2054bdd15cccb (35 ASCII chars). Other raw payload is `d^ba_^YZZZVWXRRT (17 chars). These are clues only, not a verified flag.'
+Write-Output 'No literal completed flag, network endpoint, or additional related easyre file was found. ASCII and UTF-16LE string searches did not reveal a flag body beyond the prefix and encoded clue.'
+Write-Output 'Exploratory common XOR/add/sub transforms did not recover a candidate and do not establish the app algorithm. No candidate is reported.'
+Write-Output 'Blocker: the package contains Ark bytecode but not original ArkTS source; local environment lacks a compatible Ark disassembler/Ark runtime. Required to finish exact static recovery: Ark disassembler/runtime compatible with Ark VM 12.0.6.0, or original .ets sources (especially Index.ets, Flag.ets, Coder.ets).'
+Write-Output 'Coordinator independently confirmed no local Ark/DevEco tool on PATH or in the checked install locations. A recursive local scan was stopped after it entered unrelated Program Files trees; no installation or network access was performed.'
+Write-Output 'No platform access/submission and no guide/PDF edits occurred. HAP extracted files and the recorded analysis scripts are in the assigned work directory.'
+Stop-Transcript
+Process ID: 9860
+PSVersion: 7.6.5
+PSEdition: Core
+GitCommitId: 7.6.5
+OS: Microsoft Windows 10.0.26200
+Platform: Win32NT
+PSCompatibleVersions: 1.0, 2.0, 3.0, 4.0, 5.0, 5.1, 6.0, 7.0
+PSRemotingProtocolVersion: 2.4
+SerializationVersion: 1.1.0.1
+WSManStackVersion: 3.0
+**********************
+Transcript started, output file is C:\Users\mzj\Desktop\CTF\玄机刷题\记录\代理-easyre-终端记录.txt
+=== Final offline findings for #560 easyre ===
+Input ZIP SHA256: 7401DF22E0BEEA48C439938B622931414F3EC89D383B5AA4CD72E138C42805EA
+Extracted HAP SHA256: 04449FE1DDF911A36A9A9644657F316F052B46640C224EAE61BCE3B08904D87E
+Ark bytecode SHA256: AE4C37ED75BF3623AF43AE3C1DBB4E3E0A5EA7954581A5CE99CD340269D017FE
+HAP metadata: bundle com.example.ctfdemo; debug=true; Ark VM ark12.0.6.0; HarmonyOS compile SDK 5.0.5.165; entry pages Index and Flag.
+sourceMaps.map covers EntryAbility, EntryBackupAbility, Flag, Index, Coder but has no sourcesContent. It maps positions only; no original .ets source was included.
+Ark strings expose UI prompt Click 1000000 times to get the flag; static prefix The flag is flag{; member names include hint1, magic, count, flag, getH2, onClick; Coder methods include base64 encode/decode helpers.
+The length-prefixed constant in ABC has payload NzAyZDBlODgxZDNjNzNjOWIzOTBkZjIwNTRiZGQxNWNjY2I; standard Base64 gives 702d0e881d3c73c9b390df2054bdd15cccb (35 ASCII chars). Other raw payload is `d^ba_^YZZZVWXRRT (17 chars). These are clues only, not a verified flag.
+No literal completed flag, network endpoint, or additional related easyre file was found. ASCII and UTF-16LE string searches did not reveal a flag body beyond the prefix and encoded clue.
+Exploratory common XOR/add/sub transforms did not recover a candidate and do not establish the app algorithm. No candidate is reported.
+Blocker: the package contains Ark bytecode but not original ArkTS source; local environment lacks a compatible Ark disassembler/Ark runtime. Required to finish exact static recovery: Ark disassembler/runtime compatible with Ark VM 12.0.6.0, or original .ets sources (especially Index.ets, Flag.ets, Coder.ets).
+Coordinator independently confirmed no local Ark/DevEco tool on PATH or in the checked install locations. A recursive local scan was stopped after it entered unrelated Program Files trees; no installation or network access was performed.
+No platform access/submission and no guide/PDF edits occurred. HAP extracted files and the recorded analysis scripts are in the assigned work directory.
+**********************
+PowerShell transcript end
+End time: 20260927194353
+**********************

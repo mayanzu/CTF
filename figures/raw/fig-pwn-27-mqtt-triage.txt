@@ -1,0 +1,35 @@
+mzj@Ubuntu-24.04:~$ cd ~/pwn-lab/platform/mqtt && ls -l
+总计 2632
+-rwxr-xr-x 1 mzj mzj  240936  7月  8  2025 ld-linux-x86-64.so.2
+-rw-r--r-- 1 mzj mzj   34840  7月  8  2025 libcjson.so.1
+-rw-r--r-- 1 mzj mzj 2220400  7月  8  2025 libc.so.6
+-rw-r--r-- 1 mzj mzj  145776  7月  8  2025 libpaho-mqtt3c.so.1
+-rwxr-xr-x 1 mzj mzj   40985  7月 21  2025 pwn
+
+mzj@Ubuntu-24.04:~$ cd ~/pwn-lab/platform/mqtt && file pwn && LANG=C readelf -h pwn | grep -e Type -e Entry
+pwn: ELF 64-bit LSB pie executable, x86-64, version 1 (SYSV), dynamically linked, interpreter ./ld-linux-x86-64.so.2, for GNU/Linux 3.2.0, BuildID[sha1]=336cb7f198fc525d72ec19082aa470eda8fba1b9, stripped
+  Type:                              DYN (Position-Independent Executable file)
+  Entry point address:               0x1420
+
+mzj@Ubuntu-24.04:~$ cd ~/pwn-lab/platform/mqtt && LANG=C readelf -d pwn | grep -e BIND_NOW -e NEEDED
+ 0x0000000000000001 (NEEDED)             Shared library: [libpaho-mqtt3c.so.1]
+ 0x0000000000000001 (NEEDED)             Shared library: [libcjson.so.1]
+ 0x0000000000000001 (NEEDED)             Shared library: [./libc.so.6]
+ 0x000000000000001e (FLAGS)              BIND_NOW
+
+mzj@Ubuntu-24.04:~$ cd ~/pwn-lab/platform/mqtt && LANG=C readelf -l pwn | grep -A1 GNU_STACK
+  GNU_STACK      0x0000000000000000 0x0000000000000000 0x0000000000000000
+                 0x0000000000000000 0x0000000000000000  RW     0x10
+
+mzj@Ubuntu-24.04:~$ cd ~/pwn-lab/platform/mqtt && strings pwn | grep -e diag -e 'VIN' -e auth -e 9999 -e adb -e VIN
+diag/resp
+{"status":"unauthorized"}
+unauthorized
+set_adb
+echo -n %d>/mnt/adb_flag;cat /mnt/adb_flag
+echo -n %s>/mnt/VIN;cat /mnt/VIN
+auth
+/mnt/VIN
+vehicle_diag
+tcp://localhost:9999
+diag

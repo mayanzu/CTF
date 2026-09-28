@@ -1,0 +1,70 @@
+﻿# 可疑流量分析：终端交互补录
+
+原始 PowerShell 转录在 C:\Users\mzj\Desktop\CTF\玄机刷题-终端完整记录.txt。Start-Transcript 能记录 PowerShell 及 python -c 命令，但没有收录 Python 交互式 REPL 内的逐行输入/输出。REPL 全程在前台运行，并在 Computer Use 工具结果中显示；这里按可见结果回填。先前长输出被终端截断处会标明为摘要。随后已用前台 PowerShell here-string 和 python -c 重跑核心解析，完整代码与输出进入原始转录。
+
+## 文件检查
+
+执行的 PowerShell 命令：列出 D:\Downloads 最近文件；tar -tf 可疑流量分析附件.zip；Get-FileHash 检查 ZIP；Expand-Archive 解压到 C:\Users\mzj\Desktop\CTF\可疑流量分析-附件；Get-ChildItem 检查文件；Get-FileHash 检查 challenge.pcap；Get-Command 检查 tshark、wireshark、tcpdump、python、py。
+
+输出：ZIP 266740 字节，只含 challenge.pcap；ZIP SHA256 为 1DA68FF7021F1A3294C2D6BFEC355564A2DBF5BCC96C33451D9D9422AE1B5AFA；PCAP 693571 字节，SHA256 为 B426473FC5838490B9F2F4B77A91FD68CE182B5B07A7BFD0008C63A93CF46025。只有 python.exe 和 py.exe 可用，未发现 tshark、Wireshark、tcpdump。
+
+执行：python -c "import importlib.util as u; print({x: bool(u.find_spec(x)) for x in ['scapy','dpkt','pyshark','pandas']})"
+
+输出：{'scapy': False, 'dpkt': False, 'pyshark': False, 'pandas': True}
+
+## Python REPL 解析步骤和结果
+
+输入 import struct, collections, ipaddress；打开 challenge.pcap 为二进制；用 struct.unpack('<IHHIIII', data[:24]) 解析 PCAP 头。
+
+输出：file_bytes 693571，global_header (2712847316, 2, 4, 0, 0, 262144, 276)。文件 magic 为 d4 c3 b2 a1；linktype 276 为 SLL2，链路头 20 字节。
+
+按 PCAP 记录头读取 3076 个包。首次写 while 分包循环及统计循环时忘记以空行结束 REPL 多行代码块，出现 SyntaxError，首轮统计仍为空；随后补空行并重输后成功。成功输出：records 3076；首包头 (1788149117, 393755, 76, 76)；首帧前 32 字节 080000000000000b000104062e667b34988a000045000038c86740004011b590。
+
+用 SLL2 协议字段识别 IPv4 并统计第 10 字节 IP protocol：TCP 2804 包、UDP 262 包。端点计数：172.29.50.100 3066，172.29.50.20 1018，172.29.50.40 958，172.29.50.10 828，172.29.50.30 262。服务方向计数：.100 到 .40:3306 共 507 包；到 .10:80 共 483 包；到 .20:21 共 393 包；向 .30:53 发出 131 个 DNS 请求。
+
+原文件字符串探测输出：flag{ 首次匹配 -1；password 偏移 1071；USER 偏移 23282；PASS 偏移 23593；GET 偏移 18537；POST 首次匹配 -1；mysql 偏移 21931。
+
+TCP payload 首轮循环也因没结束代码块而报 SyntaxError，之后错误筛选暂时显示 0 flows。重新执行循环后输出：1295 个 TCP payload 包，416149 字节；端口 21、80、3306 分别 76、138、62 个方向流。
+
+## 明文服务检查
+
+HTTP 请求行计数：GET /about.html 27 次、GET /index.html 23 次、GET / 19 次。服务器有两个唯一 HTML 页面，即内部门户和 About 页面。HTML 注释为两个空列表；搜索关键词 flag、secret、password、token、cdn 均未发现有效线索。一次过长的交互式过滤表达式停在续行状态，Ctrl+C 后输出 KeyboardInterrupt；附件与平台状态未改变。
+
+FTP 客户端命令 Counter：USER ctfuser 38，PASS ctfpass123 38，QUIT 38，TYPE A 26，PASV 26，NLST 17，PWD 12，RETR readme.txt 9。服务器回复 Counter：220 38，331 38，230 38，221 38，200 Type set to ASCII 26，125 Transfer starting 26，226 Transfer complete 26，257 当前目录 12，其他是 227 被动端口回复。26 个数据包仅有 readme.txt 或 Welcome to FTP server! This is a project documentation file.
+
+MySQL 客户端 payload 280 段；首包为 36 字节 SSLRequest，其后 TLS ClientHello 和 TLS 密文。无会话密钥，未声称还原 SQL。
+
+## DNS 隧道分析和解码
+
+DNS 响应解析得到 131 个响应。常见域名解析到公网地址，例如 google.com -> 142.250.80.46，baidu.com -> 110.242.68.66，cdn.jsdelivr.net -> 151.101.1.229，raw.githubusercontent.com -> 185.199.108.133。随机 CDN 风格域名短时间突发，均指向 10.10.10.1。
+
+把 DNS 记录按目标域名家族分组；cdn-static.xyz 出现连续标签序号 00 至 10。对相同 QNAME 去重后得到：
+00 MZWGCZ
+01 33GI2D
+02 EYTEMR
+03 SGIMBZ
+04 MI3DON
+05 RZMQZG
+06 KNBYGQ
+07 YDIZRW
+08 MU3TAZ
+09 BTHBSH
+10 2
+
+其他家族单独解码为二进制，或片段长度不足；混合域名后按时间或全局序号拼接也只得不可读字节。按 cdn-static.xyz 家族、序号排序后 Base32 片段连接为 61 字符：
+MZWGCZ33GI2DEYTEMRSGIMBZMI3DONRZMQZGKNBYGQYDIZRWMU3TAZBTHBSH2
+
+执行的复核命令：
+python -c "import base64; s='MZWGCZ33GI2DEYTEMRSGIMBZMI3DONRZMQZGKNBYGQYDIZRWMU3TAZBTHBSH2'; print('length',len(s),'encoded',s); print(base64.b32decode(s+'='*((-len(s))%8)).decode())"
+
+输出：
+length 61 encoded MZWGCZ33GI2DEYTEMRSGIMBZMI3DONRZMQZGKNBYGQYDIZRWMU3TAZBTHBSH2
+flag{242bdddd09b6769d2e48404f6e70d38d}
+
+正文 32 位，全部是小写十六进制字符。为补足 REPL 的转录缺口，完整 SLL2、IP、DNS 解析代码通过可见 PowerShell here-string + python -c 重跑；源代码和输出都在原始转录中。
+
+## 平台结果
+
+Computer Use 前台在提交窗口键入 flag{242bdddd09b6769d2e48404f6e70d38d} 并点击提交。页面显示“FLAG 正确，恭喜你完成此挑战”“已完成”“步骤 #1 1/1”。
+
+截图在 Computer Use 本会话实时显示。当前接口不能将浏览器截图字节保存成单独 PNG；只记录文字证据，不拿其他桌面截图冒充。

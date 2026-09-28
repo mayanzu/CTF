@@ -1,0 +1,505 @@
+**********************
+PowerShell transcript start
+Start time: 20260928215901
+Username: DESKTOP-412KTAR\mzj
+RunAs User: DESKTOP-412KTAR\mzj
+Configuration Name: 
+Machine: DESKTOP-412KTAR (Microsoft Windows NT 10.0.26200.0)
+Host Application: C:\Users\mzj\.cache\codex-runtimes\codex-primary-runtime\dependencies\native\powershell\pwsh.dll -Command try { [Console]::OutputEncoding=[System.Text.Encoding]::UTF8 } catch {}
+$log='C:\Users\mzj\Desktop\CTF\玄机刷题\记录\WP补全-资料普查记录.txt'; Start-Transcript -LiteralPath $log -Append; Write-Output '=== WP补全资料普查 / 2026-09-28 ==='; Write-Output 'COMMAND: Get-Content guide first 80 lines'; Get-Content -LiteralPath 'C:\Users\mzj\Desktop\CTF\玄机刷题\指南\玄机刷题指南_合并源.md' -TotalCount 80; Write-Output 'COMMAND: find desktop CTF training folders'; Get-ChildItem -LiteralPath 'C:\Users\mzj\Desktop' -Directory -Force | Where-Object Name -Match 'CTF|training|训练' | Select-Object FullName,LastWriteTime; Write-Output 'COMMAND: list challenge source directories'; Get-ChildItem -LiteralPath 'C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料' -Directory | Select-Object Name,LastWriteTime; Stop-Transcript
+Process ID: 26448
+PSVersion: 7.6.5
+PSEdition: Core
+GitCommitId: 7.6.5
+OS: Microsoft Windows 10.0.26200
+Platform: Win32NT
+PSCompatibleVersions: 1.0, 2.0, 3.0, 4.0, 5.0, 5.1, 6.0, 7.0
+PSRemotingProtocolVersion: 2.4
+SerializationVersion: 1.1.0.1
+WSManStackVersion: 3.0
+**********************
+Transcript started, output file is C:\Users\mzj\Desktop\CTF\玄机刷题\记录\WP补全-资料普查记录.txt
+=== WP补全资料普查 / 2026-09-28 ===
+COMMAND: Get-Content guide first 80 lines
+---
+title: "玄机平台 CTF 刷题指南"
+author: "解题过程记录与完整 Writeup"
+date: "2026-09-28"
+documentclass: ctexbook
+classoption:
+  - UTF8
+  - 11pt
+  - oneside
+  - openany
+---
+
+# 阅读说明与证据口径
+
+本指南截至 2026-09-28 收录玄机平台“已完成”筛选中显示的 **28 道题**（第一页 15 道、第二页 13 道）。筛选列表用于确认题目完成状态；详情页的步骤数、提交回执与命令输出则只在已有记录中单独注明，不把列表徽标扩写成没有证据的步骤细节。
+
+目前有 12 道题保留了可直接复核的逐步题解；本次把另外 16 道平台已完成题也加入总表。对历史记录不足的条目，本指南会标注缺少的附件或过程记录，不猜测命令、算法细节或 flag。后续补到原始附件和记录时，再把这些条目的逐步过程补齐。
+
+各题攻关、Pixel 补查以及手册整理过程均按现有文件保留命令记录，路径见末尾“终端记录与复现文件”。命令记录按实际执行顺序保存；未进入 transcript 的早期交互会在逐题记录中标注为回溯补录。为保护账户，记录内用户名和密码以占位符脱敏，其余解题命令与输出保留。浏览器由 Computer Use 前台操作，截图在会话中实时展示；当前接口不能把截图保存为本地 PNG，因此手册记录页面可见文字状态，不声称有本地截图。
+
+# 进度总览
+
+## 平台已完成（28 道）
+
+题目和难度按玄机平台“已完成”筛选页记录。ID 仅在指南或本地附件中已有确证时填写；“—”表示尚未从题目详情页核对 ID。费用不在本次列表中显示，因此新补条目不推断免费或收费。
+
+### 题目一览表
+
+| ID | 题目 | 类型 / 难度 | 状态与过程资料 |
+|---:|---|---|---|
+| — | 2026安网杯-Poisoned Samples | AI / 中等 | 平台筛选显示已完成；本地未找到附件和过程记录 |
+| 590 | 2026安网杯-Prompt Trace | AI / 中等 | 平台已完成；本指南有逐步记录 |
+| — | 2026安网杯-闸机票根 | REVERSE / 中等 | 平台筛选显示已完成；本地未找到附件和过程记录 |
+| — | 2026安网杯-联号回执 | Crypto / 中等 | 平台筛选显示已完成；本地未找到附件和过程记录 |
+| — | 2026安网杯-五格电文 | Crypto / 中等 | 平台筛选显示已完成；本地未找到附件和过程记录 |
+| 585 | 2026安网杯-班次邮戳 | MISC / 中等 | 平台已完成；本指南有逐步记录 |
+| 584 | 2026安网杯-可疑流量分析 | MISC / 中等 | 平台已完成；本指南有逐步记录 |
+| 583 | 2026安网杯-像素囚笼1 | MISC / 简单 | 平台已完成；本指南有逐步记录 |
+| — | 2026安网杯-外泄流量取证 | MISC / 中等 | 平台筛选显示已完成；本地未找到附件和过程记录 |
+| 580 | 2026安网杯-Veiled Shell | MISC / 简单 | 平台已完成；本指南有逐步记录 |
+| — | 商丘师范学院第四届网络安全及信息对抗大赛（校外赛）不劳春风解我忧 | REVERSE / 中等 | 平台筛选显示已完成；本地有程序与 XXTEA 解题脚本 |
+| — | 商丘师范学院第四届网络安全及信息对抗大赛 ezRe | REVERSE / 中等 | 平台筛选显示已完成；本地有样本和 PyInstaller 提取产物 |
+| 564 | 第一届启航杯 rainbow | REVERSE / 中等 | 平台筛选显示已完成；本地有分析记录与复现脚本 |
+| 563 | 第一届启航杯 note | REVERSE / 中等 | 平台筛选显示已完成；本地有终端记录和复现材料 |
+| — | 第三届黄河流域公安院校网络安全技能挑战赛 qgd | REVERSE / 中等 | 平台筛选显示已完成；本地未找到对应过程记录 |
+| 556 | 第三届黄河流域公安院校网络安全技能挑战赛 go_for_it | REVERSE / 中等 | 平台已完成；本地有分析输出、脚本和终端记录 |
+| 555 | 第三届黄河流域公安院校网络安全技能挑战赛 Victory_Melody | REVERSE / 中等 | 平台已完成；本指南有逐步记录 |
+| 554 | 第九届“强网杯”全国网络安全挑战赛 tradre | REVERSE / 中等 | 平台已完成；本指南有逐步记录 |
+| 550 | 第二届 Parloo 杯 PositionalXOR | REVERSE / 中等 | 平台已完成；本指南有逐步记录 |
+| 528 | 商丘师范学院第四届网络安全及信息对抗大赛 即随本心 | REVERSE / 简单 | 平台已完成；本指南有逐步记录 |
+| — | Ancient-Recall-HHB2026 | PWN / 中等 | 平台筛选显示已完成；本地未找到附件和过程记录 |
+| — | Redis未授权导致远程代码执行 | 渗透 / 简单 | 平台筛选显示已完成；本地未找到附件和过程记录 |
+| — | webmin未授权远程代码执行漏洞 | 渗透 / 入门 | 平台筛选显示已完成；本地未找到附件和过程记录 |
+| 358 | 2025鹏城杯-babyRSA | Crypto / 中等 | 平台已完成；本指南有逐步记录 |
+| — | pwn-ezpwn | PWN / 简单 | 平台筛选显示已完成；本地未找到附件和过程记录 |
+| 286 | 第九届 XCTF 国际网络攻防联赛总决赛-Tch3s | Crypto / 极难 | 平台已完成；本指南有逐步记录 |
+| — | 第十八届 CISCN 决赛 CTF-车联网安全 mqtt | PWN / 简单 | 平台筛选显示已完成；本地未找到附件和过程记录 |
+| 81 | 2024铁人三项决赛 CTFRE-crazyaes | REVERSE / 极难 | 平台已完成；本指南有逐步记录 |
+
+**统计：平台“已完成”筛选共 28 道（15 + 13）；本指南当前含 12 道完整逐步题解，另 16 道已列入并标注过程资料状态。**
+
+### 新纳入的历史题记录说明
+
+- **不劳春风解我忧**：现有 `题目资料\不劳春风解我忧\main.exe` 与 `solve_xxtea.py`。脚本明确实现 32 位 XXTEA 轮函数、给出密文和四个 32 位 key word，并包含解密与重新加密校验；这批文档尚未逐行抄录脚本输出。
+- **ezRe**：保留了 `题目资料\ezRe\33.exe`、PyInstaller 提取脚本与 `pyi_extracted`。目前没有整理成可读的逐步 WP；后续需从解包主脚本、校验逻辑和候选输入复原完整叙述。
+- **rainbow**：本地 `题目资料\rainbow\分析记录.md` 记录 ELF 静态分析和单字节 XOR：程序 key 为 `0x5A`，`output.txt` 密文解出候选 `flag{rj5Pnm6UGyGFc01BllivJliGIz37gxXfaj85z}`。这份旧记录原先标为未提交；本次平台“已完成”筛选现显示该题已完成，因此状态以当前页面为准，候选与具体提交值仍应以历史提交回执为准。
+- **note**：终端记录显示对 ELF 的静态分析、运行时解包映射检查，以及按四字节 key `42 37 A1 7C` 和递增位置值逆变换密文，得到本地候选 `flag{pyrPGREJEB22LAdDfHNrf3kA55OKf86YFlnuG}`；平台筛选显示已完成。完整命令输出见 `记录\代理-note-终端记录.txt`。
+- **go_for_it**：`题目资料\go_for_it_556` 保存了 Go 样本、调试器、求解/探测脚本和原始输出；终端记录中有候选 `flag{cde36914d3639ab8ffa5c88f58}`，平台筛选显示已完成。详见该目录 README 及 `记录\代理-go_for_it-终端记录.txt`。
+- **Poisoned Samples、闸机票根、联号回执、五格电文、外泄流量取证、qgd、Ancient-Recall-HHB2026、Redis 未授权、webmin、pwn-ezpwn、mqtt**：平台筛选已显示完成，但当前项目中没有找到对应附件或过程日志。本指南先登记题目状态，不编写未经证据支持的命令、算法和 flag。
+
+# 刷题次序与复盘方法
+
+已通过题目按简单到难的顺序学习：先做简单 MISC 和 REVERSE，再做中等 AI、图像取证、PCAP 和 RSA，最后处理 Crypto / REVERSE 极难题。对每题都先核实类型、难度和费用，再下载附件、记录哈希、静态检查格式与内容，形成能被输出验证的假设，最后才在平台提交。
+
+复盘时重点追问：
+1. 题目真正给了什么材料、要验证什么结果？
+2. 附件格式、路径、编码、区段映射是否被独立确认？
+3. 推理依赖的每条规则都能否在题目数据或程序代码中找到证据？
+4. 候选是否通过本地独立校验？平台是否确实显示完成？
+5. 哪些失败尝试改变了假设？失败输出是否保留？
+COMMAND: find desktop CTF training folders
+
+**********************
+PowerShell transcript end
+End time: 20260928215901
+**********************
+**********************
+PowerShell transcript start
+Start time: 20260928215940
+Username: DESKTOP-412KTAR\mzj
+RunAs User: DESKTOP-412KTAR\mzj
+Configuration Name: 
+Machine: DESKTOP-412KTAR (Microsoft Windows NT 10.0.26200.0)
+Host Application: C:\Users\mzj\.cache\codex-runtimes\codex-primary-runtime\dependencies\native\powershell\pwsh.dll -Command try { [Console]::OutputEncoding=[System.Text.Encoding]::UTF8 } catch {}
+$log='C:\Users\mzj\Desktop\CTF\玄机刷题\记录\WP补全-资料普查记录.txt'; Start-Transcript -LiteralPath $log -Append; Write-Output '=== 平台脚本与记录映射 ==='; Write-Output 'COMMAND: enumerate labs/platform files'; Get-ChildItem -LiteralPath 'C:\Users\mzj\Desktop\CTF\labs\platform' -File | Sort-Object Name | ForEach-Object { '{0}`t{1} bytes' -f $_.Name,$_.Length }; Write-Output 'COMMAND: search relevant task markers in records and lab platform files'; rg -n -i -S 'poisoned|gate.ticket|receipt|five.grid|network.forensics|qgd|ancient|redis|webmin|ezpwn|mqtt|external traffic|外泄流量|联号回执|五格电文|闸机票根|Poisoned Samples' 'C:\Users\mzj\Desktop\CTF\玄机刷题\记录' 'C:\Users\mzj\Desktop\CTF\labs\platform' 'C:\Users\mzj\Desktop\CTF\figures\raw' -g '*.md' -g '*.txt' -g '*.py' -g '*.c' -g '*.ps1'; Stop-Transcript
+Process ID: 20172
+PSVersion: 7.6.5
+PSEdition: Core
+GitCommitId: 7.6.5
+OS: Microsoft Windows 10.0.26200
+Platform: Win32NT
+PSCompatibleVersions: 1.0, 2.0, 3.0, 4.0, 5.0, 5.1, 6.0, 7.0
+PSRemotingProtocolVersion: 2.4
+SerializationVersion: 1.1.0.1
+WSManStackVersion: 3.0
+**********************
+Transcript started, output file is C:\Users\mzj\Desktop\CTF\玄机刷题\记录\WP补全-资料普查记录.txt
+=== 平台脚本与记录映射 ===
+COMMAND: enumerate labs/platform files
+solve_581_network_forensics.py`t6528 bytes
+solve_589_gate_ticket.py`t3156 bytes
+solve_591_poisoned_samples.py`t1814 bytes
+solve_cifar_trigger.py`t2541 bytes
+solve_five_grid.py`t1446 bytes
+solve_pwn_ezpwn.py`t3584 bytes
+solve_qgd.py`t2529 bytes
+solve_receipt.py`t1821 bytes
+COMMAND: search relevant task markers in records and lab platform files
+
+**********************
+PowerShell transcript end
+End time: 20260928215940
+**********************
+**********************
+PowerShell transcript start
+Start time: 20260928220011
+Username: DESKTOP-412KTAR\mzj
+RunAs User: DESKTOP-412KTAR\mzj
+Configuration Name: 
+Machine: DESKTOP-412KTAR (Microsoft Windows NT 10.0.26200.0)
+Host Application: C:\Users\mzj\.cache\codex-runtimes\codex-primary-runtime\dependencies\native\powershell\pwsh.dll -Command try { [Console]::OutputEncoding=[System.Text.Encoding]::UTF8 } catch {}
+$log='C:\Users\mzj\Desktop\CTF\玄机刷题\记录\WP补全-资料普查记录.txt'; Start-Transcript -LiteralPath $log -Append; Write-Output '=== 相关附件压缩包与项目证据路径 ==='; Write-Output 'COMMAND: find challenge archives and challenge-specific files'; Get-ChildItem -LiteralPath 'D:\Downloads' -File | Where-Object Name -Match 'qgd|mqtt|redis|webmin|ancient|ezpwn|receipt|receipt|five|five-grid|grid|ticket|gate|poison|network|外泄|票根|联号|五格|春风|note|rainbow|tradre|Victory|go_for_it|babyRSA|crazyaes' | Select-Object Name,Length; rg --files 'C:\Users\mzj\Desktop\CTF' | rg -i 'ancient|redis|webmin|ezpwn|mqtt|qgd|557|586|587|589|591|581|ticket|receipt|five.grid|poisoned|network.forensics'; Write-Output 'COMMAND: read known recovery scripts'; Get-Content -LiteralPath 'C:\Users\mzj\Desktop\CTF\labs\platform\solve_591_poisoned_samples.py','C:\Users\mzj\Desktop\CTF\labs\platform\solve_589_gate_ticket.py','C:\Users\mzj\Desktop\CTF\labs\platform\solve_receipt.py','C:\Users\mzj\Desktop\CTF\labs\platform\solve_five_grid.py','C:\Users\mzj\Desktop\CTF\labs\platform\solve_581_network_forensics.py','C:\Users\mzj\Desktop\CTF\labs\platform\solve_qgd.py','C:\Users\mzj\Desktop\CTF\labs\platform\solve_pwn_ezpwn.py'; Stop-Transcript
+Process ID: 9300
+PSVersion: 7.6.5
+PSEdition: Core
+GitCommitId: 7.6.5
+OS: Microsoft Windows 10.0.26200
+Platform: Win32NT
+PSCompatibleVersions: 1.0, 2.0, 3.0, 4.0, 5.0, 5.1, 6.0, 7.0
+PSRemotingProtocolVersion: 2.4
+SerializationVersion: 1.1.0.1
+WSManStackVersion: 3.0
+**********************
+Transcript started, output file is C:\Users\mzj\Desktop\CTF\玄机刷题\记录\WP补全-资料普查记录.txt
+=== 相关附件压缩包与项目证据路径 ===
+COMMAND: find challenge archives and challenge-specific files
+
+**********************
+PowerShell transcript end
+End time: 20260928220011
+**********************
+**********************
+PowerShell transcript start
+Start time: 20260928220109
+Username: DESKTOP-412KTAR\mzj
+RunAs User: DESKTOP-412KTAR\mzj
+Configuration Name: 
+Machine: DESKTOP-412KTAR (Microsoft Windows NT 10.0.26200.0)
+Host Application: C:\Users\mzj\.cache\codex-runtimes\codex-primary-runtime\dependencies\native\powershell\pwsh.dll -Command try { [Console]::OutputEncoding=[System.Text.Encoding]::UTF8 } catch {}
+$log='C:\Users\mzj\Desktop\CTF\玄机刷题\记录\WP补全-资料普查记录.txt'; Start-Transcript -LiteralPath $log -Append; Set-Location 'C:\Users\mzj\Desktop\CTF'; Write-Output '=== 本地复核：附件驱动的六题复现 ==='; Write-Output 'COMMAND> python -B labs/platform/solve_591_poisoned_samples.py'; python -B 'C:\Users\mzj\Desktop\CTF\labs\platform\solve_591_poisoned_samples.py'; Write-Output "EXIT=$LASTEXITCODE"; Write-Output 'COMMAND> python -B labs/platform/solve_589_gate_ticket.py'; python -B 'C:\Users\mzj\Desktop\CTF\labs\platform\solve_589_gate_ticket.py'; Write-Output "EXIT=$LASTEXITCODE"; Write-Output 'COMMAND> python -B labs/platform/solve_receipt.py'; python -B 'C:\Users\mzj\Desktop\CTF\labs\platform\solve_receipt.py'; Write-Output "EXIT=$LASTEXITCODE"; Write-Output 'COMMAND> python -B labs/platform/solve_five_grid.py'; python -B 'C:\Users\mzj\Desktop\CTF\labs\platform\solve_five_grid.py'; Write-Output "EXIT=$LASTEXITCODE"; Write-Output 'COMMAND> python -B labs/platform/solve_581_network_forensics.py'; python -B 'C:\Users\mzj\Desktop\CTF\labs\platform\solve_581_network_forensics.py'; Write-Output "EXIT=$LASTEXITCODE"; Write-Output 'COMMAND> python -B labs/platform/solve_qgd.py'; python -B 'C:\Users\mzj\Desktop\CTF\labs\platform\solve_qgd.py'; Write-Output "EXIT=$LASTEXITCODE"; Stop-Transcript
+Process ID: 21816
+PSVersion: 7.6.5
+PSEdition: Core
+GitCommitId: 7.6.5
+OS: Microsoft Windows 10.0.26200
+Platform: Win32NT
+PSCompatibleVersions: 1.0, 2.0, 3.0, 4.0, 5.0, 5.1, 6.0, 7.0
+PSRemotingProtocolVersion: 2.4
+SerializationVersion: 1.1.0.1
+WSManStackVersion: 3.0
+**********************
+Transcript started, output file is C:\Users\mzj\Desktop\CTF\玄机刷题\记录\WP补全-资料普查记录.txt
+=== 本地复核：附件驱动的六题复现 ===
+COMMAND> python -B labs/platform/solve_591_poisoned_samples.py
+
+EXIT=0
+COMMAND> python -B labs/platform/solve_589_gate_ticket.py
+
+EXIT=0
+COMMAND> python -B labs/platform/solve_receipt.py
+
+EXIT=0
+COMMAND> python -B labs/platform/solve_five_grid.py
+
+EXIT=0
+COMMAND> python -B labs/platform/solve_581_network_forensics.py
+
+EXIT=0
+COMMAND> python -B labs/platform/solve_qgd.py
+
+EXIT=0
+**********************
+PowerShell transcript end
+End time: 20260928220114
+**********************
+**********************
+PowerShell transcript start
+Start time: 20260928220257
+Username: DESKTOP-412KTAR\mzj
+RunAs User: DESKTOP-412KTAR\mzj
+Configuration Name: 
+Machine: DESKTOP-412KTAR (Microsoft Windows NT 10.0.26200.0)
+Host Application: C:\Users\mzj\.cache\codex-runtimes\codex-primary-runtime\dependencies\native\powershell\pwsh.dll -Command try { [Console]::OutputEncoding=[System.Text.Encoding]::UTF8 } catch {}
+$log='C:\Users\mzj\Desktop\CTF\玄机刷题\记录\WP补全-资料普查记录.txt'; Start-Transcript -LiteralPath $log -Append; Write-Output '=== 继续检索历史题材与 WSL 工作区 ==='; Write-Output 'COMMAND> search common user directories for omitted challenge files'; rg --files 'C:\Users\mzj\Documents' 'C:\Users\mzj\Desktop' 'D:\Downloads' -g '*ancient*' -g '*redis*' -g '*webmin*' -g '*ezpwn*' -g '*mqtt*' -g '*qgd*' -g '*514*' -g '*writeup*' -g '*wp*' 2>&1 | Select-Object -First 200; Write-Output 'COMMAND> test WSL home directories'; Get-ChildItem -LiteralPath '\wsl.localhost' -ErrorAction SilentlyContinue | Select-Object Name,FullName; Get-ChildItem -LiteralPath '\wsl.localhost\Ubuntu-24.04\home\mzj' -ErrorAction SilentlyContinue | Select-Object Name,Mode,LastWriteTime; Write-Output 'COMMAND> inspect challenge note and spring solver source'; Get-ChildItem -LiteralPath 'C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\ezRe' -Force | Select-Object Name,Length,Mode; Get-Content -LiteralPath 'C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\不劳春风解我忧\solve_xxtea.py','C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\rainbow\分析记录.md','C:\Users\mzj\Desktop\CTF\玄机刷题\记录\tradre-分析过程记录.md','C:\Users\mzj\Desktop\CTF\玄机刷题\记录\ezBase-分析过程记录.md'; Stop-Transcript
+Process ID: 26072
+PSVersion: 7.6.5
+PSEdition: Core
+GitCommitId: 7.6.5
+OS: Microsoft Windows 10.0.26200
+Platform: Win32NT
+PSCompatibleVersions: 1.0, 2.0, 3.0, 4.0, 5.0, 5.1, 6.0, 7.0
+PSRemotingProtocolVersion: 2.4
+SerializationVersion: 1.1.0.1
+WSManStackVersion: 3.0
+**********************
+Transcript started, output file is C:\Users\mzj\Desktop\CTF\玄机刷题\记录\WP补全-资料普查记录.txt
+=== 继续检索历史题材与 WSL 工作区 ===
+COMMAND> search common user directories for omitted challenge files
+D:\Downloads\qgd.zip
+D:\Downloads\mqtt.zip
+C:\Users\mzj\Desktop\CTF零基础自学资料包\labs\platform\solve_qgd.py
+C:\Users\mzj\Desktop\CTF零基础自学资料包\labs\platform\solve_pwn_ezpwn.py
+C:\Users\mzj\Desktop\云计算实验手册\img\_archive\exp10_redis_ORIG_wsl-ubuntu.png
+C:\Users\mzj\Desktop\云计算实验手册\img\_archive\exp10_redis_ORIG_short.png
+C:\Users\mzj\Desktop\云计算实验手册\img\exp10_redis.png
+C:\Users\mzj\Desktop\CTF零基础自学资料包\labs\platform\attachments\557-qgd.zip
+C:\Users\mzj\Desktop\CTF零基础自学资料包\figures\fig-pwn-31-ancient-recall.png
+C:\Users\mzj\Desktop\CTF零基础自学资料包\figures\fig-pwn-30-mqtt-toctou.png
+C:\Users\mzj\Desktop\CTF零基础自学资料包\figures\fig-pwn-29-mqtt-remote.png
+C:\Users\mzj\Desktop\CTF零基础自学资料包\figures\fig-pwn-28-mqtt-local.png
+C:\Users\mzj\Desktop\CTF零基础自学资料包\figures\fig-pwn-27-mqtt-triage.png
+C:\Users\mzj\Documents\xwechat_files\wxid_mutu6id0qvk922_d5e5\msg\video\2026-09\81cf3514701ce26fa5e020fa38a17b42_thumb.jpg
+C:\Users\mzj\Documents\xwechat_files\wxid_mutu6id0qvk922_d5e5\msg\video\2026-09\81cf3514701ce26fa5e020fa38a17b42.mp4
+C:\Users\mzj\Documents\xwechat_files\wxid_mutu6id0qvk922_d5e5\msg\video\2026-07\36b51ac057a9c97a8d51447769e5fdb8_thumb.jpg
+C:\Users\mzj\Documents\xwechat_files\wxid_mutu6id0qvk922_d5e5\msg\video\2026-07\36b51ac057a9c97a8d51447769e5fdb8.mp4
+C:\Users\mzj\Desktop\CTF\labs\platform\solve_qgd.py
+C:\Users\mzj\Desktop\CTF\labs\platform\solve_pwn_ezpwn.py
+C:\Users\mzj\Desktop\CTF\labs\platform\attachments\557-qgd.zip
+C:\Users\mzj\Desktop\CTF\labs\platform\attachments\296-pwn-ezpwn.zip
+C:\Users\mzj\Documents\xwechat_files\wxid_mutu6id0qvk922_d5e5\msg\video\2020-11\aeda10fbec451da1514042c234d15d71_thumb.jpg
+C:\Users\mzj\Documents\xwechat_files\wxid_mutu6id0qvk922_d5e5\msg\video\2020-11\aeda10fbec451da1514042c234d15d71.mp4
+C:\Users\mzj\Documents\xwechat_files\wxid_mutu6id0qvk922_d5e5\msg\video\2026-06\b4437a53c0d05688ba28eb51492d4777_thumb.jpg
+C:\Users\mzj\Desktop\CTF\figures\raw\fig-pwn-31-ancient-recall.txt
+C:\Users\mzj\Desktop\CTF\figures\raw\fig-pwn-29-mqtt-remote.txt
+C:\Users\mzj\Desktop\CTF\figures\raw\fig-pwn-28-mqtt-local.txt
+C:\Users\mzj\Desktop\CTF\figures\raw\fig-pwn-27-mqtt-triage.txt
+C:\Users\mzj\Desktop\CTF\figures\fig-pwn-31-ancient-recall.png
+C:\Users\mzj\Desktop\CTF\figures\fig-pwn-30-mqtt-toctou.png
+C:\Users\mzj\Desktop\CTF\figures\fig-pwn-29-mqtt-remote.png
+C:\Users\mzj\Desktop\CTF\figures\fig-pwn-28-mqtt-local.png
+C:\Users\mzj\Desktop\CTF\figures\fig-pwn-27-mqtt-triage.png
+C:\Users\mzj\Documents\xwechat_files\wxid_mutu6id0qvk922_d5e5\msg\video\2026-05\6f3ec5d81b2c77d3036ece3dec5ef514_thumb.jpg
+C:\Users\mzj\Documents\xwechat_files\wxid_mutu6id0qvk922_d5e5\msg\video\2026-05\6f3ec5d81b2c77d3036ece3dec5ef514.mp4
+C:\Users\mzj\Documents\xwechat_files\wxid_mutu6id0qvk922_d5e5\msg\file\2020-10\20-10.17报价单-小丁小丁焦糖布丁旺号 乡里来的狗.wps
+C:\Users\mzj\Documents\xwechat_files\wxid_mutu6id0qvk922_d5e5\msg\video\2026-01\e0a4377298ff0e8b7b73507a514af55b_thumb.jpg
+C:\Users\mzj\Documents\xwechat_files\wxid_mutu6id0qvk922_d5e5\msg\video\2025-10\f4c961b8725962b98c9775e75149fd67_thumb.jpg
+C:\Users\mzj\Documents\xwechat_files\wxid_mutu6id0qvk922_d5e5\msg\video\2025-10\f4c961b8725962b98c9775e75149fd67.mp4
+C:\Users\mzj\Documents\xwechat_files\wxid_mutu6id0qvk922_d5e5\msg\video\2020-06\db2c726c3cc2958f75140192fb865bb4_thumb.jpg
+C:\Users\mzj\Documents\xwechat_files\wxid_mutu6id0qvk922_d5e5\msg\video\2020-06\db2c726c3cc2958f75140192fb865bb4.mp4
+C:\Users\mzj\Documents\xwechat_files\wxid_mutu6id0qvk922_d5e5\msg\video\2020-06\688f0514a6d59aefd9974294eda470b9_thumb.jpg
+C:\Users\mzj\Documents\xwechat_files\wxid_mutu6id0qvk922_d5e5\msg\video\2020-06\688f0514a6d59aefd9974294eda470b9.mp4
+C:\Users\mzj\Documents\xwechat_files\wxid_mutu6id0qvk922_d5e5\msg\video\2025-09\05141f4e7e5e0e7895c6b3b44f8730f5_thumb.jpg
+C:\Users\mzj\Documents\xwechat_files\wxid_mutu6id0qvk922_d5e5\msg\video\2025-08\e2db4c9086ef29cc66a9803bf21d5147_thumb.jpg
+C:\Users\mzj\Documents\xwechat_files\wxid_mutu6id0qvk922_d5e5\msg\video\2025-08\e2db4c9086ef29cc66a9803bf21d5147.mp4
+C:\Users\mzj\Documents\xwechat_files\wxid_mutu6id0qvk922_d5e5\msg\video\2025-02\b1302578d34c94746151460652951ed2_thumb.jpg
+C:\Users\mzj\Documents\xwechat_files\wxid_mutu6id0qvk922_d5e5\msg\video\2025-02\b1302578d34c94746151460652951ed2.mp4
+C:\Users\mzj\Documents\xwechat_files\wxid_mutu6id0qvk922_d5e5\msg\video\2025-02\5389585764086754bb4a3687a055140c_thumb.jpg
+C:\Users\mzj\Documents\xwechat_files\wxid_mutu6id0qvk922_d5e5\msg\video\2025-02\5389585764086754bb4a3687a055140c.mp4
+C:\Users\mzj\Documents\xwechat_files\wxid_mutu6id0qvk922_d5e5\msg\attach\0a752d3e7d577cfecad402a0b75bc65c\2025-07\Img\eb309d952c8f69cb3d712d3b5146139e_t.dat
+C:\Users\mzj\Documents\xwechat_files\wxid_mutu6id0qvk922_d5e5\msg\attach\0a752d3e7d577cfecad402a0b75bc65c\2025-07\Img\eb309d952c8f69cb3d712d3b5146139e_h.dat
+C:\Users\mzj\Documents\xwechat_files\wxid_mutu6id0qvk922_d5e5\msg\attach\0a752d3e7d577cfecad402a0b75bc65c\2025-07\Img\eb309d952c8f69cb3d712d3b5146139e.dat
+C:\Users\mzj\Documents\xwechat_files\wxid_mutu6id0qvk922_d5e5\msg\video\2024-02\6d8e2f58c3f5148518eba67481b04c91_thumb.jpg
+C:\Users\mzj\Documents\xwechat_files\wxid_mutu6id0qvk922_d5e5\msg\video\2024-02\6d8e2f58c3f5148518eba67481b04c91.mp4
+C:\Users\mzj\Documents\xwechat_files\wxid_mutu6id0qvk922_d5e5\msg\video\2024-02\0a4f03516514fd391440d2e6e7efe83e_thumb.jpg
+C:\Users\mzj\Documents\xwechat_files\wxid_mutu6id0qvk922_d5e5\msg\video\2024-02\0a4f03516514fd391440d2e6e7efe83e.mp4
+C:\Users\mzj\Documents\xwechat_files\wxid_mutu6id0qvk922_d5e5\msg\video\2021-11\eeb16778531566151408805e57074f52_thumb.jpg
+C:\Users\mzj\Documents\xwechat_files\wxid_mutu6id0qvk922_d5e5\msg\video\2021-11\eeb16778531566151408805e57074f52.mp4
+C:\Users\mzj\Documents\xwechat_files\wxid_mutu6id0qvk922_d5e5\msg\attach\09d7e13ebe5098490f438053e657b7fe\2022-10\Img\240e8fa6c1c8caa7dd55c5144bb2fbf7_t.dat
+C:\Users\mzj\Documents\xwechat_files\wxid_mutu6id0qvk922_d5e5\msg\attach\09d7e13ebe5098490f438053e657b7fe\2022-10\Img\240e8fa6c1c8caa7dd55c5144bb2fbf7.dat
+C:\Users\mzj\Documents\xwechat_files\wxid_mutu6id0qvk922_d5e5\msg\video\2024-11\ada4fc85b71405d46f4b515a979c514c_thumb.jpg
+C:\Users\mzj\Documents\xwechat_files\wxid_mutu6id0qvk922_d5e5\msg\video\2024-11\ada4fc85b71405d46f4b515a979c514c.mp4
+C:\Users\mzj\Documents\xwechat_files\wxid_mutu6id0qvk922_d5e5\msg\attach\0045905860f3e1cf63cbe8abec13d14c\2019-12\Img\947b4051477fe6479331a99cc1ce4d6c_t.dat
+C:\Users\mzj\Documents\xwechat_files\wxid_mutu6id0qvk922_d5e5\msg\attach\0045905860f3e1cf63cbe8abec13d14c\2019-12\Img\947b4051477fe6479331a99cc1ce4d6c.dat
+C:\Users\mzj\Documents\xwechat_files\wxid_mutu6id0qvk922_d5e5\msg\video\2024-08\686b21ce7da5385c53567c514ba13380_thumb.jpg
+C:\Users\mzj\Documents\xwechat_files\wxid_mutu6id0qvk922_d5e5\msg\video\2022-04\30ace1a6f57faf14d804295d73514d3d_thumb.jpg
+C:\Users\mzj\Documents\xwechat_files\wxid_mutu6id0qvk922_d5e5\msg\video\2022-04\30ace1a6f57faf14d804295d73514d3d.mp4
+C:\Users\mzj\Documents\xwechat_files\wxid_mutu6id0qvk922_d5e5\msg\attach\fdaaf8abd9c49fd5b4e37eadd9d41033\2020-07\Img\a62d9f916933078b5146776dcdfba04f_t.dat
+C:\Users\mzj\Documents\xwechat_files\wxid_mutu6id0qvk922_d5e5\msg\attach\fdaaf8abd9c49fd5b4e37eadd9d41033\2020-07\Img\a62d9f916933078b5146776dcdfba04f.dat
+C:\Users\mzj\Documents\xwechat_files\wxid_mutu6id0qvk922_d5e5\business\sns\bkg\71\aff362526f45daf718b35145c2f2da
+C:\Users\mzj\Documents\xwechat_files\wxid_mutu6id0qvk922_d5e5\msg\attach\2ab82197fc255d9883f9d5af7044b2dc\2026-09\Img\3c6d4eac70514dc04742bdb99bdfc929_t.dat
+C:\Users\mzj\Documents\xwechat_files\wxid_mutu6id0qvk922_d5e5\msg\attach\2ab82197fc255d9883f9d5af7044b2dc\2026-09\Img\3c6d4eac70514dc04742bdb99bdfc929.dat
+C:\Users\mzj\Documents\leidian9\Pictures\cache\f9527dcbb47862498405e5145651de26eedcc0643fd96e39ec7baaddeb576dc8.0
+C:\Users\mzj\Documents\leidian9\Pictures\cache\8517fbea938c8933eca514fc06f7a569638ff226d40644d5a3e5640102798e63.0
+C:\Users\mzj\Documents\xwechat_files\wxid_mutu6id0qvk922_d5e5\cache\2026-09\Sns\Img\56\3f74d0f4cf55142c5e080e9b70c23c
+C:\Users\mzj\Documents\xwechat_files\wxid_mutu6id0qvk922_d5e5\msg\attach\28cfbfa65f579b3802557faac0f31dbf\2021-05\Img\1cd177bec1a5147902c319e9162d6ca0_t.dat
+C:\Users\mzj\Documents\xwechat_files\wxid_mutu6id0qvk922_d5e5\msg\attach\28cfbfa65f579b3802557faac0f31dbf\2021-05\Img\1cd177bec1a5147902c319e9162d6ca0.dat
+C:\Users\mzj\Documents\xwechat_files\wxid_mutu6id0qvk922_d5e5\cache\2026-09\Message\ec457204eb36bf23120a989e7e0d2961\Bubble\ffc522965148c668bb4988362815a296_b.dat
+C:\Users\mzj\Documents\xwechat_files\wxid_mutu6id0qvk922_d5e5\cache\2026-09\Message\ec457204eb36bf23120a989e7e0d2961\Bubble\5951421b6704e889e4a55d9e41f41487_b.dat
+C:\Users\mzj\Documents\xwechat_files\wxid_mutu6id0qvk922_d5e5\msg\attach\fc01e24538b3f86314a3cba5cfe79e6d\2025-06\Img\9bc282f3b35ddbddfa6657e651451bf0_t.dat
+C:\Users\mzj\Documents\xwechat_files\wxid_mutu6id0qvk922_d5e5\msg\attach\fc01e24538b3f86314a3cba5cfe79e6d\2025-06\Img\9bc282f3b35ddbddfa6657e651451bf0.dat
+C:\Users\mzj\Documents\xwechat_files\wxid_2llz4wwj4bjr21_469f\business\emoticon\Thumb\c8\c879793c2264dc3514770be52fd12b28.thumb
+C:\Users\mzj\Documents\xwechat_files\wxid_mutu6id0qvk922_d5e5\cache\2026-09\Message\b2bd6d0751d52147c3ca42728ad04e46\Bubble\e7ddad2fddee9ee514b80cfb51e592b3_b.dat
+C:\Users\mzj\Documents\xwechat_files\wxid_mutu6id0qvk922_d5e5\msg\attach\28cfbfa65f579b3802557faac0f31dbf\2020-02\Img\0d79ce25141248f5b6782deafd16e63b_t.dat
+C:\Users\mzj\Documents\xwechat_files\wxid_mutu6id0qvk922_d5e5\msg\attach\28cfbfa65f579b3802557faac0f31dbf\2020-02\Img\0d79ce25141248f5b6782deafd16e63b.dat
+C:\Users\mzj\Documents\xwechat_files\wxid_2llz4wwj4bjr21_469f\business\emoticon\Thumb\25\256d5d098ea94754451487d06ad9ad35.thumb
+C:\Users\mzj\Documents\xwechat_files\wxid_2llz4wwj4bjr21_469f\business\emoticon\Thumb\6f\6f9d09e029514da4d31982135092bc03.thumb
+C:\Users\mzj\Documents\xwechat_files\wxid_mutu6id0qvk922_d5e5\msg\attach\fc01e24538b3f86314a3cba5cfe79e6d\2023-03\Img\80b194717287bbef2d2e4850d514dd40_t.dat
+C:\Users\mzj\Documents\xwechat_files\wxid_mutu6id0qvk922_d5e5\msg\attach\fc01e24538b3f86314a3cba5cfe79e6d\2023-03\Img\80b194717287bbef2d2e4850d514dd40.dat
+C:\Users\mzj\Documents\xwechat_files\wxid_2llz4wwj4bjr21_469f\business\emoticon\Persist\c8\c879793c2264dc3514770be52fd12b28
+C:\Users\mzj\Documents\xwechat_files\wxid_mutu6id0qvk922_d5e5\cache\2026-09\Message\9575b30ff016a8641dddb3903c43dd10\Bubble\782_1788851421_b.dat
+C:\Users\mzj\Documents\xwechat_files\wxid_mutu6id0qvk922_d5e5\cache\2026-09\Message\9575b30ff016a8641dddb3903c43dd10\Bubble\557_1788651438_b.dat
+C:\Users\mzj\Documents\xwechat_files\wxid_2llz4wwj4bjr21_469f\business\emoticon\Thumb\7f\7f285a639f1e4d13e4b7f7514e90b84f.thumb
+C:\Users\mzj\Documents\Tencent Files\1242089794\nt_qq\nt_data\Emoji\personal_emoji\Thumb\49AA1EDD98155146A6CEA14E2F6B8A7A.png
+C:\Users\mzj\Documents\Tencent Files\1242089794\nt_qq\nt_data\Emoji\personal_emoji\Ori\49AA1EDD98155146A6CEA14E2F6B8A7A.jpg
+C:\Users\mzj\Documents\xwechat_files\wxid_mutu6id0qvk922_d5e5\business\emoticon\Thumb\24\2499b693a03bf6aa194514b4824b4e1a.thumb
+C:\Users\mzj\Documents\xwechat_files\wxid_mutu6id0qvk922_d5e5\msg\attach\fc01e24538b3f86314a3cba5cfe79e6d\2022-04\Img\1a81bae514bb633ba878b09caa302112_t.dat
+C:\Users\mzj\Documents\xwechat_files\wxid_mutu6id0qvk922_d5e5\msg\attach\fc01e24538b3f86314a3cba5cfe79e6d\2022-04\Img\1a81bae514bb633ba878b09caa302112.dat
+C:\Users\mzj\Documents\xwechat_files\wxid_mutu6id0qvk922_d5e5\msg\attach\16514c795d7532cdbea742b1b3b84a48\2023-12\Img\92745146a4aea26ba73c045ebc73eb52_t.dat
+C:\Users\mzj\Documents\xwechat_files\wxid_mutu6id0qvk922_d5e5\msg\attach\16514c795d7532cdbea742b1b3b84a48\2023-12\Img\92745146a4aea26ba73c045ebc73eb52.dat
+C:\Users\mzj\Documents\xwechat_files\wxid_2llz4wwj4bjr21_469f\business\emoticon\Persist\7f\7f285a639f1e4d13e4b7f7514e90b84f
+C:\Users\mzj\Documents\Tencent Files\1242089794\nt_qq\nt_data\Qzone\29\292151400eaa6987792841dc49bc638c
+C:\Users\mzj\Documents\xwechat_files\wxid_mutu6id0qvk922_d5e5\msg\attach\3f804b7edf4b3e0954f3add5c1db1b04\2025-04\Img\2b9a1790e7b51439a73c989f6b42e760_t.dat
+C:\Users\mzj\Documents\xwechat_files\wxid_mutu6id0qvk922_d5e5\msg\attach\3f804b7edf4b3e0954f3add5c1db1b04\2025-04\Img\2b9a1790e7b51439a73c989f6b42e760.dat
+C:\Users\mzj\Documents\xwechat_files\wxid_2llz4wwj4bjr21_469f\business\emoticon\Persist\6f\6f9d09e029514da4d31982135092bc03
+C:\Users\mzj\Documents\xwechat_files\wxid_2llz4wwj4bjr21_469f\business\emoticon\Persist\25\256d5d098ea94754451487d06ad9ad35
+C:\Users\mzj\Documents\xwechat_files\wxid_mutu6id0qvk922_d5e5\msg\attach\fc01e24538b3f86314a3cba5cfe79e6d\2021-09\Img\99008199458d942fc3289a70d2514659_t.dat
+C:\Users\mzj\Documents\xwechat_files\wxid_mutu6id0qvk922_d5e5\msg\attach\fc01e24538b3f86314a3cba5cfe79e6d\2021-09\Img\99008199458d942fc3289a70d2514659.dat
+C:\Users\mzj\Documents\xwechat_files\wxid_mutu6id0qvk922_d5e5\msg\attach\fc01e24538b3f86314a3cba5cfe79e6d\2021-09\Img\3a954514566c6db29f53d2dfc5d221e6_t.dat
+C:\Users\mzj\Documents\xwechat_files\wxid_mutu6id0qvk922_d5e5\msg\attach\fc01e24538b3f86314a3cba5cfe79e6d\2021-09\Img\3a954514566c6db29f53d2dfc5d221e6.dat
+C:\Users\mzj\Documents\xwechat_files\wxid_mutu6id0qvk922_d5e5\msg\attach\16514c795d7532cdbea742b1b3b84a48\2022-10\Img\a63fe707ef2d4414712988514e499e5f_t.dat
+C:\Users\mzj\Documents\xwechat_files\wxid_mutu6id0qvk922_d5e5\msg\attach\16514c795d7532cdbea742b1b3b84a48\2022-10\Img\a63fe707ef2d4414712988514e499e5f.dat
+C:\Users\mzj\Documents\xwechat_files\wxid_mutu6id0qvk922_d5e5\business\emoticon\Thumb\72\723691ddf514455af675e51f331288e9.thumb
+C:\Users\mzj\Documents\xwechat_files\wxid_mutu6id0qvk922_d5e5\business\emoticon\Thumb\6f\6f7c89d1a1c32ae1bc6695d3514dc99a.thumb
+C:\Users\mzj\Documents\xwechat_files\wxid_mutu6id0qvk922_d5e5\cache\2026-08\Message\9575b30ff016a8641dddb3903c43dd10\Thumb\1514_1786090154_thumb.jpg
+C:\Users\mzj\Documents\xwechat_files\wxid_mutu6id0qvk922_d5e5\msg\attach\16514c795d7532cdbea742b1b3b84a48\2022-09\Img\a59c2b5148dde488526f9aadb3062ad4_t.dat
+C:\Users\mzj\Documents\xwechat_files\wxid_mutu6id0qvk922_d5e5\msg\attach\16514c795d7532cdbea742b1b3b84a48\2022-09\Img\a59c2b5148dde488526f9aadb3062ad4.dat
+C:\Users\mzj\Documents\xwechat_files\wxid_mutu6id0qvk922_d5e5\msg\attach\16514c795d7532cdbea742b1b3b84a48\2022-09\Img\03d2199f6c56cbaebf50cbf01514944c_t.dat
+C:\Users\mzj\Documents\xwechat_files\wxid_mutu6id0qvk922_d5e5\msg\attach\16514c795d7532cdbea742b1b3b84a48\2022-09\Img\03d2199f6c56cbaebf50cbf01514944c.dat
+C:\Users\mzj\Documents\xwechat_files\wxid_mutu6id0qvk922_d5e5\msg\attach\fc01e24538b3f86314a3cba5cfe79e6d\2021-03\Img\fe5bdbd9514dc036b33ce7f701bcbd1b_t.dat
+C:\Users\mzj\Documents\xwechat_files\wxid_mutu6id0qvk922_d5e5\msg\attach\3b68ded551769f9f01ef6c2162b37e91\2025-09\Img\a29c80c89c7bc6e2e14736351486861e_t.dat
+C:\Users\mzj\Documents\xwechat_files\wxid_mutu6id0qvk922_d5e5\msg\attach\3b68ded551769f9f01ef6c2162b37e91\2025-09\Img\a29c80c89c7bc6e2e14736351486861e.dat
+C:\Users\mzj\Documents\xwechat_files\wxid_mutu6id0qvk922_d5e5\business\emoticon\Persist\24\2499b693a03bf6aa194514b4824b4e1a
+C:\Users\mzj\Documents\xwechat_files\wxid_mutu6id0qvk922_d5e5\msg\attach\16514c795d7532cdbea742b1b3b84a48\2022-07\Img\185143db782d29c458bda0383279d609_t.dat
+C:\Users\mzj\Documents\xwechat_files\wxid_mutu6id0qvk922_d5e5\msg\attach\16514c795d7532cdbea742b1b3b84a48\2022-07\Img\185143db782d29c458bda0383279d609.dat
+C:\Users\mzj\Documents\xwechat_files\wxid_mutu6id0qvk922_d5e5\msg\attach\fc01e24538b3f86314a3cba5cfe79e6d\2020-09\Img\19ec916c48ae05245145bc7605ca3fb3_t.dat
+C:\Users\mzj\Documents\xwechat_files\wxid_mutu6id0qvk922_d5e5\msg\attach\fc01e24538b3f86314a3cba5cfe79e6d\2020-09\Img\19ec916c48ae05245145bc7605ca3fb3.dat
+C:\Users\mzj\Documents\Tencent Files\1242089794\nt_qq\nt_data\Pic\2026-06\ThumbTemp\cf31f86f195514dddfde272a2ac46a3e_720
+C:\Users\mzj\Documents\xwechat_files\wxid_mutu6id0qvk922_d5e5\msg\attach\3484a95908137d27c9de224af3db8913\2026-08\Img\23b514cdf0ccb47c0532bb44ccf92df2_t.dat
+C:\Users\mzj\Documents\xwechat_files\wxid_mutu6id0qvk922_d5e5\msg\attach\3484a95908137d27c9de224af3db8913\2026-08\Img\23b514cdf0ccb47c0532bb44ccf92df2_h.dat
+C:\Users\mzj\Documents\xwechat_files\wxid_mutu6id0qvk922_d5e5\business\emoticon\Persist\72\723691ddf514455af675e51f331288e9
+C:\Users\mzj\Documents\xwechat_files\wxid_mutu6id0qvk922_d5e5\msg\attach\3d46fb5eba53ca7682c106ba76716301\2020-11\Img\06222f851c18944a85145061330eea2e_t.dat
+C:\Users\mzj\Documents\xwechat_files\wxid_mutu6id0qvk922_d5e5\msg\attach\3d46fb5eba53ca7682c106ba76716301\2020-11\Img\06222f851c18944a85145061330eea2e.dat
+C:\Users\mzj\Documents\xwechat_files\wxid_mutu6id0qvk922_d5e5\msg\attach\3018140149190ff7b7ec004c30c8c09e\2023-03\Img\d514be6def7b3698916e307b10fb23a2_t.dat
+C:\Users\mzj\Documents\xwechat_files\wxid_mutu6id0qvk922_d5e5\msg\attach\3018140149190ff7b7ec004c30c8c09e\2023-03\Img\d514be6def7b3698916e307b10fb23a2.dat
+C:\Users\mzj\Documents\xwechat_files\wxid_mutu6id0qvk922_d5e5\business\emoticon\Persist\6f\6f7c89d1a1c32ae1bc6695d3514dc99a
+C:\Users\mzj\Documents\xwechat_files\wxid_mutu6id0qvk922_d5e5\msg\attach\fc01e24538b3f86314a3cba5cfe79e6d\2020-07\Img\9dc2ef37a3aeab51cba397f8827d5141_t.dat
+C:\Users\mzj\Documents\xwechat_files\wxid_mutu6id0qvk922_d5e5\msg\attach\3484a95908137d27c9de224af3db8913\2025-08\Img\be430bf1dcec618c382d5038758514a3_t.dat
+C:\Users\mzj\Documents\xwechat_files\wxid_mutu6id0qvk922_d5e5\msg\attach\3484a95908137d27c9de224af3db8913\2025-08\Img\be430bf1dcec618c382d5038758514a3_h.dat
+C:\Users\mzj\Documents\xwechat_files\wxid_mutu6id0qvk922_d5e5\msg\attach\3b0170e1822847b4f45d5fdb0bb3edd2\2023-10\Img\5140fc6107355a03b1048a942d451ee5_t.dat
+C:\Users\mzj\Documents\xwechat_files\wxid_mutu6id0qvk922_d5e5\msg\attach\3b0170e1822847b4f45d5fdb0bb3edd2\2023-10\Img\5140fc6107355a03b1048a942d451ee5.dat
+C:\Users\mzj\Documents\Tencent Files\1242089794\nt_qq\nt_data\Pic\2026-06\Ori\7ee38069e4c8f26f619514bc30f24b92.png
+C:\Users\mzj\Documents\xwechat_files\wxid_mutu6id0qvk922_d5e5\msg\attach\fc01e24538b3f86314a3cba5cfe79e6d\2020-06\Img\31ed104f1514e57dfe653fbc6e298ebd_t.dat
+C:\Users\mzj\Documents\xwechat_files\wxid_mutu6id0qvk922_d5e5\msg\attach\fc01e24538b3f86314a3cba5cfe79e6d\2020-06\Img\31ed104f1514e57dfe653fbc6e298ebd.dat
+C:\Users\mzj\Documents\xwechat_files\wxid_mutu6id0qvk922_d5e5\msg\attach\3484a95908137d27c9de224af3db8913\2021-12\Img\6cf0b4c49caf5145cc8ff85361dcfedf_t.dat
+C:\Users\mzj\Documents\xwechat_files\wxid_mutu6id0qvk922_d5e5\msg\attach\3484a95908137d27c9de224af3db8913\2021-12\Img\6cf0b4c49caf5145cc8ff85361dcfedf.dat
+C:\Users\mzj\Documents\xwechat_files\wxid_mutu6id0qvk922_d5e5\msg\attach\3484a95908137d27c9de224af3db8913\2023-09\Img\2c514d0dca4ad9bd3385ce9911bd491f_t.dat
+C:\Users\mzj\Documents\xwechat_files\wxid_mutu6id0qvk922_d5e5\msg\attach\3484a95908137d27c9de224af3db8913\2023-09\Img\2c514d0dca4ad9bd3385ce9911bd491f.dat
+C:\Users\mzj\Documents\Tencent Files\1242089794\nt_qq\nt_data\Pic\2026-05\Ori\15f91bc9e96719351493802db79227bd.png
+C:\Users\mzj\Documents\xwechat_files\wxid_mutu6id0qvk922_d5e5\msg\attach\36b6d47bfaa0c659cc3a3e1f07e26dc4\2023-09\Img\45d411019e4c8c64f915ed89e2514ac9_t.dat
+C:\Users\mzj\Documents\xwechat_files\wxid_mutu6id0qvk922_d5e5\msg\attach\3484a95908137d27c9de224af3db8913\2021-11\Img\d8578514348a8d6b406abbf9d81dc5dc_t.dat
+C:\Users\mzj\Documents\xwechat_files\wxid_mutu6id0qvk922_d5e5\msg\attach\3484a95908137d27c9de224af3db8913\2021-11\Img\d8578514348a8d6b406abbf9d81dc5dc.dat
+C:\Users\mzj\Documents\xwechat_files\wxid_mutu6id0qvk922_d5e5\msg\attach\3484a95908137d27c9de224af3db8913\2021-11\Img\2bd5514123d707597af3d6994e77db52_t.dat
+C:\Users\mzj\Documents\xwechat_files\wxid_mutu6id0qvk922_d5e5\msg\attach\3484a95908137d27c9de224af3db8913\2021-11\Img\2bd5514123d707597af3d6994e77db52.dat
+C:\Users\mzj\Documents\xwechat_files\wxid_mutu6id0qvk922_d5e5\msg\attach\3484a95908137d27c9de224af3db8913\2024-04\Img\fcf496c85e3e8514fd2ab66a5003408b_t.dat
+C:\Users\mzj\Documents\xwechat_files\wxid_mutu6id0qvk922_d5e5\msg\attach\3484a95908137d27c9de224af3db8913\2024-04\Img\fcf496c85e3e8514fd2ab66a5003408b.dat
+C:\Users\mzj\Documents\Tencent Files\1242089794\nt_qq\nt_data\Pic\2026-03\Thumb\ddeb79bcfb1b514addbfd27ce9268db8_0.png
+C:\Users\mzj\Documents\Tencent Files\1242089794\nt_qq\nt_data\Pic\2026-03\Thumb\ae5abd51439d78763b6a18f27fde18cc_720.png
+C:\Users\mzj\Documents\Tencent Files\1242089794\nt_qq\nt_data\Pic\2026-03\Thumb\ae5abd51439d78763b6a18f27fde18cc_0.png
+C:\Users\mzj\Documents\Tencent Files\1242089794\nt_qq\nt_data\Pic\2026-03\Thumb\77e61e53ed51411c53c97775f9d3d924_720.png
+C:\Users\mzj\Documents\xwechat_files\wxid_mutu6id0qvk922_d5e5\msg\attach\3484a95908137d27c9de224af3db8913\2020-01\Img\b3a9b952514466b65f953765d925b636_t.dat
+C:\Users\mzj\Documents\xwechat_files\wxid_mutu6id0qvk922_d5e5\msg\attach\3484a95908137d27c9de224af3db8913\2020-01\Img\b3a9b952514466b65f953765d925b636.dat
+C:\Users\mzj\Documents\xwechat_files\wxid_mutu6id0qvk922_d5e5\msg\attach\3484a95908137d27c9de224af3db8913\2020-01\Img\63e7d8b41558eb9bfa514a98ccbca21d_t.dat
+C:\Users\mzj\Documents\xwechat_files\wxid_mutu6id0qvk922_d5e5\msg\attach\3484a95908137d27c9de224af3db8913\2020-01\Img\63e7d8b41558eb9bfa514a98ccbca21d.dat
+C:\Users\mzj\Documents\xwechat_files\wxid_mutu6id0qvk922_d5e5\msg\attach\3484a95908137d27c9de224af3db8913\2020-01\Img\01b7b51477335fa06c316919310fb649_t.dat
+C:\Users\mzj\Documents\xwechat_files\wxid_mutu6id0qvk922_d5e5\msg\attach\3484a95908137d27c9de224af3db8913\2020-01\Img\01b7b51477335fa06c316919310fb649.dat
+C:\Users\mzj\Documents\xwechat_files\wxid_mutu6id0qvk922_d5e5\msg\attach\3484a95908137d27c9de224af3db8913\2020-07\Img\25d5144b962d0ecce537f20d3d287f9f_t.dat
+C:\Users\mzj\Documents\Tencent Files\1242089794\nt_qq\nt_data\Pic\2026-03\Ori\ddeb79bcfb1b514addbfd27ce9268db8.png
+C:\Users\mzj\Documents\xwechat_files\wxid_mutu6id0qvk922_d5e5\msg\attach\fb2736a5ad91782851d3a5f749196158\2021-06\Img\b4e0514039966cc38604131f19d41184_t.dat
+C:\Users\mzj\Documents\xwechat_files\wxid_mutu6id0qvk922_d5e5\msg\attach\fb2736a5ad91782851d3a5f749196158\2021-06\Img\b4e0514039966cc38604131f19d41184.dat
+C:\Users\mzj\Documents\xwechat_files\wxid_mutu6id0qvk922_d5e5\msg\attach\3484a95908137d27c9de224af3db8913\2021-09\Img\3d328c75cf92f18e1ecaf951498a6b2b_t.dat
+C:\Users\mzj\Documents\xwechat_files\wxid_mutu6id0qvk922_d5e5\msg\attach\3484a95908137d27c9de224af3db8913\2021-09\Img\3d328c75cf92f18e1ecaf951498a6b2b.dat
+C:\Users\mzj\Documents\xwechat_files\wxid_mutu6id0qvk922_d5e5\msg\attach\38bb25aec6dddf3cfa3febb032a73a38\2022-08\Img\1afd27a94314ec79a514692408900479_t.dat
+C:\Users\mzj\Documents\xwechat_files\wxid_mutu6id0qvk922_d5e5\msg\attach\38bb25aec6dddf3cfa3febb032a73a38\2022-08\Img\1afd27a94314ec79a514692408900479.dat
+C:\Users\mzj\Documents\xwechat_files\wxid_mutu6id0qvk922_d5e5\msg\attach\3484a95908137d27c9de224af3db8913\2019-12\Img\71b2f3190f960e03f4ccf41514dc12a4_t.dat
+C:\Users\mzj\Documents\xwechat_files\wxid_mutu6id0qvk922_d5e5\msg\attach\3484a95908137d27c9de224af3db8913\2019-12\Img\23a2202adca9d5141bf89c20a3bdf82d_t.dat
+C:\Users\mzj\Documents\xwechat_files\wxid_mutu6id0qvk922_d5e5\msg\attach\3484a95908137d27c9de224af3db8913\2019-12\Img\23a2202adca9d5141bf89c20a3bdf82d.dat
+C:\Users\mzj\Documents\xwechat_files\wxid_mutu6id0qvk922_d5e5\msg\attach\3484a95908137d27c9de224af3db8913\2020-06\Img\99ddbdb3d06d4ee5145d3553dd8722fd_t.dat
+C:\Users\mzj\Documents\xwechat_files\wxid_mutu6id0qvk922_d5e5\msg\attach\578dd923c4c14536c03203ae34210a5d\2024-02\Img\638_1708757514_t.dat
+C:\Users\mzj\Documents\xwechat_files\wxid_mutu6id0qvk922_d5e5\msg\attach\3484a95908137d27c9de224af3db8913\2021-08\Img\98128e6d2514f66aed444ea7bfada1e5_t.dat
+C:\Users\mzj\Documents\xwechat_files\wxid_mutu6id0qvk922_d5e5\msg\attach\3484a95908137d27c9de224af3db8913\2021-08\Img\5c0af228cd02a00f514e5c31612882a4_t.dat
+C:\Users\mzj\Documents\xwechat_files\wxid_mutu6id0qvk922_d5e5\msg\attach\3484a95908137d27c9de224af3db8913\2021-08\Img\5c0af228cd02a00f514e5c31612882a4.dat
+C:\Users\mzj\Documents\xwechat_files\wxid_mutu6id0qvk922_d5e5\msg\attach\3484a95908137d27c9de224af3db8913\2022-11\Img\c13dbe2153da3f68d6f53651435b5aad_t.dat
+C:\Users\mzj\Documents\xwechat_files\wxid_mutu6id0qvk922_d5e5\msg\attach\3484a95908137d27c9de224af3db8913\2022-11\Img\c13dbe2153da3f68d6f53651435b5aad.dat
+C:\Users\mzj\Documents\xwechat_files\wxid_mutu6id0qvk922_d5e5\msg\attach\38bb25aec6dddf3cfa3febb032a73a38\2026-01\Img\8ea52cf99a3460011184e51405d435f6_t.dat
+C:\Users\mzj\Documents\xwechat_files\wxid_mutu6id0qvk922_d5e5\msg\attach\38bb25aec6dddf3cfa3febb032a73a38\2026-01\Img\8ea52cf99a3460011184e51405d435f6_h.dat
+C:\Users\mzj\Documents\xwechat_files\wxid_mutu6id0qvk922_d5e5\msg\attach\38bb25aec6dddf3cfa3febb032a73a38\2026-01\Img\8ea52cf99a3460011184e51405d435f6.dat
+C:\Users\mzj\Documents\xwechat_files\wxid_mutu6id0qvk922_d5e5\msg\attach\3484a95908137d27c9de224af3db8913\2019-11\Img\ec0a469514d255c8463242f707c8a7e8_t.dat
+C:\Users\mzj\Documents\xwechat_files\wxid_mutu6id0qvk922_d5e5\msg\attach\3484a95908137d27c9de224af3db8913\2020-05\Img\b51417c97db0a41420bdd13bccb957c8_t.dat
+C:\Users\mzj\Documents\xwechat_files\wxid_mutu6id0qvk922_d5e5\msg\attach\3484a95908137d27c9de224af3db8913\2020-05\Img\b51417c97db0a41420bdd13bccb957c8.dat
+C:\Users\mzj\Documents\xwechat_files\wxid_mutu6id0qvk922_d5e5\msg\attach\3484a95908137d27c9de224af3db8913\2022-10\Img\e7cb564d216508ae6c2ac6c3f49514b9_t.dat
+C:\Users\mzj\Documents\xwechat_files\wxid_mutu6id0qvk922_d5e5\msg\attach\3484a95908137d27c9de224af3db8913\2022-10\Img\e7cb564d216508ae6c2ac6c3f49514b9.dat
+C:\Users\mzj\Documents\xwechat_files\wxid_mutu6id0qvk922_d5e5\msg\attach\3484a95908137d27c9de224af3db8913\2022-10\Img\b5f87539a00e2659a7e18b7514efa7cd_t.dat
+C:\Users\mzj\Documents\xwechat_files\wxid_mutu6id0qvk922_d5e5\msg\attach\3484a95908137d27c9de224af3db8913\2022-10\Img\b5f87539a00e2659a7e18b7514efa7cd.dat
+C:\Users\mzj\Documents\xwechat_files\wxid_mutu6id0qvk922_d5e5\msg\attach\3484a95908137d27c9de224af3db8913\2022-10\Img\aae9d02b4989f2f950df5145ac626278_t.dat
+C:\Users\mzj\Documents\xwechat_files\wxid_mutu6id0qvk922_d5e5\msg\attach\3484a95908137d27c9de224af3db8913\2022-10\Img\aae9d02b4989f2f950df5145ac626278.dat
+C:\Users\mzj\Documents\xwechat_files\wxid_mutu6id0qvk922_d5e5\msg\attach\578dd923c4c14536c03203ae34210a5d\2023-04\Img\5514_1681388642_t.dat
+C:\Users\mzj\Documents\xwechat_files\wxid_mutu6id0qvk922_d5e5\msg\attach\3484a95908137d27c9de224af3db8913\2021-05\Img\a31cc53b514f2862792f47efa90de930_t.dat
+C:\Users\mzj\Documents\xwechat_files\wxid_mutu6id0qvk922_d5e5\msg\attach\3484a95908137d27c9de224af3db8913\2021-05\Img\a31cc53b514f2862792f47efa90de930.dat
+COMMAND> test WSL home directories
+COMMAND> inspect challenge note and spring solver source
+
+**********************
+PowerShell transcript end
+End time: 20260928220258
+**********************
+**********************
+PowerShell transcript start
+Start time: 20260928220321
+Username: DESKTOP-412KTAR\mzj
+RunAs User: DESKTOP-412KTAR\mzj
+Configuration Name: 
+Machine: DESKTOP-412KTAR (Microsoft Windows NT 10.0.26200.0)
+Host Application: C:\Users\mzj\.cache\codex-runtimes\codex-primary-runtime\dependencies\native\powershell\pwsh.dll -Command try { [Console]::OutputEncoding=[System.Text.Encoding]::UTF8 } catch {}
+$log='C:\Users\mzj\Desktop\CTF\玄机刷题\记录\WP补全-资料普查记录.txt'; Start-Transcript -LiteralPath $log -Append; Write-Output '=== 检查发现的 CTF 资料包副本 ==='; Write-Output 'COMMAND> list package root'; Get-ChildItem -LiteralPath 'C:\Users\mzj\Desktop\CTF零基础自学资料包' -Force | Select-Object Mode,Length,LastWriteTime,Name; Write-Output 'COMMAND> find WPs, writeup notes, and platform data'; rg --files 'C:\Users\mzj\Desktop\CTF零基础自学资料包' | rg -i '(write.?up|(^|\\)wp|题解|解题记录|终端记录|redis|webmin|ancient|ezpwn|mqtt|qgd|solve_514|solve_mqtt|solve_.*pwn|solve_.*web)' | Select-Object -First 250; Write-Output 'COMMAND> list relevant markdown and txt files'; Get-ChildItem -LiteralPath 'C:\Users\mzj\Desktop\CTF零基础自学资料包' -File -Recurse -ErrorAction SilentlyContinue | Where-Object Extension -in '.md','.txt','.log' | Select-Object -ExpandProperty FullName | Select-Object -First 150; Stop-Transcript
+Process ID: 18012
+PSVersion: 7.6.5
+PSEdition: Core
+GitCommitId: 7.6.5
+OS: Microsoft Windows 10.0.26200
+Platform: Win32NT
+PSCompatibleVersions: 1.0, 2.0, 3.0, 4.0, 5.0, 5.1, 6.0, 7.0
+PSRemotingProtocolVersion: 2.4
+SerializationVersion: 1.1.0.1
+WSManStackVersion: 3.0
+**********************
+Transcript started, output file is C:\Users\mzj\Desktop\CTF\玄机刷题\记录\WP补全-资料普查记录.txt
+=== 检查发现的 CTF 资料包副本 ===
+COMMAND> list package root
+
+**********************
+PowerShell transcript end
+End time: 20260928220321
+**********************
+**********************
+PowerShell transcript start
+Start time: 20260928220422
+Username: DESKTOP-412KTAR\mzj
+RunAs User: DESKTOP-412KTAR\mzj
+Configuration Name: 
+Machine: DESKTOP-412KTAR (Microsoft Windows NT 10.0.26200.0)
+Host Application: C:\Users\mzj\.cache\codex-runtimes\codex-primary-runtime\dependencies\native\powershell\pwsh.dll -Command try { [Console]::OutputEncoding=[System.Text.Encoding]::UTF8 } catch {}
+$log='C:\Users\mzj\Desktop\CTF\玄机刷题\记录\WP补全-资料普查记录.txt'; Start-Transcript -LiteralPath $log -Append; Write-Output '=== 读取遗留题目过程证据 ==='; Write-Output 'COMMAND> inspect spring, ezRe and note artifact trees'; Get-ChildItem -LiteralPath 'C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\不劳春风解我忧','C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\ezRe','C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\note','C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\go_for_it_556' -File -Recurse -ErrorAction SilentlyContinue | Select-Object FullName,Length; Write-Output 'COMMAND> search solve outputs and platform verification lines in existing logs'; rg -n -i -S 'flag\{|平台.*(正确|完成)|正确.*恭喜|Ancient|solve_514|Redis|Webmin|webmin|pwn-ezpwn|ezpwn|mqtt|part1:|part2:' 'C:\Users\mzj\Desktop\CTF\玄机刷题\记录\代理-go_for_it-终端记录.txt' 'C:\Users\mzj\Desktop\CTF\玄机刷题\记录\代理-note-终端记录.txt' 'C:\Users\mzj\Desktop\CTF\figures\raw\fig-pwn-18-xuanji-usage.txt' 'C:\Users\mzj\Desktop\CTF\figures\raw\fig-pwn-27-mqtt-triage.txt' 'C:\Users\mzj\Desktop\CTF\figures\raw\fig-pwn-28-mqtt-local.txt' 'C:\Users\mzj\Desktop\CTF\figures\raw\fig-pwn-29-mqtt-remote.txt' 'C:\Users\mzj\Desktop\CTF\figures\raw\fig-pwn-31-ancient-recall.txt' 'C:\Users\mzj\Desktop\CTF\figures\raw\fig-rev-20-589-solve.txt' 'C:\Users\mzj\Desktop\CTF\figures\raw\fig-misc-10-581-solve.txt' 'C:\Users\mzj\Desktop\CTF\figures\raw\fig-misc-11-581-lsb-recheck.txt' 'C:\Users\mzj\Desktop\CTF\figures\raw\fig-misc-13-591-solve.txt'; Write-Output 'COMMAND> show qgd attachment readme and solution outputs'; Get-Content -LiteralPath 'C:\Users\mzj\Desktop\CTF\labs\platform\attachments\557-qgd' -ErrorAction SilentlyContinue; Stop-Transcript
+Process ID: 8624
+PSVersion: 7.6.5
+PSEdition: Core
+GitCommitId: 7.6.5
+OS: Microsoft Windows 10.0.26200
+Platform: Win32NT
+PSCompatibleVersions: 1.0, 2.0, 3.0, 4.0, 5.0, 5.1, 6.0, 7.0
+PSRemotingProtocolVersion: 2.4
+SerializationVersion: 1.1.0.1
+WSManStackVersion: 3.0
+**********************
+Transcript started, output file is C:\Users\mzj\Desktop\CTF\玄机刷题\记录\WP补全-资料普查记录.txt
+=== 读取遗留题目过程证据 ===
+COMMAND> inspect spring, ezRe and note artifact trees
+
+
+**********************
+PowerShell transcript end
+End time: 20260928220422
+**********************

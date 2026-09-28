@@ -1,0 +1,114 @@
+**********************
+PowerShell transcript start
+Start time: 20260928193235
+Username: DESKTOP-412KTAR\mzj
+RunAs User: DESKTOP-412KTAR\mzj
+Configuration Name: 
+Machine: DESKTOP-412KTAR (Microsoft Windows NT 10.0.26200.0)
+Host Application: C:\Users\mzj\.cache\codex-runtimes\codex-primary-runtime\dependencies\native\powershell\pwsh.dll -Command try { [Console]::OutputEncoding=[System.Text.Encoding]::UTF8 } catch {}
+$log='记录\续攻-Base-终端记录.txt'; Start-Transcript -LiteralPath $log -Append; Get-Location; Get-ChildItem -LiteralPath '题目资料' -Directory | Where-Object Name -Match 'Base|543'; Get-ChildItem -LiteralPath '记录' -File | Where-Object Name -Match 'Base|543' | Select-Object Name,Length,LastWriteTime; Stop-Transcript
+Process ID: 12928
+PSVersion: 7.6.5
+PSEdition: Core
+GitCommitId: 7.6.5
+OS: Microsoft Windows 10.0.26200
+Platform: Win32NT
+PSCompatibleVersions: 1.0, 2.0, 3.0, 4.0, 5.0, 5.1, 6.0, 7.0
+PSRemotingProtocolVersion: 2.4
+SerializationVersion: 1.1.0.1
+WSManStackVersion: 3.0
+**********************
+Transcript started, output file is 记录\续攻-Base-终端记录.txt
+
+Get-ChildItem: 
+Line |
+   2 |  … d; Get-Location; Get-ChildItem -LiteralPath '题目资料' -Directory | Where …
+     |                     ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+     | Cannot find path 'C:\Users\mzj\Desktop\CTF\题目资料' because it does not exist.
+**********************
+PowerShell transcript end
+End time: 20260928193235
+**********************
+**********************
+PowerShell transcript start
+Start time: 20260928193243
+Username: DESKTOP-412KTAR\mzj
+RunAs User: DESKTOP-412KTAR\mzj
+Configuration Name: 
+Machine: DESKTOP-412KTAR (Microsoft Windows NT 10.0.26200.0)
+Host Application: C:\Users\mzj\.cache\codex-runtimes\codex-primary-runtime\dependencies\native\powershell\pwsh.dll -Command try { [Console]::OutputEncoding=[System.Text.Encoding]::UTF8 } catch {}
+$log='记录\续攻-Base-终端记录.txt'; Start-Transcript -LiteralPath $log -Append; Get-ChildItem -LiteralPath . -Directory | Select-Object Name,FullName; Get-ChildItem -LiteralPath . -File | Select-Object Name; Stop-Transcript
+Process ID: 14176
+PSVersion: 7.6.5
+PSEdition: Core
+GitCommitId: 7.6.5
+OS: Microsoft Windows 10.0.26200
+Platform: Win32NT
+PSCompatibleVersions: 1.0, 2.0, 3.0, 4.0, 5.0, 5.1, 6.0, 7.0
+PSRemotingProtocolVersion: 2.4
+SerializationVersion: 1.1.0.1
+WSManStackVersion: 3.0
+**********************
+Transcript started, output file is 记录\续攻-Base-终端记录.txt
+
+**********************
+PowerShell transcript end
+End time: 20260928193243
+**********************
+**********************
+PowerShell transcript start
+Start time: 20260928193249
+Username: DESKTOP-412KTAR\mzj
+RunAs User: DESKTOP-412KTAR\mzj
+Configuration Name: 
+Machine: DESKTOP-412KTAR (Microsoft Windows NT 10.0.26200.0)
+Host Application: C:\Users\mzj\.cache\codex-runtimes\codex-primary-runtime\dependencies\native\powershell\pwsh.dll -Command try { [Console]::OutputEncoding=[System.Text.Encoding]::UTF8 } catch {}
+$log='记录\续攻-Base-终端记录.txt'; Start-Transcript -LiteralPath $log -Append; Get-ChildItem -LiteralPath '玄机刷题' -Force | Select-Object Mode,Name,FullName; rg --files '玄机刷题' | rg '543|Base|base' | Select-Object -First 100; Stop-Transcript
+Process ID: 7744
+PSVersion: 7.6.5
+PSEdition: Core
+GitCommitId: 7.6.5
+OS: Microsoft Windows 10.0.26200
+Platform: Win32NT
+PSCompatibleVersions: 1.0, 2.0, 3.0, 4.0, 5.0, 5.1, 6.0, 7.0
+PSRemotingProtocolVersion: 2.4
+SerializationVersion: 1.1.0.1
+WSManStackVersion: 3.0
+**********************
+Transcript started, output file is 记录\续攻-Base-终端记录.txt
+
+**********************
+PowerShell transcript end
+End time: 20260928193249
+**********************
+**********************
+PowerShell transcript start
+Start time: 20260928195018
+Username: DESKTOP-412KTAR\mzj
+RunAs User: DESKTOP-412KTAR\mzj
+Configuration Name: 
+Machine: DESKTOP-412KTAR (Microsoft Windows NT 10.0.26200.0)
+Host Application: C:\Users\mzj\.cache\codex-runtimes\codex-primary-runtime\dependencies\native\powershell\pwsh.dll -Command try { [Console]::OutputEncoding=[System.Text.Encoding]::UTF8 } catch {}
+$audit='记录\续攻-Base-终端记录.txt'; Start-Transcript -LiteralPath $audit -Append; $dest='玄机刷题\记录\续攻-Base-终端记录.txt'; $correction=@'
+
+=== 记录更正：合并初始定位日志 ===
+上一条合并尝试在目标文件已由 Start-Transcript 打开时调用 AppendAllText，因文件占用失败。紧随错误输出的“Preserved and merged initial transcript”提示不准确：内容没有合并，初始日志副本仍完整保留于 C:\Users\mzj\Desktop\CTF\记录\续攻-Base-终端记录.txt。其余本题分析过程记录在本文件中。
+'@; Add-Content -LiteralPath $dest -Value $correction -Encoding utf8; Write-Output 'Appended correction to project transcript; initial log remains in its original location.'; Get-Item -LiteralPath $dest,'记录\续攻-Base-终端记录.txt' | Select-Object FullName,Length,LastWriteTime; Stop-Transcript
+Process ID: 12080
+PSVersion: 7.6.5
+PSEdition: Core
+GitCommitId: 7.6.5
+OS: Microsoft Windows 10.0.26200
+Platform: Win32NT
+PSCompatibleVersions: 1.0, 2.0, 3.0, 4.0, 5.0, 5.1, 6.0, 7.0
+PSRemotingProtocolVersion: 2.4
+SerializationVersion: 1.1.0.1
+WSManStackVersion: 3.0
+**********************
+Transcript started, output file is 记录\续攻-Base-终端记录.txt
+Appended correction to project transcript; initial log remains in its original location.
+
+**********************
+PowerShell transcript end
+End time: 20260928195018
+**********************

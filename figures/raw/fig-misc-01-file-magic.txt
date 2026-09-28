@@ -1,0 +1,8 @@
+mzj@Ubuntu-24.04:~$ file labs/misc/pixel.png
+labs/misc/pixel.png: PNG image data, 1 x 1, 8-bit/color RGB, non-interlaced
+
+mzj@Ubuntu-24.04:~$ cp labs/misc/pixel.png /tmp/photo.zip && file /tmp/photo.zip
+/tmp/photo.zip: PNG image data, 1 x 1, 8-bit/color RGB, non-interlaced
+
+mzj@Ubuntu-24.04:~$ xxd -l 16 /tmp/photo.zip
+00000000: 8950 4e47 0d0a 1a0a 0000 000d 4948 4452  .PNG........IHDR

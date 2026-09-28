@@ -1,0 +1,20 @@
+mzj@Ubuntu-24.04:~$ cd ~/pwn-lab && grep -n struct overflow.c
+8:struct Session {
+14:    struct Session session = {{0}, normal};
+
+mzj@Ubuntu-24.04:~$ cd ~/pwn-lab && grep -n -A 4 struct overflow.c
+8:struct Session {
+9-    char name[24];
+10-    void (*next)(void);
+11-};
+12-
+--
+14:    struct Session session = {{0}, normal};
+15-    puts("Name:");
+16-    fflush(stdout);
+17-    /* Deliberately writes past name into the adjacent function pointer. */
+18-    if (read(STDIN_FILENO, session.name, sizeof session) < 0) return 1;
+
+mzj@Ubuntu-24.04:~$ cd ~/pwn-lab && grep -n -e read -e session.next overflow.c
+18:    if (read(STDIN_FILENO, session.name, sizeof session) < 0) return 1;
+19:    session.next();

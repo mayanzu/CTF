@@ -1,0 +1,9 @@
+# 第5章 题 C1：查看 xor.hex 与转字节
+PS C:\Users\mzj\Desktop\CTF\CTF-training-problem-first-full> Get-Content labs/crypto/xor.hex
+515b56504c4f5845685e4468595843685a56505e544a
+
+PS C:\Users\mzj\Desktop\CTF\CTF-training-problem-first-full> python -c 't=open(''labs/crypto/xor.hex'').read().strip(); print(''十六进制字符数:'', len(t)); b=bytes.fromhex(t); print(''字节数:'', len(b)); print(''前 8 字节的十六进制:'', b[:8].hex()); print(''直接打印字节串(乱码正常):'', b)'
+十六进制字符数: 44
+字节数: 22
+前 8 字节的十六进制: 515b56504c4f5845
+直接打印字节串(乱码正常): b'Q[VPLOXEh^DhYXChZVP^TJ'

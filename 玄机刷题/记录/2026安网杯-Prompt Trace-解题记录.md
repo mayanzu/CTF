@@ -1,0 +1,90 @@
+﻿# 2026安网杯-Prompt Trace 解题记录
+
+## 题目信息
+
+- 平台：玄机（ID 590）
+- 类型与难度：AI题目 / 中等
+- 费用：详情页标记“免费”；未启动任何在线环境
+- 题目目标：依据 Guard 系统提示和通道目录，从审计事件中恢复真正写入生产 token 的碎片，按碎片序号拼出 Flag。
+- 结果：已提交，平台提示“FLAG 正确，恭喜你完成此挑战”；步骤状态由 0/1 更新到 1/1。
+- Flag：flag{c4d82a6fd755593832df032275355be0}
+
+## 题意与关键判断
+
+这题不是把 CSV 里的所有 crumb 直接拼起来。system_prompt.txt 定义了写入规则，必须同时满足三个条件：
+
+1. lane_id 在 channels.json 中解析为 class=production；
+2. decision=block；
+3. intent=exfiltrate。
+
+只有合格记录中的 crumb 才是真正的生产 token 碎片。每个 crumb 是 8 个字符，写入前反转字符顺序；shard_idx 是从 0 开始的碎片位置。最后按 shard_idx 从小到大拼接。
+
+## 附件与前台操作记录
+
+从题目详情确认“免费”后，点击“下载附件”。在前台 PowerShell 中检查 D:\Downloads，发现 Prompt+Trace附件 (1).zip，大小 2579 字节。之后按以下顺序进行可复现的人工检查：
+
+    Get-ChildItem -LiteralPath 'D:\Downloads' -File | Sort-Object LastWriteTime -Descending | Select-Object -First 12 Name,Length,LastWriteTime
+    tar -tf 'D:\Downloads\Prompt+Trace附件 (1).zip'
+    Expand-Archive -LiteralPath 'D:\Downloads\Prompt+Trace附件 (1).zip' -DestinationPath 'C:\Users\mzj\Desktop\CTF\Prompt Trace-附件' -Force
+    Get-ChildItem -LiteralPath 'C:\Users\mzj\Desktop\CTF\Prompt Trace-附件' -Recurse -File | Select-Object FullName,Length
+
+压缩包包含 prompt_trace_bundle/README.txt、channels.json、export_meta.json、guard_events.csv、system_prompt.txt。README 默认编码显示乱码后改用 UTF-8 读取；所有内容均在前台终端查看，没有运行附件内代码。
+
+    Get-Content -LiteralPath 'C:\Users\mzj\Desktop\CTF\Prompt Trace-附件\prompt_trace_bundle\README.txt' -Encoding UTF8
+    Get-Content -LiteralPath 'C:\Users\mzj\Desktop\CTF\Prompt Trace-附件\prompt_trace_bundle\channels.json' -Encoding UTF8
+    Get-Content -LiteralPath 'C:\Users\mzj\Desktop\CTF\Prompt Trace-附件\prompt_trace_bundle\system_prompt.txt' -Encoding UTF8
+    Get-Content -LiteralPath 'C:\Users\mzj\Desktop\CTF\Prompt Trace-附件\prompt_trace_bundle\export_meta.json' -Encoding UTF8
+    Get-Content -LiteralPath 'C:\Users\mzj\Desktop\CTF\Prompt Trace-附件\prompt_trace_bundle\guard_events.csv' -Encoding UTF8
+
+## 证据分析
+
+### 1. 通道目录
+
+| lane_id | name | class | 处理 |
+|---|---|---|---|
+| CH-04 | app-prod-west | production | 可进入候选集 |
+| CH-11 | redteam-weekly | redteam | 排除：演练流量不写生产碎片 |
+| CH-17 | app-prod-east | production | 可进入候选集 |
+| CH-22 | eval-regression | eval | 排除：回归流量不写生产碎片 |
+
+### 2. Guard 写入策略
+
+system_prompt.txt 说明：只有 production、block、exfiltrate 三项同时成立时，才把当前 8 字符 shard 反转后写入 audit crumb。允许通过的请求、标为 injection 的阻断请求、redteam/eval 通道都不应产出有效生产碎片。空 crumb 是未完成尝试，应忽略。
+
+### 3. 逐条筛选
+
+先按 channels.json 把 CH-04、CH-17 认定为 production；再在 guard_events.csv 中筛选 block 且 intent 为 exfiltrate 的记录，得到恰好覆盖 shard_idx 0、1、2、3 的四条记录：
+
+| trace_id | lane_id | decision / intent | shard_idx | 原始 crumb | 反转后 shard |
+|---|---|---|---:|---|---|
+| T-021 | CH-04 | block / exfiltrate | 0 | f6a28d4c | c4d82a6f |
+| T-042 | CH-17 | block / exfiltrate | 1 | 8395557d | d7555938 |
+| T-014 | CH-04 | block / exfiltrate | 2 | 2230fd23 | 32df0322 |
+| T-031 | CH-17 | block / exfiltrate | 3 | 0eb55357 | 75355be0 |
+
+反转示例：T-021 的 f6a28d4c 从右向左读为 c4d82a6f。其余三条按同样规则逐字符反转。碎片必须按 shard_idx 排序，不能按 CSV 行顺序拼接；CSV 中 shard 2、shard 0 的先后正好不同于拼接顺序。
+
+### 4. 易混淆记录与排除原因
+
+- T-011、T-038：CH-11 虽是 block/exfiltrate，但通道类型为 redteam，排除。
+- T-029、T-047：CH-22 虽是 block/exfiltrate，但通道类型为 eval，排除。
+- T-027：CH-04 属于 production 且 decision=block，但 intent=injection，不是 exfiltrate，排除。
+- T-044：CH-17 属于 production 且 decision=block，但 intent=injection，排除。
+- 其余 allow、translation、handbook、summary、training 等记录不符合完整条件；空 crumb 也不作为碎片。
+
+## 拼接与格式校验
+
+按 shard_idx 0 → 1 → 2 → 3 拼接：
+
+    c4d82a6f + d7555938 + 32df0322 + 75355be0
+    = c4d82a6fd755593832df032275355be0
+
+四片各 8 个小写十六进制字符，共 32 个字符，符合题目要求的 flag{32位小写十六进制字符} 格式。
+
+## 平台验证
+
+在 ID 590 详情页点“提交FLAG”，输入 flag{c4d82a6fd755593832df032275355be0} 并提交。页面出现“FLAG 正确，恭喜你完成此挑战”，随后显示“已完成”和步骤 1/1，作为验证成功的依据。
+
+## 本题总结
+
+核心是忠实按策略做三重过滤，并且把 lane_id 映射到通道类别；不能把所有看起来像十六进制的 crumb 当成答案。生产数据中还要按 shard_idx 排序后反转每片，再拼接。附件是文本审计材料，解题全程静态阅读，没有运行样本代码，也没有使用联网搜索。

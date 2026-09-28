@@ -1,0 +1,10 @@
+# 第5章 题 C3：查看 rsa.txt 与解析密文列表
+PS C:\Users\mzj\Desktop\CTF\CTF-training-problem-first-full> Get-Content labs/crypto/rsa.txt
+n=3233
+e=17
+ciphertext=[1369, 745, 1632, 2923, 855, 2412, 1230, 1632, 119, 1230, 2271, 1632, 745, 745, 119, 2271, 2185, 1773, 2160, 745, 2160, 1230, 1516]
+
+PS C:\Users\mzj\Desktop\CTF\CTF-training-problem-first-full> python -c 'import ast; t=open(''labs/crypto/rsa.txt'').read(); data=ast.literal_eval(t.split(''ciphertext='', 1)[1].strip()); print(''密文整数个数:'', len(data)); print(''最大值:'', max(data), '', 是否都小于 n=3233:'', all(c<3233 for c in data)); print(''前 6 项:'', data[:6])'
+密文整数个数: 23
+最大值: 2923 , 是否都小于 n=3233: True
+前 6 项: [1369, 745, 1632, 2923, 855, 2412]

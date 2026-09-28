@@ -1,0 +1,21 @@
+mzj@Ubuntu-24.04:~$ cat ~/pwn-lab/fixed_format.c
+#include <stdio.h>
+int main(void) {
+    char input[128];
+    const char *secret = "flag{format_string_leaks}";
+    puts("Say something:");
+    if (!fgets(input, sizeof input, stdin)) return 1;
+    printf("%s", input); /* Fixed: the format string is a constant. */
+    (void)secret;
+    return 0;
+}
+
+mzj@Ubuntu-24.04:~$ cd ~/pwn-lab && gcc -O0 -o fixed_format fixed_format.c
+
+mzj@Ubuntu-24.04:~$ cd ~/pwn-lab && echo %s | ./fixed_format
+Say something:
+%s
+
+mzj@Ubuntu-24.04:~$ cd ~/pwn-lab && echo %p | ./fixed_format
+Say something:
+%p

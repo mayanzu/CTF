@@ -1,0 +1,12 @@
+# 第5章 题 C2：查看 586 附件内容
+PS C:\Users\mzj\Desktop\CTF\CTF-training-problem-first-full> python -c 'from zipfile import ZipFile; z=ZipFile(''labs/platform/attachments/586-five-grid.zip''); print(*z.namelist(), sep=chr(10))'
+attachments/
+attachments/archive.json
+attachments/format.txt
+
+PS C:\Users\mzj\Desktop\CTF\CTF-training-problem-first-full> python -c 'from zipfile import ZipFile; import json; r=json.loads(ZipFile(''labs/platform/attachments/586-five-grid.zip'').read(''attachments/archive.json'')); print(''archive.json 的字段:'', sorted(r)); print(''glyph_plate:'', r[''glyph_plate'']); print(''符号数:'', len(r[''glyph_plate'']), '', 去重后:'', len(set(r[''glyph_plate'']))); print(''sample_wire:'', r[''sample_wire'']); print(''dispatch_wire 前 80 字符:'', r[''dispatch_wire''][:80])'
+archive.json 的字段: ['dispatch_wire', 'glyph_plate', 'sample_plain', 'sample_wire', 'station']
+glyph_plate: Af#XwWs%Z$QYcqdJD85bMre4kTp9gCB7
+符号数: 32 , 去重后: 32
+sample_wire: ge5$TTgJ rr%Me
+dispatch_wire 前 80 字符: ge5$TTgJ r4MQCc%W 4eQBYqC5 gpDY8TqJ 4%8kfA4$ D#qd8Zcc gpDZJpWd eADsc9Xf cCCesq88

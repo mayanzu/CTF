@@ -1,0 +1,12 @@
+mzj@Ubuntu-24.04:~$ cd ~/pwn-lab && nm overflow-pie | grep -e win -e normal
+00000000000011a9 t normal
+00000000000011c3 T win
+
+mzj@Ubuntu-24.04:~$ cd ~/pwn-lab && ./overflow-pie < payload.bin
+Name:
+bash: 第 1 行：  1056 段错误               （核心已转储） ./overflow-pie < payload.bin
+
+mzj@Ubuntu-24.04:~$ cd ~/pwn-lab && ./overflow < payload.bin && echo teaching build still prints the flag
+Name:
+flag{control_flow_redirected}
+teaching build still prints the flag

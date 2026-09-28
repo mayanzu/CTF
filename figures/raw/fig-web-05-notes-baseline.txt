@@ -1,0 +1,9 @@
+# 基线：正常标题 public 只返回公开笔记
+PS C:\Users\mzj\Desktop\CTF\CTF-training-problem-first-full> curl.exe -s -i -G --data-urlencode title=public http://127.0.0.1:8765/notes
+HTTP/1.0 200 OK
+Server: BaseHTTP/0.6 Python/3.12.10
+Date: Sat, 26 Sep 2026 03:15:47 GMT
+Content-Type: text/plain; charset=utf-8
+Content-Length: 47
+
+public: Try searching for a note by its title.

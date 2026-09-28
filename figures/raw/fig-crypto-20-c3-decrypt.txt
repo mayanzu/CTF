@@ -1,0 +1,5 @@
+# 第5章 题 C3：小模数 RSA 解密得 flag
+PS C:\Users\mzj\Desktop\CTF\CTF-training-problem-first-full> python -c 'import ast; t=open(''labs/crypto/rsa.txt'').read(); data=ast.literal_eval(t.split(''ciphertext='', 1)[1].strip()); pt=bytes(pow(c, 2753, 3233) for c in data); print(''解密得到的前 6 个整数:'', [pow(c, 2753, 3233) for c in data[:6]]); print(''明文:'', pt.decode()); back=[pow(b, 17, 3233) for b in pt]; print(''用公钥再加密与原密文一致:'', back==data)'
+解密得到的前 6 个整数: [102, 108, 97, 103, 123, 114]
+明文: flag{rsa_small_modulus}
+用公钥再加密与原密文一致: True

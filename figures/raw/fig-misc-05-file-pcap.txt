@@ -1,0 +1,11 @@
+mzj@Ubuntu-24.04:~$ file labs/misc/fragments.pcap
+labs/misc/fragments.pcap: pcap capture file, microsecond ts (little-endian) - version 2.4 (Ethernet, capture length 65535)
+
+mzj@Ubuntu-24.04:~$ xxd -l 24 labs/misc/fragments.pcap
+00000000: d4c3 b2a1 0200 0400 0000 0000 0000 0000  ................
+00000010: ffff 0000 0100 0000                      ........
+
+mzj@Ubuntu-24.04:~$ strings labs/misc/fragments.pcap
+part 3/3: }
+part 1/3: flag{follow_
+part 2/3: the_packets

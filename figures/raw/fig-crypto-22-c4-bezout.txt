@@ -1,0 +1,7 @@
+# 第5章 题 C4：扩展欧几里得求 Bézout 系数
+PS C:\Users\mzj\Desktop\CTF\CTF-training-problem-first-full> python -c 'import sys; sys.path.insert(0, ''labs/platform''); from solve_receipt import bezout; g, a, b = bezout(65537, 17); print(''gcd(65537, 17) ='', g, '', a ='', a, '', b ='', b); print(''验证 65537*a + 17*b ='', 65537*a + 17*b)'
+gcd(65537, 17) = 1 , a = -8 , b = 30841
+验证 65537*a + 17*b = 1
+
+PS C:\Users\mzj\Desktop\CTF\CTF-training-problem-first-full> python -c 'import math; c1, c2, n = 2, 3, 101; inv = pow(c1, -1, n); print(''负指数演示: c1^(-8) mod n 用 pow(c1, -8, n) ='', pow(c1, -8, n), '', 与先求逆再乘幂一致:'', pow(inv, 8, n))'
+负指数演示: c1^(-8) mod n 用 pow(c1, -8, n) = 58 , 与先求逆再乘幂一致: 58

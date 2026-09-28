@@ -1,0 +1,9 @@
+# 第3章 pow 三参数与求逆元
+PS C:\Users\mzj\Desktop\CTF\CTF-training-problem-first-full> python -c 'print(''pow(2,10,1000) 快速幂 ='', pow(2,10,1000)); print(''pow(17,-1,3120) 求逆元 ='', pow(17,-1,3120)); print(''验证 (17*2753) % 3120 ='', (17*2753) % 3120)'
+pow(2,10,1000) 快速幂 = 24
+pow(17,-1,3120) 求逆元 = 2753
+验证 (17*2753) % 3120 = 1
+
+PS C:\Users\mzj\Desktop\CTF\CTF-training-problem-first-full> python -c 'import math; print(''math.gcd(65537,17) ='', math.gcd(65537,17)); print(''pow(2,10) 不取模 ='', pow(2,10))'
+math.gcd(65537,17) = 1
+pow(2,10) 不取模 = 1024

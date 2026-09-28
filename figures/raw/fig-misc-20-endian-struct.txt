@@ -1,0 +1,14 @@
+mzj@Ubuntu-24.04:~$ cd /mnt/c/Users/mzj/Desktop/CTF/CTF-training-problem-first-full && python3 figures/raw/fig-misc-20-endian-struct.py
+PNG 长度字段字节          : 00 00 00 0d
+  大端序解读 (PNG 规定)   : 13
+  struct.unpack(">I") 读 : 13
+
+PCAP 长度字段字节         : 32 00 00 00
+  小端序解读 (PCAP 规定)  : 50
+  struct.unpack("<I") 读 : 50
+
+同一串字节读错字节序      : 838860800 (大端) vs 50 (小端)
+
+UDP 目的端口字段字节      : 23 28
+  大端序解读 (>H, 2 字节) : 9000 = 端口 9000
+  struct.unpack(">H") 读  : 9000

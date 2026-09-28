@@ -1,0 +1,14 @@
+# 第2章 字节、ASCII 与十六进制的关系
+PS C:\Users\mzj\Desktop\CTF\CTF-training-problem-first-full> python -c 'text=''A''; raw=text.encode(''utf-8''); print(raw, raw.hex(), len(raw)); print(bytes.fromhex(''41'')); print(b''41'', len(b''41'')); print(bytes.fromhex(''4142''), len(bytes.fromhex(''4142''))); print(''flag''.encode(''utf-8'').hex())'
+b'A' 41 1
+b'A'
+b'41' 2
+b'AB' 2
+666c6167
+
+PS C:\Users\mzj\Desktop\CTF\CTF-training-problem-first-full> python -c 'for ch in ''flag{'' : print(ch, hex(ord(ch)))'
+f 0x66
+l 0x6c
+a 0x61
+g 0x67
+{ 0x7b

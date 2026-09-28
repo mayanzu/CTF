@@ -1,0 +1,19 @@
+mzj@Ubuntu-24.04:~$ python3 - <<'PY'
+from pathlib import Path
+data = Path('labs/misc/pixel.png').read_bytes()
+print('文件大小:', len(data), '字节；PNG 签名:', data[:8].hex())
+off = 8
+while off < len(data):
+    ln = int.from_bytes(data[off:off+4], 'big')
+    kind = data[off+4:off+8].decode()
+    body = data[off+8:off+8+ln]
+    print(f'偏移 {off:>4}  类型 {kind}  数据长度 {ln:>2}  数据 {body!r}')
+    off += 12 + ln
+print('解析到文件末尾，块结构完整')
+PY
+文件大小: 121 字节；PNG 签名: 89504e470d0a1a0a
+偏移    8  类型 IHDR  数据长度 13  数据 b'\x00\x00\x00\x01\x00\x00\x00\x01\x08\x02\x00\x00\x00'
+偏移   33  类型 tEXt  数据长度 40  数据 b'Comment\x00ZmxhZ3ttZXRhZGF0YV9oYXNfY2x1ZXN9'
+偏移   85  类型 IDAT  数据长度 12  数据 b'x\x9cchhh\x00\x00\x03\x04\x01\x81'
+偏移  109  类型 IEND  数据长度  0  数据 b''
+解析到文件末尾，块结构完整

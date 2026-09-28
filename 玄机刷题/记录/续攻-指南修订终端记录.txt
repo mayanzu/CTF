@@ -1,0 +1,69 @@
+**********************
+PowerShell transcript start
+Start time: 20260928195110
+Username: DESKTOP-412KTAR\mzj
+RunAs User: DESKTOP-412KTAR\mzj
+Configuration Name: 
+Machine: DESKTOP-412KTAR (Microsoft Windows NT 10.0.26200.0)
+Host Application: C:\Users\mzj\.cache\codex-runtimes\codex-primary-runtime\dependencies\native\powershell\pwsh.dll -Command try { [Console]::OutputEncoding=[System.Text.Encoding]::UTF8 } catch {}
+Start-Transcript -LiteralPath 'C:\Users\mzj\Desktop\CTF\玄机刷题\记录\续攻-指南修订终端记录.txt' -Append
+Get-Content -LiteralPath 'C:\Users\mzj\Desktop\CTF\玄机刷题\指南\玄机刷题指南_完整记录.tex' -Tail 26
+Get-Item -LiteralPath 'C:\Users\mzj\Desktop\CTF\玄机刷题\记录\ezBase-分析过程记录.md','C:\Users\mzj\Desktop\CTF\玄机刷题\记录\hookme-分析过程记录.md','C:\Users\mzj\Desktop\CTF\玄机刷题\记录\Base_543-分析过程记录.md','C:\Users\mzj\Desktop\CTF\玄机刷题\记录\续攻-Pixel交叉检查.txt','C:\Users\mzj\Desktop\CTF\玄机刷题\记录\续攻-Base-终端记录.txt','C:\Users\mzj\Desktop\CTF\玄机刷题\记录\续攻-hookme-终端记录.txt','C:\Users\mzj\Desktop\CTF\玄机刷题\记录\续攻-ezBase-终端记录.txt' | Select-Object FullName,Length,LastWriteTime
+Stop-Transcript
+Process ID: 4284
+PSVersion: 7.6.5
+PSEdition: Core
+GitCommitId: 7.6.5
+OS: Microsoft Windows 10.0.26200
+Platform: Win32NT
+PSCompatibleVersions: 1.0, 2.0, 3.0, 4.0, 5.0, 5.1, 6.0, 7.0
+PSRemotingProtocolVersion: 2.4
+SerializationVersion: 1.1.0.1
+WSManStackVersion: 3.0
+**********************
+Transcript started, output file is C:\Users\mzj\Desktop\CTF\玄机刷题\记录\续攻-指南修订终端记录.txt
+Get-Content: 
+Line |
+   3 |  Get-Content -LiteralPath 'C:\Users\mzj\Desktop\CTF\玄机刷题\指南\玄机刷题指南_完整记 …
+     |  ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+     | Cannot find path 'C:\Users\mzj\Desktop\CTF\玄机刷题\指南\玄机刷题指南_完整记录.tex' because it does not exist.
+Get-Content:
+Line |
+   3 |  Get-Content -LiteralPath 'C:\Users\mzj\Desktop\CTF\玄机刷题\指南\玄机刷题指南_完整记 …
+     |  ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+     | Cannot find path 'C:\Users\mzj\Desktop\CTF\玄机刷题\指南\玄机刷题指南_完整记录.tex' because it does not exist.
+
+**********************
+PowerShell transcript end
+End time: 20260928195111
+**********************
+**********************
+PowerShell transcript start
+Start time: 20260928195125
+Username: DESKTOP-412KTAR\mzj
+RunAs User: DESKTOP-412KTAR\mzj
+Configuration Name: 
+Machine: DESKTOP-412KTAR (Microsoft Windows NT 10.0.26200.0)
+Host Application: C:\Users\mzj\.cache\codex-runtimes\codex-primary-runtime\dependencies\native\powershell\pwsh.dll -Command try { [Console]::OutputEncoding=[System.Text.Encoding]::UTF8 } catch {}
+Start-Transcript -LiteralPath 'C:\Users\mzj\Desktop\CTF\玄机刷题\记录\续攻-指南修订终端记录.txt' -Append
+Get-ChildItem -LiteralPath 'C:\Users\mzj\Desktop\CTF\玄机刷题' -Force | Select-Object Name,Mode,LastWriteTime
+rg --files 'C:\Users\mzj\Desktop\CTF' | Where-Object { $_ -match '玄机刷题指南_完整记录|完整记录.*\.(tex|pdf)$|指南.*\.(tex|pdf)$' } | Select-Object -First 50
+Get-ChildItem -LiteralPath 'C:\Users\mzj\Desktop\CTF\玄机刷题\指南' -Force -ErrorAction SilentlyContinue | Select-Object Name,Length,LastWriteTime
+Stop-Transcript
+Process ID: 3884
+PSVersion: 7.6.5
+PSEdition: Core
+GitCommitId: 7.6.5
+OS: Microsoft Windows 10.0.26200
+Platform: Win32NT
+PSCompatibleVersions: 1.0, 2.0, 3.0, 4.0, 5.0, 5.1, 6.0, 7.0
+PSRemotingProtocolVersion: 2.4
+SerializationVersion: 1.1.0.1
+WSManStackVersion: 3.0
+**********************
+Transcript started, output file is C:\Users\mzj\Desktop\CTF\玄机刷题\记录\续攻-指南修订终端记录.txt
+
+**********************
+PowerShell transcript end
+End time: 20260928195125
+**********************

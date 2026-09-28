@@ -1,0 +1,154 @@
+PositionalXOR (Challenge 550) — PowerShell command/output transcript
+
+COMMAND> Get-Item -LiteralPath 'D:\Downloads\encrypted_flag.zip' | Format-List FullName,Length,LastWriteTime
+OUTPUT>
+
+
+FullName      : D:\Downloads\encrypted_flag.zip
+Length        : 198
+LastWriteTime : 2026/9/28 20:15:57
+
+COMMAND> Get-FileHash -LiteralPath 'D:\Downloads\encrypted_flag.zip' -Algorithm SHA256 | Format-List Algorithm,Hash,Path
+OUTPUT>
+
+
+Algorithm : SHA256
+Hash      : 0C563421AE63279233377EEEDFAA34DD85DEFA23A663C46CF1F9DC18FFB0F834
+Path      : D:\Downloads\encrypted_flag.zip
+
+COMMAND> Add-Type -AssemblyName System.IO.Compression.FileSystem; [System.IO.Compression.ZipFile]::OpenRead('D:\Downloads\encrypted_flag.zip').Entries | Select-Object FullName,Length,CompressedLength | Format-Table -AutoSize
+OUTPUT>
+
+FullName           Length CompressedLength
+--------           ------ ----------------
+encrypted_flag.bin     26               28
+
+COMMAND> Expand-Archive -LiteralPath 'D:\Downloads\encrypted_flag.zip' -DestinationPath 'C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\PositionalXOR_550\附件' -Force
+OUTPUT>
+
+
+COMMAND> Get-ChildItem -LiteralPath 'C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\PositionalXOR_550\附件' -File | Select-Object FullName,Length,LastWriteTime | Format-Table -AutoSize
+OUTPUT>
+
+FullName                                                                   Length LastWriteTime     
+--------                                                                   ------ -------------     
+C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\PositionalXOR_550\附件\encrypted_flag.bin     26 2026/7/24 19:37:12
+
+COMMAND> Get-FileHash -LiteralPath 'C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\PositionalXOR_550\附件\encrypted_flag.bin' -Algorithm SHA256 | Format-List Algorithm,Hash,Path
+OUTPUT>
+
+
+Algorithm : SHA256
+Hash      : 4D587E8E9916DB9AB5A43F186F606250209B4B7EA8DDB1970B6D2FACFCFE5496
+Path      : C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\PositionalXOR_550\附件\encrypted_flag.bin
+
+COMMAND> =[System.IO.File]::ReadAllBytes('C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\PositionalXOR_550\附件\encrypted_flag.bin'); 'Length: '+.Length; 'Hex: '+[Convert]::ToHexString(); 'ASCII: '+[Text.Encoding]::ASCII.GetString()
+OUTPUT>
+At line:1 char:123
++ ... 题\题目资料\PositionalXOR_550\附件\encrypted_flag.bin'); 'Length: '+.Length; ...
++                                                                  ~
+You must provide a value expression following the '+' operator.
+At line:1 char:123
++ ... PositionalXOR_550\附件\encrypted_flag.bin'); 'Length: '+.Length; 'Hex:  ...
++                                                           ~~~~~~~
+Unexpected token '.Length' in expression or statement.
+    + CategoryInfo          : ParserError: (:) [], ParentContainsErrorRecordException
+    + FullyQualifiedErrorId : ExpectedValueExpression
+
+NOTE> 初次十六进制查看命令因外层 PowerShell 双引号展开了 $ 符号，目标命令未执行成功；完整解析错误已原样记录。现用单引号封装内层命令重试。
+
+COMMAND> $b=[System.IO.File]::ReadAllBytes("C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\PositionalXOR_550\附件\encrypted_flag.bin"); "Length: $($b.Length)"; "Hex: $([Convert]::ToHexString($b))"; "ASCII: $([Text.Encoding]::ASCII.GetString($b))"
+OUTPUT>
+Length: 26
+Method invocation failed because [System.Convert] does not contain a method named 'ToHexString'.
+At line:1 char:146
++ ... ); "Length: $($b.Length)"; "Hex: $([Convert]::ToHexString($b))"; "ASC ...
++                                        ~~~~~~~~~~~~~~~~~~~~~~~~~~
+    + CategoryInfo          : InvalidOperation: (:) [], RuntimeException
+    + FullyQualifiedErrorId : MethodNotFound
+ 
+Hex: 
+ASCII: gnbc~`Tk\kNU`kNWBJEsOr"hOg
+
+COMMAND> $b=[System.IO.File]::ReadAllBytes("C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\PositionalXOR_550\附件\encrypted_flag.bin"); $p=for($i=0;$i -lt $b.Length;$i++){[byte]($b[$i] -bxor ($i -band 255))}; "XOR-index hex: $([Convert]::ToHexString([byte[]]$p))"; "XOR-index ASCII: $([Text.Encoding]::ASCII.GetString([byte[]]$p))"
+OUTPUT>
+Method invocation failed because [System.Convert] does not contain a method named 'ToHexString'.
+At line:1 char:205
++ ...  255))}; "XOR-index hex: $([Convert]::ToHexString([byte[]]$p))"; "XOR ...
++                                ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    + CategoryInfo          : InvalidOperation: (:) [], RuntimeException
+    + FullyQualifiedErrorId : MethodNotFound
+ 
+XOR-index hex: 
+XOR-index ASCII: go``zeRlTbD^lf@XR[W`[g4W~
+
+COMMAND> $b=[System.IO.File]::ReadAllBytes("C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\PositionalXOR_550\附件\encrypted_flag.bin"); $p=for($i=0;$i -lt $b.Length;$i++){[byte]($b[$i] -bxor (($i+1) -band 255))}; "XOR (position starts at 1) hex: $(($p | ForEach-Object { $_.ToString("X2") }) -join " ")"; "XOR (position starts at 1) ASCII: $([Text.Encoding]::ASCII.GetString([byte[]]$p))"
+OUTPUT>
+XOR (position starts at 1) hex: 66 6C 61 67 7B 66 53 63 55 61 45 59 6D 65 41 47 53 58 56 67 5A 64 35 70 56 7D
+XOR (position starts at 1) ASCII: flag{fScUaEYmeAGSXVgZd5pV}
+
+COMMAND> $b=[System.IO.File]::ReadAllBytes("C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\PositionalXOR_550\附件\encrypted_flag.bin"); $p=for($i=0;$i -lt $b.Length;$i++){[byte]($b[$i] -bxor (($i+1) -band 255))}; for($i=0;$i -lt $b.Length;$i++){[pscustomobject]@{Index=$i;Position=$i+1;CipherHex=$b[$i].ToString("X2");CipherChar=[char]$b[$i];XorKey=($i+1);PlainHex=$p[$i].ToString("X2");PlainChar=[char]$p[$i]}} | Format-Table -AutoSize
+OUTPUT>
+At line:1 char:390
++ ... +1);PlainHex=$p[$i].ToString("X2");PlainChar=[char]$p[$i]}} | Format- ...
++                                                                 ~
+An empty pipe element is not allowed.
+    + CategoryInfo          : ParserError: (:) [], ParentContainsErrorRecordException
+    + FullyQualifiedErrorId : EmptyPipeElement
+
+COMMAND> $PSVersionTable.PSVersion | Format-List
+OUTPUT>
+
+
+Major         : 5
+Minor         : 1
+Build         : 26100
+Revision      : 9444
+MajorRevision : 0
+MinorRevision : 9444
+
+COMMAND> $b=[System.IO.File]::ReadAllBytes("C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\PositionalXOR_550\附件\encrypted_flag.bin"); $p=for($i=0;$i -lt $b.Length;$i++){[byte]($b[$i] -bxor (($i+1) -band 255))}; $rows=for($i=0;$i -lt $b.Length;$i++){[pscustomobject]@{Index=$i;Position=$i+1;CipherHex=$b[$i].ToString("X2");CipherChar=[char]$b[$i];XorKey=$i+1;PlainHex=$p[$i].ToString("X2");PlainChar=[char]$p[$i]}}; $rows | Format-Table -AutoSize
+OUTPUT>
+
+Index Position CipherHex CipherChar XorKey PlainHex PlainChar
+----- -------- --------- ---------- ------ -------- ---------
+    0        1 67                 g      1 66               f
+    1        2 6E                 n      2 6C               l
+    2        3 62                 b      3 61               a
+    3        4 63                 c      4 67               g
+    4        5 7E                 ~      5 7B               {
+    5        6 60                 `      6 66               f
+    6        7 54                 T      7 53               S
+    7        8 6B                 k      8 63               c
+    8        9 5C                 \      9 55               U
+    9       10 6B                 k     10 61               a
+   10       11 4E                 N     11 45               E
+   11       12 55                 U     12 59               Y
+   12       13 60                 `     13 6D               m
+   13       14 6B                 k     14 65               e
+   14       15 4E                 N     15 41               A
+   15       16 57                 W     16 47               G
+   16       17 42                 B     17 53               S
+   17       18 4A                 J     18 58               X
+   18       19 45                 E     19 56               V
+   19       20 73                 s     20 67               g
+   20       21 4F                 O     21 5A               Z
+   21       22 72                 r     22 64               d
+   22       23 22                 "     23 35               5
+   23       24 68                 h     24 70               p
+   24       25 4F                 O     25 56               V
+   25       26 67                 g     26 7D               }
+
+COMMAND> $b=[System.IO.File]::ReadAllBytes("C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\PositionalXOR_550\附件\encrypted_flag.bin"); $p=for($i=0;$i -lt $b.Length;$i++){[byte]($b[$i] -bxor (($i+1) -band 255))}; $enc=for($i=0;$i -lt $p.Length;$i++){[byte]($p[$i] -bxor (($i+1) -band 255))}; $match=$true; for($i=0;$i -lt $b.Length;$i++){if($enc[$i] -ne $b[$i]){$match=$false}}; "Round-trip equals original: $match"; "Recovered flag format check: starts_with_flag_brace=$([Text.Encoding]::ASCII.GetString([byte[]]$p).StartsWith("flag{")), ends_with_closing_brace=$([Text.Encoding]::ASCII.GetString([byte[]]$p).EndsWith("}")), printable_ascii_only=$((($p | Where-Object { $_ -lt 32 -or $_ -gt 126 }).Count) -eq 0)"
+OUTPUT>
+Round-trip equals original: True
+Recovered flag format check: starts_with_flag_brace=True, ends_with_closing_brace=True, printable_ascii_only=True
+
+COMMAND> $b=[System.IO.File]::ReadAllBytes("C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\PositionalXOR_550\附件\encrypted_flag.bin"); $p=for($i=0;$i -lt $b.Length;$i++){[byte]($b[$i] -bxor (($i+1) -band 255))}; [System.IO.File]::WriteAllBytes("C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\PositionalXOR_550\analysis\recovered_flag.txt",[byte[]]$p); Get-Content -LiteralPath "C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\PositionalXOR_550\analysis\recovered_flag.txt" -Raw; Get-FileHash -LiteralPath "C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\PositionalXOR_550\analysis\recovered_flag.txt" -Algorithm SHA256 | Format-List Algorithm,Hash,Path
+OUTPUT>
+flag{fScUaEYmeAGSXVgZd5pV}
+
+
+Algorithm : SHA256
+Hash      : 7231C0724F04C01F3FA35798D76DC6FC8866C59304D8965BD364795941400FF7
+Path      : C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\PositionalXOR_550\analysis\recovered_flag.txt

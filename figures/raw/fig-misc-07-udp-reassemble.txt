@@ -1,0 +1,20 @@
+mzj@Ubuntu-24.04:~$ python3 - <<'PY'
+from pathlib import Path
+data = Path('labs/misc/fragments.pcap').read_bytes()
+off, parts = 24, {}
+while off + 16 <= len(data):
+    size = int.from_bytes(data[off+8:off+12], 'little')
+    frame = data[off+16:off+16+size]
+    ip = 14
+    ihl = (frame[ip] & 15) * 4
+    payload = frame[ip+ihl+8:]
+    label, fragment = payload.split(b': ', 1)
+    index = int(label.split()[1].split(b'/')[0])
+    parts[index] = fragment
+    off += 16 + size
+print('按负载里的编号归位:', {k: v.decode() for k, v in sorted(parts.items())})
+message = b''.join(parts[k] for k in sorted(parts))
+print('按编号 1,2,3 拼接:', message.decode())
+PY
+按负载里的编号归位: {1: 'flag{follow_', 2: 'the_packets', 3: '}'}
+按编号 1,2,3 拼接: flag{follow_the_packets}

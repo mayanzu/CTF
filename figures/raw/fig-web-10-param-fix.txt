@@ -1,0 +1,11 @@
+# W3 对照：同一输入在参数化查询下失效，正常标题仍可用
+PS C:\Users\mzj\Desktop\CTF\CTF-training-problem-first-full> python -X utf8 figures/raw/fig-web-10-param-fix.py
+input title : "' OR 1=1 -- "
+
+fix BEFORE  : SELECT title, body FROM notes WHERE title = '' OR 1=1 -- '
+fix BEFORE  rows: [('public', 'Try searching for a note by its title.'), ('staff', 'flag{sql_parameters_matter}')]
+
+fix AFTER   : SELECT title, body FROM notes WHERE title = ?    with params ("' OR 1=1 -- ",)
+fix AFTER   rows: []
+
+normal title 'public' still works: [('public', 'Try searching for a note by its title.')]

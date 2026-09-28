@@ -1,0 +1,8 @@
+# 第5章 题 C3：试除分解 n 与求私钥 d
+PS C:\Users\mzj\Desktop\CTF\CTF-training-problem-first-full> python -c 'import math; n=3233; fs=[p for p in range(2, math.isqrt(n)+1) if n%p==0]; print(''从 2 试除到'', math.isqrt(n), '', 找到因子:'', fs, '', 另一因子:'', [n//p for p in fs]); phi=(61-1)*(53-1); d=pow(17, -1, phi); print(''phi(n) ='', phi, '', 私钥指数 d ='', d); print(''验证 (17*d) % phi ='', (17*d) % phi)'
+从 2 试除到 56 , 找到因子: [53] , 另一因子: [61]
+phi(n) = 3120 , 私钥指数 d = 2753
+验证 (17*d) % phi = 1
+
+PS C:\Users\mzj\Desktop\CTF\CTF-training-problem-first-full> python -c 'n=3233; c=pow(65, 17, n); print(''演示 pow(65,17,3233) ='', c, '', 再 pow(c,2753,3233) ='', pow(c, 2753, n))'
+演示 pow(65,17,3233) = 2790 , 再 pow(c,2753,3233) = 65

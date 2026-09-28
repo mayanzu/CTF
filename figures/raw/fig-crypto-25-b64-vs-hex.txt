@@ -1,0 +1,12 @@
+# 第2章 Base64 与十六进制对照演示
+PS C:\Users\mzj\Desktop\CTF\CTF-training-problem-first-full> python -X utf8 figures/raw/fig-crypto-25-b64-vs-hex.py
+原始字节        : b'flag{hex}'  字节数 9
+十六进制显示    : 666c61677b6865787d  字符数 18  (比值 2 倍)
+Base64 显示     : ZmxhZ3toZXh9  字符数 12  (比值约 1.33 倍)
+
+识别规律：hex 只出现 0-9a-f
+          Base64 会出现大写、小写、数字和 + /，末尾常带 =
+
+两者都能无损还原原始字节：
+bytes.fromhex(hex)       -> b'flag{hex}'  一致: True
+base64.b64decode(base64) -> b'flag{hex}'  一致: True

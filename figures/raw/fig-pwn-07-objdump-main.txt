@@ -1,0 +1,33 @@
+mzj@Ubuntu-24.04:~$ cd ~/pwn-lab && objdump -d overflow | tail -32
+  4011c6:	48 c7 45 f0 00 00 00 	movq   $0x0,-0x10(%rbp)
+  4011cd:	00
+  4011ce:	48 8d 05 a1 ff ff ff 	lea    -0x5f(%rip),%rax        # 401176 <normal>
+  4011d5:	48 89 45 f8          	mov    %rax,-0x8(%rbp)
+  4011d9:	48 8d 05 4d 0e 00 00 	lea    0xe4d(%rip),%rax        # 40202d <_IO_stdin_used+0x2d>
+  4011e0:	48 89 c7             	mov    %rax,%rdi
+  4011e3:	e8 78 fe ff ff       	call   401060 <puts@plt>
+  4011e8:	48 8b 05 39 2e 00 00 	mov    0x2e39(%rip),%rax        # 404028 <stdout@GLIBC_2.2.5>
+  4011ef:	48 89 c7             	mov    %rax,%rdi
+  4011f2:	e8 89 fe ff ff       	call   401080 <fflush@plt>
+  4011f7:	48 8d 45 e0          	lea    -0x20(%rbp),%rax
+  4011fb:	ba 20 00 00 00       	mov    $0x20,%edx
+  401200:	48 89 c6             	mov    %rax,%rsi
+  401203:	bf 00 00 00 00       	mov    $0x0,%edi
+  401208:	e8 63 fe ff ff       	call   401070 <read@plt>
+  40120d:	48 85 c0             	test   %rax,%rax
+  401210:	79 07                	jns    401219 <main+0x6f>
+  401212:	b8 01 00 00 00       	mov    $0x1,%eax
+  401217:	eb 0b                	jmp    401224 <main+0x7a>
+  401219:	48 8b 45 f8          	mov    -0x8(%rbp),%rax
+  40121d:	ff d0                	call   *%rax
+  40121f:	b8 00 00 00 00       	mov    $0x0,%eax
+  401224:	c9                   	leave
+  401225:	c3                   	ret
+
+Disassembly of section .fini:
+
+0000000000401228 <_fini>:
+  401228:	f3 0f 1e fa          	endbr64
+  40122c:	48 83 ec 08          	sub    $0x8,%rsp
+  401230:	48 83 c4 08          	add    $0x8,%rsp
+  401234:	c3                   	ret

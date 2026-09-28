@@ -1,0 +1,417 @@
+**********************
+PowerShell transcript start
+Start time: 20260927215223
+Username: DESKTOP-412KTAR\mzj
+RunAs User: DESKTOP-412KTAR\mzj
+Configuration Name: 
+Machine: DESKTOP-412KTAR (Microsoft Windows NT 10.0.26200.0)
+Host Application: C:\Users\mzj\.cache\codex-runtimes\codex-primary-runtime\dependencies\native\powershell\pwsh.dll -Command try { [Console]::OutputEncoding=[System.Text.Encoding]::UTF8 } catch {}
+$record='C:\Users\mzj\Desktop\CTF\玄机刷题\记录\项目清理终端记录.txt'; Start-Transcript -LiteralPath $record -Append; $project='C:\Users\mzj\Desktop\CTF\玄机刷题'; Write-Output '=== project root ==='; Get-ChildItem -LiteralPath $project -Force | Select-Object Mode,Length,LastWriteTime,Name | Format-Table -AutoSize; Write-Output '=== size and file count by top-level folder ==='; $stats=foreach($d in Get-ChildItem -LiteralPath $project -Force -Directory){$files=@(Get-ChildItem -LiteralPath $d.FullName -File -Recurse -Force);[pscustomobject]@{Folder=$d.Name;Files=$files.Count;MB=[math]::Round((($files|Measure-Object Length -Sum).Sum/1MB),2)}}; $stats|Sort-Object Folder|Format-Table -AutoSize; Write-Output '=== generated/cache/temp candidates ==='; Get-ChildItem -LiteralPath $project -Force -Recurse | Where-Object { $_.Name -match '\.(aux|toc|out|fls|fdb_latexmk|synctex\.gz|tmp|temp|bak|swp|pyc|pyo)$|^~\$|\.cache$' -or $_.Name -in @('__pycache__','dex_tmp','.pytest_cache') } | Select-Object Mode,Length,LastWriteTime,FullName | Format-Table -AutoSize; Stop-Transcript
+Process ID: 15240
+PSVersion: 7.6.5
+PSEdition: Core
+GitCommitId: 7.6.5
+OS: Microsoft Windows 10.0.26200
+Platform: Win32NT
+PSCompatibleVersions: 1.0, 2.0, 3.0, 4.0, 5.0, 5.1, 6.0, 7.0
+PSRemotingProtocolVersion: 2.4
+SerializationVersion: 1.1.0.1
+WSManStackVersion: 3.0
+**********************
+Transcript started, output file is C:\Users\mzj\Desktop\CTF\玄机刷题\记录\项目清理终端记录.txt
+=== project root ===
+
+Mode  Length LastWriteTime      Name
+----  ------ -------------      ----
+d----        2026/9/27 19:03:47 工作区
+d----        2026/9/27 21:52:23 记录
+d----        2026/9/27 20:15:34 题目资料
+d----        2026/9/27 18:46:55 指南
+d----        2026/9/27 18:20:02 tmp
+-a--- 2135   2026/9/27 18:24:55 README.md
+
+=== size and file count by top-level folder ===
+
+Folder   Files    MB
+------   -----    --
+工作区       3  0.03
+记录        35  4.80
+题目资料   337 93.69
+指南         9  0.89
+tmp          0  0.00
+
+=== generated/cache/temp candidates ===
+
+Mode  Length LastWriteTime      FullName
+----  ------ -------------      --------
+-a---  35156 2026/9/27 21:49:15 C:\Users\mzj\Desktop\CTF\玄机刷题\指南\玄机刷题指南_完整记录.aux
+-a---  11298 2026/9/27 21:49:15 C:\Users\mzj\Desktop\CTF\玄机刷题\指南\玄机刷题指南_完整记录.toc
+d----        2026/9/27 20:10:37 C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\hookme_542\dex_tmp
+d----        2026/9/27 19:46:19 C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\OpenHarmony_secret_561\analysis\__pycache__
+-a---   7588 2026/9/27 19:46:19 C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\OpenHarmony_secret_561\analysis\__pycache__…
+
+**********************
+PowerShell transcript end
+End time: 20260927215223
+**********************
+**********************
+PowerShell transcript start
+Start time: 20260927215316
+Username: DESKTOP-412KTAR\mzj
+RunAs User: DESKTOP-412KTAR\mzj
+Configuration Name: 
+Machine: DESKTOP-412KTAR (Microsoft Windows NT 10.0.26200.0)
+Host Application: C:\Users\mzj\.cache\codex-runtimes\codex-primary-runtime\dependencies\native\powershell\pwsh.dll -Command try { [Console]::OutputEncoding=[System.Text.Encoding]::UTF8 } catch {}
+$ErrorActionPreference='Stop'
+$project='C:\Users\mzj\Desktop\CTF\玄机刷题'
+$log=Join-Path $project '记录\项目清理终端记录.txt'
+Start-Transcript -LiteralPath $log -Append
+Write-Output '=== Cleanup preflight ==='
+Write-Output "Project: $project"
+$targets=@(
+  '指南\玄机刷题指南_完整记录.aux',
+  '指南\玄机刷题指南_完整记录.toc',
+  '题目资料\hookme_542\dex_tmp\classes.dex',
+  '题目资料\hookme_542\代码附件\classes.dex',
+  '题目资料\OpenHarmony_secret_561\analysis\__pycache__'
+)
+foreach($relative in $targets){
+  $p=Join-Path $project $relative
+  if(Test-Path -LiteralPath $p){
+    $item=Get-Item -LiteralPath $p -Force
+    if($item.PSIsContainer){ Get-ChildItem -LiteralPath $p -Force -File -Recurse | Select-Object FullName,Length,LastWriteTime }
+    else { [pscustomobject]@{FullName=$item.FullName;Length=$item.Length;LastWriteTime=$item.LastWriteTime;SHA256=(Get-FileHash -LiteralPath $p -Algorithm SHA256).Hash} | Format-List }
+  } else { Write-Output "MISSING: $p" }
+}
+$original=Join-Path $project '題目資料\hookme_542\dex_tmp\classes.dex'
+$reference=Join-Path $project '題目資料\hookme_542\代码附件\classes.dex'
+if((Test-Path -LiteralPath $original) -and (Test-Path -LiteralPath $reference)){
+  Write-Output '=== Duplicate comparison ==='
+  (Get-FileHash -LiteralPath $original -Algorithm SHA256).Hash
+  (Get-FileHash -LiteralPath $reference -Algorithm SHA256).Hash
+}
+$tmp=Join-Path $project 'tmp'
+if(Test-Path -LiteralPath $tmp){Write-Output '=== tmp contents ==='; Get-ChildItem -LiteralPath $tmp -Force | Select-Object FullName,Length,Mode}
+Stop-Transcript
+Process ID: 29332
+PSVersion: 7.6.5
+PSEdition: Core
+GitCommitId: 7.6.5
+OS: Microsoft Windows 10.0.26200
+Platform: Win32NT
+PSCompatibleVersions: 1.0, 2.0, 3.0, 4.0, 5.0, 5.1, 6.0, 7.0
+PSRemotingProtocolVersion: 2.4
+SerializationVersion: 1.1.0.1
+WSManStackVersion: 3.0
+**********************
+Transcript started, output file is C:\Users\mzj\Desktop\CTF\玄机刷题\记录\项目清理终端记录.txt
+=== Cleanup preflight ===
+Project: C:\Users\mzj\Desktop\CTF\玄机刷题
+
+FullName      : C:\Users\mzj\Desktop\CTF\玄机刷题\指南\玄机刷题指南_完整记录.aux
+Length        : 35156
+LastWriteTime : 2026/9/27 21:49:15
+SHA256        : E49BE71B19A2E83902D8CB62B322D5CD4ABE2F53963475FA9ACBB307F740DCB3
+
+
+FullName      : C:\Users\mzj\Desktop\CTF\玄机刷题\指南\玄机刷题指南_完整记录.toc
+Length        : 11298
+LastWriteTime : 2026/9/27 21:49:15
+SHA256        : 2C4B4BECEF33475D5775BE4B30C0CE8DD0B3453794CAF4AC4F31361543ED9E72
+
+
+FullName      : C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\hookme_542\dex_tmp\classes.dex
+Length        : 9916936
+LastWriteTime : 1981/1/1 1:01:02
+SHA256        : 488746FFA37A656EB3CBCD28D78F0179D2DEA53C1F73DC23926D21ABC86EE019
+
+
+FullName      : C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\hookme_542\代码附件\classes.dex
+Length        : 9916936
+LastWriteTime : 2026/9/27 20:11:24
+SHA256        : 488746FFA37A656EB3CBCD28D78F0179D2DEA53C1F73DC23926D21ABC86EE019
+
+
+**********************
+PowerShell transcript end
+End time: 20260927215316
+**********************
+**********************
+PowerShell transcript start
+Start time: 20260927215330
+Username: DESKTOP-412KTAR\mzj
+RunAs User: DESKTOP-412KTAR\mzj
+Configuration Name: 
+Machine: DESKTOP-412KTAR (Microsoft Windows NT 10.0.26200.0)
+Host Application: C:\Users\mzj\.cache\codex-runtimes\codex-primary-runtime\dependencies\native\powershell\pwsh.dll -Command try { [Console]::OutputEncoding=[System.Text.Encoding]::UTF8 } catch {}
+$ErrorActionPreference='Stop'
+$project='C:\Users\mzj\Desktop\CTF\玄机刷题'
+$log=Join-Path $project '记录\项目清理终端记录.txt'
+Start-Transcript -LiteralPath $log -Append
+Write-Output '=== Inspect temp and workspace folders ==='
+foreach($relative in @('tmp','工作区','题目资料\OpenHarmony_secret_561\analysis\__pycache__','题目资料\hookme_542\dex_tmp')){
+  $p=Join-Path $project $relative
+  Write-Output "--- $p ---"
+  if(Test-Path -LiteralPath $p){ Get-ChildItem -LiteralPath $p -Force -Recurse | Select-Object FullName,PSIsContainer,Length,LastWriteTime }
+  else { Write-Output 'MISSING' }
+}
+Write-Output '=== README ==='
+Get-Content -LiteralPath (Join-Path $project 'README.md')
+Write-Output '=== Top-level inventory ==='
+Get-ChildItem -LiteralPath $project -Force | Select-Object Name,PSIsContainer,Length,LastWriteTime
+Stop-Transcript
+Process ID: 12908
+PSVersion: 7.6.5
+PSEdition: Core
+GitCommitId: 7.6.5
+OS: Microsoft Windows 10.0.26200
+Platform: Win32NT
+PSCompatibleVersions: 1.0, 2.0, 3.0, 4.0, 5.0, 5.1, 6.0, 7.0
+PSRemotingProtocolVersion: 2.4
+SerializationVersion: 1.1.0.1
+WSManStackVersion: 3.0
+**********************
+Transcript started, output file is C:\Users\mzj\Desktop\CTF\玄机刷题\记录\项目清理终端记录.txt
+=== Inspect temp and workspace folders ===
+--- C:\Users\mzj\Desktop\CTF\玄机刷题\tmp ---
+
+**********************
+PowerShell transcript end
+End time: 20260927215330
+**********************
+**********************
+PowerShell transcript start
+Start time: 20260927215403
+Username: DESKTOP-412KTAR\mzj
+RunAs User: DESKTOP-412KTAR\mzj
+Configuration Name: 
+Machine: DESKTOP-412KTAR (Microsoft Windows NT 10.0.26200.0)
+Host Application: C:\Users\mzj\.cache\codex-runtimes\codex-primary-runtime\dependencies\native\powershell\pwsh.dll -Command try { [Console]::OutputEncoding=[System.Text.Encoding]::UTF8 } catch {}
+$ErrorActionPreference='Stop'
+$project='C:\Users\mzj\Desktop\CTF\玄机刷题'
+$log=Join-Path $project '记录\项目清理终端记录.txt'
+Start-Transcript -LiteralPath $log -Append
+Write-Output '=== Candidate cache review ==='
+$cache=Join-Path $project '题目资料\OpenHarmony_secret_561\analysis\__pycache__'
+Get-ChildItem -LiteralPath $cache -Force -File -Recurse | ForEach-Object { [pscustomobject]@{Path=$_.FullName;Extension=$_.Extension;Bytes=$_.Length;GeneratedCache=($_.Extension -eq '.pyc')} } | ConvertTo-Json -Depth 3
+Write-Output '=== Temporary tree counts ==='
+$tmp=Join-Path $project 'tmp'
+Get-ChildItem -LiteralPath $tmp -Force -Recurse | ForEach-Object { [pscustomobject]@{Path=$_.FullName;Directory=$_.PSIsContainer;Bytes=if($_.PSIsContainer){$null}else{$_.Length}} } | ConvertTo-Json -Depth 3
+Write-Output '=== Common generated artifacts in project ==='
+Get-ChildItem -LiteralPath $project -Force -File -Recurse | Where-Object { $_.Name -match '^(Thumbs\.db|desktop\.ini|\.DS_Store)$' -or $_.Extension -in @('.pyc','.pyo','.tmp','.bak','.orig') -or $_.Name -like '~$*' } | ForEach-Object { [pscustomobject]@{Path=$_.FullName;Bytes=$_.Length;Extension=$_.Extension} } | ConvertTo-Json -Depth 3
+Write-Output '=== Top-level names ==='
+Get-ChildItem -LiteralPath $project -Force | ForEach-Object { [pscustomobject]@{Name=$_.Name;IsDirectory=$_.PSIsContainer;Bytes=if($_.PSIsContainer){$null}else{$_.Length}} } | ConvertTo-Json -Depth 3
+Stop-Transcript
+Process ID: 2528
+PSVersion: 7.6.5
+PSEdition: Core
+GitCommitId: 7.6.5
+OS: Microsoft Windows 10.0.26200
+Platform: Win32NT
+PSCompatibleVersions: 1.0, 2.0, 3.0, 4.0, 5.0, 5.1, 6.0, 7.0
+PSRemotingProtocolVersion: 2.4
+SerializationVersion: 1.1.0.1
+WSManStackVersion: 3.0
+**********************
+Transcript started, output file is C:\Users\mzj\Desktop\CTF\玄机刷题\记录\项目清理终端记录.txt
+=== Candidate cache review ===
+{
+  "Path": "C:\\Users\\mzj\\Desktop\\CTF\\玄机刷题\\题目资料\\OpenHarmony_secret_561\\analysis\\__pycache__\\decrypt_enc_custom_sm4.cpython-312.pyc",
+  "Extension": ".pyc",
+  "Bytes": 7588,
+  "GeneratedCache": true
+}
+=== Temporary tree counts ===
+{
+  "Path": "C:\\Users\\mzj\\Desktop\\CTF\\玄机刷题\\tmp\\pdfs",
+  "Directory": true,
+  "Bytes": null
+}
+=== Common generated artifacts in project ===
+{
+  "Path": "C:\\Users\\mzj\\Desktop\\CTF\\玄机刷题\\题目资料\\OpenHarmony_secret_561\\analysis\\__pycache__\\decrypt_enc_custom_sm4.cpython-312.pyc",
+  "Bytes": 7588,
+  "Extension": ".pyc"
+}
+=== Top-level names ===
+[
+  {
+    "Name": "工作区",
+    "IsDirectory": true,
+    "Bytes": null
+  },
+  {
+    "Name": "记录",
+    "IsDirectory": true,
+    "Bytes": null
+  },
+  {
+    "Name": "题目资料",
+    "IsDirectory": true,
+    "Bytes": null
+  },
+  {
+    "Name": "指南",
+    "IsDirectory": true,
+    "Bytes": null
+  },
+  {
+    "Name": "tmp",
+    "IsDirectory": true,
+    "Bytes": null
+  },
+  {
+    "Name": "README.md",
+    "IsDirectory": false,
+    "Bytes": 2135
+  }
+]
+**********************
+PowerShell transcript end
+End time: 20260927215403
+**********************
+**********************
+Windows PowerShell ????
+????: 20260927215923
+???: DESKTOP-412KTAR\mzj
+RunAs ??: DESKTOP-412KTAR\mzj
+????: 
+???: DESKTOP-412KTAR (Microsoft Windows NT 10.0.26200.0)
+??????: C:\WINDOWS\System32\WindowsPowerShell\v1.0\powershell.exe
+?? ID: 12212
+PSVersion: 5.1.26100.9444
+PSEdition: Desktop
+PSCompatibleVersions: 1.0, 2.0, 3.0, 4.0, 5.0, 5.1.26100.9444
+BuildVersion: 10.0.26100.9444
+CLRVersion: 4.0.30319.42000
+WSManStackVersion: 3.0
+PSRemotingProtocolVersion: 2.3
+SerializationVersion: 1.1.0.1
+**********************
+??????????? C:\Users\mzj\Desktop\CTF\????\??\????????.txt
+PS C:\Users\mzj\Desktop\CTF> try {
+    $root = (Resolve-Path -LiteralPath $project).Path.TrimEnd('\') + '\'
+
+    $aux     = Join-Path $project '??\??????_????.aux'
+    $toc     = Join-Path $project '??\??????_????.toc'
+    $dex     = Join-Path $project '????\hookme_542\dex_tmp\classes.dex'
+    $dexKeep = Join-Path $project '????\hookme_542\????\classes.dex'
+    $cache   = Join-Path $project '????\OpenHarmony_secret_561\analysis\__pycache__'
+    $dexDir  = Join-Path $project '????\hookme_542\dex_tmp'
+    $tmp     = Join-Path $project 'tmp'
+    $pdfs    = Join-Path $tmp 'pdfs'
+
+    # ??????????????????????
+    foreach ($path in @($aux, $toc, $dex, $dexKeep, $cache, $dexDir, $tmp, $pdfs)) {
+        $full = [System.IO.Path]::GetFullPath($path)
+        if (-not $full.StartsWith($root, [System.StringComparison]::OrdinalIgnoreCase)) {
+            throw "?????????????$full"
+        }
+        if (-not (Test-Path -LiteralPath $path)) {
+            throw "????????????$path"
+        }
+    }
+
+    # ???? DEX ????????????
+    $hashDelete = (Get-FileHash -LiteralPath $dex -Algorithm SHA256).Hash
+    $hashKeep   = (Get-FileHash -LiteralPath $dexKeep -Algorithm SHA256).Hash
+    if ($hashDelete -ne $hashKeep) {
+        throw '?? DEX ????????????'
+    }
+    Write-Output "DEX SHA256 ???$hashDelete"
+
+    # ?????????? .pyc ??
+    $cacheItems = @(Get-ChildItem -LiteralPath $cache -Force)
+    $cacheFiles = @(
+        Get-ChildItem -LiteralPath $cache -Force -File -Recurse
+    )
+    if ($cacheItems.Count -ne 1 -or
+        $cacheFiles.Count -ne 1 -or
+        $cacheFiles[0].Extension -ne '.pyc') {
+        throw 'Python ??????????????????'
+    }
+    $pyc = $cacheFiles[0].FullName
+
+    # ?? dex_tmp ???? DEX?tmp ???? pdfs ??
+    $dexItems = @(Get-ChildItem -LiteralPath $dexDir -Force)
+    if ($dexItems.Count -ne 1 -or $dexItems[0].FullName -ne $dex) {
+        throw 'dex_tmp ????????????????'
+    }
+
+    $tmpItems  = @(Get-ChildItem -LiteralPath $tmp -Force)
+    $pdfsItems = @(Get-ChildItem -LiteralPath $pdfs -Force)
+    if ($tmpItems.Count -ne 1 -or
+        $tmpItems[0].FullName -ne $pdfs -or
+        $pdfsItems.Count -ne 0) {
+        throw 'tmp ???????????????????'
+    }
+
+    $targets = @($aux, $toc, $dex, $pyc, $pdfs, $tmp, $dexDir, $cache)
+    $bytes = (Get-Item -LiteralPath $aux).Length +
+             (Get-Item -LiteralPath $toc).Length +
+             (Get-Item -LiteralPath $dex).Length +
+             (Get-Item -LiteralPath $pyc).Length
+
+    Write-Output '=== ??????????? ==='
+    foreach ($path in $targets) {
+        Write-Output "COMMAND> Remove-Item -LiteralPath '$path' -Force"
+    }
+
+    # ????????????????????????
+    Remove-Item -LiteralPath $aux -Force
+    Remove-Item -LiteralPath $toc -Force
+    Remove-Item -LiteralPath $dex -Force
+    Remove-Item -LiteralPath $pyc -Force
+    Remove-Item -LiteralPath $pdfs -Force
+    Remove-Item -LiteralPath $tmp -Force
+    Remove-Item -LiteralPath $dexDir -Force
+    Remove-Item -LiteralPath $cache -Force
+
+    Write-Output "?????$bytes ???? $([math]::Round($bytes / 1MB, 2)) MiB?"
+    Write-Output '=== ???? ==='
+    foreach ($path in $targets) {
+        Write-Output "$path ????$(Test-Path -LiteralPath $path)"
+    }
+
+    Write-Output '=== ???????? ==='
+    foreach ($path in @(
+        (Join-Path $project '??\??????_????.tex'),
+        (Join-Path $project '??\??????_????.pdf'),
+        $dexKeep,
+        (Join-Path $project 'README.md')
+    )) {
+        Write-Output "$path ???$(Test-Path -LiteralPath $path)"
+    }
+}
+finally {
+    Stop-Transcript
+}
+DEX SHA256 ???488746FFA37A656EB3CBCD28D78F0179D2DEA53C1F73DC23926D21ABC86EE019
+=== ??????????? ===
+COMMAND> Remove-Item -LiteralPath 'C:\Users\mzj\Desktop\CTF\????\??\??????_????.aux' -Force
+COMMAND> Remove-Item -LiteralPath 'C:\Users\mzj\Desktop\CTF\????\??\??????_????.toc' -Force
+COMMAND> Remove-Item -LiteralPath 'C:\Users\mzj\Desktop\CTF\????\????\hookme_542\dex_tmp\classes.dex' -Force
+COMMAND> Remove-Item -LiteralPath 'C:\Users\mzj\Desktop\CTF\????\????\OpenHarmony_secret_561\analysis\__pycache__\decrypt_enc_custom_sm4.cpython-312.pyc' -Force
+COMMAND> Remove-Item -LiteralPath 'C:\Users\mzj\Desktop\CTF\????\tmp\pdfs' -Force
+COMMAND> Remove-Item -LiteralPath 'C:\Users\mzj\Desktop\CTF\????\tmp' -Force
+COMMAND> Remove-Item -LiteralPath 'C:\Users\mzj\Desktop\CTF\????\????\hookme_542\dex_tmp' -Force
+COMMAND> Remove-Item -LiteralPath 'C:\Users\mzj\Desktop\CTF\????\????\OpenHarmony_secret_561\analysis\__pycache__' -Force
+?????9970978 ???? 9.51 MiB?
+=== ???? ===
+C:\Users\mzj\Desktop\CTF\????\??\??????_????.aux ????False
+C:\Users\mzj\Desktop\CTF\????\??\??????_????.toc ????False
+C:\Users\mzj\Desktop\CTF\????\????\hookme_542\dex_tmp\classes.dex ????False
+C:\Users\mzj\Desktop\CTF\????\????\OpenHarmony_secret_561\analysis\__pycache__\decrypt_enc_custom_sm4.cpython-312.pyc ????False
+C:\Users\mzj\Desktop\CTF\????\tmp\pdfs ????False
+C:\Users\mzj\Desktop\CTF\????\tmp ????False
+C:\Users\mzj\Desktop\CTF\????\????\hookme_542\dex_tmp ????False
+C:\Users\mzj\Desktop\CTF\????\????\OpenHarmony_secret_561\analysis\__pycache__ ????False
+=== ???????? ===
+C:\Users\mzj\Desktop\CTF\????\??\??????_????.tex ???True
+C:\Users\mzj\Desktop\CTF\????\??\??????_????.pdf ???True
+C:\Users\mzj\Desktop\CTF\????\????\hookme_542\????\classes.dex ???True
+C:\Users\mzj\Desktop\CTF\????\README.md ???True
+**********************
+Windows PowerShell ????
+????: 20260927215924
+**********************

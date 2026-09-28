@@ -1,0 +1,1125 @@
+**********************
+PowerShell transcript start
+Start time: 20260927200932
+Username: DESKTOP-412KTAR\mzj
+RunAs User: DESKTOP-412KTAR\mzj
+Configuration Name: 
+Machine: DESKTOP-412KTAR (Microsoft Windows NT 10.0.26200.0)
+Host Application: C:\Users\mzj\.cache\codex-runtimes\codex-primary-runtime\dependencies\native\powershell\pwsh.dll -NoProfile -Command try { [Console]::OutputEncoding=[System.Text.Encoding]::UTF8 } catch {}
+$ErrorActionPreference='Continue'; Start-Transcript -LiteralPath 'C:\Users\mzj\Desktop\CTF\玄机刷题\记录\代理-base-终端记录.txt' -Append; Write-Output "COMMAND: New-Item -ItemType Directory -Force -Path 'C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\Base_543'"; New-Item -ItemType Directory -Force -Path 'C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\Base_543' | Select-Object FullName; $archive='D:\Downloads\你知道Base么-20250521104202-am92t17.rar'; Write-Output "COMMAND: Get-Item -LiteralPath '$archive' | Select-Object FullName,Length,LastWriteTime"; Get-Item -LiteralPath $archive | Select-Object FullName,Length,LastWriteTime | Format-List; Write-Output "COMMAND: Get-FileHash -LiteralPath '$archive' -Algorithm SHA256"; Get-FileHash -LiteralPath $archive -Algorithm SHA256 | Format-List; Write-Output "COMMAND: foreach (`$tool in @('7z','7za','unrar','rar','bsdtar','tar','python','python3')) { `$g=Get-Command `$tool -ErrorAction SilentlyContinue; if (`$g) { `$g | Select-Object Name,Source } else { 'NOT FOUND: '+`$tool } }"; foreach ($tool in @('7z','7za','unrar','rar','bsdtar','tar','python','python3')) { $g=Get-Command $tool -ErrorAction SilentlyContinue; if ($g) { $g | Select-Object Name,Source } else { 'NOT FOUND: '+$tool } }; Stop-Transcript
+Process ID: 15776
+PSVersion: 7.6.5
+PSEdition: Core
+GitCommitId: 7.6.5
+OS: Microsoft Windows 10.0.26200
+Platform: Win32NT
+PSCompatibleVersions: 1.0, 2.0, 3.0, 4.0, 5.0, 5.1, 6.0, 7.0
+PSRemotingProtocolVersion: 2.4
+SerializationVersion: 1.1.0.1
+WSManStackVersion: 3.0
+**********************
+Transcript started, output file is C:\Users\mzj\Desktop\CTF\玄机刷题\记录\代理-base-终端记录.txt
+COMMAND: New-Item -ItemType Directory -Force -Path 'C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\Base_543'
+
+FullName
+--------
+C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\Base_543
+COMMAND: Get-Item -LiteralPath 'D:\Downloads\你知道Base么-20250521104202-am92t17.rar' | Select-Object FullName,Length,LastWriteTime
+
+
+FullName      : D:\Downloads\你知道Base么-20250521104202-am92t17.rar
+Length        : 14603
+LastWriteTime : 2026/9/27 20:08:25
+
+COMMAND: Get-FileHash -LiteralPath 'D:\Downloads\你知道Base么-20250521104202-am92t17.rar' -Algorithm SHA256
+
+Algorithm : SHA256
+Hash      : 3FEC5E1930230660DCABDF0F31F4D97F8BB980D67306242D48A4377B74590801
+Path      : D:\Downloads\你知道Base么-20250521104202-am92t17.rar
+
+COMMAND: foreach ($tool in @('7z','7za','unrar','rar','bsdtar','tar','python','python3')) { $g=Get-Command $tool -ErrorAction SilentlyContinue; if ($g) { $g | Select-Object Name,Source } else { 'NOT FOUND: '+$tool } }
+NOT FOUND: 7z
+NOT FOUND: 7za
+NOT FOUND: unrar
+NOT FOUND: rar
+NOT FOUND: bsdtar
+
+**********************
+PowerShell transcript end
+End time: 20260927200932
+**********************
+**********************
+PowerShell transcript start
+Start time: 20260927201027
+Username: DESKTOP-412KTAR\mzj
+RunAs User: DESKTOP-412KTAR\mzj
+Configuration Name: 
+Machine: DESKTOP-412KTAR (Microsoft Windows NT 10.0.26200.0)
+Host Application: C:\Users\mzj\.cache\codex-runtimes\codex-primary-runtime\dependencies\native\powershell\pwsh.dll -NoProfile -Command try { [Console]::OutputEncoding=[System.Text.Encoding]::UTF8 } catch {}
+$ErrorActionPreference='Continue'
+Start-Transcript -LiteralPath 'C:\Users\mzj\Desktop\CTF\玄机刷题\记录\代理-base-终端记录.txt' -Append
+Write-Output 'FAILED ATTEMPT: previous combined PowerShell command returned a ParserError (Missing expression after comma) before executing its body; no archive operation ran and no file was changed.'
+$archive='D:\Downloads\你知道Base么-20250521104202-am92t17.rar'
+Write-Output "COMMAND: tar -tf '$archive'"
+tar -tf $archive
+Write-Output 'COMMAND: python -c "import importlib.util as u; print(u.find_spec(''rarfile'')); print(u.find_spec(''py7zr''))"'
+python -c "import importlib.util as u; print(u.find_spec('rarfile')); print(u.find_spec('py7zr'))"
+Write-Output "COMMAND: Format-Hex -LiteralPath '$archive' | Select-Object -First 18"
+Format-Hex -LiteralPath $archive | Select-Object -First 18
+Stop-Transcript
+Process ID: 17924
+PSVersion: 7.6.5
+PSEdition: Core
+GitCommitId: 7.6.5
+OS: Microsoft Windows 10.0.26200
+Platform: Win32NT
+PSCompatibleVersions: 1.0, 2.0, 3.0, 4.0, 5.0, 5.1, 6.0, 7.0
+PSRemotingProtocolVersion: 2.4
+SerializationVersion: 1.1.0.1
+WSManStackVersion: 3.0
+**********************
+Transcript started, output file is C:\Users\mzj\Desktop\CTF\玄机刷题\记录\代理-base-终端记录.txt
+FAILED ATTEMPT: previous combined PowerShell command returned a ParserError (Missing expression after comma) before executing its body; no archive operation ran and no file was changed.
+COMMAND: tar -tf 'D:\Downloads\你知道Base么-20250521104202-am92t17.rar'
+
+COMMAND: python -c "import importlib.util as u; print(u.find_spec('rarfile')); print(u.find_spec('py7zr'))"
+
+COMMAND: Format-Hex -LiteralPath 'D:\Downloads\你知道Base么-20250521104202-am92t17.rar' | Select-Object -First 18
+
+   Label: D:\Downloads\你知道Base么-20250521104202-am92t17.rar
+
+          Offset Bytes                                           Ascii
+                 00 01 02 03 04 05 06 07 08 09 0A 0B 0C 0D 0E 0F
+          ------ ----------------------------------------------- -----
+0000000000000000 52 61 72 21 1A 07 01 00 A1 87 4F 8C 0C 01 05 08 Rar!��� ¡�O�����
+0000000000000010 00 07 01 01 97 F1 80 80 00 61 85 98 93 43 02 03  ����ñ�� a���C��
+0000000000000020 0B 93 F0 00 04 80 A4 04 20 84 5F D1 5D 80 03 00 ��ð ��¤� �_Ñ]��
+0000000000000030 25 E4 BD A0 E7 9F A5 E9 81 93 42 61 73 65 E4 B9 %ä½ ç�¥é��Baseä¹
+0000000000000040 88 2F E4 BD A0 E7 9F A5 E9 81 93 42 61 73 65 E4 �/ä½ ç�¥é��Baseä
+0000000000000050 B9 88 2E 65 78 65 0A 03 02 00 EF D1 AD 61 BB DB ¹�.exe��� ïÑ­a»Û
+0000000000000060 01 CA A7 0F 38 50 88 65 54 32 23 66 00 50 88 E6 �Ê§�8P�eT2#f P�æ
+0000000000000070 49 99 26 01 21 22 A0 90 54 5C 02 09 14 E9 81 00 I�&�!" �T\���é�
+0000000000000080 61 D1 17 20 48 5C 06 41 C4 24 01 4E 89 21 26 42 aÑ� H\�AÄ$�N�!&B
+0000000000000090 4A 4E 97 26 60 41 A0 B0 61 1B 0B 8C 7D 3D A8 5F JN�&`A °a���}=¨_
+00000000000000A0 46 D2 B4 AD 2D A2 9D 08 B5 E8 06 88 C8 40 90 1A FÒ´­-¢��µè��È@��
+00000000000000B0 23 11 15 14 15 89 5B ED C1 82 A3 55 01 5A B3 5B #�����[íÁ�£U�Z³[
+00000000000000C0 F3 99 9E 79 E6 F9 99 32 74 02 2D BF 7B ED FB EF ó��yæù�2t�-¿{íûï
+00000000000000D0 6F BF 6A EA DF AE B5 F7 BA D7 09 CE 6F 7B F3 B7 o¿jêß®µ÷º×�Îo{ó·
+00000000000000E0 7D 1C DE F7 CE 4E 32 DF F2 9E 74 6F CE DD FE FE }�Þ÷ÎN2ßò�toÎÝþþ
+00000000000000F0 7E 7E F9 BF 37 CE 6F 7C E6 39 C9 22 C7 43 AD 1A ~~ù¿7Îo|æ9É"ÇC­�
+0000000000000100 54 D1 FD 25 7B 5D 52 90 6A 28 A2 F2 E6 D2 D0 0D TÑý%{]R�j(¢òæÒÐ�
+0000000000000110 BA 8B 70 CD 40 F0 3B 55 BB F5 5E 5D DD 4F 1E E9 º�pÍ@ð;U»õ^]ÝO�é
+**********************
+PowerShell transcript end
+End time: 20260927201028
+**********************
+**********************
+PowerShell transcript start
+Start time: 20260927201049
+Username: DESKTOP-412KTAR\mzj
+RunAs User: DESKTOP-412KTAR\mzj
+Configuration Name: 
+Machine: DESKTOP-412KTAR (Microsoft Windows NT 10.0.26200.0)
+Host Application: C:\Users\mzj\.cache\codex-runtimes\codex-primary-runtime\dependencies\native\powershell\pwsh.dll -NoProfile -Command try { [Console]::OutputEncoding=[System.Text.Encoding]::UTF8 } catch {}
+$ErrorActionPreference='Continue'
+Start-Transcript -LiteralPath 'C:\Users\mzj\Desktop\CTF\玄机刷题\记录\代理-base-终端记录.txt' -Append
+$archive='D:\Downloads\你知道Base么-20250521104202-am92t17.rar'
+[Console]::OutputEncoding=[System.Text.UTF8Encoding]::new()
+Write-Output "COMMAND: tar -tvf '$archive'"
+tar -tvf $archive
+Stop-Transcript
+Process ID: 19352
+PSVersion: 7.6.5
+PSEdition: Core
+GitCommitId: 7.6.5
+OS: Microsoft Windows 10.0.26200
+Platform: Win32NT
+PSCompatibleVersions: 1.0, 2.0, 3.0, 4.0, 5.0, 5.1, 6.0, 7.0
+PSRemotingProtocolVersion: 2.4
+SerializationVersion: 1.1.0.1
+WSManStackVersion: 3.0
+**********************
+Transcript started, output file is C:\Users\mzj\Desktop\CTF\玄机刷题\记录\代理-base-终端记录.txt
+COMMAND: tar -tvf 'D:\Downloads\你知道Base么-20250521104202-am92t17.rar'
+
+**********************
+PowerShell transcript end
+End time: 20260927201050
+**********************
+**********************
+PowerShell transcript start
+Start time: 20260927201124
+Username: DESKTOP-412KTAR\mzj
+RunAs User: DESKTOP-412KTAR\mzj
+Configuration Name: 
+Machine: DESKTOP-412KTAR (Microsoft Windows NT 10.0.26200.0)
+Host Application: C:\Users\mzj\.cache\codex-runtimes\codex-primary-runtime\dependencies\native\powershell\pwsh.dll -NoProfile -Command try { [Console]::OutputEncoding=[System.Text.Encoding]::UTF8 } catch {}
+$ErrorActionPreference='Continue'
+Start-Transcript -LiteralPath 'C:\Users\mzj\Desktop\CTF\玄机刷题\记录\代理-base-终端记录.txt' -Append
+$archive='D:\Downloads\你知道Base么-20250521104202-am92t17.rar'
+$outDir='C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\Base_543'
+Write-Output "COMMAND: tar -xvf '$archive' -C '$outDir'"
+tar -xvf $archive -C $outDir
+Write-Output "tar exit code: $LASTEXITCODE"
+Write-Output "COMMAND: Get-ChildItem -LiteralPath '$outDir' -Recurse -File | Select-Object FullName,Length,LastWriteTime"
+Get-ChildItem -LiteralPath $outDir -Recurse -File | Select-Object FullName,Length,LastWriteTime | Format-List
+Stop-Transcript
+Process ID: 19768
+PSVersion: 7.6.5
+PSEdition: Core
+GitCommitId: 7.6.5
+OS: Microsoft Windows 10.0.26200
+Platform: Win32NT
+PSCompatibleVersions: 1.0, 2.0, 3.0, 4.0, 5.0, 5.1, 6.0, 7.0
+PSRemotingProtocolVersion: 2.4
+SerializationVersion: 1.1.0.1
+WSManStackVersion: 3.0
+**********************
+Transcript started, output file is C:\Users\mzj\Desktop\CTF\玄机刷题\记录\代理-base-终端记录.txt
+COMMAND: tar -xvf 'D:\Downloads\你知道Base么-20250521104202-am92t17.rar' -C 'C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\Base_543'
+
+tar exit code: 0
+COMMAND: Get-ChildItem -LiteralPath 'C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\Base_543' -Recurse -File | Select-Object FullName,Length,LastWriteTime
+
+FullName      : C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\Base_543\你知道Base么\你知道Base么.exe
+Length        : 70144
+LastWriteTime : 2025/5/2 20:56:54
+
+**********************
+PowerShell transcript end
+End time: 20260927201125
+**********************
+**********************
+PowerShell transcript start
+Start time: 20260927201143
+Username: DESKTOP-412KTAR\mzj
+RunAs User: DESKTOP-412KTAR\mzj
+Configuration Name: 
+Machine: DESKTOP-412KTAR (Microsoft Windows NT 10.0.26200.0)
+Host Application: C:\Users\mzj\.cache\codex-runtimes\codex-primary-runtime\dependencies\native\powershell\pwsh.dll -NoProfile -Command try { [Console]::OutputEncoding=[System.Text.Encoding]::UTF8 } catch {}
+$ErrorActionPreference='Continue'
+Start-Transcript -LiteralPath 'C:\Users\mzj\Desktop\CTF\玄机刷题\记录\代理-base-终端记录.txt' -Append
+$file='C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\Base_543\你知道Base么\你知道Base么.exe'
+$wslFile='/mnt/c/Users/mzj/Desktop/CTF/玄机刷题/题目资料/Base_543/你知道Base么/你知道Base么.exe'
+Write-Output "COMMAND: Get-FileHash -LiteralPath '$file' -Algorithm SHA256"
+Get-FileHash -LiteralPath $file -Algorithm SHA256 | Format-List
+Write-Output "COMMAND: wsl --exec /usr/bin/file '$wslFile'"
+wsl --exec /usr/bin/file $wslFile
+Write-Output "COMMAND: wsl --exec /usr/bin/objdump -h '$wslFile'"
+wsl --exec /usr/bin/objdump -h $wslFile
+Write-Output "COMMAND: wsl --exec /usr/bin/objdump -p '$wslFile'"
+wsl --exec /usr/bin/objdump -p $wslFile
+Write-Output "COMMAND: wsl --exec /usr/bin/strings -a -t x -n 3 '$wslFile'"
+wsl --exec /usr/bin/strings -a -t x -n 3 $wslFile
+Stop-Transcript
+Process ID: 7220
+PSVersion: 7.6.5
+PSEdition: Core
+GitCommitId: 7.6.5
+OS: Microsoft Windows 10.0.26200
+Platform: Win32NT
+PSCompatibleVersions: 1.0, 2.0, 3.0, 4.0, 5.0, 5.1, 6.0, 7.0
+PSRemotingProtocolVersion: 2.4
+SerializationVersion: 1.1.0.1
+WSManStackVersion: 3.0
+**********************
+Transcript started, output file is C:\Users\mzj\Desktop\CTF\玄机刷题\记录\代理-base-终端记录.txt
+COMMAND: Get-FileHash -LiteralPath 'C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\Base_543\你知道Base么\你知道Base么.exe' -Algorithm SHA256
+
+Algorithm : SHA256
+Hash      : EF7DEACF6594E9353E934564B38761E8AAF614EBF39DCB17EFED36263DF2C773
+Path      : C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\Base_543\你知道Base么\你知道Base么.exe
+
+COMMAND: wsl --exec /usr/bin/file '/mnt/c/Users/mzj/Desktop/CTF/玄机刷题/题目资料/Base_543/你知道Base么/你知道Base么.exe'
+
+COMMAND: wsl --exec /usr/bin/objdump -h '/mnt/c/Users/mzj/Desktop/CTF/玄机刷题/题目资料/Base_543/你知道Base么/你知道Base么.exe'
+
+COMMAND: wsl --exec /usr/bin/objdump -p '/mnt/c/Users/mzj/Desktop/CTF/玄机刷题/题目资料/Base_543/你知道Base么/你知道Base么.exe'
+
+COMMAND: wsl --exec /usr/bin/strings -a -t x -n 3 '/mnt/c/Users/mzj/Desktop/CTF/玄机刷题/题目资料/Base_543/你知道Base么/你知道Base么.exe'
+
+**********************
+PowerShell transcript end
+End time: 20260927201209
+**********************
+**********************
+PowerShell transcript start
+Start time: 20260927201312
+Username: DESKTOP-412KTAR\mzj
+RunAs User: DESKTOP-412KTAR\mzj
+Configuration Name: 
+Machine: DESKTOP-412KTAR (Microsoft Windows NT 10.0.26200.0)
+Host Application: C:\Users\mzj\.cache\codex-runtimes\codex-primary-runtime\dependencies\native\powershell\pwsh.dll -NoProfile -Command try { [Console]::OutputEncoding=[System.Text.Encoding]::UTF8 } catch {}
+$ErrorActionPreference='Continue'
+Start-Transcript -LiteralPath 'C:\Users\mzj\Desktop\CTF\玄机刷题\记录\代理-base-终端记录.txt' -Append
+$wslFile='/mnt/c/Users/mzj/Desktop/CTF/玄机刷题/题目资料/Base_543/你知道Base么/你知道Base么.exe'
+$pattern='14001c0c8|14001c0d8|14001c0e8|14001c100|14001c130|14001c148|14001c160|14001c168|14001c180|14001c1b0|14001c1d0|14001c1f4|14001c200|14001c21c'
+Write-Output "COMMAND: wsl --exec /usr/bin/objdump -d -Mintel '$wslFile' | Select-String -Pattern '$pattern' -Context 4,3"
+wsl --exec /usr/bin/objdump -d -Mintel $wslFile | Select-String -Pattern $pattern -Context 4,3
+Stop-Transcript
+Process ID: 7220
+PSVersion: 7.6.5
+PSEdition: Core
+GitCommitId: 7.6.5
+OS: Microsoft Windows 10.0.26200
+Platform: Win32NT
+PSCompatibleVersions: 1.0, 2.0, 3.0, 4.0, 5.0, 5.1, 6.0, 7.0
+PSRemotingProtocolVersion: 2.4
+SerializationVersion: 1.1.0.1
+WSManStackVersion: 3.0
+**********************
+Transcript started, output file is C:\Users\mzj\Desktop\CTF\玄机刷题\记录\代理-base-终端记录.txt
+COMMAND: wsl --exec /usr/bin/objdump -d -Mintel '/mnt/c/Users/mzj/Desktop/CTF/玄机刷题/题目资料/Base_543/你知道Base么/你知道Base么.exe' | Select-String -Pattern '14001c0c8|14001c0d8|14001c0e8|14001c100|14001c130|14001c148|14001c160|14001c168|14001c180|14001c1b0|14001c1d0|14001c1f4|14001c200|14001c21c' -Context 4,3
+
+     14001244e:	48 8b 95 08 01 00 00 	mov    rdx,QWORD PTR [rbp+0x108]
+     140012455:	0f be 0c 0a          	movsx  ecx,BYTE PTR [rdx+rcx*1]
+     140012459:	3b c1                	cmp    eax,ecx
+     14001245b:	74 17                	je     0x140012474
+>    14001245d:	48 8d 0d 64 9c 00 00 	lea    rcx,[rip+0x9c64]        # 0x14001c0c8
+     140012464:	e8 45 ed ff ff       	call   0x1400111ae
+     140012469:	b9 01 00 00 00       	mov    ecx,0x1
+     14001246e:	ff 15 8c 0e 01 00    	call   QWORD PTR [rip+0x10e8c]        # 0x140023300
+     140012474:	eb b7                	jmp    0x14001242d
+>    140012476:	48 8d 0d 5b 9c 00 00 	lea    rcx,[rip+0x9c5b]        # 0x14001c0d8
+     14001247d:	e8 2c ed ff ff       	call   0x1400111ae
+     140012482:	48 8d a5 e8 00 00 00 	lea    rsp,[rbp+0xe8]
+     140012489:	5f                   	pop    rdi
+     14001253e:	48 8b 95 08 01 00 00 	mov    rdx,QWORD PTR [rbp+0x108]
+     140012545:	0f be 0c 0a          	movsx  ecx,BYTE PTR [rdx+rcx*1]
+     140012549:	3b c1                	cmp    eax,ecx
+     14001254b:	74 17                	je     0x140012564
+>    14001254d:	48 8d 0d 94 9b 00 00 	lea    rcx,[rip+0x9b94]        # 0x14001c0e8
+     140012554:	e8 55 ec ff ff       	call   0x1400111ae
+     140012559:	b9 01 00 00 00       	mov    ecx,0x1
+     14001255e:	ff 15 9c 0d 01 00    	call   QWORD PTR [rip+0x10d9c]        # 0x140023300
+     140012564:	eb b7                	jmp    0x14001251d
+>    140012566:	48 8d 0d 93 9b 00 00 	lea    rcx,[rip+0x9b93]        # 0x14001c100
+     14001256d:	e8 3c ec ff ff       	call   0x1400111ae
+     140012572:	48 8d a5 e8 00 00 00 	lea    rsp,[rbp+0xe8]
+     140012579:	5f                   	pop    rdi
+     140016fc1:	48 8b f8             	mov    rdi,rax
+     140016fc4:	33 c0                	xor    eax,eax
+     140016fc6:	b9 40 00 00 00       	mov    ecx,0x40
+     140016fcb:	f3 aa                	rep stos BYTE PTR es:[rdi],al
+>    140016fcd:	48 8d 0d 5c 51 00 00 	lea    rcx,[rip+0x515c]        # 0x14001c130
+     140016fd4:	e8 d5 a1 ff ff       	call   0x1400111ae
+     140016fd9:	c7 45 68 65 38 2f a9 	mov    DWORD PTR [rbp+0x68],0xa92f3865
+     140016fe0:	c7 45 6c 53 e9 60 9e 	mov    DWORD PTR [rbp+0x6c],0x9e60e953
+     140017023:	48 8b f8             	mov    rdi,rax
+     140017026:	33 c0                	xor    eax,eax
+     140017028:	b9 07 00 00 00       	mov    ecx,0x7
+     14001702d:	f3 aa                	rep stos BYTE PTR es:[rdi],al
+>    14001702f:	48 8d 0d 12 51 00 00 	lea    rcx,[rip+0x5112]        # 0x14001c148
+     140017036:	e8 73 a1 ff ff       	call   0x1400111ae
+     14001703b:	48 8d 95 b8 00 00 00 	lea    rdx,[rbp+0xb8]
+>    140017042:	48 8d 0d 17 51 00 00 	lea    rcx,[rip+0x5117]        # 0x14001c160
+     140017049:	e8 52 a0 ff ff       	call   0x1400110a0
+     14001704e:	0f b6 05 eb 50 00 00 	movzx  eax,BYTE PTR [rip+0x50eb]        # 0x14001c140
+     140017055:	88 85 d8 00 00 00    	mov    BYTE PTR [rbp+0xd8],al
+     140017102:	48 8b 95 18 01 00 00 	mov    rdx,QWORD PTR [rbp+0x118]
+     140017109:	8b 4c 8d 68          	mov    ecx,DWORD PTR [rbp+rcx*4+0x68]
+     14001710d:	39 0c 82             	cmp    DWORD PTR [rdx+rax*4],ecx
+     140017110:	74 17                	je     0x140017129
+>    140017112:	48 8d 0d 4f 50 00 00 	lea    rcx,[rip+0x504f]        # 0x14001c168
+     140017119:	e8 90 a0 ff ff       	call   0x1400111ae
+     14001711e:	b9 01 00 00 00       	mov    ecx,0x1
+     140017123:	ff 15 d7 c1 00 00    	call   QWORD PTR [rip+0xc1d7]        # 0x140023300
+     140017129:	eb b2                	jmp    0x1400170dd
+>    14001712b:	48 8d 0d 4e 50 00 00 	lea    rcx,[rip+0x504e]        # 0x14001c180
+     140017132:	e8 77 a0 ff ff       	call   0x1400111ae
+     140017137:	c7 85 54 01 00 00 08 	mov    DWORD PTR [rbp+0x154],0x8
+     14001713e:	00 00 00
+>    140017141:	48 8d 0d 68 50 00 00 	lea    rcx,[rip+0x5068]        # 0x14001c1b0
+     140017148:	e8 61 a0 ff ff       	call   0x1400111ae
+>    14001714d:	48 8d 0d 7c 50 00 00 	lea    rcx,[rip+0x507c]        # 0x14001c1d0
+     140017154:	e8 55 a0 ff ff       	call   0x1400111ae
+     140017159:	48 8d 55 10          	lea    rdx,[rbp+0x10]
+>    14001715d:	48 8d 0d 90 50 00 00 	lea    rcx,[rip+0x5090]        # 0x14001c1f4
+     140017164:	e8 37 9f ff ff       	call   0x1400110a0
+     140017169:	48 8d 85 80 01 00 00 	lea    rax,[rbp+0x180]
+     140017170:	48 8b f8             	mov    rdi,rax
+     1400173be:	48 8b f8             	mov    rdi,rax
+     1400173c1:	33 c0                	xor    eax,eax
+     1400173c3:	b9 1e 00 00 00       	mov    ecx,0x1e
+     1400173c8:	f3 aa                	rep stos BYTE PTR es:[rdi],al
+>    1400173ca:	48 8d 0d 2f 4e 00 00 	lea    rcx,[rip+0x4e2f]        # 0x14001c200
+     1400173d1:	e8 d8 9d ff ff       	call   0x1400111ae
+     1400173d6:	48 8d 95 78 02 00 00 	lea    rdx,[rbp+0x278]
+>    1400173dd:	48 8d 0d 38 4e 00 00 	lea    rcx,[rip+0x4e38]        # 0x14001c21c
+     1400173e4:	e8 b7 9c ff ff       	call   0x1400110a0
+     1400173e9:	48 8d 8d 78 02 00 00 	lea    rcx,[rbp+0x278]
+     1400173f0:	e8 91 9d ff ff       	call   0x140011186
+**********************
+PowerShell transcript end
+End time: 20260927201329
+**********************
+**********************
+PowerShell transcript start
+Start time: 20260927201345
+Username: DESKTOP-412KTAR\mzj
+RunAs User: DESKTOP-412KTAR\mzj
+Configuration Name: 
+Machine: DESKTOP-412KTAR (Microsoft Windows NT 10.0.26200.0)
+Host Application: C:\Users\mzj\.cache\codex-runtimes\codex-primary-runtime\dependencies\native\powershell\pwsh.dll -NoProfile -Command try { [Console]::OutputEncoding=[System.Text.Encoding]::UTF8 } catch {}
+$ErrorActionPreference='Continue'
+Start-Transcript -LiteralPath 'C:\Users\mzj\Desktop\CTF\玄机刷题\记录\代理-base-终端记录.txt' -Append
+$wslFile='/mnt/c/Users/mzj/Desktop/CTF/玄机刷题/题目资料/Base_543/你知道Base么/你知道Base么.exe'
+Write-Output "COMMAND: wsl --exec /usr/bin/objdump -d -Mintel --start-address=0x140016f80 --stop-address=0x140017460 '$wslFile'"
+wsl --exec /usr/bin/objdump -d -Mintel --start-address=0x140016f80 --stop-address=0x140017460 $wslFile
+Stop-Transcript
+Process ID: 27588
+PSVersion: 7.6.5
+PSEdition: Core
+GitCommitId: 7.6.5
+OS: Microsoft Windows 10.0.26200
+Platform: Win32NT
+PSCompatibleVersions: 1.0, 2.0, 3.0, 4.0, 5.0, 5.1, 6.0, 7.0
+PSRemotingProtocolVersion: 2.4
+SerializationVersion: 1.1.0.1
+WSManStackVersion: 3.0
+**********************
+Transcript started, output file is C:\Users\mzj\Desktop\CTF\玄机刷题\记录\代理-base-终端记录.txt
+COMMAND: wsl --exec /usr/bin/objdump -d -Mintel --start-address=0x140016f80 --stop-address=0x140017460 '/mnt/c/Users/mzj/Desktop/CTF/玄机刷题/题目资料/Base_543/你知道Base么/你知道Base么.exe'
+
+**********************
+PowerShell transcript end
+End time: 20260927201353
+**********************
+**********************
+PowerShell transcript start
+Start time: 20260927201417
+Username: DESKTOP-412KTAR\mzj
+RunAs User: DESKTOP-412KTAR\mzj
+Configuration Name: 
+Machine: DESKTOP-412KTAR (Microsoft Windows NT 10.0.26200.0)
+Host Application: C:\Users\mzj\.cache\codex-runtimes\codex-primary-runtime\dependencies\native\powershell\pwsh.dll -NoProfile -Command try { [Console]::OutputEncoding=[System.Text.Encoding]::UTF8 } catch {}
+$ErrorActionPreference='Continue'
+Start-Transcript -LiteralPath 'C:\Users\mzj\Desktop\CTF\玄机刷题\记录\代理-base-终端记录.txt' -Append
+$wslFile='/mnt/c/Users/mzj/Desktop/CTF/玄机刷题/题目资料/Base_543/你知道Base么/你知道Base么.exe'
+Write-Output "COMMAND: wsl --exec /usr/bin/objdump -d -Mintel --start-address=0x1400173f0 --stop-address=0x140017800 '$wslFile'"
+wsl --exec /usr/bin/objdump -d -Mintel --start-address=0x1400173f0 --stop-address=0x140017800 $wslFile
+Stop-Transcript
+Process ID: 19192
+PSVersion: 7.6.5
+PSEdition: Core
+GitCommitId: 7.6.5
+OS: Microsoft Windows 10.0.26200
+Platform: Win32NT
+PSCompatibleVersions: 1.0, 2.0, 3.0, 4.0, 5.0, 5.1, 6.0, 7.0
+PSRemotingProtocolVersion: 2.4
+SerializationVersion: 1.1.0.1
+WSManStackVersion: 3.0
+**********************
+Transcript started, output file is C:\Users\mzj\Desktop\CTF\玄机刷题\记录\代理-base-终端记录.txt
+COMMAND: wsl --exec /usr/bin/objdump -d -Mintel --start-address=0x1400173f0 --stop-address=0x140017800 '/mnt/c/Users/mzj/Desktop/CTF/玄机刷题/题目资料/Base_543/你知道Base么/你知道Base么.exe'
+
+**********************
+PowerShell transcript end
+End time: 20260927201434
+**********************
+**********************
+PowerShell transcript start
+Start time: 20260927201508
+Username: DESKTOP-412KTAR\mzj
+RunAs User: DESKTOP-412KTAR\mzj
+Configuration Name: 
+Machine: DESKTOP-412KTAR (Microsoft Windows NT 10.0.26200.0)
+Host Application: C:\Users\mzj\.cache\codex-runtimes\codex-primary-runtime\dependencies\native\powershell\pwsh.dll -NoProfile -Command try { [Console]::OutputEncoding=[System.Text.Encoding]::UTF8 } catch {}
+$ErrorActionPreference='Continue'
+Start-Transcript -LiteralPath 'C:\Users\mzj\Desktop\CTF\玄机刷题\记录\代理-base-终端记录.txt' -Append
+$wslFile='/mnt/c/Users/mzj/Desktop/CTF/玄机刷题/题目资料/Base_543/你知道Base么/你知道Base么.exe'
+Write-Output "COMMAND: wsl --exec /usr/bin/objdump -d -Mintel --start-address=0x140011000 --stop-address=0x140011500 '$wslFile'"
+wsl --exec /usr/bin/objdump -d -Mintel --start-address=0x140011000 --stop-address=0x140011500 $wslFile
+Stop-Transcript
+Process ID: 9668
+PSVersion: 7.6.5
+PSEdition: Core
+GitCommitId: 7.6.5
+OS: Microsoft Windows 10.0.26200
+Platform: Win32NT
+PSCompatibleVersions: 1.0, 2.0, 3.0, 4.0, 5.0, 5.1, 6.0, 7.0
+PSRemotingProtocolVersion: 2.4
+SerializationVersion: 1.1.0.1
+WSManStackVersion: 3.0
+**********************
+Transcript started, output file is C:\Users\mzj\Desktop\CTF\玄机刷题\记录\代理-base-终端记录.txt
+COMMAND: wsl --exec /usr/bin/objdump -d -Mintel --start-address=0x140011000 --stop-address=0x140011500 '/mnt/c/Users/mzj/Desktop/CTF/玄机刷题/题目资料/Base_543/你知道Base么/你知道Base么.exe'
+
+**********************
+PowerShell transcript end
+End time: 20260927201523
+**********************
+**********************
+PowerShell transcript start
+Start time: 20260927201653
+Username: DESKTOP-412KTAR\mzj
+RunAs User: DESKTOP-412KTAR\mzj
+Configuration Name: 
+Machine: DESKTOP-412KTAR (Microsoft Windows NT 10.0.26200.0)
+Host Application: C:\Users\mzj\.cache\codex-runtimes\codex-primary-runtime\dependencies\native\powershell\pwsh.dll -NoProfile -Command try { [Console]::OutputEncoding=[System.Text.Encoding]::UTF8 } catch {}
+$ErrorActionPreference='Continue'; Start-Transcript -LiteralPath 'C:\Users\mzj\Desktop\CTF\玄机刷题\记录\代理-base-终端记录.txt' -Append; Write-Output 'COMMAND: Get-Command wsl; wsl --exec /usr/bin/objdump --version; exit=$LASTEXITCODE'; Get-Command wsl | Format-List *; wsl --exec /usr/bin/objdump --version 2>&1; Write-Output "NATIVE_EXIT=$LASTEXITCODE"; Write-Output 'COMMAND: Test-Path archive, extracted PE, and WSL mount'; Test-Path -LiteralPath 'D:\Downloads\你知道Base么-20250521104202-am92t17.rar'; Test-Path -LiteralPath 'C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\Base_543\你知道Base么\你知道Base么.exe'; Test-Path -LiteralPath '\\wsl$\Ubuntu\mnt\c\Users\mzj\Desktop\CTF\玄机刷题\题目资料\Base_543\你知道Base么\你知道Base么.exe'; Stop-Transcript
+Process ID: 27080
+PSVersion: 7.6.5
+PSEdition: Core
+GitCommitId: 7.6.5
+OS: Microsoft Windows 10.0.26200
+Platform: Win32NT
+PSCompatibleVersions: 1.0, 2.0, 3.0, 4.0, 5.0, 5.1, 6.0, 7.0
+PSRemotingProtocolVersion: 2.4
+SerializationVersion: 1.1.0.1
+WSManStackVersion: 3.0
+**********************
+Transcript started, output file is C:\Users\mzj\Desktop\CTF\玄机刷题\记录\代理-base-终端记录.txt
+COMMAND: Get-Command wsl; wsl --exec /usr/bin/objdump --version; exit=$LASTEXITCODE
+
+HelpUri            : 
+FileVersionInfo    : File:             C:\WINDOWS\system32\wsl.exe
+                     InternalName:     wsl.exe
+                     OriginalFilename: wsl.exe.mui
+                     FileVersion:      10.0.26100.8875 (WinBuild.160101.0800)
+                     FileDescription:  适用于 Linux 的 Windows 子系统
+                     Product:          Microsoft® Windows® Operating System
+                     ProductVersion:   10.0.26100.8875
+                     Debug:            False
+                     Patched:          False
+                     PreRelease:       False
+                     PrivateBuild:     False
+                     SpecialBuild:     False
+                     Language:         简体中文(中国大陆)
+
+Path               : C:\WINDOWS\system32\wsl.exe
+Extension          : .exe
+Definition         : C:\WINDOWS\system32\wsl.exe
+Source             : C:\WINDOWS\system32\wsl.exe
+Version            : 10.0.26100.9278
+Visibility         : Public
+OutputType         : {System.String}
+Name               : wsl.exe
+CommandType        : Application
+ModuleName         : 
+Module             : 
+RemotingCapability : PowerShell
+Parameters         : 
+ParameterSets      : 
+
+NATIVE_EXIT=0
+COMMAND: Test-Path archive, extracted PE, and WSL mount
+True
+True
+False
+**********************
+PowerShell transcript end
+End time: 20260927201712
+**********************
+**********************
+PowerShell transcript start
+Start time: 20260927201720
+Username: DESKTOP-412KTAR\mzj
+RunAs User: DESKTOP-412KTAR\mzj
+Configuration Name: 
+Machine: DESKTOP-412KTAR (Microsoft Windows NT 10.0.26200.0)
+Host Application: C:\Users\mzj\.cache\codex-runtimes\codex-primary-runtime\dependencies\native\powershell\pwsh.dll -NoProfile -Command try { [Console]::OutputEncoding=[System.Text.Encoding]::UTF8 } catch {}
+$ErrorActionPreference='Continue'; Start-Transcript -LiteralPath 'C:\Users\mzj\Desktop\CTF\玄机刷题\记录\代理-base-终端记录.txt' -Append; Write-Output 'COMMAND: wsl --status'; wsl --status 2>&1; Write-Output "NATIVE_EXIT=$LASTEXITCODE"; Stop-Transcript
+Process ID: 19580
+PSVersion: 7.6.5
+PSEdition: Core
+GitCommitId: 7.6.5
+OS: Microsoft Windows 10.0.26200
+Platform: Win32NT
+PSCompatibleVersions: 1.0, 2.0, 3.0, 4.0, 5.0, 5.1, 6.0, 7.0
+PSRemotingProtocolVersion: 2.4
+SerializationVersion: 1.1.0.1
+WSManStackVersion: 3.0
+**********************
+Transcript started, output file is C:\Users\mzj\Desktop\CTF\玄机刷题\记录\代理-base-终端记录.txt
+COMMAND: wsl --status
+NATIVE_EXIT=0
+**********************
+PowerShell transcript end
+End time: 20260927201720
+**********************
+**********************
+PowerShell transcript start
+Start time: 20260927201725
+Username: DESKTOP-412KTAR\mzj
+RunAs User: DESKTOP-412KTAR\mzj
+Configuration Name: 
+Machine: DESKTOP-412KTAR (Microsoft Windows NT 10.0.26200.0)
+Host Application: C:\Users\mzj\.cache\codex-runtimes\codex-primary-runtime\dependencies\native\powershell\pwsh.dll -NoProfile -Command try { [Console]::OutputEncoding=[System.Text.Encoding]::UTF8 } catch {}
+$ErrorActionPreference='Continue'; Start-Transcript -LiteralPath 'C:\Users\mzj\Desktop\CTF\玄机刷题\记录\代理-base-终端记录.txt' -Append; Write-Output 'COMMAND: wsl --exec /usr/bin/objdump --version'; wsl --exec /usr/bin/objdump --version 2>&1; Write-Output "NATIVE_EXIT=$LASTEXITCODE"; Stop-Transcript
+Process ID: 22396
+PSVersion: 7.6.5
+PSEdition: Core
+GitCommitId: 7.6.5
+OS: Microsoft Windows 10.0.26200
+Platform: Win32NT
+PSCompatibleVersions: 1.0, 2.0, 3.0, 4.0, 5.0, 5.1, 6.0, 7.0
+PSRemotingProtocolVersion: 2.4
+SerializationVersion: 1.1.0.1
+WSManStackVersion: 3.0
+**********************
+Transcript started, output file is C:\Users\mzj\Desktop\CTF\玄机刷题\记录\代理-base-终端记录.txt
+COMMAND: wsl --exec /usr/bin/objdump --version
+NATIVE_EXIT=0
+**********************
+PowerShell transcript end
+End time: 20260927201726
+**********************
+**********************
+PowerShell transcript start
+Start time: 20260927201742
+Username: DESKTOP-412KTAR\mzj
+RunAs User: DESKTOP-412KTAR\mzj
+Configuration Name: 
+Machine: DESKTOP-412KTAR (Microsoft Windows NT 10.0.26200.0)
+Host Application: C:\Users\mzj\.cache\codex-runtimes\codex-primary-runtime\dependencies\native\powershell\pwsh.dll -NoProfile -Command try { [Console]::OutputEncoding=[System.Text.Encoding]::UTF8 } catch {}
+$ErrorActionPreference='Continue'; Start-Transcript -LiteralPath 'C:\Users\mzj\Desktop\CTF\玄机刷题\记录\代理-base-终端记录.txt' -Append; $elf='/mnt/c/Users/mzj/Desktop/CTF/玄机刷题/题目资料/Base_543/你知道Base么/你知道Base么.exe'; Write-Output 'COMMAND: wsl --exec /usr/bin/objdump -d -Mintel --start-address=0x140012400 --stop-address=0x140012a00 <exe>'; wsl --exec /usr/bin/objdump -d -Mintel --start-address=0x140012400 --stop-address=0x140012a00 $elf 2>&1; Write-Output "NATIVE_EXIT=$LASTEXITCODE"; Write-Output 'COMMAND: wsl --exec /usr/bin/objdump -d -Mintel --start-address=0x140011ea0 --stop-address=0x140012000 <exe>'; wsl --exec /usr/bin/objdump -d -Mintel --start-address=0x140011ea0 --stop-address=0x140012000 $elf 2>&1; Write-Output "NATIVE_EXIT=$LASTEXITCODE"; Stop-Transcript
+Process ID: 23588
+PSVersion: 7.6.5
+PSEdition: Core
+GitCommitId: 7.6.5
+OS: Microsoft Windows 10.0.26200
+Platform: Win32NT
+PSCompatibleVersions: 1.0, 2.0, 3.0, 4.0, 5.0, 5.1, 6.0, 7.0
+PSRemotingProtocolVersion: 2.4
+SerializationVersion: 1.1.0.1
+WSManStackVersion: 3.0
+**********************
+Transcript started, output file is C:\Users\mzj\Desktop\CTF\玄机刷题\记录\代理-base-终端记录.txt
+COMMAND: wsl --exec /usr/bin/objdump -d -Mintel --start-address=0x140012400 --stop-address=0x140012a00 <exe>
+NATIVE_EXIT=0
+COMMAND: wsl --exec /usr/bin/objdump -d -Mintel --start-address=0x140011ea0 --stop-address=0x140012000 <exe>
+NATIVE_EXIT=0
+**********************
+PowerShell transcript end
+End time: 20260927201751
+**********************
+**********************
+PowerShell transcript start
+Start time: 20260927201818
+Username: DESKTOP-412KTAR\mzj
+RunAs User: DESKTOP-412KTAR\mzj
+Configuration Name: 
+Machine: DESKTOP-412KTAR (Microsoft Windows NT 10.0.26200.0)
+Host Application: C:\Users\mzj\.cache\codex-runtimes\codex-primary-runtime\dependencies\native\powershell\pwsh.dll -NoProfile -Command try { [Console]::OutputEncoding=[System.Text.Encoding]::UTF8 } catch {}
+$ErrorActionPreference='Continue'; Start-Transcript -LiteralPath 'C:\Users\mzj\Desktop\CTF\玄机刷题\记录\代理-base-终端记录.txt' -Append; $elf='/mnt/c/Users/mzj/Desktop/CTF/玄机刷题/题目资料/Base_543/你知道Base么/你知道Base么.exe'; Write-Output 'COMMAND: objdump -d -Mintel --start-address=0x140012740 --stop-address=0x1400128c4 <exe>'; wsl --exec /usr/bin/objdump -d -Mintel --start-address=0x140012740 --stop-address=0x1400128c4 $elf 2>&1; Write-Output "NATIVE_EXIT=$LASTEXITCODE"; Write-Output 'COMMAND: objdump -d -Mintel --start-address=0x140012ae0 --stop-address=0x140012d80 <exe>'; wsl --exec /usr/bin/objdump -d -Mintel --start-address=0x140012ae0 --stop-address=0x140012d80 $elf 2>&1; Write-Output "NATIVE_EXIT=$LASTEXITCODE"; Write-Output 'COMMAND: objdump -d -Mintel --start-address=0x140012000 --stop-address=0x1400121b0 <exe>'; wsl --exec /usr/bin/objdump -d -Mintel --start-address=0x140012000 --stop-address=0x1400121b0 $elf 2>&1; Write-Output "NATIVE_EXIT=$LASTEXITCODE"; Stop-Transcript
+Process ID: 2084
+PSVersion: 7.6.5
+PSEdition: Core
+GitCommitId: 7.6.5
+OS: Microsoft Windows 10.0.26200
+Platform: Win32NT
+PSCompatibleVersions: 1.0, 2.0, 3.0, 4.0, 5.0, 5.1, 6.0, 7.0
+PSRemotingProtocolVersion: 2.4
+SerializationVersion: 1.1.0.1
+WSManStackVersion: 3.0
+**********************
+Transcript started, output file is C:\Users\mzj\Desktop\CTF\玄机刷题\记录\代理-base-终端记录.txt
+COMMAND: objdump -d -Mintel --start-address=0x140012740 --stop-address=0x1400128c4 <exe>
+NATIVE_EXIT=0
+COMMAND: objdump -d -Mintel --start-address=0x140012ae0 --stop-address=0x140012d80 <exe>
+NATIVE_EXIT=0
+COMMAND: objdump -d -Mintel --start-address=0x140012000 --stop-address=0x1400121b0 <exe>
+NATIVE_EXIT=0
+**********************
+PowerShell transcript end
+End time: 20260927201836
+**********************
+**********************
+PowerShell transcript start
+Start time: 20260927201955
+Username: DESKTOP-412KTAR\mzj
+RunAs User: DESKTOP-412KTAR\mzj
+Configuration Name: 
+Machine: DESKTOP-412KTAR (Microsoft Windows NT 10.0.26200.0)
+Host Application: C:\Users\mzj\.cache\codex-runtimes\codex-primary-runtime\dependencies\native\powershell\pwsh.dll -NoProfile -Command try { [Console]::OutputEncoding=[System.Text.Encoding]::UTF8 } catch {}
+$ErrorActionPreference='Continue'; Start-Transcript -LiteralPath 'C:\Users\mzj\Desktop\CTF\玄机刷题\记录\代理-base-终端记录.txt' -Append; $elf='/mnt/c/Users/mzj/Desktop/CTF/玄机刷题/题目资料/Base_543/你知道Base么/你知道Base么.exe'; Write-Output 'COMMAND: objdump -d -Mintel --start-address=0x140011400 --stop-address=0x140011430 <exe>'; wsl --exec /usr/bin/objdump -d -Mintel --start-address=0x140011400 --stop-address=0x140011430 $elf 2>&1; Write-Output "NATIVE_EXIT=$LASTEXITCODE"; Write-Output 'COMMAND: objdump -d -Mintel --start-address=0x140011ea0 --stop-address=0x140012074 <exe>'; wsl --exec /usr/bin/objdump -d -Mintel --start-address=0x140011ea0 --stop-address=0x140012074 $elf 2>&1; Write-Output "NATIVE_EXIT=$LASTEXITCODE"; Stop-Transcript
+Process ID: 16916
+PSVersion: 7.6.5
+PSEdition: Core
+GitCommitId: 7.6.5
+OS: Microsoft Windows 10.0.26200
+Platform: Win32NT
+PSCompatibleVersions: 1.0, 2.0, 3.0, 4.0, 5.0, 5.1, 6.0, 7.0
+PSRemotingProtocolVersion: 2.4
+SerializationVersion: 1.1.0.1
+WSManStackVersion: 3.0
+**********************
+Transcript started, output file is C:\Users\mzj\Desktop\CTF\玄机刷题\记录\代理-base-终端记录.txt
+COMMAND: objdump -d -Mintel --start-address=0x140011400 --stop-address=0x140011430 <exe>
+NATIVE_EXIT=0
+COMMAND: objdump -d -Mintel --start-address=0x140011ea0 --stop-address=0x140012074 <exe>
+NATIVE_EXIT=0
+**********************
+PowerShell transcript end
+End time: 20260927202016
+**********************
+**********************
+PowerShell transcript start
+Start time: 20260927202135
+Username: DESKTOP-412KTAR\mzj
+RunAs User: DESKTOP-412KTAR\mzj
+Configuration Name: 
+Machine: DESKTOP-412KTAR (Microsoft Windows NT 10.0.26200.0)
+Host Application: C:\Users\mzj\.cache\codex-runtimes\codex-primary-runtime\dependencies\native\powershell\pwsh.dll -NoProfile -Command try { [Console]::OutputEncoding=[System.Text.Encoding]::UTF8 } catch {}
+$ErrorActionPreference='Continue'; Start-Transcript -LiteralPath 'C:\Users\mzj\Desktop\CTF\玄机刷题\记录\代理-base-终端记录.txt' -Append; $elf='/mnt/c/Users/mzj/Desktop/CTF/玄机刷题/题目资料/Base_543/你知道Base么/你知道Base么.exe'; Write-Output 'COMMAND: objdump -d -Mintel --start-address=0x140011d10 --stop-address=0x140011ea0 <exe>'; wsl --exec /usr/bin/objdump -d -Mintel --start-address=0x140011d10 --stop-address=0x140011ea0 $elf 2>&1; Write-Output "NATIVE_EXIT=$LASTEXITCODE"; Write-Output 'COMMAND: objdump -d -Mintel --start-address=0x140016f80 --stop-address=0x1400171e0 <exe>'; wsl --exec /usr/bin/objdump -d -Mintel --start-address=0x140016f80 --stop-address=0x1400171e0 $elf 2>&1; Write-Output "NATIVE_EXIT=$LASTEXITCODE"; Stop-Transcript
+Process ID: 20380
+PSVersion: 7.6.5
+PSEdition: Core
+GitCommitId: 7.6.5
+OS: Microsoft Windows 10.0.26200
+Platform: Win32NT
+PSCompatibleVersions: 1.0, 2.0, 3.0, 4.0, 5.0, 5.1, 6.0, 7.0
+PSRemotingProtocolVersion: 2.4
+SerializationVersion: 1.1.0.1
+WSManStackVersion: 3.0
+**********************
+Transcript started, output file is C:\Users\mzj\Desktop\CTF\玄机刷题\记录\代理-base-终端记录.txt
+COMMAND: objdump -d -Mintel --start-address=0x140011d10 --stop-address=0x140011ea0 <exe>
+NATIVE_EXIT=0
+COMMAND: objdump -d -Mintel --start-address=0x140016f80 --stop-address=0x1400171e0 <exe>
+NATIVE_EXIT=0
+**********************
+PowerShell transcript end
+End time: 20260927202158
+**********************
+**********************
+PowerShell transcript start
+Start time: 20260927202242
+Username: DESKTOP-412KTAR\mzj
+RunAs User: DESKTOP-412KTAR\mzj
+Configuration Name: 
+Machine: DESKTOP-412KTAR (Microsoft Windows NT 10.0.26200.0)
+Host Application: C:\Users\mzj\.cache\codex-runtimes\codex-primary-runtime\dependencies\native\powershell\pwsh.dll -NoProfile -Command try { [Console]::OutputEncoding=[System.Text.Encoding]::UTF8 } catch {}
+$ErrorActionPreference='Continue'; Start-Transcript -LiteralPath 'C:\Users\mzj\Desktop\CTF\玄机刷题\记录\代理-base-终端记录.txt' -Append; $elf='/mnt/c/Users/mzj/Desktop/CTF/玄机刷题/题目资料/Base_543/你知道Base么/你知道Base么.exe'; Write-Output 'COMMAND: objdump -d -Mintel --start-address=0x1400171c0 --stop-address=0x140017430 <exe>'; wsl --exec /usr/bin/objdump -d -Mintel --start-address=0x1400171c0 --stop-address=0x140017430 $elf 2>&1; Write-Output "NATIVE_EXIT=$LASTEXITCODE"; Write-Output 'COMMAND: objdump -d -Mintel --start-address=0x140017430 --stop-address=0x140017590 <exe>'; wsl --exec /usr/bin/objdump -d -Mintel --start-address=0x140017430 --stop-address=0x140017590 $elf 2>&1; Write-Output "NATIVE_EXIT=$LASTEXITCODE"; Stop-Transcript
+Process ID: 19360
+PSVersion: 7.6.5
+PSEdition: Core
+GitCommitId: 7.6.5
+OS: Microsoft Windows 10.0.26200
+Platform: Win32NT
+PSCompatibleVersions: 1.0, 2.0, 3.0, 4.0, 5.0, 5.1, 6.0, 7.0
+PSRemotingProtocolVersion: 2.4
+SerializationVersion: 1.1.0.1
+WSManStackVersion: 3.0
+**********************
+Transcript started, output file is C:\Users\mzj\Desktop\CTF\玄机刷题\记录\代理-base-终端记录.txt
+COMMAND: objdump -d -Mintel --start-address=0x1400171c0 --stop-address=0x140017430 <exe>
+NATIVE_EXIT=0
+COMMAND: objdump -d -Mintel --start-address=0x140017430 --stop-address=0x140017590 <exe>
+NATIVE_EXIT=0
+**********************
+PowerShell transcript end
+End time: 20260927202258
+**********************
+**********************
+PowerShell transcript start
+Start time: 20260927202508
+Username: DESKTOP-412KTAR\mzj
+RunAs User: DESKTOP-412KTAR\mzj
+Configuration Name: 
+Machine: DESKTOP-412KTAR (Microsoft Windows NT 10.0.26200.0)
+Host Application: C:\Users\mzj\.cache\codex-runtimes\codex-primary-runtime\dependencies\native\powershell\pwsh.dll -NoProfile -Command try { [Console]::OutputEncoding=[System.Text.Encoding]::UTF8 } catch {}
+$ErrorActionPreference='Continue'
+Start-Transcript -LiteralPath 'C:\Users\mzj\Desktop\CTF\玄机刷题\记录\代理-base-终端记录.txt' -Append
+$scriptPath='C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\Base_543\solve_base_offline.py'
+$scriptText=@'
+MASK = 0xffffffff
+DELTA = 0x9e3779b9
+TEA_KEY = [0x12345678, 0x3456789a, 0x89abcdef, 0x12345678]
+TARGET_WORDS = [0xa92f3865, 0x9e60e953]
+TABLE_TARGET = bytes.fromhex(
+    "d4 59 23 76 b4 bf e3 2c 58 8f 56 19 da f0 c0 bd "
+    "36 3d 7b 46 1b b8 17 1f e3 d0 03 45 cd 04 ed c9 "
+    "67 e6 ab 29 a7 bc 0b de 5c 30 71 d7 d5 5a c6 9f "
+    "40 65 c4 71 a9 c3 ae d9 b5 e5 12 8c 80 52 34 36"
+)
+ENCODED_TARGET = "0tCPwtnncFZyYUlSK/4Cw0/echcG2lteBWnG2Ulw0htCYTMW"
+
+def mix(v, total, ka, kb):
+    return ((((v << 4) & MASK) + ka) & MASK) ^ ((v + total) & MASK) ^ (((v >> 5) + kb) & MASK)
+
+def xtea_encrypt(v0, v1):
+    total = 0
+    for _ in range(32):
+        total = (total + DELTA) & MASK
+        v0 = (v0 + mix(v1, total, TEA_KEY[0], TEA_KEY[1])) & MASK
+        v1 = (v1 + mix(v0, total, TEA_KEY[2], TEA_KEY[3])) & MASK
+    return v0, v1
+
+def xtea_decrypt(v0, v1):
+    total = (DELTA * 32) & MASK
+    for _ in range(32):
+        v1 = (v1 - mix(v0, total, TEA_KEY[2], TEA_KEY[3])) & MASK
+        v0 = (v0 - mix(v1, total, TEA_KEY[0], TEA_KEY[1])) & MASK
+        total = (total - DELTA) & MASK
+    return v0, v1
+
+plain_words = xtea_decrypt(*TARGET_WORDS)
+input_key = b"".join(w.to_bytes(4, "little") for w in plain_words)
+print("XTEA target words:", [f"0x{x:08x}" for x in TARGET_WORDS])
+print("XTEA recovered input words:", [f"0x{x:08x}" for x in plain_words])
+print("First-level input bytes:", input_key.hex(), repr(input_key))
+print("Forward XTEA verification:", [f"0x{x:08x}" for x in xtea_encrypt(*plain_words)])
+assert xtea_encrypt(*plain_words) == tuple(TARGET_WORDS)
+assert len(TABLE_TARGET) == 64
+
+# Reproduce the second-level RC4-like transformation seen in the binary.
+state = list(range(256))
+key_schedule = [input_key[i % len(input_key)] for i in range(256)]
+j = 0
+for i in range(256):
+    j = (j + state[i] + key_schedule[i]) & 0xff
+    state[i], state[j] = state[j], state[i]
+i = 0
+j = 0
+stream = []
+for _ in range(64):
+    i = (i + 1) & 0xff
+    j = (j + state[i]) & 0xff
+    state[i], state[j] = state[j], state[i]
+    stream.append(state[(state[i] + state[j]) & 0xff])
+raw_table = bytes((cipher - ks) & 0xff for cipher, ks in zip(TABLE_TARGET, stream))
+forward_table = bytes((plain + ks) & 0xff for plain, ks in zip(raw_table, stream))
+print("RC4-like keystream:", bytes(stream).hex())
+print("Recovered 64-byte raw table hex:", raw_table.hex())
+print("Recovered raw table repr:", repr(raw_table))
+print("Recovered raw table ASCII:", raw_table.decode("ascii", errors="backslashreplace"))
+print("All raw table bytes printable ASCII:", all(0x21 <= c <= 0x7e for c in raw_table))
+print("Raw table byte uniqueness:", len(set(raw_table)), "distinct values of", len(raw_table))
+print("RC4-like forward verification exact:", forward_table == TABLE_TARGET)
+assert forward_table == TABLE_TARGET
+
+alphabet = raw_table[1:33]
+print("Base32 alphabet used by code (raw_table[1:33]):", repr(alphabet))
+print("Alphabet length and uniqueness:", len(alphabet), len(set(alphabet)))
+assert len(alphabet) == 32
+assert len(set(alphabet)) == 32
+
+def decode_base32_custom(encoded, alpha):
+    inverse = {ch: i for i, ch in enumerate(alpha)}
+    if any(ord(ch) not in inverse for ch in encoded):
+        raise ValueError("encoded target contains symbol outside recovered alphabet")
+    out = bytearray()
+    groups = [encoded[k:k+8] for k in range(0, len(encoded), 8)]
+    for group in groups:
+        if len(group) != 8:
+            raise ValueError("incomplete Base32 group")
+        value = 0
+        for ch in group:
+            value = (value << 5) | inverse[ord(ch)]
+        out.extend(value.to_bytes(5, "big"))
+    return bytes(out)
+
+decoded = decode_base32_custom(ENCODED_TARGET, alphabet)
+print("Encoded target length:", len(ENCODED_TARGET))
+print("Decoded full target bytes length:", len(decoded))
+print("Decoded full target bytes hex:", decoded.hex())
+print("Decoded full target bytes repr:", repr(decoded))
+print("Decoded visible ASCII:", decoded.decode("ascii", errors="backslashreplace"))
+print("Decoded minus final zero (if present):", repr(decoded[:-1]) if decoded.endswith(b"\x00") else "final byte is nonzero")
+print("Encoded first 30 symbols (actual comparator length):", ENCODED_TARGET[:30])
+print("Flag-format check:", decoded.startswith(b"flag{") and b"}" in decoded)
+'@
+Write-Output 'COMMAND: write and run a local static-reconstruction Python solver; no network and no executable launch'
+Write-Output 'SCRIPT SOURCE BEGIN'
+Write-Output $scriptText
+Write-Output 'SCRIPT SOURCE END'
+Set-Content -LiteralPath $scriptPath -Value $scriptText -Encoding utf8
+Write-Output 'COMMAND: Get-FileHash solve_base_offline.py -Algorithm SHA256'
+Get-FileHash -LiteralPath $scriptPath -Algorithm SHA256 | Format-List
+Write-Output 'COMMAND: wsl --exec /usr/bin/python3 <solve_base_offline.py>'
+wsl --exec /usr/bin/python3 '/mnt/c/Users/mzj/Desktop/CTF/玄机刷题/题目资料/Base_543/solve_base_offline.py' 2>&1
+Write-Output "NATIVE_EXIT=$LASTEXITCODE"
+Stop-Transcript
+Process ID: 26724
+PSVersion: 7.6.5
+PSEdition: Core
+GitCommitId: 7.6.5
+OS: Microsoft Windows 10.0.26200
+Platform: Win32NT
+PSCompatibleVersions: 1.0, 2.0, 3.0, 4.0, 5.0, 5.1, 6.0, 7.0
+PSRemotingProtocolVersion: 2.4
+SerializationVersion: 1.1.0.1
+WSManStackVersion: 3.0
+**********************
+Transcript started, output file is C:\Users\mzj\Desktop\CTF\玄机刷题\记录\代理-base-终端记录.txt
+COMMAND: write and run a local static-reconstruction Python solver; no network and no executable launch
+SCRIPT SOURCE BEGIN
+MASK = 0xffffffff
+DELTA = 0x9e3779b9
+TEA_KEY = [0x12345678, 0x3456789a, 0x89abcdef, 0x12345678]
+TARGET_WORDS = [0xa92f3865, 0x9e60e953]
+TABLE_TARGET = bytes.fromhex(
+    "d4 59 23 76 b4 bf e3 2c 58 8f 56 19 da f0 c0 bd "
+    "36 3d 7b 46 1b b8 17 1f e3 d0 03 45 cd 04 ed c9 "
+    "67 e6 ab 29 a7 bc 0b de 5c 30 71 d7 d5 5a c6 9f "
+    "40 65 c4 71 a9 c3 ae d9 b5 e5 12 8c 80 52 34 36"
+)
+ENCODED_TARGET = "0tCPwtnncFZyYUlSK/4Cw0/echcG2lteBWnG2Ulw0htCYTMW"
+
+def mix(v, total, ka, kb):
+    return ((((v << 4) & MASK) + ka) & MASK) ^ ((v + total) & MASK) ^ (((v >> 5) + kb) & MASK)
+
+def xtea_encrypt(v0, v1):
+    total = 0
+    for _ in range(32):
+        total = (total + DELTA) & MASK
+        v0 = (v0 + mix(v1, total, TEA_KEY[0], TEA_KEY[1])) & MASK
+        v1 = (v1 + mix(v0, total, TEA_KEY[2], TEA_KEY[3])) & MASK
+    return v0, v1
+
+def xtea_decrypt(v0, v1):
+    total = (DELTA * 32) & MASK
+    for _ in range(32):
+        v1 = (v1 - mix(v0, total, TEA_KEY[2], TEA_KEY[3])) & MASK
+        v0 = (v0 - mix(v1, total, TEA_KEY[0], TEA_KEY[1])) & MASK
+        total = (total - DELTA) & MASK
+    return v0, v1
+
+plain_words = xtea_decrypt(*TARGET_WORDS)
+input_key = b"".join(w.to_bytes(4, "little") for w in plain_words)
+print("XTEA target words:", [f"0x{x:08x}" for x in TARGET_WORDS])
+print("XTEA recovered input words:", [f"0x{x:08x}" for x in plain_words])
+print("First-level input bytes:", input_key.hex(), repr(input_key))
+print("Forward XTEA verification:", [f"0x{x:08x}" for x in xtea_encrypt(*plain_words)])
+assert xtea_encrypt(*plain_words) == tuple(TARGET_WORDS)
+assert len(TABLE_TARGET) == 64
+
+# Reproduce the second-level RC4-like transformation seen in the binary.
+state = list(range(256))
+key_schedule = [input_key[i % len(input_key)] for i in range(256)]
+j = 0
+for i in range(256):
+    j = (j + state[i] + key_schedule[i]) & 0xff
+    state[i], state[j] = state[j], state[i]
+i = 0
+j = 0
+stream = []
+for _ in range(64):
+    i = (i + 1) & 0xff
+    j = (j + state[i]) & 0xff
+    state[i], state[j] = state[j], state[i]
+    stream.append(state[(state[i] + state[j]) & 0xff])
+raw_table = bytes((cipher - ks) & 0xff for cipher, ks in zip(TABLE_TARGET, stream))
+forward_table = bytes((plain + ks) & 0xff for plain, ks in zip(raw_table, stream))
+print("RC4-like keystream:", bytes(stream).hex())
+print("Recovered 64-byte raw table hex:", raw_table.hex())
+print("Recovered raw table repr:", repr(raw_table))
+print("Recovered raw table ASCII:", raw_table.decode("ascii", errors="backslashreplace"))
+print("All raw table bytes printable ASCII:", all(0x21 <= c <= 0x7e for c in raw_table))
+print("Raw table byte uniqueness:", len(set(raw_table)), "distinct values of", len(raw_table))
+print("RC4-like forward verification exact:", forward_table == TABLE_TARGET)
+assert forward_table == TABLE_TARGET
+
+alphabet = raw_table[1:33]
+print("Base32 alphabet used by code (raw_table[1:33]):", repr(alphabet))
+print("Alphabet length and uniqueness:", len(alphabet), len(set(alphabet)))
+assert len(alphabet) == 32
+assert len(set(alphabet)) == 32
+
+def decode_base32_custom(encoded, alpha):
+    inverse = {ch: i for i, ch in enumerate(alpha)}
+    if any(ord(ch) not in inverse for ch in encoded):
+        raise ValueError("encoded target contains symbol outside recovered alphabet")
+    out = bytearray()
+    groups = [encoded[k:k+8] for k in range(0, len(encoded), 8)]
+    for group in groups:
+        if len(group) != 8:
+            raise ValueError("incomplete Base32 group")
+        value = 0
+        for ch in group:
+            value = (value << 5) | inverse[ord(ch)]
+        out.extend(value.to_bytes(5, "big"))
+    return bytes(out)
+
+decoded = decode_base32_custom(ENCODED_TARGET, alphabet)
+print("Encoded target length:", len(ENCODED_TARGET))
+print("Decoded full target bytes length:", len(decoded))
+print("Decoded full target bytes hex:", decoded.hex())
+print("Decoded full target bytes repr:", repr(decoded))
+print("Decoded visible ASCII:", decoded.decode("ascii", errors="backslashreplace"))
+print("Decoded minus final zero (if present):", repr(decoded[:-1]) if decoded.endswith(b"\x00") else "final byte is nonzero")
+print("Encoded first 30 symbols (actual comparator length):", ENCODED_TARGET[:30])
+print("Flag-format check:", decoded.startswith(b"flag{") and b"}" in decoded)
+SCRIPT SOURCE END
+COMMAND: Get-FileHash solve_base_offline.py -Algorithm SHA256
+
+Algorithm : SHA256
+Hash      : FD43986526C2424F1CB20789F24C4E8F66CBEF64DB3F933D9F09B4ADF6FCB182
+Path      : C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\Base_543\solve_base_offline.py
+
+COMMAND: wsl --exec /usr/bin/python3 <solve_base_offline.py>
+NATIVE_EXIT=0
+**********************
+PowerShell transcript end
+End time: 20260927202529
+**********************
+**********************
+PowerShell transcript start
+Start time: 20260927202634
+Username: DESKTOP-412KTAR\mzj
+RunAs User: DESKTOP-412KTAR\mzj
+Configuration Name: 
+Machine: DESKTOP-412KTAR (Microsoft Windows NT 10.0.26200.0)
+Host Application: C:\Users\mzj\.cache\codex-runtimes\codex-primary-runtime\dependencies\native\powershell\pwsh.dll -NoProfile -Command try { [Console]::OutputEncoding=[System.Text.Encoding]::UTF8 } catch {}
+$ErrorActionPreference='Continue'
+Start-Transcript -LiteralPath 'C:\Users\mzj\Desktop\CTF\玄机刷题\记录\代理-base-终端记录.txt' -Append
+$scriptPath='C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\Base_543\solve_base_offline.py'
+$append=@'
+
+def encode_base32_custom(data, alpha):
+    out = []
+    for offset in range(0, len(data), 5):
+        chunk = data[offset:offset+5].ljust(5, b"\x00")
+        value = int.from_bytes(chunk, "big")
+        for shift in (35, 30, 25, 20, 15, 10, 5, 0):
+            out.append(alpha[(value >> shift) & 0x1f])
+    return bytes(out).decode("ascii")
+
+forward_encoded = encode_base32_custom(decoded, alphabet)
+print("Recovered candidate flag length:", len(decoded))
+print("Recovered candidate flag:", decoded.decode("ascii"))
+print("Base32 forward encoding:", forward_encoded)
+print("Full 48-symbol forward round-trip exact:", forward_encoded == ENCODED_TARGET)
+assert forward_encoded == ENCODED_TARGET
+'@
+Write-Output 'COMMAND: append a full Base32 forward-round-trip validator to solve_base_offline.py'
+Write-Output 'APPENDED SOURCE BEGIN'
+Write-Output $append
+Write-Output 'APPENDED SOURCE END'
+Add-Content -LiteralPath $scriptPath -Value $append -Encoding utf8
+Write-Output 'COMMAND: Get-FileHash solve_base_offline.py -Algorithm SHA256'
+Get-FileHash -LiteralPath $scriptPath -Algorithm SHA256 | Format-List
+Write-Output 'COMMAND: wsl --exec /usr/bin/python3 <solve_base_offline.py>'
+wsl --exec /usr/bin/python3 '/mnt/c/Users/mzj/Desktop/CTF/玄机刷题/题目资料/Base_543/solve_base_offline.py' 2>&1
+Write-Output "NATIVE_EXIT=$LASTEXITCODE"
+Write-Output 'JUDGMENT: full 48-symbol target round-trips under the recovered alphabet. The recovered 30-byte printable flag is a strong static candidate. This does not constitute execution of the supplied EXE; main statically shows scanf %29s and a 30-byte comparator, so local acceptance width is inconsistent with this 30-character candidate.'
+Stop-Transcript
+Process ID: 18372
+PSVersion: 7.6.5
+PSEdition: Core
+GitCommitId: 7.6.5
+OS: Microsoft Windows 10.0.26200
+Platform: Win32NT
+PSCompatibleVersions: 1.0, 2.0, 3.0, 4.0, 5.0, 5.1, 6.0, 7.0
+PSRemotingProtocolVersion: 2.4
+SerializationVersion: 1.1.0.1
+WSManStackVersion: 3.0
+**********************
+Transcript started, output file is C:\Users\mzj\Desktop\CTF\玄机刷题\记录\代理-base-终端记录.txt
+COMMAND: append a full Base32 forward-round-trip validator to solve_base_offline.py
+APPENDED SOURCE BEGIN
+
+def encode_base32_custom(data, alpha):
+    out = []
+    for offset in range(0, len(data), 5):
+        chunk = data[offset:offset+5].ljust(5, b"\x00")
+        value = int.from_bytes(chunk, "big")
+        for shift in (35, 30, 25, 20, 15, 10, 5, 0):
+            out.append(alpha[(value >> shift) & 0x1f])
+    return bytes(out).decode("ascii")
+
+forward_encoded = encode_base32_custom(decoded, alphabet)
+print("Recovered candidate flag length:", len(decoded))
+print("Recovered candidate flag:", decoded.decode("ascii"))
+print("Base32 forward encoding:", forward_encoded)
+print("Full 48-symbol forward round-trip exact:", forward_encoded == ENCODED_TARGET)
+assert forward_encoded == ENCODED_TARGET
+APPENDED SOURCE END
+COMMAND: Get-FileHash solve_base_offline.py -Algorithm SHA256
+
+Algorithm : SHA256
+Hash      : 4A6B2E80746DC25B3E0B987D4AE90989E2D06A5CCF0CF895BF9E3857A82C1AA9
+Path      : C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\Base_543\solve_base_offline.py
+
+COMMAND: wsl --exec /usr/bin/python3 <solve_base_offline.py>
+NATIVE_EXIT=0
+JUDGMENT: full 48-symbol target round-trips under the recovered alphabet. The recovered 30-byte printable flag is a strong static candidate. This does not constitute execution of the supplied EXE; main statically shows scanf %29s and a 30-byte comparator, so local acceptance width is inconsistent with this 30-character candidate.
+**********************
+PowerShell transcript end
+End time: 20260927202651
+**********************
+**********************
+PowerShell transcript start
+Start time: 20260927202931
+Username: DESKTOP-412KTAR\mzj
+RunAs User: DESKTOP-412KTAR\mzj
+Configuration Name: 
+Machine: DESKTOP-412KTAR (Microsoft Windows NT 10.0.26200.0)
+Host Application: C:\Users\mzj\.cache\codex-runtimes\codex-primary-runtime\dependencies\native\powershell\pwsh.dll -NoProfile -Command try { [Console]::OutputEncoding=[System.Text.Encoding]::UTF8 } catch {}
+$ErrorActionPreference='Continue'
+Start-Transcript -LiteralPath 'C:\Users\mzj\Desktop\CTF\玄机刷题\记录\代理-base-终端记录.txt' -Append
+$scriptPath='C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\Base_543\solve_base_offline.py'
+$append=@'
+
+candidate = decoded
+candidate_truncated_by_scanf = candidate[:29]
+truncated_encoding = encode_base32_custom(candidate_truncated_by_scanf, alphabet)
+print("Static candidate as 30 bytes:", repr(candidate), "length=", len(candidate))
+print("Candidate after scanf %29s width:", repr(candidate_truncated_by_scanf), "length=", len(candidate_truncated_by_scanf))
+print("Candidate full output prefix 30:", encode_base32_custom(candidate, alphabet)[:30])
+print("Truncated input output prefix 30:", truncated_encoding[:30])
+print("Does the executable's 30-symbol comparison accept the width-truncated candidate prefix:",
+      truncated_encoding[:30] == ENCODED_TARGET[:30])
+'@
+Write-Output 'COMMAND: append a local-only test of scanf width and 30-symbol comparison'
+Write-Output 'APPENDED SOURCE BEGIN'
+Write-Output $append
+Write-Output 'APPENDED SOURCE END'
+Add-Content -LiteralPath $scriptPath -Value $append -Encoding utf8
+Write-Output 'COMMAND: wsl --exec /usr/bin/python3 <solve_base_offline.py>'
+wsl --exec /usr/bin/python3 '/mnt/c/Users/mzj/Desktop/CTF/玄机刷题/题目资料/Base_543/solve_base_offline.py' 2>&1
+Write-Output "NATIVE_EXIT=$LASTEXITCODE"
+Write-Output 'PARENT-REPORTED EXTERNAL ACTION (not performed by this subagent): parent submitted the statically recovered candidate flag{y0u__rea11y__k1ow__Base!} to Xuanji challenge #543. Parent reports the platform response was FLAG incorrect and progress remained 0/1. No guessed retry was performed by this subagent.'
+Write-Output 'JUDGMENT: the full 48-character target round-trips exactly; the first 30 symbols also match after local scanf width truncates this 30-byte flag to 29 bytes because the comparator checks only 30 encoded symbols. This explains a local input-width bug but does not prove a different platform flag. No alternate flag is supported by this offline attachment; remote rejection remains unresolved pending confirmation that archive/build matches the challenge instance.'
+Write-Output 'COMMAND: Get-FileHash source executable and original RAR are rechecked below'
+Get-FileHash -LiteralPath 'C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\Base_543\solve_base_offline.py','C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\Base_543\你知道Base么\你知道Base么.exe','D:\Downloads\你知道Base么-20250521104202-am92t17.rar' -Algorithm SHA256 | Format-List
+Stop-Transcript
+Process ID: 25908
+PSVersion: 7.6.5
+PSEdition: Core
+GitCommitId: 7.6.5
+OS: Microsoft Windows 10.0.26200
+Platform: Win32NT
+PSCompatibleVersions: 1.0, 2.0, 3.0, 4.0, 5.0, 5.1, 6.0, 7.0
+PSRemotingProtocolVersion: 2.4
+SerializationVersion: 1.1.0.1
+WSManStackVersion: 3.0
+**********************
+Transcript started, output file is C:\Users\mzj\Desktop\CTF\玄机刷题\记录\代理-base-终端记录.txt
+COMMAND: append a local-only test of scanf width and 30-symbol comparison
+APPENDED SOURCE BEGIN
+
+candidate = decoded
+candidate_truncated_by_scanf = candidate[:29]
+truncated_encoding = encode_base32_custom(candidate_truncated_by_scanf, alphabet)
+print("Static candidate as 30 bytes:", repr(candidate), "length=", len(candidate))
+print("Candidate after scanf %29s width:", repr(candidate_truncated_by_scanf), "length=", len(candidate_truncated_by_scanf))
+print("Candidate full output prefix 30:", encode_base32_custom(candidate, alphabet)[:30])
+print("Truncated input output prefix 30:", truncated_encoding[:30])
+print("Does the executable's 30-symbol comparison accept the width-truncated candidate prefix:",
+      truncated_encoding[:30] == ENCODED_TARGET[:30])
+APPENDED SOURCE END
+COMMAND: wsl --exec /usr/bin/python3 <solve_base_offline.py>
+NATIVE_EXIT=0
+PARENT-REPORTED EXTERNAL ACTION (not performed by this subagent): parent submitted the statically recovered candidate flag{y0u__rea11y__k1ow__Base!} to Xuanji challenge #543. Parent reports the platform response was FLAG incorrect and progress remained 0/1. No guessed retry was performed by this subagent.
+JUDGMENT: the full 48-character target round-trips exactly; the first 30 symbols also match after local scanf width truncates this 30-byte flag to 29 bytes because the comparator checks only 30 encoded symbols. This explains a local input-width bug but does not prove a different platform flag. No alternate flag is supported by this offline attachment; remote rejection remains unresolved pending confirmation that archive/build matches the challenge instance.
+COMMAND: Get-FileHash source executable and original RAR are rechecked below
+
+Algorithm : SHA256
+Hash      : 12AB4119475EFC9EBFECED24A6445EF49F6BD3105A7407769431FB9B33A557B5
+Path      : C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\Base_543\solve_base_offline.py
+
+Algorithm : SHA256
+Hash      : EF7DEACF6594E9353E934564B38761E8AAF614EBF39DCB17EFED36263DF2C773
+Path      : C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\Base_543\你知道Base么\你知道Base么.exe
+
+Algorithm : SHA256
+Hash      : 3FEC5E1930230660DCABDF0F31F4D97F8BB980D67306242D48A4377B74590801
+Path      : D:\Downloads\你知道Base么-20250521104202-am92t17.rar
+
+**********************
+PowerShell transcript end
+End time: 20260927202951
+**********************

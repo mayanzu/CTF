@@ -1,0 +1,14 @@
+# 第1章 Windows 侧环境验证
+PS C:\Users\mzj\Desktop\CTF\CTF-training-problem-first-full> python --version
+Python 3.12.10
+
+PS C:\Users\mzj\Desktop\CTF\CTF-training-problem-first-full> python -c 'print(''hello, Crypto!''); print(2+3)'
+hello, Crypto!
+5
+
+PS C:\Users\mzj\Desktop\CTF\CTF-training-problem-first-full> Get-ChildItem labs/crypto | Select-Object Name, Length
+Name               Length
+----               ------
+make_challenges.py    492
+rsa.txt               158
+xor.hex                46

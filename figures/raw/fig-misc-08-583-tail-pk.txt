@@ -1,0 +1,32 @@
+mzj@Ubuntu-24.04:~$ file labs/platform/attachments/583-pixel-cage/challenge.png
+labs/platform/attachments/583-pixel-cage/challenge.png: PNG image data, 512 x 512, 8-bit/color RGB, non-interlaced
+
+mzj@Ubuntu-24.04:~$ python3 - <<'PY'
+from pathlib import Path
+data = Path('labs/platform/attachments/583-pixel-cage/challenge.png').read_bytes()
+off = 8
+while off < len(data):
+    ln = int.from_bytes(data[off:off+4], 'big')
+    kind = data[off+4:off+8]
+    print(f'偏移 {off:>4}  类型 {kind.decode()}  长度 {ln}')
+    off += 12 + ln
+    if kind == b'IEND':
+        break
+print('PNG 正常块结束于偏移', off, '；文件实际大小', len(data), '字节')
+print('尾部多出', len(data) - off, '字节，其开头十六进制是',
+      data[off:off+4].hex(' '), '（ASCII: PK..）')
+PY
+偏移    8  类型 IHDR  长度 13
+偏移   33  类型 IDAT  长度 4899
+偏移 4944  类型 IEND  长度 0
+PNG 正常块结束于偏移 4956 ；文件实际大小 5187 字节
+尾部多出 231 字节，其开头十六进制是 50 4b 03 04 （ASCII: PK..）
+
+mzj@Ubuntu-24.04:~$ xxd -s 4944 -l 112 labs/platform/attachments/583-pixel-cage/challenge.png
+00001350: 0000 0000 4945 4e44 ae42 6082 504b 0304  ....IEND.B`.PK..
+00001360: 1400 0100 0800 e354 8d5c 19b6 139d 7100  .......T.\....q.
+00001370: 0000 7100 0000 0a00 0000 7365 6372 6574  ..q.......secret
+00001380: 2e74 7874 0dc8 b10e c220 1000 d09d af38  .txt..... .....8
+00001390: 7fc0 54b4 8b89 93b6 7601 1612 031b b1a7  ..T.....v.......
+000013a0: 602c 971c 10eb dfeb 1bdf 99f2 9343 6def  `,...........Cm.
+000013b0: 5013 e5b2 0147 0d1e d4f2 0c35 2214 bc33  P....G.....5"..3

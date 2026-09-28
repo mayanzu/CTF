@@ -1,0 +1,7 @@
+mzj@Ubuntu-24.04:~$ cd ~/pwn-lab && python3 -c "import struct;b=struct.pack('<Q',0x401190);print(b.hex());print(list(b));print(len(b))"
+9011400000000000
+[144, 17, 64, 0, 0, 0, 0, 0]
+8
+
+mzj@Ubuntu-24.04:~$ cd ~/pwn-lab && python3 -c "import struct;print(struct.unpack('<Q',struct.pack('<Q',0x401190)))"
+(4198800,)

@@ -1,0 +1,6 @@
+# 第5章 题 C1：首字节反推密钥与反向异或核对
+PS C:\Users\mzj\Desktop\CTF\CTF-training-problem-first-full> python -c 'data=bytes.fromhex(open(''labs/crypto/xor.hex'').read().strip()); k=data[0]^ord(''f''); print(''由首字节 f 反推密钥:'', hex(k)); plain=bytes(x^k for x in data); print(''明文:'', plain.decode()); back=bytes(x^k for x in plain); print(''明文再异或得到的十六进制:'', back.hex()); print(''与原密文一致:'', back.hex()==open(''labs/crypto/xor.hex'').read().strip())'
+由首字节 f 反推密钥: 0x37
+明文: flag{xor_is_not_magic}
+明文再异或得到的十六进制: 515b56504c4f5845685e4468595843685a56505e544a
+与原密文一致: True

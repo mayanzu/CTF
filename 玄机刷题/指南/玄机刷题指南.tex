@@ -1,0 +1,39 @@
+% !TeX program = xelatex
+% 玄机平台 CTF 刷题指南 —— 主文件
+%   样式：玄机刷题指南_样式.tex
+%   正文：玄机刷题指南_正文.tex（由 玄机刷题指南_合并源.md 经 pandoc 生成）
+%   构建：build.ps1（pandoc + 后处理 + xelatex ×2）
+\documentclass[UTF8,11pt,oneside,openany]{ctexbook}
+
+\input{玄机刷题指南_样式}
+
+% pandoc 生成正文所需的表格、链接支持
+\usepackage{longtable,booktabs,array,calc}
+\usepackage{hyperref}
+
+% pandoc 输出的辅助宏
+\providecommand{\tightlist}{%
+  \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
+\providecommand{\pandocbounded}[1]{#1}
+\providecommand{\real}[1]{#1}
+
+\hypersetup{
+  pdftitle={玄机平台 CTF 刷题指南},
+  pdfauthor={解题过程记录与完整 Writeup},
+  pdfsubject={CTF Writeup / 解题思路},
+  pdfkeywords={CTF, 玄机平台, Writeup, MISC, REVERSE, Crypto, AI},
+  pdfcreator={XeLaTeX},
+}
+
+% 说明：长行内代码（SHA-256 哈希、十六进制串、路径）的可断行处理由
+% build.ps1 的后处理步骤完成——对 \texttt{} 中不含反斜杠/花括号的纯文本
+% 内容套一层 \seqsplit，这样既不会溢出页边界，也不会把 \texttt 内的
+% LaTeX 转义命令（\^ 、\_ 、\{ 等）从其参数上拆开。
+
+\begin{document}
+
+\maketitle
+\tableofcontents
+\input{玄机刷题指南_正文}
+
+\end{document}

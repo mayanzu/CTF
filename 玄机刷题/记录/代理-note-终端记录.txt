@@ -1,0 +1,1185 @@
+**********************
+PowerShell transcript start
+Start time: 20260927190347
+Username: DESKTOP-412KTAR\mzj
+RunAs User: DESKTOP-412KTAR\mzj
+Configuration Name: 
+Machine: DESKTOP-412KTAR (Microsoft Windows NT 10.0.26200.0)
+Host Application: C:\Users\mzj\.cache\codex-runtimes\codex-primary-runtime\dependencies\native\powershell\pwsh.dll -Command try { [Console]::OutputEncoding=[System.Text.Encoding]::UTF8 } catch {}
+$ErrorActionPreference = 'Continue'
+$log = 'C:\Users\mzj\Desktop\CTF\玄机刷题\记录\代理-note-终端记录.txt'
+Start-Transcript -LiteralPath $log -Append
+$source = 'D:\Downloads\note.zip'
+$work = 'C:\Users\mzj\Desktop\CTF\玄机刷题\工作区\note_563'
+Write-Output '=== 环境与来源检查 ==='
+Get-Location
+Get-Item -LiteralPath $source | Format-List FullName,Length,LastWriteTime
+Write-Output '=== 建立专属分析目录 ==='
+if (-not (Test-Path -LiteralPath $work)) { New-Item -ItemType Directory -Path $work | Format-List FullName,CreationTime } else { Get-Item -LiteralPath $work | Format-List FullName,CreationTime }
+Write-Output '=== 压缩包目录清单（不解压、不修改原件） ==='
+Add-Type -AssemblyName System.IO.Compression.FileSystem
+[System.IO.Compression.ZipFile]::OpenRead($source).Entries | Select-Object FullName,Length,CompressedLength | Format-Table -AutoSize
+Stop-Transcript
+Process ID: 23936
+PSVersion: 7.6.5
+PSEdition: Core
+GitCommitId: 7.6.5
+OS: Microsoft Windows 10.0.26200
+Platform: Win32NT
+PSCompatibleVersions: 1.0, 2.0, 3.0, 4.0, 5.0, 5.1, 6.0, 7.0
+PSRemotingProtocolVersion: 2.4
+SerializationVersion: 1.1.0.1
+WSManStackVersion: 3.0
+**********************
+Transcript started, output file is C:\Users\mzj\Desktop\CTF\玄机刷题\记录\代理-note-终端记录.txt
+=== 环境与来源检查 ===
+
+Path
+----
+C:\Users\mzj\Desktop\CTF
+
+
+FullName      : D:\Downloads\note.zip
+Length        : 5832
+LastWriteTime : 2026/9/27 18:57:46
+
+=== 建立专属分析目录 ===
+
+FullName     : C:\Users\mzj\Desktop\CTF\玄机刷题\工作区\note_563
+CreationTime : 2026/9/27 19:03:47
+
+=== 压缩包目录清单（不解压、不修改原件） ===
+
+FullName Length CompressedLength
+-------- ------ ----------------
+note       6360             5654
+
+**********************
+PowerShell transcript end
+End time: 20260927190347
+**********************
+**********************
+PowerShell transcript start
+Start time: 20260927190358
+Username: DESKTOP-412KTAR\mzj
+RunAs User: DESKTOP-412KTAR\mzj
+Configuration Name: 
+Machine: DESKTOP-412KTAR (Microsoft Windows NT 10.0.26200.0)
+Host Application: C:\Users\mzj\.cache\codex-runtimes\codex-primary-runtime\dependencies\native\powershell\pwsh.dll -Command try { [Console]::OutputEncoding=[System.Text.Encoding]::UTF8 } catch {}
+$ErrorActionPreference = 'Continue'
+$log = 'C:\Users\mzj\Desktop\CTF\玄机刷题\记录\代理-note-终端记录.txt'
+Start-Transcript -LiteralPath $log -Append
+$source = 'D:\Downloads\note.zip'
+$work = 'C:\Users\mzj\Desktop\CTF\玄机刷题\工作区\note_563'
+Write-Output '=== 解压副本到专属工作目录 ==='
+Expand-Archive -LiteralPath $source -DestinationPath $work -Force
+Get-ChildItem -LiteralPath $work -Recurse -File | Select-Object FullName,Length,LastWriteTime | Format-Table -AutoSize
+Write-Output '=== 文件哈希 ==='
+Get-FileHash -LiteralPath (Join-Path $work 'note') -Algorithm SHA256 | Format-List
+Write-Output '=== 文件前 128 字节 ==='
+Format-Hex -LiteralPath (Join-Path $work 'note') | Select-Object -First 9
+Write-Output '=== 文本读取尝试 ==='
+Get-Content -LiteralPath (Join-Path $work 'note') -TotalCount 60
+Stop-Transcript
+Process ID: 17840
+PSVersion: 7.6.5
+PSEdition: Core
+GitCommitId: 7.6.5
+OS: Microsoft Windows 10.0.26200
+Platform: Win32NT
+PSCompatibleVersions: 1.0, 2.0, 3.0, 4.0, 5.0, 5.1, 6.0, 7.0
+PSRemotingProtocolVersion: 2.4
+SerializationVersion: 1.1.0.1
+WSManStackVersion: 3.0
+**********************
+Transcript started, output file is C:\Users\mzj\Desktop\CTF\玄机刷题\记录\代理-note-终端记录.txt
+=== 解压副本到专属工作目录 ===
+
+FullName                                               Length LastWriteTime
+--------                                               ------ -------------
+C:\Users\mzj\Desktop\CTF\玄机刷题\工作区\note_563\note   6360 2026/7/25 21:06:56
+
+=== 文件哈希 ===
+
+Algorithm : SHA256
+Hash      : D7A2FD4096C6D108C45869E2F8480E85A25FA8414D030629D2E7E402AF628C92
+Path      : C:\Users\mzj\Desktop\CTF\玄机刷题\工作区\note_563\note
+
+=== 文件前 128 字节 ===
+
+**********************
+PowerShell transcript end
+End time: 20260927190359
+**********************
+**********************
+PowerShell transcript start
+Start time: 20260927190414
+Username: DESKTOP-412KTAR\mzj
+RunAs User: DESKTOP-412KTAR\mzj
+Configuration Name: 
+Machine: DESKTOP-412KTAR (Microsoft Windows NT 10.0.26200.0)
+Host Application: C:\Users\mzj\.cache\codex-runtimes\codex-primary-runtime\dependencies\native\powershell\pwsh.dll -Command try { [Console]::OutputEncoding=[System.Text.Encoding]::UTF8 } catch {}
+$ErrorActionPreference = 'Continue'
+Start-Transcript -LiteralPath 'C:\Users\mzj\Desktop\CTF\玄机刷题\记录\代理-note-终端记录.txt' -Append
+Write-Output '=== 可用静态分析工具检查 ==='
+Get-Command wsl,upx,7z,7za,llvm-objdump,objdump,strings,python,py -ErrorAction SilentlyContinue | Select-Object Name,Source,CommandType | Format-Table -AutoSize
+Write-Output '=== WSL 信息（仅检查，不执行附件） ==='
+wsl --status
+Stop-Transcript
+Process ID: 21128
+PSVersion: 7.6.5
+PSEdition: Core
+GitCommitId: 7.6.5
+OS: Microsoft Windows 10.0.26200
+Platform: Win32NT
+PSCompatibleVersions: 1.0, 2.0, 3.0, 4.0, 5.0, 5.1, 6.0, 7.0
+PSRemotingProtocolVersion: 2.4
+SerializationVersion: 1.1.0.1
+WSManStackVersion: 3.0
+**********************
+Transcript started, output file is C:\Users\mzj\Desktop\CTF\玄机刷题\记录\代理-note-终端记录.txt
+=== 可用静态分析工具检查 ===
+
+Name        Source                                                          CommandType
+----        ------                                                          -----------
+wsl.exe     C:\WINDOWS\system32\wsl.exe                                     Application
+objdump.exe C:\msys64\mingw64\bin\objdump.exe                               Application
+strings.exe C:\msys64\mingw64\bin\strings.exe                               Application
+python.exe  C:\Users\mzj\AppData\Local\Programs\Python\Python312\python.exe Application
+py.exe      C:\WINDOWS\py.exe                                               Application
+
+=== WSL 信息（仅检查，不执行附件） ===
+
+**********************
+PowerShell transcript end
+End time: 20260927190416
+**********************
+**********************
+PowerShell transcript start
+Start time: 20260927190427
+Username: DESKTOP-412KTAR\mzj
+RunAs User: DESKTOP-412KTAR\mzj
+Configuration Name: 
+Machine: DESKTOP-412KTAR (Microsoft Windows NT 10.0.26200.0)
+Host Application: C:\Users\mzj\.cache\codex-runtimes\codex-primary-runtime\dependencies\native\powershell\pwsh.dll -Command try { [Console]::OutputEncoding=[System.Text.Encoding]::UTF8 } catch {}
+$ErrorActionPreference = 'Continue'
+Start-Transcript -LiteralPath 'C:\Users\mzj\Desktop\CTF\玄机刷题\记录\代理-note-终端记录.txt' -Append
+Write-Output '=== WSL 静态工具可用性 ==='
+wsl --exec bash -lc 'command -v file; command -v upx; command -v readelf; command -v objdump; command -v strings; command -v xxd; command -v gcc; command -v python3'
+Write-Output '=== Windows objdump ELF 识别 ==='
+& 'C:\msys64\mingw64\bin\objdump.exe' -f 'C:\Users\mzj\Desktop\CTF\玄机刷题\工作区\note_563\note'
+Stop-Transcript
+Process ID: 11764
+PSVersion: 7.6.5
+PSEdition: Core
+GitCommitId: 7.6.5
+OS: Microsoft Windows 10.0.26200
+Platform: Win32NT
+PSCompatibleVersions: 1.0, 2.0, 3.0, 4.0, 5.0, 5.1, 6.0, 7.0
+PSRemotingProtocolVersion: 2.4
+SerializationVersion: 1.1.0.1
+WSManStackVersion: 3.0
+**********************
+Transcript started, output file is C:\Users\mzj\Desktop\CTF\玄机刷题\记录\代理-note-终端记录.txt
+=== WSL 静态工具可用性 ===
+
+=== Windows objdump ELF 识别 ===
+
+**********************
+PowerShell transcript end
+End time: 20260927190442
+**********************
+**********************
+PowerShell transcript start
+Start time: 20260927190453
+Username: DESKTOP-412KTAR\mzj
+RunAs User: DESKTOP-412KTAR\mzj
+Configuration Name: 
+Machine: DESKTOP-412KTAR (Microsoft Windows NT 10.0.26200.0)
+Host Application: C:\Users\mzj\.cache\codex-runtimes\codex-primary-runtime\dependencies\native\powershell\pwsh.dll -Command try { [Console]::OutputEncoding=[System.Text.Encoding]::UTF8 } catch {}
+$ErrorActionPreference = 'Continue'
+Start-Transcript -LiteralPath 'C:\Users\mzj\Desktop\CTF\玄机刷题\记录\代理-note-终端记录.txt' -Append
+Write-Output '=== 检查 WSL 静态探测进程状态 ==='
+Get-Process wsl,wslhost,bash -ErrorAction SilentlyContinue | Select-Object Name,Id,CPU,StartTime | Format-Table -AutoSize
+Write-Output '=== WSL 发行版列表 ==='
+wsl --list --verbose
+Stop-Transcript
+Process ID: 19364
+PSVersion: 7.6.5
+PSEdition: Core
+GitCommitId: 7.6.5
+OS: Microsoft Windows 10.0.26200
+Platform: Win32NT
+PSCompatibleVersions: 1.0, 2.0, 3.0, 4.0, 5.0, 5.1, 6.0, 7.0
+PSRemotingProtocolVersion: 2.4
+SerializationVersion: 1.1.0.1
+WSManStackVersion: 3.0
+**********************
+Transcript started, output file is C:\Users\mzj\Desktop\CTF\玄机刷题\记录\代理-note-终端记录.txt
+=== 检查 WSL 静态探测进程状态 ===
+
+Name       Id  CPU StartTime
+----       --  --- ---------
+wslhost  7392 0.05 2026/9/27 19:04:27
+wslhost 19792 0.03 2026/9/27 19:04:28
+
+=== WSL 发行版列表 ===
+
+**********************
+PowerShell transcript end
+End time: 20260927190453
+**********************
+**********************
+PowerShell transcript start
+Start time: 20260927190512
+Username: DESKTOP-412KTAR\mzj
+RunAs User: DESKTOP-412KTAR\mzj
+Configuration Name: 
+Machine: DESKTOP-412KTAR (Microsoft Windows NT 10.0.26200.0)
+Host Application: C:\Users\mzj\.cache\codex-runtimes\codex-primary-runtime\dependencies\native\powershell\pwsh.dll -Command try { [Console]::OutputEncoding=[System.Text.Encoding]::UTF8 } catch {}
+$ErrorActionPreference = 'Continue'
+Start-Transcript -LiteralPath 'C:\Users\mzj\Desktop\CTF\玄机刷题\记录\代理-note-终端记录.txt' -Append
+$file = 'C:\Users\mzj\Desktop\CTF\玄机刷题\工作区\note_563\note'
+Write-Output '=== objdump ELF headers ==='
+& 'C:\msys64\mingw64\bin\objdump.exe' -h $file
+Write-Output '=== objdump ELF program headers / imports ==='
+& 'C:\msys64\mingw64\bin\objdump.exe' -p $file
+Write-Output '=== printable strings ==='
+& 'C:\msys64\mingw64\bin\strings.exe' -a -n 4 $file
+Stop-Transcript
+Process ID: 18596
+PSVersion: 7.6.5
+PSEdition: Core
+GitCommitId: 7.6.5
+OS: Microsoft Windows 10.0.26200
+Platform: Win32NT
+PSCompatibleVersions: 1.0, 2.0, 3.0, 4.0, 5.0, 5.1, 6.0, 7.0
+PSRemotingProtocolVersion: 2.4
+SerializationVersion: 1.1.0.1
+WSManStackVersion: 3.0
+**********************
+Transcript started, output file is C:\Users\mzj\Desktop\CTF\玄机刷题\记录\代理-note-终端记录.txt
+=== objdump ELF headers ===
+
+=== objdump ELF program headers / imports ===
+
+=== printable strings ===
+
+**********************
+PowerShell transcript end
+End time: 20260927190512
+**********************
+**********************
+PowerShell transcript start
+Start time: 20260927190536
+Username: DESKTOP-412KTAR\mzj
+RunAs User: DESKTOP-412KTAR\mzj
+Configuration Name: 
+Machine: DESKTOP-412KTAR (Microsoft Windows NT 10.0.26200.0)
+Host Application: C:\Users\mzj\.cache\codex-runtimes\codex-primary-runtime\dependencies\native\powershell\pwsh.dll -Command try { [Console]::OutputEncoding=[System.Text.Encoding]::UTF8 } catch {}
+$ErrorActionPreference = 'Continue'
+Start-Transcript -LiteralPath 'C:\Users\mzj\Desktop\CTF\玄机刷题\记录\代理-note-终端记录.txt' -Append
+Write-Output '=== 直接检查 WSL 中的工具 ==='
+wsl --exec /usr/bin/printf 'WSL direct exec works\n'
+wsl --exec /usr/bin/which upx
+wsl --exec /usr/bin/which readelf
+wsl --exec /usr/bin/which objdump
+Stop-Transcript
+Process ID: 26712
+PSVersion: 7.6.5
+PSEdition: Core
+GitCommitId: 7.6.5
+OS: Microsoft Windows 10.0.26200
+Platform: Win32NT
+PSCompatibleVersions: 1.0, 2.0, 3.0, 4.0, 5.0, 5.1, 6.0, 7.0
+PSRemotingProtocolVersion: 2.4
+SerializationVersion: 1.1.0.1
+WSManStackVersion: 3.0
+**********************
+Transcript started, output file is C:\Users\mzj\Desktop\CTF\玄机刷题\记录\代理-note-终端记录.txt
+=== 直接检查 WSL 中的工具 ===
+
+
+
+
+**********************
+PowerShell transcript end
+End time: 20260927190553
+**********************
+**********************
+PowerShell transcript start
+Start time: 20260927190615
+Username: DESKTOP-412KTAR\mzj
+RunAs User: DESKTOP-412KTAR\mzj
+Configuration Name: 
+Machine: DESKTOP-412KTAR (Microsoft Windows NT 10.0.26200.0)
+Host Application: C:\Users\mzj\.cache\codex-runtimes\codex-primary-runtime\dependencies\native\powershell\pwsh.dll -Command try { [Console]::OutputEncoding=[System.Text.Encoding]::UTF8 } catch {}
+$ErrorActionPreference = 'Continue'
+Start-Transcript -LiteralPath 'C:\Users\mzj\Desktop\CTF\玄机刷题\记录\代理-note-终端记录.txt' -Append
+$file = 'C:\Users\mzj\Desktop\CTF\玄机刷题\工作区\note_563\note'
+$asciiCopy = 'C:\Users\mzj\Desktop\CTF\note_563_binary.tmp'
+Copy-Item -LiteralPath $file -Destination $asciiCopy -Force
+Write-Output '=== WSL ELF header ==='
+wsl --exec /usr/bin/readelf -h /mnt/c/Users/mzj/Desktop/CTF/note_563_binary.tmp
+Write-Output '=== WSL ELF sections ==='
+wsl --exec /usr/bin/readelf -S /mnt/c/Users/mzj/Desktop/CTF/note_563_binary.tmp
+Write-Output '=== WSL ELF program headers ==='
+wsl --exec /usr/bin/readelf -l /mnt/c/Users/mzj/Desktop/CTF/note_563_binary.tmp
+Write-Output '=== 本机 apt 缓存中 UPX 包情况（只读） ==='
+wsl --exec /usr/bin/apt-cache policy upx-ucl
+Stop-Transcript
+Process ID: 4928
+PSVersion: 7.6.5
+PSEdition: Core
+GitCommitId: 7.6.5
+OS: Microsoft Windows 10.0.26200
+Platform: Win32NT
+PSCompatibleVersions: 1.0, 2.0, 3.0, 4.0, 5.0, 5.1, 6.0, 7.0
+PSRemotingProtocolVersion: 2.4
+SerializationVersion: 1.1.0.1
+WSManStackVersion: 3.0
+**********************
+Transcript started, output file is C:\Users\mzj\Desktop\CTF\玄机刷题\记录\代理-note-终端记录.txt
+=== WSL ELF header ===
+
+=== WSL ELF sections ===
+
+=== WSL ELF program headers ===
+
+=== 本机 apt 缓存中 UPX 包情况（只读） ===
+
+**********************
+PowerShell transcript end
+End time: 20260927190632
+**********************
+**********************
+PowerShell transcript start
+Start time: 20260927190801
+Username: DESKTOP-412KTAR\mzj
+RunAs User: DESKTOP-412KTAR\mzj
+Configuration Name: 
+Machine: DESKTOP-412KTAR (Microsoft Windows NT 10.0.26200.0)
+Host Application: C:\Users\mzj\.cache\codex-runtimes\codex-primary-runtime\dependencies\native\powershell\pwsh.dll -Command try { [Console]::OutputEncoding=[System.Text.Encoding]::UTF8 } catch {}
+$ErrorActionPreference = 'Continue'
+Start-Transcript -LiteralPath 'C:\Users\mzj\Desktop\CTF\玄机刷题\记录\代理-note-终端记录.txt' -Append
+Write-Output '=== WSL 沙箱 / 调试 / UPX 离线工具探测 ==='
+wsl --exec /usr/bin/bash -c 'for x in bwrap unshare strace gdb qemu-x86_64 upx upx-ucl 7z; do command -v "$x" || true; done'
+Write-Output '=== WSL 安装包缓存文件（只读） ==='
+wsl --exec /usr/bin/bash -c 'ls -l /var/cache/apt/archives/upx* 2>&1'
+Write-Output '=== WSL 常见目录下名称匹配 upx 的文件（只读） ==='
+wsl --exec /usr/bin/find /usr/bin /usr/local/bin /opt -maxdepth 4 -iname '*upx*' -print
+Stop-Transcript
+Process ID: 10136
+PSVersion: 7.6.5
+PSEdition: Core
+GitCommitId: 7.6.5
+OS: Microsoft Windows 10.0.26200
+Platform: Win32NT
+PSCompatibleVersions: 1.0, 2.0, 3.0, 4.0, 5.0, 5.1, 6.0, 7.0
+PSRemotingProtocolVersion: 2.4
+SerializationVersion: 1.1.0.1
+WSManStackVersion: 3.0
+**********************
+Transcript started, output file is C:\Users\mzj\Desktop\CTF\玄机刷题\记录\代理-note-终端记录.txt
+=== WSL 沙箱 / 调试 / UPX 离线工具探测 ===
+
+=== WSL 安装包缓存文件（只读） ===
+
+=== WSL 常见目录下名称匹配 upx 的文件（只读） ===
+
+**********************
+PowerShell transcript end
+End time: 20260927190810
+**********************
+**********************
+PowerShell transcript start
+Start time: 20260927190846
+Username: DESKTOP-412KTAR\mzj
+RunAs User: DESKTOP-412KTAR\mzj
+Configuration Name: 
+Machine: DESKTOP-412KTAR (Microsoft Windows NT 10.0.26200.0)
+Host Application: C:\Users\mzj\.cache\codex-runtimes\codex-primary-runtime\dependencies\native\powershell\pwsh.dll -Command try { [Console]::OutputEncoding=[System.Text.Encoding]::UTF8 } catch {}
+$ErrorActionPreference = 'Continue'
+Start-Transcript -LiteralPath 'C:\Users\mzj\Desktop\CTF\玄机刷题\记录\代理-note-终端记录.txt' -Append
+Write-Output '=== 隔离环境可运行性检查（仅执行 id，不运行附件） ==='
+wsl --exec /usr/bin/bwrap --unshare-all --die-with-parent --ro-bind / / --tmpfs /tmp --chdir /tmp -- /usr/bin/id
+Stop-Transcript
+Process ID: 19392
+PSVersion: 7.6.5
+PSEdition: Core
+GitCommitId: 7.6.5
+OS: Microsoft Windows 10.0.26200
+Platform: Win32NT
+PSCompatibleVersions: 1.0, 2.0, 3.0, 4.0, 5.0, 5.1, 6.0, 7.0
+PSRemotingProtocolVersion: 2.4
+SerializationVersion: 1.1.0.1
+WSManStackVersion: 3.0
+**********************
+Transcript started, output file is C:\Users\mzj\Desktop\CTF\玄机刷题\记录\代理-note-终端记录.txt
+=== 隔离环境可运行性检查（仅执行 id，不运行附件） ===
+
+**********************
+PowerShell transcript end
+End time: 20260927190903
+**********************
+**********************
+PowerShell transcript start
+Start time: 20260927190913
+Username: DESKTOP-412KTAR\mzj
+RunAs User: DESKTOP-412KTAR\mzj
+Configuration Name: 
+Machine: DESKTOP-412KTAR (Microsoft Windows NT 10.0.26200.0)
+Host Application: C:\Users\mzj\.cache\codex-runtimes\codex-primary-runtime\dependencies\native\powershell\pwsh.dll -Command try { [Console]::OutputEncoding=[System.Text.Encoding]::UTF8 } catch {}
+$ErrorActionPreference = 'Continue'
+Start-Transcript -LiteralPath 'C:\Users\mzj\Desktop\CTF\玄机刷题\记录\代理-note-终端记录.txt' -Append
+Write-Output '=== 隔离执行 note，空 stdin，5 秒超时 ==='
+wsl --exec /usr/bin/timeout 5 /usr/bin/bwrap --unshare-all --die-with-parent --ro-bind / / --tmpfs /tmp --chdir /tmp -- /mnt/c/Users/mzj/Desktop/CTF/note_563_binary.tmp
+Write-Output "退出代码: $LASTEXITCODE"
+Stop-Transcript
+Process ID: 16160
+PSVersion: 7.6.5
+PSEdition: Core
+GitCommitId: 7.6.5
+OS: Microsoft Windows 10.0.26200
+Platform: Win32NT
+PSCompatibleVersions: 1.0, 2.0, 3.0, 4.0, 5.0, 5.1, 6.0, 7.0
+PSRemotingProtocolVersion: 2.4
+SerializationVersion: 1.1.0.1
+WSManStackVersion: 3.0
+**********************
+Transcript started, output file is C:\Users\mzj\Desktop\CTF\玄机刷题\记录\代理-note-终端记录.txt
+=== 隔离执行 note，空 stdin，5 秒超时 ===
+
+退出代码: 0
+**********************
+PowerShell transcript end
+End time: 20260927190913
+**********************
+**********************
+PowerShell transcript start
+Start time: 20260927191031
+Username: DESKTOP-412KTAR\mzj
+RunAs User: DESKTOP-412KTAR\mzj
+Configuration Name: 
+Machine: DESKTOP-412KTAR (Microsoft Windows NT 10.0.26200.0)
+Host Application: C:\Users\mzj\.cache\codex-runtimes\codex-primary-runtime\dependencies\native\powershell\pwsh.dll -Command try { [Console]::OutputEncoding=[System.Text.Encoding]::UTF8 } catch {}
+$ErrorActionPreference = 'Continue'
+Start-Transcript -LiteralPath 'C:\Users\mzj\Desktop\CTF\玄机刷题\记录\代理-note-终端记录.txt' -Append
+Write-Output 'PowerShell 输入: wsl --exec /usr/bin/python3 --version'
+wsl --exec /usr/bin/python3 --version
+Write-Output 'PowerShell 输入: wsl --exec /usr/bin/python3 -c "import importlib.util; print({n: bool(importlib.util.find_spec(n)) for n in [\"capstone\",\"unicorn\",\"ptrace\"]})"'
+wsl --exec /usr/bin/python3 -c 'import importlib.util; print({n: bool(importlib.util.find_spec(n)) for n in ["capstone","unicorn","ptrace"]})'
+Write-Output 'PowerShell 输入: wsl --exec /usr/bin/cat /proc/sys/kernel/yama/ptrace_scope'
+wsl --exec /usr/bin/cat /proc/sys/kernel/yama/ptrace_scope
+Stop-Transcript
+Process ID: 26916
+PSVersion: 7.6.5
+PSEdition: Core
+GitCommitId: 7.6.5
+OS: Microsoft Windows 10.0.26200
+Platform: Win32NT
+PSCompatibleVersions: 1.0, 2.0, 3.0, 4.0, 5.0, 5.1, 6.0, 7.0
+PSRemotingProtocolVersion: 2.4
+SerializationVersion: 1.1.0.1
+WSManStackVersion: 3.0
+**********************
+Transcript started, output file is C:\Users\mzj\Desktop\CTF\玄机刷题\记录\代理-note-终端记录.txt
+PowerShell 输入: wsl --exec /usr/bin/python3 --version
+
+PowerShell 输入: wsl --exec /usr/bin/python3 -c "import importlib.util; print({n: bool(importlib.util.find_spec(n)) for n in [\"capstone\",\"unicorn\",\"ptrace\"]})"
+
+PowerShell 输入: wsl --exec /usr/bin/cat /proc/sys/kernel/yama/ptrace_scope
+
+**********************
+PowerShell transcript end
+End time: 20260927191047
+**********************
+**********************
+PowerShell transcript start
+Start time: 20260927191211
+Username: DESKTOP-412KTAR\mzj
+RunAs User: DESKTOP-412KTAR\mzj
+Configuration Name: 
+Machine: DESKTOP-412KTAR (Microsoft Windows NT 10.0.26200.0)
+Host Application: C:\Users\mzj\.cache\codex-runtimes\codex-primary-runtime\dependencies\native\powershell\pwsh.dll -Command try { [Console]::OutputEncoding=[System.Text.Encoding]::UTF8 } catch {}
+$ErrorActionPreference = 'Continue'
+Start-Transcript -LiteralPath 'C:\Users\mzj\Desktop\CTF\玄机刷题\记录\代理-note-终端记录.txt' -Append
+$scriptPath = 'C:\Users\mzj\Desktop\CTF\玄机刷题\工作区\note_563\dump_runtime.py'
+@'
+import os, re, select, subprocess, time
+exe = '/mnt/c/Users/mzj/Desktop/CTF/note_563_binary.tmp'
+p = subprocess.Popen([exe], stdin=subprocess.PIPE, stdout=subprocess.PIPE, stderr=subprocess.STDOUT, bufsize=0)
+out = bytearray()
+deadline = time.time() + 4
+while time.time() < deadline:
+    ready, _, _ = select.select([p.stdout], [], [], 0.2)
+    if not ready:
+        if p.poll() is not None:
+            break
+        continue
+    b = os.read(p.stdout.fileno(), 1)
+    if not b:
+        break
+    out += b
+    if b == b':' or b == b'：':
+        break
+print('程序提示原始字节:', repr(bytes(out)))
+print('程序提示 UTF-8:', bytes(out).decode('utf-8', 'replace'))
+print('子进程 PID:', p.pid)
+try:
+    maps = open(f'/proc/{p.pid}/maps', encoding='utf-8').read().splitlines()
+    print('=== 子进程内存映射 ===')
+    for line in maps:
+        print(line)
+    fd = os.open(f'/proc/{p.pid}/mem', os.O_RDONLY)
+    print('=== 可读映射中的可打印字符串 ===')
+    for line in maps:
+        parts = line.split(None, 5)
+        lo, hi = (int(x, 16) for x in parts[0].split('-'))
+        perms = parts[1]
+        label = parts[5] if len(parts) > 5 else ''
+        size = hi - lo
+        if 'r' not in perms or label.startswith('[stack') or size > 4 * 1024 * 1024:
+            continue
+        try:
+            data = os.pread(fd, size, lo)
+        except OSError as e:
+            print('读取失败:', line, repr(e))
+            continue
+        if not data:
+            continue
+        candidates = re.findall(rb'[\x20-\x7e]{6,}', data)
+        selected = [s.decode('ascii', 'replace') for s in candidates if any(k in s.lower() for k in (b'flag', b'pass', b'note', b'secret', b'error', b'wrong', b'correct', b'input', b'enter', b'hello', b'ctf', b'xj')) or b'{' in s or b'}' in s]
+        if selected:
+            print('MAP:', line)
+            for s in selected[:100]:
+                print('  ', s)
+    os.close(fd)
+except Exception as e:
+    print('读取内存异常:', type(e).__name__, str(e))
+finally:
+    p.kill()
+    try:
+        p.wait(timeout=1)
+    except Exception:
+        pass
+    print('子进程已结束，returncode:', p.returncode)
+'@ | Set-Content -LiteralPath $scriptPath -Encoding utf8
+Write-Output "Python 分析脚本已保存: $scriptPath"
+Write-Output 'PowerShell 输入: wsl --exec /usr/bin/bwrap --unshare-all --die-with-parent --ro-bind / / --tmpfs /tmp --proc /proc --dev /dev --ro-bind <dump_runtime.py> /tmp/dump.py -- /usr/bin/python3 /tmp/dump.py'
+wsl --exec /usr/bin/bwrap --unshare-all --die-with-parent --ro-bind / / --tmpfs /tmp --proc /proc --dev /dev --ro-bind /mnt/c/Users/mzj/Desktop/CTF/玄机刷题/工作区/note_563/dump_runtime.py /tmp/dump.py -- /usr/bin/python3 /tmp/dump.py
+Write-Output "退出代码: $LASTEXITCODE"
+Stop-Transcript
+Process ID: 21856
+PSVersion: 7.6.5
+PSEdition: Core
+GitCommitId: 7.6.5
+OS: Microsoft Windows 10.0.26200
+Platform: Win32NT
+PSCompatibleVersions: 1.0, 2.0, 3.0, 4.0, 5.0, 5.1, 6.0, 7.0
+PSRemotingProtocolVersion: 2.4
+SerializationVersion: 1.1.0.1
+WSManStackVersion: 3.0
+**********************
+Transcript started, output file is C:\Users\mzj\Desktop\CTF\玄机刷题\记录\代理-note-终端记录.txt
+Python 分析脚本已保存: C:\Users\mzj\Desktop\CTF\玄机刷题\工作区\note_563\dump_runtime.py
+PowerShell 输入: wsl --exec /usr/bin/bwrap --unshare-all --die-with-parent --ro-bind / / --tmpfs /tmp --proc /proc --dev /dev --ro-bind <dump_runtime.py> /tmp/dump.py -- /usr/bin/python3 /tmp/dump.py
+
+退出代码: 1
+**********************
+PowerShell transcript end
+End time: 20260927191232
+**********************
+**********************
+PowerShell transcript start
+Start time: 20260927191245
+Username: DESKTOP-412KTAR\mzj
+RunAs User: DESKTOP-412KTAR\mzj
+Configuration Name: 
+Machine: DESKTOP-412KTAR (Microsoft Windows NT 10.0.26200.0)
+Host Application: C:\Users\mzj\.cache\codex-runtimes\codex-primary-runtime\dependencies\native\powershell\pwsh.dll -Command try { [Console]::OutputEncoding=[System.Text.Encoding]::UTF8 } catch {}
+$ErrorActionPreference = 'Continue'
+Start-Transcript -LiteralPath 'C:\Users\mzj\Desktop\CTF\玄机刷题\记录\代理-note-终端记录.txt' -Append
+$scriptPath = 'C:\Users\mzj\Desktop\CTF\玄机刷题\工作区\note_563\dump_runtime.py'
+$text = Get-Content -LiteralPath $scriptPath -Raw
+$text = $text.Replace("if b == b':' or b == b'：':", "if b == b':' or bytes(out).endswith('：'.encode('utf-8')):")
+Set-Content -LiteralPath $scriptPath -Value $text -Encoding utf8
+Write-Output 'PowerShell 输入: Get-Content dump_runtime.py; replace invalid non-ASCII bytes literal; Set-Content dump_runtime.py'
+Write-Output 'PowerShell 输入: wsl --exec /usr/bin/bwrap --unshare-all --die-with-parent --ro-bind / / --tmpfs /tmp --proc /proc --dev /dev --ro-bind <dump_runtime.py> /tmp/dump.py -- /usr/bin/python3 /tmp/dump.py'
+wsl --exec /usr/bin/bwrap --unshare-all --die-with-parent --ro-bind / / --tmpfs /tmp --proc /proc --dev /dev --ro-bind /mnt/c/Users/mzj/Desktop/CTF/玄机刷题/工作区/note_563/dump_runtime.py /tmp/dump.py -- /usr/bin/python3 /tmp/dump.py
+Write-Output "退出代码: $LASTEXITCODE"
+Stop-Transcript
+Process ID: 16052
+PSVersion: 7.6.5
+PSEdition: Core
+GitCommitId: 7.6.5
+OS: Microsoft Windows 10.0.26200
+Platform: Win32NT
+PSCompatibleVersions: 1.0, 2.0, 3.0, 4.0, 5.0, 5.1, 6.0, 7.0
+PSRemotingProtocolVersion: 2.4
+SerializationVersion: 1.1.0.1
+WSManStackVersion: 3.0
+**********************
+Transcript started, output file is C:\Users\mzj\Desktop\CTF\玄机刷题\记录\代理-note-终端记录.txt
+PowerShell 输入: Get-Content dump_runtime.py; replace invalid non-ASCII bytes literal; Set-Content dump_runtime.py
+PowerShell 输入: wsl --exec /usr/bin/bwrap --unshare-all --die-with-parent --ro-bind / / --tmpfs /tmp --proc /proc --dev /dev --ro-bind <dump_runtime.py> /tmp/dump.py -- /usr/bin/python3 /tmp/dump.py
+
+退出代码: 0
+**********************
+PowerShell transcript end
+End time: 20260927191250
+**********************
+**********************
+PowerShell transcript start
+Start time: 20260927191405
+Username: DESKTOP-412KTAR\mzj
+RunAs User: DESKTOP-412KTAR\mzj
+Configuration Name: 
+Machine: DESKTOP-412KTAR (Microsoft Windows NT 10.0.26200.0)
+Host Application: C:\Users\mzj\.cache\codex-runtimes\codex-primary-runtime\dependencies\native\powershell\pwsh.dll -Command try { [Console]::OutputEncoding=[System.Text.Encoding]::UTF8 } catch {}
+$ErrorActionPreference = 'Continue'
+Start-Transcript -LiteralPath 'C:\Users\mzj\Desktop\CTF\玄机刷题\记录\代理-note-终端记录.txt' -Append
+$scriptPath = 'C:\Users\mzj\Desktop\CTF\玄机刷题\工作区\note_563\dump_runtime.py'
+$text = Get-Content -LiteralPath $scriptPath -Raw
+$text = $text.Replace("selected = [s.decode('ascii', 'replace') for s in candidates if any(k in s.lower() for k in (b'flag', b'pass', b'note', b'secret', b'error', b'wrong', b'correct', b'input', b'enter', b'hello', b'ctf', b'xj')) or b'{' in s or b'}' in s]", "selected = [s.decode('ascii', 'replace') for s in candidates if (not label or label.startswith('[heap]')) and len(s) >= 8]")
+Set-Content -LiteralPath $scriptPath -Value $text -Encoding utf8
+Write-Output 'PowerShell 输入: 修改 dump_runtime.py，只打印匿名映射和 heap 内长度至少 8 的 ASCII 字符串'
+Write-Output 'PowerShell 输入: wsl --exec /usr/bin/bwrap --unshare-all --die-with-parent --ro-bind / / --tmpfs /tmp --proc /proc --dev /dev --ro-bind <dump_runtime.py> /tmp/dump.py -- /usr/bin/python3 /tmp/dump.py'
+wsl --exec /usr/bin/bwrap --unshare-all --die-with-parent --ro-bind / / --tmpfs /tmp --proc /proc --dev /dev --ro-bind /mnt/c/Users/mzj/Desktop/CTF/玄机刷题/工作区/note_563/dump_runtime.py /tmp/dump.py -- /usr/bin/python3 /tmp/dump.py
+Write-Output "退出代码: $LASTEXITCODE"
+Stop-Transcript
+Process ID: 4256
+PSVersion: 7.6.5
+PSEdition: Core
+GitCommitId: 7.6.5
+OS: Microsoft Windows 10.0.26200
+Platform: Win32NT
+PSCompatibleVersions: 1.0, 2.0, 3.0, 4.0, 5.0, 5.1, 6.0, 7.0
+PSRemotingProtocolVersion: 2.4
+SerializationVersion: 1.1.0.1
+WSManStackVersion: 3.0
+**********************
+Transcript started, output file is C:\Users\mzj\Desktop\CTF\玄机刷题\记录\代理-note-终端记录.txt
+PowerShell 输入: 修改 dump_runtime.py，只打印匿名映射和 heap 内长度至少 8 的 ASCII 字符串
+PowerShell 输入: wsl --exec /usr/bin/bwrap --unshare-all --die-with-parent --ro-bind / / --tmpfs /tmp --proc /proc --dev /dev --ro-bind <dump_runtime.py> /tmp/dump.py -- /usr/bin/python3 /tmp/dump.py
+
+退出代码: 0
+**********************
+PowerShell transcript end
+End time: 20260927191426
+**********************
+**********************
+PowerShell transcript start
+Start time: 20260927191553
+Username: DESKTOP-412KTAR\mzj
+RunAs User: DESKTOP-412KTAR\mzj
+Configuration Name: 
+Machine: DESKTOP-412KTAR (Microsoft Windows NT 10.0.26200.0)
+Host Application: C:\Users\mzj\.cache\codex-runtimes\codex-primary-runtime\dependencies\native\powershell\pwsh.dll -Command try { [Console]::OutputEncoding=[System.Text.Encoding]::UTF8 } catch {}
+$ErrorActionPreference = 'Continue'
+Start-Transcript -LiteralPath 'C:\Users\mzj\Desktop\CTF\玄机刷题\记录\代理-note-终端记录.txt' -Append
+$scriptPath = 'C:\Users\mzj\Desktop\CTF\玄机刷题\工作区\note_563\dump_runtime.py'
+@'
+import os, re, subprocess, time
+exe = '/mnt/c/Users/mzj/Desktop/CTF/note_563_binary.tmp'
+p = subprocess.Popen([exe], stdin=subprocess.PIPE, stdout=subprocess.PIPE, stderr=subprocess.STDOUT, bufsize=0)
+time.sleep(0.25)
+print('子进程 PID:', p.pid)
+for procfile in ('syscall', 'status'):
+    try:
+        print(f'=== /proc/{p.pid}/{procfile} ===')
+        print(open(f'/proc/{p.pid}/{procfile}', encoding='utf-8', errors='replace').read()[:3000])
+    except Exception as e:
+        print('读取失败:', repr(e))
+maps = open(f'/proc/{p.pid}/maps', encoding='utf-8').read().splitlines()
+print('=== 子进程内存映射 ===')
+for line in maps:
+    print(line)
+fd = os.open(f'/proc/{p.pid}/mem', os.O_RDONLY)
+print('=== 匿名映射内容概要 ===')
+for i, line in enumerate(maps):
+    parts = line.split(None, 5)
+    lo, hi = (int(x, 16) for x in parts[0].split('-'))
+    perms = parts[1]
+    label = parts[5] if len(parts) > 5 else ''
+    size = hi - lo
+    if 'r' not in perms or label or size > 1024 * 1024:
+        continue
+    try:
+        data = os.pread(fd, size, lo)
+        with open(f'/tmp/note_map_{i}.bin', 'wb') as out:
+            out.write(data)
+        print('MAP:', line, 'bytes=', len(data), 'prefix=', data[:32].hex())
+        strings = re.findall(rb'[\x20-\x7e]{5,}', data)
+        for s in strings[:80]:
+            print(' ASCII:', s.decode('ascii', 'replace'))
+        decoded = data.decode('utf-8', 'replace')
+        runs = re.findall(r'[\x20-\x7e\u4e00-\u9fff\uff01-\uff60]{3,}', decoded)
+        for s in runs[:40]:
+            if any(ord(c) > 127 for c in s):
+                print(' UTF8:', s)
+    except Exception as e:
+        print('读取映射失败:', line, repr(e))
+os.close(fd)
+p.kill()
+p.wait()
+print('子进程 returncode:', p.returncode)
+'@ | Set-Content -LiteralPath $scriptPath -Encoding utf8
+Write-Output "Python 分析脚本已更新: $scriptPath"
+Write-Output 'PowerShell 输入: wsl --exec /usr/bin/bwrap --unshare-all --die-with-parent --ro-bind / / --tmpfs /tmp --proc /proc --dev /dev --ro-bind <dump_runtime.py> /tmp/dump.py -- /usr/bin/python3 /tmp/dump.py'
+wsl --exec /usr/bin/bwrap --unshare-all --die-with-parent --ro-bind / / --tmpfs /tmp --proc /proc --dev /dev --ro-bind /mnt/c/Users/mzj/Desktop/CTF/玄机刷题/工作区/note_563/dump_runtime.py /tmp/dump.py -- /usr/bin/python3 /tmp/dump.py
+Write-Output "退出代码: $LASTEXITCODE"
+Stop-Transcript
+Process ID: 21908
+PSVersion: 7.6.5
+PSEdition: Core
+GitCommitId: 7.6.5
+OS: Microsoft Windows 10.0.26200
+Platform: Win32NT
+PSCompatibleVersions: 1.0, 2.0, 3.0, 4.0, 5.0, 5.1, 6.0, 7.0
+PSRemotingProtocolVersion: 2.4
+SerializationVersion: 1.1.0.1
+WSManStackVersion: 3.0
+**********************
+Transcript started, output file is C:\Users\mzj\Desktop\CTF\玄机刷题\记录\代理-note-终端记录.txt
+Python 分析脚本已更新: C:\Users\mzj\Desktop\CTF\玄机刷题\工作区\note_563\dump_runtime.py
+PowerShell 输入: wsl --exec /usr/bin/bwrap --unshare-all --die-with-parent --ro-bind / / --tmpfs /tmp --proc /proc --dev /dev --ro-bind <dump_runtime.py> /tmp/dump.py -- /usr/bin/python3 /tmp/dump.py
+
+退出代码: 0
+**********************
+PowerShell transcript end
+End time: 20260927191614
+**********************
+**********************
+PowerShell transcript start
+Start time: 20260927191730
+Username: DESKTOP-412KTAR\mzj
+RunAs User: DESKTOP-412KTAR\mzj
+Configuration Name: 
+Machine: DESKTOP-412KTAR (Microsoft Windows NT 10.0.26200.0)
+Host Application: C:\Users\mzj\.cache\codex-runtimes\codex-primary-runtime\dependencies\native\powershell\pwsh.dll -Command try { [Console]::OutputEncoding=[System.Text.Encoding]::UTF8 } catch {}
+$ErrorActionPreference = 'Continue'
+Start-Transcript -LiteralPath 'C:\Users\mzj\Desktop\CTF\玄机刷题\记录\代理-note-终端记录.txt' -Append
+$scriptPath = 'C:\Users\mzj\Desktop\CTF\玄机刷题\工作区\note_563\dump_runtime.py'
+@'
+import os, subprocess, time
+exe = '/mnt/c/Users/mzj/Desktop/CTF/note_563_binary.tmp'
+outfile = '/analysis/note_unpacked_mem.elf'
+p = subprocess.Popen([exe], stdin=subprocess.PIPE, stdout=subprocess.PIPE, stderr=subprocess.STDOUT, bufsize=0)
+time.sleep(0.25)
+print('子进程 PID:', p.pid)
+maps = open(f'/proc/{p.pid}/maps', encoding='utf-8').read().splitlines()
+fd = os.open(f'/proc/{p.pid}/mem', os.O_RDONLY)
+base = None
+for line in maps:
+    parts = line.split(None, 5)
+    lo, hi = (int(x, 16) for x in parts[0].split('-'))
+    label = parts[5] if len(parts) > 5 else ''
+    if not label:
+        head = os.pread(fd, 4, lo)
+        if head == b'\x7fELF':
+            base = lo
+            print('发现解包 ELF 头:', hex(base), '映射:', line)
+            break
+if base is None:
+    print('未在匿名映射找到 ELF magic')
+else:
+    chunks = []
+    expected = base
+    with open(outfile, 'wb') as out:
+        for line in maps:
+            parts = line.split(None, 5)
+            lo, hi = (int(x, 16) for x in parts[0].split('-'))
+            label = parts[5] if len(parts) > 5 else ''
+            if lo < base or lo >= base + 0x20000 or label:
+                continue
+            if lo > expected:
+                break
+            data = os.pread(fd, hi - lo, lo)
+            out.seek(lo - base)
+            out.write(data)
+            expected = hi
+            chunks.append((lo, hi, len(data), line))
+    print('导出文件:', outfile, '字节数:', os.path.getsize(outfile))
+    for chunk in chunks:
+        print('导出映射:', chunk)
+    for args in (['/usr/bin/readelf', '-h', '-S', outfile], ['/usr/bin/strings', '-a', '-n', '4', outfile], ['/usr/bin/objdump', '-d', '-Mintel', outfile]):
+        print('=== 执行:', ' '.join(args), '===')
+        result = subprocess.run(args, stdout=subprocess.PIPE, stderr=subprocess.STDOUT, text=True, errors='replace')
+        lines = result.stdout.splitlines()
+        print('\n'.join(lines[:350]))
+        if len(lines) > 350:
+            print(f'...输出截断：共 {len(lines)} 行')
+        print('退出代码:', result.returncode)
+os.close(fd)
+p.kill()
+p.wait()
+print('子进程 returncode:', p.returncode)
+'@ | Set-Content -LiteralPath $scriptPath -Encoding utf8
+Write-Output "Python 内存导出脚本已更新: $scriptPath"
+Write-Output 'PowerShell 输入: wsl --exec /usr/bin/bwrap --unshare-all --die-with-parent --ro-bind / / --tmpfs /tmp --proc /proc --dev /dev --dir /analysis --bind <note_563 工作目录> /analysis --ro-bind <dump_runtime.py> /tmp/dump.py -- /usr/bin/python3 /tmp/dump.py'
+wsl --exec /usr/bin/bwrap --unshare-all --die-with-parent --ro-bind / / --tmpfs /tmp --proc /proc --dev /dev --dir /analysis --bind /mnt/c/Users/mzj/Desktop/CTF/玄机刷题/工作区/note_563 /analysis --ro-bind /mnt/c/Users/mzj/Desktop/CTF/玄机刷题/工作区/note_563/dump_runtime.py /tmp/dump.py -- /usr/bin/python3 /tmp/dump.py
+Write-Output "退出代码: $LASTEXITCODE"
+Stop-Transcript
+Process ID: 17200
+PSVersion: 7.6.5
+PSEdition: Core
+GitCommitId: 7.6.5
+OS: Microsoft Windows 10.0.26200
+Platform: Win32NT
+PSCompatibleVersions: 1.0, 2.0, 3.0, 4.0, 5.0, 5.1, 6.0, 7.0
+PSRemotingProtocolVersion: 2.4
+SerializationVersion: 1.1.0.1
+WSManStackVersion: 3.0
+**********************
+Transcript started, output file is C:\Users\mzj\Desktop\CTF\玄机刷题\记录\代理-note-终端记录.txt
+Python 内存导出脚本已更新: C:\Users\mzj\Desktop\CTF\玄机刷题\工作区\note_563\dump_runtime.py
+PowerShell 输入: wsl --exec /usr/bin/bwrap --unshare-all --die-with-parent --ro-bind / / --tmpfs /tmp --proc /proc --dev /dev --dir /analysis --bind <note_563 工作目录> /analysis --ro-bind <dump_runtime.py> /tmp/dump.py -- /usr/bin/python3 /tmp/dump.py
+
+退出代码: 1
+**********************
+PowerShell transcript end
+End time: 20260927191747
+**********************
+**********************
+PowerShell transcript start
+Start time: 20260927191801
+Username: DESKTOP-412KTAR\mzj
+RunAs User: DESKTOP-412KTAR\mzj
+Configuration Name: 
+Machine: DESKTOP-412KTAR (Microsoft Windows NT 10.0.26200.0)
+Host Application: C:\Users\mzj\.cache\codex-runtimes\codex-primary-runtime\dependencies\native\powershell\pwsh.dll -Command try { [Console]::OutputEncoding=[System.Text.Encoding]::UTF8 } catch {}
+$ErrorActionPreference = 'Continue'
+Start-Transcript -LiteralPath 'C:\Users\mzj\Desktop\CTF\玄机刷题\记录\代理-note-终端记录.txt' -Append
+$scriptPath = 'C:\Users\mzj\Desktop\CTF\玄机刷题\工作区\note_563\dump_runtime.py'
+$text = Get-Content -LiteralPath $scriptPath -Raw
+$text = $text.Replace("outfile = '/analysis/note_unpacked_mem.elf'", "outfile = '/tmp/analysis/note_unpacked_mem.elf'")
+Set-Content -LiteralPath $scriptPath -Value $text -Encoding utf8
+Write-Output 'PowerShell 输入: dump_runtime.py 输出路径改为 /tmp/analysis/note_unpacked_mem.elf'
+Write-Output 'PowerShell 输入: wsl --exec /usr/bin/bwrap --unshare-all --die-with-parent --ro-bind / / --tmpfs /tmp --dir /tmp/analysis --bind <note_563 工作目录> /tmp/analysis --proc /proc --dev /dev --ro-bind <dump_runtime.py> /tmp/dump.py -- /usr/bin/python3 /tmp/dump.py'
+wsl --exec /usr/bin/bwrap --unshare-all --die-with-parent --ro-bind / / --tmpfs /tmp --dir /tmp/analysis --bind /mnt/c/Users/mzj/Desktop/CTF/玄机刷题/工作区/note_563 /tmp/analysis --proc /proc --dev /dev --ro-bind /mnt/c/Users/mzj/Desktop/CTF/玄机刷题/工作区/note_563/dump_runtime.py /tmp/dump.py -- /usr/bin/python3 /tmp/dump.py
+Write-Output "退出代码: $LASTEXITCODE"
+Stop-Transcript
+Process ID: 16848
+PSVersion: 7.6.5
+PSEdition: Core
+GitCommitId: 7.6.5
+OS: Microsoft Windows 10.0.26200
+Platform: Win32NT
+PSCompatibleVersions: 1.0, 2.0, 3.0, 4.0, 5.0, 5.1, 6.0, 7.0
+PSRemotingProtocolVersion: 2.4
+SerializationVersion: 1.1.0.1
+WSManStackVersion: 3.0
+**********************
+Transcript started, output file is C:\Users\mzj\Desktop\CTF\玄机刷题\记录\代理-note-终端记录.txt
+PowerShell 输入: dump_runtime.py 输出路径改为 /tmp/analysis/note_unpacked_mem.elf
+PowerShell 输入: wsl --exec /usr/bin/bwrap --unshare-all --die-with-parent --ro-bind / / --tmpfs /tmp --dir /tmp/analysis --bind <note_563 工作目录> /tmp/analysis --proc /proc --dev /dev --ro-bind <dump_runtime.py> /tmp/dump.py -- /usr/bin/python3 /tmp/dump.py
+
+退出代码: 0
+**********************
+PowerShell transcript end
+End time: 20260927191802
+**********************
+**********************
+PowerShell transcript start
+Start time: 20260927191844
+Username: DESKTOP-412KTAR\mzj
+RunAs User: DESKTOP-412KTAR\mzj
+Configuration Name: 
+Machine: DESKTOP-412KTAR (Microsoft Windows NT 10.0.26200.0)
+Host Application: C:\Users\mzj\.cache\codex-runtimes\codex-primary-runtime\dependencies\native\powershell\pwsh.dll -Command try { [Console]::OutputEncoding=[System.Text.Encoding]::UTF8 } catch {}
+$ErrorActionPreference = 'Continue'
+Start-Transcript -LiteralPath 'C:\Users\mzj\Desktop\CTF\玄机刷题\记录\代理-note-终端记录.txt' -Append
+$file = '/mnt/c/Users/mzj/Desktop/CTF/玄机刷题/工作区/note_563/note_unpacked_mem.elf'
+Write-Output "PowerShell 输入: wsl --exec /usr/bin/readelf -l $file"
+wsl --exec /usr/bin/readelf -l $file
+Write-Output "PowerShell 输入: wsl --exec /usr/bin/objdump -D -b binary -m i386:x86-64 --adjust-vma=0x0 --start-address=0x1000 --stop-address=0x2000 $file"
+wsl --exec /usr/bin/objdump -D -b binary -m i386:x86-64 --adjust-vma=0x0 --start-address=0x1000 --stop-address=0x2000 $file
+Stop-Transcript
+Process ID: 20128
+PSVersion: 7.6.5
+PSEdition: Core
+GitCommitId: 7.6.5
+OS: Microsoft Windows 10.0.26200
+Platform: Win32NT
+PSCompatibleVersions: 1.0, 2.0, 3.0, 4.0, 5.0, 5.1, 6.0, 7.0
+PSRemotingProtocolVersion: 2.4
+SerializationVersion: 1.1.0.1
+WSManStackVersion: 3.0
+**********************
+Transcript started, output file is C:\Users\mzj\Desktop\CTF\玄机刷题\记录\代理-note-终端记录.txt
+PowerShell 输入: wsl --exec /usr/bin/readelf -l /mnt/c/Users/mzj/Desktop/CTF/玄机刷题/工作区/note_563/note_unpacked_mem.elf
+
+PowerShell 输入: wsl --exec /usr/bin/objdump -D -b binary -m i386:x86-64 --adjust-vma=0x0 --start-address=0x1000 --stop-address=0x2000 /mnt/c/Users/mzj/Desktop/CTF/玄机刷题/工作区/note_563/note_unpacked_mem.elf
+
+**********************
+PowerShell transcript end
+End time: 20260927191901
+**********************
+**********************
+PowerShell transcript start
+Start time: 20260927191925
+Username: DESKTOP-412KTAR\mzj
+RunAs User: DESKTOP-412KTAR\mzj
+Configuration Name: 
+Machine: DESKTOP-412KTAR (Microsoft Windows NT 10.0.26200.0)
+Host Application: C:\Users\mzj\.cache\codex-runtimes\codex-primary-runtime\dependencies\native\powershell\pwsh.dll -Command try { [Console]::OutputEncoding=[System.Text.Encoding]::UTF8 } catch {}
+$ErrorActionPreference = 'Continue'
+Start-Transcript -LiteralPath 'C:\Users\mzj\Desktop\CTF\玄机刷题\记录\代理-note-终端记录.txt' -Append
+$file = '/mnt/c/Users/mzj/Desktop/CTF/玄机刷题/工作区/note_563/note_unpacked_mem.elf'
+Write-Output "PowerShell 输入: wsl --exec /usr/bin/xxd -g 1 -s 0x2000 -l 0x100 $file"
+wsl --exec /usr/bin/xxd -g 1 -s 0x2000 -l 0x100 $file
+Write-Output "PowerShell 输入: wsl --exec /usr/bin/strings -a -t x -n 1 $file"
+wsl --exec /usr/bin/strings -a -t x -n 1 $file
+Stop-Transcript
+Process ID: 20664
+PSVersion: 7.6.5
+PSEdition: Core
+GitCommitId: 7.6.5
+OS: Microsoft Windows 10.0.26200
+Platform: Win32NT
+PSCompatibleVersions: 1.0, 2.0, 3.0, 4.0, 5.0, 5.1, 6.0, 7.0
+PSRemotingProtocolVersion: 2.4
+SerializationVersion: 1.1.0.1
+WSManStackVersion: 3.0
+**********************
+Transcript started, output file is C:\Users\mzj\Desktop\CTF\玄机刷题\记录\代理-note-终端记录.txt
+PowerShell 输入: wsl --exec /usr/bin/xxd -g 1 -s 0x2000 -l 0x100 /mnt/c/Users/mzj/Desktop/CTF/玄机刷题/工作区/note_563/note_unpacked_mem.elf
+
+PowerShell 输入: wsl --exec /usr/bin/strings -a -t x -n 1 /mnt/c/Users/mzj/Desktop/CTF/玄机刷题/工作区/note_563/note_unpacked_mem.elf
+
+**********************
+PowerShell transcript end
+End time: 20260927191940
+**********************
+**********************
+PowerShell transcript start
+Start time: 20260927192013
+Username: DESKTOP-412KTAR\mzj
+RunAs User: DESKTOP-412KTAR\mzj
+Configuration Name: 
+Machine: DESKTOP-412KTAR (Microsoft Windows NT 10.0.26200.0)
+Host Application: C:\Users\mzj\.cache\codex-runtimes\codex-primary-runtime\dependencies\native\powershell\pwsh.dll -Command try { [Console]::OutputEncoding=[System.Text.Encoding]::UTF8 } catch {}
+$ErrorActionPreference = 'Continue'
+Start-Transcript -LiteralPath 'C:\Users\mzj\Desktop\CTF\玄机刷题\记录\代理-note-终端记录.txt' -Append
+$code = 'key=bytes.fromhex("4237a17c"); ct=bytes.fromhex("2559c31f3c41df061b7af835057cec5e6169f30c1347fe2a294b890b1e1c8b132873ba6e3e57ea3a1e5af7"); pt=bytes(c ^ key[i%4] ^ ((i+1)&255) for i,c in enumerate(ct)); print("cipher length:",len(ct)); print("candidate password repr:",repr(pt)); print("candidate password text:",pt.decode("utf-8","replace")); print("candidate hex:",pt.hex())'
+Write-Output "PowerShell 输入: wsl --exec /usr/bin/python3 -c '<calculation: pt[i]=ct[i]^key[i mod 4]^(i+1)>'"
+wsl --exec /usr/bin/python3 -c $code
+Stop-Transcript
+Process ID: 25648
+PSVersion: 7.6.5
+PSEdition: Core
+GitCommitId: 7.6.5
+OS: Microsoft Windows 10.0.26200
+Platform: Win32NT
+PSCompatibleVersions: 1.0, 2.0, 3.0, 4.0, 5.0, 5.1, 6.0, 7.0
+PSRemotingProtocolVersion: 2.4
+SerializationVersion: 1.1.0.1
+WSManStackVersion: 3.0
+**********************
+Transcript started, output file is C:\Users\mzj\Desktop\CTF\玄机刷题\记录\代理-note-终端记录.txt
+PowerShell 输入: wsl --exec /usr/bin/python3 -c '<calculation: pt[i]=ct[i]^key[i mod 4]^(i+1)>'
+
+**********************
+PowerShell transcript end
+End time: 20260927192030
+**********************
+**********************
+PowerShell transcript start
+Start time: 20260927192056
+Username: DESKTOP-412KTAR\mzj
+RunAs User: DESKTOP-412KTAR\mzj
+Configuration Name: 
+Machine: DESKTOP-412KTAR (Microsoft Windows NT 10.0.26200.0)
+Host Application: C:\Users\mzj\.cache\codex-runtimes\codex-primary-runtime\dependencies\native\powershell\pwsh.dll -Command try { [Console]::OutputEncoding=[System.Text.Encoding]::UTF8 } catch {}
+$ErrorActionPreference = 'Continue'
+Start-Transcript -LiteralPath 'C:\Users\mzj\Desktop\CTF\玄机刷题\记录\代理-note-终端记录.txt' -Append
+Write-Output 'PowerShell 输入: printf candidate flag to stdin of challenge in bubblewrap (network isolated, root read-only, temp /tmp only)'
+wsl --exec /usr/bin/bash -c 'printf "%s\n" "flag{pyrPGREJEB22LAdDfHNrf3kA55OKf86YFlnuG}" | /usr/bin/timeout 5 /usr/bin/bwrap --unshare-all --die-with-parent --ro-bind / / --tmpfs /tmp --proc /proc --dev /dev --chdir /tmp -- /mnt/c/Users/mzj/Desktop/CTF/note_563_binary.tmp'
+Write-Output "退出代码: $LASTEXITCODE"
+Stop-Transcript
+Process ID: 8584
+PSVersion: 7.6.5
+PSEdition: Core
+GitCommitId: 7.6.5
+OS: Microsoft Windows 10.0.26200
+Platform: Win32NT
+PSCompatibleVersions: 1.0, 2.0, 3.0, 4.0, 5.0, 5.1, 6.0, 7.0
+PSRemotingProtocolVersion: 2.4
+SerializationVersion: 1.1.0.1
+WSManStackVersion: 3.0
+**********************
+Transcript started, output file is C:\Users\mzj\Desktop\CTF\玄机刷题\记录\代理-note-终端记录.txt
+PowerShell 输入: printf candidate flag to stdin of challenge in bubblewrap (network isolated, root read-only, temp /tmp only)
+
+退出代码: 0
+**********************
+PowerShell transcript end
+End time: 20260927192112
+**********************
+**********************
+PowerShell transcript start
+Start time: 20260927192237
+Username: DESKTOP-412KTAR\mzj
+RunAs User: DESKTOP-412KTAR\mzj
+Configuration Name: 
+Machine: DESKTOP-412KTAR (Microsoft Windows NT 10.0.26200.0)
+Host Application: C:\Users\mzj\.cache\codex-runtimes\codex-primary-runtime\dependencies\native\powershell\pwsh.dll -Command try { [Console]::OutputEncoding=[System.Text.Encoding]::UTF8 } catch {}
+$ErrorActionPreference = 'Continue'
+Start-Transcript -LiteralPath 'C:\Users\mzj\Desktop\CTF\玄机刷题\记录\代理-note-终端记录.txt' -Append
+$file = '/mnt/c/Users/mzj/Desktop/CTF/玄机刷题/工作区/note_563/note_unpacked_mem.elf'
+Write-Output '=== 核心复现命令：命令行与结果成对记录 ==='
+Write-Output 'COMMAND: wsl --exec /usr/bin/readelf -l /mnt/c/Users/mzj/Desktop/CTF/玄机刷题/工作区/note_563/note_unpacked_mem.elf'
+wsl --exec /usr/bin/readelf -l $file
+Write-Output 'COMMAND: wsl --exec /usr/bin/objdump -D -b binary -m i386:x86-64 --adjust-vma=0x0 --start-address=0x1000 --stop-address=0x2000 /mnt/c/Users/mzj/Desktop/CTF/玄机刷题/工作区/note_563/note_unpacked_mem.elf'
+wsl --exec /usr/bin/objdump -D -b binary -m i386:x86-64 --adjust-vma=0x0 --start-address=0x1000 --stop-address=0x2000 $file
+Write-Output 'COMMAND: wsl --exec /usr/bin/xxd -g 1 -s 0x2000 -l 0x100 /mnt/c/Users/mzj/Desktop/CTF/玄机刷题/工作区/note_563/note_unpacked_mem.elf'
+wsl --exec /usr/bin/xxd -g 1 -s 0x2000 -l 0x100 $file
+$code = 'key=bytes.fromhex("4237a17c"); ct=bytes.fromhex("2559c31f3c41df061b7af835057cec5e6169f30c1347fe2a294b890b1e1c8b132873ba6e3e57ea3a1e5af7"); pt=bytes(c ^ key[i%4] ^ ((i+1)&255) for i,c in enumerate(ct)); print("cipher length:",len(ct)); print("candidate password repr:",repr(pt)); print("candidate password text:",pt.decode("utf-8","replace")); print("candidate hex:",pt.hex())'
+Write-Output "COMMAND: wsl --exec /usr/bin/python3 -c '$code'"
+wsl --exec /usr/bin/python3 -c $code
+$verify = 'printf "%s\n" "flag{pyrPGREJEB22LAdDfHNrf3kA55OKf86YFlnuG}" | /usr/bin/timeout 5 /usr/bin/bwrap --unshare-all --die-with-parent --ro-bind / / --tmpfs /tmp --proc /proc --dev /dev --chdir /tmp -- /mnt/c/Users/mzj/Desktop/CTF/note_563_binary.tmp'
+Write-Output "COMMAND: wsl --exec /usr/bin/bash -c '$verify'"
+wsl --exec /usr/bin/bash -c $verify
+Write-Output 'COMMAND: Get-FileHash -LiteralPath C:\Users\mzj\Desktop\CTF\玄机刷题\工作区\note_563\dump_runtime.py -Algorithm SHA256'
+Get-FileHash -LiteralPath 'C:\Users\mzj\Desktop\CTF\玄机刷题\工作区\note_563\dump_runtime.py' -Algorithm SHA256 | Format-List
+Write-Output 'COMMAND: Get-Content -LiteralPath C:\Users\mzj\Desktop\CTF\玄机刷题\工作区\note_563\dump_runtime.py'
+Get-Content -LiteralPath 'C:\Users\mzj\Desktop\CTF\玄机刷题\工作区\note_563\dump_runtime.py'
+Stop-Transcript
+Process ID: 12164
+PSVersion: 7.6.5
+PSEdition: Core
+GitCommitId: 7.6.5
+OS: Microsoft Windows 10.0.26200
+Platform: Win32NT
+PSCompatibleVersions: 1.0, 2.0, 3.0, 4.0, 5.0, 5.1, 6.0, 7.0
+PSRemotingProtocolVersion: 2.4
+SerializationVersion: 1.1.0.1
+WSManStackVersion: 3.0
+**********************
+Transcript started, output file is C:\Users\mzj\Desktop\CTF\玄机刷题\记录\代理-note-终端记录.txt
+=== 核心复现命令：命令行与结果成对记录 ===
+COMMAND: wsl --exec /usr/bin/readelf -l /mnt/c/Users/mzj/Desktop/CTF/玄机刷题/工作区/note_563/note_unpacked_mem.elf
+
+COMMAND: wsl --exec /usr/bin/objdump -D -b binary -m i386:x86-64 --adjust-vma=0x0 --start-address=0x1000 --stop-address=0x2000 /mnt/c/Users/mzj/Desktop/CTF/玄机刷题/工作区/note_563/note_unpacked_mem.elf
+
+COMMAND: wsl --exec /usr/bin/xxd -g 1 -s 0x2000 -l 0x100 /mnt/c/Users/mzj/Desktop/CTF/玄机刷题/工作区/note_563/note_unpacked_mem.elf
+
+COMMAND: wsl --exec /usr/bin/python3 -c 'key=bytes.fromhex("4237a17c"); ct=bytes.fromhex("2559c31f3c41df061b7af835057cec5e6169f30c1347fe2a294b890b1e1c8b132873ba6e3e57ea3a1e5af7"); pt=bytes(c ^ key[i%4] ^ ((i+1)&255) for i,c in enumerate(ct)); print("cipher length:",len(ct)); print("candidate password repr:",repr(pt)); print("candidate password text:",pt.decode("utf-8","replace")); print("candidate hex:",pt.hex())'
+
+COMMAND: wsl --exec /usr/bin/bash -c 'printf "%s\n" "flag{pyrPGREJEB22LAdDfHNrf3kA55OKf86YFlnuG}" | /usr/bin/timeout 5 /usr/bin/bwrap --unshare-all --die-with-parent --ro-bind / / --tmpfs /tmp --proc /proc --dev /dev --chdir /tmp -- /mnt/c/Users/mzj/Desktop/CTF/note_563_binary.tmp'
+
+COMMAND: Get-FileHash -LiteralPath C:\Users\mzj\Desktop\CTF\玄机刷题\工作区\note_563\dump_runtime.py -Algorithm SHA256
+
+Algorithm : SHA256
+Hash      : 3485EECD8B4FFA84B87BC584A2E047C9C53A8ECF313FB09F50A26C10775B56AA
+Path      : C:\Users\mzj\Desktop\CTF\玄机刷题\工作区\note_563\dump_runtime.py
+
+COMMAND: Get-Content -LiteralPath C:\Users\mzj\Desktop\CTF\玄机刷题\工作区\note_563\dump_runtime.py
+import os, subprocess, time
+exe = '/mnt/c/Users/mzj/Desktop/CTF/note_563_binary.tmp'
+outfile = '/tmp/analysis/note_unpacked_mem.elf'
+p = subprocess.Popen([exe], stdin=subprocess.PIPE, stdout=subprocess.PIPE, stderr=subprocess.STDOUT, bufsize=0)
+time.sleep(0.25)
+print('子进程 PID:', p.pid)
+maps = open(f'/proc/{p.pid}/maps', encoding='utf-8').read().splitlines()
+fd = os.open(f'/proc/{p.pid}/mem', os.O_RDONLY)
+base = None
+for line in maps:
+    parts = line.split(None, 5)
+    lo, hi = (int(x, 16) for x in parts[0].split('-'))
+    label = parts[5] if len(parts) > 5 else ''
+    if not label:
+        head = os.pread(fd, 4, lo)
+        if head == b'\x7fELF':
+            base = lo
+            print('发现解包 ELF 头:', hex(base), '映射:', line)
+            break
+if base is None:
+    print('未在匿名映射找到 ELF magic')
+else:
+    chunks = []
+    expected = base
+    with open(outfile, 'wb') as out:
+        for line in maps:
+            parts = line.split(None, 5)
+            lo, hi = (int(x, 16) for x in parts[0].split('-'))
+            label = parts[5] if len(parts) > 5 else ''
+            if lo < base or lo >= base + 0x20000 or label:
+                continue
+            if lo > expected:
+                break
+            data = os.pread(fd, hi - lo, lo)
+            out.seek(lo - base)
+            out.write(data)
+            expected = hi
+            chunks.append((lo, hi, len(data), line))
+    print('导出文件:', outfile, '字节数:', os.path.getsize(outfile))
+    for chunk in chunks:
+        print('导出映射:', chunk)
+    for args in (['/usr/bin/readelf', '-h', '-S', outfile], ['/usr/bin/strings', '-a', '-n', '4', outfile], ['/usr/bin/objdump', '-d', '-Mintel', outfile]):
+        print('=== 执行:', ' '.join(args), '===')
+        result = subprocess.run(args, stdout=subprocess.PIPE, stderr=subprocess.STDOUT, text=True, errors='replace')
+        lines = result.stdout.splitlines()
+        print('\n'.join(lines[:350]))
+        if len(lines) > 350:
+            print(f'...输出截断：共 {len(lines)} 行')
+        print('退出代码:', result.returncode)
+os.close(fd)
+p.kill()
+p.wait()
+print('子进程 returncode:', p.returncode)
+
+**********************
+PowerShell transcript end
+End time: 20260927192258
+**********************
+**********************
+PowerShell transcript start
+Start time: 20260927192323
+Username: DESKTOP-412KTAR\mzj
+RunAs User: DESKTOP-412KTAR\mzj
+Configuration Name: 
+Machine: DESKTOP-412KTAR (Microsoft Windows NT 10.0.26200.0)
+Host Application: C:\Users\mzj\.cache\codex-runtimes\codex-primary-runtime\dependencies\native\powershell\pwsh.dll -Command try { [Console]::OutputEncoding=[System.Text.Encoding]::UTF8 } catch {}
+$ErrorActionPreference = 'Continue'
+Start-Transcript -LiteralPath 'C:\Users\mzj\Desktop\CTF\玄机刷题\记录\代理-note-终端记录.txt' -Append
+$verify = 'printf "%s\n" "flag{pyrPGREJEB22LAdDfHNrf3kA55OKf86YFlnuG}" | /usr/bin/timeout 5 /usr/bin/bwrap --unshare-all --die-with-parent --ro-bind / / --tmpfs /tmp --proc /proc --dev /dev --chdir /tmp -- /mnt/c/Users/mzj/Desktop/CTF/玄机刷题/工作区/note_563/note'
+Write-Output "COMMAND: wsl --exec /usr/bin/bash -c '$verify'"
+wsl --exec /usr/bin/bash -c $verify
+Write-Output "Verification exit code: $LASTEXITCODE"
+Write-Output 'COMMAND: Remove-Item -LiteralPath C:\Users\mzj\Desktop\CTF\note_563_binary.tmp; Test-Path that path'
+Remove-Item -LiteralPath 'C:\Users\mzj\Desktop\CTF\note_563_binary.tmp'
+Test-Path -LiteralPath 'C:\Users\mzj\Desktop\CTF\note_563_binary.tmp'
+Write-Output 'COMMAND: Get-ChildItem -LiteralPath C:\Users\mzj\Desktop\CTF\玄机刷题\工作区\note_563 | Select-Object Name,Length'
+Get-ChildItem -LiteralPath 'C:\Users\mzj\Desktop\CTF\玄机刷题\工作区\note_563' | Select-Object Name,Length | Format-Table -AutoSize
+Stop-Transcript
+Process ID: 25292
+PSVersion: 7.6.5
+PSEdition: Core
+GitCommitId: 7.6.5
+OS: Microsoft Windows 10.0.26200
+Platform: Win32NT
+PSCompatibleVersions: 1.0, 2.0, 3.0, 4.0, 5.0, 5.1, 6.0, 7.0
+PSRemotingProtocolVersion: 2.4
+SerializationVersion: 1.1.0.1
+WSManStackVersion: 3.0
+**********************
+Transcript started, output file is C:\Users\mzj\Desktop\CTF\玄机刷题\记录\代理-note-终端记录.txt
+COMMAND: wsl --exec /usr/bin/bash -c 'printf "%s\n" "flag{pyrPGREJEB22LAdDfHNrf3kA55OKf86YFlnuG}" | /usr/bin/timeout 5 /usr/bin/bwrap --unshare-all --die-with-parent --ro-bind / / --tmpfs /tmp --proc /proc --dev /dev --chdir /tmp -- /mnt/c/Users/mzj/Desktop/CTF/玄机刷题/工作区/note_563/note'
+
+Verification exit code: 0
+COMMAND: Remove-Item -LiteralPath C:\Users\mzj\Desktop\CTF\note_563_binary.tmp; Test-Path that path
+False
+COMMAND: Get-ChildItem -LiteralPath C:\Users\mzj\Desktop\CTF\玄机刷题\工作区\note_563 | Select-Object Name,Length
+
+Name                  Length
+----                  ------
+dump_runtime.py         2186
+note                    6360
+note_unpacked_mem.elf  20480
+
+**********************
+PowerShell transcript end
+End time: 20260927192337
+**********************

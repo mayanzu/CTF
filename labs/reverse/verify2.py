@@ -1,0 +1,13 @@
+"""Exercise R2: derive the input accepted by this validator."""
+
+TARGET = [57, 75, 42, 60, 120, 99, 93, 42, 48, 54, 36, 99, 63, 54, 36, 75, 84, 84, 87, 126]
+
+
+def check(candidate: str) -> bool:
+    data = candidate.encode("ascii", errors="ignore")
+    return len(data) == len(TARGET) and [((b * 3 + 7) & 255) for b in data] == TARGET
+
+
+if __name__ == "__main__":
+    answer = input("input> ")
+    print("correct" if check(answer) else "nope")

@@ -1,0 +1,1036 @@
+\documentclass[UTF8,12pt,oneside]{ctexbook}
+\input{handout-common}
+% Keep instructional figures beside the step that introduces them.
+\usepackage{float}
+\renewcommand{\shot}[4][0.92]{%
+  \begin{figure}[H]\centering
+  \includegraphics[width=#1\linewidth]{#2}%
+  \caption{#3}\label{fig:#4}\end{figure}}
+\handoutmark{Misc 专攻版}
+\booktitle{CTF 网络安全入门：Misc 专攻版}
+\begin{document}
+\frontmatter
+\begin{titlepage}
+\centering
+\vspace*{36mm}
+{\Huge\bfseries CTF 网络安全入门\par}
+\vspace{9mm}
+{\LARGE Misc 专攻版\par}
+\vspace{5mm}
+{\large 文件识别 · PNG 元数据 · 尾部追加数据 · 流量取证（M0--M4）\par}
+\vspace{14mm}
+{\large 本册特色\par}
+\vspace{3mm}
+\begin{minipage}{0.86\textwidth}
+\small
+\begin{itemize}
+\item 零基础起点：每个术语第一次出现都用白话解释，配“一句话记忆”和“常见误区”。
+\item 每题一张标准题面卡：给什么、要什么、交付物、考点、难度，读完就能动手。
+\item 逐题图解带做：每一步都配真实终端截图或题目附件原图，照着敲就能复现。
+\item 证据习惯贯穿全书：保留原件、只读分析、每条结论都注明字节位置和来源。
+\end{itemize}
+\end{minipage}
+\vspace{12mm}
+{\large 适用对象：学过 Python、C 和命令行的 CTF 初学者\par}
+\vspace{4mm}
+{\large 版本：2026 年 9 月\par}
+\end{titlepage}
+
+\chapter*{使用说明}
+\addcontentsline{toc}{chapter}{使用说明}
+
+\section*{这本讲义解决什么问题}
+Misc 是 CTF 里最“杂”的方向：给你一个陌生文件、一段流量、一张图片，让你找出藏在里面的信息。初学者最常见的三个卡点是：不知道从哪里下手、看不懂二进制工具的输出、做出来了也说不清证据在哪里。本册按“先认清容器，再追查线索”的顺序，把这三个卡点逐个拆掉。
+
+\section*{学习路线图}
+\begin{center}
+\begin{tabular}{p{0.26\textwidth}p{0.60\textwidth}}
+\toprule
+章节 & 核心收获 \\
+\midrule
+第 1 章 零基础预备 & 环境安装与验证、命令行回顾、取证式工作习惯 \\
+第 2 章 基础知识铺垫 & 文件头与扩展名、PNG 分块、base64、ZIP 签名、PCAP 与分片 \\
+第 3 章 工具箱 & file / xxd / strings / Python 标准库 / Wireshark 概念 \\
+第 4 章 题目：题面卡与逐题图解带做 & M0--M4 每题一张题面卡，卡后面紧跟解题步骤：思路 $\rightarrow$ 分步操作与截图 $\rightarrow$ 核对 $\rightarrow$ 为什么 $\rightarrow$ 排错 $\rightarrow$ 变式 \\
+第 6 章 复盘 & 知识地图、易错清单、“下次遇到这类题怎么办” \\
+第 7 章 自测与参考答案 & 自测题与完整推演 \\
+附录 A/B & 平台真题状态与提交 checklist、命令速查表、术语表 \\
+\bottomrule
+\end{tabular}
+\end{center}
+
+\section*{怎么用这本讲义}
+\begin{enumerate}[label=\arabic*.]
+\item 先读第 1、2 章，把环境跑通、把术语混个脸熟。不要跳——后面所有截图都建立在这两章的命令上。
+\item 第 4 章每题先读题面卡，遮住后面的解题步骤自己试 10--15 分钟。试不出来不丢人，带着“我卡在哪一步”的问题去看同一题后面的步骤，收获最大。
+\item 第 4 章每一步都给出完整可复制的命令。终端截图里的每行输出都来自真实执行，照着敲应该得到同样的结果；不一样就看该步的“排错指南”。
+\item 学完一题，用第 6 章的清单自问一遍：“这类题下次我按什么顺序做？”能不看书答出来，才算真的会了。
+\end{enumerate}
+
+\section*{安全声明}
+本讲义所有实验只针对资料自带的 \verb|labs/| 题目和明确授权练习的 CTF 平台。不要把书中的命令用于未经授权的系统、别人的电脑或真实网络。下载到的题目附件都按“不可信输入”对待：只做静态分析，不随手运行其中的可执行文件。
+
+\section*{截图与命令约定}
+\begin{itemize}
+\item 终端截图均为真实执行实录（\verb|tools/termcap.py| 记录、\verb|tools/term2png.py| 渲染），窗口标题为英文，正文输出为真实中英文输出。
+\item 命令分两种环境：\kw{WSL}（Ubuntu 终端，提供 \verb|file|、\verb|xxd|、\verb|unzip|、\verb|strings| 等 Linux 工具）和 \kw{Windows PowerShell}（跑平台复现脚本）。每条命令都会注明在哪敲。
+\item 命令默认在资料根目录执行。终端当前目录不对会报“找不到文件”，先用 \verb|pwd|（WSL）或 \verb|Get-Location|（PowerShell）确认。
+\item 图注中的“题目附件原图”指直接来自题目附件、未经改动的图片；“放大示意”指为看清细节人为放大的示意图。
+\end{itemize}
+
+\section*{术语约定}
+术语第一次出现时用白话解释，之后直接使用。全书的“附件”指题目给的文件；“字节”是文件的最小计数单位（一个英文字母占 1 字节）；“偏移”指从文件开头数起的第几个字节；“块/字段”指格式规定的一段有名字的数据。更多术语见附录 C。
+
+\tableofcontents
+\mainmatter
+
+% ===========================================================================
+\chapter{零基础预备：环境、命令行与取证习惯}
+\label{chap:prep}
+\goal{把分析环境装好、验证好；养成“保留原件、只读分析”的证据习惯。做完本章，你敲的每条命令都和后面截图里的一致。}
+
+\section{我们要做的事：从陌生文件里把信息挖出来}
+想象有人递给你一个信封，里面装的东西看不出来历。CTF 的 Misc 题就是这个感觉：题目给你一个文件（图片、压缩包、抓包记录），你要判断它“真正是什么”，再顺着格式结构把藏起来的信息取出来。
+
+这个过程和刑侦取证很像，所以本书借用取证的两个好习惯：
+\begin{itemize}
+\item \kw{保留原件}：原件一个字节都不改。所有分析在副本上做。
+\item \kw{只读分析}：先用看的方式（十六进制、解析脚本）了解它，再决定要不要解压或运行。看到可执行文件，静态观察，不随手双击。
+\end{itemize}
+\memory{拿到附件先别动它：复制一份、记录大小和哈希，再开始分析。}
+
+\section{准备环境：两样东西就够了}
+本册的命令在两种环境里执行：
+\begin{itemize}
+\item \kw{WSL}（Windows Subsystem for Linux，Windows 里跑的 Ubuntu 终端）：提供 \verb|file|（识别文件类型）、\verb|xxd|（十六进制查看）、\verb|strings|（搜可见文本）、\verb|unzip|（列压缩包目录）这些命令行工具。
+\item \kw{Windows PowerShell}：跑 Python 3 和题目复现脚本。Python 自带的 \verb|struct|、\verb|zlib|、\verb|base64|、\verb|zipfile| 模块是本册的主力解析工具。
+\end{itemize}
+安装步骤（若尚未安装）：
+\begin{enumerate}[label=\arabic*.]
+\item 在 PowerShell 里执行 \verb|wsl --install -d Ubuntu-24.04|，按提示重启并设置 Linux 用户名密码。
+\item 安装 Python 3（python.org 下载，安装时勾选“Add python.exe to PATH”）。
+\item 在资料根目录执行 \verb|python -m pip install -r requirements.txt|，安装 Pillow（题目 581 复现脚本需要）。
+\item 在 WSL 里执行 \code{sudo apt update}，再执行 \code{sudo apt install -y file xxd unzip bsdmainutils} 补齐命令行工具。
+\end{enumerate}
+
+装完按下面的方式自检。在 \kw{WSL} 里执行：
+\begin{lstlisting}
+python3 --version
+file --version | head -n 1
+xxd -v 2>&1 | head -n 1
+unzip -v | head -n 1
+python3 -c 'import struct, zlib, base64, zipfile; print("python3 标准库 struct/zlib/base64/zipfile 可用")'
+\end{lstlisting}
+应该看到 Python 3.10 以上、file 5.x、xxd、UnZip 的版本号，以及最后一行“可用”的提示，如\figref{env}。
+\shot[0.95]{fig-misc-14-env-check.png}{环境自检：file、xxd、unzip、python3 的真实输出（WSL）}{env}
+
+在 \kw{Windows PowerShell} 里执行：
+\begin{lstlisting}
+python --version
+python -c "import PIL; print('Pillow', PIL.__version__)"
+\end{lstlisting}
+应看到 Python 3.x 和 Pillow 的版本号（可对照\figref{solve581} 第一行）。这两条不过，先回到安装步骤第 3 条。
+
+\section{命令行 30 秒回顾}
+如果你平时只用图形界面，这几条命令会反复出现，先记熟：
+\begin{center}
+\begin{tabular}{lll}
+\toprule
+想做什么 & WSL（bash） & PowerShell \\
+\midrule
+看当前目录 & \texttt{pwd} & \texttt{Get-Location} \\
+列文件 & \texttt{ls -l labs/misc} & \texttt{Get-ChildItem labs/misc} \\
+进目录 & \texttt{cd labs/misc} & \texttt{Set-Location labs/misc} \\
+复制文件 & \texttt{cp a.png b.png} & \texttt{Copy-Item a.png b.png} \\
+看文本文件 & \texttt{cat notes.txt} & \texttt{Get-Content notes.txt} \\
+删副本（小心） & \texttt{rm b.png} & \texttt{Remove-Item b.png} \\
+看文件头十六进制 & \texttt{xxd -l 16 文件} & \texttt{Format-Hex 文件} \\
+\bottomrule
+\end{tabular}
+\end{center}
+第 2 章会反复用到十六进制查看。WSL 里最常用的查看器是 \verb|xxd|；同一件事 \verb|hexdump -C 文件| 也能做（\verb|-C| 是它的规范排版，偏移 + 字节 + ASCII 三栏），不想开 WSL 时 PowerShell 用 \verb|Format-Hex 文件|。三者看的是同一批字节，只是排版不同；本册截图统一用 \verb|xxd|，你按手头环境选一种即可。
+\pitfall{路径里有空格要加引号；WSL 访问 Windows 文件用 \texttt{/mnt/c/...} 前缀，例如 \texttt{/mnt/c/Users/你/Desktop/...}。终端报“No such file or directory”九成是当前目录不对，先 \texttt{pwd}。}
+
+\section{取证式工作目录：把证据摆整齐}
+复制原件后再分析，推荐这样组织（在资料根目录之外自建）：
+\begin{lstlisting}
+work/
+  challenge-name/
+    original/       # 原件副本，只读，绝不修改
+    scripts/        # 自己写的短解析脚本
+    notes.txt       # 观察记录：每条结论都写清来自哪个字节/字段
+\end{lstlisting}
+\kw{notes.txt} 是新手最容易忽略、但最值钱的部分。每写一条结论，后面追加来源，例如：
+\begin{lstlisting}
+sample.bin | file: <粘贴实际输出>
+sha256: <粘贴 sha256sum 的完整输出>
+observation: <记录格式、结构、偏移与支持结论的字节证据>
+\end{lstlisting}
+上面第一行说的“哈希”是什么？\kw{哈希}（hash，也叫散列）是一种把\emph{任意长度}的数据压成\emph{固定长度}“指纹”的函数：同一个文件每次算出的指纹完全相同，改动文件里一个字节，指纹就会面目全非。常用三种，位数越大越难被伪造出“碰撞”：
+\begin{center}
+\begin{tabular}{lll}
+\toprule
+名称 & 指纹长度 & 常见用途 \\
+\midrule
+\texttt{md5} & 16 字节（32 位十六进制） & 快速比对、老资料里常见 \\
+\texttt{sha1} & 20 字节（40 位十六进制） & 同样的核对用途 \\
+\texttt{sha256} & 32 字节（64 位十六进制） & 本册推荐，抗篡改更强 \\
+\bottomrule
+\end{tabular}
+\end{center}
+在 \kw{WSL} 里算指纹只要一条命令，对 \verb|labs/misc/pixel.png| 的真实结果见\figref{hashdemo}：
+\begin{lstlisting}
+sha256sum labs/misc/pixel.png
+md5sum labs/misc/pixel.png
+\end{lstlisting}
+\shot[0.95]{fig-misc-19-hash-demo.png}{真实输出：同一个 pixel.png 算出的 sha256 与 md5 指纹（WSL）}{hashdemo}
+为什么分析前要记指纹？因为它给你一条“原件没被动过”的证据：动手前记一次，分析后再算一次，两次相同才说明你一直在副本上操作、原件没被工具改坏。这正是后面 1.5 节“独立核对”和 M3（581）手工复核所依赖的习惯。
+\memory{哈希是文件的“指纹”：用来核对有没有被动过，不是加密。}
+\pitfall{哈希\kw{不可逆}：知道指纹也推不出原文，所以它不是加密、也不能“解密”。所谓的“md5 解密网站”只是把常见输入提前算好做成字典去查表，输入一复杂就查不到。}
+\debugtip{\texttt{sha256sum} 报 command not found：WSL 里执行 \texttt{sudo apt install -y coreutils}。Windows 也能算：PowerShell 里 \texttt{Get-FileHash 文件 -Algorithm SHA256}，结果与本节的 sha256 一致。}
+\memory{一条结论 = 一个判断 + 一个来源。写不出来源的结论，只能算猜测。}
+
+\section{验证与组队：flag 不是终点}
+脚本打印出 \verb|flag{...}| 只说明脚本输出了这个字符串。提交前还要做两件事：
+\begin{enumerate}[label=\arabic*.]
+\item \kw{独立核对}：换一条路径复算一遍。例如 581 题脚本解出 flag 后，我们又手工取图片红通道最低位复算一次，两次结果一致（见\figref{lsbcheck}）。
+\item \kw{对格式核对}：检查大小写、花括号、有没有多余空格或换行。
+\end{enumerate}
+和队友沟通时，把状态说清楚：“已确认 $\times\times\times$，下一步做 $\times\times\times$”比“我不会”有用一百倍。未验证的东西就写“未验证”，绝不猜写 flag——这是本资料的红线，也是职业习惯。
+
+% ===========================================================================
+\chapter{Misc 基础知识铺垫}
+\label{chap:knowledge}
+\goal{看懂文件的“外壳—结构—内容—语义”四层；认识文件头、PNG 分块、base64、ZIP 签名、PCAP 与 UDP 负载。本章每个概念后面都跟着它在题目里出现的位置。}
+
+\section{文件就是一串字节：扩展名只是标签}
+电脑里的文件本质上是\kw{一串字节}（byte，0--255 的数字）。你看到的“图片”“文本文档”都是程序按某种\kw{格式约定}把字节解释出来的样子。文件名末尾的扩展名（\verb|.png|、\verb|.zip|）只是给人看的标签，随时可以改名，改名不会改变文件内容。
+
+那程序怎么知道文件“真正是什么”？靠\kw{文件头}（magic bytes）：许多格式规定开头几个字节必须是固定值。常见对照：
+
+\begin{center}
+\begin{tabular}{llll}
+\toprule
+格式 & 文件头（十六进制） & ASCII 侧写 & 说明 \\
+\midrule
+PNG & \texttt{89 50 4E 47 0D 0A 1A 0A} & \texttt{.PNG....} & 8 字节固定签名 \\
+ZIP & \texttt{50 4B 03 04} & \texttt{PK..} & 本地文件头起点 \\
+GIF & \texttt{47 49 46 38} & \texttt{GIF8} & GIF87a/89a \\
+JPEG & \texttt{FF D8 FF} & \texttt{....} & 常见照片格式 \\
+PCAP & \texttt{D4 C3 B2 A1} & \texttt{....} & 抓包文件（小端序） \\
+PDF & \texttt{25 50 44 46} & \texttt{\%PDF} & 文档 \\
+\bottomrule
+\end{tabular}
+\end{center}
+
+\verb|file| 命令就是靠读文件头（再加一些内部结构检查）给出判断的。\figref{filemagic} 里，我们把 \verb|pixel.png| 复制成 \verb|/tmp/photo.zip|，\verb|file| 依然报告 PNG——扩展名骗不了它。
+\shot[0.82]{fig-misc-01-file-magic.png}{把 pixel.png 改名为 photo.zip，file 与 xxd 的真实输出：文件头说了算}{filemagic}
+\memory{扩展名可以随便改，文件头改了文件就坏了。判断“这是什么”先看文件头。}
+\pitfall{\texttt{file} 也会被骗：把 ZIP 追加到 PNG 尾部，\texttt{file} 通常只报前面的 PNG。它是“初步判断”，不是最终结论。}
+
+\section{十六进制：怎么看懂 xxd 的输出}
+\kw{十六进制}（hex）用 0--9、a--f 表示字节，一个字节正好写成两位。二进制文件直接打开是乱码，用十六进制看才有结构。WSL 里的 \verb|xxd| 是最常用的查看器，输出分三栏：
+\begin{lstlisting}
+00000000: 8950 4e47 0d0a 1a0a 0000 000d 4948 4452  .PNG........IHDR
+\end{lstlisting}
+\begin{itemize}
+\item 第一栏 \verb|00000000|：\kw{偏移}，从文件开头数的第几个字节（十六进制）。
+\item 中间栏：字节本身，每两个字符一个字节，方便两字节一组阅读。
+\item 右栏：能显示的 ASCII 字符照原样显示，不能显示的用 \verb|.| 代替。找文件名、关键字时先扫右栏。
+\end{itemize}
+常用用法：\verb|xxd -l 16 文件| 只看开头 16 字节（够认文件头）；\verb|xxd -s 4944 -l 112 文件| 从偏移 4944 起看 112 字节（看文件尾）。图~\ref{fig:filemagic} 第三行就是 \verb|xxd -l 16| 的输出。
+\memory{xxd 三栏=偏移、十六进制字节、ASCII 侧写；右栏出现 PK、PNG、flag 之类字样都是线索。}
+
+把字节按“多字节整数”来读，还得懂\kw{字节序}（endianness）：一个整数占几个字节，这些字节谁在前由格式规定。\kw{大端序}（big-endian）高位字节在前，\kw{小端序}（little-endian）低位字节在前。同一个整数 \verb|0x11223344| 两种写法正好相反：
+\begin{lstlisting}
+大端序（高位在前）: 11 22 33 44
+小端序（低位在前）: 44 33 22 11
+\end{lstlisting}
+本册题目里两种都出现过：PNG 的块长度字段是\kw{大端序}（2.3 节），PCAP 的记录长度与 UDP 端口是\kw{小端序}（2.6 节）。读错字节序，数字会离谱到几个数量级。Python 里两种读法等价——直接读字节，或用 \verb|struct| 模块的格式符（\verb|<| 小端、\verb|>| 大端，\verb|H| 表示 2 字节无符号整数、\verb|I| 表示 4 字节无符号整数）：
+\begin{lstlisting}[language=Python]
+import struct
+png = bytes.fromhex('0000000d')        # pixel.png 的 IHDR 长度字段
+print(int.from_bytes(png, 'big'))      # 13，PNG 规定大端序
+print(int.from_bytes(png, 'little'))   # 218103808，读错字节序就离谱
+print(struct.unpack('>I', png)[0])     # 13，'>' 表示大端
+print(struct.unpack('>H', b'\x23\x28')[0])   # 9000，2 字节大端（UDP 端口）
+\end{lstlisting}
+真实运行结果见\figref{endianstruct}：PNG 的长度字段按大端读出 13，PCAP 的长度字段按小端读出 50，而同一串字节一旦读错顺序就变成八亿多。
+\shot[0.92]{fig-misc-20-endian-struct.png}{真实输出：同一串字节按大端/小端读出不同整数，以及 struct 格式符的用法（WSL）}{endianstruct}
+\memory{多字节整数先问字节序：大端高位在前、小端低位在前。PNG 大端、PCAP 小端，读错就全错。}
+\pitfall{别把“大端序=正常、小端序=反常”当成约定：两者都很常见，谁先谁后完全由文件格式规定，只能查规范或看文件头，不能凭感觉。}
+
+\section{PNG 不是一整块：它是“签名 + 数据块”的流水线}
+PNG 文件的结构非常规整：开头 8 字节签名，之后是一串\kw{数据块}（chunk），最后一块一定是 \verb|IEND|。每个块的格式固定为四段：
+\begin{center}
+\begin{tabular}{lll}
+\toprule
+段 & 长度 & 含义 \\
+\midrule
+长度 & 4 字节 & 后面“数据”段有多少字节（大端序，即高位在前） \\
+类型 & 4 字节 & 块的名字，如 \texttt{IHDR}、\texttt{tEXt}、\texttt{IDAT}、\texttt{IEND} \\
+数据 & 长度段指定 & 块的内容 \\
+CRC & 4 字节 & 对“类型+数据”的校验值，用于发现损坏 \\
+\bottomrule
+\end{tabular}
+\end{center}
+主要块的分工：
+\begin{itemize}
+\item \verb|IHDR|：图像信息（宽、高、位深、颜色类型），必须是第一块。
+\item \verb|IDAT|：压缩后的像素数据，画面就存在这里。
+\item \verb|tEXt|：文本元数据，格式是“关键字 \verb|\x00| 文本值”，例如“Comment $\backslash$x00 一串 base64”。
+\item \verb|IEND|：结束标志，数据长度为 0。它的结束位置就是 PNG 数据的终点。
+\end{itemize}
+除了 \verb|tEXt|，PNG 还有两个同类文本块：\verb|zTXt|（值先 zlib 压缩再存）和 \verb|iTXt|（支持 UTF-8 与多语言）。找元数据时三个都要找，只认 \verb|tEXt| 会漏掉后两种。
+\figref{pngstruct} 是 pixel.png 的真实块结构：签名后依次是 \verb|IHDR|（偏移 8）、\verb|tEXt|（偏移 33）、\verb|IDAT|（偏移 85）、\verb|IEND|（偏移 109），文件共 121 字节，IEND 结束后没有多余字节。
+\shot[0.95]{fig-misc-16-png-structure.png}{PNG 结构示意（以 pixel.png 为例）：签名 + 块序列，tEXt 的数据段再展开}{pngstruct}
+\memory{PNG = 8 字节签名 + 一串块；每块 = 长度 + 类型 + 数据 + CRC；IEND 的结束位置就是 PNG 的终点。}
+\pitfall{看图片“能正常打开”只证明解码器读到了它需要的块（IHDR/IDAT/IEND），不代表别的块没有内容，更不代表 IEND 之后没有追加数据。}
+
+\section{base64：不是加密，只是换了身衣服}
+有些数据（二进制）没法直接写进文本字段，于是有了 \kw{base64} 编码：把每 3 字节数据换成 4 个可打印字符（\verb|A--Z a--z 0--9 + /|，不足用 \verb|=| 补位）。它只是\kw{编码}（encoding），不是加密（encryption）：
+\begin{itemize}
+\item 编码规则全世界公开，不需要任何密钥，任何人都能直接还原；
+\item 加密需要密钥，没有密钥原则上还原不了。
+\end{itemize}
+base64 的文本特征：一长串上述 64 个字符组成的“乱码”，长度通常是 4 的倍数，末尾可能有 \verb|=|。看到这种字符串先想“它可能是某种编码”，找到它的\kw{位置和所属字段}再解码。Python 一行解码：
+\begin{lstlisting}
+import base64
+print(base64.b64decode("ZmxhZ3ttZXRhZGF0YV9oYXNfY2x1ZXN9").decode())
+\end{lstlisting}
+\memory{base64 是编码不是加密：知道规则就能还原，不需要猜口令。}
+\pitfall{不要对整个文件的字节盲目做 base64 解码。先确认这串字符在哪个字段里（如 tEXt 的值），只解码该字段。}
+
+\section{ZIP 文件与 PK 签名}
+ZIP 压缩包由若干“文件记录 + 目录”组成，几乎所有 ZIP 的开头四个字节是 \verb|50 4B 03 04|（ASCII 显示为 \verb|PK..|，PK 是 ZIP 作者 Phil Katz 的名字缩写）。ZIP 内的每个文件可以设口令：
+\begin{itemize}
+\item 传统加密叫 \kw{ZipCrypto}，目录信息（文件名、大小）是明文可见的，只有内容被加密；
+\item 判断是否加密看目录项的标志位：\verb|flag_bits=1| 就是“需要口令”（Python \verb|zipfile| 的 \verb|ZipInfo.flag_bits| 属性）。
+\end{itemize}
+ZIP 还有个反直觉但极有用的性质：它的“目录”（中央目录）在文件\kw{末尾}。所以只要 ZIP 数据完整，即使前面加了别的字节，很多工具照样能列出目录——这正是“PNG 尾部追加 ZIP”能被直接列出的原因。
+
+ZIP 里不止一种签名，搜的时候要认全：每个文件记录以 \verb|50 4B 03 04|（\verb|PK..|）开头，中央目录里的每条目录项是 \verb|50 4B 01 02|，文件末尾的“中央目录结束记录”是 \verb|50 4B 05 06|。所以一个文件里可能命中好几处 \verb|PK|，要找 ZIP 的真正起点，用 Python 按字节精确定位（偏移应根据当前文件的解析结果确定）：
+\begin{lstlisting}
+python3 -c "d=open('文件','rb').read(); print(d.find(b'PK\x03\x04'))"
+\end{lstlisting}
+\memory{十六进制 50 4B 03 04（ASCII 显示 PK..）是 ZIP 的开场白；目录在 ZIP 末尾，文件名和大小永远是明文。}
+\pitfall{在 xxd 输出里肉眼找签名要注意排版：xxd 每两字节一组，\texttt{50 4B 03 04} 会显示成 \texttt{504b 0304}，所以要搜 \texttt{504b 0304} 而不是 \texttt{04 03 4b 50}；更稳的做法是让 Python 按字节找（\texttt{find(b'PK\textbackslash x03\textbackslash x04')}），排版不会影响它。}
+
+\section{PCAP：网络世界的行车记录仪}
+\kw{PCAP}（packet capture）文件把网卡上流过的数据包按时间顺序存下来，文件扩展名常是 \verb|.pcap|。它由两部分组成：
+\begin{itemize}
+\item \kw{全局头}：24 字节，开头 4 字节是魔数 \verb|D4 C3 B2 A1|（小端序的经典 PCAP），最后一个字段记录链路类型（1 表示以太网）；
+\item \kw{包记录}：每包一个 16 字节头（时间戳 + 实际保存长度）加一个完整的\kw{帧}。
+\end{itemize}
+一个以太网帧像套娃，从外到内是：\kw{以太网头}（14 字节，MAC 地址）$\rightarrow$ \kw{IP 头}（通常 20 字节，源/目的 IP、总长度）$\rightarrow$ \kw{UDP 头}（8 字节，源/目的端口）$\rightarrow$ \kw{负载}（application payload，应用程序真正发送的内容）。IP 头首字节的低 4 位乘 4 就是 IP 头长度，所以解析代码要现算，不能死记 20。
+
+要把第 4 章的解析脚本看懂，就得知道这两个头的字段在什么偏移上（偏移都相对各自头的起点，多字节字段都是大端序）：
+\begin{center}
+\begin{tabular}{p{0.24\textwidth}p{0.12\textwidth}p{0.54\textwidth}}
+\toprule
+IP 头字段（偏移） & 长度 & 含义 \\
+\midrule
+版本 + 头长（0） & 1 字节 & 高 4 位是版本（4 = IPv4），低 4 位乘 4 = 头长度 \\
+总长度（2） & 2 字节 & 整个 IP 包的字节数（含头） \\
+协议（9） & 1 字节 & 17 = UDP，6 = TCP \\
+源 IP（12） & 4 字节 & 发送方地址 \\
+目的 IP（16） & 4 字节 & 接收方地址 \\
+\bottomrule
+\end{tabular}
+\end{center}
+\begin{center}
+\begin{tabular}{p{0.24\textwidth}p{0.12\textwidth}p{0.54\textwidth}}
+\toprule
+UDP 头字段（偏移） & 长度 & 含义 \\
+\midrule
+源端口（0） & 2 字节 & 发送方端口 \\
+目的端口（2） & 2 字节 & 接收方端口 \\
+长度（4） & 2 字节 & UDP 头 + 负载的总字节数 \\
+校验和（6） & 2 字节 & 差错检测值 \\
+\bottomrule
+\end{tabular}
+\end{center}
+对照 M2 的脚本就一目了然：\verb|frame[ip+12:ip+16]| 取源 IP、\verb|frame[ip+16:ip+20]| 取目的 IP、\verb|frame[ip+ihl]| 起 2 字节是源端口、\verb|frame[ip+ihl+8:]| 是负载（正好跳过 8 字节 UDP 头）。
+\shot[0.95]{fig-misc-17-udp-fragments.png}{UDP 包的分层结构与按编号重组示意（以 fragments.pcap 为例）}{udpfrag}
+
+真实网络里，内容顺序和到达顺序经常不一致：丢包重传、多个会话交错、发送方分片发送……所以重组（reassemble）时必须找\kw{依据}：传输层的序列号、应用层的编号、时间戳，或者题面明确说的规则。\figref{udpfrag} 里，三个 UDP 负载各自写着 \verb|part N/3|，捕获顺序是 3、1、2，按编号排回 1、2、3 才能拼出原文。
+\memory{PCAP = 24 字节全局头 + 一串包记录；帧 = 以太网头 + IP 头 + UDP/TCP 头 + 负载。重组要凭依据，不凭感觉。}
+\pitfall{抓包文件里的先后只代表“被记录的先后”，不代表数据原本的逻辑顺序。\texttt{strings} 能看到文本不代表你知道拼接顺序。}
+
+\section{编码、压缩、隐写：三种“看不见”要分清}
+新手看到乱码就说“加密了”，看到图片就说“隐写”，这是两大误区。三种“让信息不直白”的手段机理完全不同：
+\begin{center}
+\begin{tabular}{p{0.16\textwidth}p{0.34\textwidth}p{0.36\textwidth}}
+\toprule
+类别 & 是什么 & 还原需要什么 \\
+\midrule
+编码 & 换一种表示法（base64、十六进制、URL 编码） & 只需要规则，不需要密钥 \\
+压缩 & 去掉冗余减小体积（zip、zlib） & 对应的解压算法，个别情况要口令 \\
+隐写 & 把信息藏得不显眼（像素最低位、元数据、尾部追加） & 先要“发现藏在哪”，再按规则提取 \\
+\bottomrule
+\end{tabular}
+\end{center}
+判断顺序建议：先看结构（有没有多余的块、多余的字节），再看元数据（tEXt、注释、EXIF），最后才考虑像素级（最低位 LSB 之类）的方法。本册 581 题用到的“红通道最低位”就属于像素级隐写，但它是在\kw{先走完结构分析}（PCAP $\rightarrow$ HTTP 流 $\rightarrow$ 提取图片）之后才登场的。
+
+还有一类最常被误判成“加密”的现象：\kw{文本乱码}。同一串字节在不同\kw{字符编码}（把字节映射成字符的规则表）下会显示成不同的字。常见三种：
+\begin{center}
+\begin{tabular}{p{0.16\textwidth}p{0.36\textwidth}p{0.34\textwidth}}
+\toprule
+名称 & 特点 & 本册出现处 \\
+\midrule
+UTF-8 & 国际通用；英文 1 字节、中文 3 字节 & 命令行与 Python 默认、PowerShell 要加 \texttt{-Encoding UTF8} \\
+GBK & 中文 Windows 常用；中文 2 字节 & 老的中文文本文件 \\
+latin-1 & 每个字节 1:1 映射成一个字符 & 解码兜底：任何字节都能解出来 \\
+\bottomrule
+\end{tabular}
+\end{center}
+把 UTF-8 编码的中文用 GBK 去读，就会出现一串看不懂的汉字（俗称乱码）——字节一个都没变，只是\kw{编码对不上}，这和加密毫无关系。所以看到乱码先问三件事：这串是文本还是二进制？它本来该用什么编码？打开它的工具用对编码了吗？Python 指定编码读文件：
+\begin{lstlisting}[language=Python]
+raw = open('notes.txt', 'rb').read()   # 先按字节读，谁都赖不掉
+print(raw.decode('utf-8'))             # 用 UTF-8 解码
+# 报 UnicodeDecodeError 就换：raw.decode('gbk') / raw.decode('latin-1')
+\end{lstlisting}
+M4 在 PowerShell 里读 CSV 要加 \verb|-Encoding UTF8|，就是为了让终端按正确编码显示，而不是让内容真的变成乱码。
+\memory{乱码多半是编码没对上（UTF-8 / GBK / latin-1），不是加密。}
+\pitfall{不要看到非 ASCII 就喊“加密了”。顺序是：先试 UTF-8，再试 GBK，最后用 latin-1 兜底看原始字节。同时记住 base64 属于\kw{另一类}编码（2.4 节），别和字符编码混为一谈。}
+\memory{先结构、后元数据、再像素。顺序反了，你会在像素里白找半天。}
+
+\section{四层分析法：从外壳走到语义}
+综合前面所有概念，分析任何陌生附件都可以按\figref{layers} 的四层推进：
+\begin{enumerate}[label=\arabic*.]
+\item \kw{外壳}：多大？扩展名是什么？文件头是什么？（\verb|file|、\verb|xxd -l 16|）
+\item \kw{结构}：格式内部的骨架——PNG 块序列、ZIP 目录、PCAP 包记录。用解析脚本逐段走一遍，记下每个结构的偏移。
+\item \kw{内容}：结构里装的字节——文本、像素、网络负载。用 \verb|strings|、Pillow、base64 解码取出可读信息。
+\item \kw{语义}：这些内容和题面的关系——哪个字段是线索？按什么规则还原？答案格式是什么？
+\end{enumerate}
+\shot[0.92]{fig-misc-18-four-layers.png}{分析陌生附件的四层：外壳 $\rightarrow$ 结构 $\rightarrow$ 内容 $\rightarrow$ 语义}{layers}
+跳过前两层直接搜 \verb|flag{|，在简单题可能碰巧成功；遇到编码、分片、尾部追加数据就立刻失效。每层都留下证据（偏移、字段名、字节位置），复核的队友才能重走你的路。
+
+\section{证据习惯小结}
+\begin{itemize}
+\item 原件只读：分析前复制，记录大小和 SHA-256（WSL 里 \verb|sha256sum 文件|）。
+\item 每条结论写来源：偏移、字段名、包编号、颜色通道与位序。
+\item 未验证就是未验证：口令没试出来就写“口令未验证”，不要脑补答案。
+\item 附件不可信：下载的压缩包里出现可执行文件，静态看，不运行。
+\end{itemize}
+\memory{结论可以错，证据链不能断。错了能修，断了没法复核。}
+
+% ===========================================================================
+\chapter{Misc 工具箱}
+\label{chap:tools}
+\goal{每个工具知道“它是什么、什么时候用、输出怎么读”。工具不多，六个就够入门：file、xxd、strings、binwalk 的思想、Python 标准库、Wireshark/tshark（概念）。}
+
+\section{file：先问它“你是什么”}
+\kw{file} 是一个读文件头和内部结构、给出类型判断的命令。用法一行：
+\begin{lstlisting}
+file labs/misc/pixel.png
+\end{lstlisting}
+输出形如 \verb|PNG image data, 1 x 1, 8-bit/color RGB, non-interlaced|：不仅说是 PNG，还报了尺寸、位深。真实输出见\figref{filemagic} 第一行。什么时候用：\kw{拿到任何附件的第一条命令}。它报的类型和扩展名不一致时，以它为准继续深入，但记住它也可能被“尾部追加数据”骗过。
+\memory{file 是分诊台：先量体温（类型），再决定挂哪个科。}
+
+\section{xxd：把字节摊开看}
+\kw{xxd} 把文件按十六进制显示，三栏（偏移 / 字节 / ASCII 侧写）怎么读见 2.2 节。常用组合：
+\begin{lstlisting}
+xxd -l 16 文件          # 只看开头 16 字节：认文件头
+xxd 文件 | tail -n 8    # 看文件尾：找追加数据（WSL 管道）
+xxd -s 4944 -l 112 文件  # 从偏移 4944 起看 112 字节：核对 IEND 与尾部
+\end{lstlisting}
+这个方法也可用来检查 PNG 标准结束标记之后的字节。什么时候用：想确认“某偏移到底是什么字节”、“文件尾多出什么”。
+\memory{偏移 + 长度是二进制分析的坐标系；xxd 就是你的放大镜。}
+
+\section{strings：搜出所有像话的字}
+\kw|strings| 把文件里连续的可打印字符（默认 4 个以上）逐行打出来。用法：
+\begin{lstlisting}
+strings labs/misc/pixel.png
+\end{lstlisting}
+\figref{stringsfig} 上半部是它的输出：能看到 \verb|tEXt|、\verb|Comment| 和一串 base64。什么时候用：粗筛线索。局限也要记住：它看得到“字”，看不到“字属于哪个结构、按什么顺序拼”。看见文本不等于会用文本。
+\memory{strings 负责发现，解析负责证明。}
+
+\section{binwalk 的思想：在文件里搜文件签名}
+\kw{binwalk} 是知名的固件/嵌套文件分析工具，它做的事其实很朴素：\kw{在文件里逐字节搜索已知格式的文件签名}（PNG 头、ZIP 的 PK 签名、gzip 的 1f 8b……），报告命中偏移。本册的 WSL 环境没有预装 binwalk，但“搜签名”这件事用 \verb|xxd| 和 Python 十分钟就能自己做：
+\begin{lstlisting}
+xxd 文件 | grep "504b 0304"      # 搜 ZIP 的本地文件头签名
+python3 -c "print(open('文件','rb').read().find(b'PK\x03\x04'))"   # 精确偏移
+\end{lstlisting}
+搜到签名后，仍需解析其周围结构并互相验证；单次命中只能作为线索，不能单独证明文件边界。
+\memory{binwalk 的本质 = 拿着一堆文件头签名在文件里搜墙。}
+
+\section{Python 标准库：自己写解析器}
+四个模块覆盖本册九成需求：
+\begin{center}
+\begin{tabular}{p{0.16\textwidth}p{0.36\textwidth}p{0.34\textwidth}}
+\toprule
+模块 & 干什么 & 本册用在哪 \\
+\midrule
+\texttt{struct} & 字节串与整数互转（\texttt{unpack}/\texttt{pack}），可指定大小端 & 解析 PNG 块长度、PCAP 头 \\
+\texttt{zlib} & 解压/压缩（PNG 的 IDAT 就是 zlib 流）；\texttt{crc32} 校验 & 生成与校验 PNG 块 \\
+\texttt{base64} & base64 编解码（\texttt{b64decode}/\texttt{b64encode}） & M1 解出 tEXt 的值 \\
+\texttt{zipfile} & 读写 ZIP：列目录、读内容、看 \texttt{flag\_bits} & 本地 ZIP 样例、581/591 附件 \\
+\bottomrule
+\end{tabular}
+\end{center}
+最小示例——按 2.3 节的块格式走一遍 pixel.png（与\figref{chunks} 的脚本同源）：
+\begin{lstlisting}[language=Python]
+from pathlib import Path
+data = Path('labs/misc/pixel.png').read_bytes()
+off = 8                          # 跳过 8 字节签名
+while off < len(data):
+    ln = int.from_bytes(data[off:off+4], 'big')   # 长度：4 字节，大端
+    kind = data[off+4:off+8]                     # 类型：4 字节
+    body = data[off+8:off+8+ln]                  # 数据：ln 字节
+    print(off, kind, ln)
+    off += 12 + ln               # 长度4 + 类型4 + 数据ln + CRC4
+\end{lstlisting}
+读懂这 8 行，比背 10 个工具参数更有用：你已经能自己走任何“长度-类型-数据”结构了。
+\memory{工具会装不上，标准库永远在。会写 10 行解析器 = 不怕任何新格式。}
+
+\section{Wireshark / tshark：读流量的图形与命令行工具}
+\kw{Wireshark} 是最流行的抓包分析软件：打开 pcap 就能看到包列表、协议分层、十六进制详情，还能“Follow UDP/TCP Stream”（跟踪流）把一条会话的内容拼出来。\kw{tshark} 是它的命令行版本，适合批量过滤。概念只需要记住三个：
+\begin{itemize}
+\item \kw{过滤器}：按 IP、端口、协议筛包，例如 \verb|udp.port == 9000|；
+\item \kw{跟踪流}：把一条会话（源/目的 IP+端口 组合）的所有负载按序拼好；
+\item \kw{导出对象}：从 HTTP 等协议里把传输的文件直接存盘（Wireshark：文件 $\rightarrow$ 导出对象 $\rightarrow$ HTTP）。
+\end{itemize}
+\pitfall{本册不依赖 Wireshark——它没装也能做完全部题目。但考试/实战里它极常用，装一个没坏处。工具展示的一段文本不等于事实：你要能说出它来自哪条流、哪个包、依据什么排序。}
+
+\section{Pillow：读像素的 Python 库}
+\kw{Pillow}（PIL）是 Python 的图像库，一行打开图片、一行拿像素：
+\begin{lstlisting}[language=Python]
+from PIL import Image
+im = Image.open('screenshot.png').convert('RGB')
+print(im.size, im.mode, im.getpixel((0, 0)))
+\end{lstlisting}
+581 题用它把 $200\times200$ 图片的每个像素读出来，取红通道最低位。安装：\code{python -m pip install pillow}。
+\memory{像素即数据：图片在程序眼里就是一排排 (R,G,B) 数字。}
+
+% ===========================================================================
+% ===========================================================================
+\chapter{题目：题面卡与逐题图解带做}
+\label{chap:cards}
+\goal{五道题，每题一节：先用题面卡把“给什么、要什么、考什么”读清楚，紧接着就是这道题的完整解题步骤——读题与思路、分步操作与观察、结果与核对、为什么会成功、排错指南、变式练习。建议先只读题面卡自己动手试 10--15 分钟，卡住再看后面的步骤。}
+
+本册题目编号与练习材料的对应关系：M0 是纯方法题（无 flag）；M1、M2 使用资料自带的 \verb|labs/misc/| 材料离线完成；M3 对应 581 外泄流量取证，M4 对应 591 Poisoned Samples。两题的已整理附件都随包提供，可离线分析。难度用星表示：$\bigstar$ 越多越难，入门 $\bigstar\circ\circ$、进阶 $\bigstar\bigstar\circ$、挑战 $\bigstar\bigstar\bigstar$。
+
+% ===========================================================================
+\section{题 M0：扩展名和文件头吵架了，你信谁？}
+
+\begin{challenge}{题 M0 题面卡}
+\field{题目来源}{自编方法题（离线可做，无 flag）}
+\field{给定材料}{一个被重命名为 \code{photo.zip} 的文件（内容是 PNG 图片）}
+\field{目标}{判断这个文件的真实格式，并给出支持结论的字节证据}
+\field{交付物}{两条命令的输出（file 识别结果、文件头十六进制），以及一句“它其实是……”的结论}
+\field{考点}{扩展名只是标签；文件头（magic bytes）才反映内容}
+\field{前置知识}{1.3 节命令行基础、2.1--2.2 节文件头与 xxd}
+\field{难度}{$\bigstar\circ\circ$（入门）}
+\end{challenge}
+
+\paragraph{读题与思路}
+题面说“一个 PNG 被重命名成 \verb|photo.zip|”。看到“扩展名和内容可能不一致”，第一反应不该是改后缀或者双击打开，而是\kw{让文件自己报身份}：先 \verb|file|，再看文件头字节。这题没有 flag，交付物是可信的判断过程——它给后面所有题打地基。
+
+\paragraph{分步操作与观察}
+\begin{enumerate}[label=\arabic*.]
+\item 在 \kw{WSL} 里准备实验品并让 \verb|file| 识别（这一步是为了模拟“文件名骗人”的场景）：
+\begin{lstlisting}
+cp labs/misc/pixel.png /tmp/photo.zip && file /tmp/photo.zip
+\end{lstlisting}
+应看到 \verb|/tmp/photo.zip: PNG image data, 1 x 1, 8-bit/color RGB|——名字是 zip，\verb|file| 报 PNG，如\figref{filemagic} 第二行。
+\item 再用 \verb|xxd -l 16| 看开头 16 字节（这一步拿到不可辩驳的字节证据）：
+\begin{lstlisting}
+xxd -l 16 /tmp/photo.zip
+\end{lstlisting}
+应看到第一行以 \verb|8950 4e47 0d0a 1a0a| 开头，右侧 ASCII 有 \verb|.PNG|，如\figref{filemagic} 第三行。这就是 PNG 的 8 字节签名。
+\item 反向验证：如果是真 ZIP，开头应该是 \verb|50 4B 03 04|（\verb|PK..|）。本文件没有这两个字节在开头——扩展名的说法规不攻自破。
+\end{enumerate}
+
+\paragraph{结果与核对}
+结论：\kw{该文件真实格式是 PNG，扩展名 .zip 只是改出来的标签}。核对方式就是第二步的字节证据：签名 8 字节与 2.1 节表格逐字节对上。本题交付物是“命令输出 + 结论”，没有 flag。
+
+\paragraph{为什么会成功}
+一句话机制：\kw{格式识别靠内容不靠名字}。操作系统和程序打开文件时读的是字节；扩展名只是 Windows 用来“猜该用哪个程序打开”的提示。改扩展名不改字节，所以 \verb|file| 和 xxd 给出的才是真相。往后每道题，第一步都是这样“让文件报身份”。
+
+\debugtip{
+\begin{itemize}
+\item \texttt{file} 报“cannot open”：当前目录不对，先 \texttt{pwd}，或用完整路径。
+\item xxd 输出显示“command not found”：WSL 里执行 \texttt{sudo apt install -y xxd}。
+\item 看到的字节和书中不同：确认你复制的是 \texttt{labs/misc/pixel.png}，不是别的图。
+\end{itemize}}
+
+\paragraph{变式练习}
+\begin{enumerate}[label=\alph*.]
+\item 把 \verb|labs/misc/fragments.pcap| 复制成 \verb|/tmp/data.zip|，先猜 \verb|file| 会报什么，再验证。
+\item 找一张自己的 JPEG 照片，用 \verb|xxd -l 16| 看它的文件头（\verb|FF D8 FF|），对照 2.1 节表格。
+\item 思考题：扩展名和文件头都显示 PNG，能否断定文件只有标准 PNG 数据？结合本节对块序列与 IEND 结束标记的说明回答。
+\end{enumerate}
+
+% ===========================================================================
+\section{题 M1：像素没有字，备注却藏着 flag}
+
+\begin{challenge}{题 M1 题面卡}
+\field{题目来源}{本地靶场 \code{labs/misc/pixel.png}（离线可做）}
+\field{给定材料}{一张 $1\times1$ 像素的灰色 PNG，共 121 字节}
+\field{目标}{找出隐藏的 flag，并说明它位于 PNG 的哪个数据块、用什么方式编码}
+\field{交付物}{一个 \code{flag\{...\}} 字符串 + 一句话说明所在块名与编码方式}
+\field{考点}{PNG 分块结构（tEXt 元数据）；base64 是编码不是加密}
+\field{前置知识}{2.2 节字节序、2.3 节 PNG 分块、2.4 节 base64、3.2 节 xxd、3.3 节 strings}
+\field{难度}{$\bigstar\circ\circ$（入门）}
+\end{challenge}
+
+\paragraph{读题与思路}
+题面给的 \verb|labs/misc/pixel.png| 只有 121 字节，是 $1\times1$ 像素的灰图——画面本身不可能“藏字”（1 个像素就是 1 个颜色）。但 2.3 节说过 PNG 里除了像素还有\kw{元数据块}。所以思路是：画面排除 $\rightarrow$ 看结构 $\rightarrow$ 找文本块 $\rightarrow$ 只解码该字段。先看一眼原图和放大示意（\figref{pixelpng}、\figref{pixelzoom}），确认“画面无线索”，再进字节层。
+\shot[0.22]{labs/misc/pixel.png}{本地 pixel.png 原图（题目附件原图）：$1\times1$ 像素，几乎看不出内容}{pixelpng}
+\shot[0.62]{fig-misc-15-pixel-zoom.png}{pixel.png 放大示意：最近邻放大的“大色块”，实际只有 1 个像素，画面里没有文字}{pixelzoom}
+
+\paragraph{分步操作与观察}
+\begin{enumerate}[label=\arabic*.]
+\item 在 \kw{WSL} 里让 \verb|file| 报身份，确认是 PNG 且尺寸 $1\times1$（对照\figref{filemagic} 第一行）。这一步建立基线：它确实是个合法 PNG。
+\item 用 \verb|strings| 找可见文本，再用 \verb|xxd| 看全部字节：
+\begin{lstlisting}
+strings labs/misc/pixel.png
+xxd labs/misc/pixel.png
+\end{lstlisting}
+应看到 \verb|tEXt|、\verb|Comment| 字样和一长串 \verb|ZmxhZ3tt...| 的 base64 样式文本，如\figref{stringsfig}。看到 base64 样式文本，先记下它的位置（属于 tEXt 块）。
+\shot[0.78]{fig-misc-02-strings-pixel.png}{strings 与 xxd 的真实输出：tEXt、Comment 与一串 base64 样式文本都藏在可见字节里}{stringsfig}
+\item 按 2.3 节的块格式逐块解析，确认每块的类型、长度和偏移：
+\begin{lstlisting}[language=Python]
+from pathlib import Path
+data = Path('labs/misc/pixel.png').read_bytes()
+print('文件大小:', len(data), '字节；PNG 签名:', data[:8].hex())
+off = 8
+while off < len(data):
+    ln = int.from_bytes(data[off:off+4], 'big')
+    kind = data[off+4:off+8].decode()
+    body = data[off+8:off+8+ln]
+    print(f'偏移 {off:>4}  类型 {kind}  数据长度 {ln:>2}  数据 {body!r}')
+    off += 12 + ln
+print('解析到文件末尾，块结构完整')
+\end{lstlisting}
+（在 WSL 里用 \verb|python3 - <<'PY' ... PY| 粘贴运行即可。）应看到四行：\verb|IHDR|（偏移 8）、\verb|tEXt|（偏移 33）、\verb|IDAT|（偏移 85）、\verb|IEND|（偏移 109），且解析恰好停在 121 字节，如\figref{chunks}。
+\shot[0.92]{fig-misc-03-png-chunks.png}{按块解析 pixel.png 的真实输出：tEXt 的数据是 Comment 字段加一串 base64}{chunks}
+\item \kw{只}提取 tEXt 块里的文本字段并做 base64 解码（不解整张图的字节）：
+\begin{lstlisting}[language=Python]
+import base64
+# 沿用上一步的解析循环，找到 tEXt 块后：
+    if kind == b'tEXt':
+        keyword, value = body.split(b'\x00', 1)
+        print('tEXt 关键字:', keyword.decode())
+        print('tEXt 内容(原样):', value.decode())
+        print('base64 解码后:', base64.b64decode(value).decode())
+\end{lstlisting}
+应看到关键字 \verb|Comment|，以及解码后的完整 flag，如\figref{b64flag}。
+\shot[0.72]{fig-misc-04-textt-flag.png}{真实脚本输出：tEXt 的 Comment 字段解出 flag}{b64flag}
+\end{enumerate}
+
+\paragraph{结果与核对}
+\flagbox{flag\{metadata\_has\_clues\}}
+核对办法有两条，都建议做：一是 2.3 节说的 CRC——解析时块边界严丝合缝、最后恰好落在文件末尾，说明这个 tEXt 是格式内合法的块，不是偶然出现的字符；二是反向编码验证：运行以下命令，输出应与 tEXt 内容逐字符一致：
+\begin{lstlisting}
+python3 -c "import base64; print(base64.b64encode(b'flag{metadata_has_clues}').decode())"
+\end{lstlisting}
+
+\paragraph{为什么会成功}
+一句话机制：\kw{PNG 允许携带文本元数据，而图片查看器从不显示它}。tEXt 块按规范存放“关键字 $\backslash$x00 值”，本次值用 base64 包了一层。图像解码器只需要 IHDR/IDAT/IEND 就能画出画面，所以图片“看起来完全正常”——这正是元数据藏东西好用的原因。这也回答了题面的要求：flag 在 \verb|tEXt| 块的 \verb|Comment| 字段里，编码方式是 base64。
+
+\debugtip{
+\begin{itemize}
+\item \texttt{strings} 什么都没看到：确认文件是 \texttt{labs/misc/pixel.png}（121 字节）；先跑 \texttt{python3 labs/misc/make\_challenges.py} 重新生成题目数据。
+\item 解析循环报越界/读不动：检查你是不是漏了 8 字节签名（从 \texttt{off = 8} 开始），或者忘了 \texttt{off += 12 + ln}。
+\item 解码输出乱码：你可能解的是 IDAT（压缩字节）或整图字节。只对 tEXt 的\kw{值}做 \texttt{b64decode}，关键字 \texttt{Comment} 不参与解码。
+\item 提交平台被拒：检查大小写、花括号、有没有带进换行；flag 全小写，含下划线。
+\end{itemize}}
+
+\paragraph{变式练习}
+\begin{enumerate}[label=\alph*.]
+\item 用 Python 向 pixel.png 的副本里再插一个 tEXt 块（关键字 \verb|Hint|、值 \verb|try_me|），写完 CRC，再用第 3 步的解析器读出来。手写一遍块格式，比读十遍书管用。
+\item 把 Comment 的值换成 \verb|aGVsbG8=|，预测解码结果后再验证（提示：5 个字母的问候语）。
+对比不同 PNG 样例：块序列结束偏移与文件实际大小相等时，可判断标准图片结构已到文件末尾。
+\end{enumerate}
+
+% ===========================================================================
+\section{题 M2：三个 UDP 片段为什么拼成乱码？}
+
+\begin{challenge}{题 M2 题面卡}
+\field{题目来源}{本地靶场 \code{labs/misc/fragments.pcap}（离线可做）}
+\field{给定材料}{一个 252 字节的 PCAP，内含 3 个 UDP 包（10.10.0.1 $\rightarrow$ 10.10.0.2:9000）}
+\field{目标}{按正确顺序重组三个负载，还原完整消息（flag）}
+\field{交付物}{一个 \code{flag\{...\}} 字符串 + 一句话说明你依据什么排序}
+\field{考点}{PCAP 帧结构（以太网/IP/UDP/负载）；捕获顺序 $\neq$ 逻辑顺序；按应用层编号重组}
+\field{前置知识}{2.2 节字节序、2.6 节 PCAP 与 IP/UDP 头结构、3.5 节 Python 解析}
+\field{难度}{$\bigstar\bigstar\circ$（进阶）}
+\end{challenge}
+
+\paragraph{读题与思路}
+题面直说了难点：“在文件里依次出现为第 3、1、2 片”。也就是说抓包文件的记录顺序不是内容顺序。那什么是顺序的\kw{依据}？题面还提示每个负载带“part N/3”编号——依据就写在数据自己身上。所以路线是：认格式 $\rightarrow$ 逐包解析、记下每包的编号与内容 $\rightarrow$ 按编号重组 $\rightarrow$ 核对结果。
+
+\paragraph{分步操作与观察}
+\begin{enumerate}[label=\arabic*.]
+\item 在 \kw{WSL} 里认格式、看全局头、粗看内容：
+\begin{lstlisting}
+file labs/misc/fragments.pcap
+xxd -l 24 labs/misc/fragments.pcap
+strings labs/misc/fragments.pcap
+\end{lstlisting}
+应看到 \verb|pcap capture file ... (Ethernet, capture length 65535)|；全局头十六进制以 \verb|d4c3 b2a1| 开头（小端序 PCAP 魔数）；\verb|strings| 显示三行 \verb|part 3/3: }|、\verb|part 1/3: flag{follow_|、\verb|part 2/3: the_packets|，如\figref{pcapfile}。注意 strings 的输出顺序就是文件顺序 3、1、2——直接拼是乱码。
+\shot[0.88]{fig-misc-05-file-pcap.png}{真实输出：file 认出 PCAP；xxd 看全局头；strings 显示三段文本但顺序是 3、1、2}{pcapfile}
+\item 逐包解析：跳过 24 字节全局头，每包读 16 字节记录头拿长度，再从帧里剥掉以太网头、IP 头、UDP 头，得到负载：
+\begin{lstlisting}[language=Python]
+from pathlib import Path
+data = Path('labs/misc/fragments.pcap').read_bytes()
+print('文件大小:', len(data), '字节；全局头 24 字节，链路类型',
+      int.from_bytes(data[20:24], 'little'), '(1 = 以太网)')
+off, no = 24, 0
+while off + 16 <= len(data):
+    no += 1
+    size = int.from_bytes(data[off+8:off+12], 'little')
+    frame = data[off+16:off+16+size]
+    ip = 14
+    ihl = (frame[ip] & 15) * 4            # IP 头长度=首字节低4位*4
+    src = '.'.join(map(str, frame[ip+12:ip+16]))
+    dst = '.'.join(map(str, frame[ip+16:ip+20]))
+    sport = int.from_bytes(frame[ip+ihl:ip+ihl+2], 'big')
+    dport = int.from_bytes(frame[ip+ihl+2:ip+ihl+4], 'big')
+    payload = frame[ip+ihl+8:]            # 再跳过 8 字节 UDP 头
+    print(f'捕获第 {no} 个包: {src}:{sport} -> {dst}:{dport}  UDP 负载 {payload!r}')
+    off += 16 + size
+\end{lstlisting}
+应看到三行：捕获第 1 个包负载 \verb|part 3/3: }|、第 2 个包 \verb|part 1/3: flag{follow_|、第 3 个包 \verb|part 2/3: the_packets|，如\figref{pcappkts}。三个包同属 UDP 会话：源地址 \code{10.10.0.1}，目标地址 \code{10.10.0.2}，端口 \code{9000}。
+\shot[0.85]{fig-misc-06-pcap-packets.png}{真实输出：三个 UDP 包的负载与编号，捕获顺序是 3、1、2}{pcappkts}
+\item 按负载里的编号归位，再按编号拼接（把上一步循环里的 \verb|payload| 换成下面的归位逻辑）：
+\begin{lstlisting}[language=Python]
+    label, fragment = payload.split(b': ', 1)
+    index = int(label.split()[1].split(b'/')[0])   # 'part 1/3' -> 1
+    parts[index] = fragment
+print('按负载里的编号归位:', {k: v.decode() for k, v in sorted(parts.items())})
+message = b''.join(parts[k] for k in sorted(parts))
+print('按编号 1,2,3 拼接:', message.decode())
+\end{lstlisting}
+应看到三段各就各位，拼接结果完整、括号闭合，如\figref{reasm}。
+\shot[0.82]{fig-misc-07-udp-reassemble.png}{真实输出：按 part 编号归位并拼接，得到完整 flag}{reasm}
+\end{enumerate}
+
+\paragraph{结果与核对}
+\flagbox{flag\{follow\_the\_packets\}}
+核对：拼出的文本括号完整、以 \verb|flag{| 开头 \verb|}| 结尾，且三段与三个包一一对应。还可以换个工具独立验证：Wireshark 打开后依次点三个 UDP 包看负载（或安装 tcpdump 后 \verb|tcpdump -nn -A -r labs/misc/fragments.pcap|），手工按 part 编号抄一遍，结果应与脚本一致。
+
+\paragraph{为什么会成功}
+一句话机制：\kw{应用自己带了顺序号，所以不依赖抓包顺序}。网络里“先来后到”是不可靠的：丢包、重传、多会话交错都会打乱记录顺序。本题的出题人把编号写进负载（\verb|part N/3|），就是在告诉你“按我给的规则重组”。解析时我们还从 IP 头首字节现算了头长（\verb|(frame[ip] & 15) * 4|），这保证 IP 头带选项时脚本也不会剥错位置。
+
+\debugtip{
+\begin{itemize}
+\item 拼出来是乱码/顺序怪：你八成按了文件顺序或时间戳排序。排序键必须是负载里的 part 编号。
+\item 提示 \texttt{unpack} 失败或切片越界：确认从 24 字节后开始、每个包先读 16 字节记录头里的 \texttt{incl\_len}（第 3 个 4 字节字段）。
+\item 负载里看不到 \texttt{part}：你可能把 UDP 头也算进负载了。UDP 头固定 8 字节，偏移是 \texttt{ip+ihl} 到 \texttt{ip+ihl+8}。
+\item 只想快速看一眼：\texttt{strings} 能看到文本，但请务必补上“它来自哪个包、依据什么排序”的说明——这是本题的考点。
+\end{itemize}}
+
+\paragraph{变式练习}
+\begin{enumerate}[label=\alph*.]
+\item 用 Python 改写 fragments.pcap 的副本，把三个包的存储顺序换成 2、3、1（记录头和帧整体搬动），确认脚本仍得到同一 flag。
+\item 把排序键从 part 编号换成时间戳，预测输出（提示：时间戳顺序就是文件顺序），观察乱码。
+\item 进阶：如果三段是同一个 TCP 流被拆开的，应该按什么重组？（提示：TCP 头里有\kw{序列号}，Wireshark 的“跟踪流”就是干这个的。）
+\end{enumerate}
+
+% ===========================================================================
+\section{题 M3（玄机 581）：外泄流量取证——上传的图里藏着什么字？}
+
+\begin{challenge}{题 M3 题面卡}
+\field{题目来源}{玄机平台 \emph{2026安网杯-外泄流量取证}（\url{https://xj.edisec.net/challenges/581}），附件在 \code{labs/platform/attachments/581-network-forensics.zip}}
+\field{给定材料}{一份网络流量附件（PCAP）；题面不说明具体协议}
+\field{目标}{从流量中找到被上传的图片，从图片里还原出 flag}
+\field{交付物}{一个 \code{flag\{...\}} 字符串 + 证据链：哪条会话、哪个上传文件、哪个颜色通道、什么位序}
+\field{考点}{TCP 流重组、multipart 上传解析、图片 LSB（最低有效位）隐写}
+\field{前置知识}{2.6 节 PCAP、2.7 节编码/隐写区分、3.6 节 Wireshark 概念、3.7 节 Pillow}
+\field{难度}{$\bigstar\bigstar\bigstar$（挑战）}
+\end{challenge}
+
+\paragraph{读题与思路}
+题面不给协议、不给文件名，是典型的“取证链”题。思路要一步步收窄：认出附件是 PCAP $\rightarrow$ 找到有内容的会话 $\rightarrow$ 还原应用层请求 $\rightarrow$ 提取请求里的文件 $\rightarrow$ 分析文件。每一步都有输出可核对。最后一层是图片隐写：既然普通看图看不到字，而题解要“从图里读字”，就往\kw{像素的最低位}（LSB，每种颜色 0--255 的最低 1 位）想——这层放在最后，因为结构分析先做完才轮到它。
+
+\paragraph{分步操作与观察}
+\begin{enumerate}[label=\arabic*.]
+\item 观察流量里被上传的图片长什么样。先记住它的样子：$200\times200$、紫蓝色纹理，肉眼看不出文字（\figref{shot581}）。
+\shot[0.42]{labs/platform/attachments/581-network-forensics/screenshot.png}{581 流量中提取出的上传图片 screenshot.png（题目附件原图）：肉眼不见文字}{shot581}
+\item 在 Wireshark（若已安装）里打开附件 ZIP 内的 PCAP，按 TCP 会话查看，会找到一条 \verb|172.20.0.6:60244 -> 172.20.0.2:80| 的会话，请求是发往 \verb|/upload.php| 的 multipart POST，上传字段中的文件名是 \verb|screenshot_2026-03-29.png|。也可用“文件 $\rightarrow$ 导出对象 $\rightarrow$ HTTP”直接把图片存盘。
+\item 没有 Wireshark 也没关系——仓库里的复现脚本用纯 Python 完成同样的事：从 ZIP 读 PCAP、按 TCP 序号重组流、按 multipart boundary 切出上传文件、存成图片：
+\begin{lstlisting}
+python labs\platform\solve_581_network_forensics.py
+\end{lstlisting}
+（在 \kw{Windows PowerShell} 执行；依赖 Pillow。）应看到四行关键输出：会话、上传文件名、图片尺寸模式、以及 flag，如\figref{solve581}。
+\shot[0.92]{fig-misc-10-581-solve.png}{真实输出：solve 脚本报告会话、上传文件、图片信息并打出 flag}{solve581}
+\item \kw{独立复核}（不看脚本、自己写几行）：按行优先遍历像素，取红通道最低位，每 8 位拼 1 字节（最高位在前）：
+\begin{lstlisting}[language=Python]
+from PIL import Image
+im = Image.open(r'labs\platform\attachments\581-network-forensics\screenshot.png').convert('RGB')
+px = im.tobytes()
+bits = [px[i] & 1 for i in range(0, len(px), 3)]      # 每像素的红通道
+raw = bytes(sum(bits[i+j] << (7-j) for j in range(8))
+            for i in range(0, len(bits)-7, 8))
+print(raw.split(b'\x00', 1)[0].decode('ascii'))
+\end{lstlisting}
+应输出与脚本相同的 flag，如\figref{lsbcheck}。
+\shot[0.88]{fig-misc-11-581-lsb-recheck.png}{独立复算真实输出：手工取红通道最低位，还原出同一 flag}{lsbcheck}
+\end{enumerate}
+
+\paragraph{结果与核对}
+\flagbox{flag\{3b0dc3022a1a3d1ddc12653ae4948cdd\}}
+证据链完整版：来自会话 \code{172.20.0.6:60244} 到 \code{172.20.0.2:80} 的 POST 请求，路径为 \url{/upload.php}；上传文件 \url{screenshot_2026-03-29.png}；$200\times200$ RGB；按行优先取\kw{红通道}（R）\kw{最低位}，每 8 位按\kw{最高位在前}拼 1 字节；开头即完整 flag。核对方式：脚本输出与手工复算一致（\figref{solve581} 对 \figref{lsbcheck}）。平台反馈：2026-09-25 在玄机平台提交后显示“FLAG 正确”，步骤 $1/1$。
+
+\paragraph{为什么会成功}
+一句话机制：\kw{LSB 隐写把 1 个比特藏进每个像素的颜色最低位}。改最低位对颜色的影响小于 1/255，肉眼看不出（所以\figref{shot581} 一片正常纹理）；但 40000 个像素就能带 5000 字节，藏一行 flag 绰绰有余。而它之所以需要“取证链”，是因为图片本身是从流量里捞出来的——先有 TCP 重组、multipart 解析，才轮到像素分析。
+
+\debugtip{
+\begin{itemize}
+\item 脚本报“input is not a classic PCAP file”：附件 ZIP 里应有唯一一个 .pcap；确认没解压坏，重跑 \texttt{python labs/platform/solve\_581\_network\_forensics.py}（它默认读 \texttt{labs/platform/attachments/581-network-forensics.zip}）。
+\item 脚本报“Pillow”相关 ImportError：先 \texttt{python -m pip install pillow}。
+\item 手工复算出乱码：检查三处——通道是红（\texttt{px[i]} 中 i 每 3 个取 1 个）、位序是高位在前（\texttt{7-j}）、遍历顺序是从左到右、从上到下（\texttt{tobytes} 正是这个顺序）。
+\item 只想换通道试试：蓝/绿通道通常解出乱码。变换要有依据（题面、文件名、源码），不要无依据遍历所有可能性后挑一个像的。
+\end{itemize}}
+
+\paragraph{变式练习}
+\begin{enumerate}[label=\alph*.]
+\item 把复核代码改成读绿通道最低位，先预测（乱码？），再运行验证。
+\item 把位序改成低位在前（\verb|j| 而不是 \verb|7-j|），观察输出差异，理解“位序”为什么必须写进证据链。
+\item 用 2.3 节的块解析器跑 screenshot.png，看它的 tEXt 里有没有东西——想一想“元数据隐藏”和“LSB 隐藏”分别在四层分析法的哪一层。
+\end{enumerate}
+
+% ===========================================================================
+\section{题 M4（玄机 591）：Poisoned Samples——被投毒的训练集}
+
+\begin{challenge}{题 M4 题面卡}
+\field{题目来源}{玄机平台 \emph{Poisoned Samples}（591），附件在 \code{labs/platform/attachments/591-poisoned-samples.zip}}
+\field{给定材料}{一个数据集包：\code{train\_samples.csv}（文本分类训练样本）、\code{metadata.json}（审计元数据）、\code{README.txt}}
+\field{目标}{结合审计元数据识别构成后门投毒的样本，按投毒顺序恢复 flag 片段}
+\field{交付物}{一个 \code{flag\{...\}} 字符串 + 每段片段来自哪个样本的对照表}
+\field{考点}{数据投毒审计：触发词 + 目标标签 + 顺序字段的组合筛选；噪声样本的排除}
+\field{前置知识}{1.4 节记录习惯、Python \code{csv}/\code{json} 读文件（3.5 节思想）}
+\field{难度}{$\bigstar\bigstar\circ$（进阶）}
+\end{challenge}
+
+\paragraph{读题与思路}
+这是数据审计题：\verb|train_samples.csv| 里是文本分类的训练样本，其中混入了带后门的“投毒样本”。附件的 \verb|metadata.json| 给了审计口径：触发词 \verb|TRIGGER:blue-owl|、目标标签 \verb|refund_approved|。读懂口径后，任务就是\kw{按条件筛选}：一条样本要同时满足多个条件才算投毒样本；噪声行会故意长得像，但缺某个条件。最后按 \verb|poison_order| 拼片段。
+
+\paragraph{分步操作与观察}
+\begin{enumerate}[label=\arabic*.]
+\item 在 \kw{Windows PowerShell} 里看数据长什么样：
+\begin{lstlisting}
+Get-Content labs\platform\attachments\591-poisoned-samples\poisoned_samples_bundle\train_samples.csv -TotalCount 7 -Encoding UTF8
+Get-Content labs\platform\attachments\591-poisoned-samples\poisoned_samples_bundle\metadata.json -Encoding UTF8
+\end{lstlisting}
+应看到 CSV 五列：\verb|sample_id,text,label,poison_order,fragment|，以及 metadata 的四个字段，如\figref{csvhead}。仔细看会发现两类干扰：\verb|S-088| 带触发词但标签是 \verb|normal|；\verb|S-052| 标签是 \verb|refund_approved| 但没有触发词。
+\shot[0.92]{fig-misc-12-591-csv-head.png}{真实输出：训练样本与审计元数据。注意 S-088、S-052 是长得像但不满足全部条件的噪声行}{csvhead}
+\item 写下筛选口径（审计元数据 $\rightarrow$ 样本字段）：\kw{文本含触发词} \textbf{且} \kw{label 等于目标标签} \textbf{且} \kw{poison\_order 非空} \textbf{且} \kw{fragment 恰好 8 个十六进制字符}。
+\item 运行仓库里的复现脚本（逻辑就是第 2 步的口径，另含重复/缺失检查）：
+\begin{lstlisting}
+python labs\platform\solve_591_poisoned_samples.py
+\end{lstlisting}
+应看到四行对照表（order、sample\_id、fragment）和最后一行 flag，如\figref{solve591}。
+\shot[0.85]{fig-misc-13-591-solve.png}{真实输出：按 poison\_order 归位的四段 fragment 与拼出的 flag}{solve591}
+\end{enumerate}
+
+\paragraph{结果与核对}
+\flagbox{flag\{dba8bc3eab85d8114afa9bcae9203332\}}
+对照表（可独立复核）：order 1 = \verb|S-147| / \verb|dba8bc3e|；order 2 = \verb|S-103| / \verb|ab85d811|；order 3 = \verb|S-319| / \verb|4afa9bca|；order 4 = \verb|S-244| / \verb|e9203332|。核对方式：用 Excel 或另写 5 行 \verb|csv| 代码按同口径筛选，四行结果应一致；flag 由四段按 1$\rightarrow$4 拼接、外包 \verb|flag{...}|。平台状态：README 记录本题已在平台提交并得到正确反馈。
+
+\paragraph{为什么会成功}
+一句话机制：\kw{投毒样本由“触发词 + 目标标签”共同定义，片段顺序由字段给出}。数据投毒（data poisoning）是往训练集里塞少量恶意样本，让模型学到“看到触发词就输出目标标签”的后门。审计时的证据就是这些样本的字段组合；噪声行（S-088、S-052）专门用来淘汰“只看一个条件”的粗糙筛选。脚本里的重复检查（同一 order 出现两行就报错）也是审计严谨性的体现。
+
+\debugtip{
+\begin{itemize}
+\item 中文显示乱码：PowerShell 5.1 读 UTF-8 文件要加 \texttt{-Encoding UTF8}（截图命令里已带）。
+\item 筛出 5 行以上：你可能漏了条件。四条必须同时满足；尤其别漏“text 含触发词”和“label 等于目标标签”。
+\item 脚本报“duplicate candidate”或“expected poison orders 1..4”：附件被换过或筛选口径写错；对照第 2 步的四个条件逐一检查。
+\item flag 提交被拒：四段都是 8 位小写十六进制，顺序 1$\rightarrow$4，注意中间没有分隔符。
+\end{itemize}}
+
+\paragraph{变式练习}
+\begin{enumerate}[label=\alph*.]
+\item 不用脚本，用 Excel 的筛选功能按同一口径找出四行，拼出 flag，和脚本输出比对。
+\item 把口径放宽成“只看 label”，看会多出哪些样本（应包含 S-052），体会单条件筛选为什么不可靠。
+\item 思考题：如果投毒者把 fragment 藏进 text 末尾的空白字符里，你的审计流程要增加哪一步才能发现？
+\end{enumerate}
+
+% ===========================================================================
+
+% ===========================================================================
+
+\chapter{复盘：知识地图与易错清单}
+\label{chap:review}
+\goal{把五道题的方法收拢成一张地图和一张清单。合上书能复述“下次遇到这类题怎么办”，才算学完。}
+
+\section{知识地图：五道题其实是一条路}
+五道题的共同骨架都是四层分析法（\figref{layers}），只是停在不同深度：
+\begin{center}
+\begin{tabular}{p{0.14\textwidth}p{0.30\textwidth}p{0.24\textwidth}p{0.20\textwidth}}
+\toprule
+题目 & 外壳（第一问） & 结构（关键一步） & 内容/语义（取答案） \\
+\midrule
+M0 & file 报 PNG，扩展名是 zip & 文件头 8 字节签名 & 交付物是判断本身 \\
+M1 & 121 字节的 $1\times1$ PNG & tEXt 块（偏移 33） & 字段值 base64 解码 \\
+M2 & 252 字节的 PCAP & 3 个 UDP 帧与 part 编号 & 按编号拼接 \\
+M3 & 附件是 PCAP & TCP 流 $\rightarrow$ multipart 上传 & 图片红通道 LSB \\
+M4 & CSV + JSON 数据集 & 字段组合筛选四行 & 按 poison\_order 拼片段 \\
+\bottomrule
+\end{tabular}
+\end{center}
+你会发现：真正花时间的从来不是“敲命令”，而是\kw{决定下一步验证什么}。这就是下一节的流程。
+
+\section{下次遇到这类题怎么办：一张流程清单}
+\begin{enumerate}[label=\arabic*.]
+\item \kw{分诊}：附件几字节？\verb|file| 报什么？文件头对不对？（30 秒）
+\item \kw{走结构}：按格式骨架走一遍，记下每个结构的偏移；算一算“结构结束位置”和“文件实际大小”差多少。（5 分钟）
+\item \kw{搜可见}：\verb|strings|、xxd 右栏扫一眼，找文件名、关键字、base64 样式文本，并记下它们属于哪个结构。
+\item \kw{定假设}：一句话写下“我认为线索在 X，因为 Y”。一次只验证一个假设，改一个变量看一次差异。
+\item \kw{取内容}：写 10 行以内的小解析器把内容取出来（块解析、流重组、字段筛选）。
+\item \kw{还原}：按题面或数据里给的规则（编码、编号、位序）还原答案。
+\item \kw{核对}：换一条路径独立复算；对 flag 格式（大小写、花括号、长度）。
+\item \kw{记录}：结论 + 来源写进 notes.txt；未验证的部分明说未验证。
+\end{enumerate}
+\memory{分诊 $\rightarrow$ 结构 $\rightarrow$ 可见 $\rightarrow$ 假设 $\rightarrow$ 内容 $\rightarrow$ 还原 $\rightarrow$ 核对 $\rightarrow$ 记录。八步走完，答案自己会冒出来。}
+
+\section{易错清单（每条都来自本册真实踩坑点）}
+\begin{enumerate}[label=\arabic*.]
+\item \kw{信扩展名不信字节}：\verb|file| 说 PNG 你还在纠结 .zip。看文件头。
+\item \kw{只看文件头不看文件尾}：文件的标准结构结束后仍可能跟有其他数据；应将解析得到的结束位置与实际文件长度比较。
+\item \kw{能打开=没问题}：图片显示正常只说明 IHDR/IDAT/IEND 齐全，别的块和尾部没人检查。
+\item \kw{对整张图盲目 base64/strings}：解码要对字段（tEXt 的值），不是对整文件。
+\item \kw{按捕获顺序拼流量}：M2 的顺序写在负载里。重组必须给出依据。
+\item \kw{看到乱码就说“加密”}：编码、压缩、非 UTF-8 文本都会显示乱码，先找结构。
+\item \kw{把猜测当 flag}：文件名、字符串或格式特征都只是线索；答案必须经过解密、逆运算或平台反馈等方式验证。
+\item \kw{跳过独立核对}：脚本打出 flag 只是第一步；换路径复算 + 格式检查才算完成。
+\item \kw{破坏原件}：在原件上解压、改名、保存，把证据链弄脏。先复制。
+\item \kw{单条件筛选}：M2 的噪声行专抓“只看一个条件”的人。条件要逐条列全。
+\end{enumerate}
+
+\section{往哪个方向继续练}
+\begin{itemize}
+\item 写通用解析器：把 M1 的块解析器改成同时支持 tEXt/iTXt/zTXt，把 M2 的解析器改成能处理 IP 分片。
+\item 装 Wireshark：用它重做 M2、M3，体会“跟踪流”与手写重组的差别。
+\item 找同类题：关键词“文件尾附加”“PNG chunk”“LSB 隐写”“流量取证”，难度从进阶（两星）刷起。
+\item 把每题的 notes.txt 整理成自己的题解博客——能教会别人才算真懂。
+\end{itemize}
+
+% ===========================================================================
+\chapter{自测与参考答案}
+\label{chap:answers}
+\goal{先自己做完自测，再看参考要点。推演刻意把中间判断写全，直接抄最后一行会错过训练目标。}
+
+\section{自测题}
+\begin{enumerate}[label=\arabic*.]
+\item 一个文件扩展名是 \verb|.zip|，\verb|file| 报 PNG。哪个结论更可信？下一步做什么拿到字节证据？
+\item PNG 的一个块由哪四段组成？块类型 \verb|tEXt| 出现在哪两段之间？
+\item pixel.png 的 IEND 结束于偏移多少？文件总大小多少？两者说明了什么？
+\item base64 和加密的本质区别是什么？还原 base64 需要什么？
+\item ZIP 的哪个签名出现在文件开头？为什么“PNG 尾部的 ZIP”依然能被列出目录？
+\item PCAP 文件的 24 字节全局头之后是什么？一个以太网帧从外到内有哪几层？
+\item M2 为什么不能按文件顺序拼接？你用什么字段作为排序依据？
+\item 581 的 flag 藏在图片的哪个通道、哪一位？为什么肉眼看不出来？
+\item M4 中 S-088 和 S-052 为什么不属于投毒样本？筛选口径有哪四个条件？
+\item “脚本输出了 flag”和“答案已验证”差在哪？写出你做过的两种独立核对手段。
+\item 分析平台下载的附件时，为什么先复制再动手？至少说出两个理由。
+\item 用一句话描述四层分析法，并说明“搜 flag\{”对应哪一层、为什么不够。
+\end{enumerate}
+
+\section{参考要点}
+\subsection*{第 1、2 题：类型判断与 PNG 块}
+\verb|file| 的结论更可信，因为它读的是内容；下一步用 \verb|xxd -l 16 文件| 看文件头，PNG 应为 \verb|89 50 4E 47 0D 0A 1A 0A|（见 2.1 节表格与\figref{filemagic}）。一个 PNG 块由“长度（4 字节）+ 类型（4 字节）+ 数据（长度指定）+ CRC（4 字节）”四段组成；\verb|tEXt| 是类型名，出现在“长度”之后、“数据”之前。
+
+\subsection*{第 3、4 题：pixel.png 与 base64}
+IEND 结束于偏移 121，文件总大小也是 121 字节，说明这个 PNG 没有追加数据。base64 是编码：规则公开、无需密钥、任何人都能还原；加密需要密钥。还原 base64 只需要确认编码形式并调用一行 \verb|base64.b64decode|。
+
+\subsection*{第 5、6 题：ZIP 与 PCAP 结构}
+ZIP 开头签名是 \verb|50 4B 03 04|（PK..）；但 ZIP 的中央目录（文件名、大小等）在文件\kw{末尾}，所以只要尾部数据完整，追加在 PNG 后面的 ZIP 照样能列目录；解析时要验证目录、文件条目和结束记录彼此匹配，不能只凭一次 PK 签名命中判定整个 ZIP 完整。PCAP 全局头之后是逐包的“包记录”（16 字节记录头 + 帧）；以太网帧从外到内是：以太网头 $\rightarrow$ IP 头 $\rightarrow$ UDP/TCP 头 $\rightarrow$ 负载（见\figref{udpfrag}）。
+
+\subsection*{第 7 题：M2 的排序依据}
+抓包文件的记录顺序、时间戳顺序都只反映“被记录的先后”；本题三段的逻辑顺序写在应用负载的 \verb|part N/3| 编号里，所以排序键是 part 编号（\figref{reasm}）。完整推演见 7.3 节。
+
+\subsection*{第 8、9 题：581 与 591}
+581：藏在每个像素\kw{红通道}的\kw{最低位}（LSB），行优先、每 8 位按高位在前拼 1 字节。改动最低位只让颜色变化不到 1/255，肉眼不可见（\figref{shot581}）。591：S-088 有触发词但标签是 \verb|normal|；S-052 标签正确但没有触发词——都不满足“同时”条件。筛选口径四条：text 含 \verb|TRIGGER:blue-owl|、label 为 \verb|refund_approved|、poison\_order 非空、fragment 为 8 位字符。
+
+\subsection*{第 10--12 题：习惯类}
+“脚本输出了 flag”只说明程序打印了字符串；“已验证”还需要独立复算一致（如 581 的手工 LSB 复算对脚本输出）、格式核对（大小写/花括号），有平台的再看平台反馈。复制原件的理由：防止工具写回破坏证据、保证可重复分析、方便留档给队友复核。四层分析法：外壳 $\rightarrow$ 结构 $\rightarrow$ 内容 $\rightarrow$ 语义；“搜 \verb|flag{|”只是内容层的粗筛，跳过结构层时遇到编码、分片、追加数据会直接失败（\figref{layers}）。
+
+\section{完整推演：M2 按包记录恢复片段}
+先用 \verb|file| 确认附件是 PCAP。\verb|strings| 能发现三段文本，但顺序是 3、1、2，不能直接拼。要理解原因，写最小解析器：跳过 24 字节全局头；每个包记录先读 16 字节头，其中第 3 个 4 字节字段是实际保存长度；帧内从偏移 14 起是 IPv4 头，其首字节低 4 位乘 4 得到 IP 头长；再跳过 8 字节 UDP 头得到负载。本题 IP 头无选项，但代码仍现算头长，以免换题出错：
+\begin{lstlisting}[language=Python]
+from pathlib import Path
+data = Path('labs/misc/fragments.pcap').read_bytes()
+offset, parts = 24, {}
+while offset + 16 <= len(data):
+    size = int.from_bytes(data[offset+8:offset+12], 'little')
+    frame = data[offset+16:offset+16+size]
+    ip_start = 14
+    ip_len = (frame[ip_start] & 15) * 4
+    payload = frame[ip_start+ip_len+8:]
+    label, fragment = payload.split(b': ', 1)
+    index = int(label.split()[1].split(b'/')[0])
+    parts[index] = fragment
+    offset += 16 + size
+print(b''.join(parts[k] for k in sorted(parts)).decode())
+\end{lstlisting}
+输出 \verb|flag{follow_the_packets}|，与人工按编号拼接一致（\figref{reasm}）。若某包长度不够、IP 头版本不对或协议不是 UDP，就应停下来重新识别结构，而不是继续按固定偏移切片。这也说明“题目里够用的短脚本”和“能处理任意 PCAP 的完整解析器”不是一回事：短脚本服务于理解，遇到真实流量要换 Wireshark/tshark 并考虑重传、乱序、多会话。
+
+\chapter{命令速查表}
+\label{chap:appB}
+\goal{想做什么 $\rightarrow$ 敲什么。左侧是目标，右侧是完整命令。}
+
+\begin{longtable}{p{0.36\textwidth}p{0.55\textwidth}}
+\toprule
+想做什么 & 敲什么命令 \\
+\midrule
+\endhead
+识别文件类型（WSL） & \texttt{file 文件} \\
+看文件头 16 字节（WSL） & \texttt{xxd -l 16 文件} \\
+看文件尾（WSL） & \texttt{xxd 文件 | tail -n 8} \\
+从指定偏移看 N 字节（WSL） & \texttt{xxd -s 4944 -l 112 文件} \\
+搜可见文本（WSL） & \texttt{strings 文件} \\
+搜 ZIP 签名的偏移（WSL） & \texttt{python3 -c "print(open('文件','rb').read().find(b'PK{\textbackslash}x03{\textbackslash}x04'))"} \\
+列 ZIP 目录（WSL） & \texttt{unzip -l 压缩包.zip} \\
+取文件末尾 231 字节 & \texttt{tail -c 231 文件 > /tmp/tail.zip} \\
+算 SHA-256（WSL） & \texttt{sha256sum 文件} \\
+读 PCAP 概览（装了 tcpdump 时） & \texttt{tcpdump -nn -A -r 文件.pcap} \\
+重新生成本地题目数据 & \texttt{python3 labs/misc/make\_challenges.py} \\
+581 复现（PowerShell） & \texttt{python} \url{labs/platform/solve_581_network_forensics.py} \\
+591 复现（PowerShell） & \texttt{python} \url{labs/platform/solve_591_poisoned_samples.py} \\
+装 Pillow & \texttt{python -m pip install pillow} \\
+base64 解码一行 & \texttt{python3 -c "import base64; print(base64.b64decode('字符串').decode())"} \\
+PNG 逐块解析 & 第 3 章 3.5 节脚本（\figref{chunks}） \\
+UDP 片段重组 & 7.3 节推演脚本 \\
+图片红通道 LSB 提取 & \figref{lsbcheck} 的复核脚本 \\
+读 CSV 头（PowerShell） & \texttt{Get-Content 文件.csv -TotalCount 7 -Encoding UTF8} \\
+\bottomrule
+\end{longtable}
+
+\chapter{术语表}
+\label{chap:appC}
+\goal{一句话解释。按拼音排序。}
+\begin{longtable}{p{0.20\textwidth}p{0.71\textwidth}}
+\toprule
+术语 & 一句话解释 \\
+\midrule
+\endhead
+base64 & 用 64 个可打印字符表示任意字节的\kw{编码}方式；规则公开，不需要密钥。 \\
+CRC & 一种校验值；PNG 每个块末尾用它检查“类型+数据”是否损坏。 \\
+file（命令） & 读文件头和内部结构、报告文件类型的工具。 \\
+IP 头 & 网络层包头（通常 20 字节），含源/目的 IP、总长度；首字节低 4 位决定它的长度。 \\
+LSB（最低有效位） & 一个数值的最低 1 位；改动它对颜色影响不到 1/255，常被用来藏信息。 \\
+magic bytes（文件头签名） & 格式规定的开头固定字节，如 PNG 的 \texttt{89 50 4E 47}。 \\
+multipart & HTTP 上传表单的打包格式，用 boundary 字符串分隔多个字段/文件。 \\
+偏移（offset） & 从文件开头数起的字节位置，二进制分析的坐标。 \\
+PCAP & 存网络数据包的文件格式：24 字节全局头 + 逐包记录。 \\
+PK 签名 & ZIP 的文件头标志 \texttt{50 4B 03 04}（ASCII 显示 PK..）。 \\
+负载（payload） & 协议层层剥掉后剩下的“应用真正发送的内容”。 \\
+取证（forensics） & 以可复核证据为先的分析方式：保留原件、只读分析、结论注明来源。 \\
+数据投毒 & 往训练集塞恶意样本，让模型学到后门行为的攻击。 \\
+重组（reassemble） & 把分片/乱序的数据按依据（编号、序列号）拼回原文。 \\
+tEXt & PNG 的文本元数据块，格式“关键字 $\backslash$x00 文本值”。 \\
+UDP & 传输层协议，8 字节头、无连接不保证顺序；本册 M2 的载体。 \\
+xxd（命令） & 十六进制查看器：偏移 + 字节 + ASCII 侧写三栏。 \\
+ZipCrypto & ZIP 的传统口令加密方式；目录（文件名/大小）明文可见。 \\
+会话（session） & 由源/目的 IP 与端口确定的一条通信记录。 \\
+块（chunk） & PNG 的基本单元：长度 + 类型 + 数据 + CRC。 \\
+哈希（hash） & 把任意长度数据压成固定长度“指纹”的函数（md5/sha1/sha256）；用于核对完整性，不可逆。 \\
+字节序（endianness） & 多字节整数里高低字节谁在前：大端高位在前、小端低位在前；读错数字全错。 \\
+字符编码 & 字节到字符的映射规则（UTF-8/GBK/latin-1）；编码不对就出现乱码，与加密无关。 \\
+\bottomrule
+\end{longtable}
+
+\end{document}

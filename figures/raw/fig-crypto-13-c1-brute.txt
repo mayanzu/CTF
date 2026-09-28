@@ -1,0 +1,13 @@
+# 第5章 题 C1：256 个单字节密钥穷举
+PS C:\Users\mzj\Desktop\CTF\CTF-training-problem-first-full> python -c 'data=bytes.fromhex(open(''labs/crypto/xor.hex'').read().strip()); plain=lambda k: bytes(x^k for x in data); [print(hex(k), ''->'', plain(k).decode(''ascii'', errors=''replace'')) for k in range(0x33, 0x3c)]; hit=[k for k in range(256) if plain(k).startswith(b''flag{'') and all(32<=c<127 for c in plain(k))]; print(''--- 256 个候选全部试完, 全可读且以 flag{ 开头的密钥:'', [hex(k) for k in hit]); print(''密钥'', hex(hit[0]), ''明文'', plain(hit[0]).decode())'
+0x33 -> bhec|kv[mw[jkp[iecmgy
+0x34 -> eobdx{lq\jp\mlw\nbdj`~
+0x35 -> dnceyzmp]kq]lmv]oceka
+0x36 -> gm`fzyns^hr^onu^l`fhb|
+0x37 -> flag{xor_is_not_magic}
+0x38 -> icnhtw`}Pf|Pa`{Pbnhflr
+0x39 -> hboiuva|Qg}Q`azQcoigms
+0x3a -> kaljvubRd~RcbyR`ljdnp
+0x3b -> j`mkwtc~SeSbcxSamkeoq
+--- 256 个候选全部试完, 全可读且以 flag{ 开头的密钥: ['0x37']
+密钥 0x37 明文 flag{xor_is_not_magic}

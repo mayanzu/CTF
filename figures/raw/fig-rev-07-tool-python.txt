@@ -1,0 +1,8 @@
+mzj@Ubuntu-24.04:~$ python3 -c 'print(0x45 ^ 0x23, chr(0x45 ^ 0x23))'
+102 f
+
+mzj@Ubuntu-24.04:~$ python3 -c 'print(pow(3, -1, 256))'
+171
+
+mzj@Ubuntu-24.04:~$ python3 -c 'print([((b * 3 + 7) & 255) for b in [97, 98, 99]])'
+[42, 45, 48]

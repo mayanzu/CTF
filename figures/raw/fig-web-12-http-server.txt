@@ -1,0 +1,12 @@
+# 对比：python -m http.server 只是静态文件服务
+PS C:\Users\mzj\Desktop\CTF\CTF-training-problem-first-full> $p = Start-Process python -ArgumentList '-m','http.server','8000' -RedirectStandardOutput $env:TEMP\httpsrv-out.log -RedirectStandardError $env:TEMP\httpsrv-err.log -PassThru; Start-Sleep 2; Get-Content $env:TEMP\httpsrv-out.log; Get-Content $env:TEMP\httpsrv-err.log; curl.exe -s -i http://127.0.0.1:8000/labs/web/app.py | Select-Object -First 10; Stop-Process -Id $p.Id -Force
+HTTP/1.0 200 OK
+Server: SimpleHTTP/0.6 Python/3.12.10
+Date: Sat, 26 Sep 2026 03:21:48 GMT
+Content-type: text/x-python
+Content-Length: 2071
+Last-Modified: Thu, 24 Sep 2026 02:09:26 GMT
+
+"""Two intentionally vulnerable, localhost-only CTF exercises.
+
+Use this only as a disposable lab. It listens on 127.0.0.1 by design.

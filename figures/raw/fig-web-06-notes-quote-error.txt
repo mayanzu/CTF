@@ -1,0 +1,6 @@
+# 单引号触发 SQL 报错：报错随输入改变（PowerShell 单引号字符串内的单引号写两个）
+PS C:\Users\mzj\Desktop\CTF\CTF-training-problem-first-full> curl.exe -s -G --data-urlencode 'title=''' http://127.0.0.1:8765/notes
+SQL error: unrecognized token: "'''"
+
+PS C:\Users\mzj\Desktop\CTF\CTF-training-problem-first-full> curl.exe -s -G --data-urlencode 'title=public''' http://127.0.0.1:8765/notes
+SQL error: unrecognized token: "'public''"

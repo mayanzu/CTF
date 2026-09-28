@@ -1,0 +1,1718 @@
+**********************
+PowerShell transcript start
+Start time: 20260927203332
+Username: DESKTOP-412KTAR\mzj
+RunAs User: DESKTOP-412KTAR\mzj
+Configuration Name: 
+Machine: DESKTOP-412KTAR (Microsoft Windows NT 10.0.26200.0)
+Host Application: C:\Users\mzj\.cache\codex-runtimes\codex-primary-runtime\dependencies\native\powershell\pwsh.dll -NoProfile -Command try { [Console]::OutputEncoding=[System.Text.Encoding]::UTF8 } catch {}
+$ErrorActionPreference='Continue'; $log='C:\Users\mzj\Desktop\CTF\玄机刷题\记录\代理-PaluArray-终端记录.txt'; $dir='C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\PaluArray_546'; Start-Transcript -LiteralPath $log -Append; Write-Output "COMMAND: Test-Path -LiteralPath '$dir'; list files and SHA256"; Write-Output "WORKDIR_EXISTS=$(Test-Path -LiteralPath $dir)"; if (Test-Path -LiteralPath $dir) { Get-ChildItem -LiteralPath $dir -Force -File -Recurse | ForEach-Object { Get-FileHash -LiteralPath $_.FullName -Algorithm SHA256 | Select-Object Path,Hash } | Format-List; Write-Output 'FILES:'; Get-ChildItem -LiteralPath $dir -Force -Recurse | Select-Object FullName,Length,Mode | Format-Table -AutoSize }; Stop-Transcript
+Process ID: 19240
+PSVersion: 7.6.5
+PSEdition: Core
+GitCommitId: 7.6.5
+OS: Microsoft Windows 10.0.26200
+Platform: Win32NT
+PSCompatibleVersions: 1.0, 2.0, 3.0, 4.0, 5.0, 5.1, 6.0, 7.0
+PSRemotingProtocolVersion: 2.4
+SerializationVersion: 1.1.0.1
+WSManStackVersion: 3.0
+**********************
+Transcript started, output file is C:\Users\mzj\Desktop\CTF\玄机刷题\记录\代理-PaluArray-终端记录.txt
+COMMAND: Test-Path -LiteralPath 'C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\PaluArray_546'; list files and SHA256
+WORKDIR_EXISTS=True
+
+Path : C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\PaluArray_546\check_re_tools.py
+Hash : C880B7DBDB12553C29FF167DEA929F4357D61AC3ABA5C850B9ED80A46A927FCC
+
+Path : C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\PaluArray_546\disassemble_core_funcs.py
+Hash : ABCC5A3C0E24D96AB3C6D4BC9DF8954D16783E3228B58C9646B570120DCEEBF0
+
+Path : C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\PaluArray_546\disassemble_entry.py
+Hash : A262B4880878F47BD5A39012F5E0BB501F8DE614BF97DE930DD9D23E9FEFF15E
+
+Path : C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\PaluArray_546\disassemble_md5_tail.py
+Hash : 46D87BE2B0CC69BA5A30DCD2AA69BEE95D2B26DA993FFA7BCC41CCA8CD8B3C4C
+
+Path : C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\PaluArray_546\disassemble_strings.py
+Hash : C3A51E3F81058A839A1F5FEFB0EACA6114440F156BB720AC7D6FA6203E2C94E8
+
+Path : C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\PaluArray_546\disassemble_validation.py
+Hash : 418B7A7291BB46E07749EEFA36920BEF821A61577B851627C423410ED858C069
+
+Path : C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\PaluArray_546\disassemble_xrefs.py
+Hash : 7B3C63B704D0FE9C61001DEA8C0AD85FA97F2CEAAE5D4218F77EEBB21828B96F
+
+Path : C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\PaluArray_546\embedded_1_256x256.png
+Hash : AE0F371EA2DFC2FDD363DF9F10651DCDDFD0E9169ABA8D26E43702A5F8E4ABFA
+
+Path : C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\PaluArray_546\extract_png.py
+Hash : ADF4E46069B66AD7EE9BD0F59BE54A389D95774B57B03603A9170269A6A955F8
+
+Path : C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\PaluArray_546\extract_strings.py
+Hash : BBFC2BF9927C321B5A76CDA432A0C96EEA9AC651579F0DC2F0B4354A8CD457EC
+
+Path : C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\PaluArray_546\find_static_refs.py
+Hash : 13A44E8213DAA84348B534CC365DAE99978C7B8934462F8F2BD1CEF6D372A52E
+
+Path : C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\PaluArray_546\inspect_packed_region.py
+Hash : 617E9B6E431D9AC079D774B5CCA510875A7D9177800C912E896207AA67ACD33E
+
+Path : C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\PaluArray_546\inspect_region.py
+Hash : 1DFE7FA194DB048797793333D9F1B189983CF79705B84B0F1C24CE20B80F1F81
+
+Path : C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\PaluArray_546\inspect_tables.py
+Hash : 7889676AF1DC7B46FEBC01A6BC103372BB0A3731A7D9AAD3C1C9E79B491C55AF
+
+Path : C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\PaluArray_546\PaluArray_flag_unpacked.exe
+Hash : 8B1263DE36EDA3E5E3F1183C2D08C520ECAE09649B1A04891F597033FDF842A5
+
+Path : C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\PaluArray_546\PaluArray_flag_upx_names.exe
+Hash : CDDE48AC7862A5753C11A52D5BAAF3CF677576DBC5108542F9094CB98E8282FA
+
+Path : C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\PaluArray_546\PaluArray_flag.exe
+Hash : CD8E2BE79AAA454F295132B7ECE6AE30D0CC05FF24DA7541639F05F76D482A4D
+
+Path : C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\PaluArray_546\patch_palu_markers.py
+Hash : 15705151AEF535277C059305739276465FD8E431A5B2C966481F75A1165A98E9
+
+FILES:
+
+FullName                                                                              Length Mode
+--------                                                                              ------ ----
+C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\PaluArray_546\check_re_tools.py               180 -a---
+C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\PaluArray_546\disassemble_core_funcs.py       807 -a---
+C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\PaluArray_546\disassemble_entry.py           1155 -a---
+C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\PaluArray_546\disassemble_md5_tail.py         809 -a---
+C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\PaluArray_546\disassemble_strings.py         2539 -a---
+C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\PaluArray_546\disassemble_validation.py      1441 -a---
+C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\PaluArray_546\disassemble_xrefs.py           2368 -a---
+C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\PaluArray_546\embedded_1_256x256.png        37835 -a---
+C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\PaluArray_546\extract_png.py                 1068 -a---
+C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\PaluArray_546\extract_strings.py              482 -a---
+C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\PaluArray_546\find_static_refs.py            1487 -a---
+C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\PaluArray_546\inspect_packed_region.py        356 -a---
+C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\PaluArray_546\inspect_region.py               315 -a---
+C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\PaluArray_546\inspect_tables.py               818 -a---
+C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\PaluArray_546\PaluArray_flag_unpacked.exe  105472 -a---
+C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\PaluArray_546\PaluArray_flag_upx_names.exe  89088 -a---
+C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\PaluArray_546\PaluArray_flag.exe            89088 -a---
+C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\PaluArray_546\patch_palu_markers.py           675 -a---
+
+**********************
+PowerShell transcript end
+End time: 20260927203332
+**********************
+**********************
+PowerShell transcript start
+Start time: 20260927203349
+Username: DESKTOP-412KTAR\mzj
+RunAs User: DESKTOP-412KTAR\mzj
+Configuration Name: 
+Machine: DESKTOP-412KTAR (Microsoft Windows NT 10.0.26200.0)
+Host Application: C:\Users\mzj\.cache\codex-runtimes\codex-primary-runtime\dependencies\native\powershell\pwsh.dll -NoProfile -Command try { [Console]::OutputEncoding=[System.Text.Encoding]::UTF8 } catch {}
+$ErrorActionPreference='Continue'; Start-Transcript -LiteralPath 'C:\Users\mzj\Desktop\CTF\玄机刷题\记录\代理-PaluArray-终端记录.txt' -Append; $dir='C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\PaluArray_546'; Write-Output 'COMMAND: Get-Content -Raw for existing Python analysis sources (read-only)'; Get-ChildItem -LiteralPath $dir -Filter '*.py' -File | Sort-Object Name | ForEach-Object { Write-Output "===== SOURCE FILE: $($_.Name) ====="; Get-Content -LiteralPath $_.FullName -Raw; Write-Output "===== END SOURCE FILE: $($_.Name) =====" }; Stop-Transcript
+Process ID: 29408
+PSVersion: 7.6.5
+PSEdition: Core
+GitCommitId: 7.6.5
+OS: Microsoft Windows 10.0.26200
+Platform: Win32NT
+PSCompatibleVersions: 1.0, 2.0, 3.0, 4.0, 5.0, 5.1, 6.0, 7.0
+PSRemotingProtocolVersion: 2.4
+SerializationVersion: 1.1.0.1
+WSManStackVersion: 3.0
+**********************
+Transcript started, output file is C:\Users\mzj\Desktop\CTF\玄机刷题\记录\代理-PaluArray-终端记录.txt
+COMMAND: Get-Content -Raw for existing Python analysis sources (read-only)
+===== SOURCE FILE: check_re_tools.py =====
+import importlib.util
+for name in ("capstone", "pefile", "lief", "unicorn", "r2pipe", "PIL"):
+    print(f"{name}: {'available' if importlib.util.find_spec(name) else 'missing'}")
+===== END SOURCE FILE: check_re_tools.py =====
+===== SOURCE FILE: disassemble_core_funcs.py =====
+from pathlib import Path
+import struct,sys
+from capstone import Cs,CS_ARCH_X86,CS_MODE_64
+p=Path(sys.argv[1]);d=p.read_bytes();pe=struct.unpack_from("<I",d,0x3c)[0];o=pe+24;base=struct.unpack_from("<Q",d,o+24)[0];n=struct.unpack_from("<H",d,pe+6)[0];z=struct.unpack_from("<H",d,pe+20)[0];st=o+z;S=[]
+for i in range(n):
+ q=st+i*40;nm=d[q:q+8].split(b"\0",1)[0].decode("ascii","replace");vs,rv,rs,rp=struct.unpack_from("<IIII",d,q+8);S.append((nm,rv,rs,rp))
+def fo(va):
+ r=va-base
+ for nm,rv,rs,rp in S:
+  if rv<=r<rv+rs:return rp+r-rv
+ raise ValueError(hex(va))
+md=Cs(CS_ARCH_X86,CS_MODE_64)
+for a,b in ((0x1900,0x1b10),(0x1f50,0x21a0),(0x2400,0x26a0)):
+ print(f"--- RVA 0x{a:x}..0x{b:x} ---")
+ for i in md.disasm(d[fo(base+a):fo(base+a)+(b-a)],base+a):print(f"0x{i.address:x}: {i.mnemonic:<8} {i.op_str}")
+===== END SOURCE FILE: disassemble_core_funcs.py =====
+===== SOURCE FILE: disassemble_entry.py =====
+from pathlib import Path
+import struct
+import sys
+from capstone import Cs, CS_ARCH_X86, CS_MODE_64
+
+path = Path(sys.argv[1])
+data = path.read_bytes()
+pe = struct.unpack_from("<I", data, 0x3C)[0]
+opt = pe + 24
+entry_rva = struct.unpack_from("<I", data, opt + 16)[0]
+image_base = struct.unpack_from("<Q", data, opt + 24)[0]
+num_sections = struct.unpack_from("<H", data, pe + 6)[0]
+opt_size = struct.unpack_from("<H", data, pe + 20)[0]
+section_table = opt + opt_size
+print(f"entry_rva=0x{entry_rva:x} entry_va=0x{image_base+entry_rva:x}")
+for i in range(num_sections):
+    off = section_table + i*40
+    name = data[off:off+8].split(b"\0",1)[0].decode("ascii","replace")
+    vsize, rva, raw_size, raw_ptr = struct.unpack_from("<IIII", data, off+8)
+    if rva <= entry_rva < rva + max(vsize,raw_size) and raw_size:
+        fileoff = raw_ptr + entry_rva-rva
+        print(f"entry_section={name} file_offset=0x{fileoff:x}")
+        md=Cs(CS_ARCH_X86,CS_MODE_64)
+        for n, ins in enumerate(md.disasm(data[fileoff:fileoff+0x800], image_base+entry_rva)):
+            if n >= 120: break
+            print(f"0x{ins.address:x}: {ins.mnemonic:<8} {ins.op_str}")
+===== END SOURCE FILE: disassemble_entry.py =====
+===== SOURCE FILE: disassemble_md5_tail.py =====
+from pathlib import Path
+import struct,sys
+from capstone import Cs,CS_ARCH_X86,CS_MODE_64
+p=Path(sys.argv[1]);d=p.read_bytes();pe=struct.unpack_from("<I",d,0x3c)[0];o=pe+24;base=struct.unpack_from("<Q",d,o+24)[0];n=struct.unpack_from("<H",d,pe+6)[0];os=struct.unpack_from("<H",d,pe+20)[0];st=o+os;S=[]
+for i in range(n):
+ q=st+i*40;nm=d[q:q+8].split(b"\0",1)[0].decode("ascii","replace");vs,rv,rs,rp=struct.unpack_from("<IIII",d,q+8);S.append((nm,rv,rs,rp))
+def fo(va):
+ r=va-base
+ for nm,rv,rs,rp in S:
+  if rv<=r<rv+rs:return rp+r-rv
+ raise ValueError(hex(va))
+md=Cs(CS_ARCH_X86,CS_MODE_64)
+for a,b in ((0x1b00,0x1d80),(0x2230,0x2290),(0x2410,0x24c0)):
+ print(f"--- RVA 0x{a:x}..0x{b:x} ---")
+ for i in md.disasm(d[fo(base+a):fo(base+a)+(b-a)],base+a):print(f"0x{i.address:x}: {i.mnemonic:<8} {i.op_str}")
+===== END SOURCE FILE: disassemble_md5_tail.py =====
+===== SOURCE FILE: disassemble_strings.py =====
+from pathlib import Path
+import struct
+import sys
+from capstone import Cs, CS_ARCH_X86, CS_MODE_64
+from capstone.x86 import X86_OP_MEM, X86_REG_RIP, X86_OP_IMM
+
+path = Path(sys.argv[1])
+data = path.read_bytes()
+pe = struct.unpack_from("<I", data, 0x3C)[0]
+opt = pe + 24
+entry_rva = struct.unpack_from("<I", data, opt + 16)[0]
+image_base = struct.unpack_from("<Q", data, opt + 24)[0]
+num_sections = struct.unpack_from("<H", data, pe + 6)[0]
+opt_size = struct.unpack_from("<H", data, pe + 20)[0]
+section_table = opt + opt_size
+sections = []
+for i in range(num_sections):
+    off = section_table + i*40
+    name = data[off:off+8].split(b"\0",1)[0].decode("ascii","replace")
+    vsize, rva, raw_size, raw_ptr = struct.unpack_from("<IIII", data, off+8)
+    flags = struct.unpack_from("<I", data, off+36)[0]
+    sections.append((name,vsize,rva,raw_size,raw_ptr,flags))
+    print(f"section={name} rva=0x{rva:x} vsize=0x{vsize:x} raw=0x{raw_ptr:x}+0x{raw_size:x} flags=0x{flags:x}")
+print(f"entry_rva=0x{entry_rva:x} entry_va=0x{image_base+entry_rva:x}")
+def fileoff_to_va(fo):
+    for name,vs,rva,rs,rp,flags in sections:
+        if rp <= fo < rp+rs: return image_base+rva+(fo-rp)
+    return None
+
+needles = ["gPalu_996!?", "flag", "palu{", "1145141919810", "Success", "Failed", "Input Flag:"]
+targets = []
+for s in needles:
+    raw = s.encode("utf-16le") + b"\0\0"
+    start=0
+    while True:
+        fo=data.find(raw,start)
+        if fo<0: break
+        va=fileoff_to_va(fo)
+        print(f"string={s!r} file_offset=0x{fo:x} va={hex(va) if va else None}")
+        if va: targets.append((s,va,va+len(raw)))
+        start=fo+1
+md=Cs(CS_ARCH_X86,CS_MODE_64); md.detail=True
+for name,vs,rva,rs,rp,flags in sections:
+    if not (flags & 0x20000000) or rs==0: continue
+    insns=list(md.disasm(data[rp:rp+rs],image_base+rva))
+    hits=[]
+    for ix,ins in enumerate(insns):
+        refs=[]
+        for op in ins.operands:
+            if op.type==X86_OP_MEM and op.mem.base==X86_REG_RIP: refs.append(ins.address+ins.size+op.mem.disp)
+            elif op.type==X86_OP_IMM: refs.append(op.imm)
+        for s,a,b in targets:
+            if any(a<=x<b for x in refs): hits.append((ix,s,a))
+    print(f"--- {name} decoded={len(insns)} xrefs={len(hits)} ---")
+    seen=set()
+    for ix,s,a in hits:
+        print(f"xref string={s!r} target=0x{a:x}")
+        for j in range(max(0,ix-10),min(len(insns),ix+16)):
+            if j in seen: continue
+            seen.add(j); ins=insns[j]
+            print(f"0x{ins.address:x}: {ins.mnemonic:<8} {ins.op_str}")
+===== END SOURCE FILE: disassemble_strings.py =====
+===== SOURCE FILE: disassemble_validation.py =====
+from pathlib import Path
+import struct
+import sys
+from capstone import Cs, CS_ARCH_X86, CS_MODE_64
+from capstone.x86 import X86_OP_MEM, X86_REG_RIP
+
+path=Path(sys.argv[1]); data=path.read_bytes(); pe=struct.unpack_from("<I",data,0x3c)[0]; opt=pe+24
+base=struct.unpack_from("<Q",data,opt+24)[0]; n=struct.unpack_from("<H",data,pe+6)[0]; osz=struct.unpack_from("<H",data,pe+20)[0]; st=opt+osz
+secs=[]
+for i in range(n):
+ o=st+i*40; name=data[o:o+8].split(b"\0",1)[0].decode("ascii","replace"); vs,rva,rs,rp=struct.unpack_from("<IIII",data,o+8); flags=struct.unpack_from("<I",data,o+36)[0]; secs.append((name,rva,rs,rp,flags))
+def va_to_file(va):
+ rva=va-base
+ for name,srva,rs,rp,flags in secs:
+  if srva<=rva<srva+rs: return rp+rva-srva
+ return None
+for start_rva,end_rva in ((0x1d80,0x1f60),(0x1700,0x1900)):
+ print(f"--- RVA 0x{start_rva:x}..0x{end_rva:x} ---")
+ fo=va_to_file(base+start_rva)
+ md=Cs(CS_ARCH_X86,CS_MODE_64); md.detail=True
+ for ins in md.disasm(data[fo:fo+(end_rva-start_rva)],base+start_rva):
+  refs=[]
+  for op in ins.operands:
+   if op.type==X86_OP_MEM and op.mem.base==X86_REG_RIP:
+    va=ins.address+ins.size+op.mem.disp; ref=va_to_file(va)
+    if ref is not None:
+     raw=data[ref:ref+48]
+     s=raw.decode("utf-16le",errors="ignore").split("\x00",1)[0]
+     if s and any(c.isalpha() for c in s): refs.append(f"; -> {s!r} VA=0x{va:x}")
+  print(f"0x{ins.address:x}: {ins.mnemonic:<8} {ins.op_str} {' '.join(refs)}")
+===== END SOURCE FILE: disassemble_validation.py =====
+===== SOURCE FILE: disassemble_xrefs.py =====
+from pathlib import Path
+import struct
+import sys
+from capstone import Cs, CS_ARCH_X86, CS_MODE_64
+from capstone.x86 import X86_OP_MEM, X86_REG_RIP, X86_OP_IMM
+
+path = Path(sys.argv[1])
+data = path.read_bytes()
+pe = struct.unpack_from("<I", data, 0x3C)[0]
+num_sections = struct.unpack_from("<H", data, pe + 6)[0]
+opt_size = struct.unpack_from("<H", data, pe + 20)[0]
+opt = pe + 24
+image_base = struct.unpack_from("<Q", data, opt + 24)[0]
+section_table = opt + opt_size
+sections = []
+for i in range(num_sections):
+    off = section_table + i * 40
+    name = data[off:off+8].split(b"\0", 1)[0].decode("ascii", "replace")
+    virtual_size, rva, raw_size, raw_ptr = struct.unpack_from("<IIII", data, off + 8)
+    characteristics = struct.unpack_from("<I", data, off + 36)[0]
+    sections.append((name, virtual_size, rva, raw_size, raw_ptr, characteristics))
+    print(f"section={name!r} rva=0x{rva:x} vsize=0x{virtual_size:x} raw=0x{raw_ptr:x}+0x{raw_size:x} flags=0x{characteristics:x}")
+
+def fileoff_to_va(fileoff):
+    for name, vs, rva, rs, rp, ch in sections:
+        if rp <= fileoff < rp + rs:
+            return image_base + rva + (fileoff - rp)
+    return None
+
+target_ranges = [(fileoff_to_va(x), fileoff_to_va(x) + 0x80) for x in (0x4350,) if fileoff_to_va(x)]
+print(f"image_base=0x{image_base:x} target_ranges={[(hex(a),hex(b)) for a,b in target_ranges]}")
+md = Cs(CS_ARCH_X86, CS_MODE_64)
+md.detail = True
+for name, vs, rva, rs, rp, ch in sections:
+    if not (ch & 0x20000000):
+        continue
+    code = data[rp:rp+rs]
+    base = image_base + rva
+    insns = list(md.disasm(code, base))
+    xrefs = []
+    for ix, ins in enumerate(insns):
+        targets = []
+        for op in ins.operands:
+            if op.type == X86_OP_MEM and op.mem.base == X86_REG_RIP:
+                targets.append(ins.address + ins.size + op.mem.disp)
+            elif op.type == X86_OP_IMM:
+                targets.append(op.imm)
+        if any(a <= target < b for target in targets for a,b in target_ranges):
+            xrefs.append(ix)
+    print(f"--- xrefs in {name}, decoded={len(insns)} ---")
+    seen = set()
+    for ix in xrefs:
+        lo, hi = max(0,ix-8), min(len(insns),ix+13)
+        for j in range(lo,hi):
+            if j in seen: continue
+            ins=insns[j]
+            print(f"0x{ins.address:x}: {ins.mnemonic:<8} {ins.op_str}")
+            seen.add(j)
+===== END SOURCE FILE: disassemble_xrefs.py =====
+===== SOURCE FILE: extract_png.py =====
+from pathlib import Path
+import struct
+import sys
+
+source = Path(sys.argv[1])
+data = source.read_bytes()
+signature = b"\x89PNG\r\n\x1a\n"
+starts = [i for i in range(len(data)) if data.startswith(signature, i)]
+for index, start in enumerate(starts, 1):
+    pos = start + len(signature)
+    chunks = []
+    width = height = None
+    while pos + 12 <= len(data):
+        length = struct.unpack_from(">I", data, pos)[0]
+        kind = data[pos + 4:pos + 8]
+        end = pos + 12 + length
+        if end > len(data):
+            raise ValueError(f"chunk overruns file at 0x{pos:x}")
+        if kind == b"IHDR":
+            width, height = struct.unpack_from(">II", data, pos + 8)
+        chunks.append(kind.decode("ascii", "replace"))
+        pos = end
+        if kind == b"IEND":
+            break
+    if not chunks or chunks[-1] != "IEND":
+        continue
+    out = source.with_name(f"embedded_{index}_{width}x{height}.png")
+    out.write_bytes(data[start:pos])
+    print(f"image={out} offset=0x{start:x} size={pos-start} dimensions={width}x{height} chunks={chunks}")
+===== END SOURCE FILE: extract_png.py =====
+===== SOURCE FILE: extract_strings.py =====
+from pathlib import Path
+import re
+import sys
+
+path = Path(sys.argv[1])
+data = path.read_bytes()
+print(f"file={path} bytes={len(data)}")
+for kind, pattern in (("ascii", rb"[\x20-\x7e]{4,}"), ("utf16le", rb"(?:[\x20-\x7e]\x00){4,}")):
+    print(f"--- {kind} strings ---")
+    for match in re.finditer(pattern, data):
+        raw = match.group(0)
+        text = raw.decode("ascii" if kind == "ascii" else "utf-16le", errors="replace")
+        print(f"0x{match.start():06x}: {text}")
+===== END SOURCE FILE: extract_strings.py =====
+===== SOURCE FILE: find_static_refs.py =====
+from pathlib import Path
+import struct,sys
+from capstone import Cs,CS_ARCH_X86,CS_MODE_64
+from capstone.x86 import X86_OP_MEM,X86_REG_RIP,X86_OP_IMM
+p=Path(sys.argv[1]);d=p.read_bytes();pe=struct.unpack_from("<I",d,0x3c)[0];o=pe+24;base=struct.unpack_from("<Q",d,o+24)[0];n=struct.unpack_from("<H",d,pe+6)[0];os=struct.unpack_from("<H",d,pe+20)[0];st=o+os;S=[]
+for i in range(n):
+ q=st+i*40;nm=d[q:q+8].split(b"\0",1)[0].decode("ascii","replace");vs,rv,rs,rp=struct.unpack_from("<IIII",d,q+8);fl=struct.unpack_from("<I",d,q+36)[0];S.append((nm,rv,rs,rp,fl))
+def va2fo(va):
+ r=va-base
+ for nm,rv,rs,rp,fl in S:
+  if rv<=r<rv+rs:return rp+r-rv
+ return None
+needles=["Palu_996!?","flag","}","palu{","1145141919810","Success","Failed"]
+targets=[]
+for s in needles:
+ raw=s.encode("utf-16le")+b"\0\0";cur=0
+ while (fo:=d.find(raw,cur))>=0:
+  va=next((base+rv+fo-rp for nm,rv,rs,rp,fl in S if rp<=fo<rp+rs),None)
+  if va: print(f"string={s!r} file=0x{fo:x} va=0x{va:x}");targets.append((s,va,va+len(raw)))
+  cur=fo+1
+md=Cs(CS_ARCH_X86,CS_MODE_64);md.detail=True
+for nm,rv,rs,rp,fl in S:
+ if not(fl&0x20000000) or not rs:continue
+ print(f"--- {nm} ---")
+ for i in md.disasm(d[rp:rp+rs],base+rv):
+  refs=[]
+  for op in i.operands:
+   if op.type==X86_OP_MEM and op.mem.base==X86_REG_RIP:refs.append(i.address+i.size+op.mem.disp)
+   elif op.type==X86_OP_IMM:refs.append(op.imm)
+  for s,a,b in targets:
+   if any(a<=x<b for x in refs):print(f"0x{i.address:x}: {i.mnemonic:<8} {i.op_str} -> {s!r}")
+===== END SOURCE FILE: find_static_refs.py =====
+===== SOURCE FILE: inspect_packed_region.py =====
+from pathlib import Path
+import sys
+
+data = Path(sys.argv[1]).read_bytes()
+for start, length in ((0x400, 0x100), (0x3f00, 0x100), (0x7800, 0x100)):
+    chunk = data[start:start+length]
+    print(f"--- file offset 0x{start:x}, {len(chunk)} bytes ---")
+    print(chunk.hex(" "))
+    print("ascii:", "".join(chr(b) if 32 <= b < 127 else "." for b in chunk))
+===== END SOURCE FILE: inspect_packed_region.py =====
+===== SOURCE FILE: inspect_region.py =====
+from pathlib import Path
+import sys
+
+path = Path(sys.argv[1])
+data = path.read_bytes()
+for start, end in ((0x42f0, 0x43b0), (0x5d90, 0x5e30)):
+    raw = data[start:end]
+    print(f"--- file offset 0x{start:x}..0x{end:x} ---")
+    print(raw.hex(" "))
+    print("utf16le:", raw.decode("utf-16le", errors="replace"))
+===== END SOURCE FILE: inspect_region.py =====
+===== SOURCE FILE: inspect_tables.py =====
+from pathlib import Path
+import struct,sys
+p=Path(sys.argv[1]);d=p.read_bytes();pe=struct.unpack_from("<I",d,0x3c)[0];o=pe+24;base=struct.unpack_from("<Q",d,o+24)[0];n=struct.unpack_from("<H",d,pe+6)[0];os=struct.unpack_from("<H",d,pe+20)[0];st=o+os;S=[]
+for i in range(n):
+ q=st+i*40;name=d[q:q+8].split(b"\0",1)[0].decode("ascii","replace");vs,rv,rs,rp=struct.unpack_from("<IIII",d,q+8);S.append((name,rv,rs,rp))
+def va2fo(va):
+ r=va-base
+ for nm,rv,rs,rp in S:
+  if rv<=r<rv+rs:return rp+r-rv
+ raise ValueError(hex(va))
+for va,size in ((0x140009040,0x100),(0x140005e00,0x100),(0x140005e60,0x90)):
+ fo=va2fo(va);raw=d[fo:fo+size];print(f"--- VA=0x{va:x} file=0x{fo:x} ---");print(raw.hex(" "));print("ascii:","".join(chr(x) if 32<=x<127 else "." for x in raw));print("u16:",raw.decode("utf-16le",errors="replace"))
+===== END SOURCE FILE: inspect_tables.py =====
+===== SOURCE FILE: patch_palu_markers.py =====
+from pathlib import Path
+import hashlib
+
+source = Path(r"C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\PaluArray_546\PaluArray_flag.exe")
+out = source.with_name("PaluArray_flag_upx_names.exe")
+data = bytearray(source.read_bytes())
+patches = {0x208: b"UPX0", 0x230: b"UPX1", 0x3E0: b"UPX!"}
+for offset, replacement in patches.items():
+    old = bytes(data[offset:offset+4])
+    print(f"offset=0x{offset:x} old={old!r} new={replacement!r}")
+    if old != b"PALU":
+        raise SystemExit(f"unexpected bytes at 0x{offset:x}")
+    data[offset:offset+4] = replacement
+out.write_bytes(data)
+print(f"patched={out} size={len(data)} sha256={hashlib.sha256(data).hexdigest()}")
+===== END SOURCE FILE: patch_palu_markers.py =====
+**********************
+PowerShell transcript end
+End time: 20260927203349
+**********************
+**********************
+PowerShell transcript start
+Start time: 20260927203404
+Username: DESKTOP-412KTAR\mzj
+RunAs User: DESKTOP-412KTAR\mzj
+Configuration Name: 
+Machine: DESKTOP-412KTAR (Microsoft Windows NT 10.0.26200.0)
+Host Application: C:\Users\mzj\.cache\codex-runtimes\codex-primary-runtime\dependencies\native\powershell\pwsh.dll -NoProfile -Command try { [Console]::OutputEncoding=[System.Text.Encoding]::UTF8 } catch {}
+$ErrorActionPreference='Continue'; Start-Transcript -LiteralPath 'C:\Users\mzj\Desktop\CTF\玄机刷题\记录\代理-PaluArray-终端记录.txt' -Append; Write-Output 'COMMAND: wsl --exec /usr/bin/python3 check_re_tools.py <PaluArray_flag_unpacked.exe>'; wsl --exec /usr/bin/python3 '/mnt/c/Users/mzj/Desktop/CTF/玄机刷题/题目资料/PaluArray_546/check_re_tools.py' '/mnt/c/Users/mzj/Desktop/CTF/玄机刷题/题目资料/PaluArray_546/PaluArray_flag_unpacked.exe' 2>&1; Write-Output "NATIVE_EXIT=$LASTEXITCODE"; Stop-Transcript
+Process ID: 15576
+PSVersion: 7.6.5
+PSEdition: Core
+GitCommitId: 7.6.5
+OS: Microsoft Windows 10.0.26200
+Platform: Win32NT
+PSCompatibleVersions: 1.0, 2.0, 3.0, 4.0, 5.0, 5.1, 6.0, 7.0
+PSRemotingProtocolVersion: 2.4
+SerializationVersion: 1.1.0.1
+WSManStackVersion: 3.0
+**********************
+Transcript started, output file is C:\Users\mzj\Desktop\CTF\玄机刷题\记录\代理-PaluArray-终端记录.txt
+COMMAND: wsl --exec /usr/bin/python3 check_re_tools.py <PaluArray_flag_unpacked.exe>
+NATIVE_EXIT=0
+**********************
+PowerShell transcript end
+End time: 20260927203424
+**********************
+**********************
+PowerShell transcript start
+Start time: 20260927203436
+Username: DESKTOP-412KTAR\mzj
+RunAs User: DESKTOP-412KTAR\mzj
+Configuration Name: 
+Machine: DESKTOP-412KTAR (Microsoft Windows NT 10.0.26200.0)
+Host Application: C:\Users\mzj\.cache\codex-runtimes\codex-primary-runtime\dependencies\native\powershell\pwsh.dll -NoProfile -Command try { [Console]::OutputEncoding=[System.Text.Encoding]::UTF8 } catch {}
+$ErrorActionPreference='Continue'; Start-Transcript -LiteralPath 'C:\Users\mzj\Desktop\CTF\玄机刷题\记录\代理-PaluArray-终端记录.txt' -Append; $exe='/mnt/c/Users/mzj/Desktop/CTF/玄机刷题/题目资料/PaluArray_546/PaluArray_flag_unpacked.exe'; Write-Output 'COMMAND: wsl --exec /usr/bin/file <unpacked.exe>'; wsl --exec /usr/bin/file $exe 2>&1; Write-Output "NATIVE_EXIT=$LASTEXITCODE"; Write-Output 'COMMAND: wsl --exec /usr/bin/objdump -h <unpacked.exe>'; wsl --exec /usr/bin/objdump -h $exe 2>&1; Write-Output "NATIVE_EXIT=$LASTEXITCODE"; Write-Output 'COMMAND: wsl --exec /usr/bin/objdump -p <unpacked.exe>'; wsl --exec /usr/bin/objdump -p $exe 2>&1; Write-Output "NATIVE_EXIT=$LASTEXITCODE"; Stop-Transcript
+Process ID: 12268
+PSVersion: 7.6.5
+PSEdition: Core
+GitCommitId: 7.6.5
+OS: Microsoft Windows 10.0.26200
+Platform: Win32NT
+PSCompatibleVersions: 1.0, 2.0, 3.0, 4.0, 5.0, 5.1, 6.0, 7.0
+PSRemotingProtocolVersion: 2.4
+SerializationVersion: 1.1.0.1
+WSManStackVersion: 3.0
+**********************
+Transcript started, output file is C:\Users\mzj\Desktop\CTF\玄机刷题\记录\代理-PaluArray-终端记录.txt
+COMMAND: wsl --exec /usr/bin/file <unpacked.exe>
+NATIVE_EXIT=0
+COMMAND: wsl --exec /usr/bin/objdump -h <unpacked.exe>
+NATIVE_EXIT=0
+COMMAND: wsl --exec /usr/bin/objdump -p <unpacked.exe>
+NATIVE_EXIT=0
+**********************
+PowerShell transcript end
+End time: 20260927203437
+**********************
+**********************
+PowerShell transcript start
+Start time: 20260927203524
+Username: DESKTOP-412KTAR\mzj
+RunAs User: DESKTOP-412KTAR\mzj
+Configuration Name: 
+Machine: DESKTOP-412KTAR (Microsoft Windows NT 10.0.26200.0)
+Host Application: C:\Users\mzj\.cache\codex-runtimes\codex-primary-runtime\dependencies\native\powershell\pwsh.dll -NoProfile -Command try { [Console]::OutputEncoding=[System.Text.Encoding]::UTF8 } catch {}
+$ErrorActionPreference='Continue'; Start-Transcript -LiteralPath 'C:\Users\mzj\Desktop\CTF\玄机刷题\记录\代理-PaluArray-终端记录.txt' -Append; $exe='/mnt/c/Users/mzj/Desktop/CTF/玄机刷题/题目资料/PaluArray_546/PaluArray_flag_unpacked.exe'; Write-Output 'COMMAND: wsl --exec /usr/bin/python3 extract_strings.py <unpacked.exe> | Select-String on puzzle/debug terms'; wsl --exec /usr/bin/python3 '/mnt/c/Users/mzj/Desktop/CTF/玄机刷题/题目资料/PaluArray_546/extract_strings.py' $exe 2>&1 | Select-String -Pattern 'flag|Palu|Flag|Success|Failed|array|Array|Input|input|MD5|BMP|png|114514|password|Palu_996' ; Write-Output 'COMMAND: wsl --exec /usr/bin/objdump -d -Mintel --start-address=0x140001700 --stop-address=0x140001b10 <unpacked.exe>'; wsl --exec /usr/bin/objdump -d -Mintel --start-address=0x140001700 --stop-address=0x140001b10 $exe 2>&1; Write-Output "NATIVE_EXIT=$LASTEXITCODE"; Stop-Transcript
+Process ID: 28816
+PSVersion: 7.6.5
+PSEdition: Core
+GitCommitId: 7.6.5
+OS: Microsoft Windows 10.0.26200
+Platform: Win32NT
+PSCompatibleVersions: 1.0, 2.0, 3.0, 4.0, 5.0, 5.1, 6.0, 7.0
+PSRemotingProtocolVersion: 2.4
+SerializationVersion: 1.1.0.1
+WSManStackVersion: 3.0
+**********************
+Transcript started, output file is C:\Users\mzj\Desktop\CTF\玄机刷题\记录\代理-PaluArray-终端记录.txt
+COMMAND: wsl --exec /usr/bin/python3 extract_strings.py <unpacked.exe> | Select-String on puzzle/debug terms
+
+file=/mnt/c/Users/mzj/Desktop/CTF/玄机刷题/题目资料/PaluArray_546/PaluArray_flag_unpacked.exe bytes=105472
+0x005040: bad array new length
+0x005f20: Hello Palu!You Cant Find The Flag!!!
+0x007b88: .?AVbad_array_new_length@std@@
+0x005066: gPalu_996!?
+0x005080: flag
+0x005090: palu{
+0x0050a0: 1145141919810
+0x0050c0: Success
+0x0050d0: Failed
+0x0190fe: PaluArray
+0x0191b8: Input Flag:
+COMMAND: wsl --exec /usr/bin/objdump -d -Mintel --start-address=0x140001700 --stop-address=0x140001b10 <unpacked.exe>
+NATIVE_EXIT=0
+**********************
+PowerShell transcript end
+End time: 20260927203540
+**********************
+**********************
+PowerShell transcript start
+Start time: 20260927203614
+Username: DESKTOP-412KTAR\mzj
+RunAs User: DESKTOP-412KTAR\mzj
+Configuration Name: 
+Machine: DESKTOP-412KTAR (Microsoft Windows NT 10.0.26200.0)
+Host Application: C:\Users\mzj\.cache\codex-runtimes\codex-primary-runtime\dependencies\native\powershell\pwsh.dll -NoProfile -Command try { [Console]::OutputEncoding=[System.Text.Encoding]::UTF8 } catch {}
+$ErrorActionPreference='Continue'; Start-Transcript -LiteralPath 'C:\Users\mzj\Desktop\CTF\玄机刷题\记录\代理-PaluArray-终端记录.txt' -Append; $exe='/mnt/c/Users/mzj/Desktop/CTF/玄机刷题/题目资料/PaluArray_546/PaluArray_flag_unpacked.exe'; Write-Output 'COMMAND: objdump custom MD5 wrapper RVA 0x1a48..0x1bc0'; wsl --exec /usr/bin/objdump -d -Mintel --start-address=0x140001a48 --stop-address=0x140001bc0 $exe 2>&1; Write-Output 'COMMAND: objdump verifier/application logic RVA 0x1d80..0x1f60'; wsl --exec /usr/bin/objdump -d -Mintel --start-address=0x140001d80 --stop-address=0x140001f60 $exe 2>&1; Write-Output 'COMMAND: objdump application logic RVA 0x1f50..0x21a0'; wsl --exec /usr/bin/objdump -d -Mintel --start-address=0x140001f50 --stop-address=0x1400021a0 $exe 2>&1; Write-Output "NATIVE_EXIT=$LASTEXITCODE"; Stop-Transcript
+Process ID: 7324
+PSVersion: 7.6.5
+PSEdition: Core
+GitCommitId: 7.6.5
+OS: Microsoft Windows 10.0.26200
+Platform: Win32NT
+PSCompatibleVersions: 1.0, 2.0, 3.0, 4.0, 5.0, 5.1, 6.0, 7.0
+PSRemotingProtocolVersion: 2.4
+SerializationVersion: 1.1.0.1
+WSManStackVersion: 3.0
+**********************
+Transcript started, output file is C:\Users\mzj\Desktop\CTF\玄机刷题\记录\代理-PaluArray-终端记录.txt
+COMMAND: objdump custom MD5 wrapper RVA 0x1a48..0x1bc0
+COMMAND: objdump verifier/application logic RVA 0x1d80..0x1f60
+COMMAND: objdump application logic RVA 0x1f50..0x21a0
+NATIVE_EXIT=0
+**********************
+PowerShell transcript end
+End time: 20260927203630
+**********************
+**********************
+PowerShell transcript start
+Start time: 20260927203652
+Username: DESKTOP-412KTAR\mzj
+RunAs User: DESKTOP-412KTAR\mzj
+Configuration Name: 
+Machine: DESKTOP-412KTAR (Microsoft Windows NT 10.0.26200.0)
+Host Application: C:\Users\mzj\.cache\codex-runtimes\codex-primary-runtime\dependencies\native\powershell\pwsh.dll -NoProfile -Command try { [Console]::OutputEncoding=[System.Text.Encoding]::UTF8 } catch {}
+$ErrorActionPreference='Continue'; Start-Transcript -LiteralPath 'C:\Users\mzj\Desktop\CTF\玄机刷题\记录\代理-PaluArray-终端记录.txt' -Append; $exe='/mnt/c/Users/mzj/Desktop/CTF/玄机刷题/题目资料/PaluArray_546/PaluArray_flag_unpacked.exe'; Write-Output 'COMMAND: objdump -d -Mintel MD5 wrapper continuation RVA 0x1bc0..0x1d80'; wsl --exec /usr/bin/objdump -d -Mintel --start-address=0x140001bc0 --stop-address=0x140001d80 $exe 2>&1; Write-Output 'COMMAND: objdump -s .rdata region VA 0x140005e00..0x140005f00'; wsl --exec /usr/bin/objdump -s --start-address=0x140005e00 --stop-address=0x140005f00 $exe 2>&1; Write-Output 'COMMAND: objdump -d -Mintel MD5 compression/helpers RVA 0x2400..0x26a0'; wsl --exec /usr/bin/objdump -d -Mintel --start-address=0x140002400 --stop-address=0x1400026a0 $exe 2>&1; Write-Output "NATIVE_EXIT=$LASTEXITCODE"; Stop-Transcript
+Process ID: 29500
+PSVersion: 7.6.5
+PSEdition: Core
+GitCommitId: 7.6.5
+OS: Microsoft Windows 10.0.26200
+Platform: Win32NT
+PSCompatibleVersions: 1.0, 2.0, 3.0, 4.0, 5.0, 5.1, 6.0, 7.0
+PSRemotingProtocolVersion: 2.4
+SerializationVersion: 1.1.0.1
+WSManStackVersion: 3.0
+**********************
+Transcript started, output file is C:\Users\mzj\Desktop\CTF\玄机刷题\记录\代理-PaluArray-终端记录.txt
+COMMAND: objdump -d -Mintel MD5 wrapper continuation RVA 0x1bc0..0x1d80
+COMMAND: objdump -s .rdata region VA 0x140005e00..0x140005f00
+COMMAND: objdump -d -Mintel MD5 compression/helpers RVA 0x2400..0x26a0
+NATIVE_EXIT=0
+**********************
+PowerShell transcript end
+End time: 20260927203709
+**********************
+**********************
+PowerShell transcript start
+Start time: 20260927203757
+Username: DESKTOP-412KTAR\mzj
+RunAs User: DESKTOP-412KTAR\mzj
+Configuration Name: 
+Machine: DESKTOP-412KTAR (Microsoft Windows NT 10.0.26200.0)
+Host Application: C:\Users\mzj\.cache\codex-runtimes\codex-primary-runtime\dependencies\native\powershell\pwsh.dll -NoProfile -Command try { [Console]::OutputEncoding=[System.Text.Encoding]::UTF8 } catch {}
+$ErrorActionPreference='Continue'; Start-Transcript -LiteralPath 'C:\Users\mzj\Desktop\CTF\玄机刷题\记录\代理-PaluArray-终端记录.txt' -Append; $exe='/mnt/c/Users/mzj/Desktop/CTF/玄机刷题/题目资料/PaluArray_546/PaluArray_flag_unpacked.exe'; Write-Output 'COMMAND: whole .text static-reference scan for Unicode constants near rdata 0x5e66..0x5ed0'; wsl --exec /usr/bin/objdump -d -Mintel --start-address=0x140001000 --stop-address=0x140004cde $exe 2>&1 | Select-String -Pattern '0x140005e[6-9a-f][0-9a-f]' -Context 3,8; Stop-Transcript
+Process ID: 19608
+PSVersion: 7.6.5
+PSEdition: Core
+GitCommitId: 7.6.5
+OS: Microsoft Windows 10.0.26200
+Platform: Win32NT
+PSCompatibleVersions: 1.0, 2.0, 3.0, 4.0, 5.0, 5.1, 6.0, 7.0
+PSRemotingProtocolVersion: 2.4
+SerializationVersion: 1.1.0.1
+WSManStackVersion: 3.0
+**********************
+Transcript started, output file is C:\Users\mzj\Desktop\CTF\玄机刷题\记录\代理-PaluArray-终端记录.txt
+COMMAND: whole .text static-reference scan for Unicode constants near rdata 0x5e66..0x5ed0
+
+     140001036:	e9 0d 2a 00 00       	jmp    0x140003a48
+     14000103b:	cc                   	int3
+     14000103c:	48 83 ec 28          	sub    rsp,0x28
+>    140001040:	48 8d 15 21 4e 00 00 	lea    rdx,[rip+0x4e21]        # 0x140005e68
+     140001047:	48 8d 0d fa 8a 00 00 	lea    rcx,[rip+0x8afa]        # 0x140009b48
+     14000104e:	ff 15 d4 43 00 00    	call   QWORD PTR [rip+0x43d4]        # 0x140005428
+     140001054:	48 8d 0d 55 3c 00 00 	lea    rcx,[rip+0x3c55]        # 0x140004cb0
+     14000105b:	48 83 c4 28          	add    rsp,0x28
+     14000105f:	e9 e4 29 00 00       	jmp    0x140003a48
+     140001064:	48 83 ec 28          	sub    rsp,0x28
+     140001068:	48 8d 0d f1 88 00 00 	lea    rcx,[rip+0x88f1]        # 0x140009960
+     14000106f:	e8 6c 33 00 00       	call   0x1400043e0
+     140001323:	48 8d 4c 24 30       	lea    rcx,[rsp+0x30]
+     140001328:	ff 15 4a 44 00 00    	call   QWORD PTR [rip+0x444a]        # 0x140005778
+     14000132e:	90                   	nop
+>    14000132f:	48 8d 05 b2 4b 00 00 	lea    rax,[rip+0x4bb2]        # 0x140005ee8
+     140001336:	48 89 44 24 30       	mov    QWORD PTR [rsp+0x30],rax
+     14000133b:	ff 15 af 40 00 00    	call   QWORD PTR [rip+0x40af]        # 0x1400053f0
+     140001341:	ba 0e 00 00 00       	mov    edx,0xe
+     140001346:	8d 4a 72             	lea    ecx,[rdx+0x72]
+     140001349:	ff 15 99 40 00 00    	call   QWORD PTR [rip+0x4099]        # 0x1400053e8
+     14000134f:	48 8b c8             	mov    rcx,rax
+     140001352:	ba 80 00 00 00       	mov    edx,0x80
+     140001357:	ff 15 db 3d 00 00    	call   QWORD PTR [rip+0x3ddb]        # 0x140005138
+     140001b15:	48 89 43 10          	mov    QWORD PTR [rbx+0x10],rax
+     140001b19:	4c 89 73 08          	mov    QWORD PTR [rbx+0x8],r14
+     140001b1d:	c7 43 10 01 00 00 00 	mov    DWORD PTR [rbx+0x10],0x1
+>    140001b24:	48 8d 0d 61 43 00 00 	lea    rcx,[rip+0x4361]        # 0x140005e8c
+     140001b2b:	e8 a0 29 00 00       	call   0x1400044d0
+     140001b30:	48 89 03             	mov    QWORD PTR [rbx],rax
+     140001b33:	eb 03                	jmp    0x140001b38
+     140001b35:	49 8b de             	mov    rbx,r14
+     140001b38:	48 89 5c 24 40       	mov    QWORD PTR [rsp+0x40],rbx
+     140001b3d:	48 85 db             	test   rbx,rbx
+     140001b40:	0f 84 6f 02 00 00    	je     0x140001db5
+     140001b46:	48 8d 4d d8          	lea    rcx,[rbp-0x28]
+     140001b65:	00
+     140001b66:	48 8b 7d d8          	mov    rdi,QWORD PTR [rbp-0x28]
+     140001b6a:	8b 5f f0             	mov    ebx,DWORD PTR [rdi-0x10]
+>    140001b6d:	48 8d 0d 1c 43 00 00 	lea    rcx,[rip+0x431c]        # 0x140005e90
+     140001b74:	ff 15 4e 37 00 00    	call   QWORD PTR [rip+0x374e]        # 0x1400052c8
+     140001b7a:	89 5c 24 20          	mov    DWORD PTR [rsp+0x20],ebx
+     140001b7e:	4c 8b cf             	mov    r9,rdi
+     140001b81:	44 8b c0             	mov    r8d,eax
+>    140001b84:	48 8d 15 05 43 00 00 	lea    rdx,[rip+0x4305]        # 0x140005e90
+     140001b8b:	48 8d 4c 24 38       	lea    rcx,[rsp+0x38]
+     140001b90:	ff 15 62 38 00 00    	call   QWORD PTR [rip+0x3862]        # 0x1400053f8
+     140001b96:	48 8b 7c 24 38       	mov    rdi,QWORD PTR [rsp+0x38]
+     140001b9b:	4c 89 74 24 48       	mov    QWORD PTR [rsp+0x48],r14
+     140001ba0:	49 8b cd             	mov    rcx,r13
+     140001ba3:	ff 15 17 39 00 00    	call   QWORD PTR [rip+0x3917]        # 0x1400054c0
+     140001ba9:	48 8b d8             	mov    rbx,rax
+     140001bac:	48 89 44 24 50       	mov    QWORD PTR [rsp+0x50],rax
+     140001c78:	48 8b cb             	mov    rcx,rbx
+     140001c7b:	e8 e0 1d 00 00       	call   0x140003a60
+     140001c80:	45 33 c9             	xor    r9d,r9d
+>    140001c83:	4c 8d 05 f6 41 00 00 	lea    r8,[rip+0x41f6]        # 0x140005e80
+     140001c8a:	48 8b 17             	mov    rdx,QWORD PTR [rdi]
+     140001c8d:	33 c9                	xor    ecx,ecx
+     140001c8f:	ff 15 8b 34 00 00    	call   QWORD PTR [rip+0x348b]        # 0x140005120
+     140001c95:	90                   	nop
+     140001c96:	83 c8 ff             	or     eax,0xffffffff
+     140001c99:	f0 0f c1 47 10       	lock xadd DWORD PTR [rdi+0x10],eax
+     140001c9e:	83 f8 01             	cmp    eax,0x1
+     140001ca1:	75 30                	jne    0x140001cd3
+     140001e4a:	48 8d 4d e8          	lea    rcx,[rbp-0x18]
+     140001e4e:	e8 41 fb ff ff       	call   0x140001994
+     140001e53:	90                   	nop
+>    140001e54:	48 8d 15 45 40 00 00 	lea    rdx,[rip+0x4045]        # 0x140005ea0
+     140001e5b:	48 8d 4d e8          	lea    rcx,[rbp-0x18]
+     140001e5f:	ff 15 ab 35 00 00    	call   QWORD PTR [rip+0x35ab]        # 0x140005410
+     140001e65:	45 33 c9             	xor    r9d,r9d
+     140001e68:	45 33 c0             	xor    r8d,r8d
+     140001e6b:	48 8b cb             	mov    rcx,rbx
+     140001e6e:	85 c0                	test   eax,eax
+     140001e70:	0f 85 95 00 00 00    	jne    0x140001f0b
+>    140001e76:	48 8d 15 43 40 00 00 	lea    rdx,[rip+0x4043]        # 0x140005ec0
+     140001e7d:	ff 15 75 34 00 00    	call   QWORD PTR [rip+0x3475]        # 0x1400052f8
+     140001e83:	48 8b 55 e0          	mov    rdx,QWORD PTR [rbp-0x20]
+     140001e87:	48 8d 4c 24 50       	lea    rcx,[rsp+0x50]
+     140001e8c:	e8 db 00 00 00       	call   0x140001f6c
+     140001e91:	90                   	nop
+     140001e92:	48 8b 10             	mov    rdx,QWORD PTR [rax]
+     140001e95:	48 8d 4d f0          	lea    rcx,[rbp-0x10]
+     140001e99:	e8 7a 02 00 00       	call   0x140002118
+     140001f03:	cc                   	int3
+     140001f04:	e8 57 1b 00 00       	call   0x140003a60
+     140001f09:	eb 0e                	jmp    0x140001f19
+>    140001f0b:	48 8d 15 be 3f 00 00 	lea    rdx,[rip+0x3fbe]        # 0x140005ed0
+     140001f12:	ff 15 e0 33 00 00    	call   QWORD PTR [rip+0x33e0]        # 0x1400052f8
+     140001f18:	90                   	nop
+     140001f19:	48 8d 4d e8          	lea    rcx,[rbp-0x18]
+     140001f1d:	ff 15 7d 38 00 00    	call   QWORD PTR [rip+0x387d]        # 0x1400057a0
+     140001f23:	90                   	nop
+     140001f24:	48 8d 4d e0          	lea    rcx,[rbp-0x20]
+     140001f28:	ff 15 72 38 00 00    	call   QWORD PTR [rip+0x3872]        # 0x1400057a0
+     140001f2e:	48 8b 4d 10          	mov    rcx,QWORD PTR [rbp+0x10]
+**********************
+PowerShell transcript end
+End time: 20260927203813
+**********************
+**********************
+PowerShell transcript start
+Start time: 20260927204134
+Username: DESKTOP-412KTAR\mzj
+RunAs User: DESKTOP-412KTAR\mzj
+Configuration Name: 
+Machine: DESKTOP-412KTAR (Microsoft Windows NT 10.0.26200.0)
+Host Application: C:\Users\mzj\.cache\codex-runtimes\codex-primary-runtime\dependencies\native\powershell\pwsh.dll -NoProfile -Command try { [Console]::OutputEncoding=[System.Text.Encoding]::UTF8 } catch {}
+$ErrorActionPreference='Continue'; Start-Transcript -LiteralPath 'C:\Users\mzj\Desktop\CTF\玄机刷题\记录\代理-PaluArray-终端记录.txt' -Append; Write-Output 'COMMAND: Get-Command python, py and query existing interpreter/package availability (read-only)'; Get-Command python,py -ErrorAction SilentlyContinue | Select-Object Name,Source,Path | Format-List; if (Get-Command py -ErrorAction SilentlyContinue) { py -0p 2>&1 }; if (Get-Command python -ErrorAction SilentlyContinue) { python --version 2>&1; python -c "import importlib.util; print({n: bool(importlib.util.find_spec(n)) for n in ('capstone','pefile','PIL')})" 2>&1 }; Stop-Transcript
+Process ID: 5972
+PSVersion: 7.6.5
+PSEdition: Core
+GitCommitId: 7.6.5
+OS: Microsoft Windows 10.0.26200
+Platform: Win32NT
+PSCompatibleVersions: 1.0, 2.0, 3.0, 4.0, 5.0, 5.1, 6.0, 7.0
+PSRemotingProtocolVersion: 2.4
+SerializationVersion: 1.1.0.1
+WSManStackVersion: 3.0
+**********************
+Transcript started, output file is C:\Users\mzj\Desktop\CTF\玄机刷题\记录\代理-PaluArray-终端记录.txt
+COMMAND: Get-Command python, py and query existing interpreter/package availability (read-only)
+
+Name   : python.exe
+Source : C:\Users\mzj\AppData\Local\Programs\Python\Python312\python.exe
+Path   : C:\Users\mzj\AppData\Local\Programs\Python\Python312\python.exe
+
+Name   : py.exe
+Source : C:\WINDOWS\py.exe
+Path   : C:\WINDOWS\py.exe
+
+**********************
+PowerShell transcript end
+End time: 20260927204135
+**********************
+**********************
+PowerShell transcript start
+Start time: 20260927204202
+Username: DESKTOP-412KTAR\mzj
+RunAs User: DESKTOP-412KTAR\mzj
+Configuration Name: 
+Machine: DESKTOP-412KTAR (Microsoft Windows NT 10.0.26200.0)
+Host Application: C:\Users\mzj\.cache\codex-runtimes\codex-primary-runtime\dependencies\native\powershell\pwsh.dll -NoProfile -Command try { [Console]::OutputEncoding=[System.Text.Encoding]::UTF8 } catch {}
+$ErrorActionPreference='Continue'; Start-Transcript -LiteralPath 'C:\Users\mzj\Desktop\CTF\玄机刷题\记录\代理-PaluArray-终端记录.txt' -Append; $dir='C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\PaluArray_546'; $exe=Join-Path $dir 'PaluArray_flag_unpacked.exe'; Write-Output 'COMMAND: python disassemble_entry.py <unpacked.exe>'; python (Join-Path $dir 'disassemble_entry.py') $exe 2>&1; Write-Output 'COMMAND: python disassemble_validation.py <unpacked.exe>'; python (Join-Path $dir 'disassemble_validation.py') $exe 2>&1; Write-Output 'COMMAND: python disassemble_core_funcs.py <unpacked.exe>'; python (Join-Path $dir 'disassemble_core_funcs.py') $exe 2>&1; Write-Output 'COMMAND: python disassemble_md5_tail.py <unpacked.exe>'; python (Join-Path $dir 'disassemble_md5_tail.py') $exe 2>&1; Stop-Transcript
+Process ID: 7424
+PSVersion: 7.6.5
+PSEdition: Core
+GitCommitId: 7.6.5
+OS: Microsoft Windows 10.0.26200
+Platform: Win32NT
+PSCompatibleVersions: 1.0, 2.0, 3.0, 4.0, 5.0, 5.1, 6.0, 7.0
+PSRemotingProtocolVersion: 2.4
+SerializationVersion: 1.1.0.1
+WSManStackVersion: 3.0
+**********************
+Transcript started, output file is C:\Users\mzj\Desktop\CTF\玄机刷题\记录\代理-PaluArray-终端记录.txt
+COMMAND: python disassemble_entry.py <unpacked.exe>
+COMMAND: python disassemble_validation.py <unpacked.exe>
+Traceback (most recent call last):
+  File "C:\Users\mzj\Desktop\CTF\����ˢ��\��Ŀ����\PaluArray_546\disassemble_validation.py", line 30, in <module>
+    print(f"0x{ins.address:x}: {ins.mnemonic:<8} {ins.op_str} {' '.join(refs)}")
+UnicodeEncodeError: 'gbk' codec can't encode character '\ua232' in position 58: illegal multibyte sequence
+COMMAND: python disassemble_core_funcs.py <unpacked.exe>
+COMMAND: python disassemble_md5_tail.py <unpacked.exe>
+**********************
+PowerShell transcript end
+End time: 20260927204206
+**********************
+**********************
+PowerShell transcript start
+Start time: 20260927204333
+Username: DESKTOP-412KTAR\mzj
+RunAs User: DESKTOP-412KTAR\mzj
+Configuration Name: 
+Machine: DESKTOP-412KTAR (Microsoft Windows NT 10.0.26200.0)
+Host Application: C:\Users\mzj\.cache\codex-runtimes\codex-primary-runtime\dependencies\native\powershell\pwsh.dll -NoProfile -Command try { [Console]::OutputEncoding=[System.Text.Encoding]::UTF8 } catch {}
+$ErrorActionPreference='Continue'; Start-Transcript -LiteralPath 'C:\Users\mzj\Desktop\CTF\玄机刷题\记录\代理-PaluArray-终端记录.txt' -Append; $exe='/mnt/c/Users/mzj/Desktop/CTF/玄机刷题/题目资料/PaluArray_546/PaluArray_flag_unpacked.exe'; Write-Output 'COMMAND: objdump conversion helper RVA 0x1f6c..0x2118'; wsl --exec /usr/bin/objdump -d -Mintel --start-address=0x140001f6c --stop-address=0x140002118 $exe 2>&1; Write-Output 'COMMAND: objdump input-string copy/adapter RVA 0x2118..0x2244'; wsl --exec /usr/bin/objdump -d -Mintel --start-address=0x140002118 --stop-address=0x140002244 $exe 2>&1; Write-Output 'COMMAND: objdump candidate string transform RVA 0x2244..0x2368'; wsl --exec /usr/bin/objdump -d -Mintel --start-address=0x140002244 --stop-address=0x140002368 $exe 2>&1; Write-Output 'COMMAND: objdump MD5 finalization function RVA 0x2d70..0x2f50'; wsl --exec /usr/bin/objdump -d -Mintel --start-address=0x140002d70 --stop-address=0x140002f50 $exe 2>&1; Stop-Transcript
+Process ID: 28968
+PSVersion: 7.6.5
+PSEdition: Core
+GitCommitId: 7.6.5
+OS: Microsoft Windows 10.0.26200
+Platform: Win32NT
+PSCompatibleVersions: 1.0, 2.0, 3.0, 4.0, 5.0, 5.1, 6.0, 7.0
+PSRemotingProtocolVersion: 2.4
+SerializationVersion: 1.1.0.1
+WSManStackVersion: 3.0
+**********************
+Transcript started, output file is C:\Users\mzj\Desktop\CTF\玄机刷题\记录\代理-PaluArray-终端记录.txt
+COMMAND: objdump conversion helper RVA 0x1f6c..0x2118
+COMMAND: objdump input-string copy/adapter RVA 0x2118..0x2244
+COMMAND: objdump candidate string transform RVA 0x2244..0x2368
+COMMAND: objdump MD5 finalization function RVA 0x2d70..0x2f50
+**********************
+PowerShell transcript end
+End time: 20260927204353
+**********************
+**********************
+PowerShell transcript start
+Start time: 20260927204505
+Username: DESKTOP-412KTAR\mzj
+RunAs User: DESKTOP-412KTAR\mzj
+Configuration Name: 
+Machine: DESKTOP-412KTAR (Microsoft Windows NT 10.0.26200.0)
+Host Application: C:\Users\mzj\.cache\codex-runtimes\codex-primary-runtime\dependencies\native\powershell\pwsh.dll -NoProfile -Command try { [Console]::OutputEncoding=[System.Text.Encoding]::UTF8 } catch {}
+Start-Transcript -LiteralPath 'C:\Users\mzj\Desktop\CTF\玄机刷题\记录\代理-PaluArray-终端记录.txt' -Append
+Write-Output 'COMMAND: Get-Content -LiteralPath ''C:\Users\mzj\Desktop\CTF\玄机刷题\记录\代理-PaluArray-终端记录.txt'' -Tail 45'
+Get-Content -LiteralPath 'C:\Users\mzj\Desktop\CTF\玄机刷题\记录\代理-PaluArray-终端记录.txt' -Tail 45
+Write-Output 'COMMAND: Get-ChildItem -LiteralPath ''C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\PaluArray_546'' -File | Select-Object Name,Length'
+Get-ChildItem -LiteralPath 'C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\PaluArray_546' -File | Select-Object Name,Length | Format-Table -AutoSize
+Stop-Transcript
+Process ID: 17936
+PSVersion: 7.6.5
+PSEdition: Core
+GitCommitId: 7.6.5
+OS: Microsoft Windows 10.0.26200
+Platform: Win32NT
+PSCompatibleVersions: 1.0, 2.0, 3.0, 4.0, 5.0, 5.1, 6.0, 7.0
+PSRemotingProtocolVersion: 2.4
+SerializationVersion: 1.1.0.1
+WSManStackVersion: 3.0
+**********************
+Transcript started, output file is C:\Users\mzj\Desktop\CTF\玄机刷题\记录\代理-PaluArray-终端记录.txt
+COMMAND: Get-Content -LiteralPath 'C:\Users\mzj\Desktop\CTF\玄机刷题\记录\代理-PaluArray-终端记录.txt' -Tail 45
+PSEdition: Core
+GitCommitId: 7.6.5
+OS: Microsoft Windows 10.0.26200
+Platform: Win32NT
+PSCompatibleVersions: 1.0, 2.0, 3.0, 4.0, 5.0, 5.1, 6.0, 7.0
+PSRemotingProtocolVersion: 2.4
+SerializationVersion: 1.1.0.1
+WSManStackVersion: 3.0
+**********************
+Transcript started, output file is C:\Users\mzj\Desktop\CTF\玄机刷题\记录\代理-PaluArray-终端记录.txt
+COMMAND: objdump conversion helper RVA 0x1f6c..0x2118
+COMMAND: objdump input-string copy/adapter RVA 0x2118..0x2244
+COMMAND: objdump candidate string transform RVA 0x2244..0x2368
+COMMAND: objdump MD5 finalization function RVA 0x2d70..0x2f50
+**********************
+PowerShell transcript end
+End time: 20260927204353
+**********************
+**********************
+PowerShell transcript start
+Start time: 20260927204505
+Username: DESKTOP-412KTAR\mzj
+RunAs User: DESKTOP-412KTAR\mzj
+Configuration Name:
+Machine: DESKTOP-412KTAR (Microsoft Windows NT 10.0.26200.0)
+Host Application: C:\Users\mzj\.cache\codex-runtimes\codex-primary-runtime\dependencies\native\powershell\pwsh.dll -NoProfile -Command try { [Console]::OutputEncoding=[System.Text.Encoding]::UTF8 } catch {}
+Start-Transcript -LiteralPath 'C:\Users\mzj\Desktop\CTF\玄机刷题\记录\代理-PaluArray-终端记录.txt' -Append
+Write-Output 'COMMAND: Get-Content -LiteralPath ''C:\Users\mzj\Desktop\CTF\玄机刷题\记录\代理-PaluArray-终端记录.txt'' -Tail 45'
+Get-Content -LiteralPath 'C:\Users\mzj\Desktop\CTF\玄机刷题\记录\代理-PaluArray-终端记录.txt' -Tail 45
+Write-Output 'COMMAND: Get-ChildItem -LiteralPath ''C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\PaluArray_546'' -File | Select-Object Name,Length'
+Get-ChildItem -LiteralPath 'C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\PaluArray_546' -File | Select-Object Name,Length | Format-Table -AutoSize
+Stop-Transcript
+Process ID: 17936
+PSVersion: 7.6.5
+PSEdition: Core
+GitCommitId: 7.6.5
+OS: Microsoft Windows 10.0.26200
+Platform: Win32NT
+PSCompatibleVersions: 1.0, 2.0, 3.0, 4.0, 5.0, 5.1, 6.0, 7.0
+PSRemotingProtocolVersion: 2.4
+SerializationVersion: 1.1.0.1
+WSManStackVersion: 3.0
+**********************
+Transcript started, output file is C:\Users\mzj\Desktop\CTF\玄机刷题\记录\代理-PaluArray-终端记录.txt
+COMMAND: Get-Content -LiteralPath 'C:\Users\mzj\Desktop\CTF\玄机刷题\记录\代理-PaluArray-终端记录.txt' -Tail 45
+COMMAND: Get-ChildItem -LiteralPath 'C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\PaluArray_546' -File | Select-Object Name,Length
+
+Name                         Length
+----                         ------
+check_re_tools.py               180
+disassemble_core_funcs.py       807
+disassemble_entry.py           1155
+disassemble_md5_tail.py         809
+disassemble_range.py            821
+disassemble_strings.py         2539
+disassemble_validation.py      1441
+disassemble_xrefs.py           2368
+embedded_1_256x256.png        37835
+extract_png.py                 1068
+extract_strings.py              482
+find_static_refs.py            1487
+inspect_packed_region.py        356
+inspect_region.py               315
+inspect_tables.py               818
+map_import_calls.py            1848
+PaluArray_flag_unpacked.exe  105472
+PaluArray_flag_upx_names.exe  89088
+PaluArray_flag.exe            89088
+patch_palu_markers.py           675
+solve_paluarray.py              726
+
+**********************
+PowerShell transcript end
+End time: 20260927204505
+**********************
+**********************
+PowerShell transcript start
+Start time: 20260927204515
+Username: DESKTOP-412KTAR\mzj
+RunAs User: DESKTOP-412KTAR\mzj
+Configuration Name: 
+Machine: DESKTOP-412KTAR (Microsoft Windows NT 10.0.26200.0)
+Host Application: C:\Users\mzj\.cache\codex-runtimes\codex-primary-runtime\dependencies\native\powershell\pwsh.dll -NoProfile -Command try { [Console]::OutputEncoding=[System.Text.Encoding]::UTF8 } catch {}
+Start-Transcript -LiteralPath 'C:\Users\mzj\Desktop\CTF\玄机刷题\记录\代理-PaluArray-终端记录.txt' -Append
+Write-Output 'COMMAND: Get-Content disassemble_md5_tail.py and disassemble_core_funcs.py'
+Get-Content -LiteralPath 'C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\PaluArray_546\disassemble_md5_tail.py'
+Get-Content -LiteralPath 'C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\PaluArray_546\disassemble_core_funcs.py'
+Write-Output 'COMMAND: Get-FileHash original and unpacked PE SHA256'
+Get-FileHash -LiteralPath 'C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\PaluArray_546\PaluArray_flag.exe','C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\PaluArray_546\PaluArray_flag_unpacked.exe' -Algorithm SHA256 | Format-List
+Stop-Transcript
+Process ID: 21500
+PSVersion: 7.6.5
+PSEdition: Core
+GitCommitId: 7.6.5
+OS: Microsoft Windows 10.0.26200
+Platform: Win32NT
+PSCompatibleVersions: 1.0, 2.0, 3.0, 4.0, 5.0, 5.1, 6.0, 7.0
+PSRemotingProtocolVersion: 2.4
+SerializationVersion: 1.1.0.1
+WSManStackVersion: 3.0
+**********************
+Transcript started, output file is C:\Users\mzj\Desktop\CTF\玄机刷题\记录\代理-PaluArray-终端记录.txt
+COMMAND: Get-Content disassemble_md5_tail.py and disassemble_core_funcs.py
+from pathlib import Path
+import struct,sys
+from capstone import Cs,CS_ARCH_X86,CS_MODE_64
+p=Path(sys.argv[1]);d=p.read_bytes();pe=struct.unpack_from("<I",d,0x3c)[0];o=pe+24;base=struct.unpack_from("<Q",d,o+24)[0];n=struct.unpack_from("<H",d,pe+6)[0];os=struct.unpack_from("<H",d,pe+20)[0];st=o+os;S=[]
+for i in range(n):
+ q=st+i*40;nm=d[q:q+8].split(b"\0",1)[0].decode("ascii","replace");vs,rv,rs,rp=struct.unpack_from("<IIII",d,q+8);S.append((nm,rv,rs,rp))
+def fo(va):
+ r=va-base
+ for nm,rv,rs,rp in S:
+  if rv<=r<rv+rs:return rp+r-rv
+ raise ValueError(hex(va))
+md=Cs(CS_ARCH_X86,CS_MODE_64)
+for a,b in ((0x1b00,0x1d80),(0x2230,0x2290),(0x2410,0x24c0)):
+ print(f"--- RVA 0x{a:x}..0x{b:x} ---")
+ for i in md.disasm(d[fo(base+a):fo(base+a)+(b-a)],base+a):print(f"0x{i.address:x}: {i.mnemonic:<8} {i.op_str}")
+from pathlib import Path
+import struct,sys
+from capstone import Cs,CS_ARCH_X86,CS_MODE_64
+p=Path(sys.argv[1]);d=p.read_bytes();pe=struct.unpack_from("<I",d,0x3c)[0];o=pe+24;base=struct.unpack_from("<Q",d,o+24)[0];n=struct.unpack_from("<H",d,pe+6)[0];z=struct.unpack_from("<H",d,pe+20)[0];st=o+z;S=[]
+for i in range(n):
+ q=st+i*40;nm=d[q:q+8].split(b"\0",1)[0].decode("ascii","replace");vs,rv,rs,rp=struct.unpack_from("<IIII",d,q+8);S.append((nm,rv,rs,rp))
+def fo(va):
+ r=va-base
+ for nm,rv,rs,rp in S:
+  if rv<=r<rv+rs:return rp+r-rv
+ raise ValueError(hex(va))
+md=Cs(CS_ARCH_X86,CS_MODE_64)
+for a,b in ((0x1900,0x1b10),(0x1f50,0x21a0),(0x2400,0x26a0)):
+ print(f"--- RVA 0x{a:x}..0x{b:x} ---")
+ for i in md.disasm(d[fo(base+a):fo(base+a)+(b-a)],base+a):print(f"0x{i.address:x}: {i.mnemonic:<8} {i.op_str}")
+COMMAND: Get-FileHash original and unpacked PE SHA256
+
+Algorithm : SHA256
+Hash      : CD8E2BE79AAA454F295132B7ECE6AE30D0CC05FF24DA7541639F05F76D482A4D
+Path      : C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\PaluArray_546\PaluArray_flag.exe
+
+Algorithm : SHA256
+Hash      : 8B1263DE36EDA3E5E3F1183C2D08C520ECAE09649B1A04891F597033FDF842A5
+Path      : C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\PaluArray_546\PaluArray_flag_unpacked.exe
+
+**********************
+PowerShell transcript end
+End time: 20260927204515
+**********************
+**********************
+PowerShell transcript start
+Start time: 20260927204523
+Username: DESKTOP-412KTAR\mzj
+RunAs User: DESKTOP-412KTAR\mzj
+Configuration Name: 
+Machine: DESKTOP-412KTAR (Microsoft Windows NT 10.0.26200.0)
+Host Application: C:\Users\mzj\.cache\codex-runtimes\codex-primary-runtime\dependencies\native\powershell\pwsh.dll -NoProfile -Command try { [Console]::OutputEncoding=[System.Text.Encoding]::UTF8 } catch {}
+Start-Transcript -LiteralPath 'C:\Users\mzj\Desktop\CTF\玄机刷题\记录\代理-PaluArray-终端记录.txt' -Append
+Write-Output 'COMMAND: python disassemble_md5_tail.py PaluArray_flag_unpacked.exe'
+python 'C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\PaluArray_546\disassemble_md5_tail.py' 'C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\PaluArray_546\PaluArray_flag_unpacked.exe'
+Write-Output 'COMMAND: python disassemble_core_funcs.py PaluArray_flag_unpacked.exe'
+python 'C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\PaluArray_546\disassemble_core_funcs.py' 'C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\PaluArray_546\PaluArray_flag_unpacked.exe'
+Stop-Transcript
+Process ID: 23536
+PSVersion: 7.6.5
+PSEdition: Core
+GitCommitId: 7.6.5
+OS: Microsoft Windows 10.0.26200
+Platform: Win32NT
+PSCompatibleVersions: 1.0, 2.0, 3.0, 4.0, 5.0, 5.1, 6.0, 7.0
+PSRemotingProtocolVersion: 2.4
+SerializationVersion: 1.1.0.1
+WSManStackVersion: 3.0
+**********************
+Transcript started, output file is C:\Users\mzj\Desktop\CTF\玄机刷题\记录\代理-PaluArray-终端记录.txt
+COMMAND: python disassemble_md5_tail.py PaluArray_flag_unpacked.exe
+
+COMMAND: python disassemble_core_funcs.py PaluArray_flag_unpacked.exe
+
+**********************
+PowerShell transcript end
+End time: 20260927204525
+**********************
+**********************
+PowerShell transcript start
+Start time: 20260927204545
+Username: DESKTOP-412KTAR\mzj
+RunAs User: DESKTOP-412KTAR\mzj
+Configuration Name: 
+Machine: DESKTOP-412KTAR (Microsoft Windows NT 10.0.26200.0)
+Host Application: C:\Users\mzj\.cache\codex-runtimes\codex-primary-runtime\dependencies\native\powershell\pwsh.dll -NoProfile -Command try { [Console]::OutputEncoding=[System.Text.Encoding]::UTF8 } catch {}
+Start-Transcript -LiteralPath 'C:\Users\mzj\Desktop\CTF\玄机刷题\记录\代理-PaluArray-终端记录.txt' -Append
+Write-Output 'COMMAND: Get-Content disassemble_xrefs.py and find_static_refs.py'
+Get-Content -LiteralPath 'C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\PaluArray_546\disassemble_xrefs.py'
+Get-Content -LiteralPath 'C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\PaluArray_546\find_static_refs.py'
+Write-Output 'COMMAND: Get-Content disassemble_strings.py'
+Get-Content -LiteralPath 'C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\PaluArray_546\disassemble_strings.py'
+Stop-Transcript
+Process ID: 21120
+PSVersion: 7.6.5
+PSEdition: Core
+GitCommitId: 7.6.5
+OS: Microsoft Windows 10.0.26200
+Platform: Win32NT
+PSCompatibleVersions: 1.0, 2.0, 3.0, 4.0, 5.0, 5.1, 6.0, 7.0
+PSRemotingProtocolVersion: 2.4
+SerializationVersion: 1.1.0.1
+WSManStackVersion: 3.0
+**********************
+Transcript started, output file is C:\Users\mzj\Desktop\CTF\玄机刷题\记录\代理-PaluArray-终端记录.txt
+COMMAND: Get-Content disassemble_xrefs.py and find_static_refs.py
+from pathlib import Path
+import struct
+import sys
+from capstone import Cs, CS_ARCH_X86, CS_MODE_64
+from capstone.x86 import X86_OP_MEM, X86_REG_RIP, X86_OP_IMM
+
+path = Path(sys.argv[1])
+data = path.read_bytes()
+pe = struct.unpack_from("<I", data, 0x3C)[0]
+num_sections = struct.unpack_from("<H", data, pe + 6)[0]
+opt_size = struct.unpack_from("<H", data, pe + 20)[0]
+opt = pe + 24
+image_base = struct.unpack_from("<Q", data, opt + 24)[0]
+section_table = opt + opt_size
+sections = []
+for i in range(num_sections):
+    off = section_table + i * 40
+    name = data[off:off+8].split(b"\0", 1)[0].decode("ascii", "replace")
+    virtual_size, rva, raw_size, raw_ptr = struct.unpack_from("<IIII", data, off + 8)
+    characteristics = struct.unpack_from("<I", data, off + 36)[0]
+    sections.append((name, virtual_size, rva, raw_size, raw_ptr, characteristics))
+    print(f"section={name!r} rva=0x{rva:x} vsize=0x{virtual_size:x} raw=0x{raw_ptr:x}+0x{raw_size:x} flags=0x{characteristics:x}")
+
+def fileoff_to_va(fileoff):
+    for name, vs, rva, rs, rp, ch in sections:
+        if rp <= fileoff < rp + rs:
+            return image_base + rva + (fileoff - rp)
+    return None
+
+target_ranges = [(fileoff_to_va(x), fileoff_to_va(x) + 0x80) for x in (0x4350,) if fileoff_to_va(x)]
+print(f"image_base=0x{image_base:x} target_ranges={[(hex(a),hex(b)) for a,b in target_ranges]}")
+md = Cs(CS_ARCH_X86, CS_MODE_64)
+md.detail = True
+for name, vs, rva, rs, rp, ch in sections:
+    if not (ch & 0x20000000):
+        continue
+    code = data[rp:rp+rs]
+    base = image_base + rva
+    insns = list(md.disasm(code, base))
+    xrefs = []
+    for ix, ins in enumerate(insns):
+        targets = []
+        for op in ins.operands:
+            if op.type == X86_OP_MEM and op.mem.base == X86_REG_RIP:
+                targets.append(ins.address + ins.size + op.mem.disp)
+            elif op.type == X86_OP_IMM:
+                targets.append(op.imm)
+        if any(a <= target < b for target in targets for a,b in target_ranges):
+            xrefs.append(ix)
+    print(f"--- xrefs in {name}, decoded={len(insns)} ---")
+    seen = set()
+    for ix in xrefs:
+        lo, hi = max(0,ix-8), min(len(insns),ix+13)
+        for j in range(lo,hi):
+            if j in seen: continue
+            ins=insns[j]
+            print(f"0x{ins.address:x}: {ins.mnemonic:<8} {ins.op_str}")
+            seen.add(j)
+from pathlib import Path
+import struct,sys
+from capstone import Cs,CS_ARCH_X86,CS_MODE_64
+from capstone.x86 import X86_OP_MEM,X86_REG_RIP,X86_OP_IMM
+p=Path(sys.argv[1]);d=p.read_bytes();pe=struct.unpack_from("<I",d,0x3c)[0];o=pe+24;base=struct.unpack_from("<Q",d,o+24)[0];n=struct.unpack_from("<H",d,pe+6)[0];os=struct.unpack_from("<H",d,pe+20)[0];st=o+os;S=[]
+for i in range(n):
+ q=st+i*40;nm=d[q:q+8].split(b"\0",1)[0].decode("ascii","replace");vs,rv,rs,rp=struct.unpack_from("<IIII",d,q+8);fl=struct.unpack_from("<I",d,q+36)[0];S.append((nm,rv,rs,rp,fl))
+def va2fo(va):
+ r=va-base
+ for nm,rv,rs,rp,fl in S:
+  if rv<=r<rv+rs:return rp+r-rv
+ return None
+needles=["Palu_996!?","flag","}","palu{","1145141919810","Success","Failed"]
+targets=[]
+for s in needles:
+ raw=s.encode("utf-16le")+b"\0\0";cur=0
+ while (fo:=d.find(raw,cur))>=0:
+  va=next((base+rv+fo-rp for nm,rv,rs,rp,fl in S if rp<=fo<rp+rs),None)
+  if va: print(f"string={s!r} file=0x{fo:x} va=0x{va:x}");targets.append((s,va,va+len(raw)))
+  cur=fo+1
+md=Cs(CS_ARCH_X86,CS_MODE_64);md.detail=True
+for nm,rv,rs,rp,fl in S:
+ if not(fl&0x20000000) or not rs:continue
+ print(f"--- {nm} ---")
+ for i in md.disasm(d[rp:rp+rs],base+rv):
+  refs=[]
+  for op in i.operands:
+   if op.type==X86_OP_MEM and op.mem.base==X86_REG_RIP:refs.append(i.address+i.size+op.mem.disp)
+   elif op.type==X86_OP_IMM:refs.append(op.imm)
+  for s,a,b in targets:
+   if any(a<=x<b for x in refs):print(f"0x{i.address:x}: {i.mnemonic:<8} {i.op_str} -> {s!r}")
+COMMAND: Get-Content disassemble_strings.py
+from pathlib import Path
+import struct
+import sys
+from capstone import Cs, CS_ARCH_X86, CS_MODE_64
+from capstone.x86 import X86_OP_MEM, X86_REG_RIP, X86_OP_IMM
+
+path = Path(sys.argv[1])
+data = path.read_bytes()
+pe = struct.unpack_from("<I", data, 0x3C)[0]
+opt = pe + 24
+entry_rva = struct.unpack_from("<I", data, opt + 16)[0]
+image_base = struct.unpack_from("<Q", data, opt + 24)[0]
+num_sections = struct.unpack_from("<H", data, pe + 6)[0]
+opt_size = struct.unpack_from("<H", data, pe + 20)[0]
+section_table = opt + opt_size
+sections = []
+for i in range(num_sections):
+    off = section_table + i*40
+    name = data[off:off+8].split(b"\0",1)[0].decode("ascii","replace")
+    vsize, rva, raw_size, raw_ptr = struct.unpack_from("<IIII", data, off+8)
+    flags = struct.unpack_from("<I", data, off+36)[0]
+    sections.append((name,vsize,rva,raw_size,raw_ptr,flags))
+    print(f"section={name} rva=0x{rva:x} vsize=0x{vsize:x} raw=0x{raw_ptr:x}+0x{raw_size:x} flags=0x{flags:x}")
+print(f"entry_rva=0x{entry_rva:x} entry_va=0x{image_base+entry_rva:x}")
+def fileoff_to_va(fo):
+    for name,vs,rva,rs,rp,flags in sections:
+        if rp <= fo < rp+rs: return image_base+rva+(fo-rp)
+    return None
+
+needles = ["gPalu_996!?", "flag", "palu{", "1145141919810", "Success", "Failed", "Input Flag:"]
+targets = []
+for s in needles:
+    raw = s.encode("utf-16le") + b"\0\0"
+    start=0
+    while True:
+        fo=data.find(raw,start)
+        if fo<0: break
+        va=fileoff_to_va(fo)
+        print(f"string={s!r} file_offset=0x{fo:x} va={hex(va) if va else None}")
+        if va: targets.append((s,va,va+len(raw)))
+        start=fo+1
+md=Cs(CS_ARCH_X86,CS_MODE_64); md.detail=True
+for name,vs,rva,rs,rp,flags in sections:
+    if not (flags & 0x20000000) or rs==0: continue
+    insns=list(md.disasm(data[rp:rp+rs],image_base+rva))
+    hits=[]
+    for ix,ins in enumerate(insns):
+        refs=[]
+        for op in ins.operands:
+            if op.type==X86_OP_MEM and op.mem.base==X86_REG_RIP: refs.append(ins.address+ins.size+op.mem.disp)
+            elif op.type==X86_OP_IMM: refs.append(op.imm)
+        for s,a,b in targets:
+            if any(a<=x<b for x in refs): hits.append((ix,s,a))
+    print(f"--- {name} decoded={len(insns)} xrefs={len(hits)} ---")
+    seen=set()
+    for ix,s,a in hits:
+        print(f"xref string={s!r} target=0x{a:x}")
+        for j in range(max(0,ix-10),min(len(insns),ix+16)):
+            if j in seen: continue
+            seen.add(j); ins=insns[j]
+            print(f"0x{ins.address:x}: {ins.mnemonic:<8} {ins.op_str}")
+**********************
+PowerShell transcript end
+End time: 20260927204546
+**********************
+**********************
+PowerShell transcript start
+Start time: 20260927204551
+Username: DESKTOP-412KTAR\mzj
+RunAs User: DESKTOP-412KTAR\mzj
+Configuration Name: 
+Machine: DESKTOP-412KTAR (Microsoft Windows NT 10.0.26200.0)
+Host Application: C:\Users\mzj\.cache\codex-runtimes\codex-primary-runtime\dependencies\native\powershell\pwsh.dll -NoProfile -Command try { [Console]::OutputEncoding=[System.Text.Encoding]::UTF8 } catch {}
+Start-Transcript -LiteralPath 'C:\Users\mzj\Desktop\CTF\玄机刷题\记录\代理-PaluArray-终端记录.txt' -Append
+Write-Output 'COMMAND: python find_static_refs.py PaluArray_flag_unpacked.exe'
+python 'C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\PaluArray_546\find_static_refs.py' 'C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\PaluArray_546\PaluArray_flag_unpacked.exe'
+Stop-Transcript
+Process ID: 27388
+PSVersion: 7.6.5
+PSEdition: Core
+GitCommitId: 7.6.5
+OS: Microsoft Windows 10.0.26200
+Platform: Win32NT
+PSCompatibleVersions: 1.0, 2.0, 3.0, 4.0, 5.0, 5.1, 6.0, 7.0
+PSRemotingProtocolVersion: 2.4
+SerializationVersion: 1.1.0.1
+WSManStackVersion: 3.0
+**********************
+Transcript started, output file is C:\Users\mzj\Desktop\CTF\玄机刷题\记录\代理-PaluArray-终端记录.txt
+COMMAND: python find_static_refs.py PaluArray_flag_unpacked.exe
+
+**********************
+PowerShell transcript end
+End time: 20260927204552
+**********************
+**********************
+PowerShell transcript start
+Start time: 20260927204615
+Username: DESKTOP-412KTAR\mzj
+RunAs User: DESKTOP-412KTAR\mzj
+Configuration Name: 
+Machine: DESKTOP-412KTAR (Microsoft Windows NT 10.0.26200.0)
+Host Application: C:\Users\mzj\.cache\codex-runtimes\codex-primary-runtime\dependencies\native\powershell\pwsh.dll -NoProfile -Command try { [Console]::OutputEncoding=[System.Text.Encoding]::UTF8 } catch {}
+Start-Transcript -LiteralPath 'C:\Users\mzj\Desktop\CTF\玄机刷题\记录\代理-PaluArray-终端记录.txt' -Append
+Write-Output 'COMMAND: Get-Content disassemble_range.py'
+Get-Content -LiteralPath 'C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\PaluArray_546\disassemble_range.py'
+Write-Output 'COMMAND: Get-Content disassemble_entry.py'
+Get-Content -LiteralPath 'C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\PaluArray_546\disassemble_entry.py'
+Write-Output 'COMMAND: Get-Content map_import_calls.py'
+Get-Content -LiteralPath 'C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\PaluArray_546\map_import_calls.py'
+Stop-Transcript
+Process ID: 14968
+PSVersion: 7.6.5
+PSEdition: Core
+GitCommitId: 7.6.5
+OS: Microsoft Windows 10.0.26200
+Platform: Win32NT
+PSCompatibleVersions: 1.0, 2.0, 3.0, 4.0, 5.0, 5.1, 6.0, 7.0
+PSRemotingProtocolVersion: 2.4
+SerializationVersion: 1.1.0.1
+WSManStackVersion: 3.0
+**********************
+Transcript started, output file is C:\Users\mzj\Desktop\CTF\玄机刷题\记录\代理-PaluArray-终端记录.txt
+COMMAND: Get-Content disassemble_range.py
+from pathlib import Path
+import struct,sys
+from capstone import Cs,CS_ARCH_X86,CS_MODE_64
+p=Path(sys.argv[1]); start=int(sys.argv[2],16); end=int(sys.argv[3],16); d=p.read_bytes(); pe=struct.unpack_from('<I',d,0x3c)[0]; opt=pe+24; base=struct.unpack_from('<Q',d,opt+24)[0]; n=struct.unpack_from('<H',d,pe+6)[0]; os=struct.unpack_from('<H',d,pe+20)[0]; table=opt+os; sections=[]
+for j in range(n):
+ q=table+j*40; name=d[q:q+8].split(b'\0',1)[0].decode('ascii','replace'); vs,rv,rs,rp=struct.unpack_from('<IIII',d,q+8); sections.append((name,rv,rs,rp))
+def off(rva):
+ for name,rv,rs,rp in sections:
+  if rv<=rva<rv+rs:return rp+rva-rv
+ raise ValueError(hex(rva))
+md=Cs(CS_ARCH_X86,CS_MODE_64); md.detail=True
+for i in md.disasm(d[off(start):off(end-1)+1],base+start): print(f'0x{i.address:x}: {i.mnemonic:<8} {i.op_str}')
+COMMAND: Get-Content disassemble_entry.py
+from pathlib import Path
+import struct
+import sys
+from capstone import Cs, CS_ARCH_X86, CS_MODE_64
+
+path = Path(sys.argv[1])
+data = path.read_bytes()
+pe = struct.unpack_from("<I", data, 0x3C)[0]
+opt = pe + 24
+entry_rva = struct.unpack_from("<I", data, opt + 16)[0]
+image_base = struct.unpack_from("<Q", data, opt + 24)[0]
+num_sections = struct.unpack_from("<H", data, pe + 6)[0]
+opt_size = struct.unpack_from("<H", data, pe + 20)[0]
+section_table = opt + opt_size
+print(f"entry_rva=0x{entry_rva:x} entry_va=0x{image_base+entry_rva:x}")
+for i in range(num_sections):
+    off = section_table + i*40
+    name = data[off:off+8].split(b"\0",1)[0].decode("ascii","replace")
+    vsize, rva, raw_size, raw_ptr = struct.unpack_from("<IIII", data, off+8)
+    if rva <= entry_rva < rva + max(vsize,raw_size) and raw_size:
+        fileoff = raw_ptr + entry_rva-rva
+        print(f"entry_section={name} file_offset=0x{fileoff:x}")
+        md=Cs(CS_ARCH_X86,CS_MODE_64)
+        for n, ins in enumerate(md.disasm(data[fileoff:fileoff+0x800], image_base+entry_rva)):
+            if n >= 120: break
+            print(f"0x{ins.address:x}: {ins.mnemonic:<8} {ins.op_str}")
+COMMAND: Get-Content map_import_calls.py
+from pathlib import Path
+import struct,sys
+from capstone import Cs,CS_ARCH_X86,CS_MODE_64
+from capstone.x86_const import X86_OP_MEM,X86_REG_RIP
+p=Path(sys.argv[1]);d=p.read_bytes();pe=struct.unpack_from('<I',d,0x3c)[0]; opt=pe+24;base=struct.unpack_from('<Q',d,opt+24)[0]; n=struct.unpack_from('<H',d,pe+6)[0]; os=struct.unpack_from('<H',d,pe+20)[0]; st=opt+os; sections=[]
+for i in range(n):
+ q=st+i*40;name=d[q:q+8].split(b'\0',1)[0].decode('ascii','replace');vs,rv,rs,rp=struct.unpack_from('<IIII',d,q+8);sections.append((name,rv,rs,rp))
+def fo(rva):
+ for name,rv,rs,rp in sections:
+  if rv<=rva<rv+rs:return rp+rva-rv
+ raise ValueError(hex(rva))
+nd=struct.unpack_from('<I',d,opt+108)[0]; imp_rva,imp_size=struct.unpack_from('<II',d,opt+112+8)
+imports={}
+if imp_rva:
+ pos=fo(imp_rva)
+ while True:
+  oft,ts,fc,nr,ft=struct.unpack_from('<IIIII',d,pos)
+  if not (oft|nr|ft):break
+  dll=d[fo(nr):].split(b'\0',1)[0].decode('ascii','replace'); thunk=oft or ft; j=0
+  while True:
+   v=struct.unpack_from('<Q',d,fo(thunk)+j*8)[0]
+   if not v:break
+   if v>>63:name=f'ordinal_{v&0xffff}'
+   else:name=d[fo(v)+2:].split(b'\0',1)[0].decode('ascii','replace')
+   imports[base+ft+j*8]=dll+'!'+name;j+=1
+  pos+=20
+print('--- IAT ---')
+for va,name in sorted(imports.items()):print(f'{va:#x} {name}')
+md=Cs(CS_ARCH_X86,CS_MODE_64);md.detail=True
+print('--- calls into IAT in selected functions ---')
+for start,end in [(0x1040,0x1080),(0x1994,0x1a47),(0x1a48,0x1d92),(0x1dd8,0x1f4e),(0x1f6c,0x20b4),(0x2118,0x2404)]:
+ print(f'[{start:#x},{end:#x})')
+ for ins in md.disasm(d[fo(start):fo(end-1)+1],base+start):
+  for o in ins.operands:
+   if o.type==X86_OP_MEM and o.mem.base==X86_REG_RIP:
+    va=ins.address+ins.size+o.mem.disp
+    if va in imports:print(f'{ins.address:#x}: {ins.mnemonic} {ins.op_str} => {imports[va]}')
+
+**********************
+PowerShell transcript end
+End time: 20260927204615
+**********************
+**********************
+PowerShell transcript start
+Start time: 20260927204626
+Username: DESKTOP-412KTAR\mzj
+RunAs User: DESKTOP-412KTAR\mzj
+Configuration Name: 
+Machine: DESKTOP-412KTAR (Microsoft Windows NT 10.0.26200.0)
+Host Application: C:\Users\mzj\.cache\codex-runtimes\codex-primary-runtime\dependencies\native\powershell\pwsh.dll -NoProfile -Command try { [Console]::OutputEncoding=[System.Text.Encoding]::UTF8 } catch {}
+Start-Transcript -LiteralPath 'C:\Users\mzj\Desktop\CTF\玄机刷题\记录\代理-PaluArray-终端记录.txt' -Append
+Write-Output 'COMMAND: python map_import_calls.py PaluArray_flag_unpacked.exe'
+python 'C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\PaluArray_546\map_import_calls.py' 'C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\PaluArray_546\PaluArray_flag_unpacked.exe'
+Write-Output 'COMMAND: python disassemble_range.py PaluArray_flag_unpacked.exe 0x1a48 0x1d96'
+python 'C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\PaluArray_546\disassemble_range.py' 'C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\PaluArray_546\PaluArray_flag_unpacked.exe' 0x1a48 0x1d96
+Write-Output 'COMMAND: python disassemble_range.py PaluArray_flag_unpacked.exe 0x1dd8 0x1f50'
+python 'C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\PaluArray_546\disassemble_range.py' 'C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\PaluArray_546\PaluArray_flag_unpacked.exe' 0x1dd8 0x1f50
+Stop-Transcript
+Process ID: 9896
+PSVersion: 7.6.5
+PSEdition: Core
+GitCommitId: 7.6.5
+OS: Microsoft Windows 10.0.26200
+Platform: Win32NT
+PSCompatibleVersions: 1.0, 2.0, 3.0, 4.0, 5.0, 5.1, 6.0, 7.0
+PSRemotingProtocolVersion: 2.4
+SerializationVersion: 1.1.0.1
+WSManStackVersion: 3.0
+**********************
+Transcript started, output file is C:\Users\mzj\Desktop\CTF\玄机刷题\记录\代理-PaluArray-终端记录.txt
+COMMAND: python map_import_calls.py PaluArray_flag_unpacked.exe
+
+COMMAND: python disassemble_range.py PaluArray_flag_unpacked.exe 0x1a48 0x1d96
+
+COMMAND: python disassemble_range.py PaluArray_flag_unpacked.exe 0x1dd8 0x1f50
+
+**********************
+PowerShell transcript end
+End time: 20260927204629
+**********************
+**********************
+PowerShell transcript start
+Start time: 20260927204713
+Username: DESKTOP-412KTAR\mzj
+RunAs User: DESKTOP-412KTAR\mzj
+Configuration Name: 
+Machine: DESKTOP-412KTAR (Microsoft Windows NT 10.0.26200.0)
+Host Application: C:\Users\mzj\.cache\codex-runtimes\codex-primary-runtime\dependencies\native\powershell\pwsh.dll -NoProfile -Command try { [Console]::OutputEncoding=[System.Text.Encoding]::UTF8 } catch {}
+Start-Transcript -LiteralPath 'C:\Users\mzj\Desktop\CTF\玄机刷题\记录\代理-PaluArray-终端记录.txt' -Append
+Write-Output 'COMMAND: PowerShell recompute candidate map and MD5 using System.Security.Cryptography.MD5'
+$alphabet = 'Palu_996!?'
+$candidate = 'aa_9a_a?a?!aP'
+$target = '1145141919810'
+$mapping = foreach ($character in $candidate.ToCharArray()) { $alphabet.IndexOf([string]$character) }
+$mapped = ($mapping | ForEach-Object { [string]$_ }) -join ''
+$bytes = [System.Text.Encoding]::ASCII.GetBytes($candidate)
+$digest = [System.Security.Cryptography.MD5]::HashData($bytes)
+$hex = [Convert]::ToHexString($digest).ToLowerInvariant()
+Write-Output "script: alphabet='$alphabet'; candidate='$candidate'; target='$target'; foreach (character) alphabet.IndexOf(character); MD5.HashData(ASCII.GetBytes(candidate)); lowercase hex"
+Write-Output "candidate-length=$($candidate.Length)"
+Write-Output "character-indices=$($mapping -join ',')"
+Write-Output "mapped-decimal=$mapped"
+Write-Output "matches-target=$($mapped -ceq $target)"
+Write-Output "ascii-bytes-hex=$([Convert]::ToHexString($bytes))"
+Write-Output "md5-lowercase=$hex"
+Write-Output "candidate-flag=palu{$hex}"
+Write-Output 'COMMAND: python hashlib independent MD5 cross-check'
+python -c "import hashlib; candidate='aa_9a_a?a?!aP'; print('python-md5='+hashlib.md5(candidate.encode('ascii')).hexdigest()); print('python-bytes='+candidate.encode('ascii').hex())"
+Stop-Transcript
+Process ID: 29656
+PSVersion: 7.6.5
+PSEdition: Core
+GitCommitId: 7.6.5
+OS: Microsoft Windows 10.0.26200
+Platform: Win32NT
+PSCompatibleVersions: 1.0, 2.0, 3.0, 4.0, 5.0, 5.1, 6.0, 7.0
+PSRemotingProtocolVersion: 2.4
+SerializationVersion: 1.1.0.1
+WSManStackVersion: 3.0
+**********************
+Transcript started, output file is C:\Users\mzj\Desktop\CTF\玄机刷题\记录\代理-PaluArray-终端记录.txt
+COMMAND: PowerShell recompute candidate map and MD5 using System.Security.Cryptography.MD5
+script: alphabet='Palu_996!?'; candidate='aa_9a_a?a?!aP'; target='1145141919810'; foreach (character) alphabet.IndexOf(character); MD5.HashData(ASCII.GetBytes(candidate)); lowercase hex
+candidate-length=13
+character-indices=1,1,4,5,1,4,1,9,1,9,8,1,0
+mapped-decimal=1145141919810
+matches-target=True
+ascii-bytes-hex=61615F39615F613F613F216150
+md5-lowercase=1b501325fc96d5a845cbdd2ba4f01cd7
+candidate-flag=palu{1b501325fc96d5a845cbdd2ba4f01cd7}
+COMMAND: python hashlib independent MD5 cross-check
+
+**********************
+PowerShell transcript end
+End time: 20260927204714
+**********************
+**********************
+PowerShell transcript start
+Start time: 20260927204746
+Username: DESKTOP-412KTAR\mzj
+RunAs User: DESKTOP-412KTAR\mzj
+Configuration Name: 
+Machine: DESKTOP-412KTAR (Microsoft Windows NT 10.0.26200.0)
+Host Application: C:\Users\mzj\.cache\codex-runtimes\codex-primary-runtime\dependencies\native\powershell\pwsh.dll -NoProfile -Command try { [Console]::OutputEncoding=[System.Text.Encoding]::UTF8 } catch {}
+Start-Transcript -LiteralPath 'C:\Users\mzj\Desktop\CTF\玄机刷题\记录\代理-PaluArray-终端记录.txt' -Append
+Write-Output 'COMMAND: Get-Content inspect_tables.py and extract_strings.py'
+Get-Content -LiteralPath 'C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\PaluArray_546\inspect_tables.py'
+Get-Content -LiteralPath 'C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\PaluArray_546\extract_strings.py'
+Write-Output 'COMMAND: python inspect_tables.py PaluArray_flag_unpacked.exe'
+python 'C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\PaluArray_546\inspect_tables.py' 'C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\PaluArray_546\PaluArray_flag_unpacked.exe'
+Stop-Transcript
+Process ID: 3100
+PSVersion: 7.6.5
+PSEdition: Core
+GitCommitId: 7.6.5
+OS: Microsoft Windows 10.0.26200
+Platform: Win32NT
+PSCompatibleVersions: 1.0, 2.0, 3.0, 4.0, 5.0, 5.1, 6.0, 7.0
+PSRemotingProtocolVersion: 2.4
+SerializationVersion: 1.1.0.1
+WSManStackVersion: 3.0
+**********************
+Transcript started, output file is C:\Users\mzj\Desktop\CTF\玄机刷题\记录\代理-PaluArray-终端记录.txt
+COMMAND: Get-Content inspect_tables.py and extract_strings.py
+from pathlib import Path
+import struct,sys
+p=Path(sys.argv[1]);d=p.read_bytes();pe=struct.unpack_from("<I",d,0x3c)[0];o=pe+24;base=struct.unpack_from("<Q",d,o+24)[0];n=struct.unpack_from("<H",d,pe+6)[0];os=struct.unpack_from("<H",d,pe+20)[0];st=o+os;S=[]
+for i in range(n):
+ q=st+i*40;name=d[q:q+8].split(b"\0",1)[0].decode("ascii","replace");vs,rv,rs,rp=struct.unpack_from("<IIII",d,q+8);S.append((name,rv,rs,rp))
+def va2fo(va):
+ r=va-base
+ for nm,rv,rs,rp in S:
+  if rv<=r<rv+rs:return rp+r-rv
+ raise ValueError(hex(va))
+for va,size in ((0x140009040,0x100),(0x140005e00,0x100),(0x140005e60,0x90)):
+ fo=va2fo(va);raw=d[fo:fo+size];print(f"--- VA=0x{va:x} file=0x{fo:x} ---");print(raw.hex(" "));print("ascii:","".join(chr(x) if 32<=x<127 else "." for x in raw));print("u16:",raw.decode("utf-16le",errors="replace"))
+from pathlib import Path
+import re
+import sys
+
+path = Path(sys.argv[1])
+data = path.read_bytes()
+print(f"file={path} bytes={len(data)}")
+for kind, pattern in (("ascii", rb"[\x20-\x7e]{4,}"), ("utf16le", rb"(?:[\x20-\x7e]\x00){4,}")):
+    print(f"--- {kind} strings ---")
+    for match in re.finditer(pattern, data):
+        raw = match.group(0)
+        text = raw.decode("ascii" if kind == "ascii" else "utf-16le", errors="replace")
+        print(f"0x{match.start():06x}: {text}")
+COMMAND: python inspect_tables.py PaluArray_flag_unpacked.exe
+
+**********************
+PowerShell transcript end
+End time: 20260927204747
+**********************
+**********************
+PowerShell transcript start
+Start time: 20260927204813
+Username: DESKTOP-412KTAR\mzj
+RunAs User: DESKTOP-412KTAR\mzj
+Configuration Name: 
+Machine: DESKTOP-412KTAR (Microsoft Windows NT 10.0.26200.0)
+Host Application: C:\Users\mzj\.cache\codex-runtimes\codex-primary-runtime\dependencies\native\powershell\pwsh.dll -NoProfile -Command try { [Console]::OutputEncoding=[System.Text.Encoding]::UTF8 } catch {}
+Start-Transcript -LiteralPath 'C:\Users\mzj\Desktop\CTF\玄机刷题\记录\代理-PaluArray-终端记录.txt' -Append
+Write-Output 'COMMAND: python disassemble_range.py PaluArray_flag_unpacked.exe 0x44c0 0x4520'
+python 'C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\PaluArray_546\disassemble_range.py' 'C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\PaluArray_546\PaluArray_flag_unpacked.exe' 0x44c0 0x4520
+Write-Output 'SCRIPT SOURCE: inspect exact hex-conversion lookup bytes at VA 0x140006318'
+$pythonScript = @'
+import pathlib, struct, sys
+sys.stdout.reconfigure(encoding="utf-8", errors="backslashreplace")
+p = pathlib.Path(r"C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\PaluArray_546\PaluArray_flag_unpacked.exe")
+d = p.read_bytes()
+pe = struct.unpack_from("<I", d, 0x3c)[0]
+opt = pe + 24
+base = struct.unpack_from("<Q", d, opt + 24)[0]
+n = struct.unpack_from("<H", d, pe + 6)[0]
+size = struct.unpack_from("<H", d, pe + 20)[0]
+sections = []
+for i in range(n):
+    q = opt + size + i * 40
+    name = d[q:q+8].split(b"\\0", 1)[0].decode("ascii", "replace")
+    vs, rva, raw_size, raw_ptr = struct.unpack_from("<IIII", d, q + 8)
+    sections.append((name, rva, raw_size, raw_ptr))
+for va in (0x140006318, 0x140005e90, 0x140005e8c):
+    rva = va - base
+    for name, srva, raw_size, raw_ptr in sections:
+        if srva <= rva < srva + raw_size:
+            off = raw_ptr + rva - srva
+            b = d[off:off+32]
+            print(f"va={va:#x} section={name} fileoff={off:#x} hex={b.hex()} ascii={b!r}")
+            break
+'@
+Write-Output $pythonScript
+$pythonScript | python -
+Stop-Transcript
+Process ID: 24520
+PSVersion: 7.6.5
+PSEdition: Core
+GitCommitId: 7.6.5
+OS: Microsoft Windows 10.0.26200
+Platform: Win32NT
+PSCompatibleVersions: 1.0, 2.0, 3.0, 4.0, 5.0, 5.1, 6.0, 7.0
+PSRemotingProtocolVersion: 2.4
+SerializationVersion: 1.1.0.1
+WSManStackVersion: 3.0
+**********************
+Transcript started, output file is C:\Users\mzj\Desktop\CTF\玄机刷题\记录\代理-PaluArray-终端记录.txt
+COMMAND: python disassemble_range.py PaluArray_flag_unpacked.exe 0x44c0 0x4520
+
+SCRIPT SOURCE: inspect exact hex-conversion lookup bytes at VA 0x140006318
+import pathlib, struct, sys
+sys.stdout.reconfigure(encoding="utf-8", errors="backslashreplace")
+p = pathlib.Path(r"C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\PaluArray_546\PaluArray_flag_unpacked.exe")
+d = p.read_bytes()
+pe = struct.unpack_from("<I", d, 0x3c)[0]
+opt = pe + 24
+base = struct.unpack_from("<Q", d, opt + 24)[0]
+n = struct.unpack_from("<H", d, pe + 6)[0]
+size = struct.unpack_from("<H", d, pe + 20)[0]
+sections = []
+for i in range(n):
+    q = opt + size + i * 40
+    name = d[q:q+8].split(b"\\0", 1)[0].decode("ascii", "replace")
+    vs, rva, raw_size, raw_ptr = struct.unpack_from("<IIII", d, q + 8)
+    sections.append((name, rva, raw_size, raw_ptr))
+for va in (0x140006318, 0x140005e90, 0x140005e8c):
+    rva = va - base
+    for name, srva, raw_size, raw_ptr in sections:
+        if srva <= rva < srva + raw_size:
+            off = raw_ptr + rva - srva
+            b = d[off:off+32]
+            print(f"va={va:#x} section={name} fileoff={off:#x} hex={b.hex()} ascii={b!r}")
+            break
+**********************
+PowerShell transcript end
+End time: 20260927204815
+**********************
+**********************
+PowerShell transcript start
+Start time: 20260927204925
+Username: DESKTOP-412KTAR\mzj
+RunAs User: DESKTOP-412KTAR\mzj
+Configuration Name: 
+Machine: DESKTOP-412KTAR (Microsoft Windows NT 10.0.26200.0)
+Host Application: C:\Users\mzj\.cache\codex-runtimes\codex-primary-runtime\dependencies\native\powershell\pwsh.dll -NoProfile -Command try { [Console]::OutputEncoding=[System.Text.Encoding]::UTF8 } catch {}
+Start-Transcript -LiteralPath 'C:\Users\mzj\Desktop\CTF\玄机刷题\记录\代理-PaluArray-终端记录.txt' -Append
+Write-Output 'COMMAND: Get-Content transcript tail to verify appended conclusion'
+Get-Content -LiteralPath 'C:\Users\mzj\Desktop\CTF\玄机刷题\记录\代理-PaluArray-终端记录.txt' -Tail 22
+Stop-Transcript
+Process ID: 19008
+PSVersion: 7.6.5
+PSEdition: Core
+GitCommitId: 7.6.5
+OS: Microsoft Windows 10.0.26200
+Platform: Win32NT
+PSCompatibleVersions: 1.0, 2.0, 3.0, 4.0, 5.0, 5.1, 6.0, 7.0
+PSRemotingProtocolVersion: 2.4
+SerializationVersion: 1.1.0.1
+WSManStackVersion: 3.0
+**********************
+Transcript started, output file is C:\Users\mzj\Desktop\CTF\玄机刷题\记录\代理-PaluArray-终端记录.txt
+COMMAND: Get-Content transcript tail to verify appended conclusion
+Username: DESKTOP-412KTAR\mzj
+RunAs User: DESKTOP-412KTAR\mzj
+Configuration Name:
+Machine: DESKTOP-412KTAR (Microsoft Windows NT 10.0.26200.0)
+Host Application: C:\Users\mzj\.cache\codex-runtimes\codex-primary-runtime\dependencies\native\powershell\pwsh.dll -NoProfile -Command try { [Console]::OutputEncoding=[System.Text.Encoding]::UTF8 } catch {}
+Start-Transcript -LiteralPath 'C:\Users\mzj\Desktop\CTF\玄机刷题\记录\代理-PaluArray-终端记录.txt' -Append
+Write-Output 'COMMAND: Get-Content transcript tail to verify appended conclusion'
+Get-Content -LiteralPath 'C:\Users\mzj\Desktop\CTF\玄机刷题\记录\代理-PaluArray-终端记录.txt' -Tail 22
+Stop-Transcript
+Process ID: 19008
+PSVersion: 7.6.5
+PSEdition: Core
+GitCommitId: 7.6.5
+OS: Microsoft Windows 10.0.26200
+Platform: Win32NT
+PSCompatibleVersions: 1.0, 2.0, 3.0, 4.0, 5.0, 5.1, 6.0, 7.0
+PSRemotingProtocolVersion: 2.4
+SerializationVersion: 1.1.0.1
+WSManStackVersion: 3.0
+**********************
+Transcript started, output file is C:\Users\mzj\Desktop\CTF\玄机刷题\记录\代理-PaluArray-终端记录.txt
+COMMAND: Get-Content transcript tail to verify appended conclusion
+**********************
+PowerShell transcript end
+End time: 20260927204926
+**********************
+**********************
+PowerShell transcript start
+Start time: 20260927204940
+Username: DESKTOP-412KTAR\mzj
+RunAs User: DESKTOP-412KTAR\mzj
+Configuration Name: 
+Machine: DESKTOP-412KTAR (Microsoft Windows NT 10.0.26200.0)
+Host Application: C:\Users\mzj\.cache\codex-runtimes\codex-primary-runtime\dependencies\native\powershell\pwsh.dll -NoProfile -Command try { [Console]::OutputEncoding=[System.Text.Encoding]::UTF8 } catch {}
+Start-Transcript -LiteralPath 'C:\Users\mzj\Desktop\CTF\玄机刷题\记录\代理-PaluArray-终端记录.txt' -Append
+Write-Output 'ANALYST CONCLUSION: #546 PaluArray; static PE analysis only; executable not run; platform not accessed; flag not submitted.'
+Write-Output 'Mapping: find in global alphabet Palu_996!? begins at position 0 for each character; duplicate 9 therefore maps to first position 5. Target 1145141919810 inverses to aa_9a_a?a?!aP with indices 1,1,4,5,1,4,1,9,1,9,8,1,0.'
+Write-Output 'Input/hash flow: success handler passes original wide input through WideCharToMultiByte code page 3 (CP_THREAD_ACP); ASCII candidate remains the same narrow bytes. Helpers 0x2118 and 0x2244 copy that string. MD5 helper 0x1a48 hashes its exact pointer and length with standard MD5 IV.'
+Write-Output 'Output format: lowercase hex table at VA 0x140006318 is 0123456789abcdef; string references and MessageBoxW call indicate body palu{<digest>} and title flag.'
+Write-Output 'Independent PowerShell/.NET and Python hashlib recomputation agrees: MD5(ASCII aa_9a_a?a?!aP) = 1b501325fc96d5a845cbdd2ba4f01cd7. Candidate displayed flag: palu{1b501325fc96d5a845cbdd2ba4f01cd7}. Confidence high; platform acceptance not tested.'
+Stop-Transcript
+Process ID: 19952
+PSVersion: 7.6.5
+PSEdition: Core
+GitCommitId: 7.6.5
+OS: Microsoft Windows 10.0.26200
+Platform: Win32NT
+PSCompatibleVersions: 1.0, 2.0, 3.0, 4.0, 5.0, 5.1, 6.0, 7.0
+PSRemotingProtocolVersion: 2.4
+SerializationVersion: 1.1.0.1
+WSManStackVersion: 3.0
+**********************
+Transcript started, output file is C:\Users\mzj\Desktop\CTF\玄机刷题\记录\代理-PaluArray-终端记录.txt
+ANALYST CONCLUSION: #546 PaluArray; static PE analysis only; executable not run; platform not accessed; flag not submitted.
+Mapping: find in global alphabet Palu_996!? begins at position 0 for each character; duplicate 9 therefore maps to first position 5. Target 1145141919810 inverses to aa_9a_a?a?!aP with indices 1,1,4,5,1,4,1,9,1,9,8,1,0.
+Input/hash flow: success handler passes original wide input through WideCharToMultiByte code page 3 (CP_THREAD_ACP); ASCII candidate remains the same narrow bytes. Helpers 0x2118 and 0x2244 copy that string. MD5 helper 0x1a48 hashes its exact pointer and length with standard MD5 IV.
+Output format: lowercase hex table at VA 0x140006318 is 0123456789abcdef; string references and MessageBoxW call indicate body palu{<digest>} and title flag.
+Independent PowerShell/.NET and Python hashlib recomputation agrees: MD5(ASCII aa_9a_a?a?!aP) = 1b501325fc96d5a845cbdd2ba4f01cd7. Candidate displayed flag: palu{1b501325fc96d5a845cbdd2ba4f01cd7}. Confidence high; platform acceptance not tested.
+**********************
+PowerShell transcript end
+End time: 20260927204940
+**********************

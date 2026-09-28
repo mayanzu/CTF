@@ -1,0 +1,9 @@
+PS C:\Users\mzj\Desktop\CTF\CTF-training-problem-first-full> python -X utf8 figures/raw/fig-web-20-sqlite-demo.py normal
+mode    : normal
+input   : 'public'
+
+--- 拼出来的 SQL（外部数据直接进入语句结构）---
+SELECT title, body FROM notes WHERE title = 'public'
+
+--- 数据库实际返回 ---
+('public', 'Try searching for a note by its title.')

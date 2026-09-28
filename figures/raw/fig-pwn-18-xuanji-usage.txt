@@ -1,0 +1,16 @@
+mzj@Ubuntu-24.04:~$ cd /mnt/c/Users/mzj/Desktop/CTF/CTF-training-problem-first-full && python3 labs/platform/solve_pwn_ezpwn.py
+usage: labs/platform/solve_pwn_ezpwn.py HOST PORT
+
+mzj@Ubuntu-24.04:~$ cd /mnt/c/Users/mzj/Desktop/CTF/CTF-training-problem-first-full && head -12 labs/platform/solve_pwn_ezpwn.py
+"""Solve Xuanji's pwn-ezpwn inside an authorized, running challenge instance.
+
+Usage: python3 solve_pwn_ezpwn.py HOST PORT
+
+This reproduces the challenge-specific format-string leak, authenticates with
+the leaked key, sets /tmp/priv.list to the expected "cat" marker, reconnects,
+and reads the challenge flag. The stack slot and struct offset are specific to
+the supplied server build; re-check them if the challenge binary changes.
+"""
+
+import re
+import socket

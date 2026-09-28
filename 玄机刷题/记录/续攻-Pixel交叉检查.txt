@@ -1,0 +1,620 @@
+**********************
+PowerShell transcript start
+Start time: 20260928165537
+Username: DESKTOP-412KTAR\mzj
+RunAs User: DESKTOP-412KTAR\mzj
+Configuration Name: 
+Machine: DESKTOP-412KTAR (Microsoft Windows NT 10.0.26200.0)
+Host Application: C:\Users\mzj\.cache\codex-runtimes\codex-primary-runtime\dependencies\native\powershell\pwsh.dll -Command try { [Console]::OutputEncoding=[System.Text.Encoding]::UTF8 } catch {}
+Start-Transcript -LiteralPath 'C:\Users\mzj\Desktop\CTF\玄机刷题\记录\续攻-Pixel交叉检查.txt' -Append
+Get-Content -LiteralPath 'C:\Users\mzj\Desktop\CTF\玄机刷题\记录\像素囚笼1-解题记录.md' -Tail 100
+Stop-Transcript
+Process ID: 25300
+PSVersion: 7.6.5
+PSEdition: Core
+GitCommitId: 7.6.5
+OS: Microsoft Windows 10.0.26200
+Platform: Win32NT
+PSCompatibleVersions: 1.0, 2.0, 3.0, 4.0, 5.0, 5.1, 6.0, 7.0
+PSRemotingProtocolVersion: 2.4
+SerializationVersion: 1.1.0.1
+WSManStackVersion: 3.0
+**********************
+Transcript started, output file is C:\Users\mzj\Desktop\CTF\玄机刷题\记录\续攻-Pixel交叉检查.txt
+
+页面动态卡片“测试flag”点击后打开了发布者详情页（用户 ID 23），该页无额外说明；随后返回挑战页。挑战页当前仍显示“暂无简介”与步骤 0/1。
+
+## 十七、空口令及空白变体（续，2026-09-26）
+
+首次尝试把多行 Python 循环塞进 PowerShell 的 `python -c` 单行命令时，换行转义被原样传入并导致 `SyntaxError`；没有运行任何候选。随后改用独立脚本 `pixel_cage_special_passwords.py`，检查空密码、NUL、UTF-8 BOM、CR/LF、空格/制表符及题名首尾空白等 14 种字节串，全部被拒绝。
+
+## 十八、颜色名与尺寸索引（续，2026-09-26）
+
+将每个圆的尺寸等级、直径、半径、圆心 x 坐标以及匹配方块坐标作为索引，从该圆的颜色英文名中正向/反向取字符；同时把同一组数值和全部六色编号映射用于索引标题 `Abstract Art Gallery`。`pixel_cage_title_index_candidates.py` 共验证 15,915 个结果，未命中。颜色词/首字母与直径、半径、序号、圆心位置的拼接（`pixel_cage_named_size_candidates.py`，86,024 个候选）也未命中。
+
+另测试了空口令、NUL、BOM、换行、空格、制表符及题名首尾空白等 14 种情况，均被拒绝。题目页动态卡片仅链接到发布者详情，未提供额外提示。
+
+最后将完整颜色名序列和方块行序列分别做大小写、反序、凯撒、Atbash，以及用题名/颜色序号做 Vigenère/Beaufort 变换。`pixel_cage_color_words_cipher.py` 生成 1,416 个不同候选，全部未通过完整 ZIP 校验。
+
+## 十九、附件来源确认与调色板摘要（续，2026-09-26）
+
+在 `D:\Downloads` 找到 `像素囚笼附件.zip` 与 `像素囚笼附件 (1).zip` 两份下载文件。`pixel_cage_outer_archive_check.py` 逐一查看外层 ZIP，二者都只有一个 `challenge.png`（5,187 字节），SHA-256 均为 `856b8ec900eaddfeed0f1af8177e1c999133af19b8eb6d3edf12d707ec21dd3b`，和已解压附件逐字节相同。因此当前分析的图片确实来自题目附件，并非拿错文件。
+
+另对六色 HEX 调色板串的排列、分隔形式做 MD5/SHA-1/SHA-256/SHA-512、Base64 与十六进制派生，`pixel_cage_palette_hash_candidates.py` 检查 130,626 个摘要/编码候选，无命中。查询外层 ZIP 内容时最初的 `python -c` 多行命令同样因 PowerShell 换行转义失败；改成 `pixel_cage_outer_archive_check.py` 后正常完成。
+
+随后把外层下载 ZIP 中 `challenge.png` 的 CRC32、压缩/原始长度、偏移、外层 ZIP 总长度、两份下载 ZIP 的哈希及其常用截断形式作为内层口令候选，`pixel_cage_outer_crc_candidates.py` 检查 40 个候选，均未命中。
+
+## 二十、本轮结束时的状态
+
+- 正确目标是免费 MISC 题 `/challenges/583`“2026安网杯-像素囚笼1”；初始跳转 `/challenges/570` 是另一道收费 WEB 题，没有启动。
+- 附件来源已核验，两份外层 ZIP 与已解压的 `challenge.png` 内容相同。PNG 末尾包含一个采用传统 ZipCrypto 加密的 `secret.txt`。
+- 已尝试的 flag 在平台均未通过；平台仍显示步骤 #1 `0/1`。当前尚未得到 ZIP 密码、`secret.txt` 原文或有效 flag，不能标记为已解题。
+- 挑战页没有简介，附件图片本身也未出现可直接读取的隐藏文本；剩余关键条件是找到作者使用的 ZIP 密码或取得额外题目提示。
+
+## 2026-09-27 题目页复核
+
+本轮通过 Computer Use 重新打开 `/challenges/583`：页面为免费、简单 MISC，题目简介为空，步骤 #1 显示 `0/1`；可见按钮只有“下载附件”和“提交 FLAG”，未显示公开 Writeup 或实例启动入口。未提交新 flag，也未取得 ZIP 密码。
+
+## 2026-09-27 代理本地复核：PNG 扫描线与混合位平面
+
+为补查此前逐通道位平面检查未覆盖的表示方式，新增 `pixel_cage_png_filter_analysis.py` 和 `pixel_cage_mixed_bitplanes.py`，只读取本地附件 `D:\Downloads\像素囚笼附件 (1)\challenge.png`，不访问网络或平台。
+
+1. 重新解析 PNG 块并校验块 CRC：仅有 `IHDR`、`IDAT`、`IEND`，三者 CRC 均有效；IHDR 为 512×512、8-bit RGB、非隔行。解压 IDAT 后逐行读取 PNG filter byte，类型计数为 Sub(1)=46、Up(2)=446、Paeth(4)=20；没有 None/Average 行。序列主要随图形边界变化，未出现直接可读文本。滤波器编号不是图像附加文本，不能据此宣称拿到口令。
+2. 对 RGB 三通道按行优先/列优先遍历，穷举每通道分别选取 bit0–bit7、六种通道交错顺序，共 6,144 条打包比特流；检索 `flag{`、`xj{`、`mzj`、`secret` 均无命中。最高可打印字节比例约 64.88%，但内容重复为 `49 24 92` 周期（大量纯色区域造成），不是自然语言或 flag。
+3. 当前仍未发现未解压的密码、`secret.txt` 内容或可提交 flag；不改变此前结论。完整命令和输出见 `记录\代理-Pixel-终端记录.txt`，复现脚本见 `题目资料\像素囚笼1\分析脚本\pixel_cage_png_filter_analysis.py` 与 `pixel_cage_mixed_bitplanes.py`。
+
+4. 另按图中唯一文字 `Abstract Art Gallery` 的词首/词尾字母作题名线索，新增 `pixel_cage_title_acronym_candidates.py`，验证三词拼接的大小写/分隔符、首字母/末字母缩写、AAGallery、AAG 与常见题号/年份/后缀组合共 1,560 个不同候选。全部未通过 ZIP 完整解密与 CRC 校验；未获取口令。
+
+
+## 2026-09-27 代理复核：PNG 压缩流完整性
+
+新增 `pixel_cage_deflate_structure.py`，自行解析 PNG 的 IDAT zlib/DEFLATE 结构并与系统 zlib 的原始解压结果逐字节比对。证据如下：
+
+- PNG 只有 IHDR、IDAT、IEND 三块，CRC 均有效；IDAT 的 zlib 头 `78 9c` 校验正确，无预设字典。
+- IDAT 4,899 字节由 4,893 字节 DEFLATE 数据和 4 字节 Adler-32 尾校验组成，尾校验 `b2471056` 与解压数据一致。
+- DEFLATE 仅有一个最终动态 Huffman 数据块；手工解析输出 786,944 字节，与 zlib 解压结果完全相同。
+- DEFLATE 结束后仅有 3 个字节内填充位，值为 0；没有额外完整字节，zlib 也报告无 unused_data/unconsumed_tail。
+
+这排除了 PNG 压缩流末尾附带隐藏字节或非零尾部填充的简单载荷路径；不排除使用普通像素内容编码的谜题。未得到 ZIP 密码或 flag。完整解析代码、命令和输出在 `pixel_cage_deflate_structure.py` 与 `代理-Pixel-终端记录.txt`。
+
+## 2026-09-27 代理复核：PNG 滤波器是否承载人为编码
+
+新增脚本 `pixel_cage_png_filter_selection.py`，从 PNG IDAT 解压逐行像素，与 Pillow 解码像素互相核对；对每行分别重算 PNG Filter 0–4 的预测残差，并用常见 PNG 自适应筛选指标（将残差解释为有符号 8 位数后求绝对值和）比较分数。
+
+- 所有 512 行的实际滤波残差都能精确还原对应像素（0 行不匹配）。
+- 512 行实际选用滤波类型全部属于该行最低代价类型（0 行非最小）。滤波类型选择频数为 1:46、2:446、4:20；其中平分时实际类型落在并列最小项内。
+- 各类型全图代价和为 `[21040836, 705022, 784580, 1883059, 310130]`（类型 0 至 4）。
+
+这支持滤波字节来自正常的逐行压缩器选择，而不是明显的任意载荷标记；仍不能从数学上排除作者只在并列最优的行中嵌 bit。该复核没有恢复 ZIP 密码或 flag。命令和完整输出见 `记录\代理-Pixel-终端记录.txt`。
+
+## 2026-09-27 代理复核：并列滤波代价的选择位
+
+为检查压缩器是否可能在同代价滤波器之间嵌入二进制信息，新增 `pixel_cage_filter_tie_channel.py`。沿用每行 Filter 0–4 的有符号残差绝对值和评分，仅保留并列最低分的行，并把实际选项相对排序候选的高/低选择转换为 0/1。
+
+共 418 个并列行：候选对 `(1,4)` 1 行、`(2,4)` 416 行、`(1,2)` 1 行。实际滤波器总是选每组中较小编号，唯有一个 `(1,2)` 平局行实际选 2；决策流 417 个 0、1 个 1。两种位打包次序的结果分别是大量零字节与一个 `0x80`/`0x01`，没有文本或有用密钥样式。该分布与确定性平局优先级相符，不支持将滤波并列选择当成藏密信道的假设；仍不构成作者意图的数学证明。
+
+补充：418 个并列行中的 417 个非首行，有 403 行选择了与前一行相同的滤波器；另有 412 行前一行滤波器本身属于当前平局候选。此种关联更像扫描线局部统计与滤波器延续性，不像独立随机位流。该统计只能作支持性证据。
+
+## 2026-09-28 限时攻关：准确调色板复核
+
+复查此前颜色特征脚本时发现一个输入值问题：`pixel_cage_color_features.py`、`pixel_cage_visual_encodings.py` 和 `pixel_cage_palette_hash_candidates.py` 把红、黄、绿、紫写成了较旧的 Google 色值（`DB4437`、`F4B400`、`0F9D58`、`AB47BC`），与题目 PNG 实际像素不一致。因此，那几轮关于这些 RGB/HSV 数值与调色板摘要的“未命中”不能代表准确色值的候选空间已被检查；其他不依赖这些具体 RGB 数值的结果不受影响。
+
+本轮直接按附件 PNG 像素复核调色板为：蓝 `4285F4`、红 `EA4335`、黄 `FBBC05`、绿 `34A853`、紫 `A142F4`、青 `00ACC1`。新增并运行：
+
+- `pixel_cage_exact_palette_candidates.py`：准确颜色值的圆序/方块序与六色排列、RGB/HEX/字节、常见分隔、反序、Base64/Base32 和 MD5/SHA 摘要口令，共 853,804 个不同候选；全部使用 ZIP 完整读取与 CRC 校验判定，0 命中。
+- `pixel_cage_exact_color_features.py`：准确 RGB/HSV、通道和/异或、亮度/色相、颜色名称特征及常见模映射与摘要，共 152,523 个候选；完整 ZIP/CRC 校验 0 命中。
+
+本轮没有得到 ZipCrypto 密码或 `secret.txt` 内容，不能据此认定已解题。命令与终端输出见 `记录\限时攻关-Pixel-终端记录.txt`。复现脚本在 `题目资料\像素囚笼1\分析脚本`。
+
+## 勘误：2026-09-28 调色板判断已撤回
+
+紧接上一节的“发现旧色值不一致”判断是本轮分析者的错误，现明确撤回。对题目附件直接统计 PNG 像素得到的六种填充色正是 `#4285F4`、`#DB4437`、`#F4B400`、`#0F9D58`、`#AB47BC`、`#00ACC1`；既有颜色脚本里这些 RGB 值与附件一致。此前临时试用的 `#EA4335`、`#FBBC05`、`#34A853`、`#A142F4` 是我误认的另一套色板，其 853,804 和 152,523 候选结果无效，应完全忽略。
+
+已把 `pixel_cage_exact_palette_candidates.py` 和 `pixel_cage_exact_color_features.py` 修正为附件的真实 RGB 值并重新完整运行。准确色板候选重新得到 830,228 个不同候选，准确 RGB/HSV 特征候选为 153,162 个；两轮均按 `secret.txt` 完整解密与 CRC 验证，命中数均为 0。真实像素颜色计数与命令输出记在 `记录\限时攻关-Pixel-终端记录.txt`。因此，既有脚本的调色板输入没有此处所称的错误；撤回不影响其先前的有效排除结果。
+
+## 2026-09-28 限时攻关阶段结论
+
+截至本轮停止时，仍未得到 ZipCrypto 口令、`secret.txt` 明文或可提交 flag；没有向平台提交。附件的既有结构复核为：PNG 后有完整加密 ZIP，唯一成员 `secret.txt`，明文/压缩长度 113 字节、CRC32 `9d13b619`。已有来源核验记录显示两个下载 ZIP 中的 `challenge.png` 与本地附件 SHA-256 相同。本轮未重新打开平台或重新下载，所以本轮没有新的平台附件对照；现有记录未显示附件不一致。
+
+本轮准确像素色板派生的 830,228 个直接/摘要候选和 153,162 个 RGB/HSV 特征候选均经完整 ZIP 解密与 CRC 校验，0 命中。此前记录还排除了多类 PNG 元数据、IEND 后额外流、位平面/扫描线/滤波器、颜色/尺寸/几何/标题/平台元数据变换及常见口令；若干数字和小字母表空间已有 C 穷举验证。注意：上一节中关于色板不一致的最初判断及其错误色值结果已明确撤回；准确色值重跑结果取代它。
+
+剩余阻碍是缺少作者给出的 ZIP 密码线索。六位混合字母数字空间未穷举；本轮没有启动它，因为只靠 ZipCrypto 单字节头校验会产生数百万碰撞，剩余时间内无法保证完整 CRC 复核。已知明文攻击也缺少足够连续、可靠的 DEFLATE 明文。下一步最有效的输入是额外题目提示或作者确认的口令规则；在此之前不能声称已解出。
+
+本轮所有实际终端命令和输出见 `记录\限时攻关-Pixel-终端记录.txt`。本任务未操作浏览器、未提交平台、未改手册。
+**********************
+PowerShell transcript end
+End time: 20260928165538
+**********************
+**********************
+PowerShell transcript start
+Start time: 20260928165700
+Username: DESKTOP-412KTAR\mzj
+RunAs User: DESKTOP-412KTAR\mzj
+Configuration Name: 
+Machine: DESKTOP-412KTAR (Microsoft Windows NT 10.0.26200.0)
+Host Application: C:\Users\mzj\.cache\codex-runtimes\codex-primary-runtime\dependencies\native\powershell\pwsh.dll -Command try { [Console]::OutputEncoding=[System.Text.Encoding]::UTF8 } catch {}
+Start-Transcript -LiteralPath 'C:\Users\mzj\Desktop\CTF\玄机刷题\记录\续攻-Pixel交叉检查.txt' -Append
+Get-Content -LiteralPath 'C:\Users\mzj\Desktop\CTF\玄机刷题\记录\像素囚笼1-解题记录.md' -Head 90
+Stop-Transcript
+Process ID: 21572
+PSVersion: 7.6.5
+PSEdition: Core
+GitCommitId: 7.6.5
+OS: Microsoft Windows 10.0.26200
+Platform: Win32NT
+PSCompatibleVersions: 1.0, 2.0, 3.0, 4.0, 5.0, 5.1, 6.0, 7.0
+PSRemotingProtocolVersion: 2.4
+SerializationVersion: 1.1.0.1
+WSManStackVersion: 3.0
+**********************
+Transcript started, output file is C:\Users\mzj\Desktop\CTF\玄机刷题\记录\续攻-Pixel交叉检查.txt
+# 玄机平台刷题指南：2026安网杯—像素囚笼1（解题过程记录）
+
+> 状态：进行中。平台步骤 #1 显示 0/1、完成率 0%；目前没有经过平台验证的 flag。本文只把实测通过的结果记为最终答案。
+
+## 一、题目信息
+
+- 平台：玄机 https://xj.edisec.net/challenges/583
+- 题名：2026安网杯-像素囚笼1。
+- 分类与难度：MISC、简单；免费题，100 分。
+- 页面未给出题目简介，共 1 个步骤。
+- 附件已由用户解压：D:\Downloads\像素囚笼附件 (1)\challenge.png。解压目录只有这一个文件。
+- 在画图中查看到 PNG 图像尺寸 512 × 512 像素，文件约 5.1 KB；资源管理器显示 6 KB（四舍五入显示）。
+
+## 二、原图观察
+
+1. 在资源管理器打开 challenge.png，在画图中按 100% 查看整体。背景近白色，顶部写有 Abstract Art Gallery。
+2. 图中有六个带黑色边框的彩色正方形，分三行且每行两个：第一行蓝、绿；第二行红、紫；第三行黄、青。各行横向错开。
+3. 图下方有八个由左至右逐渐变大的彩色圆，颜色依次是蓝、红、黄、绿、紫、青、蓝、红。圆之间局部相互覆盖，第三行方块也被圆遮挡。
+4. 将画图缩放到 400% 后，在下方发现一个独立蓝色像素，画图状态栏读出的图像坐标约为 (411, 482)。使用取色器读取其颜色，在“编辑颜色”窗口看到 #4285F4，RGB=(66,133,244)，与蓝色图形一致。这个像素目前未能解释，不能直接当成 flag 线索。
+
+## 三、已试的解码假设及平台反馈
+
+- 假设一：把八个圆按 RGB 通道位掩码编码。候选 flag{14625314}。在题目页“提交FLAG”输入并提交，平台提示“FLAG 不正确”。
+- 假设二：反转 RGB 位权。候选 flag{41325641}。平台提示“FLAG 不正确”。
+- 假设三：六个方块按从上到下、每行从左到右编号，再把圆的颜色映射为编号。候选 flag{13524613}。平台提示“FLAG 不正确”。
+- 假设四：六个方块按中心横坐标从左到右编号，再映射圆的颜色。候选 flag{12345612}。平台提示“FLAG 不正确”。
+
+上述四个候选已经被平台排除；圆的颜色序列只是肉眼观察，不能据此断言实际编码规则。
+
+## 四、工具检查和受阻情况
+
+- 在图片属性界面没有找到可见的 EXIF、注释或作者字段。
+- 试图启动前台 PowerShell 检查 PNG 字节时，电脑操作工具返回产品策略阻止；没有继续通过其他终端绕开。
+- 通过可见浏览器搜索准确题名，结果是同名的其他作品，没有找到这道玄机题的可靠题解。
+- 查阅 StegOnline 开源项目说明，工具支持 PNG 块、位平面和 LSB 检查，且说明图像处理在浏览器内完成、数据不存储或传输。打开其页面准备选择本地图片，但 Chrome 扩展提示需要“允许访问文件网址”，因此这一步没有成功载入附件。
+
+## 五、接下来需完成
+
+1. 在获准且可见的本地图像分析界面检查 PNG 块是否有异常、IEND 后是否有附加内容；若正常，再按 R/G/B 通道和位平面检查隐写。
+2. 得到具体字符串后解释提取依据与每一步操作。
+3. 在玄机页面提交 flag，并截取或记录平台明确的正确提示及步骤完成状态。
+4. 将正确 flag、复现步骤、错误分支的排除依据和最终验证结果写回本指南。
+
+
+## 六、发现真正的附加压缩包（新增）
+
+1. 用记事本“文件→打开”直接打开 D:\Downloads\像素囚笼附件 (1)\challenge.png。二进制内容显示乱码，这是正常现象；本步骤只是用可见文本定位文件结构，不能把乱码解读为答案。
+2. 在文档末尾看到 PNG 的 IEND 结束标记之后还有 PK 标记和两处 secret.txt 字样。PK 是 ZIP 压缩包的典型文件头；因此推断 PNG 后追加了 ZIP 数据。
+3. 切换到已经打开的 Bandizip，按 Ctrl+O，在“文件名”框输入上述 challenge.png 的完整路径并打开。Bandizip 成功把 PNG 识别成压缩包，列表只有 secret.txt，原始大小和压缩后大小均为 113 字节。
+4. 双击 secret.txt 后弹出“输入密码”对话框，说明附加 ZIP 的文本受密码保护。目前不能读取其正文。
+5. 按图中色块行序映射出的 13524613、按横坐标序映射出的 12345612、标题 Abstract Art Gallery、无空格小写标题 abstractartgallery、独立像素坐标 411482 均作为 ZIP 密码试过；每次 Bandizip 都重新弹出密码框，没有成功解开。
+
+**当前判断：**正确路线已经从肉眼猜 flag 转为“PNG 后附加 ZIP → 找到 ZIP 密码 → 读取 secret.txt → 平台提交验证”。下一步应从图片细节或位平面寻找密码，不再把候选数字直接当成 flag。
+
+
+## 七、继续核查（2026-09-26）
+
+1. 又以圆点颜色首字母序列 BRYGPCBR 尝试 ZIP 密码，Bandizip 仍重新弹出空白密码框，排除该直接读法。
+2. 在画图用取色器复核背景：图像坐标 (160,480) 与 (325,482) 都是 #F0F0F5；孤立点 (411,482) 为 #4285F4，与蓝色图形一致。因此不是普通背景像素，但单个坐标和 RGB 尚不能单独确定密码。
+3. 用资源管理器的“通过 Code 打开”在可见的 VS Code 中查看 challenge.png。软件显示完整图像为 512×512、约 5.07 KB；已安装的重开视图只有文本编辑器和图像预览，没有十六进制或位平面工具。
+4. 此后停止联网搜索题解，转为附件本地分析。当前尚未找到 ZIP 密码，也没有取得可验证的 flag。
+
+## 八、结构检查与本轮复核（2026-09-26）
+
+### 8.1 平台状态
+
+通过已登录的玄机页面确认题目为「2026安网杯-像素囚笼1」，题号 #583，分类 MISC，难度简单，免费；页面显示步骤 #1 为 0/1，尚未通过验证。题面没有简介。此轮没有向平台提交新 flag。
+
+### 8.2 PNG 与 ZIP 的精确边界
+
+在本地 PowerShell 窗口运行 Python 对附件做只读检查：
+
+```powershell
+python -c "import pathlib,struct; p=pathlib.Path(r'D:\Downloads\像素囚笼附件 (1)\challenge.png'); b=p.read_bytes(); print(len(b),b[:8].hex(),b.find(b'IEND'),b.find(bytes([80,75,3,4])))"
+```
+
+结果：文件 5,187 字节，PNG 签名正确，PNG 的 IEND 类型字段在偏移 4,948；IEND 块结束后，ZIP 本地文件头从偏移 4,956 开始。ZIP 目录还可见 `PK 01 02` 和 `PK 05 06`，因此是直接附加在 PNG 后的完整 ZIP，而不是把 PNG 扩展名误认成压缩包。
+
+用 Python `zipfile` 检查目录，得到唯一成员 `secret.txt`：general-purpose flag bits 为 1（传统 ZipCrypto 加密），压缩方法为 DEFLATE，CRC32 为 `9d13b619`，解压长度 113 字节、加密压缩长度 113 字节；无 extra field、无 ZIP 注释。加密数据头起始偏移为 4,996。Bandizip 的界面也列出 `secret.txt*`，双击要求输入密码。
+
+### 8.3 图像像素复核
+
+用 Pillow 读取 PNG（文件末尾有 ZIP 不妨碍图像解码）：尺寸 512×512、RGB、无可读 PNG 元数据；全图只有 10 种 RGB 颜色。颜色是背景、描边及六种填充色，图形为六个 97×97 的方形填充区和一排逐渐变大的圆。圆的外径约为 40、46、52、58、64、70、76、82 像素。LSB 位平面只呈现大块图形轮廓；各通道打包后的可打印字节比例低于 0.5%，没有发现可读文字型 LSB 数据。
+
+复核像素时纠正前文的坐标误读：真正的 `(411,482)` 像素是背景色 `(240,240,245)`（`#F0F0F5`），不是蓝色孤立点；`(411,450)` 与 `(411,455)` 才是蓝色 `(66,133,244)`（`#4285F4`）圆形区域。先前在 Paint 400% 缩放画布中读状态栏坐标时把屏幕/画布位置当成了图像坐标，这一推断作废；图片里没有该坐标的异常单像素。这个更正覆盖前文“孤立蓝点”的说法。
+
+### 8.4 失败假设及穷举边界
+
+为避免把外观猜测写成结论，以下候选都实际尝试解密 `secret.txt`，均失败：
+
+**********************
+PowerShell transcript end
+End time: 20260928165700
+**********************
+**********************
+PowerShell transcript start
+Start time: 20260928165721
+Username: DESKTOP-412KTAR\mzj
+RunAs User: DESKTOP-412KTAR\mzj
+Configuration Name: 
+Machine: DESKTOP-412KTAR (Microsoft Windows NT 10.0.26200.0)
+Host Application: C:\Users\mzj\.cache\codex-runtimes\codex-primary-runtime\dependencies\native\powershell\pwsh.dll -Command try { [Console]::OutputEncoding=[System.Text.Encoding]::UTF8 } catch {}
+Start-Transcript -LiteralPath 'C:\Users\mzj\Desktop\CTF\玄机刷题\记录\续攻-Pixel交叉检查.txt' -Append
+rg -n -i 'rockyou|seclists|字典|wordlist|伪加密|fake|million|1000000|common' 'C:\Users\mzj\Desktop\CTF\玄机刷题\记录\像素囚笼1-解题记录.md'
+Get-ChildItem -LiteralPath 'C:\Users\mzj\Desktop\CTF\tools' -Force | Select-Object Name,Mode
+Stop-Transcript
+Process ID: 12552
+PSVersion: 7.6.5
+PSEdition: Core
+GitCommitId: 7.6.5
+OS: Microsoft Windows 10.0.26200
+Platform: Win32NT
+PSCompatibleVersions: 1.0, 2.0, 3.0, 4.0, 5.0, 5.1, 6.0, 7.0
+PSRemotingProtocolVersion: 2.4
+SerializationVersion: 1.1.0.1
+WSManStackVersion: 3.0
+**********************
+Transcript started, output file is C:\Users\mzj\Desktop\CTF\玄机刷题\记录\续攻-Pixel交叉检查.txt
+[Y] Yes  [A] Yes to All  [N] No  [L] No to All  [S] Suspend  [?] Help (default is "Y"):
+
+**********************
+PowerShell transcript end
+End time: 20260928165721
+**********************
+**********************
+PowerShell transcript start
+Start time: 20260928165742
+Username: DESKTOP-412KTAR\mzj
+RunAs User: DESKTOP-412KTAR\mzj
+Configuration Name: 
+Machine: DESKTOP-412KTAR (Microsoft Windows NT 10.0.26200.0)
+Host Application: C:\Users\mzj\.cache\codex-runtimes\codex-primary-runtime\dependencies\native\powershell\pwsh.dll -Command try { [Console]::OutputEncoding=[System.Text.Encoding]::UTF8 } catch {}
+Start-Transcript -LiteralPath 'C:\Users\mzj\Desktop\CTF\玄机刷题\记录\续攻-Pixel交叉检查.txt' -Append
+rg --files 'C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\像素囚笼1\分析脚本' | Select-Object -Last 25
+Stop-Transcript
+Process ID: 14680
+PSVersion: 7.6.5
+PSEdition: Core
+GitCommitId: 7.6.5
+OS: Microsoft Windows 10.0.26200
+Platform: Win32NT
+PSCompatibleVersions: 1.0, 2.0, 3.0, 4.0, 5.0, 5.1, 6.0, 7.0
+PSRemotingProtocolVersion: 2.4
+SerializationVersion: 1.1.0.1
+WSManStackVersion: 3.0
+**********************
+Transcript started, output file is C:\Users\mzj\Desktop\CTF\玄机刷题\记录\续攻-Pixel交叉检查.txt
+C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\像素囚笼1\分析脚本\pixel_cage_event_name_candidates.py
+C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\像素囚笼1\分析脚本\pixel_cage_derived_candidates.py
+C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\像素囚笼1\分析脚本\pixel_cage_deflate_structure.py
+C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\像素囚笼1\分析脚本\pixel_cage_coordinate_candidates.py
+C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\像素囚笼1\分析脚本\pixel_cage_components.py
+C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\像素囚笼1\分析脚本\pixel_cage_common_passwords.py
+C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\像素囚笼1\分析脚本\pixel_cage_combo_candidates.py
+C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\像素囚笼1\分析脚本\pixel_cage_color_words_cipher.py
+C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\像素囚笼1\分析脚本\pixel_cage_color_features.py
+C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\像素囚笼1\分析脚本\pixel_cage_classical_cipher_candidates.py
+C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\像素囚笼1\分析脚本\pixel_cage_chinese_candidates.py
+C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\像素囚笼1\分析脚本\pixel_cage_candidates.py
+C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\像素囚笼1\分析脚本\pixel_cage_bruteforce_initials.py
+C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\像素囚笼1\分析脚本\pixel_cage_bruteforce_colorwords.py
+C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\像素囚笼1\分析脚本\pixel_cage_bruteforce_colors.py
+C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\像素囚笼1\分析脚本\pixel_cage_bruteforce_abcdef.py
+C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\像素囚笼1\分析脚本\pixel_cage_base64_symbol_candidates.py
+C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\像素囚笼1\分析脚本\pixel_cage_ascii_verify.py
+C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\像素囚笼1\分析脚本\pixel_cage_ascii_bruteforce.c
+C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\像素囚笼1\分析脚本\pixel_cage_archive_layout_candidates.py
+C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\像素囚笼1\分析脚本\pixel_cage_alpha_candidates.py
+C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\像素囚笼1\分析脚本\pixel_cage_alnum5_verify.py
+C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\像素囚笼1\分析脚本\pixel_cage_alnum5_bruteforce.c
+C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\像素囚笼1\分析脚本\pixel_cage_all_bitplanes.py
+C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\像素囚笼1\分析脚本\pixel_cage_affine_color_candidates.py
+**********************
+PowerShell transcript end
+End time: 20260928165742
+**********************
+**********************
+PowerShell transcript start
+Start time: 20260928165756
+Username: DESKTOP-412KTAR\mzj
+RunAs User: DESKTOP-412KTAR\mzj
+Configuration Name: 
+Machine: DESKTOP-412KTAR (Microsoft Windows NT 10.0.26200.0)
+Host Application: C:\Users\mzj\.cache\codex-runtimes\codex-primary-runtime\dependencies\native\powershell\pwsh.dll -Command try { [Console]::OutputEncoding=[System.Text.Encoding]::UTF8 } catch {}
+Start-Transcript -LiteralPath 'C:\Users\mzj\Desktop\CTF\玄机刷题\记录\续攻-Pixel交叉检查.txt' -Append
+Get-Content -LiteralPath 'C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\像素囚笼1\分析脚本\pixel_cage_common_passwords.py' -Head 75
+Get-Content -LiteralPath 'C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\像素囚笼1\分析脚本\pixel_cage_ascii_bruteforce.c' -Head 85
+Stop-Transcript
+Process ID: 14776
+PSVersion: 7.6.5
+PSEdition: Core
+GitCommitId: 7.6.5
+OS: Microsoft Windows 10.0.26200
+Platform: Win32NT
+PSCompatibleVersions: 1.0, 2.0, 3.0, 4.0, 5.0, 5.1, 6.0, 7.0
+PSRemotingProtocolVersion: 2.4
+SerializationVersion: 1.1.0.1
+WSManStackVersion: 3.0
+**********************
+Transcript started, output file is C:\Users\mzj\Desktop\CTF\玄机刷题\记录\续攻-Pixel交叉检查.txt
+from itertools import product
+from pathlib import Path
+from zipfile import ZipFile
+
+IMAGE = Path(str(Path(__file__).resolve().parents[1] / '附件' / 'challenge.png'))
+words = [
+    "password", "passwd", "pass", "secret", "secretfile", "zip", "unzip", "open",
+    "flag", "test", "testflag", "admin", "root", "toor", "qwerty", "letmein",
+    "welcome", "iloveyou", "abc123", "123456", "1234567", "12345678", "000000",
+    "ctf", "challenge", "misc", "stego", "steganography", "image", "picture",
+    "pixel", "pixels", "cage", "pixelcage", "pixel_cage", "pixel-cage", "gallery",
+    "art", "abstract", "abstractart", "artgallery", "abstractartgallery", "abstractartgallery",
+    "color", "colors", "colour", "colours", "rainbow", "google", "googlecolor",
+    "googlecolors", "material", "materialdesign", "blue", "red", "yellow", "green",
+    "purple", "cyan", "xj", "xuanji", "edisec", "anwang", "anwangbei", "2026anwangbei",
+    "xiangsu", "qiulong", "mima", "test123", "flag123", "secret123", "password123",
+]
+suffixes = ["", "1", "01", "123", "1234", "123456", "2026", "20260921", "583", "!", "@"]
+prefixes = ["", "2026", "xj", "ctf", "flag", "pixel", "secret"]
+candidates = set()
+for word in words:
+    forms = {word, word.lower(), word.upper(), word.title(), word.capitalize()}
+    for form in forms:
+        candidates.add(form)
+        for suffix in suffixes:
+            candidates.add(form + suffix)
+        for prefix in prefixes:
+            candidates.add(prefix + form)
+        for prefix, suffix in product(prefixes, suffixes):
+            candidates.add(prefix + form + suffix)
+            candidates.add(prefix + "_" + form + "_" + suffix if suffix else prefix + "_" + form)
+
+with ZipFile(IMAGE) as archive:
+    for password in sorted(candidates):
+        try:
+            data = archive.read("secret.txt", pwd=password.encode("utf-8"))
+        except Exception:
+            continue
+        print(f"PASSWORD FOUND: {password!r}")
+        print(f"SECRET.TXT: {data.decode(errors='replace')!r}")
+        break
+    else:
+        print(f"No match across {len(candidates)} common/theme/event password variants.")
+#include <stdint.h>
+#include <stdio.h>
+static uint32_t table[256];
+static const unsigned char enc[12]={0x0d,0xc8,0xb1,0x0e,0xc2,0x20,0x10,0x00,0xd0,0x9d,0xaf,0x38};
+static uint32_t cb(uint32_t c,unsigned char v){return table[(c^v)&0xff]^(c>>8);}
+static void up(uint32_t *a,uint32_t *b,uint32_t *c,unsigned char p){*a=cb(*a,p);*b=(*b+(*a&255))*134775813u+1u;*c=cb(*c,(unsigned char)(*b>>24));}
+static int match(const unsigned char *pw,int n){uint32_t a=0x12345678u,b=0x23456789u,c=0x34567890u;for(int i=0;i<n;i++)up(&a,&b,&c,pw[i]);unsigned char q=0;for(int i=0;i<12;i++){uint32_t t=c|2u;q=enc[i]^(unsigned char)((t*(t^1u))>>8);up(&a,&b,&c,q);}return q==0x9d;}
+static unsigned char pw[5];static FILE *out;static unsigned long long tested;
+static void walk(int pos,int len){if(pos==len){tested++;if(match(pw,len)){for(int i=0;i<len;i++)fputc(pw[i],out);fputc('\n',out);}return;}for(int c=32;c<=126;c++){pw[pos]=(unsigned char)c;walk(pos+1,len);}}
+int main(void){for(uint32_t i=0;i<256;i++){uint32_t c=i;for(int j=0;j<8;j++)c=(c&1)?(c>>1)^0xedb88320u:c>>1;table[i]=c;}out=fopen("pixel_cage_ascii_header_matches.txt","wb");if(!out)return 2;for(int n=1;n<=4;n++){walk(0,n);fprintf(stderr,"checked length %d; total %llu\n",n,tested);}fclose(out);printf("tested %llu printable candidates\n",tested);}
+**********************
+PowerShell transcript end
+End time: 20260928165756
+**********************
+**********************
+PowerShell transcript start
+Start time: 20260928165826
+Username: DESKTOP-412KTAR\mzj
+RunAs User: DESKTOP-412KTAR\mzj
+Configuration Name: 
+Machine: DESKTOP-412KTAR (Microsoft Windows NT 10.0.26200.0)
+Host Application: C:\Users\mzj\.cache\codex-runtimes\codex-primary-runtime\dependencies\native\powershell\pwsh.dll -Command try { [Console]::OutputEncoding=[System.Text.Encoding]::UTF8 } catch {}
+Start-Transcript -LiteralPath 'C:\Users\mzj\Desktop\CTF\玄机刷题\记录\续攻-Pixel交叉检查.txt' -Append
+$env:PYTHONUTF8='1'
+@'
+from pathlib import Path
+import struct,zipfile,zlib,binascii
+p=Path(r'C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\像素囚笼1\附件\challenge.png')
+b=p.read_bytes()
+with zipfile.ZipFile(p) as z:
+ i=z.getinfo('secret.txt')
+ o=i.header_offset
+ nl,xl=struct.unpack_from('<HH',b,o+26)
+ off=o+30+nl+xl
+ payload=b[off:off+i.compress_size]
+ print('header_offset',o,'data_offset',off,'flags',i.flag_bits,'method',i.compress_type,'csize',i.compress_size,'usize',i.file_size)
+ print('raw_payload',payload.hex())
+ for skip in (0,12):
+  try:
+   obj=zlib.decompressobj(-15)
+   out=obj.decompress(payload[skip:])+obj.flush()
+   crc=binascii.crc32(out)&0xffffffff
+   print('skip',skip,'eof',obj.eof,'len',len(out),'crc',hex(crc),'expected',hex(i.CRC),'match',crc==i.CRC and len(out)==i.file_size)
+   print('plaintext',repr(out))
+  except Exception as e: print('skip',skip,type(e).__name__,str(e))
+'@ | python -
+Stop-Transcript
+Process ID: 5656
+PSVersion: 7.6.5
+PSEdition: Core
+GitCommitId: 7.6.5
+OS: Microsoft Windows 10.0.26200
+Platform: Win32NT
+PSCompatibleVersions: 1.0, 2.0, 3.0, 4.0, 5.0, 5.1, 6.0, 7.0
+PSRemotingProtocolVersion: 2.4
+SerializationVersion: 1.1.0.1
+WSManStackVersion: 3.0
+**********************
+Transcript started, output file is C:\Users\mzj\Desktop\CTF\玄机刷题\记录\续攻-Pixel交叉检查.txt
+**********************
+PowerShell transcript end
+End time: 20260928165826
+**********************
+**********************
+PowerShell transcript start
+Start time: 20260928165903
+Username: DESKTOP-412KTAR\mzj
+RunAs User: DESKTOP-412KTAR\mzj
+Configuration Name: 
+Machine: DESKTOP-412KTAR (Microsoft Windows NT 10.0.26200.0)
+Host Application: C:\Users\mzj\.cache\codex-runtimes\codex-primary-runtime\dependencies\native\powershell\pwsh.dll -Command try { [Console]::OutputEncoding=[System.Text.Encoding]::UTF8 } catch {}
+Start-Transcript -LiteralPath 'C:\Users\mzj\Desktop\CTF\玄机刷题\记录\续攻-Pixel交叉检查.txt' -Append
+$script = 'C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\像素囚笼1\分析脚本\solve_pixel_fakezip.py'
+@'
+from pathlib import Path
+import base64, binascii, hashlib, re, struct, zipfile, zlib
+root = Path(__file__).resolve().parents[1]
+image = root / '附件' / 'challenge.png'
+blob = image.read_bytes()
+print('Image SHA256:', hashlib.sha256(blob).hexdigest())
+with zipfile.ZipFile(image) as archive:
+    item = archive.getinfo('secret.txt')
+    assert item.compress_type == 8
+    name_len, extra_len = struct.unpack_from('<HH', blob, item.header_offset + 26)
+    data_offset = item.header_offset + 30 + name_len + extra_len
+    payload = blob[data_offset:data_offset + item.compress_size]
+    print('Flag bits:', item.flag_bits, 'Payload offset:', data_offset, 'Payload length:', len(payload))
+    inflater = zlib.decompressobj(-15)
+    plaintext = inflater.decompress(payload) + inflater.flush()
+    assert inflater.eof and not inflater.unused_data and not inflater.unconsumed_tail
+    assert len(plaintext) == item.file_size
+    assert (binascii.crc32(plaintext) & 0xffffffff) == item.CRC
+    print('CRC32 verified:', f'{item.CRC:08x}', 'Plaintext length:', len(plaintext))
+    print(plaintext.decode('ascii'))
+    encoded = plaintext.splitlines()[-1]
+    flag = base64.b64decode(encoded, validate=True)
+    assert re.fullmatch(rb'flag\{[0-9a-f]{32}\}', flag)
+    print('FLAG:', flag.decode('ascii'))
+    (root / '分析脚本' / 'recovered_secret.txt').write_bytes(plaintext)
+    print('Saved recovered_secret.txt; original PNG unchanged.')
+'@ | Set-Content -LiteralPath $script -Encoding utf8
+$env:PYTHONUTF8='1'
+python $script
+Stop-Transcript
+Process ID: 17836
+PSVersion: 7.6.5
+PSEdition: Core
+GitCommitId: 7.6.5
+OS: Microsoft Windows 10.0.26200
+Platform: Win32NT
+PSCompatibleVersions: 1.0, 2.0, 3.0, 4.0, 5.0, 5.1, 6.0, 7.0
+PSRemotingProtocolVersion: 2.4
+SerializationVersion: 1.1.0.1
+WSManStackVersion: 3.0
+**********************
+Transcript started, output file is C:\Users\mzj\Desktop\CTF\玄机刷题\记录\续攻-Pixel交叉检查.txt
+[Y] Yes  [A] Yes to All  [N] No  [L] No to All  [S] Suspend  [?] Help (default is "Y"):
+**********************
+PowerShell transcript end
+End time: 20260928165904
+**********************
+**********************
+PowerShell transcript start
+Start time: 20260928193324
+Username: DESKTOP-412KTAR\mzj
+RunAs User: DESKTOP-412KTAR\mzj
+Configuration Name: 
+Machine: DESKTOP-412KTAR (Microsoft Windows NT 10.0.26200.0)
+Host Application: C:\Users\mzj\.cache\codex-runtimes\codex-primary-runtime\dependencies\native\powershell\pwsh.dll -Command try { [Console]::OutputEncoding=[System.Text.Encoding]::UTF8 } catch {}
+Start-Transcript -LiteralPath 'C:\Users\mzj\Desktop\CTF\玄机刷题\记录\续攻-Pixel交叉检查.txt' -Append
+$path = 'C:\Users\mzj\Desktop\CTF\玄机刷题\记录\像素囚笼1-解题记录.md'
+$add = @'
+
+## 最终解题补记：ZIP 伪加密与 Base64（2026-09-28）
+
+此前把 ZIP 中 `general-purpose flag bits=0x1` 直接解释为内容真实加密，并据此把首 12 字节当作 ZipCrypto 加密头。这个判断错误，依赖真实 ZipCrypto 头的密码字典、颜色穷举、明文分析都走错了方向。用户告知本题已自行解决后，继续检查原始压缩流时发现：全 113 字节数据本身就是有效的 DEFLATE 流。
+
+复现步骤：
+
+1. 按本地文件头的文件名长度和 extra-field 长度计算数据偏移：ZIP local header 在 4956，数据从 4996 开始。
+2. 依 `compress_size=113` 取出完整载荷。虽然 local/central flags 都置 bit0，载荷开头 `0d c8 b1 0e c2 20 10 00...` 实际属于 DEFLATE 数据。
+3. 将完整载荷直接交给 raw-DEFLATE 解压器（`wbits=-15`），不跳过伪造的 12 字节加密头。解压器到达流尾，恢复 113 字节明文；计算 CRC32 为 `9d13b619`，与 ZIP 目录记录一致。反过来跳过 12 字节会报 `invalid block type`。长度、流结束标志和 CRC 一起证明这是可验证的完整明文。
+4. 明文内容为：
+
+```text
+Congratulations! You found the secret.
+Here is your reward:
+ZmxhZ3s0YTMxY2FjOWE2NmE4ZTM5OTY5M2Y1NDNhOGM2NmZiOH0=
+```
+
+5. 对最后一行严格 Base64 解码，得到 `flag{4a31cac9a66a8e399693f543a8c66fb8}`，且符合 `flag{}` + 32 位小写十六进制的格式。
+
+可复现脚本：`题目资料/像素囚笼1/分析脚本/solve_pixel_fakezip.py`；解出的说明文本另存于 `题目资料/像素囚笼1/分析脚本/recovered_secret.txt`。完整命令、原始压缩数据、解压结果和 CRC 输出见 `记录/续攻-Pixel交叉检查.txt`。原始 PNG 未修改。用户表示已自行解决；本次没有替用户重复提交平台，因此此记录是本地可复现结果和用户报告，未记录本线程的页面验收回执。
+'@
+Add-Content -LiteralPath $path -Value $add -Encoding utf8
+Get-Item -LiteralPath $path | Select-Object FullName,Length,LastWriteTime
+Select-String -LiteralPath $path -Pattern 'ZIP 伪加密与 Base64|flag\{4a31cac9'
+Stop-Transcript
+Process ID: 5732
+PSVersion: 7.6.5
+PSEdition: Core
+GitCommitId: 7.6.5
+OS: Microsoft Windows 10.0.26200
+Platform: Win32NT
+PSCompatibleVersions: 1.0, 2.0, 3.0, 4.0, 5.0, 5.1, 6.0, 7.0
+PSRemotingProtocolVersion: 2.4
+SerializationVersion: 1.1.0.1
+WSManStackVersion: 3.0
+**********************
+Transcript started, output file is C:\Users\mzj\Desktop\CTF\玄机刷题\记录\续攻-Pixel交叉检查.txt
+
+**********************
+PowerShell transcript end
+End time: 20260928193325
+**********************
+**********************
+PowerShell transcript start
+Start time: 20260928193334
+Username: DESKTOP-412KTAR\mzj
+RunAs User: DESKTOP-412KTAR\mzj
+Configuration Name: 
+Machine: DESKTOP-412KTAR (Microsoft Windows NT 10.0.26200.0)
+Host Application: C:\Users\mzj\.cache\codex-runtimes\codex-primary-runtime\dependencies\native\powershell\pwsh.dll -Command try { [Console]::OutputEncoding=[System.Text.Encoding]::UTF8 } catch {}
+Start-Transcript -LiteralPath 'C:\Users\mzj\Desktop\CTF\玄机刷题\记录\续攻-Pixel交叉检查.txt' -Append
+Get-Content -LiteralPath 'C:\Users\mzj\Desktop\CTF\玄机刷题\记录\像素囚笼1-解题记录.md' -Tail 25
+Stop-Transcript
+Process ID: 28856
+PSVersion: 7.6.5
+PSEdition: Core
+GitCommitId: 7.6.5
+OS: Microsoft Windows 10.0.26200
+Platform: Win32NT
+PSCompatibleVersions: 1.0, 2.0, 3.0, 4.0, 5.0, 5.1, 6.0, 7.0
+PSRemotingProtocolVersion: 2.4
+SerializationVersion: 1.1.0.1
+WSManStackVersion: 3.0
+**********************
+Transcript started, output file is C:\Users\mzj\Desktop\CTF\玄机刷题\记录\续攻-Pixel交叉检查.txt
+
+因此，所有以“破解 ZipCrypto 密码”为目标的候选数与未命中结论均不适用于这份附件，不能据此声称已穷举真实密码空间。与口令无关的 PNG 区块 CRC、附件哈希、几何和图像位平面检查仍是各自范围内的有效观测；没有发现可读图像载荷。准确色板勘误之前的临时错误结论也仍按上一条勘误处理。
+
+本次完整命令和输出见 `记录\限时攻关-Pixel-终端记录.txt`；上述 flag 来源为直接 DEFLATE 解压并匹配 CRC，再对明文内的 Base64 串解码。
+
+## 最终解题补记：ZIP 伪加密与 Base64（2026-09-28）
+
+此前把 ZIP 中 `general-purpose flag bits=0x1` 直接解释为内容真实加密，并据此把首 12 字节当作 ZipCrypto 加密头。这个判断错误，依赖真实 ZipCrypto 头的密码字典、颜色穷举、明文分析都走错了方向。用户告知本题已自行解决后，继续检查原始压缩流时发现：全 113 字节数据本身就是有效的 DEFLATE 流。
+
+复现步骤：
+
+1. 按本地文件头的文件名长度和 extra-field 长度计算数据偏移：ZIP local header 在 4956，数据从 4996 开始。
+2. 依 `compress_size=113` 取出完整载荷。虽然 local/central flags 都置 bit0，载荷开头 `0d c8 b1 0e c2 20 10 00...` 实际属于 DEFLATE 数据。
+3. 将完整载荷直接交给 raw-DEFLATE 解压器（`wbits=-15`），不跳过伪造的 12 字节加密头。解压器到达流尾，恢复 113 字节明文；计算 CRC32 为 `9d13b619`，与 ZIP 目录记录一致。反过来跳过 12 字节会报 `invalid block type`。长度、流结束标志和 CRC 一起证明这是可验证的完整明文。
+4. 明文内容为：
+
+```text
+Congratulations! You found the secret.
+Here is your reward:
+ZmxhZ3s0YTMxY2FjOWE2NmE4ZTM5OTY5M2Y1NDNhOGM2NmZiOH0=
+```
+
+5. 对最后一行严格 Base64 解码，得到 `flag{4a31cac9a66a8e399693f543a8c66fb8}`，且符合 `flag{}` + 32 位小写十六进制的格式。
+
+可复现脚本：`题目资料/像素囚笼1/分析脚本/solve_pixel_fakezip.py`；解出的说明文本另存于 `题目资料/像素囚笼1/分析脚本/recovered_secret.txt`。完整命令、原始压缩数据、解压结果和 CRC 输出见 `记录/续攻-Pixel交叉检查.txt`。原始 PNG 未修改。用户表示已自行解决；本次没有替用户重复提交平台，因此此记录是本地可复现结果和用户报告，未记录本线程的页面验收回执。
+**********************
+PowerShell transcript end
+End time: 20260928193334
+**********************

@@ -1,0 +1,26 @@
+mzj@Ubuntu-24.04:~$ python3 - <<'PY'
+from pathlib import Path
+import zipfile, io
+data = Path('labs/platform/attachments/583-pixel-cage/challenge.png').read_bytes()
+tail = data[4956:]
+print('尾部', len(tail), '字节当作 ZIP 打开：')
+z = zipfile.ZipFile(io.BytesIO(tail))
+for info in z.infolist():
+    print('  文件名:', info.filename, ' 解压后', info.file_size, '字节',
+          ' flag_bits=1 表示传统加密(ZipCrypto)')
+try:
+    z.read('secret.txt')
+except RuntimeError as err:
+    print('读取内容时:', err)
+PY
+尾部 231 字节当作 ZIP 打开：
+  文件名: secret.txt  解压后 113 字节  flag_bits=1 表示传统加密(ZipCrypto)
+读取内容时: File 'secret.txt' is encrypted, password required for extraction
+
+mzj@Ubuntu-24.04:~$ tail -c 231 labs/platform/attachments/583-pixel-cage/challenge.png > /tmp/tail.zip && unzip -l /tmp/tail.zip
+Archive:  /tmp/tail.zip
+  Length      Date    Time    Name
+---------  ---------- -----   ----
+      113  2026-04-13 10:39   secret.txt
+---------                     -------
+      113                     1 file

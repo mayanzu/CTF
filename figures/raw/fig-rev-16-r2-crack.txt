@@ -1,0 +1,5 @@
+mzj@Ubuntu-24.04:~$ python3 -c 'print(pow(3, -1, 256))'
+171
+
+mzj@Ubuntu-24.04:~$ cd /mnt/c/Users/mzj/Desktop/CTF/CTF-training-problem-first-full && python3 -c 'T=[57,75,42,60,120,99,93,42,48,54,36,99,63,54,36,75,84,84,87,126]; print(bytes(((t - 7) * 171) & 255 for t in T).decode())'
+flag{trace_the_loop}

@@ -1,0 +1,10 @@
+# 第5章 题 C0：十六进制字符数 vs 字节数
+PS C:\Users\mzj\Desktop\CTF\CTF-training-problem-first-full> python -c 's=''666c61677b6865787d''; print(''文本长度(字符):'', len(s)); b=bytes.fromhex(s); print(''还原后字节数:'', len(b)); print(''字节内容:'', b); print(''ASCII 解码:'', b.decode(''ascii''))'
+文本长度(字符): 18
+还原后字节数: 9
+字节内容: b'flag{hex}'
+ASCII 解码: flag{hex}
+
+PS C:\Users\mzj\Desktop\CTF\CTF-training-problem-first-full> python -c 'b1=b''41''; b2=bytes.fromhex(''41''); print(''两个字符的文本 b41:'', b1, ''长度'', len(b1)); print(''解析成 1 个字节后:'', b2, ''长度'', len(b2))'
+两个字符的文本 b41: b'41' 长度 2
+解析成 1 个字节后: b'A' 长度 1

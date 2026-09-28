@@ -1,0 +1,9 @@
+# Windows 自带 curl 别名与真正的 curl.exe
+PS C:\Users\mzj\Desktop\CTF\CTF-training-problem-first-full> Get-Alias curl | Format-List Name, CommandType, ReferencedCommand
+Name              : curl
+CommandType       : Alias
+ReferencedCommand : Invoke-WebRequest
+
+PS C:\Users\mzj\Desktop\CTF\CTF-training-problem-first-full> curl.exe --version | Select-Object -First 2
+curl 8.21.0 (Windows) libcurl/8.21.0 Schannel zlib/1.3.2 WinIDN WinLDAP
+Release-Date: 2026-06-24

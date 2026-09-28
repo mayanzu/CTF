@@ -1,0 +1,12 @@
+# 第3章 python 一行命令与脚本
+PS C:\Users\mzj\Desktop\CTF\CTF-training-problem-first-full> python --version
+Python 3.12.10
+
+PS C:\Users\mzj\Desktop\CTF\CTF-training-problem-first-full> python -c 'for i in range(3): print(''第'', i, ''次打印'')'
+第 0 次打印
+第 1 次打印
+第 2 次打印
+
+PS C:\Users\mzj\Desktop\CTF\CTF-training-problem-first-full> python -c 'import sys, math; print(sys.version); print(math.gcd(12, 18))'
+3.12.10 (tags/v3.12.10:0cc8128, Apr  8 2025, 12:21:36) [MSC v.1943 64 bit (AMD64)]
+6

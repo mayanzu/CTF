@@ -1,0 +1,20 @@
+mzj@Ubuntu-24.04:~$ cd ~/pwn-lab/platform && grep -n -B2 -A14 '1330:' dis.txt | head -24
+1222-    132e:	c9                   	leave
+1223-    132f:	c3                   	ret
+1224:    1330:	55                   	push   %rbp
+1225-    1331:	48 89 e5             	mov    %rsp,%rbp
+1226-    1334:	48 81 ec 20 01 00 00 	sub    $0x120,%rsp
+1227-    133b:	48 89 bd e8 fe ff ff 	mov    %rdi,-0x118(%rbp)
+1228-    1342:	48 8b 85 e8 fe ff ff 	mov    -0x118(%rbp),%rax
+1229-    1349:	48 8d 15 21 1d 00 00 	lea    0x1d21(%rip),%rdx        # 0x3071
+1230-    1350:	48 89 d6             	mov    %rdx,%rsi
+1231-    1353:	48 89 c7             	mov    %rax,%rdi
+1232-    1356:	e8 05 fe ff ff       	call   0x1160
+1233-    135b:	48 89 45 f8          	mov    %rax,-0x8(%rbp)
+1234-    135f:	48 83 7d f8 00       	cmpq   $0x0,-0x8(%rbp)
+1235-    1364:	75 11                	jne    0x1377
+1236-    1366:	48 8d 05 07 1d 00 00 	lea    0x1d07(%rip),%rax        # 0x3074
+1237-    136d:	48 89 c7             	mov    %rax,%rdi
+1238-    1370:	e8 fb fc ff ff       	call   0x1070
+
+mzj@Ubuntu-24.04:~$ cd ~/pwn-lab/platform && grep -n -e 'fopen' -e 'fread' -e 'flag' dis.txt | head -8

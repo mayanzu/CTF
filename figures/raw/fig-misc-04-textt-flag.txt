@@ -1,0 +1,19 @@
+mzj@Ubuntu-24.04:~$ python3 - <<'PY'
+from pathlib import Path
+import base64
+data = Path('labs/misc/pixel.png').read_bytes()
+off = 8
+while off < len(data):
+    ln = int.from_bytes(data[off:off+4], 'big')
+    kind = data[off+4:off+8]
+    body = data[off+8:off+8+ln]
+    if kind == b'tEXt':
+        keyword, value = body.split(b'\x00', 1)
+        print('tEXt 关键字:', keyword.decode())
+        print('tEXt 内容(原样):', value.decode())
+        print('base64 解码后:', base64.b64decode(value).decode())
+    off += 12 + ln
+PY
+tEXt 关键字: Comment
+tEXt 内容(原样): ZmxhZ3ttZXRhZGF0YV9oYXNfY2x1ZXN9
+base64 解码后: flag{metadata_has_clues}

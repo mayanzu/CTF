@@ -1,0 +1,2054 @@
+**********************
+PowerShell transcript start
+Start time: 20260928193307
+Username: DESKTOP-412KTAR\mzj
+RunAs User: DESKTOP-412KTAR\mzj
+Configuration Name: 
+Machine: DESKTOP-412KTAR (Microsoft Windows NT 10.0.26200.0)
+Host Application: C:\Users\mzj\.cache\codex-runtimes\codex-primary-runtime\dependencies\native\powershell\pwsh.dll -Command try { [Console]::OutputEncoding=[System.Text.Encoding]::UTF8 } catch {}
+$log='玄机刷题\记录\续攻-Base-终端记录.txt'; Start-Transcript -LiteralPath $log -Append; Get-ChildItem -LiteralPath '玄机刷题\题目资料\Base_543' -Recurse -File | Select-Object FullName,Length,LastWriteTime; Get-ChildItem -LiteralPath '玄机刷题\记录' -File | Where-Object Name -Match 'Base|543' | Select-Object Name,Length,LastWriteTime; Stop-Transcript
+Process ID: 24964
+PSVersion: 7.6.5
+PSEdition: Core
+GitCommitId: 7.6.5
+OS: Microsoft Windows 10.0.26200
+Platform: Win32NT
+PSCompatibleVersions: 1.0, 2.0, 3.0, 4.0, 5.0, 5.1, 6.0, 7.0
+PSRemotingProtocolVersion: 2.4
+SerializationVersion: 1.1.0.1
+WSManStackVersion: 3.0
+**********************
+Transcript started, output file is 玄机刷题\记录\续攻-Base-终端记录.txt
+
+**********************
+PowerShell transcript end
+End time: 20260928193307
+**********************
+**********************
+PowerShell transcript start
+Start time: 20260928193316
+Username: DESKTOP-412KTAR\mzj
+RunAs User: DESKTOP-412KTAR\mzj
+Configuration Name: 
+Machine: DESKTOP-412KTAR (Microsoft Windows NT 10.0.26200.0)
+Host Application: C:\Users\mzj\.cache\codex-runtimes\codex-primary-runtime\dependencies\native\powershell\pwsh.dll -Command try { [Console]::OutputEncoding=[System.Text.Encoding]::UTF8 } catch {}
+$log='玄机刷题\记录\续攻-Base-终端记录.txt'; Start-Transcript -LiteralPath $log -Append; Get-ChildItem -LiteralPath '玄机刷题\记录' -File | Where-Object Name -Match 'Base|543' | ForEach-Object { "--- $($_.FullName) [$($_.Length) bytes] ---"; Get-Content -LiteralPath $_.FullName -Tail 120 }; Get-Content -LiteralPath '玄机刷题\题目资料\Base_543\solve_base_offline.py'; Stop-Transcript
+Process ID: 10332
+PSVersion: 7.6.5
+PSEdition: Core
+GitCommitId: 7.6.5
+OS: Microsoft Windows 10.0.26200
+Platform: Win32NT
+PSCompatibleVersions: 1.0, 2.0, 3.0, 4.0, 5.0, 5.1, 6.0, 7.0
+PSRemotingProtocolVersion: 2.4
+SerializationVersion: 1.1.0.1
+WSManStackVersion: 3.0
+**********************
+Transcript started, output file is 玄机刷题\记录\续攻-Base-终端记录.txt
+--- C:\Users\mzj\Desktop\CTF\玄机刷题\记录\代理-base-终端记录.txt [63134 bytes] ---
+PSRemotingProtocolVersion: 2.4
+SerializationVersion: 1.1.0.1
+WSManStackVersion: 3.0
+**********************
+Transcript started, output file is C:\Users\mzj\Desktop\CTF\玄机刷题\记录\代理-base-终端记录.txt
+COMMAND: append a full Base32 forward-round-trip validator to solve_base_offline.py
+APPENDED SOURCE BEGIN
+
+def encode_base32_custom(data, alpha):
+    out = []
+    for offset in range(0, len(data), 5):
+        chunk = data[offset:offset+5].ljust(5, b"\x00")
+        value = int.from_bytes(chunk, "big")
+        for shift in (35, 30, 25, 20, 15, 10, 5, 0):
+            out.append(alpha[(value >> shift) & 0x1f])
+    return bytes(out).decode("ascii")
+
+forward_encoded = encode_base32_custom(decoded, alphabet)
+print("Recovered candidate flag length:", len(decoded))
+print("Recovered candidate flag:", decoded.decode("ascii"))
+print("Base32 forward encoding:", forward_encoded)
+print("Full 48-symbol forward round-trip exact:", forward_encoded == ENCODED_TARGET)
+assert forward_encoded == ENCODED_TARGET
+APPENDED SOURCE END
+COMMAND: Get-FileHash solve_base_offline.py -Algorithm SHA256
+
+Algorithm : SHA256
+Hash      : 4A6B2E80746DC25B3E0B987D4AE90989E2D06A5CCF0CF895BF9E3857A82C1AA9
+Path      : C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\Base_543\solve_base_offline.py
+
+COMMAND: wsl --exec /usr/bin/python3 <solve_base_offline.py>
+NATIVE_EXIT=0
+JUDGMENT: full 48-symbol target round-trips under the recovered alphabet. The recovered 30-byte printable flag is a strong static candidate. This does not constitute execution of the supplied EXE; main statically shows scanf %29s and a 30-byte comparator, so local acceptance width is inconsistent with this 30-character candidate.
+**********************
+PowerShell transcript end
+End time: 20260927202651
+**********************
+**********************
+PowerShell transcript start
+Start time: 20260927202931
+Username: DESKTOP-412KTAR\mzj
+RunAs User: DESKTOP-412KTAR\mzj
+Configuration Name:
+Machine: DESKTOP-412KTAR (Microsoft Windows NT 10.0.26200.0)
+Host Application: C:\Users\mzj\.cache\codex-runtimes\codex-primary-runtime\dependencies\native\powershell\pwsh.dll -NoProfile -Command try { [Console]::OutputEncoding=[System.Text.Encoding]::UTF8 } catch {}
+$ErrorActionPreference='Continue'
+Start-Transcript -LiteralPath 'C:\Users\mzj\Desktop\CTF\玄机刷题\记录\代理-base-终端记录.txt' -Append
+$scriptPath='C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\Base_543\solve_base_offline.py'
+$append=@'
+
+candidate = decoded
+candidate_truncated_by_scanf = candidate[:29]
+truncated_encoding = encode_base32_custom(candidate_truncated_by_scanf, alphabet)
+print("Static candidate as 30 bytes:", repr(candidate), "length=", len(candidate))
+print("Candidate after scanf %29s width:", repr(candidate_truncated_by_scanf), "length=", len(candidate_truncated_by_scanf))
+print("Candidate full output prefix 30:", encode_base32_custom(candidate, alphabet)[:30])
+print("Truncated input output prefix 30:", truncated_encoding[:30])
+print("Does the executable's 30-symbol comparison accept the width-truncated candidate prefix:",
+      truncated_encoding[:30] == ENCODED_TARGET[:30])
+'@
+Write-Output 'COMMAND: append a local-only test of scanf width and 30-symbol comparison'
+Write-Output 'APPENDED SOURCE BEGIN'
+Write-Output $append
+Write-Output 'APPENDED SOURCE END'
+Add-Content -LiteralPath $scriptPath -Value $append -Encoding utf8
+Write-Output 'COMMAND: wsl --exec /usr/bin/python3 <solve_base_offline.py>'
+wsl --exec /usr/bin/python3 '/mnt/c/Users/mzj/Desktop/CTF/玄机刷题/题目资料/Base_543/solve_base_offline.py' 2>&1
+Write-Output "NATIVE_EXIT=$LASTEXITCODE"
+Write-Output 'PARENT-REPORTED EXTERNAL ACTION (not performed by this subagent): parent submitted the statically recovered candidate flag{y0u__rea11y__k1ow__Base!} to Xuanji challenge #543. Parent reports the platform response was FLAG incorrect and progress remained 0/1. No guessed retry was performed by this subagent.'
+Write-Output 'JUDGMENT: the full 48-character target round-trips exactly; the first 30 symbols also match after local scanf width truncates this 30-byte flag to 29 bytes because the comparator checks only 30 encoded symbols. This explains a local input-width bug but does not prove a different platform flag. No alternate flag is supported by this offline attachment; remote rejection remains unresolved pending confirmation that archive/build matches the challenge instance.'
+Write-Output 'COMMAND: Get-FileHash source executable and original RAR are rechecked below'
+Get-FileHash -LiteralPath 'C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\Base_543\solve_base_offline.py','C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\Base_543\你知道Base么\你知道Base么.exe','D:\Downloads\你知道Base么-20250521104202-am92t17.rar' -Algorithm SHA256 | Format-List
+Stop-Transcript
+Process ID: 25908
+PSVersion: 7.6.5
+PSEdition: Core
+GitCommitId: 7.6.5
+OS: Microsoft Windows 10.0.26200
+Platform: Win32NT
+PSCompatibleVersions: 1.0, 2.0, 3.0, 4.0, 5.0, 5.1, 6.0, 7.0
+PSRemotingProtocolVersion: 2.4
+SerializationVersion: 1.1.0.1
+WSManStackVersion: 3.0
+**********************
+Transcript started, output file is C:\Users\mzj\Desktop\CTF\玄机刷题\记录\代理-base-终端记录.txt
+COMMAND: append a local-only test of scanf width and 30-symbol comparison
+APPENDED SOURCE BEGIN
+
+candidate = decoded
+candidate_truncated_by_scanf = candidate[:29]
+truncated_encoding = encode_base32_custom(candidate_truncated_by_scanf, alphabet)
+print("Static candidate as 30 bytes:", repr(candidate), "length=", len(candidate))
+print("Candidate after scanf %29s width:", repr(candidate_truncated_by_scanf), "length=", len(candidate_truncated_by_scanf))
+print("Candidate full output prefix 30:", encode_base32_custom(candidate, alphabet)[:30])
+print("Truncated input output prefix 30:", truncated_encoding[:30])
+print("Does the executable's 30-symbol comparison accept the width-truncated candidate prefix:",
+      truncated_encoding[:30] == ENCODED_TARGET[:30])
+APPENDED SOURCE END
+COMMAND: wsl --exec /usr/bin/python3 <solve_base_offline.py>
+NATIVE_EXIT=0
+PARENT-REPORTED EXTERNAL ACTION (not performed by this subagent): parent submitted the statically recovered candidate flag{y0u__rea11y__k1ow__Base!} to Xuanji challenge #543. Parent reports the platform response was FLAG incorrect and progress remained 0/1. No guessed retry was performed by this subagent.
+JUDGMENT: the full 48-character target round-trips exactly; the first 30 symbols also match after local scanf width truncates this 30-byte flag to 29 bytes because the comparator checks only 30 encoded symbols. This explains a local input-width bug but does not prove a different platform flag. No alternate flag is supported by this offline attachment; remote rejection remains unresolved pending confirmation that archive/build matches the challenge instance.
+COMMAND: Get-FileHash source executable and original RAR are rechecked below
+
+Algorithm : SHA256
+Hash      : 12AB4119475EFC9EBFECED24A6445EF49F6BD3105A7407769431FB9B33A557B5
+Path      : C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\Base_543\solve_base_offline.py
+
+Algorithm : SHA256
+Hash      : EF7DEACF6594E9353E934564B38761E8AAF614EBF39DCB17EFED36263DF2C773
+Path      : C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\Base_543\你知道Base么\你知道Base么.exe
+
+Algorithm : SHA256
+Hash      : 3FEC5E1930230660DCABDF0F31F4D97F8BB980D67306242D48A4377B74590801
+Path      : D:\Downloads\你知道Base么-20250521104202-am92t17.rar
+
+**********************
+PowerShell transcript end
+End time: 20260927202951
+**********************
+--- C:\Users\mzj\Desktop\CTF\玄机刷题\记录\续攻-Base-终端记录.txt [2430 bytes] ---
+PSRemotingProtocolVersion: 2.4
+SerializationVersion: 1.1.0.1
+WSManStackVersion: 3.0
+**********************
+Transcript started, output file is C:\Users\mzj\Desktop\CTF\玄机刷题\记录\代理-base-终端记录.txt
+COMMAND: append a full Base32 forward-round-trip validator to solve_base_offline.py
+APPENDED SOURCE BEGIN
+
+def encode_base32_custom(data, alpha):
+    out = []
+    for offset in range(0, len(data), 5):
+        chunk = data[offset:offset+5].ljust(5, b"\x00")
+        value = int.from_bytes(chunk, "big")
+        for shift in (35, 30, 25, 20, 15, 10, 5, 0):
+            out.append(alpha[(value >> shift) & 0x1f])
+    return bytes(out).decode("ascii")
+
+forward_encoded = encode_base32_custom(decoded, alphabet)
+print("Recovered candidate flag length:", len(decoded))
+print("Recovered candidate flag:", decoded.decode("ascii"))
+print("Base32 forward encoding:", forward_encoded)
+print("Full 48-symbol forward round-trip exact:", forward_encoded == ENCODED_TARGET)
+assert forward_encoded == ENCODED_TARGET
+APPENDED SOURCE END
+COMMAND: Get-FileHash solve_base_offline.py -Algorithm SHA256
+
+Algorithm : SHA256
+Hash      : 4A6B2E80746DC25B3E0B987D4AE90989E2D06A5CCF0CF895BF9E3857A82C1AA9
+Path      : C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\Base_543\solve_base_offline.py
+
+COMMAND: wsl --exec /usr/bin/python3 <solve_base_offline.py>
+NATIVE_EXIT=0
+JUDGMENT: full 48-symbol target round-trips under the recovered alphabet. The recovered 30-byte printable flag is a strong static candidate. This does not constitute execution of the supplied EXE; main statically shows scanf %29s and a 30-byte comparator, so local acceptance width is inconsistent with this 30-character candidate.
+**********************
+PowerShell transcript end
+End time: 20260927202651
+**********************
+**********************
+PowerShell transcript start
+Start time: 20260927202931
+Username: DESKTOP-412KTAR\mzj
+RunAs User: DESKTOP-412KTAR\mzj
+Configuration Name:
+Machine: DESKTOP-412KTAR (Microsoft Windows NT 10.0.26200.0)
+Host Application: C:\Users\mzj\.cache\codex-runtimes\codex-primary-runtime\dependencies\native\powershell\pwsh.dll -NoProfile -Command try { [Console]::OutputEncoding=[System.Text.Encoding]::UTF8 } catch {}
+$ErrorActionPreference='Continue'
+Start-Transcript -LiteralPath 'C:\Users\mzj\Desktop\CTF\玄机刷题\记录\代理-base-终端记录.txt' -Append
+$scriptPath='C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\Base_543\solve_base_offline.py'
+$append=@'
+
+candidate = decoded
+candidate_truncated_by_scanf = candidate[:29]
+truncated_encoding = encode_base32_custom(candidate_truncated_by_scanf, alphabet)
+print("Static candidate as 30 bytes:", repr(candidate), "length=", len(candidate))
+print("Candidate after scanf %29s width:", repr(candidate_truncated_by_scanf), "length=", len(candidate_truncated_by_scanf))
+print("Candidate full output prefix 30:", encode_base32_custom(candidate, alphabet)[:30])
+print("Truncated input output prefix 30:", truncated_encoding[:30])
+print("Does the executable's 30-symbol comparison accept the width-truncated candidate prefix:",
+      truncated_encoding[:30] == ENCODED_TARGET[:30])
+'@
+Write-Output 'COMMAND: append a local-only test of scanf width and 30-symbol comparison'
+Write-Output 'APPENDED SOURCE BEGIN'
+Write-Output $append
+Write-Output 'APPENDED SOURCE END'
+Add-Content -LiteralPath $scriptPath -Value $append -Encoding utf8
+Write-Output 'COMMAND: wsl --exec /usr/bin/python3 <solve_base_offline.py>'
+wsl --exec /usr/bin/python3 '/mnt/c/Users/mzj/Desktop/CTF/玄机刷题/题目资料/Base_543/solve_base_offline.py' 2>&1
+Write-Output "NATIVE_EXIT=$LASTEXITCODE"
+Write-Output 'PARENT-REPORTED EXTERNAL ACTION (not performed by this subagent): parent submitted the statically recovered candidate flag{y0u__rea11y__k1ow__Base!} to Xuanji challenge #543. Parent reports the platform response was FLAG incorrect and progress remained 0/1. No guessed retry was performed by this subagent.'
+Write-Output 'JUDGMENT: the full 48-character target round-trips exactly; the first 30 symbols also match after local scanf width truncates this 30-byte flag to 29 bytes because the comparator checks only 30 encoded symbols. This explains a local input-width bug but does not prove a different platform flag. No alternate flag is supported by this offline attachment; remote rejection remains unresolved pending confirmation that archive/build matches the challenge instance.'
+Write-Output 'COMMAND: Get-FileHash source executable and original RAR are rechecked below'
+Get-FileHash -LiteralPath 'C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\Base_543\solve_base_offline.py','C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\Base_543\你知道Base么\你知道Base么.exe','D:\Downloads\你知道Base么-20250521104202-am92t17.rar' -Algorithm SHA256 | Format-List
+Stop-Transcript
+Process ID: 25908
+PSVersion: 7.6.5
+PSEdition: Core
+GitCommitId: 7.6.5
+OS: Microsoft Windows 10.0.26200
+Platform: Win32NT
+PSCompatibleVersions: 1.0, 2.0, 3.0, 4.0, 5.0, 5.1, 6.0, 7.0
+PSRemotingProtocolVersion: 2.4
+SerializationVersion: 1.1.0.1
+WSManStackVersion: 3.0
+**********************
+Transcript started, output file is C:\Users\mzj\Desktop\CTF\玄机刷题\记录\代理-base-终端记录.txt
+COMMAND: append a local-only test of scanf width and 30-symbol comparison
+APPENDED SOURCE BEGIN
+
+candidate = decoded
+candidate_truncated_by_scanf = candidate[:29]
+truncated_encoding = encode_base32_custom(candidate_truncated_by_scanf, alphabet)
+print("Static candidate as 30 bytes:", repr(candidate), "length=", len(candidate))
+print("Candidate after scanf %29s width:", repr(candidate_truncated_by_scanf), "length=", len(candidate_truncated_by_scanf))
+print("Candidate full output prefix 30:", encode_base32_custom(candidate, alphabet)[:30])
+print("Truncated input output prefix 30:", truncated_encoding[:30])
+print("Does the executable's 30-symbol comparison accept the width-truncated candidate prefix:",
+      truncated_encoding[:30] == ENCODED_TARGET[:30])
+APPENDED SOURCE END
+COMMAND: wsl --exec /usr/bin/python3 <solve_base_offline.py>
+NATIVE_EXIT=0
+PARENT-REPORTED EXTERNAL ACTION (not performed by this subagent): parent submitted the statically recovered candidate flag{y0u__rea11y__k1ow__Base!} to Xuanji challenge #543. Parent reports the platform response was FLAG incorrect and progress remained 0/1. No guessed retry was performed by this subagent.
+JUDGMENT: the full 48-character target round-trips exactly; the first 30 symbols also match after local scanf width truncates this 30-byte flag to 29 bytes because the comparator checks only 30 encoded symbols. This explains a local input-width bug but does not prove a different platform flag. No alternate flag is supported by this offline attachment; remote rejection remains unresolved pending confirmation that archive/build matches the challenge instance.
+COMMAND: Get-FileHash source executable and original RAR are rechecked below
+
+Algorithm : SHA256
+Hash      : 12AB4119475EFC9EBFECED24A6445EF49F6BD3105A7407769431FB9B33A557B5
+Path      : C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\Base_543\solve_base_offline.py
+
+Algorithm : SHA256
+Hash      : EF7DEACF6594E9353E934564B38761E8AAF614EBF39DCB17EFED36263DF2C773
+Path      : C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\Base_543\你知道Base么\你知道Base么.exe
+
+Algorithm : SHA256
+Hash      : 3FEC5E1930230660DCABDF0F31F4D97F8BB980D67306242D48A4377B74590801
+Path      : D:\Downloads\你知道Base么-20250521104202-am92t17.rar
+
+**********************
+PowerShell transcript end
+End time: 20260927202951
+**********************
+--- C:\Users\mzj\Desktop\CTF\玄机刷题\记录\续攻-ezBase-平台状态.png [56053 bytes] ---
+��qUV����s�������+}E4����ʗF��
+�&������0�q�!���;�C^č�>�(\���E�Ec� k�aR�Z:ib[U��;a�Hjش�S	�}��E�i��j�K�L��Iq���2I'�tlc��TW/$^f��<���D�t�TUD����H����	��S��N�og���O��3f���d����ʹ�� _�2�֢=AUKTѺ6�K*���k�/TϬ��v��UsI=�ibObD��Tz��lU�8�OK
+���
+i�OGO
+4�uj6�Gnkڎ�9:��7�zX��[Lw$���h����\*�U~�����:zxd���������a��^J����O��6�5PSR>�yY;��9y"S*-�-��*P�2:��Y�Ī��EV��e0��Ǫ��tV{ݶ�G>���ȕ9�zB��Ȫ���Q~�Xs�ZUܭ�gO%%m&j�N�F����ٕG�5fSnN���W{�+������������k%z��E&[�s������+�DqS�GR��1��I#v�w���'�;�=���%=#���E=��-ɷ	�[T�s�x{��Of�TU���[��v�
+LY"[���T�֑���K-UC �6O.UW�_c��G9~
+SyA5�*j�o1�7���JG��DEU��O��^m�U���E���TUMA���5���EN�rL��˗^ڢ�Qf�ݾ�C%]=)#'�P�E�W���5�\���Y�%D�bJf�)�t�k�.F�VDL���{�sAr������7���E�Q:������>��PAF�B�fb�*$�*"zܺ���R�Eg��l��}�Jyc���|L�ȝH�\�x�b���o�i�e��Ix��/���Lm���Wmi
+
+�nL��$o�����\�T��Q�p5z���k�^%���)H�{��ޱ78D��nK��
+ڝ��/K�m$p6	"N�UvW=n���-�.ٷ�*�Mp��CO��-\�Dro����W������Xu�i����41QKP�-+��VB��w4E�U�<����]=�;U�j���VL��ějZ�׹�I�ާ�t}
+;OVA<h�Z��=�L���訨& �b�j�>�e������c�[s�޲e�z���"�]�T�r_���UuT�j�DāI�X�26F֪��j*��}Y9M=@�:S�sN�YYo�����h���^�Φ�TN}���ϥ9j"��Pz52�o��d���b����^;��6����:�] ����Ia�^*M>��sj�������:�
+�t��U��*/���4��6��ӛQwrTDD�C��ũ}��H/\8���su�~^��0�q�Qr���.h��T����YS"WU2չ�7w�M����o4��/WYf!��q��u#��)i#悑�Up֫]���)�g�v�/�I���������$�X��ז��Tv:��
+:�h �D��,�������]�׹��Ӓa����J:z�-j}5��%Ut1J��f$Q�X��rc�+����A�Y�%Ʋ�JWl�HX�t�R>uU^��\��.yL��u%%�}ⶩ'��$t�F$k�\&[��֝jx��je[�Om�VI3���B���rg�r�NG�بh��S�(�T�4l��c�Z�͸� �k�:�W�(l�X��YUJ���L�=��
+����u|9�I��*D�U���i�jc��h��u<(��X�|�w�eaF�q��m��F�G1�{��ԯ�7�ʼ���}�jZk|�n��K��l��1f�g�E�z��˛N��E-t�O���#�D��L*.�_e�U��+��_������{�nj����TT�U_���^�u�.jX�.�maV�un/�6�#�([]:aU^�";fU��k�S�0��>�*��YR��M�߽�9ު�Gl�OY��ym������o�z��c���o��R����z��T�˒iIe�V���#d�U�������؎�U˟[ֈX�I��[��;�յ7:���E�7S��c�M�^mEE�91�5I����-4���t>�<�.��Ib9�F�{_�����}/*����7�=&>�Q�~��0���Xˍ�O�렸��OcmF��;���s
+T�.�v�����ص��Y笩�|�*�����j�Qw4ED�ڇ�j��*��xu�aG�OAz+]�i�ENy0h�l�zv�\,UU*�g�^�ɔD{U^��Q2�M.����y���rD�ȕ�s�sM�M��%�V��ƒ�OVW=�R�)�+ s8�Fe0���Q�Z��к��k�e��#dl{7#v�9ʉ׻)����ԳDܭԓ�М������$j�"oo^=Ƚ�k�����J��R����(ջ���~}��:����" wk�(��t5�eu��l��gOY��Uj�<�(i����e���*wE=Z�P��.��2�)���'�Y��'���*�U�ж��ts�"D�EDTʯ$w%�LΜ�6�J����
+��U����*椐�'m䉵�Ez�<��]��;��{O�C<��$.�M~�.�c�\ݮ�f�v���s���U^¥��Kq����q=V�#��UѲD����̫��ֶ�UT��m���N�k���(��U6�����C�RR�!�z*j�ӱ�#%�g#&D_�_��f:�6�-�i�;)V4k��DUEE�P��kH�v��UMp��9( r�L��ě}^I�*�˭tz�X�b�c��m�9���sDN��Q�Tn�b���'�����K[.��FU��IYI,�d�1̜����be�B��[���i�.�&�t���YX؜�]����g"tf�眖j�]�3^i���lF�%Sٽxq��{��|��K%�KS�<umg�Hխ��J�wR���8��+ϧlJ�X�{>x������ �,^��j�s{�c������DgN�T "�                                             %�o�\)�����  ����B����@'�iis�]eX}�K@G��A��� }~��z G��A��� }~��z G��A��� }~��z G��A��� ��ۃ� s]!6g�Og{����/KDN�o�~}�٣��諭�ijN�i=�'�+�ݱ�mN]�?K߭m�[�H���V9S/��c�ݓQO�4�6im���C+��I#�ҽ���^�"-7Y�Ŝ4�y.}\m�A���
+WK5�idH���F3�~S=^G-EM�-���GOCU���)�U#�5�Y�9\9�E�"�=y4E"Y�ڷK���8�w��������k�m�Ս�[��jZō%��nF��S8��uUx�$���ˣJI����R��%ud����ȍ�H���"//��
+N��Aa��
+z�چ���꩖W"�E^�Fس�#����_�	*>�z_�	 #�����А>�z_�	 #�����А>�z_�	 #�����А>�zL�X V��)��?�S�J� 5`�)�����祻���q�Z�����9��U]�z~���M���d�zuUKg���10��ª�@v� +�:��  |w��A���e~�) 
+� 
+-V��UCO�� n����TL�
+����+ϵW�O��3h�U�����;3��G�2�^J��Srq�O����=��#s�"��]��ە��3���g���jW��lԎ�cY#��ۓn�+Us����yK(ڭt��]j���r���w��Z�WN[�*iX��h"�R���{��pը�i�M�V�YD��֣QZ�3�u'��X��h-T톂�8ck��D樮\�r������E�l�o�ڨS{�#�W.Uʯ4�#>��I
+\L�����g�5#�F���qػ���r�p.5�g�K�.ȏJ�S����6�X�\x����sQ��-���ig]˟^I#��=K`��]uT5#�J9,X\"9X�.{�=I����(�����SL�d����^�, 9�h}:�5ζ�\�mU��O��-Z�Ŧ�����j6�X�"���3�Q�/3tyK*TPAQ_IY";�K�����rar�Q��B��3b�&z":Djnr'R*��AF��KMMUO\�T�$���y���IZ����4��G#�z��.s��s�{UUUK�L�M$̊6�&7���c�+ۃ
+ڂ����V�Zj�_��«\�j�{9)l��ꩥ�f�V���QS��l���E-**F�U˗*�9U�r�j����T� �B���u���G��3��+��q��:
+
+X�hi�)�R#lLE\�֦��q���������~�,���UU��j�%$����$T�&66�r�D�@����Q��;sխDW/z������=;II
+<t*����WL��"c�3���E��̳ۭo����26@���cv�=���)c�e*\)��`�}4mo&�nV*�?V�� �?O[��i��*�?��g6�*"rO��qѶ��7�H��k����V�8ڈ�Ưcp�GHq�� 
+B�u���t��_�̚�WzcW��/�g��nZQ�� �jmL��矏Y|�U=���t2T�TSԱѹ'�z��ݪ֯b`�[����qTVS:Y"�m33#��UT�T��M������:[D�������2o��Ej��L8�d1�8��F��ֵ0��Ȅ���f����m�p�Y?���_W~Ƴ�v&������DT^J�} bZx]O��kݜ5jm�v:�`��PR�Υ����M���֪�w$. 5�h�H%�
+H)��V����re1�TN�g3k�0��P:j�4TOI"k)��S�s��;��;`X���b�<�g&�K�5\���Sõ�Q:����
+�9ڋ�M\�,q�PC�ؑ}�i�Up�f��@                                              ����K�8��~��� �ݸ�[�ݸ����-a��-                                      Zx�3$��L`g��BDb��  �u��`]  >;�_���*DV9�_#��xWȨ���_!����>�w�|��xW�������_ >��xW�lw�|����_!����>�w�|��xW�������_ >��xW�lw�|����_!����>�w�|��xW�������_ >��xW�lw�|����_!����>�w�|��xW�������_ >��xW�lw�|����_!����>�w�|��xW�������_ >��xW�lw�|����_!����>�w�|��xW�������_ >��xW�lw�|����_!����>�w�|��xW�������_ >��xW�lw�|����_!����>�w�|��xW�������_ >��xW�lw�|����_!����>�w�|��xW�������_ >��xW�lw�|����_!����>�w�|��xW�������_ >��xW�lw�|����_!����>�w�|��xW�������_ >��xW�lw�|����_!����>�w�|��xW�������_ >��xW�lw�|����_!����>�w�|��xW��{��%¬Lv�\*"�����T-���Tp�֖���֖�            �kU{�'�Pt��.L����j��
+j� t�F���ª5Z��̜��V=kES�*u=2K=�z�z9���
+�il��U��G34죩���K���X�z�
+tf�N�Z�D7�5CoW{նZGRU�&H��I���L�ӒrRZ�S��{�Z��uU]�W1���cS*�伉m\K����t�|��w�شt�8�ӭ<���H��}�7�l��ʺá�|�X$��edKn������S�^�l�w�����wHw;}]j�%We����2�*��cdr��j"�����]����m�T��U1�h��sY��p�{�ɩ�_���A��]Aw�IU�M��e���o�d̑>oR�Z��.��G<�m	5e$s�L�8ٹX�/%nPZob����o�i�`���i�{υ\��۔��3�rX�           Zx�3$��L`g��BDb��  �u��`]                                                                                                             �ۊ���ۊ�Nz��Vz��            �ݻ�S�4~���-yu.�uU��:�ܝVԎ5W�UѢ+�j����Z������:^{����V�I���R%W5Y#���D玲������r���/B7��U[�i���x�{���[�'�]�ܛ"L�/�#�U�~?	� �v>�=���h�E�c����:=��=��]�c�^�^�d�����e
+��u%;Y�T�V&Ì��LL�x�16��������f�vo�Iy�h*���lU� T'�S�Cҍ���Z��Ķүf��>�ޑt���K�GG,P\�{'��L�Y+W(���������4Ɨ���Jɫr�jefU$�˗**�.2f��g�Wϙ�Z����s�9Ӌ�SZko�l+O�Ix�t���mOgg,`�����:*��X�d�6��d��U#s��ɪ�h�I(tjMAY��䢹�-J%|�F�DǨ�v|M���ڗThh��g��z\S=i�*A��#�+���������k���\���w֗{^��VVi�'���Z����m���%bmE�&r�D�:�g�.�j
+MM�j�����W�V�XjaUݱʜڨ��P���v��69�Kw���4K� ᝽J����R�^K�ȧw��$u�it��cj��8�ę3�ѽ���\�''`�Ye��<���o�/�7�����u�j�U��-��G>z9�G1y$��99�����ދݯ�W�f�[o�
+�����爹��Gy�t��=AY��M]׉�R���F��H��Er�r�����4ޟ�'LQ�P�WG�F��gc�d��z�U��j �D��Ro1��z�7�����}����n�s�y�&B��Ӿ�S��Jd����FW,[����Ih��j5 (         ���LfI���������!   +� ��H�Oi����	;��O1��$�@�����oo�<��#��$���O0$�o�<�����	;��O1��$�@�����oo�<��#��$���O0$�o�<�����	;��O1��$�@�����oo�<��#��$���O0$�o�<�����	;��O1��$�@�����oo�<��#��$���O0$�o�<�����	;��O1��$�@�����oo�<��#��$���O0$�o�<�����	;��O1��$�@�����oo�<��#��$���O0$�o�<�����	;��O1��$�@�����oo�<��#��$���O0$�o�<�����	;��O1��$�@�����oo�<��#��$���O0$�o�<�����	;��O1��$�@�����oo�<��#��$���O0$�o�<�����	;��O1��$�@�����oo�<��#��$���O0$�o�<�����	;��O1��$�@�����oo�<��#��$���O0$�o�<�����	;��O1��$�@�����oo�<��#��$���O0$�o�<�����	;��O1��$�@�����oo�<��#��$���O0$�o�<�����	;��O1��$�@�����oo�<�M��T,J��TEʩ\	��ZZ*��ZZ                                      ���LfI���������!   +                                                                                                                  �>����>���                                      +O��d��)��{H�^�  � 
+�TR[�U��,r:�����Dbery�M6�z��Y��5+o��ң�y��%�s��̕='P��j��m�d��e2G����US�c	����Ig�꫽N���I
+��p����������W�?x�����8}��
+��栰[��-m{j�>��lo�9e�#���i�)�?��29���I��E�p��CR���}Х��P����'F��f2�\a9Y]GUrӟ~l��QKQ�Xڪ��w�Wrvr�����d��8���Ot��WTRY$�Mӱ_�I���y�s�Cя�S��������z�)�G�X��bj#q�9�Vr~�51h�b@��                                                                                                       \.S����� ���q��1�2q��g�`�g�� '� ��� ���q��1�2q��g�`�g�� '� ��� ���q��1�2q��g�`�g�� '� ��� ���q��1�2q��g�`�g�� '� ��� ���q��1�2q��g�`�g�� ꪪ�zπ�/a	��B@  V �Wx5�����7a�P��F-�UU�V"rUN�dǢ:��]�y�U)t��U�cY�=y���笁Oè�܏H�~+͡%u5ud���t��Kʽʨye������M$4t�$ӻr��F��k>�U;O� �ַx�C�^4����$�U��Ǝ�7"����E�=�S7f"� �                                                                                                                                                  ������!   + p�^� �]]�=c.�X�ENV��j9^�ׄ^X9� �=K�{~�?���H�������9���{�<�R�^߰����R�^߰����!��-u_H�{�<�R�^߰����R�^߰������-u_H�{�<�R�^߰����R�^߰������-u_H�{�<�R�^߰����R�^߰������-u_H�{�<�R�^߰����R�^߰������-u_H�{�<�R�^߰����R�^߰������-u_H�{�<�R�^߰����R�^߰������-u_H�{�<�R�^߰����R�^߰������-u_H�{�<�R�^߰����R�^߰������-u_H�{�<�R�^߰����?Iw�z�-���Ӫ���k��TDd5O��E�b&&>Q���`������wn�V�ڿ3��LL^  P                                                                                                                               x��$F/a	  X�Q�$� *��!���^_��	:��Ur�^����\      #!��{���{ND�ߤ�"��*>[�w�V�:ک�Ȁ         �	�Ҫ�^y���N���9��k� ���S�>�uC�N�� ��� }                                                                                                                         "��®]ܜ�'}�$_$���s���#S���ֹ�L�QS��   �����$  cG����_�d1����U��'S�� �_ˀ   �дT�7�'������FH��?o3�޼�p�z;�io�Z{|�B�{c�Tb5{ϯ������m��-4�_>>�>�n���URګC��ek��]�����N�9��w�lS�b��#F�*�r{J�������OOn��[�n�I_+eX)߹�n0�D��.�m�W�U��h(���L��ti�\��W�b�*x[��=3
+�8�T���b�^�{֨**�W�{R$�Tr��s��b�b)��Uf����²�L#^��9N�H��d�-zAKF�ʙ����j䍮D����s叁���<i㎪)'cc|��2�Z����.~#oO;��1�tz���o�^Y��r���E���܏z3�y�*v:�K���jj"e<,Z��zO�Y""�7z˞γ��7J[M�����TsخV��0����f���[(�i)��
+Wʩ�X�\�ܩ&�LsΧ�4o�ӣ�8��go��w�Uf���+um��+���t���� ��$���Բ�{h���7T�3���޳Q{U@�_�l�M5MLD^�ռ �    ?A�s�*�� ��ħHs}�ʵ� �w�)�M:��'C� ��� X� ��                                                                                                                      �];��X����!2�X�Nz�=��_���L"&�"L1���ڤ� a���.���x�� ��:q�mOCIi�4�N��G&푧�⼼��@�m]���Tʉ"�٣�cӭ �"���0�� _�#5d{���m����G5:�� 3��!"1{H  
+�:��yʿ��c���pI������TT§%C��    Hf�+���S
+�r���g�UU��P��(| e��j���I^���r���4�N��H��e�U\�Y��`         �G?2����Jt�9��+t]�0�5�%:3�S�N�� ��� }                                                                                                                      �麩W��޿��[R�:)�eG,p���L��&Wa�\U9<LO�U���5�k�0��y���=Z�U��;�[;�_��u�O�;u,��>�\����V���U^���m_��Yҕn��D��-B�;s�F97�W���~9�4��HܙIr࿈�tr��{�¦S��
+1]��MOx��W>j��WsխU�v""u"� Az��[S�����uc�9����������4�h��-�[t�]��a��VW�9��H�Qˮ*�A��gi��͵7�~��\ױ�G5ɔT�B�I�s|.T8N��S��]�Uo�[@��U^ngb� �wq�U��W*�L x��$F/a	  X/4 -ս�Sp����Ѳ���ȸ¯^���M5������@��ļ|_a踕�v���xoɦ��R���&���K���� N����x�}�i�<�m��ɦ��R���=��w�^?_G���j/�a�i�<�m��r��������&���K���|�j/�c܀���E���xoɦ��R���&���K���� :�=��x�}�i�<�m��ɦ��R���=��w�^?_G���j/�a�i�<�m��r��������&���K���|�j/�c܀���E���xoɦ��R���&���K���� :�=��x�}�i�<�m���~�.2U�n��
+:.\��r�w!�`�\5O�4Jf��͊��*Jh��j6(ڍjw"@6�b""� �                                                                                                                     "�X������_EEDT\��)eXk��ؾ��^�+�t�LT�����&�{Lr/Ҝ���5Χv���̷���Y�!UTW���r���������jX�u��Iu:H�εEک�%?=U雕<�٭�LT�J9xب��s�6t�NYU:F���eFQ�*^��k�'����E�H��#�$�ã�o4E�����GLIa�Kq�nڪ�DcW�z[����Z�����DL5���&@ �/a	��B@  V 'X�6�u ��
+ Gc|(67���
+
+�� v7c|(H����
+ Gc|(67���
+
+�� v7c|(H����
+ Gc|(67���
+
+�� v7c|(H����
+ Gc|(67���
+
+�� v7c|(H����
+ Gc|(67���
+
+�� v7c|(H����
+ Gc|(67���
+
+�� v7c|(H����
+ Gc|(67���
+
+�� v7c|(H����
+ Gc|(67���
+
+�� v7c|(H����
+ Gc|(67���
+
+�� v7c|(H����
+ Gc|(67���
+
+�� v7c|(H����
+ Gc|(67���
+
+�� v7c|(H����
+ Gc|(67���
+
+�� v7c|(H����
+ Gc|(67���
+
+�� v7c|(H����
+ Gc|(67���
+
+�� )cj1U
+�r����@                                   �ڹ����uy޾�aw��L�'&���7�D\�Ww�5$     ������!   +�:��  ��uŎ�5�
+ډ��N�SD�;w
+Wj�";�PZ�K^���.���T:J�@ʇƑ�Q�re7;Q~ɞը-wZ��*��WA'�j��Ш�O�r�@s,�6jW�V��6^�B�b�n���m�;3���:�IM_<�zh#���Z�:�k�TDTr"���z��_h�A�i~����s�]a}C8��9q"��nF��{Q{�]M��xuI^�j�K<m���b"'�U �0i-��M�+Il��ʧ�l4����c��r��5N���y.wE�)#sZ半�M˄䝜�ƣ[nA+'�9br:9�k��2�s��}?Ʋ�k�YQI#b����L�Qq�\v
+Y�n��=z���n6ǺJYs��j�W��6=��ϑ�k�s��DN��o������k}K���l5,zɵp��^x��Q� �_�Q�;�tךt�Z�G��r/ݫ'�c��ڃ�����+��[��R�k^�2UwR1	{ͥ�\��]ʲ���}&��j�[/�!�<J�\/r/5�#I������G�a���2�[jad�T�"9�D�������Up����Ѭ�lL����3�B�*�k�[)��wp*#I�0�^���Vt��h�R��\'mDSz;�CP�$��͹���6�D�.�A�Qt���l��ܪX�i���ª�2��^GG[�l�52�W^-��1%�)�XǱ����E\�eQ3�@6�5QȊ�EE抝�                                                                       �Ŷ�T�����EL�V�q�*����/T�x�!���SK�;�_��_�P�I_KY��i�"@��EN��:� �FY�Yz:�J�z���P�v�,OG#W�pf��7=놵2��U����Xi�ck�x�Dre�#W�E�7���F���s��(����Q�F'�'�� �ݸ�[�ݸ�                                          x��$F/a	  X'X	�� \"����%.���U��kL�SP��ݭ��^�ͭX��Q�~�<��э���#�54�-���c�����r�>�d���V� ��:5�Ӓk�uJKEM[L�H#�ڪ�kި��]**"c��}U-S٬[�)�~}�X$�Q�-Ҭj�_Y�ʹ��g��.���ި�����mcUk`�#fc�n��s*��#�ޮ�{�}���\���2,c���E���y!g8��ޑ����K�����5M%]���:Z�H_\��N�5_Yȸ���j��M�QE}��
+ޞ��vV�vP�v�MT�".�57�eS�q����Z
+MQf�P\�c��kx��euC��c��\�ܤn�%U��p��IMp�T*�T��e:� ��E\5y'��~�Vz�zŧ��Qk�)�~�e���#���d�+��S��+j�[�=�����W.3�䆧J���G�E[��G=��ڗƴ��Ȩ��H��y估{���z��Q�je���.U#��ʆmTG&W,~W*����:�,1^��>��&�Y_#��P������*e���"mx�n~���7��>n?�[-n�e�KT0.��������kP��f�&~��%]o���К�:�݉�iJ�xm�<��	�2��ʎN\�=7Mtf�9w��m�W�l���'Ȉ��z�Q�ɪ����ȍ?E�\+�\]�54�S�EO/jD�Y���[�_~ynk,�lr�tiCGi�SAme�d���%��K�G&�YU9�ry�-�Y�2Ǩ���u\�+g�t�|��9�Z�ݎ��������f��Q�V��T#ekW�"��jw'����]�Km��-�k�f���������ȧ-{�%����6��O���#���c릍�E���������^�޶�T���6}ϥYX��;��p��s�y��kN��Y:;��m����7�D��jnU���ER��4�N�H��Ԫ����U;�VO���|3����PS�k�Z��s�tv���ibXbF᪋�U�.��j��M{�m���[eu��9���ij#H�6��$��������Z:�r����Z��-$�Mb=����ܳ�'Z*�GF��e}��+��N�#�Jʚ���c۵Y�jrD���E�{��������X7M[�+i,m�\�a�$Y�I��.��r�y"&2�Ϛ���]�鮊�4wFq]%%�:�9Y+"]�{�"ݕ�Qs۞�3T�?���=�ժ��"��T�\�YGE$��S�U�2�J�Gy�:?���&ܭ�*KS`Y* l-W�KجYdvSz�*�ӑ*��֏[q8xϧ:��H��mץ[ܶ�QO
+d?t)Y_�"FlV+��~�Z���SR����T5����S=�H�l���K.ŚG�(���^I��zͷ��K3��VK�E%҉�Z�ͨ�W5�̍��+Խ�֫E�Y�n�����W[�@���0�]��_�&2��1����bs��������F\h!ךz9(�X�y�#$����˗��j�~
+����l��߮tV��I�wI=>GD�^�H�v�U^�NG�X4��[
+ڢ�t����K�}�j㜏Ϭ�R�gD�R�CVԴR�]*=̩n�V��*"�y���.>�eU�|_�%��ߨ(m���rY� ���'�	��q+Q�UQ{0h��C'I��h��}��(�WSG��ڒ:� ���p�}�]=KH��)%���T��Y�����|�IOu��n�SCt�Yx�KL���z��n�V*w���~(��Fi�������Z��:@��֭c]"�T9ү
+�䕪�j���{)�-ʖ��%�ue���\�.䊙͕^����r���=��]]���+��e������N�_k2�U˞����
+���~��-bS�j���Q����j᫷�e�ב��?��+|��>�__�ێ�I��T�g�VM5駞eLew>?V.]J�����_�oچ��J��㦷����:�]+�f��ͪ�}^�*/5�/^z3�]j���[u���b�����[��Tګ�Lv�q��5����vG�횺Z�@���jEHkZ�U��Ȝ�9���^Jffm;� �Nr"9�z�К����^�-]��U^�j5dH��#��F�r��;N�9�#�t�F���.�G%du�PKGT�iҥ�ɟ���Y0�^Y�ܧ��S2����%s��6��r�U�L�#uZ�ڑ�� e@                                                                 ������ ���a�T���q�µ�՟��~�����SU@��"��G��_��T̾}#��3E��|�&7N���]��8j�>��r��{O{�o�7V��Z;eroI������r�|y}��5�QD�q
+#�$1�p�T��ۃ%��Iv�Z[�<hQ��ʜӫ�P��y�����F�����i�v���;��F��M��5�c�eV�;�D:����O�7~⅟M�l���F�J��s��vS9�5^�gS�X�q����d��!�
+�<�Q�W��S[�`�mDԕ��bGF���W3���t��T��7
+�iR'"D�Z������Xh�lTֻ�M��1��ܫS伌6�'d��6��@�j���{��}jr�&%�������Ģ����̛���df�n*��n*                                          �/a	��B@  V	�u�t                                                                                                             f�n*��n*                                          �/a	��B@  V	� Qr��O+ޣ+ޠ\<�z��z�p��2���S������O+ޣ+ޠ\<�z��z�p��2���S������O+ޣ+ޠ\<�z��z�p��2���S������O+ޣ+ޠ\<�z��z�p��2���S������O+ޣ+ޠ\<�z��z�p��2���S������O+ޣ+ޠ\<�z��z�p��2���S������O+ޣ+ޠ\<�z��z�p��2���S������O+ޣ+ޠ\<�z��z�p��2���S������O+ޣ+ޠ\<�z��z�p��2���S������O+ޣ+ޠ\<�z��z�p��2���S������O+ޣ+ޠ\<�z��z�p��2���S������O+ޣ+ޠ\<�z��z�p��2���S������O+ޣ+ޠ\<�z��z�p��2���S������O+ޣ+ޠ\<�z��z�p��2�����T*���                                          <^�#���  �  
+
+v�Ӵr��ި`��p��*#��>�j�M=m��j8����+�M�~>#Y��9f�E�FF�Ԯr!�ߵ���s�P�ʲOq�b���r5Q3�.y �qt����g�ʈ\��Dz*��                                                                                                                                                    �{H�^�  � �w��Z��.��sL�>��j�S��#�r�p��S�o���G#�1��T��4-�
+Z��5�4T���Mף�gw�z���j�AEp��Z�O�z����ܛ��E9+:�����ږ��YEa�u��X)}i^�_[
+�g��z��9D_���
+U�mίV��_e�th꾓�3��Kq�(�W��z��"l槙�lk���m��i�$�X���6G��v9�U]��\�J�ڵ?D6�J+eKnU�>;�c�����\�^i����+#���Ա꿺v�����g�"N�DUDT_����>u_�7�.s�|�m:+��T�����h�Z�u;�:Y������9���?B�+�o:��שl��X�RJ^�V,h��2�}��r�=����D�1�̀��                                                                                                                                                 �����^)��L�l����M��~�5�=km�\YEI[ez*��4F�<�@�� V  >*"��( }>*"�� �                                                                                                                                                     
+�Hk�%��b>Z�r)��ZV�N���<�8�n�� t@ ?��
+--- C:\Users\mzj\Desktop\CTF\玄机刷题\记录\续攻-ezBase-终端记录.txt [34396 bytes] ---
+ 22498: Path(r"C:\Users\mzj\Desktop\CTF\_ezcand_36.txt").write_bytes(candidate+b"}"+b"\n")
+ 22499: === target inversion and exact round-trip result ===
+ 22500: solver_exit=0
+ 22501: === original target program with decoded 35-byte data ===
+ 22502: run35_exit=0
+ 22503: === original target program with appended closing brace (36 bytes) ===
+ 22504: run36_exit=0
+ 22505: === exact test input sizes and hashes ===
+ 22506:
+ 22507: **********************
+ 22508: PowerShell transcript end
+ 22509: End time: 20260927210142
+ 22510: **********************
+ 22511: **********************
+ 22512: PowerShell transcript start
+ 22513: Start time: 20260927210258
+ 22514: Username: DESKTOP-412KTAR\mzj
+ 22515: RunAs User: DESKTOP-412KTAR\mzj
+ 22516: Configuration Name:
+ 22517: Machine: DESKTOP-412KTAR (Microsoft Windows NT 10.0.26200.0)
+ 22518: Host Application: C:\Users\mzj\.cache\codex-runtimes\codex-primary-runtime\dependencies\native\powershell\pwsh.dll -Command try { [Console]::OutputEncoding=[System.Text.Encoding]::UTF8 } catch {}
+ 22519: $ErrorActionPreference='Continue'
+ 22557: === candidate source/input identities ===
+ 22558: sha256=352D04492A87FDFB1BED3E9BEF581363492F9D507E269964FFE6BC05DCE69B10 file=C:\Users\mzj\Desktop\CTF\_solve_ez541_final.py
+ 22559: sha256=F888E4456BAF9BFB066FEA0F693E12A419C62586C50DB1BE98E877B9B6A272A7 file=C:\Users\mzj\Desktop\CTF\_ezcand_35.txt
+ 22560: sha256=B95ACCB551AD62DFB0F0053B995047844B194886476CC46AF89802ACF464F00D file=C:\Users\mzj\Desktop\CTF\_ezcand_36.txt
+ 22561: === prompt helper disassembly excerpt ===
+ 22562:
+ 22563: >    1400014f0:	48 83 ec 58          	sub    rsp,0x58
+ 22564:      1400014f4:	4c 89 4c 24 78       	mov    QWORD PTR [rsp+0x78],r9
+ 22565:      1400014f9:	4c 89 44 24 70       	mov    QWORD PTR [rsp+0x70],r8
+ 22566:      1400014fe:	48 89 54 24 68       	mov    QWORD PTR [rsp+0x68],rdx
+ 22567:      140001503:	48 8b 05 fe 3a 00 00 	mov    rax,QWORD PTR [rip+0x3afe]        # 0x140005008
+ 22568:      14000150a:	48 31 e0             	xor    rax,rsp
+ 22569:      14000150d:	48 89 44 24 50       	mov    QWORD PTR [rsp+0x50],rax
+ 22570:      140001512:	48 89 4c 24 40       	mov    QWORD PTR [rsp+0x40],rcx
+ 22571:      140001517:	48 8d 44 24 68       	lea    rax,[rsp+0x68]
+ 22572:      14000151c:	48 89 44 24 48       	mov    QWORD PTR [rsp+0x48],rax
+ 22573:      140001521:	48 8b 44 24 48       	mov    rax,QWORD PTR [rsp+0x48]
+ 22574:      140001526:	48 89 44 24 30       	mov    QWORD PTR [rsp+0x30],rax
+ 22575:      14000152b:	48 8b 44 24 40       	mov    rax,QWORD PTR [rsp+0x40]
+ 22576:      140001530:	48 89 44 24 28       	mov    QWORD PTR [rsp+0x28],rax
+ 22577:      140001535:	48 8b 05 dc 30 00 00 	mov    rax,QWORD PTR [rip+0x30dc]        # 0x140004618
+ 22578:      14000153c:	b9 01 00 00 00       	mov    ecx,0x1
+ 22579:      140001541:	ff d0                	call   rax
+ 22580:      140001543:	48 8b 54 24 28       	mov    rdx,QWORD PTR [rsp+0x28]
+ 22581:      140001548:	4c 8b 4c 24 30       	mov    r9,QWORD PTR [rsp+0x30]
+ 22582:      14000154d:	48 89 c1             	mov    rcx,rax
+ 22583:      140001550:	31 c0                	xor    eax,eax
+ 22584:      140001552:	41 89 c0             	mov    r8d,eax
+ 22585:      140001555:	e8 56 01 00 00       	call   0x1400016b0
+ 22586:      14000155a:	89 44 24 3c          	mov    DWORD PTR [rsp+0x3c],eax
+ 22587:      14000155e:	8b 44 24 3c          	mov    eax,DWORD PTR [rsp+0x3c]
+ 22588:      140001562:	89 44 24 38          	mov    DWORD PTR [rsp+0x38],eax
+ 22589:      140001566:	48 8b 4c 24 50       	mov    rcx,QWORD PTR [rsp+0x50]
+ 22590:      14000156b:	48 31 e1             	xor    rcx,rsp
+ 22591:      14000156e:	e8 bd 01 00 00       	call   0x140001730
+ 22592:      140001573:	8b 44 24 38          	mov    eax,DWORD PTR [rsp+0x38]
+ 22593:      140001577:	48 83 c4 58          	add    rsp,0x58
+ 22594:      14000157b:	c3                   	ret
+ 22595:      14000157c:	cc                   	int3
+ 22596:      14000157d:	cc                   	int3
+ 22597:      14000157e:	cc                   	int3
+ 22598:      14000157f:	cc                   	int3
+ 22599:      140001580:	48 83 ec 48          	sub    rsp,0x48
+ 22600:      140001584:	4c 89 4c 24 40       	mov    QWORD PTR [rsp+0x40],r9
+ 22601:      140001589:	4c 89 44 24 38       	mov    QWORD PTR [rsp+0x38],r8
+ 22602:      14000158e:	48 89 54 24 30       	mov    QWORD PTR [rsp+0x30],rdx
+ 22603:      140001593:	48 89 4c 24 28       	mov    QWORD PTR [rsp+0x28],rcx
+ 22604:      140001598:	48 8b 44 24 40       	mov    rax,QWORD PTR [rsp+0x40]
+ 22605:      14000159d:	4c 8b 4c 24 38       	mov    r9,QWORD PTR [rsp+0x38]
+ 22606:      1400015a2:	4c 8b 44 24 30       	mov    r8,QWORD PTR [rsp+0x30]
+ 22607:      1400015a7:	48 8b 4c 24 28       	mov    rcx,QWORD PTR [rsp+0x28]
+ 22608:      1400015ac:	48 c7 c2 ff ff ff ff 	mov    rdx,0xffffffffffffffff
+ 22609: **********************
+ 22610: PowerShell transcript end
+ 22611: End time: 20260927210259
+ 22612: **********************
+ 22613: **********************
+ 22614: PowerShell transcript start
+ 22615: Start time: 20260927210320
+ 22616: Username: DESKTOP-412KTAR\mzj
+ 22617: RunAs User: DESKTOP-412KTAR\mzj
+ 22618: Configuration Name:
+ 22619: Machine: DESKTOP-412KTAR (Microsoft Windows NT 10.0.26200.0)
+ 22620: Host Application: C:\Users\mzj\.cache\codex-runtimes\codex-primary-runtime\dependencies\native\powershell\pwsh.dll -Command try { [Console]::OutputEncoding=[System.Text.Encoding]::UTF8 } catch {}
+ 22621: $ErrorActionPreference='Continue'
+ 22622: $log='C:\Users\mzj\Desktop\CTF\玄机刷题\记录\代理-go_for_it-终端记录.txt'
+ 22623: Start-Transcript -Path $log -Append
+ 22624: Write-Output '=== corrected byte count/hash for exact verified flag ==='
+ 22625: python -c "from pathlib import Path; import hashlib; p=Path(r'C:\Users\mzj\Desktop\CTF\_ezcand_36.txt'); d=p.read_bytes(); assert d.endswith(bytes([10])); f=d[:-1]; print('stdin_file_bytes=',len(d)); print('flag_bytes_excluding_LF=',len(f)); print('flag_ascii=',f.decode('ascii')); print('flag_hex=',f.hex()); print('flag_sha256=',hashlib.sha256(f).hexdigest()); print('stdin_sha256=',hashlib.sha256(d).hexdigest())"
+ 22626: Write-Output '=== extracted #541 files ==='
+ 22627: Get-ChildItem -LiteralPath 'C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\ezBase_541' -Recurse -File | Select-Object FullName,Length
+ 22628: Write-Output '=== extracted original binary hash ==='
+ 22629: Get-ChildItem -LiteralPath 'C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\ezBase_541' -Recurse -Filter 'ezre.exe' -File | Get-FileHash -Algorithm SHA256 | ForEach-Object { "sha256=$($_.Hash) file=$($_.Path)" }
+ 22630: Stop-Transcript
+ 22631: Process ID: 8488
+ 22632: PSVersion: 7.6.5
+ 22633: PSEdition: Core
+ 22634: GitCommitId: 7.6.5
+ 22635: OS: Microsoft Windows 10.0.26200
+ 22636: Platform: Win32NT
+ 22637: PSCompatibleVersions: 1.0, 2.0, 3.0, 4.0, 5.0, 5.1, 6.0, 7.0
+ 22638: PSRemotingProtocolVersion: 2.4
+ 22639: SerializationVersion: 1.1.0.1
+ 22640: WSManStackVersion: 3.0
+ 22641: **********************
+ 22642: Transcript started, output file is C:\Users\mzj\Desktop\CTF\玄机刷题\记录\代理-go_for_it-终端记录.txt
+ 22643: === corrected byte count/hash for exact verified flag ===
+ 22644:
+ 22645: === extracted #541 files ===
+ 22646:
+ 22647: **********************
+ 22648: PowerShell transcript end
+ 22649: End time: 20260927210320
+ 22650: **********************
+**********************
+PowerShell transcript end
+End time: 20260928193313
+**********************
+MASK = 0xffffffff
+DELTA = 0x9e3779b9
+TEA_KEY = [0x12345678, 0x3456789a, 0x89abcdef, 0x12345678]
+TARGET_WORDS = [0xa92f3865, 0x9e60e953]
+TABLE_TARGET = bytes.fromhex(
+    "d4 59 23 76 b4 bf e3 2c 58 8f 56 19 da f0 c0 bd "
+    "36 3d 7b 46 1b b8 17 1f e3 d0 03 45 cd 04 ed c9 "
+    "67 e6 ab 29 a7 bc 0b de 5c 30 71 d7 d5 5a c6 9f "
+    "40 65 c4 71 a9 c3 ae d9 b5 e5 12 8c 80 52 34 36"
+)
+ENCODED_TARGET = "0tCPwtnncFZyYUlSK/4Cw0/echcG2lteBWnG2Ulw0htCYTMW"
+
+def mix(v, total, ka, kb):
+    return ((((v << 4) & MASK) + ka) & MASK) ^ ((v + total) & MASK) ^ (((v >> 5) + kb) & MASK)
+
+def xtea_encrypt(v0, v1):
+    total = 0
+    for _ in range(32):
+        total = (total + DELTA) & MASK
+        v0 = (v0 + mix(v1, total, TEA_KEY[0], TEA_KEY[1])) & MASK
+        v1 = (v1 + mix(v0, total, TEA_KEY[2], TEA_KEY[3])) & MASK
+    return v0, v1
+
+def xtea_decrypt(v0, v1):
+    total = (DELTA * 32) & MASK
+    for _ in range(32):
+        v1 = (v1 - mix(v0, total, TEA_KEY[2], TEA_KEY[3])) & MASK
+        v0 = (v0 - mix(v1, total, TEA_KEY[0], TEA_KEY[1])) & MASK
+        total = (total - DELTA) & MASK
+    return v0, v1
+
+plain_words = xtea_decrypt(*TARGET_WORDS)
+input_key = b"".join(w.to_bytes(4, "little") for w in plain_words)
+print("XTEA target words:", [f"0x{x:08x}" for x in TARGET_WORDS])
+print("XTEA recovered input words:", [f"0x{x:08x}" for x in plain_words])
+print("First-level input bytes:", input_key.hex(), repr(input_key))
+print("Forward XTEA verification:", [f"0x{x:08x}" for x in xtea_encrypt(*plain_words)])
+assert xtea_encrypt(*plain_words) == tuple(TARGET_WORDS)
+assert len(TABLE_TARGET) == 64
+
+# Reproduce the second-level RC4-like transformation seen in the binary.
+state = list(range(256))
+key_schedule = [input_key[i % len(input_key)] for i in range(256)]
+j = 0
+for i in range(256):
+    j = (j + state[i] + key_schedule[i]) & 0xff
+    state[i], state[j] = state[j], state[i]
+i = 0
+j = 0
+stream = []
+for _ in range(64):
+    i = (i + 1) & 0xff
+    j = (j + state[i]) & 0xff
+    state[i], state[j] = state[j], state[i]
+    stream.append(state[(state[i] + state[j]) & 0xff])
+raw_table = bytes((cipher - ks) & 0xff for cipher, ks in zip(TABLE_TARGET, stream))
+forward_table = bytes((plain + ks) & 0xff for plain, ks in zip(raw_table, stream))
+print("RC4-like keystream:", bytes(stream).hex())
+print("Recovered 64-byte raw table hex:", raw_table.hex())
+print("Recovered raw table repr:", repr(raw_table))
+print("Recovered raw table ASCII:", raw_table.decode("ascii", errors="backslashreplace"))
+print("All raw table bytes printable ASCII:", all(0x21 <= c <= 0x7e for c in raw_table))
+print("Raw table byte uniqueness:", len(set(raw_table)), "distinct values of", len(raw_table))
+print("RC4-like forward verification exact:", forward_table == TABLE_TARGET)
+assert forward_table == TABLE_TARGET
+
+alphabet = raw_table[1:33]
+print("Base32 alphabet used by code (raw_table[1:33]):", repr(alphabet))
+print("Alphabet length and uniqueness:", len(alphabet), len(set(alphabet)))
+assert len(alphabet) == 32
+assert len(set(alphabet)) == 32
+
+def decode_base32_custom(encoded, alpha):
+    inverse = {ch: i for i, ch in enumerate(alpha)}
+    if any(ord(ch) not in inverse for ch in encoded):
+        raise ValueError("encoded target contains symbol outside recovered alphabet")
+    out = bytearray()
+    groups = [encoded[k:k+8] for k in range(0, len(encoded), 8)]
+    for group in groups:
+        if len(group) != 8:
+            raise ValueError("incomplete Base32 group")
+        value = 0
+        for ch in group:
+            value = (value << 5) | inverse[ord(ch)]
+        out.extend(value.to_bytes(5, "big"))
+    return bytes(out)
+
+decoded = decode_base32_custom(ENCODED_TARGET, alphabet)
+print("Encoded target length:", len(ENCODED_TARGET))
+print("Decoded full target bytes length:", len(decoded))
+print("Decoded full target bytes hex:", decoded.hex())
+print("Decoded full target bytes repr:", repr(decoded))
+print("Decoded visible ASCII:", decoded.decode("ascii", errors="backslashreplace"))
+print("Decoded minus final zero (if present):", repr(decoded[:-1]) if decoded.endswith(b"\x00") else "final byte is nonzero")
+print("Encoded first 30 symbols (actual comparator length):", ENCODED_TARGET[:30])
+print("Flag-format check:", decoded.startswith(b"flag{") and b"}" in decoded)
+
+def encode_base32_custom(data, alpha):
+    out = []
+    for offset in range(0, len(data), 5):
+        chunk = data[offset:offset+5].ljust(5, b"\x00")
+        value = int.from_bytes(chunk, "big")
+        for shift in (35, 30, 25, 20, 15, 10, 5, 0):
+            out.append(alpha[(value >> shift) & 0x1f])
+    return bytes(out).decode("ascii")
+
+forward_encoded = encode_base32_custom(decoded, alphabet)
+print("Recovered candidate flag length:", len(decoded))
+print("Recovered candidate flag:", decoded.decode("ascii"))
+print("Base32 forward encoding:", forward_encoded)
+print("Full 48-symbol forward round-trip exact:", forward_encoded == ENCODED_TARGET)
+assert forward_encoded == ENCODED_TARGET
+
+candidate = decoded
+candidate_truncated_by_scanf = candidate[:29]
+truncated_encoding = encode_base32_custom(candidate_truncated_by_scanf, alphabet)
+print("Static candidate as 30 bytes:", repr(candidate), "length=", len(candidate))
+print("Candidate after scanf %29s width:", repr(candidate_truncated_by_scanf), "length=", len(candidate_truncated_by_scanf))
+print("Candidate full output prefix 30:", encode_base32_custom(candidate, alphabet)[:30])
+print("Truncated input output prefix 30:", truncated_encoding[:30])
+print("Does the executable's 30-symbol comparison accept the width-truncated candidate prefix:",
+      truncated_encoding[:30] == ENCODED_TARGET[:30])
+
+truncated_full_encoding = encode_base32_custom(candidate_truncated_by_scanf, alphabet)
+print("Candidate full encoding (48 symbols):", encode_base32_custom(candidate, alphabet))
+print("%29s-truncated encoding (48 symbols):", truncated_full_encoding)
+print("Does full output equal 48-byte target after scanf truncation:", truncated_full_encoding == ENCODED_TARGET)
+print("First differing encoded index:", next((i for i, (a, b) in enumerate(zip(truncated_full_encoding, ENCODED_TARGET)) if a != b), None))
+print("Target encoded length:", len(ENCODED_TARGET), "truncated input encoded length:", len(truncated_full_encoding))
+**********************
+PowerShell transcript end
+End time: 20260928193316
+**********************
+**********************
+PowerShell transcript start
+Start time: 20260928193326
+Username: DESKTOP-412KTAR\mzj
+RunAs User: DESKTOP-412KTAR\mzj
+Configuration Name: 
+Machine: DESKTOP-412KTAR (Microsoft Windows NT 10.0.26200.0)
+Host Application: C:\Users\mzj\.cache\codex-runtimes\codex-primary-runtime\dependencies\native\powershell\pwsh.dll -Command try { [Console]::OutputEncoding=[System.Text.Encoding]::UTF8 } catch {}
+$log='玄机刷题\记录\续攻-Base-终端记录.txt'; Start-Transcript -LiteralPath $log -Append; rg --files '玄机刷题\记录' '玄机刷题\题目资料\Base_543' | rg '543|Base' | Where-Object { $_ -match '\.md$|\.txt$|\.py$|\.c$|\.cpp$|\.json$' } | ForEach-Object { Get-Item -LiteralPath $_ | Select-Object FullName,Length }; rg -n -C 4 'you__rea11y|知道Base|Base_543|Flag 不正确|不正确|30|前30' '玄机刷题\记录' --glob '*.md' --glob '*Base*.txt' --glob '*543*.txt' | Select-Object -Last 180; Stop-Transcript
+Process ID: 15492
+PSVersion: 7.6.5
+PSEdition: Core
+GitCommitId: 7.6.5
+OS: Microsoft Windows 10.0.26200
+Platform: Win32NT
+PSCompatibleVersions: 1.0, 2.0, 3.0, 4.0, 5.0, 5.1, 6.0, 7.0
+PSRemotingProtocolVersion: 2.4
+SerializationVersion: 1.1.0.1
+WSManStackVersion: 3.0
+**********************
+Transcript started, output file is 玄机刷题\记录\续攻-Base-终端记录.txt
+
+**********************
+PowerShell transcript end
+End time: 20260928193326
+**********************
+**********************
+PowerShell transcript start
+Start time: 20260928193402
+Username: DESKTOP-412KTAR\mzj
+RunAs User: DESKTOP-412KTAR\mzj
+Configuration Name: 
+Machine: DESKTOP-412KTAR (Microsoft Windows NT 10.0.26200.0)
+Host Application: C:\Users\mzj\.cache\codex-runtimes\codex-primary-runtime\dependencies\native\powershell\pwsh.dll -Command try { [Console]::OutputEncoding=[System.Text.Encoding]::UTF8 } catch {}
+$log='玄机刷题\记录\续攻-Base-终端记录.txt'; Start-Transcript -LiteralPath $log -Append; Write-Output '=== Base_543 files ==='; Get-ChildItem -LiteralPath '玄机刷题\题目资料\Base_543' -Recurse -File | Select-Object FullName,Length; Write-Output '=== relevant record names ==='; Get-ChildItem -LiteralPath '玄机刷题\记录' -File | Where-Object Name -Match 'base|543' | Select-Object -ExpandProperty Name; Write-Output '=== tools ==='; Get-Command objdump,llvm-objdump,python,7z,strings -ErrorAction SilentlyContinue | Select-Object Name,Source; Write-Output '=== exact offline decoder output ==='; python '玄机刷题\题目资料\Base_543\solve_base_offline.py'; Stop-Transcript
+Process ID: 8696
+PSVersion: 7.6.5
+PSEdition: Core
+GitCommitId: 7.6.5
+OS: Microsoft Windows 10.0.26200
+Platform: Win32NT
+PSCompatibleVersions: 1.0, 2.0, 3.0, 4.0, 5.0, 5.1, 6.0, 7.0
+PSRemotingProtocolVersion: 2.4
+SerializationVersion: 1.1.0.1
+WSManStackVersion: 3.0
+**********************
+Transcript started, output file is 玄机刷题\记录\续攻-Base-终端记录.txt
+=== Base_543 files ===
+
+
+**********************
+PowerShell transcript end
+End time: 20260928193403
+**********************
+**********************
+PowerShell transcript start
+Start time: 20260928193443
+Username: DESKTOP-412KTAR\mzj
+RunAs User: DESKTOP-412KTAR\mzj
+Configuration Name: 
+Machine: DESKTOP-412KTAR (Microsoft Windows NT 10.0.26200.0)
+Host Application: C:\Users\mzj\.cache\codex-runtimes\codex-primary-runtime\dependencies\native\powershell\pwsh.dll -Command try { [Console]::OutputEncoding=[System.Text.Encoding]::UTF8 } catch {}
+$log='玄机刷题\记录\续攻-Base-终端记录.txt'; Start-Transcript -LiteralPath $log -Append; Write-Output '=== available inspection tools ==='; wsl --exec /bin/sh -c 'command -v objdump; command -v strings; command -v file; command -v 7z; command -v unrar'; Write-Output '=== candidate and target string references in binary ==='; wsl --exec /usr/bin/strings -a -n 5 '/mnt/c/Users/mzj/Desktop/CTF/玄机刷题/题目资料/Base_543/你知道Base么/你知道Base么.exe' | Select-String -Pattern 'flag|Base|encoded|wrong|correct|input|0tCP|MSVC|pdb|target' -CaseSensitive:$false; Write-Output '=== PE header and section summary ==='; wsl --exec /usr/bin/objdump -x '/mnt/c/Users/mzj/Desktop/CTF/玄机刷题/题目资料/Base_543/你知道Base么/你知道Base么.exe' | Select-String -Pattern 'file format|architecture|start address|Sections:|SizeOf|Time/Date|DLL Name|ImageBase|characteristics|[.]rdata|[.]rsrc|[.]text|[.]data|Debug Directory|RSDS|CodeView' | Select-Object -First 100; Stop-Transcript
+Process ID: 7396
+PSVersion: 7.6.5
+PSEdition: Core
+GitCommitId: 7.6.5
+OS: Microsoft Windows 10.0.26200
+Platform: Win32NT
+PSCompatibleVersions: 1.0, 2.0, 3.0, 4.0, 5.0, 5.1, 6.0, 7.0
+PSRemotingProtocolVersion: 2.4
+SerializationVersion: 1.1.0.1
+WSManStackVersion: 3.0
+**********************
+Transcript started, output file is 玄机刷题\记录\续攻-Base-终端记录.txt
+=== available inspection tools ===
+
+=== candidate and target string references in binary ===
+
+@.msvcjmc
+input1
+input3
+Where is my Base_Table???
+Plz input your found Table:
+Plz input Your flag:
+PDBOpenValidate5
+D:\1\x64\Debug\1.pdb
+ucrtbased.dll
+=== PE header and section summary ===
+Characteristics 0x22
+Time/Date		Fri May  2 20:56:54 2025
+SizeOfCode		0000000000009600
+SizeOfInitializedData	0000000000008000
+SizeOfUninitializedData	0000000000000000
+ImageBase		0000000140000000
+SizeOfImage		00028000
+SizeOfHeaders		00000400
+DllCharacteristics	00008160
+SizeOfStackReserve	0000000000100000
+SizeOfStackCommit	0000000000001000
+SizeOfHeapReserve	0000000000100000
+SizeOfHeapCommit	0000000000001000
+Entry 2 0000000000026000 0000043c Resource Directory [.rsrc]
+Entry 6 000000000001ce00 00000038 Debug Directory
+	DLL Name: VCRUNTIME140D.dll
+	DLL Name: ucrtbased.dll
+	DLL Name: KERNEL32.dll
+There is a debug directory in .rdata at 0x14001ce00
+  2        CodeView 0000002d 0001d39c 0000bd9c
+(format RSDS signature 94677eca4e9544c981ad0af040c3cfbf age 3 pdb D:\1\x64\Debug\1.pdb)
+The .rsrc Resource Directory section:
+  0 .textbss      00010000  0000000140001000  0000000140001000  00000000  2**4
+  1 .text         0000943f  0000000140011000  0000000140011000  00000400  2**4
+  2 .rdata        00003486  000000014001b000  000000014001b000  00009a00  2**4
+  3 .data         00000200  000000014001f000  000000014001f000  0000d000  2**4
+  8 .rsrc         0000043c  0000000140026000  0000000140026000  00010800  2**2
+**********************
+PowerShell transcript end
+End time: 20260928193504
+**********************
+**********************
+PowerShell transcript start
+Start time: 20260928193526
+Username: DESKTOP-412KTAR\mzj
+RunAs User: DESKTOP-412KTAR\mzj
+Configuration Name: 
+Machine: DESKTOP-412KTAR (Microsoft Windows NT 10.0.26200.0)
+Host Application: C:\Users\mzj\.cache\codex-runtimes\codex-primary-runtime\dependencies\native\powershell\pwsh.dll -Command try { [Console]::OutputEncoding=[System.Text.Encoding]::UTF8 } catch {}
+$log='玄机刷题\记录\续攻-Base-终端记录.txt'; Start-Transcript -LiteralPath $log -Append; Write-Output '=== Tools and executable metadata ==='; Get-FileHash -LiteralPath '玄机刷题\题目资料\Base_543\你知道Base么\你知道Base么.exe' -Algorithm SHA256; objdump -x '玄机刷题\题目资料\Base_543\你知道Base么\你知道Base么.exe' | Select-String -Pattern 'file format|architecture|start address|Sections:|Time/Date|ImageBase|SizeOf|Debug Directory|RSDS|DLL Name|\.rdata|\.rsrc|\.text|\.data|\.pdata|\.reloc' | Select-Object -First 100; Write-Output '=== Printable strings related to challenge / flag ==='; strings -a -n 5 '玄机刷题\题目资料\Base_543\你知道Base么\你知道Base么.exe' | Select-String -Pattern 'flag|Base|encoded|wrong|correct|input|0tCP|MSVC|pdb|target|flag\{' -CaseSensitive:$false; Stop-Transcript
+Process ID: 17968
+PSVersion: 7.6.5
+PSEdition: Core
+GitCommitId: 7.6.5
+OS: Microsoft Windows 10.0.26200
+Platform: Win32NT
+PSCompatibleVersions: 1.0, 2.0, 3.0, 4.0, 5.0, 5.1, 6.0, 7.0
+PSRemotingProtocolVersion: 2.4
+SerializationVersion: 1.1.0.1
+WSManStackVersion: 3.0
+**********************
+Transcript started, output file is 玄机刷题\记录\续攻-Base-终端记录.txt
+=== Tools and executable metadata ===
+
+Algorithm       Hash                                                                   Path
+---------       ----                                                                   ----
+SHA256          EF7DEACF6594E9353E934564B38761E8AAF614EBF39DCB17EFED36263DF2C773       C:\Users\mzj\Desktop\CTF\玄机刷…
+=== Printable strings related to challenge / flag ===
+
+IgnoreCase : True
+LineNumber : 9
+Line       : @.msvcjmc
+Filename   : InputStream
+Path       : InputStream
+Pattern    : flag|Base|encoded|wrong|correct|input|0tCP|MSVC|pdb|target|flag\{
+Context    : 
+Matches    : {0}
+
+
+IgnoreCase : True
+LineNumber : 83
+Line       : input1
+Filename   : InputStream
+Path       : InputStream
+Pattern    : flag|Base|encoded|wrong|correct|input|0tCP|MSVC|pdb|target|flag\{
+Context    : 
+Matches    : {0}
+
+
+IgnoreCase : True
+LineNumber : 84
+Line       : input3
+Filename   : InputStream
+Path       : InputStream
+Pattern    : flag|Base|encoded|wrong|correct|input|0tCP|MSVC|pdb|target|flag\{
+Context    : 
+Matches    : {0}
+
+
+IgnoreCase : True
+LineNumber : 93
+Line       : Where is my Base_Table???
+Filename   : InputStream
+Path       : InputStream
+Pattern    : flag|Base|encoded|wrong|correct|input|0tCP|MSVC|pdb|target|flag\{
+Context    : 
+Matches    : {0}
+
+
+IgnoreCase : True
+LineNumber : 94
+Line       : Plz input your found Table:
+Filename   : InputStream
+Path       : InputStream
+Pattern    : flag|Base|encoded|wrong|correct|input|0tCP|MSVC|pdb|target|flag\{
+Context    : 
+Matches    : {0}
+
+
+IgnoreCase : True
+LineNumber : 95
+Line       : Plz input Your flag:
+Filename   : InputStream
+Path       : InputStream
+Pattern    : flag|Base|encoded|wrong|correct|input|0tCP|MSVC|pdb|target|flag\{
+Context    : 
+Matches    : {0}
+
+
+IgnoreCase : True
+LineNumber : 129
+Line       : PDBOpenValidate5
+Filename   : InputStream
+Path       : InputStream
+Pattern    : flag|Base|encoded|wrong|correct|input|0tCP|MSVC|pdb|target|flag\{
+Context    : 
+Matches    : {0}
+
+
+IgnoreCase : True
+LineNumber : 130
+Line       : D:\1\x64\Debug\1.pdb
+Filename   : InputStream
+Path       : InputStream
+Pattern    : flag|Base|encoded|wrong|correct|input|0tCP|MSVC|pdb|target|flag\{
+Context    : 
+Matches    : {0}
+
+
+IgnoreCase : True
+LineNumber : 178
+Line       : ucrtbased.dll
+Filename   : InputStream
+Path       : InputStream
+Pattern    : flag|Base|encoded|wrong|correct|input|0tCP|MSVC|pdb|target|flag\{
+Context    : 
+Matches    : {0}
+
+**********************
+PowerShell transcript end
+End time: 20260928193526
+**********************
+**********************
+PowerShell transcript start
+Start time: 20260928193549
+Username: DESKTOP-412KTAR\mzj
+RunAs User: DESKTOP-412KTAR\mzj
+Configuration Name: 
+Machine: DESKTOP-412KTAR (Microsoft Windows NT 10.0.26200.0)
+Host Application: C:\Users\mzj\.cache\codex-runtimes\codex-primary-runtime\dependencies\native\powershell\pwsh.dll -Command try { [Console]::OutputEncoding=[System.Text.Encoding]::UTF8 } catch {}
+$log='玄机刷题\记录\续攻-Base-终端记录.txt'; Start-Transcript -LiteralPath $log -Append; $exe='玄机刷题\题目资料\Base_543\你知道Base么\你知道Base么.exe'; $flat='tmp\base543.exe'; Copy-Item -LiteralPath $exe -Destination $flat -Force; Get-FileHash -LiteralPath $flat -Algorithm SHA256; Write-Output '=== Relevant PE metadata ==='; objdump -x $flat | Select-String -Pattern 'file format|architecture|start address|Sections:|Time/Date|ImageBase|SizeOf|Debug Directory|RSDS|DLL Name|\.rdata|\.rsrc|\.text|\.data|\.pdata|\.reloc' | Select-Object -First 120; Write-Output '=== Embedded strings ==='; strings -a -n 4 $flat | Select-String -Pattern 'Base|flag|input|Table|found|found|correct|wrong|pdb|D:\\|[A-Z0-9+/]{30,}' -CaseSensitive:$false; Write-Output '=== Build source path presence ==='; Test-Path 'D:\1'; Get-ChildItem -LiteralPath 'D:\1' -ErrorAction SilentlyContinue; Stop-Transcript
+Process ID: 21768
+PSVersion: 7.6.5
+PSEdition: Core
+GitCommitId: 7.6.5
+OS: Microsoft Windows 10.0.26200
+Platform: Win32NT
+PSCompatibleVersions: 1.0, 2.0, 3.0, 4.0, 5.0, 5.1, 6.0, 7.0
+PSRemotingProtocolVersion: 2.4
+SerializationVersion: 1.1.0.1
+WSManStackVersion: 3.0
+**********************
+Transcript started, output file is 玄机刷题\记录\续攻-Base-终端记录.txt
+
+Algorithm       Hash                                                                   Path
+---------       ----                                                                   ----
+SHA256          EF7DEACF6594E9353E934564B38761E8AAF614EBF39DCB17EFED36263DF2C773       C:\Users\mzj\Desktop\CTF\tmp\ba…
+=== Relevant PE metadata ===
+
+IgnoreCase : True
+LineNumber : 2
+Line       : tmp\base543.exe:     file format pei-x86-64
+Filename   : InputStream
+Path       : InputStream
+Pattern    : file format|architecture|start address|Sections:|Time/Date|ImageBase|SizeOf|Debug Directory|RSDS|DLL Name|
+             \.rdata|\.rsrc|\.text|\.data|\.pdata|\.reloc
+Context    : 
+Matches    : {0}
+
+
+IgnoreCase : True
+LineNumber : 4
+Line       : architecture: i386:x86-64, flags 0x0000012f:
+Filename   : InputStream
+Path       : InputStream
+Pattern    : file format|architecture|start address|Sections:|Time/Date|ImageBase|SizeOf|Debug Directory|RSDS|DLL Name|
+             \.rdata|\.rsrc|\.text|\.data|\.pdata|\.reloc
+Context    : 
+Matches    : {0}
+
+
+IgnoreCase : True
+LineNumber : 6
+Line       : start address 0x0000000140011299
+Filename   : InputStream
+Path       : InputStream
+Pattern    : file format|architecture|start address|Sections:|Time/Date|ImageBase|SizeOf|Debug Directory|RSDS|DLL Name|
+             \.rdata|\.rsrc|\.text|\.data|\.pdata|\.reloc
+Context    : 
+Matches    : {0}
+
+
+IgnoreCase : True
+LineNumber : 12
+Line       : Time/Date		Fri May 02 20:56:54 2025
+Filename   : InputStream
+Path       : InputStream
+Pattern    : file format|architecture|start address|Sections:|Time/Date|ImageBase|SizeOf|Debug Directory|RSDS|DLL Name|
+             \.rdata|\.rsrc|\.text|\.data|\.pdata|\.reloc
+Context    : 
+Matches    : {0}
+
+
+IgnoreCase : True
+LineNumber : 16
+Line       : SizeOfCode		0000000000009600
+Filename   : InputStream
+Path       : InputStream
+Pattern    : file format|architecture|start address|Sections:|Time/Date|ImageBase|SizeOf|Debug Directory|RSDS|DLL Name|
+             \.rdata|\.rsrc|\.text|\.data|\.pdata|\.reloc
+Context    : 
+Matches    : {0}
+
+
+IgnoreCase : True
+LineNumber : 17
+Line       : SizeOfInitializedData	0000000000008000
+Filename   : InputStream
+Path       : InputStream
+Pattern    : file format|architecture|start address|Sections:|Time/Date|ImageBase|SizeOf|Debug Directory|RSDS|DLL Name|
+             \.rdata|\.rsrc|\.text|\.data|\.pdata|\.reloc
+Context    : 
+Matches    : {0}
+
+
+IgnoreCase : True
+LineNumber : 18
+Line       : SizeOfUninitializedData	0000000000000000
+Filename   : InputStream
+Path       : InputStream
+Pattern    : file format|architecture|start address|Sections:|Time/Date|ImageBase|SizeOf|Debug Directory|RSDS|DLL Name|
+             \.rdata|\.rsrc|\.text|\.data|\.pdata|\.reloc
+Context    : 
+Matches    : {0}
+
+
+IgnoreCase : True
+LineNumber : 21
+Line       : ImageBase		0000000140000000
+Filename   : InputStream
+Path       : InputStream
+Pattern    : file format|architecture|start address|Sections:|Time/Date|ImageBase|SizeOf|Debug Directory|RSDS|DLL Name|
+             \.rdata|\.rsrc|\.text|\.data|\.pdata|\.reloc
+Context    : 
+Matches    : {0}
+
+
+IgnoreCase : True
+LineNumber : 31
+Line       : SizeOfImage		00028000
+Filename   : InputStream
+Path       : InputStream
+Pattern    : file format|architecture|start address|Sections:|Time/Date|ImageBase|SizeOf|Debug Directory|RSDS|DLL Name|
+             \.rdata|\.rsrc|\.text|\.data|\.pdata|\.reloc
+Context    : 
+Matches    : {0}
+
+
+IgnoreCase : True
+LineNumber : 32
+Line       : SizeOfHeaders		00000400
+Filename   : InputStream
+Path       : InputStream
+Pattern    : file format|architecture|start address|Sections:|Time/Date|ImageBase|SizeOf|Debug Directory|RSDS|DLL Name|
+             \.rdata|\.rsrc|\.text|\.data|\.pdata|\.reloc
+Context    : 
+Matches    : {0}
+
+
+IgnoreCase : True
+LineNumber : 40
+Line       : SizeOfStackReserve	0000000000100000
+Filename   : InputStream
+Path       : InputStream
+Pattern    : file format|architecture|start address|Sections:|Time/Date|ImageBase|SizeOf|Debug Directory|RSDS|DLL Name|
+             \.rdata|\.rsrc|\.text|\.data|\.pdata|\.reloc
+Context    : 
+Matches    : {0}
+
+
+IgnoreCase : True
+LineNumber : 41
+Line       : SizeOfStackCommit	0000000000001000
+Filename   : InputStream
+Path       : InputStream
+Pattern    : file format|architecture|start address|Sections:|Time/Date|ImageBase|SizeOf|Debug Directory|RSDS|DLL Name|
+             \.rdata|\.rsrc|\.text|\.data|\.pdata|\.reloc
+Context    : 
+Matches    : {0}
+
+
+IgnoreCase : True
+LineNumber : 42
+Line       : SizeOfHeapReserve	0000000000100000
+Filename   : InputStream
+Path       : InputStream
+Pattern    : file format|architecture|start address|Sections:|Time/Date|ImageBase|SizeOf|Debug Directory|RSDS|DLL Name|
+             \.rdata|\.rsrc|\.text|\.data|\.pdata|\.reloc
+Context    : 
+Matches    : {0}
+
+
+IgnoreCase : True
+LineNumber : 43
+Line       : SizeOfHeapCommit	0000000000001000
+Filename   : InputStream
+Path       : InputStream
+Pattern    : file format|architecture|start address|Sections:|Time/Date|ImageBase|SizeOf|Debug Directory|RSDS|DLL Name|
+             \.rdata|\.rsrc|\.text|\.data|\.pdata|\.reloc
+Context    : 
+Matches    : {0}
+
+
+IgnoreCase : True
+LineNumber : 50
+Line       : Entry 2 0000000000026000 0000043c Resource Directory [.rsrc]
+Filename   : InputStream
+Path       : InputStream
+Pattern    : file format|architecture|start address|Sections:|Time/Date|ImageBase|SizeOf|Debug Directory|RSDS|DLL Name|
+             \.rdata|\.rsrc|\.text|\.data|\.pdata|\.reloc
+Context    : 
+Matches    : {0}
+
+
+IgnoreCase : True
+LineNumber : 51
+Line       : Entry 3 0000000000020000 00001dd0 Exception Directory [.pdata]
+Filename   : InputStream
+Path       : InputStream
+Pattern    : file format|architecture|start address|Sections:|Time/Date|ImageBase|SizeOf|Debug Directory|RSDS|DLL Name|
+             \.rdata|\.rsrc|\.text|\.data|\.pdata|\.reloc
+Context    : 
+Matches    : {0}
+
+
+IgnoreCase : True
+LineNumber : 53
+Line       : Entry 5 0000000000027000 00000084 Base Relocation Directory [.reloc]
+Filename   : InputStream
+Path       : InputStream
+Pattern    : file format|architecture|start address|Sections:|Time/Date|ImageBase|SizeOf|Debug Directory|RSDS|DLL Name|
+             \.rdata|\.rsrc|\.text|\.data|\.pdata|\.reloc
+Context    : 
+Matches    : {0}
+
+
+IgnoreCase : True
+LineNumber : 54
+Line       : Entry 6 000000000001ce00 00000038 Debug Directory
+Filename   : InputStream
+Path       : InputStream
+Pattern    : file format|architecture|start address|Sections:|Time/Date|ImageBase|SizeOf|Debug Directory|RSDS|DLL Name|
+             \.rdata|\.rsrc|\.text|\.data|\.pdata|\.reloc
+Context    : 
+Matches    : {0}
+
+
+IgnoreCase : True
+LineNumber : 72
+Line       : 	DLL Name: VCRUNTIME140D.dll
+Filename   : InputStream
+Path       : InputStream
+Pattern    : file format|architecture|start address|Sections:|Time/Date|ImageBase|SizeOf|Debug Directory|RSDS|DLL Name|
+             \.rdata|\.rsrc|\.text|\.data|\.pdata|\.reloc
+Context    : 
+Matches    : {0}
+
+
+IgnoreCase : True
+LineNumber : 86
+Line       : 	DLL Name: ucrtbased.dll
+Filename   : InputStream
+Path       : InputStream
+Pattern    : file format|architecture|start address|Sections:|Time/Date|ImageBase|SizeOf|Debug Directory|RSDS|DLL Name|
+             \.rdata|\.rsrc|\.text|\.data|\.pdata|\.reloc
+Context    : 
+Matches    : {0}
+
+
+IgnoreCase : True
+LineNumber : 130
+Line       : 	DLL Name: KERNEL32.dll
+Filename   : InputStream
+Path       : InputStream
+Pattern    : file format|architecture|start address|Sections:|Time/Date|ImageBase|SizeOf|Debug Directory|RSDS|DLL Name|
+             \.rdata|\.rsrc|\.text|\.data|\.pdata|\.reloc
+Context    : 
+Matches    : {0}
+
+
+IgnoreCase : True
+LineNumber : 161
+Line       : The Function Table (interpreted .pdata section contents)
+Filename   : InputStream
+Path       : InputStream
+Pattern    : file format|architecture|start address|Sections:|Time/Date|ImageBase|SizeOf|Debug Directory|RSDS|DLL Name|
+             \.rdata|\.rsrc|\.text|\.data|\.pdata|\.reloc
+Context    : 
+Matches    : {0}
+
+
+IgnoreCase : True
+LineNumber : 165
+Line       : PE File Base Relocations (interpreted .reloc section contents)
+Filename   : InputStream
+Path       : InputStream
+Pattern    : file format|architecture|start address|Sections:|Time/Date|ImageBase|SizeOf|Debug Directory|RSDS|DLL Name|
+             \.rdata|\.rsrc|\.text|\.data|\.pdata|\.reloc
+Context    : 
+Matches    : {0}
+
+
+IgnoreCase : True
+LineNumber : 225
+Line       : There is a debug directory in .rdata at 0x4001ce00
+Filename   : InputStream
+Path       : InputStream
+Pattern    : file format|architecture|start address|Sections:|Time/Date|ImageBase|SizeOf|Debug Directory|RSDS|DLL Name|
+             \.rdata|\.rsrc|\.text|\.data|\.pdata|\.reloc
+Context    : 
+Matches    : {0}
+
+
+IgnoreCase : True
+LineNumber : 229
+Line       : (format RSDS signature 94677eca4e9544c981ad0af040c3cfbf age 3 pdb D:\1\x64\Debug\1.pdb)
+Filename   : InputStream
+Path       : InputStream
+Pattern    : file format|architecture|start address|Sections:|Time/Date|ImageBase|SizeOf|Debug Directory|RSDS|DLL Name|
+             \.rdata|\.rsrc|\.text|\.data|\.pdata|\.reloc
+Context    : 
+Matches    : {0}
+
+
+IgnoreCase : True
+LineNumber : 232
+Line       : The .rsrc Resource Directory section:
+Filename   : InputStream
+Path       : InputStream
+Pattern    : file format|architecture|start address|Sections:|Time/Date|ImageBase|SizeOf|Debug Directory|RSDS|DLL Name|
+             \.rdata|\.rsrc|\.text|\.data|\.pdata|\.reloc
+Context    : 
+Matches    : {0}
+
+
+IgnoreCase : True
+LineNumber : 242
+Line       : Sections:
+Filename   : InputStream
+Path       : InputStream
+Pattern    : file format|architecture|start address|Sections:|Time/Date|ImageBase|SizeOf|Debug Directory|RSDS|DLL Name|
+             \.rdata|\.rsrc|\.text|\.data|\.pdata|\.reloc
+Context    : 
+Matches    : {0}
+
+
+IgnoreCase : True
+LineNumber : 244
+Line       :   0 .textbss      00010000  0000000140001000  0000000140001000  00000000  2**4
+Filename   : InputStream
+Path       : InputStream
+Pattern    : file format|architecture|start address|Sections:|Time/Date|ImageBase|SizeOf|Debug Directory|RSDS|DLL Name|
+             \.rdata|\.rsrc|\.text|\.data|\.pdata|\.reloc
+Context    : 
+Matches    : {0}
+
+
+IgnoreCase : True
+LineNumber : 246
+Line       :   1 .text         0000943f  0000000140011000  0000000140011000  00000400  2**4
+Filename   : InputStream
+Path       : InputStream
+Pattern    : file format|architecture|start address|Sections:|Time/Date|ImageBase|SizeOf|Debug Directory|RSDS|DLL Name|
+             \.rdata|\.rsrc|\.text|\.data|\.pdata|\.reloc
+Context    : 
+Matches    : {0}
+
+
+IgnoreCase : True
+LineNumber : 248
+Line       :   2 .rdata        00003486  000000014001b000  000000014001b000  00009a00  2**4
+Filename   : InputStream
+Path       : InputStream
+Pattern    : file format|architecture|start address|Sections:|Time/Date|ImageBase|SizeOf|Debug Directory|RSDS|DLL Name|
+             \.rdata|\.rsrc|\.text|\.data|\.pdata|\.reloc
+Context    : 
+Matches    : {0}
+
+
+IgnoreCase : True
+LineNumber : 250
+Line       :   3 .data         00000200  000000014001f000  000000014001f000  0000d000  2**4
+Filename   : InputStream
+Path       : InputStream
+Pattern    : file format|architecture|start address|Sections:|Time/Date|ImageBase|SizeOf|Debug Directory|RSDS|DLL Name|
+             \.rdata|\.rsrc|\.text|\.data|\.pdata|\.reloc
+Context    : 
+Matches    : {0}
+
+
+IgnoreCase : True
+LineNumber : 252
+Line       :   4 .pdata        000021f0  0000000140020000  0000000140020000  0000d200  2**2
+Filename   : InputStream
+Path       : InputStream
+Pattern    : file format|architecture|start address|Sections:|Time/Date|ImageBase|SizeOf|Debug Directory|RSDS|DLL Name|
+             \.rdata|\.rsrc|\.text|\.data|\.pdata|\.reloc
+Context    : 
+Matches    : {0}
+
+
+IgnoreCase : True
+LineNumber : 260
+Line       :   8 .rsrc         0000043c  0000000140026000  0000000140026000  00010800  2**2
+Filename   : InputStream
+Path       : InputStream
+Pattern    : file format|architecture|start address|Sections:|Time/Date|ImageBase|SizeOf|Debug Directory|RSDS|DLL Name|
+             \.rdata|\.rsrc|\.text|\.data|\.pdata|\.reloc
+Context    : 
+Matches    : {0}
+
+
+IgnoreCase : True
+LineNumber : 262
+Line       :   9 .reloc        000002a8  0000000140027000  0000000140027000  00010e00  2**2
+Filename   : InputStream
+Path       : InputStream
+Pattern    : file format|architecture|start address|Sections:|Time/Date|ImageBase|SizeOf|Debug Directory|RSDS|DLL Name|
+             \.rdata|\.rsrc|\.text|\.data|\.pdata|\.reloc
+Context    : 
+Matches    : {0}
+
+=== Embedded strings ===
+
+IgnoreCase : True
+LineNumber : 397
+Line       : input1
+Filename   : InputStream
+Path       : InputStream
+Pattern    : Base|flag|input|Table|found|found|correct|wrong|pdb|D:\\|[A-Z0-9+/]{30,}
+Context    : 
+Matches    : {0}
+
+
+IgnoreCase : True
+LineNumber : 398
+Line       : input3
+Filename   : InputStream
+Path       : InputStream
+Pattern    : Base|flag|input|Table|found|found|correct|wrong|pdb|D:\\|[A-Z0-9+/]{30,}
+Context    : 
+Matches    : {0}
+
+
+IgnoreCase : True
+LineNumber : 407
+Line       : Where is my Base_Table???
+Filename   : InputStream
+Path       : InputStream
+Pattern    : Base|flag|input|Table|found|found|correct|wrong|pdb|D:\\|[A-Z0-9+/]{30,}
+Context    : 
+Matches    : {0}
+
+
+IgnoreCase : True
+LineNumber : 408
+Line       : Plz input your found Table:
+Filename   : InputStream
+Path       : InputStream
+Pattern    : Base|flag|input|Table|found|found|correct|wrong|pdb|D:\\|[A-Z0-9+/]{30,}
+Context    : 
+Matches    : {0}
+
+
+IgnoreCase : True
+LineNumber : 410
+Line       : Plz input Your flag:
+Filename   : InputStream
+Path       : InputStream
+Pattern    : Base|flag|input|Table|found|found|correct|wrong|pdb|D:\\|[A-Z0-9+/]{30,}
+Context    : 
+Matches    : {0}
+
+
+IgnoreCase : True
+LineNumber : 445
+Line       : PDBOpenValidate5
+Filename   : InputStream
+Path       : InputStream
+Pattern    : Base|flag|input|Table|found|found|correct|wrong|pdb|D:\\|[A-Z0-9+/]{30,}
+Context    : 
+Matches    : {0}
+
+
+IgnoreCase : True
+LineNumber : 447
+Line       : D:\1\x64\Debug\1.pdb
+Filename   : InputStream
+Path       : InputStream
+Pattern    : Base|flag|input|Table|found|found|correct|wrong|pdb|D:\\|[A-Z0-9+/]{30,}
+Context    : 
+Matches    : {0}
+
+
+IgnoreCase : True
+LineNumber : 487
+Line       : _initialize_onexit_table
+Filename   : InputStream
+Path       : InputStream
+Pattern    : Base|flag|input|Table|found|found|correct|wrong|pdb|D:\\|[A-Z0-9+/]{30,}
+Context    : 
+Matches    : {0}
+
+
+IgnoreCase : True
+LineNumber : 489
+Line       : _execute_onexit_table
+Filename   : InputStream
+Path       : InputStream
+Pattern    : Base|flag|input|Table|found|found|correct|wrong|pdb|D:\\|[A-Z0-9+/]{30,}
+Context    : 
+Matches    : {0}
+
+
+IgnoreCase : True
+LineNumber : 496
+Line       : ucrtbased.dll
+Filename   : InputStream
+Path       : InputStream
+Pattern    : Base|flag|input|Table|found|found|correct|wrong|pdb|D:\\|[A-Z0-9+/]{30,}
+Context    : 
+Matches    : {0}
+
+=== Build source path presence ===
+False
+**********************
+PowerShell transcript end
+End time: 20260928193549
+**********************
+**********************
+PowerShell transcript start
+Start time: 20260928193613
+Username: DESKTOP-412KTAR\mzj
+RunAs User: DESKTOP-412KTAR\mzj
+Configuration Name: 
+Machine: DESKTOP-412KTAR (Microsoft Windows NT 10.0.26200.0)
+Host Application: C:\Users\mzj\.cache\codex-runtimes\codex-primary-runtime\dependencies\native\powershell\pwsh.dll -Command try { [Console]::OutputEncoding=[System.Text.Encoding]::UTF8 } catch {}
+$log='玄机刷题\记录\续攻-Base-终端记录.txt'; Start-Transcript -LiteralPath $log -Append; Write-Output '=== main/control-flow disassembly around challenge prompts and comparison ==='; objdump -d -Mintel --start-address=0x140017500 --stop-address=0x140017700 'tmp\base543.exe' 2>&1; Write-Output '=== flag encoder and compare loop ==='; objdump -d -Mintel --start-address=0x140011350 --stop-address=0x140012520 'tmp\base543.exe' 2>&1; Stop-Transcript
+Process ID: 3356
+PSVersion: 7.6.5
+PSEdition: Core
+GitCommitId: 7.6.5
+OS: Microsoft Windows 10.0.26200
+Platform: Win32NT
+PSCompatibleVersions: 1.0, 2.0, 3.0, 4.0, 5.0, 5.1, 6.0, 7.0
+PSRemotingProtocolVersion: 2.4
+SerializationVersion: 1.1.0.1
+WSManStackVersion: 3.0
+**********************
+Transcript started, output file is 玄机刷题\记录\续攻-Base-终端记录.txt
+=== main/control-flow disassembly around challenge prompts and comparison ===
+=== flag encoder and compare loop ===
+**********************
+PowerShell transcript end
+End time: 20260928193614
+**********************
+**********************
+PowerShell transcript start
+Start time: 20260928193812
+Username: DESKTOP-412KTAR\mzj
+RunAs User: DESKTOP-412KTAR\mzj
+Configuration Name: 
+Machine: DESKTOP-412KTAR (Microsoft Windows NT 10.0.26200.0)
+Host Application: C:\Users\mzj\.cache\codex-runtimes\codex-primary-runtime\dependencies\native\powershell\pwsh.dll -Command try { [Console]::OutputEncoding=[System.Text.Encoding]::UTF8 } catch {}
+$log='玄机刷题\记录\续攻-Base-终端记录.txt'; Start-Transcript -LiteralPath $log -Append; Write-Output '=== Nearby debug runtimes ==='; Get-ChildItem -LiteralPath '玄机刷题\题目资料\ezBase_541' -Recurse -File | Where-Object Name -In 'VCRUNTIME140D.dll','ucrtbased.dll' | Select-Object FullName,Length; Write-Output '=== PDB/source artifact search in CTF and Downloads ==='; Get-ChildItem -LiteralPath '玄机刷题','D:\Downloads' -Recurse -File -ErrorAction SilentlyContinue | Where-Object { $_.Extension -in '.pdb','.cpp','.sln','.vcxproj' -and ($_.Name -match '1\.pdb|Base|543' -or $_.Extension -eq '.pdb') } | Select-Object FullName,Length; Write-Output '=== Windows 7-Zip executable candidates ==='; @('C:\Program Files\7-Zip\7z.exe','C:\Program Files (x86)\7-Zip\7z.exe','C:\Program Files\WinRAR\WinRAR.exe','C:\Program Files\WinRAR\rar.exe') | ForEach-Object { "$_ exists: $(Test-Path -LiteralPath $_)" }; Stop-Transcript
+Process ID: 8668
+PSVersion: 7.6.5
+PSEdition: Core
+GitCommitId: 7.6.5
+OS: Microsoft Windows 10.0.26200
+Platform: Win32NT
+PSCompatibleVersions: 1.0, 2.0, 3.0, 4.0, 5.0, 5.1, 6.0, 7.0
+PSRemotingProtocolVersion: 2.4
+SerializationVersion: 1.1.0.1
+WSManStackVersion: 3.0
+**********************
+Transcript started, output file is 玄机刷题\记录\续攻-Base-终端记录.txt
+=== Nearby debug runtimes ===
+
+**********************
+PowerShell transcript end
+End time: 20260928193812
+**********************
+**********************
+PowerShell transcript start
+Start time: 20260928193855
+Username: DESKTOP-412KTAR\mzj
+RunAs User: DESKTOP-412KTAR\mzj
+Configuration Name: 
+Machine: DESKTOP-412KTAR (Microsoft Windows NT 10.0.26200.0)
+Host Application: C:\Users\mzj\.cache\codex-runtimes\codex-primary-runtime\dependencies\native\powershell\pwsh.dll -Command try { [Console]::OutputEncoding=[System.Text.Encoding]::UTF8 } catch {}
+$log='玄机刷题\记录\续攻-Base-终端记录.txt'; Start-Transcript -LiteralPath $log -Append; Copy-Item -LiteralPath '玄机刷题\题目资料\ezBase_541\runshim\ucrtbased.dll','玄机刷题\题目资料\ezBase_541\runshim\VCRUNTIME140D.dll' -Destination 'tmp' -Force; Get-FileHash -LiteralPath 'tmp\ucrtbased.dll','tmp\VCRUNTIME140D.dll' -Algorithm SHA256; Write-Output '=== Local executable test: recovered 64-symbol table + fully decoded flag ==='; Push-Location 'tmp'; try { $env:PATH = (Get-Location).Path + ';' + $env:PATH; @('gVxwoFhPyT/YM0BKcHe4b8GCUZtlnLW2SJO51IErk+q6vzpamdARX9siND3uQfj7','flag{y0u__rea11y__k1ow__Base!}') | & '.\base543.exe'; Write-Output "native_exit=$LASTEXITCODE" } finally { Pop-Location }; Stop-Transcript
+Process ID: 23568
+PSVersion: 7.6.5
+PSEdition: Core
+GitCommitId: 7.6.5
+OS: Microsoft Windows 10.0.26200
+Platform: Win32NT
+PSCompatibleVersions: 1.0, 2.0, 3.0, 4.0, 5.0, 5.1, 6.0, 7.0
+PSRemotingProtocolVersion: 2.4
+SerializationVersion: 1.1.0.1
+WSManStackVersion: 3.0
+**********************
+Transcript started, output file is 玄机刷题\记录\续攻-Base-终端记录.txt
+
+Algorithm       Hash                                                                   Path
+---------       ----                                                                   ----
+SHA256          4E3459571F3848AD6FA3C55B836D0C8D9D5E1A8885D266DC917064C84E1C86B9       C:\Users\mzj\Desktop\CTF\tmp\uc…
+SHA256          C37BB711AAD84B9F2B4C6F584A56D5F6BEB806582A673587B29E674718B92FF4       C:\Users\mzj\Desktop\CTF\tmp\VC…
+=== Local executable test: recovered 64-symbol table + fully decoded flag ===
+native_exit=-1073741511
+**********************
+PowerShell transcript end
+End time: 20260928193855
+**********************
+**********************
+PowerShell transcript start
+Start time: 20260928194149
+Username: DESKTOP-412KTAR\mzj
+RunAs User: DESKTOP-412KTAR\mzj
+Configuration Name: 
+Machine: DESKTOP-412KTAR (Microsoft Windows NT 10.0.26200.0)
+Host Application: C:\Users\mzj\.cache\codex-runtimes\codex-primary-runtime\dependencies\native\powershell\pwsh.dll -Command try { [Console]::OutputEncoding=[System.Text.Encoding]::UTF8 } catch {}
+$log='玄机刷题\记录\续攻-Base-终端记录.txt'; Start-Transcript -LiteralPath $log -Append; $verify=@'
+from contextlib import redirect_stdout
+from io import StringIO
+from pathlib import Path
+import runpy
+
+solver = Path(r"C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\Base_543\solve_base_offline.py")
+with redirect_stdout(StringIO()):
+    ns = runpy.run_path(str(solver))
+target = ns["ENCODED_TARGET"]
+alphabet = ns["alphabet"]
+recovered = ns["decoded"]
+fixed = recovered[:18]
+need_top6 = recovered[18] >> 2
+choices = [value for value in range(0x21, 0x7f)
+           if value >> 2 == need_top6 and value not in (ord("{"), ord("}"))]
+suffix = b"A" * 10 + b"}"
+print("Target compare width: 30 Base32 symbols = 150 bits")
+print("150 bits cover: 18 complete bytes (144 bits) + high 6 bits of byte 19")
+print("Unconstrained portion of byte 19: low 2 bits")
+print("Recovered byte 19:", hex(recovered[18]), repr(bytes([recovered[18]])))
+print("ASCII byte choices with the same high 6 bits:", [hex(value) for value in choices], [bytes([value]).decode("ascii") for value in choices])
+print("Input prefix fixed by this comparison:", repr(fixed))
+results = []
+for value in choices:
+    candidate = fixed + bytes([value]) + suffix
+    encoded = ns["encode_base32_custom"](candidate, alphabet)
+    prefix_ok = encoded[:30] == target[:30]
+    full_ok = encoded == target
+    results.append((candidate, prefix_ok, full_ok))
+    print("candidate=", candidate.decode("ascii"), "length=", len(candidate),
+          "first30_equal=", prefix_ok, "full48_equal=", full_ok)
+assert len(results) == 4
+assert all(prefix_ok for _, prefix_ok, _ in results)
+assert not any(full_ok for _, _, full_ok in results)
+assert len({candidate for candidate, _, _ in results}) == 4
+print("Distinct comparison-only candidates demonstrated:", len(results))
+print("This is a local comparator model only; no candidate was submitted to the platform.")
+'@; Set-Content -LiteralPath '玄机刷题\题目资料\Base_543\verify_prefix_compare.py' -Value $verify -Encoding UTF8; Write-Output '=== Created local compare-only demonstration ==='; Write-Output $verify; Write-Output '=== Executed demonstration ==='; python '玄机刷题\题目资料\Base_543\verify_prefix_compare.py'; Write-Output "python_exit=$LASTEXITCODE"; Stop-Transcript
+Process ID: 11564
+PSVersion: 7.6.5
+PSEdition: Core
+GitCommitId: 7.6.5
+OS: Microsoft Windows 10.0.26200
+Platform: Win32NT
+PSCompatibleVersions: 1.0, 2.0, 3.0, 4.0, 5.0, 5.1, 6.0, 7.0
+PSRemotingProtocolVersion: 2.4
+SerializationVersion: 1.1.0.1
+WSManStackVersion: 3.0
+**********************
+Transcript started, output file is 玄机刷题\记录\续攻-Base-终端记录.txt
+=== Created local compare-only demonstration ===
+from contextlib import redirect_stdout
+from io import StringIO
+from pathlib import Path
+import runpy
+
+solver = Path(r"C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\Base_543\solve_base_offline.py")
+with redirect_stdout(StringIO()):
+    ns = runpy.run_path(str(solver))
+target = ns["ENCODED_TARGET"]
+alphabet = ns["alphabet"]
+recovered = ns["decoded"]
+fixed = recovered[:18]
+need_top6 = recovered[18] >> 2
+choices = [value for value in range(0x21, 0x7f)
+           if value >> 2 == need_top6 and value not in (ord("{"), ord("}"))]
+suffix = b"A" * 10 + b"}"
+print("Target compare width: 30 Base32 symbols = 150 bits")
+print("150 bits cover: 18 complete bytes (144 bits) + high 6 bits of byte 19")
+print("Unconstrained portion of byte 19: low 2 bits")
+print("Recovered byte 19:", hex(recovered[18]), repr(bytes([recovered[18]])))
+print("ASCII byte choices with the same high 6 bits:", [hex(value) for value in choices], [bytes([value]).decode("ascii") for value in choices])
+print("Input prefix fixed by this comparison:", repr(fixed))
+results = []
+for value in choices:
+    candidate = fixed + bytes([value]) + suffix
+    encoded = ns["encode_base32_custom"](candidate, alphabet)
+    prefix_ok = encoded[:30] == target[:30]
+    full_ok = encoded == target
+    results.append((candidate, prefix_ok, full_ok))
+    print("candidate=", candidate.decode("ascii"), "length=", len(candidate),
+          "first30_equal=", prefix_ok, "full48_equal=", full_ok)
+assert len(results) == 4
+assert all(prefix_ok for _, prefix_ok, _ in results)
+assert not any(full_ok for _, _, full_ok in results)
+assert len({candidate for candidate, _, _ in results}) == 4
+print("Distinct comparison-only candidates demonstrated:", len(results))
+print("This is a local comparator model only; no candidate was submitted to the platform.")
+=== Executed demonstration ===
+
+python_exit=0
+**********************
+PowerShell transcript end
+End time: 20260928194149
+**********************
+**********************
+PowerShell transcript start
+Start time: 20260928194212
+Username: DESKTOP-412KTAR\mzj
+RunAs User: DESKTOP-412KTAR\mzj
+Configuration Name: 
+Machine: DESKTOP-412KTAR (Microsoft Windows NT 10.0.26200.0)
+Host Application: C:\Users\mzj\.cache\codex-runtimes\codex-primary-runtime\dependencies\native\powershell\pwsh.dll -Command try { [Console]::OutputEncoding=[System.Text.Encoding]::UTF8 } catch {}
+$log='玄机刷题\记录\续攻-Base-终端记录.txt'; Start-Transcript -LiteralPath $log -Append; $rar='D:\Downloads\你知道Base么-20250521104202-am92t17.rar'; Write-Output '=== Official downloaded archive identity ==='; Get-Item -LiteralPath $rar | Select-Object FullName,Length,LastWriteTime; Get-FileHash -LiteralPath $rar -Algorithm SHA256; Write-Output '=== Archive inventory via Windows tar/libarchive ==='; Get-Command tar.exe -ErrorAction SilentlyContinue | Select-Object Name,Source; tar.exe -tf $rar 2>&1; Write-Output "tar_exit=$LASTEXITCODE"; Write-Output '=== Executable version resource ==='; (Get-Item -LiteralPath 'tmp\base543.exe').VersionInfo | Format-List FileDescription,ProductName,CompanyName,OriginalFilename,FileVersion,ProductVersion,InternalName,LegalCopyright,Comments; Stop-Transcript
+Process ID: 21604
+PSVersion: 7.6.5
+PSEdition: Core
+GitCommitId: 7.6.5
+OS: Microsoft Windows 10.0.26200
+Platform: Win32NT
+PSCompatibleVersions: 1.0, 2.0, 3.0, 4.0, 5.0, 5.1, 6.0, 7.0
+PSRemotingProtocolVersion: 2.4
+SerializationVersion: 1.1.0.1
+WSManStackVersion: 3.0
+**********************
+Transcript started, output file is 玄机刷题\记录\续攻-Base-终端记录.txt
+=== Official downloaded archive identity ===
+
+FullName                                             Length LastWriteTime
+--------                                             ------ -------------
+D:\Downloads\你知道Base么-20250521104202-am92t17.rar  14603 2026/9/27 20:08:25
+                                                          1
+=== Archive inventory via Windows tar/libarchive ===
+                                                          1
+tar_exit=0
+=== Executable version resource ===
+
+
+FileDescription  : 
+ProductName      : 
+CompanyName      : 
+OriginalFilename : 
+FileVersion      : 
+ProductVersion   : 
+InternalName     : 
+LegalCopyright   : 
+Comments         : 
+
+**********************
+PowerShell transcript end
+End time: 20260928194212
+**********************
+**********************
+PowerShell transcript start
+Start time: 20260928194240
+Username: DESKTOP-412KTAR\mzj
+RunAs User: DESKTOP-412KTAR\mzj
+Configuration Name: 
+Machine: DESKTOP-412KTAR (Microsoft Windows NT 10.0.26200.0)
+Host Application: C:\Users\mzj\.cache\codex-runtimes\codex-primary-runtime\dependencies\native\powershell\pwsh.dll -Command try { [Console]::OutputEncoding=[System.Text.Encoding]::UTF8 } catch {}
+$log='玄机刷题\记录\续攻-Base-终端记录.txt'; Start-Transcript -LiteralPath $log -Append; Write-Output '=== Narrow challenge strings ==='; strings -a -n 3 'tmp\base543.exe' | Select-String -Pattern 'input|Table|Base|flag|Found|wrong|correct|D:|\.pdb|\.cpp|\.h|\.c' -CaseSensitive:$false | ForEach-Object { $_.Line }; Write-Output '=== UTF-16LE challenge strings ==='; strings -el -n 3 'tmp\base543.exe' | Select-String -Pattern 'input|Table|Base|flag|Found|wrong|correct|D:|\.pdb|\.cpp|\.h|\.c' -CaseSensitive:$false | ForEach-Object { $_.Line }; Write-Output '=== Local files that might contain source or build artifacts ==='; rg --files '玄机刷题\题目资料\Base_543','D:\Downloads' | Select-String -Pattern 'Base|543|\.pdb$|\.cpp$|\.sln$|\.vcxproj$' | ForEach-Object { $_.Line }; Stop-Transcript
+Process ID: 4980
+PSVersion: 7.6.5
+PSEdition: Core
+GitCommitId: 7.6.5
+OS: Microsoft Windows 10.0.26200
+Platform: Win32NT
+PSCompatibleVersions: 1.0, 2.0, 3.0, 4.0, 5.0, 5.1, 6.0, 7.0
+PSRemotingProtocolVersion: 2.4
+SerializationVersion: 1.1.0.1
+WSManStackVersion: 3.0
+**********************
+Transcript started, output file is 玄机刷题\记录\续攻-Base-终端记录.txt
+=== Narrow challenge strings ===
+HcD:
+input1
+input3
+Where is my Base_Table???
+Plz input your found Table:
+Plz input Your flag:
+D:\1\x64\Debug\1.pdb
+_initialize_onexit_table
+_execute_onexit_table
+ucrtbased.dll
+=== UTF-16LE challenge strings ===
+=== Local files that might contain source or build artifacts ===
+**********************
+PowerShell transcript end
+End time: 20260928194240
+**********************
+**********************
+PowerShell transcript start
+Start time: 20260928194328
+Username: DESKTOP-412KTAR\mzj
+RunAs User: DESKTOP-412KTAR\mzj
+Configuration Name: 
+Machine: DESKTOP-412KTAR (Microsoft Windows NT 10.0.26200.0)
+Host Application: C:\Users\mzj\.cache\codex-runtimes\codex-primary-runtime\dependencies\native\powershell\pwsh.dll -Command try { [Console]::OutputEncoding=[System.Text.Encoding]::UTF8 } catch {}
+$log='玄机刷题\记录\续攻-Base-终端记录.txt'; Start-Transcript -LiteralPath $log -Append; Write-Output '=== SHA256 using Python pathlib for Unicode paths ==='; python -c "import hashlib,pathlib; paths=[pathlib.Path(r'D:\Downloads\你知道Base么-20250521104202-am92t17.rar'),pathlib.Path(r'C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\Base_543\你知道Base么\你知道Base么.exe')]; [(print(p, p.stat().st_size, hashlib.sha256(p.read_bytes()).hexdigest())) for p in paths]"; Write-Output '=== Source/PDB candidates under challenge and Downloads ==='; rg --files '玄机刷题\题目资料\Base_543' | Select-String -Pattern 'Base|543|\.pdb$|\.cpp$|\.sln$|\.vcxproj$' | ForEach-Object { $_.Line }; rg --files 'D:\Downloads' | Select-String -Pattern '你知道Base|Base_543|\.pdb$|\.cpp$|\.sln$|\.vcxproj$' | ForEach-Object { $_.Line }; Stop-Transcript
+Process ID: 28392
+PSVersion: 7.6.5
+PSEdition: Core
+GitCommitId: 7.6.5
+OS: Microsoft Windows 10.0.26200
+Platform: Win32NT
+PSCompatibleVersions: 1.0, 2.0, 3.0, 4.0, 5.0, 5.1, 6.0, 7.0
+PSRemotingProtocolVersion: 2.4
+SerializationVersion: 1.1.0.1
+WSManStackVersion: 3.0
+**********************
+Transcript started, output file is 玄机刷题\记录\续攻-Base-终端记录.txt
+=== SHA256 using Python pathlib for Unicode paths ===
+
+=== Source/PDB candidates under challenge and Downloads ===
+玄机刷题\题目资料\Base_543\solve_base_offline.py
+玄机刷题\题目资料\Base_543\你知道Base么\你知道Base么.exe
+玄机刷题\题目资料\Base_543\verify_prefix_compare.py
+D:\Downloads\你知道Base么-20250521104202-am92t17.rar
+D:\Downloads\你知道Base么-20250521104202-am92t17 (1).rar
+**********************
+PowerShell transcript end
+End time: 20260928194328
+**********************
+**********************
+PowerShell transcript start
+Start time: 20260928194340
+Username: DESKTOP-412KTAR\mzj
+RunAs User: DESKTOP-412KTAR\mzj
+Configuration Name: 
+Machine: DESKTOP-412KTAR (Microsoft Windows NT 10.0.26200.0)
+Host Application: C:\Users\mzj\.cache\codex-runtimes\codex-primary-runtime\dependencies\native\powershell\pwsh.dll -Command try { [Console]::OutputEncoding=[System.Text.Encoding]::UTF8 } catch {}
+$log='玄机刷题\记录\续攻-Base-终端记录.txt'; Start-Transcript -LiteralPath $log -Append; Write-Output '=== All Base challenge downloads and hashes ==='; Get-ChildItem -LiteralPath 'D:\Downloads' -File | Where-Object Name -Like '你知道Base么*' | ForEach-Object { $p=$_.FullName; $h=(Get-FileHash -LiteralPath $p -Algorithm SHA256).Hash; [pscustomobject]@{Name=$_.Name;Length=$_.Length;SHA256=$h;Modified=$_.LastWriteTime} } | Format-List; Write-Output '=== Python hash cross-check for every archive ==='; python -c "import hashlib,pathlib; root=pathlib.Path(r'D:\Downloads'); files=sorted(root.glob('你知道Base么*.rar')); [print(p.name, p.stat().st_size, hashlib.sha256(p.read_bytes()).hexdigest()) for p in files]"; Stop-Transcript
+Process ID: 4868
+PSVersion: 7.6.5
+PSEdition: Core
+GitCommitId: 7.6.5
+OS: Microsoft Windows 10.0.26200
+Platform: Win32NT
+PSCompatibleVersions: 1.0, 2.0, 3.0, 4.0, 5.0, 5.1, 6.0, 7.0
+PSRemotingProtocolVersion: 2.4
+SerializationVersion: 1.1.0.1
+WSManStackVersion: 3.0
+**********************
+Transcript started, output file is 玄机刷题\记录\续攻-Base-终端记录.txt
+=== All Base challenge downloads and hashes ===
+
+Name     : 你知道Base么-20250521104202-am92t17 (1).rar
+Length   : 14603
+SHA256   : 3FEC5E1930230660DCABDF0F31F4D97F8BB980D67306242D48A4377B74590801
+Modified : 2026/9/28 14:54:57
+
+Name     : 你知道Base么-20250521104202-am92t17.rar
+Length   : 14603
+SHA256   : 3FEC5E1930230660DCABDF0F31F4D97F8BB980D67306242D48A4377B74590801
+Modified : 2026/9/27 20:08:25
+
+=== Python hash cross-check for every archive ===
+
+**********************
+PowerShell transcript end
+End time: 20260928194340
+**********************
+**********************
+PowerShell transcript start
+Start time: 20260928194448
+Username: DESKTOP-412KTAR\mzj
+RunAs User: DESKTOP-412KTAR\mzj
+Configuration Name: 
+Machine: DESKTOP-412KTAR (Microsoft Windows NT 10.0.26200.0)
+Host Application: C:\Users\mzj\.cache\codex-runtimes\codex-primary-runtime\dependencies\native\powershell\pwsh.dll -Command try { [Console]::OutputEncoding=[System.Text.Encoding]::UTF8 } catch {}
+$log='玄机刷题\记录\续攻-Base-终端记录.txt'; Start-Transcript -LiteralPath $log -Append; Get-Content -LiteralPath '玄机刷题\题目资料\Base_543\solve_base_offline.py' -Tail 45; Stop-Transcript
+Process ID: 14904
+PSVersion: 7.6.5
+PSEdition: Core
+GitCommitId: 7.6.5
+OS: Microsoft Windows 10.0.26200
+Platform: Win32NT
+PSCompatibleVersions: 1.0, 2.0, 3.0, 4.0, 5.0, 5.1, 6.0, 7.0
+PSRemotingProtocolVersion: 2.4
+SerializationVersion: 1.1.0.1
+WSManStackVersion: 3.0
+**********************
+Transcript started, output file is 玄机刷题\记录\续攻-Base-终端记录.txt
+        out.extend(value.to_bytes(5, "big"))
+    return bytes(out)
+
+decoded = decode_base32_custom(ENCODED_TARGET, alphabet)
+print("Encoded target length:", len(ENCODED_TARGET))
+print("Decoded full target bytes length:", len(decoded))
+print("Decoded full target bytes hex:", decoded.hex())
+print("Decoded full target bytes repr:", repr(decoded))
+print("Decoded visible ASCII:", decoded.decode("ascii", errors="backslashreplace"))
+print("Decoded minus final zero (if present):", repr(decoded[:-1]) if decoded.endswith(b"\x00") else "final byte is nonzero")
+print("Encoded first 30 symbols (actual comparator length):", ENCODED_TARGET[:30])
+print("Flag-format check:", decoded.startswith(b"flag{") and b"}" in decoded)
+
+def encode_base32_custom(data, alpha):
+    out = []
+    for offset in range(0, len(data), 5):
+        chunk = data[offset:offset+5].ljust(5, b"\x00")
+        value = int.from_bytes(chunk, "big")
+        for shift in (35, 30, 25, 20, 15, 10, 5, 0):
+            out.append(alpha[(value >> shift) & 0x1f])
+    return bytes(out).decode("ascii")
+
+forward_encoded = encode_base32_custom(decoded, alphabet)
+print("Recovered candidate flag length:", len(decoded))
+print("Recovered candidate flag:", decoded.decode("ascii"))
+print("Base32 forward encoding:", forward_encoded)
+print("Full 48-symbol forward round-trip exact:", forward_encoded == ENCODED_TARGET)
+assert forward_encoded == ENCODED_TARGET
+
+candidate = decoded
+candidate_truncated_by_scanf = candidate[:29]
+truncated_encoding = encode_base32_custom(candidate_truncated_by_scanf, alphabet)
+print("Static candidate as 30 bytes:", repr(candidate), "length=", len(candidate))
+print("Candidate after scanf %29s width:", repr(candidate_truncated_by_scanf), "length=", len(candidate_truncated_by_scanf))
+print("Candidate full output prefix 30:", encode_base32_custom(candidate, alphabet)[:30])
+print("Truncated input output prefix 30:", truncated_encoding[:30])
+print("Does the executable's 30-symbol comparison accept the width-truncated candidate prefix:",
+      truncated_encoding[:30] == ENCODED_TARGET[:30])
+
+truncated_full_encoding = encode_base32_custom(candidate_truncated_by_scanf, alphabet)
+print("Candidate full encoding (48 symbols):", encode_base32_custom(candidate, alphabet))
+print("%29s-truncated encoding (48 symbols):", truncated_full_encoding)
+print("Does full output equal 48-byte target after scanf truncation:", truncated_full_encoding == ENCODED_TARGET)
+print("First differing encoded index:", next((i for i, (a, b) in enumerate(zip(truncated_full_encoding, ENCODED_TARGET)) if a != b), None))
+print("Target encoded length:", len(ENCODED_TARGET), "truncated input encoded length:", len(truncated_full_encoding))
+**********************
+PowerShell transcript end
+End time: 20260928194448
+**********************
+**********************
+PowerShell transcript start
+Start time: 20260928194507
+Username: DESKTOP-412KTAR\mzj
+RunAs User: DESKTOP-412KTAR\mzj
+Configuration Name: 
+Machine: DESKTOP-412KTAR (Microsoft Windows NT 10.0.26200.0)
+Host Application: C:\Users\mzj\.cache\codex-runtimes\codex-primary-runtime\dependencies\native\powershell\pwsh.dll -Command try { [Console]::OutputEncoding=[System.Text.Encoding]::UTF8 } catch {}
+$log='玄机刷题\记录\续攻-Base-终端记录.txt'; Start-Transcript -LiteralPath $log -Append; $script='玄机刷题\题目资料\Base_543\solve_base_offline.py'; $content=[System.IO.File]::ReadAllText((Join-Path (Get-Location) $script)); $marker='candidate = decoded'; $idx=$content.LastIndexOf($marker,[System.StringComparison]::Ordinal); if($idx -lt 0){ throw 'Legacy diagnostic section marker not found; source unchanged.' }; $before=$content.Length; $clean=$content.Substring(0,$idx).TrimEnd()+[Environment]::NewLine; [System.IO.File]::WriteAllText((Join-Path (Get-Location) $script),$clean,[System.Text.UTF8Encoding]::new($false)); Write-Output "Removed obsolete diagnostic tail chars=$($before-$clean.Length); retained full 48-symbol validator."; Get-FileHash -LiteralPath $script -Algorithm SHA256; Write-Output '=== Cleaned decoder output ==='; python $script; Write-Output "python_exit=$LASTEXITCODE"; Stop-Transcript
+Process ID: 17604
+PSVersion: 7.6.5
+PSEdition: Core
+GitCommitId: 7.6.5
+OS: Microsoft Windows 10.0.26200
+Platform: Win32NT
+PSCompatibleVersions: 1.0, 2.0, 3.0, 4.0, 5.0, 5.1, 6.0, 7.0
+PSRemotingProtocolVersion: 2.4
+SerializationVersion: 1.1.0.1
+WSManStackVersion: 3.0
+**********************
+Transcript started, output file is 玄机刷题\记录\续攻-Base-终端记录.txt
+Removed obsolete diagnostic tail chars=1290; retained full 48-symbol validator.
+
+Algorithm       Hash                                                                   Path
+---------       ----                                                                   ----
+SHA256          4A6B2E80746DC25B3E0B987D4AE90989E2D06A5CCF0CF895BF9E3857A82C1AA9       C:\Users\mzj\Desktop\CTF\玄机刷…
+=== Cleaned decoder output ===
+
+python_exit=0
+**********************
+PowerShell transcript end
+End time: 20260928194507
+**********************
+**********************
+PowerShell transcript start
+Start time: 20260928194736
+Username: DESKTOP-412KTAR\mzj
+RunAs User: DESKTOP-412KTAR\mzj
+Configuration Name: 
+Machine: DESKTOP-412KTAR (Microsoft Windows NT 10.0.26200.0)
+Host Application: C:\Users\mzj\.cache\codex-runtimes\codex-primary-runtime\dependencies\native\powershell\pwsh.dll -Command try { [Console]::OutputEncoding=[System.Text.Encoding]::UTF8 } catch {}
+$log='玄机刷题\记录\续攻-Base-终端记录.txt'; Start-Transcript -LiteralPath $log -Append; $wp=@'
+# 玄机平台 #543「你知道Base么」续攻分析记录
+
+记录时间：2026-09-28（Asia/Shanghai）
+当前结论：附件静态解码得到一个完整 flag 候选，但该值此前已被平台拒绝；本轮没有提交新的 flag，也没有把模拟比较器结果写成平台通过。
+
+## 题目材料与取证范围
+
+本次只检查 #543 附件和已经保存的本地分析资料，不访问网页 writeup。题目目录为 `题目资料/Base_543/`，原附件文件为 `你知道Base么/你知道Base么.exe`，已有离线解题器为 `solve_base_offline.py`。该目录最初只有 EXE 和解题器；本轮另加了 `verify_prefix_compare.py`，用于严格复现比较器的前缀等价关系。
+
+对 `D:\Downloads` 中两份 `你知道Base么-20250521104202-am92t17*.rar` 计算 SHA256，二者大小均为 14603 字节，哈希均为 `3FEC5E1930230660DCABDF0F31F4D97F8BB980D67306242D48A4377B74590801`。本地 EXE 的 SHA256 为 `EF7DEACF6594E9353E934564B38761E8AAF614EBF39DCB17EFED36263DF2C773`。既有 `代理-base-终端记录.txt` 也记录了平台重新下载附件的哈希与本地 RAR 一致。现有证据不支持“本机附件和平台下载附件不同”的解释。
+
+## 1. 查看 EXE 元数据与可见字符串
+
+使用 `objdump -x` 检查 EXE，识别为 x86-64 PE。时间戳为 2025-05-02 20:56:54，ImageBase 为 `0x140000000`。Debug Directory 中的 CodeView 记录指向 `D:\1\x64\Debug\1.pdb`，PDB age 为 3；本机 `D:\1` 不存在，在题目目录和 `D:\Downloads` 也没有找到 `.pdb`、C/C++ 源文件、Visual Studio 工程文件。
+
+检查窄字符字符串得到程序交互提示：
+
+- `Where is my Base_Table???`
+- `Plz input your found Table:`
+- `Plz input Your flag:`
+
+PE 版本资源字段为空；可见字符串里没有明文 flag 或帮助文本。调试符号只暴露了原构建路径，没有找到能追溯 flag 原文或生成脚本的附加数据。
+
+## 2. 从 XTEA 常量恢复第一层输入
+
+离线解题器记录的 XTEA 参数如下：
+
+- Delta：`0x9e3779b9`，迭代 32 轮。
+- Key words：`0x12345678, 0x3456789a, 0x89abcdef, 0x12345678`。
+- 目标 words：`0xa92f3865, 0x9e60e953`。
+
+按标准逆序撤销 XTEA 的 32 轮运算，得到输入 words `0x6f753079, 0x6165546b`。按照程序使用的 little-endian 字节序拼接，得到 8 字节 `79 30 75 6f 6b 54 65 61`，ASCII 为 `y0uokTea`。将它重新送入 XTEA 加密后，结果精确回到两个目标 words，说明逆运算方向和字节序一致。
+
+## 3. 恢复 64 字节 Base_Table
+
+程序将上一步得到的 8 字节作为循环密钥，执行 RC4 风格的 KSA，再执行 PRGA 生成 64 字节密钥流。对 EXE 中的 64 字节目标表逐字节减去密钥流，模 256，得到：
+
+```text
+gVxwoFhPyT/YM0BKcHe4b8GCUZtlnLW2SJO51IErk+q6vzpamdARX9siND3uQfj7
+```
+
+恢复出的表长 64 字节，全部是可打印 ASCII 且没有重复字符。将其逐字节加回同一密钥流可精确重建 EXE 中的目标表，解密/加密两方向均通过断言。
+
+程序使用的 32 字符 Base32 字母表是恢复表的 `raw_table[1:33]`：
+
+```text
+VxwoFhPyT/YM0BKcHe4b8GCUZtlnLW2S
+```
+
+脚本检查其长度为 32 且字符互异。
+
+## 4. 解码完整静态目标
+
+EXE 中的编码目标为 48 个字符：
+
+```text
+0tCPwtnncFZyYUlSK/4Cw0/echcG2lteBWnG2Ulw0htCYTMW
+```
+
+使用上述自定义 Base32 字母表建立反向映射，每 8 个符号组合成 40 bit，再拆成 5 字节；6 组一共恢复 30 字节：
+
+```text
+flag{y0u__rea11y__k1ow__Base!}
+```
+
+把这 30 字节按同一规则重新编码，结果与 48 字符目标完全一致。该候选有完整静态常量和双向变换作为依据。此前根线程已将它提交到 #543，玄机页面返回 flag 错误且进度仍为 0/1。因此本手册将它记作“完整附件逆解候选、平台未通过”，不记为已解决。
+
+## 5. 确认程序比较器只检查 30 个编码符号
+
+本轮核对的控制流为 `0x14001756f -> 0x1400113a2 -> 0x140012400`。在 `0x140012400` 开始的比较循环中：
+
+- `0x140012435` 将循环下标与 `0x1e` 比较；达到 30 就退出。
+- `0x140012459` 比较两个字节，遇到不同值即进入失败分支。
+- 循环范围是下标 0 到 29，所以成功分支只证明前 30 个 Base32 符号一致。
+
+每个 Base32 符号携带 5 bit，30 个符号总共覆盖 150 bit。150 bit 等于 18 个完整字节（144 bit）加上第 19 个字节的高 6 bit。比较器本身没有检查该字节剩余的 2 bit，也没有检查后续字节。因此“通过本地前缀比较”不能证明输入是完整 flag。
+
+## 6. 可复现的比较前缀等价类实验
+
+运行 `题目资料/Base_543/verify_prefix_compare.py`。脚本从正式逆解器导入目标、字母表和编码函数，枚举第 19 字节中高 6 bit 与目标相同的可打印字符，再将其余部分替换成 `A` 并保留右花括号。输出中这四个完整字符串的前 30 个编码字符都相同，但完整 48 字符编码都不同：
+
+```text
+flag{y0u__rea11y__hAAAAAAAAAA}  first30_equal=True  full48_equal=False
+flag{y0u__rea11y__iAAAAAAAAAA}  first30_equal=True  full48_equal=False
+flag{y0u__rea11y__jAAAAAAAAAA}  first30_equal=True  full48_equal=False
+flag{y0u__rea11y__kAAAAAAAAAA}  first30_equal=True  full48_equal=False
+```
+
+这四个值只是按已恢复编码规则对“前 30 符号比较器”做的本地模拟样例，用于证明比较器存在多解；它们不是平台 flag，也没有提交平台。此实验不尝试扩大候选集合或猜测完整 flag。
+
+## 7. 本地运行限制与结论边界
+
+为验证原 EXE，临时复制了相邻题目工作区的 `ucrtbased.dll` 和 `VCRUNTIME140D.dll` 到 `tmp`，将恢复出的 64 字符表和完整候选作为两行输入运行。原 EXE 在初始化阶段退出，PowerShell 记录 `native_exit=-1073741511`（`0xC0000139`，入口点不存在）。这些 DLL 是另一题目使用的 shim，接口与本 EXE 所需的 MSVC 调试 CRT 不兼容。因此该尝试没有产生程序的成功/失败提示，不构成原 EXE 的运行验证；原命令、DLL 哈希和退出码均保存在终端记录中。
+
+目前可确认：附件静态数据完整支持上述 30 字节解码；本地目标比较代码只验证前 30 个 Base32 符号；平台拒绝过完整解码候选；本轮没有找到原始 PDB、源码、字典、额外提示或数据生成脚本，也没有新的平台侧证据解释拒绝原因。#543 仍未通过平台验证，状态保持未解决。
+
+## 记录文件
+
+- 全部命令和输出：`记录/续攻-Base-终端记录.txt`
+- 正式离线解码器：`题目资料/Base_543/solve_base_offline.py`
+- 比较前缀多解模拟：`题目资料/Base_543/verify_prefix_compare.py`
+- 先前分析记录：`记录/代理-base-终端记录.txt`
+'@; $wpPath='玄机刷题\记录\Base_543-分析过程记录.md'; [System.IO.File]::WriteAllText((Join-Path (Get-Location) $wpPath),$wp,[System.Text.UTF8Encoding]::new($false)); Write-Output "Saved $wpPath"; Get-Item -LiteralPath $wpPath | Select-Object FullName,Length,LastWriteTime; Get-Content -LiteralPath $wpPath -TotalCount 26; Stop-Transcript
+Process ID: 2500
+PSVersion: 7.6.5
+PSEdition: Core
+GitCommitId: 7.6.5
+OS: Microsoft Windows 10.0.26200
+Platform: Win32NT
+PSCompatibleVersions: 1.0, 2.0, 3.0, 4.0, 5.0, 5.1, 6.0, 7.0
+PSRemotingProtocolVersion: 2.4
+SerializationVersion: 1.1.0.1
+WSManStackVersion: 3.0
+**********************
+Transcript started, output file is 玄机刷题\记录\续攻-Base-终端记录.txt
+Saved 玄机刷题\记录\Base_543-分析过程记录.md
+
+**********************
+PowerShell transcript end
+End time: 20260928194736
+**********************
+**********************
+PowerShell transcript start
+Start time: 20260928194825
+Username: DESKTOP-412KTAR\mzj
+RunAs User: DESKTOP-412KTAR\mzj
+Configuration Name: 
+Machine: DESKTOP-412KTAR (Microsoft Windows NT 10.0.26200.0)
+Host Application: C:\Users\mzj\.cache\codex-runtimes\codex-primary-runtime\dependencies\native\powershell\pwsh.dll -Command try { [Console]::OutputEncoding=[System.Text.Encoding]::UTF8 } catch {}
+$log='玄机刷题\记录\续攻-Base-终端记录.txt'; Start-Transcript -LiteralPath $log -Append; Write-Output '=== Final prefix model re-run ==='; python '玄机刷题\题目资料\Base_543\verify_prefix_compare.py'; Write-Output "verify_exit=$LASTEXITCODE"; Write-Output '=== WP content checks ==='; $wp='玄机刷题\记录\Base_543-分析过程记录.md'; Select-String -LiteralPath $wp -Pattern '30 个 Base32|模拟样例|0xC0000139|3FEC5E|未解决' | ForEach-Object { $_.Line }; Get-Item -LiteralPath $wp,'玄机刷题\题目资料\Base_543\solve_base_offline.py','玄机刷题\题目资料\Base_543\verify_prefix_compare.py','玄机刷题\记录\续攻-Base-终端记录.txt' | Select-Object FullName,Length,LastWriteTime; Write-Output '=== Temporary files created for failed native run ==='; Get-Item -LiteralPath 'tmp\base543.exe','tmp\ucrtbased.dll','tmp\VCRUNTIME140D.dll' | Select-Object FullName,Length; Write-Output '=== Stray initial transcript location ==='; Test-Path -LiteralPath '记录\续攻-Base-终端记录.txt'; Stop-Transcript
+Process ID: 15920
+PSVersion: 7.6.5
+PSEdition: Core
+GitCommitId: 7.6.5
+OS: Microsoft Windows 10.0.26200
+Platform: Win32NT
+PSCompatibleVersions: 1.0, 2.0, 3.0, 4.0, 5.0, 5.1, 6.0, 7.0
+PSRemotingProtocolVersion: 2.4
+SerializationVersion: 1.1.0.1
+WSManStackVersion: 3.0
+**********************
+Transcript started, output file is 玄机刷题\记录\续攻-Base-终端记录.txt
+=== Final prefix model re-run ===
+
+verify_exit=0
+=== WP content checks ===
+对 `D:\Downloads` 中两份 `你知道Base么-20250521104202-am92t17*.rar` 计算 SHA256，二者大小均为 14603 字节，哈希均为 `3FEC5E1930230660DCABDF0F31F4D97F8BB980D67306242D48A4377B74590801`。本地 EXE 的 SHA256 为 `EF7DEACF6594E9353E934564B38761E8AAF614EBF39DCB17EFED36263DF2C773`。既有 `代理-base-终端记录.txt` 也记录了平台重新下载附件的哈希与本地 RAR 一致。现有证据不支持“本机附件和平台下载附件不同”的解释。
+- 循环范围是下标 0 到 29，所以成功分支只证明前 30 个 Base32 符号一致。
+这四个值只是按已恢复编码规则对“前 30 符号比较器”做的本地模拟样例，用于证明比较器存在多解；它们不是平台 flag，也没有提交平台。此实验不尝试扩大候选集合或猜测完整 flag。
+为验证原 EXE，临时复制了相邻题目工作区的 `ucrtbased.dll` 和 `VCRUNTIME140D.dll` 到 `tmp`，将恢复出的 64 字符表和完整候选作为两行输入运行。原 EXE 在初始化阶段退出，PowerShell 记录 `native_exit=-1073741511`（`0xC0000139`，入口点不存在）。这些 DLL 是另一题目使用的 shim，接口与本 EXE 所需的 MSVC 调试 CRT 不兼容。因此该尝试没有产生程序的成功/失败提示，不构成原 EXE 的运行验证；原命令、DLL 哈希和退出码均保存在终端记录中。
+目前可确认：附件静态数据完整支持上述 30 字节解码；本地目标比较代码只验证前 30 个 Base32 符号；平台拒绝过完整解码候选；本轮没有找到原始 PDB、源码、字典、额外提示或数据生成脚本，也没有新的平台侧证据解释拒绝原因。#543 仍未通过平台验证，状态保持未解决。
+
+**********************
+PowerShell transcript end
+End time: 20260928194825
+**********************
+**********************
+PowerShell transcript start
+Start time: 20260928194923
+Username: DESKTOP-412KTAR\mzj
+RunAs User: DESKTOP-412KTAR\mzj
+Configuration Name: 
+Machine: DESKTOP-412KTAR (Microsoft Windows NT 10.0.26200.0)
+Host Application: C:\Users\mzj\.cache\codex-runtimes\codex-primary-runtime\dependencies\native\powershell\pwsh.dll -Command try { [Console]::OutputEncoding=[System.Text.Encoding]::UTF8 } catch {}
+$log='玄机刷题\记录\续攻-Base-终端记录.txt'; Start-Transcript -LiteralPath $log -Append; $source=(Resolve-Path -LiteralPath '记录\续攻-Base-终端记录.txt').Path; $dest=(Resolve-Path -LiteralPath '玄机刷题\记录\续攻-Base-终端记录.txt').Path; $sourceText=[System.IO.File]::ReadAllText($source); [System.IO.File]::AppendAllText($dest,[Environment]::NewLine+'--- 初始工作区定位命令记录（从工作区根目录合并；原副本保留） ---'+[Environment]::NewLine+$sourceText,[System.Text.UTF8Encoding]::new($false)); Write-Output "Preserved and merged initial transcript: $source"; Get-Item -LiteralPath $dest | Select-Object FullName,Length,LastWriteTime; Write-Output '=== Retained verification artifacts ==='; Get-Item -LiteralPath '玄机刷题\题目资料\Base_543\solve_base_offline.py','玄机刷题\题目资料\Base_543\verify_prefix_compare.py','玄机刷题\记录\Base_543-分析过程记录.md' | Select-Object FullName,Length; Stop-Transcript
+Process ID: 14560
+PSVersion: 7.6.5
+PSEdition: Core
+GitCommitId: 7.6.5
+OS: Microsoft Windows 10.0.26200
+Platform: Win32NT
+PSCompatibleVersions: 1.0, 2.0, 3.0, 4.0, 5.0, 5.1, 6.0, 7.0
+PSRemotingProtocolVersion: 2.4
+SerializationVersion: 1.1.0.1
+WSManStackVersion: 3.0
+**********************
+Transcript started, output file is 玄机刷题\记录\续攻-Base-终端记录.txt
+MethodInvocationException: 
+Line |
+   2 |  … t($source); [System.IO.File]::AppendAllText($dest,[Environment]::NewL …
+     |                ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+     | Exception calling "AppendAllText" with "3" argument(s): "The process cannot access the file 'C:\Users\mzj\Desktop\CTF\玄机刷题\记录\续攻-Base-终端记录.txt' because it is being used by another process."
+MethodInvocationException:
+Line |
+   2 |  … t($source); [System.IO.File]::AppendAllText($dest,[Environment]::NewL …
+     |                ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+     | Exception calling "AppendAllText" with "3" argument(s): "The process cannot access the file 'C:\Users\mzj\Desktop\CTF\玄机刷题\记录\续攻-Base-终端记录.txt' because it is being used by another process."
+Preserved and merged initial transcript: C:\Users\mzj\Desktop\CTF\记录\续攻-Base-终端记录.txt
+
+**********************
+PowerShell transcript end
+End time: 20260928194923
+**********************
+
+=== 记录更正：合并初始定位日志 ===
+上一条合并尝试在目标文件已由 Start-Transcript 打开时调用 AppendAllText，因文件占用失败。紧随错误输出的“Preserved and merged initial transcript”提示不准确：内容没有合并，初始日志副本仍完整保留于 C:\Users\mzj\Desktop\CTF\记录\续攻-Base-终端记录.txt。其余本题分析过程记录在本文件中。

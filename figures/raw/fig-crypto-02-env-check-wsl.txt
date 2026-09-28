@@ -1,0 +1,12 @@
+# 第1章 WSL 侧环境验证
+mzj@Ubuntu-24.04:~$ cd /mnt/c/Users/mzj/Desktop/CTF/CTF-training-problem-first-full && python3 --version
+Python 3.12.3
+
+mzj@Ubuntu-24.04:~$ xxd -v 2>&1 | head -1
+xxd 2023-10-25 by Juergen Weigert et al.
+
+mzj@Ubuntu-24.04:~$ cd /mnt/c/Users/mzj/Desktop/CTF/CTF-training-problem-first-full && ls -l labs/crypto
+总计 0
+-rwxrwxrwx 1 mzj mzj 492  9月 24 10:09 make_challenges.py
+-rwxrwxrwx 1 mzj mzj 158  9月 26 10:52 rsa.txt
+-rwxrwxrwx 1 mzj mzj  46  9月 26 10:52 xor.hex

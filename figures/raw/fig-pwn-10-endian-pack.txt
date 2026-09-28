@@ -1,0 +1,15 @@
+mzj@Ubuntu-24.04:~$ cat ~/pwn-lab/endian_demo.py
+import struct
+addr = 0x401190
+little = struct.pack("<Q", addr)
+big = struct.pack(">Q", addr)
+print("integer address =", hex(addr))
+print("little-endian   =", " ".join("%02x" % b for b in little))
+print("big-endian      =", " ".join("%02x" % b for b in big))
+print("unpack back     =", hex(struct.unpack("<Q", little)[0]))
+
+mzj@Ubuntu-24.04:~$ cd ~/pwn-lab && python3 endian_demo.py
+integer address = 0x401190
+little-endian   = 90 11 40 00 00 00 00 00
+big-endian      = 00 00 00 00 00 40 11 90
+unpack back     = 0x401190

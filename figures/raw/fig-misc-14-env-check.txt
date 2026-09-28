@@ -1,0 +1,17 @@
+mzj@Ubuntu-24.04:~$ python3 --version
+Python 3.12.3
+
+mzj@Ubuntu-24.04:~$ file --version | head -n 1
+file-5.45
+
+mzj@Ubuntu-24.04:~$ xxd -v 2>&1 | head -n 1
+xxd 2023-10-25 by Juergen Weigert et al.
+
+mzj@Ubuntu-24.04:~$ unzip -v | head -n 1
+UnZip 6.00 of 20 April 2009, by Debian. Original by Info-ZIP.
+
+mzj@Ubuntu-24.04:~$ python3 -c 'import struct, zlib, base64, zipfile; print(" python3 标准库 struct/zlib/base64/zipfile 可用\)'
+  File "<string>", line 1
+    import struct, zlib, base64, zipfile; print(" python3 标准库 struct/zlib/base64/zipfile 可用\)
+                                                ^
+SyntaxError: unterminated string literal (detected at line 1)

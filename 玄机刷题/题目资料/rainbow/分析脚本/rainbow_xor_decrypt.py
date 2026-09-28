@@ -1,0 +1,21 @@
+from pathlib import Path
+import re
+p=Path(__file__).resolve().parents[1]/'附件'/'output.txt'
+text=p.read_text(encoding='ascii').strip()
+label,hextext=text.split(':',1)
+hextext=hextext.strip()
+cipher=bytes.fromhex(hextext)
+key=cipher[0]^ord('f')
+prefix=bytes(b^key for b in cipher[:5])
+plain=bytes(b^key for b in cipher)
+print('source:',p)
+print('label:',label)
+print('cipher hex chars:',len(hextext),'cipher bytes:',len(cipher))
+print('key inferred from C0 XOR expected flag prefix byte f:',f'0x{key:02x}')
+print('first five decrypted bytes:',prefix)
+print('plaintext length:',len(plain))
+print('plaintext bytes:',plain)
+print('plaintext:',plain.decode('ascii'))
+print('format check:',bool(re.fullmatch(rb'flag\{[A-Za-z0-9]+\}',plain)))
+print('body length:',len(plain)-len(b'flag{}'))
+print('body alphabet is strictly alphanumeric:',bool(re.fullmatch(rb'[A-Za-z0-9]+',plain[5:-1])))

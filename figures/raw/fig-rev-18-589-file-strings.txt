@@ -1,0 +1,16 @@
+mzj@Ubuntu-24.04:~$ cd /mnt/c/Users/mzj/Desktop/CTF/CTF-training-problem-first-full && LC_ALL=C file labs/platform/attachments/589-gate-ticket/gate_ticket
+labs/platform/attachments/589-gate-ticket/gate_ticket: ELF 64-bit LSB executable, x86-64, version 1 (SYSV), dynamically linked, interpreter /lib64/ld-linux-x86-64.so.2, for GNU/Linux 3.2.0, stripped
+
+mzj@Ubuntu-24.04:~$ cd /mnt/c/Users/mzj/Desktop/CTF/CTF-training-problem-first-full && strings -a labs/platform/attachments/589-gate-ticket/gate_ticket | tail -12
+.eh_frame_hdr
+.eh_frame
+.note.gnu.property
+.note.ABI-tag
+.init_array
+.fini_array
+.dynamic
+.got
+.got.plt
+.data
+.bss
+.comment

@@ -1,0 +1,1962 @@
+**********************
+PowerShell transcript start
+Start time: 20260928193203
+Username: DESKTOP-412KTAR\mzj
+RunAs User: DESKTOP-412KTAR\mzj
+Configuration Name: 
+Machine: DESKTOP-412KTAR (Microsoft Windows NT 10.0.26200.0)
+Host Application: C:\Users\mzj\.cache\codex-runtimes\codex-primary-runtime\dependencies\native\powershell\pwsh.dll -Command try { [Console]::OutputEncoding=[System.Text.Encoding]::UTF8 } catch {}
+$log='记录\续攻-ezBase-终端记录.txt'; Start-Transcript -LiteralPath $log -Append; Get-ChildItem -LiteralPath '题目资料' -Directory | Where-Object Name -Match 'ezBase|541|Base' | Select-Object FullName; Get-ChildItem -LiteralPath '记录' -File | Where-Object Name -Match '541|ezBase|REVERSE' | Select-Object Name,Length,LastWriteTime; Stop-Transcript
+Process ID: 24812
+PSVersion: 7.6.5
+PSEdition: Core
+GitCommitId: 7.6.5
+OS: Microsoft Windows 10.0.26200
+Platform: Win32NT
+PSCompatibleVersions: 1.0, 2.0, 3.0, 4.0, 5.0, 5.1, 6.0, 7.0
+PSRemotingProtocolVersion: 2.4
+SerializationVersion: 1.1.0.1
+WSManStackVersion: 3.0
+**********************
+Transcript started, output file is 记录\续攻-ezBase-终端记录.txt
+
+**********************
+PowerShell transcript end
+End time: 20260928193204
+**********************
+**********************
+PowerShell transcript start
+Start time: 20260928193210
+Username: DESKTOP-412KTAR\mzj
+RunAs User: DESKTOP-412KTAR\mzj
+Configuration Name: 
+Machine: DESKTOP-412KTAR (Microsoft Windows NT 10.0.26200.0)
+Host Application: C:\Users\mzj\.cache\codex-runtimes\codex-primary-runtime\dependencies\native\powershell\pwsh.dll -Command try { [Console]::OutputEncoding=[System.Text.Encoding]::UTF8 } catch {}
+$log='记录\续攻-ezBase-终端记录.txt'; Start-Transcript -LiteralPath $log -Append; Get-ChildItem -LiteralPath '题目资料\ezBase_541' -Recurse -File | Select-Object FullName,Length; Get-ChildItem -LiteralPath '记录' -File | Select-Object Name,Length | Format-Table -AutoSize; Stop-Transcript
+Process ID: 22372
+PSVersion: 7.6.5
+PSEdition: Core
+GitCommitId: 7.6.5
+OS: Microsoft Windows 10.0.26200
+Platform: Win32NT
+PSCompatibleVersions: 1.0, 2.0, 3.0, 4.0, 5.0, 5.1, 6.0, 7.0
+PSRemotingProtocolVersion: 2.4
+SerializationVersion: 1.1.0.1
+WSManStackVersion: 3.0
+**********************
+Transcript started, output file is 记录\续攻-ezBase-终端记录.txt
+
+FullName                                                                                                  Length
+--------                                                                                                  ------
+C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\ezBase_541\candidate_35byte_prefix.txt                             36
+C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\ezBase_541\candidate_36byte_flag.txt                               37
+C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\ezBase_541\check_exports.py                                      2172
+C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\ezBase_541\debug_dump.c                                          3053
+C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\ezBase_541\debug_entry.c                                         5160
+C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\ezBase_541\debug_importdump.c                                    2847
+C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\ezBase_541\debug_mem.c                                           2885
+C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\ezBase_541\debug_patch.c                                         4030
+C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\ezBase_541\debug_stack.c                                         4142
+C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\ezBase_541\decode_upx.py                                         2971
+C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\ezBase_541\parse_exports.py                                      1941
+C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\ezBase_541\runtime_import_tail.bin                              12288
+C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\ezBase_541\shim_ucrt_min.c                                        245
+C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\ezBase_541\shim_ucrt.c                                            113
+C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\ezBase_541\shim_vcr_min.c                                         250
+C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\ezBase_541\shim_vcr.c                                              98
+C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\ezBase_541\solve_ez541_final.py                                  1423
+C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\ezBase_541\ucrtbased_forward.def                                 1410
+C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\ezBase_541\unpacked_runtime.bin                                 45056
+C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\ezBase_541\vcruntime140d_forward.def                              288
+C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\ezBase_541\ezBase\ezre.exe                                       9216
+C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\ezBase_541\runshim\ezre.exe                                      9216
+C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\ezBase_541\runshim\ucrtbased.dll                                90469
+C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\ezBase_541\runshim\VCRUNTIME140D.dll                            90297
+C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\ezBase_541\分析产物\README.md                                     216
+C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\ezBase_541\分析产物\2026-09-27\_ezcode_oep.txt                   8671
+C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\ezBase_541\分析产物\2026-09-27\_ezdecode_func.txt                7746
+C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\ezBase_541\分析产物\2026-09-27\_ezdecode_output.txt               761
+C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\ezBase_541\分析产物\2026-09-27\_ezdisasm_all.txt               197774
+C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\ezBase_541\分析产物\2026-09-27\_ezexports.txt                    3629
+C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\ezBase_541\分析产物\2026-09-27\_kernelbase_exports.txt           1196
+C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\ezBase_541\工作区\README.md                                       286
+C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\ezBase_541\工作区\2026-09-27\_dumpmain.c                         3955
+C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\ezBase_541\工作区\2026-09-27\_dumpmain.exe                     271809
+C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\ezBase_541\工作区\2026-09-27\_dumpmain2.c                        3554
+C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\ezBase_541\工作区\2026-09-27\_dumpmain2.exe                    272213
+C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\ezBase_541\工作区\2026-09-27\_dumpmain3.c                        3765
+C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\ezBase_541\工作区\2026-09-27\_dumpmain3.exe                    272725
+C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\ezBase_541\工作区\2026-09-27\_ezdebug.exe                      276238
+C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\ezBase_541\工作区\2026-09-27\_ezdump.exe                       269975
+C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\ezBase_541\工作区\2026-09-27\_ezimportdump.exe                 269975
+C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\ezBase_541\工作区\2026-09-27\_ezinput.txt                          37
+C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\ezBase_541\工作区\2026-09-27\_ezmem.exe                        270712
+C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\ezBase_541\工作区\2026-09-27\_ezpatch.exe                      272119
+C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\ezBase_541\工作区\2026-09-27\_ezstack.exe                      272361
+C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\ezBase_541\工作区\2026-09-27\solve_ez541_early.py                2019
+C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\ezBase_541\工作区\2026-09-27\solve_ez541_final_snapshot.py       1425
+C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\ezBase_541\工作区\2026-09-27\minimal-runtime\ucrtbased.dll       7387
+C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\ezBase_541\工作区\2026-09-27\minimal-runtime\VCRUNTIME140D.dll   4658
+
+
+Name                                         Length
+----                                         ------
+2024铁人三项决赛-CTFRE-crazyaes-解题记录.md    9467
+2025鹏城杯-babyRSA-解题记录.md                 4156
+2026安网杯-班次邮戳-解题记录.md                6399
+2026安网杯-可疑流量分析-解题记录.md            4116
+2026安网杯-Prompt Trace-解题记录.md            5584
+班次邮戳-终端命令与输出回溯.md                10385
+代理-arkt-终端记录.txt                       138025
+代理-base-终端记录.txt                        63134
+代理-easyre-终端记录.txt                      74518
+代理-go_for_it-终端记录.txt                 1730301
+代理-hookme-终端记录.txt                     671460
+代理-note-终端记录.txt                        58949
+代理-PaluArray-终端记录.txt                   92970
+代理-PaluArray-MD5复核终端记录.txt           257885
+代理-Pixel-终端记录.txt                      115247
+代理-Rainbow-终端记录.txt                     25148
+代理-secret-终端记录.txt                     140076
+第九届XCTF-Tch3s-解题记录.md                   5506
+即随本心-解题记录.md                           7797
+可疑流量分析-终端REPL补充记录.md               5712
+限时攻关-PaluArray-终端记录.txt              118698
+限时攻关-Pixel-终端记录.txt                  151587
+项目清理终端记录.txt                          18474
+像素囚笼1-解题记录.md                         37628
+续攻-主线程终端记录.txt                       44021
+续攻-ezBase-平台状态.png                      56053
+续攻-ezBase-终端记录.txt                       2369
+续攻-hookme-终端记录.txt                       1250
+续攻-Pixel交叉检查.txt                        38419
+hookme-分析过程记录.md                         3307
+tradre-分析过程记录.md                         6680
+ui_event_append.txt                            1922
+Veiled Shell-解题记录.md                       8621
+
+**********************
+PowerShell transcript end
+End time: 20260928193210
+**********************
+**********************
+PowerShell transcript start
+Start time: 20260928193219
+Username: DESKTOP-412KTAR\mzj
+RunAs User: DESKTOP-412KTAR\mzj
+Configuration Name: 
+Machine: DESKTOP-412KTAR (Microsoft Windows NT 10.0.26200.0)
+Host Application: C:\Users\mzj\.cache\codex-runtimes\codex-primary-runtime\dependencies\native\powershell\pwsh.dll -Command try { [Console]::OutputEncoding=[System.Text.Encoding]::UTF8 } catch {}
+$log='记录\续攻-ezBase-终端记录.txt'; Start-Transcript -LiteralPath $log -Append; Get-Content -LiteralPath '题目资料\ezBase_541\solve_ez541_final.py'; Get-Content -LiteralPath '题目资料\ezBase_541\candidate_35byte_prefix.txt'; Get-Content -LiteralPath '题目资料\ezBase_541\candidate_36byte_flag.txt'; Get-Content -LiteralPath '题目资料\ezBase_541\分析产物\2026-09-27\_ezdecode_output.txt'; Get-Content -LiteralPath '题目资料\ezBase_541\分析产物\2026-09-27\_ezcode_oep.txt' -TotalCount 180; rg -n -i 'ezbase|Y0u_@R3|b45364|541' '记录' '题目资料\ezBase_541'; Stop-Transcript
+Process ID: 4748
+PSVersion: 7.6.5
+PSEdition: Core
+GitCommitId: 7.6.5
+OS: Microsoft Windows 10.0.26200
+Platform: Win32NT
+PSCompatibleVersions: 1.0, 2.0, 3.0, 4.0, 5.0, 5.1, 6.0, 7.0
+PSRemotingProtocolVersion: 2.4
+SerializationVersion: 1.1.0.1
+WSManStackVersion: 3.0
+**********************
+Transcript started, output file is 记录\续攻-ezBase-终端记录.txt
+import base64, hashlib
+from pathlib import Path
+
+target = b"iP}ui7siC`otMgA~h5o]Tg<4jPmtIvM5C~I4h644K7M~KVg="
+alphabet = b"AaBbCcDdEeFfGgHhIiJjKkLlMmNnOoPpQqRrSsTtUuVvWwXxYyZz0123456789+/"
+canonical_alphabet = b"ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/"
+plain_b64 = bytes((ch ^ 4) if ch != ord('=') else ch for ch in target)
+canonical = bytes(ord('=') if ch == ord('=') else canonical_alphabet[alphabet.index(ch)] for ch in plain_b64)
+candidate = base64.b64decode(canonical, validate=True)
+roundtrip = base64.b64encode(candidate)
+custom = bytes(ord('=') if ch == ord('=') else alphabet[canonical_alphabet.index(ch)] for ch in roundtrip)
+reproduced = bytes((ch ^ 4) if ch != ord('=') else ch for ch in custom)
+print(f"target_len={len(target)} target={target.decode()}")
+print(f"xor4_reversed={plain_b64.decode()}")
+print(f"canonical_b64={canonical.decode()}")
+print(f"decoded_len={len(candidate)} decoded_ascii={candidate.decode()}")
+print(f"encoder_roundtrip_b64={roundtrip.decode()}")
+print(f"target_roundtrip_match={reproduced == target}")
+print(f"roundtrip_diff_indices={[i for i,(x,y) in enumerate(zip(reproduced,target)) if x!=y]}")
+print(f"candidate_sha256={hashlib.sha256(candidate).hexdigest()}")
+(Path(__file__).resolve().parent / "candidate_35byte_prefix.txt").write_bytes(candidate+b"\n")
+(Path(__file__).resolve().parent / "candidate_36byte_flag.txt").write_bytes(candidate+b"}"+b"\n")
+flag{Y0u_@R3_Upx_4nd_b45364_m4st3r!
+flag{Y0u_@R3_Upx_4nd_b45364_m4st3r!}
+decoder_exception: ValueError bad back-reference off=705 outlen=65 at command=48
+source_sha256: 607bd3e8e5d7e715f7a9b819c8d5cc235c8dcc22f06a4ae77d0383e46bbddace
+source_size: 9216 src_off: 0x21d compressed_pos: 0x257 refills: 3 commands: 48
+output_len: 65 output_head_hex: 4881ecc8010000488b05fa3f000031e048898424c0c801c744b53cc801c73f8d84593006e80204b53cc801c73f8d8415cd6dfedbe335264901c73f8d8415cd6d
+output_head_ascii: b'H\x81\xec\xc8\x01\x00\x00H\x8b\x05\xfa?\x00\x001\xe0H\x89\x84$\xc0\xc8\x01\xc7D\xb5<\xc8\x01\xc7?\x8d\x84Y0\x06\xe8\x02\x04\xb5<\xc8\x01\xc7?\x8d\x84\x15\xcdm\xfe\xdb\xe35&I\x01\xc7?\x8d\x84\x15\xcdm\x89'
+contains_input_prompt: False
+visible_strings:
+output_sha256: 9c1c74fcd510bca1e23c27fd8d70e56f4d3995f5cdf370d4d2449654b4657807
+
+C:\Users\mzj\Desktop\CTF\_ezunpacked.bin:     file format binary
+
+
+Disassembly of section .data:
+
+0000000140002f00 <.data+0x1f00>:
+   140002f00:	8b 4c 24 30          	mov    ecx,DWORD PTR [rsp+0x30]
+   140002f04:	48 2b c8             	sub    rcx,rax
+   140002f07:	48 8b c1             	mov    rax,rcx
+   140002f0a:	48 3b 44 24 40       	cmp    rax,QWORD PTR [rsp+0x40]
+   140002f0f:	76 09                	jbe    0x140002f1a
+   140002f11:	c7 04 24 01 00 00 00 	mov    DWORD PTR [rsp],0x1
+   140002f18:	eb 07                	jmp    0x140002f21
+   140002f1a:	c7 04 24 00 00 00 00 	mov    DWORD PTR [rsp],0x0
+   140002f21:	8b 04 24             	mov    eax,DWORD PTR [rsp]
+   140002f24:	48 83 c4 28          	add    rsp,0x28
+   140002f28:	c3                   	ret
+   140002f29:	cc                   	int3
+   140002f2a:	cc                   	int3
+   140002f2b:	cc                   	int3
+   140002f2c:	cc                   	int3
+   140002f2d:	cc                   	int3
+   140002f2e:	cc                   	int3
+   140002f2f:	cc                   	int3
+   140002f30:	4c 89 44 24 18       	mov    QWORD PTR [rsp+0x18],r8
+   140002f35:	48 89 54 24 10       	mov    QWORD PTR [rsp+0x10],rdx
+   140002f3a:	48 89 4c 24 08       	mov    QWORD PTR [rsp+0x8],rcx
+   140002f3f:	48 83 ec 28          	sub    rsp,0x28
+   140002f43:	4c 8b 44 24 40       	mov    r8,QWORD PTR [rsp+0x40]
+   140002f48:	48 8b 54 24 38       	mov    rdx,QWORD PTR [rsp+0x38]
+   140002f4d:	48 8b 4c 24 30       	mov    rcx,QWORD PTR [rsp+0x30]
+   140002f52:	e8 69 ff ff ff       	call   0x140002ec0
+   140002f57:	85 c0                	test   eax,eax
+   140002f59:	74 0f                	je     0x140002f6a
+   140002f5b:	48 8b 4c 24 30       	mov    rcx,QWORD PTR [rsp+0x30]
+   140002f60:	e8 3b fe ff ff       	call   0x140002da0
+   140002f65:	85 c0                	test   eax,eax
+   140002f67:	74 01                	je     0x140002f6a
+   140002f69:	cc                   	int3
+   140002f6a:	48 83 c4 28          	add    rsp,0x28
+   140002f6e:	c3                   	ret
+   140002f6f:	cc                   	int3
+   140002f70:	4c 89 44 24 18       	mov    QWORD PTR [rsp+0x18],r8
+   140002f75:	48 89 54 24 10       	mov    QWORD PTR [rsp+0x10],rdx
+   140002f7a:	48 89 4c 24 08       	mov    QWORD PTR [rsp+0x8],rcx
+   140002f7f:	48 83 ec 28          	sub    rsp,0x28
+   140002f83:	4c 8b 44 24 40       	mov    r8,QWORD PTR [rsp+0x40]
+   140002f88:	48 8b 54 24 38       	mov    rdx,QWORD PTR [rsp+0x38]
+   140002f8d:	48 8b 4c 24 30       	mov    rcx,QWORD PTR [rsp+0x30]
+   140002f92:	e8 29 ff ff ff       	call   0x140002ec0
+   140002f97:	85 c0                	test   eax,eax
+   140002f99:	74 15                	je     0x140002fb0
+   140002f9b:	48 8b 4c 24 30       	mov    rcx,QWORD PTR [rsp+0x30]
+   140002fa0:	e8 fb fd ff ff       	call   0x140002da0
+   140002fa5:	85 c0                	test   eax,eax
+   140002fa7:	74 07                	je     0x140002fb0
+   140002fa9:	b9 41 00 00 00       	mov    ecx,0x41
+   140002fae:	cd 29                	int    0x29
+   140002fb0:	48 83 c4 28          	add    rsp,0x28
+   140002fb4:	c3                   	ret
+   140002fb5:	cc                   	int3
+   140002fb6:	cc                   	int3
+   140002fb7:	cc                   	int3
+   140002fb8:	cc                   	int3
+   140002fb9:	cc                   	int3
+   140002fba:	cc                   	int3
+   140002fbb:	cc                   	int3
+   140002fbc:	cc                   	int3
+   140002fbd:	cc                   	int3
+   140002fbe:	cc                   	int3
+   140002fbf:	cc                   	int3
+   140002fc0:	4c 89 44 24 18       	mov    QWORD PTR [rsp+0x18],r8
+   140002fc5:	48 89 54 24 10       	mov    QWORD PTR [rsp+0x10],rdx
+   140002fca:	48 89 4c 24 08       	mov    QWORD PTR [rsp+0x8],rcx
+   140002fcf:	c3                   	ret
+   140002fd0:	4c 89 44 24 18       	mov    QWORD PTR [rsp+0x18],r8
+   140002fd5:	48 89 54 24 10       	mov    QWORD PTR [rsp+0x10],rdx
+   140002fda:	48 89 4c 24 08       	mov    QWORD PTR [rsp+0x8],rcx
+   140002fdf:	48 83 ec 38          	sub    rsp,0x38
+   140002fe3:	4c 8b 44 24 50       	mov    r8,QWORD PTR [rsp+0x50]
+   140002fe8:	48 8b 54 24 48       	mov    rdx,QWORD PTR [rsp+0x48]
+   140002fed:	48 8b 4c 24 40       	mov    rcx,QWORD PTR [rsp+0x40]
+   140002ff2:	e8 c9 fe ff ff       	call   0x140002ec0
+   140002ff7:	85 c0                	test   eax,eax
+   140002ff9:	74 36                	je     0x140003031
+   140002ffb:	48 8b 4c 24 40       	mov    rcx,QWORD PTR [rsp+0x40]
+   140003000:	e8 9b fd ff ff       	call   0x140002da0
+   140003005:	85 c0                	test   eax,eax
+   140003007:	74 28                	je     0x140003031
+   140003009:	48 8b 05 30 26 00 00 	mov    rax,QWORD PTR [rip+0x2630]        # 0x140005640
+   140003010:	48 85 c0             	test   rax,rax
+   140003013:	74 1c                	je     0x140003031
+   140003015:	48 8b 05 24 26 00 00 	mov    rax,QWORD PTR [rip+0x2624]        # 0x140005640
+   14000301c:	48 89 44 24 20       	mov    QWORD PTR [rsp+0x20],rax
+   140003021:	48 8b 4c 24 40       	mov    rcx,QWORD PTR [rsp+0x40]
+   140003026:	48 8b 44 24 20       	mov    rax,QWORD PTR [rsp+0x20]
+   14000302b:	ff 15 df 3f 00 00    	call   QWORD PTR [rip+0x3fdf]        # 0x140007010
+   140003031:	48 83 c4 38          	add    rsp,0x38
+   140003035:	c3                   	ret
+   140003036:	cc                   	int3
+   140003037:	cc                   	int3
+   140003038:	cc                   	int3
+   140003039:	cc                   	int3
+   14000303a:	cc                   	int3
+   14000303b:	cc                   	int3
+   14000303c:	cc                   	int3
+   14000303d:	cc                   	int3
+   14000303e:	cc                   	int3
+   14000303f:	cc                   	int3
+   140003040:	40 53                	rex push rbx
+   140003042:	48 83 ec 50          	sub    rsp,0x50
+   140003046:	48 8b 05 bb 1f 00 00 	mov    rax,QWORD PTR [rip+0x1fbb]        # 0x140005008
+   14000304d:	48 33 c4             	xor    rax,rsp
+   140003050:	48 89 44 24 40       	mov    QWORD PTR [rsp+0x40],rax
+   140003055:	c7 44 24 30 00 00 00 	mov    DWORD PTR [rsp+0x30],0x0
+   14000305c:	00
+   14000305d:	c7 44 24 34 00 00 00 	mov    DWORD PTR [rsp+0x34],0x0
+   140003064:	00
+   140003065:	c7 44 24 38 00 00 00 	mov    DWORD PTR [rsp+0x38],0x0
+   14000306c:	00
+   14000306d:	33 c0                	xor    eax,eax
+   14000306f:	33 c9                	xor    ecx,ecx
+   140003071:	0f a2                	cpuid
+   140003073:	4c 8d 44 24 20       	lea    r8,[rsp+0x20]
+   140003078:	41 89 00             	mov    DWORD PTR [r8],eax
+   14000307b:	41 89 58 04          	mov    DWORD PTR [r8+0x4],ebx
+   14000307f:	41 89 48 08          	mov    DWORD PTR [r8+0x8],ecx
+   140003083:	41 89 50 0c          	mov    DWORD PTR [r8+0xc],edx
+   140003087:	b8 04 00 00 00       	mov    eax,0x4
+   14000308c:	48 6b c0 00          	imul   rax,rax,0x0
+   140003090:	8b 44 04 20          	mov    eax,DWORD PTR [rsp+rax*1+0x20]
+   140003094:	89 44 24 14          	mov    DWORD PTR [rsp+0x14],eax
+   140003098:	b8 04 00 00 00       	mov    eax,0x4
+   14000309d:	48 6b c0 01          	imul   rax,rax,0x1
+   1400030a1:	8b 44 04 20          	mov    eax,DWORD PTR [rsp+rax*1+0x20]
+   1400030a5:	35 47 65 6e 75       	xor    eax,0x756e6547
+   1400030aa:	b9 04 00 00 00       	mov    ecx,0x4
+   1400030af:	48 6b c9 03          	imul   rcx,rcx,0x3
+   1400030b3:	8b 4c 0c 20          	mov    ecx,DWORD PTR [rsp+rcx*1+0x20]
+   1400030b7:	81 f1 69 6e 65 49    	xor    ecx,0x49656e69
+   1400030bd:	0b c1                	or     eax,ecx
+   1400030bf:	b9 04 00 00 00       	mov    ecx,0x4
+   1400030c4:	48 6b c9 02          	imul   rcx,rcx,0x2
+   1400030c8:	8b 4c 0c 20          	mov    ecx,DWORD PTR [rsp+rcx*1+0x20]
+   1400030cc:	81 f1 6e 74 65 6c    	xor    ecx,0x6c65746e
+   1400030d2:	0b c1                	or     eax,ecx
+   1400030d4:	85 c0                	test   eax,eax
+   1400030d6:	75 0a                	jne    0x1400030e2
+   1400030d8:	c7 44 24 0c 01 00 00 	mov    DWORD PTR [rsp+0xc],0x1
+   1400030df:	00
+   1400030e0:	eb 08                	jmp    0x1400030ea
+   1400030e2:	c7 44 24 0c 00 00 00 	mov    DWORD PTR [rsp+0xc],0x0
+   1400030e9:	00
+   1400030ea:	0f b6 44 24 0c       	movzx  eax,BYTE PTR [rsp+0xc]
+   1400030ef:	88 04 24             	mov    BYTE PTR [rsp],al
+   1400030f2:	b8 04 00 00 00       	mov    eax,0x4
+   1400030f7:	48 6b c0 01          	imul   rax,rax,0x1
+   1400030fb:	8b 44 04 20          	mov    eax,DWORD PTR [rsp+rax*1+0x20]
+   1400030ff:	35           	xor    eax,0x68747541
+
+**********************
+PowerShell transcript end
+End time: 20260928193219
+**********************
+**********************
+PowerShell transcript start
+Start time: 20260928193241
+Username: DESKTOP-412KTAR\mzj
+RunAs User: DESKTOP-412KTAR\mzj
+Configuration Name: 
+Machine: DESKTOP-412KTAR (Microsoft Windows NT 10.0.26200.0)
+Host Application: C:\Users\mzj\.cache\codex-runtimes\codex-primary-runtime\dependencies\native\powershell\pwsh.dll -Command try { [Console]::OutputEncoding=[System.Text.Encoding]::UTF8 } catch {}
+$log='记录\续攻-ezBase-终端记录.txt'; Start-Transcript -LiteralPath $log -Append; Write-Output '=== Candidate reproduction ==='; python '题目资料\ezBase_541\solve_ez541_final.py'; Write-Output '=== Local assets / adjacent archives ==='; Get-ChildItem -LiteralPath '题目资料' -Recurse -File | Where-Object { $_.Name -match 'ezBase|541|base' -or $_.DirectoryName -match 'ezBase_541' } | Select-Object FullName,Length; Write-Output '=== Main log relevant tail ==='; Select-String -LiteralPath '记录\代理-go_for_it-终端记录.txt' -Pattern 'final #541|flag\{|Y0u_|target_len|decoded_len|encoder_roundtrip|candidate|not correct|不正确|FLAG' -Context 2,4 | Select-Object -Last 90 | ForEach-Object { $_.ToString() }; Stop-Transcript
+Process ID: 26352
+PSVersion: 7.6.5
+PSEdition: Core
+GitCommitId: 7.6.5
+OS: Microsoft Windows 10.0.26200
+Platform: Win32NT
+PSCompatibleVersions: 1.0, 2.0, 3.0, 4.0, 5.0, 5.1, 6.0, 7.0
+PSRemotingProtocolVersion: 2.4
+SerializationVersion: 1.1.0.1
+WSManStackVersion: 3.0
+**********************
+Transcript started, output file is 记录\续攻-ezBase-终端记录.txt
+=== Candidate reproduction ===
+
+=== Local assets / adjacent archives ===
+
+**********************
+PowerShell transcript end
+End time: 20260928193241
+**********************
+**********************
+PowerShell transcript start
+Start time: 20260928193312
+Username: DESKTOP-412KTAR\mzj
+RunAs User: DESKTOP-412KTAR\mzj
+Configuration Name: 
+Machine: DESKTOP-412KTAR (Microsoft Windows NT 10.0.26200.0)
+Host Application: C:\Users\mzj\.cache\codex-runtimes\codex-primary-runtime\dependencies\native\powershell\pwsh.dll -Command try { [Console]::OutputEncoding=[System.Text.Encoding]::UTF8 } catch {}
+$log='记录\续攻-ezBase-终端记录.txt'; Start-Transcript -LiteralPath $log -Append; $f='记录\代理-go_for_it-终端记录.txt'; $lines=Get-Content -LiteralPath $f; foreach($range in @(@(22490,22519),@(22557,22658))){ for($i=$range[0]-1;$i -lt [Math]::Min($range[1],$lines.Count);$i++){ '{0,6}: {1}' -f ($i+1),$lines[$i] } }; Stop-Transcript
+Process ID: 23120
+PSVersion: 7.6.5
+PSEdition: Core
+GitCommitId: 7.6.5
+OS: Microsoft Windows 10.0.26200
+Platform: Win32NT
+PSCompatibleVersions: 1.0, 2.0, 3.0, 4.0, 5.0, 5.1, 6.0, 7.0
+PSRemotingProtocolVersion: 2.4
+SerializationVersion: 1.1.0.1
+WSManStackVersion: 3.0
+**********************
+Transcript started, output file is 记录\续攻-ezBase-终端记录.txt
+ 22490: print(f"xor4_reversed={plain_b64.decode()}")
+ 22491: print(f"canonical_b64={canonical.decode()}")
+ 22492: print(f"decoded_len={len(candidate)} decoded_ascii={candidate.decode()}")
+ 22493: print(f"encoder_roundtrip_b64={roundtrip.decode()}")
+ 22494: print(f"target_roundtrip_match={reproduced == target}")
+ 22495: print(f"roundtrip_diff_indices={[i for i,(x,y) in enumerate(zip(reproduced,target)) if x!=y]}")
+ 22496: print(f"candidate_sha256={hashlib.sha256(candidate).hexdigest()}")
+ 22497: Path(r"C:\Users\mzj\Desktop\CTF\_ezcand_35.txt").write_bytes(candidate+b"\n")
+ 22498: Path(r"C:\Users\mzj\Desktop\CTF\_ezcand_36.txt").write_bytes(candidate+b"}"+b"\n")
+ 22499: === target inversion and exact round-trip result ===
+ 22500: solver_exit=0
+ 22501: === original target program with decoded 35-byte data ===
+ 22502: run35_exit=0
+ 22503: === original target program with appended closing brace (36 bytes) ===
+ 22504: run36_exit=0
+ 22505: === exact test input sizes and hashes ===
+ 22506:
+ 22507: **********************
+ 22508: PowerShell transcript end
+ 22509: End time: 20260927210142
+ 22510: **********************
+ 22511: **********************
+ 22512: PowerShell transcript start
+ 22513: Start time: 20260927210258
+ 22514: Username: DESKTOP-412KTAR\mzj
+ 22515: RunAs User: DESKTOP-412KTAR\mzj
+ 22516: Configuration Name:
+ 22517: Machine: DESKTOP-412KTAR (Microsoft Windows NT 10.0.26200.0)
+ 22518: Host Application: C:\Users\mzj\.cache\codex-runtimes\codex-primary-runtime\dependencies\native\powershell\pwsh.dll -Command try { [Console]::OutputEncoding=[System.Text.Encoding]::UTF8 } catch {}
+ 22519: $ErrorActionPreference='Continue'
+ 22557: === candidate source/input identities ===
+ 22558: sha256=352D04492A87FDFB1BED3E9BEF581363492F9D507E269964FFE6BC05DCE69B10 file=C:\Users\mzj\Desktop\CTF\_solve_ez541_final.py
+ 22559: sha256=F888E4456BAF9BFB066FEA0F693E12A419C62586C50DB1BE98E877B9B6A272A7 file=C:\Users\mzj\Desktop\CTF\_ezcand_35.txt
+ 22560: sha256=B95ACCB551AD62DFB0F0053B995047844B194886476CC46AF89802ACF464F00D file=C:\Users\mzj\Desktop\CTF\_ezcand_36.txt
+ 22561: === prompt helper disassembly excerpt ===
+ 22562:
+ 22563: >    1400014f0:	48 83 ec 58          	sub    rsp,0x58
+ 22564:      1400014f4:	4c 89 4c 24 78       	mov    QWORD PTR [rsp+0x78],r9
+ 22565:      1400014f9:	4c 89 44 24 70       	mov    QWORD PTR [rsp+0x70],r8
+ 22566:      1400014fe:	48 89 54 24 68       	mov    QWORD PTR [rsp+0x68],rdx
+ 22567:      140001503:	48 8b 05 fe 3a 00 00 	mov    rax,QWORD PTR [rip+0x3afe]        # 0x140005008
+ 22568:      14000150a:	48 31 e0             	xor    rax,rsp
+ 22569:      14000150d:	48 89 44 24 50       	mov    QWORD PTR [rsp+0x50],rax
+ 22570:      140001512:	48 89 4c 24 40       	mov    QWORD PTR [rsp+0x40],rcx
+ 22571:      140001517:	48 8d 44 24 68       	lea    rax,[rsp+0x68]
+ 22572:      14000151c:	48 89 44 24 48       	mov    QWORD PTR [rsp+0x48],rax
+ 22573:      140001521:	48 8b 44 24 48       	mov    rax,QWORD PTR [rsp+0x48]
+ 22574:      140001526:	48 89 44 24 30       	mov    QWORD PTR [rsp+0x30],rax
+ 22575:      14000152b:	48 8b 44 24 40       	mov    rax,QWORD PTR [rsp+0x40]
+ 22576:      140001530:	48 89 44 24 28       	mov    QWORD PTR [rsp+0x28],rax
+ 22577:      140001535:	48 8b 05 dc 30 00 00 	mov    rax,QWORD PTR [rip+0x30dc]        # 0x140004618
+ 22578:      14000153c:	b9 01 00 00 00       	mov    ecx,0x1
+ 22579:      140001541:	ff d0                	call   rax
+ 22580:      140001543:	48 8b 54 24 28       	mov    rdx,QWORD PTR [rsp+0x28]
+ 22581:      140001548:	4c 8b 4c 24 30       	mov    r9,QWORD PTR [rsp+0x30]
+ 22582:      14000154d:	48 89 c1             	mov    rcx,rax
+ 22583:      140001550:	31 c0                	xor    eax,eax
+ 22584:      140001552:	41 89 c0             	mov    r8d,eax
+ 22585:      140001555:	e8 56 01 00 00       	call   0x1400016b0
+ 22586:      14000155a:	89 44 24 3c          	mov    DWORD PTR [rsp+0x3c],eax
+ 22587:      14000155e:	8b 44 24 3c          	mov    eax,DWORD PTR [rsp+0x3c]
+ 22588:      140001562:	89 44 24 38          	mov    DWORD PTR [rsp+0x38],eax
+ 22589:      140001566:	48 8b 4c 24 50       	mov    rcx,QWORD PTR [rsp+0x50]
+ 22590:      14000156b:	48 31 e1             	xor    rcx,rsp
+ 22591:      14000156e:	e8 bd 01 00 00       	call   0x140001730
+ 22592:      140001573:	8b 44 24 38          	mov    eax,DWORD PTR [rsp+0x38]
+ 22593:      140001577:	48 83 c4 58          	add    rsp,0x58
+ 22594:      14000157b:	c3                   	ret
+ 22595:      14000157c:	cc                   	int3
+ 22596:      14000157d:	cc                   	int3
+ 22597:      14000157e:	cc                   	int3
+ 22598:      14000157f:	cc                   	int3
+ 22599:      140001580:	48 83 ec 48          	sub    rsp,0x48
+ 22600:      140001584:	4c 89 4c 24 40       	mov    QWORD PTR [rsp+0x40],r9
+ 22601:      140001589:	4c 89 44 24 38       	mov    QWORD PTR [rsp+0x38],r8
+ 22602:      14000158e:	48 89 54 24 30       	mov    QWORD PTR [rsp+0x30],rdx
+ 22603:      140001593:	48 89 4c 24 28       	mov    QWORD PTR [rsp+0x28],rcx
+ 22604:      140001598:	48 8b 44 24 40       	mov    rax,QWORD PTR [rsp+0x40]
+ 22605:      14000159d:	4c 8b 4c 24 38       	mov    r9,QWORD PTR [rsp+0x38]
+ 22606:      1400015a2:	4c 8b 44 24 30       	mov    r8,QWORD PTR [rsp+0x30]
+ 22607:      1400015a7:	48 8b 4c 24 28       	mov    rcx,QWORD PTR [rsp+0x28]
+ 22608:      1400015ac:	48 c7 c2 ff ff ff ff 	mov    rdx,0xffffffffffffffff
+ 22609: **********************
+ 22610: PowerShell transcript end
+ 22611: End time: 20260927210259
+ 22612: **********************
+ 22613: **********************
+ 22614: PowerShell transcript start
+ 22615: Start time: 20260927210320
+ 22616: Username: DESKTOP-412KTAR\mzj
+ 22617: RunAs User: DESKTOP-412KTAR\mzj
+ 22618: Configuration Name:
+ 22619: Machine: DESKTOP-412KTAR (Microsoft Windows NT 10.0.26200.0)
+ 22620: Host Application: C:\Users\mzj\.cache\codex-runtimes\codex-primary-runtime\dependencies\native\powershell\pwsh.dll -Command try { [Console]::OutputEncoding=[System.Text.Encoding]::UTF8 } catch {}
+ 22621: $ErrorActionPreference='Continue'
+ 22622: $log='C:\Users\mzj\Desktop\CTF\玄机刷题\记录\代理-go_for_it-终端记录.txt'
+ 22623: Start-Transcript -Path $log -Append
+ 22624: Write-Output '=== corrected byte count/hash for exact verified flag ==='
+ 22625: python -c "from pathlib import Path; import hashlib; p=Path(r'C:\Users\mzj\Desktop\CTF\_ezcand_36.txt'); d=p.read_bytes(); assert d.endswith(bytes([10])); f=d[:-1]; print('stdin_file_bytes=',len(d)); print('flag_bytes_excluding_LF=',len(f)); print('flag_ascii=',f.decode('ascii')); print('flag_hex=',f.hex()); print('flag_sha256=',hashlib.sha256(f).hexdigest()); print('stdin_sha256=',hashlib.sha256(d).hexdigest())"
+ 22626: Write-Output '=== extracted #541 files ==='
+ 22627: Get-ChildItem -LiteralPath 'C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\ezBase_541' -Recurse -File | Select-Object FullName,Length
+ 22628: Write-Output '=== extracted original binary hash ==='
+ 22629: Get-ChildItem -LiteralPath 'C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\ezBase_541' -Recurse -Filter 'ezre.exe' -File | Get-FileHash -Algorithm SHA256 | ForEach-Object { "sha256=$($_.Hash) file=$($_.Path)" }
+ 22630: Stop-Transcript
+ 22631: Process ID: 8488
+ 22632: PSVersion: 7.6.5
+ 22633: PSEdition: Core
+ 22634: GitCommitId: 7.6.5
+ 22635: OS: Microsoft Windows 10.0.26200
+ 22636: Platform: Win32NT
+ 22637: PSCompatibleVersions: 1.0, 2.0, 3.0, 4.0, 5.0, 5.1, 6.0, 7.0
+ 22638: PSRemotingProtocolVersion: 2.4
+ 22639: SerializationVersion: 1.1.0.1
+ 22640: WSManStackVersion: 3.0
+ 22641: **********************
+ 22642: Transcript started, output file is C:\Users\mzj\Desktop\CTF\玄机刷题\记录\代理-go_for_it-终端记录.txt
+ 22643: === corrected byte count/hash for exact verified flag ===
+ 22644:
+ 22645: === extracted #541 files ===
+ 22646:
+ 22647: **********************
+ 22648: PowerShell transcript end
+ 22649: End time: 20260927210320
+ 22650: **********************
+**********************
+PowerShell transcript end
+End time: 20260928193313
+**********************
+**********************
+PowerShell transcript start
+Start time: 20260928193335
+Username: DESKTOP-412KTAR\mzj
+RunAs User: DESKTOP-412KTAR\mzj
+Configuration Name: 
+Machine: DESKTOP-412KTAR (Microsoft Windows NT 10.0.26200.0)
+Host Application: C:\Users\mzj\.cache\codex-runtimes\codex-primary-runtime\dependencies\native\powershell\pwsh.dll -Command try { [Console]::OutputEncoding=[System.Text.Encoding]::UTF8 } catch {}
+$log='记录\续攻-ezBase-终端记录.txt'; Start-Transcript -LiteralPath $log -Append; Write-Output '=== PE strings ==='; strings '题目资料\ezBase_541\ezBase\ezre.exe' 2>&1 | Select-String -Pattern 'flag|correct|wrong|success|fail|input|base|Base|good|bad|right|error'; Write-Output '=== input harness ==='; Get-Content -LiteralPath '题目资料\ezBase_541\debug_patch.c'; Write-Output '=== analysis outputs ==='; Get-Content -LiteralPath '题目资料\ezBase_541\分析产物\2026-09-27\_ezdecode_func.txt' -TotalCount 220; Stop-Transcript
+Process ID: 15972
+PSVersion: 7.6.5
+PSEdition: Core
+GitCommitId: 7.6.5
+OS: Microsoft Windows 10.0.26200
+Platform: Win32NT
+PSCompatibleVersions: 1.0, 2.0, 3.0, 4.0, 5.0, 5.1, 6.0, 7.0
+PSRemotingProtocolVersion: 2.4
+SerializationVersion: 1.1.0.1
+WSManStackVersion: 3.0
+**********************
+Transcript started, output file is 记录\续攻-ezBase-终端记录.txt
+=== PE strings ===
+
+input your flag:B
+Yes, are rightW/
+ucrtbased.dll
+=== input harness ===
+#include <windows.h>
+#include <stdio.h>
+#include <stdint.h>
+static int patch_alignment_fault(HANDLE p, ULONG_PTR a) {
+    unsigned char old[8], replacement[8]; SIZE_T got=0,wrote=0; int index=-1; unsigned char value=0;
+    if(!ReadProcessMemory(p,(LPCVOID)a,old,sizeof(old),&got)||got<5){printf("ReadProcessMemory instruction failed=%lu bytes=%llu\n",GetLastError(),(unsigned long long)got);return 0;}
+    printf("FAULT_INSTRUCTION address=%p bytes=",(void*)a);for(int j=0;j<5;j++)printf("%02x",old[j]);printf("\n");
+    if(old[0]==0x66&&old[1]==0x0f&&(old[2]==0x6f||old[2]==0x7f)){index=0;value=0xf3;}
+    else if(old[0]==0x0f&&old[1]==0x28){index=1;value=0x10;}
+    else if(old[0]==0x0f&&old[1]==0x29){index=1;value=0x11;}
+    else if(old[0]==0x66&&old[1]==0x0f&&(old[2]==0x6e||old[2]==0x7e)){index=0;value=0xf3;}
+    if(index<0){printf("No known aligned-SIMD instruction patch matches.\n");return 0;}
+    DWORD protect=0,back=0;BOOL p1=VirtualProtectEx(p,(LPVOID)a,5,PAGE_EXECUTE_READWRITE,&protect);replacement[index]=value;BOOL p2=p1&&WriteProcessMemory(p,(LPVOID)(a+index),&replacement[index],1,&wrote);if(p2)FlushInstructionCache(p,(LPCVOID)a,5);BOOL p3=p1&&VirtualProtectEx(p,(LPVOID)a,5,protect,&back);
+    printf("PATCH aligned-SIMD-to-unaligned address=%p index=%d byte=0x%02x protect_ok=%d oldprotect=0x%lx write_ok=%d bytes=%llu restore_ok=%d restored_protect=0x%lx\n",(void*)a,index,value,p1,protect,p2,(unsigned long long)wrote,p3,back);
+    return p2&&wrote==1;
+}
+int main(int argc,char**argv){
+ if(argc<3){printf("usage: ezpatch.exe <exe> <stdin-file>\n");return 2;} SECURITY_ATTRIBUTES sa={sizeof(sa),NULL,TRUE};HANDLE hin=CreateFileA(argv[2],GENERIC_READ,FILE_SHARE_READ,&sa,OPEN_EXISTING,FILE_ATTRIBUTE_NORMAL,NULL);if(hin==INVALID_HANDLE_VALUE){printf("stdin open error=%lu\n",GetLastError());return 3;}
+ STARTUPINFOA si;PROCESS_INFORMATION pi;ZeroMemory(&si,sizeof(si));ZeroMemory(&pi,sizeof(pi));si.cb=sizeof(si);si.dwFlags=STARTF_USESTDHANDLES;si.hStdInput=hin;si.hStdOutput=GetStdHandle(STD_OUTPUT_HANDLE);si.hStdError=GetStdHandle(STD_ERROR_HANDLE);char cmd[4096];snprintf(cmd,sizeof(cmd),"\"%s\"",argv[1]);printf("COMMAND: CreateProcessA %s DEBUG_ONLY_THIS_PROCESS\n",argv[1]);
+ if(!CreateProcessA(argv[1],cmd,NULL,NULL,TRUE,DEBUG_ONLY_THIS_PROCESS|CREATE_NO_WINDOW,NULL,NULL,&si,&pi)){printf("CreateProcess error=%lu\n",GetLastError());CloseHandle(hin);return 4;}CloseHandle(hin);int done=0,n=0,patched=0;while(!done&&n++<10000){DEBUG_EVENT e;if(!WaitForDebugEvent(&e,5000)){printf("WaitForDebugEvent error=%lu\n",GetLastError());break;}DWORD c=DBG_CONTINUE;
+ if(e.dwDebugEventCode==CREATE_PROCESS_DEBUG_EVENT){printf("CREATE_PROCESS base=%p start=%p\n",e.u.CreateProcessInfo.lpBaseOfImage,e.u.CreateProcessInfo.lpStartAddress);if(e.u.CreateProcessInfo.hFile)CloseHandle(e.u.CreateProcessInfo.hFile);}
+ else if(e.dwDebugEventCode==LOAD_DLL_DEBUG_EVENT){if(e.u.LoadDll.hFile)CloseHandle(e.u.LoadDll.hFile);}
+ else if(e.dwDebugEventCode==EXCEPTION_DEBUG_EVENT){DWORD code=e.u.Exception.ExceptionRecord.ExceptionCode;ULONG_PTR a=(ULONG_PTR)e.u.Exception.ExceptionRecord.ExceptionAddress;printf("EXCEPTION code=0x%08lx address=%p chance=%lu info0=0x%llx info1=0x%llx\n",code,(void*)a,e.u.Exception.dwFirstChance,(unsigned long long)e.u.Exception.ExceptionRecord.ExceptionInformation[0],(unsigned long long)e.u.Exception.ExceptionRecord.ExceptionInformation[1]);if(code==EXCEPTION_BREAKPOINT||code==EXCEPTION_SINGLE_STEP)c=DBG_CONTINUE;else if(code==0xc0000005&&patched<64&&patch_alignment_fault(pi.hProcess,a)){patched++;c=DBG_CONTINUE;}else c=DBG_EXCEPTION_NOT_HANDLED;}
+ else if(e.dwDebugEventCode==EXIT_PROCESS_DEBUG_EVENT){printf("EXIT_PROCESS code=0x%08lx\n",e.u.ExitProcess.dwExitCode);done=1;}
+ if(!ContinueDebugEvent(e.dwProcessId,e.dwThreadId,c)){printf("ContinueDebugEvent failed=%lu\n",GetLastError());break;}}
+ DWORD ec=0;GetExitCodeProcess(pi.hProcess,&ec);printf("debug_exit=%lu events=%d done=%d patched=%d\n",ec,n,done,patched);CloseHandle(pi.hThread);CloseHandle(pi.hProcess);return 0;
+}
+=== analysis outputs ===
+
+C:\Users\mzj\Desktop\CTF\_ezunpacked.bin:     file format binary
+
+
+Disassembly of section .data:
+
+0000000140001130 <.data+0x130>:
+   140001130:	48 83 ec 40          	sub    rsp,0x40
+   140001134:	4c 89 44 24 38       	mov    QWORD PTR [rsp+0x38],r8
+   140001139:	48 89 54 24 30       	mov    QWORD PTR [rsp+0x30],rdx
+   14000113e:	48 89 4c 24 28       	mov    QWORD PTR [rsp+0x28],rcx
+   140001143:	48 c7 44 24 20 00 00 	mov    QWORD PTR [rsp+0x20],0x0
+   14000114a:	00 00
+   14000114c:	48 c7 44 24 18 00 00 	mov    QWORD PTR [rsp+0x18],0x0
+   140001153:	00 00
+   140001155:	48 8b 44 24 18       	mov    rax,QWORD PTR [rsp+0x18]
+   14000115a:	48 3b 44 24 30       	cmp    rax,QWORD PTR [rsp+0x30]
+   14000115f:	0f 83 c6 01 00 00    	jae    0x14000132b
+   140001165:	c7 44 24 14 00 00 00 	mov    DWORD PTR [rsp+0x14],0x0
+   14000116c:	00
+   14000116d:	48 8b 44 24 18       	mov    rax,QWORD PTR [rsp+0x18]
+   140001172:	48 83 c0 02          	add    rax,0x2
+   140001176:	48 3b 44 24 30       	cmp    rax,QWORD PTR [rsp+0x30]
+   14000117b:	0f 93 c0             	setae  al
+   14000117e:	24 01                	and    al,0x1
+   140001180:	0f b6 c0             	movzx  eax,al
+   140001183:	48 8b 4c 24 18       	mov    rcx,QWORD PTR [rsp+0x18]
+   140001188:	48 83 c1 01          	add    rcx,0x1
+   14000118c:	48 3b 4c 24 30       	cmp    rcx,QWORD PTR [rsp+0x30]
+   140001191:	0f 93 c1             	setae  cl
+   140001194:	80 e1 01             	and    cl,0x1
+   140001197:	0f b6 c9             	movzx  ecx,cl
+   14000119a:	01 c8                	add    eax,ecx
+   14000119c:	89 44 24 10          	mov    DWORD PTR [rsp+0x10],eax
+   1400011a0:	48 8b 44 24 28       	mov    rax,QWORD PTR [rsp+0x28]
+   1400011a5:	48 8b 4c 24 18       	mov    rcx,QWORD PTR [rsp+0x18]
+   1400011aa:	0f b6 04 08          	movzx  eax,BYTE PTR [rax+rcx*1]
+   1400011ae:	c1 e0 10             	shl    eax,0x10
+   1400011b1:	0b 44 24 14          	or     eax,DWORD PTR [rsp+0x14]
+   1400011b5:	89 44 24 14          	mov    DWORD PTR [rsp+0x14],eax
+   1400011b9:	48 8b 44 24 18       	mov    rax,QWORD PTR [rsp+0x18]
+   1400011be:	48 83 c0 01          	add    rax,0x1
+   1400011c2:	48 3b 44 24 30       	cmp    rax,QWORD PTR [rsp+0x30]
+   1400011c7:	0f 83 1a 00 00 00    	jae    0x1400011e7
+   1400011cd:	48 8b 44 24 28       	mov    rax,QWORD PTR [rsp+0x28]
+   1400011d2:	48 8b 4c 24 18       	mov    rcx,QWORD PTR [rsp+0x18]
+   1400011d7:	0f b6 44 08 01       	movzx  eax,BYTE PTR [rax+rcx*1+0x1]
+   1400011dc:	c1 e0 08             	shl    eax,0x8
+   1400011df:	0b 44 24 14          	or     eax,DWORD PTR [rsp+0x14]
+   1400011e3:	89 44 24 14          	mov    DWORD PTR [rsp+0x14],eax
+   1400011e7:	48 8b 44 24 18       	mov    rax,QWORD PTR [rsp+0x18]
+   1400011ec:	48 83 c0 02          	add    rax,0x2
+   1400011f0:	48 3b 44 24 30       	cmp    rax,QWORD PTR [rsp+0x30]
+   1400011f5:	0f 83 17 00 00 00    	jae    0x140001212
+   1400011fb:	48 8b 44 24 28       	mov    rax,QWORD PTR [rsp+0x28]
+   140001200:	48 8b 4c 24 18       	mov    rcx,QWORD PTR [rsp+0x18]
+   140001205:	0f b6 44 08 02       	movzx  eax,BYTE PTR [rax+rcx*1+0x2]
+   14000120a:	0b 44 24 14          	or     eax,DWORD PTR [rsp+0x14]
+   14000120e:	89 44 24 14          	mov    DWORD PTR [rsp+0x14],eax
+   140001212:	8b 44 24 14          	mov    eax,DWORD PTR [rsp+0x14]
+   140001216:	c1 e8 12             	shr    eax,0x12
+   140001219:	83 e0 3f             	and    eax,0x3f
+   14000121c:	89 c0                	mov    eax,eax
+   14000121e:	89 c1                	mov    ecx,eax
+   140001220:	48 8d 05 19 2e 00 00 	lea    rax,[rip+0x2e19]        # 0x140004040
+   140001227:	8a 14 08             	mov    dl,BYTE PTR [rax+rcx*1]
+   14000122a:	48 8b 44 24 38       	mov    rax,QWORD PTR [rsp+0x38]
+   14000122f:	48 8b 4c 24 20       	mov    rcx,QWORD PTR [rsp+0x20]
+   140001234:	49 89 c8             	mov    r8,rcx
+   140001237:	49 83 c0 01          	add    r8,0x1
+   14000123b:	4c 89 44 24 20       	mov    QWORD PTR [rsp+0x20],r8
+   140001240:	88 14 08             	mov    BYTE PTR [rax+rcx*1],dl
+   140001243:	8b 44 24 14          	mov    eax,DWORD PTR [rsp+0x14]
+   140001247:	c1 e8 0c             	shr    eax,0xc
+   14000124a:	83 e0 3f             	and    eax,0x3f
+   14000124d:	89 c0                	mov    eax,eax
+   14000124f:	89 c1                	mov    ecx,eax
+   140001251:	48 8d 05 e8 2d 00 00 	lea    rax,[rip+0x2de8]        # 0x140004040
+   140001258:	8a 14 08             	mov    dl,BYTE PTR [rax+rcx*1]
+   14000125b:	48 8b 44 24 38       	mov    rax,QWORD PTR [rsp+0x38]
+   140001260:	48 8b 4c 24 20       	mov    rcx,QWORD PTR [rsp+0x20]
+   140001265:	49 89 c8             	mov    r8,rcx
+   140001268:	49 83 c0 01          	add    r8,0x1
+   14000126c:	4c 89 44 24 20       	mov    QWORD PTR [rsp+0x20],r8
+   140001271:	88 14 08             	mov    BYTE PTR [rax+rcx*1],dl
+   140001274:	83 7c 24 10 02       	cmp    DWORD PTR [rsp+0x10],0x2
+   140001279:	0f 85 0e 00 00 00    	jne    0x14000128d
+   14000127f:	b8 3d 00 00 00       	mov    eax,0x3d
+   140001284:	89 44 24 04          	mov    DWORD PTR [rsp+0x4],eax
+   140001288:	e9 1d 00 00 00       	jmp    0x1400012aa
+   14000128d:	8b 44 24 14          	mov    eax,DWORD PTR [rsp+0x14]
+   140001291:	c1 e8 06             	shr    eax,0x6
+   140001294:	83 e0 3f             	and    eax,0x3f
+   140001297:	89 c0                	mov    eax,eax
+   140001299:	89 c1                	mov    ecx,eax
+   14000129b:	48 8d 05 9e 2d 00 00 	lea    rax,[rip+0x2d9e]        # 0x140004040
+   1400012a2:	0f be 04 08          	movsx  eax,BYTE PTR [rax+rcx*1]
+   1400012a6:	89 44 24 04          	mov    DWORD PTR [rsp+0x4],eax
+   1400012aa:	8b 44 24 04          	mov    eax,DWORD PTR [rsp+0x4]
+   1400012ae:	88 c2                	mov    dl,al
+   1400012b0:	48 8b 44 24 38       	mov    rax,QWORD PTR [rsp+0x38]
+   1400012b5:	48 8b 4c 24 20       	mov    rcx,QWORD PTR [rsp+0x20]
+   1400012ba:	49 89 c8             	mov    r8,rcx
+   1400012bd:	49 83 c0 01          	add    r8,0x1
+   1400012c1:	4c 89 44 24 20       	mov    QWORD PTR [rsp+0x20],r8
+   1400012c6:	88 14 08             	mov    BYTE PTR [rax+rcx*1],dl
+   1400012c9:	83 7c 24 10 01       	cmp    DWORD PTR [rsp+0x10],0x1
+   1400012ce:	0f 8c 0d 00 00 00    	jl     0x1400012e1
+   1400012d4:	b8 3d 00 00 00       	mov    eax,0x3d
+   1400012d9:	89 04 24             	mov    DWORD PTR [rsp],eax
+   1400012dc:	e9 19 00 00 00       	jmp    0x1400012fa
+   1400012e1:	8b 44 24 14          	mov    eax,DWORD PTR [rsp+0x14]
+   1400012e5:	83 e0 3f             	and    eax,0x3f
+   1400012e8:	89 c0                	mov    eax,eax
+   1400012ea:	89 c1                	mov    ecx,eax
+   1400012ec:	48 8d 05 4d 2d 00 00 	lea    rax,[rip+0x2d4d]        # 0x140004040
+   1400012f3:	0f be 04 08          	movsx  eax,BYTE PTR [rax+rcx*1]
+   1400012f7:	89 04 24             	mov    DWORD PTR [rsp],eax
+   1400012fa:	8b 04 24             	mov    eax,DWORD PTR [rsp]
+   1400012fd:	88 c2                	mov    dl,al
+   1400012ff:	48 8b 44 24 38       	mov    rax,QWORD PTR [rsp+0x38]
+   140001304:	48 8b 4c 24 20       	mov    rcx,QWORD PTR [rsp+0x20]
+   140001309:	49 89 c8             	mov    r8,rcx
+   14000130c:	49 83 c0 01          	add    r8,0x1
+   140001310:	4c 89 44 24 20       	mov    QWORD PTR [rsp+0x20],r8
+   140001315:	88 14 08             	mov    BYTE PTR [rax+rcx*1],dl
+   140001318:	48 8b 44 24 18       	mov    rax,QWORD PTR [rsp+0x18]
+   14000131d:	48 83 c0 03          	add    rax,0x3
+   140001321:	48 89 44 24 18       	mov    QWORD PTR [rsp+0x18],rax
+   140001326:	e9 2a fe ff ff       	jmp    0x140001155
+   14000132b:	48 8b 44 24 38       	mov    rax,QWORD PTR [rsp+0x38]
+**********************
+PowerShell transcript end
+End time: 20260928193335
+**********************
+**********************
+PowerShell transcript start
+Start time: 20260928193416
+Username: DESKTOP-412KTAR\mzj
+RunAs User: DESKTOP-412KTAR\mzj
+Configuration Name: 
+Machine: DESKTOP-412KTAR (Microsoft Windows NT 10.0.26200.0)
+Host Application: C:\Users\mzj\.cache\codex-runtimes\codex-primary-runtime\dependencies\native\powershell\pwsh.dll -Command try { [Console]::OutputEncoding=[System.Text.Encoding]::UTF8 } catch {}
+$log='记录\续攻-ezBase-终端记录.txt'; Start-Transcript -LiteralPath $log -Append; $runtime=[IO.File]::ReadAllBytes('题目资料\ezBase_541\unpacked_runtime.bin'); foreach($off in @(0x3040,0x3000,0x2f00)){ $slice=$runtime[$off..([Math]::Min($off+128,$runtime.Length-1))]; Write-Output ('offset=0x{0:X} ascii=' -f $off); [Console]::WriteLine([Text.Encoding]::ASCII.GetString($slice)) ; Write-Output ('hex=' + [BitConverter]::ToString($slice)) }; Write-Output '=== references to alphabet/target region ==='; Select-String -LiteralPath '题目资料\ezBase_541\分析产物\2026-09-27\_ezdisasm_all.txt' -Pattern '4040|4050|4060|4070|4080|4090|40a0|40b0|40c0|40d0|40e0|40f0' -Context 1,2 | Select-Object -Last 80 | ForEach-Object { $_.ToString() }; Stop-Transcript
+Process ID: 6120
+PSVersion: 7.6.5
+PSEdition: Core
+GitCommitId: 7.6.5
+OS: Microsoft Windows 10.0.26200
+Platform: Win32NT
+PSCompatibleVersions: 1.0, 2.0, 3.0, 4.0, 5.0, 5.1, 6.0, 7.0
+PSRemotingProtocolVersion: 2.4
+SerializationVersion: 1.1.0.1
+WSManStackVersion: 3.0
+**********************
+Transcript started, output file is 记录\续攻-ezBase-终端记录.txt
+offset=0x3040 ascii=
+hex=41-61-42-62-43-63-44-64-45-65-46-66-47-67-48-68-49-69-4A-6A-4B-6B-4C-6C-4D-6D-4E-6E-4F-6F-50-70-51-71-52-72-53-73-54-74-55-75-56-76-57-77-58-78-59-79-5A-7A-30-31-32-33-34-35-36-37-38-39-2B-2F-00-69-6E-70-75-74-20-79-6F-75-72-20-66-6C-61-67-3A-20-00-0A-00-0A-4C-65-6E-67-74-68-20-77-72-6F-6E-67-2E-20-4D-75-73-74-20-62-65-20-33-36-00-0A-59-65-73-20-79-6F-75-20-61-72-65-20-72-69-67-68-74
+offset=0x3000 ascii=
+hex=69-50-7D-75-69-37-73-69-43-60-6F-74-4D-67-41-7E-68-35-6F-5D-54-67-3C-34-6A-50-6D-74-49-76-4D-35-43-7E-49-34-68-36-34-34-4B-37-4D-7E-4B-56-67-3D-00-00-00-00-00-00-00-00-00-00-00-00-00-00-00-00-41-61-42-62-43-63-44-64-45-65-46-66-47-67-48-68-49-69-4A-6A-4B-6B-4C-6C-4D-6D-4E-6E-4F-6F-50-70-51-71-52-72-53-73-54-74-55-75-56-76-57-77-58-78-59-79-5A-7A-30-31-32-33-34-35-36-37-38-39-2B-2F-00
+offset=0x2F00 ascii=
+hex=00-00-00-00-00-00-00-00-00-00-00-00-00-00-00-00-00-00-00-00-00-00-00-00-00-00-00-00-00-00-00-00-00-00-00-00-00-00-00-00-00-00-00-00-00-00-00-00-00-00-00-00-00-00-00-00-00-00-00-00-00-00-00-00-00-00-00-00-00-00-00-00-00-00-00-00-00-00-00-00-00-00-00-00-00-00-00-00-00-00-00-00-00-00-00-00-00-00-00-00-00-00-00-00-00-00-00-00-00-00-00-00-00-00-00-00-00-00-00-00-00-00-00-00-00-00-00-00-00
+=== references to alphabet/target region ===
+  C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\ezBase_541\分析产物\2026-09-27\_ezdisasm_all.txt:127:   14000121e:	89 c1                	mov    ecx,eax
+> C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\ezBase_541\分析产物\2026-09-27\_ezdisasm_all.txt:128:   140001220:	48 8d 05 19 2e 00 00 	lea    rax,[rip+0x2e19]        # 0x140004040
+  C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\ezBase_541\分析产物\2026-09-27\_ezdisasm_all.txt:129:   140001227:	8a 14 08             	mov    dl,BYTE PTR [rax+rcx*1]
+  C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\ezBase_541\分析产物\2026-09-27\_ezdisasm_all.txt:130:   14000122a:	48 8b 44 24 38       	mov    rax,QWORD PTR [rsp+0x38]
+  C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\ezBase_541\分析产物\2026-09-27\_ezdisasm_all.txt:140:   14000124f:	89 c1                	mov    ecx,eax
+> C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\ezBase_541\分析产物\2026-09-27\_ezdisasm_all.txt:141:   140001251:	48 8d 05 e8 2d 00 00 	lea    rax,[rip+0x2de8]        # 0x140004040
+  C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\ezBase_541\分析产物\2026-09-27\_ezdisasm_all.txt:142:   140001258:	8a 14 08             	mov    dl,BYTE PTR [rax+rcx*1]
+  C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\ezBase_541\分析产物\2026-09-27\_ezdisasm_all.txt:143:   14000125b:	48 8b 44 24 38       	mov    rax,QWORD PTR [rsp+0x38]
+  C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\ezBase_541\分析产物\2026-09-27\_ezdisasm_all.txt:158:   140001299:	89 c1                	mov    ecx,eax
+> C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\ezBase_541\分析产物\2026-09-27\_ezdisasm_all.txt:159:   14000129b:	48 8d 05 9e 2d 00 00 	lea    rax,[rip+0x2d9e]        # 0x140004040
+  C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\ezBase_541\分析产物\2026-09-27\_ezdisasm_all.txt:160:   1400012a2:	0f be 04 08          	movsx  eax,BYTE PTR [rax+rcx*1]
+  C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\ezBase_541\分析产物\2026-09-27\_ezdisasm_all.txt:161:   1400012a6:	89 44 24 04          	mov    DWORD PTR [rsp+0x4],eax
+  C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\ezBase_541\分析产物\2026-09-27\_ezdisasm_all.txt:178:   1400012ea:	89 c1                	mov    ecx,eax
+> C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\ezBase_541\分析产物\2026-09-27\_ezdisasm_all.txt:179:   1400012ec:	48 8d 05 4d 2d 00 00 	lea    rax,[rip+0x2d4d]        # 0x140004040
+  C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\ezBase_541\分析产物\2026-09-27\_ezdisasm_all.txt:180:   1400012f3:	0f be 04 08          	movsx  eax,BYTE PTR [rax+rcx*1]
+  C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\ezBase_541\分析产物\2026-09-27\_ezdisasm_all.txt:181:   1400012f7:	89 04 24             	mov    DWORD PTR [rsp],eax
+**********************
+PowerShell transcript end
+End time: 20260928193416
+**********************
+**********************
+PowerShell transcript start
+Start time: 20260928193531
+Username: DESKTOP-412KTAR\mzj
+RunAs User: DESKTOP-412KTAR\mzj
+Configuration Name: 
+Machine: DESKTOP-412KTAR (Microsoft Windows NT 10.0.26200.0)
+Host Application: C:\Users\mzj\.cache\codex-runtimes\codex-primary-runtime\dependencies\native\powershell\pwsh.dll -Command try { [Console]::OutputEncoding=[System.Text.Encoding]::UTF8 } catch {}
+$log='记录\续攻-ezBase-终端记录.txt'; Start-Transcript -LiteralPath $log -Append; $p='题目资料\ezBase_541\分析产物\2026-09-27\_ezdisasm_all.txt'; Write-Output '=== refs to target/prompt/length/success ==='; Select-String -LiteralPath $p -Pattern '140004000|140004081|14000409|1400040a|1400040b|1400040c|1400040d|1400040e|1400040f' -Context 2,3 | ForEach-Object { $_.ToString() }; Write-Output '=== main-ish end of functions around calls ==='; Get-Content -LiteralPath $p | Select-Object -Skip 500 -First 260; Stop-Transcript
+Process ID: 19924
+PSVersion: 7.6.5
+PSEdition: Core
+GitCommitId: 7.6.5
+OS: Microsoft Windows 10.0.26200
+Platform: Win32NT
+PSCompatibleVersions: 1.0, 2.0, 3.0, 4.0, 5.0, 5.1, 6.0, 7.0
+PSRemotingProtocolVersion: 2.4
+SerializationVersion: 1.1.0.1
+WSManStackVersion: 3.0
+**********************
+Transcript started, output file is 记录\续攻-ezBase-终端记录.txt
+=== refs to target/prompt/length/success ===
+  C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\ezBase_541\分析产物\2026-09-27\_ezdisasm_all.txt:13:   140001019:	c7 44 24 3c 00 00 00 	mov    DWORD PTR [rsp+0x3c],0x0
+  C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\ezBase_541\分析产物\2026-09-27\_ezdisasm_all.txt:14:   140001020:	00 
+> C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\ezBase_541\分析产物\2026-09-27\_ezdisasm_all.txt:15:   140001021:	48 8d 0d 59 30 00 00 	lea    rcx,[rip+0x3059]        # 0x140004081
+  C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\ezBase_541\分析产物\2026-09-27\_ezdisasm_all.txt:16:   140001028:	e8 c3 04 00 00       	call   0x1400014f0
+  C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\ezBase_541\分析产物\2026-09-27\_ezdisasm_all.txt:17:   14000102d:	31 c9                	xor    ecx,ecx
+  C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\ezBase_541\分析产物\2026-09-27\_ezdisasm_all.txt:18:   14000102f:	ff 15 e3 35 00 00    	call   QWORD PTR [rip+0x35e3]        # 0x140004618
+  C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\ezBase_541\分析产物\2026-09-27\_ezdisasm_all.txt:29:   140001062:	48 8d 8c 24 40 01 00 	lea    rcx,[rsp+0x140]
+  C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\ezBase_541\分析产物\2026-09-27\_ezdisasm_all.txt:30:   140001069:	00 
+> C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\ezBase_541\分析产物\2026-09-27\_ezdisasm_all.txt:31:   14000106a:	48 8d 15 22 30 00 00 	lea    rdx,[rip+0x3022]        # 0x140004093
+  C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\ezBase_541\分析产物\2026-09-27\_ezdisasm_all.txt:32:   140001071:	ff 15 99 36 00 00    	call   QWORD PTR [rip+0x3699]        # 0x140004710
+  C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\ezBase_541\分析产物\2026-09-27\_ezdisasm_all.txt:33:   140001077:	48 89 44 24 30       	mov    QWORD PTR [rsp+0x30],rax
+  C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\ezBase_541\分析产物\2026-09-27\_ezdisasm_all.txt:34:   14000107c:	48 8b 44 24 30       	mov    rax,QWORD PTR [rsp+0x30]
+  C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\ezBase_541\分析产物\2026-09-27\_ezdisasm_all.txt:37:   140001089:	48 83 7c 24 30 24    	cmp    QWORD PTR [rsp+0x30],0x24
+  C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\ezBase_541\分析产物\2026-09-27\_ezdisasm_all.txt:38:   14000108f:	0f 84 1a 00 00 00    	je     0x1400010af
+> C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\ezBase_541\分析产物\2026-09-27\_ezdisasm_all.txt:39:   140001095:	48 8d 0d f9 2f 00 00 	lea    rcx,[rip+0x2ff9]        # 0x140004095
+  C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\ezBase_541\分析产物\2026-09-27\_ezdisasm_all.txt:40:   14000109c:	ff 15 5e 36 00 00    	call   QWORD PTR [rip+0x365e]        # 0x140004700
+  C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\ezBase_541\分析产物\2026-09-27\_ezdisasm_all.txt:41:   1400010a2:	c7 44 24 3c 00 00 00 	mov    DWORD PTR [rsp+0x3c],0x0
+  C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\ezBase_541\分析产物\2026-09-27\_ezdisasm_all.txt:42:   1400010a9:	00
+  C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\ezBase_541\分析产物\2026-09-27\_ezdisasm_all.txt:48:   1400010c1:	e8 6a 00 00 00       	call   0x140001130
+  C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\ezBase_541\分析产物\2026-09-27\_ezdisasm_all.txt:49:   1400010c6:	48 8d 4c 24 40       	lea    rcx,[rsp+0x40]
+> C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\ezBase_541\分析产物\2026-09-27\_ezdisasm_all.txt:50:   1400010cb:	48 8d 15 2e 2f 00 00 	lea    rdx,[rip+0x2f2e]        # 0x140004000
+  C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\ezBase_541\分析产物\2026-09-27\_ezdisasm_all.txt:51:   1400010d2:	e8 b9 28 00 00       	call   0x140003990
+  C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\ezBase_541\分析产物\2026-09-27\_ezdisasm_all.txt:52:   1400010d7:	83 f8 00             	cmp    eax,0x0
+  C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\ezBase_541\分析产物\2026-09-27\_ezdisasm_all.txt:53:   1400010da:	0f 85 12 00 00 00    	jne    0x1400010f2
+> C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\ezBase_541\分析产物\2026-09-27\_ezdisasm_all.txt:54:   1400010e0:	48 8d 0d c8 2f 00 00 	lea    rcx,[rip+0x2fc8]        # 0x1400040af
+  C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\ezBase_541\分析产物\2026-09-27\_ezdisasm_all.txt:55:   1400010e7:	ff 15 13 36 00 00    	call   QWORD PTR [rip+0x3613]        # 0x140004700
+  C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\ezBase_541\分析产物\2026-09-27\_ezdisasm_all.txt:56:   1400010ed:	e9 0d 00 00 00       	jmp    0x1400010ff
+> C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\ezBase_541\分析产物\2026-09-27\_ezdisasm_all.txt:57:   1400010f2:	48 8d 0d c9 2f 00 00 	lea    rcx,[rip+0x2fc9]        # 0x1400040c2
+  C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\ezBase_541\分析产物\2026-09-27\_ezdisasm_all.txt:58:   1400010f9:	ff 15 01 36 00 00    	call   QWORD PTR [rip+0x3601]        # 0x140004700
+  C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\ezBase_541\分析产物\2026-09-27\_ezdisasm_all.txt:59:   1400010ff:	c7 44 24 3c 00 00 00 	mov    DWORD PTR [rsp+0x3c],0x0
+  C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\ezBase_541\分析产物\2026-09-27\_ezdisasm_all.txt:60:   140001106:	00
+  C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\ezBase_541\分析产物\2026-09-27\_ezdisasm_all.txt:508:   1400017d3:	8b 54 24 30          	mov    edx,DWORD PTR [rsp+0x30]
+  C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\ezBase_541\分析产物\2026-09-27\_ezdisasm_all.txt:509:   1400017d7:	48 89 14 01          	mov    QWORD PTR [rcx+rax*1],rdx
+> C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\ezBase_541\分析产物\2026-09-27\_ezdisasm_all.txt:510:   1400017db:	48 8d 0d f6 28 00 00 	lea    rcx,[rip+0x28f6]        # 0x1400040d8
+  C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\ezBase_541\分析产物\2026-09-27\_ezdisasm_all.txt:511:   1400017e2:	e8 79 03 00 00       	call   0x140001b60
+  C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\ezBase_541\分析产物\2026-09-27\_ezdisasm_all.txt:512:   1400017e7:	48 83 c4 28          	add    rsp,0x28
+  C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\ezBase_541\分析产物\2026-09-27\_ezdisasm_all.txt:513:   1400017eb:	c3                   	ret
+  C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\ezBase_541\分析产物\2026-09-27\_ezdisasm_all.txt:577:   1400018e8:	48 89 04 ca          	mov    QWORD PTR [rdx+rcx*8],rax
+  C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\ezBase_541\分析产物\2026-09-27\_ezdisasm_all.txt:578:   1400018ec:	eb ca                	jmp    0x1400018b8
+> C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\ezBase_541\分析产物\2026-09-27\_ezdisasm_all.txt:579:   1400018ee:	48 8d 0d e3 27 00 00 	lea    rcx,[rip+0x27e3]        # 0x1400040d8
+  C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\ezBase_541\分析产物\2026-09-27\_ezdisasm_all.txt:580:   1400018f5:	e8 66 02 00 00       	call   0x140001b60
+  C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\ezBase_541\分析产物\2026-09-27\_ezdisasm_all.txt:581:   1400018fa:	48 83 c4 38          	add    rsp,0x38
+  C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\ezBase_541\分析产物\2026-09-27\_ezdisasm_all.txt:582:   1400018fe:	c3                   	ret
+  C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\ezBase_541\分析产物\2026-09-27\_ezdisasm_all.txt:638:   1400019d5:	48 8b 0d 24 36 00 00 	mov    rcx,QWORD PTR [rip+0x3624]        # 0x140005000
+  C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\ezBase_541\分析产物\2026-09-27\_ezdisasm_all.txt:639:   1400019dc:	48 89 4c 04 20       	mov    QWORD PTR [rsp+rax*1+0x20],rcx
+> C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\ezBase_541\分析产物\2026-09-27\_ezdisasm_all.txt:640:   1400019e1:	48 8d 0d f0 26 00 00 	lea    rcx,[rip+0x26f0]        # 0x1400040d8
+  C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\ezBase_541\分析产物\2026-09-27\_ezdisasm_all.txt:641:   1400019e8:	e8 73 01 00 00       	call   0x140001b60
+  C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\ezBase_541\分析产物\2026-09-27\_ezdisasm_all.txt:642:   1400019ed:	48 83 c4 38          	add    rsp,0x38
+  C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\ezBase_541\分析产物\2026-09-27\_ezdisasm_all.txt:643:   1400019f1:	c3                   	ret
+=== main-ish end of functions around calls ===
+   1400017af:	c7 05 8b 38 00 00 01 	mov    DWORD PTR [rip+0x388b],0x1        # 0x140005044
+   1400017b6:	00 00 00
+   1400017b9:	c7 05 95 38 00 00 01 	mov    DWORD PTR [rip+0x3895],0x1        # 0x140005058
+   1400017c0:	00 00 00
+   1400017c3:	b8 08 00 00 00       	mov    eax,0x8
+   1400017c8:	48 6b c0 00          	imul   rax,rax,0x0
+   1400017cc:	48 8d 0d 8d 38 00 00 	lea    rcx,[rip+0x388d]        # 0x140005060
+   1400017d3:	8b 54 24 30          	mov    edx,DWORD PTR [rsp+0x30]
+   1400017d7:	48 89 14 01          	mov    QWORD PTR [rcx+rax*1],rdx
+   1400017db:	48 8d 0d f6 28 00 00 	lea    rcx,[rip+0x28f6]        # 0x1400040d8
+   1400017e2:	e8 79 03 00 00       	call   0x140001b60
+   1400017e7:	48 83 c4 28          	add    rsp,0x28
+   1400017eb:	c3                   	ret
+   1400017ec:	cc                   	int3
+   1400017ed:	cc                   	int3
+   1400017ee:	cc                   	int3
+   1400017ef:	cc                   	int3
+   1400017f0:	4c 89 44 24 18       	mov    QWORD PTR [rsp+0x18],r8
+   1400017f5:	89 54 24 10          	mov    DWORD PTR [rsp+0x10],edx
+   1400017f9:	89 4c 24 08          	mov    DWORD PTR [rsp+0x8],ecx
+   1400017fd:	48 83 ec 38          	sub    rsp,0x38
+   140001801:	b9 17 00 00 00       	mov    ecx,0x17
+   140001806:	ff 15 9c 2d 00 00    	call   QWORD PTR [rip+0x2d9c]        # 0x1400045a8
+   14000180c:	85 c0                	test   eax,eax
+   14000180e:	74 08                	je     0x140001818
+   140001810:	8b 44 24 40          	mov    eax,DWORD PTR [rsp+0x40]
+   140001814:	8b c8                	mov    ecx,eax
+   140001816:	cd 29                	int    0x29
+   140001818:	48 8d 0d c1 38 00 00 	lea    rcx,[rip+0x38c1]        # 0x1400050e0
+   14000181f:	e8 dc 01 00 00       	call   0x140001a00
+   140001824:	48 8b 44 24 38       	mov    rax,QWORD PTR [rsp+0x38]
+   140001829:	48 89 05 a8 39 00 00 	mov    QWORD PTR [rip+0x39a8],rax        # 0x1400051d8
+   140001830:	48 8d 44 24 38       	lea    rax,[rsp+0x38]
+   140001835:	48 83 c0 08          	add    rax,0x8
+   140001839:	48 89 05 38 39 00 00 	mov    QWORD PTR [rip+0x3938],rax        # 0x140005178
+   140001840:	48 8b 05 91 39 00 00 	mov    rax,QWORD PTR [rip+0x3991]        # 0x1400051d8
+   140001847:	48 89 05 02 38 00 00 	mov    QWORD PTR [rip+0x3802],rax        # 0x140005050
+   14000184e:	c7 05 e8 37 00 00 09 	mov    DWORD PTR [rip+0x37e8],0xc0000409        # 0x140005040
+   140001855:	04 00 c0
+   140001858:	c7 05 e2 37 00 00 01 	mov    DWORD PTR [rip+0x37e2],0x1        # 0x140005044
+   14000185f:	00 00 00
+   140001862:	83 7c 24 48 00       	cmp    DWORD PTR [rsp+0x48],0x0
+   140001867:	76 10                	jbe    0x140001879
+   140001869:	48 83 7c 24 50 00    	cmp    QWORD PTR [rsp+0x50],0x0
+   14000186f:	75 08                	jne    0x140001879
+   140001871:	c7 44 24 48 00 00 00 	mov    DWORD PTR [rsp+0x48],0x0
+   140001878:	00
+   140001879:	83 7c 24 48 0e       	cmp    DWORD PTR [rsp+0x48],0xe
+   14000187e:	76 0a                	jbe    0x14000188a
+   140001880:	8b 44 24 48          	mov    eax,DWORD PTR [rsp+0x48]
+   140001884:	ff c8                	dec    eax
+   140001886:	89 44 24 48          	mov    DWORD PTR [rsp+0x48],eax
+   14000188a:	8b 44 24 48          	mov    eax,DWORD PTR [rsp+0x48]
+   14000188e:	ff c0                	inc    eax
+   140001890:	89 05 c2 37 00 00    	mov    DWORD PTR [rip+0x37c2],eax        # 0x140005058
+   140001896:	b8 08 00 00 00       	mov    eax,0x8
+   14000189b:	48 6b c0 00          	imul   rax,rax,0x0
+   14000189f:	48 8d 0d ba 37 00 00 	lea    rcx,[rip+0x37ba]        # 0x140005060
+   1400018a6:	8b 54 24 40          	mov    edx,DWORD PTR [rsp+0x40]
+   1400018aa:	48 89 14 01          	mov    QWORD PTR [rcx+rax*1],rdx
+   1400018ae:	c7 44 24 20 00 00 00 	mov    DWORD PTR [rsp+0x20],0x0
+   1400018b5:	00
+   1400018b6:	eb 0a                	jmp    0x1400018c2
+   1400018b8:	8b 44 24 20          	mov    eax,DWORD PTR [rsp+0x20]
+   1400018bc:	ff c0                	inc    eax
+   1400018be:	89 44 24 20          	mov    DWORD PTR [rsp+0x20],eax
+   1400018c2:	8b 44 24 48          	mov    eax,DWORD PTR [rsp+0x48]
+   1400018c6:	39 44 24 20          	cmp    DWORD PTR [rsp+0x20],eax
+   1400018ca:	73 22                	jae    0x1400018ee
+   1400018cc:	8b 44 24 20          	mov    eax,DWORD PTR [rsp+0x20]
+   1400018d0:	8b 4c 24 20          	mov    ecx,DWORD PTR [rsp+0x20]
+   1400018d4:	ff c1                	inc    ecx
+   1400018d6:	8b c9                	mov    ecx,ecx
+   1400018d8:	48 8d 15 81 37 00 00 	lea    rdx,[rip+0x3781]        # 0x140005060
+   1400018df:	4c 8b 44 24 50       	mov    r8,QWORD PTR [rsp+0x50]
+   1400018e4:	49 8b 04 c0          	mov    rax,QWORD PTR [r8+rax*8]
+   1400018e8:	48 89 04 ca          	mov    QWORD PTR [rdx+rcx*8],rax
+   1400018ec:	eb ca                	jmp    0x1400018b8
+   1400018ee:	48 8d 0d e3 27 00 00 	lea    rcx,[rip+0x27e3]        # 0x1400040d8
+   1400018f5:	e8 66 02 00 00       	call   0x140001b60
+   1400018fa:	48 83 c4 38          	add    rsp,0x38
+   1400018fe:	c3                   	ret
+   1400018ff:	cc                   	int3
+   140001900:	48 83 ec 28          	sub    rsp,0x28
+   140001904:	b9 08 00 00 00       	mov    ecx,0x8
+   140001909:	e8 42 fe ff ff       	call   0x140001750
+   14000190e:	48 83 c4 28          	add    rsp,0x28
+   140001912:	c3                   	ret
+   140001913:	cc                   	int3
+   140001914:	cc                   	int3
+   140001915:	cc                   	int3
+   140001916:	cc                   	int3
+   140001917:	cc                   	int3
+   140001918:	cc                   	int3
+   140001919:	cc                   	int3
+   14000191a:	cc                   	int3
+   14000191b:	cc                   	int3
+   14000191c:	cc                   	int3
+   14000191d:	cc                   	int3
+   14000191e:	cc                   	int3
+   14000191f:	cc                   	int3
+   140001920:	48 89 4c 24 08       	mov    QWORD PTR [rsp+0x8],rcx
+   140001925:	48 83 ec 38          	sub    rsp,0x38
+   140001929:	b9 17 00 00 00       	mov    ecx,0x17
+   14000192e:	ff 15 74 2c 00 00    	call   QWORD PTR [rip+0x2c74]        # 0x1400045a8
+   140001934:	85 c0                	test   eax,eax
+   140001936:	74 07                	je     0x14000193f
+   140001938:	b9 02 00 00 00       	mov    ecx,0x2
+   14000193d:	cd 29                	int    0x29
+   14000193f:	48 8d 0d 9a 37 00 00 	lea    rcx,[rip+0x379a]        # 0x1400050e0
+   140001946:	e8 55 01 00 00       	call   0x140001aa0
+   14000194b:	48 8b 44 24 38       	mov    rax,QWORD PTR [rsp+0x38]
+   140001950:	48 89 05 81 38 00 00 	mov    QWORD PTR [rip+0x3881],rax        # 0x1400051d8
+   140001957:	48 8d 44 24 38       	lea    rax,[rsp+0x38]
+   14000195c:	48 83 c0 08          	add    rax,0x8
+   140001960:	48 89 05 11 38 00 00 	mov    QWORD PTR [rip+0x3811],rax        # 0x140005178
+   140001967:	48 8b 05 6a 38 00 00 	mov    rax,QWORD PTR [rip+0x386a]        # 0x1400051d8
+   14000196e:	48 89 05 db 36 00 00 	mov    QWORD PTR [rip+0x36db],rax        # 0x140005050
+   140001975:	48 8b 44 24 40       	mov    rax,QWORD PTR [rsp+0x40]
+   14000197a:	48 89 05 df 37 00 00 	mov    QWORD PTR [rip+0x37df],rax        # 0x140005160
+   140001981:	c7 05 b5 36 00 00 09 	mov    DWORD PTR [rip+0x36b5],0xc0000409        # 0x140005040
+   140001988:	04 00 c0
+   14000198b:	c7 05 af 36 00 00 01 	mov    DWORD PTR [rip+0x36af],0x1        # 0x140005044
+   140001992:	00 00 00
+   140001995:	c7 05 b9 36 00 00 01 	mov    DWORD PTR [rip+0x36b9],0x1        # 0x140005058
+   14000199c:	00 00 00
+   14000199f:	b8 08 00 00 00       	mov    eax,0x8
+   1400019a4:	48 6b c0 00          	imul   rax,rax,0x0
+   1400019a8:	48 8d 0d b1 36 00 00 	lea    rcx,[rip+0x36b1]        # 0x140005060
+   1400019af:	48 c7 04 01 02 00 00 	mov    QWORD PTR [rcx+rax*1],0x2
+   1400019b6:	00
+   1400019b7:	b8 08 00 00 00       	mov    eax,0x8
+   1400019bc:	48 6b c0 00          	imul   rax,rax,0x0
+   1400019c0:	48 8b 0d 41 36 00 00 	mov    rcx,QWORD PTR [rip+0x3641]        # 0x140005008
+   1400019c7:	48 89 4c 04 20       	mov    QWORD PTR [rsp+rax*1+0x20],rcx
+   1400019cc:	b8 08 00 00 00       	mov    eax,0x8
+   1400019d1:	48 6b c0 01          	imul   rax,rax,0x1
+   1400019d5:	48 8b 0d 24 36 00 00 	mov    rcx,QWORD PTR [rip+0x3624]        # 0x140005000
+   1400019dc:	48 89 4c 04 20       	mov    QWORD PTR [rsp+rax*1+0x20],rcx
+   1400019e1:	48 8d 0d f0 26 00 00 	lea    rcx,[rip+0x26f0]        # 0x1400040d8
+   1400019e8:	e8 73 01 00 00       	call   0x140001b60
+   1400019ed:	48 83 c4 38          	add    rsp,0x38
+   1400019f1:	c3                   	ret
+   1400019f2:	cc                   	int3
+   1400019f3:	cc                   	int3
+   1400019f4:	cc                   	int3
+   1400019f5:	cc                   	int3
+   1400019f6:	cc                   	int3
+   1400019f7:	cc                   	int3
+   1400019f8:	cc                   	int3
+   1400019f9:	cc                   	int3
+   1400019fa:	cc                   	int3
+   1400019fb:	cc                   	int3
+   1400019fc:	cc                   	int3
+   1400019fd:	cc                   	int3
+   1400019fe:	cc                   	int3
+   1400019ff:	cc                   	int3
+   140001a00:	48 89 4c 24 08       	mov    QWORD PTR [rsp+0x8],rcx
+   140001a05:	48 83 ec 78          	sub    rsp,0x78
+   140001a09:	48 8b 8c 24 80 00 00 	mov    rcx,QWORD PTR [rsp+0x80]
+   140001a10:	00
+   140001a11:	ff 15 a1 2b 00 00    	call   QWORD PTR [rip+0x2ba1]        # 0x1400045b8
+   140001a17:	48 8b 84 24 80 00 00 	mov    rax,QWORD PTR [rsp+0x80]
+   140001a1e:	00
+   140001a1f:	48 8b 80 f8 00 00 00 	mov    rax,QWORD PTR [rax+0xf8]
+   140001a26:	48 89 44 24 48       	mov    QWORD PTR [rsp+0x48],rax
+   140001a2b:	45 33 c0             	xor    r8d,r8d
+   140001a2e:	48 8d 54 24 50       	lea    rdx,[rsp+0x50]
+   140001a33:	48 8b 4c 24 48       	mov    rcx,QWORD PTR [rsp+0x48]
+   140001a38:	ff 15 82 2b 00 00    	call   QWORD PTR [rip+0x2b82]        # 0x1400045c0
+   140001a3e:	48 89 44 24 40       	mov    QWORD PTR [rsp+0x40],rax
+   140001a43:	48 83 7c 24 40 00    	cmp    QWORD PTR [rsp+0x40],0x0
+   140001a49:	74 41                	je     0x140001a8c
+   140001a4b:	48 c7 44 24 38 00 00 	mov    QWORD PTR [rsp+0x38],0x0
+   140001a52:	00 00
+   140001a54:	48 8d 44 24 58       	lea    rax,[rsp+0x58]
+   140001a59:	48 89 44 24 30       	mov    QWORD PTR [rsp+0x30],rax
+   140001a5e:	48 8d 44 24 60       	lea    rax,[rsp+0x60]
+   140001a63:	48 89 44 24 28       	mov    QWORD PTR [rsp+0x28],rax
+   140001a68:	48 8b 84 24 80 00 00 	mov    rax,QWORD PTR [rsp+0x80]
+   140001a6f:	00
+   140001a70:	48 89 44 24 20       	mov    QWORD PTR [rsp+0x20],rax
+   140001a75:	4c 8b 4c 24 40       	mov    r9,QWORD PTR [rsp+0x40]
+   140001a7a:	4c 8b 44 24 48       	mov    r8,QWORD PTR [rsp+0x48]
+   140001a7f:	48 8b 54 24 50       	mov    rdx,QWORD PTR [rsp+0x50]
+   140001a84:	33 c9                	xor    ecx,ecx
+   140001a86:	ff 15 3c 2b 00 00    	call   QWORD PTR [rip+0x2b3c]        # 0x1400045c8
+   140001a8c:	48 83 c4 78          	add    rsp,0x78
+   140001a90:	c3                   	ret
+   140001a91:	cc                   	int3
+   140001a92:	cc                   	int3
+   140001a93:	cc                   	int3
+   140001a94:	cc                   	int3
+   140001a95:	cc                   	int3
+   140001a96:	cc                   	int3
+   140001a97:	cc                   	int3
+   140001a98:	cc                   	int3
+   140001a99:	cc                   	int3
+   140001a9a:	cc                   	int3
+   140001a9b:	cc                   	int3
+   140001a9c:	cc                   	int3
+   140001a9d:	cc                   	int3
+   140001a9e:	cc                   	int3
+   140001a9f:	cc                   	int3
+   140001aa0:	48 89 4c 24 08       	mov    QWORD PTR [rsp+0x8],rcx
+   140001aa5:	48 83 ec 78          	sub    rsp,0x78
+   140001aa9:	48 8b 8c 24 80 00 00 	mov    rcx,QWORD PTR [rsp+0x80]
+   140001ab0:	00
+   140001ab1:	ff 15 01 2b 00 00    	call   QWORD PTR [rip+0x2b01]        # 0x1400045b8
+   140001ab7:	48 8b 84 24 80 00 00 	mov    rax,QWORD PTR [rsp+0x80]
+   140001abe:	00
+   140001abf:	48 8b 80 f8 00 00 00 	mov    rax,QWORD PTR [rax+0xf8]
+   140001ac6:	48 89 44 24 50       	mov    QWORD PTR [rsp+0x50],rax
+   140001acb:	c7 44 24 40 00 00 00 	mov    DWORD PTR [rsp+0x40],0x0
+   140001ad2:	00
+   140001ad3:	eb 0a                	jmp    0x140001adf
+   140001ad5:	8b 44 24 40          	mov    eax,DWORD PTR [rsp+0x40]
+   140001ad9:	ff c0                	inc    eax
+   140001adb:	89 44 24 40          	mov    DWORD PTR [rsp+0x40],eax
+   140001adf:	83 7c 24 40 02       	cmp    DWORD PTR [rsp+0x40],0x2
+   140001ae4:	7d 67                	jge    0x140001b4d
+   140001ae6:	45 33 c0             	xor    r8d,r8d
+   140001ae9:	48 8d 54 24 58       	lea    rdx,[rsp+0x58]
+   140001aee:	48 8b 4c 24 50       	mov    rcx,QWORD PTR [rsp+0x50]
+   140001af3:	ff 15 c7 2a 00 00    	call   QWORD PTR [rip+0x2ac7]        # 0x1400045c0
+   140001af9:	48 89 44 24 48       	mov    QWORD PTR [rsp+0x48],rax
+   140001afe:	48 83 7c 24 48 00    	cmp    QWORD PTR [rsp+0x48],0x0
+   140001b04:	74 43                	je     0x140001b49
+   140001b06:	48 c7 44 24 38 00 00 	mov    QWORD PTR [rsp+0x38],0x0
+   140001b0d:	00 00
+   140001b0f:	48 8d 44 24 60       	lea    rax,[rsp+0x60]
+   140001b14:	48 89 44 24 30       	mov    QWORD PTR [rsp+0x30],rax
+   140001b19:	48 8d 44 24 68       	lea    rax,[rsp+0x68]
+   140001b1e:	48 89 44 24 28       	mov    QWORD PTR [rsp+0x28],rax
+   140001b23:	48 8b 84 24 80 00 00 	mov    rax,QWORD PTR [rsp+0x80]
+   140001b2a:	00
+   140001b2b:	48 89 44 24 20       	mov    QWORD PTR [rsp+0x20],rax
+   140001b30:	4c 8b 4c 24 48       	mov    r9,QWORD PTR [rsp+0x48]
+   140001b35:	4c 8b 44 24 50       	mov    r8,QWORD PTR [rsp+0x50]
+   140001b3a:	48 8b 54 24 58       	mov    rdx,QWORD PTR [rsp+0x58]
+   140001b3f:	33 c9                	xor    ecx,ecx
+   140001b41:	ff 15 81 2a 00 00    	call   QWORD PTR [rip+0x2a81]        # 0x1400045c8
+   140001b47:	eb 02                	jmp    0x140001b4b
+   140001b49:	eb 02                	jmp    0x140001b4d
+   140001b4b:	eb 88                	jmp    0x140001ad5
+   140001b4d:	48 83 c4 78          	add    rsp,0x78
+   140001b51:	c3                   	ret
+   140001b52:	cc                   	int3
+   140001b53:	cc                   	int3
+   140001b54:	cc                   	int3
+   140001b55:	cc                   	int3
+   140001b56:	cc                   	int3
+   140001b57:	cc                   	int3
+   140001b58:	cc                   	int3
+   140001b59:	cc                   	int3
+   140001b5a:	cc                   	int3
+   140001b5b:	cc                   	int3
+   140001b5c:	cc                   	int3
+   140001b5d:	cc                   	int3
+   140001b5e:	cc                   	int3
+**********************
+PowerShell transcript end
+End time: 20260928193531
+**********************
+**********************
+PowerShell transcript start
+Start time: 20260928193616
+Username: DESKTOP-412KTAR\mzj
+RunAs User: DESKTOP-412KTAR\mzj
+Configuration Name: 
+Machine: DESKTOP-412KTAR (Microsoft Windows NT 10.0.26200.0)
+Host Application: C:\Users\mzj\.cache\codex-runtimes\codex-primary-runtime\dependencies\native\powershell\pwsh.dll -Command try { [Console]::OutputEncoding=[System.Text.Encoding]::UTF8 } catch {}
+$log='记录\续攻-ezBase-终端记录.txt'; Start-Transcript -LiteralPath $log -Append; $p='题目资料\ezBase_541\分析产物\2026-09-27\_ezdisasm_all.txt'; Get-Content -LiteralPath $p | Select-Object -First 70; Write-Output '=== strings with raw RVA layout ==='; $r=[IO.File]::ReadAllBytes('题目资料\ezBase_541\unpacked_runtime.bin'); [Console]::WriteLine([Text.Encoding]::ASCII.GetString($r,0x3000,0x140)); Stop-Transcript
+Process ID: 2248
+PSVersion: 7.6.5
+PSEdition: Core
+GitCommitId: 7.6.5
+OS: Microsoft Windows 10.0.26200
+Platform: Win32NT
+PSCompatibleVersions: 1.0, 2.0, 3.0, 4.0, 5.0, 5.1, 6.0, 7.0
+PSRemotingProtocolVersion: 2.4
+SerializationVersion: 1.1.0.1
+WSManStackVersion: 3.0
+**********************
+Transcript started, output file is 记录\续攻-ezBase-终端记录.txt
+
+C:\Users\mzj\Desktop\CTF\_ezunpacked.bin:     file format binary
+
+
+Disassembly of section .data:
+
+0000000140001000 <.data>:
+   140001000:	48 81 ec c8 01 00 00 	sub    rsp,0x1c8
+   140001007:	48 8b 05 fa 3f 00 00 	mov    rax,QWORD PTR [rip+0x3ffa]        # 0x140005008
+   14000100e:	48 31 e0             	xor    rax,rsp
+   140001011:	48 89 84 24 c0 01 00 	mov    QWORD PTR [rsp+0x1c0],rax
+   140001018:	00
+   140001019:	c7 44 24 3c 00 00 00 	mov    DWORD PTR [rsp+0x3c],0x0
+   140001020:	00
+   140001021:	48 8d 0d 59 30 00 00 	lea    rcx,[rip+0x3059]        # 0x140004081
+   140001028:	e8 c3 04 00 00       	call   0x1400014f0
+   14000102d:	31 c9                	xor    ecx,ecx
+   14000102f:	ff 15 e3 35 00 00    	call   QWORD PTR [rip+0x35e3]        # 0x140004618
+   140001035:	49 89 c0             	mov    r8,rax
+   140001038:	48 8d 8c 24 40 01 00 	lea    rcx,[rsp+0x140]
+   14000103f:	00
+   140001040:	ba 80 00 00 00       	mov    edx,0x80
+   140001045:	ff 15 ad 36 00 00    	call   QWORD PTR [rip+0x36ad]        # 0x1400046f8
+   14000104b:	48 83 f8 00          	cmp    rax,0x0
+   14000104f:	0f 85 0d 00 00 00    	jne    0x140001062
+   140001055:	c7 44 24 3c 01 00 00 	mov    DWORD PTR [rsp+0x3c],0x1
+   14000105c:	00
+   14000105d:	e9 a5 00 00 00       	jmp    0x140001107
+   140001062:	48 8d 8c 24 40 01 00 	lea    rcx,[rsp+0x140]
+   140001069:	00
+   14000106a:	48 8d 15 22 30 00 00 	lea    rdx,[rip+0x3022]        # 0x140004093
+   140001071:	ff 15 99 36 00 00    	call   QWORD PTR [rip+0x3699]        # 0x140004710
+   140001077:	48 89 44 24 30       	mov    QWORD PTR [rsp+0x30],rax
+   14000107c:	48 8b 44 24 30       	mov    rax,QWORD PTR [rsp+0x30]
+   140001081:	c6 84 04 40 01 00 00 	mov    BYTE PTR [rsp+rax*1+0x140],0x0
+   140001088:	00
+   140001089:	48 83 7c 24 30 24    	cmp    QWORD PTR [rsp+0x30],0x24
+   14000108f:	0f 84 1a 00 00 00    	je     0x1400010af
+   140001095:	48 8d 0d f9 2f 00 00 	lea    rcx,[rip+0x2ff9]        # 0x140004095
+   14000109c:	ff 15 5e 36 00 00    	call   QWORD PTR [rip+0x365e]        # 0x140004700
+   1400010a2:	c7 44 24 3c 00 00 00 	mov    DWORD PTR [rsp+0x3c],0x0
+   1400010a9:	00
+   1400010aa:	e9 58 00 00 00       	jmp    0x140001107
+   1400010af:	4c 8d 44 24 40       	lea    r8,[rsp+0x40]
+   1400010b4:	48 8b 54 24 30       	mov    rdx,QWORD PTR [rsp+0x30]
+   1400010b9:	48 8d 8c 24 40 01 00 	lea    rcx,[rsp+0x140]
+   1400010c0:	00
+   1400010c1:	e8 6a 00 00 00       	call   0x140001130
+   1400010c6:	48 8d 4c 24 40       	lea    rcx,[rsp+0x40]
+   1400010cb:	48 8d 15 2e 2f 00 00 	lea    rdx,[rip+0x2f2e]        # 0x140004000
+   1400010d2:	e8 b9 28 00 00       	call   0x140003990
+   1400010d7:	83 f8 00             	cmp    eax,0x0
+   1400010da:	0f 85 12 00 00 00    	jne    0x1400010f2
+   1400010e0:	48 8d 0d c8 2f 00 00 	lea    rcx,[rip+0x2fc8]        # 0x1400040af
+   1400010e7:	ff 15 13 36 00 00    	call   QWORD PTR [rip+0x3613]        # 0x140004700
+   1400010ed:	e9 0d 00 00 00       	jmp    0x1400010ff
+   1400010f2:	48 8d 0d c9 2f 00 00 	lea    rcx,[rip+0x2fc9]        # 0x1400040c2
+   1400010f9:	ff 15 01 36 00 00    	call   QWORD PTR [rip+0x3601]        # 0x140004700
+   1400010ff:	c7 44 24 3c 00 00 00 	mov    DWORD PTR [rsp+0x3c],0x0
+   140001106:	00
+   140001107:	8b 44 24 3c          	mov    eax,DWORD PTR [rsp+0x3c]
+   14000110b:	89 44 24 2c          	mov    DWORD PTR [rsp+0x2c],eax
+   14000110f:	48 8b 8c 24 c0 01 00 	mov    rcx,QWORD PTR [rsp+0x1c0]
+   140001116:	00
+   140001117:	48 31 e1             	xor    rcx,rsp
+   14000111a:	e8 11 06 00 00       	call   0x140001730
+   14000111f:	8b 44 24 2c          	mov    eax,DWORD PTR [rsp+0x2c]
+   140001123:	48 81 c4 c8 01 00 00 	add    rsp,0x1c8
+   14000112a:	c3                   	ret
+   14000112b:	0f 1f 44 00 00       	nop    DWORD PTR [rax+rax*1+0x0]
+=== strings with raw RVA layout ===
+**********************
+PowerShell transcript end
+End time: 20260928193616
+**********************
+**********************
+PowerShell transcript start
+Start time: 20260928193641
+Username: DESKTOP-412KTAR\mzj
+RunAs User: DESKTOP-412KTAR\mzj
+Configuration Name: 
+Machine: DESKTOP-412KTAR (Microsoft Windows NT 10.0.26200.0)
+Host Application: C:\Users\mzj\.cache\codex-runtimes\codex-primary-runtime\dependencies\native\powershell\pwsh.dll -Command try { [Console]::OutputEncoding=[System.Text.Encoding]::UTF8 } catch {}
+$log='记录\续攻-ezBase-终端记录.txt'; Start-Transcript -LiteralPath $log -Append; @'
+import base64
+from pathlib import Path
+p=Path('题目资料/ezBase_541/candidate_35byte_prefix.txt').read_bytes().rstrip(b'\r\n')
+target=b'iP}ui7siC`otMgA~h5o]Tg<4jPmtIvM5C~I4h644K7M~KVg='
+a=b'AaBbCcDdEeFfGgHhIiJjKkLlMmNnOoPpQqRrSsTtUuVvWwXxYyZz0123456789+/'
+std=b'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/'
+def enc(x):
+ b=base64.b64encode(x)
+ mapped=bytes(a[std.index(ch)] if ch!=61 else 61 for ch in b)
+ return bytes(ch^4 if ch!=61 else ch for ch in mapped)
+for s in (p,p+b'}',p+b'\n',p+b'}\n'):
+ o=enc(s)
+ print('input',repr(s),'len',len(s),'output',o.decode(),'target_match',o==target,'diffs',[i for i,(x,y) in enumerate(zip(o,target)) if x!=y], 'outlen',len(o))
+'@ | python -; Stop-Transcript
+Process ID: 9856
+PSVersion: 7.6.5
+PSEdition: Core
+GitCommitId: 7.6.5
+OS: Microsoft Windows 10.0.26200
+Platform: Win32NT
+PSCompatibleVersions: 1.0, 2.0, 3.0, 4.0, 5.0, 5.1, 6.0, 7.0
+PSRemotingProtocolVersion: 2.4
+SerializationVersion: 1.1.0.1
+WSManStackVersion: 3.0
+**********************
+Transcript started, output file is 记录\续攻-ezBase-终端记录.txt
+**********************
+PowerShell transcript end
+End time: 20260928193641
+**********************
+**********************
+PowerShell transcript start
+Start time: 20260928193727
+Username: DESKTOP-412KTAR\mzj
+RunAs User: DESKTOP-412KTAR\mzj
+Configuration Name: 
+Machine: DESKTOP-412KTAR (Microsoft Windows NT 10.0.26200.0)
+Host Application: C:\Users\mzj\.cache\codex-runtimes\codex-primary-runtime\dependencies\native\powershell\pwsh.dll -Command try { [Console]::OutputEncoding=[System.Text.Encoding]::UTF8 } catch {}
+$log='记录\续攻-ezBase-终端记录.txt'; Start-Transcript -LiteralPath $log -Append; @'
+import base64, hashlib
+from pathlib import Path
+target=b'iP}ui7siC`otMgA~h5o]Tg<4jPmtIvM5C~I4h644K7M~KVg='
+custom=b'AaBbCcDdEeFfGgHhIiJjKkLlMmNnOoPpQqRrSsTtUuVvWwXxYyZz0123456789+/'
+standard=b'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/'
+step1=bytes(x^4 for x in target)
+canonical=bytes(61 if x==61 else standard[custom.index(x)] for x in step1)
+plain=base64.b64decode(canonical, validate=True)
+reencoded=base64.b64encode(plain)
+custom_encoded=bytes(61 if x==61 else custom[standard.index(x)] for x in reencoded)
+final=bytes(x^4 for x in custom_encoded)
+print('target=',target.decode())
+print('xor4_all=',step1.decode())
+print('custom_to_canonical=',canonical.decode())
+print('plain_len=',len(plain),'plain_ascii=',plain.decode())
+print('reencoded_standard=',reencoded.decode())
+print('custom_encoded=',custom_encoded.decode())
+print('roundtrip=',final.decode())
+print('roundtrip_exact=',final==target)
+print('flag_len=',len(plain))
+print('flag_sha256=',hashlib.sha256(plain).hexdigest())
+print('target_last_before_xor=',chr(step1[-1]),'custom_index=',custom.index(step1[-1]),'mapping_to_standard=',chr(standard[custom.index(step1[-1])]))
+'@ | python -; Stop-Transcript
+Process ID: 24664
+PSVersion: 7.6.5
+PSEdition: Core
+GitCommitId: 7.6.5
+OS: Microsoft Windows 10.0.26200
+Platform: Win32NT
+PSCompatibleVersions: 1.0, 2.0, 3.0, 4.0, 5.0, 5.1, 6.0, 7.0
+PSRemotingProtocolVersion: 2.4
+SerializationVersion: 1.1.0.1
+WSManStackVersion: 3.0
+**********************
+Transcript started, output file is 记录\续攻-ezBase-终端记录.txt
+**********************
+PowerShell transcript end
+End time: 20260928193727
+**********************
+**********************
+PowerShell transcript start
+Start time: 20260928193805
+Username: DESKTOP-412KTAR\mzj
+RunAs User: DESKTOP-412KTAR\mzj
+Configuration Name: 
+Machine: DESKTOP-412KTAR (Microsoft Windows NT 10.0.26200.0)
+Host Application: C:\Users\mzj\.cache\codex-runtimes\codex-primary-runtime\dependencies\native\powershell\pwsh.dll -Command try { [Console]::OutputEncoding=[System.Text.Encoding]::UTF8 } catch {}
+$log='记录\续攻-ezBase-终端记录.txt'; Start-Transcript -LiteralPath $log -Append; Select-String -Path '记录\*.txt' -Pattern '0A7420F1D2D832474AD09EA55825900AF75EBA30DEA46DFB63F9A1AD17F0AF18|ezBase.*SHA256|541.*SHA256|ezre\.exe' -Context 1,2 | Select-Object -Last 50 | ForEach-Object { $_.ToString() }; Stop-Transcript
+Process ID: 12644
+PSVersion: 7.6.5
+PSEdition: Core
+GitCommitId: 7.6.5
+OS: Microsoft Windows 10.0.26200
+Platform: Win32NT
+PSCompatibleVersions: 1.0, 2.0, 3.0, 4.0, 5.0, 5.1, 6.0, 7.0
+PSRemotingProtocolVersion: 2.4
+SerializationVersion: 1.1.0.1
+WSManStackVersion: 3.0
+**********************
+Transcript started, output file is 记录\续攻-ezBase-终端记录.txt
+  C:\Users\mzj\Desktop\CTF\玄机刷题\记录\代理-go_for_it-终端记录.txt:11091:__declspec(dllexport) void *__current_exception(void) { return (void *)0; }
+> C:\Users\mzj\Desktop\CTF\玄机刷题\记录\代理-go_for_it-终端记录.txt:11092:'@; Write-Output 'SOURCE shim_ucrt.c:'; Write-Output $ucrtSource; Set-Content -LiteralPath $srcUcrt -Value $ucrtSource -Encoding ascii; Write-Output 'SOURCE shim_vcr.c:'; Write-Output $vcrSource; Set-Content -LiteralPath $srcVcr -Value $vcrSource -Encoding ascii; Write-Output ('COMMAND: gcc -shared -O2 -o C:\Users\mzj\Desktop\CTF\_ucrtbased.dll ' + $srcUcrt); gcc -shared -O2 -o 'C:\Users\mzj\Desktop\CTF\_ucrtbased.dll' $srcUcrt 2>&1; Write-Output ('gcc_ucrt_exit_code=' + $LASTEXITCODE); Write-Output ('COMMAND: gcc -shared -O2 -o C:\Users\mzj\Desktop\CTF\_VCRUNTIME140D.dll ' + $srcVcr); gcc -shared -O2 -o 'C:\Users\mzj\Desktop\CTF\_VCRUNTIME140D.dll' $srcVcr 2>&1; Write-Output ('gcc_vcr_exit_code=' + $LASTEXITCODE); Write-Output 'COMMAND: Copy shim DLLs and challenge into local run directory'; Copy-Item -LiteralPath 'C:\Users\mzj\Desktop\CTF\_ucrtbased.dll' -Destination (Join-Path $runDir 'ucrtbased.dll') -Force; Copy-Item -LiteralPath 'C:\Users\mzj\Desktop\CTF\_VCRUNTIME140D.dll' -Destination (Join-Path $runDir 'VCRUNTIME140D.dll') -Force; Copy-Item -LiteralPath 'C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\ezBase_541\ezBase\ezre.exe' -Destination (Join-Path $runDir 'ezre.exe') -Force; Write-Output 'COMMAND: Verify shim exports'; objdump -p 'C:\Users\mzj\Desktop\CTF\_ucrtbased.dll' 2>&1; objdump -p 'C:\Users\mzj\Desktop\CTF\_VCRUNTIME140D.dll' 2>&1; Write-Output 'COMMAND: Python run of shim copy with stdin TEST'; python -c "import subprocess; p=r'C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\ezBase_541\runshim\ezre.exe'; r=subprocess.run([p],input=b'TEST\\n',capture_output=True,timeout=10); print('returncode=',r.returncode); print('stdout=',repr(r.stdout)); print('stderr=',repr(r.stderr))"; Write-Output ('python_exit_code=' + $LASTEXITCODE); Write-Output 'COMMAND: Hash shim sources and binaries'; Get-FileHash -Algorithm SHA256 -LiteralPath $srcUcrt,$srcVcr,'C:\Users\mzj\Desktop\CTF\_ucrtbased.dll','C:\Users\mzj\Desktop\CTF\_VCRUNTIME140D.dll',(Join-Path $runDir 'ezre.exe') | Format-Table -AutoSize; } finally { Stop-Transcript | Out-Null }
+  C:\Users\mzj\Desktop\CTF\玄机刷题\记录\代理-go_for_it-终端记录.txt:11093:Process ID: 23300
+  C:\Users\mzj\Desktop\CTF\玄机刷题\记录\代理-go_for_it-终端记录.txt:11094:PSVersion: 7.6.5
+  C:\Users\mzj\Desktop\CTF\玄机刷题\记录\代理-go_for_it-终端记录.txt:11142:Host Application: C:\Users\mzj\.cache\codex-runtimes\codex-primary-runtime\dependencies\native\powershell\pwsh.dll -NoProfile -Command try { [Console]::OutputEncoding=[System.Text.Encoding]::UTF8 } catch {}
+> C:\Users\mzj\Desktop\CTF\玄机刷题\记录\代理-go_for_it-终端记录.txt:11143:$ErrorActionPreference='Continue'; $logPath='C:\Users\mzj\Desktop\CTF\玄机刷题\记录\代理-go_for_it-终端记录.txt'; $runAlias='C:\Users\mzj\Desktop\CTF\_ezrun'; $src='C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\ezBase_541\debug_entry.c'; $asciiSrc='C:\Users\mzj\Desktop\CTF\_ezdebug.c'; $dbg='C:\Users\mzj\Desktop\CTF\_ezdebug.exe'; $input='C:\Users\mzj\Desktop\CTF\_ezinput.txt'; Start-Transcript -Path $logPath -Append | Out-Null; try { Write-Output ('COMMAND: New-Item -ItemType Directory -Force -Path ' + $runAlias); New-Item -ItemType Directory -Force -Path $runAlias | Out-Null; Copy-Item -LiteralPath 'C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\ezBase_541\runshim\ezre.exe' -Destination (Join-Path $runAlias 'ezre.exe') -Force; Copy-Item -LiteralPath 'C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\ezBase_541\runshim\ucrtbased.dll' -Destination (Join-Path $runAlias 'ucrtbased.dll') -Force; Copy-Item -LiteralPath 'C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\ezBase_541\runshim\VCRUNTIME140D.dll' -Destination (Join-Path $runAlias 'VCRUNTIME140D.dll') -Force; [System.IO.File]::WriteAllBytes($input,[System.Text.Encoding]::ASCII.GetBytes('TEST`n')); $source=@'
+  C:\Users\mzj\Desktop\CTF\玄机刷题\记录\代理-go_for_it-终端记录.txt:11144:#include <windows.h>
+  C:\Users\mzj\Desktop\CTF\玄机刷题\记录\代理-go_for_it-终端记录.txt:11145:#include <stdio.h>
+  C:\Users\mzj\Desktop\CTF\玄机刷题\记录\代理-go_for_it-终端记录.txt:11202:}
+> C:\Users\mzj\Desktop\CTF\玄机刷题\记录\代理-go_for_it-终端记录.txt:11203:'@; Write-Output 'SOURCE debug_entry.c:'; Write-Output $source; Set-Content -LiteralPath $src -Value $source -Encoding ascii; Copy-Item -LiteralPath $src -Destination $asciiSrc -Force; Write-Output ('COMMAND: gcc -Wall -Wextra -O2 -o ' + $dbg + ' ' + $asciiSrc); gcc -Wall -Wextra -O2 -o $dbg $asciiSrc 2>&1; Write-Output ('gcc_exit_code=' + $LASTEXITCODE); Write-Output ('COMMAND: ' + $dbg + ' ' + (Join-Path $runAlias 'ezre.exe') + ' ' + $input); & $dbg (Join-Path $runAlias 'ezre.exe') $input 2>&1; Write-Output ('debugger_exit_code=' + $LASTEXITCODE); Write-Output 'COMMAND: Hash debug harness sources and exe'; Get-FileHash -Algorithm SHA256 -LiteralPath $src,$dbg,$input | Format-Table -AutoSize; } finally { Stop-Transcript | Out-Null }
+  C:\Users\mzj\Desktop\CTF\玄机刷题\记录\代理-go_for_it-终端记录.txt:11204:Process ID: 4488
+  C:\Users\mzj\Desktop\CTF\玄机刷题\记录\代理-go_for_it-终端记录.txt:11205:PSVersion: 7.6.5
+  C:\Users\mzj\Desktop\CTF\玄机刷题\记录\代理-go_for_it-终端记录.txt:11277:gcc_exit_code=0
+> C:\Users\mzj\Desktop\CTF\玄机刷题\记录\代理-go_for_it-终端记录.txt:11278:COMMAND: C:\Users\mzj\Desktop\CTF\_ezdebug.exe C:\Users\mzj\Desktop\CTF\_ezrun\ezre.exe C:\Users\mzj\Desktop\CTF\_ezinput.txt
+  C:\Users\mzj\Desktop\CTF\玄机刷题\记录\代理-go_for_it-终端记录.txt:11279:debugger_exit_code=0
+  C:\Users\mzj\Desktop\CTF\玄机刷题\记录\代理-go_for_it-终端记录.txt:11280:COMMAND: Hash debug harness sources and exe
+  C:\Users\mzj\Desktop\CTF\玄机刷题\记录\代理-go_for_it-终端记录.txt:11364:}
+> C:\Users\mzj\Desktop\CTF\玄机刷题\记录\代理-go_for_it-终端记录.txt:11365:'@; Write-Output 'SOURCE debug_entry.c (updated to show loaded module names and fault bytes):'; Write-Output $source; Set-Content -LiteralPath $src -Value $source -Encoding ascii; Copy-Item -LiteralPath $src -Destination $asciiSrc -Force; Write-Output ('COMMAND: gcc -Wall -Wextra -O2 -o ' + $dbg + ' ' + $asciiSrc + ' -lpsapi'); gcc -Wall -Wextra -O2 -o $dbg $asciiSrc -lpsapi 2>&1; Write-Output ('gcc_exit_code=' + $LASTEXITCODE); Write-Output ('COMMAND: ' + $dbg + ' ' + (Join-Path $runAlias 'ezre.exe') + ' ' + $input); & $dbg (Join-Path $runAlias 'ezre.exe') $input 2>&1; Write-Output ('debugger_exit_code=' + $LASTEXITCODE); Write-Output 'COMMAND: Search known local SDK roots for debug runtime DLLs'; foreach($root in @('C:\Program Files\Microsoft Visual Studio','C:\Program Files (x86)\Microsoft Visual Studio','C:\Program Files (x86)\Windows Kits\10\bin','C:\Program Files (x86)\Windows Kits\10\Redist')) { if(Test-Path -LiteralPath $root) { Write-Output ('SEARCH_ROOT=' + $root); Get-ChildItem -LiteralPath $root -Filter 'ucrtbased.dll' -File -Recurse -ErrorAction SilentlyContinue | Select-Object -ExpandProperty FullName; Get-ChildItem -LiteralPath $root -Filter 'VCRUNTIME140D.dll' -File -Recurse -ErrorAction SilentlyContinue | Select-Object -ExpandProperty FullName; } }; } finally { Stop-Transcript | Out-Null }
+  C:\Users\mzj\Desktop\CTF\玄机刷题\记录\代理-go_for_it-终端记录.txt:11366:Process ID: 28708
+  C:\Users\mzj\Desktop\CTF\玄机刷题\记录\代理-go_for_it-终端记录.txt:11367:PSVersion: 7.6.5
+  C:\Users\mzj\Desktop\CTF\玄机刷题\记录\代理-go_for_it-终端记录.txt:11466:gcc_exit_code=0
+> C:\Users\mzj\Desktop\CTF\玄机刷题\记录\代理-go_for_it-终端记录.txt:11467:COMMAND: C:\Users\mzj\Desktop\CTF\_ezdebug.exe C:\Users\mzj\Desktop\CTF\_ezrun\ezre.exe C:\Users\mzj\Desktop\CTF\_ezinput.txt
+  C:\Users\mzj\Desktop\CTF\玄机刷题\记录\代理-go_for_it-终端记录.txt:11468:debugger_exit_code=0
+  C:\Users\mzj\Desktop\CTF\玄机刷题\记录\代理-go_for_it-终端记录.txt:11469:COMMAND: Search known local SDK roots for debug runtime DLLs
+  C:\Users\mzj\Desktop\CTF\玄机刷题\记录\代理-go_for_it-终端记录.txt:11752:}
+> C:\Users\mzj\Desktop\CTF\玄机刷题\记录\代理-go_for_it-终端记录.txt:11753:'@; Write-Output 'SOURCE debug_stack.c:'; Write-Output $source; Set-Content -LiteralPath $src -Value $source -Encoding ascii; Copy-Item -LiteralPath $src -Destination $asciiSrc -Force; Write-Output ('COMMAND: gcc -Wall -Wextra -O2 -o ' + $dbg + ' ' + $asciiSrc + ' -lpsapi'); gcc -Wall -Wextra -O2 -o $dbg $asciiSrc -lpsapi 2>&1; Write-Output ('gcc_exit_code=' + $LASTEXITCODE); Write-Output ('COMMAND: ' + $dbg + ' ' + (Join-Path $runAlias 'ezre.exe') + ' ' + $input); & $dbg (Join-Path $runAlias 'ezre.exe') $input 2>&1; Write-Output ('debugger_exit_code=' + $LASTEXITCODE); Write-Output 'COMMAND: Hash debug stack artifacts'; Get-FileHash -Algorithm SHA256 -LiteralPath $src,$dbg | Format-Table -AutoSize; } finally { Stop-Transcript | Out-Null }
+  C:\Users\mzj\Desktop\CTF\玄机刷题\记录\代理-go_for_it-终端记录.txt:11754:Process ID: 8080
+  C:\Users\mzj\Desktop\CTF\玄机刷题\记录\代理-go_for_it-终端记录.txt:11755:PSVersion: 7.6.5
+  C:\Users\mzj\Desktop\CTF\玄机刷题\记录\代理-go_for_it-终端记录.txt:11799:gcc_exit_code=0
+> C:\Users\mzj\Desktop\CTF\玄机刷题\记录\代理-go_for_it-终端记录.txt:11800:COMMAND: C:\Users\mzj\Desktop\CTF\_ezstack.exe C:\Users\mzj\Desktop\CTF\_ezrun\ezre.exe C:\Users\mzj\Desktop\CTF\_ezinput.txt
+  C:\Users\mzj\Desktop\CTF\玄机刷题\记录\代理-go_for_it-终端记录.txt:11801:debugger_exit_code=0
+  C:\Users\mzj\Desktop\CTF\玄机刷题\记录\代理-go_for_it-终端记录.txt:11802:COMMAND: Hash debug stack artifacts
+  C:\Users\mzj\Desktop\CTF\玄机刷题\记录\代理-go_for_it-终端记录.txt:12014:}
+> C:\Users\mzj\Desktop\CTF\玄机刷题\记录\代理-go_for_it-终端记录.txt:12015:'@; Write-Output 'SOURCE debug_mem.c:'; Write-Output $source; Set-Content -LiteralPath $src -Value $source -Encoding ascii; Copy-Item -LiteralPath $src -Destination $asciiSrc -Force; Write-Output ('COMMAND: gcc -Wall -Wextra -O2 -o ' + $dbg + ' ' + $asciiSrc); gcc -Wall -Wextra -O2 -o $dbg $asciiSrc 2>&1; Write-Output ('gcc_exit_code=' + $LASTEXITCODE); Write-Output ('COMMAND: ' + $dbg + ' ' + (Join-Path $runAlias 'ezre.exe') + ' ' + $input); & $dbg (Join-Path $runAlias 'ezre.exe') $input 2>&1; Write-Output ('debugger_exit_code=' + $LASTEXITCODE); Write-Output 'COMMAND: Hash debug memory harness'; Get-FileHash -Algorithm SHA256 -LiteralPath $src,$dbg | Format-Table -AutoSize; } finally { Stop-Transcript | Out-Null }
+  C:\Users\mzj\Desktop\CTF\玄机刷题\记录\代理-go_for_it-终端记录.txt:12016:Process ID: 14764
+  C:\Users\mzj\Desktop\CTF\玄机刷题\记录\代理-go_for_it-终端记录.txt:12017:PSVersion: 7.6.5
+  C:\Users\mzj\Desktop\CTF\玄机刷题\记录\代理-go_for_it-终端记录.txt:12052:gcc_exit_code=0
+> C:\Users\mzj\Desktop\CTF\玄机刷题\记录\代理-go_for_it-终端记录.txt:12053:COMMAND: C:\Users\mzj\Desktop\CTF\_ezmem.exe C:\Users\mzj\Desktop\CTF\_ezrun\ezre.exe C:\Users\mzj\Desktop\CTF\_ezinput.txt
+  C:\Users\mzj\Desktop\CTF\玄机刷题\记录\代理-go_for_it-终端记录.txt:12054:debugger_exit_code=0
+  C:\Users\mzj\Desktop\CTF\玄机刷题\记录\代理-go_for_it-终端记录.txt:12055:COMMAND: Hash debug memory harness
+  C:\Users\mzj\Desktop\CTF\玄机刷题\记录\代理-go_for_it-终端记录.txt:12091:}
+> C:\Users\mzj\Desktop\CTF\玄机刷题\记录\代理-go_for_it-终端记录.txt:12092:'@; Write-Output 'SOURCE debug_dump.c:'; Write-Output $source; Set-Content -LiteralPath $src -Value $source -Encoding ascii; Copy-Item -LiteralPath $src -Destination $asciiSrc -Force; Write-Output ('COMMAND: gcc -Wall -Wextra -O2 -o ' + $dbg + ' ' + $asciiSrc); gcc -Wall -Wextra -O2 -o $dbg $asciiSrc 2>&1; Write-Output ('gcc_exit_code=' + $LASTEXITCODE); Write-Output ('COMMAND: ' + $dbg + ' ' + (Join-Path $runAlias 'ezre.exe') + ' ' + $input + ' ' + $dumpAlias); & $dbg (Join-Path $runAlias 'ezre.exe') $input $dumpAlias 2>&1; Write-Output ('debugger_exit_code=' + $LASTEXITCODE); if(Test-Path -LiteralPath $dumpAlias) { Copy-Item -LiteralPath $dumpAlias -Destination $dump -Force; Write-Output 'COMMAND: Get-Item and SHA256 for runtime dump'; Get-Item -LiteralPath $dump | Format-List FullName,Length,LastWriteTime; Get-FileHash -Algorithm SHA256 -LiteralPath $dump; Write-Output 'COMMAND: strings -a -t x -n 3 runtime dump'; strings -a -t x -n 3 $dumpAlias 2>&1; Write-Output ('strings_exit_code=' + $LASTEXITCODE) }; } finally { Stop-Transcript | Out-Null }
+  C:\Users\mzj\Desktop\CTF\玄机刷题\记录\代理-go_for_it-终端记录.txt:12093:Process ID: 29340
+  C:\Users\mzj\Desktop\CTF\玄机刷题\记录\代理-go_for_it-终端记录.txt:12094:PSVersion: 7.6.5
+  C:\Users\mzj\Desktop\CTF\玄机刷题\记录\代理-go_for_it-终端记录.txt:12123:gcc_exit_code=0
+> C:\Users\mzj\Desktop\CTF\玄机刷题\记录\代理-go_for_it-终端记录.txt:12124:COMMAND: C:\Users\mzj\Desktop\CTF\_ezdump.exe C:\Users\mzj\Desktop\CTF\_ezrun\ezre.exe C:\Users\mzj\Desktop\CTF\_ezinput.txt C:\Users\mzj\Desktop\CTF\_ezunpacked.bin
+  C:\Users\mzj\Desktop\CTF\玄机刷题\记录\代理-go_for_it-终端记录.txt:12125:debugger_exit_code=0
+  C:\Users\mzj\Desktop\CTF\玄机刷题\记录\代理-go_for_it-终端记录.txt:12126:COMMAND: Get-Item and SHA256 for runtime dump
+  C:\Users\mzj\Desktop\CTF\玄机刷题\记录\代理-go_for_it-终端记录.txt:20286:__declspec(dllexport) void *__current_exception(void) { return (void *)0; }
+> C:\Users\mzj\Desktop\CTF\玄机刷题\记录\代理-go_for_it-终端记录.txt:20287:'@; Write-Output 'SOURCE shim_ucrt_min.c:'; Write-Output $u; Set-Content -LiteralPath $srcU -Value $u -Encoding ascii; Write-Output 'SOURCE shim_vcr_min.c:'; Write-Output $v; Set-Content -LiteralPath $srcV -Value $v -Encoding ascii; Copy-Item -LiteralPath $srcU -Destination 'C:\Users\mzj\Desktop\CTF\_shim_ucrt_min.c' -Force; Copy-Item -LiteralPath $srcV -Destination 'C:\Users\mzj\Desktop\CTF\_shim_vcr_min.c' -Force; Write-Output "COMMAND: gcc -shared -nostdlib -Wl,--entry,DllMain -o _ucrtbased.dll _shim_ucrt_min.c -lkernel32"; gcc -shared -nostdlib '-Wl,--entry,DllMain' -o 'C:\Users\mzj\Desktop\CTF\_ucrtbased.dll' 'C:\Users\mzj\Desktop\CTF\_shim_ucrt_min.c' -lkernel32 2>&1; Write-Output ('gcc_ucrt_exit_code=' + $LASTEXITCODE); Write-Output "COMMAND: gcc -shared -nostdlib -Wl,--entry,DllMain -o _VCRUNTIME140D.dll _shim_vcr_min.c -lkernel32"; gcc -shared -nostdlib '-Wl,--entry,DllMain' -o 'C:\Users\mzj\Desktop\CTF\_VCRUNTIME140D.dll' 'C:\Users\mzj\Desktop\CTF\_shim_vcr_min.c' -lkernel32 2>&1; Write-Output ('gcc_vcr_exit_code=' + $LASTEXITCODE); Copy-Item -LiteralPath 'C:\Users\mzj\Desktop\CTF\_ucrtbased.dll' -Destination (Join-Path $run 'ucrtbased.dll') -Force; Copy-Item -LiteralPath 'C:\Users\mzj\Desktop\CTF\_VCRUNTIME140D.dll' -Destination (Join-Path $run 'VCRUNTIME140D.dll') -Force; Write-Output 'COMMAND: objdump -p minimal DLLs'; foreach($path in @('C:\Users\mzj\Desktop\CTF\_ucrtbased.dll','C:\Users\mzj\Desktop\CTF\_VCRUNTIME140D.dll')) { Write-Output ('DLL=' + $path); objdump -p $path 2>&1 | Select-String 'DLL Name|Member-Name|exit$|DllMain|__current_exception' | ForEach-Object { $_.Line } }; Write-Output 'COMMAND: Local debugger run with minimal shims'; & 'C:\Users\mzj\Desktop\CTF\_ezdump.exe' (Join-Path $run 'ezre.exe') 'C:\Users\mzj\Desktop\CTF\_ezinput.txt' 'C:\Users\mzj\Desktop\CTF\_ezunpacked.bin' 2>&1; Write-Output ('debugger_exit_code=' + $LASTEXITCODE); Write-Output 'COMMAND: Hash minimal shims'; Get-FileHash -Algorithm SHA256 -LiteralPath $srcU,$srcV,'C:\Users\mzj\Desktop\CTF\_ucrtbased.dll','C:\Users\mzj\Desktop\CTF\_VCRUNTIME140D.dll' | Format-Table -AutoSize; } finally { Stop-Transcript | Out-Null }
+  C:\Users\mzj\Desktop\CTF\玄机刷题\记录\代理-go_for_it-终端记录.txt:20288:Process ID: 28284
+  C:\Users\mzj\Desktop\CTF\玄机刷题\记录\代理-go_for_it-终端记录.txt:20289:PSVersion: 7.6.5
+  C:\Users\mzj\Desktop\CTF\玄机刷题\记录\代理-go_for_it-终端记录.txt:20357:}
+> C:\Users\mzj\Desktop\CTF\玄机刷题\记录\代理-go_for_it-终端记录.txt:20358:'@; Write-Output 'SOURCE debug_patch.c:'; Write-Output $source; Set-Content -LiteralPath $src -Value $source -Encoding ascii; Copy-Item -LiteralPath $src -Destination $ascii -Force; Write-Output ('COMMAND: gcc -Wall -Wextra -O2 -o ' + $exe + ' ' + $ascii); gcc -Wall -Wextra -O2 -o $exe $ascii 2>&1; Write-Output ('gcc_exit_code=' + $LASTEXITCODE); Write-Output ('COMMAND: ' + $exe + ' ' + (Join-Path $run 'ezre.exe') + ' ' + $input); & $exe (Join-Path $run 'ezre.exe') $input 2>&1; Write-Output ('debugger_exit_code=' + $LASTEXITCODE); Write-Output 'COMMAND: Hash patch harness'; Get-FileHash -Algorithm SHA256 -LiteralPath $src,$exe | Format-Table -AutoSize; } finally { Stop-Transcript | Out-Null }
+  C:\Users\mzj\Desktop\CTF\玄机刷题\记录\代理-go_for_it-终端记录.txt:20359:Process ID: 4300
+  C:\Users\mzj\Desktop\CTF\玄机刷题\记录\代理-go_for_it-终端记录.txt:20360:PSVersion: 7.6.5
+  C:\Users\mzj\Desktop\CTF\玄机刷题\记录\代理-go_for_it-终端记录.txt:20386:gcc_exit_code=0
+> C:\Users\mzj\Desktop\CTF\玄机刷题\记录\代理-go_for_it-终端记录.txt:20387:COMMAND: C:\Users\mzj\Desktop\CTF\_ezpatch.exe C:\Users\mzj\Desktop\CTF\_ezrun\ezre.exe C:\Users\mzj\Desktop\CTF\_ezinput.txt
+  C:\Users\mzj\Desktop\CTF\玄机刷题\记录\代理-go_for_it-终端记录.txt:20388:debugger_exit_code=0
+  C:\Users\mzj\Desktop\CTF\玄机刷题\记录\代理-go_for_it-终端记录.txt:20389:COMMAND: Hash patch harness
+  C:\Users\mzj\Desktop\CTF\玄机刷题\记录\代理-go_for_it-终端记录.txt:20422:}
+> C:\Users\mzj\Desktop\CTF\玄机刷题\记录\代理-go_for_it-终端记录.txt:20423:'@; Write-Output 'SOURCE debug_patch.c (supports up to 16 matching misaligned stores):'; Write-Output $source; Set-Content -LiteralPath $src -Value $source -Encoding ascii; Copy-Item -LiteralPath $src -Destination $ascii -Force; Write-Output "COMMAND: gcc -Wall -Wextra -O2 -o $exe $ascii"; gcc -Wall -Wextra -O2 -o $exe $ascii 2>&1; Write-Output ('gcc_exit_code=' + $LASTEXITCODE); $bytes=[byte[]]([System.Text.Encoding]::ASCII.GetBytes(('A'*36 + "`n"))); Write-Output ('COMMAND: WriteAllBytes ' + $input + ' ASCII=A*36+LF (length ' + $bytes.Length + ')'); [System.IO.File]::WriteAllBytes($input,$bytes); Write-Output ('COMMAND: ' + $exe + ' ' + (Join-Path $run 'ezre.exe') + ' ' + $input); & $exe (Join-Path $run 'ezre.exe') $input 2>&1; Write-Output ('debugger_exit_code=' + $LASTEXITCODE); Write-Output 'COMMAND: Hash patch harness and test input'; Get-FileHash -Algorithm SHA256 -LiteralPath $src,$exe,$input | Format-Table -AutoSize; } finally { Stop-Transcript | Out-Null }
+  C:\Users\mzj\Desktop\CTF\玄机刷题\记录\代理-go_for_it-终端记录.txt:20424:Process ID: 3836
+  C:\Users\mzj\Desktop\CTF\玄机刷题\记录\代理-go_for_it-终端记录.txt:20425:PSVersion: 7.6.5
+  C:\Users\mzj\Desktop\CTF\玄机刷题\记录\代理-go_for_it-终端记录.txt:20452:COMMAND: WriteAllBytes C:\Users\mzj\Desktop\CTF\_ezinput.txt ASCII=A*36+LF (length 37)
+> C:\Users\mzj\Desktop\CTF\玄机刷题\记录\代理-go_for_it-终端记录.txt:20453:COMMAND: C:\Users\mzj\Desktop\CTF\_ezpatch.exe C:\Users\mzj\Desktop\CTF\_ezrun\ezre.exe C:\Users\mzj\Desktop\CTF\_ezinput.txt
+  C:\Users\mzj\Desktop\CTF\玄机刷题\记录\代理-go_for_it-终端记录.txt:20454:debugger_exit_code=0
+  C:\Users\mzj\Desktop\CTF\玄机刷题\记录\代理-go_for_it-终端记录.txt:20455:COMMAND: Hash patch harness and test input
+  C:\Users\mzj\Desktop\CTF\玄机刷题\记录\代理-go_for_it-终端记录.txt:20502:}
+> C:\Users\mzj\Desktop\CTF\玄机刷题\记录\代理-go_for_it-终端记录.txt:20503:'@; Write-Output 'SOURCE debug_patch.c (aligned SSE patch handler):'; Write-Output $source; Set-Content -LiteralPath $src -Value $source -Encoding ascii; Copy-Item -LiteralPath $src -Destination $ascii -Force; Write-Output ('COMMAND: gcc -Wall -Wextra -O2 -o ' + $exe + ' ' + $ascii); gcc -Wall -Wextra -O2 -o $exe $ascii 2>&1; Write-Output ('gcc_exit_code=' + $LASTEXITCODE); Write-Output ('COMMAND: ' + $exe + ' ' + (Join-Path $run 'ezre.exe') + ' ' + $input); & $exe (Join-Path $run 'ezre.exe') $input 2>&1; Write-Output ('debugger_exit_code=' + $LASTEXITCODE); Write-Output 'COMMAND: Hash patch harness'; Get-FileHash -Algorithm SHA256 -LiteralPath $src,$exe,$input | Format-Table -AutoSize; } finally { Stop-Transcript | Out-Null }
+  C:\Users\mzj\Desktop\CTF\玄机刷题\记录\代理-go_for_it-终端记录.txt:20504:Process ID: 24944
+  C:\Users\mzj\Desktop\CTF\玄机刷题\记录\代理-go_for_it-终端记录.txt:20505:PSVersion: 7.6.5
+  C:\Users\mzj\Desktop\CTF\玄机刷题\记录\代理-go_for_it-终端记录.txt:20544:gcc_exit_code=0
+> C:\Users\mzj\Desktop\CTF\玄机刷题\记录\代理-go_for_it-终端记录.txt:20545:COMMAND: C:\Users\mzj\Desktop\CTF\_ezpatch.exe C:\Users\mzj\Desktop\CTF\_ezrun\ezre.exe C:\Users\mzj\Desktop\CTF\_ezinput.txt
+  C:\Users\mzj\Desktop\CTF\玄机刷题\记录\代理-go_for_it-终端记录.txt:20546:debugger_exit_code=0
+  C:\Users\mzj\Desktop\CTF\玄机刷题\记录\代理-go_for_it-终端记录.txt:20547:COMMAND: Hash patch harness
+  C:\Users\mzj\Desktop\CTF\玄机刷题\记录\代理-go_for_it-终端记录.txt:20572:int main(int argc,char**argv){if(argc<4){printf("usage: importdump <exe> <input> <dump>\n");return 2;}SECURITY_ATTRIBUTES sa={sizeof(sa),NULL,TRUE};HANDLE hin=CreateFileA(argv[2],GENERIC_READ,FILE_SHARE_READ,&sa,OPEN_EXISTING,FILE_ATTRIBUTE_NORMAL,NULL);STARTUPINFOA si;PROCESS_INFORMATION pi;ZeroMemory(&si,sizeof(si));ZeroMemory(&pi,sizeof(pi));si.cb=sizeof(si);si.dwFlags=STARTF_USESTDHANDLES;si.hStdInput=hin;si.hStdOutput=GetStdHandle(STD_OUTPUT_HANDLE);si.hStdError=GetStdHandle(STD_ERROR_HANDLE);char cmd[4096];snprintf(cmd,sizeof(cmd),"\"%s\"",argv[1]);printf("COMMAND: CreateProcessA %s DEBUG_ONLY_THIS_PROCESS\n",argv[1]);if(!CreateProcessA(argv[1],cmd,NULL,NULL,TRUE,DEBUG_ONLY_THIS_PROCESS|CREATE_NO_WINDOW,NULL,NULL,&si,&pi)){printf("CreateProcess error=%lu\n",GetLastError());return 4;}CloseHandle(hin);ULONG_PTR base=0;int dumped=0,done=0,n=0;while(!done&&n++<10000){DEBUG_EVENT e;if(!WaitForDebugEvent(&e,5000)){printf("WaitForDebugEvent error=%lu\n",GetLastError());break;}DWORD c=DBG_CONTINUE;if(e.dwDebugEventCode==CREATE_PROCESS_DEBUG_EVENT){base=(ULONG_PTR)e.u.CreateProcessInfo.lpBaseOfImage;printf("CREATE_PROCESS base=%p start=%p\n",(void*)base,e.u.CreateProcessInfo.lpStartAddress);if(e.u.CreateProcessInfo.hFile)CloseHandle(e.u.CreateProcessInfo.hFile);}else if(e.dwDebugEventCode==LOAD_DLL_DEBUG_EVENT){if(e.u.LoadDll.hFile)CloseHandle(e.u.LoadDll.hFile);}else if(e.dwDebugEventCode==EXCEPTION_DEBUG_EVENT){DWORD code=e.u.Exception.ExceptionRecord.ExceptionCode;printf("EXCEPTION code=0x%08lx addr=%p chance=%lu\n",code,e.u.Exception.ExceptionRecord.ExceptionAddress,e.u.Exception.dwFirstChance);if(code==EXCEPTION_BREAKPOINT||code==EXCEPTION_SINGLE_STEP)c=DBG_CONTINUE;else{if(!dumped&&code==0xc0000005){dumped=1;DWORD size=0x3000;unsigned char*b=(unsigned char*)malloc(size);SIZE_T got=0;if(ReadProcessMemory(pi.hProcess,(LPCVOID)(base+0xc000),b,size,&got)){HANDLE h=CreateFileA(argv[3],GENERIC_WRITE,0,NULL,CREATE_ALWAYS,FILE_ATTRIBUTE_NORMAL,NULL);DWORD wr=0;BOOL ok=h!=INVALID_HANDLE_VALUE&&WriteFile(h,b,(DWORD)got,&wr,NULL);if(h!=INVALID_HANDLE_VALUE)CloseHandle(h);printf("DUMP rva=0xc000 path=%s requested=%lu read=%llu written=%lu ok=%u\n",argv[3],size,(unsigned long long)got,wr,ok);}else printf("ReadProcessMemory error=%lu read=%llu\n",GetLastError(),(unsigned long long)got);free(b);}c=DBG_EXCEPTION_NOT_HANDLED;}}else if(e.dwDebugEventCode==EXIT_PROCESS_DEBUG_EVENT){printf("EXIT_PROCESS code=0x%08lx\n",e.u.ExitProcess.dwExitCode);done=1;}if(!ContinueDebugEvent(e.dwProcessId,e.dwThreadId,c)){printf("ContinueDebugEvent error=%lu\n",GetLastError());break;}}DWORD ec=0;GetExitCodeProcess(pi.hProcess,&ec);printf("debug_exit=%lu events=%d dumped=%d\n",ec,n,dumped);CloseHandle(pi.hThread);CloseHandle(pi.hProcess);return 0;}
+> C:\Users\mzj\Desktop\CTF\玄机刷题\记录\代理-go_for_it-终端记录.txt:20573:'@; Write-Output 'SOURCE debug_importdump.c:'; Write-Output $source; Set-Content -LiteralPath $src -Value $source -Encoding ascii; Copy-Item -LiteralPath $src -Destination $ascii -Force; Write-Output ('COMMAND: gcc -Wall -Wextra -O2 -o ' + $exe + ' ' + $ascii); gcc -Wall -Wextra -O2 -o $exe $ascii 2>&1; Write-Output ('gcc_exit_code=' + $LASTEXITCODE); Write-Output ('COMMAND: ' + $exe + ' ' + (Join-Path $run 'ezre.exe') + ' ' + $input + ' ' + $dump); & $exe (Join-Path $run 'ezre.exe') $input $dump 2>&1; Write-Output ('debugger_exit_code=' + $LASTEXITCODE); if(Test-Path -LiteralPath $dump) { Copy-Item -LiteralPath $dump -Destination $dumpDest -Force; Write-Output 'COMMAND: Get-Item and SHA256 runtime import tail'; Get-Item -LiteralPath $dumpDest | Format-List FullName,Length; Get-FileHash -Algorithm SHA256 -LiteralPath $dumpDest; Write-Output 'COMMAND: strings -a -t x -n 3 runtime import tail'; strings -a -t x -n 3 $dump 2>&1; Write-Output ('strings_exit_code=' + $LASTEXITCODE); Write-Output 'COMMAND: Format-Hex runtime import tail first 512 bytes'; Format-Hex -Path $dump | Select-Object -First 32; }; } finally { Stop-Transcript | Out-Null }
+  C:\Users\mzj\Desktop\CTF\玄机刷题\记录\代理-go_for_it-终端记录.txt:20574:Process ID: 3312
+  C:\Users\mzj\Desktop\CTF\玄机刷题\记录\代理-go_for_it-终端记录.txt:20575:PSVersion: 7.6.5
+  C:\Users\mzj\Desktop\CTF\玄机刷题\记录\代理-go_for_it-终端记录.txt:20592:gcc_exit_code=0
+> C:\Users\mzj\Desktop\CTF\玄机刷题\记录\代理-go_for_it-终端记录.txt:20593:COMMAND: C:\Users\mzj\Desktop\CTF\_ezimportdump.exe C:\Users\mzj\Desktop\CTF\_ezrun\ezre.exe C:\Users\mzj\Desktop\CTF\_ezinput.txt C:\Users\mzj\Desktop\CTF\_ezimport_tail.bin
+  C:\Users\mzj\Desktop\CTF\玄机刷题\记录\代理-go_for_it-终端记录.txt:20594:debugger_exit_code=0
+  C:\Users\mzj\Desktop\CTF\玄机刷题\记录\代理-go_for_it-终端记录.txt:20595:COMMAND: Get-Item and SHA256 runtime import tail
+  C:\Users\mzj\Desktop\CTF\玄机刷题\记录\代理-go_for_it-终端记录.txt:21175:Host Application: C:\Users\mzj\.cache\codex-runtimes\codex-primary-runtime\dependencies\native\powershell\pwsh.dll -NoProfile -Command try { [Console]::OutputEncoding=[System.Text.Encoding]::UTF8 } catch {}
+> C:\Users\mzj\Desktop\CTF\玄机刷题\记录\代理-go_for_it-终端记录.txt:21176:$ErrorActionPreference='Continue'; $logPath='C:\Users\mzj\Desktop\CTF\玄机刷题\记录\代理-go_for_it-终端记录.txt'; $ucrtDef='C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\ezBase_541\ucrtbased_forward.def'; $vcrDef='C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\ezBase_541\vcruntime140d_forward.def'; $run='C:\Users\mzj\Desktop\CTF\_ezrun'; $exe='C:\Users\mzj\Desktop\CTF\_ezpatch.exe'; $input='C:\Users\mzj\Desktop\CTF\_ezinput.txt'; Start-Transcript -Path $logPath -Append | Out-Null; try { $ucrtNames=@('__acrt_iob_func','__p___argc','__p___argv','__p__commode','__setusermatherr','__stdio_common_vfprintf','__stdio_common_vsprintf','_c_exit','_cexit','_configthreadlocale','_configure_narrow_argv','_crt_at_quick_exit','_crt_atexit','_execute_onexit_table','_exit','_get_initial_narrow_environment','_initialize_narrow_environment','_initialize_onexit_table','_initterm','_initterm_e','_register_onexit_function','_register_thread_local_exe_atexit_callback','_seh_filter_dll','_seh_filter_exe','_set_app_type','_set_fmode','_set_new_mode','exit','fgets','puts','strcmp','strcspn','terminate'); $vcrNames=@('__C_specific_handler','__current_exception','__current_exception_context','__std_type_info_destroy_list'); $uLines=@('LIBRARY ucrtbased.dll','EXPORTS') + ($ucrtNames | ForEach-Object { $_ + '=ucrtbase.' + $_ }); $vLines=@('LIBRARY VCRUNTIME140D.dll','EXPORTS') + ($vcrNames | ForEach-Object { $_ + '=VCRUNTIME140.' + $_ }); Write-Output 'SOURCE ucrtbased_forward.def:'; $uLines | ForEach-Object { Write-Output $_ }; $uLines | Set-Content -LiteralPath $ucrtDef -Encoding ascii; Write-Output 'SOURCE vcruntime140d_forward.def:'; $vLines | ForEach-Object { Write-Output $_ }; $vLines | Set-Content -LiteralPath $vcrDef -Encoding ascii; Write-Output 'COMMAND: gcc -shared -nostdlib -o C:\Users\mzj\Desktop\CTF\_ucrtbased.dll <ucrtbased_forward.def>'; gcc -shared -nostdlib -o 'C:\Users\mzj\Desktop\CTF\_ucrtbased.dll' $ucrtDef 2>&1; Write-Output ('gcc_ucrt_exit_code=' + $LASTEXITCODE); Write-Output 'COMMAND: gcc -shared -nostdlib -o C:\Users\mzj\Desktop\CTF\_VCRUNTIME140D.dll <vcruntime140d_forward.def>'; gcc -shared -nostdlib -o 'C:\Users\mzj\Desktop\CTF\_VCRUNTIME140D.dll' $vcrDef 2>&1; Write-Output ('gcc_vcr_exit_code=' + $LASTEXITCODE); Copy-Item -LiteralPath 'C:\Users\mzj\Desktop\CTF\_ucrtbased.dll' -Destination (Join-Path $run 'ucrtbased.dll') -Force; Copy-Item -LiteralPath 'C:\Users\mzj\Desktop\CTF\_VCRUNTIME140D.dll' -Destination (Join-Path $run 'VCRUNTIME140D.dll') -Force; Write-Output 'COMMAND: Verify forwarded exports with objdump'; objdump -p 'C:\Users\mzj\Desktop\CTF\_ucrtbased.dll' 2>&1 | Select-String 'DLL Name|Member-Name|Forwarder|ucrtbase|__acrt_iob_func|strcmp|fgets' | ForEach-Object { $_.Line }; objdump -p 'C:\Users\mzj\Desktop\CTF\_VCRUNTIME140D.dll' 2>&1 | Select-String 'DLL Name|Member-Name|Forwarder|VCRUNTIME140|current_exception' | ForEach-Object { $_.Line }; Write-Output 'COMMAND: Run locally with forwarded CRT shims and 2 alignment fixes'; & $exe (Join-Path $run 'ezre.exe') $input 2>&1; Write-Output ('debugger_exit_code=' + $LASTEXITCODE); Write-Output 'COMMAND: Hash forwarder definitions and generated DLLs'; Get-FileHash -Algorithm SHA256 -LiteralPath $ucrtDef,$vcrDef,'C:\Users\mzj\Desktop\CTF\_ucrtbased.dll','C:\Users\mzj\Desktop\CTF\_VCRUNTIME140D.dll',$input | Format-Table -AutoSize; } finally { Stop-Transcript | Out-Null }
+  C:\Users\mzj\Desktop\CTF\玄机刷题\记录\代理-go_for_it-终端记录.txt:21177:Process ID: 18688
+  C:\Users\mzj\Desktop\CTF\玄机刷题\记录\代理-go_for_it-终端记录.txt:21178:PSVersion: 7.6.5
+  C:\Users\mzj\Desktop\CTF\玄机刷题\记录\代理-go_for_it-终端记录.txt:21401:Write-Output '=== harness files ==='
+> C:\Users\mzj\Desktop\CTF\玄机刷题\记录\代理-go_for_it-终端记录.txt:21402:Get-Item 'C:\Users\mzj\Desktop\CTF\_ezpatch.exe','C:\Users\mzj\Desktop\CTF\_ezrun\ezre.exe','C:\Users\mzj\Desktop\CTF\_ezrun\ucrtbased.dll','C:\Users\mzj\Desktop\CTF\_ezrun\VCRUNTIME140D.dll','C:\Users\mzj\Desktop\CTF\_ezinput.txt' | Select-Object FullName,Length
+  C:\Users\mzj\Desktop\CTF\玄机刷题\记录\代理-go_for_it-终端记录.txt:21403:Write-Output '=== forwarder exports ==='
+  C:\Users\mzj\Desktop\CTF\玄机刷题\记录\代理-go_for_it-终端记录.txt:21404:& objdump -p 'C:\Users\mzj\Desktop\CTF\_ucrtbased_forward.dll' 2>&1 | Select-String -Context 0,2 'Export Address Table|Export Address Table --|Name Pointer|ucrtbase'
+  C:\Users\mzj\Desktop\CTF\玄机刷题\记录\代理-go_for_it-终端记录.txt:21521:Write-Output '=== harness files ==='
+> C:\Users\mzj\Desktop\CTF\玄机刷题\记录\代理-go_for_it-终端记录.txt:21522:Get-Item 'C:\Users\mzj\Desktop\CTF\_ezpatch.exe','C:\Users\mzj\Desktop\CTF\_ezrun\ezre.exe','C:\Users\mzj\Desktop\CTF\_ezrun\ucrtbased.dll','C:\Users\mzj\Desktop\CTF\_ezrun\VCRUNTIME140D.dll','C:\Users\mzj\Desktop\CTF\_ezinput.txt' | Select-Object FullName,Length
+  C:\Users\mzj\Desktop\CTF\玄机刷题\记录\代理-go_for_it-终端记录.txt:21523:Write-Output '=== forwarder exports ==='
+  C:\Users\mzj\Desktop\CTF\玄机刷题\记录\代理-go_for_it-终端记录.txt:21524:& objdump -p 'C:\Users\mzj\Desktop\CTF\_ucrtbased_forward.dll' 2>&1 | Select-String -Context 0,2 'Export Address Table|Export Address Table --|Name Pointer|ucrtbase'
+  C:\Users\mzj\Desktop\CTF\玄机刷题\记录\代理-go_for_it-终端记录.txt:21629:Write-Output '=== local target run with forwarder shims + existing in-memory SIMD alignment patches ==='
+> C:\Users\mzj\Desktop\CTF\玄机刷题\记录\代理-go_for_it-终端记录.txt:21630:& 'C:\Users\mzj\Desktop\CTF\_ezpatch.exe' (Join-Path $run 'ezre.exe') 'C:\Users\mzj\Desktop\CTF\_ezinput.txt' 2>&1
+  C:\Users\mzj\Desktop\CTF\玄机刷题\记录\代理-go_for_it-终端记录.txt:21631:Write-Output "harness_exit=$LASTEXITCODE"
+  C:\Users\mzj\Desktop\CTF\玄机刷题\记录\代理-go_for_it-终端记录.txt:21632:Stop-Transcript
+  C:\Users\mzj\Desktop\CTF\玄机刷题\记录\代理-go_for_it-终端记录.txt:21689:Write-Output '=== dump runtime data at main ==='
+> C:\Users\mzj\Desktop\CTF\玄机刷题\记录\代理-go_for_it-终端记录.txt:21690:& 'C:\Users\mzj\Desktop\CTF\_dumpmain.exe' 'C:\Users\mzj\Desktop\CTF\_ezrun\ezre.exe' 'C:\Users\mzj\Desktop\CTF\_ezinput.txt' 2>&1
+  C:\Users\mzj\Desktop\CTF\玄机刷题\记录\代理-go_for_it-终端记录.txt:21691:Write-Output "dumpmain_exit=$LASTEXITCODE"
+  C:\Users\mzj\Desktop\CTF\玄机刷题\记录\代理-go_for_it-终端记录.txt:21692:Stop-Transcript
+  C:\Users\mzj\Desktop\CTF\玄机刷题\记录\代理-go_for_it-终端记录.txt:21757:Write-Output '=== runtime data via hardware breakpoints ==='
+> C:\Users\mzj\Desktop\CTF\玄机刷题\记录\代理-go_for_it-终端记录.txt:21758:& 'C:\Users\mzj\Desktop\CTF\_dumpmain2.exe' 'C:\Users\mzj\Desktop\CTF\_ezrun\ezre.exe' 'C:\Users\mzj\Desktop\CTF\_ezinput.txt' 2>&1
+  C:\Users\mzj\Desktop\CTF\玄机刷题\记录\代理-go_for_it-终端记录.txt:21759:Write-Output "dumpmain2_exit=$LASTEXITCODE"
+  C:\Users\mzj\Desktop\CTF\玄机刷题\记录\代理-go_for_it-终端记录.txt:21760:Stop-Transcript
+  C:\Users\mzj\Desktop\CTF\玄机刷题\记录\代理-go_for_it-终端记录.txt:21813:Write-Output '=== runtime data at startup OEP and main ==='
+> C:\Users\mzj\Desktop\CTF\玄机刷题\记录\代理-go_for_it-终端记录.txt:21814:& 'C:\Users\mzj\Desktop\CTF\_dumpmain3.exe' 'C:\Users\mzj\Desktop\CTF\_ezrun\ezre.exe' 'C:\Users\mzj\Desktop\CTF\_ezinput.txt' 2>&1
+  C:\Users\mzj\Desktop\CTF\玄机刷题\记录\代理-go_for_it-终端记录.txt:21815:Write-Output "dumpmain3_exit=$LASTEXITCODE"
+  C:\Users\mzj\Desktop\CTF\玄机刷题\记录\代理-go_for_it-终端记录.txt:21816:Stop-Transcript
+  C:\Users\mzj\Desktop\CTF\玄机刷题\记录\代理-go_for_it-终端记录.txt:22328:Write-Output '=== original target binary, decoded 35-byte candidate ==='
+> C:\Users\mzj\Desktop\CTF\玄机刷题\记录\代理-go_for_it-终端记录.txt:22329:& 'C:\Users\mzj\Desktop\CTF\_ezpatch.exe' 'C:\Users\mzj\Desktop\CTF\_ezrun\ezre.exe' 'C:\Users\mzj\Desktop\CTF\_ezcand_35.txt' 2>&1
+  C:\Users\mzj\Desktop\CTF\玄机刷题\记录\代理-go_for_it-终端记录.txt:22330:Write-Output "run35_exit=$LASTEXITCODE"
+  C:\Users\mzj\Desktop\CTF\玄机刷题\记录\代理-go_for_it-终端记录.txt:22331:Write-Output '=== original target binary, candidate plus closing brace (36 bytes) ==='
+> C:\Users\mzj\Desktop\CTF\玄机刷题\记录\代理-go_for_it-终端记录.txt:22332:& 'C:\Users\mzj\Desktop\CTF\_ezpatch.exe' 'C:\Users\mzj\Desktop\CTF\_ezrun\ezre.exe' 'C:\Users\mzj\Desktop\CTF\_ezcand_36.txt' 2>&1
+  C:\Users\mzj\Desktop\CTF\玄机刷题\记录\代理-go_for_it-终端记录.txt:22333:Write-Output "run36_exit=$LASTEXITCODE"
+  C:\Users\mzj\Desktop\CTF\玄机刷题\记录\代理-go_for_it-终端记录.txt:22334:Write-Output '=== input hashes ==='
+  C:\Users\mzj\Desktop\CTF\玄机刷题\记录\代理-go_for_it-终端记录.txt:22454:Write-Output '=== original target program with decoded 35-byte data ==='
+> C:\Users\mzj\Desktop\CTF\玄机刷题\记录\代理-go_for_it-终端记录.txt:22455:& 'C:\Users\mzj\Desktop\CTF\_ezpatch.exe' 'C:\Users\mzj\Desktop\CTF\_ezrun\ezre.exe' 'C:\Users\mzj\Desktop\CTF\_ezcand_35.txt' 2>&1
+  C:\Users\mzj\Desktop\CTF\玄机刷题\记录\代理-go_for_it-终端记录.txt:22456:Write-Output "run35_exit=$LASTEXITCODE"
+  C:\Users\mzj\Desktop\CTF\玄机刷题\记录\代理-go_for_it-终端记录.txt:22457:Write-Output '=== original target program with appended closing brace (36 bytes) ==='
+> C:\Users\mzj\Desktop\CTF\玄机刷题\记录\代理-go_for_it-终端记录.txt:22458:& 'C:\Users\mzj\Desktop\CTF\_ezpatch.exe' 'C:\Users\mzj\Desktop\CTF\_ezrun\ezre.exe' 'C:\Users\mzj\Desktop\CTF\_ezcand_36.txt' 2>&1
+  C:\Users\mzj\Desktop\CTF\玄机刷题\记录\代理-go_for_it-终端记录.txt:22459:Write-Output "run36_exit=$LASTEXITCODE"
+  C:\Users\mzj\Desktop\CTF\玄机刷题\记录\代理-go_for_it-终端记录.txt:22460:Write-Output '=== exact test input sizes and hashes ==='
+  C:\Users\mzj\Desktop\CTF\玄机刷题\记录\代理-go_for_it-终端记录.txt:22524:Write-Output '=== original EXE identity ==='
+> C:\Users\mzj\Desktop\CTF\玄机刷题\记录\代理-go_for_it-终端记录.txt:22525:Get-FileHash 'C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\ezBase_541\ezre.exe' -Algorithm SHA256 | ForEach-Object { "exe_sha256=$($_.Hash) file=$($_.Path)" }
+  C:\Users\mzj\Desktop\CTF\玄机刷题\记录\代理-go_for_it-终端记录.txt:22526:Write-Output '=== candidate source/input identities ==='
+> C:\Users\mzj\Desktop\CTF\玄机刷题\记录\代理-go_for_it-终端记录.txt:22527:Get-FileHash 'C:\Users\mzj\Desktop\CTF\_solve_ez541_final.py','C:\Users\mzj\Desktop\CTF\_ezcand_35.txt','C:\Users\mzj\Desktop\CTF\_ezcand_36.txt' -Algorithm SHA256 | ForEach-Object { "sha256=$($_.Hash) file=$($_.Path)" }
+  C:\Users\mzj\Desktop\CTF\玄机刷题\记录\代理-go_for_it-终端记录.txt:22528:Write-Output '=== prompt helper disassembly excerpt ==='
+  C:\Users\mzj\Desktop\CTF\玄机刷题\记录\代理-go_for_it-终端记录.txt:22529:$asm=& objdump -D -b binary -m i386:x86-64 -M intel --adjust-vma=0x140001000 'C:\Users\mzj\Desktop\CTF\_ezruntime.bin' 2>&1
+  C:\Users\mzj\Desktop\CTF\玄机刷题\记录\代理-go_for_it-终端记录.txt:22548:Line |
+> C:\Users\mzj\Desktop\CTF\玄机刷题\记录\代理-go_for_it-终端记录.txt:22549:   8 |  Get-FileHash 'C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\ezBase_541\ezre.exe' …
+  C:\Users\mzj\Desktop\CTF\玄机刷题\记录\代理-go_for_it-终端记录.txt:22550:     |  ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+> C:\Users\mzj\Desktop\CTF\玄机刷题\记录\代理-go_for_it-终端记录.txt:22551:     | Cannot find path 'C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\ezBase_541\ezre.exe' because it does not exist.
+  C:\Users\mzj\Desktop\CTF\玄机刷题\记录\代理-go_for_it-终端记录.txt:22552:Get-FileHash:
+  C:\Users\mzj\Desktop\CTF\玄机刷题\记录\代理-go_for_it-终端记录.txt:22553:Line |
+> C:\Users\mzj\Desktop\CTF\玄机刷题\记录\代理-go_for_it-终端记录.txt:22554:   8 |  Get-FileHash 'C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\ezBase_541\ezre.exe' …
+  C:\Users\mzj\Desktop\CTF\玄机刷题\记录\代理-go_for_it-终端记录.txt:22555:     |  ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+> C:\Users\mzj\Desktop\CTF\玄机刷题\记录\代理-go_for_it-终端记录.txt:22556:     | Cannot find path 'C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\ezBase_541\ezre.exe' because it does not exist.
+  C:\Users\mzj\Desktop\CTF\玄机刷题\记录\代理-go_for_it-终端记录.txt:22557:=== candidate source/input identities ===
+  C:\Users\mzj\Desktop\CTF\玄机刷题\记录\代理-go_for_it-终端记录.txt:22558:sha256=352D04492A87FDFB1BED3E9BEF581363492F9D507E269964FFE6BC05DCE69B10 file=C:\Users\mzj\Desktop\CTF\_solve_ez541_final.py
+  C:\Users\mzj\Desktop\CTF\玄机刷题\记录\代理-go_for_it-终端记录.txt:22628:Write-Output '=== extracted original binary hash ==='
+> C:\Users\mzj\Desktop\CTF\玄机刷题\记录\代理-go_for_it-终端记录.txt:22629:Get-ChildItem -LiteralPath 'C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\ezBase_541' -Recurse -Filter 'ezre.exe' -File | Get-FileHash -Algorithm SHA256 | ForEach-Object { "sha256=$($_.Hash) file=$($_.Path)" }
+  C:\Users\mzj\Desktop\CTF\玄机刷题\记录\代理-go_for_it-终端记录.txt:22630:Stop-Transcript
+  C:\Users\mzj\Desktop\CTF\玄机刷题\记录\代理-go_for_it-终端记录.txt:22631:Process ID: 8488
+  C:\Users\mzj\Desktop\CTF\玄机刷题\记录\续攻-主线程终端记录.txt:612:C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\ezBase_541\工作区\README.md
+> C:\Users\mzj\Desktop\CTF\玄机刷题\记录\续攻-主线程终端记录.txt:613:C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\ezBase_541\ezBase\ezre.exe
+  C:\Users\mzj\Desktop\CTF\玄机刷题\记录\续攻-主线程终端记录.txt:614:C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\ezBase_541\decode_upx.py
+  C:\Users\mzj\Desktop\CTF\玄机刷题\记录\续攻-主线程终端记录.txt:615:C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\ezBase_541\debug_stack.c
+  C:\Users\mzj\Desktop\CTF\玄机刷题\记录\续攻-主线程终端记录.txt:630:C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\ezBase_541\runshim\ucrtbased.dll
+> C:\Users\mzj\Desktop\CTF\玄机刷题\记录\续攻-主线程终端记录.txt:631:C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\ezBase_541\runshim\ezre.exe
+  C:\Users\mzj\Desktop\CTF\玄机刷题\记录\续攻-主线程终端记录.txt:632:C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\ezBase_541\unpacked_runtime.bin
+  C:\Users\mzj\Desktop\CTF\玄机刷题\记录\续攻-主线程终端记录.txt:633:C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\ezBase_541\ucrtbased_forward.def
+  C:\Users\mzj\Desktop\CTF\玄机刷题\记录\续攻-主线程终端记录.txt:676:C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\ezBase_541\solve_ez541_final.py:19:print(f"roundtrip_diff_indices={[i for i,(x,y) in enumerate(zip(reproduced,target)) if x!=y]}")
+> C:\Users\mzj\Desktop\CTF\玄机刷题\记录\续攻-主线程终端记录.txt:677:C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\ezBase_541\solve_ez541_final.py:20:print(f"candidate_sha256={hashlib.sha256(candidate).hexdigest()}")
+  C:\Users\mzj\Desktop\CTF\玄机刷题\记录\续攻-主线程终端记录.txt:678:C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\ezBase_541\工作区\2026-09-27\solve_ez541_final_snapshot.py:1:import base64, hashlib
+  C:\Users\mzj\Desktop\CTF\玄机刷题\记录\续攻-主线程终端记录.txt:679:C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\ezBase_541\工作区\2026-09-27\solve_ez541_final_snapshot.py:4:target = b"iP}ui7siC`otMgA~h5o]Tg<4jPmtIvM5C~I4h644K7M~KVg="
+  C:\Users\mzj\Desktop\CTF\玄机刷题\记录\续攻-主线程终端记录.txt:694:C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\ezBase_541\工作区\2026-09-27\solve_ez541_final_snapshot.py:19:print(f"roundtrip_diff_indices={[i for i,(x,y) in enumerate(zip(reproduced,target)) if x!=y]}")
+> C:\Users\mzj\Desktop\CTF\玄机刷题\记录\续攻-主线程终端记录.txt:695:C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\ezBase_541\工作区\2026-09-27\solve_ez541_final_snapshot.py:20:print(f"candidate_sha256={hashlib.sha256(candidate).hexdigest()}")
+  C:\Users\mzj\Desktop\CTF\玄机刷题\记录\续攻-主线程终端记录.txt:696:C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\ezBase_541\工作区\2026-09-27\solve_ez541_final_snapshot.py:21:output_dir = Path(__file__).resolve().parent
+  C:\Users\mzj\Desktop\CTF\玄机刷题\记录\续攻-主线程终端记录.txt:697:C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\ezBase_541\工作区\2026-09-27\solve_ez541_early.py:1:import base64, hashlib
+  C:\Users\mzj\Desktop\CTF\玄机刷题\记录\续攻-主线程终端记录.txt:718:C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\ezBase_541\工作区\2026-09-27\solve_ez541_early.py:27:print(f"roundtrip_match={reproduced == target}")
+> C:\Users\mzj\Desktop\CTF\玄机刷题\记录\续攻-主线程终端记录.txt:719:C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\ezBase_541\工作区\2026-09-27\solve_ez541_early.py:28:print(f"candidate_sha256={hashlib.sha256(candidate).hexdigest()}")
+  C:\Users\mzj\Desktop\CTF\玄机刷题\记录\续攻-主线程终端记录.txt:720:**********************
+  C:\Users\mzj\Desktop\CTF\玄机刷题\记录\续攻-主线程终端记录.txt:721:PowerShell transcript end
+  C:\Users\mzj\Desktop\CTF\玄机刷题\记录\续攻-Base-终端记录.txt:492: 22628: Write-Output '=== extracted original binary hash ==='
+> C:\Users\mzj\Desktop\CTF\玄机刷题\记录\续攻-Base-终端记录.txt:493: 22629: Get-ChildItem -LiteralPath 'C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\ezBase_541' -Recurse -Filter 'ezre.exe' -File | Get-FileHash -Algorithm SHA256 | ForEach-Object { "sha256=$($_.Hash) file=$($_.Path)" }
+  C:\Users\mzj\Desktop\CTF\玄机刷题\记录\续攻-Base-终端记录.txt:494: 22630: Stop-Transcript
+  C:\Users\mzj\Desktop\CTF\玄机刷题\记录\续攻-Base-终端记录.txt:495: 22631: Process ID: 8488
+  C:\Users\mzj\Desktop\CTF\玄机刷题\记录\续攻-ezBase-终端记录.txt:70:C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\ezBase_541\vcruntime140d_forward.def                              288
+> C:\Users\mzj\Desktop\CTF\玄机刷题\记录\续攻-ezBase-终端记录.txt:71:C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\ezBase_541\ezBase\ezre.exe                                       9216
+> C:\Users\mzj\Desktop\CTF\玄机刷题\记录\续攻-ezBase-终端记录.txt:72:C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\ezBase_541\runshim\ezre.exe                                      9216
+  C:\Users\mzj\Desktop\CTF\玄机刷题\记录\续攻-ezBase-终端记录.txt:73:C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\ezBase_541\runshim\ucrtbased.dll                                90469
+  C:\Users\mzj\Desktop\CTF\玄机刷题\记录\续攻-ezBase-终端记录.txt:74:C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\ezBase_541\runshim\VCRUNTIME140D.dll                            90297
+  C:\Users\mzj\Desktop\CTF\玄机刷题\记录\续攻-ezBase-终端记录.txt:511: 22628: Write-Output '=== extracted original binary hash ==='
+> C:\Users\mzj\Desktop\CTF\玄机刷题\记录\续攻-ezBase-终端记录.txt:512: 22629: Get-ChildItem -LiteralPath 'C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\ezBase_541' -Recurse -Filter 'ezre.exe' -File | Get-FileHash -Algorithm SHA256 | ForEach-Object { "sha256=$($_.Hash) file=$($_.Path)" }
+  C:\Users\mzj\Desktop\CTF\玄机刷题\记录\续攻-ezBase-终端记录.txt:513: 22630: Stop-Transcript
+  C:\Users\mzj\Desktop\CTF\玄机刷题\记录\续攻-ezBase-终端记录.txt:514: 22631: Process ID: 8488
+  C:\Users\mzj\Desktop\CTF\玄机刷题\记录\续攻-ezBase-终端记录.txt:545:Host Application: C:\Users\mzj\.cache\codex-runtimes\codex-primary-runtime\dependencies\native\powershell\pwsh.dll -Command try { [Console]::OutputEncoding=[System.Text.Encoding]::UTF8 } catch {}
+> C:\Users\mzj\Desktop\CTF\玄机刷题\记录\续攻-ezBase-终端记录.txt:546:$log='记录\续攻-ezBase-终端记录.txt'; Start-Transcript -LiteralPath $log -Append; Write-Output '=== PE strings ==='; strings '题目资料\ezBase_541\ezBase\ezre.exe' 2>&1 | Select-String -Pattern 'flag|correct|wrong|success|fail|input|base|Base|good|bad|right|error'; Write-Output '=== input harness ==='; Get-Content -LiteralPath '题目资料\ezBase_541\debug_patch.c'; Write-Output '=== analysis outputs ==='; Get-Content -LiteralPath '题目资料\ezBase_541\分析产物\2026-09-27\_ezdecode_func.txt' -TotalCount 220; Stop-Transcript
+  C:\Users\mzj\Desktop\CTF\玄机刷题\记录\续攻-ezBase-终端记录.txt:547:Process ID: 15972
+  C:\Users\mzj\Desktop\CTF\玄机刷题\记录\续攻-ezBase-终端记录.txt:548:PSVersion: 7.6.5
+  C:\Users\mzj\Desktop\CTF\玄机刷题\记录\续攻-ezBase-终端记录.txt:1302:Host Application: C:\Users\mzj\.cache\codex-runtimes\codex-primary-runtime\dependencies\native\powershell\pwsh.dll -Command try { [Console]::OutputEncoding=[System.Text.Encoding]::UTF8 } catch {}
+> C:\Users\mzj\Desktop\CTF\玄机刷题\记录\续攻-ezBase-终端记录.txt:1303:$log='记录\续攻-ezBase-终端记录.txt'; Start-Transcript -LiteralPath $log -Append; Select-String -Path '记录\*.txt' -Pattern '0A7420F1D2D832474AD09EA55825900AF75EBA30DEA46DFB63F9A1AD17F0AF18|ezBase.*SHA256|541.*SHA256|ezre\.exe' -Context 1,2 | Select-Object -Last 50 | ForEach-Object { $_.ToString() }; Stop-Transcript
+  C:\Users\mzj\Desktop\CTF\玄机刷题\记录\续攻-ezBase-终端记录.txt:1304:Process ID: 12644
+  C:\Users\mzj\Desktop\CTF\玄机刷题\记录\续攻-ezBase-终端记录.txt:1305:PSVersion: 7.6.5
+**********************
+PowerShell transcript end
+End time: 20260928193805
+**********************
+**********************
+PowerShell transcript start
+Start time: 20260928193839
+Username: DESKTOP-412KTAR\mzj
+RunAs User: DESKTOP-412KTAR\mzj
+Configuration Name: 
+Machine: DESKTOP-412KTAR (Microsoft Windows NT 10.0.26200.0)
+Host Application: C:\Users\mzj\.cache\codex-runtimes\codex-primary-runtime\dependencies\native\powershell\pwsh.dll -Command try { [Console]::OutputEncoding=[System.Text.Encoding]::UTF8 } catch {}
+$log='记录\续攻-ezBase-终端记录.txt'; Start-Transcript -LiteralPath $log -Append; Write-Output '=== binary hash and exact data-region strings ==='; Get-FileHash -Algorithm SHA256 '题目资料\ezBase_541\ezBase\ezre.exe' | Select-Object Path,Hash | Format-List; @'
+from pathlib import Path
+p=Path('题目资料/ezBase_541/unpacked_runtime.bin').read_bytes()
+for off,n,label in [(0x3000,0x30,'target'),(0x3040,0x40,'custom_alphabet')]:
+ d=p[off:off+n]
+ print(label,'len',len(d),'repr',repr(d),'hex',d.hex())
+'@ | python -; Stop-Transcript
+Process ID: 368
+PSVersion: 7.6.5
+PSEdition: Core
+GitCommitId: 7.6.5
+OS: Microsoft Windows 10.0.26200
+Platform: Win32NT
+PSCompatibleVersions: 1.0, 2.0, 3.0, 4.0, 5.0, 5.1, 6.0, 7.0
+PSRemotingProtocolVersion: 2.4
+SerializationVersion: 1.1.0.1
+WSManStackVersion: 3.0
+**********************
+Transcript started, output file is 记录\续攻-ezBase-终端记录.txt
+=== binary hash and exact data-region strings ===
+
+Path : C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\ezBase_541\ezBase\ezre.exe
+Hash : 607BD3E8E5D7E715F7A9B819C8D5CC235C8DCC22F06A4AE77D0383E46BBDDACE
+
+**********************
+PowerShell transcript end
+End time: 20260928193839
+**********************
+**********************
+PowerShell transcript start
+Start time: 20260928193937
+Username: DESKTOP-412KTAR\mzj
+RunAs User: DESKTOP-412KTAR\mzj
+Configuration Name: 
+Machine: DESKTOP-412KTAR (Microsoft Windows NT 10.0.26200.0)
+Host Application: C:\Users\mzj\.cache\codex-runtimes\codex-primary-runtime\dependencies\native\powershell\pwsh.dll -Command try { [Console]::OutputEncoding=[System.Text.Encoding]::UTF8 } catch {}
+$log='记录\续攻-ezBase-终端记录.txt'; Start-Transcript -LiteralPath $log -Append; $p='题目资料\ezBase_541\分析产物\2026-09-27\_ezdisasm_all.txt'; Select-String -LiteralPath $p -Pattern '^   1400013|^   1400014|^   1400015' | Select-Object -First 160 | ForEach-Object { $_.Line }; Stop-Transcript
+Process ID: 15224
+PSVersion: 7.6.5
+PSEdition: Core
+GitCommitId: 7.6.5
+OS: Microsoft Windows 10.0.26200
+Platform: Win32NT
+PSCompatibleVersions: 1.0, 2.0, 3.0, 4.0, 5.0, 5.1, 6.0, 7.0
+PSRemotingProtocolVersion: 2.4
+SerializationVersion: 1.1.0.1
+WSManStackVersion: 3.0
+**********************
+Transcript started, output file is 记录\续攻-ezBase-终端记录.txt
+   140001304:	48 8b 4c 24 20       	mov    rcx,QWORD PTR [rsp+0x20]
+   140001309:	49 89 c8             	mov    r8,rcx
+   14000130c:	49 83 c0 01          	add    r8,0x1
+   140001310:	4c 89 44 24 20       	mov    QWORD PTR [rsp+0x20],r8
+   140001315:	88 14 08             	mov    BYTE PTR [rax+rcx*1],dl
+   140001318:	48 8b 44 24 18       	mov    rax,QWORD PTR [rsp+0x18]
+   14000131d:	48 83 c0 03          	add    rax,0x3
+   140001321:	48 89 44 24 18       	mov    QWORD PTR [rsp+0x18],rax
+   140001326:	e9 2a fe ff ff       	jmp    0x140001155
+   14000132b:	48 8b 44 24 38       	mov    rax,QWORD PTR [rsp+0x38]
+   140001330:	48 8b 4c 24 20       	mov    rcx,QWORD PTR [rsp+0x20]
+   140001335:	c6 04 08 00          	mov    BYTE PTR [rax+rcx*1],0x0
+   140001339:	48 8b 44 24 38       	mov    rax,QWORD PTR [rsp+0x38]
+   14000133e:	48 89 44 24 08       	mov    QWORD PTR [rsp+0x8],rax
+   140001343:	48 8b 44 24 08       	mov    rax,QWORD PTR [rsp+0x8]
+   140001348:	80 38 00             	cmp    BYTE PTR [rax],0x0
+   14000134b:	0f 84 36 00 00 00    	je     0x140001387
+   140001351:	48 8b 44 24 08       	mov    rax,QWORD PTR [rsp+0x8]
+   140001356:	0f be 00             	movsx  eax,BYTE PTR [rax]
+   140001359:	83 f8 3d             	cmp    eax,0x3d
+   14000135c:	0f 84 0d 00 00 00    	je     0x14000136f
+   140001362:	48 8b 44 24 08       	mov    rax,QWORD PTR [rsp+0x8]
+   140001367:	0f be 08             	movsx  ecx,BYTE PTR [rax]
+   14000136a:	83 f1 04             	xor    ecx,0x4
+   14000136d:	88 08                	mov    BYTE PTR [rax],cl
+   14000136f:	e9 00 00 00 00       	jmp    0x140001374
+   140001374:	48 8b 44 24 08       	mov    rax,QWORD PTR [rsp+0x8]
+   140001379:	48 83 c0 01          	add    rax,0x1
+   14000137d:	48 89 44 24 08       	mov    QWORD PTR [rsp+0x8],rax
+   140001382:	e9 bc ff ff ff       	jmp    0x140001343
+   140001387:	48 83 c4 40          	add    rsp,0x40
+   14000138b:	c3                   	ret
+   14000138c:	cc                   	int3
+   14000138d:	cc                   	int3
+   14000138e:	cc                   	int3
+   14000138f:	cc                   	int3
+   140001390:	48 83 ec 48          	sub    rsp,0x48
+   140001394:	4c 89 4c 24 68       	mov    QWORD PTR [rsp+0x68],r9
+   140001399:	4c 89 44 24 60       	mov    QWORD PTR [rsp+0x60],r8
+   14000139e:	48 8b 05 63 3c 00 00 	mov    rax,QWORD PTR [rip+0x3c63]        # 0x140005008
+   1400013a5:	48 31 e0             	xor    rax,rsp
+   1400013a8:	48 89 44 24 40       	mov    QWORD PTR [rsp+0x40],rax
+   1400013ad:	48 89 54 24 30       	mov    QWORD PTR [rsp+0x30],rdx
+   1400013b2:	48 89 4c 24 28       	mov    QWORD PTR [rsp+0x28],rcx
+   1400013b7:	48 8d 44 24 60       	lea    rax,[rsp+0x60]
+   1400013bc:	48 89 44 24 38       	mov    QWORD PTR [rsp+0x38],rax
+   1400013c1:	4c 8b 4c 24 38       	mov    r9,QWORD PTR [rsp+0x38]
+   1400013c6:	48 8b 54 24 30       	mov    rdx,QWORD PTR [rsp+0x30]
+   1400013cb:	48 8b 4c 24 28       	mov    rcx,QWORD PTR [rsp+0x28]
+   1400013d0:	31 c0                	xor    eax,eax
+   1400013d2:	41 89 c0             	mov    r8d,eax
+   1400013d5:	e8 a6 01 00 00       	call   0x140001580
+   1400013da:	89 44 24 24          	mov    DWORD PTR [rsp+0x24],eax
+   1400013de:	8b 44 24 24          	mov    eax,DWORD PTR [rsp+0x24]
+   1400013e2:	89 44 24 20          	mov    DWORD PTR [rsp+0x20],eax
+   1400013e6:	48 8b 4c 24 40       	mov    rcx,QWORD PTR [rsp+0x40]
+   1400013eb:	48 31 e1             	xor    rcx,rsp
+   1400013ee:	e8 3d 03 00 00       	call   0x140001730
+   1400013f3:	8b 44 24 20          	mov    eax,DWORD PTR [rsp+0x20]
+   1400013f7:	48 83 c4 48          	add    rsp,0x48
+   1400013fb:	c3                   	ret
+   1400013fc:	cc                   	int3
+   1400013fd:	cc                   	int3
+   1400013fe:	cc                   	int3
+   1400013ff:	cc                   	int3
+   140001400:	48 83 ec 48          	sub    rsp,0x48
+   140001404:	4c 89 44 24 40       	mov    QWORD PTR [rsp+0x40],r8
+   140001409:	48 89 54 24 38       	mov    QWORD PTR [rsp+0x38],rdx
+   14000140e:	48 89 4c 24 30       	mov    QWORD PTR [rsp+0x30],rcx
+   140001413:	48 8b 44 24 40       	mov    rax,QWORD PTR [rsp+0x40]
+   140001418:	4c 8b 44 24 38       	mov    r8,QWORD PTR [rsp+0x38]
+   14000141d:	48 8b 4c 24 30       	mov    rcx,QWORD PTR [rsp+0x30]
+   140001422:	48 c7 c2 ff ff ff ff 	mov    rdx,0xffffffffffffffff
+   140001429:	45 31 c9             	xor    r9d,r9d
+   14000142c:	48 89 44 24 20       	mov    QWORD PTR [rsp+0x20],rax
+   140001431:	e8 9a 01 00 00       	call   0x1400015d0
+   140001436:	90                   	nop
+   140001437:	48 83 c4 48          	add    rsp,0x48
+   14000143b:	c3                   	ret
+   14000143c:	cc                   	int3
+   14000143d:	cc                   	int3
+   14000143e:	cc                   	int3
+   14000143f:	cc                   	int3
+   140001440:	48 83 ec 58          	sub    rsp,0x58
+   140001444:	4c 89 4c 24 78       	mov    QWORD PTR [rsp+0x78],r9
+   140001449:	48 8b 05 b8 3b 00 00 	mov    rax,QWORD PTR [rip+0x3bb8]        # 0x140005008
+   140001450:	48 31 e0             	xor    rax,rsp
+   140001453:	48 89 44 24 50       	mov    QWORD PTR [rsp+0x50],rax
+   140001458:	4c 89 44 24 40       	mov    QWORD PTR [rsp+0x40],r8
+   14000145d:	48 89 54 24 38       	mov    QWORD PTR [rsp+0x38],rdx
+   140001462:	48 89 4c 24 30       	mov    QWORD PTR [rsp+0x30],rcx
+   140001467:	48 8d 44 24 78       	lea    rax,[rsp+0x78]
+   14000146c:	48 89 44 24 48       	mov    QWORD PTR [rsp+0x48],rax
+   140001471:	4c 8b 4c 24 48       	mov    r9,QWORD PTR [rsp+0x48]
+   140001476:	4c 8b 44 24 40       	mov    r8,QWORD PTR [rsp+0x40]
+   14000147b:	48 8b 54 24 38       	mov    rdx,QWORD PTR [rsp+0x38]
+   140001480:	48 8b 4c 24 30       	mov    rcx,QWORD PTR [rsp+0x30]
+   140001485:	e8 26 00 00 00       	call   0x1400014b0
+   14000148a:	89 44 24 2c          	mov    DWORD PTR [rsp+0x2c],eax
+   14000148e:	8b 44 24 2c          	mov    eax,DWORD PTR [rsp+0x2c]
+   140001492:	89 44 24 28          	mov    DWORD PTR [rsp+0x28],eax
+   140001496:	48 8b 4c 24 50       	mov    rcx,QWORD PTR [rsp+0x50]
+   14000149b:	48 31 e1             	xor    rcx,rsp
+   14000149e:	e8 8d 02 00 00       	call   0x140001730
+   1400014a3:	8b 44 24 28          	mov    eax,DWORD PTR [rsp+0x28]
+   1400014a7:	48 83 c4 58          	add    rsp,0x58
+   1400014ab:	c3                   	ret
+   1400014ac:	cc                   	int3
+   1400014ad:	cc                   	int3
+   1400014ae:	cc                   	int3
+   1400014af:	cc                   	int3
+   1400014b0:	48 83 ec 48          	sub    rsp,0x48
+   1400014b4:	4c 89 4c 24 40       	mov    QWORD PTR [rsp+0x40],r9
+   1400014b9:	4c 89 44 24 38       	mov    QWORD PTR [rsp+0x38],r8
+   1400014be:	48 89 54 24 30       	mov    QWORD PTR [rsp+0x30],rdx
+   1400014c3:	48 89 4c 24 28       	mov    QWORD PTR [rsp+0x28],rcx
+   1400014c8:	48 8b 44 24 40       	mov    rax,QWORD PTR [rsp+0x40]
+   1400014cd:	4c 8b 44 24 38       	mov    r8,QWORD PTR [rsp+0x38]
+   1400014d2:	48 8b 54 24 30       	mov    rdx,QWORD PTR [rsp+0x30]
+   1400014d7:	48 8b 4c 24 28       	mov    rcx,QWORD PTR [rsp+0x28]
+   1400014dc:	45 31 c9             	xor    r9d,r9d
+   1400014df:	48 89 44 24 20       	mov    QWORD PTR [rsp+0x20],rax
+   1400014e4:	e8 e7 00 00 00       	call   0x1400015d0
+   1400014e9:	90                   	nop
+   1400014ea:	48 83 c4 48          	add    rsp,0x48
+   1400014ee:	c3                   	ret
+   1400014ef:	cc                   	int3
+   1400014f0:	48 83 ec 58          	sub    rsp,0x58
+   1400014f4:	4c 89 4c 24 78       	mov    QWORD PTR [rsp+0x78],r9
+   1400014f9:	4c 89 44 24 70       	mov    QWORD PTR [rsp+0x70],r8
+   1400014fe:	48 89 54 24 68       	mov    QWORD PTR [rsp+0x68],rdx
+   140001503:	48 8b 05 fe 3a 00 00 	mov    rax,QWORD PTR [rip+0x3afe]        # 0x140005008
+   14000150a:	48 31 e0             	xor    rax,rsp
+   14000150d:	48 89 44 24 50       	mov    QWORD PTR [rsp+0x50],rax
+   140001512:	48 89 4c 24 40       	mov    QWORD PTR [rsp+0x40],rcx
+   140001517:	48 8d 44 24 68       	lea    rax,[rsp+0x68]
+   14000151c:	48 89 44 24 48       	mov    QWORD PTR [rsp+0x48],rax
+   140001521:	48 8b 44 24 48       	mov    rax,QWORD PTR [rsp+0x48]
+   140001526:	48 89 44 24 30       	mov    QWORD PTR [rsp+0x30],rax
+   14000152b:	48 8b 44 24 40       	mov    rax,QWORD PTR [rsp+0x40]
+   140001530:	48 89 44 24 28       	mov    QWORD PTR [rsp+0x28],rax
+   140001535:	48 8b 05 dc 30 00 00 	mov    rax,QWORD PTR [rip+0x30dc]        # 0x140004618
+   14000153c:	b9 01 00 00 00       	mov    ecx,0x1
+   140001541:	ff d0                	call   rax
+   140001543:	48 8b 54 24 28       	mov    rdx,QWORD PTR [rsp+0x28]
+   140001548:	4c 8b 4c 24 30       	mov    r9,QWORD PTR [rsp+0x30]
+   14000154d:	48 89 c1             	mov    rcx,rax
+   140001550:	31 c0                	xor    eax,eax
+   140001552:	41 89 c0             	mov    r8d,eax
+   140001555:	e8 56 01 00 00       	call   0x1400016b0
+   14000155a:	89 44 24 3c          	mov    DWORD PTR [rsp+0x3c],eax
+   14000155e:	8b 44 24 3c          	mov    eax,DWORD PTR [rsp+0x3c]
+   140001562:	89 44 24 38          	mov    DWORD PTR [rsp+0x38],eax
+   140001566:	48 8b 4c 24 50       	mov    rcx,QWORD PTR [rsp+0x50]
+   14000156b:	48 31 e1             	xor    rcx,rsp
+   14000156e:	e8 bd 01 00 00       	call   0x140001730
+   140001573:	8b 44 24 38          	mov    eax,DWORD PTR [rsp+0x38]
+   140001577:	48 83 c4 58          	add    rsp,0x58
+   14000157b:	c3                   	ret
+   14000157c:	cc                   	int3
+**********************
+PowerShell transcript end
+End time: 20260928193937
+**********************
+**********************
+PowerShell transcript start
+Start time: 20260928194035
+Username: DESKTOP-412KTAR\mzj
+RunAs User: DESKTOP-412KTAR\mzj
+Configuration Name: 
+Machine: DESKTOP-412KTAR (Microsoft Windows NT 10.0.26200.0)
+Host Application: C:\Users\mzj\.cache\codex-runtimes\codex-primary-runtime\dependencies\native\powershell\pwsh.dll -Command try { [Console]::OutputEncoding=[System.Text.Encoding]::UTF8 } catch {}
+$log='记录\续攻-ezBase-终端记录.txt'; Start-Transcript -LiteralPath $log -Append; $script=@'
+import base64
+import hashlib
+from pathlib import Path
+
+TARGET = b"iP}ui7siC`otMgA~h5o]Tg<4jPmtIvM5C~I4h644K7M~KVg="
+CUSTOM = b"AaBbCcDdEeFfGgHhIiJjKkLlMmNnOoPpQqRrSsTtUuVvWwXxYyZz0123456789+/"
+STANDARD = b"ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/"
+
+# The binary XORs each encoded byte except a real Base64 padding byte.
+# Therefore reverse XOR on every ciphertext byte first: the last '=' becomes '9'.
+pre_xor = bytes(byte ^ 0x04 for byte in TARGET)
+assert all(byte in CUSTOM for byte in pre_xor), "reversed bytes are outside the custom alphabet"
+canonical = bytes(STANDARD[CUSTOM.index(byte)] for byte in pre_xor)
+flag = base64.b64decode(canonical, validate=True)
+
+# Reproduce the target program: standard Base64, custom alphabet substitution,
+# then XOR 0x04 on every output byte except actual '=' padding.
+standard_encoded = base64.b64encode(flag)
+custom_encoded = bytes(
+    byte if byte == ord("=") else CUSTOM[STANDARD.index(byte)]
+    for byte in standard_encoded
+)
+program_output = bytes(
+    byte if byte == ord("=") else byte ^ 0x04
+    for byte in custom_encoded
+)
+
+print(f"target_len={len(TARGET)} target={TARGET.decode('ascii')}")
+print(f"xor4_reversed={pre_xor.decode('ascii')}")
+print(f"custom_alphabet_mapped_to_standard={canonical.decode('ascii')}")
+print(f"decoded_len={len(flag)} decoded_flag={flag.decode('ascii')}")
+print(f"standard_base64={standard_encoded.decode('ascii')}")
+print(f"custom_base64={custom_encoded.decode('ascii')}")
+print(f"program_output={program_output.decode('ascii')}")
+print(f"roundtrip_exact={program_output == TARGET}")
+print(f"flag_sha256={hashlib.sha256(flag).hexdigest()}")
+print(f"binary_sha256={hashlib.sha256(Path(__file__).with_name('ezBase').joinpath('ezre.exe').read_bytes()).hexdigest()}")
+assert len(flag) == 36
+assert program_output == TARGET
+'@; Set-Content -LiteralPath '题目资料\ezBase_541\solve_ez541_final.py' -Value $script -Encoding utf8; Write-Output '=== corrected solver source ==='; Get-Content -LiteralPath '题目资料\ezBase_541\solve_ez541_final.py'; Write-Output '=== execute corrected solver ==='; python '题目资料\ezBase_541\solve_ez541_final.py'; Write-Output ('solver_exit_code=' + $LASTEXITCODE); Stop-Transcript
+Process ID: 12552
+PSVersion: 7.6.5
+PSEdition: Core
+GitCommitId: 7.6.5
+OS: Microsoft Windows 10.0.26200
+Platform: Win32NT
+PSCompatibleVersions: 1.0, 2.0, 3.0, 4.0, 5.0, 5.1, 6.0, 7.0
+PSRemotingProtocolVersion: 2.4
+SerializationVersion: 1.1.0.1
+WSManStackVersion: 3.0
+**********************
+Transcript started, output file is 记录\续攻-ezBase-终端记录.txt
+=== corrected solver source ===
+import base64
+import hashlib
+from pathlib import Path
+
+TARGET = b"iP}ui7siC`otMgA~h5o]Tg<4jPmtIvM5C~I4h644K7M~KVg="
+CUSTOM = b"AaBbCcDdEeFfGgHhIiJjKkLlMmNnOoPpQqRrSsTtUuVvWwXxYyZz0123456789+/"
+STANDARD = b"ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/"
+
+# The binary XORs each encoded byte except a real Base64 padding byte.
+# Therefore reverse XOR on every ciphertext byte first: the last '=' becomes '9'.
+pre_xor = bytes(byte ^ 0x04 for byte in TARGET)
+assert all(byte in CUSTOM for byte in pre_xor), "reversed bytes are outside the custom alphabet"
+canonical = bytes(STANDARD[CUSTOM.index(byte)] for byte in pre_xor)
+flag = base64.b64decode(canonical, validate=True)
+
+# Reproduce the target program: standard Base64, custom alphabet substitution,
+# then XOR 0x04 on every output byte except actual '=' padding.
+standard_encoded = base64.b64encode(flag)
+custom_encoded = bytes(
+    byte if byte == ord("=") else CUSTOM[STANDARD.index(byte)]
+    for byte in standard_encoded
+)
+program_output = bytes(
+    byte if byte == ord("=") else byte ^ 0x04
+    for byte in custom_encoded
+)
+
+print(f"target_len={len(TARGET)} target={TARGET.decode('ascii')}")
+print(f"xor4_reversed={pre_xor.decode('ascii')}")
+print(f"custom_alphabet_mapped_to_standard={canonical.decode('ascii')}")
+print(f"decoded_len={len(flag)} decoded_flag={flag.decode('ascii')}")
+print(f"standard_base64={standard_encoded.decode('ascii')}")
+print(f"custom_base64={custom_encoded.decode('ascii')}")
+print(f"program_output={program_output.decode('ascii')}")
+print(f"roundtrip_exact={program_output == TARGET}")
+print(f"flag_sha256={hashlib.sha256(flag).hexdigest()}")
+print(f"binary_sha256={hashlib.sha256(Path(__file__).with_name('ezBase').joinpath('ezre.exe').read_bytes()).hexdigest()}")
+assert len(flag) == 36
+assert program_output == TARGET
+=== execute corrected solver ===
+
+solver_exit_code=0
+**********************
+PowerShell transcript end
+End time: 20260928194035
+**********************
+**********************
+PowerShell transcript start
+Start time: 20260928194207
+Username: DESKTOP-412KTAR\mzj
+RunAs User: DESKTOP-412KTAR\mzj
+Configuration Name: 
+Machine: DESKTOP-412KTAR (Microsoft Windows NT 10.0.26200.0)
+Host Application: C:\Users\mzj\.cache\codex-runtimes\codex-primary-runtime\dependencies\native\powershell\pwsh.dll -Command try { [Console]::OutputEncoding=[System.Text.Encoding]::UTF8 } catch {}
+$log='记录\续攻-ezBase-终端记录.txt'; Start-Transcript -LiteralPath $log -Append; $wp=@'
+# ezBase（玄机题目 #541）续攻分析记录
+
+## 当前结论
+
+从本地附件 `题目资料/ezBase_541/ezBase/ezre.exe` 的控制流和数据区反向还原，程序校验的 36 字节输入为：
+
+```text
+flag{Y0u_@R3_Upx_4nd_b45364_m4st3r!}
+```
+
+将这 36 字节按程序的编码流程正向处理，会逐字节得到程序内保存的 48 字节目标串，SHA-256 复现脚本也记录在 `题目资料/ezBase_541/solve_ez541_final.py`。不过本轮主线程已通过 Computer Use 将同一完整字符串重新输入玄机并提交，平台仍明确返回 FLAG 不正确、完成度 0/1。因此本记录将其标记为“本地二进制逻辑吻合，平台未验证通过”，不把它记成已通过题目，也不重复提交相同答案。
+
+附件核对记录显示官方重新下载的压缩包与本地包哈希一致；本地可执行文件 SHA-256 为 `607BD3E8E5D7E715F7A9B819C8D5CC235C8DCC22F06A4AE77D0383E46BBDDACE`。后续若要继续定位差异，需要平台题目实例与其下载附件的再次比对，或由平台侧确认判题 flag。现有材料不足以推导一个不同且可信的替代 flag。
+
+## 1. 确认题目文件与样本
+
+题目页面显示标题为“轩辕杯云盾盾剑CTF挑战赛 ezBase-20250521104055-dq14shk”，题目类型为 REVERSE，难度中等，描述提示“这密文怎么解不出来啊？再看看？”，并注明提交格式 `flag{}`。下载的 PE 文件位于 `题目资料/ezBase_541/ezBase/ezre.exe`，长度 9216 字节。此前已将 UPX 壳解开并保存运行时映像 `题目资料/ezBase_541/unpacked_runtime.bin`，本轮直接对现存映像与反汇编结果做交叉核查。
+
+## 2. 先从主函数确定校验流程
+
+解包后运行时映像按基址 `0x140001000` 反汇编。主函数起点 RVA `0x1000` 执行以下步骤：
+
+1. 在 `0x140001021` 将提示字符串地址 `0x140004081` 传给提示输出函数；数据区文本为 `input your flag:`。
+2. 在 `0x140001038` 将栈上缓冲区地址传给输入函数，容量参数为 `0x80`。
+3. 在 `0x14000106a` 调用字符串长度计算函数，分隔符字符串地址为 `0x140004093`（换行符）。返回长度保存到 `[rsp+0x30]`。
+4. `0x140001089` 把该长度与 `0x24`（十进制 36）比较。长度不是 36 时，输出数据区中的 `Length wrong. Must be 36` 并结束当前校验路径。
+5. 长度为 36 时，在 `0x1400010af` 调用编码函数 `0x140001130`，参数依次为输入缓冲区、输入长度、输出缓冲区。
+6. `0x1400010c6` 调用字符串比较函数，将编码输出与数据区 `0x140004000` 的目标串比较。相等时跳转到 `0x1400010e0` 输出 `Yes you are right`；不等则到 `0x1400010f2` 输出 `Wrong! Try again!`。
+
+因此这是一个由固定长度检查、编码、常量比较组成的校验器。解题关键是还原编码流程并反向处理常量。
+
+## 3. 读取程序内的目标密文和字母表
+
+运行时映像偏移 `0x3000` 对应 RVA `0x4000`，这里是 48 字节目标串：
+
+```text
+iP}ui7siC`otMgA~h5o]Tg<4jPmtIvM5C~I4h644K7M~KVg=
+```
+
+偏移 `0x3040` 对应 RVA `0x4040`，正好是程序的 64 字符 Base64 字母表：
+
+```text
+AaBbCcDdEeFfGgHhIiJjKkLlMmNnOoPpQqRrSsTtUuVvWwXxYyZz0123456789+/
+```
+
+与标准 Base64 字母表相比，它按大写、小写交错排列字母，数字与 `+/` 保持在末尾。
+
+## 4. 逆向 Base64 与 XOR 层
+
+编码函数 `0x140001130` 按每 3 字节分组，取 6 位索引，从 RVA `0x4040` 的自定义字母表中写出 4 个字符，并按标准 Base64 规则处理真正的补位 `=`。函数完成字符映射后进入收尾循环：
+
+- 当前输出字节若为 `=`，直接跳过；这是 Base64 编码产生的真实补位字符。
+- 其他输出字节与 `0x04` 做 XOR。
+
+这是本次复核的关键点：目标密文中的最后一个字节也恰好显示为 `=`，但密文层的 `=` 不一定是 Base64 补位。应先对密文的每个字节执行 XOR 0x04。末字节因此变成字符 `9`，它属于自定义字母表。正确逆序为：
+
+1. 将目标串每个字节逐一 XOR `0x04`。48 字节全部可逆到自定义字母表字符；首尾处理后的串为 `mTyqm3wmGdkpIcEzl1kYPc80nTipMrI1GzM0l200O3IzORc9`。
+2. 对每个字符查找它在自定义字母表中的索引，再将该索引映射到标准 Base64 字母表。结果是 `ZmxhZ3tZMHVfQFIzX1VweF80bmRfYjQ1MzY0X200c3QzciF9`。
+3. Base64 解码得到 36 字节可打印 ASCII：`flag{Y0u_@R3_Upx_4nd_b45364_m4st3r!}`。
+4. 36 可被 3 整除，因此标准 Base64 输出正好 48 字符，不带补位。将标准 Base64 字符换成程序的自定义字母表，再对每个字符 XOR 0x04。
+5. 与原始目标串逐字节比较，结果完全相同。
+
+## 5. 更正之前的逆向脚本错误
+
+旧版 `solve_ez541_final.py` 在反向 XOR 时先判断目标字节是否等于 `=`，并把它当作 Base64 补位而跳过 XOR。这个判断次序不成立：必须先还原 XOR 层，才能判断结果是不是程序编码时生成的补位字符。目标末字节 `=` XOR 后是自定义字母表中的 `9`，属于普通数据字符。
+
+旧脚本因此只解出 35 字节前缀 `flag{Y0u_@R3_Upx_4nd_b45364_m4st3r!`，并报告索引 46 不匹配。本次已更正脚本：它先 XOR 全部密文字节，再映射字符表并解码；正向复现也遵照程序逻辑，对真正的 `=` 补位跳过 XOR。新的输出为 `decoded_len=36`、`roundtrip_exact=True`，覆盖前述旧结论。
+
+## 6. 复现命令和结果
+
+在项目目录 `C:\Users\mzj\Desktop\CTF\玄机刷题` 中执行：
+
+```powershell
+python '题目资料\ezBase_541\solve_ez541_final.py'
+```
+
+修正版脚本输出的关键行：
+
+```text
+target_len=48 target=iP}ui7siC`otMgA~h5o]Tg<4jPmtIvM5C~I4h644K7M~KVg=
+xor4_reversed=mTyqm3wmGdkpIcEzl1kYPc80nTipMrI1GzM0l200O3IzORc9
+custom_alphabet_mapped_to_standard=ZmxhZ3tZMHVfQFIzX1VweF80bmRfYjQ1MzY0X200c3QzciF9
+decoded_len=36 decoded_flag=flag{Y0u_@R3_Upx_4nd_b45364_m4st3r!}
+program_output=iP}ui7siC`otMgA~h5o]Tg<4jPmtIvM5C~I4h644K7M~KVg=
+roundtrip_exact=True
+flag_sha256=699d2808153396b5f578f850cb185ecf51089d53bf9e21c8e4512e74c9a4e283
+binary_sha256=607bd3e8e5d7e715f7a9b819c8d5cc235c8dcc22f06a4ae77d0383e46bbddace
+solver_exit_code=0
+```
+
+详细命令、脚本内容、完整标准输出和前后复核记录追加在 `记录/续攻-ezBase-终端记录.txt`。前次平台提交与本次再次提交记录位于主线程平台验收终端记录；页面截图 `记录/续攻-ezBase-平台状态.png` 留存题目页信息和 0/1 状态。
+
+## 7. 平台验收状态与下一步
+
+主线程报告已通过 Computer Use 将上述 36 字节完整 flag 重新输入并提交，平台再次显示“FLAG 不正确”，完成度保持 `0/1`。因此本 WP 结论分开记录：本地文件的校验逻辑和解码结果吻合，但玄机在线平台没有接受答案。没有再次提交同一候选，也没有把本题标为平台已解出。
+
+目前没有足够证据证明平台题目实例使用了另一组数据；此前核对过重新下载附件与本地压缩包的 SHA-256 一致。若继续排查，应优先核对当前题目详情 ID/附件的哈希、确认本地可执行文件确实来自该题附件，并请求平台确认该实例的判题 flag。不要通过排列相近字符猜测新答案。
+'@; Set-Content -LiteralPath '记录\ezBase-分析过程记录.md' -Value $wp -Encoding utf8; Write-Output '=== WP saved ==='; Get-Item -LiteralPath '记录\ezBase-分析过程记录.md','题目资料\ezBase_541\solve_ez541_final.py' | Select-Object FullName,Length,LastWriteTime; Write-Output '=== corrected solver rerun ==='; python '题目资料\ezBase_541\solve_ez541_final.py'; Write-Output ('solver_exit_code=' + $LASTEXITCODE); Stop-Transcript
+Process ID: 18920
+PSVersion: 7.6.5
+PSEdition: Core
+GitCommitId: 7.6.5
+OS: Microsoft Windows 10.0.26200
+Platform: Win32NT
+PSCompatibleVersions: 1.0, 2.0, 3.0, 4.0, 5.0, 5.1, 6.0, 7.0
+PSRemotingProtocolVersion: 2.4
+SerializationVersion: 1.1.0.1
+WSManStackVersion: 3.0
+**********************
+Transcript started, output file is 记录\续攻-ezBase-终端记录.txt
+=== WP saved ===
+
+
+**********************
+PowerShell transcript end
+End time: 20260928194207
+**********************

@@ -1,0 +1,772 @@
+**********************
+PowerShell transcript start
+Start time: 20260928165016
+Username: DESKTOP-412KTAR\mzj
+RunAs User: DESKTOP-412KTAR\mzj
+Configuration Name: 
+Machine: DESKTOP-412KTAR (Microsoft Windows NT 10.0.26200.0)
+Host Application: C:\Users\mzj\.cache\codex-runtimes\codex-primary-runtime\dependencies\native\powershell\pwsh.dll -Command try { [Console]::OutputEncoding=[System.Text.Encoding]::UTF8 } catch {}
+Start-Transcript -LiteralPath 'C:\Users\mzj\Desktop\CTF\玄机刷题\记录\续攻-主线程终端记录.txt' -Append
+rg -n -i 'md5|提交格式|FLAG 正确' 'C:\Users\mzj\Desktop\CTF\玄机刷题\README.md' 'C:\Users\mzj\Desktop\CTF\玄机刷题\记录\hookme-分析过程记录.md' 'C:\Users\mzj\Desktop\CTF\玄机刷题\记录\新批次中等题攻关终端记录.txt' | Select-Object -Last 45
+Get-ChildItem -LiteralPath 'C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\Base_543' -Recurse -File | Select-Object FullName,Length
+Stop-Transcript
+Process ID: 7848
+PSVersion: 7.6.5
+PSEdition: Core
+GitCommitId: 7.6.5
+OS: Microsoft Windows 10.0.26200
+Platform: Win32NT
+PSCompatibleVersions: 1.0, 2.0, 3.0, 4.0, 5.0, 5.1, 6.0, 7.0
+PSRemotingProtocolVersion: 2.4
+SerializationVersion: 1.1.0.1
+WSManStackVersion: 3.0
+**********************
+Transcript started, output file is C:\Users\mzj\Desktop\CTF\玄机刷题\记录\续攻-主线程终端记录.txt
+C:\Users\mzj\Desktop\CTF\玄机刷题\记录\hookme-分析过程记录.md:37:本地 APK 答案的算法推导与跨语言复现已闭合，但它与父线程所转述的平台拒绝结果冲突。当前本地证据不能判定冲突来自玄机题目绑定了另一份附件、平台题目答案数据不一致，还是题目本身在 APK 校验之外另有提交约定；这些都只是可能解释，未被证实。本地候选不能标成平台通过，也不应在本地证据不足时生成替代 flag。若继续攻关，需先由父线程核对 ID 542 题目页实际附件指纹/提交格式；本代理依照委派要求不操作平台。
+C:\Users\mzj\Desktop\CTF\玄机刷题\记录\新批次中等题攻关终端记录.txt:4436:The image and pattern are high-confidence local candidates for the app gates. The final AES/MD5 secret and any flag have not been recovered or submitted. No flag is claimed.
+C:\Users\mzj\Desktop\CTF\玄机刷题\记录\新批次中等题攻关终端记录.txt:5115:使用 Computer Use 在玄机 #556「go_for_it」详情页确认：免费、中等、题目步骤0/1。点击“提交FLAG”，输入本地复核候选 `flag{cde36914d3639ab8ffa5c88f58}` 并点击提交；页面提示“FLAG 正确，恭喜你完成此挑战”，截图视图显示页面状态“已完成”、步骤1/1。提交由平台页面完成。
+C:\Users\mzj\Desktop\CTF\玄机刷题\记录\新批次中等题攻关终端记录.txt:5145:使用 Computer Use 在玄机 #556「go_for_it」详情页确认：免费、中等、题目步骤0/1。点击“提交FLAG”，输入本地复核候选 `flag{cde36914d3639ab8ffa5c88f58}` 并点击提交；页面提示“FLAG 正确，恭喜你完成此挑战”，截图视图显示页面状态“已完成”、步骤1/1。提交由平台页面完成。
+C:\Users\mzj\Desktop\CTF\玄机刷题\记录\新批次中等题攻关终端记录.txt:5158:使用 Computer Use 在玄机 #556「go_for_it」详情页确认：免费、中等、题目步骤0/1。点击“提交FLAG”，输入本地复核候选 `flag{cde36914d3639ab8ffa5c88f58}` 并点击提交；页面提示“FLAG 正确，恭喜你完成此挑战”，截图视图显示页面状态“已完成”、步骤1/1。提交由平台页面完成。
+C:\Users\mzj\Desktop\CTF\玄机刷题\记录\新批次中等题攻关终端记录.txt:5628:Start-Transcript -Append -Path 'C:\Users\mzj\Desktop\CTF\玄机刷题\记录\新批次中等题攻关终端记录.txt'; $scriptPath = 'C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\PaluArray_546\disassemble_md5_tail.py'; @'
+C:\Users\mzj\Desktop\CTF\玄机刷题\记录\新批次中等题攻关终端记录.txt:5728:$log='C:\Users\mzj\Desktop\CTF\玄机刷题\记录\新批次中等题攻关终端记录.txt'; Start-Transcript -LiteralPath $log -Append; Get-Content -LiteralPath 'C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\PaluArray_546\disassemble_md5_tail.py'; python 'C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\PaluArray_546\disassemble_core_funcs.py' 'C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\PaluArray_546\PaluArray_flag_unpacked.exe'; Stop-Transcript
+C:\Users\mzj\Desktop\CTF\玄机刷题\记录\新批次中等题攻关终端记录.txt:5769:$log='C:\Users\mzj\Desktop\CTF\玄机刷题\记录\新批次中等题攻关终端记录.txt'; Start-Transcript -LiteralPath $log -Append; python 'C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\PaluArray_546\disassemble_md5_tail.py' 'C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\PaluArray_546\PaluArray_flag_unpacked.exe'; Stop-Transcript
+C:\Users\mzj\Desktop\CTF\玄机刷题\记录\新批次中等题攻关终端记录.txt:5998:from hashlib import md5
+C:\Users\mzj\Desktop\CTF\玄机刷题\记录\新批次中等题攻关终端记录.txt:6007:payload = md5(flag_input.encode('ascii')).hexdigest()
+C:\Users\mzj\Desktop\CTF\玄机刷题\记录\新批次中等题攻关终端记录.txt:6013:print(f'md5_input_ascii={md5(flag_input.encode("ascii")).hexdigest()}')
+C:\Users\mzj\Desktop\CTF\玄机刷题\记录\新批次中等题攻关终端记录.txt:6241:'@ | Set-Content -LiteralPath .\check_md5_constants.py -Encoding UTF8; $env:PYTHONUTF8='1'; python .\check_md5_constants.py; Get-FileHash -Algorithm SHA256 .\check_md5_constants.py; Pop-Location; Stop-Transcript
+C:\Users\mzj\Desktop\CTF\玄机刷题\记录\新批次中等题攻关终端记录.txt:6764:$log='C:\Users\mzj\Desktop\CTF\玄机刷题\记录\新批次中等题攻关终端记录.txt'; Start-Transcript -LiteralPath $log -Append; Select-String -LiteralPath 'C:\Users\mzj\Desktop\CTF\玄机刷题\记录\代理-go_for_it-终端记录.txt' -Pattern 'go_for_it|ID 556|PWN|挑战|FLAG 正确|完成此挑战|1 / 1' | Select-Object -Last 28 | ForEach-Object { '{0}:{1}' -f $_.LineNumber,$_.Line }; Stop-Transcript
+C:\Users\mzj\Desktop\CTF\玄机刷题\记录\新批次中等题攻关终端记录.txt:6817:$log='C:\Users\mzj\Desktop\CTF\玄机刷题\记录\新批次中等题攻关终端记录.txt'; Start-Transcript -LiteralPath $log -Append; Select-String -LiteralPath $log -Pattern '556|FLAG 正确|恭喜你完成此挑战' | Select-Object -Last 20 | ForEach-Object { '{0}:{1}' -f $_.LineNumber,$_.Line }; Stop-Transcript
+C:\Users\mzj\Desktop\CTF\玄机刷题\记录\新批次中等题攻关终端记录.txt:6836:5115:使用 Computer Use 在玄机 #556「go_for_it」详情页确认：免费、中等、题目步骤0/1。点击“提交FLAG”，输入本地复核候选 `flag{cde36914d3639ab8ffa5c88f58}` 并点击提交；页面提示“FLAG 正确，恭喜你完成此挑战”，截图视图显示页面状态“已完成”、步骤1/1。提交由平台页面完成。
+C:\Users\mzj\Desktop\CTF\玄机刷题\记录\新批次中等题攻关终端记录.txt:6837:5145:使用 Computer Use 在玄机 #556「go_for_it」详情页确认：免费、中等、题目步骤0/1。点击“提交FLAG”，输入本地复核候选 `flag{cde36914d3639ab8ffa5c88f58}` 并点击提交；页面提示“FLAG 正确，恭喜你完成此挑战”，截图视图显示页面状态“已完成”、步骤1/1。提交由平台页面完成。
+C:\Users\mzj\Desktop\CTF\玄机刷题\记录\新批次中等题攻关终端记录.txt:6838:5158:使用 Computer Use 在玄机 #556「go_for_it」详情页确认：免费、中等、题目步骤0/1。点击“提交FLAG”，输入本地复核候选 `flag{cde36914d3639ab8ffa5c88f58}` 并点击提交；页面提示“FLAG 正确，恭喜你完成此挑战”，截图视图显示页面状态“已完成”、步骤1/1。提交由平台页面完成。
+C:\Users\mzj\Desktop\CTF\玄机刷题\记录\新批次中等题攻关终端记录.txt:6839:6764:$log='C:\Users\mzj\Desktop\CTF\玄机刷题\记录\新批次中等题攻关终端记录.txt'; Start-Transcript -LiteralPath $log -Append; Select-String -LiteralPath 'C:\Users\mzj\Desktop\CTF\玄机刷题\记录\代理-go_for_it-终端记录.txt' -Pattern 'go_for_it|ID 556|PWN|挑战|FLAG 正确|完成此挑战|1 / 1' | Select-Object -Last 28 | ForEach-Object { '{0}:{1}' -f $_.LineNumber,$_.Line }; Stop-Transcript
+C:\Users\mzj\Desktop\CTF\玄机刷题\记录\新批次中等题攻关终端记录.txt:6840:6817:$log='C:\Users\mzj\Desktop\CTF\玄机刷题\记录\新批次中等题攻关终端记录.txt'; Start-Transcript -LiteralPath $log -Append; Select-String -LiteralPath $log -Pattern '556|FLAG 正确|恭喜你完成此挑战' | Select-Object -Last 20 | ForEach-Object { '{0}:{1}' -f $_.LineNumber,$_.Line }; Stop-Transcript
+
+**********************
+PowerShell transcript end
+End time: 20260928165017
+**********************
+**********************
+PowerShell transcript start
+Start time: 20260928165133
+Username: DESKTOP-412KTAR\mzj
+RunAs User: DESKTOP-412KTAR\mzj
+Configuration Name: 
+Machine: DESKTOP-412KTAR (Microsoft Windows NT 10.0.26200.0)
+Host Application: C:\Users\mzj\.cache\codex-runtimes\codex-primary-runtime\dependencies\native\powershell\pwsh.dll -Command try { [Console]::OutputEncoding=[System.Text.Encoding]::UTF8 } catch {}
+Start-Transcript -LiteralPath 'C:\Users\mzj\Desktop\CTF\玄机刷题\记录\续攻-主线程终端记录.txt' -Append
+Write-Output 'Browser verification #541: typeText inserted flag{Y0u_@R3_Upx_4nd_b45364_m4st3r!}; AX confirmed full input; submit button clicked; loading observed; final visible toast FLAG 不正确~. Screenshot saved as 记录/续攻-ezBase-平台状态.png.'
+Get-Content -LiteralPath 'C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\Base_543\solve_base_offline.py'
+Get-Command python,objdump,wsl -ErrorAction SilentlyContinue | Select-Object Name,Source
+Stop-Transcript
+Process ID: 4900
+PSVersion: 7.6.5
+PSEdition: Core
+GitCommitId: 7.6.5
+OS: Microsoft Windows 10.0.26200
+Platform: Win32NT
+PSCompatibleVersions: 1.0, 2.0, 3.0, 4.0, 5.0, 5.1, 6.0, 7.0
+PSRemotingProtocolVersion: 2.4
+SerializationVersion: 1.1.0.1
+WSManStackVersion: 3.0
+**********************
+Transcript started, output file is C:\Users\mzj\Desktop\CTF\玄机刷题\记录\续攻-主线程终端记录.txt
+Browser verification #541: typeText inserted flag{Y0u_@R3_Upx_4nd_b45364_m4st3r!}; AX confirmed full input; submit button clicked; loading observed; final visible toast FLAG 不正确~. Screenshot saved as 记录/续攻-ezBase-平台状态.png.
+MASK = 0xffffffff
+DELTA = 0x9e3779b9
+TEA_KEY = [0x12345678, 0x3456789a, 0x89abcdef, 0x12345678]
+TARGET_WORDS = [0xa92f3865, 0x9e60e953]
+TABLE_TARGET = bytes.fromhex(
+    "d4 59 23 76 b4 bf e3 2c 58 8f 56 19 da f0 c0 bd "
+    "36 3d 7b 46 1b b8 17 1f e3 d0 03 45 cd 04 ed c9 "
+    "67 e6 ab 29 a7 bc 0b de 5c 30 71 d7 d5 5a c6 9f "
+    "40 65 c4 71 a9 c3 ae d9 b5 e5 12 8c 80 52 34 36"
+)
+ENCODED_TARGET = "0tCPwtnncFZyYUlSK/4Cw0/echcG2lteBWnG2Ulw0htCYTMW"
+
+def mix(v, total, ka, kb):
+    return ((((v << 4) & MASK) + ka) & MASK) ^ ((v + total) & MASK) ^ (((v >> 5) + kb) & MASK)
+
+def xtea_encrypt(v0, v1):
+    total = 0
+    for _ in range(32):
+        total = (total + DELTA) & MASK
+        v0 = (v0 + mix(v1, total, TEA_KEY[0], TEA_KEY[1])) & MASK
+        v1 = (v1 + mix(v0, total, TEA_KEY[2], TEA_KEY[3])) & MASK
+    return v0, v1
+
+def xtea_decrypt(v0, v1):
+    total = (DELTA * 32) & MASK
+    for _ in range(32):
+        v1 = (v1 - mix(v0, total, TEA_KEY[2], TEA_KEY[3])) & MASK
+        v0 = (v0 - mix(v1, total, TEA_KEY[0], TEA_KEY[1])) & MASK
+        total = (total - DELTA) & MASK
+    return v0, v1
+
+plain_words = xtea_decrypt(*TARGET_WORDS)
+input_key = b"".join(w.to_bytes(4, "little") for w in plain_words)
+print("XTEA target words:", [f"0x{x:08x}" for x in TARGET_WORDS])
+print("XTEA recovered input words:", [f"0x{x:08x}" for x in plain_words])
+print("First-level input bytes:", input_key.hex(), repr(input_key))
+print("Forward XTEA verification:", [f"0x{x:08x}" for x in xtea_encrypt(*plain_words)])
+assert xtea_encrypt(*plain_words) == tuple(TARGET_WORDS)
+assert len(TABLE_TARGET) == 64
+
+# Reproduce the second-level RC4-like transformation seen in the binary.
+state = list(range(256))
+key_schedule = [input_key[i % len(input_key)] for i in range(256)]
+j = 0
+for i in range(256):
+    j = (j + state[i] + key_schedule[i]) & 0xff
+    state[i], state[j] = state[j], state[i]
+i = 0
+j = 0
+stream = []
+for _ in range(64):
+    i = (i + 1) & 0xff
+    j = (j + state[i]) & 0xff
+    state[i], state[j] = state[j], state[i]
+    stream.append(state[(state[i] + state[j]) & 0xff])
+raw_table = bytes((cipher - ks) & 0xff for cipher, ks in zip(TABLE_TARGET, stream))
+forward_table = bytes((plain + ks) & 0xff for plain, ks in zip(raw_table, stream))
+print("RC4-like keystream:", bytes(stream).hex())
+print("Recovered 64-byte raw table hex:", raw_table.hex())
+print("Recovered raw table repr:", repr(raw_table))
+print("Recovered raw table ASCII:", raw_table.decode("ascii", errors="backslashreplace"))
+print("All raw table bytes printable ASCII:", all(0x21 <= c <= 0x7e for c in raw_table))
+print("Raw table byte uniqueness:", len(set(raw_table)), "distinct values of", len(raw_table))
+print("RC4-like forward verification exact:", forward_table == TABLE_TARGET)
+assert forward_table == TABLE_TARGET
+
+alphabet = raw_table[1:33]
+print("Base32 alphabet used by code (raw_table[1:33]):", repr(alphabet))
+print("Alphabet length and uniqueness:", len(alphabet), len(set(alphabet)))
+assert len(alphabet) == 32
+assert len(set(alphabet)) == 32
+
+def decode_base32_custom(encoded, alpha):
+    inverse = {ch: i for i, ch in enumerate(alpha)}
+    if any(ord(ch) not in inverse for ch in encoded):
+        raise ValueError("encoded target contains symbol outside recovered alphabet")
+    out = bytearray()
+    groups = [encoded[k:k+8] for k in range(0, len(encoded), 8)]
+    for group in groups:
+        if len(group) != 8:
+            raise ValueError("incomplete Base32 group")
+        value = 0
+        for ch in group:
+            value = (value << 5) | inverse[ord(ch)]
+        out.extend(value.to_bytes(5, "big"))
+    return bytes(out)
+
+decoded = decode_base32_custom(ENCODED_TARGET, alphabet)
+print("Encoded target length:", len(ENCODED_TARGET))
+print("Decoded full target bytes length:", len(decoded))
+print("Decoded full target bytes hex:", decoded.hex())
+print("Decoded full target bytes repr:", repr(decoded))
+print("Decoded visible ASCII:", decoded.decode("ascii", errors="backslashreplace"))
+print("Decoded minus final zero (if present):", repr(decoded[:-1]) if decoded.endswith(b"\x00") else "final byte is nonzero")
+print("Encoded first 30 symbols (actual comparator length):", ENCODED_TARGET[:30])
+print("Flag-format check:", decoded.startswith(b"flag{") and b"}" in decoded)
+
+def encode_base32_custom(data, alpha):
+    out = []
+    for offset in range(0, len(data), 5):
+        chunk = data[offset:offset+5].ljust(5, b"\x00")
+        value = int.from_bytes(chunk, "big")
+        for shift in (35, 30, 25, 20, 15, 10, 5, 0):
+            out.append(alpha[(value >> shift) & 0x1f])
+    return bytes(out).decode("ascii")
+
+forward_encoded = encode_base32_custom(decoded, alphabet)
+print("Recovered candidate flag length:", len(decoded))
+print("Recovered candidate flag:", decoded.decode("ascii"))
+print("Base32 forward encoding:", forward_encoded)
+print("Full 48-symbol forward round-trip exact:", forward_encoded == ENCODED_TARGET)
+assert forward_encoded == ENCODED_TARGET
+
+candidate = decoded
+candidate_truncated_by_scanf = candidate[:29]
+truncated_encoding = encode_base32_custom(candidate_truncated_by_scanf, alphabet)
+print("Static candidate as 30 bytes:", repr(candidate), "length=", len(candidate))
+print("Candidate after scanf %29s width:", repr(candidate_truncated_by_scanf), "length=", len(candidate_truncated_by_scanf))
+print("Candidate full output prefix 30:", encode_base32_custom(candidate, alphabet)[:30])
+print("Truncated input output prefix 30:", truncated_encoding[:30])
+print("Does the executable's 30-symbol comparison accept the width-truncated candidate prefix:",
+      truncated_encoding[:30] == ENCODED_TARGET[:30])
+
+truncated_full_encoding = encode_base32_custom(candidate_truncated_by_scanf, alphabet)
+print("Candidate full encoding (48 symbols):", encode_base32_custom(candidate, alphabet))
+print("%29s-truncated encoding (48 symbols):", truncated_full_encoding)
+print("Does full output equal 48-byte target after scanf truncation:", truncated_full_encoding == ENCODED_TARGET)
+print("First differing encoded index:", next((i for i, (a, b) in enumerate(zip(truncated_full_encoding, ENCODED_TARGET)) if a != b), None))
+print("Target encoded length:", len(ENCODED_TARGET), "truncated input encoded length:", len(truncated_full_encoding))
+
+**********************
+PowerShell transcript end
+End time: 20260928165133
+**********************
+**********************
+PowerShell transcript start
+Start time: 20260928165146
+Username: DESKTOP-412KTAR\mzj
+RunAs User: DESKTOP-412KTAR\mzj
+Configuration Name: 
+Machine: DESKTOP-412KTAR (Microsoft Windows NT 10.0.26200.0)
+Host Application: C:\Users\mzj\.cache\codex-runtimes\codex-primary-runtime\dependencies\native\powershell\pwsh.dll -Command try { [Console]::OutputEncoding=[System.Text.Encoding]::UTF8 } catch {}
+Start-Transcript -LiteralPath 'C:\Users\mzj\Desktop\CTF\玄机刷题\记录\续攻-主线程终端记录.txt' -Append
+Get-Content -LiteralPath 'C:\Users\mzj\Desktop\CTF\玄机刷题\记录\hookme-分析过程记录.md'
+rg --files 'C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\hookme_542' | Select-Object -First 65
+Stop-Transcript
+Process ID: 17592
+PSVersion: 7.6.5
+PSEdition: Core
+GitCommitId: 7.6.5
+OS: Microsoft Windows 10.0.26200
+Platform: Win32NT
+PSCompatibleVersions: 1.0, 2.0, 3.0, 4.0, 5.0, 5.1, 6.0, 7.0
+PSRemotingProtocolVersion: 2.4
+SerializationVersion: 1.1.0.1
+WSManStackVersion: 3.0
+**********************
+Transcript started, output file is C:\Users\mzj\Desktop\CTF\玄机刷题\记录\续攻-主线程终端记录.txt
+## 2026-09-28 限时复核补记（玄机 ID 542：hookme）
+
+### 范围与状态
+
+本轮只复核 hookme 的本地 APK、native 库、已有分析脚本和历史日志；未打开浏览器、未访问平台、未提交 flag。父线程历史记录称此前向玄机 ID 542 提交候选 flag{ee9fb062624c1e527fab36d3a27484d1} 后，平台返回“FLAG 不正确”，本题进度仍为 0/1。因此以下内容只证明这份本地 APK 接受该字符串，不代表平台已验收，题目仍标记未解决。
+
+### 附件指纹
+
+- 下载包：D:\Downloads\hookme.rar
+- RAR SHA-256：1DC981B273CB80A32863B9A89A09CFA82B731F6D4BC8E37D72C445DEB29E993F
+- RAR 列表仅含 hookme/HookMe.apk（RAR 内 APK 为 7,329,635 字节）和目录项；本地未发现第二份 hookme 压缩包。
+- APK SHA-256：61BB5BA33C8EBD3BD01BA9ECF6EDC69A18D664D91F3309447B95132B27E14E9B
+- APK Manifest 包名为 com.example.hookme。
+
+### 静态逻辑复核
+
+1. MainActivity.onCreate 调用 getPackageName()，随后传给 native setPackageNameToNative；JNI 将完整包名保存到全局 globalKey。所以本 APK 的密钥串为 com.example.hookme。
+2. MainActivity 的校验逻辑取输入字符串，调用 native rc4Encrypt，读取 R$string.correct_ciphertext（资源 ID 0x7f0f002f），将资源十六进制文本解码成字节，最后以 Arrays.equals 比较。匹配时 UI 文案为 success。
+3. ARM64 与 x86_64 native 反汇编显示 initializeSBox 从 key 的前两字节构造 seed：(signed key[0] << 8) | signed key[1]。当前包名这两个 ASCII 字节为 0x63, 0x6f，seed 为 0x636f。
+4. 初始化函数以 std::mt19937(seed) 产生 256 个值，每个值截取低 8 位填充 S-box；然后执行 KSA，再由 PRGA 对 UTF-8 输入字节加密。native 代码使用的正是包名 key。
+5. 唯一的 38 字节资源密文为：
+   f235b888b3f4e08bff17e7e29bc3bf67d0f9a1b7b6581bb4a1eb299684e99923a8d193caf91d
+
+### 独立复现
+
+先前 Python 复现脚本 题目资料/hookme_542/verify_hookme_custom_rc4.py 从 APK 的 resources.arsc 提取这条密文，再按 native 的 seed、MT19937 低字节 S-box、KSA、PRGA 解出候选。为避免只依赖同一段 Python 实现，本轮另编译并运行独立 C++ 复现 题目资料/hookme_542/independent_rc4_repro.cpp（MSYS2 g++，-std=c++17 -O2）：
+
+- 输出 seed：0x636f
+- 输出明文：flag{ee9fb062624c1e527fab36d3a27484d1}
+- 再加密结果与 APK 唯一密文完全相同：REENC_MATCH=1
+- 进程退出码：0
+
+完整命令、编译器输出和复现输出见 记录/限时攻关-hookme-终端记录.txt。本轮新证据与既有 Python 脚本的重加密断言相互独立地支持“该字符串是这份 APK 本地校验器的答案”。
+
+### 结论与未决点
+
+本地 APK 答案的算法推导与跨语言复现已闭合，但它与父线程所转述的平台拒绝结果冲突。当前本地证据不能判定冲突来自玄机题目绑定了另一份附件、平台题目答案数据不一致，还是题目本身在 APK 校验之外另有提交约定；这些都只是可能解释，未被证实。本地候选不能标成平台通过，也不应在本地证据不足时生成替代 flag。若继续攻关，需先由父线程核对 ID 542 题目页实际附件指纹/提交格式；本代理依照委派要求不操作平台。
+C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\hookme_542\附件解包\hookme\HookMe.apk
+C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\hookme_542\代码附件\lib\x86_64\libhookme.so
+C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\hookme_542\audit_other_abis.py
+C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\hookme_542\audit_arm64_and_resource.py
+C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\hookme_542\verify_hookme_rc4.py
+C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\hookme_542\verify_hookme_custom_rc4.py
+C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\hookme_542\代码附件\classes3.dex
+C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\hookme_542\independent_rc4_repro.cpp
+C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\hookme_542\mt19937_crosscheck.cpp
+C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\hookme_542\map_dex_resource_field.py
+C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\hookme_542\extract_apk_code_and_filter.py
+C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\hookme_542\dex_dump_hookme.py
+C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\hookme_542\代码附件\classes2.dex
+C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\hookme_542\inspect_apk.py
+C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\hookme_542\代码附件\classes4.dex
+C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\hookme_542\代码附件\classes.dex
+C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\hookme_542\代码附件\AndroidManifest.xml
+C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\hookme_542\代码附件\lib\x86\libhookme.so
+C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\hookme_542\代码附件\lib\arm64-v8a\libhookme.so
+C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\hookme_542\代码附件\lib\armeabi-v7a\libhookme.so
+**********************
+PowerShell transcript end
+End time: 20260928165146
+**********************
+**********************
+PowerShell transcript start
+Start time: 20260928165202
+Username: DESKTOP-412KTAR\mzj
+RunAs User: DESKTOP-412KTAR\mzj
+Configuration Name: 
+Machine: DESKTOP-412KTAR (Microsoft Windows NT 10.0.26200.0)
+Host Application: C:\Users\mzj\.cache\codex-runtimes\codex-primary-runtime\dependencies\native\powershell\pwsh.dll -Command try { [Console]::OutputEncoding=[System.Text.Encoding]::UTF8 } catch {}
+Start-Transcript -LiteralPath 'C:\Users\mzj\Desktop\CTF\玄机刷题\记录\续攻-主线程终端记录.txt' -Append
+& 'C:\msys64\mingw64\bin\objdump.exe' -d -M intel --start-address=0x140017200 --stop-address=0x140017540 'C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\Base_543\你知道Base么\你知道Base么.exe'
+Stop-Transcript
+Process ID: 17524
+PSVersion: 7.6.5
+PSEdition: Core
+GitCommitId: 7.6.5
+OS: Microsoft Windows 10.0.26200
+Platform: Win32NT
+PSCompatibleVersions: 1.0, 2.0, 3.0, 4.0, 5.0, 5.1, 6.0, 7.0
+PSRemotingProtocolVersion: 2.4
+SerializationVersion: 1.1.0.1
+WSManStackVersion: 3.0
+**********************
+Transcript started, output file is C:\Users\mzj\Desktop\CTF\玄机刷题\记录\续攻-主线程终端记录.txt
+[Y] Yes  [A] Yes to All  [N] No  [L] No to All  [S] Suspend  [?] Help (default is "Y"):
+**********************
+PowerShell transcript end
+End time: 20260928165203
+**********************
+**********************
+PowerShell transcript start
+Start time: 20260928165216
+Username: DESKTOP-412KTAR\mzj
+RunAs User: DESKTOP-412KTAR\mzj
+Configuration Name: 
+Machine: DESKTOP-412KTAR (Microsoft Windows NT 10.0.26200.0)
+Host Application: C:\Users\mzj\.cache\codex-runtimes\codex-primary-runtime\dependencies\native\powershell\pwsh.dll -Command try { [Console]::OutputEncoding=[System.Text.Encoding]::UTF8 } catch {}
+Start-Transcript -LiteralPath 'C:\Users\mzj\Desktop\CTF\玄机刷题\记录\续攻-主线程终端记录.txt' -Append
+@'
+from pathlib import Path
+import pefile, capstone
+p = next(Path(r'C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\Base_543').rglob('*.exe'))
+pe = pefile.PE(str(p))
+md = capstone.Cs(capstone.CS_ARCH_X86, capstone.CS_MODE_64)
+for i in md.disasm(pe.get_data(0x17200,0x340),pe.OPTIONAL_HEADER.ImageBase+0x17200):
+ print(f'{i.address:x}: {i.mnemonic} {i.op_str}')
+'@ | python -
+Stop-Transcript
+Process ID: 18204
+PSVersion: 7.6.5
+PSEdition: Core
+GitCommitId: 7.6.5
+OS: Microsoft Windows 10.0.26200
+Platform: Win32NT
+PSCompatibleVersions: 1.0, 2.0, 3.0, 4.0, 5.0, 5.1, 6.0, 7.0
+PSRemotingProtocolVersion: 2.4
+SerializationVersion: 1.1.0.1
+WSManStackVersion: 3.0
+**********************
+Transcript started, output file is C:\Users\mzj\Desktop\CTF\玄机刷题\记录\续攻-主线程终端记录.txt
+**********************
+PowerShell transcript end
+End time: 20260928165216
+**********************
+**********************
+PowerShell transcript start
+Start time: 20260928165229
+Username: DESKTOP-412KTAR\mzj
+RunAs User: DESKTOP-412KTAR\mzj
+Configuration Name: 
+Machine: DESKTOP-412KTAR (Microsoft Windows NT 10.0.26200.0)
+Host Application: C:\Users\mzj\.cache\codex-runtimes\codex-primary-runtime\dependencies\native\powershell\pwsh.dll -Command try { [Console]::OutputEncoding=[System.Text.Encoding]::UTF8 } catch {}
+Start-Transcript -LiteralPath 'C:\Users\mzj\Desktop\CTF\玄机刷题\记录\续攻-主线程终端记录.txt' -Append
+rg -n 'python.exe|capstone|pefile|venv|PYTHONPATH' 'C:\Users\mzj\Desktop\CTF\玄机刷题\记录\限时攻关-Base-终端记录.txt' | Select-Object -First 16
+Get-ChildItem -LiteralPath 'C:\Users\mzj\Desktop\CTF' -Force | Select-Object Name,Mode
+Stop-Transcript
+Process ID: 25576
+PSVersion: 7.6.5
+PSEdition: Core
+GitCommitId: 7.6.5
+OS: Microsoft Windows 10.0.26200
+Platform: Win32NT
+PSCompatibleVersions: 1.0, 2.0, 3.0, 4.0, 5.0, 5.1, 6.0, 7.0
+PSRemotingProtocolVersion: 2.4
+SerializationVersion: 1.1.0.1
+WSManStackVersion: 3.0
+**********************
+Transcript started, output file is C:\Users\mzj\Desktop\CTF\玄机刷题\记录\续攻-主线程终端记录.txt
+1692:python.exe  C:\Users\mzj\AppData\Local\Programs\Python\Python312\python.exe
+1693:python.exe  C:\Users\mzj\AppData\Local\Programs\Python\Python313\python.exe
+1694:python.exe  C:\Users\mzj\AppData\Local\Microsoft\WindowsApps\python.exe
+1695:python.exe  C:\Users\mzj\AppData\Local\Python\bin\python.exe
+2423:$logPath = 'C:\Users\mzj\Desktop\CTF\玄机刷题\记录\限时攻关-Base-终端记录.txt'; Start-Transcript -LiteralPath $logPath -Append; $exe='/mnt/c/Users/mzj/Desktop/CTF/玄机刷题/题目资料/Base_543/你知道Base么/你知道Base么.exe'; Write-Output 'COMMAND: objdump comparator helper and Base encoder implementation'; wsl --exec /usr/bin/objdump -d -Mintel --start-address=0x140011e80 --stop-address=0x140011ef0 $exe 2>&1; wsl --exec /usr/bin/objdump -d -Mintel --start-address=0x140012430 --stop-address=0x1400124F0 $exe 2>&1; Write-Output 'COMMAND: objdump main input format-string call sites'; wsl --exec /usr/bin/objdump -d -Mintel --start-address=0x14001713A --stop-address=0x140017410 $exe 2>&1; Write-Output 'COMMAND: query available Python PE parsers'; python -c "import importlib.util as u; print('pefile=',u.find_spec('pefile')); print('capstone=',u.find_spec('capstone'))" 2>&1; Stop-Transcript
+
+**********************
+PowerShell transcript end
+End time: 20260928165229
+**********************
+**********************
+PowerShell transcript start
+Start time: 20260928165236
+Username: DESKTOP-412KTAR\mzj
+RunAs User: DESKTOP-412KTAR\mzj
+Configuration Name: 
+Machine: DESKTOP-412KTAR (Microsoft Windows NT 10.0.26200.0)
+Host Application: C:\Users\mzj\.cache\codex-runtimes\codex-primary-runtime\dependencies\native\powershell\pwsh.dll -Command try { [Console]::OutputEncoding=[System.Text.Encoding]::UTF8 } catch {}
+Start-Transcript -LiteralPath 'C:\Users\mzj\Desktop\CTF\玄机刷题\记录\续攻-主线程终端记录.txt' -Append
+wsl --exec /usr/bin/objdump -d -Mintel --start-address=0x140017340 --stop-address=0x140017530 '/mnt/c/Users/mzj/Desktop/CTF/玄机刷题/题目资料/Base_543/你知道Base么/你知道Base么.exe'
+Stop-Transcript
+Process ID: 28048
+PSVersion: 7.6.5
+PSEdition: Core
+GitCommitId: 7.6.5
+OS: Microsoft Windows 10.0.26200
+Platform: Win32NT
+PSCompatibleVersions: 1.0, 2.0, 3.0, 4.0, 5.0, 5.1, 6.0, 7.0
+PSRemotingProtocolVersion: 2.4
+SerializationVersion: 1.1.0.1
+WSManStackVersion: 3.0
+**********************
+Transcript started, output file is C:\Users\mzj\Desktop\CTF\玄机刷题\记录\续攻-主线程终端记录.txt
+[Y] Yes  [A] Yes to All  [N] No  [L] No to All  [S] Suspend  [?] Help (default is "Y"):
+**********************
+PowerShell transcript end
+End time: 20260928165300
+**********************
+**********************
+PowerShell transcript start
+Start time: 20260928165320
+Username: DESKTOP-412KTAR\mzj
+RunAs User: DESKTOP-412KTAR\mzj
+Configuration Name: 
+Machine: DESKTOP-412KTAR (Microsoft Windows NT 10.0.26200.0)
+Host Application: C:\Users\mzj\.cache\codex-runtimes\codex-primary-runtime\dependencies\native\powershell\pwsh.dll -Command try { [Console]::OutputEncoding=[System.Text.Encoding]::UTF8 } catch {}
+Start-Transcript -LiteralPath 'C:\Users\mzj\Desktop\CTF\玄机刷题\记录\续攻-主线程终端记录.txt' -Append
+wsl --exec /usr/bin/objdump -d -Mintel --start-address=0x14001756f --stop-address=0x140017690 '/mnt/c/Users/mzj/Desktop/CTF/玄机刷题/题目资料/Base_543/你知道Base么/你知道Base么.exe'
+wsl --exec /usr/bin/objdump -d -Mintel --start-address=0x140011e80 --stop-address=0x140011ec0 '/mnt/c/Users/mzj/Desktop/CTF/玄机刷题/题目资料/Base_543/你知道Base么/你知道Base么.exe'
+Stop-Transcript
+Process ID: 26904
+PSVersion: 7.6.5
+PSEdition: Core
+GitCommitId: 7.6.5
+OS: Microsoft Windows 10.0.26200
+Platform: Win32NT
+PSCompatibleVersions: 1.0, 2.0, 3.0, 4.0, 5.0, 5.1, 6.0, 7.0
+PSRemotingProtocolVersion: 2.4
+SerializationVersion: 1.1.0.1
+WSManStackVersion: 3.0
+**********************
+Transcript started, output file is C:\Users\mzj\Desktop\CTF\玄机刷题\记录\续攻-主线程终端记录.txt
+[Y] Yes  [A] Yes to All  [N] No  [L] No to All  [S] Suspend  [?] Help (default is "Y"):
+[Y] Yes  [A] Yes to All  [N] No  [L] No to All  [S] Suspend  [?] Help (default is "Y"):
+**********************
+PowerShell transcript end
+End time: 20260928165337
+**********************
+**********************
+PowerShell transcript start
+Start time: 20260928165423
+Username: DESKTOP-412KTAR\mzj
+RunAs User: DESKTOP-412KTAR\mzj
+Configuration Name: 
+Machine: DESKTOP-412KTAR (Microsoft Windows NT 10.0.26200.0)
+Host Application: C:\Users\mzj\.cache\codex-runtimes\codex-primary-runtime\dependencies\native\powershell\pwsh.dll -Command try { [Console]::OutputEncoding=[System.Text.Encoding]::UTF8 } catch {}
+Start-Transcript -LiteralPath 'C:\Users\mzj\Desktop\CTF\玄机刷题\记录\续攻-主线程终端记录.txt' -Append
+wsl --exec /usr/bin/objdump -d -Mintel --start-address=0x140017529 --stop-address=0x140017579 '/mnt/c/Users/mzj/Desktop/CTF/玄机刷题/题目资料/Base_543/你知道Base么/你知道Base么.exe'
+wsl --exec /usr/bin/objdump -d -Mintel --start-address=0x140011390 --stop-address=0x1400113c0 '/mnt/c/Users/mzj/Desktop/CTF/玄机刷题/题目资料/Base_543/你知道Base么/你知道Base么.exe'
+Stop-Transcript
+Process ID: 3392
+PSVersion: 7.6.5
+PSEdition: Core
+GitCommitId: 7.6.5
+OS: Microsoft Windows 10.0.26200
+Platform: Win32NT
+PSCompatibleVersions: 1.0, 2.0, 3.0, 4.0, 5.0, 5.1, 6.0, 7.0
+PSRemotingProtocolVersion: 2.4
+SerializationVersion: 1.1.0.1
+WSManStackVersion: 3.0
+**********************
+Transcript started, output file is C:\Users\mzj\Desktop\CTF\玄机刷题\记录\续攻-主线程终端记录.txt
+[Y] Yes  [A] Yes to All  [N] No  [L] No to All  [S] Suspend  [?] Help (default is "Y"):
+[Y] Yes  [A] Yes to All  [N] No  [L] No to All  [S] Suspend  [?] Help (default is "Y"):
+**********************
+PowerShell transcript end
+End time: 20260928165439
+**********************
+**********************
+PowerShell transcript start
+Start time: 20260928165508
+Username: DESKTOP-412KTAR\mzj
+RunAs User: DESKTOP-412KTAR\mzj
+Configuration Name: 
+Machine: DESKTOP-412KTAR (Microsoft Windows NT 10.0.26200.0)
+Host Application: C:\Users\mzj\.cache\codex-runtimes\codex-primary-runtime\dependencies\native\powershell\pwsh.dll -Command try { [Console]::OutputEncoding=[System.Text.Encoding]::UTF8 } catch {}
+Start-Transcript -LiteralPath 'C:\Users\mzj\Desktop\CTF\玄机刷题\记录\续攻-主线程终端记录.txt' -Append
+wsl --exec /usr/bin/objdump -d -Mintel --start-address=0x140012400 --stop-address=0x140012550 '/mnt/c/Users/mzj/Desktop/CTF/玄机刷题/题目资料/Base_543/你知道Base么/你知道Base么.exe'
+Stop-Transcript
+Process ID: 24532
+PSVersion: 7.6.5
+PSEdition: Core
+GitCommitId: 7.6.5
+OS: Microsoft Windows 10.0.26200
+Platform: Win32NT
+PSCompatibleVersions: 1.0, 2.0, 3.0, 4.0, 5.0, 5.1, 6.0, 7.0
+PSRemotingProtocolVersion: 2.4
+SerializationVersion: 1.1.0.1
+WSManStackVersion: 3.0
+**********************
+Transcript started, output file is C:\Users\mzj\Desktop\CTF\玄机刷题\记录\续攻-主线程终端记录.txt
+[Y] Yes  [A] Yes to All  [N] No  [L] No to All  [S] Suspend  [?] Help (default is "Y"):
+**********************
+PowerShell transcript end
+End time: 20260928165523
+**********************
+**********************
+PowerShell transcript start
+Start time: 20260928165618
+Username: DESKTOP-412KTAR\mzj
+RunAs User: DESKTOP-412KTAR\mzj
+Configuration Name: 
+Machine: DESKTOP-412KTAR (Microsoft Windows NT 10.0.26200.0)
+Host Application: C:\Users\mzj\.cache\codex-runtimes\codex-primary-runtime\dependencies\native\powershell\pwsh.dll -Command try { [Console]::OutputEncoding=[System.Text.Encoding]::UTF8 } catch {}
+Start-Transcript -LiteralPath 'C:\Users\mzj\Desktop\CTF\玄机刷题\记录\续攻-主线程终端记录.txt' -Append
+Write-Output 'BASE CORRECTION WITH DIRECT EVIDENCE: main 0x14001756f calls 0x1400113a2, which jumps to 0x140012400. Actual comparison loop at 0x140012435 compares counter against 0x1e; bytes at [rcx+index] and [rdx+index] are compared at 0x140012459. Thus it compares exactly first 30 encoded symbols. The previous correction claiming full-string comparison was itself wrong. The separate REP STOS initialization is not the evidence for length; the comparator loop is.'
+$env:PYTHONUTF8='1'
+python 'C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\Base_543\solve_base_offline.py'
+Stop-Transcript
+Process ID: 14932
+PSVersion: 7.6.5
+PSEdition: Core
+GitCommitId: 7.6.5
+OS: Microsoft Windows 10.0.26200
+Platform: Win32NT
+PSCompatibleVersions: 1.0, 2.0, 3.0, 4.0, 5.0, 5.1, 6.0, 7.0
+PSRemotingProtocolVersion: 2.4
+SerializationVersion: 1.1.0.1
+WSManStackVersion: 3.0
+**********************
+Transcript started, output file is C:\Users\mzj\Desktop\CTF\玄机刷题\记录\续攻-主线程终端记录.txt
+BASE CORRECTION WITH DIRECT EVIDENCE: main 0x14001756f calls 0x1400113a2, which jumps to 0x140012400. Actual comparison loop at 0x140012435 compares counter against 0x1e; bytes at [rcx+index] and [rdx+index] are compared at 0x140012459. Thus it compares exactly first 30 encoded symbols. The previous correction claiming full-string comparison was itself wrong. The separate REP STOS initialization is not the evidence for length; the comparator loop is.
+[Y] Yes  [A] Yes to All  [N] No  [L] No to All  [S] Suspend  [?] Help (default is "Y"):
+**********************
+PowerShell transcript end
+End time: 20260928165618
+**********************
+**********************
+PowerShell transcript start
+Start time: 20260928165628
+Username: DESKTOP-412KTAR\mzj
+RunAs User: DESKTOP-412KTAR\mzj
+Configuration Name: 
+Machine: DESKTOP-412KTAR (Microsoft Windows NT 10.0.26200.0)
+Host Application: C:\Users\mzj\.cache\codex-runtimes\codex-primary-runtime\dependencies\native\powershell\pwsh.dll -Command try { [Console]::OutputEncoding=[System.Text.Encoding]::UTF8 } catch {}
+Start-Transcript -LiteralPath 'C:\Users\mzj\Desktop\CTF\玄机刷题\记录\续攻-主线程终端记录.txt' -Append
+rg -n '543|y0u__rea11y|FLAG 不正确|542' 'C:\Users\mzj\Desktop\CTF\玄机刷题\记录\新批次中等题攻关终端记录.txt' | Select-Object -Last 22
+Stop-Transcript
+Process ID: 18792
+PSVersion: 7.6.5
+PSEdition: Core
+GitCommitId: 7.6.5
+OS: Microsoft Windows 10.0.26200
+Platform: Win32NT
+PSCompatibleVersions: 1.0, 2.0, 3.0, 4.0, 5.0, 5.1, 6.0, 7.0
+PSRemotingProtocolVersion: 2.4
+SerializationVersion: 1.1.0.1
+WSManStackVersion: 3.0
+**********************
+Transcript started, output file is C:\Users\mzj\Desktop\CTF\玄机刷题\记录\续攻-主线程终端记录.txt
+682:Hash      : E1621BF0A51FC0F1783515F2DCEC95070A8737F59521D8F202B97F8135420A26
+1383:     14000c543:	41 39 3c 82          	cmp    DWORD PTR [r10+rax*4],edi
+1559:key = [0x12345678, 0x9ABCDEF0, 0xFEDCBA98, 0x87654321]
+1635:key = [0x12345678, 0x9ABCDEF0, 0xFEDCBA98, 0x87654321]
+3377:$log = 'C:\Users\mzj\Desktop\CTF\玄机刷题\记录\新批次中等题攻关终端记录.txt'; Start-Transcript -LiteralPath $log -Append; Write-Output '=== 前台玄机操作记录：checker #562 提交验证（2026-09-27） ==='; Write-Output '操作：在 /challenges/562 的提交 FLAG 对话框输入 flag{enp17I4p8TZmAriao2lq5tAArZ2P1wxBUwXU2} 并点击提交。'; Write-Output '前台 AX 提交响应：FLAG 不正确。页面步骤仍显示 0 / 1，完成情况 0%；因此没有记为平台解出。'; Write-Output '证据：提交后可见挑战详情页仍未完成；本地 Windows checker.exe 对同一输入输出 Correct! You have the flag. 两者结果冲突，需复查题目/校验逻辑。'; Stop-Transcript
+3392:前台 AX 提交响应：FLAG 不正确。页面步骤仍显示 0 / 1，完成情况 0%；因此没有记为平台解出。
+3552:前台 AX 提交响应：FLAG 不正确。页面步骤仍显示 0 / 1，完成情况 0%；因此没有记为平台解出。
+5583:Start time: 20260927202542
+5618:End time: 20260927202543
+6267:#542 轩辕杯 REVERSE hookme：提交 `flag{ee9fb062624c1e527fab36d3a27484d1}`；页面即时反馈“FLAG 不正确”，题目步骤仍为 0/1。候选与复核依据见 `记录\代理-hookme-终端记录.txt`；该值未记为已解决。
+6268:#543 轩辕杯 你知道Base么：提交 `flag{y0u__rea11y__k1ow__Base!}`；页面即时反馈“FLAG 不正确”，题目步骤仍为 0/1。候选与复核依据见 `记录\代理-base-终端记录.txt`；该值未记为已解决。
+6269:#546 第二届Parloo杯PaluArray：2026-09-27 在 `https://xj.edisec.net/challenges/546` 的 FLAG 提交框输入 `palu{1b501325fc96d5a845cbdd2ba4f01cd7}` 并点击“提交”；页面 AX 反馈“FLAG 不正确”，题目步骤仍为 0/1，截图中题目进度显示 0%。该候选未记为已解决。当前题目页面已确认标题“第二届Parloo杯PaluArray”、免费、中等、步骤 0/1。
+6284:#542 轩辕杯 REVERSE hookme：提交 `flag{ee9fb062624c1e527fab36d3a27484d1}`；页面即时反馈“FLAG 不正确”，题目步骤仍为 0/1。候选与复核依据见 `记录\代理-hookme-终端记录.txt`；该值未记为已解决。
+6285:#543 轩辕杯 你知道Base么：提交 `flag{y0u__rea11y__k1ow__Base!}`；页面即时反馈“FLAG 不正确”，题目步骤仍为 0/1。候选与复核依据见 `记录\代理-base-终端记录.txt`；该值未记为已解决。
+6286:#546 第二届Parloo杯PaluArray：2026-09-27 在 `https://xj.edisec.net/challenges/546` 的 FLAG 提交框输入 `palu{1b501325fc96d5a845cbdd2ba4f01cd7}` 并点击“提交”；页面 AX 反馈“FLAG 不正确”，题目步骤仍为 0/1，截图中题目进度显示 0%。该候选未记为已解决。当前题目页面已确认标题“第二届Parloo杯PaluArray”、免费、中等、步骤 0/1。
+6311:#542 轩辕杯 REVERSE hookme：提交 `flag{ee9fb062624c1e527fab36d3a27484d1}`；页面即时反馈“FLAG 不正确”，题目步骤仍为 0/1。候选与复核依据见 `记录\代理-hookme-终端记录.txt`；该值未记为已解决。
+6312:#543 轩辕杯 你知道Base么：提交 `flag{y0u__rea11y__k1ow__Base!}`；页面即时反馈“FLAG 不正确”，题目步骤仍为 0/1。候选与复核依据见 `记录\代理-base-终端记录.txt`；该值未记为已解决。
+6313:#546 第二届Parloo杯PaluArray：2026-09-27 在 `https://xj.edisec.net/challenges/546` 的 FLAG 提交框输入 `palu{1b501325fc96d5a845cbdd2ba4f01cd7}` 并点击“提交”；页面 AX 反馈“FLAG 不正确”，题目步骤仍为 0/1，截图中题目进度显示 0%。该候选未记为已解决。当前题目页面已确认标题“第二届Parloo杯PaluArray”、免费、中等、步骤 0/1。
+7177:Start time: 20260927205430
+7323:End time: 20260927205430
+7333:$p='C:\Users\mzj\Desktop\CTF\玄机刷题\记录\新批次中等题攻关终端记录.txt'; Start-Transcript -LiteralPath $p -Append; Write-Output '=== Computer Use 平台提交回溯补录：#541 ezBase ==='; Write-Output '通过 Computer Use 打开 https://xj.edisec.net/challenges/541，确认页面标题为“轩辕杯”云盾砺剑CTF挑战赛ezBase-20250521104055-dq14shk，分类 REVERSE，免费，中等，积分 300，唯一步骤提示尝试读取 /flag，当前进度 0/1。此前在页面提交本地候选 flag{Y0u_@R3_Upx_4nd_b45364_m4st3r!}；会话中平台即时反馈为“FLAG 不正确”，页面保持 0/1。该标记来自本轮 Computer Use 交互记录；现在重新读取页面 AX 状态只确认 0/1，不将旧反馈伪装成本次可见 toast。页面 screenshot 没有保存为本地文件。'; Stop-Transcript
+7347:通过 Computer Use 打开 https://xj.edisec.net/challenges/541，确认页面标题为“轩辕杯”云盾砺剑CTF挑战赛ezBase-20250521104055-dq14shk，分类 REVERSE，免费，中等，积分 300，唯一步骤提示尝试读取 /flag，当前进度 0/1。此前在页面提交本地候选 flag{Y0u_@R3_Upx_4nd_b45364_m4st3r!}；会话中平台即时反馈为“FLAG 不正确”，页面保持 0/1。该标记来自本轮 Computer Use 交互记录；现在重新读取页面 AX 状态只确认 0/1，不将旧反馈伪装成本次可见 toast。页面 screenshot 没有保存为本地文件。
+**********************
+PowerShell transcript end
+End time: 20260928165628
+**********************
+**********************
+PowerShell transcript start
+Start time: 20260928193605
+Username: DESKTOP-412KTAR\mzj
+RunAs User: DESKTOP-412KTAR\mzj
+Configuration Name: 
+Machine: DESKTOP-412KTAR (Microsoft Windows NT 10.0.26200.0)
+Host Application: C:\Users\mzj\.cache\codex-runtimes\codex-primary-runtime\dependencies\native\powershell\pwsh.dll -Command try { [Console]::OutputEncoding=[System.Text.Encoding]::UTF8 } catch {}
+Start-Transcript -LiteralPath 'C:\Users\mzj\Desktop\CTF\玄机刷题\记录\续攻-主线程终端记录.txt' -Append
+rg --files 'C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料' | Where-Object { $_ -match '541|ezBase|ezbase' }
+rg -n 'ENCRYPTED|TARGET|FLAG|target|base64|XOR|xor|decode|=' 'C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料' -g '*ez*' -g '*541*' | Select-Object -First 60
+Stop-Transcript
+Process ID: 25456
+PSVersion: 7.6.5
+PSEdition: Core
+GitCommitId: 7.6.5
+OS: Microsoft Windows 10.0.26200
+Platform: Win32NT
+PSCompatibleVersions: 1.0, 2.0, 3.0, 4.0, 5.0, 5.1, 6.0, 7.0
+PSRemotingProtocolVersion: 2.4
+SerializationVersion: 1.1.0.1
+WSManStackVersion: 3.0
+**********************
+Transcript started, output file is C:\Users\mzj\Desktop\CTF\玄机刷题\记录\续攻-主线程终端记录.txt
+C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\ezBase_541\parse_exports.py
+C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\ezBase_541\工作区\README.md
+C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\ezBase_541\ezBase\ezre.exe
+C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\ezBase_541\decode_upx.py
+C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\ezBase_541\debug_stack.c
+C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\ezBase_541\debug_patch.c
+C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\ezBase_541\debug_mem.c
+C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\ezBase_541\debug_importdump.c
+C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\ezBase_541\debug_entry.c
+C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\ezBase_541\debug_dump.c
+C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\ezBase_541\check_exports.py
+C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\ezBase_541\candidate_36byte_flag.txt
+C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\ezBase_541\candidate_35byte_prefix.txt
+C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\ezBase_541\shim_vcr_min.c
+C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\ezBase_541\shim_vcr.c
+C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\ezBase_541\shim_ucrt_min.c
+C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\ezBase_541\shim_ucrt.c
+C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\ezBase_541\runtime_import_tail.bin
+C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\ezBase_541\runshim\VCRUNTIME140D.dll
+C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\ezBase_541\runshim\ucrtbased.dll
+C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\ezBase_541\runshim\ezre.exe
+C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\ezBase_541\unpacked_runtime.bin
+C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\ezBase_541\ucrtbased_forward.def
+C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\ezBase_541\solve_ez541_final.py
+C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\ezBase_541\vcruntime140d_forward.def
+C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\ezBase_541\工作区\2026-09-27\_ezstack.exe
+C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\ezBase_541\工作区\2026-09-27\_ezpatch.exe
+C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\ezBase_541\工作区\2026-09-27\_ezmem.exe
+C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\ezBase_541\工作区\2026-09-27\_ezinput.txt
+C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\ezBase_541\工作区\2026-09-27\_ezimportdump.exe
+C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\ezBase_541\工作区\2026-09-27\_ezdump.exe
+C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\ezBase_541\工作区\2026-09-27\_ezdebug.exe
+C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\ezBase_541\工作区\2026-09-27\_dumpmain3.exe
+C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\ezBase_541\工作区\2026-09-27\_dumpmain3.c
+C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\ezBase_541\工作区\2026-09-27\_dumpmain2.exe
+C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\ezBase_541\工作区\2026-09-27\_dumpmain2.c
+C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\ezBase_541\工作区\2026-09-27\_dumpmain.exe
+C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\ezBase_541\工作区\2026-09-27\_dumpmain.c
+C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\ezBase_541\工作区\2026-09-27\solve_ez541_final_snapshot.py
+C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\ezBase_541\工作区\2026-09-27\solve_ez541_early.py
+C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\ezBase_541\分析产物\README.md
+C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\ezBase_541\工作区\2026-09-27\minimal-runtime\VCRUNTIME140D.dll
+C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\ezBase_541\工作区\2026-09-27\minimal-runtime\ucrtbased.dll
+C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\ezBase_541\分析产物\2026-09-27\_ezcode_oep.txt
+C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\ezBase_541\分析产物\2026-09-27\_ezdecode_func.txt
+C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\ezBase_541\分析产物\2026-09-27\_kernelbase_exports.txt
+C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\ezBase_541\分析产物\2026-09-27\_ezexports.txt
+C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\ezBase_541\分析产物\2026-09-27\_ezdisasm_all.txt
+C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\ezBase_541\分析产物\2026-09-27\_ezdecode_output.txt
+C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\ezBase_541\solve_ez541_final.py:1:import base64, hashlib
+C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\ezBase_541\solve_ez541_final.py:4:target = b"iP}ui7siC`otMgA~h5o]Tg<4jPmtIvM5C~I4h644K7M~KVg="
+C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\ezBase_541\solve_ez541_final.py:5:alphabet = b"AaBbCcDdEeFfGgHhIiJjKkLlMmNnOoPpQqRrSsTtUuVvWwXxYyZz0123456789+/"
+C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\ezBase_541\solve_ez541_final.py:6:canonical_alphabet = b"ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/"
+C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\ezBase_541\solve_ez541_final.py:7:plain_b64 = bytes((ch ^ 4) if ch != ord('=') else ch for ch in target)
+C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\ezBase_541\solve_ez541_final.py:8:canonical = bytes(ord('=') if ch == ord('=') else canonical_alphabet[alphabet.index(ch)] for ch in plain_b64)
+C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\ezBase_541\solve_ez541_final.py:9:candidate = base64.b64decode(canonical, validate=True)
+C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\ezBase_541\solve_ez541_final.py:10:roundtrip = base64.b64encode(candidate)
+C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\ezBase_541\solve_ez541_final.py:11:custom = bytes(ord('=') if ch == ord('=') else alphabet[canonical_alphabet.index(ch)] for ch in roundtrip)
+C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\ezBase_541\solve_ez541_final.py:12:reproduced = bytes((ch ^ 4) if ch != ord('=') else ch for ch in custom)
+C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\ezBase_541\solve_ez541_final.py:13:print(f"target_len={len(target)} target={target.decode()}")
+C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\ezBase_541\solve_ez541_final.py:14:print(f"xor4_reversed={plain_b64.decode()}")
+C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\ezBase_541\solve_ez541_final.py:15:print(f"canonical_b64={canonical.decode()}")
+C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\ezBase_541\solve_ez541_final.py:16:print(f"decoded_len={len(candidate)} decoded_ascii={candidate.decode()}")
+C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\ezBase_541\solve_ez541_final.py:17:print(f"encoder_roundtrip_b64={roundtrip.decode()}")
+C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\ezBase_541\solve_ez541_final.py:18:print(f"target_roundtrip_match={reproduced == target}")
+C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\ezBase_541\solve_ez541_final.py:19:print(f"roundtrip_diff_indices={[i for i,(x,y) in enumerate(zip(reproduced,target)) if x!=y]}")
+C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\ezBase_541\solve_ez541_final.py:20:print(f"candidate_sha256={hashlib.sha256(candidate).hexdigest()}")
+C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\ezBase_541\工作区\2026-09-27\solve_ez541_final_snapshot.py:1:import base64, hashlib
+C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\ezBase_541\工作区\2026-09-27\solve_ez541_final_snapshot.py:4:target = b"iP}ui7siC`otMgA~h5o]Tg<4jPmtIvM5C~I4h644K7M~KVg="
+C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\ezBase_541\工作区\2026-09-27\solve_ez541_final_snapshot.py:5:alphabet = b"AaBbCcDdEeFfGgHhIiJjKkLlMmNnOoPpQqRrSsTtUuVvWwXxYyZz0123456789+/"
+C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\ezBase_541\工作区\2026-09-27\solve_ez541_final_snapshot.py:6:canonical_alphabet = b"ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/"
+C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\ezBase_541\工作区\2026-09-27\solve_ez541_final_snapshot.py:7:plain_b64 = bytes((ch ^ 4) if ch != ord('=') else ch for ch in target)
+C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\ezBase_541\工作区\2026-09-27\solve_ez541_final_snapshot.py:8:canonical = bytes(ord('=') if ch == ord('=') else canonical_alphabet[alphabet.index(ch)] for ch in plain_b64)
+C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\ezBase_541\工作区\2026-09-27\solve_ez541_final_snapshot.py:9:candidate = base64.b64decode(canonical, validate=True)
+C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\ezBase_541\工作区\2026-09-27\solve_ez541_final_snapshot.py:10:roundtrip = base64.b64encode(candidate)
+C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\ezBase_541\工作区\2026-09-27\solve_ez541_final_snapshot.py:11:custom = bytes(ord('=') if ch == ord('=') else alphabet[canonical_alphabet.index(ch)] for ch in roundtrip)
+C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\ezBase_541\工作区\2026-09-27\solve_ez541_final_snapshot.py:12:reproduced = bytes((ch ^ 4) if ch != ord('=') else ch for ch in custom)
+C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\ezBase_541\工作区\2026-09-27\solve_ez541_final_snapshot.py:13:print(f"target_len={len(target)} target={target.decode()}")
+C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\ezBase_541\工作区\2026-09-27\solve_ez541_final_snapshot.py:14:print(f"xor4_reversed={plain_b64.decode()}")
+C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\ezBase_541\工作区\2026-09-27\solve_ez541_final_snapshot.py:15:print(f"canonical_b64={canonical.decode()}")
+C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\ezBase_541\工作区\2026-09-27\solve_ez541_final_snapshot.py:16:print(f"decoded_len={len(candidate)} decoded_ascii={candidate.decode()}")
+C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\ezBase_541\工作区\2026-09-27\solve_ez541_final_snapshot.py:17:print(f"encoder_roundtrip_b64={roundtrip.decode()}")
+C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\ezBase_541\工作区\2026-09-27\solve_ez541_final_snapshot.py:18:print(f"target_roundtrip_match={reproduced == target}")
+C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\ezBase_541\工作区\2026-09-27\solve_ez541_final_snapshot.py:19:print(f"roundtrip_diff_indices={[i for i,(x,y) in enumerate(zip(reproduced,target)) if x!=y]}")
+C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\ezBase_541\工作区\2026-09-27\solve_ez541_final_snapshot.py:20:print(f"candidate_sha256={hashlib.sha256(candidate).hexdigest()}")
+C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\ezBase_541\工作区\2026-09-27\solve_ez541_final_snapshot.py:21:output_dir = Path(__file__).resolve().parent
+C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\ezBase_541\工作区\2026-09-27\solve_ez541_early.py:1:import base64, hashlib
+C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\ezBase_541\工作区\2026-09-27\solve_ez541_early.py:4:target = b"iP}ui7siC`otMgA~h5o]Tg<4jPmtIvM5C~I4h644K7M~KVg="
+C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\ezBase_541\工作区\2026-09-27\solve_ez541_early.py:5:alphabet = b"AaBbCcDdEeFfGgHhIiJjKkLlMmNnOoPpQqRrSsTtUuVvWwXxYyZz0123456789+/"
+C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\ezBase_541\工作区\2026-09-27\solve_ez541_early.py:6:# Undo the encoder's final bytewise XOR (except the Base64 padding character).
+C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\ezBase_541\工作区\2026-09-27\solve_ez541_early.py:7:plain_b64 = bytes((ch ^ 0x04) if ch != ord('=') else ch for ch in target)
+C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\ezBase_541\工作区\2026-09-27\solve_ez541_early.py:8:print(f"target_len={len(target)}")
+C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\ezBase_541\工作区\2026-09-27\solve_ez541_early.py:9:print(f"target={target.decode('ascii')}")
+C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\ezBase_541\工作区\2026-09-27\solve_ez541_early.py:10:print(f"xor4_reversed={plain_b64.decode('ascii')}")
+C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\ezBase_541\工作区\2026-09-27\solve_ez541_early.py:11:print(f"alphabet_len={len(alphabet)} alphabet_unique={len(set(alphabet))}")
+C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\ezBase_541\工作区\2026-09-27\solve_ez541_early.py:12:assert len(alphabet) == 64 and len(set(alphabet)) == 64
+C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\ezBase_541\工作区\2026-09-27\solve_ez541_early.py:13:assert all(ch == ord('=') or ch in alphabet for ch in plain_b64)
+C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\ezBase_541\工作区\2026-09-27\solve_ez541_early.py:15:canon = bytes((ord('=') if ch == ord('=') else ord('ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/ '[alphabet.index(ch)])) for ch in plain_b64)
+C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\ezBase_541\工作区\2026-09-27\solve_ez541_early.py:16:print(f"canonical_b64={canon.decode('ascii')}")
+C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\ezBase_541\工作区\2026-09-27\solve_ez541_early.py:17:candidate = base64.b64decode(canon, validate=True)
+C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\ezBase_541\工作区\2026-09-27\solve_ez541_early.py:18:print(f"candidate_len={len(candidate)}")
+C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\ezBase_541\工作区\2026-09-27\solve_ez541_early.py:19:print(f"candidate_ascii={candidate.decode('ascii')}")
+C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\ezBase_541\工作区\2026-09-27\solve_ez541_early.py:20:print(f"candidate_hex={candidate.hex()}")
+C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\ezBase_541\工作区\2026-09-27\solve_ez541_early.py:22:enc = base64.b64encode(candidate)
+C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\ezBase_541\工作区\2026-09-27\solve_ez541_early.py:23:custom = bytes(alphabet[ord("ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/"[i])] if c != ord('=') else c for c in enc for i in [0])
+C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\ezBase_541\工作区\2026-09-27\solve_ez541_early.py:25:custom = bytes(ord('=') if c == ord('=') else alphabet[b"ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/".index(c)] for c in enc)
+C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\ezBase_541\工作区\2026-09-27\solve_ez541_early.py:26:reproduced = bytes((c ^ 4) if c != ord('=') else c for c in custom)
+C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\ezBase_541\工作区\2026-09-27\solve_ez541_early.py:27:print(f"roundtrip_match={reproduced == target}")
+C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\ezBase_541\工作区\2026-09-27\solve_ez541_early.py:28:print(f"candidate_sha256={hashlib.sha256(candidate).hexdigest()}")
+**********************
+PowerShell transcript end
+End time: 20260928193606
+**********************
+**********************
+PowerShell transcript start
+Start time: 20260928194132
+Username: DESKTOP-412KTAR\mzj
+RunAs User: DESKTOP-412KTAR\mzj
+Configuration Name: 
+Machine: DESKTOP-412KTAR (Microsoft Windows NT 10.0.26200.0)
+Host Application: C:\Users\mzj\.cache\codex-runtimes\codex-primary-runtime\dependencies\native\powershell\pwsh.dll -Command try { [Console]::OutputEncoding=[System.Text.Encoding]::UTF8 } catch {}
+Start-Transcript -LiteralPath 'C:\Users\mzj\Desktop\CTF\玄机刷题\记录\续攻-主线程终端记录.txt' -Append
+Get-Content -LiteralPath 'C:\Users\mzj\Desktop\CTF\玄机刷题\记录\ezBase-分析过程记录.md' -Tail 22 -ErrorAction SilentlyContinue
+Get-Content -LiteralPath 'C:\Users\mzj\Desktop\CTF\玄机刷题\记录\hookme-分析过程记录.md' -Tail 20
+Get-Content -LiteralPath 'C:\Users\mzj\Desktop\CTF\玄机刷题\记录\Base_543-分析过程记录.md' -Tail 20 -ErrorAction SilentlyContinue
+Stop-Transcript
+Process ID: 5576
+PSVersion: 7.6.5
+PSEdition: Core
+GitCommitId: 7.6.5
+OS: Microsoft Windows 10.0.26200
+Platform: Win32NT
+PSCompatibleVersions: 1.0, 2.0, 3.0, 4.0, 5.0, 5.1, 6.0, 7.0
+PSRemotingProtocolVersion: 2.4
+SerializationVersion: 1.1.0.1
+WSManStackVersion: 3.0
+**********************
+Transcript started, output file is C:\Users\mzj\Desktop\CTF\玄机刷题\记录\续攻-主线程终端记录.txt
+本地 APK 答案的算法推导与跨语言复现已闭合，但它与父线程所转述的平台拒绝结果冲突。当前本地证据不能判定冲突来自玄机题目绑定了另一份附件、平台题目答案数据不一致，还是题目本身在 APK 校验之外另有提交约定；这些都只是可能解释，未被证实。本地候选不能标成平台通过，也不应在本地证据不足时生成替代 flag。若继续攻关，需先由父线程核对 ID 542 题目页实际附件指纹/提交格式；本代理依照委派要求不操作平台。
+
+## 2026-09-28 续攻复核：检查隐藏校验路径与 APK 其他载荷（玄机 ID 542）
+
+### 本次检查目标
+
+此前 APK 静态验证得出 `flag{ee9fb062624c1e527fab36d3a27484d1}`，但平台曾拒绝。此次只在现有附件上排查“APK 是否还含另一套验证、另一份 flag、额外输入/环境条件或第二载荷”；没有访问平台、浏览器或提交答案，也没有尝试改写 flag 前缀。
+
+### 逐步检查
+
+1. **确认 APK 可完整读取并盘点内容。** 重新对 `附件解包\hookme\HookMe.apk` 做 ZIP 完整性检查，`testzip()` 返回 `None`，共 891 个 ZIP 条目。以 assets、raw、secret、flag、config 等目录名筛查可承载额外题目数据的资源路径，结果为空；全部 DEX 之外没有发现单独的脚本、配置或旗标载荷。
+2. **按 DEX 分析应用代码归属。** APK 共包含 `classes.dex`、`classes2.dex`、`classes3.dex`、`classes4.dex`。逐个解析类描述符后，主应用逻辑 `MainActivity` 仅在 `classes4.dex`；`classes3.dex` 是 ActivityMainBinding 视图绑定；`classes2.dex` 含资源常量类；`classes.dex` 主要是 AndroidX/Kotlin 依赖，未发现另一个 `com.example.hookme` 应用验证类。应用类字符串中未发现第二个 `flag{...}` 或第二个密文。
+3. **重新检查输入到结果判断的完整链路。** `MainActivity.onCreate` 调用 `getPackageName()` 并将结果传入 `setPackageNameToNative`；点击监听器调用 `rc4Encrypt(输入)`，取 `R$string.correct_ciphertext` 并用 `hexStringToByteArray` 转为字节，然后通过 `Arrays.equals` 逐字节比较。匹配后界面显示 `success`。该应用链路没有读取网络响应或设备标识后再变更答案的代码分支。
+4. **枚举密文资源。** 对完整 `resources.arsc` 中不少于 32 位的连续十六进制字符串做提取，只找到一条：`f235b888b3f4e08bff17e7e29bc3bf67d0f9a1b7b6581bb4a1eb299684e99923a8d193caf91d`，长度 38 字节。之前资源字段映射已确认该字符串对应 `correct_ciphertext`。
+5. **重跑解密与反向验证。** 用现存独立 Python 实现按 Manifest 包名 `com.example.hookme` 生成密钥，seed 为 `0x636f`，按 MT19937 低字节构造 S-box，再执行 KSA、PRGA。解密结果仍是 `flag{ee9fb062624c1e527fab36d3a27484d1}`；将结果重新加密得到的 38 字节与唯一资源密文完全相同，`REENCRYPT_MATCHES_RESOURCE=True`。旧分析还用独立 C++ 实现交叉复现，输出相同。
+6. **复核 ABI。** 重跑 `audit_other_abis.py`，检查 armeabi-v7a 与 x86 的导出 JNI 和算法实现；此前已审查 arm64-v8a 与 x86_64。四种 ABI 的目标逻辑均表现为同一套包名派生 seed、MT19937 字节 S-box、KSA 与 RC4 风格 PRGA；没有找到另一份隐藏密文或基于架构切换的 flag。ARMv7 的 seed 汇编按 `key[0] << 8 | key[1]` 组合，ASCII 包名首两字节仍为 `0x636f`。
+
+### 结论
+
+本次没有找到 APK 中第二个 flag、替代密文、远程校验或环境门槛。现有候选仍是这份 APK 自身校验逻辑的唯一可复现答案，反向加密可逐字节还原唯一密文；但由于玄机平台此前返回错误，**题目 542 仍不能标记为平台通过或已解决**。平台拒绝原因无法从 APK 本地证据判明，不能据此推造替代 flag。命令及输出逐条保存在 `记录\续攻-hookme-终端记录.txt`。
+**********************
+PowerShell transcript end
+End time: 20260928194132
+**********************

@@ -1,0 +1,50 @@
+\usepackage{xcolor}
+\usepackage{titlesec}
+\usepackage{fancyhdr}
+\usepackage{fvextra}
+\usepackage{enumitem}
+\usepackage{seqsplit}
+\usepackage[a4paper,left=18mm,right=18mm,top=18mm,bottom=18mm,
+  includeheadfoot,headheight=15pt,headsep=4mm,footskip=10mm]{geometry}
+\newcommand{\hexwrap}[1]{{\footnotesize\texttt{\seqsplit{#1}}}}
+\definecolor{ctfaccent}{HTML}{285D55}
+\titleformat{\chapter}[display]{\normalfont\huge\bfseries\color{ctfaccent}}{第\chinese{chapter}章}{12pt}{}
+\titleformat{\section}{\normalfont\Large\bfseries\color{ctfaccent}}{\thesection}{0.8em}{}
+\pagestyle{fancy}
+\fancyhf{}
+\fancyhead[L]{玄机平台 CTF 刷题指南}
+\fancyhead[R]{\nouppercase{\leftmark}}
+\fancyfoot[C]{\thepage}
+\setlength{\headheight}{15pt}
+\renewcommand{\headrulewidth}{0.4pt}
+\setlength{\parindent}{1.6em}
+\setlength{\parskip}{0.2em}
+\setlength{\emergencystretch}{2em}
+\setlist{itemsep=0.18em,topsep=0.25em}
+\RecustomVerbatimEnvironment{verbatim}{Verbatim}{fontsize=\footnotesize,breaklines=true,breakanywhere=true}
+\AtBeginDocument{\hypersetup{hidelinks}}
+\makeatletter
+\renewcommand{\maketitle}{%
+\begin{titlepage}
+\thispagestyle{empty}
+\vspace*{28mm}
+\begin{center}
+{\large\color{ctfaccent} XUANJI / CTF TRAINING LOG\par}
+\vspace{18mm}
+{\Huge\bfseries 玄机平台 CTF\par}
+\vspace{3mm}
+{\Huge\bfseries 刷题指南\par}
+\vspace{8mm}
+{\Large 平台已完成 28 道 · 收录 12 道完整解题思路与 Writeup\par}
+\vspace{4mm}
+{\large 含思路总览、完整推理、命令输出与平台验证状态\par}
+\vfill
+{\large 截止日期：2026 年 9 月 28 日\par}
+\vspace{7mm}
+{\small 根据本轮玄机平台题目页、附件分析与本地终端记录整理\par}
+\vspace{10mm}
+\end{center}
+\end{titlepage}
+}
+\makeatother
+

@@ -1,0 +1,7 @@
+# 第5章 题 C4：查看 587 两条记录的公钥参数
+PS C:\Users\mzj\Desktop\CTF\CTF-training-problem-first-full> python -c 'from zipfile import ZipFile; import json; recs=json.loads(ZipFile(''labs/platform/attachments/587-linked-receipts.zip'').read(''attachments/export.json''))[''records'']; print(''记录数:'', len(recs)); [print(r[''receipt_id''], '', e ='', r[''exponent''], '', n 的十进制位数 ='', len(r[''modulus'']), '', 密文位数 ='', len(r[''ciphertext''])) for r in recs]; print(''两条记录模数相同:'', recs[0][''modulus'']==recs[1][''modulus'']); import math; print(''两个指数互素:'', math.gcd(int(recs[0][''exponent'']), int(recs[1][''exponent'']))==1)'
+记录数: 2
+RS-2048-A , e = 65537 , n 的十进制位数 = 308 , 密文位数 = 307
+RS-2048-B , e = 17 , n 的十进制位数 = 308 , 密文位数 = 308
+两条记录模数相同: True
+两个指数互素: True

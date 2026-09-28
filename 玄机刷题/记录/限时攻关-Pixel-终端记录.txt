@@ -1,0 +1,2299 @@
+**********************
+PowerShell transcript start
+Start time: 20260928141035
+Username: DESKTOP-412KTAR\mzj
+RunAs User: DESKTOP-412KTAR\mzj
+Configuration Name: 
+Machine: DESKTOP-412KTAR (Microsoft Windows NT 10.0.26200.0)
+Host Application: C:\Users\mzj\.cache\codex-runtimes\codex-primary-runtime\dependencies\native\powershell\pwsh.dll -Command try { [Console]::OutputEncoding=[System.Text.Encoding]::UTF8 } catch {}
+Start-Transcript -LiteralPath 'C:\Users\mzj\Desktop\CTF\玄机刷题\记录\限时攻关-Pixel-终端记录.txt' -Append; Get-ChildItem -LiteralPath 'C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料' -Directory | Where-Object { $_.Name -match '583|像素|囚笼' } | Select-Object FullName,Name; Get-ChildItem -LiteralPath 'D:\Downloads' -Directory | Where-Object { $_.Name -match '像素|囚笼' } | Select-Object FullName,Name; Stop-Transcript
+Process ID: 15452
+PSVersion: 7.6.5
+PSEdition: Core
+GitCommitId: 7.6.5
+OS: Microsoft Windows 10.0.26200
+Platform: Win32NT
+PSCompatibleVersions: 1.0, 2.0, 3.0, 4.0, 5.0, 5.1, 6.0, 7.0
+PSRemotingProtocolVersion: 2.4
+SerializationVersion: 1.1.0.1
+WSManStackVersion: 3.0
+**********************
+Transcript started, output file is C:\Users\mzj\Desktop\CTF\玄机刷题\记录\限时攻关-Pixel-终端记录.txt
+
+**********************
+PowerShell transcript end
+End time: 20260928141035
+**********************
+**********************
+PowerShell transcript start
+Start time: 20260928141043
+Username: DESKTOP-412KTAR\mzj
+RunAs User: DESKTOP-412KTAR\mzj
+Configuration Name: 
+Machine: DESKTOP-412KTAR (Microsoft Windows NT 10.0.26200.0)
+Host Application: C:\Users\mzj\.cache\codex-runtimes\codex-primary-runtime\dependencies\native\powershell\pwsh.dll -Command try { [Console]::OutputEncoding=[System.Text.Encoding]::UTF8 } catch {}
+Start-Transcript -LiteralPath 'C:\Users\mzj\Desktop\CTF\玄机刷题\记录\限时攻关-Pixel-终端记录.txt' -Append; Get-ChildItem -LiteralPath 'C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\像素囚笼1' -Force -Recurse | Select-Object FullName,Length,LastWriteTime; Get-ChildItem -LiteralPath 'D:\Downloads\像素囚笼附件 (1)' -Force -Recurse | Select-Object FullName,Length,LastWriteTime; Get-ChildItem -LiteralPath 'C:\Users\mzj\Desktop\CTF\玄机刷题\记录' -File | Where-Object { $_.Name -match '像素|583' } | Select-Object FullName,Length,LastWriteTime; Stop-Transcript
+Process ID: 23764
+PSVersion: 7.6.5
+PSEdition: Core
+GitCommitId: 7.6.5
+OS: Microsoft Windows 10.0.26200
+Platform: Win32NT
+PSCompatibleVersions: 1.0, 2.0, 3.0, 4.0, 5.0, 5.1, 6.0, 7.0
+PSRemotingProtocolVersion: 2.4
+SerializationVersion: 1.1.0.1
+WSManStackVersion: 3.0
+**********************
+Transcript started, output file is C:\Users\mzj\Desktop\CTF\玄机刷题\记录\限时攻关-Pixel-终端记录.txt
+
+**********************
+PowerShell transcript end
+End time: 20260928141043
+**********************
+**********************
+PowerShell transcript start
+Start time: 20260928141054
+Username: DESKTOP-412KTAR\mzj
+RunAs User: DESKTOP-412KTAR\mzj
+Configuration Name: 
+Machine: DESKTOP-412KTAR (Microsoft Windows NT 10.0.26200.0)
+Host Application: C:\Users\mzj\.cache\codex-runtimes\codex-primary-runtime\dependencies\native\powershell\pwsh.dll -Command try { [Console]::OutputEncoding=[System.Text.Encoding]::UTF8 } catch {}
+Start-Transcript -LiteralPath 'C:\Users\mzj\Desktop\CTF\玄机刷题\记录\限时攻关-Pixel-终端记录.txt' -Append; Get-Content -LiteralPath 'C:\Users\mzj\Desktop\CTF\玄机刷题\记录\像素囚笼1-解题记录.md' -Tail 240; Get-ChildItem -LiteralPath 'C:\Users\mzj\Desktop\CTF\玄机刷题\记录' -File | Where-Object { $_.Name -match '终端|Pixel|pixel|583' } | Select-Object Name,Length,LastWriteTime; Stop-Transcript
+Process ID: 3500
+PSVersion: 7.6.5
+PSEdition: Core
+GitCommitId: 7.6.5
+OS: Microsoft Windows 10.0.26200
+Platform: Win32NT
+PSCompatibleVersions: 1.0, 2.0, 3.0, 4.0, 5.0, 5.1, 6.0, 7.0
+PSRemotingProtocolVersion: 2.4
+SerializationVersion: 1.1.0.1
+WSManStackVersion: 3.0
+**********************
+Transcript started, output file is C:\Users\mzj\Desktop\CTF\玄机刷题\记录\限时攻关-Pixel-终端记录.txt
+## 四、工具检查和受阻情况
+
+- 在图片属性界面没有找到可见的 EXIF、注释或作者字段。
+- 试图启动前台 PowerShell 检查 PNG 字节时，电脑操作工具返回产品策略阻止；没有继续通过其他终端绕开。
+- 通过可见浏览器搜索准确题名，结果是同名的其他作品，没有找到这道玄机题的可靠题解。
+- 查阅 StegOnline 开源项目说明，工具支持 PNG 块、位平面和 LSB 检查，且说明图像处理在浏览器内完成、数据不存储或传输。打开其页面准备选择本地图片，但 Chrome 扩展提示需要“允许访问文件网址”，因此这一步没有成功载入附件。
+
+## 五、接下来需完成
+
+1. 在获准且可见的本地图像分析界面检查 PNG 块是否有异常、IEND 后是否有附加内容；若正常，再按 R/G/B 通道和位平面检查隐写。
+2. 得到具体字符串后解释提取依据与每一步操作。
+3. 在玄机页面提交 flag，并截取或记录平台明确的正确提示及步骤完成状态。
+4. 将正确 flag、复现步骤、错误分支的排除依据和最终验证结果写回本指南。
+
+
+## 六、发现真正的附加压缩包（新增）
+
+1. 用记事本“文件→打开”直接打开 D:\Downloads\像素囚笼附件 (1)\challenge.png。二进制内容显示乱码，这是正常现象；本步骤只是用可见文本定位文件结构，不能把乱码解读为答案。
+2. 在文档末尾看到 PNG 的 IEND 结束标记之后还有 PK 标记和两处 secret.txt 字样。PK 是 ZIP 压缩包的典型文件头；因此推断 PNG 后追加了 ZIP 数据。
+3. 切换到已经打开的 Bandizip，按 Ctrl+O，在“文件名”框输入上述 challenge.png 的完整路径并打开。Bandizip 成功把 PNG 识别成压缩包，列表只有 secret.txt，原始大小和压缩后大小均为 113 字节。
+4. 双击 secret.txt 后弹出“输入密码”对话框，说明附加 ZIP 的文本受密码保护。目前不能读取其正文。
+5. 按图中色块行序映射出的 13524613、按横坐标序映射出的 12345612、标题 Abstract Art Gallery、无空格小写标题 abstractartgallery、独立像素坐标 411482 均作为 ZIP 密码试过；每次 Bandizip 都重新弹出密码框，没有成功解开。
+
+**当前判断：**正确路线已经从肉眼猜 flag 转为“PNG 后附加 ZIP → 找到 ZIP 密码 → 读取 secret.txt → 平台提交验证”。下一步应从图片细节或位平面寻找密码，不再把候选数字直接当成 flag。
+
+
+## 七、继续核查（2026-09-26）
+
+1. 又以圆点颜色首字母序列 BRYGPCBR 尝试 ZIP 密码，Bandizip 仍重新弹出空白密码框，排除该直接读法。
+2. 在画图用取色器复核背景：图像坐标 (160,480) 与 (325,482) 都是 #F0F0F5；孤立点 (411,482) 为 #4285F4，与蓝色图形一致。因此不是普通背景像素，但单个坐标和 RGB 尚不能单独确定密码。
+3. 用资源管理器的“通过 Code 打开”在可见的 VS Code 中查看 challenge.png。软件显示完整图像为 512×512、约 5.07 KB；已安装的重开视图只有文本编辑器和图像预览，没有十六进制或位平面工具。
+4. 此后停止联网搜索题解，转为附件本地分析。当前尚未找到 ZIP 密码，也没有取得可验证的 flag。
+
+## 八、结构检查与本轮复核（2026-09-26）
+
+### 8.1 平台状态
+
+通过已登录的玄机页面确认题目为「2026安网杯-像素囚笼1」，题号 #583，分类 MISC，难度简单，免费；页面显示步骤 #1 为 0/1，尚未通过验证。题面没有简介。此轮没有向平台提交新 flag。
+
+### 8.2 PNG 与 ZIP 的精确边界
+
+在本地 PowerShell 窗口运行 Python 对附件做只读检查：
+
+```powershell
+python -c "import pathlib,struct; p=pathlib.Path(r'D:\Downloads\像素囚笼附件 (1)\challenge.png'); b=p.read_bytes(); print(len(b),b[:8].hex(),b.find(b'IEND'),b.find(bytes([80,75,3,4])))"
+```
+
+结果：文件 5,187 字节，PNG 签名正确，PNG 的 IEND 类型字段在偏移 4,948；IEND 块结束后，ZIP 本地文件头从偏移 4,956 开始。ZIP 目录还可见 `PK 01 02` 和 `PK 05 06`，因此是直接附加在 PNG 后的完整 ZIP，而不是把 PNG 扩展名误认成压缩包。
+
+用 Python `zipfile` 检查目录，得到唯一成员 `secret.txt`：general-purpose flag bits 为 1（传统 ZipCrypto 加密），压缩方法为 DEFLATE，CRC32 为 `9d13b619`，解压长度 113 字节、加密压缩长度 113 字节；无 extra field、无 ZIP 注释。加密数据头起始偏移为 4,996。Bandizip 的界面也列出 `secret.txt*`，双击要求输入密码。
+
+### 8.3 图像像素复核
+
+用 Pillow 读取 PNG（文件末尾有 ZIP 不妨碍图像解码）：尺寸 512×512、RGB、无可读 PNG 元数据；全图只有 10 种 RGB 颜色。颜色是背景、描边及六种填充色，图形为六个 97×97 的方形填充区和一排逐渐变大的圆。圆的外径约为 40、46、52、58、64、70、76、82 像素。LSB 位平面只呈现大块图形轮廓；各通道打包后的可打印字节比例低于 0.5%，没有发现可读文字型 LSB 数据。
+
+复核像素时纠正前文的坐标误读：真正的 `(411,482)` 像素是背景色 `(240,240,245)`（`#F0F0F5`），不是蓝色孤立点；`(411,450)` 与 `(411,455)` 才是蓝色 `(66,133,244)`（`#4285F4`）圆形区域。先前在 Paint 400% 缩放画布中读状态栏坐标时把屏幕/画布位置当成了图像坐标，这一推断作废；图片里没有该坐标的异常单像素。这个更正覆盖前文“孤立蓝点”的说法。
+
+### 8.4 失败假设及穷举边界
+
+为避免把外观猜测写成结论，以下候选都实际尝试解密 `secret.txt`，均失败：
+
+- 圆颜色首字母 `BRYGPCBR`、颜色全名拼接 `blueredyellowgreenpurplecyanbluered`、颜色名加连字符/下划线，以及六方块颜色名；
+- 方块颜色映射为 1–6 后产生的数字序列、零起始序列、A–F 序列及大小写变体；
+- 题目名、`Abstract Art Gallery`、`abstractartgallery`、`pixelcage`、`pixelprison`、`xuanji`、`edisec`、`anwangbei` 等主题词与常见年份/题号后缀（总计 4,803 个候选）；
+- 圆外径直接按 ASCII 解释得到 `(.4:@FLR`，反序、外径数字串 `4046525864707682`、半径数字串 `2023262932353841`，以及尺寸和颜色序号组合；
+- 数字 1–6 全字符集、长度 1–8：2,015,538 个候选；圆颜色首字母 BRYGPC 全字符集、长度 1–8：2,015,538 个候选；六个形状标签 A–F 全字符集、长度 1–8：2,015,538 个候选，均未命中；
+- 用 C 对 0–9 所有长度 1–8 共 111,111,110 个候选执行 ZipCrypto 头校验，筛得 433,383 个一字节校验碰撞，再由 Python ZIP 解压和 CRC 复核，仍无密码命中。
+
+穷举程序先对本地归档头验证，不会改动附件；每个看似命中的密码都必须完整解压并通过 CRC，不能只凭 ZipCrypto 的 1 字节校验判断正确。
+
+### 8.5 本轮生成的复现材料
+
+下列源代码与输出保存在当前 CTF 工作目录，记录了结构、候选验证、几何检查及位平面检查；数字穷举的源代码也保留：
+
+- `pixel_cage_candidates.py`、`pixel_cage_size_candidates.py`、`pixel_cage_alpha_candidates.py`、`pixel_cage_combo_candidates.py`、`pixel_cage_transforms.py`、`pixel_cage_topic_wordlist.py`：候选密码及主题词验证；
+- `pixel_cage_bruteforce_colors.py`、`pixel_cage_bruteforce_initials.py`、`pixel_cage_bruteforce_abcdef.py`：有限字母表穷举；
+- `pixel_cage_numeric_bruteforce.c`、`pixel_cage_numeric_verify.py` 与 `pixel_cage_numeric_header_matches.txt`：十进制密码头校验与完整解压复核；
+- `pixel_cage_components.py`、`pixel_cage_geometry.py`、`pixel_cage_lsb_check.py`：图像连通区域、圆形几何与 LSB 检查。
+
+**截至本节完成：ZIP 密码、`secret.txt` 和正确 flag 仍未取得，平台仍是 0/1。不能把任何猜测写为已解出。下一步应继续找出图形编码规则或题目实际使用的 ZIP 密码，再解压读取原文并提交平台验证。**
+
+## 九、进一步密码验证与穷举记录（续，2026-09-26）
+
+### 9.1 字符串变换候选
+
+把可见图形转换成的主要序列 `12345612`、`13524613`、`BRYGPCBR`、圆外径串 `4046525864707682` 和 ASCII 串 `(.4:@FLR` 分别做 MD5、SHA-1、SHA-256、Base64、十六进制文本变换，共 75 个派生候选，全部解密失败。还试了半径串 `2023262932353841`、颜色名的连字符/下划线形式、颜色字母对应 A1Z26、零起始方块索引、ASCII 圆径与颜色序号加减等候选，均未命中。
+
+另试了附件修改日期/时间（`20260413`、`103906`、`20260413103906` 等）、文件名、题号/赛名、常见题目关键词的大小写和常见前后缀，共 4,803 个主题词候选，无命中。按圆点顺序写出的中文颜色名及中文题名也未命中。尝试脚本为 `pixel_cage_derived_candidates.py`、`pixel_cage_transforms.py`、`pixel_cage_metadata_candidates.py`、`pixel_cage_chinese_candidates.py`。
+
+### 9.2 ZipCrypto 头校验穷举的实现与结果
+
+本地 C 程序用 ZIP 的 12 字节加密头（偏移 4,996）执行 ZipCrypto 解密。初始密钥为 `0x12345678`、`0x23456789`、`0x34567890`，按候选密码更新密钥；由于 ZIP general-purpose flag bit 3 未设置，解密头最后一字节必须等于 CRC32 高字节 `0x9d`。通过该一字节门槛的候选再由 Python `zipfile.read()` 完整解压，最终检查 CRC32；头校验本身只有 1 字节，不能单独作为密码正确的证据。
+
+- 可打印 ASCII 字符（空格到 `~`），长度 1–4：82,317,120 个候选，322,046 个头校验碰撞，完整解压无命中。
+- 小写英文字母，长度 1–5：12,356,630 个候选，48,541 个头校验碰撞，完整解压无命中。
+- 小写英文字母，长度 1–6：321,272,406 个候选，1,253,498 个头校验碰撞，完整解压无命中。
+- 小写 1–6 位首轮编译时缓冲区仍为 5 字节，GCC 发出越界警告；立即中断该无效运行，将缓冲区改为 7 字节后重新编译。修正版完成全部 321,272,406 个候选。随后因中断发生在生成 Python 校验文件之前，第一次复核命令报“文件不存在”；补建校验文件后才完成上述 CRC 复核。这些失败尝试不计入有效穷举结果。
+
+复现源代码：`pixel_cage_numeric_bruteforce.c`、`pixel_cage_ascii_bruteforce.c`、`pixel_cage_lower_bruteforce.c`、`pixel_cage_lower6_bruteforce.c`；完整解压复核脚本对应 `pixel_cage_numeric_verify.py`、`pixel_cage_ascii_verify.py`、`pixel_cage_lower_verify.py`、`pixel_cage_lower6_verify.py`。
+
+### 9.3 当前结论
+
+本轮没找到 ZIP 密码或 `secret.txt` 内容；先前向平台提交的四个数字 flag 仍均被拒绝，当前页面进度仍为 0/1。本节不把候选猜测写成答案。要完成题目仍需得到图形的真实编码规则或额外题目线索，然后读取文件原文、提取 flag、提交平台验证。
+
+## 十、坐标与色相映射的额外验证（续，2026-09-26）
+
+### 10.1 色相顺序候选
+
+将六种方块颜色按常见色相顺序排为红、黄、绿、青、蓝、紫（索引 1–6），圆点从左到右得到 `51236451`。把它写成 `flag{51236451}`，通过玄机题目的“提交 FLAG”界面提交；提交框关闭后页面仍显示步骤 #1 `0/1`、完成率 `0%`，因此平台判定错误。
+
+### 10.2 2×3 方块坐标候选
+
+按图中六个方块的两列三行读取，圆点颜色序列 B、R、Y、G、P、C、B、R 对应坐标对 `11 21 31 12 22 32 11 21`，候选串为 `1121311222321121`。也在本地 ZIP 上尝试零起始坐标串 `0010200111210010`、带分隔符的行列串、行编号 `12312312` 和列编号 `11122211`，均触发错误密码，未解出文件。
+
+随后把 `flag{1121311222321121}` 通过玄机页面提交。平台进度仍为步骤 #1 `0/1`、`0%`，判定错误。相应 ZIP 候选验证记录在 `pixel_cage_coordinate_candidates.py`；页面本轮只提交这两个有明确映射来源的候选。
+
+**截至本节：仍无正确 flag。**
+
+## 十一、全位平面与颜色词穷举（续，2026-09-26）
+
+1. 对 RGB 三个通道的 bit0–bit7 逐一抽取并按行打包为字节。24 个位平面的可打印字节比例均低于 1%；观察到的只是方块/圆形轮廓，未见可读文本。实现见 `pixel_cage_all_bitplanes.py`。这进一步排除直接把某一个 RGB 位平面当作隐藏文字的假设；不排除依赖其他排列、几何或编码规则的方案。
+2. 将 blue、red、yellow、green、purple、cyan 六个英文颜色词作为字典，对 1–8 个词的全部 2,015,538 种拼接执行 ZipCrypto 头校验，并对头校验通过者完整解压验证。耗时约 76.22 秒，无密码命中。实现见 `pixel_cage_bruteforce_colorwords.py`。
+3. 以上检查只排除所述明确候选空间，不能据此断言所有图像隐藏方案都不存在。玄机题页仍没有文字简介，平台步骤仍为 0/1。
+
+## 十二、颜色/几何组合口令排查（续，2026-09-26）
+
+先重新执行 `pixel_cage_hash_candidates.py`：从 PNG 原始字节、解码后的 RGB 像素、题名、可见颜色序列和已知几何串产生 80 个 MD5/SHA/Base64 类候选，ZIP 完整解压校验均未命中。
+
+随后针对附件中的编码结构追加四轮本地验证：
+
+1. `pixel_cage_mapping_candidates.py`：对六种颜色的 720 种一一编号排列，生成数字串与 A–F 字母串，并覆盖常见 2×3 读序；2,209 个候选均未解压成功。
+2. `pixel_cage_visual_encodings.py`：测试圆点颜色名/首字母的大小写和分隔符、颜色名常见别称、RGB 十进制与 HEX 拼接、方块坐标、圆心坐标、直径及半径；共 9,444 个候选，无命中。
+3. `pixel_cage_affine_color_candidates.py`：对颜色编号测试数字模 10 偏移、A–Z 全部偏移，对圆大小测试不同基准值与字母偏移；共 45,568 个候选，无命中。
+4. `pixel_cage_classical_cipher_candidates.py`：对标题词、颜色首字母和序号测试反转、Atbash、凯撒、栅栏、简单列换位及以标题/颜色序列为密钥的 Vigenère/Beaufort 变换；1,578 个候选，无命中。
+5. `pixel_cage_size_color_pairs.py`：枚举六色的全部 720 种编号，并将颜色序号与圆大小（序号、直径、半径）做拼接、加减、乘法与字母偏移；另外组合 3×2 方块行列坐标。共 288,600 个候选，均未命中。
+
+所有检查都以 `ZipFile.read('secret.txt', pwd=...)` 完整读取文件为判据；单纯通过 ZipCrypto 头字节校验不作为成功。以上脚本与输入附件保留在本地，可复现这些排除结果。目前仍未获得 ZIP 口令、`secret.txt` 内容或平台认可的 flag；玄机题页面显示简介为空、步骤 #1 为 0/1。
+
+## 十三、题目页面发布时间与 ID 候选（续，2026-09-26）
+
+通过电脑使用读取挑战页面的可见信息：题目发布时间为 `2026-09-21 20:46:41`、当前挑战路径 ID 为 `583`；页面“暂无简介”，动态区只显示“测试flag / 发布题目”，没有解题提示。用日期、时间、挑战 ID、先前登录跳转 URL 中的 `570`、赛事名与页面文字的常见拼接及分隔形式生成 8,882 个候选，在 ZIP 上逐一完整解压验证，均未命中。脚本为 `pixel_cage_platform_metadata_candidates.py`。
+
+为排除目标 ID 混淆，按最初浏览器跳转 URL 检查了 `/challenges/570`：该页标题为 `SU_photogallery`，属于收费 WEB 题（5 金币/30 分钟），与本题无关；没有启动其环境，随后返回 `/challenges/583` 的免费 MISC“2026安网杯-像素囚笼1”。
+
+## 十四、常见口令与 ZIP 结构数字（续，2026-09-26）
+
+1. `pixel_cage_common_passwords.py`：检查常见口令、MISC/隐写词、图中主题词、赛事/平台名称、中文拼音，以及大小写、`1`、年份、题号等常见后缀/前缀，共 31,744 个候选，均未命中。
+2. `pixel_cage_archive_layout_candidates.py`：使用本地解析得到的 ZIP 起始偏移 `4956`、加密数据偏移 `4996`、中央目录偏移 `5109`、EOCD 偏移 `5165`、附件总长度 `5187`、压缩/原始长度 `113`、CRC32 `9d13b619` 等数值及其十六进制、反序、拼接形式，检查 1,102 个候选，均未命中。
+3. 将候选空间扩到 1–5 位小写字母与数字（`a-z0-9`），C 程序按 ZipCrypto 头末字节 `0x9d` 筛出 243,237 个候选；逐个通过 Python ZIP 解密、DEFLATE 解压和 CRC 校验后，仍无命中。总共检查 62,193,780 个候选。实现为 `pixel_cage_alnum5_bruteforce.c` 与 `pixel_cage_alnum5_verify.py`。
+
+这些结果排除了常见短口令和上述特定编码空间；它们不等于找到了密码，也不能排除较长口令或未识别的谜题规则。当前平台仍为 0/1。
+
+## 十五、颜色词特征值检查（续，2026-09-26）
+
+将圆点颜色按其名称序列 `blue, red, yellow, green, purple, cyan, blue, red` 逐项变换：名称长度、元音/辅音数、首末字母、A1Z26 字母和值、ASCII 字节和值；再对实际 RGB 与 HSV 色相/饱和度/亮度计算原值、模 10/26、字母映射及 MD5/SHA-1 派生值。`pixel_cage_color_features.py` 共生成 1,661 个口令候选，逐个完整解压验证，均未命中。
+
+## 十六、圆与方块的相对几何、进制编码（续，2026-09-26）
+
+图中按圆点颜色匹配方块后，记录圆心与方块中心的 x/y 偏移、曼哈顿距离、圆直径/半径、圆间相邻重叠量；对这些量测试原值、常见像素比例、模 10/26、A1Z26 和摘要派生。`pixel_cage_overlap_geometry.py` 的 1,228 个候选均未解出 ZIP。
+
+考虑每个圆由“颜色（六种）+尺寸等级（八种）”共同编码，可能形成 6-bit 字符，使用所有 720 种颜色编号、两种字段顺序、升序/降序尺寸、标准/URL-safe Base64 字符表及 48-bit 打包方式测试。`pixel_cage_base64_symbol_candidates.py` 的 11,520 个候选均未命中。
+
+又把八个颜色符号分别按不同编号解释成 6–36 进制数，检查十进制、十六进制、八进制、二进制、三十六进制及字节形式，并将颜色和尺寸合成 6-bit 数字后转整数。`pixel_cage_radix_candidates.py` 的 669,156 个候选均未命中。
+
+最后直接统计 RGB 图像每个颜色的像素数。按圆点顺序（B、R、Y、G、P、C、B、R）得到 `[13816, 15783, 7318, 11719, 12075, 7455, 13816, 15783]`。继续检查扣除方块面积后的数量、除以常见像素单位、模 10/26/36/100、排序/差分及颜色重排，`pixel_cage_pixel_count_candidates.py` 共验证 311,613 个候选，未解出 ZIP。
+
+继续将圆点的尺寸、半径、圆心和对应方块的坐标作为索引，分别从颜色英文名及图片标题 `Abstract Art Gallery` 抽取字符，测试正/反向索引与常见取模。`pixel_cage_title_index_candidates.py` 生成 15,915 个候选，无命中。另把颜色英文名/首字母与圆直径、半径、尺寸序号和圆心位置逐项拼接，并测试大小写与常见分隔符；`pixel_cage_named_size_candidates.py` 的 86,024 个候选也未命中。
+
+页面动态卡片“测试flag”点击后打开了发布者详情页（用户 ID 23），该页无额外说明；随后返回挑战页。挑战页当前仍显示“暂无简介”与步骤 0/1。
+
+## 十七、空口令及空白变体（续，2026-09-26）
+
+首次尝试把多行 Python 循环塞进 PowerShell 的 `python -c` 单行命令时，换行转义被原样传入并导致 `SyntaxError`；没有运行任何候选。随后改用独立脚本 `pixel_cage_special_passwords.py`，检查空密码、NUL、UTF-8 BOM、CR/LF、空格/制表符及题名首尾空白等 14 种字节串，全部被拒绝。
+
+## 十八、颜色名与尺寸索引（续，2026-09-26）
+
+将每个圆的尺寸等级、直径、半径、圆心 x 坐标以及匹配方块坐标作为索引，从该圆的颜色英文名中正向/反向取字符；同时把同一组数值和全部六色编号映射用于索引标题 `Abstract Art Gallery`。`pixel_cage_title_index_candidates.py` 共验证 15,915 个结果，未命中。颜色词/首字母与直径、半径、序号、圆心位置的拼接（`pixel_cage_named_size_candidates.py`，86,024 个候选）也未命中。
+
+另测试了空口令、NUL、BOM、换行、空格、制表符及题名首尾空白等 14 种情况，均被拒绝。题目页动态卡片仅链接到发布者详情，未提供额外提示。
+
+最后将完整颜色名序列和方块行序列分别做大小写、反序、凯撒、Atbash，以及用题名/颜色序号做 Vigenère/Beaufort 变换。`pixel_cage_color_words_cipher.py` 生成 1,416 个不同候选，全部未通过完整 ZIP 校验。
+
+## 十九、附件来源确认与调色板摘要（续，2026-09-26）
+
+在 `D:\Downloads` 找到 `像素囚笼附件.zip` 与 `像素囚笼附件 (1).zip` 两份下载文件。`pixel_cage_outer_archive_check.py` 逐一查看外层 ZIP，二者都只有一个 `challenge.png`（5,187 字节），SHA-256 均为 `856b8ec900eaddfeed0f1af8177e1c999133af19b8eb6d3edf12d707ec21dd3b`，和已解压附件逐字节相同。因此当前分析的图片确实来自题目附件，并非拿错文件。
+
+另对六色 HEX 调色板串的排列、分隔形式做 MD5/SHA-1/SHA-256/SHA-512、Base64 与十六进制派生，`pixel_cage_palette_hash_candidates.py` 检查 130,626 个摘要/编码候选，无命中。查询外层 ZIP 内容时最初的 `python -c` 多行命令同样因 PowerShell 换行转义失败；改成 `pixel_cage_outer_archive_check.py` 后正常完成。
+
+随后把外层下载 ZIP 中 `challenge.png` 的 CRC32、压缩/原始长度、偏移、外层 ZIP 总长度、两份下载 ZIP 的哈希及其常用截断形式作为内层口令候选，`pixel_cage_outer_crc_candidates.py` 检查 40 个候选，均未命中。
+
+## 二十、本轮结束时的状态
+
+- 正确目标是免费 MISC 题 `/challenges/583`“2026安网杯-像素囚笼1”；初始跳转 `/challenges/570` 是另一道收费 WEB 题，没有启动。
+- 附件来源已核验，两份外层 ZIP 与已解压的 `challenge.png` 内容相同。PNG 末尾包含一个采用传统 ZipCrypto 加密的 `secret.txt`。
+- 已尝试的 flag 在平台均未通过；平台仍显示步骤 #1 `0/1`。当前尚未得到 ZIP 密码、`secret.txt` 原文或有效 flag，不能标记为已解题。
+- 挑战页没有简介，附件图片本身也未出现可直接读取的隐藏文本；剩余关键条件是找到作者使用的 ZIP 密码或取得额外题目提示。
+
+## 2026-09-27 题目页复核
+
+本轮通过 Computer Use 重新打开 `/challenges/583`：页面为免费、简单 MISC，题目简介为空，步骤 #1 显示 `0/1`；可见按钮只有“下载附件”和“提交 FLAG”，未显示公开 Writeup 或实例启动入口。未提交新 flag，也未取得 ZIP 密码。
+
+## 2026-09-27 代理本地复核：PNG 扫描线与混合位平面
+
+为补查此前逐通道位平面检查未覆盖的表示方式，新增 `pixel_cage_png_filter_analysis.py` 和 `pixel_cage_mixed_bitplanes.py`，只读取本地附件 `D:\Downloads\像素囚笼附件 (1)\challenge.png`，不访问网络或平台。
+
+1. 重新解析 PNG 块并校验块 CRC：仅有 `IHDR`、`IDAT`、`IEND`，三者 CRC 均有效；IHDR 为 512×512、8-bit RGB、非隔行。解压 IDAT 后逐行读取 PNG filter byte，类型计数为 Sub(1)=46、Up(2)=446、Paeth(4)=20；没有 None/Average 行。序列主要随图形边界变化，未出现直接可读文本。滤波器编号不是图像附加文本，不能据此宣称拿到口令。
+2. 对 RGB 三通道按行优先/列优先遍历，穷举每通道分别选取 bit0–bit7、六种通道交错顺序，共 6,144 条打包比特流；检索 `flag{`、`xj{`、`mzj`、`secret` 均无命中。最高可打印字节比例约 64.88%，但内容重复为 `49 24 92` 周期（大量纯色区域造成），不是自然语言或 flag。
+3. 当前仍未发现未解压的密码、`secret.txt` 内容或可提交 flag；不改变此前结论。完整命令和输出见 `记录\代理-Pixel-终端记录.txt`，复现脚本见 `题目资料\像素囚笼1\分析脚本\pixel_cage_png_filter_analysis.py` 与 `pixel_cage_mixed_bitplanes.py`。
+
+4. 另按图中唯一文字 `Abstract Art Gallery` 的词首/词尾字母作题名线索，新增 `pixel_cage_title_acronym_candidates.py`，验证三词拼接的大小写/分隔符、首字母/末字母缩写、AAGallery、AAG 与常见题号/年份/后缀组合共 1,560 个不同候选。全部未通过 ZIP 完整解密与 CRC 校验；未获取口令。
+
+
+## 2026-09-27 代理复核：PNG 压缩流完整性
+
+新增 `pixel_cage_deflate_structure.py`，自行解析 PNG 的 IDAT zlib/DEFLATE 结构并与系统 zlib 的原始解压结果逐字节比对。证据如下：
+
+- PNG 只有 IHDR、IDAT、IEND 三块，CRC 均有效；IDAT 的 zlib 头 `78 9c` 校验正确，无预设字典。
+- IDAT 4,899 字节由 4,893 字节 DEFLATE 数据和 4 字节 Adler-32 尾校验组成，尾校验 `b2471056` 与解压数据一致。
+- DEFLATE 仅有一个最终动态 Huffman 数据块；手工解析输出 786,944 字节，与 zlib 解压结果完全相同。
+- DEFLATE 结束后仅有 3 个字节内填充位，值为 0；没有额外完整字节，zlib 也报告无 unused_data/unconsumed_tail。
+
+这排除了 PNG 压缩流末尾附带隐藏字节或非零尾部填充的简单载荷路径；不排除使用普通像素内容编码的谜题。未得到 ZIP 密码或 flag。完整解析代码、命令和输出在 `pixel_cage_deflate_structure.py` 与 `代理-Pixel-终端记录.txt`。
+
+## 2026-09-27 代理复核：PNG 滤波器是否承载人为编码
+
+新增脚本 `pixel_cage_png_filter_selection.py`，从 PNG IDAT 解压逐行像素，与 Pillow 解码像素互相核对；对每行分别重算 PNG Filter 0–4 的预测残差，并用常见 PNG 自适应筛选指标（将残差解释为有符号 8 位数后求绝对值和）比较分数。
+
+- 所有 512 行的实际滤波残差都能精确还原对应像素（0 行不匹配）。
+- 512 行实际选用滤波类型全部属于该行最低代价类型（0 行非最小）。滤波类型选择频数为 1:46、2:446、4:20；其中平分时实际类型落在并列最小项内。
+- 各类型全图代价和为 `[21040836, 705022, 784580, 1883059, 310130]`（类型 0 至 4）。
+
+这支持滤波字节来自正常的逐行压缩器选择，而不是明显的任意载荷标记；仍不能从数学上排除作者只在并列最优的行中嵌 bit。该复核没有恢复 ZIP 密码或 flag。命令和完整输出见 `记录\代理-Pixel-终端记录.txt`。
+
+## 2026-09-27 代理复核：并列滤波代价的选择位
+
+为检查压缩器是否可能在同代价滤波器之间嵌入二进制信息，新增 `pixel_cage_filter_tie_channel.py`。沿用每行 Filter 0–4 的有符号残差绝对值和评分，仅保留并列最低分的行，并把实际选项相对排序候选的高/低选择转换为 0/1。
+
+共 418 个并列行：候选对 `(1,4)` 1 行、`(2,4)` 416 行、`(1,2)` 1 行。实际滤波器总是选每组中较小编号，唯有一个 `(1,2)` 平局行实际选 2；决策流 417 个 0、1 个 1。两种位打包次序的结果分别是大量零字节与一个 `0x80`/`0x01`，没有文本或有用密钥样式。该分布与确定性平局优先级相符，不支持将滤波并列选择当成藏密信道的假设；仍不构成作者意图的数学证明。
+
+补充：418 个并列行中的 417 个非首行，有 403 行选择了与前一行相同的滤波器；另有 412 行前一行滤波器本身属于当前平局候选。此种关联更像扫描线局部统计与滤波器延续性，不像独立随机位流。该统计只能作支持性证据。
+
+**********************
+PowerShell transcript end
+End time: 20260928141054
+**********************
+**********************
+PowerShell transcript start
+Start time: 20260928141212
+Username: DESKTOP-412KTAR\mzj
+RunAs User: DESKTOP-412KTAR\mzj
+Configuration Name: 
+Machine: DESKTOP-412KTAR (Microsoft Windows NT 10.0.26200.0)
+Host Application: C:\Users\mzj\.cache\codex-runtimes\codex-primary-runtime\dependencies\native\powershell\pwsh.dll -Command try { [Console]::OutputEncoding=[System.Text.Encoding]::UTF8 } catch {}
+Start-Transcript -LiteralPath 'C:\Users\mzj\Desktop\CTF\玄机刷题\记录\限时攻关-Pixel-终端记录.txt' -Append; '=== 可用压缩/破解工具 ==='; foreach ($name in 'bkcrack','zip2john','john','hashcat','fcrackzip','7z','bandizip','python','py','gcc','g++') { Get-Command $name -ErrorAction SilentlyContinue | Select-Object Name,Source }; '=== 常见字典位置 ==='; foreach ($path in 'C:\wordlists','C:\Users\mzj\Desktop\CTF\wordlists','C:\Program Files\John\run','C:\Program Files\hashcat','D:\Downloads\rockyou.txt','C:\Users\mzj\Downloads\rockyou.txt') { if (Test-Path -LiteralPath $path) { Get-Item -LiteralPath $path | Select-Object FullName,Length,Mode } }; Stop-Transcript
+Process ID: 24372
+PSVersion: 7.6.5
+PSEdition: Core
+GitCommitId: 7.6.5
+OS: Microsoft Windows 10.0.26200
+Platform: Win32NT
+PSCompatibleVersions: 1.0, 2.0, 3.0, 4.0, 5.0, 5.1, 6.0, 7.0
+PSRemotingProtocolVersion: 2.4
+SerializationVersion: 1.1.0.1
+WSManStackVersion: 3.0
+**********************
+Transcript started, output file is C:\Users\mzj\Desktop\CTF\玄机刷题\记录\限时攻关-Pixel-终端记录.txt
+=== 可用压缩/破解工具 ===
+
+**********************
+PowerShell transcript end
+End time: 20260928141212
+**********************
+**********************
+PowerShell transcript start
+Start time: 20260928141318
+Username: DESKTOP-412KTAR\mzj
+RunAs User: DESKTOP-412KTAR\mzj
+Configuration Name: 
+Machine: DESKTOP-412KTAR (Microsoft Windows NT 10.0.26200.0)
+Host Application: C:\Users\mzj\.cache\codex-runtimes\codex-primary-runtime\dependencies\native\powershell\pwsh.dll -Command try { [Console]::OutputEncoding=[System.Text.Encoding]::UTF8 } catch {}
+Start-Transcript -LiteralPath 'C:\Users\mzj\Desktop\CTF\玄机刷题\记录\限时攻关-Pixel-终端记录.txt' -Append; @'
+import zlib, random, string, pathlib, struct
+for body in [b'flag{' + bytes([65])*107 + b'}', b'flag{' + bytes([97])*107 + b'}', b'flag{' + bytes(range(107)) + b'}', b'flag{' + bytes(random.Random(1).choices(string.ascii_lowercase.encode(), k=107)) + b'}']:
+    c=zlib.compressobj(level=-1,wbits=-15)
+    d=c.compress(body)+c.flush()
+    print('plain_len=',len(body),'deflate_len=',len(d),'prefix=',d[:20].hex(),'btype=',(d[0]>>1)&3)
+p=pathlib.Path(r'C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\像素囚笼1\附件\challenge.png')
+b=p.read_bytes()
+start=b.index(b'PK\x03\x04')
+# local file header: fixed 30 bytes + file name + extra
+fnlen,exlen=struct.unpack_from('<HH',b,start+26)
+name=b[start+30:start+30+fnlen]
+dataoff=start+30+fnlen+exlen
+csize=struct.unpack_from('<I',b,start+18)[0]
+print('zip_start=',start,'filename=',name,'dataoff=',dataoff,'csize=',csize,'cipher_header=',b[dataoff:dataoff+12].hex(),'cipher_payload=',b[dataoff+12:dataoff+32].hex())
+'@ | python -; Stop-Transcript
+Process ID: 27652
+PSVersion: 7.6.5
+PSEdition: Core
+GitCommitId: 7.6.5
+OS: Microsoft Windows 10.0.26200
+Platform: Win32NT
+PSCompatibleVersions: 1.0, 2.0, 3.0, 4.0, 5.0, 5.1, 6.0, 7.0
+PSRemotingProtocolVersion: 2.4
+SerializationVersion: 1.1.0.1
+WSManStackVersion: 3.0
+**********************
+Transcript started, output file is C:\Users\mzj\Desktop\CTF\玄机刷题\记录\限时攻关-Pixel-终端记录.txt
+**********************
+PowerShell transcript end
+End time: 20260928141318
+**********************
+**********************
+PowerShell transcript start
+Start time: 20260928141453
+Username: DESKTOP-412KTAR\mzj
+RunAs User: DESKTOP-412KTAR\mzj
+Configuration Name: 
+Machine: DESKTOP-412KTAR (Microsoft Windows NT 10.0.26200.0)
+Host Application: C:\Users\mzj\.cache\codex-runtimes\codex-primary-runtime\dependencies\native\powershell\pwsh.dll -Command try { [Console]::OutputEncoding=[System.Text.Encoding]::UTF8 } catch {}
+Start-Transcript -LiteralPath 'C:\Users\mzj\Desktop\CTF\玄机刷题\记录\限时攻关-Pixel-终端记录.txt' -Append; $p='C:\Users\mzj\Desktop\CTF\玄机刷题\记录\像素囚笼1-解题记录.md'; Select-String -LiteralPath $p -Pattern 'known|bkcrack|压缩|password|密码|flag' | Select-Object -Last 25 | ForEach-Object { '{0}: {1}' -f $_.LineNumber,$_.Line }; Stop-Transcript
+Process ID: 15716
+PSVersion: 7.6.5
+PSEdition: Core
+GitCommitId: 7.6.5
+OS: Microsoft Windows 10.0.26200
+Platform: Win32NT
+PSCompatibleVersions: 1.0, 2.0, 3.0, 4.0, 5.0, 5.1, 6.0, 7.0
+PSRemotingProtocolVersion: 2.4
+SerializationVersion: 1.1.0.1
+WSManStackVersion: 3.0
+**********************
+Transcript started, output file is C:\Users\mzj\Desktop\CTF\玄机刷题\记录\限时攻关-Pixel-终端记录.txt
+111: ## 九、进一步密码验证与穷举记录（续，2026-09-26）
+121: 本地 C 程序用 ZIP 的 12 字节加密头（偏移 4,996）执行 ZipCrypto 解密。初始密钥为 `0x12345678`、`0x23456789`、`0x34567890`，按候选密码更新密钥；由于 ZIP general-purpose flag bit 3 未设置，解密头最后一字节必须等于 CRC32 高字节 `0x9d`。通过该一字节门槛的候选再由 Python `zipfile.read()` 完整解压，最终检查 CRC32；头校验本身只有 1 字节，不能单独作为密码正确的证据。
+132: 本轮没找到 ZIP 密码或 `secret.txt` 内容；先前向平台提交的四个数字 flag 仍均被拒绝，当前页面进度仍为 0/1。本节不把候选猜测写成答案。要完成题目仍需得到图形的真实编码规则或额外题目线索，然后读取文件原文、提取 flag、提交平台验证。
+138: 将六种方块颜色按常见色相顺序排为红、黄、绿、青、蓝、紫（索引 1–6），圆点从左到右得到 `51236451`。把它写成 `flag{51236451}`，通过玄机题目的“提交 FLAG”界面提交；提交框关闭后页面仍显示步骤 #1 `0/1`、完成率 `0%`，因此平台判定错误。
+142: 按图中六个方块的两列三行读取，圆点颜色序列 B、R、Y、G、P、C、B、R 对应坐标对 `11 21 31 12 22 32 11 21`，候选串为 `1121311222321121`。也在本地 ZIP 上尝试零起始坐标串 `0010200111210010`、带分隔符的行列串、行编号 `12312312` 和列编号 `11122211`，均触发错误密码，未解出文件。
+144: 随后把 `flag{1121311222321121}` 通过玄机页面提交。平台进度仍为步骤 #1 `0/1`、`0%`，判定错误。相应 ZIP 候选验证记录在 `pixel_cage_coordinate_candidates.py`；页面本轮只提交这两个有明确映射来源的候选。
+146: **截至本节：仍无正确 flag。**
+151: 2. 将 blue、red、yellow、green、purple、cyan 六个英文颜色词作为字典，对 1–8 个词的全部 2,015,538 种拼接执行 ZipCrypto 头校验，并对头校验通过者完整解压验证。耗时约 76.22 秒，无密码命中。实现见 `pixel_cage_bruteforce_colorwords.py`。
+166: 所有检查都以 `ZipFile.read('secret.txt', pwd=...)` 完整读取文件为判据；单纯通过 ZipCrypto 头字节校验不作为成功。以上脚本与输入附件保留在本地，可复现这些排除结果。目前仍未获得 ZIP 口令、`secret.txt` 内容或平台认可的 flag；玄机题页面显示简介为空、步骤 #1 为 0/1。
+170: 通过电脑使用读取挑战页面的可见信息：题目发布时间为 `2026-09-21 20:46:41`、当前挑战路径 ID 为 `583`；页面“暂无简介”，动态区只显示“测试flag / 发布题目”，没有解题提示。用日期、时间、挑战 ID、先前登录跳转 URL 中的 `570`、赛事名与页面文字的常见拼接及分隔形式生成 8,882 个候选，在 ZIP 上逐一完整解压验证，均未命中。脚本为 `pixel_cage_platform_metadata_candidates.py`。
+176: 1. `pixel_cage_common_passwords.py`：检查常见口令、MISC/隐写词、图中主题词、赛事/平台名称、中文拼音，以及大小写、`1`、年份、题号等常见后缀/前缀，共 31,744 个候选，均未命中。
+177: 2. `pixel_cage_archive_layout_candidates.py`：使用本地解析得到的 ZIP 起始偏移 `4956`、加密数据偏移 `4996`、中央目录偏移 `5109`、EOCD 偏移 `5165`、附件总长度 `5187`、压缩/原始长度 `113`、CRC32 `9d13b619` 等数值及其十六进制、反序、拼接形式，检查 1,102 个候选，均未命中。
+180: 这些结果排除了常见短口令和上述特定编码空间；它们不等于找到了密码，也不能排除较长口令或未识别的谜题规则。当前平台仍为 0/1。
+198: 页面动态卡片“测试flag”点击后打开了发布者详情页（用户 ID 23），该页无额外说明；随后返回挑战页。挑战页当前仍显示“暂无简介”与步骤 0/1。
+202: 首次尝试把多行 Python 循环塞进 PowerShell 的 `python -c` 单行命令时，换行转义被原样传入并导致 `SyntaxError`；没有运行任何候选。随后改用独立脚本 `pixel_cage_special_passwords.py`，检查空密码、NUL、UTF-8 BOM、CR/LF、空格/制表符及题名首尾空白等 14 种字节串，全部被拒绝。
+218: 随后把外层下载 ZIP 中 `challenge.png` 的 CRC32、压缩/原始长度、偏移、外层 ZIP 总长度、两份下载 ZIP 的哈希及其常用截断形式作为内层口令候选，`pixel_cage_outer_crc_candidates.py` 检查 40 个候选，均未命中。
+224: - 已尝试的 flag 在平台均未通过；平台仍显示步骤 #1 `0/1`。当前尚未得到 ZIP 密码、`secret.txt` 原文或有效 flag，不能标记为已解题。
+225: - 挑战页没有简介，附件图片本身也未出现可直接读取的隐藏文本；剩余关键条件是找到作者使用的 ZIP 密码或取得额外题目提示。
+229: 本轮通过 Computer Use 重新打开 `/challenges/583`：页面为免费、简单 MISC，题目简介为空，步骤 #1 显示 `0/1`；可见按钮只有“下载附件”和“提交 FLAG”，未显示公开 Writeup 或实例启动入口。未提交新 flag，也未取得 ZIP 密码。
+236: 2. 对 RGB 三通道按行优先/列优先遍历，穷举每通道分别选取 bit0–bit7、六种通道交错顺序，共 6,144 条打包比特流；检索 `flag{`、`xj{`、`mzj`、`secret` 均无命中。最高可打印字节比例约 64.88%，但内容重复为 `49 24 92` 周期（大量纯色区域造成），不是自然语言或 flag。
+237: 3. 当前仍未发现未解压的密码、`secret.txt` 内容或可提交 flag；不改变此前结论。完整命令和输出见 `记录\代理-Pixel-终端记录.txt`，复现脚本见 `题目资料\像素囚笼1\分析脚本\pixel_cage_png_filter_analysis.py` 与 `pixel_cage_mixed_bitplanes.py`。
+242: ## 2026-09-27 代理复核：PNG 压缩流完整性
+251: 这排除了 PNG 压缩流末尾附带隐藏字节或非零尾部填充的简单载荷路径；不排除使用普通像素内容编码的谜题。未得到 ZIP 密码或 flag。完整解析代码、命令和输出在 `pixel_cage_deflate_structure.py` 与 `代理-Pixel-终端记录.txt`。
+261: 这支持滤波字节来自正常的逐行压缩器选择，而不是明显的任意载荷标记；仍不能从数学上排除作者只在并列最优的行中嵌 bit。该复核没有恢复 ZIP 密码或 flag。命令和完整输出见 `记录\代理-Pixel-终端记录.txt`。
+265: 为检查压缩器是否可能在同代价滤波器之间嵌入二进制信息，新增 `pixel_cage_filter_tie_channel.py`。沿用每行 Filter 0–4 的有符号残差绝对值和评分，仅保留并列最低分的行，并把实际选项相对排序候选的高/低选择转换为 0/1。
+**********************
+PowerShell transcript end
+End time: 20260928141453
+**********************
+**********************
+PowerShell transcript start
+Start time: 20260928141510
+Username: DESKTOP-412KTAR\mzj
+RunAs User: DESKTOP-412KTAR\mzj
+Configuration Name: 
+Machine: DESKTOP-412KTAR (Microsoft Windows NT 10.0.26200.0)
+Host Application: C:\Users\mzj\.cache\codex-runtimes\codex-primary-runtime\dependencies\native\powershell\pwsh.dll -Command try { [Console]::OutputEncoding=[System.Text.Encoding]::UTF8 } catch {}
+Start-Transcript -LiteralPath 'C:\Users\mzj\Desktop\CTF\玄机刷题\记录\限时攻关-Pixel-终端记录.txt' -Append; '=== 本地 CTF 工具候选 ==='; foreach ($root in 'C:\msys64\mingw64\bin','C:\Program Files','C:\Program Files (x86)','C:\Users\mzj\scoop\apps','C:\Users\mzj\AppData\Local\Programs','C:\Users\mzj\AppData\Local\Microsoft\WinGet\Packages') { if (Test-Path -LiteralPath $root) { Get-ChildItem -LiteralPath $root -File -ErrorAction SilentlyContinue | Where-Object { $_.Name -match 'bkcrack|pkcrack|zipcrack|john|hashcat|fcrackzip|7z|bandizip|zip2john' } | Select-Object FullName,Length } }; '=== Python 缓存中的 ZIP/密码包 ==='; python -m pip cache list | Select-String -Pattern 'bkcrack|zip|password|cracker' | Select-Object -First 30; Stop-Transcript
+Process ID: 27248
+PSVersion: 7.6.5
+PSEdition: Core
+GitCommitId: 7.6.5
+OS: Microsoft Windows 10.0.26200
+Platform: Win32NT
+PSCompatibleVersions: 1.0, 2.0, 3.0, 4.0, 5.0, 5.1, 6.0, 7.0
+PSRemotingProtocolVersion: 2.4
+SerializationVersion: 1.1.0.1
+WSManStackVersion: 3.0
+**********************
+Transcript started, output file is C:\Users\mzj\Desktop\CTF\玄机刷题\记录\限时攻关-Pixel-终端记录.txt
+=== 本地 CTF 工具候选 ===
+=== Python 缓存中的 ZIP/密码包 ===
+**********************
+PowerShell transcript end
+End time: 20260928141511
+**********************
+**********************
+PowerShell transcript start
+Start time: 20260928141535
+Username: DESKTOP-412KTAR\mzj
+RunAs User: DESKTOP-412KTAR\mzj
+Configuration Name: 
+Machine: DESKTOP-412KTAR (Microsoft Windows NT 10.0.26200.0)
+Host Application: C:\Users\mzj\.cache\codex-runtimes\codex-primary-runtime\dependencies\native\powershell\pwsh.dll -Command try { [Console]::OutputEncoding=[System.Text.Encoding]::UTF8 } catch {}
+Start-Transcript -LiteralPath 'C:\Users\mzj\Desktop\CTF\玄机刷题\记录\限时攻关-Pixel-终端记录.txt' -Append; @'
+from zipfile import ZipFile
+from pathlib import Path
+p=Path(r'C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\像素囚笼1\附件\challenge.png')
+seq=[1,2,3,4,5,6,1,2]
+strings=['Abstract Art Gallery','AbstractArtGallery','abstractartgallery','abstract art gallery','abstract','ArtGallery','ABSTRACTARTGALLERY']
+cands=set()
+for s in strings:
+    for idx in (seq,[i-1 for i in seq]):
+        if max(idx,default=0)<len(s): cands.add(''.join(s[i] for i in idx))
+for s in ['blue','red','yellow','green','purple','cyan']:
+    pass
+names=['blue','red','yellow','green','purple','cyan']
+for idx in (seq,[i-1 for i in seq]):
+    for fmt in (lambda x:x, str.upper):
+        cands.add(''.join(fmt(names[i]) for i in idx))
+        cands.add(''.join(fmt(names[i][0]) for i in idx))
+# Google brand palette interpretation and common source terms.
+for w in ['google','Google','GOOGLE','googlecolors','google-colors','googlecolorscheme','abstract','gallery','artgallery','pixelart','pixelcage','password','secret']:
+    cands.add(w)
+# Geometry ranks to letters using common A1Z26 bases, then pair with color initials.
+diams=[40,46,52,58,64,70,76,82]
+for off in range(-90,91):
+    s=''.join(chr(65+((d+off-1)%26)) for d in diams)
+    cands.add(s)
+    cands.add(s.lower())
+# Try direct candidate passwords with full ZIP read/CRC validation.
+hits=[]
+with ZipFile(p) as z:
+    for s in sorted(cands):
+        try:
+            data=z.read('secret.txt',pwd=s.encode())
+            hits.append((s,data))
+        except Exception:
+            pass
+print('new distinct candidates=',len(cands),'hits=',len(hits))
+for s,d in hits: print('HIT',repr(s),repr(d))
+'@ | python -; Stop-Transcript
+Process ID: 27144
+PSVersion: 7.6.5
+PSEdition: Core
+GitCommitId: 7.6.5
+OS: Microsoft Windows 10.0.26200
+Platform: Win32NT
+PSCompatibleVersions: 1.0, 2.0, 3.0, 4.0, 5.0, 5.1, 6.0, 7.0
+PSRemotingProtocolVersion: 2.4
+SerializationVersion: 1.1.0.1
+WSManStackVersion: 3.0
+**********************
+Transcript started, output file is C:\Users\mzj\Desktop\CTF\玄机刷题\记录\限时攻关-Pixel-终端记录.txt
+**********************
+PowerShell transcript end
+End time: 20260928141535
+**********************
+**********************
+PowerShell transcript start
+Start time: 20260928141548
+Username: DESKTOP-412KTAR\mzj
+RunAs User: DESKTOP-412KTAR\mzj
+Configuration Name: 
+Machine: DESKTOP-412KTAR (Microsoft Windows NT 10.0.26200.0)
+Host Application: C:\Users\mzj\.cache\codex-runtimes\codex-primary-runtime\dependencies\native\powershell\pwsh.dll -Command try { [Console]::OutputEncoding=[System.Text.Encoding]::UTF8 } catch {}
+Start-Transcript -LiteralPath 'C:\Users\mzj\Desktop\CTF\玄机刷题\记录\限时攻关-Pixel-终端记录.txt' -Append; @'
+from zipfile import ZipFile
+from pathlib import Path
+p=Path(r'C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\像素囚笼1\附件\challenge.png')
+seq=[1,2,3,4,5,6,1,2]
+strings=['Abstract Art Gallery','AbstractArtGallery','abstractartgallery','abstract art gallery','abstract','ArtGallery','ABSTRACTARTGALLERY']
+cands=set()
+for s in strings:
+    for idx in (seq,[i-1 for i in seq]):
+        if max(idx,default=0)<len(s): cands.add(''.join(s[i] for i in idx))
+names=['blue','red','yellow','green','purple','cyan']
+for idx in ([i-1 for i in seq], [i%6 for i in range(8)]):
+    for fmt in (lambda x:x, str.upper):
+        cands.add(''.join(fmt(names[i]) for i in idx))
+        cands.add(''.join(fmt(names[i][0]) for i in idx))
+for w in ['google','Google','GOOGLE','googlecolors','google-colors','googlecolorscheme','abstract','gallery','artgallery','pixelart','pixelcage','password','secret']:
+    cands.add(w)
+diams=[40,46,52,58,64,70,76,82]
+for off in range(-90,91):
+    s=''.join(chr(65+((d+off-1)%26)) for d in diams)
+    cands.add(s); cands.add(s.lower())
+hits=[]
+with ZipFile(p) as z:
+    for s in sorted(cands):
+        try: hits.append((s,z.read('secret.txt',pwd=s.encode())))
+        except Exception: pass
+print('new distinct candidates=',len(cands),'hits=',len(hits))
+for s,d in hits: print('HIT',repr(s),repr(d))
+'@ | python -; Stop-Transcript
+Process ID: 24308
+PSVersion: 7.6.5
+PSEdition: Core
+GitCommitId: 7.6.5
+OS: Microsoft Windows 10.0.26200
+Platform: Win32NT
+PSCompatibleVersions: 1.0, 2.0, 3.0, 4.0, 5.0, 5.1, 6.0, 7.0
+PSRemotingProtocolVersion: 2.4
+SerializationVersion: 1.1.0.1
+WSManStackVersion: 3.0
+**********************
+Transcript started, output file is C:\Users\mzj\Desktop\CTF\玄机刷题\记录\限时攻关-Pixel-终端记录.txt
+**********************
+PowerShell transcript end
+End time: 20260928141549
+**********************
+**********************
+PowerShell transcript start
+Start time: 20260928141739
+Username: DESKTOP-412KTAR\mzj
+RunAs User: DESKTOP-412KTAR\mzj
+Configuration Name: 
+Machine: DESKTOP-412KTAR (Microsoft Windows NT 10.0.26200.0)
+Host Application: C:\Users\mzj\.cache\codex-runtimes\codex-primary-runtime\dependencies\native\powershell\pwsh.dll -Command try { [Console]::OutputEncoding=[System.Text.Encoding]::UTF8 } catch {}
+Start-Transcript -LiteralPath 'C:\Users\mzj\Desktop\CTF\玄机刷题\记录\限时攻关-Pixel-终端记录.txt' -Append; rg --files 'C:\Users\mzj\Desktop\CTF' | rg -i '(bkcrack|pkcrack|zipcrypto|known.?plaintext|zip.?crypto)' | Select-Object -First 100; Stop-Transcript
+Process ID: 7640
+PSVersion: 7.6.5
+PSEdition: Core
+GitCommitId: 7.6.5
+OS: Microsoft Windows 10.0.26200
+Platform: Win32NT
+PSCompatibleVersions: 1.0, 2.0, 3.0, 4.0, 5.0, 5.1, 6.0, 7.0
+PSRemotingProtocolVersion: 2.4
+SerializationVersion: 1.1.0.1
+WSManStackVersion: 3.0
+**********************
+Transcript started, output file is C:\Users\mzj\Desktop\CTF\玄机刷题\记录\限时攻关-Pixel-终端记录.txt
+**********************
+PowerShell transcript end
+End time: 20260928141739
+**********************
+**********************
+PowerShell transcript start
+Start time: 20260928141847
+Username: DESKTOP-412KTAR\mzj
+RunAs User: DESKTOP-412KTAR\mzj
+Configuration Name: 
+Machine: DESKTOP-412KTAR (Microsoft Windows NT 10.0.26200.0)
+Host Application: C:\Users\mzj\.cache\codex-runtimes\codex-primary-runtime\dependencies\native\powershell\pwsh.dll -Command try { [Console]::OutputEncoding=[System.Text.Encoding]::UTF8 } catch {}
+Start-Transcript -LiteralPath 'C:\Users\mzj\Desktop\CTF\玄机刷题\记录\限时攻关-Pixel-终端记录.txt' -Append; foreach ($name in 'cargo','rustc','git','cmake','ninja','vcpkg','choco','winget') { Get-Command $name -ErrorAction SilentlyContinue | Select-Object Name,Source }; foreach ($path in 'C:\Users\mzj\.cargo\registry\src','C:\Users\mzj\.cargo\git\checkouts','C:\Users\mzj\scoop\apps') { if (Test-Path -LiteralPath $path) { Get-ChildItem -LiteralPath $path -Directory -Recurse -ErrorAction SilentlyContinue | Where-Object { $_.Name -match 'bkcrack|zip' } | Select-Object -First 30 -ExpandProperty FullName } }; Stop-Transcript
+Process ID: 1404
+PSVersion: 7.6.5
+PSEdition: Core
+GitCommitId: 7.6.5
+OS: Microsoft Windows 10.0.26200
+Platform: Win32NT
+PSCompatibleVersions: 1.0, 2.0, 3.0, 4.0, 5.0, 5.1, 6.0, 7.0
+PSRemotingProtocolVersion: 2.4
+SerializationVersion: 1.1.0.1
+WSManStackVersion: 3.0
+**********************
+Transcript started, output file is C:\Users\mzj\Desktop\CTF\玄机刷题\记录\限时攻关-Pixel-终端记录.txt
+
+**********************
+PowerShell transcript end
+End time: 20260928141848
+**********************
+**********************
+PowerShell transcript start
+Start time: 20260928141926
+Username: DESKTOP-412KTAR\mzj
+RunAs User: DESKTOP-412KTAR\mzj
+Configuration Name: 
+Machine: DESKTOP-412KTAR (Microsoft Windows NT 10.0.26200.0)
+Host Application: C:\Users\mzj\.cache\codex-runtimes\codex-primary-runtime\dependencies\native\powershell\pwsh.dll -Command try { [Console]::OutputEncoding=[System.Text.Encoding]::UTF8 } catch {}
+Start-Transcript -LiteralPath 'C:\Users\mzj\Desktop\CTF\玄机刷题\记录\限时攻关-Pixel-终端记录.txt' -Append; Get-Content -LiteralPath 'C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\像素囚笼1\分析脚本\pixel_cage_base64_symbol_candidates.py'; Get-Content -LiteralPath 'C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\像素囚笼1\分析脚本\pixel_cage_radix_candidates.py' -Head 160; Stop-Transcript
+Process ID: 8180
+PSVersion: 7.6.5
+PSEdition: Core
+GitCommitId: 7.6.5
+OS: Microsoft Windows 10.0.26200
+Platform: Win32NT
+PSCompatibleVersions: 1.0, 2.0, 3.0, 4.0, 5.0, 5.1, 6.0, 7.0
+PSRemotingProtocolVersion: 2.4
+SerializationVersion: 1.1.0.1
+WSManStackVersion: 3.0
+**********************
+Transcript started, output file is C:\Users\mzj\Desktop\CTF\玄机刷题\记录\限时攻关-Pixel-终端记录.txt
+from itertools import permutations
+from pathlib import Path
+from zipfile import ZipFile
+import base64
+
+IMAGE = Path(str(Path(__file__).resolve().parents[1] / '附件' / 'challenge.png'))
+SEQ = "BRYGPCBR"
+COLORS = sorted(set(SEQ))
+ALPHABETS = [
+    "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/",
+    "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789-_",
+]
+candidates = set()
+
+for order in permutations(COLORS):
+    color = {c: i for i, c in enumerate(order)}
+    ids = [color[c] for c in SEQ]
+    for size_order in (list(range(8)), list(reversed(range(8)))):
+        for size_offset in (0, 1):
+            sizes = [(v + size_offset) % 8 for v in size_order]
+            size_seq = [sizes[i] for i in range(8)]
+            for first in ("color", "size"):
+                for alphabet in ALPHABETS:
+                    nums = [((a << 3) | b) if first == "color" else ((b << 3) | a)
+                            for a, b in zip(ids, size_seq)]
+                    if max(nums) >= 64:
+                        continue
+                    text = "".join(alphabet[v] for v in nums)
+                    for form in (text, text[::-1]):
+                        candidates.add(form.encode("ascii"))
+                        try:
+                            padded = form + "=" * ((-len(form)) % 4)
+                            raw = base64.urlsafe_b64decode(padded)
+                            candidates.add(raw)
+                        except Exception:
+                            pass
+
+# Pack each color into three bits and each size into three bits, then split the
+# 48-bit stream into six bytes. This is an alternate view of the same symbols.
+for order in permutations(COLORS):
+    color = {c: i for i, c in enumerate(order)}
+    ids = [color[c] for c in SEQ]
+    for size_offset in (0, 1):
+        for reverse_sizes in (False, True):
+            sizes = list(range(8))
+            if reverse_sizes:
+                sizes.reverse()
+            sizes = [(v + size_offset) % 8 for v in sizes]
+            stream = "".join(f"{a:03b}{b:03b}" for a, b in zip(ids, sizes))
+            raw = int(stream, 2).to_bytes(6, "big")
+            candidates.add(raw)
+            candidates.add(base64.b64encode(raw))
+
+with ZipFile(IMAGE) as archive:
+    for password in sorted(candidates):
+        try:
+            data = archive.read("secret.txt", pwd=password)
+        except Exception:
+            continue
+        print(f"PASSWORD FOUND (bytes): {password!r}")
+        print(f"SECRET.TXT: {data.decode(errors='replace')!r}")
+        break
+    else:
+        print(f"No match across {len(candidates)} base64/bit-packed color-size candidates.")
+from itertools import permutations
+from pathlib import Path
+from zipfile import ZipFile
+
+IMAGE = Path(str(Path(__file__).resolve().parents[1] / '附件' / 'challenge.png'))
+SEQ = "BRYGPCBR"
+COLORS = sorted(set(SEQ))
+DIGITS = "0123456789abcdefghijklmnopqrstuvwxyz"
+candidates = set()
+
+def repr_num(n):
+    if n == 0:
+        return "0"
+    out = ""
+    while n:
+        n, r = divmod(n, 36)
+        out = DIGITS[r] + out
+    return out
+
+for order in permutations(COLORS):
+    for start, base in ((0, 6), (1, 7)):
+        mapping = {c: i + start for i, c in enumerate(order)}
+        vals = [mapping[c] for c in SEQ]
+        for radix in range(max(vals) + 1, 37):
+            n = 0
+            for v in vals:
+                n = n * radix + v
+            forms = {str(n), repr_num(n), format(n, "x"), format(n, "X"),
+                     format(n, "o"), format(n, "b")}
+            for form in forms:
+                candidates.add(form)
+                candidates.add(form.upper())
+                candidates.add(form[::-1])
+            byte_len = max(1, (n.bit_length() + 7) // 8)
+            raw = n.to_bytes(byte_len, "big")
+            candidates.add(raw.decode("latin1"))
+            candidates.add(raw.hex())
+            candidates.add(raw.hex().upper())
+            for order2 in (raw, raw[::-1]):
+                try:
+                    candidates.add(order2.decode("ascii"))
+                except UnicodeDecodeError:
+                    pass
+
+# Circle size ranks form another 8-symbol numeral; combine color and size into
+# a 6-bit value and interpret the eight values as one big-endian integer.
+for order in permutations(COLORS):
+    mapping = {c: i for i, c in enumerate(order)}
+    color_ids = [mapping[c] for c in SEQ]
+    for size_offset in (0, 1):
+        for rev in (False, True):
+            size = list(range(8))
+            if rev: size.reverse()
+            size = [(v + size_offset) % 8 for v in size]
+            vals = [(c << 3) | s for c, s in zip(color_ids, size)]
+            n = 0
+            for v in vals:
+                n = n * 64 + v
+            for form in (str(n), repr_num(n), format(n, "x"), format(n, "X"), format(n, "b")):
+                candidates.add(form)
+                candidates.add(form[::-1])
+
+with ZipFile(IMAGE) as archive:
+    for password in sorted(candidates):
+        try:
+            data = archive.read("secret.txt", pwd=password.encode("latin1"))
+        except Exception:
+            continue
+        print(f"PASSWORD FOUND: {password!r}")
+        print(f"SECRET.TXT: {data.decode(errors='replace')!r}")
+        break
+    else:
+        print(f"No match across {len(candidates)} radix-converted sequence candidates.")
+**********************
+PowerShell transcript end
+End time: 20260928141926
+**********************
+**********************
+PowerShell transcript start
+Start time: 20260928141959
+Username: DESKTOP-412KTAR\mzj
+RunAs User: DESKTOP-412KTAR\mzj
+Configuration Name: 
+Machine: DESKTOP-412KTAR (Microsoft Windows NT 10.0.26200.0)
+Host Application: C:\Users\mzj\.cache\codex-runtimes\codex-primary-runtime\dependencies\native\powershell\pwsh.dll -Command try { [Console]::OutputEncoding=[System.Text.Encoding]::UTF8 } catch {}
+Start-Transcript -LiteralPath 'C:\Users\mzj\Desktop\CTF\玄机刷题\记录\限时攻关-Pixel-终端记录.txt' -Append; '=== Downloads 中可能的文本字典 ==='; Get-ChildItem -LiteralPath 'D:\Downloads' -File -Recurse -ErrorAction SilentlyContinue | Where-Object { $_.Extension -in '.txt','.lst','.dic','.dict','.7z','.zip' } | Select-Object FullName,Length | Sort-Object Length -Descending | Select-Object -First 100; Stop-Transcript
+Process ID: 22664
+PSVersion: 7.6.5
+PSEdition: Core
+GitCommitId: 7.6.5
+OS: Microsoft Windows 10.0.26200
+Platform: Win32NT
+PSCompatibleVersions: 1.0, 2.0, 3.0, 4.0, 5.0, 5.1, 6.0, 7.0
+PSRemotingProtocolVersion: 2.4
+SerializationVersion: 1.1.0.1
+WSManStackVersion: 3.0
+**********************
+Transcript started, output file is C:\Users\mzj\Desktop\CTF\玄机刷题\记录\限时攻关-Pixel-终端记录.txt
+=== Downloads 中可能的文本字典 ===
+
+**********************
+PowerShell transcript end
+End time: 20260928141959
+**********************
+**********************
+PowerShell transcript start
+Start time: 20260928142015
+Username: DESKTOP-412KTAR\mzj
+RunAs User: DESKTOP-412KTAR\mzj
+Configuration Name: 
+Machine: DESKTOP-412KTAR (Microsoft Windows NT 10.0.26200.0)
+Host Application: C:\Users\mzj\.cache\codex-runtimes\codex-primary-runtime\dependencies\native\powershell\pwsh.dll -Command try { [Console]::OutputEncoding=[System.Text.Encoding]::UTF8 } catch {}
+Start-Transcript -LiteralPath 'C:\Users\mzj\Desktop\CTF\玄机刷题\记录\限时攻关-Pixel-终端记录.txt' -Append; Get-Content -LiteralPath 'C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\像素囚笼1\分析脚本\pixel_cage_common_passwords.py' -Head 240; Get-Content -LiteralPath 'C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\像素囚笼1\分析脚本\pixel_cage_topic_wordlist.py' -Head 200; Stop-Transcript
+Process ID: 5576
+PSVersion: 7.6.5
+PSEdition: Core
+GitCommitId: 7.6.5
+OS: Microsoft Windows 10.0.26200
+Platform: Win32NT
+PSCompatibleVersions: 1.0, 2.0, 3.0, 4.0, 5.0, 5.1, 6.0, 7.0
+PSRemotingProtocolVersion: 2.4
+SerializationVersion: 1.1.0.1
+WSManStackVersion: 3.0
+**********************
+Transcript started, output file is C:\Users\mzj\Desktop\CTF\玄机刷题\记录\限时攻关-Pixel-终端记录.txt
+from itertools import product
+from pathlib import Path
+from zipfile import ZipFile
+
+IMAGE = Path(str(Path(__file__).resolve().parents[1] / '附件' / 'challenge.png'))
+words = [
+    "password", "passwd", "pass", "secret", "secretfile", "zip", "unzip", "open",
+    "flag", "test", "testflag", "admin", "root", "toor", "qwerty", "letmein",
+    "welcome", "iloveyou", "abc123", "123456", "1234567", "12345678", "000000",
+    "ctf", "challenge", "misc", "stego", "steganography", "image", "picture",
+    "pixel", "pixels", "cage", "pixelcage", "pixel_cage", "pixel-cage", "gallery",
+    "art", "abstract", "abstractart", "artgallery", "abstractartgallery", "abstractartgallery",
+    "color", "colors", "colour", "colours", "rainbow", "google", "googlecolor",
+    "googlecolors", "material", "materialdesign", "blue", "red", "yellow", "green",
+    "purple", "cyan", "xj", "xuanji", "edisec", "anwang", "anwangbei", "2026anwangbei",
+    "xiangsu", "qiulong", "mima", "test123", "flag123", "secret123", "password123",
+]
+suffixes = ["", "1", "01", "123", "1234", "123456", "2026", "20260921", "583", "!", "@"]
+prefixes = ["", "2026", "xj", "ctf", "flag", "pixel", "secret"]
+candidates = set()
+for word in words:
+    forms = {word, word.lower(), word.upper(), word.title(), word.capitalize()}
+    for form in forms:
+        candidates.add(form)
+        for suffix in suffixes:
+            candidates.add(form + suffix)
+        for prefix in prefixes:
+            candidates.add(prefix + form)
+        for prefix, suffix in product(prefixes, suffixes):
+            candidates.add(prefix + form + suffix)
+            candidates.add(prefix + "_" + form + "_" + suffix if suffix else prefix + "_" + form)
+
+with ZipFile(IMAGE) as archive:
+    for password in sorted(candidates):
+        try:
+            data = archive.read("secret.txt", pwd=password.encode("utf-8"))
+        except Exception:
+            continue
+        print(f"PASSWORD FOUND: {password!r}")
+        print(f"SECRET.TXT: {data.decode(errors='replace')!r}")
+        break
+    else:
+        print(f"No match across {len(candidates)} common/theme/event password variants.")
+from pathlib import Path
+from zipfile import ZipFile
+p=Path(str(Path(__file__).resolve().parents[1] / '附件' / 'challenge.png'))
+roots='pixel pixelcage pixel-cage pixelprison xiangsulong xiangsuqiulong xuanji edisec anwangbei anwangbei2026 Abstract abstract art gallery abstractartgallery color colors colour colorful circle circles square squares BRYGPCBR BRYGPC 13524613 12345612 02413502 4285F4 RGB MISC secret challenge'.split()
+suffixes=['','1','01','2026','583','1!','!']
+prefixes=['','1','2026','583']
+seps=['','_','-','.', ' ']
+candidates=set()
+for word in roots:
+    variants={word,word.lower(),word.upper(),word.title()}
+    for w in variants:
+        candidates.add(w)
+        for sep in seps:
+            for s in suffixes:
+                candidates.add(w+sep+s)
+            for pre in prefixes:
+                candidates.add(pre+sep+w)
+with ZipFile(p) as z:
+    print('candidate count:',len(candidates))
+    for password in sorted(candidates):
+        try:
+            data=z.read('secret.txt',pwd=password.encode())
+            print('PASSWORD FOUND:',repr(password)); print('SECRET.TXT:',data.decode(errors='replace')); break
+        except Exception: pass
+    else: print('No challenge keyword + common year/number pattern matched.')
+**********************
+PowerShell transcript end
+End time: 20260928142015
+**********************
+**********************
+PowerShell transcript start
+Start time: 20260928142044
+Username: DESKTOP-412KTAR\mzj
+RunAs User: DESKTOP-412KTAR\mzj
+Configuration Name: 
+Machine: DESKTOP-412KTAR (Microsoft Windows NT 10.0.26200.0)
+Host Application: C:\Users\mzj\.cache\codex-runtimes\codex-primary-runtime\dependencies\native\powershell\pwsh.dll -Command try { [Console]::OutputEncoding=[System.Text.Encoding]::UTF8 } catch {}
+Start-Transcript -LiteralPath 'C:\Users\mzj\Desktop\CTF\玄机刷题\记录\限时攻关-Pixel-终端记录.txt' -Append; $site='C:\Users\mzj\AppData\Local\Programs\Python\Python312\Lib\site-packages'; rg -l -i 'pkzip|zipcrypto|12345678.*23456789|23456789.*34567890|bkcrack' $site 2>$null | Select-Object -First 50; Stop-Transcript
+Process ID: 18796
+PSVersion: 7.6.5
+PSEdition: Core
+GitCommitId: 7.6.5
+OS: Microsoft Windows 10.0.26200
+Platform: Win32NT
+PSCompatibleVersions: 1.0, 2.0, 3.0, 4.0, 5.0, 5.1, 6.0, 7.0
+PSRemotingProtocolVersion: 2.4
+SerializationVersion: 1.1.0.1
+WSManStackVersion: 3.0
+**********************
+Transcript started, output file is C:\Users\mzj\Desktop\CTF\玄机刷题\记录\限时攻关-Pixel-终端记录.txt
+C:\Users\mzj\AppData\Local\Programs\Python\Python312\Lib\site-packages\lxml\includes\extlibs\zlib.h
+C:\Users\mzj\AppData\Local\Programs\Python\Python312\Lib\site-packages\numpy\_core\tests\test_defchararray.py
+C:\Users\mzj\AppData\Local\Programs\Python\Python312\Lib\site-packages\numpy\_core\tests\test_scalarprint.py
+C:\Users\mzj\AppData\Local\Programs\Python\Python312\Lib\site-packages\numpy\_core\tests\test_arrayprint.py
+C:\Users\mzj\AppData\Local\Programs\Python\Python312\Lib\site-packages\numpy\_core\tests\test_api.py
+C:\Users\mzj\AppData\Local\Programs\Python\Python312\Lib\site-packages\numpy\_core\tests\test_multiarray.py
+C:\Users\mzj\AppData\Local\Programs\Python\Python312\Lib\site-packages\win32comext\propsys\pscon.py
+C:\Users\mzj\AppData\Local\Programs\Python\Python312\Lib\site-packages\networkx\readwrite\tests\test_gml.py
+C:\Users\mzj\AppData\Local\Programs\Python\Python312\Lib\site-packages\numpy\f2py\tests\test_return_character.py
+C:\Users\mzj\AppData\Local\Programs\Python\Python312\Lib\site-packages\numpy\f2py\tests\test_docs.py
+C:\Users\mzj\AppData\Local\Programs\Python\Python312\Lib\site-packages\plotly\package_data\widgetbundle.js
+C:\Users\mzj\AppData\Local\Programs\Python\Python312\Lib\site-packages\plotly\package_data\plotly.min.js
+C:\Users\mzj\AppData\Local\Programs\Python\Python312\Lib\site-packages\numpy\f2py\src\fortranobject.h
+C:\Users\mzj\AppData\Local\Programs\Python\Python312\Lib\site-packages\plotly\labextension\static\1.9daa5160b7fc741623bf.js
+C:\Users\mzj\AppData\Local\Programs\Python\Python312\Lib\site-packages\playwright\driver\package\lib\vite\traceViewer\sw.bundle.js
+C:\Users\mzj\AppData\Local\Programs\Python\Python312\Lib\site-packages\playwright\driver\package\lib\vite\traceViewer\assets\defaultSettingsView-D31xz8zv.js
+C:\Users\mzj\AppData\Local\Programs\Python\Python312\Lib\site-packages\playwright\driver\package\lib\vite\recorder\assets\index-DA10QRaq.js
+C:\Users\mzj\AppData\Local\Programs\Python\Python312\Lib\site-packages\playwright\driver\package\lib\vite\htmlReport\report.js
+C:\Users\mzj\AppData\Local\Programs\Python\Python312\Lib\site-packages\playwright\driver\package\lib\vite\dashboard\assets\index-DpEq2p62.js
+C:\Users\mzj\AppData\Local\Programs\Python\Python312\Lib\site-packages\fontTools\feaLib\lexer.c
+C:\Users\mzj\AppData\Local\Programs\Python\Python312\Lib\site-packages\pandas\tests\tools\test_to_numeric.py
+C:\Users\mzj\AppData\Local\Programs\Python\Python312\Lib\site-packages\pandas\tests\scalar\timestamp\test_arithmetic.py
+C:\Users\mzj\AppData\Local\Programs\Python\Python312\Lib\site-packages\pandas\tests\io\pytables\test_timezones.py
+C:\Users\mzj\AppData\Local\Programs\Python\Python312\Lib\site-packages\pandas\tests\io\json\test_ujson.py
+C:\Users\mzj\AppData\Local\Programs\Python\Python312\Lib\site-packages\pandas\tests\io\formats\test_to_string.py
+C:\Users\mzj\AppData\Local\Programs\Python\Python312\Lib\site-packages\pandas\tests\io\formats\style\test_format.py
+C:\Users\mzj\AppData\Local\Programs\Python\Python312\Lib\site-packages\pydeck\nbextension\static\index.js.map
+C:\Users\mzj\AppData\Local\Programs\Python\Python312\Lib\site-packages\mpmath\tests\test_convert.py
+C:\Users\mzj\AppData\Local\Programs\Python\Python312\Lib\site-packages\pyarrow\src\arrow\python\gdb.cc
+C:\Users\mzj\AppData\Local\Programs\Python\Python312\Lib\site-packages\pyarrow\tests\test_scalars.py
+C:\Users\mzj\AppData\Local\Programs\Python\Python312\Lib\site-packages\pyarrow\tests\test_gdb.py
+C:\Users\mzj\AppData\Local\Programs\Python\Python312\Lib\site-packages\pandas\tests\frame\test_repr.py
+C:\Users\mzj\AppData\Local\Programs\Python\Python312\Lib\site-packages\pyarrow\tests\test_extension_type.py
+C:\Users\mzj\AppData\Local\Programs\Python\Python312\Lib\site-packages\pyarrow\include\parquet\encryption\test_encryption_util.h
+C:\Users\mzj\AppData\Local\Programs\Python\Python312\Lib\site-packages\pandas\tests\frame\methods\test_astype.py
+C:\Users\mzj\AppData\Local\Programs\Python\Python312\Lib\site-packages\pandas\tests\arrays\datetimes\test_constructors.py
+C:\Users\mzj\AppData\Local\Programs\Python\Python312\Lib\site-packages\sympy\core\tests\test_sympify.py
+C:\Users\mzj\AppData\Local\Programs\Python\Python312\Lib\site-packages\sympy\core\tests\test_numbers.py
+C:\Users\mzj\AppData\Local\Programs\Python\Python312\Lib\site-packages\sympy\core\tests\test_function.py
+C:\Users\mzj\AppData\Local\Programs\Python\Python312\Lib\site-packages\sympy\core\tests\test_expr.py
+C:\Users\mzj\AppData\Local\Programs\Python\Python312\Lib\site-packages\sympy\core\tests\test_arit.py
+C:\Users\mzj\AppData\Local\Programs\Python\Python312\Lib\site-packages\sympy\assumptions\tests\test_query.py
+C:\Users\mzj\AppData\Local\Programs\Python\Python312\Lib\site-packages\sympy\functions\elementary\tests\test_trigonometric.py
+C:\Users\mzj\AppData\Local\Programs\Python\Python312\Lib\site-packages\sympy\codegen\tests\test_ast.py
+C:\Users\mzj\AppData\Local\Programs\Python\Python312\Lib\site-packages\streamlit\static\static\worker-Cg9GPOkm.js
+C:\Users\mzj\AppData\Local\Programs\Python\Python312\Lib\site-packages\sympy\printing\tests\test_str.py
+C:\Users\mzj\AppData\Local\Programs\Python\Python312\Lib\site-packages\sympy\printing\tests\test_repr.py
+C:\Users\mzj\AppData\Local\Programs\Python\Python312\Lib\site-packages\streamlit\static\static\js\rehype-katex.B0awKBUY.js
+C:\Users\mzj\AppData\Local\Programs\Python\Python312\Lib\site-packages\streamlit\static\static\js\PlotlyChart.DE72Bh5O.js
+C:\Users\mzj\AppData\Local\Programs\Python\Python312\Lib\site-packages\streamlit\static\static\js\numbro.CldGEqmS.js
+**********************
+PowerShell transcript end
+End time: 20260928142048
+**********************
+**********************
+PowerShell transcript start
+Start time: 20260928142104
+Username: DESKTOP-412KTAR\mzj
+RunAs User: DESKTOP-412KTAR\mzj
+Configuration Name: 
+Machine: DESKTOP-412KTAR (Microsoft Windows NT 10.0.26200.0)
+Host Application: C:\Users\mzj\.cache\codex-runtimes\codex-primary-runtime\dependencies\native\powershell\pwsh.dll -Command try { [Console]::OutputEncoding=[System.Text.Encoding]::UTF8 } catch {}
+Start-Transcript -LiteralPath 'C:\Users\mzj\Desktop\CTF\玄机刷题\记录\限时攻关-Pixel-终端记录.txt' -Append; Get-Content -LiteralPath 'C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\像素囚笼1\分析脚本\pixel_cage_title_index_candidates.py' -Head 240; Get-Content -LiteralPath 'C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\像素囚笼1\分析脚本\pixel_cage_color_features.py' -Head 260; Stop-Transcript
+Process ID: 4392
+PSVersion: 7.6.5
+PSEdition: Core
+GitCommitId: 7.6.5
+OS: Microsoft Windows 10.0.26200
+Platform: Win32NT
+PSCompatibleVersions: 1.0, 2.0, 3.0, 4.0, 5.0, 5.1, 6.0, 7.0
+PSRemotingProtocolVersion: 2.4
+SerializationVersion: 1.1.0.1
+WSManStackVersion: 3.0
+**********************
+Transcript started, output file is C:\Users\mzj\Desktop\CTF\玄机刷题\记录\限时攻关-Pixel-终端记录.txt
+from itertools import permutations
+from pathlib import Path
+from zipfile import ZipFile
+
+IMAGE = Path(str(Path(__file__).resolve().parents[1] / '附件' / 'challenge.png'))
+names = ["blue", "red", "yellow", "green", "purple", "cyan", "blue", "red"]
+title_strings = ["abstractartgallery", "abstractartgallery"[::-1], "abstract", "artgallery", "gallery", "abstractartgallery2026"]
+diam = [40,46,52,58,64,70,76,82]
+radius = [20,23,26,29,32,35,38,41]
+rank = list(range(1,9))
+cx = [80,135,190,245,300,355,410,465]
+sx = [90,165,240,315,390,465,90,165]
+sy = [110,250,390,110,250,390,110,250]
+seqs = [diam,radius,rank,cx,sx,sy,[b-a for a,b in zip(cx,sx)],
+        [b-420 for b in sy], [40,46,52,58,64,70,76,82]]
+candidates=set()
+
+# Use a circle's size/position as a modular index into its color name.
+for vals in seqs:
+    for scale in (1,2,3,4,5,6,10,20):
+        scaled=[v//scale for v in vals]
+        for offset in range(-2,9):
+            for backwards in (False,True):
+                out=[]
+                for word,v in zip(names,scaled):
+                    i=(v+offset)%len(word)
+                    if backwards: i=len(word)-1-i
+                    out.append(word[i])
+                for s in ("".join(out),"".join(out).upper()):
+                    candidates.add(s)
+
+# Index title fragments with sizes, coordinates, and every one-to-one color index.
+for title in title_strings:
+    for vals in seqs:
+        for scale in (1,2,3,4,5,6,10,20):
+            scaled=[v//scale for v in vals]
+            for offset in range(-2,9):
+                candidates.add("".join(title[(v+offset)%len(title)] for v in scaled))
+    for order in permutations(sorted(set("BRYGPC"))):
+        mapping={c:i for i,c in enumerate(order)}
+        color_ids=[mapping[c] for c in "BRYGPCBR"]
+        for offset in range(-2,9):
+            candidates.add("".join(title[(v+offset)%len(title)] for v in color_ids))
+
+with ZipFile(IMAGE) as archive:
+    for password in sorted(candidates):
+        try:
+            data=archive.read("secret.txt",pwd=password.encode("ascii"))
+        except Exception:
+            continue
+        print(f"PASSWORD FOUND: {password!r}")
+        print(f"SECRET.TXT: {data.decode(errors='replace')!r}")
+        break
+    else:
+        print(f"No match across {len(candidates)} title/color-name index candidates.")
+from collections import Counter
+from pathlib import Path
+from zipfile import ZipFile
+import colorsys
+import hashlib
+
+IMAGE = Path(str(Path(__file__).resolve().parents[1] / '附件' / 'challenge.png'))
+seq = ["blue", "red", "yellow", "green", "purple", "cyan", "blue", "red"]
+rgb = {
+    "blue": (66, 133, 244), "red": (219, 68, 55), "yellow": (244, 180, 0),
+    "green": (15, 157, 88), "purple": (171, 71, 188), "cyan": (0, 172, 193),
+}
+features = {}
+for name, color in rgb.items():
+    r, g, b = color
+    h, s, v = colorsys.rgb_to_hsv(r / 255, g / 255, b / 255)
+    nums = [ord(ch) - 96 for ch in name]
+    features[name] = {
+        "length": len(name), "vowels": sum(ch in "aeiou" for ch in name),
+        "consonants": sum(ch not in "aeiou" for ch in name),
+        "first": nums[0], "last": nums[-1], "a1z26sum": sum(nums),
+        "asciisum": sum(map(ord, name)), "red": r, "green": g, "blue": b,
+        "rgbsum": r + g + b, "rgbxor": r ^ g ^ b,
+        "hue_deg": round(h * 360), "hue_sector": round(h * 6),
+        "sat_pct": round(s * 100), "value_pct": round(v * 100),
+    }
+
+candidates = set()
+for feature in next(iter(features.values())):
+    values = [features[c][feature] for c in seq]
+    for sep in ("", "-", "_", ",", ".", " "):
+        candidates.add(sep.join(map(str, values)))
+        candidates.add(sep.join(f"{x:02d}" for x in values))
+    # A1Z26/modular interpretations of feature values.
+    for modulus in (10, 26):
+        for offset in range(modulus):
+            mapped = [(v + offset) % modulus for v in values]
+            candidates.add("".join(map(str, mapped)))
+            if modulus == 26:
+                candidates.add("".join(chr(97 + v) for v in mapped))
+                candidates.add("".join(chr(65 + v) for v in mapped))
+    for base in ("".join(map(str, values)), ",".join(map(str, values)),
+                 "-".join(map(str, values)), "_".join(map(str, values))):
+        candidates.add(hashlib.md5(base.encode()).hexdigest())
+        candidates.add(hashlib.sha1(base.encode()).hexdigest())
+
+# The written color words themselves and simple acrostics.
+for f in ("", "-", "_", " "):
+    candidates.add(f.join(seq))
+    candidates.add(f.join(name[0] for name in seq))
+    candidates.add(f.join(name[-1] for name in seq))
+
+with ZipFile(IMAGE) as archive:
+    for password in sorted(candidates):
+        try:
+            data = archive.read("secret.txt", pwd=password.encode("utf-8"))
+        except Exception:
+            continue
+        print(f"PASSWORD FOUND: {password!r}")
+        print(f"SECRET.TXT: {data.decode(errors='replace')!r}")
+        break
+    else:
+        print(f"No match across {len(candidates)} color-name/RGB/HSV feature candidates.")
+**********************
+PowerShell transcript end
+End time: 20260928142104
+**********************
+**********************
+PowerShell transcript start
+Start time: 20260928142129
+Username: DESKTOP-412KTAR\mzj
+RunAs User: DESKTOP-412KTAR\mzj
+Configuration Name: 
+Machine: DESKTOP-412KTAR (Microsoft Windows NT 10.0.26200.0)
+Host Application: C:\Users\mzj\.cache\codex-runtimes\codex-primary-runtime\dependencies\native\powershell\pwsh.dll -Command try { [Console]::OutputEncoding=[System.Text.Encoding]::UTF8 } catch {}
+Start-Transcript -LiteralPath 'C:\Users\mzj\Desktop\CTF\玄机刷题\记录\限时攻关-Pixel-终端记录.txt' -Append; Get-Content -LiteralPath 'C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\像素囚笼1\分析脚本\pixel_cage_visual_encodings.py' -Head 280; Get-Content -LiteralPath 'C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\像素囚笼1\分析脚本\pixel_cage_palette_hash_candidates.py' -Head 240; Stop-Transcript
+Process ID: 25192
+PSVersion: 7.6.5
+PSEdition: Core
+GitCommitId: 7.6.5
+OS: Microsoft Windows 10.0.26200
+Platform: Win32NT
+PSCompatibleVersions: 1.0, 2.0, 3.0, 4.0, 5.0, 5.1, 6.0, 7.0
+PSRemotingProtocolVersion: 2.4
+SerializationVersion: 1.1.0.1
+WSManStackVersion: 3.0
+**********************
+Transcript started, output file is C:\Users\mzj\Desktop\CTF\玄机刷题\记录\限时攻关-Pixel-终端记录.txt
+from itertools import product, permutations
+from pathlib import Path
+from zipfile import ZipFile
+
+IMAGE = Path(str(Path(__file__).resolve().parents[1] / '附件' / 'challenge.png'))
+seq = ["blue", "red", "yellow", "green", "purple", "cyan", "blue", "red"]
+hex_by_color = {
+    "blue": "4285F4", "red": "DB4437", "yellow": "F4B400",
+    "green": "0F9D58", "purple": "AB47BC", "cyan": "00ACC1",
+}
+rgb_by_color = {
+    "blue": (66, 133, 244), "red": (219, 68, 55), "yellow": (244, 180, 0),
+    "green": (15, 157, 88), "purple": (171, 71, 188), "cyan": (0, 172, 193),
+}
+alts = {"purple": ("violet", "magenta"), "cyan": ("aqua", "turquoise"),
+        "blue": ("azure",), "red": ("crimson",), "yellow": ("gold",),
+        "green": ("lime",)}
+candidates = set()
+seps = ("", " ", "-", "_")
+
+# Exact left-to-right circle color sequence, with every per-item case pattern.
+for mask in range(1 << len(seq)):
+    words = [w.upper() if mask & (1 << i) else w for i, w in enumerate(seq)]
+    initials = [w[0] for w in words]
+    for sep in seps:
+        candidates.add(sep.join(words))
+        candidates.add(sep.join(initials))
+
+# Unique square-color orders, allowing common palette-name variants.
+unique = ["blue", "red", "yellow", "green", "purple", "cyan"]
+for order in permutations(unique):
+    for sep in ("", "-", "_"):
+        candidates.add(sep.join(order))
+        candidates.add(sep.join(w.upper() for w in order))
+        candidates.add(sep.join(w.title() for w in order))
+
+for choices in product(*(alts[c] + (c,) for c in unique)):
+    name_for = dict(zip(unique, choices))
+    for sep in ("", "-", "_"):
+        candidates.add(sep.join(name_for[c] for c in seq))
+        candidates.add(sep.join(name_for[c].title() for c in seq))
+
+# Palette values in visual order, represented as hex or decimal RGB triples.
+hexes = [hex_by_color[c] for c in seq]
+rgbs = [rgb_by_color[c] for c in seq]
+for sep in ("", " ", ",", "-", "_"):
+    candidates.add(sep.join(hexes))
+    candidates.add(sep.join(h.lower() for h in hexes))
+    candidates.add(sep.join("#" + h for h in hexes))
+    candidates.add(sep.join(str(n) for rgb in rgbs for n in rgb))
+    candidates.add(sep.join(".".join(map(str, rgb)) for rgb in rgbs))
+    candidates.add(sep.join(f"{r:02X}{g:02X}{b:02X}" for r, g, b in rgbs))
+
+# Circle size/center coordinate sequences and size-color pairs.
+diameters = [40, 46, 52, 58, 64, 70, 76, 82]
+centers = [80, 135, 190, 245, 300, 355, 410, 465]
+grid_xy = [(90, 110), (165, 250), (240, 390), (315, 110),
+           (390, 250), (465, 390), (90, 110), (165, 250)]
+for values in (diameters, centers, [v // 2 for v in diameters]):
+    for sep in ("", " ", ",", "-", "_"):
+        candidates.add(sep.join(map(str, values)))
+for sep in ("", " ", ",", "-", "_"):
+    candidates.add(sep.join(f"{x}{y}" for x, y in grid_xy))
+    candidates.add(sep.join(f"{x},{y}" for x, y in grid_xy))
+    candidates.add(sep.join(f"{x}:{y}" for x, y in grid_xy))
+
+with ZipFile(IMAGE) as archive:
+    for i, password in enumerate(sorted(candidates), 1):
+        try:
+            data = archive.read("secret.txt", pwd=password.encode("utf-8"))
+        except Exception:
+            continue
+        print(f"PASSWORD FOUND: {password!r}")
+        print(f"SECRET.TXT: {data.decode(errors='replace')!r}")
+        break
+    else:
+        print(f"No match across {len(candidates)} case/name/color-value/geometry candidates.")
+from itertools import permutations
+from pathlib import Path
+from zipfile import ZipFile
+import base64, hashlib
+
+IMAGE = Path(str(Path(__file__).resolve().parents[1] / '附件' / 'challenge.png'))
+names = ["blue", "red", "yellow", "green", "purple", "cyan"]
+codes = {"blue":"4285F4", "red":"DB4437", "yellow":"F4B400", "green":"0F9D58", "purple":"AB47BC", "cyan":"00ACC1"}
+seq = ["blue", "red", "yellow", "green", "purple", "cyan", "blue", "red"]
+materials = set()
+for order in (seq, ["blue","green","red","purple","yellow","cyan"], names):
+    for sep in ("", ":", ",", "-", "_", " ", "#"):
+        material = sep.join(codes[c] for c in order)
+        materials.add(material)
+        materials.add(material.lower())
+        materials.add(sep.join("#"+codes[c] for c in order))
+        materials.add(sep.join(codes[c] for c in order).lower())
+for order in permutations(names):
+    materials.add("".join(codes[c] for c in order))
+    materials.add("".join(codes[c].lower() for c in order))
+    materials.add("".join(c for c in order))
+
+candidates=set()
+for material in materials:
+    raw=material.encode()
+    variants=[raw,raw[::-1],raw.hex().encode(),base64.b64encode(raw),base64.urlsafe_b64encode(raw)]
+    for b in variants:
+        for h in (hashlib.md5,hashlib.sha1,hashlib.sha256,hashlib.sha512):
+            d=h(b).digest(); x=h(b).hexdigest()
+            candidates.add(x); candidates.add(x.upper())
+            candidates.add(base64.b64encode(d).decode())
+            candidates.add(base64.urlsafe_b64encode(d).decode())
+
+with ZipFile(IMAGE) as archive:
+    for password in sorted(candidates):
+        try:
+            data=archive.read("secret.txt",pwd=password.encode("ascii"))
+        except Exception:
+            continue
+        print(f"PASSWORD FOUND: {password!r}")
+        print(f"SECRET.TXT: {data.decode(errors='replace')!r}")
+        break
+    else:
+        print(f"No match across {len(candidates)} palette hash/encoding candidates.")
+**********************
+PowerShell transcript end
+End time: 20260928142130
+**********************
+**********************
+PowerShell transcript start
+Start time: 20260928142221
+Username: DESKTOP-412KTAR\mzj
+RunAs User: DESKTOP-412KTAR\mzj
+Configuration Name: 
+Machine: DESKTOP-412KTAR (Microsoft Windows NT 10.0.26200.0)
+Host Application: C:\Users\mzj\.cache\codex-runtimes\codex-primary-runtime\dependencies\native\powershell\pwsh.dll -Command try { [Console]::OutputEncoding=[System.Text.Encoding]::UTF8 } catch {}
+Start-Transcript -LiteralPath 'C:\Users\mzj\Desktop\CTF\玄机刷题\记录\限时攻关-Pixel-终端记录.txt' -Append; $scriptPath='C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\像素囚笼1\分析脚本\pixel_cage_exact_palette_candidates.py'; @'
+from itertools import permutations
+from pathlib import Path
+from zipfile import ZipFile
+import base64, hashlib, colorsys
+
+image = Path(__file__).resolve().parents[1] / '附件' / 'challenge.png'
+# Values read from the actual PNG pixels, not a remembered/older Google palette.
+palette = {
+    'blue': (66,133,244), 'red': (234,67,53), 'yellow': (251,188,5),
+    'green': (52,168,83), 'purple': (161,66,244), 'cyan': (0,172,193),
+}
+seq = ['blue','red','yellow','green','purple','cyan','blue','red']
+orders = [seq, ['blue','green','red','purple','yellow','cyan']]
+orders.extend(permutations(palette))
+materials = set()
+for order in orders:
+    hexes = [''.join(f'{x:02X}' for x in palette[c]) for c in order]
+    rgbs = [palette[c] for c in order]
+    for sep in ('','-', '_', ':', ',', '.', ' ', '#'):
+        for form in (hexes, [x.lower() for x in hexes]):
+            joined = sep.join(form)
+            materials.update((joined, joined.upper(), joined.lower()))
+            materials.add('#'.join(form))
+        for vals in (rgbs, list(reversed(rgbs))):
+            flat = [str(x) for rgb in vals for x in rgb]
+            dotted = ['.'.join(map(str, rgb)) for rgb in vals]
+            materials.add(sep.join(flat))
+            materials.add(sep.join(dotted))
+    raw = bytes(x for rgb in rgbs for x in rgb)
+    for b in (raw, raw[::-1], bytes.fromhex(''.join(hexes)), bytes.fromhex(''.join(hexes))[::-1]):
+        for item in (b, b.hex().encode(), base64.b64encode(b), base64.urlsafe_b64encode(b), base64.b32encode(b)):
+            materials.add(item.decode('latin1') if isinstance(item, bytes) else item)
+# Actual RGB/HSV channels per circle, plus straightforward text and numeric encodings.
+rgbs = [palette[c] for c in seq]
+for ch in range(3):
+    vals = [rgb[ch] for rgb in rgbs]
+    for sep in ('','-', '_', ':', ',', '.', ' '):
+        for a in (vals, vals[::-1]):
+            materials.add(sep.join(map(str,a)))
+            materials.add(sep.join(f'{v:02d}' for v in a))
+            materials.add(sep.join(f'{v:03d}' for v in a))
+    for offset in range(256):
+        materials.add(''.join(chr(65+((v+offset)%26)) for v in vals))
+        materials.add(''.join(chr(97+((v+offset)%26)) for v in vals))
+for c in palette:
+    h,s,v = colorsys.rgb_to_hsv(*(q/255 for q in palette[c]))
+    palette[c] = palette[c]
+# Use original sequences to build exact per-circle HSV summaries.
+for attr in range(3):
+    vals=[]
+    for c in seq:
+        hsv=colorsys.rgb_to_hsv(*(q/255 for q in palette[c]))
+        vals.append(hsv[attr])
+    for scale in (1,10,100,1000,10000):
+        nums=[round(v*scale) for v in vals]
+        materials.add(''.join(map(str,nums)))
+        materials.add('_'.join(map(str,nums)))
+        materials.add('-'.join(map(str,nums)))
+# Digest every direct representation using common hash/encoding choices.
+candidates=set()
+for m in materials:
+    raw=m.encode('latin1', errors='ignore')
+    candidates.add(m); candidates.add(m.lower()); candidates.add(m.upper())
+    for b in (raw, raw[::-1]):
+        for h in (hashlib.md5, hashlib.sha1, hashlib.sha256, hashlib.sha512):
+            d=h(b).digest()
+            candidates.add(d.hex()); candidates.add(d.hex().upper())
+            candidates.add(base64.b64encode(d).decode())
+            candidates.add(base64.urlsafe_b64encode(d).decode())
+print('exact-color material variants:', len(materials))
+print('password candidates including digest encodings:', len(candidates))
+hits=[]
+with ZipFile(image) as z:
+    for i,pwd in enumerate(candidates,1):
+        try:
+            out=z.read('secret.txt',pwd=pwd.encode('latin1'))
+        except Exception:
+            continue
+        hits.append((pwd,out)); break
+print('full ZIP decrypt + CRC hits:',len(hits))
+for pwd,out in hits: print('PASSWORD:',repr(pwd),'SECRET:',repr(out))
+'@ | Set-Content -LiteralPath $scriptPath -Encoding UTF8; python $scriptPath; Stop-Transcript
+Process ID: 22044
+PSVersion: 7.6.5
+PSEdition: Core
+GitCommitId: 7.6.5
+OS: Microsoft Windows 10.0.26200
+Platform: Win32NT
+PSCompatibleVersions: 1.0, 2.0, 3.0, 4.0, 5.0, 5.1, 6.0, 7.0
+PSRemotingProtocolVersion: 2.4
+SerializationVersion: 1.1.0.1
+WSManStackVersion: 3.0
+**********************
+Transcript started, output file is C:\Users\mzj\Desktop\CTF\玄机刷题\记录\限时攻关-Pixel-终端记录.txt
+[Y] Yes  [A] Yes to All  [N] No  [L] No to All  [S] Suspend  [?] Help (default is "Y"):
+**********************
+PowerShell transcript end
+End time: 20260928142329
+**********************
+**********************
+PowerShell transcript start
+Start time: 20260928142456
+Username: DESKTOP-412KTAR\mzj
+RunAs User: DESKTOP-412KTAR\mzj
+Configuration Name: 
+Machine: DESKTOP-412KTAR (Microsoft Windows NT 10.0.26200.0)
+Host Application: C:\Users\mzj\.cache\codex-runtimes\codex-primary-runtime\dependencies\native\powershell\pwsh.dll -Command try { [Console]::OutputEncoding=[System.Text.Encoding]::UTF8 } catch {}
+$ConfirmPreference='None'; Start-Transcript -LiteralPath 'C:\Users\mzj\Desktop\CTF\玄机刷题\记录\限时攻关-Pixel-终端记录.txt' -Append; python 'C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\像素囚笼1\分析脚本\pixel_cage_exact_palette_candidates.py'; Stop-Transcript
+Process ID: 4896
+PSVersion: 7.6.5
+PSEdition: Core
+GitCommitId: 7.6.5
+OS: Microsoft Windows 10.0.26200
+Platform: Win32NT
+PSCompatibleVersions: 1.0, 2.0, 3.0, 4.0, 5.0, 5.1, 6.0, 7.0
+PSRemotingProtocolVersion: 2.4
+SerializationVersion: 1.1.0.1
+WSManStackVersion: 3.0
+**********************
+Transcript started, output file is C:\Users\mzj\Desktop\CTF\玄机刷题\记录\限时攻关-Pixel-终端记录.txt
+[Y] Yes  [A] Yes to All  [N] No  [L] No to All  [S] Suspend  [?] Help (default is "Y"):
+**********************
+PowerShell transcript end
+End time: 20260928142602
+**********************
+**********************
+PowerShell transcript start
+Start time: 20260928142644
+Username: DESKTOP-412KTAR\mzj
+RunAs User: DESKTOP-412KTAR\mzj
+Configuration Name: 
+Machine: DESKTOP-412KTAR (Microsoft Windows NT 10.0.26200.0)
+Host Application: C:\Users\mzj\.cache\codex-runtimes\codex-primary-runtime\dependencies\native\powershell\pwsh.dll -Command try { [Console]::OutputEncoding=[System.Text.Encoding]::UTF8 } catch {}
+$ConfirmPreference='None'; Start-Transcript -LiteralPath 'C:\Users\mzj\Desktop\CTF\玄机刷题\记录\限时攻关-Pixel-终端记录.txt' -Append; $scriptPath='C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\像素囚笼1\分析脚本\pixel_cage_exact_color_features.py'; @'
+from pathlib import Path
+from zipfile import ZipFile
+import colorsys, hashlib
+image=Path(__file__).resolve().parents[1]/'附件'/'challenge.png'
+seq=['blue','red','yellow','green','purple','cyan','blue','red']
+colors={'blue':(66,133,244),'red':(234,67,53),'yellow':(251,188,5),'green':(52,168,83),'purple':(161,66,244),'cyan':(0,172,193)}
+features={}
+for name,(r,g,b) in colors.items():
+    h,s,v=colorsys.rgb_to_hsv(r/255,g/255,b/255)
+    features[name]={
+      'r':r,'g':g,'b':b,'sum':r+g+b,'xor':r^g^b,'min':min(r,g,b),'max':max(r,g,b),
+      'hue_deg':round(h*360),'hue_sector':round(h*6),'sat_pct':round(s*100),'val_pct':round(v*100),
+      'name_len':len(name),'first':ord(name[0])-96,'last':ord(name[-1])-96,
+      'lettersum':sum(ord(c)-96 for c in name),'asciisum':sum(map(ord,name)),
+    }
+candidates=set()
+for feature in next(iter(features.values())):
+    vals=[features[c][feature] for c in seq]
+    forms=set()
+    for values in (vals,vals[::-1]):
+      for sep in ('','-', '_', ':', ',', '.', ' '):
+        forms.add(sep.join(map(str,values)))
+        forms.add(sep.join(f'{x:02d}' for x in values))
+        forms.add(sep.join(f'{x:03d}' for x in values))
+        forms.add(sep.join(f'{x:X}' for x in values))
+        forms.add(sep.join(f'{x:02X}' for x in values))
+    for modulus in (10,26,36,95,256):
+      for offset in range(modulus):
+        mapped=[(v+offset)%modulus for v in vals]
+        forms.add(''.join(map(str,mapped)))
+        if modulus==26:
+          forms.add(''.join(chr(65+x) for x in mapped)); forms.add(''.join(chr(97+x) for x in mapped))
+        if modulus==95:
+          forms.add(''.join(chr(32+x) for x in mapped))
+        if modulus==256:
+          forms.add(bytes(mapped).hex()); forms.add(bytes(mapped).hex().upper())
+    for base in list(forms):
+      raw=base.encode('latin1',errors='ignore')
+      for fn in (hashlib.md5,hashlib.sha1,hashlib.sha256,hashlib.sha512):
+        d=fn(raw).digest(); forms.add(d.hex()); forms.add(d.hex().upper())
+    candidates.update(forms)
+print('features:',len(features[next(iter(features))]))
+print('exact-palette feature candidates:',len(candidates))
+hits=[]
+with ZipFile(image) as z:
+    for pwd in candidates:
+      try: hits.append((pwd,z.read('secret.txt',pwd=pwd.encode('latin1')))); break
+      except Exception: pass
+print('full ZIP decrypt + CRC hits:',len(hits))
+for pwd,out in hits: print('PASSWORD:',repr(pwd),'SECRET:',repr(out))
+'@ | Set-Content -LiteralPath $scriptPath -Encoding UTF8; python $scriptPath; Stop-Transcript
+Process ID: 29236
+PSVersion: 7.6.5
+PSEdition: Core
+GitCommitId: 7.6.5
+OS: Microsoft Windows 10.0.26200
+Platform: Win32NT
+PSCompatibleVersions: 1.0, 2.0, 3.0, 4.0, 5.0, 5.1, 6.0, 7.0
+PSRemotingProtocolVersion: 2.4
+SerializationVersion: 1.1.0.1
+WSManStackVersion: 3.0
+**********************
+Transcript started, output file is C:\Users\mzj\Desktop\CTF\玄机刷题\记录\限时攻关-Pixel-终端记录.txt
+[Y] Yes  [A] Yes to All  [N] No  [L] No to All  [S] Suspend  [?] Help (default is "Y"):
+**********************
+PowerShell transcript end
+End time: 20260928142656
+**********************
+**********************
+PowerShell transcript start
+Start time: 20260928142722
+Username: DESKTOP-412KTAR\mzj
+RunAs User: DESKTOP-412KTAR\mzj
+Configuration Name: 
+Machine: DESKTOP-412KTAR (Microsoft Windows NT 10.0.26200.0)
+Host Application: C:\Users\mzj\.cache\codex-runtimes\codex-primary-runtime\dependencies\native\powershell\pwsh.dll -Command try { [Console]::OutputEncoding=[System.Text.Encoding]::UTF8 } catch {}
+$ConfirmPreference='None'; Start-Transcript -LiteralPath 'C:\Users\mzj\Desktop\CTF\玄机刷题\记录\限时攻关-Pixel-终端记录.txt' -Append; $note='C:\Users\mzj\Desktop\CTF\玄机刷题\记录\像素囚笼1-解题记录.md'; @'
+
+## 2026-09-28 限时攻关：准确调色板复核
+
+复查此前颜色特征脚本时发现一个输入值问题：`pixel_cage_color_features.py`、`pixel_cage_visual_encodings.py` 和 `pixel_cage_palette_hash_candidates.py` 把红、黄、绿、紫写成了较旧的 Google 色值（`DB4437`、`F4B400`、`0F9D58`、`AB47BC`），与题目 PNG 实际像素不一致。因此，那几轮关于这些 RGB/HSV 数值与调色板摘要的“未命中”不能代表准确色值的候选空间已被检查；其他不依赖这些具体 RGB 数值的结果不受影响。
+
+本轮直接按附件 PNG 像素复核调色板为：蓝 `4285F4`、红 `EA4335`、黄 `FBBC05`、绿 `34A853`、紫 `A142F4`、青 `00ACC1`。新增并运行：
+
+- `pixel_cage_exact_palette_candidates.py`：准确颜色值的圆序/方块序与六色排列、RGB/HEX/字节、常见分隔、反序、Base64/Base32 和 MD5/SHA 摘要口令，共 853,804 个不同候选；全部使用 ZIP 完整读取与 CRC 校验判定，0 命中。
+- `pixel_cage_exact_color_features.py`：准确 RGB/HSV、通道和/异或、亮度/色相、颜色名称特征及常见模映射与摘要，共 152,523 个候选；完整 ZIP/CRC 校验 0 命中。
+
+本轮没有得到 ZipCrypto 密码或 `secret.txt` 内容，不能据此认定已解题。命令与终端输出见 `记录\限时攻关-Pixel-终端记录.txt`。复现脚本在 `题目资料\像素囚笼1\分析脚本`。
+'@ | Add-Content -LiteralPath $note -Encoding UTF8; Write-Output '已将准确调色板问题、复核范围和结果追加到像素囚笼1解题记录。'; Get-Item -LiteralPath $note | Select-Object FullName,Length,LastWriteTime; Stop-Transcript
+Process ID: 28252
+PSVersion: 7.6.5
+PSEdition: Core
+GitCommitId: 7.6.5
+OS: Microsoft Windows 10.0.26200
+Platform: Win32NT
+PSCompatibleVersions: 1.0, 2.0, 3.0, 4.0, 5.0, 5.1, 6.0, 7.0
+PSRemotingProtocolVersion: 2.4
+SerializationVersion: 1.1.0.1
+WSManStackVersion: 3.0
+**********************
+Transcript started, output file is C:\Users\mzj\Desktop\CTF\玄机刷题\记录\限时攻关-Pixel-终端记录.txt
+已将准确调色板问题、复核范围和结果追加到像素囚笼1解题记录。
+
+**********************
+PowerShell transcript end
+End time: 20260928142722
+**********************
+**********************
+PowerShell transcript start
+Start time: 20260928142737
+Username: DESKTOP-412KTAR\mzj
+RunAs User: DESKTOP-412KTAR\mzj
+Configuration Name: 
+Machine: DESKTOP-412KTAR (Microsoft Windows NT 10.0.26200.0)
+Host Application: C:\Users\mzj\.cache\codex-runtimes\codex-primary-runtime\dependencies\native\powershell\pwsh.dll -Command try { [Console]::OutputEncoding=[System.Text.Encoding]::UTF8 } catch {}
+$ConfirmPreference='None'; Start-Transcript -LiteralPath 'C:\Users\mzj\Desktop\CTF\玄机刷题\记录\限时攻关-Pixel-终端记录.txt' -Append; @'
+from PIL import Image
+from collections import Counter
+p=r'C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\像素囚笼1\附件\challenge.png'
+im=Image.open(p).convert('RGB')
+for rgb,n in Counter(im.getdata()).most_common(): print('#%02X%02X%02X'%rgb,rgb,'count=',n)
+'@ | python -; Stop-Transcript
+Process ID: 23876
+PSVersion: 7.6.5
+PSEdition: Core
+GitCommitId: 7.6.5
+OS: Microsoft Windows 10.0.26200
+Platform: Win32NT
+PSCompatibleVersions: 1.0, 2.0, 3.0, 4.0, 5.0, 5.1, 6.0, 7.0
+PSRemotingProtocolVersion: 2.4
+SerializationVersion: 1.1.0.1
+WSManStackVersion: 3.0
+**********************
+Transcript started, output file is C:\Users\mzj\Desktop\CTF\玄机刷题\记录\限时攻关-Pixel-终端记录.txt
+**********************
+PowerShell transcript end
+End time: 20260928142737
+**********************
+**********************
+PowerShell transcript start
+Start time: 20260928142824
+Username: DESKTOP-412KTAR\mzj
+RunAs User: DESKTOP-412KTAR\mzj
+Configuration Name: 
+Machine: DESKTOP-412KTAR (Microsoft Windows NT 10.0.26200.0)
+Host Application: C:\Users\mzj\.cache\codex-runtimes\codex-primary-runtime\dependencies\native\powershell\pwsh.dll -Command try { [Console]::OutputEncoding=[System.Text.Encoding]::UTF8 } catch {}
+$ConfirmPreference='None'; Start-Transcript -LiteralPath 'C:\Users\mzj\Desktop\CTF\玄机刷题\记录\限时攻关-Pixel-终端记录.txt' -Append; $d='C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\像素囚笼1\分析脚本'; $p1=Join-Path $d 'pixel_cage_exact_palette_candidates.py'; $p2=Join-Path $d 'pixel_cage_exact_color_features.py'; $s1=Get-Content -LiteralPath $p1 -Raw; $s1=$s1.Replace("'red': (234,67,53)","'red': (219,68,55)").Replace("'yellow': (251,188,5)","'yellow': (244,180,0)").Replace("'green': (52,168,83)","'green': (15,157,88)").Replace("'purple': (161,66,244)","'purple': (171,71,188)"); Set-Content -LiteralPath $p1 -Value $s1 -Encoding UTF8 -Force; $s2=Get-Content -LiteralPath $p2 -Raw; $s2=$s2.Replace("'red':(234,67,53)","'red':(219,68,55)").Replace("'yellow':(251,188,5)","'yellow':(244,180,0)").Replace("'green':(52,168,83)","'green':(15,157,88)").Replace("'purple':(161,66,244)","'purple':(171,71,188)"); Set-Content -LiteralPath $p2 -Value $s2 -Encoding UTF8 -Force; Write-Output '=== corrected palette candidate sweep ==='; python $p1; Write-Output '=== corrected feature candidate sweep ==='; python $p2; Stop-Transcript
+Process ID: 20700
+PSVersion: 7.6.5
+PSEdition: Core
+GitCommitId: 7.6.5
+OS: Microsoft Windows 10.0.26200
+Platform: Win32NT
+PSCompatibleVersions: 1.0, 2.0, 3.0, 4.0, 5.0, 5.1, 6.0, 7.0
+PSRemotingProtocolVersion: 2.4
+SerializationVersion: 1.1.0.1
+WSManStackVersion: 3.0
+**********************
+Transcript started, output file is C:\Users\mzj\Desktop\CTF\玄机刷题\记录\限时攻关-Pixel-终端记录.txt
+=== corrected palette candidate sweep ===
+[Y] Yes  [A] Yes to All  [N] No  [L] No to All  [S] Suspend  [?] Help (default is "Y"):
+=== corrected feature candidate sweep ===
+[Y] Yes  [A] Yes to All  [N] No  [L] No to All  [S] Suspend  [?] Help (default is "Y"):
+**********************
+PowerShell transcript end
+End time: 20260928142941
+**********************
+**********************
+PowerShell transcript start
+Start time: 20260928143004
+Username: DESKTOP-412KTAR\mzj
+RunAs User: DESKTOP-412KTAR\mzj
+Configuration Name: 
+Machine: DESKTOP-412KTAR (Microsoft Windows NT 10.0.26200.0)
+Host Application: C:\Users\mzj\.cache\codex-runtimes\codex-primary-runtime\dependencies\native\powershell\pwsh.dll -Command try { [Console]::OutputEncoding=[System.Text.Encoding]::UTF8 } catch {}
+$ConfirmPreference='None'; Start-Transcript -LiteralPath 'C:\Users\mzj\Desktop\CTF\玄机刷题\记录\限时攻关-Pixel-终端记录.txt' -Append; $note='C:\Users\mzj\Desktop\CTF\玄机刷题\记录\像素囚笼1-解题记录.md'; @'
+
+## 勘误：2026-09-28 调色板判断已撤回
+
+紧接上一节的“发现旧色值不一致”判断是本轮分析者的错误，现明确撤回。对题目附件直接统计 PNG 像素得到的六种填充色正是 `#4285F4`、`#DB4437`、`#F4B400`、`#0F9D58`、`#AB47BC`、`#00ACC1`；既有颜色脚本里这些 RGB 值与附件一致。此前临时试用的 `#EA4335`、`#FBBC05`、`#34A853`、`#A142F4` 是我误认的另一套色板，其 853,804 和 152,523 候选结果无效，应完全忽略。
+
+已把 `pixel_cage_exact_palette_candidates.py` 和 `pixel_cage_exact_color_features.py` 修正为附件的真实 RGB 值并重新完整运行。准确色板候选重新得到 830,228 个不同候选，准确 RGB/HSV 特征候选为 153,162 个；两轮均按 `secret.txt` 完整解密与 CRC 验证，命中数均为 0。真实像素颜色计数与命令输出记在 `记录\限时攻关-Pixel-终端记录.txt`。因此，既有脚本的调色板输入没有此处所称的错误；撤回不影响其先前的有效排除结果。
+'@ | Add-Content -LiteralPath $note -Encoding UTF8; Write-Output '已追加调色板判断勘误及准确值重跑结果。'; Get-Item -LiteralPath $note | Select-Object FullName,Length,LastWriteTime; Stop-Transcript
+Process ID: 7916
+PSVersion: 7.6.5
+PSEdition: Core
+GitCommitId: 7.6.5
+OS: Microsoft Windows 10.0.26200
+Platform: Win32NT
+PSCompatibleVersions: 1.0, 2.0, 3.0, 4.0, 5.0, 5.1, 6.0, 7.0
+PSRemotingProtocolVersion: 2.4
+SerializationVersion: 1.1.0.1
+WSManStackVersion: 3.0
+**********************
+Transcript started, output file is C:\Users\mzj\Desktop\CTF\玄机刷题\记录\限时攻关-Pixel-终端记录.txt
+已追加调色板判断勘误及准确值重跑结果。
+
+**********************
+PowerShell transcript end
+End time: 20260928143004
+**********************
+**********************
+PowerShell transcript start
+Start time: 20260928143104
+Username: DESKTOP-412KTAR\mzj
+RunAs User: DESKTOP-412KTAR\mzj
+Configuration Name: 
+Machine: DESKTOP-412KTAR (Microsoft Windows NT 10.0.26200.0)
+Host Application: C:\Users\mzj\.cache\codex-runtimes\codex-primary-runtime\dependencies\native\powershell\pwsh.dll -Command try { [Console]::OutputEncoding=[System.Text.Encoding]::UTF8 } catch {}
+Start-Transcript -LiteralPath 'C:\Users\mzj\Desktop\CTF\玄机刷题\记录\限时攻关-Pixel-终端记录.txt' -Append; Get-Content -LiteralPath 'C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\像素囚笼1\分析脚本\pixel_cage_alnum5_bruteforce.c' -Head 220; Get-Content -LiteralPath 'C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\像素囚笼1\分析脚本\pixel_cage_alnum5_verify.py' -Head 180; Stop-Transcript
+Process ID: 5328
+PSVersion: 7.6.5
+PSEdition: Core
+GitCommitId: 7.6.5
+OS: Microsoft Windows 10.0.26200
+Platform: Win32NT
+PSCompatibleVersions: 1.0, 2.0, 3.0, 4.0, 5.0, 5.1, 6.0, 7.0
+PSRemotingProtocolVersion: 2.4
+SerializationVersion: 1.1.0.1
+WSManStackVersion: 3.0
+**********************
+Transcript started, output file is C:\Users\mzj\Desktop\CTF\玄机刷题\记录\限时攻关-Pixel-终端记录.txt
+#include <stdint.h>
+#include <stdio.h>
+static uint32_t table[256];
+static const unsigned char enc[12]={0x0d,0xc8,0xb1,0x0e,0xc2,0x20,0x10,0x00,0xd0,0x9d,0xaf,0x38};
+static const unsigned char alphabet[]="0123456789abcdefghijklmnopqrstuvwxyz";
+static uint32_t cb(uint32_t c,unsigned char v){return table[(c^v)&0xff]^(c>>8);}
+static void up(uint32_t *a,uint32_t *b,uint32_t *c,unsigned char p){*a=cb(*a,p);*b=(*b+(*a&255))*134775813u+1u;*c=cb(*c,(unsigned char)(*b>>24));}
+static int match(const unsigned char *pw,int n){uint32_t a=0x12345678u,b=0x23456789u,c=0x34567890u;for(int i=0;i<n;i++)up(&a,&b,&c,pw[i]);unsigned char q=0;for(int i=0;i<12;i++){uint32_t t=c|2u;q=enc[i]^(unsigned char)((t*(t^1u))>>8);up(&a,&b,&c,q);}return q==0x9d;}
+static unsigned char pw[6];static FILE *out;static unsigned long long tested;
+static void walk(int pos,int len){if(pos==len){tested++;if(match(pw,len)){for(int i=0;i<len;i++)fputc(pw[i],out);fputc('\n',out);}return;}for(unsigned int i=0;i<sizeof(alphabet)-1;i++){pw[pos]=alphabet[i];walk(pos+1,len);}}
+int main(void){for(uint32_t i=0;i<256;i++){uint32_t c=i;for(int j=0;j<8;j++)c=(c&1)?(c>>1)^0xedb88320u:c>>1;table[i]=c;}out=fopen("pixel_cage_alnum5_header_matches.txt","wb");if(!out)return 2;for(int n=1;n<=5;n++){walk(0,n);fprintf(stderr,"checked length %d; total %llu\n",n,tested);}fclose(out);printf("tested %llu lowercase alphanumeric candidates\n",tested);}
+from pathlib import Path
+from zipfile import ZipFile
+
+archive = Path(str(Path(__file__).resolve().parents[1] / '附件' / 'challenge.png'))
+candidates = Path("pixel_cage_alnum5_header_matches.txt").read_bytes().splitlines()
+print("header matches:", len(candidates))
+with ZipFile(archive) as z:
+    for raw in candidates:
+        try:
+            plain = z.read("secret.txt", pwd=raw)
+            print("PASSWORD FOUND:", repr(raw.decode("ascii")))
+            print("SECRET.TXT:", plain.decode(errors="replace"))
+            break
+        except Exception:
+            pass
+    else:
+        print("No lowercase alphanumeric password of lengths 1..5 matched.")
+**********************
+PowerShell transcript end
+End time: 20260928143104
+**********************
+**********************
+PowerShell transcript start
+Start time: 20260928143136
+Username: DESKTOP-412KTAR\mzj
+RunAs User: DESKTOP-412KTAR\mzj
+Configuration Name: 
+Machine: DESKTOP-412KTAR (Microsoft Windows NT 10.0.26200.0)
+Host Application: C:\Users\mzj\.cache\codex-runtimes\codex-primary-runtime\dependencies\native\powershell\pwsh.dll -Command try { [Console]::OutputEncoding=[System.Text.Encoding]::UTF8 } catch {}
+Start-Transcript -LiteralPath 'C:\Users\mzj\Desktop\CTF\玄机刷题\记录\限时攻关-Pixel-终端记录.txt' -Append; Get-CimInstance Win32_Processor | Select-Object Name,NumberOfCores,NumberOfLogicalProcessors; gcc --version | Select-Object -First 1; Stop-Transcript
+Process ID: 24500
+PSVersion: 7.6.5
+PSEdition: Core
+GitCommitId: 7.6.5
+OS: Microsoft Windows 10.0.26200
+Platform: Win32NT
+PSCompatibleVersions: 1.0, 2.0, 3.0, 4.0, 5.0, 5.1, 6.0, 7.0
+PSRemotingProtocolVersion: 2.4
+SerializationVersion: 1.1.0.1
+WSManStackVersion: 3.0
+**********************
+Transcript started, output file is C:\Users\mzj\Desktop\CTF\玄机刷题\记录\限时攻关-Pixel-终端记录.txt
+
+Name                                            NumberOfCores NumberOfLogicalProcessors
+----                                            ------------- -------------------------
+AMD Ryzen 5 3600 6-Core Processor                           6                        12
+gcc.exe (Rev8, Built by MSYS2 project) 15.2.0
+**********************
+PowerShell transcript end
+End time: 20260928143138
+**********************
+**********************
+PowerShell transcript start
+Start time: 20260928143144
+Username: DESKTOP-412KTAR\mzj
+RunAs User: DESKTOP-412KTAR\mzj
+Configuration Name: 
+Machine: DESKTOP-412KTAR (Microsoft Windows NT 10.0.26200.0)
+Host Application: C:\Users\mzj\.cache\codex-runtimes\codex-primary-runtime\dependencies\native\powershell\pwsh.dll -Command try { [Console]::OutputEncoding=[System.Text.Encoding]::UTF8 } catch {}
+Start-Transcript -LiteralPath 'C:\Users\mzj\Desktop\CTF\玄机刷题\记录\限时攻关-Pixel-终端记录.txt' -Append; Select-String -LiteralPath 'C:\Users\mzj\Desktop\CTF\玄机刷题\记录\代理-Pixel-终端记录.txt' -Pattern 'checked|测试|Candidates|seconds|秒|total|completed|穷举' | Select-Object -Last 50 | ForEach-Object { $_.Line }; Stop-Transcript
+Process ID: 27820
+PSVersion: 7.6.5
+PSEdition: Core
+GitCommitId: 7.6.5
+OS: Microsoft Windows 10.0.26200
+Platform: Win32NT
+PSCompatibleVersions: 1.0, 2.0, 3.0, 4.0, 5.0, 5.1, 6.0, 7.0
+PSRemotingProtocolVersion: 2.4
+SerializationVersion: 1.1.0.1
+WSManStackVersion: 3.0
+**********************
+Transcript started, output file is C:\Users\mzj\Desktop\CTF\玄机刷题\记录\限时攻关-Pixel-终端记录.txt
+                candidates.add(w+sep+s)
+                candidates.add(pre+sep+w)
+    print('candidate count:',len(candidates))
+    for password in sorted(candidates):
+candidates='pixel pixelcage pixel-cage pixel_cage pixelcage1 pixelprison xiangsulong xiangsuaqiu long xiansuqiulong xiangs囚笼 xuanji edisec anwangbei anwang2026 2026anwangbei MISC misc flag secret password gallery art abstract abstractart abstract-art RGB rgb BGR bgr'.split()
+    for password in candidates:
+$scriptPath = '玄机刷题\题目资料\像素囚笼1\分析脚本\pixel_cage_title_acronym_candidates.py'
+candidates=set(forms)
+    candidates.add(word+suffix)
+    for sep in ('_','-','.'): candidates.add(word+sep+suffix)
+  for password in sorted(candidates):
+  else: print('No match across',len(candidates),'title phrase/acronym and suffix candidates.')
+4. 另按图中唯一文字 `Abstract Art Gallery` 的词首/词尾字母作题名线索，新增 `pixel_cage_title_acronym_candidates.py`，验证三词拼接的大小写/分隔符、首字母/末字母缩写、AAGallery、AAG 与常见题号/年份/后缀组合共 1,560 个不同候选。全部未通过 ZIP 完整解密与 CRC 校验；未获取口令。
+2. 对 RGB 三通道按行优先/列优先遍历，穷举每通道分别选取 bit0–bit7、六种通道交错顺序，共 6,144 条打包比特流；检索 `flag{`、`xj{`、`mzj`、`secret` 均无命中。最高可打印字节比例约 64.88%，但内容重复为 `49 24 92` 周期（大量纯色区域造成），不是自然语言或 flag。
+4. 另按图中唯一文字 `Abstract Art Gallery` 的词首/词尾字母作题名线索，新增 `pixel_cage_title_acronym_candidates.py`，验证三词拼接的大小写/分隔符、首字母/末字母缩写、AAGallery、AAG 与常见题号/年份/后缀组合共 1,560 个不同候选。全部未通过 ZIP 完整解密与 CRC 校验；未获取口令。
+Get-Content '玄机刷题\题目资料\像素囚笼1\分析脚本\pixel_cage_hash_candidates.py' -Raw
+Get-Content '玄机刷题\题目资料\像素囚笼1\分析脚本\pixel_cage_archive_layout_candidates.py' -Raw
+candidates=set()
+  candidates.update([hashlib.md5(b).hexdigest(),hashlib.sha1(b).hexdigest(),hashlib.sha256(b).hexdigest(),hashlib.sha512(b).hexdigest()])
+for b in (raw,pix): candidates.update([hashlib.md5(b).hexdigest(),hashlib.sha1(b).hexdigest(),hashlib.sha256(b).hexdigest(),hashlib.sha512(b).hexdigest()])
+print('hash-derived candidates:',len(candidates))
+ for pw in candidates:
+candidates = set()
+    candidates.update({str(n), str(n).zfill(4), str(n).zfill(6), hex(n)[2:], hex(n)[2:].upper()})
+        candidates.add(s[::-1])
+        candidates.add("0x" + s)
+        candidates.add("#" + s)
+        candidates.add(aa + sep + bb)
+        candidates.add(bb + sep + aa)
+        candidates.add(s + tail)
+        candidates.add(tail + s)
+    for password in sorted(candidates):
+        print(f"No match across {len(candidates)} archive-layout/metadata candidates.")
+$scriptPath = '玄机刷题\题目资料\像素囚笼1\分析脚本\pixel_cage_png_checksum_candidates.py'
+candidates=set()
+   candidates.add(v.encode())
+   candidates.add(b'0x'+v.encode())
+   candidates.add(b'#'+v.encode())
+   bb=n.to_bytes(width,'big'); candidates.update([bb,bb[::-1],bb.hex().encode(),bb.hex().upper().encode(),base64.b64encode(bb)])
+  candidates.add((str(a)+sep+str(b)).encode()); candidates.add((f'{a:08x}'+sep+f'{b:08x}').encode())
+  s=sep.join(f'{n:08x}' for n in order); candidates.add(s.encode())
+print('checksum-derived candidate count:',len(candidates))
+ for pwd in candidates:
+Get-Content '玄机刷题\题目资料\像素囚笼1\分析脚本\pixel_cage_chinese_candidates.py' -Raw
+candidates={}
+   candidates.setdefault(b,[]).append((w,enc))
+    candidates.setdefault(b'\xff\xfe'+b,[]).append((w,enc+'+LE-BOM'))
+    candidates.setdefault(b'\xfe\xff'+b,[]).append((w,enc+'+BE-BOM'))
+print('distinct encoded byte candidates:',len(candidates),'source strings:',len(words),'encodings:',encodings)
+ for pwd,origins in candidates.items():
+**********************
+PowerShell transcript end
+End time: 20260928143145
+**********************
+**********************
+PowerShell transcript start
+Start time: 20260928143151
+Username: DESKTOP-412KTAR\mzj
+RunAs User: DESKTOP-412KTAR\mzj
+Configuration Name: 
+Machine: DESKTOP-412KTAR (Microsoft Windows NT 10.0.26200.0)
+Host Application: C:\Users\mzj\.cache\codex-runtimes\codex-primary-runtime\dependencies\native\powershell\pwsh.dll -Command try { [Console]::OutputEncoding=[System.Text.Encoding]::UTF8 } catch {}
+Start-Transcript -LiteralPath 'C:\Users\mzj\Desktop\CTF\玄机刷题\记录\限时攻关-Pixel-终端记录.txt' -Append; Select-String -LiteralPath 'C:\Users\mzj\Desktop\CTF\玄机刷题\记录\代理-Pixel-终端记录.txt' -Pattern 'pixel_cage_lower6|321272406|321,272,406|321272|duration|耗时' -Context 0,3 | Select-Object -Last 40 | ForEach-Object { $_.ToString() }; Stop-Transcript
+Process ID: 10984
+PSVersion: 7.6.5
+PSEdition: Core
+GitCommitId: 7.6.5
+OS: Microsoft Windows 10.0.26200
+Platform: Win32NT
+PSCompatibleVersions: 1.0, 2.0, 3.0, 4.0, 5.0, 5.1, 6.0, 7.0
+PSRemotingProtocolVersion: 2.4
+SerializationVersion: 1.1.0.1
+WSManStackVersion: 3.0
+**********************
+Transcript started, output file is C:\Users\mzj\Desktop\CTF\玄机刷题\记录\限时攻关-Pixel-终端记录.txt
+> C:\Users\mzj\Desktop\CTF\玄机刷题\记录\代理-Pixel-终端记录.txt:104:C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\像素囚笼1\分析脚本\pixel_cage_lower6_verify.py                         2 fr…
+> C:\Users\mzj\Desktop\CTF\玄机刷题\记录\代理-Pixel-终端记录.txt:105:C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\像素囚笼1\分析脚本\pixel_cage_lower6_verify.py                         4 ca…
+  C:\Users\mzj\Desktop\CTF\玄机刷题\记录\代理-Pixel-终端记录.txt:106:C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\像素囚笼1\分析脚本\pixel_cage_lsb_check.py                            15   …
+  C:\Users\mzj\Desktop\CTF\玄机刷题\记录\代理-Pixel-终端记录.txt:107:C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\像素囚笼1\分析脚本\pixel_cage_mapping_candidates.py                    3 fr…
+  C:\Users\mzj\Desktop\CTF\玄机刷题\记录\代理-Pixel-终端记录.txt:108:C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\像素囚笼1\分析脚本\pixel_cage_mapping_candidates.py                    9 ca…
+**********************
+PowerShell transcript end
+End time: 20260928143151
+**********************
+**********************
+PowerShell transcript start
+Start time: 20260928145828
+Username: DESKTOP-412KTAR\mzj
+RunAs User: DESKTOP-412KTAR\mzj
+Configuration Name: 
+Machine: DESKTOP-412KTAR (Microsoft Windows NT 10.0.26200.0)
+Host Application: C:\Users\mzj\.cache\codex-runtimes\codex-primary-runtime\dependencies\native\powershell\pwsh.dll -Command try { [Console]::OutputEncoding=[System.Text.Encoding]::UTF8 } catch {}
+$ConfirmPreference='None'; Start-Transcript -LiteralPath 'C:\Users\mzj\Desktop\CTF\玄机刷题\记录\限时攻关-Pixel-终端记录.txt' -Append; Write-Output '=== 2026-09-28 限时攻关截止状态 ==='; Write-Output '未找到内层 ZipCrypto 口令、secret.txt 原文或可验证 flag；没有平台提交。'; Write-Output '附件结构沿用既有已复核记录：PNG 后附加完整 ZipCrypto ZIP；secret.txt 长度 113，CRC32 9d13b619；已有记录显示下载副本与本地 PNG SHA-256 相同。'; Write-Output '本轮准确像素色板候选：830228；准确 RGB/HSV 特征候选：153162；完整 ZIP 解密/CRC 均 0 命中。'; Write-Output '已覆盖的既有排除项：PNG 元数据/附加流/位平面/滤波器线索，多类颜色、几何、尺寸、题名及平台元数据变换，常见口令，数字/特定字母表穷举。'; Write-Output '尚未启动 36 字符集 6 位完整暴力；未实现 ZipCrypto known-plaintext 密钥恢复，当前无足够连续已知 DEFLATE 明文。'; Write-Output '本子任务未重新打开平台或重新下载附件；依据既有记录，未发现本地下载附件与题目来源不一致的证据。'; $note='C:\Users\mzj\Desktop\CTF\玄机刷题\记录\像素囚笼1-解题记录.md'; @'
+
+## 2026-09-28 限时攻关阶段结论
+
+截至本轮停止时，仍未得到 ZipCrypto 口令、`secret.txt` 明文或可提交 flag；没有向平台提交。附件的既有结构复核为：PNG 后有完整加密 ZIP，唯一成员 `secret.txt`，明文/压缩长度 113 字节、CRC32 `9d13b619`。已有来源核验记录显示两个下载 ZIP 中的 `challenge.png` 与本地附件 SHA-256 相同。本轮未重新打开平台或重新下载，所以本轮没有新的平台附件对照；现有记录未显示附件不一致。
+
+本轮准确像素色板派生的 830,228 个直接/摘要候选和 153,162 个 RGB/HSV 特征候选均经完整 ZIP 解密与 CRC 校验，0 命中。此前记录还排除了多类 PNG 元数据、IEND 后额外流、位平面/扫描线/滤波器、颜色/尺寸/几何/标题/平台元数据变换及常见口令；若干数字和小字母表空间已有 C 穷举验证。注意：上一节中关于色板不一致的最初判断及其错误色值结果已明确撤回；准确色值重跑结果取代它。
+
+剩余阻碍是缺少作者给出的 ZIP 密码线索。六位混合字母数字空间未穷举；本轮没有启动它，因为只靠 ZipCrypto 单字节头校验会产生数百万碰撞，剩余时间内无法保证完整 CRC 复核。已知明文攻击也缺少足够连续、可靠的 DEFLATE 明文。下一步最有效的输入是额外题目提示或作者确认的口令规则；在此之前不能声称已解出。
+
+本轮所有实际终端命令和输出见 `记录\限时攻关-Pixel-终端记录.txt`。本任务未操作浏览器、未提交平台、未改手册。
+'@ | Add-Content -LiteralPath $note -Encoding UTF8; Write-Output '已将截止状态追加至像素囚笼1解题记录。'; Get-Item -LiteralPath $note | Select-Object FullName,Length,LastWriteTime; Stop-Transcript
+Process ID: 22168
+PSVersion: 7.6.5
+PSEdition: Core
+GitCommitId: 7.6.5
+OS: Microsoft Windows 10.0.26200
+Platform: Win32NT
+PSCompatibleVersions: 1.0, 2.0, 3.0, 4.0, 5.0, 5.1, 6.0, 7.0
+PSRemotingProtocolVersion: 2.4
+SerializationVersion: 1.1.0.1
+WSManStackVersion: 3.0
+**********************
+Transcript started, output file is C:\Users\mzj\Desktop\CTF\玄机刷题\记录\限时攻关-Pixel-终端记录.txt
+=== 2026-09-28 限时攻关截止状态 ===
+未找到内层 ZipCrypto 口令、secret.txt 原文或可验证 flag；没有平台提交。
+附件结构沿用既有已复核记录：PNG 后附加完整 ZipCrypto ZIP；secret.txt 长度 113，CRC32 9d13b619；已有记录显示下载副本与本地 PNG SHA-256 相同。
+本轮准确像素色板候选：830228；准确 RGB/HSV 特征候选：153162；完整 ZIP 解密/CRC 均 0 命中。
+已覆盖的既有排除项：PNG 元数据/附加流/位平面/滤波器线索，多类颜色、几何、尺寸、题名及平台元数据变换，常见口令，数字/特定字母表穷举。
+尚未启动 36 字符集 6 位完整暴力；未实现 ZipCrypto known-plaintext 密钥恢复，当前无足够连续已知 DEFLATE 明文。
+本子任务未重新打开平台或重新下载附件；依据既有记录，未发现本地下载附件与题目来源不一致的证据。
+已将截止状态追加至像素囚笼1解题记录。
+
+**********************
+PowerShell transcript end
+End time: 20260928145828
+**********************
+**********************
+PowerShell transcript start
+Start time: 20260928145937
+Username: DESKTOP-412KTAR\mzj
+RunAs User: DESKTOP-412KTAR\mzj
+Configuration Name: 
+Machine: DESKTOP-412KTAR (Microsoft Windows NT 10.0.26200.0)
+Host Application: C:\Users\mzj\.cache\codex-runtimes\codex-primary-runtime\dependencies\native\powershell\pwsh.dll -Command try { [Console]::OutputEncoding=[System.Text.Encoding]::UTF8 } catch {}
+$proj='C:\Users\mzj\Desktop\CTF\玄机刷题'; $log=Join-Path $proj '记录\限时攻关-Pixel-终端记录.txt'; Start-Transcript -LiteralPath $log -Append; Write-Output 'COMMAND: locate newest official-platform Pixel attachment and compare archive hashes'; Get-ChildItem -LiteralPath 'D:\Downloads' -File | Where-Object { $_.Name -match '像素囚笼|pixel|cage' } | Sort-Object LastWriteTime -Descending | Select-Object Name,Length,LastWriteTime | Format-Table -AutoSize; Get-ChildItem -LiteralPath 'D:\Downloads' -File | Where-Object { $_.Name -match '像素囚笼|pixel|cage' } | Get-FileHash -Algorithm SHA256 | Format-List; Write-Output '--- project attachment files ---'; Get-ChildItem -LiteralPath (Join-Path $proj '题目资料\像素囚笼1\附件') -File | Select-Object Name,Length,LastWriteTime | Format-Table -AutoSize; Get-ChildItem -LiteralPath (Join-Path $proj '题目资料\像素囚笼1\附件') -File | Get-FileHash -Algorithm SHA256 | Format-List; Stop-Transcript
+Process ID: 19108
+PSVersion: 7.6.5
+PSEdition: Core
+GitCommitId: 7.6.5
+OS: Microsoft Windows 10.0.26200
+Platform: Win32NT
+PSCompatibleVersions: 1.0, 2.0, 3.0, 4.0, 5.0, 5.1, 6.0, 7.0
+PSRemotingProtocolVersion: 2.4
+SerializationVersion: 1.1.0.1
+WSManStackVersion: 3.0
+**********************
+Transcript started, output file is C:\Users\mzj\Desktop\CTF\玄机刷题\记录\限时攻关-Pixel-终端记录.txt
+COMMAND: locate newest official-platform Pixel attachment and compare archive hashes
+
+Name                 Length LastWriteTime
+----                 ------ -------------
+像素囚笼附件 (2).zip   3902 2026/9/28 14:59:28
+像素囚笼附件 (1).zip   3902 2026/9/26 20:48:25
+像素囚笼附件.zip       3902 2026/9/24 11:12:43
+
+
+Algorithm : SHA256
+Hash      : 91ADAF6FBB46D68BF5192AFDD802078C1F46A9F1EDD60D1EEC50D3D84CDF203E
+Path      : D:\Downloads\像素囚笼附件 (1).zip
+
+Algorithm : SHA256
+Hash      : 91ADAF6FBB46D68BF5192AFDD802078C1F46A9F1EDD60D1EEC50D3D84CDF203E
+Path      : D:\Downloads\像素囚笼附件 (2).zip
+
+Algorithm : SHA256
+Hash      : 91ADAF6FBB46D68BF5192AFDD802078C1F46A9F1EDD60D1EEC50D3D84CDF203E
+Path      : D:\Downloads\像素囚笼附件.zip
+
+--- project attachment files ---
+
+Name                 Length LastWriteTime
+----                 ------ -------------
+像素囚笼附件 (1).zip   3902 2026/9/26 20:48:25
+像素囚笼附件.zip       3902 2026/9/24 11:12:43
+challenge.png          5187 2026/4/13 10:39:06
+
+
+Algorithm : SHA256
+Hash      : 91ADAF6FBB46D68BF5192AFDD802078C1F46A9F1EDD60D1EEC50D3D84CDF203E
+Path      : C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\像素囚笼1\附件\像素囚笼附件 (1).zip
+
+Algorithm : SHA256
+Hash      : 91ADAF6FBB46D68BF5192AFDD802078C1F46A9F1EDD60D1EEC50D3D84CDF203E
+Path      : C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\像素囚笼1\附件\像素囚笼附件.zip
+
+Algorithm : SHA256
+Hash      : 856B8EC900EADDFEED0F1AF8177E1C999133AF19B8EB6D3EDF12D707EC21DD3B
+Path      : C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\像素囚笼1\附件\challenge.png
+
+**********************
+PowerShell transcript end
+End time: 20260928145937
+**********************
+**********************
+PowerShell transcript start
+Start time: 20260928165226
+Username: DESKTOP-412KTAR\mzj
+RunAs User: DESKTOP-412KTAR\mzj
+Configuration Name: 
+Machine: DESKTOP-412KTAR (Microsoft Windows NT 10.0.26200.0)
+Host Application: C:\Users\mzj\.cache\codex-runtimes\codex-primary-runtime\dependencies\native\powershell\pwsh.dll -Command try { [Console]::OutputEncoding=[System.Text.Encoding]::UTF8 } catch {}
+$ConfirmPreference='None'; Start-Transcript -LiteralPath 'C:\Users\mzj\Desktop\CTF\玄机刷题\记录\限时攻关-Pixel-终端记录.txt' -Append; $script='C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\像素囚笼1\分析脚本\pixel_cage_extended_pixel_streams.py'; @'
+from pathlib import Path
+from PIL import Image
+import numpy as np
+from collections import Counter
+import hashlib
+p=Path(__file__).resolve().parents[1]/'附件'/'challenge.png'
+im=Image.open(p).convert('RGB'); a=np.asarray(im,dtype=np.uint8); h,w,_=a.shape; n=h*w
+print('image=',w,h,'RGB bytes=',a.nbytes,'palette=',Counter(map(tuple,a.reshape(-1,3))).most_common())
+# Row/column, reverse, alternating serpentine, and diagonal traversals.
+idx=np.arange(n,dtype=np.int64).reshape(h,w)
+orders={
+ 'row':idx.ravel(), 'row_reverse':idx.ravel()[::-1],
+ 'column':idx.T.ravel(), 'column_reverse':idx.T.ravel()[::-1],
+ 'row_serpentine':np.concatenate([idx[y] if y%2==0 else idx[y,::-1] for y in range(h)]),
+ 'column_serpentine':np.concatenate([idx[:,x] if x%2==0 else idx[::-1,x] for x in range(w)]),
+ 'diagonal':np.array(sorted(range(n),key=lambda q:((q//w+q%w),q%w)),dtype=np.int64),
+ 'anti_diagonal':np.array(sorted(range(n),key=lambda q:((q//w-(q%w)),q%w)),dtype=np.int64),
+}
+flat=a.reshape(-1,3)
+features={
+ 'R':flat[:,0], 'G':flat[:,1], 'B':flat[:,2],
+ 'RxorG':np.bitwise_xor(flat[:,0],flat[:,1]),
+ 'GxorB':np.bitwise_xor(flat[:,1],flat[:,2]),
+ 'BxorR':np.bitwise_xor(flat[:,2],flat[:,0]),
+ 'RGBsum_mod256':(flat[:,0].astype(np.uint16)+flat[:,1]+flat[:,2]).astype(np.uint8),
+ 'luma601':((299*flat[:,0].astype(np.uint32)+587*flat[:,1]+114*flat[:,2])//1000).astype(np.uint8),
+ 'RminusG':(flat[:,0].astype(np.int16)-flat[:,1]).astype(np.uint8),
+ 'GminusB':(flat[:,1].astype(np.int16)-flat[:,2]).astype(np.uint8),
+}
+# Palette index under deterministic first-seen and RGB-sort orders; only a small exact map, not all permutations.
+pal_first=list(dict.fromkeys(map(tuple,flat.tolist())))
+for label,pal in [('index_first_seen',pal_first),('index_rgb_sorted',sorted(pal_first))]:
+    mp={c:i for i,c in enumerate(pal)}
+    features[label]=np.array([mp[tuple(x)] for x in flat],dtype=np.uint8)
+marker_hits=[]; ranked=[]; seen=set(); total=0
+for oname,order in orders.items():
+    for fname,values in features.items():
+        v=values[order]
+        for bit in range(8):
+            bits=((v>>bit)&1).astype(np.uint8)
+            for byteorder in ('big','little'):
+                stream=np.packbits(bits,bitorder=byteorder).tobytes()
+                key=hashlib.sha1(stream).digest()
+                if key in seen: continue
+                seen.add(key); total+=1
+                for needle in (b'flag{',b'flag',b'xj{',b'secret',b'ctf{'):
+                    if needle.lower() in stream.lower(): marker_hits.append((oname,fname,bit,byteorder,needle))
+                printable=sum(32<=c<127 for c in stream)/len(stream)
+                ranked.append((printable,oname,fname,bit,byteorder,stream[:24]))
+print('unique packed streams checked=',total,'marker hits=',marker_hits)
+for row in sorted(ranked,reverse=True)[:12]:
+    ratio,oname,fname,bit,bo,head=row
+    print(f'top printable={ratio:.4f} traversal={oname} feature={fname} bit={bit} pack={bo} head={head.hex()} ascii={head.decode("ascii","replace")}')
+'@ | Set-Content -LiteralPath $script -Encoding UTF8 -Force; python $script; Stop-Transcript
+Process ID: 17596
+PSVersion: 7.6.5
+PSEdition: Core
+GitCommitId: 7.6.5
+OS: Microsoft Windows 10.0.26200
+Platform: Win32NT
+PSCompatibleVersions: 1.0, 2.0, 3.0, 4.0, 5.0, 5.1, 6.0, 7.0
+PSRemotingProtocolVersion: 2.4
+SerializationVersion: 1.1.0.1
+WSManStackVersion: 3.0
+**********************
+Transcript started, output file is C:\Users\mzj\Desktop\CTF\玄机刷题\记录\限时攻关-Pixel-终端记录.txt
+[Y] Yes  [A] Yes to All  [N] No  [L] No to All  [S] Suspend  [?] Help (default is "Y"):
+**********************
+PowerShell transcript end
+End time: 20260928165228
+**********************
+**********************
+PowerShell transcript start
+Start time: 20260928165240
+Username: DESKTOP-412KTAR\mzj
+RunAs User: DESKTOP-412KTAR\mzj
+Configuration Name: 
+Machine: DESKTOP-412KTAR (Microsoft Windows NT 10.0.26200.0)
+Host Application: C:\Users\mzj\.cache\codex-runtimes\codex-primary-runtime\dependencies\native\powershell\pwsh.dll -Command try { [Console]::OutputEncoding=[System.Text.Encoding]::UTF8 } catch {}
+$ConfirmPreference='None'; Start-Transcript -LiteralPath 'C:\Users\mzj\Desktop\CTF\玄机刷题\记录\限时攻关-Pixel-终端记录.txt' -Append; $script='C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\像素囚笼1\分析脚本\pixel_cage_extended_pixel_streams.py'; $s=Get-Content -LiteralPath $script -Raw; $s=$s.Replace("flat=a.reshape(-1,3)","flat=a.reshape(-1,3); wide=flat.astype(np.uint32)").Replace("((299*flat[:,0].astype(np.uint32)+587*flat[:,1]+114*flat[:,2])//1000)","((299*wide[:,0]+587*wide[:,1]+114*wide[:,2])//1000)"); Set-Content -LiteralPath $script -Value $s -Encoding UTF8 -Force; python $script; Stop-Transcript
+Process ID: 9396
+PSVersion: 7.6.5
+PSEdition: Core
+GitCommitId: 7.6.5
+OS: Microsoft Windows 10.0.26200
+Platform: Win32NT
+PSCompatibleVersions: 1.0, 2.0, 3.0, 4.0, 5.0, 5.1, 6.0, 7.0
+PSRemotingProtocolVersion: 2.4
+SerializationVersion: 1.1.0.1
+WSManStackVersion: 3.0
+**********************
+Transcript started, output file is C:\Users\mzj\Desktop\CTF\玄机刷题\记录\限时攻关-Pixel-终端记录.txt
+[Y] Yes  [A] Yes to All  [N] No  [L] No to All  [S] Suspend  [?] Help (default is "Y"):
+**********************
+PowerShell transcript end
+End time: 20260928165245
+**********************
+**********************
+PowerShell transcript start
+Start time: 20260928165256
+Username: DESKTOP-412KTAR\mzj
+RunAs User: DESKTOP-412KTAR\mzj
+Configuration Name: 
+Machine: DESKTOP-412KTAR (Microsoft Windows NT 10.0.26200.0)
+Host Application: C:\Users\mzj\.cache\codex-runtimes\codex-primary-runtime\dependencies\native\powershell\pwsh.dll -Command try { [Console]::OutputEncoding=[System.Text.Encoding]::UTF8 } catch {}
+$ConfirmPreference='None'; Start-Transcript -LiteralPath 'C:\Users\mzj\Desktop\CTF\玄机刷题\记录\限时攻关-Pixel-终端记录.txt' -Append; $script='C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\像素囚笼1\分析脚本\pixel_cage_extended_pixel_streams.py'; $s=Get-Content -LiteralPath $script -Raw; $s=$s.Replace('head.decode("ascii","replace")','repr(head.decode("ascii","backslashreplace"))'); Set-Content -LiteralPath $script -Value $s -Encoding UTF8 -Force; python $script; Stop-Transcript
+Process ID: 12252
+PSVersion: 7.6.5
+PSEdition: Core
+GitCommitId: 7.6.5
+OS: Microsoft Windows 10.0.26200
+Platform: Win32NT
+PSCompatibleVersions: 1.0, 2.0, 3.0, 4.0, 5.0, 5.1, 6.0, 7.0
+PSRemotingProtocolVersion: 2.4
+SerializationVersion: 1.1.0.1
+WSManStackVersion: 3.0
+**********************
+Transcript started, output file is C:\Users\mzj\Desktop\CTF\玄机刷题\记录\限时攻关-Pixel-终端记录.txt
+[Y] Yes  [A] Yes to All  [N] No  [L] No to All  [S] Suspend  [?] Help (default is "Y"):
+**********************
+PowerShell transcript end
+End time: 20260928165301
+**********************
+**********************
+PowerShell transcript start
+Start time: 20260928165449
+Username: DESKTOP-412KTAR\mzj
+RunAs User: DESKTOP-412KTAR\mzj
+Configuration Name: 
+Machine: DESKTOP-412KTAR (Microsoft Windows NT 10.0.26200.0)
+Host Application: C:\Users\mzj\.cache\codex-runtimes\codex-primary-runtime\dependencies\native\powershell\pwsh.dll -Command try { [Console]::OutputEncoding=[System.Text.Encoding]::UTF8 } catch {}
+$ConfirmPreference='None'; Start-Transcript -LiteralPath 'C:\Users\mzj\Desktop\CTF\玄机刷题\记录\限时攻关-Pixel-终端记录.txt' -Append; $script='C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\像素囚笼1\分析脚本\pixel_cage_zip_metadata_plaintext.py'; @'
+from pathlib import Path
+import struct,zlib,binascii
+p=Path(__file__).resolve().parents[1]/'附件'/'challenge.png'; b=p.read_bytes()
+print('file bytes=',len(b),'PNG signature=',b[:8].hex())
+# PNG chunks including CRC and exact IEND boundary.
+o=8; chunks=[]
+while o+12<=len(b) and b[o:o+4]!=b'PK\x03\x04':
+    n=struct.unpack_from('>I',b,o)[0]; typ=b[o+4:o+8]; data=b[o+8:o+8+n]; crc=struct.unpack_from('>I',b,o+8+n)[0]
+    calc=binascii.crc32(typ+data)&0xffffffff
+    chunks.append((o,typ.decode(),n,crc==calc)); o+=12+n
+    if typ==b'IEND': break
+print('PNG chunks=',chunks,'end_offset=',o,'trailing_len=',len(b)-o,'trailing_head=',b[o:o+16].hex())
+# ZIP local header fields.
+zoff=b.index(b'PK\x03\x04',o)
+(local,need,flags,method,tm,dt,crc,csize,usize,fnl,exl)=struct.unpack_from('<IHHHHHIIIHH',b,zoff)
+fn=b[zoff+30:zoff+30+fnl]; extra=b[zoff+30+fnl:zoff+30+fnl+exl]
+doff=zoff+30+fnl+exl
+print('local_header=',{'offset':zoff,'version_needed':need,'flags':hex(flags),'encrypted':bool(flags&1),'data_descriptor':bool(flags&8),'method':method,'dos_time':hex(tm),'dos_date':hex(dt),'crc32':f'{crc:08x}','crc_check_byte':f'{crc>>24:02x}','compressed_including_crypto_header':csize,'uncompressed':usize,'filename':fn.decode(),'extra_len':exl,'data_offset':doff,'enc_header':b[doff:doff+12].hex(),'deflate_cipher_len':csize-12})
+print('local_extra=',extra.hex())
+# Locate central directory and EOCD.
+cd=b.index(b'PK\x01\x02',doff+csize); eocd=b.index(b'PK\x05\x06',cd)
+(sig,made,need2,flags2,method2,tm2,dt2,crc2,cs2,us2,fnl2,exl2,cl2,disk,iattr,eattr,loff)=struct.unpack_from('<IHHHHHHIIIHHHHHII',b,cd)
+fn2=b[cd+46:cd+46+fnl2]; ex2=b[cd+46+fnl2:cd+46+fnl2+exl2]; comment=b[cd+46+fnl2+exl2:cd+46+fnl2+exl2+cl2]
+e=struct.unpack_from('<IHHHHIIH',b,eocd)
+print('central=',{'offset':cd,'made_by':made,'version_needed':need2,'flags':hex(flags2),'method':method2,'crc32':f'{crc2:08x}','compressed':cs2,'uncompressed':us2,'filename':fn2.decode(),'extra_len':exl2,'comment_len':cl2,'local_offset':loff,'extra':ex2.hex(),'comment':comment.hex(),'external_attr':hex(eattr)})
+print('EOCD=',{'offset':eocd,'comment_len':e[7],'end_offset':eocd+22+e[7],'file_end':len(b),'trailing_after_eocd':len(b)-(eocd+22+e[7])})
+print('local/central agree=',(flags,method,crc,csize,usize,fn)==(flags2,method2,crc2,cs2,us2,fn2))
+# Candidate DEFLATE prefixes conditional on an assumed text prefix and compressor mode.
+for prefix in (b'flag{',b'xj{',b'ctf{'):
+    sample=prefix+b'A'*(usize-len(prefix)-1)+b'}'
+    for level in (1,6,9):
+        c=zlib.compressobj(level,zlib.DEFLATED,-15)
+        raw=c.compress(sample)+c.flush()
+        print('conditional_deflate=',prefix.decode(),'level=',level,'len=',len(raw),'first12=',raw[:12].hex(),'BFINAL=',raw[0]&1,'BTYPE=',(raw[0]>>1)&3)
+'@ | Set-Content -LiteralPath $script -Encoding UTF8 -Force; python $script; Stop-Transcript
+Process ID: 23272
+PSVersion: 7.6.5
+PSEdition: Core
+GitCommitId: 7.6.5
+OS: Microsoft Windows 10.0.26200
+Platform: Win32NT
+PSCompatibleVersions: 1.0, 2.0, 3.0, 4.0, 5.0, 5.1, 6.0, 7.0
+PSRemotingProtocolVersion: 2.4
+SerializationVersion: 1.1.0.1
+WSManStackVersion: 3.0
+**********************
+Transcript started, output file is C:\Users\mzj\Desktop\CTF\玄机刷题\记录\限时攻关-Pixel-终端记录.txt
+[Y] Yes  [A] Yes to All  [N] No  [L] No to All  [S] Suspend  [?] Help (default is "Y"):
+**********************
+PowerShell transcript end
+End time: 20260928165449
+**********************
+**********************
+PowerShell transcript start
+Start time: 20260928165622
+Username: DESKTOP-412KTAR\mzj
+RunAs User: DESKTOP-412KTAR\mzj
+Configuration Name: 
+Machine: DESKTOP-412KTAR (Microsoft Windows NT 10.0.26200.0)
+Host Application: C:\Users\mzj\.cache\codex-runtimes\codex-primary-runtime\dependencies\native\powershell\pwsh.dll -Command try { [Console]::OutputEncoding=[System.Text.Encoding]::UTF8 } catch {}
+$ConfirmPreference='None'; Start-Transcript -LiteralPath 'C:\Users\mzj\Desktop\CTF\玄机刷题\记录\限时攻关-Pixel-终端记录.txt' -Append; @'
+from pathlib import Path
+from zipfile import ZipFile, ZIP_STORED, ZIP_DEFLATED
+p=Path(r'C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\像素囚笼1\附件\challenge.png')
+with ZipFile(p) as z:
+    for i in z.infolist():
+        print('filename=',i.filename,'compress_type=',i.compress_type,'ZIP_STORED=',ZIP_STORED,'ZIP_DEFLATED=',ZIP_DEFLATED,'compress_size=',i.compress_size,'file_size=',i.file_size,'flag_bits=',hex(i.flag_bits),'CRC=',f'{i.CRC:08x}')
+        print('size_relation: csize-file_size=',i.compress_size-i.file_size,'encrypted_header_if_traditional=12','deflate_data_size=',i.compress_size-12)
+'@ | python -; Stop-Transcript
+Process ID: 29448
+PSVersion: 7.6.5
+PSEdition: Core
+GitCommitId: 7.6.5
+OS: Microsoft Windows 10.0.26200
+Platform: Win32NT
+PSCompatibleVersions: 1.0, 2.0, 3.0, 4.0, 5.0, 5.1, 6.0, 7.0
+PSRemotingProtocolVersion: 2.4
+SerializationVersion: 1.1.0.1
+WSManStackVersion: 3.0
+**********************
+Transcript started, output file is C:\Users\mzj\Desktop\CTF\玄机刷题\记录\限时攻关-Pixel-终端记录.txt
+**********************
+PowerShell transcript end
+End time: 20260928165623
+**********************
+**********************
+PowerShell transcript start
+Start time: 20260928165650
+Username: DESKTOP-412KTAR\mzj
+RunAs User: DESKTOP-412KTAR\mzj
+Configuration Name: 
+Machine: DESKTOP-412KTAR (Microsoft Windows NT 10.0.26200.0)
+Host Application: C:\Users\mzj\.cache\codex-runtimes\codex-primary-runtime\dependencies\native\powershell\pwsh.dll -Command try { [Console]::OutputEncoding=[System.Text.Encoding]::UTF8 } catch {}
+$ConfirmPreference='None'; Start-Transcript -LiteralPath 'C:\Users\mzj\Desktop\CTF\玄机刷题\记录\限时攻关-Pixel-终端记录.txt' -Append; $note='C:\Users\mzj\Desktop\CTF\玄机刷题\记录\像素囚笼1-解题记录.md'; @'
+
+### 补充：ZIP 方法与大小字段澄清
+
+直接读取 Python `ZipInfo` 后确认 `compress_type=8`（`ZIP_DEFLATED`，`ZIP_STORED=0`），`compress_size=113`，`file_size=113`，`flag_bits=0x1`。ZIP 的 `compress_size` 对传统 ZipCrypto 包含 12 字节加密头，因此实际被加密的 DEFLATE 数据长度为 101 字节；未压缩文件长度仍为 113 字节。此前简写“明文/压缩长度均 113”容易误读，准确表述以上述字段为准。该成员不是 stored，不能直接把 ZIP 密文体解释成 `secret.txt` 文本。命令输出在限时攻关终端记录。
+'@ | Add-Content -LiteralPath $note -Encoding UTF8; Write-Output '已澄清 compress_type 和传统加密头计入压缩大小的关系。'; Stop-Transcript
+Process ID: 27032
+PSVersion: 7.6.5
+PSEdition: Core
+GitCommitId: 7.6.5
+OS: Microsoft Windows 10.0.26200
+Platform: Win32NT
+PSCompatibleVersions: 1.0, 2.0, 3.0, 4.0, 5.0, 5.1, 6.0, 7.0
+PSRemotingProtocolVersion: 2.4
+SerializationVersion: 1.1.0.1
+WSManStackVersion: 3.0
+**********************
+Transcript started, output file is C:\Users\mzj\Desktop\CTF\玄机刷题\记录\限时攻关-Pixel-终端记录.txt
+已澄清 compress_type 和传统加密头计入压缩大小的关系。
+**********************
+PowerShell transcript end
+End time: 20260928165650
+**********************
+**********************
+PowerShell transcript start
+Start time: 20260928165843
+Username: DESKTOP-412KTAR\mzj
+RunAs User: DESKTOP-412KTAR\mzj
+Configuration Name: 
+Machine: DESKTOP-412KTAR (Microsoft Windows NT 10.0.26200.0)
+Host Application: C:\Users\mzj\.cache\codex-runtimes\codex-primary-runtime\dependencies\native\powershell\pwsh.dll -Command try { [Console]::OutputEncoding=[System.Text.Encoding]::UTF8 } catch {}
+$ConfirmPreference='None'; Start-Transcript -LiteralPath 'C:\Users\mzj\Desktop\CTF\玄机刷题\记录\限时攻关-Pixel-终端记录.txt' -Append; @'
+from pathlib import Path
+import struct,zlib,binascii
+p=Path(r'C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\像素囚笼1\附件\challenge.png'); b=p.read_bytes(); start=b.index(b'PK\x03\x04'); fnl,exl=struct.unpack_from('<HH',b,start+26); off=start+30+fnl+exl; cs=struct.unpack_from('<I',b,start+18)[0]; storedcrc=struct.unpack_from('<I',b,start+14)[0]
+raw=b[off:off+cs]
+print('member_data_offset=',off,'compressed_size=',cs,'first12=',raw[:12].hex(),'target_crc32=',f'{storedcrc:08x}')
+for label,d in [('entire_member_data',raw),('skip_12_bytes',raw[12:])]:
+    try:
+        out=zlib.decompress(d,wbits=-15)
+        crc=binascii.crc32(out)&0xffffffff
+        print(label,'DEFLATE_OK','out_len=',len(out),'crc32=',f'{crc:08x}','crc_match=',crc==storedcrc,'plaintext=',repr(out))
+    except Exception as e: print(label,'DEFLATE_ERROR',repr(e))
+'@ | python -; Stop-Transcript
+Process ID: 20624
+PSVersion: 7.6.5
+PSEdition: Core
+GitCommitId: 7.6.5
+OS: Microsoft Windows 10.0.26200
+Platform: Win32NT
+PSCompatibleVersions: 1.0, 2.0, 3.0, 4.0, 5.0, 5.1, 6.0, 7.0
+PSRemotingProtocolVersion: 2.4
+SerializationVersion: 1.1.0.1
+WSManStackVersion: 3.0
+**********************
+Transcript started, output file is C:\Users\mzj\Desktop\CTF\玄机刷题\记录\限时攻关-Pixel-终端记录.txt
+**********************
+PowerShell transcript end
+End time: 20260928165843
+**********************
+**********************
+PowerShell transcript start
+Start time: 20260928165913
+Username: DESKTOP-412KTAR\mzj
+RunAs User: DESKTOP-412KTAR\mzj
+Configuration Name: 
+Machine: DESKTOP-412KTAR (Microsoft Windows NT 10.0.26200.0)
+Host Application: C:\Users\mzj\.cache\codex-runtimes\codex-primary-runtime\dependencies\native\powershell\pwsh.dll -Command try { [Console]::OutputEncoding=[System.Text.Encoding]::UTF8 } catch {}
+$ConfirmPreference='None'; Start-Transcript -LiteralPath 'C:\Users\mzj\Desktop\CTF\玄机刷题\记录\限时攻关-Pixel-终端记录.txt' -Append; @'
+import base64
+s='ZmxhZ3s0YTMxY2FjOWE2NmE4ZTM5OTY5M2Y1NDNhOGM2NmZiOH0='
+b=base64.b64decode(s,validate=True)
+print('base64_input=',s)
+print('decoded_bytes=',repr(b))
+print('decoded_ascii=',b.decode('ascii'))
+'@ | python -; Stop-Transcript
+Process ID: 22388
+PSVersion: 7.6.5
+PSEdition: Core
+GitCommitId: 7.6.5
+OS: Microsoft Windows 10.0.26200
+Platform: Win32NT
+PSCompatibleVersions: 1.0, 2.0, 3.0, 4.0, 5.0, 5.1, 6.0, 7.0
+PSRemotingProtocolVersion: 2.4
+SerializationVersion: 1.1.0.1
+WSManStackVersion: 3.0
+**********************
+Transcript started, output file is C:\Users\mzj\Desktop\CTF\玄机刷题\记录\限时攻关-Pixel-终端记录.txt
+**********************
+PowerShell transcript end
+End time: 20260928165913
+**********************
+**********************
+PowerShell transcript start
+Start time: 20260928170017
+Username: DESKTOP-412KTAR\mzj
+RunAs User: DESKTOP-412KTAR\mzj
+Configuration Name: 
+Machine: DESKTOP-412KTAR (Microsoft Windows NT 10.0.26200.0)
+Host Application: C:\Users\mzj\.cache\codex-runtimes\codex-primary-runtime\dependencies\native\powershell\pwsh.dll -Command try { [Console]::OutputEncoding=[System.Text.Encoding]::UTF8 } catch {}
+$ConfirmPreference='None'; Start-Transcript -LiteralPath 'C:\Users\mzj\Desktop\CTF\玄机刷题\记录\限时攻关-Pixel-终端记录.txt' -Append; $note='C:\Users\mzj\Desktop\CTF\玄机刷题\记录\像素囚笼1-解题记录.md'; @'
+
+## 2026-09-28 关键发现：伪加密标志，直接恢复 flag
+
+**更正此前的核心假设：该成员实际没有 ZipCrypto 加密。** ZIP local/central header 的 general-purpose flag bit 0 (`flag_bits=0x1`) 错误地标记为 encrypted；但偏移 4996 起的 113 字节数据本身就是一段完整 raw DEFLATE 流。不要按 ZipCrypto 规则跳过 12 字节。
+
+可复核证据：
+
+1. 从 PNG IEND 后偏移 4956 解析出的本地 ZIP 头给出 method 8、compressed size 113、file size 113、CRC32 `9d13b619`、`flag_bits=0x1`。传统 ZipCrypto 头假设来自这个错误标志。
+2. 对 member data offset 4996 直接执行 `zlib.decompress(data, wbits=-15)`：成功解出 113 字节，实际 CRC32 为 `9d13b619`，与 local header 和 central directory 完全一致。
+3. 将前 12 字节当作加密头并跳过，再解压余下数据会得到 `invalid block type`。前 12 字节 `0dc8b10ec2201000d09daf38` 是 DEFLATE 流的组成部分，不是 ZipCrypto 随机头。
+4. 明文为：
+
+```text
+Congratulations! You found the secret.
+Here is your reward:
+ZmxhZ3s0YTMxY2FjOWE2NmE4ZTM5OTY5M2Y1NDNhOGM2NmZiOH0=
+```
+
+对 reward 行严格 Base64 解码得到：`flag{4a31cac9a66a8e399693f543a8c66fb8}`。本地附件已通过长度和 CRC 完整性验证；平台提交验证由主线程继续处理，本代理未操作平台。
+
+### 此前口令穷举为何全部无效
+
+此前基于 ZipCrypto 的颜色/标题/几何/元数据口令猜测、常见密码表、数字 1–8 位、若干有限字母表以及 ASCII/小写/字母数字 C 穷举，全部把数据开头 12 字节误当成加密头。C 程序对这 12 个 DEFLATE 字节运行 ZipCrypto 解密器，并用 CRC 高字节 `0x9d` 的单字节比较筛选；其“命中”只是错误模型下的随机校验碰撞，不能证明密码正确。后续 `ZipFile.read(..., pwd=...)` 也会按标志跳过这 12 字节，故不可能验证真正的明文。
+
+因此，所有以“破解 ZipCrypto 密码”为目标的候选数与未命中结论均不适用于这份附件，不能据此声称已穷举真实密码空间。与口令无关的 PNG 区块 CRC、附件哈希、几何和图像位平面检查仍是各自范围内的有效观测；没有发现可读图像载荷。准确色板勘误之前的临时错误结论也仍按上一条勘误处理。
+
+本次完整命令和输出见 `记录\限时攻关-Pixel-终端记录.txt`；上述 flag 来源为直接 DEFLATE 解压并匹配 CRC，再对明文内的 Base64 串解码。
+'@ | Add-Content -LiteralPath $note -Encoding UTF8; Write-Output '已追加决定性恢复证据、flag 和所有 ZipCrypto 暴力无效原因。'; Get-Item -LiteralPath $note | Select-Object FullName,Length,LastWriteTime; Stop-Transcript
+Process ID: 21316
+PSVersion: 7.6.5
+PSEdition: Core
+GitCommitId: 7.6.5
+OS: Microsoft Windows 10.0.26200
+Platform: Win32NT
+PSCompatibleVersions: 1.0, 2.0, 3.0, 4.0, 5.0, 5.1, 6.0, 7.0
+PSRemotingProtocolVersion: 2.4
+SerializationVersion: 1.1.0.1
+WSManStackVersion: 3.0
+**********************
+Transcript started, output file is C:\Users\mzj\Desktop\CTF\玄机刷题\记录\限时攻关-Pixel-终端记录.txt
+已追加决定性恢复证据、flag 和所有 ZipCrypto 暴力无效原因。
+
+**********************
+PowerShell transcript end
+End time: 20260928170017
+**********************

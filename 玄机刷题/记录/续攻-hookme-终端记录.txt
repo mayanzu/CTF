@@ -1,0 +1,1053 @@
+**********************
+PowerShell transcript start
+Start time: 20260928165524
+Username: DESKTOP-412KTAR\mzj
+RunAs User: DESKTOP-412KTAR\mzj
+Configuration Name: 
+Machine: DESKTOP-412KTAR (Microsoft Windows NT 10.0.26200.0)
+Host Application: C:\Users\mzj\.cache\codex-runtimes\codex-primary-runtime\dependencies\native\powershell\pwsh.dll -Command try { [Console]::OutputEncoding=[System.Text.Encoding]::UTF8 } catch {}
+Start-Transcript -LiteralPath 'C:\Users\mzj\Desktop\CTF\玄机刷题\记录\续攻-hookme-终端记录.txt' -Append
+python 'C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\hookme_542\dex_dump_hookme.py'
+Stop-Transcript
+Process ID: 27360
+PSVersion: 7.6.5
+PSEdition: Core
+GitCommitId: 7.6.5
+OS: Microsoft Windows 10.0.26200
+Platform: Win32NT
+PSCompatibleVersions: 1.0, 2.0, 3.0, 4.0, 5.0, 5.1, 6.0, 7.0
+PSRemotingProtocolVersion: 2.4
+SerializationVersion: 1.1.0.1
+WSManStackVersion: 3.0
+**********************
+Transcript started, output file is C:\Users\mzj\Desktop\CTF\玄机刷题\记录\续攻-hookme-终端记录.txt
+[Y] Yes  [A] Yes to All  [N] No  [L] No to All  [S] Suspend  [?] Help (default is "Y"):
+**********************
+PowerShell transcript end
+End time: 20260928165524
+**********************
+**********************
+PowerShell transcript start
+Start time: 20260928193231
+Username: DESKTOP-412KTAR\mzj
+RunAs User: DESKTOP-412KTAR\mzj
+Configuration Name: 
+Machine: DESKTOP-412KTAR (Microsoft Windows NT 10.0.26200.0)
+Host Application: C:\Users\mzj\.cache\codex-runtimes\codex-primary-runtime\dependencies\native\powershell\pwsh.dll -Command try { [Console]::OutputEncoding=[System.Text.Encoding]::UTF8 } catch {}
+$ErrorActionPreference='Continue'
+$root = 'C:\Users\mzj\Desktop\CTF\玄机刷题'
+$log = Join-Path $root '记录\续攻-hookme-终端记录.txt'
+Start-Transcript -LiteralPath $log -Append
+Write-Output "PWD: $(Get-Location)"
+Write-Output "ROOT: $root"
+Get-ChildItem -LiteralPath (Join-Path $root '题目资料\hookme_542') -Force | Select-Object Mode,Length,LastWriteTime,Name | Format-Table -AutoSize
+Write-Output '--- prior notes ---'
+Get-Content -LiteralPath (Join-Path $root '记录\hookme-分析过程记录.md') -Tail 160
+Stop-Transcript
+Process ID: 25884
+PSVersion: 7.6.5
+PSEdition: Core
+GitCommitId: 7.6.5
+OS: Microsoft Windows 10.0.26200
+Platform: Win32NT
+PSCompatibleVersions: 1.0, 2.0, 3.0, 4.0, 5.0, 5.1, 6.0, 7.0
+PSRemotingProtocolVersion: 2.4
+SerializationVersion: 1.1.0.1
+WSManStackVersion: 3.0
+**********************
+Transcript started, output file is C:\Users\mzj\Desktop\CTF\玄机刷题\记录\续攻-hookme-终端记录.txt
+PWD: C:\Users\mzj\Desktop\CTF
+ROOT: C:\Users\mzj\Desktop\CTF\玄机刷题
+
+Mode  Length LastWriteTime      Name
+----  ------ -------------      ----
+d----        2026/9/27 20:11:24 代码附件
+d----        2026/9/27 20:10:08 附件解包
+-a--- 3649   2026/9/27 20:26:35 audit_arm64_and_resource.py
+-a--- 2492   2026/9/27 20:28:43 audit_other_abis.py
+-a--- 6538   2026/9/27 20:14:44 dex_dump_hookme.py
+-a--- 1715   2026/9/27 20:11:23 extract_apk_code_and_filter.py
+-a--- 1569   2026/9/28 14:37:47 independent_rc4_repro.cpp
+-a--- 938    2026/9/27 20:10:35 inspect_apk.py
+-a--- 1550   2026/9/27 20:21:55 map_dex_resource_field.py
+-a--- 414    2026/9/27 20:21:46 mt19937_crosscheck.cpp
+-a--- 2331   2026/9/27 20:20:40 verify_hookme_custom_rc4.py
+-a--- 3240   2026/9/27 20:17:52 verify_hookme_rc4.py
+
+--- prior notes ---
+## 2026-09-28 限时复核补记（玄机 ID 542：hookme）
+
+### 范围与状态
+
+本轮只复核 hookme 的本地 APK、native 库、已有分析脚本和历史日志；未打开浏览器、未访问平台、未提交 flag。父线程历史记录称此前向玄机 ID 542 提交候选 flag{ee9fb062624c1e527fab36d3a27484d1} 后，平台返回“FLAG 不正确”，本题进度仍为 0/1。因此以下内容只证明这份本地 APK 接受该字符串，不代表平台已验收，题目仍标记未解决。
+
+### 附件指纹
+
+- 下载包：D:\Downloads\hookme.rar
+- RAR SHA-256：1DC981B273CB80A32863B9A89A09CFA82B731F6D4BC8E37D72C445DEB29E993F
+- RAR 列表仅含 hookme/HookMe.apk（RAR 内 APK 为 7,329,635 字节）和目录项；本地未发现第二份 hookme 压缩包。
+- APK SHA-256：61BB5BA33C8EBD3BD01BA9ECF6EDC69A18D664D91F3309447B95132B27E14E9B
+- APK Manifest 包名为 com.example.hookme。
+
+### 静态逻辑复核
+
+1. MainActivity.onCreate 调用 getPackageName()，随后传给 native setPackageNameToNative；JNI 将完整包名保存到全局 globalKey。所以本 APK 的密钥串为 com.example.hookme。
+2. MainActivity 的校验逻辑取输入字符串，调用 native rc4Encrypt，读取 R$string.correct_ciphertext（资源 ID 0x7f0f002f），将资源十六进制文本解码成字节，最后以 Arrays.equals 比较。匹配时 UI 文案为 success。
+3. ARM64 与 x86_64 native 反汇编显示 initializeSBox 从 key 的前两字节构造 seed：(signed key[0] << 8) | signed key[1]。当前包名这两个 ASCII 字节为 0x63, 0x6f，seed 为 0x636f。
+4. 初始化函数以 std::mt19937(seed) 产生 256 个值，每个值截取低 8 位填充 S-box；然后执行 KSA，再由 PRGA 对 UTF-8 输入字节加密。native 代码使用的正是包名 key。
+5. 唯一的 38 字节资源密文为：
+   f235b888b3f4e08bff17e7e29bc3bf67d0f9a1b7b6581bb4a1eb299684e99923a8d193caf91d
+
+### 独立复现
+
+先前 Python 复现脚本 题目资料/hookme_542/verify_hookme_custom_rc4.py 从 APK 的 resources.arsc 提取这条密文，再按 native 的 seed、MT19937 低字节 S-box、KSA、PRGA 解出候选。为避免只依赖同一段 Python 实现，本轮另编译并运行独立 C++ 复现 题目资料/hookme_542/independent_rc4_repro.cpp（MSYS2 g++，-std=c++17 -O2）：
+
+- 输出 seed：0x636f
+- 输出明文：flag{ee9fb062624c1e527fab36d3a27484d1}
+- 再加密结果与 APK 唯一密文完全相同：REENC_MATCH=1
+- 进程退出码：0
+
+完整命令、编译器输出和复现输出见 记录/限时攻关-hookme-终端记录.txt。本轮新证据与既有 Python 脚本的重加密断言相互独立地支持“该字符串是这份 APK 本地校验器的答案”。
+
+### 结论与未决点
+
+本地 APK 答案的算法推导与跨语言复现已闭合，但它与父线程所转述的平台拒绝结果冲突。当前本地证据不能判定冲突来自玄机题目绑定了另一份附件、平台题目答案数据不一致，还是题目本身在 APK 校验之外另有提交约定；这些都只是可能解释，未被证实。本地候选不能标成平台通过，也不应在本地证据不足时生成替代 flag。若继续攻关，需先由父线程核对 ID 542 题目页实际附件指纹/提交格式；本代理依照委派要求不操作平台。
+**********************
+PowerShell transcript end
+End time: 20260928193231
+**********************
+**********************
+PowerShell transcript start
+Start time: 20260928193244
+Username: DESKTOP-412KTAR\mzj
+RunAs User: DESKTOP-412KTAR\mzj
+Configuration Name: 
+Machine: DESKTOP-412KTAR (Microsoft Windows NT 10.0.26200.0)
+Host Application: C:\Users\mzj\.cache\codex-runtimes\codex-primary-runtime\dependencies\native\powershell\pwsh.dll -Command try { [Console]::OutputEncoding=[System.Text.Encoding]::UTF8 } catch {}
+$ErrorActionPreference='Continue'
+$root = 'C:\Users\mzj\Desktop\CTF\玄机刷题'
+$log = Join-Path $root '记录\续攻-hookme-终端记录.txt'
+Start-Transcript -LiteralPath $log -Append
+Write-Output '--- recursive files ---'
+Get-ChildItem -LiteralPath (Join-Path $root '题目资料\hookme_542') -Recurse -File | Select-Object FullName,Length,LastWriteTime | Format-Table -AutoSize
+Write-Output '--- previous hookme transcript tail ---'
+Get-Content -LiteralPath (Join-Path $root '记录\限时攻关-hookme-终端记录.txt') -Tail 180
+Write-Output '--- related records and manifests ---'
+Get-ChildItem -LiteralPath (Join-Path $root '记录') -File | Where-Object Name -Match 'hookme|542|平台验收' | Select-Object Name,Length,LastWriteTime | Format-Table -AutoSize
+Stop-Transcript
+Process ID: 5892
+PSVersion: 7.6.5
+PSEdition: Core
+GitCommitId: 7.6.5
+OS: Microsoft Windows 10.0.26200
+Platform: Win32NT
+PSCompatibleVersions: 1.0, 2.0, 3.0, 4.0, 5.0, 5.1, 6.0, 7.0
+PSRemotingProtocolVersion: 2.4
+SerializationVersion: 1.1.0.1
+WSManStackVersion: 3.0
+**********************
+Transcript started, output file is C:\Users\mzj\Desktop\CTF\玄机刷题\记录\续攻-hookme-终端记录.txt
+--- recursive files ---
+
+FullName                                                                                     Length LastWriteTime
+--------                                                                                     ------ -------------
+C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\hookme_542\audit_arm64_and_resource.py              3649 2026/9/27 20:26:35
+C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\hookme_542\audit_other_abis.py                      2492 2026/9/27 20:28:43
+C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\hookme_542\dex_dump_hookme.py                       6538 2026/9/27 20:14:44
+C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\hookme_542\extract_apk_code_and_filter.py           1715 2026/9/27 20:11:23
+C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\hookme_542\independent_rc4_repro.cpp                1569 2026/9/28 14:37:47
+C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\hookme_542\inspect_apk.py                            938 2026/9/27 20:10:35
+C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\hookme_542\map_dex_resource_field.py                1550 2026/9/27 20:21:55
+C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\hookme_542\mt19937_crosscheck.cpp                    414 2026/9/27 20:21:46
+C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\hookme_542\verify_hookme_custom_rc4.py              2331 2026/9/27 20:20:40
+C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\hookme_542\verify_hookme_rc4.py                     3240 2026/9/27 20:17:52
+C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\hookme_542\代码附件\AndroidManifest.xml             5328 2026/9/27 20:11:24
+C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\hookme_542\代码附件\classes.dex                  9916936 2026/9/27 20:11:24
+C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\hookme_542\代码附件\classes2.dex                  512592 2026/9/27 20:11:24
+C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\hookme_542\代码附件\classes3.dex                    2464 2026/9/27 20:11:24
+C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\hookme_542\代码附件\classes4.dex                    5112 2026/9/27 20:11:24
+C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\hookme_542\代码附件\lib\arm64-v8a\libhookme.so    442072 2026/9/27 20:11:24
+C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\hookme_542\代码附件\lib\armeabi-v7a\libhookme.so  265360 2026/9/27 20:11:24
+C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\hookme_542\代码附件\lib\x86\libhookme.so          413936 2026/9/27 20:11:24
+C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\hookme_542\代码附件\lib\x86_64\libhookme.so       418600 2026/9/27 20:11:24
+C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\hookme_542\附件解包\hookme\HookMe.apk            7329635 2025/4/24 21:07:39
+
+--- previous hookme transcript tail ---
+Get-Content: 
+Line |
+   9 |  Get-Content -LiteralPath (Join-Path $root '记录\限时攻关-hookme-终端记录.txt')  …
+     |  ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+     | Cannot find path 'C:\Users\mzj\Desktop\CTF\玄机刷题\记录\限时攻关-hookme-终端记录.txt' because it does not exist.
+Get-Content:
+Line |
+   9 |  Get-Content -LiteralPath (Join-Path $root '记录\限时攻关-hookme-终端记录.txt')  …
+     |  ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+     | Cannot find path 'C:\Users\mzj\Desktop\CTF\玄机刷题\记录\限时攻关-hookme-终端记录.txt' because it does not exist.
+--- related records and manifests ---
+
+Name                     Length LastWriteTime
+----                     ------ -------------
+代理-hookme-终端记录.txt 671460 2026/9/27 20:29:47
+续攻-hookme-终端记录.txt  12116 2026/9/28 19:32:44
+hookme-分析过程记录.md     3307 2026/9/28 14:39:18
+
+**********************
+PowerShell transcript end
+End time: 20260928193244
+**********************
+**********************
+PowerShell transcript start
+Start time: 20260928193255
+Username: DESKTOP-412KTAR\mzj
+RunAs User: DESKTOP-412KTAR\mzj
+Configuration Name: 
+Machine: DESKTOP-412KTAR (Microsoft Windows NT 10.0.26200.0)
+Host Application: C:\Users\mzj\.cache\codex-runtimes\codex-primary-runtime\dependencies\native\powershell\pwsh.dll -Command try { [Console]::OutputEncoding=[System.Text.Encoding]::UTF8 } catch {}
+$ErrorActionPreference='Continue'
+$root = 'C:\Users\mzj\Desktop\CTF\玄机刷题'
+$log = Join-Path $root '记录\续攻-hookme-终端记录.txt'
+Start-Transcript -LiteralPath $log -Append
+$base = Join-Path $root '题目资料\hookme_542'
+Write-Output '--- verifier scripts ---'
+Get-Content -LiteralPath (Join-Path $base 'verify_hookme_custom_rc4.py')
+Write-Output '--- APK inspection scripts ---'
+Get-Content -LiteralPath (Join-Path $base 'inspect_apk.py')
+Get-Content -LiteralPath (Join-Path $base 'extract_apk_code_and_filter.py')
+Write-Output '--- ABI audit ---'
+Get-Content -LiteralPath (Join-Path $base 'audit_other_abis.py')
+Write-Output '--- static result archive / candidate mentions ---'
+rg -n -i "flag\{|correct_ciphertext|wrong|success|packageName|hookme" (Join-Path $base 'dex_dump_hookme.py') (Join-Path $root '记录\代理-hookme-终端记录.txt') | Select-Object -First 120
+Stop-Transcript
+Process ID: 29064
+PSVersion: 7.6.5
+PSEdition: Core
+GitCommitId: 7.6.5
+OS: Microsoft Windows 10.0.26200
+Platform: Win32NT
+PSCompatibleVersions: 1.0, 2.0, 3.0, 4.0, 5.0, 5.1, 6.0, 7.0
+PSRemotingProtocolVersion: 2.4
+SerializationVersion: 1.1.0.1
+WSManStackVersion: 3.0
+**********************
+Transcript started, output file is C:\Users\mzj\Desktop\CTF\玄机刷题\记录\续攻-hookme-终端记录.txt
+--- verifier scripts ---
+import zipfile,re,pathlib,hashlib
+apk=pathlib.Path(r'C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\hookme_542\附件解包\hookme\HookMe.apk')
+package='com.example.hookme'
+with zipfile.ZipFile(apk) as z: arsc=z.read('resources.arsc')
+hexes=re.findall(rb'(?<![0-9A-Fa-f])([0-9A-Fa-f]{64,})(?![0-9A-Fa-f])',arsc)
+if len(hexes)!=1:raise SystemExit(f'expected exactly one long hex string; found {len(hexes)}')
+cipher=bytes.fromhex(hexes[0].decode())
+key=package.encode('ascii')
+seed=((key[0] if key[0]<128 else key[0]-256)<<8)|(key[1] if key[1]<128 else key[1]-256)
+seed &= 0xffffffff
+print('APK_SHA256',hashlib.sha256(apk.read_bytes()).hexdigest())
+print('PACKAGE',package,'KEY_BYTES',key.hex(),'KEY_LEN',len(key),'SBOX_SEED',seed,hex(seed))
+print('CIPHERTEXT_HEX',cipher.hex(),'LEN',len(cipher))
+# std::mersenne_twister_engine<uint_fast32_t,32,624,397,31,0x9908b0df,11,0xffffffff,7,0x9d2c5680,15,0xefc60000,18,1812433253>
+class MT19937:
+ def __init__(self,seed):
+  self.mt=[0]*624;self.mt[0]=seed&0xffffffff
+  for i in range(1,624):
+   x=self.mt[i-1]^(self.mt[i-1]>>30)
+   self.mt[i]=(1812433253*x+i)&0xffffffff
+  self.index=624
+ def next(self):
+  if self.index>=624:
+   for i in range(624):
+    y=(self.mt[i]&0x80000000)|(self.mt[(i+1)%624]&0x7fffffff)
+    self.mt[i]=(self.mt[(i+397)%624]^(y>>1)^(0x9908b0df if y&1 else 0))&0xffffffff
+   self.index=0
+  y=self.mt[self.index];self.index+=1
+  y^=y>>11;y^=(y<<7)&0x9d2c5680;y^=(y<<15)&0xefc60000;y^=y>>18
+  return y&0xffffffff
+mt=MT19937(seed)
+init_s=[mt.next()&255 for _ in range(256)]
+print('MT19937_FIRST8',[hex(x) for x in init_s[:8]])
+def native_rc4(data,key):
+ mt=MT19937(seed)
+ s=[mt.next()&255 for _ in range(256)]
+ j=0
+ for i in range(256):
+  # JNI input/key in this task are ASCII, so C++ signed char equals byte.
+  j=(j+s[i]+key[i%len(key)])%256
+  s[i],s[j]=s[j],s[i]
+ out=bytearray();i=j=0
+ for x in data:
+  i=(i+1)%256;j=(j+s[i])%256;s[i],s[j]=s[j],s[i]
+  out.append(x^s[(s[i]+s[j])%256])
+ return bytes(out)
+plain=native_rc4(cipher,key)
+print('RECOVERED_BYTES',repr(plain))
+try:print('RECOVERED_UTF8',plain.decode('utf-8'))
+except UnicodeDecodeError as e:print('UTF8_ERROR',e)
+reenc=native_rc4(plain,key)
+print('REENCRYPT_HEX',reenc.hex())
+print('REENCRYPT_MATCHES_RESOURCE',reenc==cipher)
+print('FLAG_FORMAT',bool(re.fullmatch(rb'flag\{[^\r\n{}]+\}',plain,re.I)))
+--- APK inspection scripts ---
+import hashlib
+import zipfile
+from pathlib import Path
+p=Path(r'C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\hookme_542\附件解包\hookme\HookMe.apk')
+b=p.read_bytes()
+print('APK=',p.resolve())
+print('APK_SIZE=',len(b))
+print('APK_SHA256=',hashlib.sha256(b).hexdigest())
+print('APK_MAGIC=',b[:8].hex())
+with zipfile.ZipFile(p) as z:
+    print('ZIP_TEST=',z.testzip())
+    infos=z.infolist()
+    print('ENTRY_COUNT=',len(infos))
+    for x in infos:
+        print(f'{x.filename}\t{ x.file_size }\t{ x.compress_size }\tCRC={x.CRC:08x}')
+    for name in [x.filename for x in infos if x.filename.endswith(('.dex','.so')) or x.filename in ('AndroidManifest.xml','resources.arsc')]:
+        data=z.read(name)
+        print(f'RECORD name={name} size={len(data)} sha256={hashlib.sha256(data).hexdigest()} magic={data[:16].hex()}')
+        if name.endswith('.dex'):
+            print('DEX_HEADER=')
+            print(data[:0x70].hex(' '))
+import hashlib
+import re
+import zipfile
+from pathlib import Path
+
+apk=Path(r'C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\hookme_542\附件解包\hookme\HookMe.apk')
+out=Path(r'C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\hookme_542\代码附件')
+out.mkdir(parents=True,exist_ok=True)
+keep=[]
+with zipfile.ZipFile(apk) as z:
+    for info in z.infolist():
+        name=info.filename
+        if re.fullmatch(r'classes(?:\d+)?\.dex',name) or name=='AndroidManifest.xml' or re.fullmatch(r'lib/[^/]+/libhookme\.so',name):
+            keep.append(info)
+    print('APK=',apk)
+    print('APK_SHA256=',hashlib.sha256(apk.read_bytes()).hexdigest())
+    print('RELEVANT_ENTRY_COUNT=',len(keep))
+    for info in keep:
+        name=info.filename
+        data=z.read(name)
+        target=out.joinpath(*Path(name).parts)
+        target.parent.mkdir(parents=True,exist_ok=True)
+        target.write_bytes(data)
+        print(f'ENTRY={name}\tsize={len(data)}\tsha256={hashlib.sha256(data).hexdigest()}\tmagic={data[:12].hex()}')
+        if name.endswith('.dex') or name.endswith('.so') or name=='AndroidManifest.xml':
+            text_runs=[m.group().decode('ascii','replace') for m in re.finditer(rb'[\x20-\x7e]{4,}',data)]
+            pat=re.compile(r'flag|hook|frida|xposed|jni|native|root|ptrace|check|secret|key|MainActivity|Main|tamper|debug|magisk|zygisk|com\.',re.I)
+            relevant=[]
+            seen=set()
+            for s in text_runs:
+                if pat.search(s) and s not in seen:
+                    relevant.append(s);seen.add(s)
+            print(f'FILTERED_ASCII_COUNT={len(relevant)}')
+            for s in relevant[:300]:
+                print('STR=',repr(s))
+print('EXTRACTED_TO=',out)
+--- ABI audit ---
+import pathlib,struct,hashlib
+from capstone import Cs,CS_ARCH_ARM,CS_ARCH_X86,CS_MODE_ARM,CS_MODE_THUMB,CS_MODE_LITTLE_ENDIAN,CS_MODE_32
+root=pathlib.Path(r'C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\hookme_542\代码附件\lib')
+for rel in ['armeabi-v7a/libhookme.so','x86/libhookme.so']:
+ p=root/rel;b=p.read_bytes();is64=b[4]==2;assert b[5]==1
+ mach=struct.unpack_from('<H',b,18)[0]
+ if is64:
+  shoff=struct.unpack_from('<Q',b,0x28)[0];ents=struct.unpack_from('<H',b,0x3a)[0];n=struct.unpack_from('<H',b,0x3c)[0];si=struct.unpack_from('<H',b,0x3e)[0]
+  sh=[struct.unpack_from('<IIQQQQIIQQ',b,shoff+i*ents) for i in range(n)]
+ else:
+  shoff=struct.unpack_from('<I',b,0x20)[0];ents=struct.unpack_from('<H',b,0x2e)[0];n=struct.unpack_from('<H',b,0x30)[0];si=struct.unpack_from('<H',b,0x32)[0]
+  sh=[struct.unpack_from('<IIIIIIIIII',b,shoff+i*ents) for i in range(n)]
+ namesec=sh[si];names=b[namesec[4]:namesec[4]+namesec[5]]
+ def cstr(x,o):return x[o:x.find(b'\0',o)].decode('utf8','replace')
+ named={cstr(names,s[0]):s for s in sh};tx=named['.text'];tva,toff,tsize=tx[3],tx[4],tx[5]
+ print('\nABI',rel,'machine',mach,'size',len(b),'SHA256',hashlib.sha256(b).hexdigest(),'TEXT',hex(tva),hex(toff),hex(tsize))
+ funcs=[]
+ for sn,sec in named.items():
+  if sec[1] not in (2,11) or sec[9]==0:continue
+  st=sh[sec[6]];strtab=b[st[4]:st[4]+st[5]]
+  step=sec[9]
+  for o in range(sec[4],sec[4]+sec[5],step):
+   if is64:no,info,other,ndx,val,size=struct.unpack_from('<IBBHQQ',b,o)
+   else:no,val,size,info,other,ndx=struct.unpack_from('<IIIBBH',b,o)
+   name=cstr(strtab,no)
+   if name in ('Java_com_example_hookme_MainActivity_setPackageNameToNative','Java_com_example_hookme_MainActivity_rc4Encrypt') or any(x in name for x in ['initializeSBox','rc4Encrypt','_Z3ksa','_Z4prga']):
+    row=(name,val,size,ndx)
+    if row not in funcs:funcs.append(row)
+ for x in funcs:print('SYMBOL',x)
+ if mach==40:arch=CS_ARCH_ARM;mode=CS_MODE_LITTLE_ENDIAN
+ elif mach==3:arch=CS_ARCH_X86;mode=CS_MODE_32
+ else:continue
+ md=Cs(arch,mode)
+ for name,val,size,ndx in funcs:
+  if size==0 or val<tva or val>=tva+tsize:continue
+  thumb=mach==40 and bool(val&1);start=val&~1 if thumb else val
+  mode=CS_MODE_THUMB|CS_MODE_LITTLE_ENDIAN if thumb else (CS_MODE_ARM|CS_MODE_LITTLE_ENDIAN if mach==40 else CS_MODE_32)
+  md=Cs(arch,mode)
+  off=toff+(start-tva);code=b[off:off+size]
+  print('DISASM',name,'thumb',thumb,'size',size)
+  for i in md.disasm(code,start): print(f' {i.address:08x}: {i.mnemonic:8s} {i.op_str}')
+--- static result archive / candidate mentions ---
+C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\hookme_542\dex_dump_hookme.py:2:p=pathlib.Path(r'C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\hookme_542\代码附件\classes4.dex')
+C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\hookme_542\dex_dump_hookme.py:45: if 'Lcom/example/hookme/' in c[0]:print(' ',c)
+C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\hookme_542\dex_dump_hookme.py:95: if 'Lcom/example/hookme/' not in desc or not cd:continue
+C:\Users\mzj\Desktop\CTF\玄机刷题\记录\代理-hookme-终端记录.txt:9:Start-Transcript -Path '玄机刷题\记录\代理-hookme-终端记录.txt' -Append
+C:\Users\mzj\Desktop\CTF\玄机刷题\记录\代理-hookme-终端记录.txt:12:$work='玄机刷题\题目资料\hookme_542'
+C:\Users\mzj\Desktop\CTF\玄机刷题\记录\代理-hookme-终端记录.txt:14:$archive='D:\Downloads\hookme.rar'
+C:\Users\mzj\Desktop\CTF\玄机刷题\记录\代理-hookme-终端记录.txt:35:Transcript started, output file is 玄机刷题\记录\代理-hookme-终端记录.txt
+C:\Users\mzj\Desktop\CTF\玄机刷题\记录\代理-hookme-终端记录.txt:37:WORKDIR=C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\hookme_542
+C:\Users\mzj\Desktop\CTF\玄机刷题\记录\代理-hookme-终端记录.txt:39:FullName      : D:\Downloads\hookme.rar
+C:\Users\mzj\Desktop\CTF\玄机刷题\记录\代理-hookme-终端记录.txt:46:Path      : D:\Downloads\hookme.rar
+C:\Users\mzj\Desktop\CTF\玄机刷题\记录\代理-hookme-终端记录.txt:67:Start-Transcript -Path '玄机刷题\记录\代理-hookme-终端记录.txt' -Append
+C:\Users\mzj\Desktop\CTF\玄机刷题\记录\代理-hookme-终端记录.txt:69:$archive='D:\Downloads\hookme.rar'
+C:\Users\mzj\Desktop\CTF\玄机刷题\记录\代理-hookme-终端记录.txt:90:Transcript started, output file is 玄机刷题\记录\代理-hookme-终端记录.txt
+C:\Users\mzj\Desktop\CTF\玄机刷题\记录\代理-hookme-终端记录.txt:146:Start-Transcript -Path '玄机刷题\记录\代理-hookme-终端记录.txt' -Append
+C:\Users\mzj\Desktop\CTF\玄机刷题\记录\代理-hookme-终端记录.txt:148:$archive='D:\Downloads\hookme.rar'
+C:\Users\mzj\Desktop\CTF\玄机刷题\记录\代理-hookme-终端记录.txt:149:$dest='玄机刷题\题目资料\hookme_542\附件解包'
+C:\Users\mzj\Desktop\CTF\玄机刷题\记录\代理-hookme-终端记录.txt:175:Transcript started, output file is 玄机刷题\记录\代理-hookme-终端记录.txt
+C:\Users\mzj\Desktop\CTF\玄机刷题\记录\代理-hookme-终端记录.txt:176:EXTRACTION_TARGET=C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\hookme_542\附件解包
+C:\Users\mzj\Desktop\CTF\玄机刷题\记录\代理-hookme-终端记录.txt:183:C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\hookme_542\附件解包\hookme                    d----
+C:\Users\mzj\Desktop\CTF\玄机刷题\记录\代理-hookme-终端记录.txt:184:C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\hookme_542\附件解包\hookme\HookMe.apk 7329635 -a---
+C:\Users\mzj\Desktop\CTF\玄机刷题\记录\代理-hookme-终端记录.txt:189:C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\hookme_542\附件解包\hookme\HookMe.apk 61BB5BA33C8EBD3BD01BA9ECF6EDC69A18D66…
+C:\Users\mzj\Desktop\CTF\玄机刷题\记录\代理-hookme-终端记录.txt:210:Start-Transcript -Path '玄机刷题\记录\代理-hookme-终端记录.txt' -Append
+C:\Users\mzj\Desktop\CTF\玄机刷题\记录\代理-hookme-终端记录.txt:212:$apk='玄机刷题\题目资料\hookme_542\附件解包\hookme\HookMe.apk'
+C:\Users\mzj\Desktop\CTF\玄机刷题\记录\代理-hookme-终端记录.txt:217:p=Path(r'C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\hookme_542\附件解包\hookme\HookMe.apk')
+C:\Users\mzj\Desktop\CTF\玄机刷题\记录\代理-hookme-终端记录.txt:238:$scriptPath='玄机刷题\题目资料\hookme_542\inspect_apk.py'
+C:\Users\mzj\Desktop\CTF\玄机刷题\记录\代理-hookme-终端记录.txt:244:$zipPath=Join-Path (Resolve-Path -LiteralPath (Split-Path $apk -Parent)).Path 'HookMe.apk'
+C:\Users\mzj\Desktop\CTF\玄机刷题\记录\代理-hookme-终端记录.txt:246:$extractDir='玄机刷题\题目资料\hookme_542\dex_tmp'
+C:\Users\mzj\Desktop\CTF\玄机刷题\记录\代理-hookme-终端记录.txt:263:Transcript started, output file is 玄机刷题\记录\代理-hookme-终端记录.txt
+C:\Users\mzj\Desktop\CTF\玄机刷题\记录\代理-hookme-终端记录.txt:268:p=Path(r'C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\hookme_542\附件解包\hookme\HookMe.apk')
+C:\Users\mzj\Desktop\CTF\玄机刷题\记录\代理-hookme-终端记录.txt:289:Path      : C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\hookme_542\inspect_apk.py
+C:\Users\mzj\Desktop\CTF\玄机刷题\记录\代理-hookme-终端记录.txt:6340:mName;":"339161aa","Lkotlin/jvm/JvmOverloads;":"edf1efe3","Lkotlin/jvm/JvmPackageName;":"ba350f5b","Lkotlin/jvm/JvmReco
+C:\Users\mzj\Desktop\CTF\玄机刷题\记录\代理-hookme-终端记录.txt:7090:Start-Transcript -Path '玄机刷题\记录\代理-hookme-终端记录.txt' -Append
+C:\Users\mzj\Desktop\CTF\玄机刷题\记录\代理-hookme-终端记录.txt:7098:apk=Path(r'C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\hookme_542\附件解包\hookme\HookMe.apk')
+C:\Users\mzj\Desktop\CTF\玄机刷题\记录\代理-hookme-终端记录.txt:7099:out=Path(r'C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\hookme_542\代码附件')
+C:\Users\mzj\Desktop\CTF\玄机刷题\记录\代理-hookme-终端记录.txt:7105:        if re.fullmatch(r'classes(?:\d+)?\.dex',name) or name=='AndroidManifest.xml' or re.fullmatch(r'lib/[^/]+/libhookme\.so',name):
+C:\Users\mzj\Desktop\CTF\玄机刷题\记录\代理-hookme-终端记录.txt:7132:$scriptPath='玄机刷题\题目资料\hookme_542\extract_apk_code_and_filter.py'
+C:\Users\mzj\Desktop\CTF\玄机刷题\记录\代理-hookme-终端记录.txt:7149:Transcript started, output file is 玄机刷题\记录\代理-hookme-终端记录.txt
+C:\Users\mzj\Desktop\CTF\玄机刷题\记录\代理-hookme-终端记录.txt:7156:apk=Path(r'C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\hookme_542\附件解包\hookme\HookMe.apk')
+C:\Users\mzj\Desktop\CTF\玄机刷题\记录\代理-hookme-终端记录.txt:7157:out=Path(r'C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\hookme_542\代码附件')
+C:\Users\mzj\Desktop\CTF\玄机刷题\记录\代理-hookme-终端记录.txt:7163:        if re.fullmatch(r'classes(?:\d+)?\.dex',name) or name=='AndroidManifest.xml' or re.fullmatch(r'lib/[^/]+/libhookme\.so',name):
+C:\Users\mzj\Desktop\CTF\玄机刷题\记录\代理-hookme-终端记录.txt:7190:Path      : C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\hookme_542\extract_apk_code_and_filter.py
+C:\Users\mzj\Desktop\CTF\玄机刷题\记录\代理-hookme-终端记录.txt:7206:$log='C:\Users\mzj\Desktop\CTF\玄机刷题\记录\代理-hookme-终端记录.txt'
+C:\Users\mzj\Desktop\CTF\玄机刷题\记录\代理-hookme-终端记录.txt:7208:Write-Output '=== 继续 hookme 离线检查 ==='
+C:\Users\mzj\Desktop\CTF\玄机刷题\记录\代理-hookme-终端记录.txt:7211:$work='C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\hookme_542'
+C:\Users\mzj\Desktop\CTF\玄机刷题\记录\代理-hookme-终端记录.txt:7216:p=pathlib.Path(r'C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\hookme_542\代码附件\classes.dex')
+C:\Users\mzj\Desktop\CTF\玄机刷题\记录\代理-hookme-终端记录.txt:7221:patterns=re.compile(rb'(?i)(hookme|MainActivity|rc4|encrypt|packageName|flag|secret|key|native|check|verify|com/example|com\.example)')
+C:\Users\mzj\Desktop\CTF\玄机刷题\记录\代理-hookme-终端记录.txt:7245:Transcript started, output file is C:\Users\mzj\Desktop\CTF\玄机刷题\记录\代理-hookme-终端记录.txt
+C:\Users\mzj\Desktop\CTF\玄机刷题\记录\代理-hookme-终端记录.txt:7246:=== 继续 hookme 离线检查 ===
+C:\Users\mzj\Desktop\CTF\玄机刷题\记录\代理-hookme-终端记录.txt:7262:Path      : C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\hookme_542\代码附件\classes.dex
+C:\Users\mzj\Desktop\CTF\玄机刷题\记录\代理-hookme-终端记录.txt:7276:$log='C:\Users\mzj\Desktop\CTF\玄机刷题\记录\代理-hookme-终端记录.txt'; Start-Transcript -LiteralPath $log -Append
+C:\Users\mzj\Desktop\CTF\玄机刷题\记录\代理-hookme-终端记录.txt:7280:base=pathlib.Path(r'C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\hookme_542\代码附件')
+C:\Users\mzj\Desktop\CTF\玄机刷题\记录\代理-hookme-终端记录.txt:7286:  if any(t in s.lower() for t in ['com/example/hookme','hookme','mainactivity','rc4encrypt','setpackagenametonative','globalkey','flag{','flag']):
+C:\Users\mzj\Desktop\CTF\玄机刷题\记录\代理-hookme-终端记录.txt:7292:& 'C:\msys64\mingw64\bin\readelf.exe' -Ws (Join-Path $base 'lib\x86_64\libhookme.so') | Select-String -Pattern 'Java_com_example_hookme|rc4|packageName|globalKey|encrypt|UND' | Select-Object -First 80
+C:\Users\mzj\Desktop\CTF\玄机刷题\记录\代理-hookme-终端记录.txt:7312:Transcript started, output file is C:\Users\mzj\Desktop\CTF\玄机刷题\记录\代理-hookme-终端记录.txt
+C:\Users\mzj\Desktop\CTF\玄机刷题\记录\代理-hookme-终端记录.txt:7339:$log='C:\Users\mzj\Desktop\CTF\玄机刷题\记录\代理-hookme-终端记录.txt'; Start-Transcript -LiteralPath $log -Append
+C:\Users\mzj\Desktop\CTF\玄机刷题\记录\代理-hookme-终端记录.txt:7340:$work='C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\hookme_542'
+C:\Users\mzj\Desktop\CTF\玄机刷题\记录\代理-hookme-终端记录.txt:7341:$script=Join-Path $work 'dex_dump_hookme.py'
+C:\Users\mzj\Desktop\CTF\玄机刷题\记录\代理-hookme-终端记录.txt:7344:p=pathlib.Path(r'C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\hookme_542\代码附件\classes4.dex')
+C:\Users\mzj\Desktop\CTF\玄机刷题\记录\代理-hookme-终端记录.txt:7387: if 'Lcom/example/hookme/' in c[0]:print(' ',c)
+C:\Users\mzj\Desktop\CTF\玄机刷题\记录\代理-hookme-终端记录.txt:7437: if 'Lcom/example/hookme/' not in desc or not cd:continue
+C:\Users\mzj\Desktop\CTF\玄机刷题\记录\代理-hookme-终端记录.txt:7448:& 'C:\msys64\mingw64\bin\readelf.exe' -Ws (Join-Path $work '代码附件\lib\x86_64\libhookme.so') | Select-String -Pattern 'Java_com_example_hookme|rc4|packageName|globalKey|encrypt' | Select-Object -First 60
+C:\Users\mzj\Desktop\CTF\玄机刷题\记录\代理-hookme-终端记录.txt:7462:Transcript started, output file is C:\Users\mzj\Desktop\CTF\玄机刷题\记录\代理-hookme-终端记录.txt
+C:\Users\mzj\Desktop\CTF\玄机刷题\记录\代理-hookme-终端记录.txt:7467:Path      : C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\hookme_542\dex_dump_hookme.py
+C:\Users\mzj\Desktop\CTF\玄机刷题\记录\代理-hookme-终端记录.txt:7475:   172: 000000000002d100   725 FUNC    GLOBAL DEFAULT   14 Java_com_example_hookme_MainActivity_rc4Encrypt
+C:\Users\mzj\Desktop\CTF\玄机刷题\记录\代理-hookme-终端记录.txt:7476:   294: 000000000002ce50   318 FUNC    GLOBAL DEFAULT   14 Java_com_example_hookme_MainActivity_setPackageNameToNative
+C:\Users\mzj\Desktop\CTF\玄机刷题\记录\代理-hookme-终端记录.txt:7491:$log='C:\Users\mzj\Desktop\CTF\玄机刷题\记录\代理-hookme-终端记录.txt'; Start-Transcript -LiteralPath $log -Append
+C:\Users\mzj\Desktop\CTF\玄机刷题\记录\代理-hookme-终端记录.txt:7492:$work='C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\hookme_542'; $apk=Join-Path $work '附件解包\hookme\HookMe.apk'; $lib=Join-Path $work '代码附件\lib\x86_64\libhookme.so'
+C:\Users\mzj\Desktop\CTF\玄机刷题\记录\代理-hookme-终端记录.txt:7495:apk=pathlib.Path(r'C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\hookme_542\附件解包\hookme\HookMe.apk')
+C:\Users\mzj\Desktop\CTF\玄机刷题\记录\代理-hookme-终端记录.txt:7509:   if re.search(r'(?i)(hookme|flag|[0-9a-f]{24,}|package|com\.example)',s):
+C:\Users\mzj\Desktop\CTF\玄机刷题\记录\代理-hookme-终端记录.txt:7516:& 'C:\msys64\mingw64\bin\objdump.exe' -d --no-show-raw-insn --disassemble=Java_com_example_hookme_MainActivity_setPackageNameToNative $lib
+C:\Users\mzj\Desktop\CTF\玄机刷题\记录\代理-hookme-终端记录.txt:7517:& 'C:\msys64\mingw64\bin\objdump.exe' -d --no-show-raw-insn --disassemble=Java_com_example_hookme_MainActivity_rc4Encrypt $lib
+C:\Users\mzj\Desktop\CTF\玄机刷题\记录\代理-hookme-终端记录.txt:7533:Transcript started, output file is C:\Users\mzj\Desktop\CTF\玄机刷题\记录\代理-hookme-终端记录.txt
+C:\Users\mzj\Desktop\CTF\玄机刷题\记录\代理-hookme-终端记录.txt:7571:$log='C:\Users\mzj\Desktop\CTF\玄机刷题\记录\代理-hookme-终端记录.txt'; Start-Transcript -LiteralPath $log -Append
+C:\Users\mzj\Desktop\CTF\玄机刷题\记录\代理-hookme-终端记录.txt:7572:$work='C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\hookme_542'; $lib=Join-Path $work '代码附件\lib\x86_64\libhookme.so'
+C:\Users\mzj\Desktop\CTF\玄机刷题\记录\代理-hookme-终端记录.txt:7573:$temp='C:\Temp\hookme_542_native.so'; New-Item -ItemType Directory -Path 'C:\Temp' -Force | Out-Null; Copy-Item -LiteralPath $lib -Destination $temp -Force
+C:\Users\mzj\Desktop\CTF\玄机刷题\记录\代理-hookme-终端记录.txt:7575:Write-Output '--- JNI: setPackageNameToNative ---'
+C:\Users\mzj\Desktop\CTF\玄机刷题\记录\代理-hookme-终端记录.txt:7576:& 'C:\msys64\mingw64\bin\objdump.exe' -d --no-show-raw-insn --disassemble=Java_com_example_hookme_MainActivity_setPackageNameToNative $temp
+C:\Users\mzj\Desktop\CTF\玄机刷题\记录\代理-hookme-终端记录.txt:7578:& 'C:\msys64\mingw64\bin\objdump.exe' -d --no-show-raw-insn --disassemble=Java_com_example_hookme_MainActivity_rc4Encrypt $temp
+C:\Users\mzj\Desktop\CTF\玄机刷题\记录\代理-hookme-终端记录.txt:7584:p=pathlib.Path(r'C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\hookme_542\附件解包\hookme\HookMe.apk')
+C:\Users\mzj\Desktop\CTF\玄机刷题\记录\代理-hookme-终端记录.txt:7604:Transcript started, output file is C:\Users\mzj\Desktop\CTF\玄机刷题\记录\代理-hookme-终端记录.txt
+C:\Users\mzj\Desktop\CTF\玄机刷题\记录\代理-hookme-终端记录.txt:7605:ASCII_COPY=C:\Temp\hookme_542_native.so
+C:\Users\mzj\Desktop\CTF\玄机刷题\记录\代理-hookme-终端记录.txt:7609:Path      : C:\Temp\hookme_542_native.so
+C:\Users\mzj\Desktop\CTF\玄机刷题\记录\代理-hookme-终端记录.txt:7611:--- JNI: setPackageNameToNative ---
+C:\Users\mzj\Desktop\CTF\玄机刷题\记录\代理-hookme-终端记录.txt:7630:$log='C:\Users\mzj\Desktop\CTF\玄机刷题\记录\代理-hookme-终端记录.txt'; Start-Transcript -LiteralPath $log -Append
+C:\Users\mzj\Desktop\CTF\玄机刷题\记录\代理-hookme-终端记录.txt:7631:$work='C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\hookme_542'; $script=Join-Path $work 'verify_hookme_rc4.py'
+C:\Users\mzj\Desktop\CTF\玄机刷题\记录\代理-hookme-终端记录.txt:7634:apk=pathlib.Path(r'C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\hookme_542\附件解包\hookme\HookMe.apk')
+C:\Users\mzj\Desktop\CTF\玄机刷题\记录\代理-hookme-终端记录.txt:7668:print('AXML_PACKAGE_LIKE',[s for s in pool if 'com.' in s or 'hookme' in s.lower()])
+C:\Users\mzj\Desktop\CTF\玄机刷题\记录\代理-hookme-终端记录.txt:7723:Transcript started, output file is C:\Users\mzj\Desktop\CTF\玄机刷题\记录\代理-hookme-终端记录.txt
+C:\Users\mzj\Desktop\CTF\玄机刷题\记录\代理-hookme-终端记录.txt:7728:Path      : C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\hookme_542\verify_hookme_rc4.py
+C:\Users\mzj\Desktop\CTF\玄机刷题\记录\代理-hookme-终端记录.txt:7744:$log='C:\Users\mzj\Desktop\CTF\玄机刷题\记录\代理-hookme-终端记录.txt'; Start-Transcript -LiteralPath $log -Append
+C:\Users\mzj\Desktop\CTF\玄机刷题\记录\代理-hookme-终端记录.txt:7745:$temp='C:\Temp\hookme_542_native.so'
+C:\Users\mzj\Desktop\CTF\玄机刷题\记录\代理-hookme-终端记录.txt:7765:Transcript started, output file is C:\Users\mzj\Desktop\CTF\玄机刷题\记录\代理-hookme-终端记录.txt
+C:\Users\mzj\Desktop\CTF\玄机刷题\记录\代理-hookme-终端记录.txt:7770:   172: 000000000002d100   725 FUNC    GLOBAL DEFAULT   14 Java_com_example_hookme_MainActivity_rc4Encrypt
+C:\Users\mzj\Desktop\CTF\玄机刷题\记录\代理-hookme-终端记录.txt:7784:Java_com_example_hookme_MainActivity_setPackageNameToNative
+C:\Users\mzj\Desktop\CTF\玄机刷题\记录\代理-hookme-终端记录.txt:7787:Java_com_example_hookme_MainActivity_rc4Encrypt
+C:\Users\mzj\Desktop\CTF\玄机刷题\记录\代理-hookme-终端记录.txt:7794:libhookme.so
+C:\Users\mzj\Desktop\CTF\玄机刷题\记录\代理-hookme-终端记录.txt:7809:HookMe
+C:\Users\mzj\Desktop\CTF\玄机刷题\记录\代理-hookme-终端记录.txt:7893:$log='C:\Users\mzj\Desktop\CTF\玄机刷题\记录\代理-hookme-终端记录.txt'; Start-Transcript -LiteralPath $log -Append
+C:\Users\mzj\Desktop\CTF\玄机刷题\记录\代理-hookme-终端记录.txt:7894:$temp='C:\Temp\hookme_542_native.so'
+C:\Users\mzj\Desktop\CTF\玄机刷题\记录\代理-hookme-终端记录.txt:7914:Transcript started, output file is C:\Users\mzj\Desktop\CTF\玄机刷题\记录\代理-hookme-终端记录.txt
+C:\Users\mzj\Desktop\CTF\玄机刷题\记录\代理-hookme-终端记录.txt:7933:$log='C:\Users\mzj\Desktop\CTF\玄机刷题\记录\代理-hookme-终端记录.txt'; Start-Transcript -LiteralPath $log -Append
+C:\Users\mzj\Desktop\CTF\玄机刷题\记录\代理-hookme-终端记录.txt:7934:$temp='C:\Temp\hookme_542_native.so'
+C:\Users\mzj\Desktop\CTF\玄机刷题\记录\代理-hookme-终端记录.txt:7954:Transcript started, output file is C:\Users\mzj\Desktop\CTF\玄机刷题\记录\代理-hookme-终端记录.txt
+C:\Users\mzj\Desktop\CTF\玄机刷题\记录\代理-hookme-终端记录.txt:7973:$log='C:\Users\mzj\Desktop\CTF\玄机刷题\记录\代理-hookme-终端记录.txt'; Start-Transcript -LiteralPath $log -Append
+C:\Users\mzj\Desktop\CTF\玄机刷题\记录\代理-hookme-终端记录.txt:7974:$work='C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\hookme_542'; $script=Join-Path $work 'verify_hookme_custom_rc4.py'
+C:\Users\mzj\Desktop\CTF\玄机刷题\记录\代理-hookme-终端记录.txt:7977:apk=pathlib.Path(r'C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\hookme_542\附件解包\hookme\HookMe.apk')
+C:\Users\mzj\Desktop\CTF\玄机刷题\记录\代理-hookme-终端记录.txt:7978:package='com.example.hookme'
+C:\Users\mzj\Desktop\CTF\玄机刷题\记录\代理-hookme-终端记录.txt:8048:Transcript started, output file is C:\Users\mzj\Desktop\CTF\玄机刷题\记录\代理-hookme-终端记录.txt
+C:\Users\mzj\Desktop\CTF\玄机刷题\记录\代理-hookme-终端记录.txt:8053:Path      : C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\hookme_542\verify_hookme_custom_rc4.py
+C:\Users\mzj\Desktop\CTF\玄机刷题\记录\代理-hookme-终端记录.txt:8069:$log='C:\Users\mzj\Desktop\CTF\玄机刷题\记录\代理-hookme-终端记录.txt'; Start-Transcript -LiteralPath $log -Append
+C:\Users\mzj\Desktop\CTF\玄机刷题\记录\代理-hookme-终端记录.txt:8070:$work='C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\hookme_542'
+C:\Users\mzj\Desktop\CTF\玄机刷题\记录\代理-hookme-终端记录.txt:8094:root=pathlib.Path(r'C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\hookme_542\代码附件')
+C:\Users\mzj\Desktop\CTF\玄机刷题\记录\代理-hookme-终端记录.txt:8117:  if 'com/example/hookme' in f[0] and (i<24 or '$string' in f[0]):print('FIELD_ID',i,f)
+C:\Users\mzj\Desktop\CTF\玄机刷题\记录\代理-hookme-终端记录.txt:8122:  if desc!='Lcom/example/hookme/R$string;':continue
+C:\Users\mzj\Desktop\CTF\玄机刷题\记录\代理-hookme-终端记录.txt:8147:Transcript started, output file is C:\Users\mzj\Desktop\CTF\玄机刷题\记录\代理-hookme-终端记录.txt
+C:\Users\mzj\Desktop\CTF\玄机刷题\记录\代理-hookme-终端记录.txt:8154:Path      : C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\hookme_542\mt19937_crosscheck.cpp
+C:\Users\mzj\Desktop\CTF\玄机刷题\记录\代理-hookme-终端记录.txt:8162:Path      : C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\hookme_542\map_dex_resource_field.py
+C:\Users\mzj\Desktop\CTF\玄机刷题\记录\代理-hookme-终端记录.txt:8178:$log='C:\Users\mzj\Desktop\CTF\玄机刷题\记录\代理-hookme-终端记录.txt'; Start-Transcript -LiteralPath $log -Append
+C:\Users\mzj\Desktop\CTF\玄机刷题\记录\代理-hookme-终端记录.txt:8179:$work='C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\hookme_542'
+C:\Users\mzj\Desktop\CTF\玄机刷题\记录\代理-hookme-终端记录.txt:8199:Transcript started, output file is C:\Users\mzj\Desktop\CTF\玄机刷题\记录\代理-hookme-终端记录.txt
+**********************
+PowerShell transcript end
+End time: 20260928193256
+**********************
+**********************
+PowerShell transcript start
+Start time: 20260928193332
+Username: DESKTOP-412KTAR\mzj
+RunAs User: DESKTOP-412KTAR\mzj
+Configuration Name: 
+Machine: DESKTOP-412KTAR (Microsoft Windows NT 10.0.26200.0)
+Host Application: C:\Users\mzj\.cache\codex-runtimes\codex-primary-runtime\dependencies\native\powershell\pwsh.dll -Command try { [Console]::OutputEncoding=[System.Text.Encoding]::UTF8 } catch {}
+$ErrorActionPreference='Continue'
+$root = 'C:\Users\mzj\Desktop\CTF\玄机刷题'
+$log = Join-Path $root '记录\续攻-hookme-终端记录.txt'
+Start-Transcript -LiteralPath $log -Append
+$base=Join-Path $root '题目资料\hookme_542'
+$env:PYTHONIOENCODING='utf-8'
+Write-Output '--- Python runtime ---'
+Get-Command python,py -ErrorAction SilentlyContinue | Select-Object Name,Source | Format-Table -AutoSize
+Write-Output '--- all ABI cross-check ---'
+python (Join-Path $base 'audit_other_abis.py')
+Write-Output '--- dex method/string extraction ---'
+python (Join-Path $base 'dex_dump_hookme.py')
+Write-Output '--- APK archive summary & strings scan ---'
+@'
+import zipfile,re,hashlib,pathlib
+p=pathlib.Path(r'C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\hookme_542\附件解包\hookme\HookMe.apk')
+with zipfile.ZipFile(p) as z:
+ print('APK_SHA256',hashlib.sha256(p.read_bytes()).hexdigest(),'ZIP_TEST',z.testzip())
+ for x in z.infolist():
+  print('ENTRY',x.filename,'SIZE',x.file_size,'CRC',f'{x.CRC:08x}')
+  if x.is_dir(): continue
+  b=z.read(x)
+  vals=re.findall(rb'[ -~]{6,}',b)
+  hits=[x.decode('ascii','replace') for x in vals if re.search(rb'(?i)(flag|secret|correct|cipher|hookme|package|com\.example|[0-9a-f]{32,})',x)]
+  if hits:
+   print('  INTERESTING_STRINGS',len(hits))
+   for s in hits[:80]: print('   ',repr(s))
+'@ | python -
+Stop-Transcript
+Process ID: 26860
+PSVersion: 7.6.5
+PSEdition: Core
+GitCommitId: 7.6.5
+OS: Microsoft Windows 10.0.26200
+Platform: Win32NT
+PSCompatibleVersions: 1.0, 2.0, 3.0, 4.0, 5.0, 5.1, 6.0, 7.0
+PSRemotingProtocolVersion: 2.4
+SerializationVersion: 1.1.0.1
+WSManStackVersion: 3.0
+**********************
+Transcript started, output file is C:\Users\mzj\Desktop\CTF\玄机刷题\记录\续攻-hookme-终端记录.txt
+--- Python runtime ---
+
+Name       Source
+----       ------
+python.exe C:\Users\mzj\AppData\Local\Programs\Python\Python312\python.exe
+py.exe     C:\WINDOWS\py.exe
+
+--- all ABI cross-check ---
+
+--- dex method/string extraction ---
+
+--- APK archive summary & strings scan ---
+**********************
+PowerShell transcript end
+End time: 20260928193335
+**********************
+**********************
+PowerShell transcript start
+Start time: 20260928193354
+Username: DESKTOP-412KTAR\mzj
+RunAs User: DESKTOP-412KTAR\mzj
+Configuration Name: 
+Machine: DESKTOP-412KTAR (Microsoft Windows NT 10.0.26200.0)
+Host Application: C:\Users\mzj\.cache\codex-runtimes\codex-primary-runtime\dependencies\native\powershell\pwsh.dll -Command try { [Console]::OutputEncoding=[System.Text.Encoding]::UTF8 } catch {}
+$ErrorActionPreference='Continue'
+$root='C:\Users\mzj\Desktop\CTF\玄机刷题'; $log=Join-Path $root '记录\续攻-hookme-终端记录.txt'
+Start-Transcript -LiteralPath $log -Append
+$script=Join-Path $root '题目资料\hookme_542\dex_dump_hookme.py'
+Get-Content -LiteralPath $script -TotalCount 180
+Write-Output '--- focused old log findings ---'
+$old=Join-Path $root '记录\代理-hookme-终端记录.txt'
+Select-String -LiteralPath $old -Pattern 'DECRYPTED|RECOVERED|flag\{|correct_ciphertext|setPackageNameToNative|MainActivity|FORMAT|onClick|FLAG' | Select-Object -Last 120 | ForEach-Object { '{0}:{1}' -f $_.LineNumber,$_.Line }
+Stop-Transcript
+Process ID: 3352
+PSVersion: 7.6.5
+PSEdition: Core
+GitCommitId: 7.6.5
+OS: Microsoft Windows 10.0.26200
+Platform: Win32NT
+PSCompatibleVersions: 1.0, 2.0, 3.0, 4.0, 5.0, 5.1, 6.0, 7.0
+PSRemotingProtocolVersion: 2.4
+SerializationVersion: 1.1.0.1
+WSManStackVersion: 3.0
+**********************
+Transcript started, output file is C:\Users\mzj\Desktop\CTF\玄机刷题\记录\续攻-hookme-终端记录.txt
+import struct, pathlib, hashlib
+p=pathlib.Path(r'C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\hookme_542\代码附件\classes4.dex')
+b=p.read_bytes()
+print('FILE',p,'SIZE',len(b),'SHA256',hashlib.sha256(b).hexdigest(),'MAGIC',repr(b[:8]))
+u16=lambda o: struct.unpack_from('<H',b,o)[0]
+u32=lambda o: struct.unpack_from('<I',b,o)[0]
+def uleb(o):
+ v=0;s=0
+ while True:
+  c=b[o];o+=1;v|=(c&127)<<s
+  if c<128:return v,o
+  s+=7
+def mstr(o):
+ n,o=uleb(o); end=b.index(0,o); raw=b[o:end]
+ # DEX MUTF-8 NUL is C0 80.
+ raw=raw.replace(b'\xc0\x80',b'\x00')
+ return raw.decode('utf-8','replace'),end+1
+ssz,so=u32(0x38),u32(0x3c)
+tsz,to=u32(0x40),u32(0x44)
+psz,po=u32(0x48),u32(0x4c)
+msz,mo=u32(0x58),u32(0x5c)
+csz,co=u32(0x60),u32(0x64)
+print('HEADER strings',ssz,'types',tsz,'protos',psz,'methods',msz,'classes',csz)
+strings=[]
+for i in range(ssz):strings.append(mstr(u32(so+4*i))[0])
+types=[strings[u32(to+4*i)] for i in range(tsz)]
+protos=[]
+for i in range(psz):
+ sh,ret,params=struct.unpack_from('<III',b,po+12*i)
+ args=[]
+ if params:
+  n=u32(params)
+  args=[types[u16(params+4+2*j)] for j in range(n)]
+ protos.append('('+''.join(args)+')'+types[ret])
+methods=[]
+for i in range(msz):
+ ci,pi,ni=struct.unpack_from('<HHI',b,mo+8*i)
+ methods.append((types[ci],strings[ni],protos[pi]))
+classes=[]
+for i in range(csz):
+ ci,acc,sup,inter,src,ann,cd,sv=struct.unpack_from('<8I',b,co+32*i)
+ classes.append((types[ci],acc,cd))
+print('APP CLASSES:')
+for c in classes:
+ if 'Lcom/example/hookme/' in c[0]:print(' ',c)
+def parse_class_data(off):
+ sf,off=uleb(off); inf,off=uleb(off); dm,off=uleb(off); vm,off=uleb(off)
+ for kind,count in [('static_field',sf),('instance_field',inf)]:
+  idx=0
+  for _ in range(count):
+   d,off=uleb(off);idx+=d;acc,off=uleb(off)
+ for kind,count in [('direct',dm),('virtual',vm)]:
+  idx=0
+  for _ in range(count):
+   d,off=uleb(off);idx+=d;acc,off=uleb(off);code,off=uleb(off)
+   yield kind,idx,acc,code
+WIDTH=[1]*256
+for op in [0x02,0x05,0x08,0x13,0x15,0x16,0x19,0x1a,0x1c,0x1f,0x20,0x22,0x23,0x29,0x32,0x33,0x34,0x35,0x36,0x37,0x38,0x39,0x3a,0x3b,0x3c,0x3d,0x44,0x45,0x46,0x47,0x48,0x49,0x4a,0x4b,0x4c,0x4d,0x4e,0x4f,0x50,0x51,0x52,0x53,0x54,0x55,0x56,0x57,0x58,0x59,0x5a,0x5b,0x5c,0x5d,0x5e,0x5f,0x60,0x61,0x62,0x63,0x64,0x65,0x66,0x67,0x68,0x69,0x6a,0x6b,0x6c,0x6d,0x6e,0x6f,0x70,0x71,0x72,0x74,0x75,0x76,0x77,0x78,0x1d,0x1e,0x21,0x27,0x28,0x7b,0x7c,0x7d,0x7e,0x7f,0x80,0x81,0x82,0x83,0x84,0x85,0x86,0x87,0x88,0x89,0x8a,0x8b,0x8c,0x8d,0x8e,0x8f]:WIDTH[op]=1
+for op in [0x03,0x06,0x09,0x14,0x17,0x1b,0x24,0x25,0x26,0x2a,0x2b,0x2c,0x6e,0x6f,0x70,0x71,0x72,0x74,0x75,0x76,0x77,0x78]:WIDTH[op]=3
+for op in [0x02,0x05,0x08,0x13,0x15,0x16,0x19,0x1a,0x1c,0x1f,0x20,0x22,0x23,0x29,0x32,0x33,0x34,0x35,0x36,0x37,0x38,0x39,0x3a,0x3b,0x3c,0x3d,0x44,0x45,0x46,0x47,0x48,0x49,0x4a,0x4b,0x4c,0x4d,0x4e,0x4f,0x50,0x51,0x52,0x53,0x54,0x55,0x56,0x57,0x58,0x59,0x5a,0x5b,0x5c,0x5d,0x5e,0x5f,0x60,0x61,0x62,0x63,0x64,0x65,0x66,0x67,0x68,0x69,0x6a,0x6b,0x6c,0x6d]:WIDTH[op]=2
+for op in [0xd0,0xd1,0xd2,0xd3,0xd4,0xd5,0xd6,0xd7,0xd8,0xd9,0xda,0xdb,0xdc,0xdd,0xde,0xdf,0xe0,0xe1,0xe2]:WIDTH[op]=2
+for op in range(0x90,0xb0):WIDTH[op]=2
+for op in range(0xb0,0xd0):WIDTH[op]=1
+for op in [0xfa,0xfb]:WIDTH[op]=4
+for op in [0xfc,0xfd]:WIDTH[op]=3
+WIDTH[0xff]=2;WIDTH[0xfe]=2
+NAMES={0x00:'nop',0x01:'move',0x02:'move/from16',0x03:'move/16',0x0a:'move-result',0x0b:'move-result-wide',0x0c:'move-result-object',0x0d:'move-exception',0x0e:'return-void',0x0f:'return',0x10:'return-wide',0x11:'return-object',0x12:'const/4',0x13:'const/16',0x14:'const',0x15:'const/high16',0x16:'const-wide/16',0x17:'const-wide/32',0x18:'const-wide',0x19:'const-wide/high16',0x1a:'const-string',0x1b:'const-string/jumbo',0x1c:'const-class',0x1d:'monitor-enter',0x1e:'monitor-exit',0x1f:'check-cast',0x20:'instance-of',0x21:'array-length',0x22:'new-instance',0x23:'new-array',0x24:'filled-new-array',0x25:'filled-new-array/range',0x26:'fill-array-data',0x27:'throw',0x28:'goto',0x29:'goto/16',0x2a:'goto/32',0x2b:'packed-switch',0x2c:'sparse-switch',0x2d:'cmpl-float',0x32:'if-eq',0x33:'if-ne',0x34:'if-lt',0x35:'if-ge',0x36:'if-gt',0x37:'if-le',0x38:'if-eqz',0x39:'if-nez',0x3a:'if-ltz',0x3b:'if-gez',0x3c:'if-gtz',0x3d:'if-lez',0x44:'aget',0x4b:'aput',0x52:'iget',0x59:'iput',0x60:'sget',0x67:'sput',0x6e:'invoke-virtual',0x6f:'invoke-super',0x70:'invoke-direct',0x71:'invoke-static',0x72:'invoke-interface',0x74:'invoke-virtual/range',0x75:'invoke-super/range',0x76:'invoke-direct/range',0x77:'invoke-static/range',0x78:'invoke-interface/range',0x7b:'neg-int',0x7d:'not-int',0x90:'add-int',0x91:'sub-int',0x92:'mul-int',0x93:'div-int',0x94:'rem-int',0x95:'and-int',0x96:'or-int',0x97:'xor-int',0x98:'shl-int',0x99:'shr-int',0x9a:'ushr-int',0xb0:'add-int/2addr',0xb1:'sub-int/2addr',0xb2:'mul-int/2addr',0xd0:'add-int/lit16',0xd8:'add-int/lit8',0xe2:'ushr-int/lit8',0xfa:'invoke-polymorphic',0xfb:'invoke-polymorphic/range',0xfc:'invoke-custom',0xfd:'invoke-custom/range'}
+def disasm(codeoff):
+ if not codeoff:return
+ regs,ins,outs,tries=struct.unpack_from('<4H',b,codeoff);debug=u32(codeoff+8);n=u32(codeoff+12);start=codeoff+16
+ words=list(struct.unpack_from('<'+'H'*n,b,start))
+ print(f'  CODE off=0x{codeoff:x} regs={regs} ins={ins} outs={outs} tries={tries} debug=0x{debug:x} units={n}')
+ pc=0
+ while pc<n:
+  w=words[pc];op=w&255;wid=WIDTH[op]
+  if op==0x18:wid=5
+  if op in (0x00,) and w>>8 in (1,2,3):wid={1:4,2:2,3:4}[w>>8]
+  if pc+wid>n:wid=1
+  raw=' '.join(f'{x:04x}' for x in words[pc:pc+wid])
+  ann=''
+  if op==0x1a and pc+1<n:ann=' STRING='+repr(strings[words[pc+1]])
+  elif op==0x1b and pc+2<n:ann=' STRING='+repr(strings[words[pc+1]|(words[pc+2]<<16)])
+  elif op in range(0x6e,0x73) or op in range(0x74,0x79):
+   if pc+1<n:
+    mi=words[pc+1];ann=' METHOD='+str(mi)+' '+str(methods[mi]) if mi<len(methods) else f' BAD_METHOD={mi}'
+  elif op==0x22 and pc+1<n:
+   ti=words[pc+1];ann=' TYPE='+types[ti] if ti<len(types) else ''
+  elif op==0x1f and pc+1<n:
+   ti=words[pc+1];ann=' TYPE='+types[ti] if ti<len(types) else ''
+  elif op in (0x60,0x61,0x62,0x63,0x64,0x65,0x66,0x67,0x68,0x69,0x6a,0x6b,0x6c,0x6d) and pc+1<n:
+   fi=words[pc+1];ann=' FIELD_ID='+str(fi)
+  print(f'    {pc:04x}: {NAMES.get(op,"op_%02x"%op):24s} {raw}{ann}')
+  pc+=wid
+for desc,acc,cd in classes:
+ if 'Lcom/example/hookme/' not in desc or not cd:continue
+ print('\nCLASS',desc,'access',hex(acc),'class_data_off',hex(cd))
+ for kind,mi,access,code in parse_class_data(cd):
+  print(f' METHOD {kind} id={mi} access=0x{access:x} code=0x{code:x} {methods[mi]}')
+  if code:disasm(code)
+--- focused old log findings ---
+3977:itionOnClick;":"a07b88e2","Landroidx/constraintlayout/motion/widget/MotionScene$Transition;":"e9bb5746","Landroidx/cons
+4141:":"cec665b2","Landroidx/core/app/PendingIntentCompat$Flags;":"970f22c2","Landroidx/core/app/PendingIntentCompat;":"85a3
+4151:viceCompat$StopForegroundFlags;":"27111966","Landroidx/core/app/ServiceCompat;":"b2736a0e","Landroidx/core/app/ShareCom
+4170:apHolder;":"2b00faa2","Landroidx/core/content/ContextCompat$RegisterReceiverFlags;":"2f601417","Landroidx/core/content/
+4210:InfoCompat$Protection;":"611979b5","Landroidx/core/content/pm/PermissionInfoCompat$ProtectionFlags;":"5ab8ded4","Landro
+4217:atchFlags;":"3314a4fd","Landroidx/core/content/pm/ShortcutManagerCompat;":"86864c76","Landroidx/core/content/pm/Shortcu
+4385:087b08","Landroidx/core/telephony/mbms/MbmsHelper;":"aa46e2c8","Landroidx/core/text/BidiFormatter$Builder;":"522e378f",
+4386:"Landroidx/core/text/BidiFormatter$DirectionalityEstimator;":"8e9b6adf","Landroidx/core/text/BidiFormatter;":"6b9221f3"
+4447:re/view/ContentInfoCompat$Flags;":"62d89f2","Landroidx/core/view/ContentInfoCompat$Source;":"be89850c","Landroidx/core/
+4741:her;":"1c9f3eb1","Landroidx/emoji2/viewsintegration/EmojiTransformationMethod;":"5854ca49","Landroidx/fragment/app/Back
+4870:ingleGeneratedAdapterObserver;":"48e0b6c9","Landroidx/lifecycle/Transformations$distinctUntilChanged$1;":"86bcdc00","La
+4871:ndroidx/lifecycle/Transformations$map$1;":"62b4452","Landroidx/lifecycle/Transformations$map$2;":"225fa5c","Landroidx/l
+4872:ifecycle/Transformations$sam$androidx_lifecycle_Observer$0;":"82517ae0","Landroidx/lifecycle/Transformations$switchMap$
+4873:1$onChanged$1;":"3e6bfcf9","Landroidx/lifecycle/Transformations$switchMap$1;":"165a1c1a","Landroidx/lifecycle/Transform
+4874:ations$switchMap$2$onChanged$1;":"82b7af0a","Landroidx/lifecycle/Transformations$switchMap$2;":"8603acae","Landroidx/li
+4875:fecycle/Transformations;":"8559e270","Landroidx/lifecycle/ViewModel;":"4261c6ff","Landroidx/lifecycle/ViewModelLazy$1;"
+5031:77bb840","Landroidx/recyclerview/widget/TileList;":"7cfe9091","Landroidx/recyclerview/widget/ViewBoundsCheck$BoundFlags
+5078::"7324ca97","Landroidx/transition/Slide$CalculateSlideVertical;":"d636a611","Landroidx/transition/Slide$GravityFlag;":"
+5183:le/android/material/animation/Positioning;":"53446f7","Lcom/google/android/material/animation/TransformationCallback;":
+5197:t$LayoutParams$ScrollFlags;":"38311a9d","Lcom/google/android/material/appbar/AppBarLayout$LayoutParams;":"8a5142ba","Lc
+5247:etBehavior$BottomSheetCallback;":"ac914965","Lcom/google/android/material/bottomsheet/BottomSheetBehavior$SaveFlags;":"
+5545:/datepicker/CompositeDateValidator;":"b11e8597","Lcom/google/android/material/datepicker/DateFormatTextWatcher$$Externa
+5546:lSyntheticLambda0;":"3f70f6211","Lcom/google/android/material/datepicker/DateFormatTextWatcher$$ExternalSyntheticLambda
+5547:1;":"-5d5462c6d","Lcom/google/android/material/datepicker/DateFormatTextWatcher;":"7a333117","Lcom/google/android/mater
+5570:/google/android/material/datepicker/MaterialPickerOnPositiveButtonClickListener;":"c9ecca0c","Lcom/google/android/mater
+5592:/expandable/ExpandableTransformationWidget;":"4d170536","Lcom/google/android/material/expandable/ExpandableWidget;":"69
+5617:formationCallbackWrapper;":"6ff47bb9","Lcom/google/android/material/floatingactionbutton/FloatingActionButton;":"d01f9a
+5626:ial/floatingactionbutton/FloatingActionButtonImpl$InternalTransformationCallback;":"c156f7a4","Lcom/google/android/mate
+5870:Lcom/google/android/material/slider/BasicLabelFormatter;":"f7aca39c","Lcom/google/android/material/slider/LabelFormatte
+5995:id/material/tooltip/TooltipDrawable;":"321bbc44","Lcom/google/android/material/transformation/ExpandableBehavior$1;":"2
+5996:29492cd","Lcom/google/android/material/transformation/ExpandableBehavior;":"7fe7476a","Lcom/google/android/material/tra
+5997:nsformation/ExpandableTransformationBehavior$1;":"fb05275e","Lcom/google/android/material/transformation/ExpandableTran
+5998:sformationBehavior;":"e9cd188a","Lcom/google/android/material/transformation/FabTransformationBehavior$1;":"67e0348a","
+5999:Lcom/google/android/material/transformation/FabTransformationBehavior$2;":"6190a424","Lcom/google/android/material/tran
+6000:sformation/FabTransformationBehavior$3;":"bc0e418b","Lcom/google/android/material/transformation/FabTransformationBehav
+6001:ior$4;":"8066502d","Lcom/google/android/material/transformation/FabTransformationBehavior$FabTransformationSpec;":"4874
+6002:0dad","Lcom/google/android/material/transformation/FabTransformationBehavior;":"956a7baf","Lcom/google/android/material
+6003:/transformation/FabTransformationScrimBehavior$1;":"93f62c58","Lcom/google/android/material/transformation/FabTransform
+6004:ationScrimBehavior;":"338cac3e","Lcom/google/android/material/transformation/FabTransformationSheetBehavior;":"f9d3c3bf
+6005:","Lcom/google/android/material/transformation/TransformationChildCard;":"88a8d2e8","Lcom/google/android/material/trans
+6006:formation/TransformationChildLayout;":"c105d3ba","Lcom/google/android/material/transition/FadeModeEvaluator;":"61c0b3e8
+6034:ndroid/material/transition/SlideDistanceProvider$GravityFlag;":"f80f4e8e","Lcom/google/android/material/transition/Slid
+6076:cf89cf11","Lcom/google/android/material/transition/platform/SlideDistanceProvider$GravityFlag;":"524f83","Lcom/google/a
+6086:Lcom/google/errorprone/annotations/ForOverride;":"af255683","Lcom/google/errorprone/annotations/FormatMethod;":"c20656f
+6087:a","Lcom/google/errorprone/annotations/FormatString;":"7bf26282","Lcom/google/errorprone/annotations/Immutable;":"cda09
+6509:Sequence;":"68c6bd6f","Lkotlin/text/FlagEnum;":"2d8696fc","Lkotlin/text/HexExtensionsKt;":"1030574c","Lkotlin/text/HexF
+6510:ormat$Builder;":"cb55bb00","Lkotlin/text/HexFormat$BytesHexFormat$Builder;":"c001197a","Lkotlin/text/HexFormat$BytesHex
+6511:Format$Companion;":"63805d9b","Lkotlin/text/HexFormat$BytesHexFormat;":"99665c14","Lkotlin/text/HexFormat$Companion;":"
+6512:598b0eba","Lkotlin/text/HexFormat$NumberHexFormat$Builder;":"43871f2a","Lkotlin/text/HexFormat$NumberHexFormat$Companio
+6513:n;":"b259dca5","Lkotlin/text/HexFormat$NumberHexFormat;":"6c3e08a","Lkotlin/text/HexFormat;":"4d94890f","Lkotlin/text/H
+6514:exFormatKt;":"87881022","Lkotlin/text/MatchGroup;":"634bb915","Lkotlin/text/MatchGroupCollection;":"12ae6600","Lkotlin/
+7067:ntellij/lang/annotations/JdkConstants$PatternFlags;":"ad2f53ee","Lorg/intellij/lang/annotations/JdkConstants$TabLayoutP
+7073:Format;":"5623370d","Lorg/intellij/lang/annotations/PrintFormatPattern;":"a6216627","Lorg/intellij/lang/annotations/Reg
+7119:            pat=re.compile(r'flag|hook|frida|xposed|jni|native|root|ptrace|check|secret|key|MainActivity|Main|tamper|debug|magisk|zygisk|com\.',re.I)
+7134:Get-FileHash -LiteralPath $scriptPath -Algorithm SHA256 | Format-List
+7177:            pat=re.compile(r'flag|hook|frida|xposed|jni|native|root|ptrace|check|secret|key|MainActivity|Main|tamper|debug|magisk|zygisk|com\.',re.I)
+7221:patterns=re.compile(rb'(?i)(hookme|MainActivity|rc4|encrypt|packageName|flag|secret|key|native|check|verify|com/example|com\.example)')
+7231:Get-FileHash -LiteralPath $dex -Algorithm SHA256 | Format-List
+7286:  if any(t in s.lower() for t in ['com/example/hookme','hookme','mainactivity','rc4encrypt','setpackagenametonative','globalkey','flag{','flag']):
+7444:Get-FileHash -LiteralPath $script -Algorithm SHA256 | Format-List
+7475:   172: 000000000002d100   725 FUNC    GLOBAL DEFAULT   14 Java_com_example_hookme_MainActivity_rc4Encrypt
+7476:   294: 000000000002ce50   318 FUNC    GLOBAL DEFAULT   14 Java_com_example_hookme_MainActivity_setPackageNameToNative
+7509:   if re.search(r'(?i)(hookme|flag|[0-9a-f]{24,}|package|com\.example)',s):
+7516:& 'C:\msys64\mingw64\bin\objdump.exe' -d --no-show-raw-insn --disassemble=Java_com_example_hookme_MainActivity_setPackageNameToNative $lib
+7517:& 'C:\msys64\mingw64\bin\objdump.exe' -d --no-show-raw-insn --disassemble=Java_com_example_hookme_MainActivity_rc4Encrypt $lib
+7548:  Flags:                             0x0
+7574:Write-Output "ASCII_COPY=$temp"; Get-FileHash -LiteralPath $temp -Algorithm SHA256 | Format-List
+7575:Write-Output '--- JNI: setPackageNameToNative ---'
+7576:& 'C:\msys64\mingw64\bin\objdump.exe' -d --no-show-raw-insn --disassemble=Java_com_example_hookme_MainActivity_setPackageNameToNative $temp
+7578:& 'C:\msys64\mingw64\bin\objdump.exe' -d --no-show-raw-insn --disassemble=Java_com_example_hookme_MainActivity_rc4Encrypt $temp
+7611:--- JNI: setPackageNameToNative ---
+7656:  cnt=u32(man,pos+8);flags=u32(man,pos+16);start=u32(man,pos+20);utf8=bool(flags&0x100); entries=[]
+7700:  print('DECRYPTED_HEX',plain.hex())
+7701:  print('DECRYPTED_BYTES',repr(bytes(plain)))
+7702:  try: print('DECRYPTED_UTF8',bytes(plain).decode('utf-8'))
+7704:  print('FLAG_FORMAT',bool(re.fullmatch(rb'flag\{[^\r\n{}]+\}',plain,re.I)))
+7707:Get-FileHash -LiteralPath $script -Algorithm SHA256 | Format-List
+7751:& 'C:\msys64\mingw64\bin\strings.exe' -a $temp | Select-String -Pattern 'hook|key|flag|RC4|empty|Failed|Global|package|JNI|frida|xposed' | Select-Object -First 100
+7770:   172: 000000000002d100   725 FUNC    GLOBAL DEFAULT   14 Java_com_example_hookme_MainActivity_rc4Encrypt
+7784:Java_com_example_hookme_MainActivity_setPackageNameToNative
+7787:Java_com_example_hookme_MainActivity_rc4Encrypt
+8023:print('RECOVERED_BYTES',repr(plain))
+8024:try:print('RECOVERED_UTF8',plain.decode('utf-8'))
+8029:print('FLAG_FORMAT',bool(re.fullmatch(rb'flag\{[^\r\n{}]+\}',plain,re.I)))
+8032:Get-FileHash -LiteralPath $script -Algorithm SHA256 | Format-List
+8089:Write-Output '--- C++ cross-check source hash ---'; Get-FileHash -LiteralPath $cpp -Algorithm SHA256 | Format-List
+8127:   d,off=uleb(b,off);idx+=d;flags,off=uleb(b,off)
+8128:   print('STATIC_FIELD',idx,fields[idx],'access',hex(flags))
+8132:Write-Output '--- DEX field mapper source hash ---'; Get-FileHash -LiteralPath $py -Algorithm SHA256 | Format-List
+8182:Write-Output '--- ASCII C++ source copy hash ---'; Get-FileHash -LiteralPath $tempSrc -Algorithm SHA256 | Format-List
+8224:Write-Output 'Parent reported: submitted candidate flag{ee9fb062624c1e527fab36d3a27484d1} to Xuanji challenge #542; platform response was “FLAG 不正确”; progress remained 0/1.'
+8231:Write-Output '--- ARM64 ELF file format ---'
+8248:Parent reported: submitted candidate flag{ee9fb062624c1e527fab36d3a27484d1} to Xuanji challenge #542; platform response was “FLAG 不正确”; progress remained 0/1.
+8267:--- ARM64 ELF file format ---
+8287:# Parse R$string class field constants and identify correct_ciphertext resource ID.
+8327:func_names={'Java_com_example_hookme_MainActivity_setPackageNameToNative','Java_com_example_hookme_MainActivity_rc4Encrypt'}
+8345:Write-Output '--- ARM64/resource audit script hash ---'; Get-FileHash -LiteralPath $script -Algorithm SHA256 | Format-List
+8389:Write-Output '--- corrected audit script hash ---'; Get-FileHash -LiteralPath $script -Algorithm SHA256 | Format-List
+8430:Write-Output '--- audit script final hash ---'; Get-FileHash -LiteralPath $script -Algorithm SHA256 | Format-List
+8471:Write-Output '--- ARM64 audit script hash ---'; Get-FileHash -LiteralPath $script -Algorithm SHA256 | Format-List
+8535:   if name in ('Java_com_example_hookme_MainActivity_setPackageNameToNative','Java_com_example_hookme_MainActivity_rc4Encrypt') or any(x in name for x in ['initializeSBox','rc4Encrypt','_Z3ksa','_Z4prga']):
+8552:Write-Output '--- other ABI audit source hash ---'; Get-FileHash -LiteralPath $script -Algorithm SHA256 | Format-List
+8593:if(Test-Path -LiteralPath $rar){Get-Item -LiteralPath $rar | Select-Object FullName,Length | Format-List;Get-FileHash -LiteralPath $rar -Algorithm SHA256 | Format-List}else{Write-Output 'RAR_NOT_FOUND'}
+8600:Write-Output 'COMMAND: C:\msys64\mingw64\bin\objdump.exe -d --no-show-raw-insn --disassemble=Java_com_example_hookme_MainActivity_setPackageNameToNative C:\Temp\hookme_542_native.so'
+8601:Write-Output 'COMMAND: C:\msys64\mingw64\bin\objdump.exe -d --no-show-raw-insn --disassemble=Java_com_example_hookme_MainActivity_rc4Encrypt C:\Temp\hookme_542_native.so'
+8607:foreach($name in $files){$p=Join-Path $work $name;if(Test-Path -LiteralPath $p){Write-Output "SOURCE_SHA256 $name";Get-FileHash -LiteralPath $p -Algorithm SHA256 | Format-List;Write-Output "===== BEGIN SOURCE $name =====";Get-Content -LiteralPath $p;Write-Output "===== END SOURCE $name ====="}}
+8609:Write-Output 'Certain for attached APK: app package com.example.hookme; R$string.correct_ciphertext resource id 0x7f0f002f; custom seeded S-box and RC4 logic; recovered bytes re-encrypt exactly to the single 38-byte long hex resource; APK UI compares those output bytes with decoded expected bytes.'
+8610:Write-Output 'External conflict: parent reports Xuanji #542 rejected that flag. Local evidence cannot determine the server-side expected flag or prove the downloaded RAR is the exact attachment currently bound to that challenge. Do not submit alternative guesses under this offline task.'
+8643:COMMAND: C:\msys64\mingw64\bin\objdump.exe -d --no-show-raw-insn --disassemble=Java_com_example_hookme_MainActivity_setPackageNameToNative C:\Temp\hookme_542_native.so
+8644:COMMAND: C:\msys64\mingw64\bin\objdump.exe -d --no-show-raw-insn --disassemble=Java_com_example_hookme_MainActivity_rc4Encrypt C:\Temp\hookme_542_native.so
+8713:print('RECOVERED_BYTES',repr(plain))
+8714:try:print('RECOVERED_UTF8',plain.decode('utf-8'))
+8719:print('FLAG_FORMAT',bool(re.fullmatch(rb'flag\{[^\r\n{}]+\}',plain,re.I)))
+8762:   d,off=uleb(b,off);idx+=d;flags,off=uleb(b,off)
+8763:   print('STATIC_FIELD',idx,fields[idx],'access',hex(flags))
+8777:# Parse R$string class field constants and identify correct_ciphertext resource ID.
+8817:func_names={'Java_com_example_hookme_MainActivity_setPackageNameToNative','Java_com_example_hookme_MainActivity_rc4Encrypt'}
+8870:   if name in ('Java_com_example_hookme_MainActivity_setPackageNameToNative','Java_com_example_hookme_MainActivity_rc4Encrypt') or any(x in name for x in ['initializeSBox','rc4Encrypt','_Z3ksa','_Z4prga']):
+9016:Certain for attached APK: app package com.example.hookme; R$string.correct_ciphertext resource id 0x7f0f002f; custom seeded S-box and RC4 logic; recovered bytes re-encrypt exactly to the single 38-byte long hex resource; APK UI compares those output bytes with decoded expected bytes.
+9017:External conflict: parent reports Xuanji #542 rejected that flag. Local evidence cannot determine the server-side expected flag or prove the downloaded RAR is the exact attachment currently bound to that challenge. Do not submit alternative guesses under this offline task.
+**********************
+PowerShell transcript end
+End time: 20260928193354
+**********************
+**********************
+PowerShell transcript start
+Start time: 20260928193450
+Username: DESKTOP-412KTAR\mzj
+RunAs User: DESKTOP-412KTAR\mzj
+Configuration Name: 
+Machine: DESKTOP-412KTAR (Microsoft Windows NT 10.0.26200.0)
+Host Application: C:\Users\mzj\.cache\codex-runtimes\codex-primary-runtime\dependencies\native\powershell\pwsh.dll -Command try { [Console]::OutputEncoding=[System.Text.Encoding]::UTF8 } catch {}
+$ErrorActionPreference='Continue'
+$root='C:\Users\mzj\Desktop\CTF\玄机刷题'; $log=Join-Path $root '记录\续攻-hookme-终端记录.txt'
+Start-Transcript -LiteralPath $log -Append
+$apk=Join-Path $root '题目资料\hookme_542\附件解包\hookme\HookMe.apk'
+@'
+import zipfile,struct,re,hashlib,pathlib
+p=pathlib.Path(r'C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\hookme_542\附件解包\hookme\HookMe.apk')
+with zipfile.ZipFile(p) as z:
+ print('APK_SHA256',hashlib.sha256(p.read_bytes()).hexdigest())
+ print('APK_ENTRIES',len(z.infolist()))
+ print('APK_TESTZIP',z.testzip())
+ print('EXTERNAL_PAYLOADS',[x.filename for x in z.infolist() if any(k in x.filename.lower() for k in ('assets/','raw/','secret','flag','config'))])
+ for n in sorted(x for x in z.namelist() if re.fullmatch(r'classes(?:\d+)?\.dex',x)):
+  b=z.read(n); u32=lambda o:struct.unpack_from('<I',b,o)[0]
+  ss,so,ts,to,cs,co=[u32(o) for o in (0x38,0x3c,0x40,0x44,0x60,0x64)]
+  st=[u32(so+4*i) for i in range(ss)]
+  strings=[]
+  for off in st:
+   pos=off; size=0;shift=0
+   while True:
+    c=b[pos];pos+=1;size|=(c&127)<<shift
+    if c<128:break
+    shift+=7
+   end=b.index(0,pos);strings.append(b[pos:end].replace(b'\xc0\x80',b'\0').decode('utf8','replace'))
+  types=[strings[u32(to+4*i)] for i in range(ts)]
+  appclasses=[]
+  for i in range(cs):
+   classidx=struct.unpack_from('<I',b,co+32*i)[0]
+   desc=types[classidx]
+   if desc.startswith('Lcom/example/hookme/'):appclasses.append(desc)
+  relevant=[s for s in strings if any(k in s.lower() for k in ('flag{','correct_ciphertext','hookme','mainactivity','rc4encrypt','setpackagenametonative','success','incorrect'))]
+  print('DEX',n,'SIZE',len(b),'CLASSES',cs,'APP_CLASSES',appclasses)
+  print('DEX_RELEVANT_STRINGS',relevant)
+ arsc=z.read('resources.arsc')
+ longhex=re.findall(rb'(?<![0-9A-Fa-f])([0-9A-Fa-f]{32,})(?![0-9A-Fa-f])',arsc)
+ print('RESOURCE_LONG_HEX_COUNT',len(longhex),'VALUES',[x.decode() for x in longhex])
+'@ | python -
+Write-Output '--- independent decode result ---'
+python (Join-Path $root '题目资料\hookme_542\verify_hookme_custom_rc4.py')
+Stop-Transcript
+Process ID: 16040
+PSVersion: 7.6.5
+PSEdition: Core
+GitCommitId: 7.6.5
+OS: Microsoft Windows 10.0.26200
+Platform: Win32NT
+PSCompatibleVersions: 1.0, 2.0, 3.0, 4.0, 5.0, 5.1, 6.0, 7.0
+PSRemotingProtocolVersion: 2.4
+SerializationVersion: 1.1.0.1
+WSManStackVersion: 3.0
+**********************
+Transcript started, output file is C:\Users\mzj\Desktop\CTF\玄机刷题\记录\续攻-hookme-终端记录.txt
+--- independent decode result ---
+
+**********************
+PowerShell transcript end
+End time: 20260928193452
+**********************
+**********************
+PowerShell transcript start
+Start time: 20260928193511
+Username: DESKTOP-412KTAR\mzj
+RunAs User: DESKTOP-412KTAR\mzj
+Configuration Name: 
+Machine: DESKTOP-412KTAR (Microsoft Windows NT 10.0.26200.0)
+Host Application: C:\Users\mzj\.cache\codex-runtimes\codex-primary-runtime\dependencies\native\powershell\pwsh.dll -Command try { [Console]::OutputEncoding=[System.Text.Encoding]::UTF8 } catch {}
+$ErrorActionPreference='Continue'
+$root='C:\Users\mzj\Desktop\CTF\玄机刷题'; $log=Join-Path $root '记录\续攻-hookme-终端记录.txt'
+Start-Transcript -LiteralPath $log -Append
+$dump = python (Join-Path $root '题目资料\hookme_542\dex_dump_hookme.py')
+Write-Output '--- only application bytecode decisions and JNI calls ---'
+$dump | Select-String -Pattern '^CLASS|^ METHOD|correct_ciphertext|rc4Encrypt|setPackageNameToNative|equals|success|Expected|setOnClick|onClick|packageName' | ForEach-Object { $_.Line }
+Write-Output '--- all special package class descriptors across dex files ---'
+$base=Join-Path $root '题目资料\hookme_542\代码附件'
+$files=Get-ChildItem -LiteralPath $base -Filter 'classes*.dex' -File | Sort-Object Name
+foreach($f in $files){$strings=[Text.Encoding]::UTF8.GetString([IO.File]::ReadAllBytes($f.FullName));$matches=[regex]::Matches($strings,'Lcom/example/hookme/[A-Za-z0-9_$/;]+')|ForEach-Object Value|Sort-Object -Unique;Write-Output "$($f.Name): $($matches -join ', ')"}
+Stop-Transcript
+Process ID: 14708
+PSVersion: 7.6.5
+PSEdition: Core
+GitCommitId: 7.6.5
+OS: Microsoft Windows 10.0.26200
+Platform: Win32NT
+PSCompatibleVersions: 1.0, 2.0, 3.0, 4.0, 5.0, 5.1, 6.0, 7.0
+PSRemotingProtocolVersion: 2.4
+SerializationVersion: 1.1.0.1
+WSManStackVersion: 3.0
+**********************
+Transcript started, output file is C:\Users\mzj\Desktop\CTF\玄机刷题\记录\续攻-hookme-终端记录.txt
+--- only application bytecode decisions and JNI calls ---
+CLASS Lcom/example/hookme/MainActivity$$ExternalSyntheticLambda0; access 0x1011 class_data_off 0x12a5
+ METHOD direct id=5 access=0x11001 code=0x5bc ('Lcom/example/hookme/MainActivity$$ExternalSyntheticLambda0;', '<init>', '(Landroid/widget/EditText;Lcom/example/hookme/MainActivity;Landroid/widget/TextView;)V')
+ METHOD virtual id=6 access=0x11 code=0x5e0 ('Lcom/example/hookme/MainActivity$$ExternalSyntheticLambda0;', 'onClick', '(Landroid/view/View;)V')
+CLASS Lcom/example/hookme/MainActivity$Companion; access 0x11 class_data_off 0x12bc
+ METHOD direct id=7 access=0x10002 code=0x604 ('Lcom/example/hookme/MainActivity$Companion;', '<init>', '()V')
+ METHOD direct id=8 access=0x11001 code=0x61c ('Lcom/example/hookme/MainActivity$Companion;', '<init>', '(Lkotlin/jvm/internal/DefaultConstructorMarker;)V')
+CLASS Lcom/example/hookme/MainActivity; access 0x11 class_data_off 0x12cc
+ METHOD direct id=9 access=0x1009 code=0x6d8 ('Lcom/example/hookme/MainActivity;', '$r8$lambda$Sr6sQXzvEjgJBU6OLiC0M3Wd7xs', '(Landroid/widget/EditText;Lcom/example/hookme/MainActivity;Landroid/widget/TextView;Landroid/view/View;)V')
+ METHOD direct id=10 access=0x10008 code=0x6f0 ('Lcom/example/hookme/MainActivity;', '<clinit>', '()V')
+ METHOD direct id=11 access=0x10001 code=0x720 ('Lcom/example/hookme/MainActivity;', '<init>', '()V')
+ METHOD direct id=15 access=0x12 code=0x634 ('Lcom/example/hookme/MainActivity;', 'hexStringToByteArray', '(Ljava/lang/String;)[B')
+ METHOD direct id=17 access=0x1a code=0x738 ('Lcom/example/hookme/MainActivity;', 'onCreate$lambda$0', '(Landroid/widget/EditText;Lcom/example/hookme/MainActivity;Landroid/widget/TextView;Landroid/view/View;)V')
+    0016: invoke-virtual           206e 0012 0006 METHOD=18 ('Lcom/example/hookme/MainActivity;', 'rc4Encrypt', '(Ljava/lang/String;)[B')
+    0029: invoke-static            2071 001c 0031 METHOD=28 ('Ljava/util/Arrays;', 'equals', '([B[B)Z')
+    002f: const-string             041a 006e STRING='success'
+ METHOD virtual id=16 access=0x4 code=0x7d8 ('Lcom/example/hookme/MainActivity;', 'onCreate', '(Landroid/os/Bundle;)V')
+    0008: invoke-virtual           106e 000d 0005 METHOD=13 ('Lcom/example/hookme/MainActivity;', 'getPackageName', '()Ljava/lang/String;')
+    000c: invoke-virtual           206e 0014 0005 METHOD=20 ('Lcom/example/hookme/MainActivity;', 'setPackageNameToNative', '(Ljava/lang/String;)V')
+    002c: invoke-virtual           206e 0000 0042 METHOD=0 ('Landroid/widget/Button;', 'setOnClickListener', '(Landroid/view/View$OnClickListener;)V')
+ METHOD virtual id=18 access=0x111 code=0x0 ('Lcom/example/hookme/MainActivity;', 'rc4Encrypt', '(Ljava/lang/String;)[B')
+ METHOD virtual id=20 access=0x111 code=0x0 ('Lcom/example/hookme/MainActivity;', 'setPackageNameToNative', '(Ljava/lang/String;)V')
+--- all special package class descriptors across dex files ---
+classes.dex:
+classes2.dex: Lcom/example/hookme/R;, Lcom/example/hookme/R$color;, Lcom/example/hookme/R$drawable;, Lcom/example/hookme/R$id;, Lcom/example/hookme/R$layout;, Lcom/example/hookme/R$mipmap;, Lcom/example/hookme/R$string;, Lcom/example/hookme/R$style;, Lcom/example/hookme/R$xml;
+classes3.dex: Lcom/example/hookme/databinding/ActivityMainBinding;, Lcom/example/hookme/R$id;, Lcom/example/hookme/R$layout;
+classes4.dex: Lcom/example/hookme/MainActivity;, Lcom/example/hookme/MainActivity$$ExternalSyntheticLambda0;, Lcom/example/hookme/MainActivity$Companion;, Lcom/example/hookme/R$id;, Lcom/example/hookme/R$layout;, Lcom/example/hookme/R$string;
+**********************
+PowerShell transcript end
+End time: 20260928193512
+**********************
+**********************
+PowerShell transcript start
+Start time: 20260928193617
+Username: DESKTOP-412KTAR\mzj
+RunAs User: DESKTOP-412KTAR\mzj
+Configuration Name: 
+Machine: DESKTOP-412KTAR (Microsoft Windows NT 10.0.26200.0)
+Host Application: C:\Users\mzj\.cache\codex-runtimes\codex-primary-runtime\dependencies\native\powershell\pwsh.dll -Command try { [Console]::OutputEncoding=[System.Text.Encoding]::UTF8 } catch {}
+$ErrorActionPreference='Stop'
+$root='C:\Users\mzj\Desktop\CTF\玄机刷题'
+$log=Join-Path $root '记录\续攻-hookme-终端记录.txt'
+Start-Transcript -LiteralPath $log -Append
+$note=Join-Path $root '记录\hookme-分析过程记录.md'
+$section=@'
+
+## 2026-09-28 续攻复核：检查隐藏校验路径与 APK 其他载荷（玄机 ID 542）
+
+### 本次检查目标
+
+此前 APK 静态验证得出 `flag{ee9fb062624c1e527fab36d3a27484d1}`，但平台曾拒绝。此次只在现有附件上排查“APK 是否还含另一套验证、另一份 flag、额外输入/环境条件或第二载荷”；没有访问平台、浏览器或提交答案，也没有尝试改写 flag 前缀。
+
+### 逐步检查
+
+1. **确认 APK 可完整读取并盘点内容。** 重新对 `附件解包\hookme\HookMe.apk` 做 ZIP 完整性检查，`testzip()` 返回 `None`，共 891 个 ZIP 条目。以 assets、raw、secret、flag、config 等目录名筛查可承载额外题目数据的资源路径，结果为空；全部 DEX 之外没有发现单独的脚本、配置或旗标载荷。
+2. **按 DEX 分析应用代码归属。** APK 共包含 `classes.dex`、`classes2.dex`、`classes3.dex`、`classes4.dex`。逐个解析类描述符后，主应用逻辑 `MainActivity` 仅在 `classes4.dex`；`classes3.dex` 是 ActivityMainBinding 视图绑定；`classes2.dex` 含资源常量类；`classes.dex` 主要是 AndroidX/Kotlin 依赖，未发现另一个 `com.example.hookme` 应用验证类。应用类字符串中未发现第二个 `flag{...}` 或第二个密文。
+3. **重新检查输入到结果判断的完整链路。** `MainActivity.onCreate` 调用 `getPackageName()` 并将结果传入 `setPackageNameToNative`；点击监听器调用 `rc4Encrypt(输入)`，取 `R$string.correct_ciphertext` 并用 `hexStringToByteArray` 转为字节，然后通过 `Arrays.equals` 逐字节比较。匹配后界面显示 `success`。该应用链路没有读取网络响应或设备标识后再变更答案的代码分支。
+4. **枚举密文资源。** 对完整 `resources.arsc` 中不少于 32 位的连续十六进制字符串做提取，只找到一条：`f235b888b3f4e08bff17e7e29bc3bf67d0f9a1b7b6581bb4a1eb299684e99923a8d193caf91d`，长度 38 字节。之前资源字段映射已确认该字符串对应 `correct_ciphertext`。
+5. **重跑解密与反向验证。** 用现存独立 Python 实现按 Manifest 包名 `com.example.hookme` 生成密钥，seed 为 `0x636f`，按 MT19937 低字节构造 S-box，再执行 KSA、PRGA。解密结果仍是 `flag{ee9fb062624c1e527fab36d3a27484d1}`；将结果重新加密得到的 38 字节与唯一资源密文完全相同，`REENCRYPT_MATCHES_RESOURCE=True`。旧分析还用独立 C++ 实现交叉复现，输出相同。
+6. **复核 ABI。** 重跑 `audit_other_abis.py`，检查 armeabi-v7a 与 x86 的导出 JNI 和算法实现；此前已审查 arm64-v8a 与 x86_64。四种 ABI 的目标逻辑均表现为同一套包名派生 seed、MT19937 字节 S-box、KSA 与 RC4 风格 PRGA；没有找到另一份隐藏密文或基于架构切换的 flag。ARMv7 的 seed 汇编按 `key[0] << 8 | key[1]` 组合，ASCII 包名首两字节仍为 `0x636f`。
+
+### 结论
+
+本次没有找到 APK 中第二个 flag、替代密文、远程校验或环境门槛。现有候选仍是这份 APK 自身校验逻辑的唯一可复现答案，反向加密可逐字节还原唯一密文；但由于玄机平台此前返回错误，**题目 542 仍不能标记为平台通过或已解决**。平台拒绝原因无法从 APK 本地证据判明，不能据此推造替代 flag。命令及输出逐条保存在 `记录\续攻-hookme-终端记录.txt`。
+'@
+Add-Content -LiteralPath $note -Value $section -Encoding UTF8
+Write-Output 'WP_APPEND_OK'
+Get-Item -LiteralPath $note | Select-Object FullName,Length,LastWriteTime | Format-List
+Write-Output '--- appended section tail ---'
+Get-Content -LiteralPath $note -Tail 32
+Stop-Transcript
+Process ID: 28540
+PSVersion: 7.6.5
+PSEdition: Core
+GitCommitId: 7.6.5
+OS: Microsoft Windows 10.0.26200
+Platform: Win32NT
+PSCompatibleVersions: 1.0, 2.0, 3.0, 4.0, 5.0, 5.1, 6.0, 7.0
+PSRemotingProtocolVersion: 2.4
+SerializationVersion: 1.1.0.1
+WSManStackVersion: 3.0
+**********************
+Transcript started, output file is C:\Users\mzj\Desktop\CTF\玄机刷题\记录\续攻-hookme-终端记录.txt
+WP_APPEND_OK
+
+FullName      : C:\Users\mzj\Desktop\CTF\玄机刷题\记录\hookme-分析过程记录.md
+Length        : 6717
+LastWriteTime : 2026/9/28 19:36:17
+
+--- appended section tail ---
+
+先前 Python 复现脚本 题目资料/hookme_542/verify_hookme_custom_rc4.py 从 APK 的 resources.arsc 提取这条密文，再按 native 的 seed、MT19937 低字节 S-box、KSA、PRGA 解出候选。为避免只依赖同一段 Python 实现，本轮另编译并运行独立 C++ 复现 题目资料/hookme_542/independent_rc4_repro.cpp（MSYS2 g++，-std=c++17 -O2）：
+
+- 输出 seed：0x636f
+- 输出明文：flag{ee9fb062624c1e527fab36d3a27484d1}
+- 再加密结果与 APK 唯一密文完全相同：REENC_MATCH=1
+- 进程退出码：0
+
+完整命令、编译器输出和复现输出见 记录/限时攻关-hookme-终端记录.txt。本轮新证据与既有 Python 脚本的重加密断言相互独立地支持“该字符串是这份 APK 本地校验器的答案”。
+
+### 结论与未决点
+
+本地 APK 答案的算法推导与跨语言复现已闭合，但它与父线程所转述的平台拒绝结果冲突。当前本地证据不能判定冲突来自玄机题目绑定了另一份附件、平台题目答案数据不一致，还是题目本身在 APK 校验之外另有提交约定；这些都只是可能解释，未被证实。本地候选不能标成平台通过，也不应在本地证据不足时生成替代 flag。若继续攻关，需先由父线程核对 ID 542 题目页实际附件指纹/提交格式；本代理依照委派要求不操作平台。
+
+## 2026-09-28 续攻复核：检查隐藏校验路径与 APK 其他载荷（玄机 ID 542）
+
+### 本次检查目标
+
+此前 APK 静态验证得出 `flag{ee9fb062624c1e527fab36d3a27484d1}`，但平台曾拒绝。此次只在现有附件上排查“APK 是否还含另一套验证、另一份 flag、额外输入/环境条件或第二载荷”；没有访问平台、浏览器或提交答案，也没有尝试改写 flag 前缀。
+
+### 逐步检查
+
+1. **确认 APK 可完整读取并盘点内容。** 重新对 `附件解包\hookme\HookMe.apk` 做 ZIP 完整性检查，`testzip()` 返回 `None`，共 891 个 ZIP 条目。以 assets、raw、secret、flag、config 等目录名筛查可承载额外题目数据的资源路径，结果为空；全部 DEX 之外没有发现单独的脚本、配置或旗标载荷。
+2. **按 DEX 分析应用代码归属。** APK 共包含 `classes.dex`、`classes2.dex`、`classes3.dex`、`classes4.dex`。逐个解析类描述符后，主应用逻辑 `MainActivity` 仅在 `classes4.dex`；`classes3.dex` 是 ActivityMainBinding 视图绑定；`classes2.dex` 含资源常量类；`classes.dex` 主要是 AndroidX/Kotlin 依赖，未发现另一个 `com.example.hookme` 应用验证类。应用类字符串中未发现第二个 `flag{...}` 或第二个密文。
+3. **重新检查输入到结果判断的完整链路。** `MainActivity.onCreate` 调用 `getPackageName()` 并将结果传入 `setPackageNameToNative`；点击监听器调用 `rc4Encrypt(输入)`，取 `R$string.correct_ciphertext` 并用 `hexStringToByteArray` 转为字节，然后通过 `Arrays.equals` 逐字节比较。匹配后界面显示 `success`。该应用链路没有读取网络响应或设备标识后再变更答案的代码分支。
+4. **枚举密文资源。** 对完整 `resources.arsc` 中不少于 32 位的连续十六进制字符串做提取，只找到一条：`f235b888b3f4e08bff17e7e29bc3bf67d0f9a1b7b6581bb4a1eb299684e99923a8d193caf91d`，长度 38 字节。之前资源字段映射已确认该字符串对应 `correct_ciphertext`。
+5. **重跑解密与反向验证。** 用现存独立 Python 实现按 Manifest 包名 `com.example.hookme` 生成密钥，seed 为 `0x636f`，按 MT19937 低字节构造 S-box，再执行 KSA、PRGA。解密结果仍是 `flag{ee9fb062624c1e527fab36d3a27484d1}`；将结果重新加密得到的 38 字节与唯一资源密文完全相同，`REENCRYPT_MATCHES_RESOURCE=True`。旧分析还用独立 C++ 实现交叉复现，输出相同。
+6. **复核 ABI。** 重跑 `audit_other_abis.py`，检查 armeabi-v7a 与 x86 的导出 JNI 和算法实现；此前已审查 arm64-v8a 与 x86_64。四种 ABI 的目标逻辑均表现为同一套包名派生 seed、MT19937 字节 S-box、KSA 与 RC4 风格 PRGA；没有找到另一份隐藏密文或基于架构切换的 flag。ARMv7 的 seed 汇编按 `key[0] << 8 | key[1]` 组合，ASCII 包名首两字节仍为 `0x636f`。
+
+### 结论
+
+本次没有找到 APK 中第二个 flag、替代密文、远程校验或环境门槛。现有候选仍是这份 APK 自身校验逻辑的唯一可复现答案，反向加密可逐字节还原唯一密文；但由于玄机平台此前返回错误，**题目 542 仍不能标记为平台通过或已解决**。平台拒绝原因无法从 APK 本地证据判明，不能据此推造替代 flag。命令及输出逐条保存在 `记录\续攻-hookme-终端记录.txt`。
+**********************
+PowerShell transcript end
+End time: 20260928193618
+**********************

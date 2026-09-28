@@ -1,0 +1,8 @@
+# 第5章 题 C2：用公开试报验证符号映射
+PS C:\Users\mzj\Desktop\CTF\CTF-training-problem-first-full> python -c 'from zipfile import ZipFile; import json; r=json.loads(ZipFile(''labs/platform/attachments/586-five-grid.zip'').read(''attachments/archive.json'')); a=r[''glyph_plate'']; w=r[''sample_wire''].replace('' '', ''''); bits=''''.join(f''{a.index(s):05b}'' for s in w); print(''试报符号数:'', len(w), '', 比特数:'', len(bits)); print(''前 12 个符号在模板中的下标:'', [a.index(s) for s in w[:12]]); print(''拼出的比特串前 40 位:'', bits[:40]); b=bytes(int(bits[i:i+8], 2) for i in range(0, len(bits)//8*8, 8)); print(''每 8 位组装成字节:'', b); txt=b.decode(''utf-8''); print(''UTF-8 解码结果:'', txt); print(''与 sample_plain 一致:'', txt==r[''sample_plain''])'
+试报符号数: 13 , 比特数: 65
+前 12 个符号在模板中的下标: [28, 22, 18, 9, 25, 25, 28, 15, 21, 21, 7, 20]
+拼出的比特串前 40 位: 1110010110100100100111001110011110001111
+每 8 位组装成字节: b'\xe5\xa4\x9c\xe7\x8f\xadOK'
+UTF-8 解码结果: 夜班OK
+与 sample_plain 一致: True

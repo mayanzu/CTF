@@ -1,0 +1,11 @@
+#include <stdio.h>
+
+/* Exercise P2: an intentionally unsafe format string. Build in WSL. */
+int main(void) {
+    char input[128];
+    const char *secret = "flag{format_string_leaks}";
+    puts("Say something:");
+    if (!fgets(input, sizeof input, stdin)) return 1;
+    printf(input, secret); /* Deliberately vulnerable. */
+    return 0;
+}

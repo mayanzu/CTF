@@ -1,0 +1,13 @@
+mzj@Ubuntu-24.04:~$ cat ~/pwn-lab/layout.c
+#include <stddef.h>
+#include <stdio.h>
+struct Session { char name[24]; void (*next)(void); };
+int main(void) {
+    printf("sizeof(struct Session) = %zu\n", sizeof(struct Session));
+    printf("offsetof(next)         = %zu\n", offsetof(struct Session, next));
+    return 0;
+}
+
+mzj@Ubuntu-24.04:~$ cd ~/pwn-lab && gcc -o layout layout.c && ./layout
+sizeof(struct Session) = 32
+offsetof(next)         = 24

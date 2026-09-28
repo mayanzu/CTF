@@ -1,0 +1,1066 @@
+\documentclass[UTF8,12pt,oneside]{ctexbook}
+\input{handout-common}
+% Keep instructional figures beside the step that introduces them.
+\usepackage{float}
+\renewcommand{\shot}[4][0.92]{%
+  \begin{figure}[H]\centering
+  \includegraphics[width=#1\linewidth]{#2}%
+  \caption{#3}\label{fig:#4}\end{figure}}
+% 字形修正：①②③④ 等序号与 ★☆、↔、希腊字母在西文字体中缺字形，声明为 CJK 字符类，
+% 改由中文字体渲染，避免这些字符在 PDF 里被吞掉。
+\xeCJKDeclareCharClass{CJK}{"2460 -> "24FF, "2194 -> "2195, "2605 -> "2606, "03B1 -> "03C9}
+\handoutmark{Reverse 专攻版}
+\booktitle{CTF 网络安全入门：Reverse 专攻版}
+
+\begin{document}
+\frontmatter
+\begin{titlepage}
+\centering
+\vspace*{28mm}
+{\Huge\bfseries CTF 网络安全入门\par}
+\vspace{6mm}
+{\LARGE\bfseries Reverse 专攻版\par}
+\vspace{8mm}
+{\large 把“程序说不对”改写成等式 · 从黑盒观察到白盒验证\par}
+\vspace{10mm}
+{\large\bfseries 本册特色\par}
+\vspace{3mm}
+\begin{minipage}{0.86\linewidth}
+\begin{itemize}
+\item 零基础起点：环境安装、命令行、字节与十六进制，每个术语首现都有白话解释；
+\item 三道带做题（R1 异或校验器、R2 乘加校验器、玄机 589 闸机票根），每题配真实终端截图；
+\item 每张截图都来自真实执行：命令输出先被录制为实录文本，再渲染成终端窗口图，可按命令逐条复现；
+\item 工具箱逐个演示：file、strings、xxd、objdump、readelf、python3 字节运算；
+\item 附录含命令速查表、术语表与玄机命令速查表与术语表。
+\end{itemize}
+\end{minipage}
+\vfill
+{\large 适用对象：学过 Python、C 和命令行的 CTF 初学者\par}
+\vspace{4mm}
+{\large 版本：2026 年 9 月（零基础重构版）\par}
+\end{titlepage}
+
+\chapter*{使用说明}
+\addcontentsline{toc}{chapter}{使用说明}
+
+\section*{这本讲义教什么}
+Reverse（逆向工程）方向的题目，通常给你一个\kw{可执行程序}（或一段编译后的代码），程序只回答“对”或“不对”。你的任务是弄清它内部的判定逻辑，反推出它接受的输入，或直接解出它藏起来的 flag。本册按“先铺垫、再工具、再题目、再带做”的顺序展开，学完你应该能独立完成同类型的入门逆向题。
+
+\section*{学习路线图}
+\begin{enumerate}
+\item \textbf{第 1 章 零基础预备}：装好 WSL 与工具，认识命令行的管道与重定向；
+\item \textbf{第 2 章 基础知识铺垫}：程序怎么从源码变成机器码，x86-64 汇编与寄存器、栈帧与调用约定，二进制里能看到什么，逆向的标准路线，字节运算与 RC4 概念；
+\item \textbf{第 3 章 工具箱}：六个常用工具，每个都有真实输出截图；
+\item \textbf{第 4 章 题目：题面卡与逐题图解带做}：三道题每题一张题面卡，卡后面直接就是跟着截图一步步做的解题过程；
+\item \textbf{第 6 章 复盘}：知识地图、易错清单、下次怎么办；
+\item \textbf{第 7 章 自测与参考答案}：先做题再看推演；
+\item \textbf{附录}：命令速查表、术语表。
+\end{enumerate}
+
+\section*{怎么用这本讲义}
+建议先只读第 4 章的题面卡自行尝试，再对照同一题后面的解题步骤、配套源码和脚本复现。讲义中每条命令都注明执行环境（Windows PowerShell 还是 WSL）。\textbf{截图说明}：所有终端截图均由工具真实执行命令后录制渲染，未做任何内容修改；\kw{原理示意图}（流程图、对应关系图）为 matplotlib 绘制的教学示意图，图注中会注明。玄机平台（xj.edisec.net）的页面无法截图，凡涉及平台处均以文字表格示意，并注明“示意，非平台截图”。
+
+\section*{安全声明}
+所有实验只针对本资料附带的程序和明确允许练习的平台题目。不要把命令用于未经授权的系统；来源不明的二进制先做静态分析，不要随手运行；不要把账号密码写进讲义、脚本或共享压缩包。
+
+\section*{术语约定}
+每个术语第一次出现时都会用白话解释，并在附录 C 术语表中给出一句话定义。\kw{字节}（byte）是计算机存储的最小可寻址单位，一个字节有 8 个\kw{位}（bit），能表示 0--255 共 256 个数值；本册几乎所有的“魔法数”（如 \code{0x23}、\code{171}）都是字节层面的数值。\kw{十六进制}（hex）是人类看字节的常用记法，两位数字表示一个字节，如 \code{0x45} 表示数值 69。
+
+\section*{已验证答案一览（原讲义事实原样保留）}
+本地题 R1 的接受输入为 \code{flag\{reverse\_xor\}}，R2 为 \code{flag\{trace\_the\_loop\}}；玄机 589 闸机票根的票根与 flag 由本册解题脚本真实运行得到（见第 4 章图~\ref{fig:fig-rev-20}）；原讲义已验证的玄机 557 qgd 答案为 \code{flag\{933de8e7e0/\allowbreak 3b162f64bcfec94803d\}}，相关推演原样保留在第 7 章与附录 A。除上述内容外，本册不引入任何新的 flag。
+
+\tableofcontents
+\mainmatter
+
+% =====================================================================
+\chapter{零基础预备：实验环境、命令行与工具安装}
+\goal{在自己的电脑上搭好“能跑 Linux 程序、能看二进制”的实验环境，并养成先观察、后动手的习惯。}
+% =====================================================================
+
+\section{逆向是什么：用白话说清楚}
+先说人话：朋友给你一个小程序，说“输入正确的口令才放行”。你运行它，随便输什么都显示 \code{nope}。逆向工程（reverse engineering，常简称 reverse 或 RE）就是：\textbf{在看不到原始源码的情况下，弄明白这个程序到底怎么判断“口令正确”，从而算出正确口令}。
+
+CTF 里的 Reverse 题有三个常见形态：
+\begin{itemize}
+\item 给你一个可执行文件（Linux 的 ELF 或 Windows 的 EXE），要你找出被接受的输入，输入本身就是 flag；
+\item 给你一段编译后的代码或字节，要你还原它做的事，算出 flag；
+\item 给你一个加了“壳”的程序（比如 PyInstaller 打包的 Python 程序），要你拆开包装，找到里面的加密逻辑。
+\end{itemize}
+
+逆向题的“对手”不是别人，是编译器。编译器把你看得懂的源码翻译成了机器码；我们要把这趟翻译反着走回去。\kw{编译器}（compiler）是把 C 等高级语言翻译成 CPU 能执行的机器码的程序；\kw{机器码}（machine code）就是一堆 0/1 字节，CPU 逐条执行。
+
+\memory{逆向 = 在没有源码的前提下，从可执行文件还原“程序的判定逻辑”，并算出它接受的输入。}
+
+\section{实验环境：Windows + WSL}
+本册的练习程序是 Linux ELF 文件，需要在 Linux 环境运行。Windows 用户最省事的办法是安装 \kw{WSL}（Windows Subsystem for Linux，Windows 的 Linux 子系统）：在 PowerShell（管理员）里执行 \code{wsl --install -d Ubuntu-24.04}，装完后从开始菜单打开 Ubuntu 即可。详细的安装步骤和常见问题请看 README.md；Linux 虚拟机同样可用，命令一致。
+
+Windows 与 WSL 的路径写法不同：Windows 的 \code{C:\textbackslash} 盘在 WSL 中通常位于 \code{/mnt/c/}。本资料放在
+\begin{lstlisting}
+C:\Users\你的用户名\Desktop\CTF零基础自学资料包
+\end{lstlisting}
+对应 WSL 路径
+\begin{lstlisting}
+/mnt/c/Users/你的用户名/Desktop/CTF零基础自学资料包
+\end{lstlisting}
+终端的当前目录以资料根目录为准，动手前先用 \code{pwd} 和 \code{ls} 确认位置，避免“找不到文件”式的空转。
+
+\pitfall{Windows 的记事本、PowerShell 和 WSL 终端是三个不同的世界。截图里形如 \code{mzj@Ubuntu-24.04:\textasciitilde\$} 的提示符（\code{mzj} 是作者电脑上的用户名，你机器上会显示你自己的用户名）表示“这条命令在 WSL 里跑”；带 \code{PS} 开头提示符的才是 PowerShell 命令。}
+
+\section{工具安装与验证}
+逆向入门只需要六个小工具，WSL/Ubuntu 下用一条命令就能装齐：
+\begin{lstlisting}
+sudo apt update && sudo apt install -y binutils file bsdextrautils gcc python3
+\end{lstlisting}
+其中 \code{binutils} 提供 \code{objdump} 与 \code{readelf}，\code{file} 识别文件类型，\code{bsdextrautils} 提供 \code{xxd}，\code{gcc} 用来编译练习程序，\code{python3} 用来写字节运算脚本。装完用 \code{which} 逐个确认存在：\code{which} 的作用是打印某个命令的安装路径，什么都没打印就说明没装上。
+
+\figref{fig-rev-01} 是本册实际执行的验证结果（真实终端截图）：七个工具全部就位，\code{python3} 为 3.12.3，\code{gcc} 为 13.3.0。你的版本号略有差别没关系，只要有输出即可。
+\shot{fig-rev-01-wsl-tools.png}{真实终端截图：用 \code{which} 确认 file / strings / objdump / readelf / xxd / gcc / python3 全部安装成功，并查看 python3 与 gcc 版本}{fig-rev-01}
+
+\paragraph{先把练习程序编译出来}后面第 3 章和第 4 章会反复用到两个练习文件：\code{check1}（一个 C 程序，需要编译）和 \code{verify2.py}（Python 脚本，直接运行）。\code{check1.c} 随包提供，但二进制 \code{check1} 要你自己编——\textbf{现在编好，后面就不用回头补}。在 WSL 里进入资料根目录后执行：
+\begin{lstlisting}
+cd /mnt/c/Users/你的用户名/Desktop/CTF零基础自学资料包
+gcc -O0 -o labs/reverse/check1 labs/reverse/check1.c
+file labs/reverse/check1
+\end{lstlisting}
+\figref{fig-rev-27} 是真实执行结果：\code{file} 认出它是 \code{ELF 64-bit LSB pie executable, x86-64 ... not stripped}，看到这行就说明编译成功。\code{not stripped} 意思是符号表还在，所以第 3 章的 \code{strings}、\code{objdump} 能直接读出函数名。
+
+\shot{fig-rev-27-compile-check1.png}{真实终端截图：在 WSL 里用 gcc -O0 编译 check1.c，再用 file 确认产物是 ELF 64-bit、not stripped（终端实录截图）}{fig-rev-27}
+
+\pitfall{① 报 \code{No such file or directory}：当前目录不对。先 \code{pwd} 看看自己在哪，资料根目录里应该能看到 \code{labs/}、\code{figures/}、\code{README.md}。② 报 \code{No rule to make target} 或找不到 \code{check1.c}：路径拼错了，确认 \code{ls labs/reverse/} 能列出 \code{check1.c}。③ 后面忘了自己编过、结果 \code{xxd} 提示文件不存在：回到本页重新执行一次这三条命令。}
+
+\pitfall{为什么固定用 \code{-O0}？}\code{-O0} 表示“不做优化”，编译器把你写的代码按原样顺序翻译成机器码。加了优化后，编译器可能把校验循环合并、改写甚至整段删掉，反汇编出来的样子就和讲义里展示的不一样了。练习题一律用 \code{-O0}，保证“看到的汇编 = 写的代码”。
+
+\code{python3} 有两种用法，第 2、3 章的示例都会出现，先认识一下：把代码写进文件后 \code{python3 脚本.py} 一次跑完；或者直接敲 \code{python3} 回车，进入\kw{交互式解释器}（REPL，read-eval-print loop，读一行、算一行、打印一行）。进入后提示符变成 \code{>>>}，你输入一个表达式它立刻给出结果——第 2.5 节和 3.6 节那些以 \code{>>> 0x45} 开头的代码块，就是在画这个界面。想退出时按 \code{Ctrl+D}（或输入 \code{exit()}）。本书里凡出现 \code{>>>} 的行，都在提示你“这一句可以直接敲进 REPL 验证”。
+
+\section{命令行的三个小概念：管道、重定向、退出码}
+带做步骤会大量使用下面三个写法，先在这里认识：
+
+\begin{itemize}
+\item \kw{管道}（pipe）：竖线 \code{|}，把左边命令的输出当作右边命令的输入。\code{echo hello | ./check1} 的意思是“把字符串 hello 喂给程序 check1”，相当于你在键盘上敲了 hello 再回车。\code{echo} 命令负责打印一行文字，\code{./check1} 表示运行当前目录下名为 check1 的文件。
+\item \kw{标准输入/输出}（stdin/stdout）：程序默认从键盘读入（stdin）、向屏幕打印（stdout）。用管道可以把“键盘”换成“另一个命令的输出”。
+\item \kw{退出码}（exit code）：命令结束后留下的一个数字，0 通常表示成功。用 \code{echo \$?} 可以看到上一条命令的退出码。
+\end{itemize}
+
+另一个常见写法是 \code{>} 重定向，如 \code{ls > list.txt} 把输出写进文件而不是屏幕。明白这三点，后面截图里的每条命令你都能看懂“输入从哪来、输出到哪去”。
+
+\memory{命令之间用 \code{|} 接流水线：\code{echo 输入 | 程序} 就是“喂输入给程序”的标准姿势。}
+
+\section{好习惯：先观察，后动手}
+拿到陌生材料，第一个动作永远是观察，而不是运行：
+\begin{enumerate}
+\item 先回答两个问题：“这题要我交付什么？”“程序正常（未破解时）的输出是什么？”——后者叫\kw{基线}（baseline），是判断“有没有变化”的参照；
+\item 用 \code{file} 看它是什么类型的文件；
+\item 用 \code{strings} 翻一翻有没有可读的提示；
+\item 再决定是静态分析（读文件）还是运行观察（喂输入）。
+\end{enumerate}
+来源不明的 Windows EXE 更要谨慎：先静态分析，必要时在受控的虚拟机里运行。考试平台给出的练习附件可以放心在练习环境里分析，但“先静态后动态”的顺序不变。
+
+\tip{每一步的结论都写成一句可复现的话：“我执行了命令 X，看到输出 Y，因此认为 Z”。这条证据链就是逆向题的解题报告，也是队友复核的依据。}
+
+% =====================================================================
+\chapter{Reverse 基础知识铺垫}
+\goal{理解程序从源码到可执行文件的全过程，知道字符串、常量和代码逻辑分别藏在二进制的哪里，并掌握字节运算反推与 RC4 的基本概念。}
+% =====================================================================
+
+\section{程序从源码到可执行文件}
+写完 \code{hello.c} 到能在终端运行，中间经历了五个阶段，\figref{fig-rev-21} 画出了完整链条：
+\begin{enumerate}
+\item \kw{预处理}（gcc -E）：把 \code{\#include} 的头文件内容展开进来，把宏替换成实际文本，得到 \code{hello.i}；
+\item \kw{编译}（gcc -S）：把 C 文本翻译成\kw{汇编}（assembly，一种给人看的助记指令文本），得到 \code{hello.s}；
+\item \kw{汇编}（as）：把汇编指令逐条编码成机器码字节，得到目标文件 \code{hello.o}；
+\item \kw{链接}（ld）：把你的代码和 printf、fgets 这类\kw{库函数}的实现拼在一起，得到可执行文件 \code{a.out}；
+\item \kw{加载执行}：操作系统把可执行文件读进内存，CPU 从入口地址开始逐条执行机器码。
+\end{enumerate}
+平时写 \code{gcc -o hello hello.c} 一条命令搞定，是因为 gcc 在幕后把五步连跑了。
+\shot{fig-rev-21-build-pipeline.png}{原理示意图（matplotlib 绘制）：源码经预处理、编译、汇编、链接变成可执行文件；Reverse 就是把这条链反着走}{fig-rev-21}
+
+\pitfall{“编译”这个词有两个含义：狭义指 C→汇编那一步，广义指从源码到可执行文件的整个链条。本册说“编译成可执行文件”时指后者。}
+
+\section{源码、汇编、机器码：一件事的三种写法}
+同一段逻辑在三个层面的写法对照见\figref{fig-rev-22}，全部取自本册 R1 题程序 check1 的真实反汇编：
+\begin{itemize}
+\item \kw{源码}：人写的，有变量名、有 if/for；
+\item \kw{汇编}：CPU 视角的步骤清单。\code{mov} 是搬运数据，\code{cmp} 是比较并设置标志，\code{je}（jump if equal）是“相等就跳转”，\code{call} 是调用函数，\code{xor} 是按位异或；
+\item \kw{机器码}：汇编指令的字节编码。比如 \code{xor \$0x23,\%eax} 这条指令编码为 3 个字节 \code{83 f0 23}。
+\end{itemize}
+逆向的过程就是：从文件里读到机器码，用工具还原出汇编（这一步叫\kw{反汇编}，disassembly），再把汇编“翻译成一句源码的意思”。不需要逐条背指令，入门阶段认识十来条常见指令足够（下一小节给出最小指令集）。
+\shot{fig-rev-22-src-asm-bytes.png}{原理示意图（matplotlib 绘制）：同一件事的三种写法对照。左：C 源码；中：objdump -d 看到的 x86-64 汇编；右：文件里实际存储的机器码字节}{fig-rev-22}
+
+但“认识十来条指令”不等于读得懂一整段反汇编。第 4 章 R1 第 4 步要对着 \code{objdump -d} 的输出找变换，输出里还夹着 \code{\%eax}、\code{\%rdi}、\code{rbp-0x90} 这些没解释过的东西。下面四个小节把这块补齐：寄存器、最小指令集、两种汇编语法、栈帧与调用约定。它们全部绑定到 R1 的真实反汇编，读完就能照着读。
+
+\subsection{读汇编前的第一课：寄存器是 CPU 手边的小格子}
+\kw{寄存器}（register）是 CPU 内部直接参与运算的一小块存储：数量很少（x86-64 有 16 个 64 位的通用寄存器），但速度比内存快得多。程序运行时的中间数据几乎都在寄存器之间倒手，而不是每次读写内存，所以反汇编里全是寄存器的名字。不认识这些“格子”，反汇编就等于看天书。
+
+下表列出入门题里最常出场的几个，第二列标出惯例用途与本册第一次见到它的地方（都来自真实反汇编）：
+\begin{center}
+\begin{tabular}{@{}lp{0.7\linewidth}@{}}
+\toprule
+寄存器 & 惯例用途与本册出处 \\
+\midrule
+\code{\%rax} & 累加器，也是函数\kw{返回值}的存放处。\code{cmp \$0x11,\%rax} 比较长度，\code{mov \$0x1,\%eax} 表示“返回 1、判定失败” \\
+\code{\%rcx} & 第 4 个参数（也常作计数器）。\code{lea 0xd86(\%rip),\%rcx} 把目标数组地址放进 rcx \\
+\code{\%rdx} & 第 3 个参数。\code{mov 0x2e22(\%rip),\%rdx} 把 stdin 交给 fgets \\
+\code{\%rsi} & 第 2 个参数。\code{mov \$0x80,\%esi} 把缓冲区长度 0x80 交给 fgets \\
+\code{\%rdi} & 第 1 个参数。\code{mov \%rax,\%rdi} 把缓冲区地址交给 fgets \\
+\code{\%rbp} & 栈基址，指向当前函数栈帧的起点。\code{lea -0x90(\%rbp),\%rax} 取局部缓冲区地址 \\
+\code{\%rsp} & 栈顶指针，始终指向栈顶。\code{sub \$0xa0,\%rsp} 给局部变量腾空间 \\
+\code{\%rip} & 指令指针，指向“下一条要执行的指令”。\code{lea 0xd86(\%rip),\%rcx} 借此定位常量 \\
+\bottomrule
+\end{tabular}
+\end{center}
+
+还有一条容易卡的规则：同一个寄存器按“用到多少位”有不同的名字。\code{\%rax} 是 64 位，\code{\%eax} 是它的低 32 位，\code{\%ax} 是低 16 位，\code{\%al} 是最低 8 位（\code{\%rdx} 同理有 \code{\%edx}、\code{\%dl}）。所以 R1 第二段反汇编里出现的 \code{\%eax} 和 \code{\%al}，其实是同一个格子的不同宽度：比较长度这类“整型”用 64 位名 \code{\%rax}，处理单个字节时用 8 位名 \code{\%al}。
+
+\memory{寄存器是 CPU 手边的小格子：整型参数按 rdi、rsi、rdx、rcx 的顺序传，返回值看 rax，栈顶看 rsp。}
+
+\pitfall{\code{\%eax} 不是“另一个寄存器”，而是 \code{\%rax} 的低 32 位视图。写 \code{mov \$0x1,\%eax} 会把 rax 的高 32 位一并清零，别把它当成独立变量。}
+
+\subsection{十几条够用的最小指令集}
+反汇编里只有一条条\kw{指令}（instruction）。不必逐条背，入门题反复出现的就那么十几条，先认识它们的“一句话含义”：
+\begin{center}
+\begin{tabular}{@{}lp{0.62\linewidth}@{}}
+\toprule
+指令 & 一句话含义（后附本册真实例子） \\
+\midrule
+\code{mov} & 搬运数据（寄存器或内存）。\code{mov \%rax,\%rdi} \\
+\code{lea} & 只算地址、不访问内存（load effective address）。\code{lea -0x90(\%rbp),\%rax} \\
+\code{cmp} & 比较两个值并设置标志位，不改动原操作数。\code{cmp \$0x11,\%rax} \\
+\code{test} & 按位与后设标志，常用来判“是不是 0”。\code{test \%rax,\%rax} \\
+\code{je} / \code{jne} & 相等 / 不相等就跳转。\code{je 1211 <main+0x48>} \\
+\code{jmp} & 无条件跳转。\code{jmp 12d7 <main+0x10e>} \\
+\code{call} / \code{ret} & 调用函数 / 从函数返回。\code{call <fgets@plt>} \\
+\code{push} / \code{pop} & 把一个值压入 / 弹出栈。\code{push \%rbp} \\
+\code{xor} & 按位异或（对同一个寄存器异或自身等于清零）。\code{xor \$0x23,\%eax} \\
+\code{add} / \code{sub} & 加 / 减。\code{sub \$0xa0,\%rsp} \\
+\code{and} / \code{or} & 按位与 / 或，常用来取掩码。\code{and \$0xff,\%eax} \\
+\code{shl} / \code{shr} & 左移 / 右移若干位。\code{shr \$0x4,\%eax} \\
+\bottomrule
+\end{tabular}
+\end{center}
+
+一条指令写成“助记符 操作数,操作数”。以 \code{xor \$0x23,\%eax} 为例：\code{\$0x23} 是\kw{立即数}（immediate，直接写死在指令里的常数，AT\&T 语法里带 \code{\$} 前缀），\code{\%eax} 是参与运算的寄存器。而 \code{movzbl (\%rax),\%eax} 里的 \code{(\%rax)} 表示“以 rax 里的值当地址，去内存取一个字节，再搬进 eax”。
+
+\memory{先认 mov / lea / cmp / test / je / jne / jmp / call / ret / push / pop / xor / add / sub / and / shl / shr，就够读入门题的反汇编了。}
+
+\pitfall{读汇编不是“逐条执行、心算到底”，而是回答两个问题：\textbf{比较了什么}、\textbf{做了什么变换}。R1 的两段反汇编正好分别回答“长度是不是 17”和“是不是先异或 0x23 再比较”。}
+
+\subsection{AT\&T 与 Intel：同一条指令的两种写法}
+objdump 默认输出\kw{AT\&T 语法}，字面像 \code{mov \%rsp,\%rbp}：寄存器带 \code{\%}、立即数带 \code{\$}、内存写成 \code{偏移(基址)}，而且\textbf{操作数顺序是“源, 目的”}。网上大量教程和 Ghidra/IDA 默认的\kw{Intel 语法}则相反：寄存器不带前缀、内存写成 \code{[基址+偏移]}，\textbf{顺序是“目的, 源”}。两派说的是同一件事，只是书写习惯不同：
+\begin{center}
+\begin{tabular}{@{}lll@{}}
+\toprule
+AT\&T（objdump 默认） & Intel（\code{-M intel}） & 含义 \\
+\midrule
+\code{mov \%rsp,\%rbp} & \code{mov rbp,rsp} & 把 rsp 的值给 rbp \\
+\code{sub \$0xa0,\%rsp} & \code{sub rsp,0xa0} & 栈顶下移 0xa0 字节 \\
+\code{lea -0x90(\%rbp),\%rax} & \code{lea rax,[rbp-0x90]} & 把 rbp-0x90 这个地址放进 rax \\
+\code{mov \$0x80,\%esi} & \code{mov esi,0x80} & 把 0x80 放进 esi \\
+\bottomrule
+\end{tabular}
+\end{center}
+
+想切换成 Intel 语法，给 objdump 加一个参数即可：\code{objdump -d -M intel 目标文件}（\code{-M intel} 意为“反汇编时用 Intel 语法”）。\figref{fig-rev-26} 是真实对照截图：对 check1 的 main 开头分别用两种语法反汇编，机器码字节完全一致，只有写法不同。
+\shot{fig-rev-26-asm-syntax.png}{真实终端截图：objdump -d（上，AT\&T 语法）与 objdump -d -M intel（下，Intel 语法）反汇编 labs/reverse/check1 的 main 开头，机器码相同、写法不同}{fig-rev-26}
+
+\debugtip{按 Intel 的习惯把 \code{mov \%rsp,\%rbp} 读成“把 rbp 给 rsp”（目的在前）就会把搬运方向搞反，进而把栈的方向想错。看到不熟悉的写法，先判断它属于哪一派，再读顺序。}
+
+\subsection{函数怎么被调用：栈、栈帧与参数传递}
+R1 第 4 步的反汇编里有连续三行 \code{lea -0x90(\%rbp),\%rax}、\code{mov \%rax,\%rdi}、\code{call <fgets@plt>}。要读懂它，得先知道“参数放哪、局部变量放哪”。
+
+\kw{栈}（stack）是内存里一段“后进先出”的区域，专供函数调用使用。它从高地址向低地址生长：\code{push} 让栈顶下降、\code{pop} 让栈顶上升，\code{\%rsp} 始终指向栈顶。一个函数在栈上占用的那一段叫\kw{栈帧}（stack frame），\code{\%rbp} 指向它的起点。
+
+x86-64 Linux 的\kw{调用约定}（calling convention）就三条，记住就能读调用现场：
+\begin{enumerate}
+\item 前 6 个整数/指针\kw{参数}依次放进 \code{\%rdi}、\code{\%rsi}、\code{\%rdx}、\code{\%rcx}、\code{\%r8}、\code{\%r9}，超过 6 个的参数才通过栈传递；
+\item 函数的\kw{返回值}放在 \code{\%rax}；
+\item 进入函数先 \code{push \%rbp}、\code{mov \%rsp,\%rbp} 建立自己的栈帧，再用 \code{sub \$N,\%rsp} 给局部变量腾地方；局部变量按 \code{rbp-偏移} 访问。
+\end{enumerate}
+
+把这三条套到\figref{fig-rev-26}上半段的真实反汇编，整个场面就立起来了：
+\begin{itemize}
+\item \code{push \%rbp} 加 \code{mov \%rsp,\%rbp}：保存调用者的栈基址，建立 main 自己的栈帧；
+\item \code{sub \$0xa0,\%rsp}：给 main 的局部变量开 0xa0（160）字节，源码里那个 \code{char input[128]} 就在这里；
+\item 一连串准备动作：\code{lea -0x90(\%rbp),\%rax} 取出缓冲区地址；\code{mov \%rax,\%rdi} 把它送进第 1 个参数；\code{mov \$0x80,\%esi} 送进第 2 个参数（长度 0x80）；\code{mov 0x2e22(\%rip),\%rdx} 送进第 3 个参数（stdin）；最后 \code{call <fgets@plt>} 读出整行；
+\item \code{xor \%eax,\%eax}：把 eax 清零（任何数异或自己都是 0），这是编译器准备“返回 0”的惯用手法。
+\end{itemize}
+
+\memory{读函数调用三步曲：看参数进了哪几个寄存器（rdi/rsi/rdx…），看 call 了谁，看返回值怎么用 rax。}
+
+\pitfall{栈是“从高地址往低地址”长的，所以 \code{sub \$0xa0,\%rsp} 是往下开空间，而不是往上。这一点写 Pwn 题构造 payload 时会再次用到（Pwn 分册详解），方向想反会全盘失败。}
+
+\section{二进制里能看到什么：字符串、常量、代码逻辑}
+可执行文件不是一个黑疙瘩，里面有明确的“分区”。ELF 文件常见分区：
+\begin{itemize}
+\item \code{.text}：机器码（程序的逻辑）；
+\item \code{.rodata}：只读数据（read-only data），比如提示语、目标常量数组；
+\item \code{.data} / \code{.bss}：可写的全局变量；
+\item \code{.symtab}：\kw{符号表}（symbol table），记录函数名与地址的对应关系。若编译时“去符号”（stripped），函数名就没了，只剩地址，逆向难度随之上升。
+\end{itemize}
+所以“二进制里能看到什么”的答案分三层：
+\begin{enumerate}
+\item \kw{可打印字符串}：用 \code{strings} 一搜就有，比如错误提示、菜单文字；
+\item \kw{常量}：数字数组、密钥、目标值，多藏在 .rodata，用 \code{xxd} 或 \code{objdump -s} 能直接读出字节；
+\item \kw{代码逻辑}：藏在 .text，需要反汇编阅读。
+\end{enumerate}
+R1 题的“标准答案数组”就躺在 .rodata 里，\figref{fig-rev-11} 会带你亲眼看到它。
+
+\memory{字符串看 strings，常量看 .rodata，逻辑看 .text 的反汇编——二进制取证的三层套路。}
+
+\section{逆向的标准路线：黑盒观察 → 白盒验证}
+“黑盒”指只看输入输出、不看内部；“白盒”指读内部实现。做逆向题的标准姿势是先黑盒、后白盒，最后用原程序验证，全程如\figref{fig-rev-25}：
+\begin{enumerate}
+\item \kw{黑盒观察}：运行程序，故意喂错误输入，记录它打印什么（nope？哪里报错？）；
+\item \kw{静态取证}：file 看类型、strings 找提示、xxd/objdump -s 看常量；
+\item \kw{找到变换}：objdump -d 读逻辑，判断输入经过了什么运算（异或？乘加？RC4？）；
+\item \kw{写等式反推}：把“程序的比较”改写成等式，用 python3 解出候选输入；
+\item \kw{原程序验证}：把候选输入喂回原程序，看到 \code{correct} 才算数。
+\end{enumerate}
+\shot{fig-rev-25-method-map.png}{原理示意图（matplotlib 绘制）：逆向题标准路线与卡住时的回头路}{fig-rev-25}
+
+\pitfall{脚本打印出一个“像 flag 的字符串”不等于解题完成。只有原程序接受（或平台判定正确），证据链才算闭合。}
+
+\section{字节、ASCII 与十六进制}
+计算机里没有“字符”，只有数字。\kw{ASCII} 表把数字和字符一一对应：65 是 `A'，97 是 `a'，102 是 `f'，123 是左花括号 `\{'。所以“把字节 0x66 变成字符”就是查表：\code{chr(0x66)} 得到 `f'。反过来 \code{ord('f')} 得到 102。
+
+\kw{十六进制}（hex）是看字节的记法：两位数字表示一个字节，前缀 \code{0x} 表示这是十六进制数，如 \code{0x23} 表示十进制 35。写十六进制的好处是字节边界一目了然——反汇编、xxd 输出全是十六进制，看惯了就会形成“字节直觉”。
+
+python3 是最好的字节计算器，随手可验证：
+\begin{lstlisting}
+>>> 0x45          # 十六进制 -> 十进制
+69
+>>> chr(0x66)     # 字节 -> 字符
+'f'
+>>> ord('f')      # 字符 -> 字节
+102
+\end{lstlisting}
+
+\section{异或（XOR）：自己的逆运算}
+\kw{异或}（exclusive or，写作 \code{\^{}}、EOR、XOR）是按位运算：两位相同得 0，不同得 1。它有两条逆天的性质：
+\begin{enumerate}
+\item \kw{自己是自己的逆}：$(a\oplus b)\oplus b = a$。把数据用密钥 $b$ 异或一次得到密文，再异或一次就还原明文；
+\item \kw{任意值异或 0 不变}：$a\oplus 0 = a$。
+\end{enumerate}
+下面的真值表是全部规则：
+\begin{center}
+\begin{tabular}{cc|c}
+\toprule
+$a$ & $b$ & $a\oplus b$ \\
+\midrule
+0 & 0 & 0 \\
+0 & 1 & 1 \\
+1 & 0 & 1 \\
+1 & 1 & 0 \\
+\bottomrule
+\end{tabular}
+\end{center}
+例如 $0x45 \oplus 0x23$：先化成二进制 $0100\,0101 \oplus 0010\,0011 = 0110\,0110 = 0x66$，也就是字符 `f'。R1 的整个校验就是一个“逐字节异或 0x23 再比较”的循环，\figref{fig-rev-23} 给出流程图，它的求解就是把这个循环每一步反过来做一遍异或。
+\shot{fig-rev-23-xor-flow.png}{原理示意图（matplotlib 绘制）：check1 的校验流程。求解时把箭头反过来：对每个目标字节再异或 0x23 就得到输入}{fig-rev-23}
+
+\memory{XOR 加密的“密钥”就是解密的密钥：同一个运算做两次回到原点。}
+
+\section{Python 字节运算反推：从 TARGET 逆出 (b*3+7)\&255}
+R2 的程序对每个输入字节 $b$ 计算 $t = (3b + 7) \bmod 256$ 再和目标列表比较。“\&255” 是程序员写“取模 256”的惯用法：一个字节只有 8 位，\&255 的作用就是丢掉进位、只留低 8 位。
+
+顺带认识两个位运算写法，读 RC4 代码（第 2.8 节）和 557 的推演（第 7 章）时都会反复见到：
+\begin{itemize}
+\item \kw{掩码}（mask）：\code{0xFF} 就是二进制 \code{11111111}（8 个 1）。一个数与 \code{0xFF} 做按位与，高位的比特全被清成 0，只保留最低 8 位——所以对非负整数而言 \code{x \& 0xFF}、\code{x \& 255}、\code{x \% 256} 三者等价。RC4 代码里每一处 \code{\& 0xFF} 都是在把索引压回 0--255，防止越界。
+\item \kw{移位}（shift）：\code{x << n} 把二进制整体左移 n 位（低位补 0），相当于乘 $2^n$；\code{x >> n} 右移 n 位，相当于整除 $2^n$。557 那个自定义 RC4 里的 \code{(t << 4) | (t >> 4)} 就是把一个字节的高 4 位和低 4 位对调位置。
+\end{itemize}
+
+要从 $t$ 反推 $b$，先想清楚变换是否可逆：
+\begin{itemize}
+\item 加 7 可逆：减 7 就好；
+\item 乘 3 在模 256 下可逆，当且仅当 3 与 256 互素（最大公约数为 1）。$3\times 171 = 513 = 2\times256 + 1$，即 $3\times171\equiv 1 \pmod{256}$，所以 171 是 3 的\kw{模逆元}（modular inverse）；
+\item 于是 $b = (t - 7)\times 171 \bmod 256$。
+\end{itemize}
+python3 内置了求模逆的函数：\code{pow(3, -1, 256)} 直接得到 171，不用手算。反推代码：
+\begin{lstlisting}[language=Python]
+TARGET = [57, 75, 42, 60, 120, 99, 93, 42, 48, 54,
+          36, 99, 63, 54, 36, 75, 84, 84, 87, 126]
+inv3 = pow(3, -1, 256)                 # 171
+plain = bytes(((t - 7) * inv3) & 255 for t in TARGET)
+print(plain.decode())
+\end{lstlisting}
+
+\pitfall{如果乘数是 2（与 256 不互素），就不存在模逆元：偶数输出会对应两个可能的输入，奇数输出根本产生不了。此时不能硬套公式，要结合字符集、长度等约束缩小范围。判断“先问变换有没有唯一逆”，是逆向题的分水岭。}
+
+\section{RC4 的两个阶段：KSA 与 PRGA}
+\kw{RC4} 是一种经典的\kw{流密码}（stream cipher）：它根据密钥生成一串看起来随机的字节（叫\kw{密钥流}，keystream），再把明文和密钥流逐字节异或得到密文。解密是同一过程——用同一个密钥重新生成密钥流，再异或一次即可还原。
+
+RC4 分两个阶段（流程见\figref{fig-rev-24}）：
+\begin{enumerate}
+\item \kw{KSA}（Key Scheduling Algorithm，密钥调度）：造一张 256 项的状态表 $S=[0,1,\ldots,255]$，用密钥把它彻底打乱；
+\item \kw{PRGA}（Pseudo-Random Generation Algorithm，伪随机生成）：每需要一个字节，就再次搅动状态表并吐出一个密钥流字节 $K$。
+\end{enumerate}
+标准 RC4 的参考实现（与本册 589 解题脚本一致）：
+\begin{lstlisting}[language=Python]
+def rc4(key, data):
+    S = list(range(256))
+    j = 0
+    for i in range(256):                       # KSA
+        j = (j + S[i] + key[i % len(key)]) & 0xFF
+        S[i], S[j] = S[j], S[i]
+    i = j = 0
+    out = bytearray()
+    for byte in data:                          # PRGA
+        i = (i + 1) & 0xFF
+        j = (j + S[i]) & 0xFF
+        S[i], S[j] = S[j], S[i]
+        out.append(byte ^ S[(S[i] + S[j]) & 0xFF])
+    return bytes(out)
+\end{lstlisting}
+RC4 的安全性完全依赖密钥保密。攻击 RC4 题目的切入口通常是：\textbf{找到密钥藏在哪、密文藏在哪，以及程序按什么顺序调用解密}。
+\shot{fig-rev-24-rc4-flow.png}{原理示意图（matplotlib 绘制）：RC4 的 KSA 与 PRGA 两个阶段，以及 589 题“先解票根再解 flag”的两次调用关系}{fig-rev-24}
+
+\subsection{为什么 589 要“先解票根再解 flag”}
+玄机 589 闸机票根的程序用了两次 RC4：第一次用内置的 16 字节密钥解出 11 字节的\kw{票根}（ticket，相当于通关凭证）；第二次把刚解出的票根\textbf{当作密钥}，去解 flag 的密文。两步环环相扣：不知道票根就无法生成第二步的密钥流，直接解 flag 只会得到乱码。这正是流密码“密钥决定一切”的直接体现。第 4 章会用真实脚本把两步跑通。
+
+\memory{RC4 = KSA 打乱状态表 + PRGA 吐密钥流 + 与密文逐字节异或；密钥错了，输出只是乱码，不会报错。}
+
+\section{本章小结：把术语串成一条线}
+源码被\kw{编译器}翻译成\kw{机器码}，存放在可执行文件的 \code{.text}；提示语和目标常量放在 \code{.rodata}；函数名放在\kw{符号表}（可能被剥掉）。要读懂 \code{objdump} 输出，先认识\kw{寄存器}与十几条常用\kw{指令}，以及栈帧与\kw{调用约定}（第 2.2 节）。拿到题目先\kw{黑盒观察}建立基线，再用 \code{strings}、\code{xxd}、\code{objdump} 做\kw{静态取证}，找出输入经历的\kw{变换}（XOR、乘加、RC4……），把“程序的比较”写成等式\kw{反推}，最后把结果\kw{喂回原程序}验证。这条线会在第 4 章走三遍。
+
+% =====================================================================
+\chapter{Reverse 工具箱}
+\goal{掌握六个入门必备工具：每个都知道“是什么、怎么用、输出怎么读”，并看过真实输出。}
+% =====================================================================
+
+本章每个工具都配真实终端截图。所有截图在 WSL 中录制；命令前的长 \code{cd} 是为了进入资料根目录，你也可以先进入目录再执行短命令。
+
+\section{file：先问“这是什么”}
+\kw{file} 命令读取文件开头的若干字节，告诉你它是什么类型、什么架构、有没有去符号。这是所有分析的第一步，因为不同类型的文件要用不同的工具。
+
+基本用法：
+\begin{lstlisting}
+file labs/reverse/check1
+\end{lstlisting}
+\figref{fig-rev-02} 是真实输出，两行都值得逐词看懂：
+\begin{itemize}
+\item \code{ELF 64-bit LSB pie executable, x86-64}：ELF 是 Linux 可执行文件格式（类似 Windows 的 PE）；64 位、x86-64 架构、小端序（LSB，低位字节存低地址）；
+\item \code{not stripped}：带符号表，函数名可见；\code{stripped}：符号被剥离，只剩地址——第二行的 589 附件 gate\_ticket 就是去符号的，逆向难度更高。
+\end{itemize}
+\shot{fig-rev-02-tool-file.png}{真实终端截图：file 识别 check1（ELF 64-bit、not stripped）与 589 附件 gate\_ticket（ELF 64-bit、stripped）}{fig-rev-02}
+
+\memory{file 三连问：什么格式（ELF/PE）？什么架构（x86-64）？有没有符号（stripped 与否）？}
+
+\section{strings：翻一翻可读文字}
+\kw{strings} 扫描文件中连续的可打印字符序列。它常能直接翻出提示语、错误消息，甚至明文 flag；但它只能看到\textbf{原样存放}的字符串，异或过的、拆开存的、编码过的都看不见。
+
+基本用法（\code{-a} 表示扫描整个文件，别只看默认段）：
+\begin{lstlisting}
+strings -a labs/reverse/check1
+\end{lstlisting}
+\figref{fig-rev-03} 的真实输出里有三类内容：库函数名（\code{fgets}、\code{strlen}……）、一串乱码（\code{EOBDXQFUFQPF|[LQ\^{}}——这其实是目标数组，后面会讲）、以及两个关键提示 \code{nope} 与 \code{correct}。\textbf{没搜到 flag 不能说题目无解}，只能说明它没以连续明文存放。
+\shot{fig-rev-03-tool-strings.png}{真实终端截图：strings -a 翻看 check1。没看到 flag，但看到 nope / correct 提示和一串“乱码”（目标数组的 ASCII 视图）}{fig-rev-03}
+
+\section{xxd：用十六进制看字节}
+\kw{xxd} 把文件字节以十六进制打印出来，左边是偏移（地址），中间是字节，右边是可读字符视图。看文件头、看常量数组、看“乱码”的真实身份，都靠它。
+
+基本用法：
+\begin{lstlisting}
+xxd -l 48 labs/reverse/check1       # 只看前 48 字节
+xxd -s 0x2010 -l 32 labs/reverse/check1   # 从偏移 0x2010 看 32 字节
+\end{lstlisting}
+\figref{fig-rev-04} 的真实输出：第一段开头的 \code{7f 45 4c 46} 就是 ELF 的\kw{魔数}（magic number，文件格式的固定签名）；第二段从偏移 \code{0x2010} 起是 \code{45 4f 42 44 ...}，右侧 ASCII 视图显示 \code{EOBDXQFUFQPF|[LQ\^{}}——正是 R1 的目标数组，和 strings 看到的“乱码”对上了。
+\shot{fig-rev-04-tool-xxd.png}{真实终端截图：xxd 看 check1 文件头（\code{7f 45 4c 46} = ELF 魔数）与偏移 0x2010 处的目标数组字节}{fig-rev-04}
+
+\section{objdump -d：反汇编看逻辑}
+\kw{objdump} 是 GNU 的二进制分析瑞士军刀，\code{-d} 参数把机器码反汇编成汇编指令。逆向入门用它的两个姿势：
+\begin{lstlisting}
+objdump -d labs/reverse/check1                        # 全部反汇编
+objdump -d labs/reverse/check1 | sed -n '/<main>:/,+14p'   # 只看 main 开头
+\end{lstlisting}
+\code{sed -n '/<main>:/,+14p'} 的意思是“从含 \code{<main>:} 的行开始，往后打印 14 行”。反汇编输出很长，用这种方式切片是必备技能。输出的默认语法是 AT\&T（如 \code{\%rax}、\code{\$0x11}）；想换成网上更常见的 Intel 语法就加 \code{-M intel}，两种写法的区别与读法见第 2.2 节。
+
+\figref{fig-rev-05} 的真实输出是 main 的开头十几行：\code{call <fgets@plt>} 表示调用 fgets 读输入（\code{@plt} 是跳进动态库的中转站），\code{mov \$0x80,\%esi} 是给 fgets 传缓冲区长度 0x80（128 字节）。函数名（如 \code{<main>}）来自符号表；去符号文件里这些名字都会消失，只能靠地址。
+\shot{fig-rev-05-tool-objdump.png}{真实终端截图：objdump -d 反汇编 check1 的 main 开头，可见 \code{call <fgets@plt>}（读输入）等指令}{fig-rev-05}
+
+\section{readelf -h：看 ELF 身份证}
+\kw{readelf} 读取 ELF 文件的结构信息。\code{-h} 显示\kw{ELF 头}（文件头），相当于文件的身份证。
+
+基本用法：
+\begin{lstlisting}
+readelf -h labs/reverse/check1
+\end{lstlisting}
+\figref{fig-rev-06} 的真实输出中最有用的四行：\code{Class: ELF64}（64 位）、\code{Type: DYN}（位置无关可执行文件，即 PIE）、\code{Machine: Advanced Micro Devices X86-64}（x86-64 架构）、\code{Entry point address: 0x10e0}（程序执行的第一条指令地址）。看懂这几行，就知道该用 32 位还是 64 位的视角读反汇编。（本册截图统一加 \code{LC\_ALL=C} 环境变量以英文输出为例；中文系统的输出是中文，含义相同。）
+\shot{fig-rev-06-tool-readelf.png}{真实终端截图：readelf -h 查看 check1 的 ELF 头——ELF64、x86-64、入口地址 0x10e0}{fig-rev-06}
+
+\section{python3：字节运算的计算器}
+逆向题的“算”几乎都交给 python3。最常用的四类运算：
+\begin{lstlisting}
+>>> 0x45 ^ 0x23            # 异或
+102
+>>> chr(102)               # 字节转字符
+'f'
+>>> pow(3, -1, 256)        # 求模逆元
+171
+>>> ((97 * 3 + 7) & 255)   # 正向变换（& 255 = mod 256）
+54
+\end{lstlisting}
+\figref{fig-rev-07} 是这三类运算的真实终端输出：异或 0x45\^{ }0x23 得 102（字符 f）、3 对 256 的模逆元是 171、对 97/98/99 做 $(3b+7)\,\&\,255$ 得到 \code{[54, 57, 60]}。
+\shot{fig-rev-07-tool-python.png}{真实终端截图：python3 做字节运算——异或、求模逆元、正向变换（(b*3+7)\&255）}{fig-rev-07}
+
+\memory{解逆向题的“公式三件套”：\code{\^{}} 异或、\code{\& 255} 取低 8 位、\code{pow(a,-1,m)} 求模逆元。}
+
+\section{本章工具一览}
+\begin{center}
+\begin{tabular}{lll}
+\toprule
+工具 & 一句话用途 & 关键参数 \\
+\midrule
+\code{file} & 识别格式/架构/是否去符号 & 无 \\
+\code{strings} & 找可打印字符串 & \code{-a} \\
+\code{xxd} & 十六进制看字节 & \code{-l} 长度、\code{-s} 偏移 \\
+\code{objdump} & 反汇编、看数据段 & \code{-d}、\code{-s -j 段名} \\
+\code{readelf} & 看 ELF 结构 & \code{-h}、\code{-S}、\code{-s} \\
+\code{python3} & 字节运算与写破解脚本 & \code{-c} 单行执行 \\
+\bottomrule
+\end{tabular}
+\end{center}
+
+补充两个以后会用到的工具：\code{nm} 列出符号表（函数名与地址）；\kw{Ghidra}/\kw{IDA} 是图形化反编译工具，能把汇编还原成伪代码（伪代码里的变量名是工具推测的，涉及细节时以汇编和实际运行结果为准）。本册的 WSL 环境没有安装 gdb 调试器，所有结论用静态证据 + 程序实际运行验证，这也是真实比赛中常见的情形。
+
+\tip{把六条命令打成肌肉记忆：\code{file → strings → xxd → objdump -d → readelf -h → python3}。前三条建立直觉，中间两条找证据，最后一条算答案。}
+
+% =====================================================================
+% ===========================================================================
+\chapter{题目：题面卡与逐题图解带做}
+
+\goal{三道题，每题一节：先用题面卡把“给什么、要什么、考什么”读清楚，紧接着就是这道题的完整解题步骤——读题与思路、分步操作与观察、结果与核对、为什么会成功、排错指南、变式练习。建议先只读题面卡自己动手试 10--15 分钟，卡住再看后面的步骤。}
+
+% =====================================================================
+
+\textbf{怎么读题面卡}：
+每张题面卡固定七个字段：
+\begin{itemize}
+\item \kw{题目来源}：题目在哪儿，离线能不能做；
+\item \kw{给定材料}：你手上有什么文件、什么代码；
+\item \kw{目标}：这题到底要你干什么；
+\item \kw{交付物}：最后交什么，怎么检查格式；
+\item \kw{考点}：这题训练的知识点；
+\item \kw{前置知识}：做之前需要看懂讲义哪几节；
+\item \kw{难度}：★ 越多越难。
+\end{itemize}
+读卡顺序建议：先看“目标”和“交付物”明确终点，再看“给定材料”盘点资产，最后用“前置知识”查漏补缺。
+
+% =====================================================================
+
+本章三道题都按同一节奏展开：\textbf{读题与思路 → 分步操作与观察 → 结果与核对 → 为什么会成功 → 排错指南 → 变式练习}。截图里的命令都先进入资料根目录；你可以在 WSL 中先执行一次 \code{cd}，后面就只敲短命令。
+
+% ===========================================================================
+\section{题 R1：程序说 nope，正确输入长什么样？}
+
+\begin{challenge}{题 R1 题面卡}
+\field{题目来源}{本地练习，离线可做：\code{labs/reverse/check1}（二进制）与 \code{labs/reverse/check1.c}（源码）}
+\field{给定材料}{一个 ELF 64 位可执行文件 \code{check1}；它从标准输入读一行，判定通过打印 \code{correct}，否则打印 \code{nope}。资料里同时附了源码 \code{check1.c}（白盒练习用）}
+\field{目标}{找出能让 \code{check1} 打印 \code{correct} 的 17 字节输入}
+\field{交付物}{一个 \code{flag\{...\}} 形式的字符串。核对方式：\code{echo 你的输入 | labs/reverse/check1} 输出 \code{correct}}
+\field{考点}{逐字节 XOR 校验的逆推；常量数组在 .rodata 的定位；黑盒观察与白盒验证的配合}
+\field{前置知识}{2.6 节异或、2.3 节二进制分区、2.2 节汇编与寄存器（第 4 章要用 objdump 读 main）、3.2--3.4 节 strings/xxd/objdump}
+\field{难度}{★☆☆（入门）}
+\end{challenge}
+
+\paragraph{读题与思路}
+看到“程序说 nope”，先别急着读代码，做三十秒黑盒观察：它到底怎么失败的？是不管输什么都 nope，还是不同的输入有不同的反应？题面说输入会被逐字节异或 0x23 后和目标数组比较——如果先看到了这句话，思路就是一句话：\textbf{对目标数组每个字节再异或 0x23}。但做题时你未必有这句话，所以本节按“先黑盒、后白盒”的完整顺序走一遍：先运行看反应，再看源码与汇编找变换，最后写脚本反推并验证。反推时先手工算第一个字节建立信心：$0x45\oplus0x23 = 0x66$，查 ASCII 表是 `f'——像 flag 的开头，方向对了。
+
+\paragraph{分步操作与观察}
+\begin{enumerate}[label=\arabic*.]
+\item \textbf{确认程序身份}。在 WSL 执行：
+\begin{lstlisting}
+cd /mnt/c/Users/你的用户名/Desktop/CTF零基础自学资料包
+LC_ALL=C file labs/reverse/check1
+\end{lstlisting}
+这一步是为了确认它是能直接运行的 Linux ELF。应该看到 \code{ELF 64-bit LSB pie executable, x86-64}（见\figref{fig-rev-02}）。如果显示 PE 或别的格式，后面的命令就要换工具。
+
+\item \textbf{黑盒观察：喂两类错误输入}。
+\begin{lstlisting}
+echo hello | labs/reverse/check1
+echo 12345678901234567 | labs/reverse/check1
+\end{lstlisting}
+第一条是长度错误的输入（5 字节），第二条是长度正确（17 字节）但内容错误的输入。\figref{fig-rev-08} 的真实输出：两条都是 \code{nope}。这一步建立基线——失败时只会说 nope；也提醒我们：长度和内容是两道关卡，接下来要分别确认。
+\shot{fig-rev-08-r1-nope.png}{真实终端截图：喂长度错误（hello）与长度正确但内容错误（12345678901234567）的输入，都得到 \code{nope}}{fig-rev-08}
+
+\item \textbf{读源码，把校验写成四句话}（白盒练习可以直接看资料里的 \code{check1.c}）：
+\begin{lstlisting}
+cat labs/reverse/check1.c
+\end{lstlisting}
+\figref{fig-rev-09} 的真实输出就是源码全文。把逻辑提炼成四句：读一行；去掉末尾换行；长度必须是 17（\code{sizeof expected}）；每个字节异或 0x23 后必须等于 \code{expected[i]}。提炼高层描述比逐行抄代码管用。
+\shot{fig-rev-09-r1-source.png}{真实终端截图：cat 查看 check1.c 源码——目标数组、长度检查与异或比较循环}{fig-rev-09}
+
+\item \textbf{（模拟无源码）用反汇编找证据}。真实比赛通常没有源码，用 objdump 看 main 的两段关键逻辑：
+\begin{lstlisting}
+LC_ALL=C objdump -d labs/reverse/check1 | sed -n '/1232:/,/125b:/p'
+LC_ALL=C objdump -d labs/reverse/check1 | sed -n '/126a:/,/12b1:/p'
+\end{lstlisting}
+第一段能看到 \code{call <strlen@plt>}（求长度）和 \code{cmp \$0x11,\%rax}（和 0x11=17 比较）；第二段能看到 \code{xor \$0x23,\%eax}（异或 0x23）和 \code{cmp \%al,\%dl}（逐字节比较），见\figref{fig-rev-10}。汇编里的立即数（\code{0x11}、\code{0x23}）就是变换的全部秘密。
+\shot{fig-rev-10-r1-objdump.png}{真实终端截图：objdump -d 关键片段。上：长度检查（cmp \$0x11）；下：XOR 0x23 的比较循环（xor \$0x23,\%eax）}{fig-rev-10}
+
+\item \textbf{定位目标数组}。汇编里 \code{lea 0xd86(\%rip),\%rcx} 指向符号 \code{<expected>}，说明比较的另一侧是名为 expected 的常量数组。用 objdump 看数据段：
+\begin{lstlisting}
+LC_ALL=C objdump -s -j .rodata labs/reverse/check1
+\end{lstlisting}
+\figref{fig-rev-11} 的真实输出里，偏移 \code{2010} 处一行 \code{454f4244 58514655 46515046 7c5b4c51} 加下一行开头的 \code{5e}，共 17 字节，右侧 ASCII 视图显示 \code{EOBDXQFUFQPF|[LQ\^{}}——和 strings 看到的“乱码”一致。这就是目标数组，一共 17 项，也印证了长度检查。
+\shot{fig-rev-11-r1-rodata.png}{真实终端截图：objdump -s -j .rodata 显示目标数组字节（45 4f 42 44 ... 5e）与 ASCII 视图 EOBDXQFUFQPF|[LQ\^{}}{fig-rev-11}
+
+\item \textbf{写破解脚本反推}。对每个目标字节再异或 0x23：
+\begin{lstlisting}[language=Python]
+expected = [0x45, 0x4f, 0x42, 0x44, 0x58, 0x51, 0x46, 0x55,
+            0x46, 0x51, 0x50, 0x46, 0x7c, 0x5b, 0x4c, 0x51, 0x5e]
+plain = bytes(x ^ 0x23 for x in expected)
+print(plain.decode())
+\end{lstlisting}
+截图中用单行命令真实执行了同样的运算：
+\begin{lstlisting}
+python3 -c 'E=[0x45,0x4f,0x42,0x44,0x58,0x51,0x46,0x55,0x46,0x51,0x50,0x46,0x7c,0x5b,0x4c,0x51,0x5e]; print(bytes(x ^ 0x23 for x in E).decode())'
+\end{lstlisting}
+\figref{fig-rev-12} 的真实输出：\code{flag\{reverse\_xor\}}。17 个字符，长度刚好对上。
+\shot{fig-rev-12-r1-crack.png}{真实终端截图：python3 破解脚本真实输出——逐字节 XOR 0x23 得到 \code{flag\{reverse\_xor\}}}{fig-rev-12}
+
+\item \textbf{把结果喂回原程序}。
+\begin{lstlisting}
+echo flag{reverse_xor} | labs/reverse/check1
+\end{lstlisting}
+\figref{fig-rev-13} 的真实输出：\code{correct}。至此证据链闭环：黑盒基线、白盒变换、脚本反推、原程序接受，四样齐全。
+\shot{fig-rev-13-r1-correct.png}{真实终端截图：正确输入喂回原程序，输出 \code{correct}}{fig-rev-13}
+\end{enumerate}
+
+\paragraph{结果与核对}
+正确输入（即本题 flag）：
+\flagbox{flag\{reverse\_xor\}}
+独立核对有两条路：① 把它逐字节再异或 0x23，应还原出目标数组的 17 个字节；② 喂给原程序，看到 \code{correct}。两条都过才算验证完成，只跑破解脚本打印字符串还不够。
+
+\paragraph{为什么会成功}
+一句话机制：\textbf{异或是自己的逆运算}。程序的判定是 $input[i] \oplus 0x23 = expected[i]$，等式两边同时异或 0x23，得到 $input[i] = expected[i] \oplus 0x23$。展开说：异或不丢失信息，任何一个字节和 0x23 异或后都唯一对应另一个字节；所以“加密”用的 0x23 就是“解密”用的 0x23。目标数组放在 .rodata 里没有被加密，这让攻击者能直接读到比较对象——真实恶意软件通常会把目标值藏得更深（比如再编码一层）。
+
+\debugtip{
+\begin{enumerate}
+\item 提示 \code{nope} 但脚本输出的字符串看起来对：先数长度。echo 会补一个换行符，程序会去掉行尾换行，但如果输入里多了空格（复制时带上行尾空格），长度就不是 17。用 \code{echo -n} 或管道时留意不可见字符。
+\item 输出乱码而不是 flag：检查是否对每个字节都异或了 0x23，且没有漏掉字节数组的逗号——python 里少写一项，后续全部错位。
+\item 反汇编里找不到 \code{xor \$0x23}：确认你反汇编的是同一个文件（可用 \code{md5sum labs/reverse/check1} 记录哈希），或编译参数不同导致代码形状不同——但常量 0x23 和 0x11 一般仍在。
+\item echo 管道运行后没有任何输出：确认命令里的路径正确，且在 WSL 里执行（Windows 下无法直接运行 ELF）。
+\end{enumerate}
+}
+
+\paragraph{变式练习}
+\begin{enumerate}
+\item 把 \code{check1.c} 复制出来，把 \code{0x23} 改成 \code{0x37} 重新编译，用同样的方法求新输入；体会“换密钥不换结构”。
+\item 把比较方式从“逐字节异或”改成“先异或 0x23 再加 1”，写出新的反推公式，并验证。
+\item 只用二进制（把 \code{check1.c} 藏起来）：从 \code{objdump -s -j .rodata} 的输出直接抄目标数组，走一遍无源码流程。
+\end{enumerate}
+
+% ===========================================================================
+\section{题 R2：乘 3 加 7 的循环，怎么倒着走？}
+
+\begin{challenge}{题 R2 题面卡}
+\field{题目来源}{本地练习，离线可做：\code{labs/reverse/verify2.py}（Python 验证器）}
+\field{给定材料}{一个 Python 脚本，读取一行输入，对每个字节做变换后与目标列表比较，全对打印 \code{correct}，否则 \code{nope}。目标列表写死在脚本里}
+\field{目标}{还原出验证器接受的 20 字节输入}
+\field{交付物}{一个 \code{flag\{...\}} 形式的字符串。核对方式：\code{echo 你的输入 | python3 labs/reverse/verify2.py} 输出 \code{correct}}
+\field{考点}{模 256 乘加变换的可逆性判断；模逆元的使用；从目标值反推输入的完整流程}
+\field{前置知识}{2.7 节字节运算反推、3.6 节 python3、附录 C 术语“模逆元”}
+\field{难度}{★★☆（基础）}
+\end{challenge}
+
+\paragraph{读题与思路}
+R2 是 Python 写的验证器，读题后先问一个关键问题：\textbf{这个变换有没有唯一逆}？题面给出变换 $t=(3b+7)\bmod 256$。加法可逆（减 7），乘法在模 256 下要 3 与 256 互素才有逆元。$3\times171=513=2\times256+1$，所以逆元是 171，每个目标值 $t$ 对应唯一的 $b=(t-7)\times171\bmod256$。思路成立后，动手顺序：先黑盒看反应，再读脚本抄下变换和目标列表，然后写反推脚本，最后验证。
+
+\paragraph{分步操作与观察}
+\begin{enumerate}[label=\arabic*.]
+\item \textbf{黑盒观察}。随便输一个答案，再输一个“看起来像 flag”的答案：
+\begin{lstlisting}
+echo hello | python3 labs/reverse/verify2.py
+echo flag{reverse_xor} | python3 labs/reverse/verify2.py
+\end{lstlisting}
+\figref{fig-rev-14} 的真实输出：两条都是 \code{input> nope}（\code{input>} 是脚本的提示符）。R1 的答案在这里不通过，说明两题算法不同，不能套用。
+\shot{fig-rev-14-r2-nope.png}{真实终端截图：随便输入与沿用 R1 答案都得到 \code{nope}}{fig-rev-14}
+
+\item \textbf{读脚本，抄下变换与目标}。
+\begin{lstlisting}
+cat labs/reverse/verify2.py
+\end{lstlisting}
+\figref{fig-rev-15} 的真实输出是脚本全文。逐行读关键句：\code{data = candidate.encode("ascii", errors="ignore")} 先把输入转成字节；\code{((b * 3 + 7) \& 255) for b in data} 就是变换 $t=(3b+7)\bmod 256$；\code{== TARGET} 是逐项比较。\code{len(data) == len(TARGET)} 说明答案长度是 20。
+\shot{fig-rev-15-r2-source.png}{真实终端截图：cat 查看 verify2.py——目标列表 TARGET 与变换 (b*3+7)\&255}{fig-rev-15}
+
+\item \textbf{先确认逆元，再反推}。数学先行，代码在后：
+\begin{lstlisting}
+python3 -c 'print(pow(3, -1, 256))'
+python3 -c 'T=[57,75,42,60,120,99,93,42,48,54,36,99,63,54,36,75,84,84,87,126]; print(bytes(((t - 7) * 171) & 255 for t in T).decode())'
+\end{lstlisting}
+第一条命令输出 \code{171}，确认逆元；第二条对 20 个目标值逐项反推并按 ASCII 解码。\figref{fig-rev-16} 的真实输出：\code{flag\{trace\_the\_loop\}}。
+\shot{fig-rev-16-r2-crack.png}{真实终端截图：python3 求出模逆元 171，再逐项还原目标列表，输出 \code{flag\{trace\_the\_loop\}}}{fig-rev-16}
+
+\item \textbf{双通道验证}。把结果喂回验证器，同时反向复算一次：
+\begin{lstlisting}
+echo flag{trace_the_loop} | python3 labs/reverse/verify2.py
+python3 -c 'print([
+  ((ord(c)*3+7)&255) for c in "flag{trace_the_loop}"
+])'
+\end{lstlisting}
+第一条得到 \code{input> correct}；第二条把答案的 ASCII 码正向变换，输出与 TARGET 一致，见\figref{fig-rev-17}。反推、正算、原程序三者互相印证。
+\shot{fig-rev-17-r2-correct.png}{真实终端截图：验证器输出 \code{correct}；正向复算结果与目标列表完全一致}{fig-rev-17}
+\end{enumerate}
+
+\paragraph{结果与核对}
+正确输入（即本题 flag）：
+\flagbox{flag\{trace\_the\_loop\}}
+核对：① \code{echo flag\{trace\_the\_loop\} | python3 labs/reverse/verify2.py} 输出 \code{correct}；② 正向复算 $(3b+7)\,\&\,255$ 的 20 个结果逐项等于 TARGET；③ 首字节手工核对：$(57-7)\times171 \bmod 256 = 102$，ASCII 是 `f'。
+
+\paragraph{为什么会成功}
+一句话机制：\textbf{乘 3 在模 256 下有唯一的逆元 171}。展开说：3 与 256 互素，保证了每个输出值都恰好来自一个输入值，变换是“双射”（一一对应）；因此反推公式 $b=(t-7)\times171\bmod256$ 对全部 20 个字节同时成立。脚本先 \code{encode("ascii")} 再运算，说明答案是纯 ASCII 文本——这也是我们可以用 \code{.decode()} 直接读出 flag 的原因。
+
+\debugtip{
+\begin{enumerate}
+\item 反推结果是乱码：先验证逆元——执行 \code{pow(3, -1, 256)} 必须得 171；若你把公式写成 $(t-7)/3$ 或用了 171 的近似值，结果全错。
+\item 前几个字符像 flag 后面乱掉：多半是目标列表抄漏或抄错序。数一数列表必须是 20 项，和 \code{len(TARGET)} 一致。
+\item 验证器一直 nope：检查是否把反推结果的行尾换行也算进长度（脚本的 \code{input()} 会自动去掉换行，一般没问题）；再检查是否多复制了空格。
+\item 想改乘数做变式却算不出逆元：先算 \code{pow(5, -1, 256)} 之类确认存在；乘数取偶数时逆元不存在，这是数学限制，不是你算错。
+\end{enumerate}
+}
+
+\paragraph{变式练习}
+\begin{enumerate}
+\item 把乘数改成 5（\code{pow(5, -1, 256)} 存在），重新生成 TARGET 并反推，体会“换参数不换方法”。
+\item 把乘数改成 2，观察哪些目标值反推出两个候选字节，思考为什么此时不能只靠公式。
+\item 给变换再加一步“结果循环左移 1 位”，写出新的正逆公式，并用双通道验证法自证。
+\end{enumerate}
+
+% ===========================================================================
+\section{题 R2+：玄机 589 闸机票根——票根是什么，flag 又藏在哪？}
+
+\begin{challenge}{题 R2+ 题面卡}
+\field{题目来源}{玄机平台 2026 安网杯“闸机票根”（challenge 589，\url{https://xj.edisec.net/challenges/589}）；附件已随资料保存在 \code{labs/platform/attachments/589-gate-ticket/}，离线可解}
+\field{给定材料}{一个去符号的 ELF 64 位可执行文件 \code{gate\_ticket}。运行它会提示 \code{GATE TICKET: } 等你输入票根；输错有三种不同的拒绝信息，输对则打印 \code{GATE OPEN}}
+\field{目标}{先还原 11 字节票根，再用票根解出 flag}
+\field{交付物}{票根字符串与一个 \code{flag\{...\}} 字符串；用随资料提供的脚本 \code{labs/platform/solve\_589\_gate\_ticket.py} 可直接复现两行输出}
+\field{考点}{RC4 流密码的两次调用（KSA/PRGA）；从 .rodata 提取密钥与密文；“先解票根再解 flag”的依赖关系}
+\field{前置知识}{2.2 节汇编与寄存器、2.8 节 RC4、3.4--3.5 节 objdump/readelf、第 4 章 R1 的带做经验}
+\field{难度}{★★★（进阶）}
+\end{challenge}
+
+\pitfall{题面卡中 589 的平台信息整理自题目文字与本地附件分析，\textbf{示意，非平台截图}。本地脚本输出的 ticket 与 flag 是真实运行结果（见 \figref{fig-rev-20}）。}
+
+\paragraph{读题与思路}
+这是一道平台题的本地附件版。程序运行后提示 \code{GATE TICKET: }，像门禁一样等你刷票根。先黑盒试一下就知道：随便输会得到三种拒绝信息之一（长度不对、字符集不对、校验失败），说明它对票根有格式和内容的双重检查。题面卡说这题考 RC4 两次调用——先解票根，再用票根当密钥解 flag。所以思路是三步：\textbf{从二进制里找到密钥与两段密文 → 用 RC4 解出票根 → 用票根解出 flag}。这题比 R1/R2 多了两个难点：程序去符号（函数名不可见），常量混在 .rodata 里需要定位。好在随资料提供了完整解题脚本，我们先看懂它再运行它。
+
+\paragraph{分步操作与观察}
+\begin{enumerate}[label=\arabic*.]
+\item \textbf{识别附件}。
+\begin{lstlisting}
+LC_ALL=C file labs/platform/attachments/589-gate-ticket/gate_ticket
+strings -a labs/platform/attachments/589-gate-ticket/gate_ticket | tail -12
+\end{lstlisting}
+\figref{fig-rev-18} 的真实输出：file 显示 \code{ELF 64-bit LSB executable, x86-64, ..., stripped}——注意 \code{stripped}，符号表被剥离，反汇编里不会有函数名。strings 的尾部翻出六条有价值的线索：提示语 \code{GATE TICKET: }、三种拒绝信息、\code{GATE OPEN}，以及神秘的四字符标记 \code{GTK1}。这些字符串是后续定位数据的“路标”。
+\shot{fig-rev-18-589-file-strings.png}{真实终端截图：file 识别 gate\_ticket（stripped，去符号）；strings 尾部显示提示语、拒绝信息与 GTK1 标记}{fig-rev-18}
+
+\item \textbf{看 .rodata，按 GTK1 标记定位常量}。数据段是这类题的藏宝图：
+\begin{lstlisting}
+LC_ALL=C objdump -s -j .rodata labs/platform/attachments/589-gate-ticket/gate_ticket
+\end{lstlisting}
+\figref{fig-rev-19} 的真实输出里，地址 \code{402080} 处有 38 字节看不懂的字节（\code{7b860a12 cbdf7761 ...}），地址 \code{4020c0} 处是 \code{GTK1} 标记，紧随其后是 16 字节 \code{0be84416 6ce2d272 4fc2bc99 5bb6cfa8}（在标记偏移 +5 处）和 11 字节 \code{ac67fa6a 32753626 777a536c}（标记偏移 +21 处）。对照解题脚本的注释：16 字节那段是 \kw{密钥}，11 字节那段是\kw{票根密文}，而 \code{402080} 的 38 字节是\kw{flag 密文}（38 字节恰好是 \code{flag\{...\}} 32 位十六进制摘要的长度）。
+\shot{fig-rev-19-589-rodata.png}{真实终端截图：gate\_ticket 的 .rodata——402080 处 38 字节 flag 密文、4020c0 处 GTK1 标记及其后的 16 字节密钥与 11 字节票根密文}{fig-rev-19}
+
+\item \textbf{读懂解题脚本}。脚本 \code{labs/platform/solve\_589\_gate\_ticket.py} 做了四件事（全文 77 行，值得通读）：
+\begin{enumerate}
+\item 用 python 直接解析 ELF 结构、抽出 \code{.rodata} 段字节（不依赖 Linux 环境，也\textbf{不运行}陌生程序）；
+\item 以 \code{GTK1} 标记为基准切出密钥（16 字节）与票根密文（11 字节），并按反汇编注释定位 flag 密文（38 字节）；
+\item 调用标准 RC4（KSA + PRGA，见 2.8 节）解票根，并校验票根是 11 字节可打印字符、往返异或自洽；
+\item 用票根作密钥解 flag 密文，打印两行结果。
+\end{enumerate}
+\item \textbf{真实运行}。
+\begin{lstlisting}
+python3 labs/platform/solve_589_gate_ticket.py
+\end{lstlisting}
+\figref{fig-rev-20} 的真实输出：
+\begin{lstlisting}
+ticket: GT-A7K9M2QX
+flag: flag{0a109ca9d704833bc2924f889d1b5576}
+\end{lstlisting}
+两行输出对应两次 RC4 调用：第一行是“密钥解票根”，第二行是“票根解 flag”。
+\shot{fig-rev-20-589-solve.png}{真实终端截图：solve\_589\_gate\_ticket.py 真实运行输出——ticket: GT-A7K9M2QX 与 flag（本册所有 flag 中唯一的平台题答案，由真实运行得到）}{fig-rev-20}
+
+\item \textbf{（可选）上机刷票根}。如果想看程序亲口说 \code{GATE OPEN}，把票根喂给它：
+\begin{lstlisting}
+echo GT-A7K9M2QX | labs/platform/attachments/589-gate-ticket/gate_ticket
+\end{lstlisting}
+这是对“票根正确性”的第四重验证。
+\end{enumerate}
+
+\paragraph{结果与核对}
+票根与 flag（均由脚本真实运行得到）：
+\flagbox{GT-A7K9M2QX}
+\flagbox{flag\{0a109ca9d704833bc2924f889d1b5576\}}
+独立核对的三条路：① 脚本内置的往返校验（用密钥加密票根应还原票根密文）；② 把票根喂给 gate\_ticket 得到 \code{GATE OPEN}；③ flag 形如 32 位十六进制摘要包裹 \code{flag\{...\}}，与 38 字节密文长度吻合。平台提交记录见附录 A（589 已在平台提交并得到正确反馈）。
+
+\paragraph{为什么会成功}
+一句话机制：\textbf{RC4 解密就是再执行一遍相同的密钥流生成，两次调用的密钥分别是“内置密钥”和“解出的票根”}。展开说：KSA 用密钥打乱 256 项状态表，PRGA 吐出与明文等长的密钥流，逐字节异或即得密文；因为 RC4 是对称的，同一个密钥再跑一遍就还原明文。程序把票根当第二步的密钥，构成“连锁锁”——这也解释了为什么必须先解票根：没有 11 字节的票根，第二步的 KSA 无从开始，直接解 flag 只会得到乱码。去符号只增加了“找函数名”的难度，不改变数据和算法本身。
+
+\debugtip{
+\begin{enumerate}
+\item 脚本报 \code{GTK1 data marker was not found}：说明你用的附件不是资料包里的那一份。用 \code{md5sum} 或 SHA-256 核对附件版本，平台换过附件就要重新分析。
+\item 报 \code{decrypted ticket is not the expected printable 11-byte value}：多半是密钥/密文切片偏移搞错（标记 +5 与 +21 的位置）。对照 \figref{fig-rev-19} 逐字节检查。
+\item 输出是乱码：确认用的是标准 RC4（KSA 里 \code{j = (j + S[i] + key[i \% len(key)]) \& 0xFF}），没有漏掉 swap 或把 PRGA 的 \code{i/j} 更新顺序弄反。
+\item 想用现成 RC4 库却结果不对：库的接口可能要求明文密钥类型不同（str/bytes）；本题密钥是 16 原始字节，不是十六进制文本，别做多余的编解码。
+\end{enumerate}
+}
+
+\paragraph{变式练习}
+\begin{enumerate}
+\item 改动脚本：先只解票根不解 flag，确认第一行输出稳定后再加上第二步，体会“分步验证”。
+\item 把 flag 密文和票根密文在脚本里对调，观察输出变成什么，理解“密钥/密文角色由调用顺序决定”。
+\item 对照原讲义的 557 qgd 题（第 7 章保留推演）：它的解密是 128 项状态表的自定义 RC4 变种，找出与本题标准 RC4 的三个不同点。
+\end{enumerate}
+
+% ===========================================================================
+\section{三道题的共性复盘}
+
+把三道题并排看，套路完全一致：
+\begin{center}
+\begin{tabular}{llll}
+\toprule
+& R1 异或 & R2 乘加 & 589 RC4 \\
+\midrule
+变换 & $x\oplus0x23$ & $(3b+7)\bmod256$ & KSA+PRGA 密钥流 \\
+目标数据在哪 & .rodata 的数组 & 脚本里的 TARGET & .rodata 的 GTK1 标记后 \\
+逆运算 & 再异或一次 & 乘模逆元 171 & 同密钥重跑 RC4 \\
+独立验证 & 程序打印 correct & 程序 + 正向复算 & 往返校验 + GATE OPEN \\
+\bottomrule
+\end{tabular}
+\end{center}
+\memory{无论变换多花哨，解题骨架都是：找变换 → 写等式 → 求逆 → 喂回原程序。}
+
+% =====================================================================
+
+% ===========================================================================
+
+\chapter{复盘：知识地图与易错清单}
+\goal{把三道题的经验拧成一张地图，明确“下次拿到逆向题，第一步做什么”。}
+% =====================================================================
+
+\section{知识地图}
+\figref{fig-rev-25} 的五步路线是主干道，本章把它展开成一张知识地图。逆向题的全部知识点挂在五个树杈上：
+\begin{enumerate}
+\item \kw{认文件}：file 看格式与架构（ELF/PE、32/64 位、是否去符号）；readelf -h 看入口与类型（2.x、3.x 节）；
+\item \kw{找数据}：strings 找提示语；xxd / objdump -s 看 .rodata 常量；“乱码”字符串常是加密的目标数组（\figref{fig-rev-03} 与 \figref{fig-rev-11} 的呼应就是活例子）；
+\item \kw{读逻辑}：objdump -d 反汇编，从成功/失败输出反向追踪比较点；把汇编提炼成“读入、长度、变换、比较”四句话（2.2 节的寄存器、指令与栈帧是读懂它的前提）；
+\item \kw{写等式}：把比较写成 $f(input) = target$，判断 $f$ 是否可逆；XOR 再异或一次、乘加求模逆元、RC4 重跑一遍（2.5--2.8 节）；
+\item \kw{做验证}：结果喂回原程序（correct / GATE OPEN）；正向复算与脚本内置校验交叉印证（\figref{fig-rev-17}）。
+\end{enumerate}
+编译链（\figref{fig-rev-21}）解释了“为什么能反汇编”，源码/汇编/机器码对照（\figref{fig-rev-22}）解释了“反汇编在读什么”，AT\&T 与 Intel 语法的真实对照（\figref{fig-rev-26}）是读反汇编的入门钥匙，XOR 流程图（\figref{fig-rev-23}）和 RC4 流程图（\figref{fig-rev-24}）是两类最常见变换的解剖图。把这六张图钉在墙上，做题时对号入座即可。
+
+\section{易错清单}
+下表汇总本册带做中真实出现过（或初学者高频出现）的坑：
+\begin{center}
+\begin{tabular}{p{0.28\linewidth}p{0.32\linewidth}p{0.28\linewidth}}
+\toprule
+坑 & 症状 & 解法 \\
+\midrule
+把“没搜到 flag”当成无解 & strings 输出里没有 flag & 目标值常以变换后的字节数组存在，去看 .rodata \\
+凭 Intel 习惯读 AT\&T 汇编 & 参数/搬运方向读反，栈方向想错 & 先判断语法流派；AT\&T 是“源, 目的”（第 2.2 节） \\
+复制输入带了空格或换行 & 字节明明对却 nope & 先数长度；用 echo -n 或在脚本里 strip \\
+长度关卡没过就猜算法 & 怎么算都 nope & 先确认长度检查（R1 的 17 字节） \\
+忘记异或是按位运算 & 手算和脚本对不上 & 用 python3 算，别心算十六进制 \\
+模运算直接做除法 & 反推结果全错 & 乘法要乘模逆元（171），不是除以 3 \\
+乘数与 256 不互素还套公式 & 反推出多个候选 & 先查互素，再决定策略 \\
+凭变量名判断密钥/密文 & 解出乱码 & 以调用顺序和实际运算为准（557 qgd 的教训） \\
+只跑破解脚本就提交 & 平台判错或无法复核 & 必须让原程序/平台确认 \\
+照抄讲义地址 & 自己机器上找不到 & 地址随编译变化，只抄“结构”不抄数字 \\
+在 Windows 里运行 ELF & 报“不是可执行文件” & 到 WSL 里运行 \\
+\bottomrule
+\end{tabular}
+\end{center}
+
+\section{下次遇到这类题怎么办}
+按“有没有源码”“程序能不能跑”分四种情形，各给一条起步路线：
+\begin{itemize}
+\item \kw{有源码的练习题}（如 R1、R2）：读源码写四句话摘要 → 手算首字节 → 写脚本 → 喂回程序。重点练“写等式”，别急着抄答案；
+\item \kw{只有二进制、能运行}（如 589）：file/strings 建基线 → 喂输入看拒绝信息 → objdump -s 找常量路标（GTK1 这类标记）→ objdump -d 追数据引用 → 脚本求解 → 票根类的中间产物也要喂回程序验证；
+\item \kw{只有二进制、不能/不敢运行}：全程静态。objdump -s 直接读数据段、objdump -d 读逻辑，用 python 离线解密；陌生 Windows EXE 尤其如此；
+\item \kw{题面给机器码或字节码}（如 557）：把十六进制文本还原成字节，用反汇编器/字节码工具读指令，翻译成分支与运算，再按索引反推列表。
+\end{itemize}
+最后是通用的报告模板（写题解、交接队友都用得上）：材料是什么（文件名+哈希）→ 基线是什么（错误输入的输出）→ 证据在哪（命令+偏移/地址）→ 变换是什么（公式）→ 答案怎么算（脚本）→ 怎么验证（原程序/平台反馈）。按事实汇报，没证明的事项明确写“尚未证明”。
+
+\tip{卡住超过 20 分钟就换角度：没看过数据段就去看数据段，没跑过黑盒就去跑黑盒。逆向题的线索几乎总是藏在你还没做的那一步里。}
+
+% =====================================================================
+\chapter{自测与参考答案}
+\goal{先独立作答再对照推演；推演刻意写全中间判断，照抄最后一行命令就错过了训练目标。}
+% =====================================================================
+
+\section{自测题}
+\begin{enumerate}
+\item 为什么 strings 没找到 flag 不能说明题目没有 flag？
+\item R1 的首个目标字节是 0x45，为什么正确输入的首字符是 \code{f}？
+\item R1 的长度检查和内容检查各起什么作用？只过其中一关会怎样？
+\item R2 的变换 $t=(3b+7)\bmod256$ 中，为什么反推要乘 171 而不是除以 3？
+\item 若把 R2 的乘数改成 2，为什么无法对所有目标字节唯一还原？
+\item \code{\& 255} 和 \code{\% 256} 有什么关系？为什么说它们对字节运算等价？
+\item RC4 的 KSA 和 PRGA 各做什么？解密时要重新执行哪一部分？
+\item 589 为什么要先解票根再解 flag？直接解 flag 密文会得到什么？
+\item “脚本打印出 flag\{...\}”和“解题完成”之间还差什么？
+\item file 输出里的 \code{stripped} 说明什么？对逆向有什么影响？
+\end{enumerate}
+
+\section{参考要点}
+\begin{enumerate}
+\item strings 只发现\textbf{原样存放}的连续可打印文本；目标值可能经过异或、拆分或编码，藏在 .rodata 里。R1 的目标数组在 strings 里只是一串“乱码”（\figref{fig-rev-03}）。
+\item $0x45\oplus0x23 = 0x66$，ASCII 0x66 是 \code{f}。先手工算首字节可以快速判断方向对不对。
+\item 长度检查保证输入是 17 字节（防止长度不同引起的错位比较），内容检查保证每个字节都对。长度不对会直接 nope（\figref{fig-rev-08} 第一条），长度对但内容错也会 nope（第二条），两个 nope 的含义不同。
+\item 因为计算含模 256，除法不封闭；3 在模 256 下的逆元是 171（$3\times171\equiv1$），乘 171 与“除以 3”等价且唯一。
+\item 2 与 256 不互素，不存在模逆元：偶数目标值对应两个可能的输入字节，奇数目标值不可能由该变换产生。
+\item 对字节（低 8 位）而言，\code{x \& 255} 与 \code{x \% 256} 结果相同；前者是位运算写法，后者是算术写法。
+\item KSA 用密钥打乱 256 项状态表；PRGA 逐字节生成密钥流。解密时两者都要重新执行（用同一个密钥），再与密文异或一次。
+\item 第二次 RC4 的密钥是票根本身；不知道票根就没有正确的初始状态表，直接解 flag 密文只会得到乱码（不会报错）。
+\item 还差\textbf{原程序或平台的确认}。破解脚本的输出只是候选答案，必须让原程序打印 correct / GATE OPEN，或平台判定正确。
+\item 符号表被剥离，反汇编里函数名消失、只剩地址，定位逻辑更费力；但数据和算法本身不变，字符串路标与数据段分析照常有效。
+\end{enumerate}
+
+\section{完整推演一：R1 从目标数组还原输入}
+先建立基线：\code{echo hello | labs/reverse/check1} 输出 nope（\figref{fig-rev-08}）。读源码（\figref{fig-rev-09}）得到判定为 \code{input[i] \^{} 0x23 == expected[i]}，共 17 项。写成等式：$input[i] = expected[i] \oplus 0x23$。
+
+手算首项：$0x45 \oplus 0x23 = 0x66 = $ \code{f}，像 flag 开头，方向正确。对 17 项批量计算（\figref{fig-rev-12}）得到 \code{flag\{reverse\_xor\}}。喂回原程序输出 correct（\figref{fig-rev-13}）。反向验证：把结果逐字节再异或 0x23，还原出原目标数组的 17 个字节。两条独立证据链闭合。
+
+\section{完整推演二：R2 从目标列表还原输入}
+黑盒输入只得到 nope（\figref{fig-rev-14}）。读脚本（\figref{fig-rev-15}）抄出变换 $t=(3b+7)\bmod256$ 与 20 项目标。先验逆元：\code{pow(3,-1,256)} = 171（\figref{fig-rev-16}）。对首项 57：$(57-7)\times171 = 50\times171 = 8550 = 33\times256 + 102$，得 102 即 \code{f}。批量反推得 \code{flag\{trace\_the\_loop\}}。
+
+验证分三步：喂回验证器得 correct；把答案的 ASCII 码正向做一遍变换，20 个结果逐项等于 TARGET（\figref{fig-rev-17}）；首字节手工核对通过。若只在脚本里打印字符串而不让验证器接受，就还缺最后一步。
+
+\section{完整推演三：589 从 .rodata 到两行输出}
+file 确认去符号 ELF（\figref{fig-rev-18}）。strings 尾部的 \code{GTK1} 是数据路标。objdump -s 读 .rodata（\figref{fig-rev-19}）：标记 +5 起 16 字节为密钥，+21 起 11 字节为票根密文，402080 处 38 字节为 flag 密文。脚本用标准 RC4 两步（\figref{fig-rev-20}）：先解出 11 字节可打印票根 \code{GT-A7K9M2QX} 并通过往返自检，再以票根为密钥解出 \code{flag\{0a109ca9d704833bc2924f889d1b5576\}}。票根回喂程序得到 \code{GATE OPEN}，是第四重印证。
+
+\section{保留记录：玄机 557 qgd 的完整推演（原讲义结论原样保留）}
+本节内容来自原讲义的已验证结论，原样保留，不作改动。题目为玄机 \emph{第三届黄河流域公安院校网络安全技能挑战赛 qgd}（\url{https://xj.edisec.net/challenges/557}），官方 ZIP 含 \code{lookatme.txt}、\code{part1flag.txt}、\code{part2flag.exe}，最终格式为 \code{flag\{part1flag/part2flag\}}。
+
+\textbf{第一部分：}\code{part1flag.txt} 前半段是 x86-64 机器码的十六进制文本（全文去除首尾空白后共 695 字符，含空格分隔，对应 232 字节机器码，节选如下），后半段给出加密列表：
+\begin{lstlisting}
+48 89 4C 24 08 55 57 48 81 EC 28 01 00 00 48 8D 6C 24 20 48 8D 0D 34 08 01 00 E8 96 FB FF FF 48 83 BD 20 01 00 00 00 75 05 E9 BF
+\end{lstlisting}
+\begin{lstlisting}[language=Python]
+encrypted = [8, 107, 2, 60, 84, 96, 84, 111, 84, 104]
+part1 = bytes(x ^ (0x31 if i % 2 == 0 else 0x58)
+              for i, x in enumerate(encrypted))
+print(part1)  # b'933de8e7e0'
+\end{lstlisting}
+反汇编可见程序用位置加一后的奇偶性分支：原位置为偶数时异或 \code{0x31}，奇数时异或 \code{0x58}。例如第零项 $8\oplus49=57$ 即 \code{9}，第一项 $107\oplus88=51$ 即 \code{3}。完整第一段为 \code{933de8e7e0}。知识点：读机器码时要把分支条件翻成“原列表索引的奇偶”，避免把两把异或密钥用反。
+
+\textbf{第二部分：}\code{part2flag.exe} 是 PyInstaller 打包的 Python 程序。静态提取 Python 3.9 字节码后，入口调用 \code{decrypt(ciphertext, key)}；长十六进制常量经 \code{bytes.fromhex} 后实际作为密钥，短字节常量虽变量名叫 \code{ciphertext}，实际作为密文——\textbf{变量名不是算法依据，调用顺序才是}。其算法与标准 RC4 相似却不相同：状态表只有 128 项；初始化每轮对索引异或 55；输出字节由状态值的高低四位组合（$((16t) | (t\gg4)) \& 255$）。因此直接调用现成 RC4 库会得到错误文本。按实际代码还原后得到第二段：
+\begin{lstlisting}
+3b162f64bcfec94803d
+\end{lstlisting}
+两段按题面格式组合：
+\flagbox{flag\{933de8e7e0/\allowbreak 3b162f64bcfec94803d\}}
+此答案已在平台提交，页面显示“FLAG 正确”和步骤 $1/1$。讲义附带脚本 \code{python3 labs/platform/solve\_qgd.py path/to/qgd.zip} 保存了静态提取的常量，并核对官方 ZIP 中两份材料的 SHA-256，防止误用不同版本附件；脚本不运行 EXE。
+
+\section{自测评分参考}
+10 题中答对 8 题以上，说明本册知识地图已建立，可以去做平台题；答对 5--7 题，建议重读第 2 章对应小节并重做该题的变式练习；少于 5 题，先按第 1 章把环境与命令行练熟，再从 R1 的黑盒步骤重新走一遍。
+
+% =====================================================================
+\appendix
+\chapter{命令速查表}
+\goal{忘记命令时来这里查：左列是想做什么，右列是敲什么。所有命令默认在 WSL 的资料根目录执行。}
+% =====================================================================
+
+\section{观察与识别}
+\begin{center}
+\begin{tabular}{p{0.36\linewidth}p{0.52\linewidth}}
+\toprule
+想做什么 & 敲什么命令 \\
+\midrule
+确认当前目录 & \code{pwd; ls} \\
+识别文件类型/架构 & \code{LC\_ALL=C file 目标文件} \\
+找可打印字符串 & \code{strings -a 目标文件} \\
+看文件头字节 & \code{xxd -l 48 目标文件} \\
+看指定偏移的字节 & \code{xxd -s 0x2010 -l 32 目标文件} \\
+看 ELF 头（架构/入口） & \code{LC\_ALL=C readelf -h 目标文件} \\
+看 ELF 分段表 & \code{LC\_ALL=C readelf -S 目标文件} \\
+看符号表 & \code{nm 目标文件} \\
+\bottomrule
+\end{tabular}
+\end{center}
+
+\section{反汇编与数据段}
+\begin{center}
+\begin{tabular}{p{0.36\linewidth}p{0.52\linewidth}}
+\toprule
+想做什么 & 敲什么命令 \\
+\midrule
+反汇编全部代码 & \code{LC\_ALL=C objdump -d 目标文件} \\
+反汇编（Intel 语法） & \code{LC\_ALL=C objdump -d -M intel 目标文件} \\
+只看 main 开头 & \code{LC\_ALL=C objdump -d 目标文件 | sed -n '/<main>:/,+20p'} \\
+按地址切片 & \code{LC\_ALL=C objdump -d 目标文件 | sed -n '/126a:/,/12b1:/p'} \\
+读数据段字节 & \code{LC\_ALL=C objdump -s -j .rodata 目标文件} \\
+在反汇编里找常量 & \code{objdump -d 目标文件 | grep 0x23} \\
+记录文件哈希 & \code{sha256sum 目标文件} \\
+\bottomrule
+\end{tabular}
+\end{center}
+
+\section{运行与破解}
+\begin{center}
+\begin{tabular}{p{0.36\linewidth}p{0.52\linewidth}}
+\toprule
+想做什么 & 敲什么命令 \\
+\midrule
+喂输入给程序（失败演示） & \code{echo hello | labs/reverse/check1} \\
+喂正确输入验证 & \code{echo flag\{reverse\_xor\} | labs/reverse/check1} \\
+运行 Python 验证器 & \code{echo flag\{trace\_the\_loop\} | python3 labs/reverse/verify2.py} \\
+单行异或反推 & \code{python3 -c 'print(bytes(x \textasciicircum{} 0x23 for x in E).decode())'} \\
+求模逆元 & \code{python3 -c 'print(pow(3, -1, 256))'} \\
+乘加变换反推 & \code{python3 -c 'print(bytes(((t - 7) * 171) \& 255 for t in T).decode())'} \\
+跑 589 解题脚本 & \code{python3} \url{labs/platform/solve_589_gate_ticket.py} \\
+编译练习程序 & \code{gcc -O0 -o} \url{labs/reverse/check1} \url{labs/reverse/check1.c} \\
+看上条命令退出码 & \code{echo \$?} \\
+\bottomrule
+\end{tabular}
+\end{center}
+
+% =====================================================================
+\chapter{术语表}
+\goal{按字母顺序速查；每个术语一句话解释，正文首现处有展开。}
+% =====================================================================
+
+\begin{itemize}
+\item \kw{ASCII}：数字与字符的对应表，如 102 对应 \code{f}；\code{chr()}/\code{ord()} 互转。
+\item \kw{AT\&T / Intel 语法}：汇编的两种书写流派；objdump 默认 AT\&T（操作数“源, 目的”），加 \code{-M intel} 切换为 Intel（“目的, 源”）。
+\item \kw{base64}：用 64 个可打印字符编码任意字节的记法，常见于嵌入文本的数据（本册题目未用到，Misc 方向常见）。
+\item \kw{字节}（byte）：8 位二进制，取值 0--255，计算机存储的最小单位。
+\item \kw{反汇编}（disassembly）：把机器码翻译回汇编指令，工具如 objdump -d。
+\item \kw{ELF}：Linux 可执行文件格式（Executable and Linkable Format），与 Windows 的 PE 对应。
+\item \kw{entry point}（入口点）：程序开始执行的第一条指令地址，readelf -h 可见。
+\item \kw{fgets}：C 标准库函数，从标准输入读一行文本。
+\item \kw{Ghidra / IDA}：图形化反编译工具，把汇编还原成伪代码；伪代码的变量名是推测，细节以汇编为准。
+\item \kw{十六进制}（hex）：两位数字表示一个字节的记法，\code{0x} 前缀标记。
+\item \kw{黑盒 / 白盒}：只看输入输出的观察方式 / 读内部实现的分析方式。
+\item \kw{KSA}：RC4 的密钥调度阶段，用密钥打乱 256 项状态表。
+\item \kw{机器码}（machine code）：CPU 直接执行的字节序列。
+\item \kw{基线}（baseline）：正常/失败状态下的输出参照，用于判断变化。
+\item \kw{汇编}（assembly）：机器码的助记文本，如 \code{xor \$0x23,\%eax}。
+\item \kw{寄存器}（register）：CPU 内部直接参与运算的小块存储；整型参数按 rdi、rsi、rdx、rcx 传，返回值在 rax。
+\item \kw{立即数}（immediate）：直接写在指令里的常数，AT\&T 里带 \code{\$} 前缀，如 \code{\$0x23}。
+\item \kw{链接}（linking）：把目标文件与库函数拼成可执行文件的步骤。
+\item \kw{流密码}（stream cipher）：逐字节用密钥流加密的密码体制，RC4 是代表。
+\item \kw{魔数}（magic number）：标识文件格式的固定字节序列，如 ELF 的 \code{7f 45 4c 46}。
+\item \kw{模逆元}（modular inverse）：满足 $a\cdot a^{-1}\equiv1\pmod m$ 的数；3 对 256 的模逆元是 171。
+\item \kw{PIE}：位置无关可执行文件，加载地址随机；readelf -h 显示类型 DYN。
+\item \kw{管道}（pipe）：\code{|}，把左边命令的输出接给右边命令作输入。
+\item \kw{PRGA}：RC4 的密钥流生成阶段，每输出一字节搅动一次状态表。
+\item \kw{payload}：为触发目标行为而构造的输入数据（本册的“正确输入”即一种 payload）。
+\item \kw{伪代码}（pseudo-code）：反编译工具生成的类 C 代码，便于阅读但非原始源码。
+\item \kw{RC4}：经典流密码，KSA 打乱状态表、PRGA 生成密钥流，逐字节异或加解密。
+\item \kw{.rodata}：ELF 的只读数据段，常量数组与提示字符串常在此。
+\item \kw{符号表}（symbol table）：函数名与地址的对应表；被剥离（stripped）后只剩地址。
+\item \kw{标准输入/输出}（stdin/stdout）：程序默认的读入/打印通道，可被管道替换。
+\item \kw{十六进制文本}：把字节写成十六进制字符串的形式（如 \code{48 89 4C}），机器码的常见出题形式。
+\item \kw{退出码}（exit code）：命令结束时返回的整数，0 表示成功。
+\item \kw{.text}：ELF 的代码段，存放机器码。
+\item \kw{票根}（ticket）：589 题中 11 字节的通关凭证，兼作第二步 RC4 的密钥。
+\item \kw{异或}（XOR）：按位“相异为 1”的运算，自己是自己的逆。
+\item \kw{掩码}（mask）：用按位与只保留想要的位，如 \code{x \& 0xFF} 只留最低 8 位。
+\item \kw{移位}（shift）：\code{<<} / \code{>>} 把二进制整体左移 / 右移，相当于乘 / 除 $2^n$。
+\item \kw{栈}（stack）：函数调用的“后进先出”内存区，从高地址向低地址生长，rsp 指向栈顶。
+\item \kw{栈帧}（stack frame）：一个函数在栈上占用的那一段，rbp 指向其起点；局部变量按 rbp-偏移 访问。
+\item \kw{调用约定}（calling convention）：函数传参与返值的规则；x86-64 前 6 个整型参数走 rdi/rsi/rdx/rcx/r8/r9，返回值在 rax。
+\item \kw{正向复算}：用还原结果重跑一遍原变换、比对目标值的验证手法。
+\item \kw{字节流}（byte stream）：连续的字节序列；RC4 的密钥流即一串伪随机字节。
+\end{itemize}
+
+\end{document}

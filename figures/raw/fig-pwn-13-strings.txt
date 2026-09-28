@@ -1,0 +1,24 @@
+mzj@Ubuntu-24.04:~$ cd ~/pwn-lab && strings format | head -16
+/lib64/ld-linux-x86-64.so.2
++=Vl
+mgUa
+fgets
+stdin
+puts
+__stack_chk_fail
+__libc_start_main
+__cxa_finalize
+printf
+libc.so.6
+GLIBC_2.4
+GLIBC_2.2.5
+GLIBC_2.34
+_ITM_deregisterTMCloneTable
+__gmon_start__
+
+mzj@Ubuntu-24.04:~$ cd ~/pwn-lab && strings format | grep -e flag -e Say
+flag{format_string_leaks}
+Say something:
+
+mzj@Ubuntu-24.04:~$ cd ~/pwn-lab && strings overflow | grep flag
+flag{control_flow_redirected}

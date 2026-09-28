@@ -1,0 +1,1984 @@
+**********************
+PowerShell transcript start
+Start time: 20260928144050
+Username: DESKTOP-412KTAR\mzj
+RunAs User: DESKTOP-412KTAR\mzj
+Configuration Name: 
+Machine: DESKTOP-412KTAR (Microsoft Windows NT 10.0.26200.0)
+Host Application: C:\Users\mzj\.cache\codex-runtimes\codex-primary-runtime\dependencies\native\powershell\pwsh.dll -Command try { [Console]::OutputEncoding=[System.Text.Encoding]::UTF8 } catch {}
+$proj='C:\Users\mzj\Desktop\CTF\玄机刷题'; $log=Join-Path $proj '记录\限时攻关-PaluArray-终端记录.txt'; Start-Transcript -LiteralPath $log -Append; $dir=Join-Path $proj '题目资料\PaluArray_546'; Write-Output 'COMMAND: enumerate PaluArray working files and archive candidates'; Get-ChildItem -LiteralPath $dir -Recurse -File | Select-Object FullName,Length,LastWriteTime | Format-Table -AutoSize; Write-Output '--- matching download archives ---'; Get-ChildItem -LiteralPath 'D:\Downloads' -File | Where-Object { $_.Name -match 'Palu|帕鲁|Parloo' } | Select-Object FullName,Length,LastWriteTime | Format-Table -AutoSize; Write-Output '--- hashes ---'; Get-ChildItem -LiteralPath $dir -Recurse -File | Where-Object { $_.Extension -in '.exe','.zip','.rar','.7z' } | Get-FileHash -Algorithm SHA256 | Format-List; Write-Output '--- prior Palu submission evidence ---'; Select-String -LiteralPath (Join-Path $proj '记录\*') -Pattern 'palu\{1b501325fc96d5a845cbdd2ba4f01cd7\}|PaluArray.*(incorrect|拒绝|0/1)|ID.?546' -SimpleMatch:$false -ErrorAction SilentlyContinue | Select-Object -Last 30 | ForEach-Object { '{0}:{1}:{2}' -f $_.Path,$_.LineNumber,$_.Line }; Stop-Transcript
+Process ID: 20368
+PSVersion: 7.6.5
+PSEdition: Core
+GitCommitId: 7.6.5
+OS: Microsoft Windows 10.0.26200
+Platform: Win32NT
+PSCompatibleVersions: 1.0, 2.0, 3.0, 4.0, 5.0, 5.1, 6.0, 7.0
+PSRemotingProtocolVersion: 2.4
+SerializationVersion: 1.1.0.1
+WSManStackVersion: 3.0
+**********************
+Transcript started, output file is C:\Users\mzj\Desktop\CTF\玄机刷题\记录\限时攻关-PaluArray-终端记录.txt
+COMMAND: enumerate PaluArray working files and archive candidates
+
+FullName                                                                                    Length LastWriteTime
+--------                                                                                    ------ -------------
+C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\PaluArray_546\check_md5_constants.py                307 2026/9/27 20:46:10
+C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\PaluArray_546\check_re_tools.py                     180 2026/9/27 20:13:38
+C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\PaluArray_546\disassemble_core_funcs.py             807 2026/9/27 20:25:07
+C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\PaluArray_546\disassemble_entry.py                 1155 2026/9/27 20:17:05
+C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\PaluArray_546\disassemble_md5_tail.py               809 2026/9/27 20:30:37
+C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\PaluArray_546\disassemble_range.py                  821 2026/9/27 20:35:06
+C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\PaluArray_546\disassemble_strings.py               2539 2026/9/27 20:23:51
+C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\PaluArray_546\disassemble_validation.py            1441 2026/9/27 20:24:32
+C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\PaluArray_546\disassemble_xrefs.py                 2368 2026/9/27 20:14:24
+C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\PaluArray_546\embedded_1_256x256.png              37835 2026/9/27 20:12:20
+C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\PaluArray_546\extract_png.py                       1068 2026/9/27 20:12:20
+C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\PaluArray_546\extract_strings.py                    482 2026/9/27 20:11:29
+C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\PaluArray_546\find_static_refs.py                  1487 2026/9/27 20:31:21
+C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\PaluArray_546\inspect_packed_region.py              356 2026/9/27 20:18:33
+C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\PaluArray_546\inspect_region.py                     315 2026/9/27 20:13:21
+C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\PaluArray_546\inspect_tables.py                     818 2026/9/27 20:25:42
+C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\PaluArray_546\map_import_calls.py                  1848 2026/9/27 20:42:58
+C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\PaluArray_546\PaluArray_flag_unpacked.exe        105472 2026/9/27 20:22:59
+C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\PaluArray_546\PaluArray_flag_upx_names.exe        89088 2026/9/27 20:22:59
+C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\PaluArray_546\PaluArray_flag.exe                  89088 2026/7/24 19:40:10
+C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\PaluArray_546\patch_palu_markers.py                 675 2026/9/27 20:22:58
+C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\PaluArray_546\review_md5_flow.py                   3274 2026/9/27 20:50:20
+C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\PaluArray_546\review_palu_alphabet_bytes.py        1423 2026/9/27 20:56:27
+C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\PaluArray_546\review_palu_calls.py                 1805 2026/9/27 20:51:54
+C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\PaluArray_546\review_palu_candidate_recompute.py   1594 2026/9/27 20:58:31
+C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\PaluArray_546\review_palu_hex_helper.py            1853 2026/9/27 20:57:27
+C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\PaluArray_546\review_palu_import_xrefs.py          2722 2026/9/27 20:53:00
+C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\PaluArray_546\review_palu_prefix_and_hash.py       2866 2026/9/27 20:55:07
+C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\PaluArray_546\solve_paluarray.py                    726 2026/9/27 20:39:23
+
+--- matching download archives ---
+
+FullName                        Length LastWriteTime
+--------                        ------ -------------
+D:\Downloads\PaluArray_flag.zip  73952 2026/9/27 20:07:40
+
+--- hashes ---
+
+Algorithm : SHA256
+Hash      : 8B1263DE36EDA3E5E3F1183C2D08C520ECAE09649B1A04891F597033FDF842A5
+Path      : C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\PaluArray_546\PaluArray_flag_unpacked.exe
+
+Algorithm : SHA256
+Hash      : CDDE48AC7862A5753C11A52D5BAAF3CF677576DBC5108542F9094CB98E8282FA
+Path      : C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\PaluArray_546\PaluArray_flag_upx_names.exe
+
+Algorithm : SHA256
+Hash      : CD8E2BE79AAA454F295132B7ECE6AE30D0CC05FF24DA7541639F05F76D482A4D
+Path      : C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\PaluArray_546\PaluArray_flag.exe
+
+--- prior Palu submission evidence ---
+**********************
+PowerShell transcript end
+End time: 20260928144050
+**********************
+**********************
+PowerShell transcript start
+Start time: 20260928144106
+Username: DESKTOP-412KTAR\mzj
+RunAs User: DESKTOP-412KTAR\mzj
+Configuration Name: 
+Machine: DESKTOP-412KTAR (Microsoft Windows NT 10.0.26200.0)
+Host Application: C:\Users\mzj\.cache\codex-runtimes\codex-primary-runtime\dependencies\native\powershell\pwsh.dll -Command try { [Console]::OutputEncoding=[System.Text.Encoding]::UTF8 } catch {}
+$proj='C:\Users\mzj\Desktop\CTF\玄机刷题'; $log=Join-Path $proj '记录\限时攻关-PaluArray-终端记录.txt'; Start-Transcript -LiteralPath $log -Append; Write-Output 'COMMAND: inspect exact input validation and MD5 flow review scripts'; foreach($f in @('题目资料\PaluArray_546\review_md5_flow.py','题目资料\PaluArray_546\review_palu_calls.py','题目资料\PaluArray_546\review_palu_prefix_and_hash.py','题目资料\PaluArray_546\solve_paluarray.py')){Write-Output "--- $f ---"; Get-Content -LiteralPath (Join-Path $proj $f)}; Write-Output '--- original disassembly excerpts ---'; Select-String -LiteralPath (Join-Path $proj '记录\代理-PaluArray-MD5复核终端记录.txt') -Pattern '^=== RVA|^CALL XREF|^caller |^0*1a48|^0*2118|^0*2244|^.*WideCharToMultiByte|^.*MessageBoxW|^.*Palu_996|^.*114514|^.*palu\{' | Select-Object -Last 100 | ForEach-Object Line; Stop-Transcript
+Process ID: 12960
+PSVersion: 7.6.5
+PSEdition: Core
+GitCommitId: 7.6.5
+OS: Microsoft Windows 10.0.26200
+Platform: Win32NT
+PSCompatibleVersions: 1.0, 2.0, 3.0, 4.0, 5.0, 5.1, 6.0, 7.0
+PSRemotingProtocolVersion: 2.4
+SerializationVersion: 1.1.0.1
+WSManStackVersion: 3.0
+**********************
+Transcript started, output file is C:\Users\mzj\Desktop\CTF\玄机刷题\记录\限时攻关-PaluArray-终端记录.txt
+COMMAND: inspect exact input validation and MD5 flow review scripts
+--- 题目资料\PaluArray_546\review_md5_flow.py ---
+from pathlib import Path
+import struct,sys,hashlib
+from capstone import Cs,CS_ARCH_X86,CS_MODE_64
+from capstone.x86 import X86_OP_MEM,X86_REG_RIP,X86_OP_IMM
+sys.stdout.reconfigure(encoding='utf-8',errors='backslashreplace')
+p=Path(r'C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\PaluArray_546\PaluArray_flag_unpacked.exe');d=p.read_bytes()
+pe=struct.unpack_from('<I',d,0x3c)[0];opt=pe+24;base=struct.unpack_from('<Q',d,opt+24)[0];entry=struct.unpack_from('<I',d,opt+16)[0];ns=struct.unpack_from('<H',d,pe+6)[0];os=struct.unpack_from('<H',d,pe+20)[0];st=opt+os
+sections=[]
+for i in range(ns):
+ q=st+i*40;name=d[q:q+8].split(b'\0',1)[0].decode('ascii','replace');vs,rv,rs,rp=struct.unpack_from('<IIII',d,q+8);flags=struct.unpack_from('<I',d,q+36)[0];sections.append((name,vs,rv,rs,rp,flags))
+def fo_va(va):
+ r=va-base
+ for name,vs,rv,rs,rp,flags in sections:
+  if rv<=r<rv+rs:return rp+r-rv
+ return None
+def fo_rva(rva):return fo_va(base+rva)
+print('FILE',p,'BYTES',len(d),'SHA256',hashlib.sha256(d).hexdigest(),'IMAGE_BASE',hex(base),'ENTRY_RVA',hex(entry),'ENTRY_VA',hex(base+entry))
+print('SECTIONS',[(n,hex(rv),hex(rs),hex(rp),hex(fl)) for n,vs,rv,rs,rp,fl in sections])
+# Read PE import table, used only to annotate calls; this does not load or execute the PE.
+nd=struct.unpack_from('<I',d,opt+108)[0];imp_rva,imp_size=struct.unpack_from('<II',d,opt+112+8);imports={}
+if imp_rva:
+ pos=fo_rva(imp_rva)
+ while True:
+  oft,ts,fc,nr,ft=struct.unpack_from('<IIIII',d,pos)
+  if not (oft|nr|ft):break
+  dll=d[fo_rva(nr):].split(b'\0',1)[0].decode('ascii','replace');thunk=oft or ft;j=0
+  while True:
+   v=struct.unpack_from('<Q',d,fo_rva(thunk)+8*j)[0]
+   if not v:break
+   if v>>63:name=f'ordinal_{v&0xffff}'
+   else:name=d[fo_rva(v)+2:].split(b'\0',1)[0].decode('ascii','replace')
+   imports[base+ft+8*j]=dll+'!'+name;j+=1
+  pos+=20
+print('IMPORTS',len(imports))
+for va,name in sorted(imports.items()):
+ if any(x in name.lower() for x in ['md5','hash','printf','string','write','format','cin','cout','puts','itoa','sprintf','tostring']):print('IMPORT',hex(va),name)
+md=Cs(CS_ARCH_X86,CS_MODE_64);md.detail=True
+ranges=[(0x1700,0x1a48),(0x1a48,0x1d96),(0x1d80,0x1f60),(0x1f50,0x2118),(0x2118,0x2244),(0x2244,0x2404),(0x2410,0x26a0),(0x2d70,0x2f50)]
+for a,b in ranges:
+ f=fo_rva(a)
+ if f is None:print('UNMAPPED',hex(a),hex(b));continue
+ print(f'\n===== DISASSEMBLY RVA {a:#x}..{b:#x} VA {base+a:#x} =====')
+ for ins in md.disasm(d[f:f+(b-a)],base+a):
+  refs=[]
+  for op in ins.operands:
+   if op.type==X86_OP_MEM and op.mem.base==X86_REG_RIP:
+    va=ins.address+ins.size+op.mem.disp
+    if va in imports:refs.append('IAT='+imports[va])
+    off=fo_va(va)
+    if off is not None:
+     raw=d[off:off+40]
+     if raw[:2]==b'\xff\xfe' or len(raw)>=2:
+      ss=raw.decode('utf-16le',errors='ignore').split('\0',1)[0]
+      if ss and sum(ch.isprintable() for ch in ss[:20])>=min(4,len(ss[:20])):refs.append('UTF16='+repr(ss[:30]))
+     aa=raw.split(b'\0',1)[0]
+     if len(aa)>=4 and all(32<=x<127 for x in aa[:min(len(aa),20)]):refs.append('ASCII='+repr(aa[:30].decode('ascii','replace')))
+   elif op.type==X86_OP_IMM and ins.mnemonic.startswith('call'):
+    refs.append('CALL_TARGET='+hex(op.imm))
+  print(f'{ins.address:#x}: {ins.mnemonic:<8} {ins.op_str} {" ".join(refs)}')
+--- 题目资料\PaluArray_546\review_palu_calls.py ---
+from pathlib import Path
+import struct, hashlib, collections
+from capstone import Cs, CS_ARCH_X86, CS_MODE_64, CS_GRP_CALL
+from capstone.x86 import X86_OP_IMM
+p=Path(r'C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\PaluArray_546\PaluArray_flag_unpacked.exe')
+d=p.read_bytes(); pe=struct.unpack_from('<I',d,0x3c)[0]; opt=pe+24
+base=struct.unpack_from('<Q',d,opt+24)[0]; n=struct.unpack_from('<H',d,pe+6)[0]; os=struct.unpack_from('<H',d,pe+20)[0]; st=opt+os
+secs=[]
+for i in range(n):
+ q=st+i*40; name=d[q:q+8].split(b'\0',1)[0].decode('ascii','replace'); vs,rv,rs,rp=struct.unpack_from('<IIII',d,q+8); secs.append((name,vs,rv,rs,rp))
+def fo(rva):
+ for name,vs,rv,rs,rp in secs:
+  if rv<=rva<rv+rs:return rp+rva-rv
+ raise ValueError(hex(rva))
+text=next(s for s in secs if s[0]=='.text'); _,vs,rv,rs,rp=text
+md=Cs(CS_ARCH_X86,CS_MODE_64); md.detail=True
+ins=list(md.disasm(d[rp:rp+rs],base+rv))
+def line(i):
+ return f'{i.address-base:06x}  {i.bytes.hex():<24} {i.mnemonic:<8} {i.op_str}'
+print('PE SHA256',hashlib.sha256(d).hexdigest(),'text RVA',hex(rv),'rawsize',hex(rs),'instructions',len(ins))
+for target in [0x1a48,0x1d70,0x1994,0x2118,0x2244,0x2404,0x2d70]:
+ callers=[]
+ for ix,i in enumerate(ins):
+  if i.group(CS_GRP_CALL) and i.operands and i.operands[0].type==X86_OP_IMM and i.operands[0].imm==base+target:
+   callers.append(ix)
+ print('\nDIRECT CALLERS target RVA',hex(target),'count',len(callers))
+ for ix in callers:
+  lo=max(0,ix-28); hi=min(len(ins),ix+13)
+  print('-- caller at',hex(ins[ix].address-base),'context --')
+  for j in range(lo,hi): print(line(ins[j]))
+print('\nFOCUSED RANGES')
+for a,b in [(0x1980,0x1a48),(0x1d80,0x1f60),(0x1f50,0x2118),(0x2118,0x2244),(0x2244,0x2404)]:
+ print('\n===',hex(a),'-',hex(b),'===')
+ for i in ins:
+  r=i.address-base
+  if a<=r<b: print(line(i))
+--- 题目资料\PaluArray_546\review_palu_prefix_and_hash.py ---
+from pathlib import Path
+import struct,hashlib,sys,re
+sys.stdout.reconfigure(encoding='utf-8',errors='backslashreplace')
+from capstone import Cs,CS_ARCH_X86,CS_MODE_64
+from capstone.x86 import X86_OP_MEM,X86_REG_RIP
+p=Path(r'C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\PaluArray_546\PaluArray_flag_unpacked.exe');d=p.read_bytes()
+pe=struct.unpack_from('<I',d,0x3c)[0];opt=pe+24;base=struct.unpack_from('<Q',d,opt+24)[0];n=struct.unpack_from('<H',d,pe+6)[0];st=opt+struct.unpack_from('<H',d,pe+20)[0];secs=[]
+for j in range(n):
+ q=st+j*40;nm=d[q:q+8].split(b'\0',1)[0].decode('ascii','replace');vs,rv,rs,rp=struct.unpack_from('<IIII',d,q+8);secs.append((nm,vs,rv,rs,rp))
+def fo(rva):
+ for nm,vs,rv,rs,rp in secs:
+  if rv<=rva<rv+rs:return rp+rva-rv
+ return None
+def printable(b):return sum(32<=x<127 for x in b)/max(1,len(b))
+imp_rva=struct.unpack_from('<I',d,opt+120)[0];imports={}
+if imp_rva:
+ pos=fo(imp_rva)
+ while pos is not None:
+  oft,ts,fc,nr,ft=struct.unpack_from('<IIIII',d,pos)
+  if not (oft|nr|ft):break
+  dll_off=fo(nr);dll=d[dll_off:].split(b'\0',1)[0].decode('ascii','replace');thunk=oft or ft;k=0
+  while True:
+   to=fo(thunk)+8*k;v=struct.unpack_from('<Q',d,to)[0]
+   if not v:break
+   nm=('ordinal_'+str(v&0xffff)) if v>>63 else d[fo(v)+2:].split(b'\0',1)[0].decode('ascii','replace')
+   imports[base+ft+8*k]=dll+'!'+nm;k+=1
+  pos+=20
+md=Cs(CS_ARCH_X86,CS_MODE_64);md.detail=True
+for a,b in [(0x1994,0x1a48),(0x1a48,0x1d96),(0x1e4e,0x1ecb)]:
+ print(f'\n=== RVA {a:#x}..{b:#x} ===')
+ f=fo(a);chunk=d[f:f+(b-a)]
+ for ins in md.disasm(chunk,base+a):
+  extras=[]
+  for op in ins.operands:
+   if op.type==X86_OP_MEM and op.mem.base==X86_REG_RIP:
+    va=ins.address+ins.size+op.mem.disp
+    if va in imports:extras.append('IAT='+imports[va])
+    off=fo(va-base)
+    if off is not None:
+     raw=d[off:off+80]
+     asc=raw.split(b'\0',1)[0]
+     if asc and printable(asc[:min(len(asc),40)])>.85: extras.append('ASCII='+repr(asc[:48]))
+     wide=raw.decode('utf-16le','ignore').split('\0',1)[0]
+     if wide and sum(c.isprintable() for c in wide)/max(1,len(wide))>.80: extras.append('UTF16='+repr(wide[:40]))
+  print(f'{ins.address-base:06x} {ins.bytes.hex():<22} {ins.mnemonic:<7} {ins.op_str}',(' ; '+' | '.join(extras) if extras else ''))
+print('\nTARGETED LITERAL SCAN in .rdata')
+for nm,vs,rv,rs,rp in secs:
+ if nm!='.rdata':continue
+ blob=d[rp:rp+rs]
+ for m in re.finditer(rb'[\x20-\x7e]{3,}\x00',blob):
+  s=m.group()[:-1]
+  if any(k in s.lower() for k in [b'palu',b'0123456789abcdef',b'114514',b'success',b'failed',b'996',b'flag']):print('ASCII',hex(rv+m.start()),repr(s))
+ for m in re.finditer(rb'(?:[\x20-\x7e]\x00){3,}\x00\x00',blob):
+  try:s=m.group()[:-2].decode('utf-16le')
+  except:continue
+  if any(k in s.lower() for k in ['palu','0123456789abcdef','114514','success','failed','996','flag']):print('UTF16',hex(rv+m.start()),repr(s))
+--- 题目资料\PaluArray_546\solve_paluarray.py ---
+from hashlib import md5
+alphabet = 'Palu_996!?'
+target = '1145141919810'
+# string.find in the disassembled validator returns the first matching position;
+# this matters because '9' occurs twice in the alphabet.
+by_index = {i: ch for i, ch in enumerate(alphabet)}
+flag_input = ''.join(by_index[int(d)] for d in target)
+transformed = ''.join(str(alphabet.find(ch)) for ch in flag_input)
+assert transformed == target
+payload = md5(flag_input.encode('ascii')).hexdigest()
+flag = f'palu{{{payload}}}'
+print(f'alphabet={alphabet!r}')
+print(f'target={target}')
+print(f'input={flag_input!r}')
+print(f'transformed={transformed}')
+print(f'md5_input_ascii={md5(flag_input.encode("ascii")).hexdigest()}')
+print(f'candidate_flag={flag}')
+--- original disassembly excerpts ---
+alphabet = 'Palu_996!?'
+target = '1145141919810'
+flag = f'palu{{{payload}}}'
+needles = ["gPalu_996!?", "flag", "palu{", "1145141919810", "Success", "Failed", "Input Flag:"]
+needles = ["gPalu_996!?", "flag", "palu{", "1145141919810", "Success", "Failed", "Input Flag:"]
+> C:\Users\mzj\Desktop\CTF\玄机刷题\记录\代理-PaluArray-终端记录.txt:225:needles = ["gPalu_996!?", "flag", "palu{", "1145141919810", "Success", "Failed", "Input Flag:"]
+> C:\Users\mzj\Desktop\CTF\玄机刷题\记录\代理-PaluArray-终端记录.txt:409:needles=["Palu_996!?","flag","}","palu{","1145141919810","Success","Failed"]
+> C:\Users\mzj\Desktop\CTF\玄机刷题\记录\代理-PaluArray-终端记录.txt:553:$ErrorActionPreference='Continue'; Start-Transcript -LiteralPath 'C:\Users\mzj\Desktop\CTF\玄机刷题\记录\代理-PaluArray-终端记录.txt' -Append; $exe='/mnt/c/Users/mzj/Desktop/CTF/玄机刷题/题目资料/PaluArray_546/PaluArray_flag_unpacked.exe'; Write-Output 'COMMAND: wsl --exec /usr/bin/python3 extract_strings.py <unpacked.exe> | Select-String on puzzle/debug terms'; wsl --exec /usr/bin/python3 '/mnt/c/Users/mzj/Desktop/CTF/玄机刷题/题目资料/PaluArray_546/extract_strings.py' $exe 2>&1 | Select-String -Pattern 'flag|Palu|Flag|Success|Failed|array|Array|Input|input|MD5|BMP|png|114514|password|Palu_996' ; Write-Output 'COMMAND: wsl --exec /usr/bin/objdump -d -Mintel --start-address=0x140001700 --stop-address=0x140001b10 <unpacked.exe>'; wsl --exec /usr/bin/objdump -d -Mintel --start-address=0x140001700 --stop-address=0x140001b10 $exe 2>&1; Write-Output "NATIVE_EXIT=$LASTEXITCODE"; Stop-Transcript
+0x005066: gPalu_996!?
+  C:\Users\mzj\Desktop\CTF\玄机刷题\记录\代理-PaluArray-终端记录.txt:572:0x005066: gPalu_996!?
+0x005066: gPalu_996!?
+0x005090: palu{
+0x0050a0: 1145141919810
+0x005066: gPalu_996!?
+0x005090: palu{
+0x0050a0: 1145141919810
+> C:\Users\mzj\Desktop\CTF\玄机刷题\记录\代理-PaluArray-终端记录.txt:574:0x005090: palu{
+  C:\Users\mzj\Desktop\CTF\玄机刷题\记录\代理-PaluArray-终端记录.txt:575:0x0050a0: 1145141919810
+0x005066: gPalu_996!?
+0x0050a0: 1145141919810
+> C:\Users\mzj\Desktop\CTF\玄机刷题\记录\代理-PaluArray-终端记录.txt:1171:needles=["Palu_996!?","flag","}","palu{","1145141919810","Success","Failed"]
+needles = ["gPalu_996!?", "flag", "palu{", "1145141919810", "Success", "Failed", "Input Flag:"]
+> C:\Users\mzj\Desktop\CTF\玄机刷题\记录\代理-PaluArray-终端记录.txt:1220:needles = ["gPalu_996!?", "flag", "palu{", "1145141919810", "Success", "Failed", "Input Flag:"]
+  C:\Users\mzj\Desktop\CTF\玄机刷题\记录\代理-PaluArray-终端记录.txt:1445:$alphabet = 'Palu_996!?'
+$alphabet = 'Palu_996!?'
+$target = '1145141919810'
+  C:\Users\mzj\Desktop\CTF\玄机刷题\记录\代理-PaluArray-终端记录.txt:1447:$target = '1145141919810'
+$alphabet = 'Palu_996!?'
+$target = '1145141919810'
+$alphabet = 'Palu_996!?'
+$target = '1145141919810'
+$target = '1145141919810'
+Write-Output "candidate-flag=palu{$hex}"
+> C:\Users\mzj\Desktop\CTF\玄机刷题\记录\代理-PaluArray-终端记录.txt:1460:Write-Output "candidate-flag=palu{$hex}"
+Write-Output "candidate-flag=palu{$hex}"
+Write-Output "candidate-flag=palu{$hex}"
+script: alphabet='Palu_996!?'; candidate='aa_9a_a?a?!aP'; target='1145141919810'; foreach (character) alphabet.IndexOf(character); MD5.HashData(ASCII.GetBytes(candidate)); lowercase hex
+mapped-decimal=1145141919810
+> C:\Users\mzj\Desktop\CTF\玄机刷题\记录\代理-PaluArray-终端记录.txt:1477:script: alphabet='Palu_996!?'; candidate='aa_9a_a?a?!aP'; target='1145141919810'; foreach (character) alphabet.IndexOf(character); MD5.HashData(ASCII.GetBytes(candidate)); lowercase hex
+mapped-decimal=1145141919810
+  C:\Users\mzj\Desktop\CTF\玄机刷题\记录\代理-PaluArray-终端记录.txt:1480:mapped-decimal=1145141919810
+script: alphabet='Palu_996!?'; candidate='aa_9a_a?a?!aP'; target='1145141919810'; foreach (character) alphabet.IndexOf(character); MD5.HashData(ASCII.GetBytes(candidate)); lowercase hex
+mapped-decimal=1145141919810
+mapped-decimal=1145141919810
+candidate-flag=palu{1b501325fc96d5a845cbdd2ba4f01cd7}
+> C:\Users\mzj\Desktop\CTF\玄机刷题\记录\代理-PaluArray-终端记录.txt:1484:candidate-flag=palu{1b501325fc96d5a845cbdd2ba4f01cd7}
+candidate-flag=palu{1b501325fc96d5a845cbdd2ba4f01cd7}
+ 1445: $alphabet = 'Palu_996!?'
+ 1447: $target = '1145141919810'
+ 1460: Write-Output "candidate-flag=palu{$hex}"
+ 1477: script: alphabet='Palu_996!?'; candidate='aa_9a_a?a?!aP'; target='1145141919810'; foreach (character) alphabet.IndexOf(character); MD5.HashData(ASCII.GetBytes(candidate)); lowercase hex
+ 1480: mapped-decimal=1145141919810
+ 1484: candidate-flag=palu{1b501325fc96d5a845cbdd2ba4f01cd7}
+  if any(k in s.lower() for k in [b'palu',b'0123456789abcdef',b'114514',b'success',b'failed',b'996',b'flag']):print('ASCII',hex(rv+m.start()),repr(s))
+  if any(k in s.lower() for k in ['palu','0123456789abcdef','114514','success','failed','996','flag']):print('UTF16',hex(rv+m.start()),repr(s))
+  if any(k in s.lower() for k in [b'palu',b'0123456789abcdef',b'114514',b'success',b'failed',b'996',b'flag']):print('ASCII',hex(rv+m.start()),repr(s))
+  if any(k in s.lower() for k in ['palu','0123456789abcdef','114514','success','failed','996','flag']):print('UTF16',hex(rv+m.start()),repr(s))
+ for s in ['Palu_996!?','1145141919810','palu{','0123456789abcdef']:
+alphabet='Palu_996!?';target='1145141919810'
+print('Expected wrapper form inferred from code',f'palu{{{hashlib.md5(raw).hexdigest()}}}')
+ for s in ['Palu_996!?','1145141919810','palu{','0123456789abcdef']:
+alphabet='Palu_996!?';target='1145141919810'
+print('Expected wrapper form inferred from code',f'palu{{{hashlib.md5(raw).hexdigest()}}}')
+**********************
+PowerShell transcript end
+End time: 20260928144106
+**********************
+**********************
+PowerShell transcript start
+Start time: 20260928144125
+Username: DESKTOP-412KTAR\mzj
+RunAs User: DESKTOP-412KTAR\mzj
+Configuration Name: 
+Machine: DESKTOP-412KTAR (Microsoft Windows NT 10.0.26200.0)
+Host Application: C:\Users\mzj\.cache\codex-runtimes\codex-primary-runtime\dependencies\native\powershell\pwsh.dll -Command try { [Console]::OutputEncoding=[System.Text.Encoding]::UTF8 } catch {}
+$proj='C:\Users\mzj\Desktop\CTF\玄机刷题'; $dir=Join-Path $proj '题目资料\PaluArray_546'; $log=Join-Path $proj '记录\限时攻关-PaluArray-终端记录.txt'; Start-Transcript -LiteralPath $log -Append; Write-Output 'COMMAND: python review_palu_prefix_and_hash.py (static disassembly only; no executable run)'; python (Join-Path $dir 'review_palu_prefix_and_hash.py'); Write-Output "NATIVE_EXIT=$LASTEXITCODE"; Stop-Transcript
+Process ID: 24940
+PSVersion: 7.6.5
+PSEdition: Core
+GitCommitId: 7.6.5
+OS: Microsoft Windows 10.0.26200
+Platform: Win32NT
+PSCompatibleVersions: 1.0, 2.0, 3.0, 4.0, 5.0, 5.1, 6.0, 7.0
+PSRemotingProtocolVersion: 2.4
+SerializationVersion: 1.1.0.1
+WSManStackVersion: 3.0
+**********************
+Transcript started, output file is C:\Users\mzj\Desktop\CTF\玄机刷题\记录\限时攻关-PaluArray-终端记录.txt
+COMMAND: python review_palu_prefix_and_hash.py (static disassembly only; no executable run)
+[Y] Yes  [A] Yes to All  [N] No  [L] No to All  [S] Suspend  [?] Help (default is "Y"):
+NATIVE_EXIT=0
+**********************
+PowerShell transcript end
+End time: 20260928144126
+**********************
+**********************
+PowerShell transcript start
+Start time: 20260928144156
+Username: DESKTOP-412KTAR\mzj
+RunAs User: DESKTOP-412KTAR\mzj
+Configuration Name: 
+Machine: DESKTOP-412KTAR (Microsoft Windows NT 10.0.26200.0)
+Host Application: C:\Users\mzj\.cache\codex-runtimes\codex-primary-runtime\dependencies\native\powershell\pwsh.dll -Command try { [Console]::OutputEncoding=[System.Text.Encoding]::UTF8 } catch {}
+$proj='C:\Users\mzj\Desktop\CTF\玄机刷题'; $dir=Join-Path $proj '题目资料\PaluArray_546'; $log=Join-Path $proj '记录\限时攻关-PaluArray-终端记录.txt'; Start-Transcript -LiteralPath $log -Append; Write-Output 'COMMAND: write a focused static disassembly reader for main and success helpers'; $src=@'
+from pathlib import Path
+import struct,sys
+from capstone import Cs,CS_ARCH_X86,CS_MODE_64
+p=Path(r'C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\PaluArray_546\PaluArray_flag_unpacked.exe'); d=p.read_bytes()
+pe=struct.unpack_from('<I',d,0x3c)[0]; opt=pe+24; base=struct.unpack_from('<Q',d,opt+24)[0]; n=struct.unpack_from('<H',d,pe+6)[0]; st=opt+struct.unpack_from('<H',d,pe+20)[0]
+secs=[]
+for i in range(n):
+ q=st+i*40; nm=d[q:q+8].split(b'\0',1)[0].decode('ascii','replace'); vs,rv,rs,rp=struct.unpack_from('<IIII',d,q+8); secs.append((nm,vs,rv,rs,rp))
+def fo(r):
+ for nm,vs,rv,rs,rp in secs:
+  if rv<=r<rv+rs:return rp+r-rv
+ raise KeyError(hex(r))
+md=Cs(CS_ARCH_X86,CS_MODE_64)
+for a,b in [(0x1d90,0x1f70),(0x1f6c,0x2118),(0x2118,0x2244),(0x2244,0x2404)]:
+ print(f'\n=== RVA {a:#x}..{b:#x} ===')
+ f=fo(a)
+ for x in md.disasm(d[f:f+b-a],base+a): print(f'{x.address-base:06x} {x.bytes.hex():<22} {x.mnemonic:<8} {x.op_str}')
+'@; $py=Join-Path $dir 'review_palu_success_path.py'; Set-Content -LiteralPath $py -Value $src -Encoding UTF8; Write-Output '--- SOURCE ---'; Write-Output $src; Write-Output '--- OUTPUT ---'; python $py; Write-Output "NATIVE_EXIT=$LASTEXITCODE"; Stop-Transcript
+Process ID: 25500
+PSVersion: 7.6.5
+PSEdition: Core
+GitCommitId: 7.6.5
+OS: Microsoft Windows 10.0.26200
+Platform: Win32NT
+PSCompatibleVersions: 1.0, 2.0, 3.0, 4.0, 5.0, 5.1, 6.0, 7.0
+PSRemotingProtocolVersion: 2.4
+SerializationVersion: 1.1.0.1
+WSManStackVersion: 3.0
+**********************
+Transcript started, output file is C:\Users\mzj\Desktop\CTF\玄机刷题\记录\限时攻关-PaluArray-终端记录.txt
+COMMAND: write a focused static disassembly reader for main and success helpers
+--- SOURCE ---
+from pathlib import Path
+import struct,sys
+from capstone import Cs,CS_ARCH_X86,CS_MODE_64
+p=Path(r'C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\PaluArray_546\PaluArray_flag_unpacked.exe'); d=p.read_bytes()
+pe=struct.unpack_from('<I',d,0x3c)[0]; opt=pe+24; base=struct.unpack_from('<Q',d,opt+24)[0]; n=struct.unpack_from('<H',d,pe+6)[0]; st=opt+struct.unpack_from('<H',d,pe+20)[0]
+secs=[]
+for i in range(n):
+ q=st+i*40; nm=d[q:q+8].split(b'\0',1)[0].decode('ascii','replace'); vs,rv,rs,rp=struct.unpack_from('<IIII',d,q+8); secs.append((nm,vs,rv,rs,rp))
+def fo(r):
+ for nm,vs,rv,rs,rp in secs:
+  if rv<=r<rv+rs:return rp+r-rv
+ raise KeyError(hex(r))
+md=Cs(CS_ARCH_X86,CS_MODE_64)
+for a,b in [(0x1d90,0x1f70),(0x1f6c,0x2118),(0x2118,0x2244),(0x2244,0x2404)]:
+ print(f'\n=== RVA {a:#x}..{b:#x} ===')
+ f=fo(a)
+ for x in md.disasm(d[f:f+b-a],base+a): print(f'{x.address-base:06x} {x.bytes.hex():<22} {x.mnemonic:<8} {x.op_str}')
+--- OUTPUT ---
+[Y] Yes  [A] Yes to All  [N] No  [L] No to All  [S] Suspend  [?] Help (default is "Y"):
+NATIVE_EXIT=0
+**********************
+PowerShell transcript end
+End time: 20260928144157
+**********************
+**********************
+PowerShell transcript start
+Start time: 20260928144319
+Username: DESKTOP-412KTAR\mzj
+RunAs User: DESKTOP-412KTAR\mzj
+Configuration Name: 
+Machine: DESKTOP-412KTAR (Microsoft Windows NT 10.0.26200.0)
+Host Application: C:\Users\mzj\.cache\codex-runtimes\codex-primary-runtime\dependencies\native\powershell\pwsh.dll -Command try { [Console]::OutputEncoding=[System.Text.Encoding]::UTF8 } catch {}
+$proj='C:\Users\mzj\Desktop\CTF\玄机刷题'; $dir=Join-Path $proj '题目资料\PaluArray_546'; $log=Join-Path $proj '记录\限时攻关-PaluArray-终端记录.txt'; Start-Transcript -LiteralPath $log -Append; Write-Output 'COMMAND: inspect raw UTF-16 literal boundaries and PE section mapping near alphabet'; $src=@'
+from pathlib import Path
+import struct,hashlib
+p=Path(r'C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\PaluArray_546\PaluArray_flag_unpacked.exe'); d=p.read_bytes()
+pe=struct.unpack_from('<I',d,0x3c)[0]; opt=pe+24; base=struct.unpack_from('<Q',d,opt+24)[0]; n=struct.unpack_from('<H',d,pe+6)[0]; st=opt+struct.unpack_from('<H',d,pe+20)[0]
+print('sha256',hashlib.sha256(d).hexdigest(),'imagebase',hex(base),'sections:')
+for i in range(n):
+ q=st+i*40; name=d[q:q+8].split(b'\0',1)[0].decode('ascii','replace'); vs,rv,rs,rp=struct.unpack_from('<IIII',d,q+8);print(name,'VA',hex(base+rv),'RVA',hex(rv),'raw size',hex(rs),'raw ptr',hex(rp),'virtual size',hex(vs))
+for rva in [0x5e40,0x5e60,0x5e66,0x5e68,0x5e80,0x5e90,0x5ea0,0x9b48]:
+ found=None
+ for i in range(n):
+  q=st+i*40; name=d[q:q+8].split(b'\0',1)[0].decode('ascii','replace');vs,rv,rs,rp=struct.unpack_from('<IIII',d,q+8)
+  if rv<=rva<rv+rs:found=(name,rp+rva-rv);break
+ if found:
+  name,off=found; raw=d[off:off+96];
+  print('\nRVA',hex(rva),'VA',hex(base+rva),'file',hex(off),'section',name)
+  print('HEX',raw.hex())
+  print('UTF16',repr(raw.decode('utf-16le','replace')))
+  print('ASCII',repr(raw))
+ else: print('RVA',hex(rva),'VA',hex(base+rva),'no raw file-backed section (possibly BSS)')
+'@; $py=Join-Path $dir 'review_palu_data_boundaries.py'; Set-Content -LiteralPath $py -Value $src -Encoding UTF8; Write-Output '--- SOURCE ---'; Write-Output $src; Write-Output '--- OUTPUT ---'; python $py; Write-Output "NATIVE_EXIT=$LASTEXITCODE"; Stop-Transcript
+Process ID: 26840
+PSVersion: 7.6.5
+PSEdition: Core
+GitCommitId: 7.6.5
+OS: Microsoft Windows 10.0.26200
+Platform: Win32NT
+PSCompatibleVersions: 1.0, 2.0, 3.0, 4.0, 5.0, 5.1, 6.0, 7.0
+PSRemotingProtocolVersion: 2.4
+SerializationVersion: 1.1.0.1
+WSManStackVersion: 3.0
+**********************
+Transcript started, output file is C:\Users\mzj\Desktop\CTF\玄机刷题\记录\限时攻关-PaluArray-终端记录.txt
+COMMAND: inspect raw UTF-16 literal boundaries and PE section mapping near alphabet
+--- SOURCE ---
+from pathlib import Path
+import struct,hashlib
+p=Path(r'C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\PaluArray_546\PaluArray_flag_unpacked.exe'); d=p.read_bytes()
+pe=struct.unpack_from('<I',d,0x3c)[0]; opt=pe+24; base=struct.unpack_from('<Q',d,opt+24)[0]; n=struct.unpack_from('<H',d,pe+6)[0]; st=opt+struct.unpack_from('<H',d,pe+20)[0]
+print('sha256',hashlib.sha256(d).hexdigest(),'imagebase',hex(base),'sections:')
+for i in range(n):
+ q=st+i*40; name=d[q:q+8].split(b'\0',1)[0].decode('ascii','replace'); vs,rv,rs,rp=struct.unpack_from('<IIII',d,q+8);print(name,'VA',hex(base+rv),'RVA',hex(rv),'raw size',hex(rs),'raw ptr',hex(rp),'virtual size',hex(vs))
+for rva in [0x5e40,0x5e60,0x5e66,0x5e68,0x5e80,0x5e90,0x5ea0,0x9b48]:
+ found=None
+ for i in range(n):
+  q=st+i*40; name=d[q:q+8].split(b'\0',1)[0].decode('ascii','replace');vs,rv,rs,rp=struct.unpack_from('<IIII',d,q+8)
+  if rv<=rva<rv+rs:found=(name,rp+rva-rv);break
+ if found:
+  name,off=found; raw=d[off:off+96];
+  print('\nRVA',hex(rva),'VA',hex(base+rva),'file',hex(off),'section',name)
+  print('HEX',raw.hex())
+  print('UTF16',repr(raw.decode('utf-16le','replace')))
+  print('ASCII',repr(raw))
+ else: print('RVA',hex(rva),'VA',hex(base+rva),'no raw file-backed section (possibly BSS)')
+--- OUTPUT ---
+[Y] Yes  [A] Yes to All  [N] No  [L] No to All  [S] Suspend  [?] Help (default is "Y"):
+NATIVE_EXIT=1
+**********************
+PowerShell transcript end
+End time: 20260928144319
+**********************
+**********************
+PowerShell transcript start
+Start time: 20260928144431
+Username: DESKTOP-412KTAR\mzj
+RunAs User: DESKTOP-412KTAR\mzj
+Configuration Name: 
+Machine: DESKTOP-412KTAR (Microsoft Windows NT 10.0.26200.0)
+Host Application: C:\Users\mzj\.cache\codex-runtimes\codex-primary-runtime\dependencies\native\powershell\pwsh.dll -Command try { [Console]::OutputEncoding=[System.Text.Encoding]::UTF8 } catch {}
+$log='C:\Users\mzj\Desktop\CTF\玄机刷题\记录\限时攻关-PaluArray-终端记录.txt'; Start-Transcript -LiteralPath $log -Append; Write-Output 'COMMAND: find the newest browser-downloaded attachment in known download folders'; foreach($d in @('D:\Downloads','C:\Users\mzj\Downloads')){Write-Output "--- $d ---"; if(Test-Path -LiteralPath $d){Get-ChildItem -LiteralPath $d -File | Sort-Object LastWriteTime -Descending | Select-Object -First 15 Name,Length,LastWriteTime | Format-Table -AutoSize}else{Write-Output 'folder missing'}}; Stop-Transcript
+Process ID: 19996
+PSVersion: 7.6.5
+PSEdition: Core
+GitCommitId: 7.6.5
+OS: Microsoft Windows 10.0.26200
+Platform: Win32NT
+PSCompatibleVersions: 1.0, 2.0, 3.0, 4.0, 5.0, 5.1, 6.0, 7.0
+PSRemotingProtocolVersion: 2.4
+SerializationVersion: 1.1.0.1
+WSManStackVersion: 3.0
+**********************
+Transcript started, output file is C:\Users\mzj\Desktop\CTF\玄机刷题\记录\限时攻关-PaluArray-终端记录.txt
+COMMAND: find the newest browser-downloaded attachment in known download folders
+--- D:\Downloads ---
+
+Name                                     Length LastWriteTime
+----                                     ------ -------------
+PaluArray_flag (1).zip                    73952 2026/9/28 14:44:21
+hookme.rar                              5125397 2026/9/27 20:08:39
+你知道Base么-20250521104202-am92t17.rar   14603 2026/9/27 20:08:25
+PaluArray_flag.zip                        73952 2026/9/27 20:07:40
+ezBase-20250521104055-dq14shk.rar          7833 2026/9/27 20:04:46
+go_for_it.zip                            636919 2026/9/27 19:44:27
+checker.zip                               17498 2026/9/27 19:28:15
+secret.zip                              1170497 2026/9/27 19:27:50
+easyre.zip                               117343 2026/9/27 19:27:31
+arkt.zip                                 109627 2026/9/27 19:27:07
+babyRe.zip                              5883266 2026/9/27 19:03:03
+rainbow (1).zip                            4038 2026/9/27 18:58:18
+note.zip                                   5832 2026/9/27 18:57:46
+rainbow.zip                                4038 2026/9/27 18:56:56
+spring.zip                                30014 2026/9/27 18:55:53
+
+--- C:\Users\mzj\Downloads ---
+**********************
+PowerShell transcript end
+End time: 20260928144431
+**********************
+**********************
+PowerShell transcript start
+Start time: 20260928144441
+Username: DESKTOP-412KTAR\mzj
+RunAs User: DESKTOP-412KTAR\mzj
+Configuration Name: 
+Machine: DESKTOP-412KTAR (Microsoft Windows NT 10.0.26200.0)
+Host Application: C:\Users\mzj\.cache\codex-runtimes\codex-primary-runtime\dependencies\native\powershell\pwsh.dll -Command try { [Console]::OutputEncoding=[System.Text.Encoding]::UTF8 } catch {}
+$log='C:\Users\mzj\Desktop\CTF\玄机刷题\记录\限时攻关-PaluArray-终端记录.txt'; Start-Transcript -LiteralPath $log -Append; Write-Output 'COMMAND: hash platform-downloaded archive and list contents/hashes'; $paths=@('D:\Downloads\PaluArray_flag.zip','D:\Downloads\PaluArray_flag (1).zip'); Get-FileHash -LiteralPath $paths -Algorithm SHA256 | Format-List; Add-Type -AssemblyName System.IO.Compression.FileSystem; foreach($path in $paths){Write-Output "--- $path ---"; $zip=[IO.Compression.ZipFile]::OpenRead($path); foreach($entry in $zip.Entries){$stream=$entry.Open();$sha=[Security.Cryptography.SHA256]::Create();$h=[Convert]::ToHexString($sha.ComputeHash($stream));$stream.Dispose();$sha.Dispose();Write-Output ("ENTRY name={0} length={1} sha256={2}" -f $entry.FullName,$entry.Length,$h)};$zip.Dispose()}; Stop-Transcript
+Process ID: 12172
+PSVersion: 7.6.5
+PSEdition: Core
+GitCommitId: 7.6.5
+OS: Microsoft Windows 10.0.26200
+Platform: Win32NT
+PSCompatibleVersions: 1.0, 2.0, 3.0, 4.0, 5.0, 5.1, 6.0, 7.0
+PSRemotingProtocolVersion: 2.4
+SerializationVersion: 1.1.0.1
+WSManStackVersion: 3.0
+**********************
+Transcript started, output file is C:\Users\mzj\Desktop\CTF\玄机刷题\记录\限时攻关-PaluArray-终端记录.txt
+COMMAND: hash platform-downloaded archive and list contents/hashes
+
+Algorithm : SHA256
+Hash      : 106CF19A6967105AEA4ACAEAA3B10E8DB169293E3057C9109845D324FF85779A
+Path      : D:\Downloads\PaluArray_flag.zip
+
+Algorithm : SHA256
+Hash      : 106CF19A6967105AEA4ACAEAA3B10E8DB169293E3057C9109845D324FF85779A
+Path      : D:\Downloads\PaluArray_flag (1).zip
+
+--- D:\Downloads\PaluArray_flag.zip ---
+ENTRY name=PaluArray_flag.exe length=89088 sha256=CD8E2BE79AAA454F295132B7ECE6AE30D0CC05FF24DA7541639F05F76D482A4D
+--- D:\Downloads\PaluArray_flag (1).zip ---
+ENTRY name=PaluArray_flag.exe length=89088 sha256=CD8E2BE79AAA454F295132B7ECE6AE30D0CC05FF24DA7541639F05F76D482A4D
+**********************
+PowerShell transcript end
+End time: 20260928144441
+**********************
+**********************
+PowerShell transcript start
+Start time: 20260928144655
+Username: DESKTOP-412KTAR\mzj
+RunAs User: DESKTOP-412KTAR\mzj
+Configuration Name: 
+Machine: DESKTOP-412KTAR (Microsoft Windows NT 10.0.26200.0)
+Host Application: C:\Users\mzj\.cache\codex-runtimes\codex-primary-runtime\dependencies\native\powershell\pwsh.dll -Command try { [Console]::OutputEncoding=[System.Text.Encoding]::UTF8 } catch {}
+$proj='C:\Users\mzj\Desktop\CTF\玄机刷题'; $dir=Join-Path $proj '题目资料\PaluArray_546'; $log=Join-Path $proj '记录\限时攻关-PaluArray-终端记录.txt'; Start-Transcript -LiteralPath $log -Append; Write-Output 'COMMAND: disassemble MD5 finalization and digest-to-hex helper statically'; $src=@'
+from pathlib import Path
+import struct,sys
+sys.stdout.reconfigure(encoding='utf-8',errors='backslashreplace')
+from capstone import Cs,CS_ARCH_X86,CS_MODE_64
+p=Path(r'C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\PaluArray_546\PaluArray_flag_unpacked.exe');d=p.read_bytes();pe=struct.unpack_from('<I',d,0x3c)[0];opt=pe+24;base=struct.unpack_from('<Q',d,opt+24)[0];n=struct.unpack_from('<H',d,pe+6)[0];st=opt+struct.unpack_from('<H',d,pe+20)[0];secs=[]
+for i in range(n):
+ q=st+i*40;nm=d[q:q+8].split(b'\0',1)[0].decode('ascii','replace');vs,rv,rs,rp=struct.unpack_from('<IIII',d,q+8);secs.append((nm,vs,rv,rs,rp))
+def fo(r):
+ for nm,vs,rv,rs,rp in secs:
+  if rv<=r<rv+rs:return rp+r-rv
+ raise KeyError(hex(r))
+md=Cs(CS_ARCH_X86,CS_MODE_64)
+for a,b in [(0x14d8,0x1700),(0x2d70,0x2e40),(0x1a48,0x1d96)]:
+ print(f'\n=== RVA {a:#x}..{b:#x} ===')
+ for i in md.disasm(d[fo(a):fo(a)+b-a],base+a): print(f'{i.address-base:06x} {i.bytes.hex():<22} {i.mnemonic:<8} {i.op_str}')
+'@; $py=Join-Path $dir 'review_palu_digest_output.py'; Set-Content -LiteralPath $py -Value $src -Encoding UTF8; Write-Output '--- SOURCE ---'; Write-Output $src; Write-Output '--- OUTPUT ---'; python $py; Write-Output "NATIVE_EXIT=$LASTEXITCODE"; Stop-Transcript
+Process ID: 18944
+PSVersion: 7.6.5
+PSEdition: Core
+GitCommitId: 7.6.5
+OS: Microsoft Windows 10.0.26200
+Platform: Win32NT
+PSCompatibleVersions: 1.0, 2.0, 3.0, 4.0, 5.0, 5.1, 6.0, 7.0
+PSRemotingProtocolVersion: 2.4
+SerializationVersion: 1.1.0.1
+WSManStackVersion: 3.0
+**********************
+Transcript started, output file is C:\Users\mzj\Desktop\CTF\玄机刷题\记录\限时攻关-PaluArray-终端记录.txt
+COMMAND: disassemble MD5 finalization and digest-to-hex helper statically
+--- SOURCE ---
+from pathlib import Path
+import struct,sys
+sys.stdout.reconfigure(encoding='utf-8',errors='backslashreplace')
+from capstone import Cs,CS_ARCH_X86,CS_MODE_64
+p=Path(r'C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\PaluArray_546\PaluArray_flag_unpacked.exe');d=p.read_bytes();pe=struct.unpack_from('<I',d,0x3c)[0];opt=pe+24;base=struct.unpack_from('<Q',d,opt+24)[0];n=struct.unpack_from('<H',d,pe+6)[0];st=opt+struct.unpack_from('<H',d,pe+20)[0];secs=[]
+for i in range(n):
+ q=st+i*40;nm=d[q:q+8].split(b'\0',1)[0].decode('ascii','replace');vs,rv,rs,rp=struct.unpack_from('<IIII',d,q+8);secs.append((nm,vs,rv,rs,rp))
+def fo(r):
+ for nm,vs,rv,rs,rp in secs:
+  if rv<=r<rv+rs:return rp+r-rv
+ raise KeyError(hex(r))
+md=Cs(CS_ARCH_X86,CS_MODE_64)
+for a,b in [(0x14d8,0x1700),(0x2d70,0x2e40),(0x1a48,0x1d96)]:
+ print(f'\n=== RVA {a:#x}..{b:#x} ===')
+ for i in md.disasm(d[fo(a):fo(a)+b-a],base+a): print(f'{i.address-base:06x} {i.bytes.hex():<22} {i.mnemonic:<8} {i.op_str}')
+--- OUTPUT ---
+[Y] Yes  [A] Yes to All  [N] No  [L] No to All  [S] Suspend  [?] Help (default is "Y"):
+NATIVE_EXIT=0
+**********************
+PowerShell transcript end
+End time: 20260928144656
+**********************
+**********************
+PowerShell transcript start
+Start time: 20260928145156
+Username: DESKTOP-412KTAR\mzj
+RunAs User: DESKTOP-412KTAR\mzj
+Configuration Name: 
+Machine: DESKTOP-412KTAR (Microsoft Windows NT 10.0.26200.0)
+Host Application: C:\Users\mzj\.cache\codex-runtimes\codex-primary-runtime\dependencies\native\powershell\pwsh.dll -Command try { [Console]::OutputEncoding=[System.Text.Encoding]::UTF8 } catch {}
+$log='C:\Users\mzj\Desktop\CTF\玄机刷题\记录\限时攻关-PaluArray-终端记录.txt'; Start-Transcript -LiteralPath $log -Append; Write-Output 'COMMAND: check for already-installed unpacking/emulation tools only'; foreach($n in @('upx','upx.exe','wsl','wine','wine64')){ $x=Get-Command $n -ErrorAction SilentlyContinue; if($x){Write-Output ("FOUND {0} => {1}" -f $n,$x.Source)}else{Write-Output ("NOT FOUND {0}" -f $n)}}; Write-Output 'COMMAND: query installed tools in the existing WSL distribution'; wsl --exec /bin/sh -lc 'for t in upx wine wine64 llvm-objdump objdump; do command -v "$t" || true; done' 2>&1; Write-Output "WSL_EXIT=$LASTEXITCODE"; Stop-Transcript
+Process ID: 19556
+PSVersion: 7.6.5
+PSEdition: Core
+GitCommitId: 7.6.5
+OS: Microsoft Windows 10.0.26200
+Platform: Win32NT
+PSCompatibleVersions: 1.0, 2.0, 3.0, 4.0, 5.0, 5.1, 6.0, 7.0
+PSRemotingProtocolVersion: 2.4
+SerializationVersion: 1.1.0.1
+WSManStackVersion: 3.0
+**********************
+Transcript started, output file is C:\Users\mzj\Desktop\CTF\玄机刷题\记录\限时攻关-PaluArray-终端记录.txt
+COMMAND: check for already-installed unpacking/emulation tools only
+NOT FOUND upx
+NOT FOUND upx.exe
+FOUND wsl => C:\WINDOWS\system32\wsl.exe
+NOT FOUND wine
+NOT FOUND wine64
+COMMAND: query installed tools in the existing WSL distribution
+WSL_EXIT=0
+**********************
+PowerShell transcript end
+End time: 20260928145216
+**********************
+
+===== 独立复核开始 2026-09-28 UTC =====
+COMMAND> Get-ChildItem -Force 'C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料' | Where-Object { $_.Name -match 'Palu|palu|546' } | Format-List FullName,Name,Mode
+OUTPUT>
+FullName : C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\PaluArray_546
+Name     : PaluArray_546
+Mode     : d----
+
+COMMAND> Get-ChildItem -Force 'C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\PaluArray_546' -Recurse | Select-Object FullName,Length,Mode | Format-Table -AutoSize; Get-ChildItem 'C:\Users\mzj\Desktop\CTF\玄机刷题\记录' -Filter '*Palu*' | Select-Object FullName,Length
+OUTPUT>
+[完整附件与记录清单见本轮前置命令输出；主要样本 PaluArray_flag.exe 为 89,088 字节，PaluArray_flag_unpacked.exe 为 105,472 字节，相关静态分析脚本均在题目资料\PaluArray_546。]
+===== 独立复核进行中 =====
+**********************
+PowerShell transcript start
+Start time: 20260928150046
+Username: DESKTOP-412KTAR\mzj
+RunAs User: DESKTOP-412KTAR\mzj
+Configuration Name: 
+Machine: DESKTOP-412KTAR (Microsoft Windows NT 10.0.26200.0)
+Host Application: C:\Users\mzj\.cache\codex-runtimes\codex-primary-runtime\dependencies\native\powershell\pwsh.dll -NoProfile -Command try { [Console]::OutputEncoding=[System.Text.Encoding]::UTF8 } catch {}
+$log='C:\Users\mzj\Desktop\CTF\玄机刷题\记录\限时攻关-PaluArray-终端记录.txt'; $dir='C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\PaluArray_546'; Start-Transcript -LiteralPath $log -Append; Write-Output 'COMMAND: python -B review_palu_success_path.py (static disassembly; do not execute target)'; Get-FileHash -LiteralPath (Join-Path $dir 'PaluArray_flag_unpacked.exe') -Algorithm SHA256 | Format-List; python -B (Join-Path $dir 'review_palu_success_path.py') 2>&1; Write-Output "PYTHON_EXIT=$LASTEXITCODE"; Stop-Transcript
+Process ID: 22236
+PSVersion: 7.6.5
+PSEdition: Core
+GitCommitId: 7.6.5
+OS: Microsoft Windows 10.0.26200
+Platform: Win32NT
+PSCompatibleVersions: 1.0, 2.0, 3.0, 4.0, 5.0, 5.1, 6.0, 7.0
+PSRemotingProtocolVersion: 2.4
+SerializationVersion: 1.1.0.1
+WSManStackVersion: 3.0
+**********************
+Transcript started, output file is C:\Users\mzj\Desktop\CTF\玄机刷题\记录\限时攻关-PaluArray-终端记录.txt
+COMMAND: python -B review_palu_success_path.py (static disassembly; do not execute target)
+
+Algorithm : SHA256
+Hash      : 8B1263DE36EDA3E5E3F1183C2D08C520ECAE09649B1A04891F597033FDF842A5
+Path      : C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\PaluArray_546\PaluArray_flag_unpacked.exe
+
+PYTHON_EXIT=0
+**********************
+PowerShell transcript end
+End time: 20260928150046
+**********************
+**********************
+PowerShell transcript start
+Start time: 20260928150054
+Username: DESKTOP-412KTAR\mzj
+RunAs User: DESKTOP-412KTAR\mzj
+Configuration Name: 
+Machine: DESKTOP-412KTAR (Microsoft Windows NT 10.0.26200.0)
+Host Application: C:\Users\mzj\.cache\codex-runtimes\codex-primary-runtime\dependencies\native\powershell\pwsh.dll -NoProfile -Command try { [Console]::OutputEncoding=[System.Text.Encoding]::UTF8 } catch {}
+$log='C:\Users\mzj\Desktop\CTF\玄机刷题\记录\限时攻关-PaluArray-终端记录.txt'; $dir='C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\PaluArray_546'; Start-Transcript -LiteralPath $log -Append; Write-Output 'COMMAND: python -B review_palu_prefix_and_hash.py (read-only static disassembly)'; python -B (Join-Path $dir 'review_palu_prefix_and_hash.py') 2>&1; Write-Output "PYTHON_EXIT=$LASTEXITCODE"; Stop-Transcript
+Process ID: 19640
+PSVersion: 7.6.5
+PSEdition: Core
+GitCommitId: 7.6.5
+OS: Microsoft Windows 10.0.26200
+Platform: Win32NT
+PSCompatibleVersions: 1.0, 2.0, 3.0, 4.0, 5.0, 5.1, 6.0, 7.0
+PSRemotingProtocolVersion: 2.4
+SerializationVersion: 1.1.0.1
+WSManStackVersion: 3.0
+**********************
+Transcript started, output file is C:\Users\mzj\Desktop\CTF\玄机刷题\记录\限时攻关-PaluArray-终端记录.txt
+COMMAND: python -B review_palu_prefix_and_hash.py (read-only static disassembly)
+PYTHON_EXIT=0
+**********************
+PowerShell transcript end
+End time: 20260928150054
+**********************
+**********************
+PowerShell transcript start
+Start time: 20260928150142
+Username: DESKTOP-412KTAR\mzj
+RunAs User: DESKTOP-412KTAR\mzj
+Configuration Name: 
+Machine: DESKTOP-412KTAR (Microsoft Windows NT 10.0.26200.0)
+Host Application: C:\Users\mzj\.cache\codex-runtimes\codex-primary-runtime\dependencies\native\powershell\pwsh.dll -NoProfile -Command try { [Console]::OutputEncoding=[System.Text.Encoding]::UTF8 } catch {}
+$log='C:\Users\mzj\Desktop\CTF\玄机刷题\记录\限时攻关-PaluArray-终端记录.txt'; $dir='C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\PaluArray_546'; Start-Transcript -LiteralPath $log -Append; Write-Output 'COMMAND: python -B review_palu_hex_helper.py (verify MD5 result construction and references)'; python -B (Join-Path $dir 'review_palu_hex_helper.py') 2>&1; Write-Output "PYTHON_EXIT=$LASTEXITCODE"; Write-Output 'COMMAND: independent exact-index mapping and MD5 recomputation using observed UTF-16 literal gPalu_996!?'; @'
+import hashlib
+alphabet='gPalu_996!?'
+target='1145141919810'
+candidate=''.join(alphabet[int(c)] for c in target)
+indices=[alphabet.find(c) for c in candidate]
+print('alphabet=',repr(alphabet),'len=',len(alphabet))
+print('index table=',list(enumerate(alphabet)))
+print('target=',target)
+print('candidate=',repr(candidate),'length=',len(candidate))
+print('actual first-match indices=',indices)
+print('reconstructed=',''.join(map(str,indices)))
+print('reconstruction_matches=',''.join(map(str,indices))==target)
+print('ascii_hex=',candidate.encode('ascii').hex())
+print('md5_ascii=',hashlib.md5(candidate.encode('ascii')).hexdigest())
+print('flag=',f"palu{{{hashlib.md5(candidate.encode('ascii')).hexdigest()}}}")
+print('index7_unreachable_from_find=',7 not in [alphabet.find(c) for c in set(alphabet)])
+'@ | python -B -; Write-Output "PYTHON_EXIT=$LASTEXITCODE"; Stop-Transcript
+Process ID: 23036
+PSVersion: 7.6.5
+PSEdition: Core
+GitCommitId: 7.6.5
+OS: Microsoft Windows 10.0.26200
+Platform: Win32NT
+PSCompatibleVersions: 1.0, 2.0, 3.0, 4.0, 5.0, 5.1, 6.0, 7.0
+PSRemotingProtocolVersion: 2.4
+SerializationVersion: 1.1.0.1
+WSManStackVersion: 3.0
+**********************
+Transcript started, output file is C:\Users\mzj\Desktop\CTF\玄机刷题\记录\限时攻关-PaluArray-终端记录.txt
+COMMAND: python -B review_palu_hex_helper.py (verify MD5 result construction and references)
+PYTHON_EXIT=0
+COMMAND: independent exact-index mapping and MD5 recomputation using observed UTF-16 literal gPalu_996!?
+PYTHON_EXIT=0
+**********************
+PowerShell transcript end
+End time: 20260928150144
+**********************
+**********************
+PowerShell transcript start
+Start time: 20260928150234
+Username: DESKTOP-412KTAR\mzj
+RunAs User: DESKTOP-412KTAR\mzj
+Configuration Name: 
+Machine: DESKTOP-412KTAR (Microsoft Windows NT 10.0.26200.0)
+Host Application: C:\Users\mzj\.cache\codex-runtimes\codex-primary-runtime\dependencies\native\powershell\pwsh.dll -NoProfile -Command try { [Console]::OutputEncoding=[System.Text.Encoding]::UTF8 } catch {}
+$log='C:\Users\mzj\Desktop\CTF\玄机刷题\记录\限时攻关-PaluArray-终端记录.txt'; $dir='C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\PaluArray_546'; Start-Transcript -LiteralPath $log -Append; Write-Output 'COMMAND: python -B review_palu_alphabet_bytes.py (confirm full table bytes and RVA)'; python -B (Join-Path $dir 'review_palu_alphabet_bytes.py') 2>&1; Write-Output "PYTHON_EXIT=$LASTEXITCODE"; Stop-Transcript
+Process ID: 7880
+PSVersion: 7.6.5
+PSEdition: Core
+GitCommitId: 7.6.5
+OS: Microsoft Windows 10.0.26200
+Platform: Win32NT
+PSCompatibleVersions: 1.0, 2.0, 3.0, 4.0, 5.0, 5.1, 6.0, 7.0
+PSRemotingProtocolVersion: 2.4
+SerializationVersion: 1.1.0.1
+WSManStackVersion: 3.0
+**********************
+Transcript started, output file is C:\Users\mzj\Desktop\CTF\玄机刷题\记录\限时攻关-PaluArray-终端记录.txt
+COMMAND: python -B review_palu_alphabet_bytes.py (confirm full table bytes and RVA)
+PYTHON_EXIT=0
+**********************
+PowerShell transcript end
+End time: 20260928150235
+**********************
+**********************
+PowerShell transcript start
+Start time: 20260928150302
+Username: DESKTOP-412KTAR\mzj
+RunAs User: DESKTOP-412KTAR\mzj
+Configuration Name: 
+Machine: DESKTOP-412KTAR (Microsoft Windows NT 10.0.26200.0)
+Host Application: C:\Users\mzj\.cache\codex-runtimes\codex-primary-runtime\dependencies\native\powershell\pwsh.dll -NoProfile -Command try { [Console]::OutputEncoding=[System.Text.Encoding]::UTF8 } catch {}
+$log='C:\Users\mzj\Desktop\CTF\玄机刷题\记录\限时攻关-PaluArray-终端记录.txt'; $dir='C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\PaluArray_546'; Start-Transcript -LiteralPath $log -Append; Write-Output 'COMMAND: read existing reference scanner source'; Get-Content -LiteralPath (Join-Path $dir 'find_static_refs.py'); Write-Output 'COMMAND: python -B find_static_refs.py PaluArray_flag_unpacked.exe'; python -B (Join-Path $dir 'find_static_refs.py') (Join-Path $dir 'PaluArray_flag_unpacked.exe') 2>&1; Write-Output "PYTHON_EXIT=$LASTEXITCODE"; Stop-Transcript
+Process ID: 28196
+PSVersion: 7.6.5
+PSEdition: Core
+GitCommitId: 7.6.5
+OS: Microsoft Windows 10.0.26200
+Platform: Win32NT
+PSCompatibleVersions: 1.0, 2.0, 3.0, 4.0, 5.0, 5.1, 6.0, 7.0
+PSRemotingProtocolVersion: 2.4
+SerializationVersion: 1.1.0.1
+WSManStackVersion: 3.0
+**********************
+Transcript started, output file is C:\Users\mzj\Desktop\CTF\玄机刷题\记录\限时攻关-PaluArray-终端记录.txt
+COMMAND: read existing reference scanner source
+from pathlib import Path
+import struct,sys
+from capstone import Cs,CS_ARCH_X86,CS_MODE_64
+from capstone.x86 import X86_OP_MEM,X86_REG_RIP,X86_OP_IMM
+p=Path(sys.argv[1]);d=p.read_bytes();pe=struct.unpack_from("<I",d,0x3c)[0];o=pe+24;base=struct.unpack_from("<Q",d,o+24)[0];n=struct.unpack_from("<H",d,pe+6)[0];os=struct.unpack_from("<H",d,pe+20)[0];st=o+os;S=[]
+for i in range(n):
+ q=st+i*40;nm=d[q:q+8].split(b"\0",1)[0].decode("ascii","replace");vs,rv,rs,rp=struct.unpack_from("<IIII",d,q+8);fl=struct.unpack_from("<I",d,q+36)[0];S.append((nm,rv,rs,rp,fl))
+def va2fo(va):
+ r=va-base
+ for nm,rv,rs,rp,fl in S:
+  if rv<=r<rv+rs:return rp+r-rv
+ return None
+needles=["Palu_996!?","flag","}","palu{","1145141919810","Success","Failed"]
+targets=[]
+for s in needles:
+ raw=s.encode("utf-16le")+b"\0\0";cur=0
+ while (fo:=d.find(raw,cur))>=0:
+  va=next((base+rv+fo-rp for nm,rv,rs,rp,fl in S if rp<=fo<rp+rs),None)
+  if va: print(f"string={s!r} file=0x{fo:x} va=0x{va:x}");targets.append((s,va,va+len(raw)))
+  cur=fo+1
+md=Cs(CS_ARCH_X86,CS_MODE_64);md.detail=True
+for nm,rv,rs,rp,fl in S:
+ if not(fl&0x20000000) or not rs:continue
+ print(f"--- {nm} ---")
+ for i in md.disasm(d[rp:rp+rs],base+rv):
+  refs=[]
+  for op in i.operands:
+   if op.type==X86_OP_MEM and op.mem.base==X86_REG_RIP:refs.append(i.address+i.size+op.mem.disp)
+   elif op.type==X86_OP_IMM:refs.append(op.imm)
+  for s,a,b in targets:
+   if any(a<=x<b for x in refs):print(f"0x{i.address:x}: {i.mnemonic:<8} {i.op_str} -> {s!r}")
+COMMAND: python -B find_static_refs.py PaluArray_flag_unpacked.exe
+PYTHON_EXIT=0
+**********************
+PowerShell transcript end
+End time: 20260928150303
+**********************
+**********************
+PowerShell transcript start
+Start time: 20260928150344
+Username: DESKTOP-412KTAR\mzj
+RunAs User: DESKTOP-412KTAR\mzj
+Configuration Name: 
+Machine: DESKTOP-412KTAR (Microsoft Windows NT 10.0.26200.0)
+Host Application: C:\Users\mzj\.cache\codex-runtimes\codex-primary-runtime\dependencies\native\powershell\pwsh.dll -Command try { [Console]::OutputEncoding=[System.Text.Encoding]::UTF8 } catch {}
+$proj='C:\Users\mzj\Desktop\CTF\玄机刷题'; $log=Join-Path $proj '记录\限时攻关-PaluArray-终端记录.txt'; Start-Transcript -LiteralPath $log -Append; Write-Output 'COMMAND: independently verify corrected alphabet beginning with g, inverse mapping, and candidate MD5'; $src=@'
+from pathlib import Path
+import hashlib,struct,sys
+sys.stdout.reconfigure(encoding='utf-8',errors='backslashreplace')
+p=Path(r'C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\PaluArray_546\PaluArray_flag_unpacked.exe')
+b=p.read_bytes(); pe=struct.unpack_from('<I',b,0x3c)[0]; opt=pe+24; base=struct.unpack_from('<Q',b,opt+24)[0]; n=struct.unpack_from('<H',b,pe+6)[0]; st=opt+struct.unpack_from('<H',b,pe+20)[0]
+for j in range(n):
+ q=st+j*40; nm=b[q:q+8].split(b'\0',1)[0].decode('ascii','replace'); vs,rv,rs,rp=struct.unpack_from('<IIII',b,q+8)
+ if rv<=0x5e66<rv+rs:
+  off=rp+0x5e66-rv; raw=b[off:off+28]; break
+else: raise RuntimeError('RVA not file-backed')
+alpha=raw.decode('utf-16le').split('\0',1)[0]
+target='1145141919810'
+candidate=''.join(alpha[int(d)] for d in target)
+forward=''.join(str(alpha.find(ch)) for ch in candidate)
+print('file_sha256',hashlib.sha256(b).hexdigest())
+print('RVA_0x5e66 raw bytes',raw.hex())
+print('UTF16 alphabet from RVA 0x5e66',repr(alpha))
+print('alphabet length',len(alpha),'indices',list(enumerate(alpha)))
+print('target',target)
+print('candidate',repr(candidate),'length',len(candidate))
+print('re-encoded indices',forward,'exact_match',forward==target)
+digest=hashlib.md5(candidate.encode('ascii')).hexdigest()
+print('MD5 ASCII input',digest)
+print('candidate flag',f'palu{{{digest}}}')
+assert alpha=='gPalu_996!?'
+assert forward==target
+'@; $py=Join-Path $proj '题目资料\PaluArray_546\review_corrected_alphabet.py'; Set-Content -LiteralPath $py -Value $src -Encoding UTF8; Write-Output '--- SCRIPT SOURCE ---'; Write-Output $src; Write-Output '--- SCRIPT OUTPUT ---'; python $py; Write-Output "NATIVE_EXIT=$LASTEXITCODE"; Stop-Transcript
+Process ID: 7616
+PSVersion: 7.6.5
+PSEdition: Core
+GitCommitId: 7.6.5
+OS: Microsoft Windows 10.0.26200
+Platform: Win32NT
+PSCompatibleVersions: 1.0, 2.0, 3.0, 4.0, 5.0, 5.1, 6.0, 7.0
+PSRemotingProtocolVersion: 2.4
+SerializationVersion: 1.1.0.1
+WSManStackVersion: 3.0
+**********************
+Transcript started, output file is C:\Users\mzj\Desktop\CTF\玄机刷题\记录\限时攻关-PaluArray-终端记录.txt
+COMMAND: independently verify corrected alphabet beginning with g, inverse mapping, and candidate MD5
+--- SCRIPT SOURCE ---
+from pathlib import Path
+import hashlib,struct,sys
+sys.stdout.reconfigure(encoding='utf-8',errors='backslashreplace')
+p=Path(r'C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\PaluArray_546\PaluArray_flag_unpacked.exe')
+b=p.read_bytes(); pe=struct.unpack_from('<I',b,0x3c)[0]; opt=pe+24; base=struct.unpack_from('<Q',b,opt+24)[0]; n=struct.unpack_from('<H',b,pe+6)[0]; st=opt+struct.unpack_from('<H',b,pe+20)[0]
+for j in range(n):
+ q=st+j*40; nm=b[q:q+8].split(b'\0',1)[0].decode('ascii','replace'); vs,rv,rs,rp=struct.unpack_from('<IIII',b,q+8)
+ if rv<=0x5e66<rv+rs:
+  off=rp+0x5e66-rv; raw=b[off:off+28]; break
+else: raise RuntimeError('RVA not file-backed')
+alpha=raw.decode('utf-16le').split('\0',1)[0]
+target='1145141919810'
+candidate=''.join(alpha[int(d)] for d in target)
+forward=''.join(str(alpha.find(ch)) for ch in candidate)
+print('file_sha256',hashlib.sha256(b).hexdigest())
+print('RVA_0x5e66 raw bytes',raw.hex())
+print('UTF16 alphabet from RVA 0x5e66',repr(alpha))
+print('alphabet length',len(alpha),'indices',list(enumerate(alpha)))
+print('target',target)
+print('candidate',repr(candidate),'length',len(candidate))
+print('re-encoded indices',forward,'exact_match',forward==target)
+digest=hashlib.md5(candidate.encode('ascii')).hexdigest()
+print('MD5 ASCII input',digest)
+print('candidate flag',f'palu{{{digest}}}')
+assert alpha=='gPalu_996!?'
+assert forward==target
+--- SCRIPT OUTPUT ---
+[Y] Yes  [A] Yes to All  [N] No  [L] No to All  [S] Suspend  [?] Help (default is "Y"):
+NATIVE_EXIT=0
+**********************
+PowerShell transcript end
+End time: 20260928150344
+**********************
+**********************
+PowerShell transcript start
+Start time: 20260928150516
+Username: DESKTOP-412KTAR\mzj
+RunAs User: DESKTOP-412KTAR\mzj
+Configuration Name: 
+Machine: DESKTOP-412KTAR (Microsoft Windows NT 10.0.26200.0)
+Host Application: C:\Users\mzj\.cache\codex-runtimes\codex-primary-runtime\dependencies\native\powershell\pwsh.dll -NoProfile -Command try { [Console]::OutputEncoding=[System.Text.Encoding]::UTF8 } catch {}
+$log='C:\Users\mzj\Desktop\CTF\玄机刷题\记录\限时攻关-PaluArray-终端记录.txt'; $dir='C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\PaluArray_546'; Start-Transcript -LiteralPath $log -Append; Write-Output 'COMMAND: python -B review_palu_candidate_recompute.py (read-only variant hashes)'; python -B (Join-Path $dir 'review_palu_candidate_recompute.py') 2>&1; Write-Output "PYTHON_EXIT=$LASTEXITCODE"; Stop-Transcript
+Process ID: 19524
+PSVersion: 7.6.5
+PSEdition: Core
+GitCommitId: 7.6.5
+OS: Microsoft Windows 10.0.26200
+Platform: Win32NT
+PSCompatibleVersions: 1.0, 2.0, 3.0, 4.0, 5.0, 5.1, 6.0, 7.0
+PSRemotingProtocolVersion: 2.4
+SerializationVersion: 1.1.0.1
+WSManStackVersion: 3.0
+**********************
+Transcript started, output file is C:\Users\mzj\Desktop\CTF\玄机刷题\记录\限时攻关-PaluArray-终端记录.txt
+COMMAND: python -B review_palu_candidate_recompute.py (read-only variant hashes)
+PYTHON_EXIT=0
+**********************
+PowerShell transcript end
+End time: 20260928150517
+**********************
+
+===== 独立复核结论（纠正初始误读） =====
+附件样本 PaluArray_flag_unpacked.exe SHA256: 8b1263de36eda3e5e3f1183c2d08c520ecae09649b1a04891f597033fdf842a5
+原始 .rdata bytes 与已存在静态引用扫描结果确认：
+- RVA 0x5e68（VA 0x140005e68）UTF-16LE alphabet 精确为 `Palu_996!?`；find_static_refs.py 在代码 RVA 0x1040 找到对此字面量的 RIP 引用。
+- RVA 0x5e66 的 `g` 属于相邻的窄字符串错误文案 `string too long` 的最后一个字符，绝非 alphabet 的前缀。先前独立复核把相邻错误字符串末尾误认为 alphabet 字符，派生出的 `palu{c5302025cc6eab4bb4c17c67fe39e44d}` 候选撤回、无效，不得提交。
+- 对 alphabet `Palu_996!?`，索引表为 0:P, 1:a, 2:l, 3:u, 4:_, 5:9, 6:9, 7:6, 8:!, 9:?。输入 `aa_9a_a?a?!aP` 的首匹配索引序列精确等于目标 `1145141919810`；这是静态逻辑所支持的输入。
+- 校验成功分支在 RVA 0x1e54 比较目标字符串，成功后进入 RVA 0x1e83；后续在 RVA 0x1ec5 调用 RVA 0x1a48 的自定义 MD5 计算及 `palu{}` 包装路径。该输入的 ASCII MD5 = `1b501325fc96d5a845cbdd2ba4f01cd7`，形成此前已通过 CUA 提交且平台明确拒绝的 `palu{1b501325fc96d5a845cbdd2ba4f01cd7}`。
+- 仅作哈希字节假设对照：UTF-16LE 全输入 MD5 `51eaa3a2c24f9ff5953e78a67d44f8f5`；映射数字 ASCII MD5 `32150285b345c48aa3492f9212f61ca2`。代码中没有证据表明这两种替代内容被哈希，故不能把它们当作候选提交。
+结论：在当前官方附件与现存反汇编证据下，变换前像唯一确定，但此前与附件生成逻辑相符的 MD5 候选已被平台拒绝；未能证明其他 hash 输入/格式，故 PaluArray（ID 546）本轮仍未解。没有重交候选、没有联网、没有执行附件。
+===== 独立复核结束 =====
+**********************
+PowerShell transcript start
+Start time: 20260928164942
+Username: DESKTOP-412KTAR\mzj
+RunAs User: DESKTOP-412KTAR\mzj
+Configuration Name: 
+Machine: DESKTOP-412KTAR (Microsoft Windows NT 10.0.26200.0)
+Host Application: C:\Users\mzj\.cache\codex-runtimes\codex-primary-runtime\dependencies\native\powershell\pwsh.dll -NoProfile -Command try { [Console]::OutputEncoding=[System.Text.Encoding]::UTF8 } catch {}
+$log='C:\Users\mzj\Desktop\CTF\玄机刷题\记录\限时攻关-PaluArray-终端记录.txt'; $dir='C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\PaluArray_546'; Start-Transcript -LiteralPath $log -Append; Write-Output '===== 二阶段核验启动 2026-09-28 ====='; Write-Output 'COMMAND: inspect focused review script sources'; foreach($name in @('review_md5_flow.py','review_palu_calls.py','review_palu_import_xrefs.py','disassemble_md5_tail.py','disassemble_core_funcs.py','map_import_calls.py')){Write-Output ('--- '+$name+' ---'); Get-Content -LiteralPath (Join-Path $dir $name)}; Write-Output 'COMMAND: check existing emulation / sandbox runtimes only'; foreach($n in @('wine','wine64','wsl','sandboxie','WindowsSandbox','vmrun','qemu-x86_64')){$c=Get-Command $n -ErrorAction SilentlyContinue;if($c){Write-Output ('FOUND '+$n+' => '+$c.Source)}else{Write-Output ('NOT FOUND '+$n)}}; Stop-Transcript
+Process ID: 21500
+PSVersion: 7.6.5
+PSEdition: Core
+GitCommitId: 7.6.5
+OS: Microsoft Windows 10.0.26200
+Platform: Win32NT
+PSCompatibleVersions: 1.0, 2.0, 3.0, 4.0, 5.0, 5.1, 6.0, 7.0
+PSRemotingProtocolVersion: 2.4
+SerializationVersion: 1.1.0.1
+WSManStackVersion: 3.0
+**********************
+Transcript started, output file is C:\Users\mzj\Desktop\CTF\玄机刷题\记录\限时攻关-PaluArray-终端记录.txt
+===== 二阶段核验启动 2026-09-28 =====
+COMMAND: inspect focused review script sources
+--- review_md5_flow.py ---
+from pathlib import Path
+import struct,sys,hashlib
+from capstone import Cs,CS_ARCH_X86,CS_MODE_64
+from capstone.x86 import X86_OP_MEM,X86_REG_RIP,X86_OP_IMM
+sys.stdout.reconfigure(encoding='utf-8',errors='backslashreplace')
+p=Path(r'C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\PaluArray_546\PaluArray_flag_unpacked.exe');d=p.read_bytes()
+pe=struct.unpack_from('<I',d,0x3c)[0];opt=pe+24;base=struct.unpack_from('<Q',d,opt+24)[0];entry=struct.unpack_from('<I',d,opt+16)[0];ns=struct.unpack_from('<H',d,pe+6)[0];os=struct.unpack_from('<H',d,pe+20)[0];st=opt+os
+sections=[]
+for i in range(ns):
+ q=st+i*40;name=d[q:q+8].split(b'\0',1)[0].decode('ascii','replace');vs,rv,rs,rp=struct.unpack_from('<IIII',d,q+8);flags=struct.unpack_from('<I',d,q+36)[0];sections.append((name,vs,rv,rs,rp,flags))
+def fo_va(va):
+ r=va-base
+ for name,vs,rv,rs,rp,flags in sections:
+  if rv<=r<rv+rs:return rp+r-rv
+ return None
+def fo_rva(rva):return fo_va(base+rva)
+print('FILE',p,'BYTES',len(d),'SHA256',hashlib.sha256(d).hexdigest(),'IMAGE_BASE',hex(base),'ENTRY_RVA',hex(entry),'ENTRY_VA',hex(base+entry))
+print('SECTIONS',[(n,hex(rv),hex(rs),hex(rp),hex(fl)) for n,vs,rv,rs,rp,fl in sections])
+# Read PE import table, used only to annotate calls; this does not load or execute the PE.
+nd=struct.unpack_from('<I',d,opt+108)[0];imp_rva,imp_size=struct.unpack_from('<II',d,opt+112+8);imports={}
+if imp_rva:
+ pos=fo_rva(imp_rva)
+ while True:
+  oft,ts,fc,nr,ft=struct.unpack_from('<IIIII',d,pos)
+  if not (oft|nr|ft):break
+  dll=d[fo_rva(nr):].split(b'\0',1)[0].decode('ascii','replace');thunk=oft or ft;j=0
+  while True:
+   v=struct.unpack_from('<Q',d,fo_rva(thunk)+8*j)[0]
+   if not v:break
+   if v>>63:name=f'ordinal_{v&0xffff}'
+   else:name=d[fo_rva(v)+2:].split(b'\0',1)[0].decode('ascii','replace')
+   imports[base+ft+8*j]=dll+'!'+name;j+=1
+  pos+=20
+print('IMPORTS',len(imports))
+for va,name in sorted(imports.items()):
+ if any(x in name.lower() for x in ['md5','hash','printf','string','write','format','cin','cout','puts','itoa','sprintf','tostring']):print('IMPORT',hex(va),name)
+md=Cs(CS_ARCH_X86,CS_MODE_64);md.detail=True
+ranges=[(0x1700,0x1a48),(0x1a48,0x1d96),(0x1d80,0x1f60),(0x1f50,0x2118),(0x2118,0x2244),(0x2244,0x2404),(0x2410,0x26a0),(0x2d70,0x2f50)]
+for a,b in ranges:
+ f=fo_rva(a)
+ if f is None:print('UNMAPPED',hex(a),hex(b));continue
+ print(f'\n===== DISASSEMBLY RVA {a:#x}..{b:#x} VA {base+a:#x} =====')
+ for ins in md.disasm(d[f:f+(b-a)],base+a):
+  refs=[]
+  for op in ins.operands:
+   if op.type==X86_OP_MEM and op.mem.base==X86_REG_RIP:
+    va=ins.address+ins.size+op.mem.disp
+    if va in imports:refs.append('IAT='+imports[va])
+    off=fo_va(va)
+    if off is not None:
+     raw=d[off:off+40]
+     if raw[:2]==b'\xff\xfe' or len(raw)>=2:
+      ss=raw.decode('utf-16le',errors='ignore').split('\0',1)[0]
+      if ss and sum(ch.isprintable() for ch in ss[:20])>=min(4,len(ss[:20])):refs.append('UTF16='+repr(ss[:30]))
+     aa=raw.split(b'\0',1)[0]
+     if len(aa)>=4 and all(32<=x<127 for x in aa[:min(len(aa),20)]):refs.append('ASCII='+repr(aa[:30].decode('ascii','replace')))
+   elif op.type==X86_OP_IMM and ins.mnemonic.startswith('call'):
+    refs.append('CALL_TARGET='+hex(op.imm))
+  print(f'{ins.address:#x}: {ins.mnemonic:<8} {ins.op_str} {" ".join(refs)}')
+--- review_palu_calls.py ---
+from pathlib import Path
+import struct, hashlib, collections
+from capstone import Cs, CS_ARCH_X86, CS_MODE_64, CS_GRP_CALL
+from capstone.x86 import X86_OP_IMM
+p=Path(r'C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\PaluArray_546\PaluArray_flag_unpacked.exe')
+d=p.read_bytes(); pe=struct.unpack_from('<I',d,0x3c)[0]; opt=pe+24
+base=struct.unpack_from('<Q',d,opt+24)[0]; n=struct.unpack_from('<H',d,pe+6)[0]; os=struct.unpack_from('<H',d,pe+20)[0]; st=opt+os
+secs=[]
+for i in range(n):
+ q=st+i*40; name=d[q:q+8].split(b'\0',1)[0].decode('ascii','replace'); vs,rv,rs,rp=struct.unpack_from('<IIII',d,q+8); secs.append((name,vs,rv,rs,rp))
+def fo(rva):
+ for name,vs,rv,rs,rp in secs:
+  if rv<=rva<rv+rs:return rp+rva-rv
+ raise ValueError(hex(rva))
+text=next(s for s in secs if s[0]=='.text'); _,vs,rv,rs,rp=text
+md=Cs(CS_ARCH_X86,CS_MODE_64); md.detail=True
+ins=list(md.disasm(d[rp:rp+rs],base+rv))
+def line(i):
+ return f'{i.address-base:06x}  {i.bytes.hex():<24} {i.mnemonic:<8} {i.op_str}'
+print('PE SHA256',hashlib.sha256(d).hexdigest(),'text RVA',hex(rv),'rawsize',hex(rs),'instructions',len(ins))
+for target in [0x1a48,0x1d70,0x1994,0x2118,0x2244,0x2404,0x2d70]:
+ callers=[]
+ for ix,i in enumerate(ins):
+  if i.group(CS_GRP_CALL) and i.operands and i.operands[0].type==X86_OP_IMM and i.operands[0].imm==base+target:
+   callers.append(ix)
+ print('\nDIRECT CALLERS target RVA',hex(target),'count',len(callers))
+ for ix in callers:
+  lo=max(0,ix-28); hi=min(len(ins),ix+13)
+  print('-- caller at',hex(ins[ix].address-base),'context --')
+  for j in range(lo,hi): print(line(ins[j]))
+print('\nFOCUSED RANGES')
+for a,b in [(0x1980,0x1a48),(0x1d80,0x1f60),(0x1f50,0x2118),(0x2118,0x2244),(0x2244,0x2404)]:
+ print('\n===',hex(a),'-',hex(b),'===')
+ for i in ins:
+  r=i.address-base
+  if a<=r<b: print(line(i))
+--- review_palu_import_xrefs.py ---
+from pathlib import Path
+import struct,hashlib
+from capstone import Cs,CS_ARCH_X86,CS_MODE_64
+from capstone.x86 import X86_OP_MEM,X86_REG_RIP
+p=Path(r'C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\PaluArray_546\PaluArray_flag_unpacked.exe'); d=p.read_bytes()
+pe=struct.unpack_from('<I',d,0x3c)[0]; opt=pe+24; base=struct.unpack_from('<Q',d,opt+24)[0]; n=struct.unpack_from('<H',d,pe+6)[0]; st=opt+struct.unpack_from('<H',d,pe+20)[0]; secs=[]
+for j in range(n):
+ q=st+j*40; nm=d[q:q+8].split(b'\0',1)[0].decode('ascii','replace'); vs,rv,rs,rp=struct.unpack_from('<IIII',d,q+8); secs.append((nm,vs,rv,rs,rp))
+def fo(rva):
+ for nm,vs,rv,rs,rp in secs:
+  if rv<=rva<rv+rs:return rp+rva-rv
+ raise ValueError(hex(rva))
+def fo_va(va): return fo(va-base)
+imp_rva=struct.unpack_from('<I',d,opt+112+8)[0]; imports={}
+if imp_rva:
+ pos=fo(imp_rva)
+ while True:
+  oft,ts,fc,nr,ft=struct.unpack_from('<IIIII',d,pos)
+  if not (oft|nr|ft):break
+  dll=d[fo(nr):].split(b'\0',1)[0].decode('ascii','replace'); thunk=oft or ft; k=0
+  while True:
+   v=struct.unpack_from('<Q',d,fo(thunk)+8*k)[0]
+   if not v:break
+   name=('ordinal_'+str(v&0xffff)) if v>>63 else d[fo(v)+2:].split(b'\0',1)[0].decode('ascii','replace')
+   imports[base+ft+8*k]=dll+'!'+name;k+=1
+  pos+=20
+print('PE SHA256',hashlib.sha256(d).hexdigest(),'imports',len(imports))
+md=Cs(CS_ARCH_X86,CS_MODE_64);md.detail=True
+text=next(s for s in secs if s[0]=='.text'); _,vs,rv,rs,rp=text; allins=list(md.disasm(d[rp:rp+rs],base+rv))
+for a,b in [(0x1e00,0x1f20),(0x1f6c,0x1fb8),(0x1fb8,0x20b4),(0x1994,0x1a48),(0x1a48,0x1c40)]:
+ print('\n=== RVA',hex(a),'-',hex(b),'===')
+ for ins in allins:
+  r=ins.address-base
+  if not a<=r<b:continue
+  extra=[]
+  for op in ins.operands:
+   if op.type==X86_OP_MEM and op.mem.base==X86_REG_RIP:
+    va=ins.address+ins.size+op.mem.disp
+    if va in imports: extra.append('IAT '+hex(va)+' '+imports[va])
+    off=fo_va(va)
+    if off is not None:
+     raw=d[off:off+48]
+     asc=raw.split(b'\0',1)[0]
+     if asc and all(32<=c<127 for c in asc[:24]): extra.append('ASCII '+repr(asc[:48]))
+     wide=raw.decode('utf-16le','ignore').split('\0',1)[0]
+     if wide and sum(c.isprintable() for c in wide[:20])>=max(4,len(wide[:20])//2):extra.append('UTF16 '+repr(wide[:40]))
+  print(f'{r:06x} {ins.bytes.hex():<22} {ins.mnemonic:<7} {ins.op_str}',(' ; '+' | '.join(extra) if extra else ''))
+print('\nIMPORTS FROM RELEVANT CALLED IAT CELLS')
+needed=set()
+for ins in allins:
+ r=ins.address-base
+ if 0x1e00<=r<0x20b4 or 0x1994<=r<0x1a48:
+  for op in ins.operands:
+   if op.type==X86_OP_MEM and op.mem.base==X86_REG_RIP:
+    va=ins.address+ins.size+op.mem.disp
+    if va in imports: needed.add(va)
+for va in sorted(needed):print(hex(va),imports[va])
+--- disassemble_md5_tail.py ---
+from pathlib import Path
+import struct,sys
+from capstone import Cs,CS_ARCH_X86,CS_MODE_64
+p=Path(sys.argv[1]);d=p.read_bytes();pe=struct.unpack_from("<I",d,0x3c)[0];o=pe+24;base=struct.unpack_from("<Q",d,o+24)[0];n=struct.unpack_from("<H",d,pe+6)[0];os=struct.unpack_from("<H",d,pe+20)[0];st=o+os;S=[]
+for i in range(n):
+ q=st+i*40;nm=d[q:q+8].split(b"\0",1)[0].decode("ascii","replace");vs,rv,rs,rp=struct.unpack_from("<IIII",d,q+8);S.append((nm,rv,rs,rp))
+def fo(va):
+ r=va-base
+ for nm,rv,rs,rp in S:
+  if rv<=r<rv+rs:return rp+r-rv
+ raise ValueError(hex(va))
+md=Cs(CS_ARCH_X86,CS_MODE_64)
+for a,b in ((0x1b00,0x1d80),(0x2230,0x2290),(0x2410,0x24c0)):
+ print(f"--- RVA 0x{a:x}..0x{b:x} ---")
+ for i in md.disasm(d[fo(base+a):fo(base+a)+(b-a)],base+a):print(f"0x{i.address:x}: {i.mnemonic:<8} {i.op_str}")
+--- disassemble_core_funcs.py ---
+from pathlib import Path
+import struct,sys
+from capstone import Cs,CS_ARCH_X86,CS_MODE_64
+p=Path(sys.argv[1]);d=p.read_bytes();pe=struct.unpack_from("<I",d,0x3c)[0];o=pe+24;base=struct.unpack_from("<Q",d,o+24)[0];n=struct.unpack_from("<H",d,pe+6)[0];z=struct.unpack_from("<H",d,pe+20)[0];st=o+z;S=[]
+for i in range(n):
+ q=st+i*40;nm=d[q:q+8].split(b"\0",1)[0].decode("ascii","replace");vs,rv,rs,rp=struct.unpack_from("<IIII",d,q+8);S.append((nm,rv,rs,rp))
+def fo(va):
+ r=va-base
+ for nm,rv,rs,rp in S:
+  if rv<=r<rv+rs:return rp+r-rv
+ raise ValueError(hex(va))
+md=Cs(CS_ARCH_X86,CS_MODE_64)
+for a,b in ((0x1900,0x1b10),(0x1f50,0x21a0),(0x2400,0x26a0)):
+ print(f"--- RVA 0x{a:x}..0x{b:x} ---")
+ for i in md.disasm(d[fo(base+a):fo(base+a)+(b-a)],base+a):print(f"0x{i.address:x}: {i.mnemonic:<8} {i.op_str}")
+--- map_import_calls.py ---
+from pathlib import Path
+import struct,sys
+from capstone import Cs,CS_ARCH_X86,CS_MODE_64
+from capstone.x86_const import X86_OP_MEM,X86_REG_RIP
+p=Path(sys.argv[1]);d=p.read_bytes();pe=struct.unpack_from('<I',d,0x3c)[0]; opt=pe+24;base=struct.unpack_from('<Q',d,opt+24)[0]; n=struct.unpack_from('<H',d,pe+6)[0]; os=struct.unpack_from('<H',d,pe+20)[0]; st=opt+os; sections=[]
+for i in range(n):
+ q=st+i*40;name=d[q:q+8].split(b'\0',1)[0].decode('ascii','replace');vs,rv,rs,rp=struct.unpack_from('<IIII',d,q+8);sections.append((name,rv,rs,rp))
+def fo(rva):
+ for name,rv,rs,rp in sections:
+  if rv<=rva<rv+rs:return rp+rva-rv
+ raise ValueError(hex(rva))
+nd=struct.unpack_from('<I',d,opt+108)[0]; imp_rva,imp_size=struct.unpack_from('<II',d,opt+112+8)
+imports={}
+if imp_rva:
+ pos=fo(imp_rva)
+ while True:
+  oft,ts,fc,nr,ft=struct.unpack_from('<IIIII',d,pos)
+  if not (oft|nr|ft):break
+  dll=d[fo(nr):].split(b'\0',1)[0].decode('ascii','replace'); thunk=oft or ft; j=0
+  while True:
+   v=struct.unpack_from('<Q',d,fo(thunk)+j*8)[0]
+   if not v:break
+   if v>>63:name=f'ordinal_{v&0xffff}'
+   else:name=d[fo(v)+2:].split(b'\0',1)[0].decode('ascii','replace')
+   imports[base+ft+j*8]=dll+'!'+name;j+=1
+  pos+=20
+print('--- IAT ---')
+for va,name in sorted(imports.items()):print(f'{va:#x} {name}')
+md=Cs(CS_ARCH_X86,CS_MODE_64);md.detail=True
+print('--- calls into IAT in selected functions ---')
+for start,end in [(0x1040,0x1080),(0x1994,0x1a47),(0x1a48,0x1d92),(0x1dd8,0x1f4e),(0x1f6c,0x20b4),(0x2118,0x2404)]:
+ print(f'[{start:#x},{end:#x})')
+ for ins in md.disasm(d[fo(start):fo(end-1)+1],base+start):
+  for o in ins.operands:
+   if o.type==X86_OP_MEM and o.mem.base==X86_REG_RIP:
+    va=ins.address+ins.size+o.mem.disp
+    if va in imports:print(f'{ins.address:#x}: {ins.mnemonic} {ins.op_str} => {imports[va]}')
+
+COMMAND: check existing emulation / sandbox runtimes only
+NOT FOUND wine
+NOT FOUND wine64
+FOUND wsl => C:\WINDOWS\system32\wsl.exe
+NOT FOUND sandboxie
+NOT FOUND WindowsSandbox
+NOT FOUND vmrun
+NOT FOUND qemu-x86_64
+**********************
+PowerShell transcript end
+End time: 20260928164942
+**********************
+**********************
+PowerShell transcript start
+Start time: 20260928164951
+Username: DESKTOP-412KTAR\mzj
+RunAs User: DESKTOP-412KTAR\mzj
+Configuration Name: 
+Machine: DESKTOP-412KTAR (Microsoft Windows NT 10.0.26200.0)
+Host Application: C:\Users\mzj\.cache\codex-runtimes\codex-primary-runtime\dependencies\native\powershell\pwsh.dll -NoProfile -Command try { [Console]::OutputEncoding=[System.Text.Encoding]::UTF8 } catch {}
+$log='C:\Users\mzj\Desktop\CTF\玄机刷题\记录\限时攻关-PaluArray-终端记录.txt'; $dir='C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\PaluArray_546'; Start-Transcript -LiteralPath $log -Append; Write-Output 'COMMAND: python -B review_md5_flow.py (full static disassembly; no PE execution)'; python -B (Join-Path $dir 'review_md5_flow.py') 2>&1; Write-Output "PYTHON_EXIT=$LASTEXITCODE"; Stop-Transcript
+Process ID: 9868
+PSVersion: 7.6.5
+PSEdition: Core
+GitCommitId: 7.6.5
+OS: Microsoft Windows 10.0.26200
+Platform: Win32NT
+PSCompatibleVersions: 1.0, 2.0, 3.0, 4.0, 5.0, 5.1, 6.0, 7.0
+PSRemotingProtocolVersion: 2.4
+SerializationVersion: 1.1.0.1
+WSManStackVersion: 3.0
+**********************
+Transcript started, output file is C:\Users\mzj\Desktop\CTF\玄机刷题\记录\限时攻关-PaluArray-终端记录.txt
+COMMAND: python -B review_md5_flow.py (full static disassembly; no PE execution)
+PYTHON_EXIT=0
+**********************
+PowerShell transcript end
+End time: 20260928164952
+**********************
+**********************
+PowerShell transcript start
+Start time: 20260928165043
+Username: DESKTOP-412KTAR\mzj
+RunAs User: DESKTOP-412KTAR\mzj
+Configuration Name: 
+Machine: DESKTOP-412KTAR (Microsoft Windows NT 10.0.26200.0)
+Host Application: C:\Users\mzj\.cache\codex-runtimes\codex-primary-runtime\dependencies\native\powershell\pwsh.dll -NoProfile -Command try { [Console]::OutputEncoding=[System.Text.Encoding]::UTF8 } catch {}
+$log='C:\Users\mzj\Desktop\CTF\玄机刷题\记录\限时攻关-PaluArray-终端记录.txt'; $dir='C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\PaluArray_546'; Start-Transcript -LiteralPath $log -Append; Write-Output 'COMMAND: python -B map_import_calls.py ... | Select-String for hash/update/UI conversion IAT labels'; python -B (Join-Path $dir 'map_import_calls.py') (Join-Path $dir 'PaluArray_flag_unpacked.exe') 2>&1 | Select-String -Pattern '^0x140005|^\[|=> |^--- IAT ---|wcslen|strlen|MultiByte|WideChar|MessageBox|memcpy|find|Hash|ordinal_29|ordinal_16|ordinal_45|ordinal_24|ordinal_57|ordinal_29' | Select-Object -First 220; Write-Output "PIPELINE_EXIT=$LASTEXITCODE"; Stop-Transcript
+Process ID: 15588
+PSVersion: 7.6.5
+PSEdition: Core
+GitCommitId: 7.6.5
+OS: Microsoft Windows 10.0.26200
+Platform: Win32NT
+PSCompatibleVersions: 1.0, 2.0, 3.0, 4.0, 5.0, 5.1, 6.0, 7.0
+PSRemotingProtocolVersion: 2.4
+SerializationVersion: 1.1.0.1
+WSManStackVersion: 3.0
+**********************
+Transcript started, output file is C:\Users\mzj\Desktop\CTF\玄机刷题\记录\限时攻关-PaluArray-终端记录.txt
+COMMAND: python -B map_import_calls.py ... | Select-String for hash/update/UI conversion IAT labels
+
+--- IAT ---
+0x140005000 COMCTL32.dll!InitCommonControlsEx
+0x140005010 KERNEL32.DLL!LocalFree
+0x140005018 KERNEL32.DLL!MultiByteToWideChar
+0x140005020 KERNEL32.DLL!OutputDebugStringW
+0x140005028 KERNEL32.DLL!InitializeCriticalSectionEx
+0x140005030 KERNEL32.DLL!GetLastError
+0x140005038 KERNEL32.DLL!GetSystemTimeAsFileTime
+0x140005040 KERNEL32.DLL!DeleteCriticalSection
+0x140005048 KERNEL32.DLL!TerminateProcess
+0x140005050 KERNEL32.DLL!GetCurrentProcess
+0x140005058 KERNEL32.DLL!GetModuleHandleW
+0x140005060 KERNEL32.DLL!IsProcessorFeaturePresent
+0x140005068 KERNEL32.DLL!GetStartupInfoW
+0x140005070 KERNEL32.DLL!SetUnhandledExceptionFilter
+0x140005078 KERNEL32.DLL!UnhandledExceptionFilter
+0x140005080 KERNEL32.DLL!IsDebuggerPresent
+0x140005088 KERNEL32.DLL!RtlVirtualUnwind
+0x140005090 KERNEL32.DLL!RtlLookupFunctionEntry
+0x140005098 KERNEL32.DLL!RtlCaptureContext
+0x1400050a0 KERNEL32.DLL!InitializeSListHead
+0x1400050a8 KERNEL32.DLL!GetCurrentThreadId
+0x1400050b0 KERNEL32.DLL!GetCurrentProcessId
+0x1400050b8 KERNEL32.DLL!QueryPerformanceCounter
+0x1400050c0 KERNEL32.DLL!WideCharToMultiByte
+0x1400050d0 MSVCP140.dll!?_Xlength_error@std@@YAXPEBD@Z
+0x1400050e0 OLEAUT32.dll!ordinal_150
+0x1400050e8 OLEAUT32.dll!ordinal_6
+0x1400050f0 OLEAUT32.dll!ordinal_7
+0x1400050f8 OLEAUT32.dll!ordinal_2
+0x140005100 OLEAUT32.dll!ordinal_9
+0x140005110 USER32.dll!EnableWindow
+0x140005118 USER32.dll!IsIconic
+0x140005120 USER32.dll!MessageBoxW
+0x140005128 USER32.dll!SendMessageW
+0x140005130 USER32.dll!GetClientRect
+0x140005138 USER32.dll!LoadIconW
+0x140005140 USER32.dll!DrawIcon
+0x140005148 USER32.dll!GetSystemMetrics
+0x140005158 VCRUNTIME140.dll!_CxxThrowException
+0x140005160 VCRUNTIME140.dll!memset
+0x140005168 VCRUNTIME140.dll!__current_exception_context
+0x140005170 VCRUNTIME140.dll!__current_exception
+0x140005178 VCRUNTIME140.dll!__std_terminate
+0x140005180 VCRUNTIME140.dll!__std_exception_destroy
+0x140005188 VCRUNTIME140.dll!memcpy
+0x140005190 VCRUNTIME140.dll!__std_exception_copy
+0x140005198 VCRUNTIME140.dll!__C_specific_handler
+0x1400051a8 VCRUNTIME140_1.dll!__CxxFrameHandler4
+0x1400051b8 api-ms-win-crt-heap-l1-1-0.dll!calloc
+0x1400051c0 api-ms-win-crt-heap-l1-1-0.dll!malloc
+0x1400051c8 api-ms-win-crt-heap-l1-1-0.dll!_set_new_mode
+0x1400051d0 api-ms-win-crt-heap-l1-1-0.dll!_recalloc
+0x1400051d8 api-ms-win-crt-heap-l1-1-0.dll!free
+0x1400051e8 api-ms-win-crt-locale-l1-1-0.dll!_configthreadlocale
+0x1400051f8 api-ms-win-crt-math-l1-1-0.dll!__setusermatherr
+0x140005208 api-ms-win-crt-runtime-l1-1-0.dll!_set_app_type
+0x140005210 api-ms-win-crt-runtime-l1-1-0.dll!_seh_filter_exe
+0x140005218 api-ms-win-crt-runtime-l1-1-0.dll!_errno
+0x140005220 api-ms-win-crt-runtime-l1-1-0.dll!_configure_wide_argv
+0x140005228 api-ms-win-crt-runtime-l1-1-0.dll!_initialize_wide_environment
+0x140005230 api-ms-win-crt-runtime-l1-1-0.dll!_get_wide_winmain_command_line
+0x140005238 api-ms-win-crt-runtime-l1-1-0.dll!_initterm
+0x140005240 api-ms-win-crt-runtime-l1-1-0.dll!_initterm_e
+0x140005248 api-ms-win-crt-runtime-l1-1-0.dll!exit
+0x140005250 api-ms-win-crt-runtime-l1-1-0.dll!_exit
+0x140005258 api-ms-win-crt-runtime-l1-1-0.dll!_invalid_parameter_noinfo
+0x140005260 api-ms-win-crt-runtime-l1-1-0.dll!_cexit
+0x140005268 api-ms-win-crt-runtime-l1-1-0.dll!_c_exit
+0x140005270 api-ms-win-crt-runtime-l1-1-0.dll!_register_thread_local_exe_atexit_callback
+0x140005278 api-ms-win-crt-runtime-l1-1-0.dll!terminate
+0x140005280 api-ms-win-crt-runtime-l1-1-0.dll!_initialize_onexit_table
+0x140005288 api-ms-win-crt-runtime-l1-1-0.dll!_register_onexit_function
+0x140005290 api-ms-win-crt-runtime-l1-1-0.dll!_crt_atexit
+0x140005298 api-ms-win-crt-runtime-l1-1-0.dll!_invalid_parameter_noinfo_noreturn
+0x1400052a8 api-ms-win-crt-stdio-l1-1-0.dll!_set_fmode
+0x1400052b0 api-ms-win-crt-stdio-l1-1-0.dll!__p__commode
+0x1400052c0 api-ms-win-crt-string-l1-1-0.dll!strlen
+0x1400052c8 api-ms-win-crt-string-l1-1-0.dll!wcslen
+0x1400052d8 mfc140u.dll!ordinal_2967
+0x1400052e0 mfc140u.dll!ordinal_14211
+0x1400052e8 mfc140u.dll!ordinal_7651
+0x1400052f0 mfc140u.dll!ordinal_14217
+0x1400052f8 mfc140u.dll!ordinal_8449
+0x140005300 mfc140u.dll!ordinal_6631
+0x140005308 mfc140u.dll!ordinal_11406
+0x140005310 mfc140u.dll!ordinal_13354
+0x140005318 mfc140u.dll!ordinal_5723
+0x140005320 mfc140u.dll!ordinal_7551
+0x140005328 mfc140u.dll!ordinal_5240
+0x140005330 mfc140u.dll!ordinal_2629
+0x140005338 mfc140u.dll!ordinal_11806
+0x140005340 mfc140u.dll!ordinal_3812
+0x140005348 mfc140u.dll!ordinal_3279
+0x140005350 mfc140u.dll!ordinal_3278
+0x140005358 mfc140u.dll!ordinal_3172
+0x140005360 mfc140u.dll!ordinal_11850
+0x140005368 mfc140u.dll!ordinal_10727
+0x140005370 mfc140u.dll!ordinal_11813
+0x140005378 mfc140u.dll!ordinal_6000
+0x140005380 mfc140u.dll!ordinal_13397
+0x140005388 mfc140u.dll!ordinal_2697
+0x140005390 mfc140u.dll!ordinal_8901
+0x140005398 mfc140u.dll!ordinal_5083
+0x1400053a0 mfc140u.dll!ordinal_10704
+0x1400053a8 mfc140u.dll!ordinal_11085
+0x1400053b0 mfc140u.dll!ordinal_10163
+0x1400053b8 mfc140u.dll!ordinal_3308
+0x1400053c0 mfc140u.dll!ordinal_3307
+0x1400053c8 mfc140u.dll!ordinal_3071
+0x1400053d0 mfc140u.dll!ordinal_2431
+0x1400053d8 mfc140u.dll!ordinal_1369
+0x1400053e0 mfc140u.dll!ordinal_878
+0x1400053e8 mfc140u.dll!ordinal_2187
+0x1400053f0 mfc140u.dll!ordinal_2212
+0x1400053f8 mfc140u.dll!ordinal_2921
+0x140005400 mfc140u.dll!ordinal_285
+0x140005408 mfc140u.dll!ordinal_5709
+0x140005410 mfc140u.dll!ordinal_2903
+0x140005418 mfc140u.dll!ordinal_1631
+0x140005420 mfc140u.dll!ordinal_280
+0x140005428 mfc140u.dll!ordinal_286
+0x140005430 mfc140u.dll!ordinal_290
+0x140005438 mfc140u.dll!ordinal_4510
+0x140005440 mfc140u.dll!ordinal_5555
+0x140005448 mfc140u.dll!ordinal_5339
+0x140005450 mfc140u.dll!ordinal_9041
+0x140005458 mfc140u.dll!ordinal_4767
+0x140005460 mfc140u.dll!ordinal_5363
+0x140005468 mfc140u.dll!ordinal_5080
+0x140005470 mfc140u.dll!ordinal_2270
+0x140005478 mfc140u.dll!ordinal_6250
+0x140005480 mfc140u.dll!ordinal_4352
+0x140005488 mfc140u.dll!ordinal_7054
+0x140005490 mfc140u.dll!ordinal_2350
+0x140005498 mfc140u.dll!ordinal_1091
+0x1400054a0 mfc140u.dll!ordinal_4656
+0x1400054a8 mfc140u.dll!ordinal_940
+0x1400054b0 mfc140u.dll!ordinal_3951
+0x1400054b8 mfc140u.dll!ordinal_1089
+0x1400054c0 mfc140u.dll!ordinal_1489
+0x1400054c8 mfc140u.dll!ordinal_6614
+0x1400054d0 mfc140u.dll!ordinal_5582
+0x1400054d8 mfc140u.dll!ordinal_13545
+0x1400054e0 mfc140u.dll!ordinal_6122
+0x1400054e8 mfc140u.dll!ordinal_14289
+0x1400054f0 mfc140u.dll!ordinal_6123
+0x1400054f8 mfc140u.dll!ordinal_14290
+0x140005500 mfc140u.dll!ordinal_6121
+0x140005508 mfc140u.dll!ordinal_14288
+0x140005510 mfc140u.dll!ordinal_7719
+0x140005518 mfc140u.dll!ordinal_12212
+0x140005520 mfc140u.dll!ordinal_14088
+0x140005528 mfc140u.dll!ordinal_11665
+0x140005530 mfc140u.dll!ordinal_11664
+0x140005538 mfc140u.dll!ordinal_2011
+0x140005540 mfc140u.dll!ordinal_7668
+0x140005548 mfc140u.dll!ordinal_12625
+0x140005550 mfc140u.dll!ordinal_3949
+0x140005558 mfc140u.dll!ordinal_4011
+0x140005560 mfc140u.dll!ordinal_9089
+0x140005568 mfc140u.dll!ordinal_14216
+0x140005570 mfc140u.dll!ordinal_7650
+0x140005578 mfc140u.dll!ordinal_14210
+0x140005580 mfc140u.dll!ordinal_12223
+0x140005588 mfc140u.dll!ordinal_12222
+0x140005590 mfc140u.dll!ordinal_2439
+0x140005598 mfc140u.dll!ordinal_10070
+0x1400055a0 mfc140u.dll!ordinal_5183
+0x1400055a8 mfc140u.dll!ordinal_8023
+0x1400055b0 mfc140u.dll!ordinal_4752
+0x1400055b8 mfc140u.dll!ordinal_4814
+0x1400055c0 mfc140u.dll!ordinal_4859
+0x1400055c8 mfc140u.dll!ordinal_4782
+0x1400055d0 mfc140u.dll!ordinal_4837
+0x1400055d8 mfc140u.dll!ordinal_4853
+0x1400055e0 mfc140u.dll!ordinal_4794
+0x1400055e8 mfc140u.dll!ordinal_4800
+0x1400055f0 mfc140u.dll!ordinal_4806
+0x1400055f8 mfc140u.dll!ordinal_4788
+0x140005600 mfc140u.dll!ordinal_7716
+0x140005608 mfc140u.dll!ordinal_4445
+0x140005610 mfc140u.dll!ordinal_12544
+0x140005618 mfc140u.dll!ordinal_12606
+0x140005620 mfc140u.dll!ordinal_10124
+0x140005628 mfc140u.dll!ordinal_11929
+0x140005630 mfc140u.dll!ordinal_8084
+0x140005638 mfc140u.dll!ordinal_1450
+0x140005640 mfc140u.dll!ordinal_4843
+0x140005648 mfc140u.dll!ordinal_2346
+0x140005650 mfc140u.dll!ordinal_9384
+0x140005658 mfc140u.dll!ordinal_7393
+0x140005660 mfc140u.dll!ordinal_8167
+0x140005668 mfc140u.dll!ordinal_4776
+0x140005670 mfc140u.dll!ordinal_1755
+0x140005678 mfc140u.dll!ordinal_1734
+0x140005680 mfc140u.dll!ordinal_1748
+0x140005688 mfc140u.dll!ordinal_1722
+0x140005690 mfc140u.dll!ordinal_1700
+0x140005698 mfc140u.dll!ordinal_11940
+0x1400056a0 mfc140u.dll!ordinal_11944
+0x1400056a8 mfc140u.dll!ordinal_13513
+0x1400056b0 mfc140u.dll!ordinal_3173
+0x1400056b8 mfc140u.dll!ordinal_10691
+0x1400056c0 mfc140u.dll!ordinal_6729
+0x1400056c8 mfc140u.dll!ordinal_8656
+0x1400056d0 mfc140u.dll!ordinal_14209
+0x1400056d8 mfc140u.dll!ordinal_11625
+0x1400056e0 mfc140u.dll!ordinal_3718
+0x1400056e8 mfc140u.dll!ordinal_11771
+0x1400056f0 mfc140u.dll!ordinal_8830
+0x1400056f8 mfc140u.dll!ordinal_4360
+0x140005700 mfc140u.dll!ordinal_11415
+0x140005708 mfc140u.dll!ordinal_983
+0x140005710 mfc140u.dll!ordinal_11414
+0x140005718 mfc140u.dll!ordinal_5451
+0x140005720 mfc140u.dll!ordinal_9979
+0x140005728 mfc140u.dll!ordinal_9975
+0x140005730 mfc140u.dll!ordinal_9977
+0x140005738 mfc140u.dll!ordinal_9978
+PIPELINE_EXIT=
+**********************
+PowerShell transcript end
+End time: 20260928165043
+**********************
+**********************
+PowerShell transcript start
+Start time: 20260928165103
+Username: DESKTOP-412KTAR\mzj
+RunAs User: DESKTOP-412KTAR\mzj
+Configuration Name: 
+Machine: DESKTOP-412KTAR (Microsoft Windows NT 10.0.26200.0)
+Host Application: C:\Users\mzj\.cache\codex-runtimes\codex-primary-runtime\dependencies\native\powershell\pwsh.dll -NoProfile -Command try { [Console]::OutputEncoding=[System.Text.Encoding]::UTF8 } catch {}
+$log='C:\Users\mzj\Desktop\CTF\玄机刷题\记录\限时攻关-PaluArray-终端记录.txt'; $dir='C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\PaluArray_546'; Start-Transcript -LiteralPath $log -Append; Write-Output 'COMMAND: map only IAT calls in target UI, conversion and MD5 functions'; python -B (Join-Path $dir 'map_import_calls.py') (Join-Path $dir 'PaluArray_flag_unpacked.exe') 2>&1 | Select-String -Pattern '^--- calls into IAT|^\[|=> ' ; Stop-Transcript
+Process ID: 22284
+PSVersion: 7.6.5
+PSEdition: Core
+GitCommitId: 7.6.5
+OS: Microsoft Windows 10.0.26200
+Platform: Win32NT
+PSCompatibleVersions: 1.0, 2.0, 3.0, 4.0, 5.0, 5.1, 6.0, 7.0
+PSRemotingProtocolVersion: 2.4
+SerializationVersion: 1.1.0.1
+WSManStackVersion: 3.0
+**********************
+Transcript started, output file is C:\Users\mzj\Desktop\CTF\玄机刷题\记录\限时攻关-PaluArray-终端记录.txt
+COMMAND: map only IAT calls in target UI, conversion and MD5 functions
+
+--- calls into IAT in selected functions ---
+[0x1040,0x1080)
+0x14000104e: call qword ptr [rip + 0x43d4] => mfc140u.dll!ordinal_286
+[0x1994,0x1a47)
+0x1400019c7: call qword ptr [rip + 0x3ddb] => mfc140u.dll!ordinal_296
+0x1400019e2: call qword ptr [rip + 0x3a30] => mfc140u.dll!ordinal_1631
+0x1400019f5: call qword ptr [rip + 0x3a3d] => mfc140u.dll!ordinal_4510
+0x140001a0d: call qword ptr [rip + 0x39bd] => mfc140u.dll!ordinal_2431
+0x140001a20: call qword ptr [rip + 0x3d7a] => mfc140u.dll!ordinal_1033
+[0x1a48,0x1d92)
+0x140001aea: call qword ptr [rip + 0x3940] => mfc140u.dll!ordinal_290
+0x140001afa: call qword ptr [rip + 0x39c0] => mfc140u.dll!ordinal_1489
+0x140001b4a: call qword ptr [rip + 0x38b8] => mfc140u.dll!ordinal_5709
+0x140001b58: call qword ptr [rip + 0x38a2] => mfc140u.dll!ordinal_285
+0x140001b74: call qword ptr [rip + 0x374e] => api-ms-win-crt-string-l1-1-0.dll!wcslen
+0x140001b90: call qword ptr [rip + 0x3862] => mfc140u.dll!ordinal_2921
+0x140001ba3: call qword ptr [rip + 0x3917] => mfc140u.dll!ordinal_1489
+0x140001bd0: call qword ptr [rip + 0x3522] => OLEAUT32.dll!ordinal_2
+0x140001c05: call qword ptr [rip + 0x38b5] => mfc140u.dll!ordinal_1489
+0x140001c59: call qword ptr [rip + 0x3489] => OLEAUT32.dll!ordinal_6
+0x140001c6b: call qword ptr [rip + 0x3b27] => mfc140u.dll!ordinal_266
+0x140001c8f: call qword ptr [rip + 0x348b] => USER32.dll!MessageBoxW
+0x140001cab: call qword ptr [rip + 0x3437] => OLEAUT32.dll!ordinal_6
+0x140001cbd: call qword ptr [rip + 0x3ad5] => mfc140u.dll!ordinal_266
+0x140001cd8: call qword ptr [rip + 0x3ac2] => mfc140u.dll!ordinal_1033
+0x140001cee: call qword ptr [rip + 0x3aac] => mfc140u.dll!ordinal_1033
+0x140001d28: call qword ptr [rip + 0x356a] => api-ms-win-crt-runtime-l1-1-0.dll!_invalid_parameter_noinfo_noreturn
+[0x1dd8,0x1f4e)
+0x140001e00: call qword ptr [rip + 0x359a] => mfc140u.dll!ordinal_10704
+0x140001e0e: call qword ptr [rip + 0x3514] => mfc140u.dll!ordinal_5240
+0x140001e24: call qword ptr [rip + 0x397e] => mfc140u.dll!ordinal_296
+0x140001e32: call qword ptr [rip + 0x34e8] => mfc140u.dll!ordinal_7551
+0x140001e41: call qword ptr [rip + 0x35d9] => mfc140u.dll!ordinal_280
+0x140001e5f: call qword ptr [rip + 0x35ab] => mfc140u.dll!ordinal_2903
+0x140001e7d: call qword ptr [rip + 0x3475] => mfc140u.dll!ordinal_8449
+0x140001eae: call qword ptr [rip + 0x3324] => api-ms-win-crt-heap-l1-1-0.dll!free
+0x140001efd: call qword ptr [rip + 0x3395] => api-ms-win-crt-runtime-l1-1-0.dll!_invalid_parameter_noinfo_noreturn
+0x140001f12: call qword ptr [rip + 0x33e0] => mfc140u.dll!ordinal_8449
+0x140001f1d: call qword ptr [rip + 0x387d] => mfc140u.dll!ordinal_1033
+0x140001f28: call qword ptr [rip + 0x3872] => mfc140u.dll!ordinal_1033
+[0x1f6c,0x20b4)
+0x140001fbb: call qword ptr [rip + 0x3307] => api-ms-win-crt-string-l1-1-0.dll!wcslen
+0x140002003: call qword ptr [rip + 0x30b7] => KERNEL32.DLL!WideCharToMultiByte
+0x140002018: call qword ptr [rip + 0x3012] => KERNEL32.DLL!GetLastError
+0x140002051: call qword ptr [rip + 0x3069] => KERNEL32.DLL!WideCharToMultiByte
+0x14000208f: call qword ptr [rip + 0x302b] => KERNEL32.DLL!WideCharToMultiByte
+[0x2118,0x2404)
+0x140002149: call qword ptr [rip + 0x3171] => api-ms-win-crt-string-l1-1-0.dll!strlen
+0x140002180: call qword ptr [rip + 0x3002] => VCRUNTIME140.dll!memcpy
+0x1400021a9: call qword ptr [rip + 0x3311] => mfc140u.dll!ordinal_1489
+0x1400021f2: call qword ptr [rip + 0x30a0] => api-ms-win-crt-runtime-l1-1-0.dll!_invalid_parameter_noinfo_noreturn
+0x1400021f9: call qword ptr [rip + 0x32c1] => mfc140u.dll!ordinal_1489
+0x140002216: call qword ptr [rip + 0x2f6c] => VCRUNTIME140.dll!memcpy
+0x1400022bf: call qword ptr [rip + 0x31fb] => mfc140u.dll!ordinal_1489
+0x140002304: call qword ptr [rip + 0x2f8e] => api-ms-win-crt-runtime-l1-1-0.dll!_invalid_parameter_noinfo_noreturn
+0x14000230b: call qword ptr [rip + 0x31af] => mfc140u.dll!ordinal_1489
+0x140002329: call qword ptr [rip + 0x2e59] => VCRUNTIME140.dll!memcpy
+0x14000235d: call qword ptr [rip + 0x2e75] => api-ms-win-crt-heap-l1-1-0.dll!free
+0x14000239f: call qword ptr [rip + 0x2e2b] => api-ms-win-crt-heap-l1-1-0.dll!_recalloc
+0x1400023af: call qword ptr [rip + 0x2e23] => api-ms-win-crt-heap-l1-1-0.dll!free
+0x1400023c7: call qword ptr [rip + 0x2deb] => api-ms-win-crt-heap-l1-1-0.dll!calloc
+**********************
+PowerShell transcript end
+End time: 20260928165104
+**********************
+**********************
+PowerShell transcript start
+Start time: 20260928165135
+Username: DESKTOP-412KTAR\mzj
+RunAs User: DESKTOP-412KTAR\mzj
+Configuration Name: 
+Machine: DESKTOP-412KTAR (Microsoft Windows NT 10.0.26200.0)
+Host Application: C:\Users\mzj\.cache\codex-runtimes\codex-primary-runtime\dependencies\native\powershell\pwsh.dll -NoProfile -Command try { [Console]::OutputEncoding=[System.Text.Encoding]::UTF8 } catch {}
+$log='C:\Users\mzj\Desktop\CTF\玄机刷题\记录\限时攻关-PaluArray-终端记录.txt'; $dir='C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\PaluArray_546'; Start-Transcript -LiteralPath $log -Append; Write-Output 'COMMAND: inspect existing range disassembler'; Get-Content -LiteralPath (Join-Path $dir 'disassemble_range.py'); Write-Output 'COMMAND: disassemble MD5 update entry, transform tail and finalizer'; python -B (Join-Path $dir 'disassemble_range.py') (Join-Path $dir 'PaluArray_flag_unpacked.exe') 0x23f0 0x24d0; python -B (Join-Path $dir 'disassemble_range.py') (Join-Path $dir 'PaluArray_flag_unpacked.exe') 0x2c80 0x2d70; python -B (Join-Path $dir 'disassemble_range.py') (Join-Path $dir 'PaluArray_flag_unpacked.exe') 0x2d70 0x2ea0; Stop-Transcript
+Process ID: 29024
+PSVersion: 7.6.5
+PSEdition: Core
+GitCommitId: 7.6.5
+OS: Microsoft Windows 10.0.26200
+Platform: Win32NT
+PSCompatibleVersions: 1.0, 2.0, 3.0, 4.0, 5.0, 5.1, 6.0, 7.0
+PSRemotingProtocolVersion: 2.4
+SerializationVersion: 1.1.0.1
+WSManStackVersion: 3.0
+**********************
+Transcript started, output file is C:\Users\mzj\Desktop\CTF\玄机刷题\记录\限时攻关-PaluArray-终端记录.txt
+COMMAND: inspect existing range disassembler
+from pathlib import Path
+import struct,sys
+from capstone import Cs,CS_ARCH_X86,CS_MODE_64
+p=Path(sys.argv[1]); start=int(sys.argv[2],16); end=int(sys.argv[3],16); d=p.read_bytes(); pe=struct.unpack_from('<I',d,0x3c)[0]; opt=pe+24; base=struct.unpack_from('<Q',d,opt+24)[0]; n=struct.unpack_from('<H',d,pe+6)[0]; os=struct.unpack_from('<H',d,pe+20)[0]; table=opt+os; sections=[]
+for j in range(n):
+ q=table+j*40; name=d[q:q+8].split(b'\0',1)[0].decode('ascii','replace'); vs,rv,rs,rp=struct.unpack_from('<IIII',d,q+8); sections.append((name,rv,rs,rp))
+def off(rva):
+ for name,rv,rs,rp in sections:
+  if rv<=rva<rv+rs:return rp+rva-rv
+ raise ValueError(hex(rva))
+md=Cs(CS_ARCH_X86,CS_MODE_64); md.detail=True
+for i in md.disasm(d[off(start):off(end-1)+1],base+start): print(f'0x{i.address:x}: {i.mnemonic:<8} {i.op_str}')
+COMMAND: disassemble MD5 update entry, transform tail and finalizer
+[Y] Yes  [A] Yes to All  [N] No  [L] No to All  [S] Suspend  [?] Help (default is "Y"):
+[Y] Yes  [A] Yes to All  [N] No  [L] No to All  [S] Suspend  [?] Help (default is "Y"):
+[Y] Yes  [A] Yes to All  [N] No  [L] No to All  [S] Suspend  [?] Help (default is "Y"):
+**********************
+PowerShell transcript end
+End time: 20260928165137
+**********************
+**********************
+PowerShell transcript start
+Start time: 20260928165250
+Username: DESKTOP-412KTAR\mzj
+RunAs User: DESKTOP-412KTAR\mzj
+Configuration Name: 
+Machine: DESKTOP-412KTAR (Microsoft Windows NT 10.0.26200.0)
+Host Application: C:\Users\mzj\.cache\codex-runtimes\codex-primary-runtime\dependencies\native\powershell\pwsh.dll -NoProfile -Command try { [Console]::OutputEncoding=[System.Text.Encoding]::UTF8 } catch {}
+$log='C:\Users\mzj\Desktop\CTF\玄机刷题\记录\限时攻关-PaluArray-终端记录.txt'; $dir='C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\PaluArray_546'; Start-Transcript -LiteralPath $log -Append; Write-Output 'COMMAND: disassemble MD5 update helper from exact call entry 0x2404; cross-check function table'; python -B (Join-Path $dir 'disassemble_range.py') (Join-Path $dir 'PaluArray_flag_unpacked.exe') 0x2404 0x24d0; @'
+import pathlib,struct
+p=pathlib.Path(r'C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\PaluArray_546\PaluArray_flag_unpacked.exe'); d=p.read_bytes(); pe=struct.unpack_from('<I',d,0x3c)[0]; opt=pe+24; n=struct.unpack_from('<H',d,pe+6)[0]; st=opt+struct.unpack_from('<H',d,pe+20)[0]; base=struct.unpack_from('<Q',d,opt+24)[0]; print('RUNTIME_FUNCTIONS near hash routines:')
+for i in range(n):
+ q=st+i*40; name=d[q:q+8].split(b'\0',1)[0].decode('ascii'); vs,rv,rs,rp=struct.unpack_from('<IIII',d,q+8)
+ if name=='.pdata':
+  for o in range(0,rs,12):
+   a,b,u=struct.unpack_from('<III',d,rp+o)
+   if any(a<=x<b for x in [0x1994,0x1a48,0x2404,0x2410,0x24d0,0x2d70]): print(hex(a),hex(b),hex(u))
+'@ | python -B -; Stop-Transcript
+Process ID: 16516
+PSVersion: 7.6.5
+PSEdition: Core
+GitCommitId: 7.6.5
+OS: Microsoft Windows 10.0.26200
+Platform: Win32NT
+PSCompatibleVersions: 1.0, 2.0, 3.0, 4.0, 5.0, 5.1, 6.0, 7.0
+PSRemotingProtocolVersion: 2.4
+SerializationVersion: 1.1.0.1
+WSManStackVersion: 3.0
+**********************
+Transcript started, output file is C:\Users\mzj\Desktop\CTF\玄机刷题\记录\限时攻关-PaluArray-终端记录.txt
+COMMAND: disassemble MD5 update helper from exact call entry 0x2404; cross-check function table
+[Y] Yes  [A] Yes to All  [N] No  [L] No to All  [S] Suspend  [?] Help (default is "Y"):
+**********************
+PowerShell transcript end
+End time: 20260928165252
+**********************
+**********************
+PowerShell transcript start
+Start time: 20260928165419
+Username: DESKTOP-412KTAR\mzj
+RunAs User: DESKTOP-412KTAR\mzj
+Configuration Name: 
+Machine: DESKTOP-412KTAR (Microsoft Windows NT 10.0.26200.0)
+Host Application: C:\Users\mzj\.cache\codex-runtimes\codex-primary-runtime\dependencies\native\powershell\pwsh.dll -NoProfile -Command try { [Console]::OutputEncoding=[System.Text.Encoding]::UTF8 } catch {}
+$log='C:\Users\mzj\Desktop\CTF\玄机刷题\记录\限时攻关-PaluArray-终端记录.txt'; Start-Transcript -LiteralPath $log -Append; Write-Output 'COMMAND: static-verify every compression-round constant and rotation against MD5 definition using Capstone'; $src=@'
+import pathlib,struct,math
+from capstone import Cs,CS_ARCH_X86,CS_MODE_64
+from capstone.x86 import X86_OP_IMM
+p=pathlib.Path(r'C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\PaluArray_546\PaluArray_flag_unpacked.exe'); d=p.read_bytes(); pe=struct.unpack_from('<I',d,0x3c)[0]; opt=pe+24; base=struct.unpack_from('<Q',d,opt+24)[0]; n=struct.unpack_from('<H',d,pe+6)[0]; st=opt+struct.unpack_from('<H',d,pe+20)[0]; secs=[]
+for i in range(n):
+ q=st+i*40; nm=d[q:q+8].split(b'\0',1)[0].decode(); vs,rv,rs,rp=struct.unpack_from('<IIII',d,q+8); secs.append((nm,rv,rs,rp))
+def fo(r):
+ for nm,rv,rs,rp in secs:
+  if rv<=r<rv+rs:return rp+r-rv
+ raise KeyError(hex(r))
+md=Cs(CS_ARCH_X86,CS_MODE_64); md.detail=True; ins=list(md.disasm(d[fo(0x24d0):fo(0x2d70)],base+0x24d0))
+ks=[]; rots=[]
+for x in ins:
+ if x.mnemonic=='add' and len(x.operands)==2 and x.operands[1].type==X86_OP_IMM and x.operands[0].type not in (0,):
+  v=x.operands[1].imm
+  if v>255 or v< -255: ks.append((x.address-base,v&0xffffffff))
+ if x.mnemonic in ('rol','ror') and len(x.operands)==2 and x.operands[1].type==X86_OP_IMM: rots.append((x.address-base,x.mnemonic,x.operands[1].imm))
+expected=[int(abs(math.sin(i+1))*2**32)&0xffffffff for i in range(64)]
+print('hash=',__import__('hashlib').sha256(d).hexdigest())
+print('compression entry/end=0x24d0..0x2d70 instructions=',len(ins))
+print('extracted large immediate-add constants=',len(ks))
+print('first 8 constants=',[hex(v) for a,v in ks[:8]])
+print('last 8 constants=',[hex(v) for a,v in ks[-8:]])
+print('all 64 K values match sin table=',len(ks)==64 and [v for a,v in ks]==expected)
+if len(ks)==64:
+ print('K mismatch positions=',[(i,hex(v),hex(expected[i])) for i,(a,v) in enumerate(ks) if v!=expected[i]])
+print('rotation count=',len(rots),'rotation histogram=',{(op,n):sum(1 for _,o,n0 in rots if o==op and n0==n) for op,n in sorted(set((o,n0) for _,o,n0 in rots))})
+print('first 16 rotation ops=',[(hex(a),op,n) for a,op,n in rots[:16]])
+'@; Write-Output $src; $src | python -B -; Write-Output "PYTHON_EXIT=$LASTEXITCODE"; Stop-Transcript
+Process ID: 16040
+PSVersion: 7.6.5
+PSEdition: Core
+GitCommitId: 7.6.5
+OS: Microsoft Windows 10.0.26200
+Platform: Win32NT
+PSCompatibleVersions: 1.0, 2.0, 3.0, 4.0, 5.0, 5.1, 6.0, 7.0
+PSRemotingProtocolVersion: 2.4
+SerializationVersion: 1.1.0.1
+WSManStackVersion: 3.0
+**********************
+Transcript started, output file is C:\Users\mzj\Desktop\CTF\玄机刷题\记录\限时攻关-PaluArray-终端记录.txt
+COMMAND: static-verify every compression-round constant and rotation against MD5 definition using Capstone
+import pathlib,struct,math
+from capstone import Cs,CS_ARCH_X86,CS_MODE_64
+from capstone.x86 import X86_OP_IMM
+p=pathlib.Path(r'C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\PaluArray_546\PaluArray_flag_unpacked.exe'); d=p.read_bytes(); pe=struct.unpack_from('<I',d,0x3c)[0]; opt=pe+24; base=struct.unpack_from('<Q',d,opt+24)[0]; n=struct.unpack_from('<H',d,pe+6)[0]; st=opt+struct.unpack_from('<H',d,pe+20)[0]; secs=[]
+for i in range(n):
+ q=st+i*40; nm=d[q:q+8].split(b'\0',1)[0].decode(); vs,rv,rs,rp=struct.unpack_from('<IIII',d,q+8); secs.append((nm,rv,rs,rp))
+def fo(r):
+ for nm,rv,rs,rp in secs:
+  if rv<=r<rv+rs:return rp+r-rv
+ raise KeyError(hex(r))
+md=Cs(CS_ARCH_X86,CS_MODE_64); md.detail=True; ins=list(md.disasm(d[fo(0x24d0):fo(0x2d70)],base+0x24d0))
+ks=[]; rots=[]
+for x in ins:
+ if x.mnemonic=='add' and len(x.operands)==2 and x.operands[1].type==X86_OP_IMM and x.operands[0].type not in (0,):
+  v=x.operands[1].imm
+  if v>255 or v< -255: ks.append((x.address-base,v&0xffffffff))
+ if x.mnemonic in ('rol','ror') and len(x.operands)==2 and x.operands[1].type==X86_OP_IMM: rots.append((x.address-base,x.mnemonic,x.operands[1].imm))
+expected=[int(abs(math.sin(i+1))*2**32)&0xffffffff for i in range(64)]
+print('hash=',__import__('hashlib').sha256(d).hexdigest())
+print('compression entry/end=0x24d0..0x2d70 instructions=',len(ins))
+print('extracted large immediate-add constants=',len(ks))
+print('first 8 constants=',[hex(v) for a,v in ks[:8]])
+print('last 8 constants=',[hex(v) for a,v in ks[-8:]])
+print('all 64 K values match sin table=',len(ks)==64 and [v for a,v in ks]==expected)
+if len(ks)==64:
+ print('K mismatch positions=',[(i,hex(v),hex(expected[i])) for i,(a,v) in enumerate(ks) if v!=expected[i]])
+print('rotation count=',len(rots),'rotation histogram=',{(op,n):sum(1 for _,o,n0 in rots if o==op and n0==n) for op,n in sorted(set((o,n0) for _,o,n0 in rots))})
+print('first 16 rotation ops=',[(hex(a),op,n) for a,op,n in rots[:16]])
+PYTHON_EXIT=0
+**********************
+PowerShell transcript end
+End time: 20260928165419
+**********************
+**********************
+PowerShell transcript start
+Start time: 20260928165500
+Username: DESKTOP-412KTAR\mzj
+RunAs User: DESKTOP-412KTAR\mzj
+Configuration Name: 
+Machine: DESKTOP-412KTAR (Microsoft Windows NT 10.0.26200.0)
+Host Application: C:\Users\mzj\.cache\codex-runtimes\codex-primary-runtime\dependencies\native\powershell\pwsh.dll -NoProfile -Command try { [Console]::OutputEncoding=[System.Text.Encoding]::UTF8 } catch {}
+$log='C:\Users\mzj\Desktop\CTF\玄机刷题\记录\限时攻关-PaluArray-терминал-record.txt'; $log='C:\Users\mzj\Desktop\CTF\玄机刷题\记录\限时攻关-PaluArray-终端记录.txt'; Start-Transcript -LiteralPath $log -Append; Write-Output 'COMMAND: extract both ADD and LEA round constants and compare all 64 values'; $src=@'
+import pathlib,struct,math,hashlib
+from capstone import Cs,CS_ARCH_X86,CS_MODE_64
+from capstone.x86 import X86_OP_IMM,X86_OP_MEM
+p=pathlib.Path(r'C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\PaluArray_546\PaluArray_flag_unpacked.exe');d=p.read_bytes();pe=struct.unpack_from('<I',d,0x3c)[0];opt=pe+24;base=struct.unpack_from('<Q',d,opt+24)[0];n=struct.unpack_from('<H',d,pe+6)[0];st=opt+struct.unpack_from('<H',d,pe+20)[0];ss=[]
+for j in range(n):
+ q=st+j*40;nm=d[q:q+8].split(b'\0',1)[0].decode();vs,rv,rs,rp=struct.unpack_from('<IIII',d,q+8);ss.append((nm,rv,rs,rp))
+def fo(r):
+ for nm,rv,rs,rp in ss:
+  if rv<=r<rv+rs:return rp+r-rv
+md=Cs(CS_ARCH_X86,CS_MODE_64);md.detail=True;ins=list(md.disasm(d[fo(0x24d0):fo(0x2d70)],base+0x24d0));items=[];rots=[]
+for x in ins:
+ v=None
+ if x.mnemonic=='add' and len(x.operands)==2 and x.operands[1].type==X86_OP_IMM:
+  v=x.operands[1].imm
+ elif x.mnemonic=='lea' and len(x.operands)==2 and x.operands[1].type==X86_OP_MEM:
+  v=x.operands[1].mem.disp
+ if v is not None and abs(v)>255:items.append((x.address-base,v&0xffffffff,x.mnemonic))
+ if x.mnemonic in ('rol','ror') and len(x.operands)==2 and x.operands[1].type==X86_OP_IMM:rots.append((x.mnemonic,x.operands[1].imm))
+expect=[int(abs(math.sin(i+1))*2**32)&0xffffffff for i in range(64)]
+print('constants found',len(items))
+print('all K constants match MD5 sin-derived table',len(items)==64 and [v for _,v,_ in items]==expect)
+print('mismatches',[(i,hex(items[i][1]),hex(expect[i]),hex(items[i][0]),items[i][2]) for i in range(min(len(items),64)) if items[i][1]!=expect[i]])
+print('K sequence',[hex(v) for _,v,_ in items])
+rot_expected=[25,20,15,10]*4+[23,18,12,9]*4+[22,17,11,9]*4+[21,16,11,10]*4
+print('rotations found',len(rots),'match MD5 right-rotate schedule',len(rots)==64 and [v for op,v in rots]==rot_expected and all(op=='ror' for op,v in rots))
+print('sample native constants: init-state=[0x67452301,0xefcdab89,0x98badcfe,0x10325476], digest output copies 16 state bytes in little endian')
+'@; Write-Output $src; $src | python -B -; Write-Output "PYTHON_EXIT=$LASTEXITCODE"; Stop-Transcript
+Process ID: 19620
+PSVersion: 7.6.5
+PSEdition: Core
+GitCommitId: 7.6.5
+OS: Microsoft Windows 10.0.26200
+Platform: Win32NT
+PSCompatibleVersions: 1.0, 2.0, 3.0, 4.0, 5.0, 5.1, 6.0, 7.0
+PSRemotingProtocolVersion: 2.4
+SerializationVersion: 1.1.0.1
+WSManStackVersion: 3.0
+**********************
+Transcript started, output file is C:\Users\mzj\Desktop\CTF\玄机刷题\记录\限时攻关-PaluArray-终端记录.txt
+COMMAND: extract both ADD and LEA round constants and compare all 64 values
+import pathlib,struct,math,hashlib
+from capstone import Cs,CS_ARCH_X86,CS_MODE_64
+from capstone.x86 import X86_OP_IMM,X86_OP_MEM
+p=pathlib.Path(r'C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\PaluArray_546\PaluArray_flag_unpacked.exe');d=p.read_bytes();pe=struct.unpack_from('<I',d,0x3c)[0];opt=pe+24;base=struct.unpack_from('<Q',d,opt+24)[0];n=struct.unpack_from('<H',d,pe+6)[0];st=opt+struct.unpack_from('<H',d,pe+20)[0];ss=[]
+for j in range(n):
+ q=st+j*40;nm=d[q:q+8].split(b'\0',1)[0].decode();vs,rv,rs,rp=struct.unpack_from('<IIII',d,q+8);ss.append((nm,rv,rs,rp))
+def fo(r):
+ for nm,rv,rs,rp in ss:
+  if rv<=r<rv+rs:return rp+r-rv
+md=Cs(CS_ARCH_X86,CS_MODE_64);md.detail=True;ins=list(md.disasm(d[fo(0x24d0):fo(0x2d70)],base+0x24d0));items=[];rots=[]
+for x in ins:
+ v=None
+ if x.mnemonic=='add' and len(x.operands)==2 and x.operands[1].type==X86_OP_IMM:
+  v=x.operands[1].imm
+ elif x.mnemonic=='lea' and len(x.operands)==2 and x.operands[1].type==X86_OP_MEM:
+  v=x.operands[1].mem.disp
+ if v is not None and abs(v)>255:items.append((x.address-base,v&0xffffffff,x.mnemonic))
+ if x.mnemonic in ('rol','ror') and len(x.operands)==2 and x.operands[1].type==X86_OP_IMM:rots.append((x.mnemonic,x.operands[1].imm))
+expect=[int(abs(math.sin(i+1))*2**32)&0xffffffff for i in range(64)]
+print('constants found',len(items))
+print('all K constants match MD5 sin-derived table',len(items)==64 and [v for _,v,_ in items]==expect)
+print('mismatches',[(i,hex(items[i][1]),hex(expect[i]),hex(items[i][0]),items[i][2]) for i in range(min(len(items),64)) if items[i][1]!=expect[i]])
+print('K sequence',[hex(v) for _,v,_ in items])
+rot_expected=[25,20,15,10]*4+[23,18,12,9]*4+[22,17,11,9]*4+[21,16,11,10]*4
+print('rotations found',len(rots),'match MD5 right-rotate schedule',len(rots)==64 and [v for op,v in rots]==rot_expected and all(op=='ror' for op,v in rots))
+print('sample native constants: init-state=[0x67452301,0xefcdab89,0x98badcfe,0x10325476], digest output copies 16 state bytes in little endian')
+PYTHON_EXIT=0
+**********************
+PowerShell transcript end
+End time: 20260928165500
+**********************
+**********************
+PowerShell transcript start
+Start time: 20260928165754
+Username: DESKTOP-412KTAR\mzj
+RunAs User: DESKTOP-412KTAR\mzj
+Configuration Name: 
+Machine: DESKTOP-412KTAR (Microsoft Windows NT 10.0.26200.0)
+Host Application: C:\Users\mzj\.cache\codex-runtimes\codex-primary-runtime\dependencies\native\powershell\pwsh.dll -NoProfile -Command try { [Console]::OutputEncoding=[System.Text.Encoding]::UTF8 } catch {}
+$log='C:\Users\mzj\Desktop\CTF\玄机刷题\记录\限时攻关-PaluArray-终端记录.txt'; Start-Transcript -LiteralPath $log -Append; Write-Output 'COMMAND: check only already-installed Python emulators and compiler runtimes'; @'
+import importlib.util,shutil,platform
+for m in ['unicorn','qiling','angr','pefile','lief','capstone']:
+ print(m, bool(importlib.util.find_spec(m)))
+for c in ['wine','wine64','qemu-x86_64','gcc','clang','clang-cl','cl','dotnet']:
+ print(c,shutil.which(c))
+print('platform',platform.platform())
+'@ | python -B -; Write-Output "PYTHON_EXIT=$LASTEXITCODE"; Stop-Transcript
+Process ID: 16172
+PSVersion: 7.6.5
+PSEdition: Core
+GitCommitId: 7.6.5
+OS: Microsoft Windows 10.0.26200
+Platform: Win32NT
+PSCompatibleVersions: 1.0, 2.0, 3.0, 4.0, 5.0, 5.1, 6.0, 7.0
+PSRemotingProtocolVersion: 2.4
+SerializationVersion: 1.1.0.1
+WSManStackVersion: 3.0
+**********************
+Transcript started, output file is C:\Users\mzj\Desktop\CTF\玄机刷题\记录\限时攻关-PaluArray-终端记录.txt
+COMMAND: check only already-installed Python emulators and compiler runtimes
+PYTHON_EXIT=0
+**********************
+PowerShell transcript end
+End time: 20260928165754
+**********************
+**********************
+PowerShell transcript start
+Start time: 20260928165936
+Username: DESKTOP-412KTAR\mzj
+RunAs User: DESKTOP-412KTAR\mzj
+Configuration Name: 
+Machine: DESKTOP-412KTAR (Microsoft Windows NT 10.0.26200.0)
+Host Application: C:\Users\mzj\.cache\codex-runtimes\codex-primary-runtime\dependencies\native\powershell\pwsh.dll -NoProfile -Command try { [Console]::OutputEncoding=[System.Text.Encoding]::UTF8 } catch {}
+$log='C:\Users\mzj\Desktop\CTF\玄机刷题\记录\限时攻关-PaluArray-终端记录.txt'; Start-Transcript -LiteralPath $log -Append; Write-Output 'COMMAND: verify compressor constant SET (compiler schedules some arithmetic early) and rotation multiset'; $src=@'
+import pathlib,struct,math,collections
+from capstone import Cs,CS_ARCH_X86,CS_MODE_64
+from capstone.x86 import X86_OP_IMM,X86_OP_MEM
+p=pathlib.Path(r'C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\PaluArray_546\PaluArray_flag_unpacked.exe');d=p.read_bytes();pe=struct.unpack_from('<I',d,0x3c)[0];opt=pe+24;base=struct.unpack_from('<Q',d,opt+24)[0];n=struct.unpack_from('<H',d,pe+6)[0];st=opt+struct.unpack_from('<H',d,pe+20)[0];ss=[]
+for j in range(n):
+ q=st+j*40;nm=d[q:q+8].split(b'\0',1)[0].decode();vs,rv,rs,rp=struct.unpack_from('<IIII',d,q+8);ss.append((nm,rv,rs,rp))
+def fo(r):
+ for nm,rv,rs,rp in ss:
+  if rv<=r<rv+rs:return rp+r-rv
+md=Cs(CS_ARCH_X86,CS_MODE_64);md.detail=True;ins=list(md.disasm(d[fo(0x24d0):fo(0x2d70)],base+0x24d0));ks=[];rots=[]
+for x in ins:
+ v=None
+ if x.mnemonic=='add' and len(x.operands)==2 and x.operands[1].type==X86_OP_IMM:v=x.operands[1].imm
+ elif x.mnemonic=='lea' and len(x.operands)==2 and x.operands[1].type==X86_OP_MEM:v=x.operands[1].mem.disp
+ if v is not None and abs(v)>255:ks.append(v&0xffffffff)
+ if x.mnemonic in ('rol','ror') and len(x.operands)==2 and x.operands[1].type==X86_OP_IMM:rots.append((x.mnemonic,x.operands[1].imm))
+expected=[int(abs(math.sin(i+1))*2**32)&0xffffffff for i in range(64)]
+shifts=[25,20,15,10]*4+[23,18,12,9]*4+[22,17,11,9]*4+[21,16,11,10]*4
+print('64 constants extracted:',len(ks))
+print('K-table multiset equals all 64 MD5 T[i] constants:',collections.Counter(ks)==collections.Counter(expected))
+print('K values missing/extra:',[hex(x) for x in expected if x not in ks],[hex(x) for x in ks if x not in expected])
+print('64 ROR instructions:',len(rots))
+print('rotation multiset equals MD5 left-rotate schedule expressed as ROR(32-s):',collections.Counter(rots)==collections.Counter(('ror',x) for x in shifts))
+print('observed shift counts:',sorted(collections.Counter(rots).items()))
+'@; Write-Output $src; $src | python -B -; Write-Output "PYTHON_EXIT=$LASTEXITCODE"; Stop-Transcript
+Process ID: 496
+PSVersion: 7.6.5
+PSEdition: Core
+GitCommitId: 7.6.5
+OS: Microsoft Windows 10.0.26200
+Platform: Win32NT
+PSCompatibleVersions: 1.0, 2.0, 3.0, 4.0, 5.0, 5.1, 6.0, 7.0
+PSRemotingProtocolVersion: 2.4
+SerializationVersion: 1.1.0.1
+WSManStackVersion: 3.0
+**********************
+Transcript started, output file is C:\Users\mzj\Desktop\CTF\玄机刷题\记录\限时攻关-PaluArray-终端记录.txt
+COMMAND: verify compressor constant SET (compiler schedules some arithmetic early) and rotation multiset
+import pathlib,struct,math,collections
+from capstone import Cs,CS_ARCH_X86,CS_MODE_64
+from capstone.x86 import X86_OP_IMM,X86_OP_MEM
+p=pathlib.Path(r'C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\PaluArray_546\PaluArray_flag_unpacked.exe');d=p.read_bytes();pe=struct.unpack_from('<I',d,0x3c)[0];opt=pe+24;base=struct.unpack_from('<Q',d,opt+24)[0];n=struct.unpack_from('<H',d,pe+6)[0];st=opt+struct.unpack_from('<H',d,pe+20)[0];ss=[]
+for j in range(n):
+ q=st+j*40;nm=d[q:q+8].split(b'\0',1)[0].decode();vs,rv,rs,rp=struct.unpack_from('<IIII',d,q+8);ss.append((nm,rv,rs,rp))
+def fo(r):
+ for nm,rv,rs,rp in ss:
+  if rv<=r<rv+rs:return rp+r-rv
+md=Cs(CS_ARCH_X86,CS_MODE_64);md.detail=True;ins=list(md.disasm(d[fo(0x24d0):fo(0x2d70)],base+0x24d0));ks=[];rots=[]
+for x in ins:
+ v=None
+ if x.mnemonic=='add' and len(x.operands)==2 and x.operands[1].type==X86_OP_IMM:v=x.operands[1].imm
+ elif x.mnemonic=='lea' and len(x.operands)==2 and x.operands[1].type==X86_OP_MEM:v=x.operands[1].mem.disp
+ if v is not None and abs(v)>255:ks.append(v&0xffffffff)
+ if x.mnemonic in ('rol','ror') and len(x.operands)==2 and x.operands[1].type==X86_OP_IMM:rots.append((x.mnemonic,x.operands[1].imm))
+expected=[int(abs(math.sin(i+1))*2**32)&0xffffffff for i in range(64)]
+shifts=[25,20,15,10]*4+[23,18,12,9]*4+[22,17,11,9]*4+[21,16,11,10]*4
+print('64 constants extracted:',len(ks))
+print('K-table multiset equals all 64 MD5 T[i] constants:',collections.Counter(ks)==collections.Counter(expected))
+print('K values missing/extra:',[hex(x) for x in expected if x not in ks],[hex(x) for x in ks if x not in expected])
+print('64 ROR instructions:',len(rots))
+print('rotation multiset equals MD5 left-rotate schedule expressed as ROR(32-s):',collections.Counter(rots)==collections.Counter(('ror',x) for x in shifts))
+print('observed shift counts:',sorted(collections.Counter(rots).items()))
+PYTHON_EXIT=0
+**********************
+PowerShell transcript end
+End time: 20260928165937
+**********************

@@ -1,0 +1,12 @@
+mzj@Ubuntu-24.04:~$ cd ~/pwn-lab && file overflow format payload.bin
+overflow:    ELF 64-bit LSB executable, x86-64, version 1 (SYSV), dynamically linked, interpreter /lib64/ld-linux-x86-64.so.2, BuildID[sha1]=40996d15db6f40bfce3ffb05c98be4019950b248, for GNU/Linux 3.2.0, not stripped
+format:      ELF 64-bit LSB pie executable, x86-64, version 1 (SYSV), dynamically linked, interpreter /lib64/ld-linux-x86-64.so.2, BuildID[sha1]=601040856a2cb3f82b3d566ca65dd1cecff0d404, for GNU/Linux 3.2.0, not stripped
+payload.bin: data
+
+mzj@Ubuntu-24.04:~$ cd ~/pwn-lab && xxd -l 32 overflow
+00000000: 7f45 4c46 0201 0100 0000 0000 0000 0000  .ELF............
+00000010: 0200 3e00 0100 0000 9010 4000 0000 0000  ..>.......@.....
+
+mzj@Ubuntu-24.04:~$ cd ~/pwn-lab && xxd -l 32 payload.bin
+00000000: 4141 4141 4141 4141 4141 4141 4141 4141  AAAAAAAAAAAAAAAA
+00000010: 4141 4141 4141 4141 9011 4000 0000 0000  AAAAAAAA..@.....

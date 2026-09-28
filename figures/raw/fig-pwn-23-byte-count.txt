@@ -1,0 +1,11 @@
+mzj@Ubuntu-24.04:~$ cd ~/pwn-lab && printf AAAA | wc -c
+4
+
+mzj@Ubuntu-24.04:~$ cd ~/pwn-lab && echo AAAA | wc -c
+5
+
+mzj@Ubuntu-24.04:~$ cd ~/pwn-lab && echo AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA | wc -c
+33
+
+mzj@Ubuntu-24.04:~$ cd ~/pwn-lab && wc -c payload.bin
+32 payload.bin

