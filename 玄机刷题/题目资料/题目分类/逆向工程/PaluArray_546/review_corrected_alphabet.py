@@ -1,7 +1,7 @@
 from pathlib import Path
 import hashlib,struct,sys
 sys.stdout.reconfigure(encoding='utf-8',errors='backslashreplace')
-p=Path(r'C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\PaluArray_546\PaluArray_flag_unpacked.exe')
+p=Path(r'C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\题目分类\逆向工程\PaluArray_546\PaluArray_flag_unpacked.exe')
 b=p.read_bytes(); pe=struct.unpack_from('<I',b,0x3c)[0]; opt=pe+24; base=struct.unpack_from('<Q',b,opt+24)[0]; n=struct.unpack_from('<H',b,pe+6)[0]; st=opt+struct.unpack_from('<H',b,pe+20)[0]
 for j in range(n):
  q=st+j*40; nm=b[q:q+8].split(b'\0',1)[0].decode('ascii','replace'); vs,rv,rs,rp=struct.unpack_from('<IIII',b,q+8)

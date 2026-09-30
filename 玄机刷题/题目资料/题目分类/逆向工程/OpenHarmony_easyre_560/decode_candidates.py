@@ -1,5 +1,5 @@
 import base64, pathlib, re
-p = pathlib.Path(r"C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\OpenHarmony_easyre_560\hap_extracted\ets\modules.abc")
+p = pathlib.Path(r"C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\题目分类\逆向工程\OpenHarmony_easyre_560\hap_extracted\ets\modules.abc")
 b = p.read_bytes()
 for start, end in [(0x1750,0x18a0),(0x20c0,0x2160),(0x2310,0x2540),(0x2550,0x2780)]:
     print(f"\nRAW {start:#x}..{end:#x}")

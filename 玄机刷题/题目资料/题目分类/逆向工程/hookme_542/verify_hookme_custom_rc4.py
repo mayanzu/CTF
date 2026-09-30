@@ -1,5 +1,5 @@
 import zipfile,re,pathlib,hashlib
-apk=pathlib.Path(r'C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\hookme_542\附件解包\hookme\HookMe.apk')
+apk=pathlib.Path(r'C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\题目分类\逆向工程\hookme_542\附件解包\hookme\HookMe.apk')
 package='com.example.hookme'
 with zipfile.ZipFile(apk) as z: arsc=z.read('resources.arsc')
 hexes=re.findall(rb'(?<![0-9A-Fa-f])([0-9A-Fa-f]{64,})(?![0-9A-Fa-f])',arsc)

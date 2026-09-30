@@ -4,7 +4,7 @@ import re
 import zlib
 from pathlib import Path
 
-abc=Path(r'C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\OpenHarmony_arkt_559\附件解包\HAP内容\ets\modules.abc').read_bytes()
+abc=Path(r'C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\题目分类\逆向工程\OpenHarmony_arkt_559\附件解包\HAP内容\ets\modules.abc').read_bytes()
 raw=bytes.fromhex('138c5ff4280f930c0f3c15e8bb72bcb6f8e11c70ecaf0f724fe48a4e082359d4294eeae4')
 
 def rc4(key,data):

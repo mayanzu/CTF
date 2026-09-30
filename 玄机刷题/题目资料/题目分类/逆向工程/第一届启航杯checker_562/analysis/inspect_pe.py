@@ -1,6 +1,6 @@
 from pathlib import Path
 import struct,re
-p=Path(r"C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\第一届启航杯checker_562\analysis\extracted\checker.exe")
+p=Path(r"C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\题目分类\逆向工程\第一届启航杯checker_562\analysis\extracted\checker.exe")
 b=p.read_bytes(); pe=struct.unpack_from('<I',b,0x3c)[0]
 machine,nsec,ts,ptrsym,nsyms,optlen,chars=struct.unpack_from('<HHIIIHH',b,pe+4)
 opt=pe+24; magic=struct.unpack_from('<H',b,opt)[0]

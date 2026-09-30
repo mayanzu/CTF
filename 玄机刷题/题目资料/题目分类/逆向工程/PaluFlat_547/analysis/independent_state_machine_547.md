@@ -4,7 +4,7 @@
 
 对 analysis/extracted/PaluFlat.exe 做静态字节读取：只读取文件头部 0x5000 字节，不映射、不启动、不调用附件。没有联网或提交平台。分析文件使用 independent_state_machine_547 前缀；未改动主 solver、WP 或 commands_output.log。
 
-附件路径：C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\PaluFlat_547\analysis\extracted\PaluFlat.exe  
+附件路径：C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\题目分类\逆向工程\PaluFlat_547\analysis\extracted\PaluFlat.exe  
 文件长度：1,073,741,824 字节；PE 的 SizeOfImage 为 0xC000。这里只读取开头 20,480 字节。该文件长度和 PE 映像大小不相称，可能是稀疏/填充附件；本审计未对尾部做扫描。读取区 SHA-256：9fb745dab1c76f9a0118a871753e50ff5dd251df81de9b502508ed65b11eec03。
 
 ## 0x2d 状态调度

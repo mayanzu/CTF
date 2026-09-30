@@ -1,7 +1,7 @@
 from pathlib import Path
 import hashlib
 
-source = Path(r"C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\PaluArray_546\PaluArray_flag.exe")
+source = Path(r"C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\题目分类\逆向工程\PaluArray_546\PaluArray_flag.exe")
 out = source.with_name("PaluArray_flag_upx_names.exe")
 data = bytearray(source.read_bytes())
 patches = {0x208: b"UPX0", 0x230: b"UPX1", 0x3E0: b"UPX!"}

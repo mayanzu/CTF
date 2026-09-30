@@ -1,5 +1,5 @@
 import zipfile,re,pathlib,hashlib,struct
-apk=pathlib.Path(r'C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\hookme_542\附件解包\hookme\HookMe.apk')
+apk=pathlib.Path(r'C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\题目分类\逆向工程\hookme_542\附件解包\hookme\HookMe.apk')
 with zipfile.ZipFile(apk) as z:
  man=z.read('AndroidManifest.xml'); arsc=z.read('resources.arsc')
 print('APK',apk,'SHA256',hashlib.sha256(apk.read_bytes()).hexdigest())

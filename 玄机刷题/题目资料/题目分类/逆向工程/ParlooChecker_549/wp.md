@@ -165,7 +165,7 @@ ValueError: invalid PKCS#7 bytes: 238f8210bf7d11b1
 主脚本：
 
 ```powershell
-python .\玄机刷题\题目资料\ParlooChecker_549\analysis\solve_offline.py
+python .\玄机刷题\题目资料\题目分类\逆向工程\ParlooChecker_549\analysis\solve_offline.py
 ```
 
 关键输出：
@@ -187,7 +187,7 @@ FLAG_WRAPPER_CHECK=True
 随后运行 `analysis\independent_verify.py`。这个脚本不导入主求解器，而是独立实现 RC4、带扰动的 XTEA 变体和 CBC，并重新检查所有条件：
 
 ```powershell
-python .\玄机刷题\题目资料\ParlooChecker_549\analysis\independent_verify.py
+python .\玄机刷题\题目资料\题目分类\逆向工程\ParlooChecker_549\analysis\independent_verify.py
 ```
 
 复核结果：

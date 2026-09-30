@@ -1638,7 +1638,7 @@ target NUL byte indices: [16]
 在 PowerShell 中进入题目目录后，可复现静态校验：
 
 \begin{verbatim}
-Set-Location 'C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\PaluFlat_547'
+Set-Location 'C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\题目分类\逆向工程\PaluFlat_547'
 python .\analysis\solve_static.py
 python .\analysis\verify_forward.py
 python .\analysis\check_overlay.py
@@ -1705,7 +1705,7 @@ flag{bdm23Ne6ljz5O}
 从 \texttt{\seqsplit{C:\textbackslash{}Users\textbackslash{}mzj\textbackslash{}Desktop\textbackslash{}CTF}} 运行：
 
 \begin{verbatim}
-python .\玄机刷题\题目资料\PaluFlat_547\analysis\audit_independent_547.py
+python .\玄机刷题\题目资料\题目分类\逆向工程\PaluFlat_547\analysis\audit_independent_547.py
 \end{verbatim}
 
 脚本仅对外层 ZIP 和内层 7z 做清单/流式字节校验，并从 PE 读取有限前缀解析节表、跳表、状态、目标和导入符号。准确的脚本启动行、内部 \texttt{tar} argv、每一步输出及退出码均保存于 \texttt{\seqsplit{analysis/audit\_independent\_547\_transcript.txt}}。
@@ -1752,7 +1752,7 @@ python .\玄机刷题\题目资料\PaluFlat_547\analysis\audit_independent_547.p
 核心命令：
 
 \begin{verbatim}
-Get-FileHash -LiteralPath 'C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\PaluGOGOGO_548\originals\palugogogo_flag.zip' -Algorithm SHA256
+Get-FileHash -LiteralPath 'C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\题目分类\逆向工程\PaluGOGOGO_548\originals\palugogogo_flag.zip' -Algorithm SHA256
 [System.IO.Compression.ZipFile]::OpenRead($zipPath)
 \end{verbatim}
 
@@ -1874,7 +1874,7 @@ flag{bg92Oejpfgl}
 执行保存在项目中的静态复现脚本（它只读取 PE 文件字节，不加载或运行 EXE）：
 
 \begin{verbatim}
-python 'C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\PaluGOGOGO_548\analysis\solve_static.py' 'C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\PaluGOGOGO_548\analysis\palugogogo_flag.exe'
+python 'C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\题目分类\逆向工程\PaluGOGOGO_548\analysis\solve_static.py' 'C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\题目分类\逆向工程\PaluGOGOGO_548\analysis\palugogogo_flag.exe'
 \end{verbatim}
 
 脚本输出：
@@ -2109,7 +2109,7 @@ ValueError: invalid PKCS#7 bytes: 238f8210bf7d11b1
 主脚本：
 
 \begin{verbatim}
-python .\玄机刷题\题目资料\ParlooChecker_549\analysis\solve_offline.py
+python .\玄机刷题\题目资料\题目分类\逆向工程\ParlooChecker_549\analysis\solve_offline.py
 \end{verbatim}
 
 关键输出：
@@ -2131,7 +2131,7 @@ FLAG_WRAPPER_CHECK=True
 随后运行 \texttt{\seqsplit{analysis/independent\_verify.py}}。这个脚本不导入主求解器，而是独立实现 RC4、带扰动的 XTEA 变体和 CBC，并重新检查所有条件：
 
 \begin{verbatim}
-python .\玄机刷题\题目资料\ParlooChecker_549\analysis\independent_verify.py
+python .\玄机刷题\题目资料\题目分类\逆向工程\ParlooChecker_549\analysis\independent_verify.py
 \end{verbatim}
 
 复核结果：
@@ -2200,7 +2200,7 @@ flag{fScUaEYmeAGSXVgZd5pV}
 
 5.将明文再按相同位置值 XOR，逐字节比较输入密文，输出 Round-trip equals original: True。外壳、末尾括号和可打印 ASCII 检查也都通过。
 
-本题的密钥是位置值 \texttt{i+1}，不是数组下标 \texttt{i}。最终 flag 为 \texttt{\seqsplit{flag\{fScUaEYmeAGSXVgZd5pV\}}}。全部 PowerShell 命令与输出见 \texttt{\seqsplit{C:\textbackslash{}Users\textbackslash{}mzj\textbackslash{}Desktop\textbackslash{}CTF\textbackslash{}玄机刷题\textbackslash{}记录\textbackslash{}PositionalXOR\_550-终端记录.txt}}；逐步 WP 见 \texttt{\seqsplit{C:\textbackslash{}Users\textbackslash{}mzj\textbackslash{}Desktop\textbackslash{}CTF\textbackslash{}玄机刷题\textbackslash{}记录\textbackslash{}PositionalXOR\_550-WP.md}}；解压附件及复核明文见 \texttt{\seqsplit{C:\textbackslash{}Users\textbackslash{}mzj\textbackslash{}Desktop\textbackslash{}CTF\textbackslash{}玄机刷题\textbackslash{}题目资料\textbackslash{}PositionalXOR\_550\textbackslash{}}}。
+本题的密钥是位置值 \texttt{i+1}，不是数组下标 \texttt{i}。最终 flag 为 \texttt{\seqsplit{flag\{fScUaEYmeAGSXVgZd5pV\}}}。全部 PowerShell 命令与输出见 \texttt{\seqsplit{C:\textbackslash{}Users\textbackslash{}mzj\textbackslash{}Desktop\textbackslash{}CTF\textbackslash{}玄机刷题\textbackslash{}记录\textbackslash{}PositionalXOR\_550-终端记录.txt}}；逐步 WP 见 \texttt{\seqsplit{C:\textbackslash{}Users\textbackslash{}mzj\textbackslash{}Desktop\textbackslash{}CTF\textbackslash{}玄机刷题\textbackslash{}记录\textbackslash{}PositionalXOR\_550-WP.md}}；解压附件及复核明文见 \texttt{\seqsplit{C:\textbackslash{}Users\textbackslash{}mzj\textbackslash{}Desktop\textbackslash{}CTF\textbackslash{}玄机刷题\textbackslash{}题目资料\textbackslash{}题目分类\textbackslash{}逆向工程\textbackslash{}PositionalXOR\_550\textbackslash{}}}。
 
 \section{第二届 Parloo 杯「帕鲁迷宫」（ID \#551）}\label{ux7b2cux4e8cux5c4a-parloo-ux676fux5e15ux9c81ux8ff7ux5babid-551}
 
@@ -2594,7 +2594,7 @@ flag_body = AES.new(key, AES.MODE_ECB).decrypt(cipher)
 
 4.初始化代码把比较目标写为 18 14 14 19 14 16 19。输入随后逐字节 XOR 0x21；最后 memcmp 只比较前 7 字节。 5.XOR 可逆，把目标逐字节与 0x21 再 XOR，得到输入 ASCII：9、5、5、8、5、7、8，即 9558578。正向运算确认 39 35 35 38 35 37 38 XOR 21 后，逐字节等于目标 18 14 14 19 14 16 19。 6.按成功提示，对 ASCII 输入 9558578 求 MD5；Python 与 PowerShell/.NET 独立计算一致，摘要为 \seqsplit{f972007e0d3d9cb5f7d03661019eaf6e}。
 
-关键点是把 VM 字节码还原成``读入 7 字符、每字节 XOR 0x21、比较 7 字节''，再对原始输入而非整个 flag 求 MD5。逐步 WP 见 \texttt{\seqsplit{C:\textbackslash{}Users\textbackslash{}mzj\textbackslash{}Desktop\textbackslash{}CTF\textbackslash{}玄机刷题\textbackslash{}记录\textbackslash{}Victory\_Melody\_555-WP.md}}；所有命令和原始输出见 \texttt{\seqsplit{C:\textbackslash{}Users\textbackslash{}mzj\textbackslash{}Desktop\textbackslash{}CTF\textbackslash{}玄机刷题\textbackslash{}记录\textbackslash{}Victory\_Melody\_555-终端记录.txt}}；题目资料见 \texttt{\seqsplit{C:\textbackslash{}Users\textbackslash{}mzj\textbackslash{}Desktop\textbackslash{}CTF\textbackslash{}玄机刷题\textbackslash{}题目资料\textbackslash{}Victory\_Melody\_555\textbackslash{}}}。
+关键点是把 VM 字节码还原成``读入 7 字符、每字节 XOR 0x21、比较 7 字节''，再对原始输入而非整个 flag 求 MD5。逐步 WP 见 \texttt{\seqsplit{C:\textbackslash{}Users\textbackslash{}mzj\textbackslash{}Desktop\textbackslash{}CTF\textbackslash{}玄机刷题\textbackslash{}记录\textbackslash{}Victory\_Melody\_555-WP.md}}；所有命令和原始输出见 \texttt{\seqsplit{C:\textbackslash{}Users\textbackslash{}mzj\textbackslash{}Desktop\textbackslash{}CTF\textbackslash{}玄机刷题\textbackslash{}记录\textbackslash{}Victory\_Melody\_555-终端记录.txt}}；题目资料见 \texttt{\seqsplit{C:\textbackslash{}Users\textbackslash{}mzj\textbackslash{}Desktop\textbackslash{}CTF\textbackslash{}玄机刷题\textbackslash{}题目资料\textbackslash{}题目分类\textbackslash{}逆向工程\textbackslash{}Victory\_Melody\_555\textbackslash{}}}。
 
 \section{第三届黄河流域公安院校网络安全技能挑战赛 go\_for\_it（ID \#556）}\label{ux7b2cux4e09ux5c4aux9ec4ux6cb3ux6d41ux57dfux516cux5b89ux9662ux6821ux7f51ux7edcux5b89ux5168ux6280ux80fdux6311ux6218ux8d5b-go_for_itid-556}
 
@@ -2883,9 +2883,9 @@ roundtrip_match= True
 在项目根目录 \texttt{\seqsplit{C:\textbackslash{}Users\textbackslash{}mzj\textbackslash{}Desktop\textbackslash{}CTF}} 下：
 
 \begin{verbatim}
-python .\玄机刷题\题目资料\challenge_558\analysis\solve_558.py
-Get-FileHash -Algorithm SHA256 .\玄机刷题\题目资料\challenge_558\R.zip
-Get-FileHash -Algorithm SHA256 .\玄机刷题\题目资料\challenge_558\attachment\R.exe
+python .\玄机刷题\题目资料\题目分类\逆向工程\challenge_558\analysis\solve_558.py
+Get-FileHash -Algorithm SHA256 .\玄机刷题\题目资料\题目分类\逆向工程\challenge_558\R.zip
+Get-FileHash -Algorithm SHA256 .\玄机刷题\题目资料\题目分类\逆向工程\challenge_558\attachment\R.exe
 \end{verbatim}
 
 命令及其输出记录：\texttt{\seqsplit{题目资料/challenge\_558/analysis/powershell\_transcript\_20260929.txt}}。本地静态逆向与往返验证完成；
@@ -3031,7 +3031,7 @@ CHECK flag length: PASS
 在 PowerShell 中运行独立复核脚本：
 
 \begin{verbatim}
-Set-Location 'C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\OpenHarmony_arkt_559'
+Set-Location 'C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\题目分类\逆向工程\OpenHarmony_arkt_559'
 python .\analysis\agent_arkt559_independent_reproduce.py
 \end{verbatim}
 
@@ -3091,7 +3091,7 @@ SHA-256
 从题目目录运行新的相对路径复现脚本：
 
 \begin{verbatim}
-Set-Location 'C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\OpenHarmony_arkt_559'
+Set-Location 'C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\题目分类\逆向工程\OpenHarmony_arkt_559'
 python -B -u .\analysis\reproduce_arkt559.py
 \end{verbatim}
 
@@ -3670,7 +3670,7 @@ flag{2db163a20ecc0e6a27ce588669211a2e}
 在 Windows PowerShell 中，从题目目录运行：
 
 \begin{verbatim}
-$D = 'C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\密钥生成审计_588'
+$D = 'C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\题目分类\密码学\密钥生成审计_588'
 python (Join-Path $D 'analysis/solve_588.py')
 powershell -NoProfile -ExecutionPolicy Bypass -File (Join-Path $D 'analysis/decrypt_588.ps1')
 \end{verbatim}

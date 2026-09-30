@@ -1,6 +1,6 @@
 from pathlib import Path
 import hashlib
-p=Path(r'C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\第一届启航杯checker_562\analysis\extracted\checker.exe')
+p=Path(r'C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\题目分类\逆向工程\第一届启航杯checker_562\analysis\extracted\checker.exe')
 b=p.read_bytes()
 # Target address recovered from the main-function reference and PE .data section mapping.
 imagebase=0x400000; target_va=0x404020; target_rva=target_va-imagebase

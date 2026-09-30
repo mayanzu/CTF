@@ -1,7 +1,7 @@
 from pathlib import Path
 import struct,sys
 from capstone import Cs,CS_ARCH_X86,CS_MODE_64
-p=Path(r'C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\PaluArray_546\PaluArray_flag_unpacked.exe'); d=p.read_bytes()
+p=Path(r'C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\题目分类\逆向工程\PaluArray_546\PaluArray_flag_unpacked.exe'); d=p.read_bytes()
 pe=struct.unpack_from('<I',d,0x3c)[0]; opt=pe+24; base=struct.unpack_from('<Q',d,opt+24)[0]; n=struct.unpack_from('<H',d,pe+6)[0]; st=opt+struct.unpack_from('<H',d,pe+20)[0]
 secs=[]
 for i in range(n):

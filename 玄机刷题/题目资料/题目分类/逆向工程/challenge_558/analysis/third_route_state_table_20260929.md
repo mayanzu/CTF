@@ -17,8 +17,8 @@
 
 项目附件：
 
-- ZIP：C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\challenge_558\R.zip
-- 可执行文件：C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\challenge_558\attachment\R.exe
+- ZIP：C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\题目分类\逆向工程\challenge_558\R.zip
+- 可执行文件：C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\题目分类\逆向工程\challenge_558\attachment\R.exe
 - 用于静态反汇编的 ASCII 路径副本：C:\Users\mzj\Desktop\CTF\challenge558_third_route_static.exe
 
 SHA-256：
@@ -164,7 +164,7 @@ main 在 0x1400042dc 分配 0x13（19）字节，并在 0x1400042f5–0x14000433
 
 从 PowerShell 执行：
 
-    python C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\challenge_558\analysis\third_route_verify_20260929.py
+    python C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\题目分类\逆向工程\challenge_558\analysis\third_route_verify_20260929.py
 
 最终输出包含 raw/effective key 的逐项转换、状态表长度及前缀、候选字节串、19 行正向校验，以及以下结果：
 
@@ -174,6 +174,6 @@ main 在 0x1400042dc 分配 0x13（19）字节，并在 0x1400042f5–0x14000433
 
 完整 PowerShell transcript（包括反汇编、哈希、脚本正文、运行输出以及两次校验脚本编写错误与修正过程）：
 
-    C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\challenge_558\analysis\third_route_state_table_transcript_20260929.txt
+    C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\题目分类\逆向工程\challenge_558\analysis\third_route_state_table_transcript_20260929.txt
 
 此次结论基于静态附件分析和独立实现的逐字节本地复算。程序未执行，候选未提交玄机平台。

@@ -1,5 +1,5 @@
 import struct, pathlib, hashlib
-p=pathlib.Path(r'C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\hookme_542\代码附件\classes4.dex')
+p=pathlib.Path(r'C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\题目分类\逆向工程\hookme_542\代码附件\classes4.dex')
 b=p.read_bytes()
 print('FILE',p,'SIZE',len(b),'SHA256',hashlib.sha256(b).hexdigest(),'MAGIC',repr(b[:8]))
 u16=lambda o: struct.unpack_from('<H',b,o)[0]

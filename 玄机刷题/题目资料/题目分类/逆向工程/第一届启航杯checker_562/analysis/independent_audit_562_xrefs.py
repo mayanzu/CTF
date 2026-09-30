@@ -2,7 +2,7 @@ from pathlib import Path
 import struct
 from capstone import Cs,CS_ARCH_X86,CS_MODE_32
 from capstone.x86 import X86_OP_IMM,X86_OP_MEM
-P=Path(r'C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\第一届启航杯checker_562\analysis\extracted\checker.exe')
+P=Path(r'C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\题目分类\逆向工程\第一届启航杯checker_562\analysis\extracted\checker.exe')
 b=P.read_bytes(); base=0x400000; md=Cs(CS_ARCH_X86,CS_MODE_32); md.detail=True
 # Known VAs from PE section mapping / literal scan.
 targets={0x404020:'encrypted bytes/table at file offset 0x3220',0x405093:'Enter the flag',0x4050a6:'Correct message',0x4050c2:'Incorrect message'}

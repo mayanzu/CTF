@@ -1,7 +1,7 @@
 from pathlib import Path
 import struct, zlib
 source = Path(r'D:\Downloads\game_flag.exe')
-out = Path(r'C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\PaluMaze_551\extracted')
+out = Path(r'C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\题目分类\逆向工程\PaluMaze_551\extracted')
 data = source.read_bytes()
 magic = b'MEI' + bytes([12, 11, 10, 11, 14])
 cookie_at = data.rfind(magic)

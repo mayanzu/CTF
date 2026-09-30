@@ -1,6 +1,6 @@
 from pathlib import Path
 import dis, marshal, types
-source = Path(r'C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\PaluMaze_551\extracted\game')
+source = Path(r'C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\题目分类\逆向工程\PaluMaze_551\extracted\game')
 root = marshal.loads(source.read_bytes())
 print('PYTHON', __import__('sys').version)
 print('MAIN', root.co_filename, 'bytes', source.stat().st_size)

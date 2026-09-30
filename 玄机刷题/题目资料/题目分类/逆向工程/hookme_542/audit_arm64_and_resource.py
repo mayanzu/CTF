@@ -1,6 +1,6 @@
 import pathlib,struct,hashlib,subprocess,sys
 from capstone import Cs,CS_ARCH_ARM64,CS_MODE_ARM
-root=pathlib.Path(r'C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\hookme_542')
+root=pathlib.Path(r'C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\题目分类\逆向工程\hookme_542')
 # Parse R$string class field constants and identify correct_ciphertext resource ID.
 p=root/'代码附件'/'classes2.dex';b=p.read_bytes();u32=lambda o:struct.unpack_from('<I',b,o)[0];u16=lambda o:struct.unpack_from('<H',b,o)[0]
 def uleb(o):

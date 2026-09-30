@@ -1,7 +1,7 @@
 from pathlib import Path
 from capstone import Cs, CS_ARCH_X86, CS_MODE_64
 from capstone.x86 import X86_OP_MEM, X86_OP_IMM, X86_REG_RIP
-P = Path(r"C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\butterfly_552\analysis\extracted\butterfly")
+P = Path(r"C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\题目分类\逆向工程\butterfly_552\analysis\extracted\butterfly")
 data = P.read_bytes(); BASE=0x400000
 md=Cs(CS_ARCH_X86,CS_MODE_64); md.detail=True
 

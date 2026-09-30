@@ -1,6 +1,6 @@
 from pathlib import Path
 import hashlib,zlib
-r=Path(r"C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\butterfly_552")
+r=Path(r"C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\题目分类\逆向工程\butterfly_552")
 bin=(r/'analysis/extracted/butterfly').read_bytes()
 key=(r/'analysis/extracted/encode.dat.key').read_bytes()
 dat=(r/'analysis/extracted/encode.dat').read_bytes()

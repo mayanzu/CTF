@@ -1,6 +1,6 @@
 import struct
 from pathlib import Path
-b=Path(r'C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\OpenHarmony_arkt_559\附件解包\HAP内容\ets\modules.abc').read_bytes()
+b=Path(r'C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\题目分类\逆向工程\OpenHarmony_arkt_559\附件解包\HAP内容\ets\modules.abc').read_bytes()
 class_offsets=[struct.unpack_from('<I',b,0x3c+4*i)[0] for i in range(12)]
 method_offsets=[struct.unpack_from('<I',b,0x6c+4*i)[0] for i in range((0xc0-0x6c)//4)]
 

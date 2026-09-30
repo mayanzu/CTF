@@ -51,7 +51,7 @@ WP 中“这里没有隐藏的 `% len`”紧接状态表索引说明，容易被
 从 `C:\Users\mzj\Desktop\CTF` 执行：
 
 ```powershell
-python .\玄机刷题\题目资料\challenge_558\analysis\audit_558_independent.py
-python .\玄机刷题\题目资料\challenge_558\analysis\solve_558.py
-python .\玄机刷题\题目资料\challenge_558\analysis\third_route_verify_20260929.py
+python .\玄机刷题\题目资料\题目分类\逆向工程\challenge_558\analysis\audit_558_independent.py
+python .\玄机刷题\题目资料\题目分类\逆向工程\challenge_558\analysis\solve_558.py
+python .\玄机刷题\题目资料\题目分类\逆向工程\challenge_558\analysis\third_route_verify_20260929.py
 ```

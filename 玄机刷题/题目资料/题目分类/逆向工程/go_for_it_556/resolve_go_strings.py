@@ -1,5 +1,5 @@
 import pathlib,struct
-b=pathlib.Path(r"C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\go_for_it_556\go.exe").read_bytes()
+b=pathlib.Path(r"C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\题目分类\逆向工程\go_for_it_556\go.exe").read_bytes()
 def fileoff(va):
  if 0x4a0000<=va<0x54e000: return 0x9e800+(va-0x4a0000)
  if 0x54e000<=va<0x5c2000: return 0x14be00+(va-0x54e000)

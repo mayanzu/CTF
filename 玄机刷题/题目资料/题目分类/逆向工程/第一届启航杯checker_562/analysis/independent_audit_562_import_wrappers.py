@@ -1,7 +1,7 @@
 from pathlib import Path
 import struct
 from capstone import Cs,CS_ARCH_X86,CS_MODE_32
-P=Path(r'C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\第一届启航杯checker_562\analysis\extracted\checker.exe'); b=P.read_bytes(); base=0x400000
+P=Path(r'C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\题目分类\逆向工程\第一届启航杯checker_562\analysis\extracted\checker.exe'); b=P.read_bytes(); base=0x400000
 u16=lambda o:struct.unpack_from('<H',b,o)[0]; u32=lambda o:struct.unpack_from('<I',b,o)[0]
 pe=u32(0x3c); coff=pe+4; nsec=u16(coff+2); osz=u16(coff+16); opt=coff+20; magic=u16(opt); ib=u32(opt+28); so=opt+osz
 secs=[]

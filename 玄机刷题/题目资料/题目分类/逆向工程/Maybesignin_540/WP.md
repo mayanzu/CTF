@@ -125,8 +125,8 @@ stderr repr: b''
 在项目根目录 `C:\Users\mzj\Desktop\CTF\玄机刷题` 的 PowerShell 中执行 SM4 解题和原 EXE 本地验证：
 
 ```powershell
-py -3 "C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\Maybesignin_540\analysis\solve_maybesignin_540.py"
-py -3 "C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\Maybesignin_540\analysis\verify_maybesignin_540.py"
+py -3 "C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\题目分类\逆向工程\Maybesignin_540\analysis\solve_maybesignin_540.py"
+py -3 "C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\题目分类\逆向工程\Maybesignin_540\analysis\verify_maybesignin_540.py"
 ```
 
 纯 Python 实现包含 SM4 的 S-box、FK/CK、轮密钥扩展、加密和解密；不依赖第三方密码学包。解题脚本包含已知测试向量及重新加密闭环断言。验证脚本直接运行原始附件，分别显示错误候选被拒和正确候选得到 `success`。

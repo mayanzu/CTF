@@ -1,5 +1,5 @@
 import json, pathlib
-path = pathlib.Path(r"C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\OpenHarmony_easyre_560\hap_extracted\ets\sourceMaps.map")
+path = pathlib.Path(r"C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\题目分类\逆向工程\OpenHarmony_easyre_560\hap_extracted\ets\sourceMaps.map")
 root=json.loads(path.read_text(encoding="utf-8"))
 alphabet="ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/"
 def decode_vlq(s):

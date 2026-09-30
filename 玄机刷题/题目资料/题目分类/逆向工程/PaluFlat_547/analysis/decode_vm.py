@@ -2,7 +2,7 @@ from pathlib import Path
 import struct
 from capstone import Cs, CS_ARCH_X86, CS_MODE_64
 
-p=Path(r"C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\PaluFlat_547\analysis\PaluFlat_head_0x5000.bin")
+p=Path(r"C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\题目分类\逆向工程\PaluFlat_547\analysis\PaluFlat_head_0x5000.bin")
 b=p.read_bytes()
 text=b[0x400:0x2e00]
 table=b[0x3000:0x30b8]
@@ -22,7 +22,7 @@ for i,addr in enumerate(targets):
         n+=1
         if ins.mnemonic in ("jmp","ret","retq","ud2") or n>=80:
             break
-Path(r"C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\PaluFlat_547\analysis\vm_cases.txt").write_text("\n".join(out),encoding="utf-8")
+Path(r"C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\题目分类\逆向工程\PaluFlat_547\analysis\vm_cases.txt").write_text("\n".join(out),encoding="utf-8")
 print("jump table count:",len(targets))
 print("jump table targets:")
 for i,t in enumerate(targets): print(f"{i:02d}: {t:#x}")

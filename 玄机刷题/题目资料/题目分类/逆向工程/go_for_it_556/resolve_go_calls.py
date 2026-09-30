@@ -1,5 +1,5 @@
 import pathlib,struct
-b=pathlib.Path(r"C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\go_for_it_556\go.exe").read_bytes(); hdr=0xe2460
+b=pathlib.Path(r"C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\题目分类\逆向工程\go_for_it_556\go.exe").read_bytes(); hdr=0xe2460
 nfunc,nfiles,fno,cu,ft,pct,pln=struct.unpack_from("<7Q",b,hdr+8); nb=hdr+fno; pb=hdr+pln
 funcs=[]
 for i in range(nfunc):

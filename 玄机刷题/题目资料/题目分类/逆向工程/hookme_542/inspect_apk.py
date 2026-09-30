@@ -1,7 +1,7 @@
 import hashlib
 import zipfile
 from pathlib import Path
-p=Path(r'C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\hookme_542\附件解包\hookme\HookMe.apk')
+p=Path(r'C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\题目分类\逆向工程\hookme_542\附件解包\hookme\HookMe.apk')
 b=p.read_bytes()
 print('APK=',p.resolve())
 print('APK_SIZE=',len(b))

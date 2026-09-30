@@ -2,7 +2,7 @@ from pathlib import Path
 import struct, re, hashlib
 from capstone import Cs, CS_ARCH_X86, CS_MODE_32, CS_MODE_64
 from capstone.x86 import X86_OP_IMM, X86_OP_MEM, X86_REG_RIP
-P=Path(r'C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\第一届启航杯checker_562\analysis\extracted\checker.exe')
+P=Path(r'C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\题目分类\逆向工程\第一届启航杯checker_562\analysis\extracted\checker.exe')
 b=P.read_bytes()
 def u16(o): return struct.unpack_from('<H',b,o)[0]
 def u32(o): return struct.unpack_from('<I',b,o)[0]

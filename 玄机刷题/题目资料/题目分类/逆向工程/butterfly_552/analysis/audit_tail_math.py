@@ -1,6 +1,6 @@
 from pathlib import Path
 from itertools import product
-root=Path(r'C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\butterfly_552\analysis\extracted')
+root=Path(r'C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\题目分类\逆向工程\butterfly_552\analysis\extracted')
 ct=(root/'encode.dat').read_bytes(); k=(root/'encode.dat.key').read_bytes()[:8]
 target=ct[32:36]
 mask=(1<<64)-1

@@ -1,7 +1,7 @@
 from pathlib import Path
 import base64, hashlib, subprocess, sys
 sys.stdout.reconfigure(encoding='utf-8', errors='backslashreplace')
-root=Path(r'C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\OpenHarmony_secret_561')
+root=Path(r'C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\题目分类\逆向工程\OpenHarmony_secret_561')
 analysis=root/'analysis'
 cipher_b64=(analysis/'resource_index_salted_ciphertext.b64').read_bytes()
 img=(analysis/'enc.recovered.jpg').read_bytes()

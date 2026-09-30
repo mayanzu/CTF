@@ -3,7 +3,7 @@ import struct,sys,hashlib
 sys.stdout.reconfigure(encoding='utf-8',errors='backslashreplace')
 from capstone import Cs,CS_ARCH_X86,CS_MODE_64,CS_GRP_CALL
 from capstone.x86 import X86_OP_IMM,X86_OP_MEM,X86_REG_RIP
-p=Path(r'C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\PaluArray_546\PaluArray_flag_unpacked.exe');d=p.read_bytes()
+p=Path(r'C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\题目分类\逆向工程\PaluArray_546\PaluArray_flag_unpacked.exe');d=p.read_bytes()
 pe=struct.unpack_from('<I',d,0x3c)[0];opt=pe+24;base=struct.unpack_from('<Q',d,opt+24)[0];n=struct.unpack_from('<H',d,pe+6)[0];st=opt+struct.unpack_from('<H',d,pe+20)[0];secs=[]
 for j in range(n):
  q=st+j*40;nm=d[q:q+8].split(b'\0',1)[0].decode('ascii','replace');vs,rv,rs,rp=struct.unpack_from('<IIII',d,q+8);secs.append((nm,vs,rv,rs,rp))

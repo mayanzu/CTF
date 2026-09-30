@@ -136,8 +136,8 @@ MD5(ASCII("aa_9a_a?a?!aP")) = 1b501325fc96d5a845cbdd2ba4f01cd7
 在 PowerShell 中从题目目录执行以下命令。拆包器读取的是恢复标记后的副本，Python 脚本只解析数据：
 
 ```powershell
-$Root = 'C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\PaluArray_546'
-$UPX = 'C:\Users\mzj\Desktop\CTF\玄机刷题\tools\upx-5.2.0\upx-5.2.0-win64\upx.exe'
+$Root = 'C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\题目分类\逆向工程\PaluArray_546'
+$UPX = 'C:\Users\mzj\Desktop\CTF\tools\upx-5.2.0\upx-5.2.0-win64\upx.exe'
 py -3.12 "$Root\patch_palu_markers.py"
 & $UPX -d "$Root\PaluArray_flag_upx_names.exe" -o "$Root\analysis\PaluArray_flag_unpacked_repro.exe"
 py -3.12 "$Root\analysis\solve_paluarray_546_static.py"

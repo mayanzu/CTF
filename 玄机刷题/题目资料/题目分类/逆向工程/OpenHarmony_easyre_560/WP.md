@@ -93,7 +93,7 @@ flag{afaffeeacdebdfabe702d0e881d3c73c9b390df2054bdd15cccb}
 核心脚本：`analysis/derive_easyre_flag.py`。在项目根目录运行：
 
 ```powershell
-py -3 "C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\OpenHarmony_easyre_560\analysis\derive_easyre_flag.py"
+py -3 "C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\题目分类\逆向工程\OpenHarmony_easyre_560\analysis\derive_easyre_flag.py"
 ```
 
 完整输出：

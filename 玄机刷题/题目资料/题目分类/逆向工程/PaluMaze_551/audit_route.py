@@ -1,7 +1,7 @@
 import contextlib, io, runpy
 output = io.StringIO()
 with contextlib.redirect_stdout(output):
-    ns = runpy.run_path(r'C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\PaluMaze_551\solve_maze.py')
+    ns = runpy.run_path(r'C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\题目分类\逆向工程\PaluMaze_551\solve_maze.py')
 order = ns['best'][2]
 exits = ns['exits']
 paths = ns['paths']

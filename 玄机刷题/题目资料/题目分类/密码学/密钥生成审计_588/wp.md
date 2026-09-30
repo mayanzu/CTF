@@ -82,7 +82,7 @@ flag{2db163a20ecc0e6a27ce588669211a2e}
 在 Windows PowerShell 中，从题目目录运行：
 
 ```powershell
-$D = 'C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\密钥生成审计_588'
+$D = 'C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\题目分类\密码学\密钥生成审计_588'
 python (Join-Path $D 'analysis\solve_588.py')
 powershell -NoProfile -ExecutionPolicy Bypass -File (Join-Path $D 'analysis\decrypt_588.ps1')
 ```

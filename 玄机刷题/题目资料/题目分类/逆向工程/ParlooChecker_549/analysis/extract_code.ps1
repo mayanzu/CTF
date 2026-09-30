@@ -1,6 +1,6 @@
 $ErrorActionPreference = 'Stop'
-$apkPath = 'C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\ParlooChecker_549\analysis\extracted\ParlooChecker_flag.apk'
-$outputRoot = [System.IO.Path]::GetFullPath('C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\ParlooChecker_549\analysis\code')
+$apkPath = 'C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\题目分类\逆向工程\ParlooChecker_549\analysis\extracted\ParlooChecker_flag.apk'
+$outputRoot = [System.IO.Path]::GetFullPath('C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\题目分类\逆向工程\ParlooChecker_549\analysis\code')
 $selected = @(
     'AndroidManifest.xml',
     'classes.dex',

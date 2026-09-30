@@ -96,7 +96,7 @@ cipherByte = (input.charCodeAt(position) + stream) % 256
 独立复现命令：
 
 ```powershell
-python -B -u "C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\OpenHarmony_arkt_559\analysis\agent_arkt559_independent_reproduce.py"
+python -B -u "C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\题目分类\逆向工程\OpenHarmony_arkt_559\analysis\agent_arkt559_independent_reproduce.py"
 ```
 
 全程使用项目已有本地附件、解析器、ISA 与 reference；没有使用公开 Writeup，没有下载或运行新工具，也没有提交平台。

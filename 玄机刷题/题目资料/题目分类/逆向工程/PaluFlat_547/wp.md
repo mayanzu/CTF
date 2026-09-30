@@ -231,7 +231,7 @@ target NUL byte indices: [16]
 在 PowerShell 中进入题目目录后，可复现静态校验：
 
 ~~~powershell
-Set-Location 'C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\PaluFlat_547'
+Set-Location 'C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\题目分类\逆向工程\PaluFlat_547'
 python .\analysis\solve_static.py
 python .\analysis\verify_forward.py
 python .\analysis\check_overlay.py
@@ -303,7 +303,7 @@ flag{bdm23Ne6ljz5O}
 从 `C:\Users\mzj\Desktop\CTF` 运行：
 
 ~~~powershell
-python .\玄机刷题\题目资料\PaluFlat_547\analysis\audit_independent_547.py
+python .\玄机刷题\题目资料\题目分类\逆向工程\PaluFlat_547\analysis\audit_independent_547.py
 ~~~
 
 脚本仅对外层 ZIP 和内层 7z 做清单/流式字节校验，并从 PE 读取有限前缀解析节表、跳表、状态、目标和导入符号。准确的脚本启动行、内部 `tar` argv、每一步输出及退出码均保存于 `analysis/audit_independent_547_transcript.txt`。本次没有运行 `.com` 或 `.exe`、没有浏览公开 Writeup、没有联网，也没有向平台提交 flag。

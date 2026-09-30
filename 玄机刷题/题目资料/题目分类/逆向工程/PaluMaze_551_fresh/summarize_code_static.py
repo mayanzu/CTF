@@ -1,6 +1,6 @@
 from pathlib import Path
 import marshal,types
-p=Path(r'C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\PaluMaze_551_fresh\archive\game')
+p=Path(r'C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\题目分类\逆向工程\PaluMaze_551_fresh\archive\game')
 root=marshal.loads(p.read_bytes())
 allnames=set(); allstrings=[]
 def walk(code,depth=0):

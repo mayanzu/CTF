@@ -5,7 +5,7 @@ import math
 import struct
 from pathlib import Path
 
-ROOT = Path(r'C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\OpenHarmony_arkt_559')
+ROOT = Path(r'C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\题目分类\逆向工程\OpenHarmony_arkt_559')
 ABC = ROOT / '附件解包' / 'HAP内容' / 'ets' / 'modules.abc'
 ZIP = ROOT / '附件' / 'arkt_platform_20260929.zip'
 HAP = ROOT / '附件解包' / 'task_5.hap'

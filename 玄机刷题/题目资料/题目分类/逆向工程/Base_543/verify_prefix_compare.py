@@ -3,7 +3,7 @@ from io import StringIO
 from pathlib import Path
 import runpy
 
-solver = Path(r"C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\Base_543\solve_base_offline.py")
+solver = Path(r"C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\题目分类\逆向工程\Base_543\solve_base_offline.py")
 with redirect_stdout(StringIO()):
     ns = runpy.run_path(str(solver))
 target = ns["ENCODED_TARGET"]

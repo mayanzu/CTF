@@ -16,7 +16,7 @@
 
 项目目录：
 
-    C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\checker_562\
+    C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\题目分类\逆向工程\checker_562\
     ├── checker_platform_20260929.zip
     ├── checker.exe
     ├── 附件_20260929\checker.exe
@@ -168,7 +168,7 @@ MSYS objdump 直接读取含中文目录名的路径时报告找不到文件；�
 
 以下命令按 PowerShell 使用。文件路径假定和本机项目一致：
 
-    $root = 'C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\checker_562'
+    $root = 'C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\题目分类\逆向工程\checker_562'
     python (Join-Path $root 'analysis\agent_checker562_independent_rederive.py')
     Get-FileHash -Algorithm SHA256 (Join-Path $root 'checker_platform_20260929.zip'), (Join-Path $root 'checker.exe'), (Join-Path $root '附件_20260929\checker.exe')
 

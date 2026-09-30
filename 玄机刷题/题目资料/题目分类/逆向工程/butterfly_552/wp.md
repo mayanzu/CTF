@@ -27,7 +27,7 @@ SHA-256：`85FDF4CEC63C0A33F2D8A144D2652B63188BE015907F5C2A78559FD469B43228`。
 以下命令均在 PowerShell 前台执行；完整 stdout/stderr、反汇编摘要、哈希与错误尝试记录在 [commands_output.log](analysis/commands_output.log)。
 
 ```powershell
-$base = 'C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\butterfly_552'
+$base = 'C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\题目分类\逆向工程\butterfly_552'
 $z = 'C:\Program Files\AMD\CIM\Bin64\7z.exe'
 & $z l -slt (Join-Path $base 'originals\butterfly.7z')
 & $z x -y ('-o' + (Join-Path $base 'analysis\extracted')) (Join-Path $base 'originals\butterfly.7z')

@@ -103,7 +103,7 @@ MD5           = 8b4ec604943712483bfca67cacf85f1a
 主 solver：`analysis/recover_pattern_561.py`。在项目根目录的 PowerShell 中传入解包后的 x86_64 ELF：
 
 ```powershell
-py -3 "C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\OpenHarmony_secret_561\analysis\recover_pattern_561.py" "C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\OpenHarmony_secret_561\hap_contents\libs\x86_64\libsecret.so"
+py -3 "C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\题目分类\逆向工程\OpenHarmony_secret_561\analysis\recover_pattern_561.py" "C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\题目分类\逆向工程\OpenHarmony_secret_561\hap_contents\libs\x86_64\libsecret.so"
 ```
 
 输出原文保存在 `analysis/recover_pattern_561_output.txt`；完整批次命令及 stdout/stderr 保存在 `../../../../../记录/批次记录/综合协调/原始分件/批次_20260929_选题与本地资料核对.txt`。辅助复算在 `analysis/check_formula_variants.py`，SM4 解密及闭环在 `analysis/decrypt_enc_custom_sm4.py` 与 `analysis/verify_roundtrip_and_decode_jpeg.py`，字节码主输出为 `analysis/disassemble_app_output.txt`。
@@ -193,7 +193,7 @@ x86_64/libsecret.so           388EC90B343F5C74E70F2ECB5F83098F9C3A09F23B6222F59F
 新增可复现命令：
 
 ```powershell
-Set-Location 'C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\OpenHarmony_secret_561'
+Set-Location 'C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\题目分类\逆向工程\OpenHarmony_secret_561'
 Get-FileHash '.\secret_platform_20260929.zip','.\secret.hap','.\hap_contents\ets\modules.abc','.\hap_contents\libs\x86_64\libsecret.so' -Algorithm SHA256
 python .\analysis\independent_rederive_secret561.py
 python .\analysis\recover_pattern_561.py .\hap_contents\libs\x86_64\libsecret.so
@@ -243,7 +243,7 @@ python .\analysis\recover_pattern_561.py .\hap_contents\libs\x86_64\libsecret.so
 在 PowerShell 中进入本题目录后运行：
 
 ```powershell
-Set-Location 'C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\OpenHarmony_secret_561'
+Set-Location 'C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\题目分类\逆向工程\OpenHarmony_secret_561'
 py -3 .\analysis\hash_materials_561.py
 py -3 .\analysis\revalidate_native_pattern.py
 ```

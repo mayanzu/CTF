@@ -1,5 +1,5 @@
 from pathlib import Path
-p=Path(r"C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\PaluFlat_547\analysis\extracted\PaluFlat.exe")
+p=Path(r"C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\题目分类\逆向工程\PaluFlat_547\analysis\extracted\PaluFlat.exe")
 size=p.stat().st_size
 chunk_size=16*1024*1024
 nonzero=0; chunks=0; first=None; last=None

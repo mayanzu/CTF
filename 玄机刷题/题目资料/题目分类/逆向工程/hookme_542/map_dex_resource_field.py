@@ -1,5 +1,5 @@
 import pathlib,struct,hashlib
-root=pathlib.Path(r'C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\hookme_542\代码附件')
+root=pathlib.Path(r'C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\题目分类\逆向工程\hookme_542\代码附件')
 def uleb(b,o):
  v=s=0
  while True:

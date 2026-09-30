@@ -29,7 +29,7 @@
 核心命令：
 
 ```powershell
-Get-FileHash -LiteralPath 'C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\PaluGOGOGO_548\originals\palugogogo_flag.zip' -Algorithm SHA256
+Get-FileHash -LiteralPath 'C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\题目分类\逆向工程\PaluGOGOGO_548\originals\palugogogo_flag.zip' -Algorithm SHA256
 [System.IO.Compression.ZipFile]::OpenRead($zipPath)
 ```
 
@@ -162,7 +162,7 @@ flag{bg92Oejpfgl}
 执行保存在项目中的静态复现脚本（它只读取 PE 文件字节，不加载或运行 EXE）：
 
 ```powershell
-python 'C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\PaluGOGOGO_548\analysis\solve_static.py' 'C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\PaluGOGOGO_548\analysis\palugogogo_flag.exe'
+python 'C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\题目分类\逆向工程\PaluGOGOGO_548\analysis\solve_static.py' 'C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\题目分类\逆向工程\PaluGOGOGO_548\analysis\palugogogo_flag.exe'
 ```
 
 脚本输出：

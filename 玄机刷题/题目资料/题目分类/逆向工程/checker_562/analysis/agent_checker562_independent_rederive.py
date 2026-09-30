@@ -4,7 +4,7 @@ import re
 import struct
 import zipfile
 
-root = Path(r"C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\checker_562")
+root = Path(r"C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\题目分类\逆向工程\checker_562")
 archive = root / "checker_platform_20260929.zip"
 exe_path = root / "附件_20260929" / "checker.exe"
 data = exe_path.read_bytes()

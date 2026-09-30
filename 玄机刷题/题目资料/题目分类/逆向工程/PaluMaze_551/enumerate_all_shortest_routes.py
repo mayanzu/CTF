@@ -1,6 +1,6 @@
 import contextlib,io,runpy,hashlib
 from collections import deque,defaultdict
-base=r'C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\PaluMaze_551\solve_maze.py'
+base=r'C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\题目分类\逆向工程\PaluMaze_551\solve_maze.py'
 with contextlib.redirect_stdout(io.StringIO()): ns=runpy.run_path(base)
 maze,exits=ns['maze'],ns['exits']; idx={p:i for i,p in enumerate(exits)}
 moves=[(-1,0,'w'),(0,-1,'a'),(1,0,'s'),(0,1,'d')]

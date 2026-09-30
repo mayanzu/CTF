@@ -1,7 +1,7 @@
 from pathlib import Path
 import hashlib,struct,sys
 sys.stdout.reconfigure(encoding='utf-8',errors='backslashreplace')
-dir=Path(r'C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\PaluArray_546')
+dir=Path(r'C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\题目分类\逆向工程\PaluArray_546')
 paths=[dir/'PaluArray_flag.exe',dir/'PaluArray_flag_upx_names.exe',dir/'PaluArray_flag_unpacked.exe']
 for p in paths:
  b=p.read_bytes(); print('FILE',p.name,'size',len(b),'sha256',hashlib.sha256(b).hexdigest(),'upx_signature_count',b.count(b'UPX!'))

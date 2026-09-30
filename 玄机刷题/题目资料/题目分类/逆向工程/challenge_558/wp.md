@@ -170,9 +170,9 @@ roundtrip_match= True
 在项目根目录 `C:\Users\mzj\Desktop\CTF` 下：
 
 ```powershell
-python .\玄机刷题\题目资料\challenge_558\analysis\solve_558.py
-Get-FileHash -Algorithm SHA256 .\玄机刷题\题目资料\challenge_558\R.zip
-Get-FileHash -Algorithm SHA256 .\玄机刷题\题目资料\challenge_558\attachment\R.exe
+python .\玄机刷题\题目资料\题目分类\逆向工程\challenge_558\analysis\solve_558.py
+Get-FileHash -Algorithm SHA256 .\玄机刷题\题目资料\题目分类\逆向工程\challenge_558\R.zip
+Get-FileHash -Algorithm SHA256 .\玄机刷题\题目资料\题目分类\逆向工程\challenge_558\attachment\R.exe
 ```
 
 命令及其输出记录：`题目资料/challenge_558/analysis/powershell_transcript_20260929.txt`。本地静态逆向与往返验证完成；玄机平台验证刻意未执行，因为本批要求禁止提交。

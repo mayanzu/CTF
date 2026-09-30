@@ -133,7 +133,7 @@ CHECK flag length: PASS
 在 PowerShell 中运行独立复核脚本：
 
 ```powershell
-Set-Location 'C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\OpenHarmony_arkt_559'
+Set-Location 'C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\题目分类\逆向工程\OpenHarmony_arkt_559'
 python .\analysis\agent_arkt559_independent_reproduce.py
 ```
 
@@ -188,7 +188,7 @@ python .\solve_arkt_target.py
 从题目目录运行新的相对路径复现脚本：
 
 ```powershell
-Set-Location 'C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\OpenHarmony_arkt_559'
+Set-Location 'C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\题目分类\逆向工程\OpenHarmony_arkt_559'
 python -B -u .\analysis\reproduce_arkt559.py
 ```
 

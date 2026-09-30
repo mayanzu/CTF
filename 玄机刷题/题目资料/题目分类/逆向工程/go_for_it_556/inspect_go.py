@@ -1,5 +1,5 @@
 import hashlib, pathlib, re
-p=pathlib.Path(r"C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\go_for_it_556\go.exe")
+p=pathlib.Path(r"C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\题目分类\逆向工程\go_for_it_556\go.exe")
 b=p.read_bytes()
 print(f"size={len(b)} SHA256={hashlib.sha256(b).hexdigest()}")
 seen=set()

@@ -1,7 +1,7 @@
 from pathlib import Path
 import hashlib
 
-ROOT = Path(r"C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\butterfly_552\analysis\extracted")
+ROOT = Path(r"C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\题目分类\逆向工程\butterfly_552\analysis\extracted")
 ct = (ROOT / "encode.dat").read_bytes()
 keyfile = (ROOT / "encode.dat.key").read_bytes()
 key = keyfile[:8]  # main() loads the first 8 bytes as the MMX lane key

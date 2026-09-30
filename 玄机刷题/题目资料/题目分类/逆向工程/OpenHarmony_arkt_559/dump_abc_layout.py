@@ -1,6 +1,6 @@
 import struct
 from pathlib import Path
-p=Path(r'C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\OpenHarmony_arkt_559\附件解包\HAP内容\ets\modules.abc')
+p=Path(r'C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\题目分类\逆向工程\OpenHarmony_arkt_559\附件解包\HAP内容\ets\modules.abc')
 b=p.read_bytes()
 print('FILE=',p)
 print('SIZE=',len(b))

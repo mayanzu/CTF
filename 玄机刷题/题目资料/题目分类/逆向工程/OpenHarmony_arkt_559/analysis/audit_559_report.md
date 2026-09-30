@@ -30,7 +30,7 @@ flag{b80ebf0f0e210ad73664bdd19c16387e}
 The independent verifier is [audit_559_reproduce.py](audit_559_reproduce.py). It parses the ABC header/index table and the literal array itself, performs the reverse and forward calculations, prints each of the 38 comparisons, and exits nonzero on any mismatch. Run it with:
 
 ```powershell
-python -B -u "C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\OpenHarmony_arkt_559\analysis\audit_559_reproduce.py"
+python -B -u "C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\题目分类\逆向工程\OpenHarmony_arkt_559\analysis\audit_559_reproduce.py"
 ```
 
 ## Saved audit artifacts

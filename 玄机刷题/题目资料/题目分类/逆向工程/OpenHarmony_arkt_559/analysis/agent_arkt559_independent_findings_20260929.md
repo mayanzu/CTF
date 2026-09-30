@@ -124,7 +124,7 @@ RSA 逆向结果仍是 RC4 的输出字节，还需要按字节码恢复 RC4 变
 在 PowerShell 中执行：
 
 ```powershell
-Set-Location 'C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\OpenHarmony_arkt_559'
+Set-Location 'C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\题目分类\逆向工程\OpenHarmony_arkt_559'
 python .\analysis\agent_arkt559_independent_reproduce.py
 ```
 

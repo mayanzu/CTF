@@ -1,5 +1,5 @@
 $ErrorActionPreference = 'Stop'
-$archivePath = 'C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\ParlooChecker_549\originals\ParlooChecker_flag.zip'
+$archivePath = 'C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\题目分类\逆向工程\ParlooChecker_549\originals\ParlooChecker_flag.zip'
 Write-Output "ARCHIVE=$archivePath"
 Write-Output '--- SHA256 ---'
 Get-FileHash -LiteralPath $archivePath -Algorithm SHA256 | Format-List

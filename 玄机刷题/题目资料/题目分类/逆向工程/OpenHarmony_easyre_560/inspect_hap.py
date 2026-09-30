@@ -1,5 +1,5 @@
 import base64, hashlib, json, pathlib, re, zipfile
-root = pathlib.Path(r"C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\OpenHarmony_easyre_560")
+root = pathlib.Path(r"C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\题目分类\逆向工程\OpenHarmony_easyre_560")
 hap_dir = root / "hap_extracted"
 source_map = json.loads((hap_dir / "ets/sourceMaps.map").read_text(encoding="utf-8"))
 print("SOURCE MAP KEYS")

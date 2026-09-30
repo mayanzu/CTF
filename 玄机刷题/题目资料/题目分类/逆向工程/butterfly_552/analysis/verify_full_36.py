@@ -1,6 +1,6 @@
 from pathlib import Path
 import hashlib
-root=Path(r"C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\butterfly_552\analysis\extracted")
+root=Path(r"C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\题目分类\逆向工程\butterfly_552\analysis\extracted")
 ct=(root/'encode.dat').read_bytes(); keyfile=(root/'encode.dat.key').read_bytes(); key=keyfile[:8]
 N=len(ct); mask=(1<<64)-1
 

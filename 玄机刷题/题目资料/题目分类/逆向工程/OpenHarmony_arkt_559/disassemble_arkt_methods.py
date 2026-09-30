@@ -183,7 +183,7 @@ def render(meta: dict, decoded, data: bytes, index_offsets: list[int], methods_b
 def main():
     ap = argparse.ArgumentParser()
     ap.add_argument("abc", nargs="?", default=r"附件解包\HAP内容\ets\modules.abc")
-    ap.add_argument("--isa", default=r"C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\OpenHarmony_easyre_560\analysis\reference\isa.yaml")
+    ap.add_argument("--isa", default=r"C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\题目分类\逆向工程\OpenHarmony_easyre_560\analysis\reference\isa.yaml")
     ap.add_argument("--names", nargs="*", default=["enc", "handleCheck", "customBase64", "modPow", "rc4Encrypt", "rsaEncrypt", "stringToUint8Array"])
     args = ap.parse_args()
     data = Path(args.abc).read_bytes()

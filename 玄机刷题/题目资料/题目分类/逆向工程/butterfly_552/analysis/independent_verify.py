@@ -1,7 +1,7 @@
 from pathlib import Path
 from itertools import product
 import hashlib
-root=Path(r"C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\butterfly_552\analysis\extracted")
+root=Path(r"C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\题目分类\逆向工程\butterfly_552\analysis\extracted")
 ct=(root/"encode.dat").read_bytes(); keyfile=(root/"encode.dat.key").read_bytes(); key=keyfile[:8]
 MASK=(1<<64)-1
 

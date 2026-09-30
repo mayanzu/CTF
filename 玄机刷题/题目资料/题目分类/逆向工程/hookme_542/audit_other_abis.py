@@ -1,6 +1,6 @@
 import pathlib,struct,hashlib
 from capstone import Cs,CS_ARCH_ARM,CS_ARCH_X86,CS_MODE_ARM,CS_MODE_THUMB,CS_MODE_LITTLE_ENDIAN,CS_MODE_32
-root=pathlib.Path(r'C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\hookme_542\代码附件\lib')
+root=pathlib.Path(r'C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\题目分类\逆向工程\hookme_542\代码附件\lib')
 for rel in ['armeabi-v7a/libhookme.so','x86/libhookme.so']:
  p=root/rel;b=p.read_bytes();is64=b[4]==2;assert b[5]==1
  mach=struct.unpack_from('<H',b,18)[0]

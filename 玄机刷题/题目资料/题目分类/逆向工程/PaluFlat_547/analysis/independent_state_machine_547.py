@@ -2,7 +2,7 @@ from pathlib import Path
 import hashlib
 import struct
 
-EXE = Path(r"C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\PaluFlat_547\analysis\extracted\PaluFlat.exe")
+EXE = Path(r"C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\题目分类\逆向工程\PaluFlat_547\analysis\extracted\PaluFlat.exe")
 HEAD_SIZE = 0x5000
 IMAGE_BASE_EXPECTED = 0x400000
 TABLE_VA = 0x405000

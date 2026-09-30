@@ -1,7 +1,7 @@
 import contextlib, hashlib, io, itertools, runpy
 f = io.StringIO()
 with contextlib.redirect_stdout(f):
-    ns = runpy.run_path(r'C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\PaluMaze_551\solve_maze.py')
+    ns = runpy.run_path(r'C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\题目分类\逆向工程\PaluMaze_551\solve_maze.py')
 exits, paths = ns['exits'], ns['paths']
 records=[]
 for order in itertools.permutations(range(len(exits))):

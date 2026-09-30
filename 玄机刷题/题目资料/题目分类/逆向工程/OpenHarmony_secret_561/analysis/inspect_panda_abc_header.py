@@ -2,7 +2,7 @@ import hashlib
 import pathlib
 import struct
 
-path = pathlib.Path('/mnt/c/Users/mzj/Desktop/CTF/玄机刷题/题目资料/OpenHarmony_secret_561/hap_contents/ets/modules.abc')
+path = pathlib.Path('/mnt/c/Users/mzj/Desktop/CTF/玄机刷题/题目资料/题目分类/逆向工程/OpenHarmony_secret_561/hap_contents/ets/modules.abc')
 data = path.read_bytes()
 print('path:', path)
 print('file bytes:', len(data))

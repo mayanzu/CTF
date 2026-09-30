@@ -1,6 +1,6 @@
 $ErrorActionPreference = 'Stop'
-$archivePath = 'C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\ParlooChecker_549\originals\ParlooChecker_flag.zip'
-$extractRoot = [System.IO.Path]::GetFullPath('C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\ParlooChecker_549\analysis\extracted')
+$archivePath = 'C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\题目分类\逆向工程\ParlooChecker_549\originals\ParlooChecker_flag.zip'
+$extractRoot = [System.IO.Path]::GetFullPath('C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\题目分类\逆向工程\ParlooChecker_549\analysis\extracted')
 Add-Type -AssemblyName System.IO.Compression.FileSystem
 $zip = [System.IO.Compression.ZipFile]::OpenRead($archivePath)
 try {
