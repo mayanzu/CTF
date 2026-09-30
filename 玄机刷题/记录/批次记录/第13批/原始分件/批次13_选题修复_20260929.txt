@@ -1,0 +1,142 @@
+**********************
+PowerShell transcript start
+Start time: 20260929145756
+Username: DESKTOP-412KTAR\mzj
+RunAs User: DESKTOP-412KTAR\mzj
+Configuration Name: 
+Machine: DESKTOP-412KTAR (Microsoft Windows NT 10.0.26200.0)
+Host Application: C:\Users\mzj\.cache\codex-runtimes\codex-primary-runtime\dependencies\native\powershell\pwsh.dll -NoProfile -Command try { [Console]::OutputEncoding=[System.Text.Encoding]::UTF8 } catch {}
+$ErrorActionPreference='Continue'; $log='C:\Users\mzj\Desktop\CTF\玄机刷题\记录\批次13_选题修复_20260929.txt'; Start-Transcript -LiteralPath $log -Append; Write-Output 'COMMAND> Read selection repair script and current selection record'; Get-Content -LiteralPath 'C:\Users\mzj\Desktop\CTF\玄机刷题\记录\批次13_修正选题记录.ps1' -Raw; Get-Content -LiteralPath 'C:\Users\mzj\Desktop\CTF\玄机刷题\记录\批次_20260929_第十三批题目确认.md' -Raw; Stop-Transcript
+Process ID: 31256
+PSVersion: 7.6.5
+PSEdition: Core
+GitCommitId: 7.6.5
+OS: Microsoft Windows 10.0.26200
+Platform: Win32NT
+PSCompatibleVersions: 1.0, 2.0, 3.0, 4.0, 5.0, 5.1, 6.0, 7.0
+PSRemotingProtocolVersion: 2.4
+SerializationVersion: 1.1.0.1
+WSManStackVersion: 3.0
+**********************
+Transcript started, output file is C:\Users\mzj\Desktop\CTF\玄机刷题\记录\批次13_选题修复_20260929.txt
+COMMAND> Read selection repair script and current selection record
+$ErrorActionPreference = 'Stop'
+$root = 'C:\Users\mzj\Desktop\CTF\玄机刷题'
+$recordPath = Join-Path $root '记录\批次_20260929_第十三批题目确认.md'
+$logPath = Join-Path $root '记录\批次13_附件归档_20260929.txt'
+Start-Transcript -LiteralPath $logPath -Append
+$lines = @(
+  '# 第十三批题目确认（2026-09-29）',
+  '',
+  '## 选择方式',
+  '',
+  '- 在玄机 `/challenges` 页面选择“全部”题目，保留状态单选“全部”，点击难度“中等”；未依赖“未完成”筛选，因为该筛选不完整。',
+  '- 在中等难度分页中逐题核对详情页，确认免费、中等、REVERSE、步骤 0/1 且无“已完成”徽标。选取三道新题；排除已完成题、此前尝试过的 #532、#534、#541、#542、#546、#561、#562 等题。',
+  '',
+  '## 本批题目',
+  '',
+  '### #533 圣人当仁不让',
+  '',
+  '- 详情页：https://xj.edisec.net/challenges/533',
+  '- 核验：免费；难度中等；类型 REVERSE；挑战步骤 0/1；提交前没有“已完成”徽标。',
+  '- 附件：`ez_vm.zip`；SHA-256 `B9B280302A0B975F272CFCA88B59CFFB0EDE4DE3529D56A1BB328CE0D0ED071E`。ZIP 成员：`ez_vm.exe`（82,661 bytes）。',
+  '- 归档目录：`题目资料/批次13_20260929/533_圣人当仁不让/`。',
+  '',
+  '### #537 湘岚杯ezbase',
+  '',
+  '- 详情页：https://xj.edisec.net/challenges/537',
+  '- 核验：免费；难度中等；类型 REVERSE；挑战步骤 0/1；提交前没有“已完成”徽标。',
+  '- 附件：`ezbase.zip`；SHA-256 `24E646D8337FE6284DDAACEFB05D3ACEAFA01EAE746CF1CBB872046F3A9EBECB`。ZIP 成员：`ezbase.exe`（40,719 bytes）。',
+  '- 归档目录：`题目资料/批次13_20260929/537_湘岚杯ezbase/`。',
+  '',
+  '### #538 湘岚杯1997',
+  '',
+  '- 详情页：https://xj.edisec.net/challenges/538',
+  '- 核验：免费；难度中等；类型 REVERSE；挑战步骤 0/1；提交前没有“已完成”徽标。',
+  '- 附件：`1997.zip`；SHA-256 `832F1BA75D90A93FF2B8D867483CE8612CF42157685976C4FD665ED4AC07193B`。ZIP 成员：`123.exe`（63,228 bytes）。',
+  '- 归档目录：`题目资料/批次13_20260929/538_湘岚杯1997/`。',
+  '',
+  '## 状态',
+  '',
+  '- 三题附件均通过玄机详情页在前台下载并复制到项目；D:\Downloads 原始下载保留。',
+  '- 每题由一名独立子代理静态分析；未知 EXE 不运行。FLAG 只在 root 前台复核后提交。',
+  '- 页面选择和核验在 Computer Use 交互中可见；没有把交互截图另存为项目 PNG。',
+  ''
+)
+[IO.File]::WriteAllLines($recordPath, $lines, [Text.UTF8Encoding]::new($false))
+Write-Output "修正后的题目确认记录：$recordPath"
+Get-Content -LiteralPath $recordPath -Raw
+Get-FileHash -LiteralPath $recordPath -Algorithm SHA256 | Format-List
+Stop-Transcript
+# 第十三批题目确认（2026-09-29）
+
+## 选择方式
+
+- 在玄机 `/challenges` 页面选择“全部”题目，保留状态单选“全部”，点击难度“中等”；未依赖“未完成”筛选，因为用户指出该筛选不完整。
+- 在中等难度分页中逐题核对详情页，确认免费、中等、REVERSE、步骤 0/1 且无“已完成”徽标。选取三道新题；排除已完成题、此前尝试过的 #532、#534、#541、#542、#546、#561、#562 等题。
+
+## 本批题目
+
+### #533 圣人当仁不让
+
+- 详情页：https://xj.edisec.net/challenges/533
+- 核验：免费；难度中等；类型 REVERSE；挑战步骤 0/1；提交前没有“已完成”徽标。
+- 附件：$(@{Id=533; Title=圣人当仁不让; Zip=ez_vm.zip; SHA256=B9B280302A0B975F272CFCA88B59CFFB0EDE4DE3529D56A1BB328CE0D0ED071E; Entries=ez_vm.exe (82661 bytes)}.Zip)；SHA-256 $(@{Id=533; Title=圣人当仁不让; Zip=ez_vm.zip; SHA256=B9B280302A0B975F272CFCA88B59CFFB0EDE4DE3529D56A1BB328CE0D0ED071E; Entries=ez_vm.exe (82661 bytes)}.SHA256)。ZIP 成员：ez_vm.exe (82661 bytes)。
+- 归档目录：题目资料/批次13_20260929/533_圣人当仁不让/。
+
+### #537 湘岚杯ezbase
+
+- 详情页：https://xj.edisec.net/challenges/537
+- 核验：免费；难度中等；类型 REVERSE；挑战步骤 0/1；提交前没有“已完成”徽标。
+- 附件：$(@{Id=537; Title=湘岚杯ezbase; Zip=ezbase.zip; SHA256=24E646D8337FE6284DDAACEFB05D3ACEAFA01EAE746CF1CBB872046F3A9EBECB; Entries=ezbase.exe (40719 bytes)}.Zip)；SHA-256 $(@{Id=537; Title=湘岚杯ezbase; Zip=ezbase.zip; SHA256=24E646D8337FE6284DDAACEFB05D3ACEAFA01EAE746CF1CBB872046F3A9EBECB; Entries=ezbase.exe (40719 bytes)}.SHA256)。ZIP 成员：ezbase.exe (40719 bytes)。
+- 归档目录：题目资料/批次13_20260929/537_湘岚杯ezbase/。
+
+### #538 湘岚杯1997
+
+- 详情页：https://xj.edisec.net/challenges/538
+- 核验：免费；难度中等；类型 REVERSE；挑战步骤 0/1；提交前没有“已完成”徽标。
+- 附件：$(@{Id=538; Title=湘岚杯1997; Zip=1997.zip; SHA256=832F1BA75D90A93FF2B8D867483CE8612CF42157685976C4FD665ED4AC07193B; Entries=123.exe (63228 bytes)}.Zip)；SHA-256 $(@{Id=538; Title=湘岚杯1997; Zip=1997.zip; SHA256=832F1BA75D90A93FF2B8D867483CE8612CF42157685976C4FD665ED4AC07193B; Entries=123.exe (63228 bytes)}.SHA256)。ZIP 成员：123.exe (63228 bytes)。
+- 归档目录：题目资料/批次13_20260929/538_湘岚杯1997/。
+
+## 状态
+
+- 三题附件已由玄机详情页通过前台下载并复制入项目；D:\Downloads 原始文件保留。
+- 各题由独立子代理静态分析。平台提交只由 root 根据本地复核过的候选在前台进行。
+- 页面选择及详情核对在 Computer Use 交互中可见；没有将交互截图另存为项目 PNG。
+**********************
+PowerShell transcript end
+End time: 20260929145756
+**********************
+**********************
+PowerShell transcript start
+Start time: 20260929150211
+Username: DESKTOP-412KTAR\mzj
+RunAs User: DESKTOP-412KTAR\mzj
+Configuration Name: 
+Machine: DESKTOP-412KTAR (Microsoft Windows NT 10.0.26200.0)
+Host Application: C:\Users\mzj\.cache\codex-runtimes\codex-primary-runtime\dependencies\native\powershell\pwsh.dll -NoProfile -Command try { [Console]::OutputEncoding=[System.Text.Encoding]::UTF8 } catch {}
+$ErrorActionPreference='Continue'; $log='C:\Users\mzj\Desktop\CTF\玄机刷题\记录\批次13_选题修复_20260929.txt'; Start-Transcript -LiteralPath $log -Append; Write-Output 'COMMAND> Check root document update timestamps and status counters'; Get-Item 'C:\Users\mzj\Desktop\CTF\玄机刷题\指南\玄机刷题指南_合并源.md','C:\Users\mzj\Desktop\CTF\玄机刷题\README.md','C:\Users\mzj\Desktop\CTF\玄机刷题\记录\提交核验_20260929_第十三批.md' -ErrorAction SilentlyContinue | Select-Object FullName,Length,LastWriteTime | Format-Table -AutoSize; Select-String -LiteralPath 'C:\Users\mzj\Desktop\CTF\玄机刷题\指南\玄机刷题指南_合并源.md' -Pattern '平台已完成（46|平台已完成（47|第十三批题目 #537|湘岚杯ezbase|当前共 46 道|当前共 47 道' | Select-Object -First 15; Stop-Transcript
+Process ID: 40612
+PSVersion: 7.6.5
+PSEdition: Core
+GitCommitId: 7.6.5
+OS: Microsoft Windows 10.0.26200
+Platform: Win32NT
+PSCompatibleVersions: 1.0, 2.0, 3.0, 4.0, 5.0, 5.1, 6.0, 7.0
+PSRemotingProtocolVersion: 2.4
+SerializationVersion: 1.1.0.1
+WSManStackVersion: 3.0
+**********************
+Transcript started, output file is C:\Users\mzj\Desktop\CTF\玄机刷题\记录\批次13_选题修复_20260929.txt
+COMMAND> Check root document update timestamps and status counters
+
+FullName                                                      Length LastWriteTime
+--------                                                      ------ -------------
+C:\Users\mzj\Desktop\CTF\玄机刷题\指南\玄机刷题指南_合并源.md 174137 2026/9/29 14:25:53
+C:\Users\mzj\Desktop\CTF\玄机刷题\README.md                     4065 2026/9/29 14:25:53
+
+
+**********************
+PowerShell transcript end
+End time: 20260929150211
+**********************

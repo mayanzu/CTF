@@ -1,0 +1,2167 @@
+**********************
+PowerShell transcript start
+Start time: 20260929145803
+Username: DESKTOP-412KTAR\mzj
+RunAs User: DESKTOP-412KTAR\mzj
+Configuration Name: 
+Machine: DESKTOP-412KTAR (Microsoft Windows NT 10.0.26200.0)
+Host Application: C:\Users\mzj\.cache\codex-runtimes\codex-primary-runtime\dependencies\native\powershell\pwsh.dll -Command try { [Console]::OutputEncoding=[System.Text.Encoding]::UTF8 } catch {}
+$ErrorActionPreference='Stop'
+$project='C:\Users\mzj\Desktop\CTF\玄机刷题'
+$record=Join-Path $project '记录\批次13_提交核验_20260929.txt'
+Start-Transcript -Path $record -Force
+Write-Output 'COMMAND> inspect root guide and README metadata'
+$guide=Join-Path $project '指南\玄机刷题指南_合并源.md'
+$readme=Join-Path $project 'README.md'
+Get-Item -LiteralPath $guide,$readme | Select-Object FullName,Length,LastWriteTime | Format-Table -AutoSize
+Get-FileHash -LiteralPath $guide,$readme -Algorithm SHA256 | ForEach-Object { '{0}  {1}' -f $_.Hash,$_.Path }
+Write-Output 'COMMAND> scan key counts, challenge rows, batch headings, unresolved references'
+Select-String -LiteralPath $guide,$readme -Pattern '46|537|53[38]|第十二|第十三|批次12|批次13|已完成|未解决|挑战总数|刷题数量|Index|目录' -Context 1,2 | Select-Object -First 220 | Format-List Path,LineNumber,Line,Context
+Stop-Transcript
+Process ID: 36608
+PSVersion: 7.6.5
+PSEdition: Core
+GitCommitId: 7.6.5
+OS: Microsoft Windows 10.0.26200
+Platform: Win32NT
+PSCompatibleVersions: 1.0, 2.0, 3.0, 4.0, 5.0, 5.1, 6.0, 7.0
+PSRemotingProtocolVersion: 2.4
+SerializationVersion: 1.1.0.1
+WSManStackVersion: 3.0
+**********************
+Transcript started, output file is C:\Users\mzj\Desktop\CTF\玄机刷题\记录\批次13_提交核验_20260929.txt
+COMMAND> inspect root guide and README metadata
+
+FullName                                                      Length LastWriteTime
+--------                                                      ------ -------------
+C:\Users\mzj\Desktop\CTF\玄机刷题\指南\玄机刷题指南_合并源.md 174137 2026/9/29 14:25:53
+C:\Users\mzj\Desktop\CTF\玄机刷题\README.md                     4065 2026/9/29 14:25:53
+
+02907301829309536AA1679E9542B6EA2DC518CE00DB31096C85B909B1575B2C  C:\Users\mzj\Desktop\CTF\玄机刷题\指南\玄机刷题指南_合并源.md
+58F7B8F9EFF53D2324195452C1BFEDF0FB8AF8C278FE88D282A2EFD6796B2E54  C:\Users\mzj\Desktop\CTF\玄机刷题\README.md
+COMMAND> scan key counts, challenge rows, batch headings, unresolved references
+
+Path       : C:\Users\mzj\Desktop\CTF\玄机刷题\指南\玄机刷题指南_合并源.md
+LineNumber : 15
+Line       : 本指南原记录了玄机平台“已完成”筛选中的 28 道题。此后 #367、#450、#451、#520、#551、#530、#531、#559、#588
+             、#549、#558、#547、#548、#552、#539、#540 共 16 道新题均取得平台接受回执，手册现收录 44 道已完成题。解题
+             状态、flag 与过程分别以平台回执、附件分析和命令输出为证；不把完成徽标扩写成没有证据的步骤细节。
+Context    : Microsoft.PowerShell.Commands.MatchInfoContext
+
+Path       : C:\Users\mzj\Desktop\CTF\玄机刷题\指南\玄机刷题指南_合并源.md
+LineNumber : 17
+Line       : 此前只盘点了 `题目资料` 子目录，漏掉了 `C:\Users\mzj\Desktop\CTF\labs\platform`、`figures\raw`、WSL 下的 `
+             ~/pwn-lab/platform`、旧终端记录以及 `D:\Downloads` 中的附件。本轮已将这些位置纳入核查，并为原有 28 道平台
+             已完成题和后续新增 14 道已验证题建立逐题章节。每章分别标明题目附件、可复现脚本、旧终端日志、平台公开 Write
+             up、平台完成徽标和本轮远程输出来自哪里；“已完成”徽标不会被写成某个具体 flag 的提交回执。现存证据仍不完整的
+             题会列出缺失项，不补造历史输入、输出或提交结果。
+Context    : Microsoft.PowerShell.Commands.MatchInfoContext
+
+Path       : C:\Users\mzj\Desktop\CTF\玄机刷题\指南\玄机刷题指南_合并源.md
+LineNumber : 23
+Line       : ## 平台已完成（46 道）
+Context    : Microsoft.PowerShell.Commands.MatchInfoContext
+
+Path       : C:\Users\mzj\Desktop\CTF\玄机刷题\指南\玄机刷题指南_合并源.md
+LineNumber : 25
+Line       : 题目和难度按玄机平台“已完成”筛选页记录。ID 仅在指南或本地附件中已有确证时填写；“—”表示尚未从题目详情页核对
+              ID。费用不在本次列表中显示，因此新补条目不推断免费或收费。
+Context    : Microsoft.PowerShell.Commands.MatchInfoContext
+
+Path       : C:\Users\mzj\Desktop\CTF\玄机刷题\指南\玄机刷题指南_合并源.md
+LineNumber : 32
+Line       : | 590 | 2026安网杯-Prompt Trace | AI / 中等 | 平台已完成；本指南有逐步记录 |
+Context    : Microsoft.PowerShell.Commands.MatchInfoContext
+
+Path       : C:\Users\mzj\Desktop\CTF\玄机刷题\指南\玄机刷题指南_合并源.md
+LineNumber : 37
+Line       : | 585 | 2026安网杯-班次邮戳 | MISC / 中等 | 平台已完成；本指南有逐步记录 |
+Context    : Microsoft.PowerShell.Commands.MatchInfoContext
+
+Path       : C:\Users\mzj\Desktop\CTF\玄机刷题\指南\玄机刷题指南_合并源.md
+LineNumber : 38
+Line       : | 584 | 2026安网杯-可疑流量分析 | MISC / 中等 | 平台已完成；本指南有逐步记录 |
+Context    : Microsoft.PowerShell.Commands.MatchInfoContext
+
+Path       : C:\Users\mzj\Desktop\CTF\玄机刷题\指南\玄机刷题指南_合并源.md
+LineNumber : 39
+Line       : | 583 | 2026安网杯-像素囚笼1 | MISC / 简单 | 平台已完成；本指南有逐步记录 |
+Context    : Microsoft.PowerShell.Commands.MatchInfoContext
+
+Path       : C:\Users\mzj\Desktop\CTF\玄机刷题\指南\玄机刷题指南_合并源.md
+LineNumber : 41
+Line       : | 580 | 2026安网杯-Veiled Shell | MISC / 简单 | 平台已完成；本指南有逐步记录 |
+Context    : Microsoft.PowerShell.Commands.MatchInfoContext
+
+Path       : C:\Users\mzj\Desktop\CTF\玄机刷题\指南\玄机刷题指南_合并源.md
+LineNumber : 44
+Line       : | 564 | 第一届启航杯 rainbow | REVERSE / 中等 | 平台筛选显示已完成；本地有分析记录与复现脚本 |
+Context    : Microsoft.PowerShell.Commands.MatchInfoContext
+
+Path       : C:\Users\mzj\Desktop\CTF\玄机刷题\指南\玄机刷题指南_合并源.md
+LineNumber : 45
+Line       : | 563 | 第一届启航杯 note | REVERSE / 中等 | 平台筛选显示已完成；本地有终端记录和复现材料 |
+Context    : Microsoft.PowerShell.Commands.MatchInfoContext
+
+Path       : C:\Users\mzj\Desktop\CTF\玄机刷题\指南\玄机刷题指南_合并源.md
+LineNumber : 49
+Line       : | 556 | 第三届黄河流域公安院校网络安全技能挑战赛 go_for_it | REVERSE / 中等 | 平台已完成；本地有分析输出、
+             脚本和终端记录 |
+Context    : Microsoft.PowerShell.Commands.MatchInfoContext
+
+Path       : C:\Users\mzj\Desktop\CTF\玄机刷题\指南\玄机刷题指南_合并源.md
+LineNumber : 50
+Line       : | 555 | 第三届黄河流域公安院校网络安全技能挑战赛 Victory_Melody | REVERSE / 中等 | 平台已完成；本指南有逐
+             步记录 |
+Context    : Microsoft.PowerShell.Commands.MatchInfoContext
+
+Path       : C:\Users\mzj\Desktop\CTF\玄机刷题\指南\玄机刷题指南_合并源.md
+LineNumber : 51
+Line       : | 554 | 第九届“强网杯”全国网络安全挑战赛 tradre | REVERSE / 中等 | 平台已完成；本指南有逐步记录 |
+Context    : Microsoft.PowerShell.Commands.MatchInfoContext
+
+Path       : C:\Users\mzj\Desktop\CTF\玄机刷题\指南\玄机刷题指南_合并源.md
+LineNumber : 54
+Line       : | 550 | 第二届 Parloo 杯 PositionalXOR | REVERSE / 中等 | 平台已完成；本指南有逐步记录 |
+Context    : Microsoft.PowerShell.Commands.MatchInfoContext
+
+Path       : C:\Users\mzj\Desktop\CTF\玄机刷题\指南\玄机刷题指南_合并源.md
+LineNumber : 64
+Line       : | 528 | 商丘师范学院第四届网络安全及信息对抗大赛 即随本心 | REVERSE / 简单 | 平台已完成；本指南有逐步记录
+             |
+Context    : Microsoft.PowerShell.Commands.MatchInfoContext
+
+Path       : C:\Users\mzj\Desktop\CTF\玄机刷题\指南\玄机刷题指南_合并源.md
+LineNumber : 70
+Line       : | 428 | webmin未授权远程代码执行漏洞 | 渗透 / 入门 | 免费实例现场确认 1.920 并取得 `/root/flag.txt` 响应；
+             平台原已完成 |
+Context    : Microsoft.PowerShell.Commands.MatchInfoContext
+
+Path       : C:\Users\mzj\Desktop\CTF\玄机刷题\指南\玄机刷题指南_合并源.md
+LineNumber : 71
+Line       : | 358 | 2025鹏城杯-babyRSA | Crypto / 中等 | 平台已完成；本指南有逐步记录 |
+Context    : Microsoft.PowerShell.Commands.MatchInfoContext
+
+Path       : C:\Users\mzj\Desktop\CTF\玄机刷题\指南\玄机刷题指南_合并源.md
+LineNumber : 74
+Line       : | 286 | 第九届 XCTF 国际网络攻防联赛总决赛-Tch3s | Crypto / 极难 | 平台已完成；本指南有逐步记录 |
+Context    : Microsoft.PowerShell.Commands.MatchInfoContext
+
+Path       : C:\Users\mzj\Desktop\CTF\玄机刷题\指南\玄机刷题指南_合并源.md
+LineNumber : 76
+Line       : | 81 | 2024铁人三项决赛 CTFRE-crazyaes | REVERSE / 极难 | 平台已完成；本指南有逐步记录 |
+Context    : Microsoft.PowerShell.Commands.MatchInfoContext
+
+Path       : C:\Users\mzj\Desktop\CTF\玄机刷题\指南\玄机刷题指南_合并源.md
+LineNumber : 78
+Line       : **统计：本指南原收录 28 道，后续新增的 #367、#450、#451、#520、#551、#530、#531、#559、#588、#549、#558、#
+             547、#548、#552、#539、#540 均有逐题平台接受回执，当前共 44 道。现有证据可给出 42 道题的 flag 候选或公开 W
+             riteup 结果；Ancient-Recall 与 pwn-ezpwn 的最终 flag 输出仍缺失。#541 ezBase 与 #546 PaluArray 的新候选均
+             被平台拒绝，不计入已完成总数。旧题若只有平台完成徽标或离线候选，仍与具体 flag 的提交回执分开标注。**
+Context    : Microsoft.PowerShell.Commands.MatchInfoContext
+
+Path       : C:\Users\mzj\Desktop\CTF\玄机刷题\指南\玄机刷题指南_合并源.md
+LineNumber : 82
+Line       : - 清理终端记录显示此前只移除了 TeX 辅助文件、重复 DEX/缓存和空临时目录；没有删掉这些题目附件。遗漏来自早期
+             盘点范围太窄，而不是清理记录中有删题证据。
+Context    : Microsoft.PowerShell.Commands.MatchInfoContext
+
+Path       : C:\Users\mzj\Desktop\CTF\玄机刷题\指南\玄机刷题指南_合并源.md
+LineNumber : 106
+Line       : **思路：** PCAP 里没有 DNS、没有 TLS，只有 172.28.0.20 与 172.28.0.10:80 之间的纯 HTTP，所以重点不是找明文
+              flag，而是重组 TCP 流、还原一次 WebShell 上传与后续加密信道。上传体里的 PHP 脚本硬编码了 16 字节密钥 `3f9
+             a7c2e1d8b6045`，请求按 Base64 + AES-128-CBC（未传 IV，实测全零 IV）加密，明文形如 `assert|system('cmd');`
+             ，只有 `|` 后半段会被 `eval`。按“Base64 → AES → 去填充”解出每条命令，再按“gzip（若声明）→ AES → Base64”还
+             原回显，逐条对照得到目录结构，最后一条回显就是 flag。
+Context    : Microsoft.PowerShell.Commands.MatchInfoContext
+
+Path       : C:\Users\mzj\Desktop\CTF\玄机刷题\指南\玄机刷题指南_合并源.md
+LineNumber : 110
+Line       : **Flag：** `flag{bcb5e1538d12162510d5297a43fa8fcf}`
+Context    : Microsoft.PowerShell.Commands.MatchInfoContext
+
+Path       : C:\Users\mzj\Desktop\CTF\玄机刷题\指南\玄机刷题指南_合并源.md
+LineNumber : 154
+Line       : **思路：** 破点不在 128 位密钥，而在 PRNG 种子：反汇编看到 `time(NULL)` → `srand` → 循环 `rand()` 生成 16
+             字节密钥，测试明文同样由 `rand()%256` 生成，而 `output` 里公开了首组明文。于是把“Unix 秒级时间”当搜索空间
+             ，每个候选种子先跳过 16 次 `rand()` 生成密钥，再比对后续 16 个低字节是否等于已知明文，用明文前 4 字节做快
+             速过滤。命中 `seed=1753843495` 后，把工作副本的 `time()` 改成固定种子、把加密调用改成解密调用 `0x31a1`，用
+              `FLAG` 环境变量喂入密文分块解密。
+Context    : Microsoft.PowerShell.Commands.MatchInfoContext
+
+Path       : C:\Users\mzj\Desktop\CTF\玄机刷题\指南\玄机刷题指南_合并源.md
+LineNumber : 202
+Line       : 检查简单未完成列表时，软件系统安全赛决赛 CIFAR-10（ID 573）、SU_photogallery（ID 570）与 php（CVE-2024-296
+             1，ID 505）详情均显示 5 金币 / 30 分钟。没有点击启动环境、没有下载附件、没有产生扣费，因此按免费优先约束跳
+             过。原先详写的 12 道题均记录为免费；本次新增的 16 道历史已完成题未逐题复核费用，故不作免费或收费判断。
+Context    : Microsoft.PowerShell.Commands.MatchInfoContext
+
+Path       : C:\Users\mzj\Desktop\CTF\玄机刷题\指南\玄机刷题指南_合并源.md
+LineNumber : 225
+Line       : 2. 在 `D:\Downloads` 找到新下载的 `Veiled+Shell附件 (2).zip`，大小 7,404 字节。目录中另有一个较早下载的 `(
+             1)` 文件。
+Context    : Microsoft.PowerShell.Commands.MatchInfoContext
+
+Path       : C:\Users\mzj\Desktop\CTF\玄机刷题\指南\玄机刷题指南_合并源.md
+LineNumber : 227
+Line       : 4. 查看 ZIP 目录，仅有 `incident_traffic.pcap`：原始长度 23,394 字节，压缩长度 7,192 字节。
+Context    : Microsoft.PowerShell.Commands.MatchInfoContext
+
+Path       : C:\Users\mzj\Desktop\CTF\玄机刷题\指南\玄机刷题指南_合并源.md
+LineNumber : 266
+Line       : - **时间（服务器 HTTP Date）:** 02:25:25、02:25:27；**流量 / 观察:** `GET /index.php`，均返回 200；**判断:
+             ** 正常页面访问/探测
+Context    : Microsoft.PowerShell.Commands.MatchInfoContext
+
+Path       : C:\Users\mzj\Desktop\CTF\玄机刷题\指南\玄机刷题指南_合并源.md
+LineNumber : 267
+Line       : - **时间（服务器 HTTP Date）:** 02:25:28；**流量 / 观察:** `GET /uploads/` 返回 403；**判断:** 目录浏览被
+             禁止；但不能据此认为目录不可写或其中脚本不可访问
+Context    : Microsoft.PowerShell.Commands.MatchInfoContext
+
+Path       : C:\Users\mzj\Desktop\CTF\玄机刷题\指南\玄机刷题指南_合并源.md
+LineNumber : 268
+Line       : - **时间（服务器 HTTP Date）:** 02:25:31；**流量 / 观察:** `POST /index.php`，multipart 文件名 `shell.php`
+             ，类型 `application/x-php`；**判断:** 上传了 PHP 文件，是关键异常行为
+Context    : Microsoft.PowerShell.Commands.MatchInfoContext
+
+Path       : C:\Users\mzj\Desktop\CTF\玄机刷题\指南\玄机刷题指南_合并源.md
+LineNumber : 269
+Line       : - **时间（服务器 HTTP Date）:** 02:25:33、02:25:34；**流量 / 观察:** `GET /` 与 `GET /index.php`；**判断:*
+             * 上传后页面访问
+Context    : Microsoft.PowerShell.Commands.MatchInfoContext
+
+Path       : C:\Users\mzj\Desktop\CTF\玄机刷题\指南\玄机刷题指南_合并源.md
+LineNumber : 322
+Line       : - **客户端口 / 时间:** 59568 / 02:25:42；**解密出的请求明文:** `assert|system('ls -la /var/www/html');`；*
+             *解密后的服务端输出:** `index.php` 与 `uploads/`；**用途:** 确认站点目录结构
+Context    : Microsoft.PowerShell.Commands.MatchInfoContext
+
+Path       : C:\Users\mzj\Desktop\CTF\玄机刷题\指南\玄机刷题指南_合并源.md
+LineNumber : 324
+Line       : - **客户端口 / 时间:** 59586 / 02:25:46；**解密出的请求明文:** `assert|system('ls /');`；**解密后的服务端
+             输出:** 根目录列表中有 `flag.txt`；**用途:** 定位目标文件
+Context    : Microsoft.PowerShell.Commands.MatchInfoContext
+
+Path       : C:\Users\mzj\Desktop\CTF\玄机刷题\指南\玄机刷题指南_合并源.md
+LineNumber : 325
+Line       : - **客户端口 / 时间:** 59594 / 02:25:49；**解密出的请求明文:** `assert|system('cat /flag.txt');`；**解密后
+             的服务端输出:** `flag{bcb5e1538d12162510d5297a43fa8fcf}`；**用途:** 直接取得 Flag
+Context    : Microsoft.PowerShell.Commands.MatchInfoContext
+
+Path       : C:\Users\mzj\Desktop\CTF\玄机刷题\指南\玄机刷题指南_合并源.md
+LineNumber : 349
+Line       : 解密最后一条请求先得到 `assert|system('cat /flag.txt');`。最后一条响应经过 gzip 解压后，是 Base64 格式的 A
+             ES 密文；先 AES 解密，再 Base64 解码，明文为 `flag{bcb5e1538d12162510d5297a43fa8fcf}\n`。
+Context    : Microsoft.PowerShell.Commands.MatchInfoContext
+
+Path       : C:\Users\mzj\Desktop\CTF\玄机刷题\指南\玄机刷题指南_合并源.md
+LineNumber : 353
+Line       : 这是一次通过 HTTP 上传加密 PHP WebShell 的行为。攻击者从 `172.28.0.20` 向 `www.corp.internal` 上传 `shell.
+             php`，随后通过加密请求控制 Web 服务器 `web-prod-01`。命令以 `www-data` 运行，逐步枚举 Web 目录和根目录，最
+             后读取 `/flag.txt`。Flag 的来源是抓包中的加密命令回包解密结果，不是猜测或从平台外部查找。
+Context    : Microsoft.PowerShell.Commands.MatchInfoContext
+
+Path       : C:\Users\mzj\Desktop\CTF\玄机刷题\指南\玄机刷题指南_合并源.md
+LineNumber : 358
+Line       : flag{bcb5e1538d12162510d5297a43fa8fcf}
+Context    : Microsoft.PowerShell.Commands.MatchInfoContext
+
+Path       : C:\Users\mzj\Desktop\CTF\玄机刷题\指南\玄机刷题指南_合并源.md
+LineNumber : 363
+Line       : 按用户此前的要求，我已在玄机该题的提交框中提交上述 Flag。平台明确返回“FLAG 正确~，恭喜你完成此挑战~”，题目
+             页顶部显示“已完成”，步骤进度从 `0/1` 更新为 `1/1`。因此本题已通过平台验证。
+Context    : Microsoft.PowerShell.Commands.MatchInfoContext
+
+Path       : C:\Users\mzj\Desktop\CTF\玄机刷题\指南\玄机刷题指南_合并源.md
+LineNumber : 428
+Line       : - **字段:** TOC 相对偏移；**值:** `0xC187C6`；**解释:** 归档内的目录表位置
+Context    : Microsoft.PowerShell.Commands.MatchInfoContext
+
+Path       : C:\Users\mzj\Desktop\CTF\玄机刷题\指南\玄机刷题指南_合并源.md
+LineNumber : 429
+Line       : - **字段:** TOC 长度；**值:** `0x17B0`；**解释:** 目录表字节数
+Context    : Microsoft.PowerShell.Commands.MatchInfoContext
+
+Path       : C:\Users\mzj\Desktop\CTF\玄机刷题\指南\玄机刷题指南_合并源.md
+LineNumber : 524
+Line       : 已将上述 Flag 提交到玄机题目 `528`。页面返回“FLAG 正确~，恭喜你完成此挑战~”，并显示题目“已完成”、步骤进度
+             `1/1`。本题验证通过。
+Context    : Microsoft.PowerShell.Commands.MatchInfoContext
+
+Path       : C:\Users\mzj\Desktop\CTF\玄机刷题\指南\玄机刷题指南_合并源.md
+LineNumber : 541
+Line       : - 题目目标：依据 Guard 系统提示和通道目录，从审计事件中恢复真正写入生产 token 的碎片，按碎片序号拼出 Flag
+             。
+Context    : Microsoft.PowerShell.Commands.MatchInfoContext
+
+Path       : C:\Users\mzj\Desktop\CTF\玄机刷题\指南\玄机刷题指南_合并源.md
+LineNumber : 574
+Line       : ### 1. 通道目录
+Context    : Microsoft.PowerShell.Commands.MatchInfoContext
+
+Path       : C:\Users\mzj\Desktop\CTF\玄机刷题\指南\玄机刷题指南_合并源.md
+LineNumber : 619
+Line       : 在 ID 590 详情页点“提交FLAG”，输入 flag{c4d82a6fd755593832df032275355be0} 并提交。页面出现“FLAG 正确，恭喜
+             你完成此挑战”，随后显示“已完成”和步骤 1/1，作为验证成功的依据。
+Context    : Microsoft.PowerShell.Commands.MatchInfoContext
+
+Path       : C:\Users\mzj\Desktop\CTF\玄机刷题\指南\玄机刷题指南_合并源.md
+LineNumber : 634
+Line       : - 结果：Flag 已提交，平台详情页显示“已完成”，步骤进度 1/1
+Context    : Microsoft.PowerShell.Commands.MatchInfoContext
+
+Path       : C:\Users\mzj\Desktop\CTF\玄机刷题\指南\玄机刷题指南_合并源.md
+LineNumber : 647
+Line       : 点击详情页“下载附件”，在前台 PowerShell 检查下载目录。压缩包班次邮戳附件.zip 为 160,365 字节，SHA-256：
+Context    : Microsoft.PowerShell.Commands.MatchInfoContext
+
+Path       : C:\Users\mzj\Desktop\CTF\玄机刷题\指南\玄机刷题指南_合并源.md
+LineNumber : 727
+Line       : 提交后页面短暂跳转至用户详情。随后重新打开该题详情进行核验，页面在标题上方显示“已完成”，题目步骤区域显示“
+             步骤 #1”及“1/1”。这两个页面字段是最终判题通过的直接证据。
+Context    : Microsoft.PowerShell.Commands.MatchInfoContext
+
+Path       : C:\Users\mzj\Desktop\CTF\玄机刷题\指南\玄机刷题指南_合并源.md
+LineNumber : 741
+Line       : Computer Use 浏览器操作中的题目页面与分析画面曾在本会话实时显示。当前 Computer Use 接口能把浏览器截图显示
+             在会话中，但不能把截图字节直接保存到本地文件；之前一次 Windows 桌面截图抓到的是 Codex 对话界面，因此已删除
+             ，没有拿它冒充题目截图。平台最终页面的“已完成 / 1/1”状态已由本次浏览器截图与可访问性树同时核验。若后续获得
+             可保存的浏览器截图方式，再补入 PDF；未保存的图片不会伪造或用其他画面代替。
+Context    : Microsoft.PowerShell.Commands.MatchInfoContext
+
+Path       : C:\Users\mzj\Desktop\CTF\玄机刷题\指南\玄机刷题指南_合并源.md
+LineNumber : 748
+Line       : - 提交成功以题目页“已完成”和步骤 1/1 为准，不只依据本地解码结果。
+Context    : Microsoft.PowerShell.Commands.MatchInfoContext
+
+Path       : C:\Users\mzj\Desktop\CTF\玄机刷题\指南\玄机刷题指南_合并源.md
+LineNumber : 759
+Line       : - 结果：Flag 已提交；平台提示“FLAG 正确，恭喜你完成此挑战”，状态“已完成”，步骤 1/1
+Context    : Microsoft.PowerShell.Commands.MatchInfoContext
+
+Path       : C:\Users\mzj\Desktop\CTF\玄机刷题\指南\玄机刷题指南_合并源.md
+LineNumber : 770
+Line       : B426473FC5838490B9F2F4B77A91FD68CE182B5B07A7BFD0008C63A93CF46025
+Context    : Microsoft.PowerShell.Commands.MatchInfoContext
+
+Path       : C:\Users\mzj\Desktop\CTF\玄机刷题\指南\玄机刷题指南_合并源.md
+LineNumber : 790
+Line       : HTTP 客户端 69 个请求只访问 /、/index.html、/about.html。两类服务器页面介绍内网门户、FTP 文件服务和 MySQL
+             开发数据库，没有 HTML 注释或 Flag 文本。
+Context    : Microsoft.PowerShell.Commands.MatchInfoContext
+
+Path       : C:\Users\mzj\Desktop\CTF\玄机刷题\指南\玄机刷题指南_合并源.md
+LineNumber : 798
+Line       : DNS 共 131 个请求、66 个唯一名称。普通业务域名返回公网地址，例如 google.com -> 142.250.80.46、baidu.com ->
+              110.242.68.66。另有一波短时间高频随机子域名，分布在 cdn-static.xyz、cdn-edge.io、cdn-assets.net、static-c
+             dn.xyz 等近似 CDN 域名下；这些名称都解析到 10.10.10.1。
+Context    : Microsoft.PowerShell.Commands.MatchInfoContext
+
+Path       : C:\Users\mzj\Desktop\CTF\玄机刷题\指南\玄机刷题指南_合并源.md
+LineNumber : 830
+Line       : 在 ID 584 详情页打开“提交FLAG”，前台键入 flag{242bdddd09b6769d2e48404f6e70d38d} 并点击提交。页面出现成功提
+             示，同时状态更新为“已完成”和步骤 1/1。
+Context    : Microsoft.PowerShell.Commands.MatchInfoContext
+
+Path       : C:\Users\mzj\Desktop\CTF\玄机刷题\指南\玄机刷题指南_合并源.md
+LineNumber : 871
+Line       : 6. 在玄机题目页提交明文 flag，平台返回正确提示，题目标为已完成。
+Context    : Microsoft.PowerShell.Commands.MatchInfoContext
+
+Path       : C:\Users\mzj\Desktop\CTF\玄机刷题\指南\玄机刷题指南_合并源.md
+LineNumber : 897
+Line       :     plaintext hex = 666c61677b746831735f31735f345f747572655f666c34677d
+Context    : Microsoft.PowerShell.Commands.MatchInfoContext
+
+Path       : C:\Users\mzj\Desktop\CTF\玄机刷题\指南\玄机刷题指南_合并源.md
+LineNumber : 901
+Line       : 重新按 Decimal 精度 1024 计算泄漏后，结果与附件注释一致；素数位数也符合 1024 位范围。最后在题目页提交该 fl
+             ag，页面显示“FLAG 正确，恭喜你完成此挑战”，标题显示“已完成”，步骤显示 1/1。
+Context    : Microsoft.PowerShell.Commands.MatchInfoContext
+
+Path       : C:\Users\mzj\Desktop\CTF\玄机刷题\指南\玄机刷题指南_合并源.md
+LineNumber : 923
+Line       : - 附件目录：`C:\Users\mzj\Desktop\CTF\Tch3s-附件`
+Context    : Microsoft.PowerShell.Commands.MatchInfoContext
+
+Path       : C:\Users\mzj\Desktop\CTF\玄机刷题\指南\玄机刷题指南_合并源.md
+LineNumber : 924
+Line       : - 原二进制 SHA-256：`03d7248be820b1dab28d1ad3754c1bc81c8b1894b432abaa701538b40f505ab6`
+Context    : Microsoft.PowerShell.Commands.MatchInfoContext
+
+Path       : C:\Users\mzj\Desktop\CTF\玄机刷题\指南\玄机刷题指南_合并源.md
+LineNumber : 937
+Line       : 1. 从附件目录检查二进制与输出文件，并把文件复制到工作目录的 ASCII 文件名，避免 Windows 中文路径传入 MSYS `
+             objdump` 时被替换成问号。最初直接对中文路径运行 `objdump` 失败，错误信息也保留在完整 transcript 中。
+Context    : Microsoft.PowerShell.Commands.MatchInfoContext
+
+Path       : C:\Users\mzj\Desktop\CTF\玄机刷题\指南\玄机刷题指南_合并源.md
+LineNumber : 940
+Line       : 4. 搜索结果：`MATCH seed=1753843495`，即 `2025-07-30 02:44:55 UTC`。候选生成的完整首组明文与附件一致：`720
+             B4455C91B6A024135343386B6679D`。
+Context    : Microsoft.PowerShell.Commands.MatchInfoContext
+
+Path       : C:\Users\mzj\Desktop\CTF\玄机刷题\指南\玄机刷题指南_合并源.md
+LineNumber : 944
+Line       :    - 解密输出：`666C61677B74696D316E675F61377440`，ASCII 为 `flag{tim1ng_a7t@`
+Context    : Microsoft.PowerShell.Commands.MatchInfoContext
+
+Path       : C:\Users\mzj\Desktop\CTF\玄机刷题\指南\玄机刷题指南_合并源.md
+LineNumber : 945
+Line       :    - 第 2 块密文：`F5333E4783390B91EDB9D2B4FD2A5FC0`
+Context    : Microsoft.PowerShell.Commands.MatchInfoContext
+
+Path       : C:\Users\mzj\Desktop\CTF\玄机刷题\指南\玄机刷题指南_合并源.md
+LineNumber : 946
+Line       :    - 解密输出：`636B5F31735F64616E6765726F75737D`，ASCII 为 `ck_1s_dangerous}`
+Context    : Microsoft.PowerShell.Commands.MatchInfoContext
+
+Path       : C:\Users\mzj\Desktop\CTF\玄机刷题\指南\玄机刷题指南_合并源.md
+LineNumber : 948
+Line       : 8. 在玄机题目页打开“提交 FLAG”，输入上述候选并提交。平台页面随后显示绿色“已完成”标记，题目状态确认通过。平
+             台验证是最终正确性依据。
+Context    : Microsoft.PowerShell.Commands.MatchInfoContext
+
+Path       : C:\Users\mzj\Desktop\CTF\玄机刷题\指南\玄机刷题指南_合并源.md
+LineNumber : 960
+Line       : MATCH seed=1753843495
+Context    : Microsoft.PowerShell.Commands.MatchInfoContext
+
+Path       : C:\Users\mzj\Desktop\CTF\玄机刷题\指南\玄机刷题指南_合并源.md
+LineNumber : 962
+Line       : 第 1 块解密：666C61677B74696D316E675F61377440
+Context    : Microsoft.PowerShell.Commands.MatchInfoContext
+
+Path       : C:\Users\mzj\Desktop\CTF\玄机刷题\指南\玄机刷题指南_合并源.md
+LineNumber : 963
+Line       : 第 2 块解密：636B5F31735F64616E6765726F75737D
+Context    : Microsoft.PowerShell.Commands.MatchInfoContext
+
+Path       : C:\Users\mzj\Desktop\CTF\玄机刷题\指南\玄机刷题指南_合并源.md
+LineNumber : 964
+Line       : 平台：已完成
+Context    : Microsoft.PowerShell.Commands.MatchInfoContext
+
+Path       : C:\Users\mzj\Desktop\CTF\玄机刷题\指南\玄机刷题指南_合并源.md
+LineNumber : 967
+Line       : 完整命令、反汇编输出、种子搜索和补丁试错过程见 `记录/第九届XCTF-Tch3s-解题记录.md` 及对应题目资料目录。
+Context    : Microsoft.PowerShell.Commands.MatchInfoContext
+
+Path       : C:\Users\mzj\Desktop\CTF\玄机刷题\指南\玄机刷题指南_合并源.md
+LineNumber : 975
+Line       : - 附件：crazyaes.exe；原始文件 SHA-256：924E14635E4ECA8823EDC8FC7F857A58F1EA1FEEDBE8210B3585E381C968280C
+Context    : Microsoft.PowerShell.Commands.MatchInfoContext
+
+Path       : C:\Users\mzj\Desktop\CTF\玄机刷题\指南\玄机刷题指南_合并源.md
+LineNumber : 977
+Line       : - 平台验证：提交后页面提示“FLAG 正确，恭喜你完成此挑战”，标题显示“已完成”，步骤进度 1/1
+Context    : Microsoft.PowerShell.Commands.MatchInfoContext
+
+Path       : C:\Users\mzj\Desktop\CTF\玄机刷题\指南\玄机刷题指南_合并源.md
+LineNumber : 990
+Line       : SHA-256：924E14635E4ECA8823EDC8FC7F857A58F1EA1FEEDBE8210B3585E381C968280C
+Context    : Microsoft.PowerShell.Commands.MatchInfoContext
+
+Path       : C:\Users\mzj\Desktop\CTF\玄机刷题\指南\玄机刷题指南_合并源.md
+LineNumber : 1100
+Line       : 在玄机 ID 81 的题目页点“提交FLAG”，输入 flag{Re_1ts_f0n} 并提交。平台截图当场显示绿色提示“FLAG 正确，恭喜
+             你完成此挑战”，题目标题上方标记“已完成”，步骤卡片为 1/1。该页面状态和 accessibility tree 在本轮 Computer U
+             se 中现场核对。浏览器工具能把截图呈现在对话里，但本轮没有可保存的截图文件；手册如实保留页面文字结果，不伪
+             造本地图片。
+Context    : Microsoft.PowerShell.Commands.MatchInfoContext
+
+Path       : C:\Users\mzj\Desktop\CTF\玄机刷题\指南\玄机刷题指南_合并源.md
+LineNumber : 1101
+Line       : 平台验证为最终依据：本题已完成。
+Context    : Microsoft.PowerShell.Commands.MatchInfoContext
+
+Path       : C:\Users\mzj\Desktop\CTF\玄机刷题\指南\玄机刷题指南_合并源.md
+LineNumber : 1110
+Line       : - 本题命令、输入、输出、错误候选和排错过程已整理于 `记录/2024铁人三项决赛-CTFRE-crazyaes-解题记录.md` 及对
+             应题目资料目录。
+Context    : Microsoft.PowerShell.Commands.MatchInfoContext
+
+Path       : C:\Users\mzj\Desktop\CTF\玄机刷题\指南\玄机刷题指南_合并源.md
+LineNumber : 1114
+Line       : > 状态：已完成。平台步骤 #1 显示 1/1；最终 Flag：`flag{4a31cac9a66a8e399693f543a8c66fb8}`。
+Context    : Microsoft.PowerShell.Commands.MatchInfoContext
+
+Path       : C:\Users\mzj\Desktop\CTF\玄机刷题\指南\玄机刷题指南_合并源.md
+LineNumber : 1124
+Line       : - 附件已由用户解压：`D:\Downloads\像素囚笼附件 (1)\challenge.png`。解压目录只有这一个文件。
+Context    : Microsoft.PowerShell.Commands.MatchInfoContext
+
+Path       : C:\Users\mzj\Desktop\CTF\玄机刷题\指南\玄机刷题指南_合并源.md
+LineNumber : 1136
+Line       : - 假设一：把八个圆按 RGB 通道位掩码编码。候选 flag{14625314}。在题目页“提交FLAG”输入并提交，平台提示“FLAG
+             不正确”。
+Context    : Microsoft.PowerShell.Commands.MatchInfoContext
+
+Path       : C:\Users\mzj\Desktop\CTF\玄机刷题\指南\玄机刷题指南_合并源.md
+LineNumber : 1138
+Line       : - 假设三：六个方块按从上到下、每行从左到右编号，再把圆的颜色映射为编号。候选 flag{13524613}。平台提示“FLAG
+              不正确”。
+Context    : Microsoft.PowerShell.Commands.MatchInfoContext
+
+Path       : C:\Users\mzj\Desktop\CTF\玄机刷题\指南\玄机刷题指南_合并源.md
+LineNumber : 1164
+Line       : 5. 按图中色块行序映射出的 13524613、按横坐标序映射出的 12345612、标题 Abstract Art Gallery、无空格小写标题
+              abstractartgallery、独立像素坐标 411482 均作为 ZIP 密码试过；每次 Bandizip 都重新弹出密码框，没有成功解开
+             。
+Context    : Microsoft.PowerShell.Commands.MatchInfoContext
+
+Path       : C:\Users\mzj\Desktop\CTF\玄机刷题\指南\玄机刷题指南_合并源.md
+LineNumber : 1190
+Line       : 结果：文件 5,187 字节，PNG 签名正确，PNG 的 IEND 类型字段在偏移 4,948；IEND 块结束后，ZIP 本地文件头从偏移
+              4,956 开始。ZIP 目录还可见 `PK 01 02` 和 `PK 05 06`，因此是直接附加在 PNG 后的完整 ZIP，而不是把 PNG 扩展
+             名误认成压缩包。
+Context    : Microsoft.PowerShell.Commands.MatchInfoContext
+
+Path       : C:\Users\mzj\Desktop\CTF\玄机刷题\指南\玄机刷题指南_合并源.md
+LineNumber : 1192
+Line       : 用 Python `zipfile` 检查目录，得到唯一成员 `secret.txt`：general-purpose flag bits 为 1（传统 ZipCrypto 加
+             密），压缩方法为 DEFLATE，CRC32 为 `9d13b619`，解压长度 113 字节、加密压缩长度 113 字节；无 extra field、
+             无 ZIP 注释。加密数据头起始偏移为 4,996。Bandizip 的界面也列出 `secret.txt*`，双击要求输入密码。
+Context    : Microsoft.PowerShell.Commands.MatchInfoContext
+
+Path       : C:\Users\mzj\Desktop\CTF\玄机刷题\指南\玄机刷题指南_合并源.md
+LineNumber : 1196
+Line       : 用 Pillow 读取 PNG（文件末尾有 ZIP 不妨碍图像解码）：尺寸 512×512、RGB、无可读 PNG 元数据；全图只有 10 种
+             RGB 颜色。颜色是背景、描边及六种填充色，图形为六个 97×97 的方形填充区和一排逐渐变大的圆。圆的外径约为 40、
+             46、52、58、64、70、76、82 像素。LSB 位平面只呈现大块图形轮廓；各通道打包后的可打印字节比例低于 0.5%，没有
+             发现可读文字型 LSB 数据。
+Context    : Microsoft.PowerShell.Commands.MatchInfoContext
+
+Path       : C:\Users\mzj\Desktop\CTF\玄机刷题\指南\玄机刷题指南_合并源.md
+LineNumber : 1207
+Line       : - 圆外径直接按 ASCII 解释得到 `(.4:@FLR`，反序、外径数字串 `4046525864707682`、半径数字串 `202326293235384
+             1`，以及尺寸和颜色序号组合；
+Context    : Microsoft.PowerShell.Commands.MatchInfoContext
+
+Path       : C:\Users\mzj\Desktop\CTF\玄机刷题\指南\玄机刷题指南_合并源.md
+LineNumber : 1208
+Line       : - 数字 1–6 全字符集、长度 1–8：2,015,538 个候选；圆颜色首字母 BRYGPC 全字符集、长度 1–8：2,015,538 个候选
+             ；六个形状标签 A–F 全字符集、长度 1–8：2,015,538 个候选，均未命中；
+Context    : Microsoft.PowerShell.Commands.MatchInfoContext
+
+Path       : C:\Users\mzj\Desktop\CTF\玄机刷题\指南\玄机刷题指南_合并源.md
+LineNumber : 1215
+Line       : 下列源代码与输出保存在当前 CTF 工作目录，记录了结构、候选验证、几何检查及位平面检查；数字穷举的源代码也保
+             留：
+Context    : Microsoft.PowerShell.Commands.MatchInfoContext
+
+Path       : C:\Users\mzj\Desktop\CTF\玄机刷题\指南\玄机刷题指南_合并源.md
+LineNumber : 1228
+Line       : 把可见图形转换成的主要序列 `12345612`、`13524613`、`BRYGPCBR`、圆外径串 `4046525864707682` 和 ASCII 串 `(.
+             4:@FLR` 分别做 MD5、SHA-1、SHA-256、Base64、十六进制文本变换，共 75 个派生候选，全部解密失败。还试了半径串
+              `2023262932353841`、颜色名的连字符/下划线形式、颜色字母对应 A1Z26、零起始方块索引、ASCII 圆径与颜色序号加
+             减等候选，均未命中。
+Context    : Microsoft.PowerShell.Commands.MatchInfoContext
+
+Path       : C:\Users\mzj\Desktop\CTF\玄机刷题\指南\玄机刷题指南_合并源.md
+LineNumber : 1236
+Line       : - 可打印 ASCII 字符（空格到 `~`），长度 1–4：82,317,120 个候选，322,046 个头校验碰撞，完整解压无命中。
+Context    : Microsoft.PowerShell.Commands.MatchInfoContext
+
+Path       : C:\Users\mzj\Desktop\CTF\玄机刷题\指南\玄机刷题指南_合并源.md
+LineNumber : 1264
+Line       : 2. 将 blue、red、yellow、green、purple、cyan 六个英文颜色词作为字典，对 1–8 个词的全部 2,015,538 种拼接执
+             行 ZipCrypto 头校验，并对头校验通过者完整解压验证。耗时约 76.22 秒，无密码命中。实现见 `pixel_cage_brutefo
+             rce_colorwords.py`。
+Context    : Microsoft.PowerShell.Commands.MatchInfoContext
+
+Path       : C:\Users\mzj\Desktop\CTF\玄机刷题\指南\玄机刷题指南_合并源.md
+LineNumber : 1283
+Line       : 通过电脑使用读取挑战页面的可见信息：题目发布时间为 `2026-09-21 20:46:41`、当前挑战路径 ID 为 `583`；页面“
+             暂无简介”，动态区只显示“测试flag / 发布题目”，没有解题提示。用日期、时间、挑战 ID、先前登录跳转 URL 中的 `
+             570`、赛事名与页面文字的常见拼接及分隔形式生成 8,882 个候选，在 ZIP 上逐一完整解压验证，均未命中。脚本为 `
+             pixel_cage_platform_metadata_candidates.py`。
+Context    : Microsoft.PowerShell.Commands.MatchInfoContext
+
+Path       : C:\Users\mzj\Desktop\CTF\玄机刷题\指南\玄机刷题指南_合并源.md
+LineNumber : 1290
+Line       : 2. `pixel_cage_archive_layout_candidates.py`：使用本地解析得到的 ZIP 起始偏移 `4956`、加密数据偏移 `4996`
+             、中央目录偏移 `5109`、EOCD 偏移 `5165`、附件总长度 `5187`、压缩/原始长度 `113`、CRC32 `9d13b619` 等数值及
+             其十六进制、反序、拼接形式，检查 1,102 个候选，均未命中。
+Context    : Microsoft.PowerShell.Commands.MatchInfoContext
+
+Path       : C:\Users\mzj\Desktop\CTF\玄机刷题\指南\玄机刷题指南_合并源.md
+LineNumber : 1309
+Line       : 继续将圆点的尺寸、半径、圆心和对应方块的坐标作为索引，分别从颜色英文名及图片标题 `Abstract Art Gallery` 抽
+             取字符，测试正/反向索引与常见取模。`pixel_cage_title_index_candidates.py` 生成 15,915 个候选，无命中。另把
+             颜色英文名/首字母与圆直径、半径、尺寸序号和圆心位置逐项拼接，并测试大小写与常见分隔符；`pixel_cage_named_s
+             ize_candidates.py` 的 86,024 个候选也未命中。
+Context    : Microsoft.PowerShell.Commands.MatchInfoContext
+
+Path       : C:\Users\mzj\Desktop\CTF\玄机刷题\指南\玄机刷题指南_合并源.md
+LineNumber : 1319
+Line       : 将每个圆的尺寸等级、直径、半径、圆心 x 坐标以及匹配方块坐标作为索引，从该圆的颜色英文名中正向/反向取字符；
+             同时把同一组数值和全部六色编号映射用于索引标题 `Abstract Art Gallery`。`pixel_cage_title_index_candidates.
+             py` 共验证 15,915 个结果，未命中。颜色词/首字母与直径、半径、序号、圆心位置的拼接（`pixel_cage_named_size_
+             candidates.py`，86,024 个候选）也未命中。
+Context    : Microsoft.PowerShell.Commands.MatchInfoContext
+
+Path       : C:\Users\mzj\Desktop\CTF\玄机刷题\指南\玄机刷题指南_合并源.md
+LineNumber : 1337
+Line       : - 最终提交 `flag{4a31cac9a66a8e399693f543a8c66fb8}` 后，平台返回正确提示，题目状态为“已完成”，步骤 #1 为 `
+             1/1`；flag 的取得过程见本章“最终 WP”一节。
+Context    : Microsoft.PowerShell.Commands.MatchInfoContext
+
+Path       : C:\Users\mzj\Desktop\CTF\玄机刷题\指南\玄机刷题指南_合并源.md
+LineNumber : 1348
+Line       : 1. 解析 PNG 块并校验 CRC，附件只有 IHDR、IDAT、IEND；图像是 512×512、8-bit RGB、非隔行。解压 IDAT 后统计 5
+             12 行滤波类型：Sub 46 行、Up 446 行、Paeth 20 行；未见直接可读文本。PNG filter byte 是图像编码元数据，当前
+             序列不能直接推出口令。
+Context    : Microsoft.PowerShell.Commands.MatchInfoContext
+
+Path       : C:\Users\mzj\Desktop\CTF\玄机刷题\指南\玄机刷题指南_合并源.md
+LineNumber : 1385
+Line       : **Flag：** `flag{4a31cac9a66a8e399693f543a8c66fb8}`。平台提交后返回“FLAG 正确”提示，题目状态“已完成”，步骤
+              #1 为 `1/1`。
+Context    : Microsoft.PowerShell.Commands.MatchInfoContext
+
+Path       : C:\Users\mzj\Desktop\CTF\玄机刷题\指南\玄机刷题指南_合并源.md
+LineNumber : 1407
+Line       : 3. 用 GNU objdump 对含中文的绝对路径操作时，MSYS 路径转换把路径变成问号，导致失败；切到父目录后用相对路径
+             成功读取文件头、符号和 `.rodata`。
+Context    : Microsoft.PowerShell.Commands.MatchInfoContext
+
+Path       : C:\Users\mzj\Desktop\CTF\玄机刷题\指南\玄机刷题指南_合并源.md
+LineNumber : 1434
+Line       :     "202a5e01b4655cdde3dce131a2e83440"
+Context    : Microsoft.PowerShell.Commands.MatchInfoContext
+
+Path       : C:\Users\mzj\Desktop\CTF\玄机刷题\指南\玄机刷题指南_合并源.md
+LineNumber : 1453
+Line       : - `target`（33 字节）：\hexwrap{027532640ce1c1b999349f08b1c457df202a5e01b4655cdde3dce131a2e834408b}
+Context    : Microsoft.PowerShell.Commands.MatchInfoContext
+
+Path       : C:\Users\mzj\Desktop\CTF\玄机刷题\指南\玄机刷题指南_合并源.md
+LineNumber : 1454
+Line       : - 重排后的 `used_target`（32 字节）：\hexwrap{027532640ce1c1b999349f08b1c457df2a5e01b4655cdde3dce131a2e834
+             408b}
+Context    : Microsoft.PowerShell.Commands.MatchInfoContext
+
+Path       : C:\Users\mzj\Desktop\CTF\玄机刷题\指南\玄机刷题指南_合并源.md
+LineNumber : 1457
+Line       : - AES 解密结果十六进制：\hexwrap{3135373639323933306365353538356666336633613637343535613033343433}
+Context    : Microsoft.PowerShell.Commands.MatchInfoContext
+
+Path       : C:\Users\mzj\Desktop\CTF\玄机刷题\指南\玄机刷题指南_合并源.md
+LineNumber : 1466
+Line       : 3. 页面返回绿色提示“FLAG 正确，恭喜你完成此挑战”；题目状态变成“已完成”，步骤 #1 从 `0/1` 变成 `1/1`。刷新
+             后的视觉截图和无障碍树在本轮 Computer Use 会话中现场可见；截图没有独立保存到本地文件，因此手册只记录可复核
+             的页面状态，不伪称存在截图文件。
+Context    : Microsoft.PowerShell.Commands.MatchInfoContext
+
+Path       : C:\Users\mzj\Desktop\CTF\玄机刷题\指南\玄机刷题指南_合并源.md
+LineNumber : 1483
+Line       : - ZIP SHA-256：0C563421AE63279233377EEEDFAA34DD85DEFA23A663C46CF1F9DC18FFB0F834。
+Context    : Microsoft.PowerShell.Commands.MatchInfoContext
+
+Path       : C:\Users\mzj\Desktop\CTF\玄机刷题\指南\玄机刷题指南_合并源.md
+LineNumber : 1500
+Line       : 6. 主线程在玄机 ID 550 题页通过 Computer Use 前台提交。页面返回“FLAG 正确~, 恭喜你完成此挑战~”，题目显示“
+             已完成”、步骤 1/1。
+Context    : Microsoft.PowerShell.Commands.MatchInfoContext
+
+Path       : C:\Users\mzj\Desktop\CTF\玄机刷题\指南\玄机刷题指南_合并源.md
+LineNumber : 1512
+Line       : - EXE SHA-256：9909D359461E16E1CA1D55521A187302799C781C718BE3B6613E5A8FB2D3D87B。
+Context    : Microsoft.PowerShell.Commands.MatchInfoContext
+
+Path       : C:\Users\mzj\Desktop\CTF\玄机刷题\指南\玄机刷题指南_合并源.md
+LineNumber : 1525
+Line       : | 0x20 index value | data[index] = value |
+Context    : Microsoft.PowerShell.Commands.MatchInfoContext
+
+Path       : C:\Users\mzj\Desktop\CTF\玄机刷题\指南\玄机刷题指南_合并源.md
+LineNumber : 1533
+Line       : 7. 主线程在玄机 ID 555 题页前台提交 flag{f972007e0d3d9cb5f7d03661019eaf6e}。页面显示“已完成”、步骤 1/1，且
+             用户 slu_mzj 显示为第二血。
+Context    : Microsoft.PowerShell.Commands.MatchInfoContext
+
+Path       : C:\Users\mzj\Desktop\CTF\玄机刷题\指南\玄机刷题指南_合并源.md
+LineNumber : 1541
+Line       : 本章逐题补回旧版遗漏的材料。附件、求解器、终端日志分别来自 labs/platform、玄机刷题/题目资料、figures/raw、
+             WSL 和 D:\Downloads。每节区分本地复现、历史日志、平台公开 Writeup 与平台完成状态；“已完成”徽标不等于某个具
+             体 flag 的提交回执。
+Context    : Microsoft.PowerShell.Commands.MatchInfoContext
+
+Path       : C:\Users\mzj\Desktop\CTF\玄机刷题\指南\玄机刷题指南_合并源.md
+LineNumber : 1577
+Line       : attachments/export.json 中两份 RSA 回执使用同一模数 n 加密同一明文 m，指数 e1=65537、e2=17。扩展欧几里得给
+             出 -8×65537+30841×17=1，因此 m = c1^(-8)×c2^(30841) mod n；负指数通过模逆实现。
+Context    : Microsoft.PowerShell.Commands.MatchInfoContext
+
+Path       : C:\Users\mzj\Desktop\CTF\玄机刷题\指南\玄机刷题指南_合并源.md
+LineNumber : 1676
+Line       : 脚本 rainbow_xor_decrypt.py 完成解密；rainbow_verify_key.py 从 ELF demo 字符串独立校验 key。二者和样本位于
+              题目资料/rainbow/；原始日志为 记录/代理-Rainbow-终端记录.txt。脚本复跑退出码 0。平台已完成列表有该题，但
+             旧分析明确当时未提交；因此本章只写本地候选，不声称它有平台 flag 正确回执。
+Context    : Microsoft.PowerShell.Commands.MatchInfoContext
+
+Path       : C:\Users\mzj\Desktop\CTF\玄机刷题\指南\玄机刷题指南_合并源.md
+LineNumber : 1755
+Line       : 本轮用玄机题目提供的免费实例复核：页面当时显示“已完成”和“免费”，地址 43.192.167.19 / 10.0.10.1。HTTP banne
+             r 是 MiniServ/1.920，页面指示 Webmin 1.920 on Ubuntu Linux 24.04.3。
+Context    : Microsoft.PowerShell.Commands.MatchInfoContext
+
+Path       : C:\Users\mzj\Desktop\CTF\玄机刷题\指南\玄机刷题指南_合并源.md
+LineNumber : 1786
+Line       : 此前遗漏的附件不在 Windows 题目资料目录，而在 WSL 路径 \\wsl.localhost\Ubuntu-24.04\home\mzj\pwn-lab\platf
+             orm。保留 ancient_recall.bin、solve_514.py、step1.py–step8.py、调试脚本与 raw514.log。solve_514.py 包含完
+             整利用流程，旧终端输出只到 PIE 基址，未保留 FLAG 输出。
+Context    : Microsoft.PowerShell.Commands.MatchInfoContext
+
+Path       : C:\Users\mzj\Desktop\CTF\玄机刷题\指南\玄机刷题指南_合并源.md
+LineNumber : 1795
+Line       : 6. 已知回调偏移 0x1311，PIE base=fn-0x1311，并验证 base 处 ELF magic 为 7f454c46。
+Context    : Microsoft.PowerShell.Commands.MatchInfoContext
+
+Path       : C:\Users\mzj\Desktop\CTF\玄机刷题\指南\玄机刷题指南_合并源.md
+LineNumber : 1838
+Line       : | flag{755a1e3b44693d063ec0058572392668} | Held–Karp 出口访问顺序路线，一条 295 步路径 | 拒绝 |
+Context    : Microsoft.PowerShell.Commands.MatchInfoContext
+
+Path       : C:\Users\mzj\Desktop\CTF\玄机刷题\指南\玄机刷题指南_合并源.md
+LineNumber : 1855
+Line       : 玄机页面前台回执原文为“FLAG 正确~, 恭喜你完成此挑战~”；页面显示绿色“已完成”，步骤为 1/1。页面截图在 Comput
+             er Use 交互输出中展示，没有保存为本地图片。
+Context    : Microsoft.PowerShell.Commands.MatchInfoContext
+
+Path       : C:\Users\mzj\Desktop\CTF\玄机刷题\指南\玄机刷题指南_合并源.md
+LineNumber : 1874
+Line       : 先对两条记录中的 signed_json 原始 UTF-8 字节重算 SHA-256，结果分别等于数据库内 digest_hex，故记 z1、z2 的
+             摘要来源可信。两条记录曲线和 hash 均为 secp256r1 与 SHA-256；r 都是 67d6db4e0744fe60746c510d6938e64f4a893e
+             64e06b90c2030d1b981ec17d5e，而 s 与消息摘要不同。共同 nonce_tag 与共同 r 指向 ECDSA 随机数重用。
+Context    : Microsoft.PowerShell.Commands.MatchInfoContext
+
+Path       : C:\Users\mzj\Desktop\CTF\玄机刷题\指南\玄机刷题指南_合并源.md
+LineNumber : 1909
+Line       : 玄机页面前台回执原文为“FLAG 正确~, 恭喜你完成此挑战~”，页面显示绿色“已完成”、步骤 1/1，完成进度从 27% 变为
+              33%。Computer Use 截图只在交互输出中展示，未保存为本地图片。
+Context    : Microsoft.PowerShell.Commands.MatchInfoContext
+
+Path       : C:\Users\mzj\Desktop\CTF\玄机刷题\指南\玄机刷题指南_合并源.md
+LineNumber : 1927
+Line       : 日志内普通爬虫、404、目录探测很多，不能仅凭出现 select 就判定为有效 SQL 注入。先筛选 database、information
+             _schema、union、select、sleep 等关键词，再按同一攻击源和时间把请求串起来。重点流量来自 192.168.1.100 对 /t
+             est/login.php 的连续访问：
+Context    : Microsoft.PowerShell.Commands.MatchInfoContext
+
+Path       : C:\Users\mzj\Desktop\CTF\玄机刷题\指南\玄机刷题指南_合并源.md
+LineNumber : 1929
+Line       : 1. 第 3608 行以 UNION 查询 INFORMATION_SCHEMA.TABLES，条件使用十六进制 schema 值 0x6c6f67696e5f6462。
+Context    : Microsoft.PowerShell.Commands.MatchInfoContext
+
+Path       : C:\Users\mzj\Desktop\CTF\玄机刷题\指南\玄机刷题指南_合并源.md
+LineNumber : 1942
+Line       : 玄机题目页前台提交后显示“已完成”、步骤 1/1，平台记录明确为 ACCEPTED。截图在 Computer Use 交互输出中展示，
+             未保存为本地图片。
+Context    : Microsoft.PowerShell.Commands.MatchInfoContext
+
+Path       : C:\Users\mzj\Desktop\CTF\玄机刷题\指南\玄机刷题指南_合并源.md
+LineNumber : 1969
+Line       : 玄机页面提交后显示绿色“已完成”、步骤 1/1；平台记录明确为 ACCEPTED。截图仅在 Computer Use 交互输出展示，没
+             有保存为本地图片。
+Context    : Microsoft.PowerShell.Commands.MatchInfoContext
+
+Path       : C:\Users\mzj\Desktop\CTF\玄机刷题\指南\玄机刷题指南_合并源.md
+LineNumber : 2000
+Line       : 该最终值提交玄机后返回 FLAG 正确，题目页显示“已完成”。截图仅在交互输出展示，没有保存为本地图片。
+Context    : Microsoft.PowerShell.Commands.MatchInfoContext
+
+Path       : C:\Users\mzj\Desktop\CTF\玄机刷题\指南\玄机刷题指南_合并源.md
+LineNumber : 2014
+Line       : 本节只纳入已取得玄机平台接受回执的题目。第六批 #530、#531、第七批 #559、#588，以及第八批 #549、#558 均已通
+             过；#532、#561、#562 尚无平台完成回执，继续留在待解决资料中，不列作已完成题。
+Context    : Microsoft.PowerShell.Commands.MatchInfoContext
+
+Path       : C:\Users\mzj\Desktop\CTF\玄机刷题\指南\玄机刷题指南_合并源.md
+LineNumber : 2019
+Line       : - 平台验证：候选 flag{2db163a20ecc0e6a27ce588669211a2e} 前台提交后，页面显示“已完成”，步骤 1/1。
+Context    : Microsoft.PowerShell.Commands.MatchInfoContext
+
+Path       : C:\Users\mzj\Desktop\CTF\玄机刷题\指南\玄机刷题指南_合并源.md
+LineNumber : 2028
+Line       : - 平台验证：候选 flag{b80ebf0f0e210ad73664bdd19c16387e} 前台提交后显示“FLAG 正确，恭喜你完成此挑战”；详情
+             页标记“已完成”，步骤 1/1。
+Context    : Microsoft.PowerShell.Commands.MatchInfoContext
+
+Path       : C:\Users\mzj\Desktop\CTF\玄机刷题\指南\玄机刷题指南_合并源.md
+LineNumber : 2034
+Line       : - 复现命令（在题目目录执行）：
+Context    : Microsoft.PowerShell.Commands.MatchInfoContext
+
+Path       : C:\Users\mzj\Desktop\CTF\玄机刷题\指南\玄机刷题指南_合并源.md
+LineNumber : 2039
+Line       : - 完整分析、每一步推理、38 项输出、哈希与平台回执：题目资料\OpenHarmony_arkt_559\WP.md；脚本与逐条 transcr
+             ipt 位于该目录的 analysis 子目录。
+Context    : Microsoft.PowerShell.Commands.MatchInfoContext
+
+Path       : C:\Users\mzj\Desktop\CTF\玄机刷题\指南\玄机刷题指南_合并源.md
+LineNumber : 2044
+Line       : - 平台验证：flag{9e76e57b-a921-4cbc-8} 前台提交后，详情页显示已完成，步骤 1/1，进度 100%。
+Context    : Microsoft.PowerShell.Commands.MatchInfoContext
+
+Path       : C:\Users\mzj\Desktop\CTF\玄机刷题\指南\玄机刷题指南_合并源.md
+LineNumber : 2048
+Line       : - 完整步骤、机器码依据、逐字节输出与复现脚本：题目资料\你若安好便是晴_531\wp.md；脚本为 analysis\decrypt_s
+             tatic.py，输出、符号与反汇编材料均在 analysis 子目录。
+Context    : Microsoft.PowerShell.Commands.MatchInfoContext
+
+Path       : C:\Users\mzj\Desktop\CTF\玄机刷题\指南\玄机刷题指南_合并源.md
+LineNumber : 2053
+Line       : - 平台验证：flag{ddddddssaaaaassdddssaa} 前台提交后显示“FLAG 正确，恭喜你完成此挑战”；题目详情页标记“已完
+             成”，步骤 1/1。
+Context    : Microsoft.PowerShell.Commands.MatchInfoContext
+
+Path       : C:\Users\mzj\Desktop\CTF\玄机刷题\指南\玄机刷题指南_合并源.md
+LineNumber : 2078
+Line       : - 全程未运行附件 EXE。完整反汇编证据、错误分支、逐步字节计算、复现脚本及 PowerShell 输出见 `题目资料/chall
+             enge_558/wp.md` 和其 `analysis` 子目录。
+Context    : Microsoft.PowerShell.Commands.MatchInfoContext
+
+Path       : C:\Users\mzj\Desktop\CTF\玄机刷题\指南\玄机刷题指南_合并源.md
+LineNumber : 2083
+Line       : - 平台验证：候选 `flag{vhl8XriruyiB2zeTLNc8pik29HJy7S2w0}` 在前台提交后，页面显示“FLAG 正确，恭喜你完成此
+             挑战”，详情页为已完成、步骤 1/1。
+Context    : Microsoft.PowerShell.Commands.MatchInfoContext
+
+Path       : C:\Users\mzj\Desktop\CTF\玄机刷题\指南\玄机刷题指南_合并源.md
+LineNumber : 2086
+Line       : - 未加载或运行 APK、DEX 或陌生 `.so`。完整 JNI/汇编证据、密钥派生、错误尝试、两个独立求解脚本及逐项输出见
+             `题目资料/ParlooChecker_549/wp.md` 和 `analysis` 子目录。
+Context    : Microsoft.PowerShell.Commands.MatchInfoContext
+
+Path       : C:\Users\mzj\Desktop\CTF\玄机刷题\指南\玄机刷题指南_合并源.md
+LineNumber : 2092
+Line       : - 平台 ID：547；REVERSE；免费、中等。候选 `flag{bdm23Ne6ljz5O}` 由附件目标字节逆算，并经正向变换逐字节匹配
+              19 字节常量；玄机前台提交后显示“FLAG 正确~，恭喜你完成此挑战~”，页面为“已完成”、步骤 1/1。
+Context    : Microsoft.PowerShell.Commands.MatchInfoContext
+
+Path       : C:\Users\mzj\Desktop\CTF\玄机刷题\指南\玄机刷题指南_合并源.md
+LineNumber : 2098
+Line       : - 平台 ID：548；REVERSE；免费、中等。玄机前台提交 `flag{bg92Oejpfgl}` 后显示“FLAG 正确~，恭喜你完成此挑战~
+             ”，题目“已完成”、步骤 1/1。
+Context    : Microsoft.PowerShell.Commands.MatchInfoContext
+
+Path       : C:\Users\mzj\Desktop\CTF\玄机刷题\指南\玄机刷题指南_合并源.md
+LineNumber : 2100
+Line       : - 附件没有运行；Go PRNG 状态、函数反汇编、目标数据映射与复现脚本见 `题目资料/PaluGOGOGO_548/analysis/`，完
+             整 WP 见同目录 `wp.md`。
+Context    : Microsoft.PowerShell.Commands.MatchInfoContext
+
+Path       : C:\Users\mzj\Desktop\CTF\玄机刷题\指南\玄机刷题指南_合并源.md
+LineNumber : 2102
+Line       : ### #546 第二届 Parloo 杯 PaluArray（仍未解决）
+Context    : Microsoft.PowerShell.Commands.MatchInfoContext
+
+Path       : C:\Users\mzj\Desktop\CTF\玄机刷题\指南\玄机刷题指南_合并源.md
+LineNumber : 2104
+Line       : - 平台 ID：546；REVERSE；免费、中等。独立静态分析确认实际字符表为 `Palu_996!?`（起始 RVA `0x5e68`），目标
+             索引串为 `1145141919810`；可逆得输入 `aa_9a_a?a?!aP`，MD5 为 `1b501325fc96d5a845cbdd2ba4f01cd7`。
+Context    : Microsoft.PowerShell.Commands.MatchInfoContext
+
+Path       : C:\Users\mzj\Desktop\CTF\玄机刷题\指南\玄机刷题指南_合并源.md
+LineNumber : 2105
+Line       : - 按静态显示包装，候选 `palu{1b501325fc96d5a845cbdd2ba4f01cd7}` 已在玄机前台提交，但页面返回“FLAG 不正确”
+             。因此这项本地计算不能算答案，未重复盲交；平台配置或 flag 格式仍待有证据地排查。旧字符表候选也曾被拒绝。完
+             整审计和失败修正见 `题目资料/PaluArray_546/wp.md` 与 `analysis` 子目录；前台回执见 `记录/提交核验_20260929
+             _第九批.md`。
+Context    : Microsoft.PowerShell.Commands.MatchInfoContext
+
+Path       : C:\Users\mzj\Desktop\CTF\玄机刷题\指南\玄机刷题指南_合并源.md
+LineNumber : 2109
+Line       : #532《人生自古谁无死》的两个已提交候选均无平台完成回执，需新的独立证据后再决定；#546《PaluArray》的静态候
+             选被平台明确拒绝，需解释二进制推导与平台 flag 不一致的原因；#561《第一届OpenHarmony secret》的 pattern 闭
+             环已复核，但题内 MD5 示例与明文公式不符，现有候选也未获平台确认；#562 checker 的 ZIP 与 checker.exe 副本哈
+             希一致，静态复核仍得到已被拒绝的同一候选；#541《ezBase》本批静态逆向候选被前台平台拒绝，且附件比较常量存在
+             填充分支歧义，暂不盲目重交。这五题都不计入已完成总数。
+Context    : Microsoft.PowerShell.Commands.MatchInfoContext
+
+Path       : C:\Users\mzj\Desktop\CTF\玄机刷题\指南\玄机刷题指南_合并源.md
+LineNumber : 2113
+Line       : 本批从平台“全部”列表中筛选并分析了三道免费、中等 REVERSE 题。本指南只把取得平台接受回执的题目纳入已完成题
+             解；本批其余候选和平台状态保存在单独的题目资料与提交记录中，待解决后再加入。
+Context    : Microsoft.PowerShell.Commands.MatchInfoContext
+
+Path       : C:\Users\mzj\Desktop\CTF\玄机刷题\指南\玄机刷题指南_合并源.md
+LineNumber : 2117
+Line       : ELF 为静态链接 x86-64。反汇编还原每个 8 字节块的加密流程：按字节 XOR `MMXEncod`，每个 16 位字交换高低字节
+             ，把小端 64 位值循环左移一位，最后逐字节加 key 并模 256。逆变换完整恢复 32 字节主体；`encode.dat` 尾部四字
+             节没有经过块变换，其中 `i}` 属于 flag，末尾 LF 是文件换行。候选为 `flag{66eec38e269e0e267849a1f7b708i}`。
+             重新正向处理后 36 字节与附件完全一致，平台显示“已完成”、步骤 `1/1`。注意候选本体不包含换行。完整逐步 WP、
+             反汇编、块级 trace 与终端记录在 `题目资料/批次10_20260929/552_butterfly/`。
+Context    : Microsoft.PowerShell.Commands.MatchInfoContext
+
+Path       : C:\Users\mzj\Desktop\CTF\玄机刷题\指南\玄机刷题指南_合并源.md
+LineNumber : 2121
+Line       : 本批在玄机平台“全部”题目列表中核对免费、中等 REVERSE 项。#539「湘岚杯cryptor」和 #540「湘岚杯maybesignin」
+             取得前台正确回执；#541「ezBase」的候选被拒绝，因此未放入已完成表。
+Context    : Microsoft.PowerShell.Commands.MatchInfoContext
+
+Path       : C:\Users\mzj\Desktop\CTF\玄机刷题\指南\玄机刷题指南_合并源.md
+LineNumber : 2128
+Line       : - 首轮尝试 ECB / PKCS#7 未得到有效明文；缺少 PyCryptodome、PowerShell/.NET API 差异和中文路径工具调用问题
+             均保留在命令记录中。完整常量定位、错误分支、命令输出和复现代码见 题目资料/批次11_20260929/539_cryptor/wp.m
+             d 及其 analysis 子目录。
+Context    : Microsoft.PowerShell.Commands.MatchInfoContext
+
+Path       : C:\Users\mzj\Desktop\CTF\玄机刷题\指南\玄机刷题指南_合并源.md
+LineNumber : 2141
+Line       : ## 第十二批：商丘师范学院第四届网络安全及信息对抗大赛 REVERSE
+Context    : Microsoft.PowerShell.Commands.MatchInfoContext
+
+Path       : C:\Users\mzj\Desktop\CTF\玄机刷题\指南\玄机刷题指南_合并源.md
+LineNumber : 2143
+Line       : 本批从平台“全部”题目列表中选取三道免费、中等 REVERSE 题。主指南只收录已取得平台接受回执的解题；#535、#536
+             已通过平台验证，#534 仍未解决，留在独立资料与核验记录中，不计入完成数。
+Context    : Microsoft.PowerShell.Commands.MatchInfoContext
+
+Path       : C:\Users\mzj\Desktop\CTF\玄机刷题\指南\玄机刷题指南_合并源.md
+LineNumber : 2152
+Line       : - 中文逐步 WP、附件、CArchive/字节码提取物、求解器与完整命令/输出记录：`题目资料/批次12_20260929/535_往事
+             暗沉不可追/`；本批三题选择和平台核验记录：`记录/批次_20260929_第十二批题目确认.md`、`记录/提交核验_2026092
+             9_第十二批.md`。
+Context    : Microsoft.PowerShell.Commands.MatchInfoContext
+
+Path       : C:\Users\mzj\Desktop\CTF\玄机刷题\指南\玄机刷题指南_合并源.md
+LineNumber : 2155
+Line       : - 平台 ID：536；REVERSE；免费、中等。修正候选 `flag{f8f06f2b-60ee-43ca-8e3a-1048042edddd}` 前台提交后被接
+             受，详情页标记“已完成”、步骤 1/1，并显示一血。
+Context    : Microsoft.PowerShell.Commands.MatchInfoContext
+
+Path       : C:\Users\mzj\Desktop\CTF\玄机刷题\指南\玄机刷题指南_合并源.md
+LineNumber : 2159
+Line       : - APK 未安装、未运行。附件哈希、DEX 结构、反汇编、逐字符结果、错误分支、前台提交回执和完整命令输出：`题目
+             资料/批次12_20260929/536_遇事不决可问春风/`；三题确认和平台验收：`记录/批次_20260929_第十二批题目确认.md`
+             、`记录/提交核验_20260929_第十二批.md`。
+Context    : Microsoft.PowerShell.Commands.MatchInfoContext
+
+Path       : C:\Users\mzj\Desktop\CTF\玄机刷题\指南\玄机刷题指南_合并源.md
+LineNumber : 2177
+Line       : - 第九批 #547/#548 接受、#546 拒绝的前台逐步记录：记录/提交核验_20260929_第九批.md；题目选择与附件哈希：记
+             录/批次_20260929_第九批题目确认.md；各题完整 WP 和静态分析均在题目资料/PaluFlat_547、PaluGOGOGO_548、PaluA
+             rray_546。
+Context    : Microsoft.PowerShell.Commands.MatchInfoContext
+
+Path       : C:\Users\mzj\Desktop\CTF\玄机刷题\README.md
+LineNumber : 3
+Line       : 本项目归档玄机平台刷题指南、逐题记录、原始附件和用于复核的分析资料。归档动作只复制文件，原始 Downloads、WS
+             L 目录和 CTF 父目录的文件未移动或删除。
+Context    : Microsoft.PowerShell.Commands.MatchInfoContext
+
+Path       : C:\Users\mzj\Desktop\CTF\玄机刷题\README.md
+LineNumber : 5
+Line       : ## 目录结构
+Context    : Microsoft.PowerShell.Commands.MatchInfoContext
+
+Path       : C:\Users\mzj\Desktop\CTF\玄机刷题\README.md
+LineNumber : 11
+Line       : - `题目资料/WSL平台归档/pwn-lab/platform/`：WSL 平台题工作目录的本地副本。
+Context    : Microsoft.PowerShell.Commands.MatchInfoContext
+
+Path       : C:\Users\mzj\Desktop\CTF\玄机刷题\README.md
+LineNumber : 19
+Line       : 《指南/玄机刷题指南_合并源.md》是状态与逐题 WP 的主索引；手册已同步列出 46 道平台接受题；平台当前已接受总
+             数为 46 道；旧版 README 的 10 题统计已废止。第十一批的逐题验收状态见 `记录/提交核验_20260929_第十一批.md`
+             。独立 WP 和过程补充保存在 `记录/`。
+Context    : Microsoft.PowerShell.Commands.MatchInfoContext
+
+Path       : C:\Users\mzj\Desktop\CTF\玄机刷题\README.md
+LineNumber : 20
+Line       : 平台验收记录在 `记录/提交核验_20260929_第六批.md`、`记录/批次_20260929_第七批平台核对.md`、`记录/提交核验_
+             20260929_第八批.md` 和 `记录/提交核验_20260929_第九批.md`；#562 的拒绝原因静态复核见其 `analysis/` 子目录
+             。未通过平台的题目不计入已完成总数。
+Context    : Microsoft.PowerShell.Commands.MatchInfoContext
+
+Path       : C:\Users\mzj\Desktop\CTF\玄机刷题\README.md
+LineNumber : 21
+Line       : 第九批 #547、#548 已由前台平台接受；#546 的候选已被拒绝，仍待复核。三题详情、附件哈希与任务范围见 `记录/批
+             次_20260929_第九批题目确认.md`，提交过程与回执见第九批平台验收记录。第十批从“全部”列表选出的免费中等题 #55
+             2、#543、#542 中，#552 已接受，#543、#542 的候选被平台拒绝；提交过程与状态见 `记录/提交核验_20260929_第十
+             批.md`，附件副本与哈希见 `记录/批次_20260929_第十批题目确认.md` 和 `记录/第十批_附件归档_20260929.txt`。两
+             道未解决题不计入完成数，静态 WP 保存在各自题目资料目录，等待新证据后再纳入已完成题解。
+Context    : Microsoft.PowerShell.Commands.MatchInfoContext
+
+Path       : C:\Users\mzj\Desktop\CTF\玄机刷题\README.md
+LineNumber : 29
+Line       : 历史终端记录保留当时实际输入的原始路径，避免改写操作证据；所引用的外部来源文件已在本项目相应目录留存副本。
+             附件若在项目内已有相同 SHA-256，则不重复占用空间，映射记录在 `题目资料/原始下载附件/manifest.csv`。账户凭
+             据不写入项目记录。
+Context    : Microsoft.PowerShell.Commands.MatchInfoContext
+
+Path       : C:\Users\mzj\Desktop\CTF\玄机刷题\README.md
+LineNumber : 31
+Line       : 第十二批从“全部”列表选出三道免费、中等 REVERSE 题：#535「往事暗沉不可追」和 #536「遇事不决，可问春风」均通
+             过前台 FLAG 验证，步骤 1/1 并取得一血；平台已完成总数更新为 46。#534「天下谁人不识君」的候选未获接受，仍未
+             解决，不计入已完成数。三题附件、逐题 WP、分析产物和命令输出保存在 题目资料/批次12_20260929/；选择与平台回
+             执见 记录/批次_20260929_第十二批题目确认.md、记录/提交核验_20260929_第十二批.md。
+Context    : Microsoft.PowerShell.Commands.MatchInfoContext
+
+**********************
+PowerShell transcript end
+End time: 20260929145803
+**********************
+**********************
+PowerShell transcript start
+Start time: 20260929145821
+Username: DESKTOP-412KTAR\mzj
+RunAs User: DESKTOP-412KTAR\mzj
+Configuration Name: 
+Machine: DESKTOP-412KTAR (Microsoft Windows NT 10.0.26200.0)
+Host Application: C:\Users\mzj\.cache\codex-runtimes\codex-primary-runtime\dependencies\native\powershell\pwsh.dll -Command try { [Console]::OutputEncoding=[System.Text.Encoding]::UTF8 } catch {}
+$ErrorActionPreference='Stop'
+$project='C:\Users\mzj\Desktop\CTF\玄机刷题'
+$record=Join-Path $project '记录\批次13_提交核验_20260929.txt'
+Start-Transcript -Path $record -Append
+$guide=Join-Path $project '指南\玄机刷题指南_合并源.md'
+$readme=Join-Path $project 'README.md'
+Write-Output 'COMMAND> guide title/summary/table lines 1-95'
+Get-Content -LiteralPath $guide -Encoding utf8 | Select-Object -First 95
+Write-Output 'COMMAND> guide final batch sections lines 2000-end'
+$g=Get-Content -LiteralPath $guide -Encoding utf8
+for($i=1995;$i -lt $g.Count;$i++){ '{0}: {1}' -f ($i+1),$g[$i] }
+Write-Output 'COMMAND> complete root README'
+Get-Content -LiteralPath $readme -Encoding utf8
+Stop-Transcript
+Process ID: 34720
+PSVersion: 7.6.5
+PSEdition: Core
+GitCommitId: 7.6.5
+OS: Microsoft Windows 10.0.26200
+Platform: Win32NT
+PSCompatibleVersions: 1.0, 2.0, 3.0, 4.0, 5.0, 5.1, 6.0, 7.0
+PSRemotingProtocolVersion: 2.4
+SerializationVersion: 1.1.0.1
+WSManStackVersion: 3.0
+**********************
+Transcript started, output file is C:\Users\mzj\Desktop\CTF\玄机刷题\记录\批次13_提交核验_20260929.txt
+COMMAND> guide title/summary/table lines 1-95
+---
+title: "玄机平台 CTF 刷题指南"
+author: "解题过程记录与完整 Writeup"
+date: "2026-09-29"
+documentclass: ctexbook
+classoption:
+  - UTF8
+  - 11pt
+  - oneside
+  - openany
+---
+
+# 阅读说明与证据口径
+
+本指南原记录了玄机平台“已完成”筛选中的 28 道题。此后 #367、#450、#451、#520、#551、#530、#531、#559、#588、#549、#558、#547、#548、#552、#539、#540 共 16 道新题均取得平台接受回执，手册现收录 44 道已完成题。解题状态、flag 与过程分别以平台回执、附件分析和命令输出为证；不把完成徽标扩写成没有证据的步骤细节。
+
+此前只盘点了 `题目资料` 子目录，漏掉了 `C:\Users\mzj\Desktop\CTF\labs\platform`、`figures\raw`、WSL 下的 `~/pwn-lab/platform`、旧终端记录以及 `D:\Downloads` 中的附件。本轮已将这些位置纳入核查，并为原有 28 道平台已完成题和后续新增 14 道已验证题建立逐题章节。每章分别标明题目附件、可复现脚本、旧终端日志、平台公开 Writeup、平台完成徽标和本轮远程输出来自哪里；“已完成”徽标不会被写成某个具体 flag 的提交回执。现存证据仍不完整的题会列出缺失项，不补造历史输入、输出或提交结果。
+
+各题攻关、Pixel 补查以及手册整理过程均按现有文件保留命令记录，路径见末尾“终端记录与复现文件”。命令记录按实际执行顺序保存；未进入 transcript 的早期交互会在逐题记录中标注为回溯补录。为保护账户，记录内用户名和密码以占位符脱敏，其余解题命令与输出保留。页面状态按前台实际可见文字记录；只有明确存在的截图文件才列出路径，未保存到文件的会话截图不声称为本地图片。
+
+# 进度总览
+
+## 平台已完成（46 道）
+
+题目和难度按玄机平台“已完成”筛选页记录。ID 仅在指南或本地附件中已有确证时填写；“—”表示尚未从题目详情页核对 ID。费用不在本次列表中显示，因此新补条目不推断免费或收费。
+
+### 题目一览表
+
+| ID | 题目 | 类型 / 难度 | 状态与过程资料 |
+|---:|---|---|---|
+| 591 | 2026安网杯-Poisoned Samples | AI / 中等 | ZIP、求解器及本地复现输出齐全 |
+| 590 | 2026安网杯-Prompt Trace | AI / 中等 | 平台已完成；本指南有逐步记录 |
+| 589 | 2026安网杯-闸机票根 | REVERSE / 中等 | ELF 附件、RC4 求解器及本地复现输出齐全 |
+| 588 | 2026安网杯-密钥生成审计 | Crypto / 困难 | 平台已接受；MT19937 状态恢复、AES 解密及完整复现记录齐全 |
+| 587 | 2026安网杯-联号回执 | Crypto / 中等 | ZIP 附件、RSA 求解器及本地复现输出齐全 |
+| 586 | 2026安网杯-五格电文 | Crypto / 中等 | ZIP 附件、编码器逆变换及本地复现输出齐全 |
+| 585 | 2026安网杯-班次邮戳 | MISC / 中等 | 平台已完成；本指南有逐步记录 |
+| 584 | 2026安网杯-可疑流量分析 | MISC / 中等 | 平台已完成；本指南有逐步记录 |
+| 583 | 2026安网杯-像素囚笼1 | MISC / 简单 | 平台已完成；本指南有逐步记录 |
+| 581 | 2026安网杯-外泄流量取证 | MISC / 中等 | PCAP 附件、提取器及本地复现输出齐全 |
+| 580 | 2026安网杯-Veiled Shell | MISC / 简单 | 平台已完成；本指南有逐步记录 |
+| — | 商丘师范学院第四届网络安全及信息对抗大赛（校外赛）不劳春风解我忧 | REVERSE / 中等 | 样本、XXTEA 解密/重加密脚本和候选输出齐全；无原平台回执 |
+| — | 商丘师范学院第四届网络安全及信息对抗大赛 ezRe | REVERSE / 中等 | PyInstaller 样本和 marshal 字节码齐全；有 Base64 候选，无独立程序验证/平台回执 |
+| 564 | 第一届启航杯 rainbow | REVERSE / 中等 | 平台筛选显示已完成；本地有分析记录与复现脚本 |
+| 563 | 第一届启航杯 note | REVERSE / 中等 | 平台筛选显示已完成；本地有终端记录和复现材料 |
+| 559 | 第一届 OpenHarmony arkt | REVERSE / 中等 | 平台已接受；HAP/ABC 溯源、双实现复现及 38 项正向校验齐全 |
+| 558 | 第三届黄河流域公安院校网络安全技能挑战赛 R | REVERSE / 中等 | 平台已接受；Rust PE 静态逆向、流算法复算及往返校验齐全 |
+| 557 | 第三届黄河流域公安院校网络安全技能挑战赛 qgd | REVERSE / 中等 | ZIP、双分支求解器、SHA-256 校验及本地输出齐全 |
+| 556 | 第三届黄河流域公安院校网络安全技能挑战赛 go_for_it | REVERSE / 中等 | 平台已完成；本地有分析输出、脚本和终端记录 |
+| 555 | 第三届黄河流域公安院校网络安全技能挑战赛 Victory_Melody | REVERSE / 中等 | 平台已完成；本指南有逐步记录 |
+| 554 | 第九届“强网杯”全国网络安全挑战赛 tradre | REVERSE / 中等 | 平台已完成；本指南有逐步记录 |
+| 552 | 第九届“强网杯”全国网络安全挑战赛 Butterfly | REVERSE / 中等 | 平台已接受；8 字节块变换逆算、36 字节正向闭环与完整命令记录齐全 |
+| 551 | 第二届 Parloo 杯「帕鲁迷宫」 | REVERSE / 中等 | 本批平台已验证；完整路线、平局分析与复放记录齐全 |
+| 550 | 第二届 Parloo 杯 PositionalXOR | REVERSE / 中等 | 平台已完成；本指南有逐步记录 |
+| 549 | 第二届 Parloo 杯 ParlooChecker | REVERSE / 中等 | 平台已接受；APK/native 静态逆向、CBC 重加密验证齐全 |
+| 548 | 第二届 Parloo 杯 PaluGOGOGO | REVERSE / 中等 | 平台已接受；Go math/rand 状态恢复、常量逆变换及 84 字节正向闭环齐全 |
+| 547 | 第二届 Parloo 杯 RE PaluFlat | REVERSE / 中等 | 平台已接受；变换状态机逆算及目标闭环齐全；附件 NUL/strlen 矛盾另有说明 |
+| 540 | 湘岚杯maybesignin | REVERSE / 中等 | 平台已接受；SM4 静态逆向、Python 与 OpenSSL 独立解密及复加密验证齐全 |
+| 539 | 湘岚杯cryptor | REVERSE / 中等 | 平台已接受；Cython 扩展静态分析、AES-CBC 双实现复核及完整命令记录齐全 |
+| 535 | 商丘师范学院第四届网络安全及信息对抗大赛 往事暗沉不可追 | REVERSE / 中等 | 平台已接受；PyInstaller/Python 3.10 字节码静态解析、逐字节 XOR 复核及平台一血 |
+| 536 | 商丘师范学院第四届网络安全及信息对抗大赛 遇事不决，可问春风 | REVERSE / 中等 | 平台已接受；DEX XOR 逆向、opcode 独立复核及平台一血 |
+| 531 | 商丘师范学院第四届网络安全及信息对抗大赛 你若安好便是晴 | REVERSE / 中等 | 平台已接受；TEA 解密与重加密回验及题目附件齐全 |
+| 530 | 商丘师范学院第四届网络安全及信息对抗大赛 慕然回首，那人却在灯火阑珊处 | REVERSE / 中等 | 平台已接受；迷宫 BFS、唯一最短路和题目附件齐全 |
+| 528 | 商丘师范学院第四届网络安全及信息对抗大赛 即随本心 | REVERSE / 简单 | 平台已完成；本指南有逐步记录 |
+| 520 | 第二届 CCF 智能汽车大赛 Digital Key UWB | Crypto / 中等 | 本批平台已验证；签名恢复、SM4 解密和重加密闭环齐全 |
+| 514 | Ancient-Recall-HHB2026 | PWN / 中等 | WSL 附件、完整利用脚本和阶段日志齐全；最终 FLAG 输出缺失 |
+| 451 | 2026CCF-被入侵的数据库 | 应急响应 / 中等 | 本批平台已验证；日志枚举、hex 解码和提交回执齐全 |
+| 450 | 2026CCF-Sql注入的应急排查 | 应急响应 / 中等 | 本批平台已验证；唯一外带请求和 URL 解码过程齐全 |
+| 442 | Redis未授权导致远程代码执行 | 渗透 / 简单 | 玄机平台公开 Writeup 可读；没有本地附件/当年操作日志 |
+| 428 | webmin未授权远程代码执行漏洞 | 渗透 / 入门 | 免费实例现场确认 1.920 并取得 `/root/flag.txt` 响应；平台原已完成 |
+| 358 | 2025鹏城杯-babyRSA | Crypto / 中等 | 平台已完成；本指南有逐步记录 |
+| 367 | 第三届“长城杯”初赛-EzFlag | Crypto / 中等 | 本批平台已验证；ELF 静态分析、逐字符复算及排版纠错齐全 |
+| 296 | pwn-ezpwn | PWN / 简单 | 附件和利用源码齐全；缺目标地址/端口、实际输出及 flag |
+| 286 | 第九届 XCTF 国际网络攻防联赛总决赛-Tch3s | Crypto / 极难 | 平台已完成；本指南有逐步记录 |
+| — | 第十八届 CISCN 决赛 CTF-车联网安全 mqtt | PWN / 简单 | 远程终端日志记录 TOCTOU 利用和 FLAG 回显；题目 ID 未从本地证据确认 |
+| 81 | 2024铁人三项决赛 CTFRE-crazyaes | REVERSE / 极难 | 平台已完成；本指南有逐步记录 |
+
+**统计：本指南原收录 28 道，后续新增的 #367、#450、#451、#520、#551、#530、#531、#559、#588、#549、#558、#547、#548、#552、#539、#540 均有逐题平台接受回执，当前共 44 道。现有证据可给出 42 道题的 flag 候选或公开 Writeup 结果；Ancient-Recall 与 pwn-ezpwn 的最终 flag 输出仍缺失。#541 ezBase 与 #546 PaluArray 的新候选均被平台拒绝，不计入已完成总数。旧题若只有平台完成徽标或离线候选，仍与具体 flag 的提交回执分开标注。**
+
+### 资料找回与证据边界
+
+- 清理终端记录显示此前只移除了 TeX 辅助文件、重复 DEX/缓存和空临时目录；没有删掉这些题目附件。遗漏来自早期盘点范围太窄，而不是清理记录中有删题证据。
+- 题目材料主要分布在 `labs\platform\attachments`、`玄机刷题\题目资料`、`figures\raw`、WSL `~/pwn-lab/platform`、`记录` 与 `D:\Downloads`。本指南后续章节按这些真实来源逐题交叉核验。
+- Ancient-Recall #514 与 pwn-ezpwn #296 有可读利用代码，但保存的运行结果不含最终 flag；恢复它们需要可用的靶场地址/端口或完整历史输出，本指南不会把平台徽标当成缺失输出。
+- Redis #442 的利用链和候选 flag 来自玄机平台公开 Writeup；Webmin #428 是本轮通过免费靶场重新验证并取得 HTTP 返回值。二者均与原始历史终端记录分开标注。
+- ezRe、rainbow、note、go_for_it 和“不劳春风解我忧”保留离线候选与对应代码/日志；旧终端记录或当前题目页未能确认同一串候选当时的提交回执，相关表述严格限定为“本地解出候选”或“平台完成徽标”。
+
+# 刷题次序与复盘方法
+
+已通过题目按简单到难的顺序学习：先做简单 MISC 和 REVERSE，再做中等 AI、图像取证、PCAP 和 RSA，最后处理 Crypto / REVERSE 极难题。对每题都先核实类型、难度和费用，再下载附件、记录哈希、静态检查格式与内容，形成能被输出验证的假设，最后才在平台提交。
+
+复盘时重点追问：
+1. 题目真正给了什么材料、要验证什么结果？
+2. 附件格式、路径、编码、区段映射是否被独立确认？
+3. 推理依赖的每条规则都能否在题目数据或程序代码中找到证据？
+COMMAND> guide final batch sections lines 2000-end
+1996: 原始 32 字符串为 106326741d21909f2914769f60219a24。题目程序在字符下标 7、12、17、22 后显示连字符。第一次脚本逐次插入连字符，导致之前插入改变了后续索引，日志中出现了错误中间结果 flag{10632674-1d21-909f-2914-769f60219a24}。修正后从原始字符串一次性生成分组，得到：
+1997:
+1998:     flag{10632674-1d219-09f29-14769-f60219a24}
+1999:
+2000: 该最终值提交玄机后返回 FLAG 正确，题目页显示“已完成”。截图仅在交互输出展示，没有保存为本地图片。
+2001:
+2002: ### 附件、复算源码和日志
+2003:
+2004: - 原始命令、ELF 头、反汇编、32 轮逐字符表、排版纠错和平台提交：记录/新题批次_367_分析.txt
+2005: - 求解器：题目资料/EzFlag_367/solve_ezflag.py
+2006: - 附件：题目资料/EzFlag_367/EzFlag
+2007:
+2008:
+2009:
+2010:
+2011:
+2012: # 第六至第八批：平台已验证题目
+2013:
+2014: 本节只纳入已取得玄机平台接受回执的题目。第六批 #530、#531、第七批 #559、#588，以及第八批 #549、#558 均已通过；#532、#561、#562 尚无平台完成回执，继续留在待解决资料中，不列作已完成题。
+2015:
+2016: ## #588 2026安网杯-密钥生成审计
+2017:
+2018: - 平台 ID：588；类别 Crypto；难度困难；免费。
+2019: - 平台验证：候选 flag{2db163a20ecc0e6a27ce588669211a2e} 前台提交后，页面显示“已完成”，步骤 1/1。
+2020: - 题目给出 MT19937 连续输出的前 624 个 32 位随机数。MT19937 的 temper 由可逆的移位和掩码组成；逐项逆 temper 可重建状态，并用固定种子的 CPython 克隆器自测后预测接下来的四个 32 位值。
+2021: - 将预测输出按题目生成逻辑拼接为 16 字节 AES 密钥，读取附件中的 48 字节密文，以 AES-128-ECB 解密。解密末尾得到十个连续的 0x0A，满足 PKCS#7 填充；去填充后得到 38 字节 ASCII flag。
+2022: - 闭环校验：将 flag 重新按 PKCS#7 填充并用同一 AES 密钥加密，结果与附件原始密文逐字节相同。
+2023: - 完整命令、输出、附件 SHA-256、MT 状态恢复、AES 解密及平台验收记录：题目资料\密钥生成审计_588\wp.md。复现脚本为 analysis\solve_588.py 和 analysis\decrypt_588.ps1；运行 transcript 保存在 analysis\session_transcript.txt。
+2024:
+2025: ## #559 第一届 OpenHarmony arkt
+2026:
+2027: - 平台 ID：559；类别 REVERSE；难度中等。
+2028: - 平台验证：候选 flag{b80ebf0f0e210ad73664bdd19c16387e} 前台提交后显示“FLAG 正确，恭喜你完成此挑战”；详情页标记“已完成”，步骤 1/1。
+2029: - 附件链：原始 ZIP 中的 task_5.hap 与归档 HAP SHA-256 一致；HAP 中 ets/modules.abc 与解包文件逐字节一致。先验证来源，避免分析到非题目附件。
+2030: - 字节码定位：从 ABC 头部索引定位 LiteralArray 17，偏移 0x265a。数组头的 76 个 literal slots 实际由 38 组 STRING tag/value 构成，按原顺序读取并保留重复项。
+2031: - 逆向流程：按自定义 Base64 字母表还原标准 Base64，再解出十进制 ASCII；逐项用 RSA 私钥运算 m = c^42583 mod 75067 恢复字节。公钥参数为 n=75067、e=7，且 75067=271×277、φ(n)=74520。
+2032: - 生命周期与流变换：页面首次显示时，key 从构造默认值 OHCTF2025 更新为 OHCTF2026。按字节码恢复自定义 KSA/PRGA，正向对字节执行模 256 加法，逆向则减去流字节，得到 38 字节候选。
+2033: - 闭环：按恢复的完整加密链重新处理候选，38 个 token 与 ABC 内目标逐项匹配；独立解析器也得到同一 flag。
+2034: - 复现命令（在题目目录执行）：
+2035:
+2036:         python -B -u .\analysis\reproduce_arkt559.py
+2037:         python -B -u .\analysis\agent_arkt559_independent_reproduce.py
+2038:
+2039: - 完整分析、每一步推理、38 项输出、哈希与平台回执：题目资料\OpenHarmony_arkt_559\WP.md；脚本与逐条 transcript 位于该目录的 analysis 子目录。
+2040:
+2041: ## #531 你若安好便是晴
+2042:
+2043: - 平台 ID：531；类别 REVERSE；难度中等。
+2044: - 平台验证：flag{9e76e57b-a921-4cbc-8} 前台提交后，详情页显示已完成，步骤 1/1，进度 100%。
+2045: - PE 中硬编码 64 个十六进制字符，按每两字符解成 32 字节，分为四个 8 字节块；四个 32 位密钥字为 0x12345678、0x87654321、0xabcdef98、0x98fedcba。
+2046: - 对每块按小端序执行标准 TEA 32 轮解密，delta 为 0x9E3779B9，初始 sum 为 0xC6EF3720。解密所得 32 字节末尾为六个 0x06；按末字节删去 PKCS#7 风格填充，再对剩余内容逐字节 XOR 0x16，得到上面的 flag。
+2047: - 把四块重新按 TEA 正向加密后与原始密文逐字节比较，完整匹配，核对了块端序、密钥和轮次。
+2048: - 完整步骤、机器码依据、逐字节输出与复现脚本：题目资料\你若安好便是晴_531\wp.md；脚本为 analysis\decrypt_static.py，输出、符号与反汇编材料均在 analysis 子目录。
+2049:
+2050: ## #530 慕然回首，那人却在灯火阑珊处
+2051:
+2052: - 平台 ID：530；类别 REVERSE；难度中等。
+2053: - 平台验证：flag{ddddddssaaaaassdddssaa} 前台提交后显示“FLAG 正确，恭喜你完成此挑战”；题目详情页标记“已完成”，步骤 1/1。
+2054: - 迷宫是 PE 的 .data 段中连续 100 字节，按 10 列读取：
+2055:
+2056:         S******###
+2057:         ######*###
+2058:         #******###
+2059:         #*########
+2060:         #****#####
+2061:         ####*#####
+2062:         ##E**#####
+2063:         ##########
+2064:         ##########
+2065:         ##########
+2066:
+2067: - 起点 S=(0,0)，终点 E=(6,2)。每个非墙格作为图节点，四方向相邻格作为边，用 BFS 搜索并统计最短路数量；唯一最短路长度为 22，路径为 ddddddssaaaaassdddssaa。
+2068: - 分段复核坐标：起点 (0,0)；d×6 到 (0,6)；s×2 到 (2,6)；a×5 到 (2,1)；s×2 到 (4,1)；d×3 到 (4,4)；s×2 到 (6,4)；a×2 到终点 (6,2)。
+2069: - 程序只在抵达 E 后打印 flag 格式提示，不自行比较 flag；最终候选由路径和提示格式推导，并由玄机平台前台接受。
+2070: - 完整 PE 字段、地址映射、控制流、逐步路径模拟、附件 SHA-256 与静态分析日志：题目资料\慕然回首_530\wp.md；求路脚本为 analysis\static_analyze.py。
+2071:
+2072: ## #558 第三届黄河流域公安院校网络安全技能挑战赛 R
+2073:
+2074: - 平台 ID：558；类别 REVERSE；难度中等；免费。
+2075: - 平台验证：候选 `flag{8a1c2a73c29b2}` 在前台提交后，页面显示“FLAG 正确，恭喜你完成此挑战”，步骤 1/1。
+2076: - 附件为 Rust 风格 x86-64 PE。静态追踪主逻辑发现程序先将 8 字节原始 key 按 `key[i] ^= i` 变换，再执行 256 轮 KSA、19 轮 PRGA；目标比较串共 19 字节。
+2077: - 从 PE 反汇编还原位置相关 XOR 的逆变换，逐字节恢复输入；用独立脚本从原始 key 开始正向重放全部 KSA/PRGA 和位置变换，得到的 19 字节结果与硬编码目标逐字节一致。
+2078: - 全程未运行附件 EXE。完整反汇编证据、错误分支、逐步字节计算、复现脚本及 PowerShell 输出见 `题目资料/challenge_558/wp.md` 和其 `analysis` 子目录。
+2079:
+2080: ## #549 第二届 Parloo 杯 ParlooChecker
+2081:
+2082: - 平台 ID：549；类别 REVERSE；难度中等；免费。
+2083: - 平台验证：候选 `flag{vhl8XriruyiB2zeTLNc8pik29HJy7S2w0}` 在前台提交后，页面显示“FLAG 正确，恭喜你完成此挑战”，详情页为已完成、步骤 1/1。
+2084: - 安全检查 ZIP 仅含指定 APK；静态确认 JNI 将 Java 字符串送入 native CBC 校验。分组密钥与 IV 由相同 RC4 密码分别解出；分组变换是每块 32 轮、累计值带 `key[round & 3] XOR round` 扰动的 XTEA 变体。
+2085: - 首次套用标准 XTEA 的固定 delta 得到非法填充，未提交。逐条对照汇编修正每轮增量后，PKCS#7 填充合法、输出满足 `flag{...}`，独立实现重新执行 CBC 加密并与附件目标 40 字节完全一致。
+2086: - 未加载或运行 APK、DEX 或陌生 `.so`。完整 JNI/汇编证据、密钥派生、错误尝试、两个独立求解脚本及逐项输出见 `题目资料/ParlooChecker_549/wp.md` 和 `analysis` 子目录。
+2087:
+2088: ## 第九批：PaluFlat、PaluGOGOGO 与 PaluArray
+2089:
+2090: ### #547 第二届 Parloo 杯 RE PaluFlat
+2091:
+2092: - 平台 ID：547；REVERSE；免费、中等。候选 `flag{bdm23Ne6ljz5O}` 由附件目标字节逆算，并经正向变换逐字节匹配 19 字节常量；玄机前台提交后显示“FLAG 正确~，恭喜你完成此挑战~”，页面为“已完成”、步骤 1/1。
+2093: - 输入校验函数依状态机执行 `x ^= key; x = ROL4(x); x = x - 0x55; x = ~x`。状态 0 的 key 指针选择以及状态 10、12、2、3、4 的转移还原后，重复 key 字节为 `p,l,l,t`。
+2094: - 附件的比较目标第 16 字节为 NUL；虽然目标和候选正向输出完全相同，`strlen(output)` 实际为 16，与代码要求 19 冲突。因此本地附件的成功分支不可达；平台接受回执是 flag 正确的最终依据，不能声称附件本地运行通过。ZIP、7z、PE 归档完整性及分块检查材料见 `题目资料/PaluFlat_547/analysis/`，逐步 WP 见 `题目资料/PaluFlat_547/wp.md`。
+2095:
+2096: ### #548 第二届 Parloo 杯 PaluGOGOGO
+2097:
+2098: - 平台 ID：548；REVERSE；免费、中等。玄机前台提交 `flag{bg92Oejpfgl}` 后显示“FLAG 正确~，恭喜你完成此挑战~”，题目“已完成”、步骤 1/1。
+2099: - `GetValue` 使用 Go `math/rand` 的 `Seed(996)`，10 次 `Intn(100)` 改写输入数组，再取 `Intn(2)` 选择 key。静态复现得 key=79。程序逐字符生成十六进制 token：`ord(ch)+79+(i mod 5)`，并以逗号连接；附件中 84 字节目标共 17 项。逐项逆算得到候选，再正向生成完整 84 字节串，与附件常量完全一致。
+2100: - 附件没有运行；Go PRNG 状态、函数反汇编、目标数据映射与复现脚本见 `题目资料/PaluGOGOGO_548/analysis/`，完整 WP 见同目录 `wp.md`。
+2101:
+2102: ### #546 第二届 Parloo 杯 PaluArray（仍未解决）
+2103:
+2104: - 平台 ID：546；REVERSE；免费、中等。独立静态分析确认实际字符表为 `Palu_996!?`（起始 RVA `0x5e68`），目标索引串为 `1145141919810`；可逆得输入 `aa_9a_a?a?!aP`，MD5 为 `1b501325fc96d5a845cbdd2ba4f01cd7`。
+2105: - 按静态显示包装，候选 `palu{1b501325fc96d5a845cbdd2ba4f01cd7}` 已在玄机前台提交，但页面返回“FLAG 不正确”。因此这项本地计算不能算答案，未重复盲交；平台配置或 flag 格式仍待有证据地排查。旧字符表候选也曾被拒绝。完整审计和失败修正见 `题目资料/PaluArray_546/wp.md` 与 `analysis` 子目录；前台回执见 `记录/提交核验_20260929_第九批.md`。
+2106:
+2107: ### 本批仍待解决
+2108:
+2109: #532《人生自古谁无死》的两个已提交候选均无平台完成回执，需新的独立证据后再决定；#546《PaluArray》的静态候选被平台明确拒绝，需解释二进制推导与平台 flag 不一致的原因；#561《第一届OpenHarmony secret》的 pattern 闭环已复核，但题内 MD5 示例与明文公式不符，现有候选也未获平台确认；#562 checker 的 ZIP 与 checker.exe 副本哈希一致，静态复核仍得到已被拒绝的同一候选；#541《ezBase》本批静态逆向候选被前台平台拒绝，且附件比较常量存在填充分支歧义，暂不盲目重交。这五题都不计入已完成总数。
+2110:
+2111: ## 第十批：平台已验证题目
+2112:
+2113: 本批从平台“全部”列表中筛选并分析了三道免费、中等 REVERSE 题。本指南只把取得平台接受回执的题目纳入已完成题解；本批其余候选和平台状态保存在单独的题目资料与提交记录中，待解决后再加入。
+2114:
+2115: ### #552 Butterfly（平台已接受）
+2116:
+2117: ELF 为静态链接 x86-64。反汇编还原每个 8 字节块的加密流程：按字节 XOR `MMXEncod`，每个 16 位字交换高低字节，把小端 64 位值循环左移一位，最后逐字节加 key 并模 256。逆变换完整恢复 32 字节主体；`encode.dat` 尾部四字节没有经过块变换，其中 `i}` 属于 flag，末尾 LF 是文件换行。候选为 `flag{66eec38e269e0e267849a1f7b708i}`。重新正向处理后 36 字节与附件完全一致，平台显示“已完成”、步骤 `1/1`。注意候选本体不包含换行。完整逐步 WP、反汇编、块级 trace 与终端记录在 `题目资料/批次10_20260929/552_butterfly/`。
+2118:
+2119: ## 第十一批：湘岚杯静态逆向题
+2120:
+2121: 本批在玄机平台“全部”题目列表中核对免费、中等 REVERSE 项。#539「湘岚杯cryptor」和 #540「湘岚杯maybesignin」取得前台正确回执；#541「ezBase」的候选被拒绝，因此未放入已完成表。
+2122:
+2123: ### #539 湘岚杯 cryptor（平台已接受）
+2124:
+2125: - 平台 ID：539；REVERSE；免费、中等。候选 flag{AtYpXBh38fNvc1ymsQ7vL} 在玄机前台提交后显示正确、步骤 1/1 和一血。
+2126: - main.py 只接收输入并调用 cryptor.check；判定逻辑位于 CPython 3.10 x64 的 Cython .pyd。静态字符串与数据区提供 AES 模式、零填充提示、Base64 密文、16 字节 key EzCrypt0ofPython 和 16 字节 IV 1145140A01919810。IV 按 16 个 ASCII 字符处理。
+2127: - Base64 解码得到 32 字节密文。按 AES-128-CBC、关闭标准填充解密，明文为 flag 后接 5 个 NUL 字节；去掉 NUL 后得到候选。Python cryptography 与 OpenSSL 两套独立实现的明文十六进制相同；扩展未加载或运行。
+2128: - 首轮尝试 ECB / PKCS#7 未得到有效明文；缺少 PyCryptodome、PowerShell/.NET API 差异和中文路径工具调用问题均保留在命令记录中。完整常量定位、错误分支、命令输出和复现代码见 题目资料/批次11_20260929/539_cryptor/wp.md 及其 analysis 子目录。
+2129:
+2130: ### #540 湘岚杯 maybesignin（平台已接受）
+2131:
+2132: - 平台 ID：540；REVERSE；免费、中等。候选 flag{wlascJDAFS} 前台提交后显示正确、步骤 1/1。
+2133: - 附件是 12,800 字节 PE32+ x86-64。静态识别比较目标块 1C84BE5145CE1AF31FA3F75E3A38D0BE，并从 S-box、FK、CK 和轮函数常量确认校验算法为标准 SM4 单块变换。
+2134: - 关键字节序检查：四个 mov dword 立即数按小端存储组成 16 字节 key 01 02 03 04 05 06 07 08 09 10 11 12 13 14 15 16（十六进制字节）。逆序轮密钥解密得到 flag{wlascJDAFS}；本地 Python 正向加密回目标块，且 OpenSSL SM4-ECB 独立解密得到相同明文。附件 EXE 未运行。
+2135: - 首次将 key 误读成更长的十六进制序列，虽然自洽重加密仍不对；回到小端立即数还原后才得到正确 16 字节 key。详细反汇编、常量表、错误假设、复算命令和输出见 题目资料/批次11_20260929/540_maybesignin/wp.md 与 analysis。
+2136:
+2137: ### 第十一批其他记录
+2138:
+2139: #541 ezBase 的本地候选仅是分析分支，平台明确拒绝；不把它作为答案。候选输入、拒绝回执、解包修正、分支检查和逐命令记录见 题目资料/批次11_20260929/541_ezBase/ 与 记录/提交核验_20260929_第十一批.md。
+2140:
+2141: ## 第十二批：商丘师范学院第四届网络安全及信息对抗大赛 REVERSE
+2142:
+2143: 本批从平台“全部”题目列表中选取三道免费、中等 REVERSE 题。主指南只收录已取得平台接受回执的解题；#535、#536 已通过平台验证，#534 仍未解决，留在独立资料与核验记录中，不计入完成数。
+2144:
+2145: ### #535 往事暗沉不可追（平台已接受）
+2146:
+2147: - 平台 ID：535；REVERSE；免费、中等。题面说明“解密后的数据就是 flag，用逗号隔开”。平台实际接受的文本为 `flag{7549ecca-f}`，步骤 1/1，页面记录一血。
+2148: - 附件是 PyInstaller one-file x64 PE。静态解析 CArchive，恢复 Python 3.10 冻结主模块；未运行陌生 EXE、DLL、PYD 或其中代码。由于本机 marshal 版本为 Python 3.12，使用仅解析结构的 Python 3.10 marshal 读取器恢复代码对象和常量。
+2149: - 密文数组为 `153,147,158,152,132,200,202,203,198,154,156,156,158,210,153,130`；两条嵌入 XOR 常数分别为 0x55、0xAA，异或合成 0xFF。逐字节计算 `cipher[i] XOR 0x55 XOR 0xAA` 得到 `102,108,97,103,123,55,53,52,57,101,99,99,97,45,102,125`，ASCII 解释为上面的 flag 文本。再次 XOR 0xFF 能逐字节还原原密文。
+2150: - 需如实保留实现缺陷：VM 的六条真实指令只读取密文第一个字节，写入两个内存位置，没有遍历 16 字节，也没有打印完整明文。完整 flag 是基于题面数据和嵌入 XOR 链逐字节推导出来；平台接受回执确认候选正确，但不能称 VM 本地实际执行产出了完整 flag。
+2151: - 前台 Computer Use 提交后，玄机显示“FLAG 正确~，恭喜你完成此挑战~”、步骤 1/1、进度 100% 和一血。
+2152: - 中文逐步 WP、附件、CArchive/字节码提取物、求解器与完整命令/输出记录：`题目资料/批次12_20260929/535_往事暗沉不可追/`；本批三题选择和平台核验记录：`记录/批次_20260929_第十二批题目确认.md`、`记录/提交核验_20260929_第十二批.md`。
+2153: ### #536 遇事不决，可问春风（平台已接受）
+2154:
+2155: - 平台 ID：536；REVERSE；免费、中等。修正候选 `flag{f8f06f2b-60ee-43ca-8e3a-1048042edddd}` 前台提交后被接受，详情页标记“已完成”、步骤 1/1，并显示一血。
+2156: - APK 静态解析定位应用自有类 `com.example.wakurev.MainActivity` 于 `classes3.dex`。原始指令 code unit `06df 4205` 中 opcode `0xdf` 对应 Dalvik `xor-int/lit8`，不是初版解析器误标的 OR。第三个 code unit 提供立即数 `0x42`；`decryptPassword()` 对密文逐字符 XOR 0x42。
+2157: - 密文为 `$z$rt$p otr''ovq!#oz'q#osrvzrvp'&&&&`。逐字符执行 `ord(ch) XOR 0x42` 得到 `f8f06f2b-60ee-43ca-8e3a-1048042edddd`。校验方法将输入字符串与 `decryptPassword()` 结果比较；成功分支 `buildFlag()` 明确拼接 `flag{`、用户输入和 `}`，因此得到上面的完整 flag。
+2158: - 首次静态解读把 `0xdf` 错读成 OR，形成的候选被平台拒绝。复查 opcode 表和原始 DEX code unit 后修正译码、脚本及 WP；修正候选得到平台接受。把这次错误与更正保留在逐题材料中，避免将错误推导写成正确流程。
+2159: - APK 未安装、未运行。附件哈希、DEX 结构、反汇编、逐字符结果、错误分支、前台提交回执和完整命令输出：`题目资料/批次12_20260929/536_遇事不决可问春风/`；三题确认和平台验收：`记录/批次_20260929_第十二批题目确认.md`、`记录/提交核验_20260929_第十二批.md`。
+2160: # 终端记录与复现文件
+2161:
+2162: 指南正文逐题保留解题推理、关键命令、关键输出、错误分支和平台状态；补充命令记录与复核材料按题目保存在 `记录/` 和 `题目资料/`：
+2163:
+2164: - Pixel 本地补查：`记录/代理-Pixel-终端记录.txt`
+2165: - 项目清理过程：`记录/项目清理终端记录.txt`
+2166: - 本轮附件普查、六题脚本复跑与 Webmin HTTP 命令/响应：`记录/WP补全-资料普查记录.txt`
+2167: - note、ezRe、XXTEA 等候选复算命令与输出：`记录/代理-WP补全-子代理B.txt`
+2168: - 本轮找回的历史题 WP 草稿副本：`记录/子代理B_WP草稿.md`
+2169: - Ancient-Recall PWN 原题附件、求解器和阶段脚本：WSL `\\wsl.localhost\Ubuntu-24.04\home\mzj\pwn-lab\platform`
+2170: - 本批 #367、#450、#451 的终端记录：记录/新题批次_367_分析.txt、记录/新题批次_450_附件分析.txt、记录/新题批次_451_附件分析.txt。
+2171: - 本批 #520 的主分析与平台回执：记录/DigitalKey_UWB_520-分析.txt；代理复核：记录/代理-520-附件普查及公式验证.txt。
+2172: - 本批 #551 的完整静态分析、路径复放及平台回执：记录/PaluMaze_551-fresh-static.txt、记录/PaluMaze_551-终端记录.txt；最终路线脚本和输出在题目资料/PaluMaze_551/。
+2173: - 第六批 #530/#531/#532 FLAG 提交核验：记录/提交核验_20260929_第六批.md；PowerShell transcript：记录/提交记录_20260929_第六批.txt。
+2174: - 第七批 #559/#588 平台验收与项目更新过程：记录/批次_20260929_第七批平台核对.md、记录/批次_20260929_第七批协调.txt。
+2175: - 第八批 #549/#558 前台平台接受回执与 #562 待复核记录：记录/提交核验_20260929_第八批.md。
+2176: - 第八批文档校对与统计检查的 PowerShell 命令输出：记录/第八批_后续校对_20260929.txt；#562 独立拒绝原因静态复核：题目资料/checker_562/analysis/checker_rejection_audit_20260929.md。
+2177: - 第九批 #547/#548 接受、#546 拒绝的前台逐步记录：记录/提交核验_20260929_第九批.md；题目选择与附件哈希：记录/批次_20260929_第九批题目确认.md；各题完整 WP 和静态分析均在题目资料/PaluFlat_547、PaluGOGOGO_548、PaluArray_546。
+2178: - 第十批前台提交核验及附件确认：记录/提交核验_20260929_第十批.md、记录/批次_20260929_第十批题目确认.md、记录/第十批_附件归档_20260929.txt；本批已验证题目 #552 的完整 WP 在题目资料/批次10_20260929/552_butterfly/。
+2179: - 第十一批 #539/#540 平台接受、#541 被拒绝的前台核验及附件确认：记录/批次_20260929_第十一批题目确认.md、记录/提交核验_20260929_第十一批.md；附件哈希、逐题 WP、静态分析产物与终端记录见 题目资料/批次11_20260929/。
+2180: - 各题逐题记录：`记录/*-解题记录.md`、`记录/*-分析过程记录.md`
+2181: - 各题附件、脚本和分析产物：`题目资料/<题目>/`
+2182:
+2183: 记录中的玄机账户名和密码均以占位符脱敏；其余解题命令与输出保留。浏览器页面通过 Computer Use 前台操作；对留有回执的题目，以题目页确认文字与步骤进度为准。只有明确存在的截图才给出本地路径，没有保存到文件的会话截图不声称为本地图片。
+2184:
+2185:
+2186:
+2187:
+2188:
+2189:
+2190:
+2191:
+COMMAND> complete root README
+# 玄机平台刷题资料
+
+本项目归档玄机平台刷题指南、逐题记录、原始附件和用于复核的分析资料。归档动作只复制文件，原始 Downloads、WSL 目录和 CTF 父目录的文件未移动或删除。
+
+## 目录结构
+
+- `指南/`：状态总览、合并 Markdown 源稿、LaTeX 源文件及 PDF。
+- `记录/`：逐题 WP、分析补充、完整命令/输出记录和归档操作记录。
+- `题目资料/<题目>/`：题目附件、分析脚本、反编译结果、输出和过程证据。
+- `题目资料/原始下载附件/`：按 SHA-256 去重归档的下载题包；`README.md` 和 `manifest.csv` 给出来源、保存位置及校验值。
+- `题目资料/WSL平台归档/pwn-lab/platform/`：WSL 平台题工作目录的本地副本。
+- `labs/platform/`：平台题附件和复现求解器的本地副本。
+- `figures/`：图片证据和 `raw/` 原始终端输出素材。
+- `tools/`：相关工具及工具包。
+- `工作区/`：仍有复现价值的题目专用工作区。
+
+## 刷题状态与 WP
+
+《指南/玄机刷题指南_合并源.md》是状态与逐题 WP 的主索引；手册已同步列出 46 道平台接受题；平台当前已接受总数为 46 道；旧版 README 的 10 题统计已废止。第十一批的逐题验收状态见 `记录/提交核验_20260929_第十一批.md`。独立 WP 和过程补充保存在 `记录/`。
+平台验收记录在 `记录/提交核验_20260929_第六批.md`、`记录/批次_20260929_第七批平台核对.md`、`记录/提交核验_20260929_第八批.md` 和 `记录/提交核验_20260929_第九批.md`；#562 的拒绝原因静态复核见其 `analysis/` 子目录。未通过平台的题目不计入已完成总数。
+第九批 #547、#548 已由前台平台接受；#546 的候选已被拒绝，仍待复核。三题详情、附件哈希与任务范围见 `记录/批次_20260929_第九批题目确认.md`，提交过程与回执见第九批平台验收记录。第十批从“全部”列表选出的免费中等题 #552、#543、#542 中，#552 已接受，#543、#542 的候选被平台拒绝；提交过程与状态见 `记录/提交核验_20260929_第十批.md`，附件副本与哈希见 `记录/批次_20260929_第十批题目确认.md` 和 `记录/第十批_附件归档_20260929.txt`。两道未解决题不计入完成数，静态 WP 保存在各自题目资料目录，等待新证据后再纳入已完成题解。
+
+第十一批已归档：按“全部”列表筛选并逐题确认了免费、中等题 #539「湘岚杯cryptor」、#540「湘岚杯maybesignin」、#541「ezBase」。#539 与 #540 已通过前台提交，平台当前已接受数从 42 变为 44；#541 的候选被平台拒绝，仍待复核。题目确认与平台详情见 `记录/批次_20260929_第十一批题目确认.md` 和 `记录/提交核验_20260929_第十一批.md`；附件副本、SHA-256、逐命令记录和 WPs 位于 `题目资料/批次11_20260929/`。
+
+KROP2（ID 270）和 abs（ID 271）的原始资料现已归档在 WSL 平台副本中，但尚未作为已解题目补写到主手册；附件归档不代表题目完成或 flag 已验证。
+
+## 证据与去重
+
+历史终端记录保留当时实际输入的原始路径，避免改写操作证据；所引用的外部来源文件已在本项目相应目录留存副本。附件若在项目内已有相同 SHA-256，则不重复占用空间，映射记录在 `题目资料/原始下载附件/manifest.csv`。账户凭据不写入项目记录。
+
+第十二批从“全部”列表选出三道免费、中等 REVERSE 题：#535「往事暗沉不可追」和 #536「遇事不决，可问春风」均通过前台 FLAG 验证，步骤 1/1 并取得一血；平台已完成总数更新为 46。#534「天下谁人不识君」的候选未获接受，仍未解决，不计入已完成数。三题附件、逐题 WP、分析产物和命令输出保存在 题目资料/批次12_20260929/；选择与平台回执见 记录/批次_20260929_第十二批题目确认.md、记录/提交核验_20260929_第十二批.md。
+**********************
+PowerShell transcript end
+End time: 20260929145821
+**********************
+**********************
+PowerShell transcript start
+Start time: 20260929145914
+Username: DESKTOP-412KTAR\mzj
+RunAs User: DESKTOP-412KTAR\mzj
+Configuration Name: 
+Machine: DESKTOP-412KTAR (Microsoft Windows NT 10.0.26200.0)
+Host Application: C:\Users\mzj\.cache\codex-runtimes\codex-primary-runtime\dependencies\native\powershell\pwsh.dll -Command try { [Console]::OutputEncoding=[System.Text.Encoding]::UTF8 } catch {}
+$ErrorActionPreference='Stop'
+$project='C:\Users\mzj\Desktop\CTF\玄机刷题'
+$record=Join-Path $project '记录\批次13_提交核验_20260929.txt'
+Start-Transcript -Path $record -Append
+Write-Output 'COMMAND> locate batch-13 selection and challenge records without modifying them'
+Get-ChildItem -LiteralPath (Join-Path $project '记录') -File | Where-Object { $_.Name -match '第十三|批次13|537' } | Select-Object Name,Length | Format-Table -AutoSize
+Get-ChildItem -LiteralPath (Join-Path $project '题目资料\批次13_20260929\537_湘岚杯ezbase') -File | Select-Object Name,Length | Format-Table -AutoSize
+Write-Output 'COMMAND> search batch-13 records for IDs and classification'
+$records=Get-ChildItem -LiteralPath (Join-Path $project '记录') -File | Where-Object { $_.Name -match '第十三|批次13|537' }
+foreach($f in $records){Select-String -LiteralPath $f.FullName -Pattern '#537|#533|#538|难度|REVERSE|中等|免费' -Context 0,1 | Select-Object -First 30 | Format-List Path,LineNumber,Line}
+Stop-Transcript
+Process ID: 13308
+PSVersion: 7.6.5
+PSEdition: Core
+GitCommitId: 7.6.5
+OS: Microsoft Windows 10.0.26200
+Platform: Win32NT
+PSCompatibleVersions: 1.0, 2.0, 3.0, 4.0, 5.0, 5.1, 6.0, 7.0
+PSRemotingProtocolVersion: 2.4
+SerializationVersion: 1.1.0.1
+WSManStackVersion: 3.0
+**********************
+Transcript started, output file is C:\Users\mzj\Desktop\CTF\玄机刷题\记录\批次13_提交核验_20260929.txt
+COMMAND> locate batch-13 selection and challenge records without modifying them
+
+Name                              Length
+----                              ------
+批次_20260929_第十三批题目确认.md   2107
+批次13_附件查找_20260929.txt        3656
+批次13_附件归档_20260929.txt       18205
+批次13_归档附件.ps1                 3989
+批次13_提交核验_20260929.txt      110716
+批次13_提交准备检查_20260929.txt   83266
+批次13_修正选题记录.ps1             2813
+批次13_选题修复_20260929.txt        7173
+
+
+Name        Length
+----        ------
+平台核验.md    563
+README.md     1276
+wp.md         7849
+
+COMMAND> search batch-13 records for IDs and classification
+
+Path       : C:\Users\mzj\Desktop\CTF\玄机刷题\记录\批次_20260929_第十三批题目确认.md
+LineNumber : 5
+Line       : - 在玄机 `/challenges` 页面选择“全部”题目，保留状态单选“全部”，点击难度“中等”；未依赖“未完成”筛选，因为该
+             筛选不完整。
+
+Path       : C:\Users\mzj\Desktop\CTF\玄机刷题\记录\批次_20260929_第十三批题目确认.md
+LineNumber : 6
+Line       : - 在中等难度分页中逐题核对详情页，确认免费、中等、REVERSE、步骤 0/1 且无“已完成”徽标。选取三道新题；排除已
+             完成题、此前尝试过的 #532、#534、#541、#542、#546、#561、#562 等题。
+
+Path       : C:\Users\mzj\Desktop\CTF\玄机刷题\记录\批次_20260929_第十三批题目确认.md
+LineNumber : 10
+Line       : ### #533 圣人当仁不让
+
+Path       : C:\Users\mzj\Desktop\CTF\玄机刷题\记录\批次_20260929_第十三批题目确认.md
+LineNumber : 13
+Line       : - 核验：免费；难度中等；类型 REVERSE；挑战步骤 0/1；提交前没有“已完成”徽标。
+
+Path       : C:\Users\mzj\Desktop\CTF\玄机刷题\记录\批次_20260929_第十三批题目确认.md
+LineNumber : 17
+Line       : ### #537 湘岚杯ezbase
+
+Path       : C:\Users\mzj\Desktop\CTF\玄机刷题\记录\批次_20260929_第十三批题目确认.md
+LineNumber : 20
+Line       : - 核验：免费；难度中等；类型 REVERSE；挑战步骤 0/1；提交前没有“已完成”徽标。
+
+Path       : C:\Users\mzj\Desktop\CTF\玄机刷题\记录\批次_20260929_第十三批题目确认.md
+LineNumber : 24
+Line       : ### #538 湘岚杯1997
+
+Path       : C:\Users\mzj\Desktop\CTF\玄机刷题\记录\批次_20260929_第十三批题目确认.md
+LineNumber : 27
+Line       : - 核验：免费；难度中等；类型 REVERSE；挑战步骤 0/1；提交前没有“已完成”徽标。
+
+
+Path       : C:\Users\mzj\Desktop\CTF\玄机刷题\记录\批次13_附件归档_20260929.txt
+LineNumber : 22
+Line       : === #533 圣人当仁不让 ===
+
+Path       : C:\Users\mzj\Desktop\CTF\玄机刷题\记录\批次13_附件归档_20260929.txt
+LineNumber : 39
+Line       : === #537 湘岚杯ezbase ===
+
+Path       : C:\Users\mzj\Desktop\CTF\玄机刷题\记录\批次13_附件归档_20260929.txt
+LineNumber : 57
+Line       : === #538 湘岚杯1997 ===
+
+Path       : C:\Users\mzj\Desktop\CTF\玄机刷题\记录\批次13_附件归档_20260929.txt
+LineNumber : 102
+Line       : - 在玄机 `/challenges` 页面选择“全部”题目，保留状态单选“全部”，点击难度“中等”；未依赖“未完成”筛选，因为用
+             户指出该筛选不完整。
+
+Path       : C:\Users\mzj\Desktop\CTF\玄机刷题\记录\批次13_附件归档_20260929.txt
+LineNumber : 103
+Line       : - 在中等难度分页中逐题核对详情页，确认免费、中等、REVERSE、步骤 0/1 且无“已完成”徽标。选取三道新题；排除已
+             完成题、此前尝试过的 #532、#534、#541、#542、#546、#561、#562 等题。
+
+Path       : C:\Users\mzj\Desktop\CTF\玄机刷题\记录\批次13_附件归档_20260929.txt
+LineNumber : 107
+Line       : ### #533 圣人当仁不让
+
+Path       : C:\Users\mzj\Desktop\CTF\玄机刷题\记录\批次13_附件归档_20260929.txt
+LineNumber : 110
+Line       : - 核验：免费；难度中等；类型 REVERSE；挑战步骤 0/1；提交前没有“已完成”徽标。
+
+Path       : C:\Users\mzj\Desktop\CTF\玄机刷题\记录\批次13_附件归档_20260929.txt
+LineNumber : 114
+Line       : ### #537 湘岚杯ezbase
+
+Path       : C:\Users\mzj\Desktop\CTF\玄机刷题\记录\批次13_附件归档_20260929.txt
+LineNumber : 117
+Line       : - 核验：免费；难度中等；类型 REVERSE；挑战步骤 0/1；提交前没有“已完成”徽标。
+
+Path       : C:\Users\mzj\Desktop\CTF\玄机刷题\记录\批次13_附件归档_20260929.txt
+LineNumber : 121
+Line       : ### #538 湘岚杯1997
+
+Path       : C:\Users\mzj\Desktop\CTF\玄机刷题\记录\批次13_附件归档_20260929.txt
+LineNumber : 124
+Line       : - 核验：免费；难度中等；类型 REVERSE；挑战步骤 0/1；提交前没有“已完成”徽标。
+
+Path       : C:\Users\mzj\Desktop\CTF\玄机刷题\记录\批次13_附件归档_20260929.txt
+LineNumber : 139
+Line       : - 平台题页状态（任务开始时）：免费、中等、未完成、1 步 0/1
+
+Path       : C:\Users\mzj\Desktop\CTF\玄机刷题\记录\批次13_附件归档_20260929.txt
+LineNumber : 213
+Line       : - 在玄机 `/challenges` 页面选择“全部”题目，保留状态单选“全部”，点击难度“中等”；未依赖“未完成”筛选，因为该
+             筛选不完整。
+
+Path       : C:\Users\mzj\Desktop\CTF\玄机刷题\记录\批次13_附件归档_20260929.txt
+LineNumber : 214
+Line       : - 在中等难度分页中逐题核对详情页，确认免费、中等、REVERSE、步骤 0/1 且无“已完成”徽标。选取三道新题；排除已
+             完成题、此前尝试过的 #532、#534、#541、#542、#546、#561、#562 等题。
+
+Path       : C:\Users\mzj\Desktop\CTF\玄机刷题\记录\批次13_附件归档_20260929.txt
+LineNumber : 218
+Line       : ### #533 圣人当仁不让
+
+Path       : C:\Users\mzj\Desktop\CTF\玄机刷题\记录\批次13_附件归档_20260929.txt
+LineNumber : 221
+Line       : - 核验：免费；难度中等；类型 REVERSE；挑战步骤 0/1；提交前没有“已完成”徽标。
+
+Path       : C:\Users\mzj\Desktop\CTF\玄机刷题\记录\批次13_附件归档_20260929.txt
+LineNumber : 225
+Line       : ### #537 湘岚杯ezbase
+
+Path       : C:\Users\mzj\Desktop\CTF\玄机刷题\记录\批次13_附件归档_20260929.txt
+LineNumber : 228
+Line       : - 核验：免费；难度中等；类型 REVERSE；挑战步骤 0/1；提交前没有“已完成”徽标。
+
+Path       : C:\Users\mzj\Desktop\CTF\玄机刷题\记录\批次13_附件归档_20260929.txt
+LineNumber : 232
+Line       : ### #538 湘岚杯1997
+
+Path       : C:\Users\mzj\Desktop\CTF\玄机刷题\记录\批次13_附件归档_20260929.txt
+LineNumber : 235
+Line       : - 核验：免费；难度中等；类型 REVERSE；挑战步骤 0/1；提交前没有“已完成”徽标。
+
+
+Path       : C:\Users\mzj\Desktop\CTF\玄机刷题\记录\批次13_归档附件.ps1
+LineNumber : 44
+Line       :   '- 在玄机 `/challenges` 页面选择“全部”题目，保留状态单选“全部”，点击难度“中等”；未依赖“未完成”筛选，因为
+             用户指出该筛选不完整。',
+
+Path       : C:\Users\mzj\Desktop\CTF\玄机刷题\记录\批次13_归档附件.ps1
+LineNumber : 45
+Line       :   '- 在中等难度分页中逐题核对详情页，确认免费、中等、REVERSE、步骤 0/1 且无“已完成”徽标。选取三道新题；排
+             除已完成题、此前尝试过的 #532、#534、#541、#542、#546、#561、#562 等题。',
+
+Path       : C:\Users\mzj\Desktop\CTF\玄机刷题\记录\批次13_归档附件.ps1
+LineNumber : 55
+Line       :     '- 核验：免费；难度中等；类型 REVERSE；挑战步骤 0/1；提交前没有“已完成”徽标。',
+
+
+Path       : C:\Users\mzj\Desktop\CTF\玄机刷题\记录\批次13_提交核验_20260929.txt
+LineNumber : 67
+Line       : Line       : 题目和难度按玄机平台“已完成”筛选页记录。ID 仅在指南或本地附件中已有确证时填写；“—”表示尚未从
+             题目详情页核对
+
+Path       : C:\Users\mzj\Desktop\CTF\玄机刷题\记录\批次13_提交核验_20260929.txt
+LineNumber : 68
+Line       :               ID。费用不在本次列表中显示，因此新补条目不推断免费或收费。
+
+Path       : C:\Users\mzj\Desktop\CTF\玄机刷题\记录\批次13_提交核验_20260929.txt
+LineNumber : 73
+Line       : Line       : | 590 | 2026安网杯-Prompt Trace | AI / 中等 | 平台已完成；本指南有逐步记录 |
+
+Path       : C:\Users\mzj\Desktop\CTF\玄机刷题\记录\批次13_提交核验_20260929.txt
+LineNumber : 78
+Line       : Line       : | 585 | 2026安网杯-班次邮戳 | MISC / 中等 | 平台已完成；本指南有逐步记录 |
+
+Path       : C:\Users\mzj\Desktop\CTF\玄机刷题\记录\批次13_提交核验_20260929.txt
+LineNumber : 83
+Line       : Line       : | 584 | 2026安网杯-可疑流量分析 | MISC / 中等 | 平台已完成；本指南有逐步记录 |
+
+Path       : C:\Users\mzj\Desktop\CTF\玄机刷题\记录\批次13_提交核验_20260929.txt
+LineNumber : 98
+Line       : Line       : | 564 | 第一届启航杯 rainbow | REVERSE / 中等 | 平台筛选显示已完成；本地有分析记录与复现脚本
+             |
+
+Path       : C:\Users\mzj\Desktop\CTF\玄机刷题\记录\批次13_提交核验_20260929.txt
+LineNumber : 103
+Line       : Line       : | 563 | 第一届启航杯 note | REVERSE / 中等 | 平台筛选显示已完成；本地有终端记录和复现材料 |
+
+Path       : C:\Users\mzj\Desktop\CTF\玄机刷题\记录\批次13_提交核验_20260929.txt
+LineNumber : 108
+Line       : Line       : | 556 | 第三届黄河流域公安院校网络安全技能挑战赛 go_for_it | REVERSE / 中等 | 平台已完成；本
+             地有分析输出、
+
+Path       : C:\Users\mzj\Desktop\CTF\玄机刷题\记录\批次13_提交核验_20260929.txt
+LineNumber : 114
+Line       : Line       : | 555 | 第三届黄河流域公安院校网络安全技能挑战赛 Victory_Melody | REVERSE / 中等 | 平台已完成
+             ；本指南有逐
+
+Path       : C:\Users\mzj\Desktop\CTF\玄机刷题\记录\批次13_提交核验_20260929.txt
+LineNumber : 120
+Line       : Line       : | 554 | 第九届“强网杯”全国网络安全挑战赛 tradre | REVERSE / 中等 | 平台已完成；本指南有逐步记
+             录 |
+
+Path       : C:\Users\mzj\Desktop\CTF\玄机刷题\记录\批次13_提交核验_20260929.txt
+LineNumber : 125
+Line       : Line       : | 550 | 第二届 Parloo 杯 PositionalXOR | REVERSE / 中等 | 平台已完成；本指南有逐步记录 |
+
+Path       : C:\Users\mzj\Desktop\CTF\玄机刷题\记录\批次13_提交核验_20260929.txt
+LineNumber : 130
+Line       : Line       : | 528 | 商丘师范学院第四届网络安全及信息对抗大赛 即随本心 | REVERSE / 简单 | 平台已完成；本指
+             南有逐步记录
+
+Path       : C:\Users\mzj\Desktop\CTF\玄机刷题\记录\批次13_提交核验_20260929.txt
+LineNumber : 136
+Line       : Line       : | 428 | webmin未授权远程代码执行漏洞 | 渗透 / 入门 | 免费实例现场确认 1.920 并取得 `/root/fla
+             g.txt` 响应；
+
+Path       : C:\Users\mzj\Desktop\CTF\玄机刷题\记录\批次13_提交核验_20260929.txt
+LineNumber : 142
+Line       : Line       : | 358 | 2025鹏城杯-babyRSA | Crypto / 中等 | 平台已完成；本指南有逐步记录 |
+
+Path       : C:\Users\mzj\Desktop\CTF\玄机刷题\记录\批次13_提交核验_20260929.txt
+LineNumber : 152
+Line       : Line       : | 81 | 2024铁人三项决赛 CTFRE-crazyaes | REVERSE / 极难 | 平台已完成；本指南有逐步记录 |
+
+Path       : C:\Users\mzj\Desktop\CTF\玄机刷题\记录\批次13_提交核验_20260929.txt
+LineNumber : 195
+Line       :              1，ID 505）详情均显示 5 金币 / 30 分钟。没有点击启动环境、没有下载附件、没有产生扣费，因此按
+             免费优先约束跳
+
+Path       : C:\Users\mzj\Desktop\CTF\玄机刷题\记录\批次13_提交核验_20260929.txt
+LineNumber : 196
+Line       :              过。原先详写的 12 道题均记录为免费；本次新增的 16 道历史已完成题未逐题复核费用，故不作免费或
+             收费判断。
+
+Path       : C:\Users\mzj\Desktop\CTF\玄机刷题\记录\批次13_提交核验_20260929.txt
+LineNumber : 707
+Line       : Line       : 本轮用玄机题目提供的免费实例复核：页面当时显示“已完成”和“免费”，地址 43.192.167.19 / 10.0.10.
+             1。HTTP banne
+
+Path       : C:\Users\mzj\Desktop\CTF\玄机刷题\记录\批次13_提交核验_20260929.txt
+LineNumber : 841
+Line       : Line       : - 平台 ID：547；REVERSE；免费、中等。候选 `flag{bdm23Ne6ljz5O}` 由附件目标字节逆算，并经正向
+             变换逐字节匹配
+
+Path       : C:\Users\mzj\Desktop\CTF\玄机刷题\记录\批次13_提交核验_20260929.txt
+LineNumber : 847
+Line       : Line       : - 平台 ID：548；REVERSE；免费、中等。玄机前台提交 `flag{bg92Oejpfgl}` 后显示“FLAG 正确~，恭喜
+             你完成此挑战~
+
+Path       : C:\Users\mzj\Desktop\CTF\玄机刷题\记录\批次13_提交核验_20260929.txt
+LineNumber : 864
+Line       : Line       : - 平台 ID：546；REVERSE；免费、中等。独立静态分析确认实际字符表为 `Palu_996!?`（起始 RVA `0x5
+             e68`），目标
+
+Path       : C:\Users\mzj\Desktop\CTF\玄机刷题\记录\批次13_提交核验_20260929.txt
+LineNumber : 887
+Line       : Line       : 本批从平台“全部”列表中筛选并分析了三道免费、中等 REVERSE 题。本指南只把取得平台接受回执的题目
+             纳入已完成题
+
+Path       : C:\Users\mzj\Desktop\CTF\玄机刷题\记录\批次13_提交核验_20260929.txt
+LineNumber : 902
+Line       : Line       : 本批在玄机平台“全部”题目列表中核对免费、中等 REVERSE 项。#539「湘岚杯cryptor」和 #540「湘岚杯
+             maybesignin」
+
+Path       : C:\Users\mzj\Desktop\CTF\玄机刷题\记录\批次13_提交核验_20260929.txt
+LineNumber : 915
+Line       : Line       : ## 第十二批：商丘师范学院第四届网络安全及信息对抗大赛 REVERSE
+
+Path       : C:\Users\mzj\Desktop\CTF\玄机刷题\记录\批次13_提交核验_20260929.txt
+LineNumber : 920
+Line       : Line       : 本批从平台“全部”题目列表中选取三道免费、中等 REVERSE 题。主指南只收录已取得平台接受回执的解题
+             ；#535、#536
+
+Path       : C:\Users\mzj\Desktop\CTF\玄机刷题\记录\批次13_提交核验_20260929.txt
+LineNumber : 933
+Line       : Line       : - 平台 ID：536；REVERSE；免费、中等。修正候选 `flag{f8f06f2b-60ee-43ca-8e3a-1048042edddd}` 前
+             台提交后被接
+
+Path       : C:\Users\mzj\Desktop\CTF\玄机刷题\记录\批次13_提交核验_20260929.txt
+LineNumber : 984
+Line       :              次_20260929_第九批题目确认.md`，提交过程与回执见第九批平台验收记录。第十批从“全部”列表选出的
+             免费中等题 #55
+
+Path       : C:\Users\mzj\Desktop\CTF\玄机刷题\记录\批次13_提交核验_20260929.txt
+LineNumber : 999
+Line       : Line       : 第十二批从“全部”列表选出三道免费、中等 REVERSE 题：#535「往事暗沉不可追」和 #536「遇事不决，
+             可问春风」均通
+
+Path       : C:\Users\mzj\Desktop\CTF\玄机刷题\记录\批次13_提交核验_20260929.txt
+LineNumber : 1068
+Line       : 题目和难度按玄机平台“已完成”筛选页记录。ID 仅在指南或本地附件中已有确证时填写；“—”表示尚未从题目详情页核对
+              ID。费用不在本次列表中显示，因此新补条目不推断免费或收费。
+
+Path       : C:\Users\mzj\Desktop\CTF\玄机刷题\记录\批次13_提交核验_20260929.txt
+LineNumber : 1072
+Line       : | ID | 题目 | 类型 / 难度 | 状态与过程资料 |
+
+
+Path       : C:\Users\mzj\Desktop\CTF\玄机刷题\记录\批次13_修正选题记录.ps1
+LineNumber : 11
+Line       :   '- 在玄机 `/challenges` 页面选择“全部”题目，保留状态单选“全部”，点击难度“中等”；未依赖“未完成”筛选，因为
+             该筛选不完整。',
+
+Path       : C:\Users\mzj\Desktop\CTF\玄机刷题\记录\批次13_修正选题记录.ps1
+LineNumber : 12
+Line       :   '- 在中等难度分页中逐题核对详情页，确认免费、中等、REVERSE、步骤 0/1 且无“已完成”徽标。选取三道新题；排
+             除已完成题、此前尝试过的 #532、#534、#541、#542、#546、#561、#562 等题。',
+
+Path       : C:\Users\mzj\Desktop\CTF\玄机刷题\记录\批次13_修正选题记录.ps1
+LineNumber : 16
+Line       :   '### #533 圣人当仁不让',
+
+Path       : C:\Users\mzj\Desktop\CTF\玄机刷题\记录\批次13_修正选题记录.ps1
+LineNumber : 19
+Line       :   '- 核验：免费；难度中等；类型 REVERSE；挑战步骤 0/1；提交前没有“已完成”徽标。',
+
+Path       : C:\Users\mzj\Desktop\CTF\玄机刷题\记录\批次13_修正选题记录.ps1
+LineNumber : 23
+Line       :   '### #537 湘岚杯ezbase',
+
+Path       : C:\Users\mzj\Desktop\CTF\玄机刷题\记录\批次13_修正选题记录.ps1
+LineNumber : 26
+Line       :   '- 核验：免费；难度中等；类型 REVERSE；挑战步骤 0/1；提交前没有“已完成”徽标。',
+
+Path       : C:\Users\mzj\Desktop\CTF\玄机刷题\记录\批次13_修正选题记录.ps1
+LineNumber : 30
+Line       :   '### #538 湘岚杯1997',
+
+Path       : C:\Users\mzj\Desktop\CTF\玄机刷题\记录\批次13_修正选题记录.ps1
+LineNumber : 33
+Line       :   '- 核验：免费；难度中等；类型 REVERSE；挑战步骤 0/1；提交前没有“已完成”徽标。',
+
+
+Path       : C:\Users\mzj\Desktop\CTF\玄机刷题\记录\批次13_选题修复_20260929.txt
+LineNumber : 33
+Line       :   '- 在玄机 `/challenges` 页面选择“全部”题目，保留状态单选“全部”，点击难度“中等”；未依赖“未完成”筛选，因为
+             该筛选不完整。',
+
+Path       : C:\Users\mzj\Desktop\CTF\玄机刷题\记录\批次13_选题修复_20260929.txt
+LineNumber : 34
+Line       :   '- 在中等难度分页中逐题核对详情页，确认免费、中等、REVERSE、步骤 0/1 且无“已完成”徽标。选取三道新题；排
+             除已完成题、此前尝试过的 #532、#534、#541、#542、#546、#561、#562 等题。',
+
+Path       : C:\Users\mzj\Desktop\CTF\玄机刷题\记录\批次13_选题修复_20260929.txt
+LineNumber : 38
+Line       :   '### #533 圣人当仁不让',
+
+Path       : C:\Users\mzj\Desktop\CTF\玄机刷题\记录\批次13_选题修复_20260929.txt
+LineNumber : 41
+Line       :   '- 核验：免费；难度中等；类型 REVERSE；挑战步骤 0/1；提交前没有“已完成”徽标。',
+
+Path       : C:\Users\mzj\Desktop\CTF\玄机刷题\记录\批次13_选题修复_20260929.txt
+LineNumber : 45
+Line       :   '### #537 湘岚杯ezbase',
+
+Path       : C:\Users\mzj\Desktop\CTF\玄机刷题\记录\批次13_选题修复_20260929.txt
+LineNumber : 48
+Line       :   '- 核验：免费；难度中等；类型 REVERSE；挑战步骤 0/1；提交前没有“已完成”徽标。',
+
+Path       : C:\Users\mzj\Desktop\CTF\玄机刷题\记录\批次13_选题修复_20260929.txt
+LineNumber : 52
+Line       :   '### #538 湘岚杯1997',
+
+Path       : C:\Users\mzj\Desktop\CTF\玄机刷题\记录\批次13_选题修复_20260929.txt
+LineNumber : 55
+Line       :   '- 核验：免费；难度中等；类型 REVERSE；挑战步骤 0/1；提交前没有“已完成”徽标。',
+
+Path       : C:\Users\mzj\Desktop\CTF\玄机刷题\记录\批次13_选题修复_20260929.txt
+LineNumber : 75
+Line       : - 在玄机 `/challenges` 页面选择“全部”题目，保留状态单选“全部”，点击难度“中等”；未依赖“未完成”筛选，因为用
+             户指出该筛选不完整。
+
+Path       : C:\Users\mzj\Desktop\CTF\玄机刷题\记录\批次13_选题修复_20260929.txt
+LineNumber : 76
+Line       : - 在中等难度分页中逐题核对详情页，确认免费、中等、REVERSE、步骤 0/1 且无“已完成”徽标。选取三道新题；排除已
+             完成题、此前尝试过的 #532、#534、#541、#542、#546、#561、#562 等题。
+
+Path       : C:\Users\mzj\Desktop\CTF\玄机刷题\记录\批次13_选题修复_20260929.txt
+LineNumber : 80
+Line       : ### #533 圣人当仁不让
+
+Path       : C:\Users\mzj\Desktop\CTF\玄机刷题\记录\批次13_选题修复_20260929.txt
+LineNumber : 83
+Line       : - 核验：免费；难度中等；类型 REVERSE；挑战步骤 0/1；提交前没有“已完成”徽标。
+
+Path       : C:\Users\mzj\Desktop\CTF\玄机刷题\记录\批次13_选题修复_20260929.txt
+LineNumber : 87
+Line       : ### #537 湘岚杯ezbase
+
+Path       : C:\Users\mzj\Desktop\CTF\玄机刷题\记录\批次13_选题修复_20260929.txt
+LineNumber : 90
+Line       : - 核验：免费；难度中等；类型 REVERSE；挑战步骤 0/1；提交前没有“已完成”徽标。
+
+Path       : C:\Users\mzj\Desktop\CTF\玄机刷题\记录\批次13_选题修复_20260929.txt
+LineNumber : 94
+Line       : ### #538 湘岚杯1997
+
+Path       : C:\Users\mzj\Desktop\CTF\玄机刷题\记录\批次13_选题修复_20260929.txt
+LineNumber : 97
+Line       : - 核验：免费；难度中等；类型 REVERSE；挑战步骤 0/1；提交前没有“已完成”徽标。
+
+**********************
+PowerShell transcript end
+End time: 20260929145914
+**********************
+**********************
+PowerShell transcript start
+Start time: 20260929150108
+Username: DESKTOP-412KTAR\mzj
+RunAs User: DESKTOP-412KTAR\mzj
+Configuration Name: 
+Machine: DESKTOP-412KTAR (Microsoft Windows NT 10.0.26200.0)
+Host Application: C:\Users\mzj\.cache\codex-runtimes\codex-primary-runtime\dependencies\native\powershell\pwsh.dll -Command try { [Console]::OutputEncoding=[System.Text.Encoding]::UTF8 } catch {}
+$ErrorActionPreference='Stop'
+$project='C:\Users\mzj\Desktop\CTF\玄机刷题'
+$record=Join-Path $project '记录\批次13_提交核验_20260929.txt'
+Start-Transcript -Path $record -Append
+$guide=Get-Content -LiteralPath (Join-Path $project '指南\玄机刷题指南_合并源.md') -Raw -Encoding utf8
+$start=$guide.IndexOf('### 题目一览表')
+$end=$guide.IndexOf('### 资料找回与证据边界')
+$table=$guide.Substring($start,$end-$start)
+$numeric=[regex]::Matches($table,'(?m)^\|\s*\d+\s*\|').Count
+$unverified=[regex]::Matches($table,'(?m)^\|\s*—\s*\|').Count
+Write-Output ("COMMAND> count existing overview table rows: numeric=$numeric unverified-id=$unverified total="+($numeric+$unverified))
+Write-Output 'COMMAND> verify exact paragraph update anchors'
+Select-String -LiteralPath (Join-Path $project '指南\玄机刷题指南_合并源.md') -Pattern '^本指南原记录|此前只盘点了|^## 平台已完成|^\*\*统计：|^### 第十二批|^# 终端记录' | ForEach-Object { '{0}: {1}' -f $_.LineNumber,$_.Line }
+Stop-Transcript
+Process ID: 39356
+PSVersion: 7.6.5
+PSEdition: Core
+GitCommitId: 7.6.5
+OS: Microsoft Windows 10.0.26200
+Platform: Win32NT
+PSCompatibleVersions: 1.0, 2.0, 3.0, 4.0, 5.0, 5.1, 6.0, 7.0
+PSRemotingProtocolVersion: 2.4
+SerializationVersion: 1.1.0.1
+WSManStackVersion: 3.0
+**********************
+Transcript started, output file is C:\Users\mzj\Desktop\CTF\玄机刷题\记录\批次13_提交核验_20260929.txt
+COMMAND> count existing overview table rows: numeric=43 unverified-id=3 total=46
+COMMAND> verify exact paragraph update anchors
+15: 本指南原记录了玄机平台“已完成”筛选中的 28 道题。此后 #367、#450、#451、#520、#551、#530、#531、#559、#588、#549、#558、#547、#548、#552、#539、#540 共 16 道新题均取得平台接受回执，手册现收录 44 道已完成题。解题状态、flag 与过程分别以平台回执、附件分析和命令输出为证；不把完成徽标扩写成没有证据的步骤细节。
+17: 此前只盘点了 `题目资料` 子目录，漏掉了 `C:\Users\mzj\Desktop\CTF\labs\platform`、`figures\raw`、WSL 下的 `~/pwn-lab/platform`、旧终端记录以及 `D:\Downloads` 中的附件。本轮已将这些位置纳入核查，并为原有 28 道平台已完成题和后续新增 14 道已验证题建立逐题章节。每章分别标明题目附件、可复现脚本、旧终端日志、平台公开 Writeup、平台完成徽标和本轮远程输出来自哪里；“已完成”徽标不会被写成某个具体 flag 的提交回执。现存证据仍不完整的题会列出缺失项，不补造历史输入、输出或提交结果。
+23: ## 平台已完成（46 道）
+78: **统计：本指南原收录 28 道，后续新增的 #367、#450、#451、#520、#551、#530、#531、#559、#588、#549、#558、#547、#548、#552、#539、#540 均有逐题平台接受回执，当前共 44 道。现有证据可给出 42 道题的 flag 候选或公开 Writeup 结果；Ancient-Recall 与 pwn-ezpwn 的最终 flag 输出仍缺失。#541 ezBase 与 #546 PaluArray 的新候选均被平台拒绝，不计入已完成总数。旧题若只有平台完成徽标或离线候选，仍与具体 flag 的提交回执分开标注。**
+2160: # 终端记录与复现文件
+**********************
+PowerShell transcript end
+End time: 20260929150108
+**********************
+**********************
+PowerShell transcript start
+Start time: 20260929150335
+Username: DESKTOP-412KTAR\mzj
+RunAs User: DESKTOP-412KTAR\mzj
+Configuration Name: 
+Machine: DESKTOP-412KTAR (Microsoft Windows NT 10.0.26200.0)
+Host Application: C:\Users\mzj\.cache\codex-runtimes\codex-primary-runtime\dependencies\native\powershell\pwsh.dll -Command try { [Console]::OutputEncoding=[System.Text.Encoding]::UTF8 } catch {}
+$ErrorActionPreference='Stop'
+$project='C:\Users\mzj\Desktop\CTF\玄机刷题'
+$transcript=Join-Path $project '记录\批次13_提交核验_20260929.txt'
+Start-Transcript -Path $transcript -Append
+Write-Output 'COMMAND> write independent 第十三批 platform verification report'
+$report=Join-Path $project '记录\提交核验_20260929_第十三批.md'
+$content=@'
+# 第十三批平台核验（2026-09-29）
+
+本批从玄机“全部”题目列表中核对并选择三道免费、中等 REVERSE 题。选题时平台显示各题步骤 0/1、无“已完成”徽标。批次选择与附件记录见 `记录/批次_20260929_第十三批题目确认.md` 与 `记录/批次13_附件归档_20260929.txt`。
+
+## #533 圣人当仁不让
+
+- 状态：未解决；没有平台接受回执，不计入已完成总数。
+- 本报告不把尚未验证的本地推导或历史材料当作平台正确结果。
+
+## #537 湘岚杯ezbase
+
+- 提交值：`flag{2qOrxQfRmDEdSkGt2mFoyilZQFU4BQDxBsuc}`。
+- 提交结果：root 在玄机前台提交；页面反馈 `FLAG 正确`，挑战显示 `已完成 1/1`，并显示一血。平台总数由 46 更新到 47。
+- 依据：附件校验程序的静态逆变换给出唯一候选；独立正向重编码结果与程序内 56 字节比较目标逐字节相等。
+- 附件 SHA-256：`ezbase.zip` 为 `24E646D8337FE6284DDAACEFB05D3ACEAFA01EAE746CF1CBB872046F3A9EBECB`；提取的 `ezbase.exe` 为 `AEE861E105AFD0DDA6DDBACD27865FAFDC91E2FA225105920DB88DB38A30CAA0`。
+- 本题目录：`题目资料/批次13_20260929/537_湘岚杯ezbase/`；逐步 WP 为 `wp.md`，静态复算脚本和反汇编位于 `analysis/`。
+
+## #538 湘岚杯1997
+
+- 状态：程序约束矛盾，无可提交 flag；未提交，不计入已完成总数。
+- 独立静态逆变换得到唯一 32 字节前像 `f0f1a0e7b57ebbf87ca9111468ca5971ed5fa6aef9802f8990c8ec1720d644bb`，并正向重加密匹配程序目标。
+- 但第 28 字节为 `0x20` 空格。程序使用 `scanf("%s")` 读入，空格会终止输入；因此不能输入完整 32 字节前像，随后要求长度为 32 的条件不可达。由于程序不接受可提交输入，未尝试拼造 flag 包装或盲目提交。
+
+## 批次结论
+
+本批 3 道题中，1 道（#537）获平台接受，2 道（#533、#538）未解决/未获接受。只有 #537 纳入已完成数，项目和主指南总数从 46 更新为 47。PowerShell 命令与输出 transcript：`记录/批次13_提交核验_20260929.txt`。页面状态按 root 的前台观察记录；本报告所在目录未收到截图文件，不声称已归档截图。
+'@
+Set-Content -LiteralPath $report -Value $content -Encoding utf8
+Write-Output 'COMMAND> verify report has expected statuses and paths'
+Select-String -LiteralPath $report -Pattern '^## #533|^## #537|^## #538|#533|#538|46 更新到 47|1 道（#537）' | ForEach-Object { '{0}: {1}' -f $_.LineNumber,$_.Line }
+Write-Output 'COMMAND> report file and SHA256'
+Get-Item -LiteralPath $report | Select-Object FullName,Length | Format-List
+Get-FileHash -LiteralPath $report -Algorithm SHA256 | ForEach-Object { '{0}  {1}' -f $_.Hash,$_.Path }
+Stop-Transcript
+Process ID: 42840
+PSVersion: 7.6.5
+PSEdition: Core
+GitCommitId: 7.6.5
+OS: Microsoft Windows 10.0.26200
+Platform: Win32NT
+PSCompatibleVersions: 1.0, 2.0, 3.0, 4.0, 5.0, 5.1, 6.0, 7.0
+PSRemotingProtocolVersion: 2.4
+SerializationVersion: 1.1.0.1
+WSManStackVersion: 3.0
+**********************
+Transcript started, output file is C:\Users\mzj\Desktop\CTF\玄机刷题\记录\批次13_提交核验_20260929.txt
+COMMAND> write independent 第十三批 platform verification report
+COMMAND> verify report has expected statuses and paths
+5: ## #533 圣人当仁不让
+10: ## #537 湘岚杯ezbase
+13: - 提交结果：root 在玄机前台提交；页面反馈 `FLAG 正确`，挑战显示 `已完成 1/1`，并显示一血。平台总数由 46 更新到 47。
+18: ## #538 湘岚杯1997
+26: 本批 3 道题中，1 道（#537）获平台接受，2 道（#533、#538）未解决/未获接受。只有 #537 纳入已完成数，项目和主指南总数从 46 更新为 47。PowerShell 命令与输出 transcript：`记录/批次13_提交核验_20260929.txt`。页面状态按 root 的前台观察记录；本报告所在目录未收到截图文件，不声称已归档截图。
+COMMAND> report file and SHA256
+
+FullName : C:\Users\mzj\Desktop\CTF\玄机刷题\记录\提交核验_20260929_第十三批.md
+Length   : 2231
+
+B9EC77DA049724C2A651437923B822BCCE5EF77DC926230C604FE16F932FB15D  C:\Users\mzj\Desktop\CTF\玄机刷题\记录\提交核验_20260929_第十三批.md
+**********************
+PowerShell transcript end
+End time: 20260929150335
+**********************
+**********************
+PowerShell transcript start
+Start time: 20260929150610
+Username: DESKTOP-412KTAR\mzj
+RunAs User: DESKTOP-412KTAR\mzj
+Configuration Name: 
+Machine: DESKTOP-412KTAR (Microsoft Windows NT 10.0.26200.0)
+Host Application: C:\Users\mzj\.cache\codex-runtimes\codex-primary-runtime\dependencies\native\powershell\pwsh.dll -Command try { [Console]::OutputEncoding=[System.Text.Encoding]::UTF8 } catch {}
+$ErrorActionPreference='Stop'
+$project='C:\Users\mzj\Desktop\CTF\玄机刷题'
+$transcript=Join-Path $project '记录\批次13_提交核验_20260929.txt'
+Start-Transcript -Path $transcript -Append
+$guidePath=Join-Path $project '指南\玄机刷题指南_合并源.md'
+$guide=Get-Content -LiteralPath $guidePath -Raw -Encoding utf8
+Write-Output 'COMMAND> update guide overall status, new completed row, batch-13 WP, and evidence index'
+$oldIntro='本指南原记录了玄机平台“已完成”筛选中的 28 道题。此后 #367、#450、#451、#520、#551、#530、#531、#559、#588、#549、#558、#547、#548、#552、#539、#540 共 16 道新题均取得平台接受回执，手册现收录 44 道已完成题。解题状态、flag 与过程分别以平台回执、附件分析和命令输出为证；不把完成徽标扩写成没有证据的步骤细节。'
+$newIntro='本指南原记录了玄机平台“已完成”筛选中的 28 道题。此后 #367、#450、#451、#520、#551、#530、#531、#559、#588、#549、#558、#547、#548、#552、#539、#540、#535、#536、#537 共 19 道新题均取得平台接受回执，手册现收录 47 道已完成题。解题状态、flag 与过程分别以平台回执、附件分析和命令输出为证；不把完成徽标扩写成没有证据的步骤细节。'
+if(-not $guide.Contains($oldIntro)){throw 'guide intro anchor not found'}
+$guide=$guide.Replace($oldIntro,$newIntro)
+$oldCount='后续新增 14 道已验证题'
+if(-not $guide.Contains($oldCount)){throw 'guide secondary intro count anchor not found'}
+$guide=$guide.Replace($oldCount,'后续新增 19 道已验证题')
+$oldHeading='## 平台已完成（46 道）'
+if(-not $guide.Contains($oldHeading)){throw 'guide completed heading anchor not found'}
+$guide=$guide.Replace($oldHeading,'## 平台已完成（47 道）')
+$oldRows='| 539 | 湘岚杯cryptor | REVERSE / 中等 | 平台已接受；Cython 扩展静态分析、AES-CBC 双实现复核及完整命令记录齐全 |'+[Environment]::NewLine+'| 535 | 商丘师范学院第四届网络安全及信息对抗大赛 往事暗沉不可追 | REVERSE / 中等 | 平台已接受；PyInstaller/Python 3.10 字节码静态解析、逐字节 XOR 复核及平台一血 |'
+$newRows='| 539 | 湘岚杯cryptor | REVERSE / 中等 | 平台已接受；Cython 扩展静态分析、AES-CBC 双实现复核及完整命令记录齐全 |'+[Environment]::NewLine+'| 537 | 湘岚杯ezbase | REVERSE / 中等 | 平台已接受；自定义 Base64 逆变换、正向闭环及前台一血 |'+[Environment]::NewLine+'| 535 | 商丘师范学院第四届网络安全及信息对抗大赛 往事暗沉不可追 | REVERSE / 中等 | 平台已接受；PyInstaller/Python 3.10 字节码静态解析、逐字节 XOR 复核及平台一血 |'
+if(-not $guide.Contains($oldRows)){throw 'guide table insertion anchor not found'}
+$guide=$guide.Replace($oldRows,$newRows)
+$oldStats='**统计：本指南原收录 28 道，后续新增的 #367、#450、#451、#520、#551、#530、#531、#559、#588、#549、#558、#547、#548、#552、#539、#540 均有逐题平台接受回执，当前共 44 道。现有证据可给出 42 道题的 flag 候选或公开 Writeup 结果；Ancient-Recall 与 pwn-ezpwn 的最终 flag 输出仍缺失。#541 ezBase 与 #546 PaluArray 的新候选均被平台拒绝，不计入已完成总数。旧题若只有平台完成徽标或离线候选，仍与具体 flag 的提交回执分开标注。**'
+$newStats='**统计：本指南原收录 28 道，后续新增的 #367、#450、#451、#520、#551、#530、#531、#559、#588、#549、#558、#547、#548、#552、#539、#540、#535、#536、#537 共 19 道均有逐题平台接受回执，当前共 47 道。现有证据可给出 45 道已完成题的 flag 候选或公开 Writeup 结果；Ancient-Recall 与 pwn-ezpwn 的最终 flag 输出仍缺失。#532、#533、#534、#538、#541、#546、#561、#562 均未获平台接受，不计入已完成总数；其中 #538 的程序输入约束矛盾使校验长度条件不可达。旧题若只有平台完成徽标或离线候选，仍与具体 flag 的提交回执分开标注。**'
+if(-not $guide.Contains($oldStats)){throw 'guide statistics anchor not found'}
+$guide=$guide.Replace($oldStats,$newStats)
+$batch=@'
+## 第十三批：湘岚杯 REVERSE
+
+本批从玄机“全部”列表确认三道免费、中等 REVERSE 题：#533「圣人当仁不让」、#537「湘岚杯ezbase」、#538「湘岚杯1997」。本批只有 #537 获平台接受；#533 仍未解决，#538 因程序输入约束矛盾而没有可提交 flag。后二题均不计入平台已完成数。
+
+### #537 湘岚杯ezbase（平台已接受）
+
+- 平台 ID：537；REVERSE；免费、中等。提交 `flag{2qOrxQfRmDEdSkGt2mFoyilZQFU4BQDxBsuc}` 后，玄机前台显示 `FLAG 正确`、`已完成 1/1`，并显示一血。平台已接受总数从 46 增至 47。
+- 附件 `ezbase.zip` 的 SHA-256 为 `24E646D8337FE6284DDAACEFB05D3ACEAFA01EAE746CF1CBB872046F3A9EBECB`；ZIP 中的 PE32/i386 `ezbase.exe` 为 40,719 字节，SHA-256 为 `AEE861E105AFD0DDA6DDBACD27865FAFDC91E2FA225105920DB88DB38A30CAA0`。静态字符串、PE 头和反汇编指出它由 UPX 打包，节名被改为 `PXU0/PXU1/UXP2`；原件不变，仅在分析副本恢复节名为 `UPX0/UPX1/UPX2` 后通过 `upx -t` 并静态解包。全程没有运行陌生 EXE。
+- 在解包后 `_main` (`0x4015d7`) 看到格式串 `%42s` 和长度 `42` 检查；输入的每个字节随后 XOR `0x10`。编码函数位于 `0x401410`，使用 64 字节自定义 Base64 字母表 `Fvm/RkQucZNVyYABpS2w6enjdtGPO8UalxrbD45Ci07MT9KLEJo1h3zHgfX+WqsI`，不能用标准 Base64 字母表替代。
+- 程序将编码结果下标 `12` 与 `18` 交换，再与栈上 14 条小端序 DWORD 立即数拼出的 56 字节目标比较：
+
+  ```text
+  8CJJ8zTrdeqr3RkzpCG6ejS/U38DcC3naz4faR0veD6D6Dk6GkZbtjY9
+  ```
+
+- 逆向步骤：先对目标串撤销下标 12/18 交换，得到 `8CJJ8zTrdeqrGRkzpC36ejS/U38DcC3naz4faR0veD6D6Dk6GkZbtjY9`；按自定义字母表解码得到 42 字节 `767c71776b22615f62684176427d545574437b5764227d567f69797c4a4156452452415468526365736d`；逐字节 XOR `0x10` 后得到 ASCII `flag{2qOrxQfRmDEdSkGt2mFoyilZQFU4BQDxBsuc}`。
+- 正向闭环：把候选逐字节 XOR `0x10`，按同一自定义表重新 Base64 编码并交换下标 12/18，结果逐字节等于上面的 56 字节比较目标。复现脚本输出 `forward_reencode_match=True`；平台随后接受同一 flag 并显示一血。
+- 完整中文步骤、失败假设修正、附件与分析产物见 `题目资料/批次13_20260929/537_湘岚杯ezbase/wp.md` 和其 `analysis/`；选题及附件来源见 `记录/批次_20260929_第十三批题目确认.md`、`记录/批次13_附件归档_20260929.txt`；前台核验摘要见 `记录/提交核验_20260929_第十三批.md`。逐条 PowerShell 命令与输出见 `记录/批次13_提交核验_20260929.txt`。
+
+### 本批未计入完成数
+
+- **#533 圣人当仁不让：** 仍未解决，当前没有平台接受回执，不计入已完成题数。
+- **#538 湘岚杯1997：** 独立静态逆变换的 32 字节前像虽可正向重加密匹配目标，但第 28 字节为 `0x20` 空格。输入由 `scanf("%s")` 读取，空格会提前结束输入，故程序随后要求的长度 32 条件不可达；没有可提交 flag，本批未提交，不计入已完成题数。
+
+'@
+$anchor='# 终端记录与复现文件'
+if(-not $guide.Contains($anchor)){throw 'guide final section anchor not found'}
+$guide=$guide.Replace($anchor,$batch+$anchor)
+$logBullet='- 第十一批 #539/#540 平台接受、#541 被拒绝的前台核验及附件确认：记录/批次_20260929_第十一批题目确认.md、记录/提交核验_20260929_第十一批.md；附件哈希、逐题 WP、静态分析产物与终端记录见 题目资料/批次11_20260929/。'
+$newBullet=$logBullet+[Environment]::NewLine+'- 第十三批 #537 平台接受（1/1、一血），#533 未解决，#538 因 `%s` 输入空格截断导致长度检查不可达而未提交：前台核验报告 `记录/提交核验_20260929_第十三批.md`；选题与附件记录见 `记录/批次_20260929_第十三批题目确认.md`、`记录/批次13_附件归档_20260929.txt`，逐 PowerShell 命令/输出 transcript 为 `记录/批次13_提交核验_20260929.txt`；#537 完整 WP 和求解脚本见 `题目资料/批次13_20260929/537_湘岚杯ezbase/`。'
+if(-not $guide.Contains($logBullet)){throw 'guide terminal index anchor not found'}
+$guide=$guide.Replace($logBullet,$newBullet)
+Set-Content -LiteralPath $guidePath -Value $guide -Encoding utf8
+Write-Output 'COMMAND> verify guide counts, #537 row, batch section and #533/#538 exclusions'
+$updated=Get-Content -LiteralPath $guidePath -Raw -Encoding utf8
+$tableStart=$updated.IndexOf('### 题目一览表')
+$tableEnd=$updated.IndexOf('### 资料找回与证据边界')
+$tableText=$updated.Substring($tableStart,$tableEnd-$tableStart)
+$numericRows=[regex]::Matches($tableText,'(?m)^\|\s*\d+\s*\|').Count
+$unknownRows=[regex]::Matches($tableText,'(?m)^\|\s*—\s*\|').Count
+Write-Output ("overview_numeric_rows=$numericRows unknown_ID_rows=$unknownRows total_rows="+($numericRows+$unknownRows))
+Select-String -LiteralPath $guidePath -Pattern '^## 平台已完成|^\| 537 \||^## 第十三批|^### #537|^### 本批未计入|#533、#538|本指南原收录 28 道，后续新增' | ForEach-Object { '{0}: {1}' -f $_.LineNumber,$_.Line }
+Stop-Transcript
+Process ID: 35888
+PSVersion: 7.6.5
+PSEdition: Core
+GitCommitId: 7.6.5
+OS: Microsoft Windows 10.0.26200
+Platform: Win32NT
+PSCompatibleVersions: 1.0, 2.0, 3.0, 4.0, 5.0, 5.1, 6.0, 7.0
+PSRemotingProtocolVersion: 2.4
+SerializationVersion: 1.1.0.1
+WSManStackVersion: 3.0
+**********************
+Transcript started, output file is C:\Users\mzj\Desktop\CTF\玄机刷题\记录\批次13_提交核验_20260929.txt
+COMMAND> update guide overall status, new completed row, batch-13 WP, and evidence index
+COMMAND> verify guide counts, #537 row, batch section and #533/#538 exclusions
+overview_numeric_rows=44 unknown_ID_rows=3 total_rows=47
+23: ## 平台已完成（47 道）
+60: | 537 | 湘岚杯ezbase | REVERSE / 中等 | 平台已接受；自定义 Base64 逆变换、正向闭环及前台一血 |
+79: **统计：本指南原收录 28 道，后续新增的 #367、#450、#451、#520、#551、#530、#531、#559、#588、#549、#558、#547、#548、#552、#539、#540、#535、#536、#537 共 19 道均有逐题平台接受回执，当前共 47 道。现有证据可给出 45 道已完成题的 flag 候选或公开 Writeup 结果；Ancient-Recall 与 pwn-ezpwn 的最终 flag 输出仍缺失。#532、#533、#534、#538、#541、#546、#561、#562 均未获平台接受，不计入已完成总数；其中 #538 的程序输入约束矛盾使校验长度条件不可达。旧题若只有平台完成徽标或离线候选，仍与具体 flag 的提交回执分开标注。**
+2161: ## 第十三批：湘岚杯 REVERSE
+2165: ### #537 湘岚杯ezbase（平台已接受）
+2180: ### 本批未计入完成数
+**********************
+PowerShell transcript end
+End time: 20260929150610
+**********************
+**********************
+PowerShell transcript start
+Start time: 20260929150648
+Username: DESKTOP-412KTAR\mzj
+RunAs User: DESKTOP-412KTAR\mzj
+Configuration Name: 
+Machine: DESKTOP-412KTAR (Microsoft Windows NT 10.0.26200.0)
+Host Application: C:\Users\mzj\.cache\codex-runtimes\codex-primary-runtime\dependencies\native\powershell\pwsh.dll -Command try { [Console]::OutputEncoding=[System.Text.Encoding]::UTF8 } catch {}
+$ErrorActionPreference='Stop'
+$project='C:\Users\mzj\Desktop\CTF\玄机刷题'
+$transcript=Join-Path $project '记录\批次13_提交核验_20260929.txt'
+Start-Transcript -Path $transcript -Append
+$readmePath=Join-Path $project 'README.md'
+$readme=Get-Content -LiteralPath $readmePath -Raw -Encoding utf8
+Write-Output 'COMMAND> update root README completed count and batch-13 summary/index'
+$oldCount='手册已同步列出 46 道平台接受题；平台当前已接受总数为 46 道'
+if(-not $readme.Contains($oldCount)){throw 'README completed count anchor not found'}
+$readme=$readme.Replace($oldCount,'手册已同步列出 47 道平台接受题；平台当前已接受总数为 47 道')
+$oldBatch='第十二批从“全部”列表选出三道免费、中等 REVERSE 题：#535「往事暗沉不可追」和 #536「遇事不决，可问春风」均通过前台 FLAG 验证，步骤 1/1 并取得一血；平台已完成总数更新为 46。#534「天下谁人不识君」的候选未获接受，仍未解决，不计入已完成数。三题附件、逐题 WP、分析产物和命令输出保存在 题目资料/批次12_20260929/；选择与平台回执见 记录/批次_20260929_第十二批题目确认.md、记录/提交核验_20260929_第十二批.md。'
+$newBatch=$oldBatch+[Environment]::NewLine+[Environment]::NewLine+'第十三批核验：免费、中等 REVERSE #533、#537、#538 中，#537「湘岚杯ezbase」已由前台接受（FLAG 正确、1/1、一血），总数由 46 更新为 47；完整 WP、静态求解器和分析证据见 `题目资料/批次13_20260929/537_湘岚杯ezbase/`。#533 仍未解决；#538 的 32 字节逆像含空格，`scanf("%s")` 会截断，长度校验不可达，因此没有可提交 flag、未提交；这两题均不计入已完成数。三题选题/附件索引见 `记录/批次_20260929_第十三批题目确认.md`、`记录/批次13_附件归档_20260929.txt`；核验报告见 `记录/提交核验_20260929_第十三批.md`，PowerShell 命令与输出 transcript 见 `记录/批次13_提交核验_20260929.txt`。'
+if(-not $readme.Contains($oldBatch)){throw 'README batch-12 anchor not found'}
+$readme=$readme.Replace($oldBatch,$newBatch)
+Set-Content -LiteralPath $readmePath -Value $readme -Encoding utf8
+Write-Output 'COMMAND> validate README counts and batch-13 wording'
+Select-String -LiteralPath $readmePath -Pattern '47 道平台接受题|平台当前已接受总数|第十三批核验|#533 仍未解决|没有可提交 flag' | ForEach-Object { '{0}: {1}' -f $_.LineNumber,$_.Line }
+Write-Output 'COMMAND> report final document sizes and SHA256'
+$guidePath=Join-Path $project '指南\玄机刷题指南_合并源.md'
+$reportPath=Join-Path $project '记录\提交核验_20260929_第十三批.md'
+foreach($f in @($guidePath,$readmePath,$reportPath)){ $info=Get-Item -LiteralPath $f; $hash=(Get-FileHash -LiteralPath $f -Algorithm SHA256).Hash; Write-Output ("{0} bytes={1} SHA256={2}" -f $info.FullName,$info.Length,$hash) }
+Stop-Transcript
+Process ID: 42660
+PSVersion: 7.6.5
+PSEdition: Core
+GitCommitId: 7.6.5
+OS: Microsoft Windows 10.0.26200
+Platform: Win32NT
+PSCompatibleVersions: 1.0, 2.0, 3.0, 4.0, 5.0, 5.1, 6.0, 7.0
+PSRemotingProtocolVersion: 2.4
+SerializationVersion: 1.1.0.1
+WSManStackVersion: 3.0
+**********************
+Transcript started, output file is C:\Users\mzj\Desktop\CTF\玄机刷题\记录\批次13_提交核验_20260929.txt
+COMMAND> update root README completed count and batch-13 summary/index
+COMMAND> validate README counts and batch-13 wording
+19: 《指南/玄机刷题指南_合并源.md》是状态与逐题 WP 的主索引；手册已同步列出 47 道平台接受题；平台当前已接受总数为 47 道；旧版 README 的 10 题统计已废止。第十一批的逐题验收状态见 `记录/提交核验_20260929_第十一批.md`。独立 WP 和过程补充保存在 `记录/`。
+33: 第十三批核验：免费、中等 REVERSE #533、#537、#538 中，#537「湘岚杯ezbase」已由前台接受（FLAG 正确、1/1、一血），总数由 46 更新为 47；完整 WP、静态求解器和分析证据见 `题目资料/批次13_20260929/537_湘岚杯ezbase/`。#533 仍未解决；#538 的 32 字节逆像含空格，`scanf("%s")` 会截断，长度校验不可达，因此没有可提交 flag、未提交；这两题均不计入已完成数。三题选题/附件索引见 `记录/批次_20260929_第十三批题目确认.md`、`记录/批次13_附件归档_20260929.txt`；核验报告见 `记录/提交核验_20260929_第十三批.md`，PowerShell 命令与输出 transcript 见 `记录/批次13_提交核验_20260929.txt`。
+COMMAND> report final document sizes and SHA256
+C:\Users\mzj\Desktop\CTF\玄机刷题\指南\玄机刷题指南_合并源.md bytes=178051 SHA256=2B19B4862EE2AA06560CB3BA85090363884FD567D4D2E892296B4C4AAAA3B37D
+C:\Users\mzj\Desktop\CTF\玄机刷题\README.md bytes=4815 SHA256=E73E27E3179D47A41DDD320DAA71B4DA879F7B2730AA5D325083B03F096E537A
+C:\Users\mzj\Desktop\CTF\玄机刷题\记录\提交核验_20260929_第十三批.md bytes=2231 SHA256=B9EC77DA049724C2A651437923B822BCCE5EF77DC926230C604FE16F932FB15D
+**********************
+PowerShell transcript end
+End time: 20260929150648
+**********************
+**********************
+PowerShell transcript start
+Start time: 20260929150751
+Username: DESKTOP-412KTAR\mzj
+RunAs User: DESKTOP-412KTAR\mzj
+Configuration Name: 
+Machine: DESKTOP-412KTAR (Microsoft Windows NT 10.0.26200.0)
+Host Application: C:\Users\mzj\.cache\codex-runtimes\codex-primary-runtime\dependencies\native\powershell\pwsh.dll -Command try { [Console]::OutputEncoding=[System.Text.Encoding]::UTF8 } catch {}
+$ErrorActionPreference='Stop'
+$project='C:\Users\mzj\Desktop\CTF\玄机刷题'
+$transcript=Join-Path $project '记录\批次13_提交核验_20260929.txt'
+Start-Transcript -Path $transcript -Append
+$guidePath=Join-Path $project '指南\玄机刷题指南_合并源.md'
+$readmePath=Join-Path $project 'README.md'
+$reportPath=Join-Path $project '记录\提交核验_20260929_第十三批.md'
+$guide=Get-Content -LiteralPath $guidePath -Raw -Encoding utf8
+$tableStart=$guide.IndexOf('### 题目一览表')
+$tableEnd=$guide.IndexOf('### 资料找回与证据边界')
+$table=$guide.Substring($tableStart,$tableEnd-$tableStart)
+$rows=[regex]::Matches($table,'(?m)^\|\s*\d+\s*\|').Count+[regex]::Matches($table,'(?m)^\|\s*—\s*\|').Count
+$flag='flag{2qOrxQfRmDEdSkGt2mFoyilZQFU4BQDxBsuc}'
+Write-Output 'COMMAND> final consistency checks for completed table and batch-13 states'
+Write-Output ("table_total_rows=$rows #537_rows="+([regex]::Matches($table,'(?m)^\|\s*537\s*\|').Count)+" #533_rows="+([regex]::Matches($table,'(?m)^\|\s*533\s*\|').Count)+" #538_rows="+([regex]::Matches($table,'(?m)^\|\s*538\s*\|').Count))
+Write-Output ("guide_flag_occurrences="+([regex]::Matches($guide,[regex]::Escape($flag)).Count))
+Write-Output ("guide_batch13_headings="+([regex]::Matches($guide,[regex]::Escape('## 第十三批：湘岚杯 REVERSE')).Count))
+Write-Output ("guide_has_47_heading="+$guide.Contains('## 平台已完成（47 道）'))
+Write-Output ("guide_has_both_unresolved="+($guide.Contains('#533 圣人当仁不让：') -or $guide.Contains('#533 圣人当仁不让'))+';'+$guide.Contains('#538 湘岚杯1997'))
+Write-Output 'COMMAND> inspect potentially stale overview counters'
+Select-String -LiteralPath $guidePath,$readmePath -Pattern '平台已完成（46 道）|手册现收录 44 道|当前共 44 道|列出 46 道平台接受题|平台当前已接受总数为 46 道|后续新增 14 道已验证题' | ForEach-Object { '{0}:{1}: {2}' -f $_.Path,$_.LineNumber,$_.Line }
+Write-Output 'COMMAND> final content excerpts'
+Select-String -LiteralPath $guidePath,$readmePath,$reportPath -Pattern '47 道|第十三批|#538|#533|flag\{2qOrxQfRmDEdSkGt2mFoyilZQFU4BQDxBsuc\}' | Select-Object -First 35 | ForEach-Object { '{0}:{1}: {2}' -f $_.Path,$_.LineNumber,$_.Line }
+Write-Output 'COMMAND> final root-document/report hashes'
+foreach($f in @($guidePath,$readmePath,$reportPath)){ $i=Get-Item -LiteralPath $f; $h=(Get-FileHash -LiteralPath $f -Algorithm SHA256).Hash; Write-Output ("{0} bytes={1} SHA256={2}" -f $i.FullName,$i.Length,$h) }
+Stop-Transcript
+Process ID: 21956
+PSVersion: 7.6.5
+PSEdition: Core
+GitCommitId: 7.6.5
+OS: Microsoft Windows 10.0.26200
+Platform: Win32NT
+PSCompatibleVersions: 1.0, 2.0, 3.0, 4.0, 5.0, 5.1, 6.0, 7.0
+PSRemotingProtocolVersion: 2.4
+SerializationVersion: 1.1.0.1
+WSManStackVersion: 3.0
+**********************
+Transcript started, output file is C:\Users\mzj\Desktop\CTF\玄机刷题\记录\批次13_提交核验_20260929.txt
+COMMAND> final consistency checks for completed table and batch-13 states
+table_total_rows=47 #537_rows=1 #533_rows=0 #538_rows=0
+guide_flag_occurrences=2
+guide_batch13_headings=1
+guide_has_47_heading=True
+guide_has_both_unresolved=True;True
+COMMAND> inspect potentially stale overview counters
+COMMAND> final content excerpts
+C:\Users\mzj\Desktop\CTF\玄机刷题\指南\玄机刷题指南_合并源.md:15: 本指南原记录了玄机平台“已完成”筛选中的 28 道题。此后 #367、#450、#451、#520、#551、#530、#531、#559、#588、#549、#558、#547、#548、#552、#539、#540、#535、#536、#537 共 19 道新题均取得平台接受回执，手册现收录 47 道已完成题。解题状态、flag 与过程分别以平台回执、附件分析和命令输出为证；不把完成徽标扩写成没有证据的步骤细节。
+C:\Users\mzj\Desktop\CTF\玄机刷题\指南\玄机刷题指南_合并源.md:23: ## 平台已完成（47 道）
+C:\Users\mzj\Desktop\CTF\玄机刷题\指南\玄机刷题指南_合并源.md:79: **统计：本指南原收录 28 道，后续新增的 #367、#450、#451、#520、#551、#530、#531、#559、#588、#549、#558、#547、#548、#552、#539、#540、#535、#536、#537 共 19 道均有逐题平台接受回执，当前共 47 道。现有证据可给出 45 道已完成题的 flag 候选或公开 Writeup 结果；Ancient-Recall 与 pwn-ezpwn 的最终 flag 输出仍缺失。#532、#533、#534、#538、#541、#546、#561、#562 均未获平台接受，不计入已完成总数；其中 #538 的程序输入约束矛盾使校验长度条件不可达。旧题若只有平台完成徽标或离线候选，仍与具体 flag 的提交回执分开标注。**
+C:\Users\mzj\Desktop\CTF\玄机刷题\指南\玄机刷题指南_合并源.md:2161: ## 第十三批：湘岚杯 REVERSE
+C:\Users\mzj\Desktop\CTF\玄机刷题\指南\玄机刷题指南_合并源.md:2163: 本批从玄机“全部”列表确认三道免费、中等 REVERSE 题：#533「圣人当仁不让」、#537「湘岚杯ezbase」、#538「湘岚杯1997」。本批只有 #537 获平台接受；#533 仍未解决，#538 因程序输入约束矛盾而没有可提交 flag。后二题均不计入平台已完成数。
+C:\Users\mzj\Desktop\CTF\玄机刷题\指南\玄机刷题指南_合并源.md:2167: - 平台 ID：537；REVERSE；免费、中等。提交 `flag{2qOrxQfRmDEdSkGt2mFoyilZQFU4BQDxBsuc}` 后，玄机前台显示 `FLAG 正确`、`已完成 1/1`，并显示一血。平台已接受总数从 46 增至 47。
+C:\Users\mzj\Desktop\CTF\玄机刷题\指南\玄机刷题指南_合并源.md:2176: - 逆向步骤：先对目标串撤销下标 12/18 交换，得到 `8CJJ8zTrdeqrGRkzpC36ejS/U38DcC3naz4faR0veD6D6Dk6GkZbtjY9`；按自定义字母表解码得到 42 字节 `767c71776b22615f62684176427d545574437b5764227d567f69797c4a4156452452415468526365736d`；逐字节 XOR `0x10` 后得到 ASCII `flag{2qOrxQfRmDEdSkGt2mFoyilZQFU4BQDxBsuc}`。
+C:\Users\mzj\Desktop\CTF\玄机刷题\指南\玄机刷题指南_合并源.md:2178: - 完整中文步骤、失败假设修正、附件与分析产物见 `题目资料/批次13_20260929/537_湘岚杯ezbase/wp.md` 和其 `analysis/`；选题及附件来源见 `记录/批次_20260929_第十三批题目确认.md`、`记录/批次13_附件归档_20260929.txt`；前台核验摘要见 `记录/提交核验_20260929_第十三批.md`。逐条 PowerShell 命令与输出见 `记录/批次13_提交核验_20260929.txt`。
+C:\Users\mzj\Desktop\CTF\玄机刷题\指南\玄机刷题指南_合并源.md:2182: - **#533 圣人当仁不让：** 仍未解决，当前没有平台接受回执，不计入已完成题数。
+C:\Users\mzj\Desktop\CTF\玄机刷题\指南\玄机刷题指南_合并源.md:2183: - **#538 湘岚杯1997：** 独立静态逆变换的 32 字节前像虽可正向重加密匹配目标，但第 28 字节为 `0x20` 空格。输入由 `scanf("%s")` 读取，空格会提前结束输入，故程序随后要求的长度 32 条件不可达；没有可提交 flag，本批未提交，不计入已完成题数。
+C:\Users\mzj\Desktop\CTF\玄机刷题\指南\玄机刷题指南_合并源.md:2204: - 第十三批 #537 平台接受（1/1、一血），#533 未解决，#538 因 `%s` 输入空格截断导致长度检查不可达而未提交：前台核验报告 `记录/提交核验_20260929_第十三批.md`；选题与附件记录见 `记录/批次_20260929_第十三批题目确认.md`、`记录/批次13_附件归档_20260929.txt`，逐 PowerShell 命令/输出 transcript 为 `记录/批次13_提交核验_20260929.txt`；#537 完整 WP 和求解脚本见 `题目资料/批次13_20260929/537_湘岚杯ezbase/`。
+C:\Users\mzj\Desktop\CTF\玄机刷题\README.md:19: 《指南/玄机刷题指南_合并源.md》是状态与逐题 WP 的主索引；手册已同步列出 47 道平台接受题；平台当前已接受总数为 47 道；旧版 README 的 10 题统计已废止。第十一批的逐题验收状态见 `记录/提交核验_20260929_第十一批.md`。独立 WP 和过程补充保存在 `记录/`。
+C:\Users\mzj\Desktop\CTF\玄机刷题\README.md:33: 第十三批核验：免费、中等 REVERSE #533、#537、#538 中，#537「湘岚杯ezbase」已由前台接受（FLAG 正确、1/1、一血），总数由 46 更新为 47；完整 WP、静态求解器和分析证据见 `题目资料/批次13_20260929/537_湘岚杯ezbase/`。#533 仍未解决；#538 的 32 字节逆像含空格，`scanf("%s")` 会截断，长度校验不可达，因此没有可提交 flag、未提交；这两题均不计入已完成数。三题选题/附件索引见 `记录/批次_20260929_第十三批题目确认.md`、`记录/批次13_附件归档_20260929.txt`；核验报告见 `记录/提交核验_20260929_第十三批.md`，PowerShell 命令与输出 transcript 见 `记录/批次13_提交核验_20260929.txt`。
+C:\Users\mzj\Desktop\CTF\玄机刷题\记录\提交核验_20260929_第十三批.md:1: # 第十三批平台核验（2026-09-29）
+C:\Users\mzj\Desktop\CTF\玄机刷题\记录\提交核验_20260929_第十三批.md:3: 本批从玄机“全部”题目列表中核对并选择三道免费、中等 REVERSE 题。选题时平台显示各题步骤 0/1、无“已完成”徽标。批次选择与附件记录见 `记录/批次_20260929_第十三批题目确认.md` 与 `记录/批次13_附件归档_20260929.txt`。
+C:\Users\mzj\Desktop\CTF\玄机刷题\记录\提交核验_20260929_第十三批.md:5: ## #533 圣人当仁不让
+C:\Users\mzj\Desktop\CTF\玄机刷题\记录\提交核验_20260929_第十三批.md:12: - 提交值：`flag{2qOrxQfRmDEdSkGt2mFoyilZQFU4BQDxBsuc}`。
+C:\Users\mzj\Desktop\CTF\玄机刷题\记录\提交核验_20260929_第十三批.md:18: ## #538 湘岚杯1997
+C:\Users\mzj\Desktop\CTF\玄机刷题\记录\提交核验_20260929_第十三批.md:26: 本批 3 道题中，1 道（#537）获平台接受，2 道（#533、#538）未解决/未获接受。只有 #537 纳入已完成数，项目和主指南总数从 46 更新为 47。PowerShell 命令与输出 transcript：`记录/批次13_提交核验_20260929.txt`。页面状态按 root 的前台观察记录；本报告所在目录未收到截图文件，不声称已归档截图。
+COMMAND> final root-document/report hashes
+C:\Users\mzj\Desktop\CTF\玄机刷题\指南\玄机刷题指南_合并源.md bytes=178051 SHA256=2B19B4862EE2AA06560CB3BA85090363884FD567D4D2E892296B4C4AAAA3B37D
+C:\Users\mzj\Desktop\CTF\玄机刷题\README.md bytes=4815 SHA256=E73E27E3179D47A41DDD320DAA71B4DA879F7B2730AA5D325083B03F096E537A
+C:\Users\mzj\Desktop\CTF\玄机刷题\记录\提交核验_20260929_第十三批.md bytes=2231 SHA256=B9EC77DA049724C2A651437923B822BCCE5EF77DC926230C604FE16F932FB15D
+**********************
+PowerShell transcript end
+End time: 20260929150751
+**********************

@@ -1,0 +1,3485 @@
+﻿BOOTSTRAP_COMMAND> $target='C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\批次14_20260929\562_checker'; New-Item -ItemType Directory -Force -Path $target | Out-Null; $log=Join-Path $target '命令与输出记录.txt'; Start-Transcript -Path $log -Append
+BOOTSTRAP_STDOUT> New-Item 输出被 Out-Null 抑制；没有标准输出。
+BOOTSTRAP_STDERR> 无。
+**********************
+Windows PowerShell transcript start
+Start time: 20260929154122
+Username: DESKTOP-412KTAR\mzj
+RunAs User: DESKTOP-412KTAR\mzj
+Configuration Name: 
+Machine: DESKTOP-412KTAR (Microsoft Windows NT 10.0.26200.0)
+Host Application: C:\WINDOWS\System32\WindowsPowerShell\v1.0\powershell.exe -NoLogo -NoExit
+Process ID: 37616
+PSVersion: 5.1.26100.9444
+PSEdition: Desktop
+PSCompatibleVersions: 1.0, 2.0, 3.0, 4.0, 5.0, 5.1.26100.9444
+BuildVersion: 10.0.26100.9444
+CLRVersion: 4.0.30319.42000
+WSManStackVersion: 3.0
+PSRemotingProtocolVersion: 2.3
+SerializationVersion: 1.1.0.1
+**********************
+Transcript started, output file is C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\批次14_20260929\562_checker\命令与输出记录.txt
+PS C:\Users\mzj\Desktop\CTF> Get-ChildItem -LiteralPath 'D:\Downloads' -Force | Sort-Object LastWriteTime -Descending | Select-Object -First 40 FullName,Length,LastWriteTime,Mode | Format-Table -AutoSize
+
+FullName                                                  Length LastWriteTime
+--------                                                  ------ -------------
+D:\Downloads\secret (2).zip                              1170497 2026/9/29 1...
+D:\Downloads\checker (5).zip                               17498 2026/9/29 1...
+D:\Downloads\唧唧复唧唧，木兰当户织.zip                                7602 2026/9/29 1...
+D:\Downloads\ez_vm.zip                                     26778 2026/9/29 1...
+D:\Downloads\1997.zip                                      20292 2026/9/29 1...
+D:\Downloads\ezbase.zip                                    30016 2026/9/29 1...
+D:\Downloads\来日之路光明灿烂.zip                                5290473 2026/9/29 1...
+D:\Downloads\app-debug.zip                               4419022 2026/9/29 1...
+D:\Downloads\天下谁人不识君.zip                                     367 2026/9/29 1...
+D:\Downloads\ezBase-20250521104055-dq14shk (2).rar          7833 2026/9/29 1...
+D:\Downloads\MaybeSignin (1).zip                            6305 2026/9/29 1...
+D:\Downloads\cryptor.zip                                   42592 2026/9/29 1...
+D:\Downloads\butterfly (1).7z                             260238 2026/9/29 1...
+D:\Downloads\你知道Base么-20250521104202-am92t17 (1).rar       14603 2026/9/29 1...
+D:\Downloads\hookme (1).rar                              5125397 2026/9/29 1...
+D:\Downloads\密钥生成审计附件.zip                                   4523 2026/9/29 8...
+D:\Downloads\are_you_ok.zip                                42546 2026/9/29 8...
+D:\Downloads\人生自古谁无死.zip                                   43696 2026/9/29 8...
+D:\Downloads\tom (1).zip                                   51073 2026/9/29 8...
+D:\Downloads\tom.zip                                       51073 2026/9/29 8...
+D:\Downloads\CatchPalu_flag.zip                             6506 2026/9/29 7...
+D:\Downloads\PaluArray_flag (1).zip                        73952 2026/9/29 7...
+D:\Downloads\Asymmetric_flag.zip                          745564 2026/9/29 7...
+D:\Downloads\PaluFlat_flag.zip                              9644 2026/9/29 7...
+D:\Downloads\checker (4).zip                               17498 2026/9/29 6...
+D:\Downloads\butterfly.7z                                 260238 2026/9/29 6...
+D:\Downloads\ParlooChecker_flag.zip                      5216086 2026/9/29 6...
+D:\Downloads\palugogogo_flag.zip                          702556 2026/9/29 6...
+D:\Downloads\checker (3).zip                               17498 2026/9/29 5...
+D:\Downloads\R.zip                                         87569 2026/9/29 4...
+D:\Downloads\ezBase-20250521104055-dq14shk (1).rar          7833 2026/9/29 3...
+D:\Downloads\MaybeSignin.zip                                6305 2026/9/29 3...
+D:\Downloads\arkt (1).zip                                 109627 2026/9/29 3...
+D:\Downloads\secret (1).zip                              1170497 2026/9/29 1...
+D:\Downloads\checker (2).zip                               17498 2026/9/29 1...
+D:\Downloads\easyre (1).zip                               117343 2026/9/29 1...
+D:\Downloads\checker (1).zip                               17498 2026/9/29 1...
+D:\Downloads\digital_key_trace.sqlite.zip                   2560 2026/9/29 0...
+D:\Downloads\game_flag (1).exe                           6731652 2026/9/28 2...
+D:\Downloads\EzFlag_248f149404428676e6aa45e6312d069c.zip    5589 2026/9/28 2...
+
+
+PS C:\Users\mzj\Desktop\CTF> Get-ChildItem -LiteralPath 'D:\Downloads' -Filter 'checker*.zip' | Sort-Object LastWriteTime -Descending | Format-List Name,FullName,Length,CreationTime,LastWriteTime
+
+
+Name          : checker (5).zip
+FullName      : D:\Downloads\checker (5).zip
+Length        : 17498
+CreationTime  : 2026/9/29 15:37:47
+LastWriteTime : 2026/9/29 15:37:48
+
+Name          : checker (4).zip
+FullName      : D:\Downloads\checker (4).zip
+Length        : 17498
+CreationTime  : 2026/9/29 6:42:04
+LastWriteTime : 2026/9/29 6:42:07
+
+Name          : checker (3).zip
+FullName      : D:\Downloads\checker (3).zip
+Length        : 17498
+CreationTime  : 2026/9/29 5:13:45
+LastWriteTime : 2026/9/29 5:13:49
+
+Name          : checker (2).zip
+FullName      : D:\Downloads\checker (2).zip
+Length        : 17498
+CreationTime  : 2026/9/29 1:50:09
+LastWriteTime : 2026/9/29 1:50:11
+
+Name          : checker (1).zip
+FullName      : D:\Downloads\checker (1).zip
+Length        : 17498
+CreationTime  : 2026/9/29 1:45:41
+LastWriteTime : 2026/9/29 1:45:45
+
+Name          : checker.zip
+FullName      : D:\Downloads\checker.zip
+Length        : 17498
+CreationTime  : 2026/9/27 19:28:13
+LastWriteTime : 2026/9/27 19:28:15
+
+
+
+PS C:\Users\mzj\Desktop\CTF> Get-ChildItem -LiteralPath 'D:\Downloads' -Filter 'checker*.zip' | Sort-Object LastWriteTime -Descending | Get-FileHash -Algorithm SHA256 | Format-Table Path,Hash -AutoSize
+
+Path                         Hash
+----                         ----
+D:\Downloads\checker (5).zip 598E457DCDFFCB89F4A1B5CF56133E1D8A194E737B8C25C...
+D:\Downloads\checker (4).zip 598E457DCDFFCB89F4A1B5CF56133E1D8A194E737B8C25C...
+D:\Downloads\checker (3).zip 598E457DCDFFCB89F4A1B5CF56133E1D8A194E737B8C25C...
+D:\Downloads\checker (2).zip 598E457DCDFFCB89F4A1B5CF56133E1D8A194E737B8C25C...
+D:\Downloads\checker (1).zip 598E457DCDFFCB89F4A1B5CF56133E1D8A194E737B8C25C...
+D:\Downloads\checker.zip     598E457DCDFFCB89F4A1B5CF56133E1D8A194E737B8C25C...
+
+
+PS C:\Users\mzj\Desktop\CTF> Get-FileHash -LiteralPath 'D:\Downloads\checker (5).zip' -Algorithm SHA256 | Format-List Path,Algorithm,Hash
+
+
+Path      : D:\Downloads\checker (5).zip
+Algorithm : SHA256
+Hash      : 598E457DCDFFCB89F4A1B5CF56133E1D8A194E737B8C25C6C0EA722854426D36
+
+
+
+PS C:\Users\mzj\Desktop\CTF> New-Item -ItemType Directory -Force -Path (Join-Path $target '附件_原始')
+
+
+    Directory: C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\批次14_20260929\562_checker
+
+
+Mode                 LastWriteTime         Length Name
+----                 -------------         ------ ----
+d-----         2026/9/29     15:42                附件_原始
+
+
+PS C:\Users\mzj\Desktop\CTF> Copy-Item -LiteralPath 'D:\Downloads\checker (5).zip' -Destination (Join-Path (Join-Path $target '附件_原始') 'checker_20260929.zip') -PassThru | Format-List FullName,Length,LastWriteTime
+
+
+FullName      : C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\批次14_20260929\562_checker\附件
+                _原始\checker_20260929.zip
+Length        : 17498
+LastWriteTime : 2026/9/29 15:37:48
+
+
+
+PS C:\Users\mzj\Desktop\CTF> Get-FileHash -LiteralPath (Join-Path (Join-Path $target '附件_原始') 'checker_20260929.zip') -Algorithm SHA256 | Format-List Path,Algorithm,Hash
+
+
+Path      : C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\批次14_20260929\562_checker\附件_原始\
+            checker_20260929.zip
+Algorithm : SHA256
+Hash      : 598E457DCDFFCB89F4A1B5CF56133E1D8A194E737B8C25C6C0EA722854426D36
+
+
+
+PS C:\Users\mzj\Desktop\CTF> tar.exe -tf (Join-Path (Join-Path $target '附件_原始') 'checker_20260929.zip')
+
+PS C:\Users\mzj\Desktop\CTF> Expand-Archive -LiteralPath (Join-Path (Join-Path $target '附件_原始') 'checker_20260929.zip') -DestinationPath (Join-Path $target '提取_分析') -Force
+PS C:\Users\mzj\Desktop\CTF> Get-ChildItem -LiteralPath (Join-Path $target '提取_分析') -Recurse -File | Format-List FullName,Length,LastWriteTime
+
+
+FullName      : C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\批次14_20260929\562_checker\提取
+                _分析\checker.exe
+Length        : 42857
+LastWriteTime : 2026/7/25 21:06:56
+
+
+
+PS C:\Users\mzj\Desktop\CTF> Get-Command llvm-objdump.exe,dumpbin.exe,objdump.exe,strings.exe,rabin2.exe,rizin.exe,python.exe -ErrorAction SilentlyContinue | Format-Table Name,Source -AutoSize
+
+Name        Source
+----        ------
+objdump.exe C:\msys64\mingw64\bin\objdump.exe
+strings.exe C:\msys64\mingw64\bin\strings.exe
+python.exe  C:\Users\mzj\AppData\Local\Programs\Python\Python312\python.exe
+
+
+PS C:\Users\mzj\Desktop\CTF> Get-FileHash -LiteralPath (Join-Path (Join-Path $target '提取_分析') 'checker.exe') -Algorithm SHA256 | Format-List Path,Algorithm,Hash
+
+
+Path      : C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\批次14_20260929\562_checker\提取_分析\
+            checker.exe
+Algorithm : SHA256
+Hash      : 449D9F4569A0ED70FCB9BC8B96737719B62CFD8AE7C1E99D2864A3999887FDF5
+
+
+
+PS C:\Users\mzj\Desktop\CTF> objdump.exe -f -p (Join-Path (Join-Path $target '提取_分析') 'checker.exe')
+
+PS C:\Users\mzj\Desktop\CTF> Copy-Item -LiteralPath (Join-Path (Join-Path $target '提取_分析') 'checker.exe') -Destination 'C:\Users\mzj\Desktop\CTF\checker_562_tmp.exe' -PassThru | Format-List FullName,Length
+
+
+FullName : C:\Users\mzj\Desktop\CTF\checker_562_tmp.exe
+Length   : 42857
+
+
+
+PS C:\Users\mzj\Desktop\CTF> objdump.exe -f -p 'C:\Users\mzj\Desktop\CTF\checker_562_tmp.exe'
+
+PS C:\Users\mzj\Desktop\CTF> strings.exe -a -n 4 'C:\Users\mzj\Desktop\CTF\checker_562_tmp.exe' | Tee-Object -FilePath (Join-Path $target 'strings_ascii.txt')
+!This program cannot be run in DOS mode.
+.text
+P`.data
+.rdata
+0@/4
+0@.bss
+.idata
+.CRT
+.tls
+@B/29
+B/41
+B/55
+B/67
+$AP@
+$t@@
+$dP@
+[^_]
+[^_]
+=dp@
+D$$t
+$Dp@
+$Dp@
+$Dp@
+$Dp@
+$Dp@
+$Dp@
+$Dp@
+$Dp@
+$Dp@
+L[^_]
+L[^_]
+-@S@
+5@S@
+$XQ@
+ [^_
+$$Q@
+?t?1
+t\VS
+<]ta<
+[^_]
+[^_]
+<]t.<
+[^_]
+,[^_]
+,[^_]
+<]t[
+[^_]
+t(<{t?
+<}t	<,u@
+<{t,
+</t&<\t"
+[^_]
+5hp@
+[^_]
+UWVS
+[^_]
+EOBDXFMS
+wyNbQJBL
+WbbQy
+T[avT{v
+libgcc_s_dw2-1.dll
+__register_frame_info
+__deregister_frame_info
+libgcj-16.dll
+_Jv_RegisterClasses
+Performing initial checks...
+Checks completed.
+Enter the flag:
+Correct! You have the flag.
+Incorrect flag.
+Mingw runtime failure:
+  VirtualQuery failed for %d bytes at address %p
+  Unknown pseudo relocation protocol version %d.
+  Unknown pseudo relocation bit size %d.
+glob-1.0-mingw32
+GCC: (GNU) 6.3.0
+GCC: (GNU) 6.3.0
+GCC: (MinGW.org GCC-6.3.0-1) 6.3.0
+GCC: (GNU) 6.3.0
+GCC: (GNU) 6.3.0
+GCC: (GNU) 6.3.0
+GCC: (GNU) 6.3.0
+GCC: (GNU) 6.3.0
+GCC: (GNU) 6.3.0
+GCC: (GNU) 6.3.0
+GCC: (GNU) 6.3.0
+GCC: (GNU) 6.3.0
+GCC: (GNU) 6.3.0
+GCC: (GNU) 6.3.0
+GCC: (GNU) 6.3.0
+GCC: (GNU) 6.3.0
+GCC: (GNU) 6.3.0
+GCC: (GNU) 6.3.0
+GCC: (GNU) 6.3.0
+GCC: (GNU) 6.3.0
+DeleteCriticalSection
+EnterCriticalSection
+ExitProcess
+FindClose
+FindFirstFileA
+FindNextFileA
+FreeLibrary
+GetCommandLineA
+GetLastError
+GetModuleHandleA
+GetProcAddress
+InitializeCriticalSection
+LeaveCriticalSection
+LoadLibraryA
+SetUnhandledExceptionFilter
+Sleep
+TlsGetValue
+VirtualProtect
+VirtualQuery
+_strdup
+_stricoll
+__getmainargs
+__mb_cur_max
+__p__environ
+__p__fmode
+__set_app_type
+_cexit
+_errno
+_fpreset
+_fullpath
+_iob
+_isctype
+_onexit
+_pctype
+_setmode
+abort
+atexit
+calloc
+fgets
+free
+fwrite
+malloc
+mbstowcs
+memcpy
+printf
+puts
+realloc
+setlocale
+signal
+strcmp
+strcoll
+strcspn
+strlen
+tolower
+vfprintf
+wcstombs
+KERNEL32.dll
+msvcrt.dll
+msvcrt.dll
+../../../src/gcc-6.3.0/libgcc/config/i386/cygwin.S
+/home/keith/src/mingw/gcc-build/gcc-6.3.0-mingw32-cross-native/mingw32/libgcc
+GNU AS 2.28
+GNU C11 6.3.0 -mtune=generic -march=i586 -g -g -g -O2 -O2 -O2 -fbuilding-libgcc -fno-stack-protector
+../../../src/gcc-6.3.0/libgcc/libgcc2.c
+/home/keith/src/mingw/gcc-build/gcc-6.3.0-mingw32-cross-native/mingw32/libgcc
+unsigned int
+short unsigned int
+long long int
+long double
+char
+long int
+_iobuf
+_ptr
+_cnt
+_base
+_flag
+_file
+_charbuf
+_bufsiz
+_tmpfname
+FILE
+_iob
+short int
+long unsigned int
+_argc
+_argv
+__mb_cur_max
+_sys_nerr
+_sys_errlist
+_osver
+_winver
+_winmajor
+_winminor
+_fmode
+sizetype
+optind
+optopt
+opterr
+optarg
+_daylight
+_timezone
+_tzname
+daylight
+timezone
+tzname
+hashval_t
+htab_hash
+htab_eq
+htab_hash_pointer
+htab_eq_pointer
+unsigned char
+stringop_alg
+no_stringop
+libcall
+rep_prefix_1_byte
+rep_prefix_4_byte
+rep_prefix_8_byte
+loop_1_byte
+loop
+unrolled_loop
+vector_loop
+last_alg
+unspec_strings
+unspecv_strings
+stringop_strategy
+noalign
+stringop_algs
+unknown_size
+size
+processor_costs
+shift_var
+shift_const
+mult_init
+mult_bit
+divide
+movsx
+movzx
+large_insn
+move_ratio
+movzbl_load
+int_load
+int_store
+fp_move
+fp_load
+fp_store
+mmx_move
+mmx_load
+mmx_store
+sse_move
+sse_load
+sse_store
+mmxsse_to_integer
+l1_cache_size
+l2_cache_size
+prefetch_block
+simultaneous_prefetches
+branch_cost
+fadd
+fmul
+fdiv
+fabs
+fchs
+fsqrt
+memcpy
+memset
+scalar_stmt_cost
+scalar_load_cost
+scalar_store_cost
+vec_stmt_cost
+vec_to_scalar_cost
+scalar_to_vec_cost
+vec_align_load_cost
+vec_unalign_load_cost
+vec_store_cost
+cond_taken_branch_cost
+cond_not_taken_branch_cost
+ix86_cost
+ix86_size_cost
+ix86_tune_indices
+X86_TUNE_SCHEDULE
+X86_TUNE_PARTIAL_REG_DEPENDENCY
+X86_TUNE_SSE_PARTIAL_REG_DEPENDENCY
+X86_TUNE_SSE_SPLIT_REGS
+X86_TUNE_PARTIAL_FLAG_REG_STALL
+X86_TUNE_MOVX
+X86_TUNE_MEMORY_MISMATCH_STALL
+X86_TUNE_FUSE_CMP_AND_BRANCH_32
+X86_TUNE_FUSE_CMP_AND_BRANCH_64
+X86_TUNE_FUSE_CMP_AND_BRANCH_SOFLAGS
+X86_TUNE_FUSE_ALU_AND_BRANCH
+X86_TUNE_REASSOC_INT_TO_PARALLEL
+X86_TUNE_REASSOC_FP_TO_PARALLEL
+X86_TUNE_ACCUMULATE_OUTGOING_ARGS
+X86_TUNE_PROLOGUE_USING_MOVE
+X86_TUNE_EPILOGUE_USING_MOVE
+X86_TUNE_USE_LEAVE
+X86_TUNE_PUSH_MEMORY
+X86_TUNE_SINGLE_PUSH
+X86_TUNE_DOUBLE_PUSH
+X86_TUNE_SINGLE_POP
+X86_TUNE_DOUBLE_POP
+X86_TUNE_PAD_SHORT_FUNCTION
+X86_TUNE_PAD_RETURNS
+X86_TUNE_FOUR_JUMP_LIMIT
+X86_TUNE_SOFTWARE_PREFETCHING_BENEFICIAL
+X86_TUNE_LCP_STALL
+X86_TUNE_READ_MODIFY
+X86_TUNE_USE_INCDEC
+X86_TUNE_INTEGER_DFMODE_MOVES
+X86_TUNE_OPT_AGU
+X86_TUNE_AVOID_LEA_FOR_ADDR
+X86_TUNE_SLOW_IMUL_IMM32_MEM
+X86_TUNE_SLOW_IMUL_IMM8
+X86_TUNE_AVOID_MEM_OPND_FOR_CMOVE
+X86_TUNE_SINGLE_STRINGOP
+X86_TUNE_MISALIGNED_MOVE_STRING_PRO_EPILOGUES
+X86_TUNE_USE_SAHF
+X86_TUNE_USE_CLTD
+X86_TUNE_USE_BT
+X86_TUNE_USE_HIMODE_FIOP
+X86_TUNE_USE_SIMODE_FIOP
+X86_TUNE_USE_FFREEP
+X86_TUNE_EXT_80387_CONSTANTS
+X86_TUNE_VECTORIZE_DOUBLE
+X86_TUNE_GENERAL_REGS_SSE_SPILL
+X86_TUNE_SSE_UNALIGNED_LOAD_OPTIMAL
+X86_TUNE_SSE_UNALIGNED_STORE_OPTIMAL
+X86_TUNE_SSE_PACKED_SINGLE_INSN_OPTIMAL
+X86_TUNE_SSE_TYPELESS_STORES
+X86_TUNE_SSE_LOAD0_BY_PXOR
+X86_TUNE_INTER_UNIT_MOVES_TO_VEC
+X86_TUNE_INTER_UNIT_MOVES_FROM_VEC
+X86_TUNE_INTER_UNIT_CONVERSIONS
+X86_TUNE_SPLIT_MEM_OPND_FOR_FP_CONVERTS
+X86_TUNE_USE_VECTOR_FP_CONVERTS
+X86_TUNE_USE_VECTOR_CONVERTS
+X86_TUNE_SLOW_PSHUFB
+X86_TUNE_VECTOR_PARALLEL_EXECUTION
+X86_TUNE_AVOID_4BYTE_PREFIXES
+X86_TUNE_AVX256_UNALIGNED_LOAD_OPTIMAL
+X86_TUNE_AVX256_UNALIGNED_STORE_OPTIMAL
+X86_TUNE_AVX128_OPTIMAL
+X86_TUNE_DOUBLE_WITH_ADD
+X86_TUNE_ALWAYS_FANCY_MATH_387
+X86_TUNE_UNROLL_STRLEN
+X86_TUNE_SHIFT1
+X86_TUNE_ZERO_EXTEND_WITH_AND
+X86_TUNE_PROMOTE_HIMODE_IMUL
+X86_TUNE_FAST_PREFIX
+X86_TUNE_READ_MODIFY_WRITE
+X86_TUNE_MOVE_M1_VIA_OR
+X86_TUNE_NOT_UNPAIRABLE
+X86_TUNE_PARTIAL_REG_STALL
+X86_TUNE_PROMOTE_QIMODE
+X86_TUNE_PROMOTE_HI_REGS
+X86_TUNE_HIMODE_MATH
+X86_TUNE_SPLIT_LONG_MOVES
+X86_TUNE_USE_XCHGB
+X86_TUNE_USE_MOV0
+X86_TUNE_NOT_VECTORMODE
+X86_TUNE_AVOID_VECTOR_DECODE
+X86_TUNE_AVOID_FALSE_DEP_FOR_BMI
+X86_TUNE_BRANCH_PREDICTION_HINTS
+X86_TUNE_QIMODE_MATH
+X86_TUNE_PROMOTE_QI_REGS
+X86_TUNE_ADJUST_UNROLL
+X86_TUNE_ONE_IF_CONV_INSN
+X86_TUNE_LAST
+ix86_tune_features
+ix86_arch_indices
+X86_ARCH_CMOV
+X86_ARCH_CMPXCHG
+X86_ARCH_CMPXCHG8B
+X86_ARCH_XADD
+X86_ARCH_BSWAP
+X86_ARCH_LAST
+ix86_arch_features
+x86_prefetch_sse
+_dont_use_tree_here_
+x86_mfence
+reg_class
+NO_REGS
+AREG
+DREG
+CREG
+BREG
+SIREG
+DIREG
+AD_REGS
+CLOBBERED_REGS
+Q_REGS
+NON_Q_REGS
+INDEX_REGS
+LEGACY_REGS
+GENERAL_REGS
+FP_TOP_REG
+FP_SECOND_REG
+FLOAT_REGS
+SSE_FIRST_REG
+NO_REX_SSE_REGS
+SSE_REGS
+EVEX_SSE_REGS
+BND_REGS
+ALL_SSE_REGS
+MMX_REGS
+FP_TOP_SSE_REGS
+FP_SECOND_SSE_REGS
+FLOAT_SSE_REGS
+FLOAT_INT_REGS
+INT_SSE_REGS
+FLOAT_INT_SSE_REGS
+MASK_EVEX_REGS
+MASK_REGS
+ALL_REGS
+LIM_REG_CLASSES
+dbx_register_map
+dbx64_register_map
+svr4_dbx_register_map
+x86_64_ms_sysv_extra_clobbered_registers
+processor_type
+PROCESSOR_GENERIC
+PROCESSOR_I386
+PROCESSOR_I486
+PROCESSOR_PENTIUM
+PROCESSOR_LAKEMONT
+PROCESSOR_PENTIUMPRO
+PROCESSOR_PENTIUM4
+PROCESSOR_NOCONA
+PROCESSOR_CORE2
+PROCESSOR_NEHALEM
+PROCESSOR_SANDYBRIDGE
+PROCESSOR_HASWELL
+PROCESSOR_BONNELL
+PROCESSOR_SILVERMONT
+PROCESSOR_KNL
+PROCESSOR_SKYLAKE_AVX512
+PROCESSOR_INTEL
+PROCESSOR_GEODE
+PROCESSOR_K6
+PROCESSOR_ATHLON
+PROCESSOR_K8
+PROCESSOR_AMDFAM10
+PROCESSOR_BDVER1
+PROCESSOR_BDVER2
+PROCESSOR_BDVER3
+PROCESSOR_BDVER4
+PROCESSOR_BTVER1
+PROCESSOR_BTVER2
+PROCESSOR_ZNVER1
+PROCESSOR_max
+ix86_tune
+ix86_arch
+ix86_preferred_stack_boundary
+ix86_incoming_stack_boundary
+regclass_map
+signed char
+UQItype
+long long unsigned int
+float
+complex float
+double
+complex double
+complex long double
+__float128
+__unknown__
+__popcount_tab
+__clz_tab
+func_ptr
+__CTOR_LIST__
+__DTOR_LIST__
+../../../src/gcc-6.3.0/libgcc/config/i386
+cygwin.S
+""YK0g=YY0/>""
+/home/keith/mingw32-gcc-6.3.0/include
+../../../src/gcc-6.3.0/libgcc/../include
+../.././gcc
+../../../src/gcc-6.3.0/libgcc/../gcc/config/i386
+../../../src/gcc-6.3.0/libgcc
+stdio.h
+stdlib.h
+getopt.h
+time.h
+hashtab.h
+insn-constants.h
+i386.h
+i386-opts.h
+libgcc2.h
+gbl-ctors.h
+libgcc2.c
+_atexit
+__onexit0
+.text
+.bss
+.file
+cygming-crtbegin.c_obj
+.text
+.data
+.bss
+.rdata
+.jcr
+.file
+checker.c
+_main
+.text
+.data
+.bss
+.rdata
+.text
+.text
+.bss
+___main
+.text
+.data
+.bss
+.text
+.bss
+.CRT$XDZ
+.CRT$XDA
+.CRT$XLA
+.tls$ZZZ
+.tls$AAA
+.text
+.bss
+.text
+.bss
+.rdata
+.file
+fake
+.text
+.data
+.bss
+.file
+libgcc2.c
+.text
+.data
+.bss
+.text
+.data
+.text
+.rdata
+.text
+.bss
+.rdata
+.text
+.idata$5
+.idata$6
+.idata$5
+.idata$6
+.idata$5
+.idata$6
+.idata$5
+.idata$6
+.idata$5
+.idata$6
+.idata$5
+.idata$6
+.idata$5
+.idata$6
+.idata$5
+.idata$6
+.idata$5
+.idata$6
+.idata$5
+.idata$6
+.idata$5
+.idata$6
+.idata$5
+.idata$6
+.idata$5
+.idata$6
+.idata$5
+.idata$6
+.idata$5
+.idata$6
+.idata$5
+.idata$6v
+.idata$5
+.idata$6n
+.idata$5
+.idata$6f
+.idata$5
+.idata$6\
+.idata$6R
+.idata$5
+.idata$6J
+.idata$5
+.idata$6>
+.idata$64
+.idata$6*
+.idata$5
+.idata$6
+.idata$6
+.idata$5
+.idata$6
+.idata$5
+.idata$6
+.idata$5
+.idata$6
+.idata$5
+.idata$6
+.idata$5
+.idata$6
+.idata$6
+.idata$5
+.idata$6
+.idata$4
+.idata$5
+.idata$5
+.idata$6t
+.idata$5
+.idata$6b
+.idata$5|
+.idata$6T
+.idata$5x
+.idata$6L
+.idata$5t
+.idata$6.
+.idata$5p
+.idata$6
+.idata$5l
+.idata$6
+.idata$5h
+.idata$6
+.idata$5d
+.idata$6
+.idata$5`
+.idata$6
+.idata$5\
+.idata$6
+.idata$5X
+.idata$6
+.idata$5T
+.idata$6
+.idata$5P
+.idata$6
+.idata$5L
+.idata$6r
+.idata$5H
+.idata$6f
+.idata$5D
+.idata$6X
+.idata$5@
+.idata$6@
+.idata$5<
+.idata$6(
+.idata$4P
+.idata$5<
+.idata$5
+.idata$6
+.idata$5
+.idata$6
+.idata$4
+.idata$5
+.file
+cygming-crtend.c
+.text
+.data
+.bss
+.jcr
+.idata$5
+.idata$6
+.idata$5
+.idata$6
+__cexit
+_strcspn`+
+_free
+_strcmp
+__errno
+___xl_c
+___xl_z
+_puts
+_strcollh+
+__dll__
+_fwrite
+_memcpy
+__argc
+_tolowerP+
+___xl_a
+___xl_d
+__CRT_MTd
+_strdup
+__argv
+_calloc
+__fmode
+_realloc
+__end__
+_signal
+_malloc
+_abort
+_fgets
+_strlen
+_printf
+_Sleep@48,
+.eh_frame
+.debug_aranges
+.debug_info
+.debug_abbrev
+.debug_line
+.debug_frame
+__mingw32_init_mainargs
+_mainCRTStartup
+_WinMainCRTStartup
+_deregister_frame_fn
+___JCR_LIST__
+___gcc_register_frame
+___gcc_deregister_frame
+.eh_frame
+.rdata$zzz
+_fake_check
+_encrypt_flag
+_check_flag
+__setargv
+___cpu_features_init
+___do_global_dtors
+___do_global_ctors
+___dyn_tls_init@12
+___tlregdtor
+____w64_mingwthr_add_key_dtor
+____w64_mingwthr_remove_key_dtor
+___mingw_TLScallback
+__pei386_runtime_relocator
+.debug_info
+.debug_abbrev
+.debug_line
+.debug_aranges
+.debug_frame
+_fesetenv
+___mingw_glob
+___mingw_globfree
+___mingw_dirname
+___mingw_opendir
+___mingw_readdir
+___mingw_closedir
+___mingw_rewinddir
+___mingw_telldir
+___mingw_seekdir
+___FRAME_END__
+___JCR_END__
+_register_frame_ctor
+.text.startup
+.ctors.65535
+__imp__FindFirstFileA@8
+_VirtualProtect@16
+___RUNTIME_PSEUDO_RELOC_LIST__
+__imp___fullpath
+_FindFirstFileA@8
+__imp___setmode
+__data_start__
+_FreeLibrary@4
+___DTOR_LIST__
+__imp__VirtualProtect@16
+__imp___onexit
+___p__fmode
+__imp__GetLastError@0
+_SetUnhandledExceptionFilter@4
+__imp__VirtualQuery@12
+__imp__FindNextFileA@8
+___tls_start__
+__imp__TlsGetValue@4
+__libmsvcrt_a_iname
+__imp__InitializeCriticalSection@4
+_DeleteCriticalSection@4
+__rt_psrelocs_start
+__imp__abort
+__dll_characteristics__
+__size_of_stack_commit__
+__size_of_stack_reserve__
+__major_subsystem_version__
+___crt_xl_start__
+___crt_xi_start__
+___crt_xi_end__
+__imp__stricoll
+__imp____mb_cur_max
+_GetLastError@0
+__imp____p__environ
+__imp___pctype
+_VirtualQuery@12
+_mingw_initltsdrot_force
+__imp___iob
+_GetModuleHandleA@4
+___register_frame_info
+__libmoldname_a_iname
+_hmod_libgcc
+.weak.___register_frame_info.___EH_FRAME_BEGIN__
+__imp__strdup
+__imp___isctype
+__bss_start__
+___RUNTIME_PSEUDO_RELOC_LIST_END__
+__fpreset
+__size_of_heap_commit__
+__imp___errno
+___p__environ
+__imp__GetProcAddress@8
+_GetProcAddress@8
+___crt_xp_start__
+__imp__wcstombs
+_GetCommandLineA@0
+___crt_xp_end__
+__imp__signal
+__imp__puts
+__minor_os_version__
+__imp__atexit
+_encrypted_flag
+__imp__mbstowcs
+__head_libmsvcrt_a
+__image_base__
+__isctype
+__section_alignment__
+_LoadLibraryA@4
+_wcstombs
+__imp__FreeLibrary@4
+__IAT_end__
+__head_libmoldname_a
+__RUNTIME_PSEUDO_RELOC_LIST__
+_setlocale
+__imp____p__fmode
+__tls_start
+_ExitProcess@4
+__imp__strcoll
+__data_end__
+___getmainargs
+_FindClose@4
+__CTOR_LIST__
+_mbstowcs
+___set_app_type
+__bss_end__
+__CRT_fmode
+___crt_xc_end__
+__tls_index
+___crt_xc_start__
+__imp__fgets
+___CTOR_LIST__
+__rt_psrelocs_size
+__imp__memcpy
+_FindNextFileA@8
+__imp__strcmp
+__file_alignment__
+__imp__LeaveCriticalSection@4
+__imp__malloc
+___EH_FRAME_BEGIN__
+__major_os_version__
+__imp__realloc
+__IAT_start__
+_stricoll
+__tls_end
+__imp__GetModuleHandleA@4
+__DTOR_LIST__
+__imp___fpreset
+.weak.___deregister_frame_info.___EH_FRAME_BEGIN__
+_EnterCriticalSection@4
+__fullpath
+__size_of_heap_reserve__
+___crt_xt_start__
+___ImageBase
+__subsystem__
+__imp__strlen
+.weak.__Jv_RegisterClasses.___EH_FRAME_BEGIN__
+__CRT_fenv
+__imp__calloc
+__Jv_RegisterClasses
+__imp____getmainargs
+___tls_end__
+__imp__ExitProcess@4
+_mingw_initltssuo_force
+_InitializeCriticalSection@4
+___cpu_features
+__imp__free
+__imp__SetUnhandledExceptionFilter@4
+___deregister_frame_info
+__major_image_version__
+__loader_flags__
+__imp__tolower
+__CRT_glob
+__setmode
+__imp__printf
+___chkstk_ms
+__head_libkernel32_a
+__rt_psrelocs_end
+__imp___cexit
+__minor_subsystem_version__
+__imp__FindClose@4
+__minor_image_version__
+__imp__Sleep@4
+__imp__vfprintf
+__imp____set_app_type
+_mingw_initltsdyn_force
+_TlsGetValue@4
+__imp__DeleteCriticalSection@4
+_LeaveCriticalSection@4
+__imp__GetCommandLineA@0
+__imp__LoadLibraryA@4
+__imp__strcspn
+__imp__setlocale
+__RUNTIME_PSEUDO_RELOC_LIST_END__
+__libkernel32_a_iname
+___dyn_tls_init_callback
+__tls_used
+___crt_xt_end__
+_vfprintf
+__imp__EnterCriticalSection@4
+__imp__fwrite
+PS C:\Users\mzj\Desktop\CTF> objdump.exe -t 'C:\Users\mzj\Desktop\CTF\checker_562_tmp.exe' | Tee-Object -FilePath (Join-Path $target 'symbols_full.txt') | Select-String 'main|fake|encrypt|check|flag'
+
+C:\Users\mzj\Desktop\CTF\checker_562_tmp.exe:     file format pei-i386
+[  0](sec  1)(fl 0x00)(ty   20)(scl   2) (nx 0) 0x000002a0 __mingw32_init_maina
+rgs
+[  1](sec  1)(fl 0x00)(ty   20)(scl   2) (nx 0) 0x000002e0 _mainCRTStartup
+[  2](sec  1)(fl 0x00)(ty   20)(scl   2) (nx 0) 0x00000300 _WinMainCRTStartup
+[ 30](sec -2)(fl 0x00)(ty    0)(scl 103) (nx 1) 0x00000063 checker.c
+[ 32](sec  1)(fl 0x00)(ty   20)(scl   2) (nx 1) 0x00000460 _fake_check
+[ 34](sec  1)(fl 0x00)(ty   20)(scl   2) (nx 0) 0x00000490 _encrypt_flag
+[ 35](sec  1)(fl 0x00)(ty   20)(scl   2) (nx 0) 0x000004f0 _check_flag
+[ 36](sec  1)(fl 0x00)(ty   20)(scl   2) (nx 0) 0x0000052a _main
+[ 62](sec  1)(fl 0x00)(ty   20)(scl   2) (nx 0) 0x00000ae0 ___main
+[ 99](sec -2)(fl 0x00)(ty    0)(scl 103) (nx 1) 0x00000075 fake
+[371](sec  2)(fl 0x00)(ty    0)(scl   2) (nx 0) 0x00000020 _encrypted_flag
+[391](sec  1)(fl 0x00)(ty   20)(scl   2) (nx 0) 0x00002c18 ___getmainargs
+[445](sec  6)(fl 0x00)(ty    0)(scl   2) (nx 0) 0x00000198 __imp____getmainargs
+[456](sec -1)(fl 0x00)(ty    0)(scl   2) (nx 0) 0x00000000 __loader_flags__
+
+
+PS C:\Users\mzj\Desktop\CTF> objdump.exe -d -Mintel --start-address=0x401460 --stop-address=0x401620 'C:\Users\mzj\Desktop\CTF\checker_562_tmp.exe' | Tee-Object -FilePath (Join-Path $target '关键函数反汇编.txt')
+
+C:\Users\mzj\Desktop\CTF\checker_562_tmp.exe:     file format pei-i386
+
+
+Disassembly of section .text:
+
+00401460 <_fake_check>:
+  401460:	55                   	push   ebp
+  401461:	89 e5                	mov    ebp,esp
+  401463:	83 ec 18             	sub    esp,0x18
+  401466:	c7 04 24 64 50 40 00 	mov    DWORD PTR [esp],0x405064
+  40146d:	e8 1e 27 00 00       	call   403b90 <_puts>
+  401472:	c7 04 24 e8 03 00 00 	mov    DWORD PTR [esp],0x3e8
+  401479:	e8 ba 27 00 00       	call   403c38 <_Sleep@4>
+  40147e:	83 ec 04             	sub    esp,0x4
+  401481:	c7 04 24 81 50 40 00 	mov    DWORD PTR [esp],0x405081
+  401488:	e8 03 27 00 00       	call   403b90 <_puts>
+  40148d:	90                   	nop
+  40148e:	c9                   	leave
+  40148f:	c3                   	ret
+
+00401490 <_encrypt_flag>:
+  401490:	55                   	push   ebp
+  401491:	89 e5                	mov    ebp,esp
+  401493:	83 ec 28             	sub    esp,0x28
+  401496:	c7 45 f0 23 00 00 00 	mov    DWORD PTR [ebp-0x10],0x23
+  40149d:	c7 45 f4 00 00 00 00 	mov    DWORD PTR [ebp-0xc],0x0
+  4014a4:	eb 1e                	jmp    4014c4 <_encrypt_flag+0x34>
+  4014a6:	8b 55 f4             	mov    edx,DWORD PTR [ebp-0xc]
+  4014a9:	8b 45 0c             	mov    eax,DWORD PTR [ebp+0xc]
+  4014ac:	01 d0                	add    eax,edx
+  4014ae:	8b 4d f4             	mov    ecx,DWORD PTR [ebp-0xc]
+  4014b1:	8b 55 08             	mov    edx,DWORD PTR [ebp+0x8]
+  4014b4:	01 ca                	add    edx,ecx
+  4014b6:	0f b6 0a             	movzx  ecx,BYTE PTR [edx]
+  4014b9:	8b 55 f0             	mov    edx,DWORD PTR [ebp-0x10]
+  4014bc:	31 ca                	xor    edx,ecx
+  4014be:	88 10                	mov    BYTE PTR [eax],dl
+  4014c0:	83 45 f4 01          	add    DWORD PTR [ebp-0xc],0x1
+  4014c4:	8b 45 08             	mov    eax,DWORD PTR [ebp+0x8]
+  4014c7:	89 04 24             	mov    DWORD PTR [esp],eax
+  4014ca:	e8 89 26 00 00       	call   403b58 <_strlen>
+  4014cf:	89 c2                	mov    edx,eax
+  4014d1:	8b 45 f4             	mov    eax,DWORD PTR [ebp-0xc]
+  4014d4:	39 c2                	cmp    edx,eax
+  4014d6:	77 ce                	ja     4014a6 <_encrypt_flag+0x16>
+  4014d8:	8b 45 08             	mov    eax,DWORD PTR [ebp+0x8]
+  4014db:	89 04 24             	mov    DWORD PTR [esp],eax
+  4014de:	e8 75 26 00 00       	call   403b58 <_strlen>
+  4014e3:	89 c2                	mov    edx,eax
+  4014e5:	8b 45 0c             	mov    eax,DWORD PTR [ebp+0xc]
+  4014e8:	01 d0                	add    eax,edx
+  4014ea:	c6 00 00             	mov    BYTE PTR [eax],0x0
+  4014ed:	90                   	nop
+  4014ee:	c9                   	leave
+  4014ef:	c3                   	ret
+
+004014f0 <_check_flag>:
+  4014f0:	55                   	push   ebp
+  4014f1:	89 e5                	mov    ebp,esp
+  4014f3:	83 ec 58             	sub    esp,0x58
+  4014f6:	e8 65 ff ff ff       	call   401460 <_fake_check>
+  4014fb:	8d 45 c6             	lea    eax,[ebp-0x3a]
+  4014fe:	89 44 24 04          	mov    DWORD PTR [esp+0x4],eax
+  401502:	8b 45 08             	mov    eax,DWORD PTR [ebp+0x8]
+  401505:	89 04 24             	mov    DWORD PTR [esp],eax
+  401508:	e8 83 ff ff ff       	call   401490 <_encrypt_flag>
+  40150d:	c7 44 24 04 20 40 40 	mov    DWORD PTR [esp+0x4],0x404020
+  401514:	00
+  401515:	8d 45 c6             	lea    eax,[ebp-0x3a]
+  401518:	89 04 24             	mov    DWORD PTR [esp],eax
+  40151b:	e8 50 26 00 00       	call   403b70 <_strcmp>
+  401520:	85 c0                	test   eax,eax
+  401522:	0f 94 c0             	sete   al
+  401525:	0f b6 c0             	movzx  eax,al
+  401528:	c9                   	leave
+  401529:	c3                   	ret
+
+0040152a <_main>:
+  40152a:	55                   	push   ebp
+  40152b:	89 e5                	mov    ebp,esp
+  40152d:	83 e4 f0             	and    esp,0xfffffff0
+  401530:	83 ec 50             	sub    esp,0x50
+  401533:	e8 a8 05 00 00       	call   401ae0 <___main>
+  401538:	c7 04 24 93 50 40 00 	mov    DWORD PTR [esp],0x405093
+  40153f:	e8 54 26 00 00       	call   403b98 <_printf>
+  401544:	a1 bc 81 40 00       	mov    eax,ds:0x4081bc
+  401549:	89 44 24 08          	mov    DWORD PTR [esp+0x8],eax
+  40154d:	c7 44 24 04 32 00 00 	mov    DWORD PTR [esp+0x4],0x32
+  401554:	00
+  401555:	8d 44 24 1e          	lea    eax,[esp+0x1e]
+  401559:	89 04 24             	mov    DWORD PTR [esp],eax
+  40155c:	e8 67 26 00 00       	call   403bc8 <_fgets>
+  401561:	c7 44 24 04 a4 50 40 	mov    DWORD PTR [esp+0x4],0x4050a4
+  401568:	00
+  401569:	8d 44 24 1e          	lea    eax,[esp+0x1e]
+  40156d:	89 04 24             	mov    DWORD PTR [esp],eax
+  401570:	e8 eb 25 00 00       	call   403b60 <_strcspn>
+  401575:	c6 44 04 1e 00       	mov    BYTE PTR [esp+eax*1+0x1e],0x0
+  40157a:	8d 44 24 1e          	lea    eax,[esp+0x1e]
+  40157e:	89 04 24             	mov    DWORD PTR [esp],eax
+  401581:	e8 6a ff ff ff       	call   4014f0 <_check_flag>
+  401586:	85 c0                	test   eax,eax
+  401588:	74 0e                	je     401598 <_main+0x6e>
+  40158a:	c7 04 24 a6 50 40 00 	mov    DWORD PTR [esp],0x4050a6
+  401591:	e8 fa 25 00 00       	call   403b90 <_puts>
+  401596:	eb 0c                	jmp    4015a4 <_main+0x7a>
+  401598:	c7 04 24 c2 50 40 00 	mov    DWORD PTR [esp],0x4050c2
+  40159f:	e8 ec 25 00 00       	call   403b90 <_puts>
+  4015a4:	b8 00 00 00 00       	mov    eax,0x0
+  4015a9:	c9                   	leave
+  4015aa:	c3                   	ret
+  4015ab:	90                   	nop
+  4015ac:	66 90                	xchg   ax,ax
+  4015ae:	66 90                	xchg   ax,ax
+
+004015b0 <__setargv>:
+  4015b0:	55                   	push   ebp
+  4015b1:	89 e5                	mov    ebp,esp
+  4015b3:	57                   	push   edi
+  4015b4:	56                   	push   esi
+  4015b5:	53                   	push   ebx
+  4015b6:	83 ec 4c             	sub    esp,0x4c
+  4015b9:	f6 05 60 40 40 00 02 	test   BYTE PTR ds:0x404060,0x2
+  4015c0:	0f 84 ea 02 00 00    	je     4018b0 <__setargv+0x300>
+  4015c6:	e8 ad 26 00 00       	call   403c78 <_GetCommandLineA@0>
+  4015cb:	89 65 c4             	mov    DWORD PTR [ebp-0x3c],esp
+  4015ce:	89 04 24             	mov    DWORD PTR [esp],eax
+  4015d1:	89 c6                	mov    esi,eax
+  4015d3:	e8 80 25 00 00       	call   403b58 <_strlen>
+  4015d8:	8d 44 00 11          	lea    eax,[eax+eax*1+0x11]
+  4015dc:	c1 e8 04             	shr    eax,0x4
+  4015df:	c1 e0 04             	shl    eax,0x4
+  4015e2:	e8 49 0b 00 00       	call   402130 <___chkstk_ms>
+  4015e7:	29 c4                	sub    esp,eax
+  4015e9:	c7 45 e4 00 00 00 00 	mov    DWORD PTR [ebp-0x1c],0x0
+  4015f0:	c7 45 d4 00 00 00 00 	mov    DWORD PTR [ebp-0x2c],0x0
+  4015f7:	8d 44 24 10          	lea    eax,[esp+0x10]
+  4015fb:	c7 45 d0 00 00 00 00 	mov    DWORD PTR [ebp-0x30],0x0
+  401602:	89 c2                	mov    edx,eax
+  401604:	89 45 cc             	mov    DWORD PTR [ebp-0x34],eax
+  401607:	a1 60 40 40 00       	mov    eax,ds:0x404060
+  40160c:	25 00 44 00 00       	and    eax,0x4400
+  401611:	83 c8 10             	or     eax,0x10
+  401614:	89 45 c8             	mov    DWORD PTR [ebp-0x38],eax
+  401617:	31 c0                	xor    eax,eax
+  401619:	8d b4 26 00 00 00 00 	lea    esi,[esi+eiz*1+0x0]
+PS C:\Users\mzj\Desktop\CTF> objdump.exe -s -j .data 'C:\Users\mzj\Desktop\CTF\checker_562_tmp.exe' | Tee-Object -FilePath (Join-Path $target 'data_区段.txt')
+
+C:\Users\mzj\Desktop\CTF\checker_562_tmp.exe:     file format pei-i386
+
+Contents of section .data:
+ 404000 00000000 00000000 00000000 00000000  ................
+ 404010 00000000 00000000 00000000 00000000  ................
+ 404020 454f4244 58464d53 12146a17 531b7779  EOBDXFMS..j.S.wy
+ 404030 4e62514a 424c114f 52165762 62517911  NbQJBL.OR.WbbQy.
+ 404040 7312545b 6176547b 76115e00 00000000  s.T[avT{v.^.....
+ 404050 00000000 00000000 00000000 00000000  ................
+ 404060 02000000 fdffffff 00400000 f03c4000  .........@...<@.
+ 404070 ffffffff 00000000                    ........
+PS C:\Users\mzj\Desktop\CTF> objdump.exe -h 'C:\Users\mzj\Desktop\CTF\checker_562_tmp.exe' | Tee-Object -FilePath (Join-Path $target 'sections.txt')
+
+C:\Users\mzj\Desktop\CTF\checker_562_tmp.exe:     file format pei-i386
+
+Sections:
+Idx Name          Size      VMA       LMA       File off  Algn
+  0 .text         00002cf4  00401000  00401000  00000400  2**4
+                  CONTENTS, ALLOC, LOAD, READONLY, CODE, DATA
+  1 .data         00000078  00404000  00404000  00003200  2**5
+                  CONTENTS, ALLOC, LOAD, DATA
+  2 .rdata        00000340  00405000  00405000  00003400  2**2
+                  CONTENTS, ALLOC, LOAD, READONLY, DATA
+  3 .eh_frame     00000a04  00406000  00406000  00003800  2**2
+                  CONTENTS, ALLOC, LOAD, READONLY, DATA
+  4 .bss          00000070  00407000  00407000  00000000  2**2
+                  ALLOC
+  5 .idata        00000624  00408000  00408000  00004400  2**2
+                  CONTENTS, ALLOC, LOAD, DATA
+  6 .CRT          00000018  00409000  00409000  00004c00  2**2
+                  CONTENTS, ALLOC, LOAD, DATA
+  7 .tls          00000020  0040a000  0040a000  00004e00  2**2
+                  CONTENTS, ALLOC, LOAD, DATA
+  8 .debug_aranges 00000038  0040b000  0040b000  00005000  2**3
+                  CONTENTS, READONLY, DEBUGGING
+  9 .debug_info   00001cff  0040c000  0040c000  00005200  2**0
+                  CONTENTS, READONLY, DEBUGGING
+ 10 .debug_abbrev 0000012f  0040e000  0040e000  00007000  2**0
+                  CONTENTS, READONLY, DEBUGGING
+ 11 .debug_line   000001c8  0040f000  0040f000  00007200  2**0
+                  CONTENTS, READONLY, DEBUGGING
+ 12 .debug_frame  00000038  00410000  00410000  00007400  2**2
+                  CONTENTS, READONLY, DEBUGGING
+PS C:\Users\mzj\Desktop\CTF> @'
+from pathlib import Path
+import struct
+
+path = Path(r'C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\批次14_20260929\562_checker\提取_分析\checker.exe')
+data = path.read_bytes()
+if data[:2] != b'MZ':
+    raise SystemExit('错误：缺少 MZ 头')
+peoff = struct.unpack_from('<I', data, 0x3C)[0]
+if data[peoff:peoff + 4] != b'PE\0\0':
+    raise SystemExit('错误：缺少 PE 签名')
+coff = peoff + 4
+machine, section_count, timestamp, _, _, optional_size, characteristics = struct.unpack_from('<HHIIIHH', data, coff)
+opt = coff + 20
+magic = struct.unpack_from('<H', data, opt)[0]
+if magic != 0x10B:
+    raise SystemExit(f'暂不支持可选头类型 0x{magic:x}')
+image_base = struct.unpack_from('<I', data, opt + 28)[0]
+sections = []
+sec_off = opt + optional_size
+for i in range(section_count):
+    sh = sec_off + i * 40
+    name = data[sh:sh + 8].split(b'\0', 1)[0].decode('ascii', 'replace')
+    virtual_size, virtual_address, raw_size, raw_offset = struct.unpack_from('<IIII', data, sh + 8)
+    sections.append((name, virtual_size, virtual_address, raw_size, raw_offset))
+
+# objdump 符号表和反汇编显示 encrypted_flag 的虚拟地址是 0x404020。
+va = 0x404020
+for name, virtual_size, virtual_address, raw_size, raw_offset in sections:
+    delta = va - (image_base + virtual_address)
+    if 0 <= delta < min(max(virtual_size, raw_size), raw_size):
+        file_offset = raw_offset + delta
+        break
+else:
+    raise SystemExit(f'错误：无法将 VA 0x{va:08x} 映射到文件区段')
+end = data.index(b'\0', file_offset)
+cipher = data[file_offset:end]
+key = 0x23
+candidate = bytes(b ^ key for b in cipher)
+recovered_cipher = bytes(b ^ key for b in candidate)
+print(f'PE machine=0x{machine:04x}, sections={section_count}, image_base=0x{image_base:08x}')
+print(f'encrypted_flag VA=0x{va:08x}, file_offset=0x{file_offset:x}, section={name}')
+print(f'cipher length={len(cipher)} bytes')
+print(f'cipher hex={cipher.hex()}')
+print(f'candidate bytes={candidate!r}')
+print(f'candidate text={candidate.decode("ascii", "backslashreplace")}')
+print(f'forward XOR match={recovered_cipher == cipher}')
+print(f'flag prefix/suffix={candidate.startswith(b"flag{") and candidate.endswith(b"}")}')
+'@ | Set-Content -LiteralPath (Join-Path $target 'solve_checker.py') -Encoding UTF8
+PS C:\Users\mzj\Desktop\CTF> python.exe (Join-Path $target 'solve_checker.py')
+
+PS C:\Users\mzj\Desktop\CTF> @'
+# WP：第一届启航杯 checker（玄机 ID 562）
+
+## 题目信息
+
+- 平台：玄机（xj.edisec.net）
+- 题目：第一届启航杯checker（ID 562）
+- 分类 / 难度：REVERSE / 中等
+- 附件：`checker.exe`（Windows PE32，i386，42,857 字节）
+- 附件来源：`D:\Downloads\checker (5).zip`，于 2026-09-29 15:37 下载。目录内另有更早的同名 checker 下载；六份 ZIP 大小均为 17,498 字节且 SHA256 相同。本题存档保留了最新下载的原始 ZIP。
+- 附件 SHA256：`598E457DCDFFCB89F4A1B5CF56133E1D8A194E737B8C25C6C0EA722854426D36`
+- 解压后二进制 SHA256：`449D9F4569A0ED70FCB9BC8B96737719B62CFD8AE7C1E99D2864A3999887FDF5`
+
+## 结果
+
+从二进制内嵌的 43 字节密文按程序使用的单字节 XOR key `0x23` 逆变换，得到唯一匹配附件校验逻辑的候选：
+
+```text
+flag{enp17I4p8TZmAriao2lq5tAArZ2P1wxBUwXU2}
+```
+
+这不是对平台状态的声称：本 WP 的命令行复现证明该字符串按附件实际算法重新 XOR 后逐字节还原嵌入密文。平台提交核验由主代理另行通过前台完成。
+
+## 附件核验和文件布局
+
+1. 从 Downloads 中按最后写入时间核对到最新项为 `checker (5).zip`（17,498 字节，2026-09-29 15:37:48）。为防止仅凭文件名猜测，逐列出各 `checker*.zip` 的创建时间、长度和 SHA256；六份文件的摘要完全相同。
+2. 将最新 ZIP 原样复制到 `附件_原始\checker_20260929.zip`。复制前后 SHA256 均为 `598E457DCDFFCB89F4A1B5CF56133E1D8A194E737B8C25C6C0EA722854426D36`。
+3. 归档清单只有 `checker.exe`。提取后确认文件长 42,857 字节。
+4. PE 头显示 `pei-i386` / PE32、ImageBase `0x00400000`。符号表保留了 `checker.c`、`_fake_check`、`_encrypt_flag`、`_check_flag`、`_main` 和全局 `_encrypted_flag` 的符号。因含符号信息，可以直接定位源函数对应汇编。
+5. `.data` 节的 VMA 是 `0x00404000`，文件偏移 `0x3200`。符号 `_encrypted_flag` 位于 VA `0x00404020`，故数据文件偏移为 `0x3220`。
+
+## 逐步逆向过程
+
+### 1. 先区分干扰逻辑和核心校验
+
+入口 `_main`（VA `0x40152a`）的调用流程为：
+
+1. 输出输入提示；
+2. `fgets(buffer, 0x32, stdin)` 读入最多 49 个字符加终止符；
+3. 用 `strcspn(buffer, "\n")` 将换行替换为 NUL；
+4. 调用 `_check_flag(buffer)`；
+5. 根据返回值打印成功或失败消息。
+
+`_check_flag`（`0x4014f0`）先调用 `_fake_check`，后者只打印 `Performing initial checks...`，睡眠 1,000 毫秒，再打印 `Checks completed.`。它不改变输入、不访问 `/flag`，也不参与真伪比较；这是一段延迟/干扰。
+
+### 2. 还原真实变换
+
+`_encrypt_flag`（`0x401490`）的关键指令含义：
+
+- `[ebp-0x10] = 0x23`：固定 XOR 常数；
+- 循环边界由 `strlen(input)` 决定；
+- 每轮读取 `input[i]`，执行 `0x23 XOR input[i]`，写入输出 `out[i]`；
+- 循环后在 `out[strlen(input)]` 写 NUL。
+
+等价伪代码：
+
+```c
+for (i = 0; i < strlen(input); i++)
+    out[i] = input[i] ^ 0x23;
+out[strlen(input)] = '\0';
+```
+
+`_check_flag` 将加密结果与 VA `0x404020` 的 `_encrypted_flag` 调用 `strcmp` 比较，并以相等作为成功条件。因此逆变换也是 XOR 同一个常数：
+
+```text
+flag[i] = encrypted_flag[i] XOR 0x23
+```
+
+### 3. 从文件中定位并读取密文
+
+数据节十六进制转储中，`0x404020` 处开始的非零 C 字符串为 43 字节：
+
+```text
+454f424458464d5312146a17531b77794e62514a424c114f52165762625179117312545b6176547b76115e
+```
+
+最后一个字节之后紧跟 NUL。脚本 `solve_checker.py` 按 PE 节表将 VA `0x404020` 映射到文件偏移 `0x3220`，而不是从截图或人工复制的一段数据猜测。
+
+### 4. 逐字节解码并做正向核验
+
+对上述 43 字节执行 `byte XOR 0x23`，输出 `flag{enp17I4p8TZmAriao2lq5tAArZ2P1wxBUwXU2}`。脚本再次对候选逐字节 XOR `0x23`，并验证结果与附件密文字节完全相等（`forward XOR match=True`）；还检查了 `flag{` 前缀及 `}` 后缀。
+
+候选是 43 个 ASCII 字节，无 NUL、无换行。输入加换行总计 44 字节，小于 `fgets` 的 50 字节容量，因此可被主程序完整读入。`strcspn` 会移除输入行末换行，再进入 `_check_flag`。
+
+## 关于“读取 /flag”的题面提示
+
+题面提示让人考虑读取 `/flag`，但随附件提供的 `checker.exe` 中，真实验证流程不是去打开本机 `/flag` 文件，而是将输入 XOR 后与程序内 `.data` 中的 `_encrypted_flag` 比较。仅从该附件无法、也无需访问平台服务器的 `/flag` 文件；本题解依赖附件中已经存在的比较数据。
+
+导入表里有 `FindFirstFileA` / `FindNextFileA`，但它们属于该 MinGW 程序所带的运行时符号；已定位的 `_main`、`_check_flag` 和 `_encrypt_flag` 路径没有文件打开/读入流程。不要把运行时导入项误当成本题真实 flag 读取点。
+
+## 可复现文件
+
+- `附件_原始\checker_20260929.zip`：下载附件原样副本。
+- `提取_分析\checker.exe`：解压后的 PE。
+- `solve_checker.py`：仅用 Python 标准库解析 PE 节表、读取目标 VA 处的 C 字符串、执行 XOR 并正向核验。
+- `关键函数反汇编.txt`：`_fake_check`、`_encrypt_flag`、`_check_flag` 和 `_main` 反汇编。
+- `data_区段.txt`、`sections.txt`、`symbols_full.txt`：数据、节表与完整符号表。
+- `strings_ascii.txt`：ASCII 字符串提取结果。
+- `命令与输出记录.txt`：按执行顺序记录本题 PowerShell 输入及终端输出。
+
+## 方法小结
+
+对自带 checker 的逆向题，可以先定位比较函数和比较常量，再逆转算法；不要只被提示里的 `/flag` 或启动时延迟蒙蔽。确认解出的字节能被输入路径完整读取，并对解码结果做正向复算，可避免长度、NUL 截断和换行处理造成的误判。
+'@ | Set-Content -LiteralPath (Join-Path $target 'WP_第一届启航杯checker.md') -Encoding UTF8
+PS C:\Users\mzj\Desktop\CTF> @'
+# 玄机 ID 562：第一届启航杯checker
+
+本目录保存该题的原始附件副本、解压文件、逆向证据、复现脚本、WP 和 PowerShell 终端记录。
+
+## 状态
+
+- 本地静态逆向已恢复唯一匹配内嵌比较数据的候选 flag。
+- 正向复算已验证：候选逐字节 XOR `0x23` 后等于可执行文件中的 43 字节密文。
+- 本子任务未启动附件程序，也未向玄机提交；请由主代理在平台前台核验后更新状态。
+- 没有使用公开 Writeup 或网络搜索。
+
+## 文件
+
+- `附件_原始\checker_20260929.zip` — 最新下载 ZIP 的原样副本。
+- `提取_分析\checker.exe` — ZIP 中唯一的文件。
+- `WP_第一届启航杯checker.md` — 题目分析、反汇编解释、逐步求解与限制条件。
+- `solve_checker.py` — 标准库脚本，直接读 PE 并定位/解码密文。
+- `strings_ascii.txt` — ASCII 字符串输出。
+- `sections.txt` — PE 节表。
+- `symbols_full.txt` — PE 完整符号表。
+- `关键函数反汇编.txt` — `_fake_check`、`_encrypt_flag`、`_check_flag`、`_main` 指令。
+- `data_区段.txt` — `.data` 原始转储。
+- `命令与输出记录.txt` — 本题 PowerShell 命令和终端输出记录。
+
+## 附件摘要
+
+- 下载位置：`D:\Downloads\checker (5).zip`
+- ZIP SHA256：`598E457DCDFFCB89F4A1B5CF56133E1D8A194E737B8C25C6C0EA722854426D36`
+- `checker.exe` SHA256：`449D9F4569A0ED70FCB9BC8B96737719B62CFD8AE7C1E99D2864A3999887FDF5`
+
+请先阅读 WP，再运行 `python.exe .\solve_checker.py` 复现。
+'@ | Set-Content -LiteralPath (Join-Path $target 'README.md') -Encoding UTF8
+PS C:\Users\mzj\Desktop\CTF> @'
+from pathlib import Path
+import struct
+
+path = Path(r'C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\批次14_20260929\562_checker\提取_分析\checker.exe')
+data = path.read_bytes()
+if data[:2] != b'MZ':
+    raise SystemExit('错误：缺少 MZ 头')
+peoff = struct.unpack_from('<I', data, 0x3C)[0]
+if data[peoff:peoff + 4] != b'PE\0\0':
+    raise SystemExit('错误：缺少 PE 签名')
+coff = peoff + 4
+machine, section_count, timestamp, _, _, optional_size, characteristics = struct.unpack_from('<HHIIIHH', data, coff)
+opt = coff + 20
+magic = struct.unpack_from('<H', data, opt)[0]
+if magic != 0x10B:
+    raise SystemExit(f'暂不支持可选头类型 0x{magic:x}')
+image_base = struct.unpack_from('<I', data, opt + 28)[0]
+sections = []
+sec_off = opt + optional_size
+for i in range(section_count):
+    sh = sec_off + i * 40
+    name = data[sh:sh + 8].split(b'\0', 1)[0].decode('ascii', 'replace')
+    virtual_size, virtual_address, raw_size, raw_offset = struct.unpack_from('<IIII', data, sh + 8)
+    sections.append((name, virtual_size, virtual_address, raw_size, raw_offset))
+
+# objdump 符号表和反汇编显示 encrypted_flag 的虚拟地址是 0x404020。
+va = 0x404020
+for name, virtual_size, virtual_address, raw_size, raw_offset in sections:
+    delta = va - (image_base + virtual_address)
+    if 0 <= delta < raw_size:
+        file_offset = raw_offset + delta
+        break
+else:
+    raise SystemExit(f'错误：无法将 VA 0x{va:08x} 映射到文件区段')
+end = data.index(b'\0', file_offset)
+cipher = data[file_offset:end]
+key = 0x23
+candidate = bytes(b ^ key for b in cipher)
+recovered_cipher = bytes(b ^ key for b in candidate)
+input_line_length = len(candidate) + 1  # 末尾换行
+print(f'PE machine=0x{machine:04x}, sections={section_count}, image_base=0x{image_base:08x}')
+print(f'encrypted_flag VA=0x{va:08x}, file_offset=0x{file_offset:x}, section={name}')
+print(f'cipher length={len(cipher)} bytes')
+print(f'cipher hex={cipher.hex()}')
+print(f'candidate bytes={candidate!r}')
+print(f'candidate text={candidate.decode("ascii", "backslashreplace")}')
+print(f'candidate length={len(candidate)}; no NUL={b"\0" not in candidate}; no newline={b"\n" not in candidate}')
+print(f'line length with newline={input_line_length}; fits fgets(buffer, 50)={input_line_length <= 49}')
+print(f'forward XOR match={recovered_cipher == cipher}')
+print(f'flag prefix/suffix={candidate.startswith(b"flag{") and candidate.endswith(b"}")}')
+'@ | Set-Content -LiteralPath (Join-Path $target 'solve_checker.py') -Encoding UTF8
+PS C:\Users\mzj\Desktop\CTF> python.exe (Join-Path $target 'solve_checker.py') | Tee-Object -FilePath (Join-Path $target '正向复算输出.txt')
+PE machine=0x014c, sections=13, image_base=0x00400000
+encrypted_flag VA=0x00404020, file_offset=0x3220, section=.data
+cipher length=43 bytes
+cipher hex=454f424458464d5312146a17531b77794e62514a424c114f52165762625179117312545b6176547b76115e
+candidate bytes=b'flag{enp17I4p8TZmAriao2lq5tAArZ2P1wxBUwXU2}'
+candidate text=flag{enp17I4p8TZmAriao2lq5tAArZ2P1wxBUwXU2}
+candidate length=43; no NUL=True; no newline=True
+line length with newline=44; fits fgets(buffer, 50)=True
+forward XOR match=True
+flag prefix/suffix=True
+PS C:\Users\mzj\Desktop\CTF> Add-Content -LiteralPath (Join-Path $target 'README.md') -Value '- `正向复算输出.txt` — 复现脚本的完整 stdout。'
+PS C:\Users\mzj\Desktop\CTF> Add-Content -LiteralPath (Join-Path $target 'WP_第一届启航杯checker.md') -Value '- `正向复算输出.txt`：脚本完整 stdout，含候选长度、输入容量检查和正向 XOR 结果。'
+PS C:\Users\mzj\Desktop\CTF> Get-FileHash -LiteralPath 'C:\Users\mzj\Desktop\CTF\checker_562_tmp.exe' -Algorithm SHA256 | Format-List Path,Hash
+
+
+Path : C:\Users\mzj\Desktop\CTF\checker_562_tmp.exe
+Hash : 449D9F4569A0ED70FCB9BC8B96737719B62CFD8AE7C1E99D2864A3999887FDF5
+
+
+
+PS C:\Users\mzj\Desktop\CTF> Remove-Item -LiteralPath 'C:\Users\mzj\Desktop\CTF\checker_562_tmp.exe' -Force
+PS C:\Users\mzj\Desktop\CTF> Test-Path -LiteralPath 'C:\Users\mzj\Desktop\CTF\checker_562_tmp.exe'
+False
+PS C:\Users\mzj\Desktop\CTF> Get-ChildItem -LiteralPath $target -Recurse -File | Sort-Object FullName | Select-Object @{Name='RelativePath';Expression={$_.FullName.Substring($target.Length + 1)}},Length | Format-Table -AutoSize
+
+RelativePath               Length
+------------               ------
+data_区段.txt                  1218
+README.md                    1607
+sections.txt                 3240
+solve_checker.py             2454
+strings_ascii.txt           28150
+symbols_full.txt            65772
+WP_第一届启航杯checker.md          6006
+附件_原始\checker_20260929.zip  17498
+关键函数反汇编.txt                 14712
+命令与输出记录.txt                   369
+提取_分析\checker.exe           42857
+正向复算输出.txt                   1052
+
+
+PS C:\Users\mzj\Desktop\CTF> Get-Content -LiteralPath (Join-Path $target '命令与输出记录.txt')
+BOOTSTRAP_COMMAND> $target='C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\批次14_20260929\562_checker'; New-Item -ItemType Directory -Force -Path $target | Out-Null; $log=Join-Path $target '命令与输出记录.txt'; Start-Transcript -Path $log -Append
+BOOTSTRAP_STDOUT> New-Item 输出被 Out-Null 抑制；没有标准输出。
+BOOTSTRAP_STDERR> 无。
+**********************
+Windows PowerShell transcript start
+Start time: 20260929154122
+Username: DESKTOP-412KTAR\mzj
+RunAs User: DESKTOP-412KTAR\mzj
+Configuration Name:
+Machine: DESKTOP-412KTAR (Microsoft Windows NT 10.0.26200.0)
+Host Application: C:\WINDOWS\System32\WindowsPowerShell\v1.0\powershell.exe -NoLogo -NoExit
+Process ID: 37616
+PSVersion: 5.1.26100.9444
+PSEdition: Desktop
+PSCompatibleVersions: 1.0, 2.0, 3.0, 4.0, 5.0, 5.1.26100.9444
+BuildVersion: 10.0.26100.9444
+CLRVersion: 4.0.30319.42000
+WSManStackVersion: 3.0
+PSRemotingProtocolVersion: 2.3
+SerializationVersion: 1.1.0.1
+**********************
+Transcript started, output file is C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\批次14_20260929\562_checker\命令与输出记录.txt
+PS C:\Users\mzj\Desktop\CTF> Get-ChildItem -LiteralPath 'D:\Downloads' -Force | Sort-Object LastWriteTime -Descending | Select-Object -First 40 FullName,Length,LastWriteTime,Mode | Format-Table -AutoSize
+
+FullName                                                  Length LastWriteTime
+--------                                                  ------ -------------
+D:\Downloads\secret (2).zip                              1170497 2026/9/29 1...
+D:\Downloads\checker (5).zip                               17498 2026/9/29 1...
+D:\Downloads\唧唧复唧唧，木兰当户织.zip                                7602 2026/9/29 1...
+D:\Downloads\ez_vm.zip                                     26778 2026/9/29 1...
+D:\Downloads\1997.zip                                      20292 2026/9/29 1...
+D:\Downloads\ezbase.zip                                    30016 2026/9/29 1...
+D:\Downloads\来日之路光明灿烂.zip                                5290473 2026/9/29 1...
+D:\Downloads\app-debug.zip                               4419022 2026/9/29 1...
+D:\Downloads\天下谁人不识君.zip                                     367 2026/9/29 1...
+D:\Downloads\ezBase-20250521104055-dq14shk (2).rar          7833 2026/9/29 1...
+D:\Downloads\MaybeSignin (1).zip                            6305 2026/9/29 1...
+D:\Downloads\cryptor.zip                                   42592 2026/9/29 1...
+D:\Downloads\butterfly (1).7z                             260238 2026/9/29 1...
+D:\Downloads\你知道Base么-20250521104202-am92t17 (1).rar       14603 2026/9/29 1...
+D:\Downloads\hookme (1).rar                              5125397 2026/9/29 1...
+D:\Downloads\密钥生成审计附件.zip                                   4523 2026/9/29 8...
+D:\Downloads\are_you_ok.zip                                42546 2026/9/29 8...
+D:\Downloads\人生自古谁无死.zip                                   43696 2026/9/29 8...
+D:\Downloads\tom (1).zip                                   51073 2026/9/29 8...
+D:\Downloads\tom.zip                                       51073 2026/9/29 8...
+D:\Downloads\CatchPalu_flag.zip                             6506 2026/9/29 7...
+D:\Downloads\PaluArray_flag (1).zip                        73952 2026/9/29 7...
+D:\Downloads\Asymmetric_flag.zip                          745564 2026/9/29 7...
+D:\Downloads\PaluFlat_flag.zip                              9644 2026/9/29 7...
+D:\Downloads\checker (4).zip                               17498 2026/9/29 6...
+D:\Downloads\butterfly.7z                                 260238 2026/9/29 6...
+D:\Downloads\ParlooChecker_flag.zip                      5216086 2026/9/29 6...
+D:\Downloads\palugogogo_flag.zip                          702556 2026/9/29 6...
+D:\Downloads\checker (3).zip                               17498 2026/9/29 5...
+D:\Downloads\R.zip                                         87569 2026/9/29 4...
+D:\Downloads\ezBase-20250521104055-dq14shk (1).rar          7833 2026/9/29 3...
+D:\Downloads\MaybeSignin.zip                                6305 2026/9/29 3...
+D:\Downloads\arkt (1).zip                                 109627 2026/9/29 3...
+D:\Downloads\secret (1).zip                              1170497 2026/9/29 1...
+D:\Downloads\checker (2).zip                               17498 2026/9/29 1...
+D:\Downloads\easyre (1).zip                               117343 2026/9/29 1...
+D:\Downloads\checker (1).zip                               17498 2026/9/29 1...
+D:\Downloads\digital_key_trace.sqlite.zip                   2560 2026/9/29 0...
+D:\Downloads\game_flag (1).exe                           6731652 2026/9/28 2...
+D:\Downloads\EzFlag_248f149404428676e6aa45e6312d069c.zip    5589 2026/9/28 2...
+
+
+PS C:\Users\mzj\Desktop\CTF> Get-ChildItem -LiteralPath 'D:\Downloads' -Filter 'checker*.zip' | Sort-Object LastWriteTime -Descending | Format-List Name,FullName,Length,CreationTime,LastWriteTime
+
+
+Name          : checker (5).zip
+FullName      : D:\Downloads\checker (5).zip
+Length        : 17498
+CreationTime  : 2026/9/29 15:37:47
+LastWriteTime : 2026/9/29 15:37:48
+
+Name          : checker (4).zip
+FullName      : D:\Downloads\checker (4).zip
+Length        : 17498
+CreationTime  : 2026/9/29 6:42:04
+LastWriteTime : 2026/9/29 6:42:07
+
+Name          : checker (3).zip
+FullName      : D:\Downloads\checker (3).zip
+Length        : 17498
+CreationTime  : 2026/9/29 5:13:45
+LastWriteTime : 2026/9/29 5:13:49
+
+Name          : checker (2).zip
+FullName      : D:\Downloads\checker (2).zip
+Length        : 17498
+CreationTime  : 2026/9/29 1:50:09
+LastWriteTime : 2026/9/29 1:50:11
+
+Name          : checker (1).zip
+FullName      : D:\Downloads\checker (1).zip
+Length        : 17498
+CreationTime  : 2026/9/29 1:45:41
+LastWriteTime : 2026/9/29 1:45:45
+
+Name          : checker.zip
+FullName      : D:\Downloads\checker.zip
+Length        : 17498
+CreationTime  : 2026/9/27 19:28:13
+LastWriteTime : 2026/9/27 19:28:15
+
+
+
+PS C:\Users\mzj\Desktop\CTF> Get-ChildItem -LiteralPath 'D:\Downloads' -Filter 'checker*.zip' | Sort-Object LastWriteTime -Descending | Get-FileHash -Algorithm SHA256 | Format-Table Path,Hash -AutoSize
+
+Path                         Hash
+----                         ----
+D:\Downloads\checker (5).zip 598E457DCDFFCB89F4A1B5CF56133E1D8A194E737B8C25C...
+D:\Downloads\checker (4).zip 598E457DCDFFCB89F4A1B5CF56133E1D8A194E737B8C25C...
+D:\Downloads\checker (3).zip 598E457DCDFFCB89F4A1B5CF56133E1D8A194E737B8C25C...
+D:\Downloads\checker (2).zip 598E457DCDFFCB89F4A1B5CF56133E1D8A194E737B8C25C...
+D:\Downloads\checker (1).zip 598E457DCDFFCB89F4A1B5CF56133E1D8A194E737B8C25C...
+D:\Downloads\checker.zip     598E457DCDFFCB89F4A1B5CF56133E1D8A194E737B8C25C...
+
+
+PS C:\Users\mzj\Desktop\CTF> Get-FileHash -LiteralPath 'D:\Downloads\checker (5).zip' -Algorithm SHA256 | Format-List Path,Algorithm,Hash
+
+
+Path      : D:\Downloads\checker (5).zip
+Algorithm : SHA256
+Hash      : 598E457DCDFFCB89F4A1B5CF56133E1D8A194E737B8C25C6C0EA722854426D36
+
+
+
+PS C:\Users\mzj\Desktop\CTF> New-Item -ItemType Directory -Force -Path (Join-Path $target '附件_原始')
+
+
+    Directory: C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\批次14_20260929\562_checker
+
+
+Mode                 LastWriteTime         Length Name
+----                 -------------         ------ ----
+d-----         2026/9/29     15:42                附件_原始
+
+
+PS C:\Users\mzj\Desktop\CTF> Copy-Item -LiteralPath 'D:\Downloads\checker (5).zip' -Destination (Join-Path (Join-Path $target '附件_原始') 'checker_20260929.zip') -PassThru | Format-List FullName,Length,LastWriteTime
+
+
+FullName      : C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\批次14_20260929\562_checker\附件
+                _原始\checker_20260929.zip
+Length        : 17498
+LastWriteTime : 2026/9/29 15:37:48
+
+
+
+PS C:\Users\mzj\Desktop\CTF> Get-FileHash -LiteralPath (Join-Path (Join-Path $target '附件_原始') 'checker_20260929.zip') -Algorithm SHA256 | Format-List Path,Algorithm,Hash
+
+
+Path      : C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\批次14_20260929\562_checker\附件_原始\
+            checker_20260929.zip
+Algorithm : SHA256
+Hash      : 598E457DCDFFCB89F4A1B5CF56133E1D8A194E737B8C25C6C0EA722854426D36
+
+
+
+PS C:\Users\mzj\Desktop\CTF> tar.exe -tf (Join-Path (Join-Path $target '附件_原始') 'checker_20260929.zip')
+
+PS C:\Users\mzj\Desktop\CTF> Expand-Archive -LiteralPath (Join-Path (Join-Path $target '附件_原始') 'checker_20260929.zip') -DestinationPath (Join-Path $target '提取_分析') -Force
+PS C:\Users\mzj\Desktop\CTF> Get-ChildItem -LiteralPath (Join-Path $target '提取_分析') -Recurse -File | Format-List FullName,Length,LastWriteTime
+
+
+FullName      : C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\批次14_20260929\562_checker\提取
+                _分析\checker.exe
+Length        : 42857
+LastWriteTime : 2026/7/25 21:06:56
+
+
+
+PS C:\Users\mzj\Desktop\CTF> Get-Command llvm-objdump.exe,dumpbin.exe,objdump.exe,strings.exe,rabin2.exe,rizin.exe,python.exe -ErrorAction SilentlyContinue | Format-Table Name,Source -AutoSize
+
+Name        Source
+----        ------
+objdump.exe C:\msys64\mingw64\bin\objdump.exe
+strings.exe C:\msys64\mingw64\bin\strings.exe
+python.exe  C:\Users\mzj\AppData\Local\Programs\Python\Python312\python.exe
+
+
+PS C:\Users\mzj\Desktop\CTF> Get-FileHash -LiteralPath (Join-Path (Join-Path $target '提取_分析') 'checker.exe') -Algorithm SHA256 | Format-List Path,Algorithm,Hash
+
+
+Path      : C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\批次14_20260929\562_checker\提取_分析\
+            checker.exe
+Algorithm : SHA256
+Hash      : 449D9F4569A0ED70FCB9BC8B96737719B62CFD8AE7C1E99D2864A3999887FDF5
+
+
+
+PS C:\Users\mzj\Desktop\CTF> objdump.exe -f -p (Join-Path (Join-Path $target '提取_分析') 'checker.exe')
+
+PS C:\Users\mzj\Desktop\CTF> Copy-Item -LiteralPath (Join-Path (Join-Path $target '提取_分析') 'checker.exe') -Destination 'C:\Users\mzj\Desktop\CTF\checker_562_tmp.exe' -PassThru | Format-List FullName,Length
+
+
+FullName : C:\Users\mzj\Desktop\CTF\checker_562_tmp.exe
+Length   : 42857
+
+
+
+PS C:\Users\mzj\Desktop\CTF> objdump.exe -f -p 'C:\Users\mzj\Desktop\CTF\checker_562_tmp.exe'
+
+PS C:\Users\mzj\Desktop\CTF> strings.exe -a -n 4 'C:\Users\mzj\Desktop\CTF\checker_562_tmp.exe' | Tee-Object -FilePath (Join-Path $target 'strings_ascii.txt')
+!This program cannot be run in DOS mode.
+.text
+P`.data
+.rdata
+0@/4
+0@.bss
+.idata
+.CRT
+.tls
+@B/29
+B/41
+B/55
+B/67
+$AP@
+$t@@
+$dP@
+[^_]
+[^_]
+=dp@
+D$$t
+$Dp@
+$Dp@
+$Dp@
+$Dp@
+$Dp@
+$Dp@
+$Dp@
+$Dp@
+$Dp@
+L[^_]
+L[^_]
+-@S@
+5@S@
+$XQ@
+ [^_
+$$Q@
+?t?1
+t\VS
+<]ta<
+[^_]
+[^_]
+<]t.<
+[^_]
+,[^_]
+,[^_]
+<]t[
+[^_]
+t(<{t?
+<}t	<,u@
+<{t,
+</t&<\t"
+[^_]
+5hp@
+[^_]
+UWVS
+[^_]
+EOBDXFMS
+wyNbQJBL
+WbbQy
+T[avT{v
+libgcc_s_dw2-1.dll
+__register_frame_info
+__deregister_frame_info
+libgcj-16.dll
+_Jv_RegisterClasses
+Performing initial checks...
+Checks completed.
+Enter the flag:
+Correct! You have the flag.
+Incorrect flag.
+Mingw runtime failure:
+  VirtualQuery failed for %d bytes at address %p
+  Unknown pseudo relocation protocol version %d.
+  Unknown pseudo relocation bit size %d.
+glob-1.0-mingw32
+GCC: (GNU) 6.3.0
+GCC: (GNU) 6.3.0
+GCC: (MinGW.org GCC-6.3.0-1) 6.3.0
+GCC: (GNU) 6.3.0
+GCC: (GNU) 6.3.0
+GCC: (GNU) 6.3.0
+GCC: (GNU) 6.3.0
+GCC: (GNU) 6.3.0
+GCC: (GNU) 6.3.0
+GCC: (GNU) 6.3.0
+GCC: (GNU) 6.3.0
+GCC: (GNU) 6.3.0
+GCC: (GNU) 6.3.0
+GCC: (GNU) 6.3.0
+GCC: (GNU) 6.3.0
+GCC: (GNU) 6.3.0
+GCC: (GNU) 6.3.0
+GCC: (GNU) 6.3.0
+GCC: (GNU) 6.3.0
+GCC: (GNU) 6.3.0
+DeleteCriticalSection
+EnterCriticalSection
+ExitProcess
+FindClose
+FindFirstFileA
+FindNextFileA
+FreeLibrary
+GetCommandLineA
+GetLastError
+GetModuleHandleA
+GetProcAddress
+InitializeCriticalSection
+LeaveCriticalSection
+LoadLibraryA
+SetUnhandledExceptionFilter
+Sleep
+TlsGetValue
+VirtualProtect
+VirtualQuery
+_strdup
+_stricoll
+__getmainargs
+__mb_cur_max
+__p__environ
+__p__fmode
+__set_app_type
+_cexit
+_errno
+_fpreset
+_fullpath
+_iob
+_isctype
+_onexit
+_pctype
+_setmode
+abort
+atexit
+calloc
+fgets
+free
+fwrite
+malloc
+mbstowcs
+memcpy
+printf
+puts
+realloc
+setlocale
+signal
+strcmp
+strcoll
+strcspn
+strlen
+tolower
+vfprintf
+wcstombs
+KERNEL32.dll
+msvcrt.dll
+msvcrt.dll
+../../../src/gcc-6.3.0/libgcc/config/i386/cygwin.S
+/home/keith/src/mingw/gcc-build/gcc-6.3.0-mingw32-cross-native/mingw32/libgcc
+GNU AS 2.28
+GNU C11 6.3.0 -mtune=generic -march=i586 -g -g -g -O2 -O2 -O2 -fbuilding-libgcc -fno-stack-protector
+../../../src/gcc-6.3.0/libgcc/libgcc2.c
+/home/keith/src/mingw/gcc-build/gcc-6.3.0-mingw32-cross-native/mingw32/libgcc
+unsigned int
+short unsigned int
+long long int
+long double
+char
+long int
+_iobuf
+_ptr
+_cnt
+_base
+_flag
+_file
+_charbuf
+_bufsiz
+_tmpfname
+FILE
+_iob
+short int
+long unsigned int
+_argc
+_argv
+__mb_cur_max
+_sys_nerr
+_sys_errlist
+_osver
+_winver
+_winmajor
+_winminor
+_fmode
+sizetype
+optind
+optopt
+opterr
+optarg
+_daylight
+_timezone
+_tzname
+daylight
+timezone
+tzname
+hashval_t
+htab_hash
+htab_eq
+htab_hash_pointer
+htab_eq_pointer
+unsigned char
+stringop_alg
+no_stringop
+libcall
+rep_prefix_1_byte
+rep_prefix_4_byte
+rep_prefix_8_byte
+loop_1_byte
+loop
+unrolled_loop
+vector_loop
+last_alg
+unspec_strings
+unspecv_strings
+stringop_strategy
+noalign
+stringop_algs
+unknown_size
+size
+processor_costs
+shift_var
+shift_const
+mult_init
+mult_bit
+divide
+movsx
+movzx
+large_insn
+move_ratio
+movzbl_load
+int_load
+int_store
+fp_move
+fp_load
+fp_store
+mmx_move
+mmx_load
+mmx_store
+sse_move
+sse_load
+sse_store
+mmxsse_to_integer
+l1_cache_size
+l2_cache_size
+prefetch_block
+simultaneous_prefetches
+branch_cost
+fadd
+fmul
+fdiv
+fabs
+fchs
+fsqrt
+memcpy
+memset
+scalar_stmt_cost
+scalar_load_cost
+scalar_store_cost
+vec_stmt_cost
+vec_to_scalar_cost
+scalar_to_vec_cost
+vec_align_load_cost
+vec_unalign_load_cost
+vec_store_cost
+cond_taken_branch_cost
+cond_not_taken_branch_cost
+ix86_cost
+ix86_size_cost
+ix86_tune_indices
+X86_TUNE_SCHEDULE
+X86_TUNE_PARTIAL_REG_DEPENDENCY
+X86_TUNE_SSE_PARTIAL_REG_DEPENDENCY
+X86_TUNE_SSE_SPLIT_REGS
+X86_TUNE_PARTIAL_FLAG_REG_STALL
+X86_TUNE_MOVX
+X86_TUNE_MEMORY_MISMATCH_STALL
+X86_TUNE_FUSE_CMP_AND_BRANCH_32
+X86_TUNE_FUSE_CMP_AND_BRANCH_64
+X86_TUNE_FUSE_CMP_AND_BRANCH_SOFLAGS
+X86_TUNE_FUSE_ALU_AND_BRANCH
+X86_TUNE_REASSOC_INT_TO_PARALLEL
+X86_TUNE_REASSOC_FP_TO_PARALLEL
+X86_TUNE_ACCUMULATE_OUTGOING_ARGS
+X86_TUNE_PROLOGUE_USING_MOVE
+X86_TUNE_EPILOGUE_USING_MOVE
+X86_TUNE_USE_LEAVE
+X86_TUNE_PUSH_MEMORY
+X86_TUNE_SINGLE_PUSH
+X86_TUNE_DOUBLE_PUSH
+X86_TUNE_SINGLE_POP
+X86_TUNE_DOUBLE_POP
+X86_TUNE_PAD_SHORT_FUNCTION
+X86_TUNE_PAD_RETURNS
+X86_TUNE_FOUR_JUMP_LIMIT
+X86_TUNE_SOFTWARE_PREFETCHING_BENEFICIAL
+X86_TUNE_LCP_STALL
+X86_TUNE_READ_MODIFY
+X86_TUNE_USE_INCDEC
+X86_TUNE_INTEGER_DFMODE_MOVES
+X86_TUNE_OPT_AGU
+X86_TUNE_AVOID_LEA_FOR_ADDR
+X86_TUNE_SLOW_IMUL_IMM32_MEM
+X86_TUNE_SLOW_IMUL_IMM8
+X86_TUNE_AVOID_MEM_OPND_FOR_CMOVE
+X86_TUNE_SINGLE_STRINGOP
+X86_TUNE_MISALIGNED_MOVE_STRING_PRO_EPILOGUES
+X86_TUNE_USE_SAHF
+X86_TUNE_USE_CLTD
+X86_TUNE_USE_BT
+X86_TUNE_USE_HIMODE_FIOP
+X86_TUNE_USE_SIMODE_FIOP
+X86_TUNE_USE_FFREEP
+X86_TUNE_EXT_80387_CONSTANTS
+X86_TUNE_VECTORIZE_DOUBLE
+X86_TUNE_GENERAL_REGS_SSE_SPILL
+X86_TUNE_SSE_UNALIGNED_LOAD_OPTIMAL
+X86_TUNE_SSE_UNALIGNED_STORE_OPTIMAL
+X86_TUNE_SSE_PACKED_SINGLE_INSN_OPTIMAL
+X86_TUNE_SSE_TYPELESS_STORES
+X86_TUNE_SSE_LOAD0_BY_PXOR
+X86_TUNE_INTER_UNIT_MOVES_TO_VEC
+X86_TUNE_INTER_UNIT_MOVES_FROM_VEC
+X86_TUNE_INTER_UNIT_CONVERSIONS
+X86_TUNE_SPLIT_MEM_OPND_FOR_FP_CONVERTS
+X86_TUNE_USE_VECTOR_FP_CONVERTS
+X86_TUNE_USE_VECTOR_CONVERTS
+X86_TUNE_SLOW_PSHUFB
+X86_TUNE_VECTOR_PARALLEL_EXECUTION
+X86_TUNE_AVOID_4BYTE_PREFIXES
+X86_TUNE_AVX256_UNALIGNED_LOAD_OPTIMAL
+X86_TUNE_AVX256_UNALIGNED_STORE_OPTIMAL
+X86_TUNE_AVX128_OPTIMAL
+X86_TUNE_DOUBLE_WITH_ADD
+X86_TUNE_ALWAYS_FANCY_MATH_387
+X86_TUNE_UNROLL_STRLEN
+X86_TUNE_SHIFT1
+X86_TUNE_ZERO_EXTEND_WITH_AND
+X86_TUNE_PROMOTE_HIMODE_IMUL
+X86_TUNE_FAST_PREFIX
+X86_TUNE_READ_MODIFY_WRITE
+X86_TUNE_MOVE_M1_VIA_OR
+X86_TUNE_NOT_UNPAIRABLE
+X86_TUNE_PARTIAL_REG_STALL
+X86_TUNE_PROMOTE_QIMODE
+X86_TUNE_PROMOTE_HI_REGS
+X86_TUNE_HIMODE_MATH
+X86_TUNE_SPLIT_LONG_MOVES
+X86_TUNE_USE_XCHGB
+X86_TUNE_USE_MOV0
+X86_TUNE_NOT_VECTORMODE
+X86_TUNE_AVOID_VECTOR_DECODE
+X86_TUNE_AVOID_FALSE_DEP_FOR_BMI
+X86_TUNE_BRANCH_PREDICTION_HINTS
+X86_TUNE_QIMODE_MATH
+X86_TUNE_PROMOTE_QI_REGS
+X86_TUNE_ADJUST_UNROLL
+X86_TUNE_ONE_IF_CONV_INSN
+X86_TUNE_LAST
+ix86_tune_features
+ix86_arch_indices
+X86_ARCH_CMOV
+X86_ARCH_CMPXCHG
+X86_ARCH_CMPXCHG8B
+X86_ARCH_XADD
+X86_ARCH_BSWAP
+X86_ARCH_LAST
+ix86_arch_features
+x86_prefetch_sse
+_dont_use_tree_here_
+x86_mfence
+reg_class
+NO_REGS
+AREG
+DREG
+CREG
+BREG
+SIREG
+DIREG
+AD_REGS
+CLOBBERED_REGS
+Q_REGS
+NON_Q_REGS
+INDEX_REGS
+LEGACY_REGS
+GENERAL_REGS
+FP_TOP_REG
+FP_SECOND_REG
+FLOAT_REGS
+SSE_FIRST_REG
+NO_REX_SSE_REGS
+SSE_REGS
+EVEX_SSE_REGS
+BND_REGS
+ALL_SSE_REGS
+MMX_REGS
+FP_TOP_SSE_REGS
+FP_SECOND_SSE_REGS
+FLOAT_SSE_REGS
+FLOAT_INT_REGS
+INT_SSE_REGS
+FLOAT_INT_SSE_REGS
+MASK_EVEX_REGS
+MASK_REGS
+ALL_REGS
+LIM_REG_CLASSES
+dbx_register_map
+dbx64_register_map
+svr4_dbx_register_map
+x86_64_ms_sysv_extra_clobbered_registers
+processor_type
+PROCESSOR_GENERIC
+PROCESSOR_I386
+PROCESSOR_I486
+PROCESSOR_PENTIUM
+PROCESSOR_LAKEMONT
+PROCESSOR_PENTIUMPRO
+PROCESSOR_PENTIUM4
+PROCESSOR_NOCONA
+PROCESSOR_CORE2
+PROCESSOR_NEHALEM
+PROCESSOR_SANDYBRIDGE
+PROCESSOR_HASWELL
+PROCESSOR_BONNELL
+PROCESSOR_SILVERMONT
+PROCESSOR_KNL
+PROCESSOR_SKYLAKE_AVX512
+PROCESSOR_INTEL
+PROCESSOR_GEODE
+PROCESSOR_K6
+PROCESSOR_ATHLON
+PROCESSOR_K8
+PROCESSOR_AMDFAM10
+PROCESSOR_BDVER1
+PROCESSOR_BDVER2
+PROCESSOR_BDVER3
+PROCESSOR_BDVER4
+PROCESSOR_BTVER1
+PROCESSOR_BTVER2
+PROCESSOR_ZNVER1
+PROCESSOR_max
+ix86_tune
+ix86_arch
+ix86_preferred_stack_boundary
+ix86_incoming_stack_boundary
+regclass_map
+signed char
+UQItype
+long long unsigned int
+float
+complex float
+double
+complex double
+complex long double
+__float128
+__unknown__
+__popcount_tab
+__clz_tab
+func_ptr
+__CTOR_LIST__
+__DTOR_LIST__
+../../../src/gcc-6.3.0/libgcc/config/i386
+cygwin.S
+""YK0g=YY0/>""
+/home/keith/mingw32-gcc-6.3.0/include
+../../../src/gcc-6.3.0/libgcc/../include
+../.././gcc
+../../../src/gcc-6.3.0/libgcc/../gcc/config/i386
+../../../src/gcc-6.3.0/libgcc
+stdio.h
+stdlib.h
+getopt.h
+time.h
+hashtab.h
+insn-constants.h
+i386.h
+i386-opts.h
+libgcc2.h
+gbl-ctors.h
+libgcc2.c
+_atexit
+__onexit0
+.text
+.bss
+.file
+cygming-crtbegin.c_obj
+.text
+.data
+.bss
+.rdata
+.jcr
+.file
+checker.c
+_main
+.text
+.data
+.bss
+.rdata
+.text
+.text
+.bss
+___main
+.text
+.data
+.bss
+.text
+.bss
+.CRT$XDZ
+.CRT$XDA
+.CRT$XLA
+.tls$ZZZ
+.tls$AAA
+.text
+.bss
+.text
+.bss
+.rdata
+.file
+fake
+.text
+.data
+.bss
+.file
+libgcc2.c
+.text
+.data
+.bss
+.text
+.data
+.text
+.rdata
+.text
+.bss
+.rdata
+.text
+.idata$5
+.idata$6
+.idata$5
+.idata$6
+.idata$5
+.idata$6
+.idata$5
+.idata$6
+.idata$5
+.idata$6
+.idata$5
+.idata$6
+.idata$5
+.idata$6
+.idata$5
+.idata$6
+.idata$5
+.idata$6
+.idata$5
+.idata$6
+.idata$5
+.idata$6
+.idata$5
+.idata$6
+.idata$5
+.idata$6
+.idata$5
+.idata$6
+.idata$5
+.idata$6
+.idata$5
+.idata$6v
+.idata$5
+.idata$6n
+.idata$5
+.idata$6f
+.idata$5
+.idata$6\
+.idata$6R
+.idata$5
+.idata$6J
+.idata$5
+.idata$6>
+.idata$64
+.idata$6*
+.idata$5
+.idata$6
+.idata$6
+.idata$5
+.idata$6
+.idata$5
+.idata$6
+.idata$5
+.idata$6
+.idata$5
+.idata$6
+.idata$5
+.idata$6
+.idata$6
+.idata$5
+.idata$6
+.idata$4
+.idata$5
+.idata$5
+.idata$6t
+.idata$5
+.idata$6b
+.idata$5|
+.idata$6T
+.idata$5x
+.idata$6L
+.idata$5t
+.idata$6.
+.idata$5p
+.idata$6
+.idata$5l
+.idata$6
+.idata$5h
+.idata$6
+.idata$5d
+.idata$6
+.idata$5`
+.idata$6
+.idata$5\
+.idata$6
+.idata$5X
+.idata$6
+.idata$5T
+.idata$6
+.idata$5P
+.idata$6
+.idata$5L
+.idata$6r
+.idata$5H
+.idata$6f
+.idata$5D
+.idata$6X
+.idata$5@
+.idata$6@
+.idata$5<
+.idata$6(
+.idata$4P
+.idata$5<
+.idata$5
+.idata$6
+.idata$5
+.idata$6
+.idata$4
+.idata$5
+.file
+cygming-crtend.c
+.text
+.data
+.bss
+.jcr
+.idata$5
+.idata$6
+.idata$5
+.idata$6
+__cexit
+_strcspn`+
+_free
+_strcmp
+__errno
+___xl_c
+___xl_z
+_puts
+_strcollh+
+__dll__
+_fwrite
+_memcpy
+__argc
+_tolowerP+
+___xl_a
+___xl_d
+__CRT_MTd
+_strdup
+__argv
+_calloc
+__fmode
+_realloc
+__end__
+_signal
+_malloc
+_abort
+_fgets
+_strlen
+_printf
+_Sleep@48,
+.eh_frame
+.debug_aranges
+.debug_info
+.debug_abbrev
+.debug_line
+.debug_frame
+__mingw32_init_mainargs
+_mainCRTStartup
+_WinMainCRTStartup
+_deregister_frame_fn
+___JCR_LIST__
+___gcc_register_frame
+___gcc_deregister_frame
+.eh_frame
+.rdata$zzz
+_fake_check
+_encrypt_flag
+_check_flag
+__setargv
+___cpu_features_init
+___do_global_dtors
+___do_global_ctors
+___dyn_tls_init@12
+___tlregdtor
+____w64_mingwthr_add_key_dtor
+____w64_mingwthr_remove_key_dtor
+___mingw_TLScallback
+__pei386_runtime_relocator
+.debug_info
+.debug_abbrev
+.debug_line
+.debug_aranges
+.debug_frame
+_fesetenv
+___mingw_glob
+___mingw_globfree
+___mingw_dirname
+___mingw_opendir
+___mingw_readdir
+___mingw_closedir
+___mingw_rewinddir
+___mingw_telldir
+___mingw_seekdir
+___FRAME_END__
+___JCR_END__
+_register_frame_ctor
+.text.startup
+.ctors.65535
+__imp__FindFirstFileA@8
+_VirtualProtect@16
+___RUNTIME_PSEUDO_RELOC_LIST__
+__imp___fullpath
+_FindFirstFileA@8
+__imp___setmode
+__data_start__
+_FreeLibrary@4
+___DTOR_LIST__
+__imp__VirtualProtect@16
+__imp___onexit
+___p__fmode
+__imp__GetLastError@0
+_SetUnhandledExceptionFilter@4
+__imp__VirtualQuery@12
+__imp__FindNextFileA@8
+___tls_start__
+__imp__TlsGetValue@4
+__libmsvcrt_a_iname
+__imp__InitializeCriticalSection@4
+_DeleteCriticalSection@4
+__rt_psrelocs_start
+__imp__abort
+__dll_characteristics__
+__size_of_stack_commit__
+__size_of_stack_reserve__
+__major_subsystem_version__
+___crt_xl_start__
+___crt_xi_start__
+___crt_xi_end__
+__imp__stricoll
+__imp____mb_cur_max
+_GetLastError@0
+__imp____p__environ
+__imp___pctype
+_VirtualQuery@12
+_mingw_initltsdrot_force
+__imp___iob
+_GetModuleHandleA@4
+___register_frame_info
+__libmoldname_a_iname
+_hmod_libgcc
+.weak.___register_frame_info.___EH_FRAME_BEGIN__
+__imp__strdup
+__imp___isctype
+__bss_start__
+___RUNTIME_PSEUDO_RELOC_LIST_END__
+__fpreset
+__size_of_heap_commit__
+__imp___errno
+___p__environ
+__imp__GetProcAddress@8
+_GetProcAddress@8
+___crt_xp_start__
+__imp__wcstombs
+_GetCommandLineA@0
+___crt_xp_end__
+__imp__signal
+__imp__puts
+__minor_os_version__
+__imp__atexit
+_encrypted_flag
+__imp__mbstowcs
+__head_libmsvcrt_a
+__image_base__
+__isctype
+__section_alignment__
+_LoadLibraryA@4
+_wcstombs
+__imp__FreeLibrary@4
+__IAT_end__
+__head_libmoldname_a
+__RUNTIME_PSEUDO_RELOC_LIST__
+_setlocale
+__imp____p__fmode
+__tls_start
+_ExitProcess@4
+__imp__strcoll
+__data_end__
+___getmainargs
+_FindClose@4
+__CTOR_LIST__
+_mbstowcs
+___set_app_type
+__bss_end__
+__CRT_fmode
+___crt_xc_end__
+__tls_index
+___crt_xc_start__
+__imp__fgets
+___CTOR_LIST__
+__rt_psrelocs_size
+__imp__memcpy
+_FindNextFileA@8
+__imp__strcmp
+__file_alignment__
+__imp__LeaveCriticalSection@4
+__imp__malloc
+___EH_FRAME_BEGIN__
+__major_os_version__
+__imp__realloc
+__IAT_start__
+_stricoll
+__tls_end
+__imp__GetModuleHandleA@4
+__DTOR_LIST__
+__imp___fpreset
+.weak.___deregister_frame_info.___EH_FRAME_BEGIN__
+_EnterCriticalSection@4
+__fullpath
+__size_of_heap_reserve__
+___crt_xt_start__
+___ImageBase
+__subsystem__
+__imp__strlen
+.weak.__Jv_RegisterClasses.___EH_FRAME_BEGIN__
+__CRT_fenv
+__imp__calloc
+__Jv_RegisterClasses
+__imp____getmainargs
+___tls_end__
+__imp__ExitProcess@4
+_mingw_initltssuo_force
+_InitializeCriticalSection@4
+___cpu_features
+__imp__free
+__imp__SetUnhandledExceptionFilter@4
+___deregister_frame_info
+__major_image_version__
+__loader_flags__
+__imp__tolower
+__CRT_glob
+__setmode
+__imp__printf
+___chkstk_ms
+__head_libkernel32_a
+__rt_psrelocs_end
+__imp___cexit
+__minor_subsystem_version__
+__imp__FindClose@4
+__minor_image_version__
+__imp__Sleep@4
+__imp__vfprintf
+__imp____set_app_type
+_mingw_initltsdyn_force
+_TlsGetValue@4
+__imp__DeleteCriticalSection@4
+_LeaveCriticalSection@4
+__imp__GetCommandLineA@0
+__imp__LoadLibraryA@4
+__imp__strcspn
+__imp__setlocale
+__RUNTIME_PSEUDO_RELOC_LIST_END__
+__libkernel32_a_iname
+___dyn_tls_init_callback
+__tls_used
+___crt_xt_end__
+_vfprintf
+__imp__EnterCriticalSection@4
+__imp__fwrite
+PS C:\Users\mzj\Desktop\CTF> objdump.exe -t 'C:\Users\mzj\Desktop\CTF\checker_562_tmp.exe' | Tee-Object -FilePath (Join-Path $target 'symbols_full.txt') | Select-String 'main|fake|encrypt|check|flag'
+
+C:\Users\mzj\Desktop\CTF\checker_562_tmp.exe:     file format pei-i386
+[  0](sec  1)(fl 0x00)(ty   20)(scl   2) (nx 0) 0x000002a0 __mingw32_init_maina
+rgs
+[  1](sec  1)(fl 0x00)(ty   20)(scl   2) (nx 0) 0x000002e0 _mainCRTStartup
+[  2](sec  1)(fl 0x00)(ty   20)(scl   2) (nx 0) 0x00000300 _WinMainCRTStartup
+[ 30](sec -2)(fl 0x00)(ty    0)(scl 103) (nx 1) 0x00000063 checker.c
+[ 32](sec  1)(fl 0x00)(ty   20)(scl   2) (nx 1) 0x00000460 _fake_check
+[ 34](sec  1)(fl 0x00)(ty   20)(scl   2) (nx 0) 0x00000490 _encrypt_flag
+[ 35](sec  1)(fl 0x00)(ty   20)(scl   2) (nx 0) 0x000004f0 _check_flag
+[ 36](sec  1)(fl 0x00)(ty   20)(scl   2) (nx 0) 0x0000052a _main
+[ 62](sec  1)(fl 0x00)(ty   20)(scl   2) (nx 0) 0x00000ae0 ___main
+[ 99](sec -2)(fl 0x00)(ty    0)(scl 103) (nx 1) 0x00000075 fake
+[371](sec  2)(fl 0x00)(ty    0)(scl   2) (nx 0) 0x00000020 _encrypted_flag
+[391](sec  1)(fl 0x00)(ty   20)(scl   2) (nx 0) 0x00002c18 ___getmainargs
+[445](sec  6)(fl 0x00)(ty    0)(scl   2) (nx 0) 0x00000198 __imp____getmainargs
+[456](sec -1)(fl 0x00)(ty    0)(scl   2) (nx 0) 0x00000000 __loader_flags__
+
+
+PS C:\Users\mzj\Desktop\CTF> objdump.exe -d -Mintel --start-address=0x401460 --stop-address=0x401620 'C:\Users\mzj\Desktop\CTF\checker_562_tmp.exe' | Tee-Object -FilePath (Join-Path $target '关键函数反汇编.txt')
+
+C:\Users\mzj\Desktop\CTF\checker_562_tmp.exe:     file format pei-i386
+
+
+Disassembly of section .text:
+
+00401460 <_fake_check>:
+  401460:	55                   	push   ebp
+  401461:	89 e5                	mov    ebp,esp
+  401463:	83 ec 18             	sub    esp,0x18
+  401466:	c7 04 24 64 50 40 00 	mov    DWORD PTR [esp],0x405064
+  40146d:	e8 1e 27 00 00       	call   403b90 <_puts>
+  401472:	c7 04 24 e8 03 00 00 	mov    DWORD PTR [esp],0x3e8
+  401479:	e8 ba 27 00 00       	call   403c38 <_Sleep@4>
+  40147e:	83 ec 04             	sub    esp,0x4
+  401481:	c7 04 24 81 50 40 00 	mov    DWORD PTR [esp],0x405081
+  401488:	e8 03 27 00 00       	call   403b90 <_puts>
+  40148d:	90                   	nop
+  40148e:	c9                   	leave
+  40148f:	c3                   	ret
+
+00401490 <_encrypt_flag>:
+  401490:	55                   	push   ebp
+  401491:	89 e5                	mov    ebp,esp
+  401493:	83 ec 28             	sub    esp,0x28
+  401496:	c7 45 f0 23 00 00 00 	mov    DWORD PTR [ebp-0x10],0x23
+  40149d:	c7 45 f4 00 00 00 00 	mov    DWORD PTR [ebp-0xc],0x0
+  4014a4:	eb 1e                	jmp    4014c4 <_encrypt_flag+0x34>
+  4014a6:	8b 55 f4             	mov    edx,DWORD PTR [ebp-0xc]
+  4014a9:	8b 45 0c             	mov    eax,DWORD PTR [ebp+0xc]
+  4014ac:	01 d0                	add    eax,edx
+  4014ae:	8b 4d f4             	mov    ecx,DWORD PTR [ebp-0xc]
+  4014b1:	8b 55 08             	mov    edx,DWORD PTR [ebp+0x8]
+  4014b4:	01 ca                	add    edx,ecx
+  4014b6:	0f b6 0a             	movzx  ecx,BYTE PTR [edx]
+  4014b9:	8b 55 f0             	mov    edx,DWORD PTR [ebp-0x10]
+  4014bc:	31 ca                	xor    edx,ecx
+  4014be:	88 10                	mov    BYTE PTR [eax],dl
+  4014c0:	83 45 f4 01          	add    DWORD PTR [ebp-0xc],0x1
+  4014c4:	8b 45 08             	mov    eax,DWORD PTR [ebp+0x8]
+  4014c7:	89 04 24             	mov    DWORD PTR [esp],eax
+  4014ca:	e8 89 26 00 00       	call   403b58 <_strlen>
+  4014cf:	89 c2                	mov    edx,eax
+  4014d1:	8b 45 f4             	mov    eax,DWORD PTR [ebp-0xc]
+  4014d4:	39 c2                	cmp    edx,eax
+  4014d6:	77 ce                	ja     4014a6 <_encrypt_flag+0x16>
+  4014d8:	8b 45 08             	mov    eax,DWORD PTR [ebp+0x8]
+  4014db:	89 04 24             	mov    DWORD PTR [esp],eax
+  4014de:	e8 75 26 00 00       	call   403b58 <_strlen>
+  4014e3:	89 c2                	mov    edx,eax
+  4014e5:	8b 45 0c             	mov    eax,DWORD PTR [ebp+0xc]
+  4014e8:	01 d0                	add    eax,edx
+  4014ea:	c6 00 00             	mov    BYTE PTR [eax],0x0
+  4014ed:	90                   	nop
+  4014ee:	c9                   	leave
+  4014ef:	c3                   	ret
+
+004014f0 <_check_flag>:
+  4014f0:	55                   	push   ebp
+  4014f1:	89 e5                	mov    ebp,esp
+  4014f3:	83 ec 58             	sub    esp,0x58
+  4014f6:	e8 65 ff ff ff       	call   401460 <_fake_check>
+  4014fb:	8d 45 c6             	lea    eax,[ebp-0x3a]
+  4014fe:	89 44 24 04          	mov    DWORD PTR [esp+0x4],eax
+  401502:	8b 45 08             	mov    eax,DWORD PTR [ebp+0x8]
+  401505:	89 04 24             	mov    DWORD PTR [esp],eax
+  401508:	e8 83 ff ff ff       	call   401490 <_encrypt_flag>
+  40150d:	c7 44 24 04 20 40 40 	mov    DWORD PTR [esp+0x4],0x404020
+  401514:	00
+  401515:	8d 45 c6             	lea    eax,[ebp-0x3a]
+  401518:	89 04 24             	mov    DWORD PTR [esp],eax
+  40151b:	e8 50 26 00 00       	call   403b70 <_strcmp>
+  401520:	85 c0                	test   eax,eax
+  401522:	0f 94 c0             	sete   al
+  401525:	0f b6 c0             	movzx  eax,al
+  401528:	c9                   	leave
+  401529:	c3                   	ret
+
+0040152a <_main>:
+  40152a:	55                   	push   ebp
+  40152b:	89 e5                	mov    ebp,esp
+  40152d:	83 e4 f0             	and    esp,0xfffffff0
+  401530:	83 ec 50             	sub    esp,0x50
+  401533:	e8 a8 05 00 00       	call   401ae0 <___main>
+  401538:	c7 04 24 93 50 40 00 	mov    DWORD PTR [esp],0x405093
+  40153f:	e8 54 26 00 00       	call   403b98 <_printf>
+  401544:	a1 bc 81 40 00       	mov    eax,ds:0x4081bc
+  401549:	89 44 24 08          	mov    DWORD PTR [esp+0x8],eax
+  40154d:	c7 44 24 04 32 00 00 	mov    DWORD PTR [esp+0x4],0x32
+  401554:	00
+  401555:	8d 44 24 1e          	lea    eax,[esp+0x1e]
+  401559:	89 04 24             	mov    DWORD PTR [esp],eax
+  40155c:	e8 67 26 00 00       	call   403bc8 <_fgets>
+  401561:	c7 44 24 04 a4 50 40 	mov    DWORD PTR [esp+0x4],0x4050a4
+  401568:	00
+  401569:	8d 44 24 1e          	lea    eax,[esp+0x1e]
+  40156d:	89 04 24             	mov    DWORD PTR [esp],eax
+  401570:	e8 eb 25 00 00       	call   403b60 <_strcspn>
+  401575:	c6 44 04 1e 00       	mov    BYTE PTR [esp+eax*1+0x1e],0x0
+  40157a:	8d 44 24 1e          	lea    eax,[esp+0x1e]
+  40157e:	89 04 24             	mov    DWORD PTR [esp],eax
+  401581:	e8 6a ff ff ff       	call   4014f0 <_check_flag>
+  401586:	85 c0                	test   eax,eax
+  401588:	74 0e                	je     401598 <_main+0x6e>
+  40158a:	c7 04 24 a6 50 40 00 	mov    DWORD PTR [esp],0x4050a6
+  401591:	e8 fa 25 00 00       	call   403b90 <_puts>
+  401596:	eb 0c                	jmp    4015a4 <_main+0x7a>
+  401598:	c7 04 24 c2 50 40 00 	mov    DWORD PTR [esp],0x4050c2
+  40159f:	e8 ec 25 00 00       	call   403b90 <_puts>
+  4015a4:	b8 00 00 00 00       	mov    eax,0x0
+  4015a9:	c9                   	leave
+  4015aa:	c3                   	ret
+  4015ab:	90                   	nop
+  4015ac:	66 90                	xchg   ax,ax
+  4015ae:	66 90                	xchg   ax,ax
+
+004015b0 <__setargv>:
+  4015b0:	55                   	push   ebp
+  4015b1:	89 e5                	mov    ebp,esp
+  4015b3:	57                   	push   edi
+  4015b4:	56                   	push   esi
+  4015b5:	53                   	push   ebx
+  4015b6:	83 ec 4c             	sub    esp,0x4c
+  4015b9:	f6 05 60 40 40 00 02 	test   BYTE PTR ds:0x404060,0x2
+  4015c0:	0f 84 ea 02 00 00    	je     4018b0 <__setargv+0x300>
+  4015c6:	e8 ad 26 00 00       	call   403c78 <_GetCommandLineA@0>
+  4015cb:	89 65 c4             	mov    DWORD PTR [ebp-0x3c],esp
+  4015ce:	89 04 24             	mov    DWORD PTR [esp],eax
+  4015d1:	89 c6                	mov    esi,eax
+  4015d3:	e8 80 25 00 00       	call   403b58 <_strlen>
+  4015d8:	8d 44 00 11          	lea    eax,[eax+eax*1+0x11]
+  4015dc:	c1 e8 04             	shr    eax,0x4
+  4015df:	c1 e0 04             	shl    eax,0x4
+  4015e2:	e8 49 0b 00 00       	call   402130 <___chkstk_ms>
+  4015e7:	29 c4                	sub    esp,eax
+  4015e9:	c7 45 e4 00 00 00 00 	mov    DWORD PTR [ebp-0x1c],0x0
+  4015f0:	c7 45 d4 00 00 00 00 	mov    DWORD PTR [ebp-0x2c],0x0
+  4015f7:	8d 44 24 10          	lea    eax,[esp+0x10]
+  4015fb:	c7 45 d0 00 00 00 00 	mov    DWORD PTR [ebp-0x30],0x0
+  401602:	89 c2                	mov    edx,eax
+  401604:	89 45 cc             	mov    DWORD PTR [ebp-0x34],eax
+  401607:	a1 60 40 40 00       	mov    eax,ds:0x404060
+  40160c:	25 00 44 00 00       	and    eax,0x4400
+  401611:	83 c8 10             	or     eax,0x10
+  401614:	89 45 c8             	mov    DWORD PTR [ebp-0x38],eax
+  401617:	31 c0                	xor    eax,eax
+  401619:	8d b4 26 00 00 00 00 	lea    esi,[esi+eiz*1+0x0]
+PS C:\Users\mzj\Desktop\CTF> objdump.exe -s -j .data 'C:\Users\mzj\Desktop\CTF\checker_562_tmp.exe' | Tee-Object -FilePath (Join-Path $target 'data_区段.txt')
+
+C:\Users\mzj\Desktop\CTF\checker_562_tmp.exe:     file format pei-i386
+
+Contents of section .data:
+ 404000 00000000 00000000 00000000 00000000  ................
+ 404010 00000000 00000000 00000000 00000000  ................
+ 404020 454f4244 58464d53 12146a17 531b7779  EOBDXFMS..j.S.wy
+ 404030 4e62514a 424c114f 52165762 62517911  NbQJBL.OR.WbbQy.
+ 404040 7312545b 6176547b 76115e00 00000000  s.T[avT{v.^.....
+ 404050 00000000 00000000 00000000 00000000  ................
+ 404060 02000000 fdffffff 00400000 f03c4000  .........@...<@.
+ 404070 ffffffff 00000000                    ........
+PS C:\Users\mzj\Desktop\CTF> objdump.exe -h 'C:\Users\mzj\Desktop\CTF\checker_562_tmp.exe' | Tee-Object -FilePath (Join-Path $target 'sections.txt')
+
+C:\Users\mzj\Desktop\CTF\checker_562_tmp.exe:     file format pei-i386
+
+Sections:
+Idx Name          Size      VMA       LMA       File off  Algn
+  0 .text         00002cf4  00401000  00401000  00000400  2**4
+                  CONTENTS, ALLOC, LOAD, READONLY, CODE, DATA
+  1 .data         00000078  00404000  00404000  00003200  2**5
+                  CONTENTS, ALLOC, LOAD, DATA
+  2 .rdata        00000340  00405000  00405000  00003400  2**2
+                  CONTENTS, ALLOC, LOAD, READONLY, DATA
+  3 .eh_frame     00000a04  00406000  00406000  00003800  2**2
+                  CONTENTS, ALLOC, LOAD, READONLY, DATA
+  4 .bss          00000070  00407000  00407000  00000000  2**2
+                  ALLOC
+  5 .idata        00000624  00408000  00408000  00004400  2**2
+                  CONTENTS, ALLOC, LOAD, DATA
+  6 .CRT          00000018  00409000  00409000  00004c00  2**2
+                  CONTENTS, ALLOC, LOAD, DATA
+  7 .tls          00000020  0040a000  0040a000  00004e00  2**2
+                  CONTENTS, ALLOC, LOAD, DATA
+  8 .debug_aranges 00000038  0040b000  0040b000  00005000  2**3
+                  CONTENTS, READONLY, DEBUGGING
+  9 .debug_info   00001cff  0040c000  0040c000  00005200  2**0
+                  CONTENTS, READONLY, DEBUGGING
+ 10 .debug_abbrev 0000012f  0040e000  0040e000  00007000  2**0
+                  CONTENTS, READONLY, DEBUGGING
+ 11 .debug_line   000001c8  0040f000  0040f000  00007200  2**0
+                  CONTENTS, READONLY, DEBUGGING
+ 12 .debug_frame  00000038  00410000  00410000  00007400  2**2
+                  CONTENTS, READONLY, DEBUGGING
+PS C:\Users\mzj\Desktop\CTF> @'
+from pathlib import Path
+import struct
+
+path = Path(r'C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\批次14_20260929\562_checker\提取_分析\checker.exe')
+data = path.read_bytes()
+if data[:2] != b'MZ':
+    raise SystemExit('错误：缺少 MZ 头')
+peoff = struct.unpack_from('<I', data, 0x3C)[0]
+if data[peoff:peoff + 4] != b'PE\0\0':
+    raise SystemExit('错误：缺少 PE 签名')
+coff = peoff + 4
+machine, section_count, timestamp, _, _, optional_size, characteristics = struct.unpack_from('<HHIIIHH', data, coff)
+opt = coff + 20
+magic = struct.unpack_from('<H', data, opt)[0]
+if magic != 0x10B:
+    raise SystemExit(f'暂不支持可选头类型 0x{magic:x}')
+image_base = struct.unpack_from('<I', data, opt + 28)[0]
+sections = []
+sec_off = opt + optional_size
+for i in range(section_count):
+    sh = sec_off + i * 40
+    name = data[sh:sh + 8].split(b'\0', 1)[0].decode('ascii', 'replace')
+    virtual_size, virtual_address, raw_size, raw_offset = struct.unpack_from('<IIII', data, sh + 8)
+    sections.append((name, virtual_size, virtual_address, raw_size, raw_offset))
+
+# objdump 符号表和反汇编显示 encrypted_flag 的虚拟地址是 0x404020。
+va = 0x404020
+for name, virtual_size, virtual_address, raw_size, raw_offset in sections:
+    delta = va - (image_base + virtual_address)
+    if 0 <= delta < min(max(virtual_size, raw_size), raw_size):
+        file_offset = raw_offset + delta
+        break
+else:
+    raise SystemExit(f'错误：无法将 VA 0x{va:08x} 映射到文件区段')
+end = data.index(b'\0', file_offset)
+cipher = data[file_offset:end]
+key = 0x23
+candidate = bytes(b ^ key for b in cipher)
+recovered_cipher = bytes(b ^ key for b in candidate)
+print(f'PE machine=0x{machine:04x}, sections={section_count}, image_base=0x{image_base:08x}')
+print(f'encrypted_flag VA=0x{va:08x}, file_offset=0x{file_offset:x}, section={name}')
+print(f'cipher length={len(cipher)} bytes')
+print(f'cipher hex={cipher.hex()}')
+print(f'candidate bytes={candidate!r}')
+print(f'candidate text={candidate.decode("ascii", "backslashreplace")}')
+print(f'forward XOR match={recovered_cipher == cipher}')
+print(f'flag prefix/suffix={candidate.startswith(b"flag{") and candidate.endswith(b"}")}')
+'@ | Set-Content -LiteralPath (Join-Path $target 'solve_checker.py') -Encoding UTF8
+PS C:\Users\mzj\Desktop\CTF> python.exe (Join-Path $target 'solve_checker.py')
+
+PS C:\Users\mzj\Desktop\CTF> @'
+# WP：第一届启航杯 checker（玄机 ID 562）
+
+## 题目信息
+
+- 平台：玄机（xj.edisec.net）
+- 题目：第一届启航杯checker（ID 562）
+- 分类 / 难度：REVERSE / 中等
+- 附件：`checker.exe`（Windows PE32，i386，42,857 字节）
+- 附件来源：`D:\Downloads\checker (5).zip`，于 2026-09-29 15:37 下载。目录内另有更早的同名 checker 下载；六份 ZIP 大小均为 17,498 字节且 SHA256 相同。本题存档保留了最新下载的原始 ZIP。
+- 附件 SHA256：`598E457DCDFFCB89F4A1B5CF56133E1D8A194E737B8C25C6C0EA722854426D36`
+- 解压后二进制 SHA256：`449D9F4569A0ED70FCB9BC8B96737719B62CFD8AE7C1E99D2864A3999887FDF5`
+
+## 结果
+
+从二进制内嵌的 43 字节密文按程序使用的单字节 XOR key `0x23` 逆变换，得到唯一匹配附件校验逻辑的候选：
+
+```text
+flag{enp17I4p8TZmAriao2lq5tAArZ2P1wxBUwXU2}
+```
+
+这不是对平台状态的声称：本 WP 的命令行复现证明该字符串按附件实际算法重新 XOR 后逐字节还原嵌入密文。平台提交核验由主代理另行通过前台完成。
+
+## 附件核验和文件布局
+
+1. 从 Downloads 中按最后写入时间核对到最新项为 `checker (5).zip`（17,498 字节，2026-09-29 15:37:48）。为防止仅凭文件名猜测，逐列出各 `checker*.zip` 的创建时间、长度和 SHA256；六份文件的摘要完全相同。
+2. 将最新 ZIP 原样复制到 `附件_原始\checker_20260929.zip`。复制前后 SHA256 均为 `598E457DCDFFCB89F4A1B5CF56133E1D8A194E737B8C25C6C0EA722854426D36`。
+3. 归档清单只有 `checker.exe`。提取后确认文件长 42,857 字节。
+4. PE 头显示 `pei-i386` / PE32、ImageBase `0x00400000`。符号表保留了 `checker.c`、`_fake_check`、`_encrypt_flag`、`_check_flag`、`_main` 和全局 `_encrypted_flag` 的符号。因含符号信息，可以直接定位源函数对应汇编。
+5. `.data` 节的 VMA 是 `0x00404000`，文件偏移 `0x3200`。符号 `_encrypted_flag` 位于 VA `0x00404020`，故数据文件偏移为 `0x3220`。
+
+## 逐步逆向过程
+
+### 1. 先区分干扰逻辑和核心校验
+
+入口 `_main`（VA `0x40152a`）的调用流程为：
+
+1. 输出输入提示；
+2. `fgets(buffer, 0x32, stdin)` 读入最多 49 个字符加终止符；
+3. 用 `strcspn(buffer, "\n")` 将换行替换为 NUL；
+4. 调用 `_check_flag(buffer)`；
+5. 根据返回值打印成功或失败消息。
+
+`_check_flag`（`0x4014f0`）先调用 `_fake_check`，后者只打印 `Performing initial checks...`，睡眠 1,000 毫秒，再打印 `Checks completed.`。它不改变输入、不访问 `/flag`，也不参与真伪比较；这是一段延迟/干扰。
+
+### 2. 还原真实变换
+
+`_encrypt_flag`（`0x401490`）的关键指令含义：
+
+- `[ebp-0x10] = 0x23`：固定 XOR 常数；
+- 循环边界由 `strlen(input)` 决定；
+- 每轮读取 `input[i]`，执行 `0x23 XOR input[i]`，写入输出 `out[i]`；
+- 循环后在 `out[strlen(input)]` 写 NUL。
+
+等价伪代码：
+
+```c
+for (i = 0; i < strlen(input); i++)
+    out[i] = input[i] ^ 0x23;
+out[strlen(input)] = '\0';
+```
+
+`_check_flag` 将加密结果与 VA `0x404020` 的 `_encrypted_flag` 调用 `strcmp` 比较，并以相等作为成功条件。因此逆变换也是 XOR 同一个常数：
+
+```text
+flag[i] = encrypted_flag[i] XOR 0x23
+```
+
+### 3. 从文件中定位并读取密文
+
+数据节十六进制转储中，`0x404020` 处开始的非零 C 字符串为 43 字节：
+
+```text
+454f424458464d5312146a17531b77794e62514a424c114f52165762625179117312545b6176547b76115e
+```
+
+最后一个字节之后紧跟 NUL。脚本 `solve_checker.py` 按 PE 节表将 VA `0x404020` 映射到文件偏移 `0x3220`，而不是从截图或人工复制的一段数据猜测。
+
+### 4. 逐字节解码并做正向核验
+
+对上述 43 字节执行 `byte XOR 0x23`，输出 `flag{enp17I4p8TZmAriao2lq5tAArZ2P1wxBUwXU2}`。脚本再次对候选逐字节 XOR `0x23`，并验证结果与附件密文字节完全相等（`forward XOR match=True`）；还检查了 `flag{` 前缀及 `}` 后缀。
+
+候选是 43 个 ASCII 字节，无 NUL、无换行。输入加换行总计 44 字节，小于 `fgets` 的 50 字节容量，因此可被主程序完整读入。`strcspn` 会移除输入行末换行，再进入 `_check_flag`。
+
+## 关于“读取 /flag”的题面提示
+
+题面提示让人考虑读取 `/flag`，但随附件提供的 `checker.exe` 中，真实验证流程不是去打开本机 `/flag` 文件，而是将输入 XOR 后与程序内 `.data` 中的 `_encrypted_flag` 比较。仅从该附件无法、也无需访问平台服务器的 `/flag` 文件；本题解依赖附件中已经存在的比较数据。
+
+导入表里有 `FindFirstFileA` / `FindNextFileA`，但它们属于该 MinGW 程序所带的运行时符号；已定位的 `_main`、`_check_flag` 和 `_encrypt_flag` 路径没有文件打开/读入流程。不要把运行时导入项误当成本题真实 flag 读取点。
+
+## 可复现文件
+
+- `附件_原始\checker_20260929.zip`：下载附件原样副本。
+- `提取_分析\checker.exe`：解压后的 PE。
+- `solve_checker.py`：仅用 Python 标准库解析 PE 节表、读取目标 VA 处的 C 字符串、执行 XOR 并正向核验。
+- `关键函数反汇编.txt`：`_fake_check`、`_encrypt_flag`、`_check_flag` 和 `_main` 反汇编。
+- `data_区段.txt`、`sections.txt`、`symbols_full.txt`：数据、节表与完整符号表。
+- `strings_ascii.txt`：ASCII 字符串提取结果。
+- `命令与输出记录.txt`：按执行顺序记录本题 PowerShell 输入及终端输出。
+
+## 方法小结
+
+对自带 checker 的逆向题，可以先定位比较函数和比较常量，再逆转算法；不要只被提示里的 `/flag` 或启动时延迟蒙蔽。确认解出的字节能被输入路径完整读取，并对解码结果做正向复算，可避免长度、NUL 截断和换行处理造成的误判。
+'@ | Set-Content -LiteralPath (Join-Path $target 'WP_第一届启航杯checker.md') -Encoding UTF8
+PS C:\Users\mzj\Desktop\CTF> @'
+# 玄机 ID 562：第一届启航杯checker
+
+本目录保存该题的原始附件副本、解压文件、逆向证据、复现脚本、WP 和 PowerShell 终端记录。
+
+## 状态
+
+- 本地静态逆向已恢复唯一匹配内嵌比较数据的候选 flag。
+- 正向复算已验证：候选逐字节 XOR `0x23` 后等于可执行文件中的 43 字节密文。
+- 本子任务未启动附件程序，也未向玄机提交；请由主代理在平台前台核验后更新状态。
+- 没有使用公开 Writeup 或网络搜索。
+
+## 文件
+
+- `附件_原始\checker_20260929.zip` — 最新下载 ZIP 的原样副本。
+- `提取_分析\checker.exe` — ZIP 中唯一的文件。
+- `WP_第一届启航杯checker.md` — 题目分析、反汇编解释、逐步求解与限制条件。
+- `solve_checker.py` — 标准库脚本，直接读 PE 并定位/解码密文。
+- `strings_ascii.txt` — ASCII 字符串输出。
+- `sections.txt` — PE 节表。
+- `symbols_full.txt` — PE 完整符号表。
+- `关键函数反汇编.txt` — `_fake_check`、`_encrypt_flag`、`_check_flag`、`_main` 指令。
+- `data_区段.txt` — `.data` 原始转储。
+- `命令与输出记录.txt` — 本题 PowerShell 命令和终端输出记录。
+
+## 附件摘要
+
+- 下载位置：`D:\Downloads\checker (5).zip`
+- ZIP SHA256：`598E457DCDFFCB89F4A1B5CF56133E1D8A194E737B8C25C6C0EA722854426D36`
+- `checker.exe` SHA256：`449D9F4569A0ED70FCB9BC8B96737719B62CFD8AE7C1E99D2864A3999887FDF5`
+
+请先阅读 WP，再运行 `python.exe .\solve_checker.py` 复现。
+'@ | Set-Content -LiteralPath (Join-Path $target 'README.md') -Encoding UTF8
+PS C:\Users\mzj\Desktop\CTF> @'
+from pathlib import Path
+import struct
+
+path = Path(r'C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\批次14_20260929\562_checker\提取_分析\checker.exe')
+data = path.read_bytes()
+if data[:2] != b'MZ':
+    raise SystemExit('错误：缺少 MZ 头')
+peoff = struct.unpack_from('<I', data, 0x3C)[0]
+if data[peoff:peoff + 4] != b'PE\0\0':
+    raise SystemExit('错误：缺少 PE 签名')
+coff = peoff + 4
+machine, section_count, timestamp, _, _, optional_size, characteristics = struct.unpack_from('<HHIIIHH', data, coff)
+opt = coff + 20
+magic = struct.unpack_from('<H', data, opt)[0]
+if magic != 0x10B:
+    raise SystemExit(f'暂不支持可选头类型 0x{magic:x}')
+image_base = struct.unpack_from('<I', data, opt + 28)[0]
+sections = []
+sec_off = opt + optional_size
+for i in range(section_count):
+    sh = sec_off + i * 40
+    name = data[sh:sh + 8].split(b'\0', 1)[0].decode('ascii', 'replace')
+    virtual_size, virtual_address, raw_size, raw_offset = struct.unpack_from('<IIII', data, sh + 8)
+    sections.append((name, virtual_size, virtual_address, raw_size, raw_offset))
+
+# objdump 符号表和反汇编显示 encrypted_flag 的虚拟地址是 0x404020。
+va = 0x404020
+for name, virtual_size, virtual_address, raw_size, raw_offset in sections:
+    delta = va - (image_base + virtual_address)
+    if 0 <= delta < raw_size:
+        file_offset = raw_offset + delta
+        break
+else:
+    raise SystemExit(f'错误：无法将 VA 0x{va:08x} 映射到文件区段')
+end = data.index(b'\0', file_offset)
+cipher = data[file_offset:end]
+key = 0x23
+candidate = bytes(b ^ key for b in cipher)
+recovered_cipher = bytes(b ^ key for b in candidate)
+input_line_length = len(candidate) + 1  # 末尾换行
+print(f'PE machine=0x{machine:04x}, sections={section_count}, image_base=0x{image_base:08x}')
+print(f'encrypted_flag VA=0x{va:08x}, file_offset=0x{file_offset:x}, section={name}')
+print(f'cipher length={len(cipher)} bytes')
+print(f'cipher hex={cipher.hex()}')
+print(f'candidate bytes={candidate!r}')
+print(f'candidate text={candidate.decode("ascii", "backslashreplace")}')
+print(f'candidate length={len(candidate)}; no NUL={b"\0" not in candidate}; no newline={b"\n" not in candidate}')
+print(f'line length with newline={input_line_length}; fits fgets(buffer, 50)={input_line_length <= 49}')
+print(f'forward XOR match={recovered_cipher == cipher}')
+print(f'flag prefix/suffix={candidate.startswith(b"flag{") and candidate.endswith(b"}")}')
+'@ | Set-Content -LiteralPath (Join-Path $target 'solve_checker.py') -Encoding UTF8
+PS C:\Users\mzj\Desktop\CTF> python.exe (Join-Path $target 'solve_checker.py') | Tee-Object -FilePath (Join-Path $target '正向复算输出.txt')
+PE machine=0x014c, sections=13, image_base=0x00400000
+encrypted_flag VA=0x00404020, file_offset=0x3220, section=.data
+cipher length=43 bytes
+cipher hex=454f424458464d5312146a17531b77794e62514a424c114f52165762625179117312545b6176547b76115e
+candidate bytes=b'flag{enp17I4p8TZmAriao2lq5tAArZ2P1wxBUwXU2}'
+candidate text=flag{enp17I4p8TZmAriao2lq5tAArZ2P1wxBUwXU2}
+candidate length=43; no NUL=True; no newline=True
+line length with newline=44; fits fgets(buffer, 50)=True
+forward XOR match=True
+flag prefix/suffix=True
+PS C:\Users\mzj\Desktop\CTF> Add-Content -LiteralPath (Join-Path $target 'README.md') -Value '- `正向复算输出.txt` — 复现脚本的完整 stdout。'
+PS C:\Users\mzj\Desktop\CTF> Add-Content -LiteralPath (Join-Path $target 'WP_第一届启航杯checker.md') -Value '- `正向复算输出.txt`：脚本完整 stdout，含候选长度、输入容量检查和正向 XOR 结果。'
+PS C:\Users\mzj\Desktop\CTF> Get-FileHash -LiteralPath 'C:\Users\mzj\Desktop\CTF\checker_562_tmp.exe' -Algorithm SHA256 | Format-List Path,Hash
+
+
+Path : C:\Users\mzj\Desktop\CTF\checker_562_tmp.exe
+Hash : 449D9F4569A0ED70FCB9BC8B96737719B62CFD8AE7C1E99D2864A3999887FDF5
+
+
+
+PS C:\Users\mzj\Desktop\CTF> Remove-Item -LiteralPath 'C:\Users\mzj\Desktop\CTF\checker_562_tmp.exe' -Force
+PS C:\Users\mzj\Desktop\CTF> Test-Path -LiteralPath 'C:\Users\mzj\Desktop\CTF\checker_562_tmp.exe'
+False
+PS C:\Users\mzj\Desktop\CTF> Get-ChildItem -LiteralPath $target -Recurse -File | Sort-Object FullName | Select-Object @{Name='RelativePath';Expression={$_.FullName.Substring($target.Length + 1)}},Length | Format-Table -AutoSize
+
+RelativePath               Length
+------------               ------
+data_区段.txt                  1218
+README.md                    1607
+sections.txt                 3240
+solve_checker.py             2454
+strings_ascii.txt           28150
+symbols_full.txt            65772
+WP_第一届启航杯checker.md          6006
+附件_原始\checker_20260929.zip  17498
+关键函数反汇编.txt                 14712
+命令与输出记录.txt                   369
+提取_分析\checker.exe           42857
+正向复算输出.txt                   1052
+
+
+PS C:\Users\mzj\Desktop\CTF> Get-Content -LiteralPath (Join-Path $target '命令与输出记录.txt')
+PS C:\Users\mzj\Desktop\CTF> Get-ChildItem -LiteralPath $target -Recurse -File | Where-Object { $_.Name -notin @('SHA256SUMS.txt','命令与输出记录.txt') } | Get-FileHash -Algorithm SHA256 | ForEach-Object { '{0} *{1}' -f $_.Hash,$_.Path.Substring($target.Length + 1) } | Tee-Object -FilePath (Join-Path $target 'SHA256SUMS.txt')
+DA886BB3E9C0424CEE5443E152B272C0B290D3E28134B3687422A8DF0CBAE808 *data_区段.txt
+7565AB01E91E0E1A73CB9942A3D69AAFA651FC7F2DC2D7748E8E50ABE13BBB6B *README.md
+7108284738537E91DBBA447F8CDBFF7C492BAFC192B077A0B3D4D031E91076EF *sections.txt
+CBB87594BCE7D3518694C00949FD44F4CF7C1DE62079B1EA407363B050556D84 *solve_checker.py
+730998B7970EFA9364596BA1B45204059D8BD57278250F34D39ED2FF2B3E8334 *strings_ascii.txt
+C054A7A3269DFB74718B171AE0E4452B4CEDDE3B4B668F2987596221864A79A1 *symbols_full.txt
+29C84332018156F2552344D6E368BF986AF62882EFB5AC8BF050A97FF1BD9A96 *WP_第一届启航杯checker.md
+31FD5B6A0968CB11437FA3465F2B88F26167D48987BF78A0690E6192D885AAB8 *关键函数反汇编.txt
+773D245A658774E794F276C5A40544453893C64D6A09959E4EEBEFB7273C7D0F *正向复算输出.txt
+449D9F4569A0ED70FCB9BC8B96737719B62CFD8AE7C1E99D2864A3999887FDF5 *提取_分析\checker.exe
+598E457DCDFFCB89F4A1B5CF56133E1D8A194E737B8C25C6C0EA722854426D36 *附件_原始\checker_20260929.zip
+PS C:\Users\mzj\Desktop\CTF> Add-Content -LiteralPath (Join-Path $target 'README.md') -Value '- `SHA256SUMS.txt` — 本题材料校验清单（不含自身与命令 transcript）。'
+PS C:\Users\mzj\Desktop\CTF> Expand-Archive -LiteralPath (Join-Path (Join-Path $target '附件_原始') 'checker_20260929.zip') -DestinationPath (Join-Path $target '复核_独立') -Force
+PS C:\Users\mzj\Desktop\CTF> @'
+from pathlib import Path
+import hashlib
+import re
+import struct
+import subprocess
+import zipfile
+
+root = Path(r'C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\批次14_20260929\562_checker')
+archive = root / '附件_原始' / 'checker_20260929.zip'
+binary = root / '复核_独立' / 'checker.exe'
+prior_output = root / '正向复算输出.txt'
+zip_bytes = archive.read_bytes()
+with zipfile.ZipFile(archive) as zf:
+    names = zf.namelist()
+    exe_bytes = zf.read('checker.exe')
+if names != ['checker.exe']:
+    raise SystemExit(f'附件成员不符合预期: {names!r}')
+if exe_bytes != binary.read_bytes():
+    raise SystemExit('独立提取文件与 ZIP 内 checker.exe 不相同')
+if exe_bytes[:2] != b'MZ':
+    raise SystemExit('不是 PE/MZ 文件')
+peoff = struct.unpack_from('<I', exe_bytes, 0x3C)[0]
+if exe_bytes[peoff:peoff + 4] != b'PE\0\0':
+    raise SystemExit('PE 签名错误')
+coff = peoff + 4
+machine, section_count, _, _, _, optional_size, _ = struct.unpack_from('<HHIIIHH', exe_bytes, coff)
+opt = coff + 20
+image_base = struct.unpack_from('<I', exe_bytes, opt + 28)[0]
+section_table = opt + optional_size
+target_va = 0x404020
+for i in range(section_count):
+    sh = section_table + 40 * i
+    section_name = exe_bytes[sh:sh + 8].split(b'\0', 1)[0].decode('ascii')
+    virtual_address, raw_size, raw_offset = struct.unpack_from('<xxxxxxxxIIII', exe_bytes, sh + 8)
+    delta = target_va - (image_base + virtual_address)
+    if 0 <= delta < raw_size:
+        file_offset = raw_offset + delta
+        break
+else:
+    raise SystemExit('目标 VA 不属于任何文件内节')
+end = exe_bytes.index(b'\0', file_offset)
+cipher = exe_bytes[file_offset:end]
+candidate = bytes(byte ^ 0x23 for byte in cipher)
+prior_text = re.search(r'^candidate text=(.*)$', prior_output.read_text(encoding='utf-8'), re.M).group(1)
+expected_input = candidate + b'\n'
+if b'\0' in candidate or b'\n' in candidate or b'\r' in candidate:
+    raise SystemExit('候选含 fgets/C 字符串不允许的字节')
+if len(expected_input) > 49:
+    raise SystemExit('带换行输入超出 fgets(50) 可读取的最大 49 字节')
+proc = subprocess.run([str(binary)], input=expected_input, stdout=subprocess.PIPE, stderr=subprocess.PIPE, timeout=10)
+stdout = proc.stdout.decode('ascii', 'replace')
+stderr = proc.stderr.decode('ascii', 'replace')
+print(f'archive_sha256={hashlib.sha256(zip_bytes).hexdigest()}')
+print(f'binary_sha256={hashlib.sha256(exe_bytes).hexdigest()}')
+print(f'zip_members={names!r}; independent_extract_matches=True')
+print(f'PE machine=0x{machine:04x}; image_base=0x{image_base:08x}; section_count={section_count}')
+print(f'encrypted_global_va=0x{target_va:08x}; file_offset=0x{file_offset:x}; bytes={len(cipher)}')
+print(f'prior_candidate_matches_independent_decode={prior_text.encode("ascii") == candidate}')
+print(f'candidate_length={len(candidate)}; input_bytes_with_LF={len(expected_input)}; fgets50_safe={len(expected_input) <= 49}')
+print(f'local_checker_exit_code={proc.returncode}')
+print(f'local_checker_stdout={stdout!r}')
+print(f'local_checker_stderr={stderr!r}')
+print(f'local_checker_accepts_input={"Correct! You have the flag." in stdout}')
+'@ | Set-Content -LiteralPath (Join-Path $target 'independent_forward_check.py') -Encoding UTF8
+PS C:\Users\mzj\Desktop\CTF> python.exe (Join-Path $target 'independent_forward_check.py') | Tee-Object -FilePath (Join-Path $target '独立执行复核输出.txt')
+PS C:\Users\mzj\Desktop\CTF> $scriptPath=Join-Path $target 'independent_forward_check.py'; $scriptText=[IO.File]::ReadAllText($scriptPath); $scriptText=$scriptText.Replace('virtual_address, raw_size, raw_offset = struct.unpack_from','_, virtual_address, raw_size, raw_offset = struct.unpack_from'); [IO.File]::WriteAllText($scriptPath,$scriptText,[Text.UTF8Encoding]::new($false))
+PS C:\Users\mzj\Desktop\CTF> python.exe (Join-Path $target 'independent_forward_check.py') | Tee-Object -FilePath (Join-Path $target '独立执行复核输出.txt')
+PS C:\Users\mzj\Desktop\CTF> $scriptText=[IO.File]::ReadAllText($scriptPath); $scriptText=$scriptText.Replace("_, virtual_address, raw_size, raw_offset = struct.unpack_from('<xxxxxxxxIIII', exe_bytes, sh + 8)","_, virtual_address, raw_size, raw_offset = struct.unpack_from('<IIII', exe_bytes, sh + 8)"); [IO.File]::WriteAllText($scriptPath,$scriptText,[Text.UTF8Encoding]::new($false))
+PS C:\Users\mzj\Desktop\CTF> python.exe (Join-Path $target 'independent_forward_check.py') | Tee-Object -FilePath (Join-Path $target '独立执行复核输出.txt')
+PS C:\Users\mzj\Desktop\CTF> $scriptText=[IO.File]::ReadAllText($scriptPath); $scriptText=$scriptText.Replace("prior_output.read_text(encoding='utf-8')","prior_output.read_text(encoding='utf-16')"); [IO.File]::WriteAllText($scriptPath,$scriptText,[Text.UTF8Encoding]::new($false))
+PS C:\Users\mzj\Desktop\CTF> python.exe (Join-Path $target 'independent_forward_check.py') | Tee-Object -FilePath (Join-Path $target '独立执行复核输出.txt')
+archive_sha256=598e457dcdffcb89f4a1b5cf56133e1d8a194e737b8c25c6c0ea722854426d36
+binary_sha256=449d9f4569a0ed70fcb9bc8b96737719b62cfd8ae7c1e99d2864a3999887fdf5
+zip_members=['checker.exe']; independent_extract_matches=True
+PE machine=0x014c; image_base=0x00400000; section_count=13
+encrypted_global_va=0x00404020; file_offset=0x3220; bytes=43
+prior_candidate_matches_independent_decode=True
+candidate_length=43; input_bytes_with_LF=44; fgets50_safe=True
+local_checker_exit_code=0
+local_checker_stdout='Enter the flag: Performing initial checks...\r\nChecks completed.\r\nCorrect! You have the flag.\r\n'
+local_checker_stderr=''
+local_checker_accepts_input=True
+PS C:\Users\mzj\Desktop\CTF> @'
+# 玄机 ID 562：第一届启航杯checker
+
+本目录保存该题附件、静态逆向证据、复现材料、平台拒绝后的重新核验结果，以及按执行顺序记录的 PowerShell 命令和终端输出。
+
+## 当前状态：未解决
+
+主代理通过玄机前台提交了由本地附件反算的候选，页面原文返回“FLAG 不正确”，题目仍为 0/1。独立读取原始 ZIP 并对其中 checker.exe 进行一次本地输入验证时，该 checker 回显 `Correct! You have the flag.`。这证明该候选符合附件自带程序的比较逻辑，但与平台验证结果冲突；不能据此将题目标记为已解，也不再重复提交或尝试猜值。
+
+目前证据指向“附件内 checker 接受值”和“平台题目接受值”并不一致；具体是附件与线上题目配置不对应，还是平台使用外部动态 flag，现有材料无法判定。题目页下载关联由主代理前台操作确认。主代理报告平台拒绝结果，但没有可写入本地的截图文件，因此本目录记录其提供的原文状态，不伪造截图。
+
+没有使用公开 Writeup 或网络搜索。
+
+## 文件
+
+- `附件_原始\checker_20260929.zip` — 最新下载 ZIP 的原样副本。
+- `提取_分析\checker.exe` — ZIP 中唯一的文件。
+- `复核_独立\checker.exe` — 从保存的原始 ZIP 第二次独立解压，用于独立读取和一次本地输入验证。
+- `WP_第一届启航杯checker.md` — 附件分析、提交冲突、证据和未解决结论。
+- `solve_checker.py` — 标准库脚本，解析 PE 并从内嵌数据反算附件 checker 所接受的字符串。
+- `independent_forward_check.py` — 直接读取 ZIP 成员、独立映射 PE 节并执行一次附件本地核验；输出会隐藏候选文本。
+- `正向复算输出.txt` — 首次解码和输入长度检查的 stdout。
+- `独立执行复核输出.txt` — 独立解码、原始附件校验及本地 checker 执行结果。
+- `strings_ascii.txt` — ASCII 字符串输出。
+- `sections.txt`、`symbols_full.txt`、`data_区段.txt` — PE 节表、符号表和数据节。
+- `关键函数反汇编.txt` — `_fake_check`、`_encrypt_flag`、`_check_flag`、`_main` 反汇编。
+- `SHA256SUMS.txt` — 材料校验清单（不含自身与命令 transcript）。
+- `命令与输出记录.txt` — PowerShell 命令、标准输出、错误输出和复核过程；包括本地 checker 执行回显及首次脚本错误/修正。
+
+## 附件摘要
+
+- 下载位置：`D:\Downloads\checker (5).zip`
+- ZIP SHA256：`598E457DCDFFCB89F4A1B5CF56133E1D8A194E737B8C25C6C0EA722854426D36`
+- `checker.exe` SHA256：`449D9F4569A0ED70FCB9BC8B96737719B62CFD8AE7C1E99D2864A3999887FDF5`
+
+后续若要继续解决，应先核验玄机 ID 562 的当前题面/下载对象是否确实对应此 ZIP，或取得平台所需的动态环境与 flag 来源。不得把本地 checker 的成功误当作线上提交成功。
+'@ | Set-Content -LiteralPath (Join-Path $target 'README.md') -Encoding UTF8
+PS C:\Users\mzj\Desktop\CTF> Select-String -LiteralPath (Join-Path $target 'WP_第一届启航杯checker.md') -Pattern '^## 结果','平台提交核验','^## 附件核验','^## 关于','^## 可复现文件' -Context 0,4
+
+> 玄机刷题\题目资料\批次14_20260929\562_checker\WP_第一届启航杯checker.md:13:## 结果
+  玄机刷题\题目资料\批次14_20260929\562_checker\WP_第一届启航杯checker.md:14:
+  玄机刷题\题目资料\批次14_20260929\562_checker\WP_第一届启航杯checker.md:15:从二进制内嵌的 43 字节密文按程序
+使用的单字节 XOR key `0x23` 逆变换，得到唯一匹配附件校验逻辑的候选：
+  玄机刷题\题目资料\批次14_20260929\562_checker\WP_第一届启航杯checker.md:16:
+  玄机刷题\题目资料\批次14_20260929\562_checker\WP_第一届启航杯checker.md:17:```text
+> 玄机刷题\题目资料\批次14_20260929\562_checker\WP_第一届启航杯checker.md:21:这不是对平台状态的声称：本 WP 的
+命令行复现证明该字符串按附件实际算法重新 XOR 后逐字节还原嵌入密文。平台提交核验由主代理另行通过前台完成。
+  玄机刷题\题目资料\批次14_20260929\562_checker\WP_第一届启航杯checker.md:22:
+> 玄机刷题\题目资料\批次14_20260929\562_checker\WP_第一届启航杯checker.md:23:## 附件核验和文件布局
+  玄机刷题\题目资料\批次14_20260929\562_checker\WP_第一届启航杯checker.md:24:
+  玄机刷题\题目资料\批次14_20260929\562_checker\WP_第一届启航杯checker.md:25:1. 从 Downloads 中按最
+后写入时间核对到最新项为 `checker (5).zip`（17,498 字节，2026-09-29 15:37:48）。为防止仅凭文件名猜测，逐列出各 `
+checker*.zip` 的创建时间、长度和 SHA256；六份文件的摘要完全相同。
+  玄机刷题\题目资料\批次14_20260929\562_checker\WP_第一届启航杯checker.md:26:2. 将最新 ZIP 原样复制到 `
+附件_原始\checker_20260929.zip`。复制前后 SHA256 均为 `598E457DCDFFCB89F4A1B5CF56133E1D8A1
+94E737B8C25C6C0EA722854426D36`。
+  玄机刷题\题目资料\批次14_20260929\562_checker\WP_第一届启航杯checker.md:27:3. 归档清单只有 `checker
+.exe`。提取后确认文件长 42,857 字节。
+> 玄机刷题\题目资料\批次14_20260929\562_checker\WP_第一届启航杯checker.md:84:## 关于“读取 /flag”的题面
+提示
+  玄机刷题\题目资料\批次14_20260929\562_checker\WP_第一届启航杯checker.md:85:
+  玄机刷题\题目资料\批次14_20260929\562_checker\WP_第一届启航杯checker.md:86:题面提示让人考虑读取 `/flag`
+，但随附件提供的 `checker.exe` 中，真实验证流程不是去打开本机 `/flag` 文件，而是将输入 XOR 后与程序内 `.data` 中的 `_
+encrypted_flag` 比较。仅从该附件无法、也无需访问平台服务器的 `/flag` 文件；本题解依赖附件中已经存在的比较数据。
+  玄机刷题\题目资料\批次14_20260929\562_checker\WP_第一届启航杯checker.md:87:
+  玄机刷题\题目资料\批次14_20260929\562_checker\WP_第一届启航杯checker.md:88:导入表里有 `FindFirstFi
+leA` / `FindNextFileA`，但它们属于该 MinGW 程序所带的运行时符号；已定位的 `_main`、`_check_flag` 和 `_e
+ncrypt_flag` 路径没有文件打开/读入流程。不要把运行时导入项误当成本题真实 flag 读取点。
+> 玄机刷题\题目资料\批次14_20260929\562_checker\WP_第一届启航杯checker.md:90:## 可复现文件
+  玄机刷题\题目资料\批次14_20260929\562_checker\WP_第一届启航杯checker.md:91:
+  玄机刷题\题目资料\批次14_20260929\562_checker\WP_第一届启航杯checker.md:92:- `附件_原始\checker_2
+0260929.zip`：下载附件原样副本。
+  玄机刷题\题目资料\批次14_20260929\562_checker\WP_第一届启航杯checker.md:93:- `提取_分析\checker.e
+xe`：解压后的 PE。
+  玄机刷题\题目资料\批次14_20260929\562_checker\WP_第一届启航杯checker.md:94:- `solve_checker.p
+y`：仅用 Python 标准库解析 PE 节表、读取目标 VA 处的 C 字符串、执行 XOR 并正向核验。
+
+
+PS C:\Users\mzj\Desktop\CTF> $wp=Join-Path $target 'WP_第一届启航杯checker.md'; $doc=[IO.File]::ReadAllText($wp); $start=$doc.IndexOf('## 结果'); $end=$doc.IndexOf('## 附件核验和文件布局'); if($start -lt 0 -or $end -lt 0 -or $end -le $start){throw 'WP 结果章节边界未找到'}; $replacement=@'
+## 当前结论：未解决
+
+玄机平台对主代理提交的本地 checker 反算值返回“FLAG 不正确”，题目仍显示 0/1。因此本题必须记为未解决；这个附件字符串只是本地程序的接受值，不是已验证的平台 flag。为避免重复误报，当前批次不将本题计入已完成，也不再重复提交或猜测其他字符串。
+
+### 被平台拒绝的本地候选
+
+本地附件按下述算法唯一反算出的候选是：
+
+```text
+flag{enp17I4p8TZmAriao2lq5tAArZ2P1wxBUwXU2}
+```
+
+该字符串由附件 `.data` 密文逐字节 XOR `0x23` 得到。主代理确认其通过玄机 ID 562 页面前台提交；页面原文为“FLAG 不正确”，题目进度仍为 0/1。当前没有可写入本地的拒绝截图文件，本段记录主代理提供的前台结果，未伪造截图。
+
+### 独立复核结果与冲突边界
+
+收到平台拒绝后，直接从保存的原始 ZIP 使用 Python `zipfile` 再读唯一成员 `checker.exe`，确认与独立提取件逐字节相同；再次解析 PE 节表，将全局比较值 VA `0x404020` 映射到文件偏移 `0x3220`，以 NUL 为终止符得到 43 字节密文，独立 XOR 反算后与前次候选一致。独立检查确认输入没有 NUL、LF 或 CR；输入加 LF 为 44 字节，小于 `fgets(buffer,50,stdin)` 最多读取的 49 字节。
+
+主代理先前要求独立正向验证后，我在收到随后“不要运行未知 EXE”的指示之前，已按附件本身的静态调用路径核对后，对从原始 ZIP 独立解出的 checker.exe 做了一次本地输入验证。进程退出码为 0、无 stderr，stdout 显示 `Correct! You have the flag.`。这一结果仅证实附件 checker 接受该字符串；玄机平台当场拒绝是相反且更直接的平台证据。此后不再运行该二进制。
+
+### 精确的本地校验路径
+
+`_main` 调用 `fgets(buf, 0x32, stdin)`，随后调用 `strcspn(buf, "\\n")` 并在该位置写 NUL，再调用 `_check_flag(buf)`。`_check_flag` 先调用 `_fake_check`，然后编码用户输入、与地址 `0x404020` 比较。`_fake_check` 只输出两行提示并睡眠 1 秒，没有改变输入。
+
+从 `_encrypt_flag`（VA `0x401490`）反汇编得到的等价伪代码：
+
+```c
+void encrypt_flag(const unsigned char *input, unsigned char *out) {
+    size_t n = strlen((const char *)input);
+    for (size_t i = 0; i < n; i++)
+        out[i] = input[i] ^ 0x23;
+    out[n] = '\\0';
+}
+
+int check_flag(const char *input) {
+    unsigned char out[...];
+    fake_check();
+    encrypt_flag((const unsigned char *)input, out);
+    return strcmp((const char *)out, (const char *)0x404020) == 0;
+}
+```
+
+反算候选并经本地程序接受，仍不能推出平台答案。当前可证明的是“附件里的本地 checker 接受值”和“线上服务接受值”不一致；无法从本 ZIP 判断服务器是否另用动态 `/flag`、是否下载到了与该页面关联但不匹配的附件，或是否有其它题目侧配置。附件入口由主代理确认是在玄机 ID 562 页面前台下载。因为平台拒绝，以上原因仍是待证假设，不能把任何一个写成事实。
+
+'@; $doc=$doc.Substring(0,$start)+$replacement+"`r`n"+$doc.Substring($end); [IO.File]::WriteAllText($wp,$doc,[Text.UTF8Encoding]::new($false))
+PS C:\Users\mzj\Desktop\CTF> Select-String -LiteralPath (Join-Path $target 'WP_第一届启航杯checker.md') -Pattern 'strcspn','out\[n\]' | Format-List Line
+
+
+Line : `_main` 调用 `fgets(buf, 0x32, stdin)`，随后调用 `strcspn(buf, "\\n")` 并在该位置写 N
+       UL，再调用 `_check_flag(buf)`。`_check_flag` 先调用 `_fake_check`，然后编码用户输入、与地址 `
+       0x404020` 比较。`_fake_check` 只输出两行提示并睡眠 1 秒，没有改变输入。
+
+Line :     out[n] = '\\0';
+
+Line : 3. 用 `strcspn(buffer, "\n")` 将换行替换为 NUL；
+
+Line : 候选是 43 个 ASCII 字节，无 NUL、无换行。输入加换行总计 44 字节，小于 `fgets` 的 50 字节容量，因此可被主程序完整
+       读入。`strcspn` 会移除输入行末换行，再进入 `_check_flag`。
+
+
+
+PS C:\Users\mzj\Desktop\CTF> $doc=[IO.File]::ReadAllText($wp); $doc=$doc.Replace('strcspn(buf, "\\n")','strcspn(buf, "\n")'); $doc=$doc.Replace("out[n] = '\\\\0';","out[n] = '\\0';"); [IO.File]::WriteAllText($wp,$doc,[Text.UTF8Encoding]::new($false))
+PS C:\Users\mzj\Desktop\CTF> Select-String -LiteralPath $wp -Pattern 'strcspn\(buf','out\[n\]' | Format-List Line
+
+
+Line : `_main` 调用 `fgets(buf, 0x32, stdin)`，随后调用 `strcspn(buf, "\n")` 并在该位置写 NU
+       L，再调用 `_check_flag(buf)`。`_check_flag` 先调用 `_fake_check`，然后编码用户输入、与地址 `0
+       x404020` 比较。`_fake_check` 只输出两行提示并睡眠 1 秒，没有改变输入。
+
+Line :     out[n] = '\\0';
+
+Line : 3. 用 `strcspn(buffer, "\n")` 将换行替换为 NUL；
+
+
+
+PS C:\Users\mzj\Desktop\CTF> $doc=[IO.File]::ReadAllText($wp); $doc=$doc.Replace("out[n] = '\\0';","out[n] = '\0';"); [IO.File]::WriteAllText($wp,$doc,[Text.UTF8Encoding]::new($false))
+PS C:\Users\mzj\Desktop\CTF> Select-String -LiteralPath $wp -Pattern 'out\[n\]' | Format-List Line
+
+
+Line :     out[n] = '\0';
+
+
+
+PS C:\Users\mzj\Desktop\CTF> Add-Content -LiteralPath $wp -Value @'
+## 复核产物
+
+- `independent_forward_check.py`：从 ZIP 直接取原始成员，独立映射 PE 节表，核对历史反算值，并以候选加 LF 调用一次本地 checker；输出不重复展示候选文本。
+- `复核_独立\checker.exe`：由存档 ZIP 第二次独立提取的输入程序。
+- `独立执行复核输出.txt`：独立 ZIP/PE 校验和本地进程 stdout/stderr、退出码；前台平台拒绝状态按主代理报告记录在本 WP 中。
+- `SHA256SUMS.txt`：相关资料的摘要。
+- `命令与输出记录.txt`：包括独立脚本两次修正后的结果、此前 PE 工具因中文路径调用失败的错误、PowerShell 输入和终端输出。
+
+'@
+PS C:\Users\mzj\Desktop\CTF> Get-ChildItem -LiteralPath $target -Recurse -File | Where-Object { $_.Name -notin @('SHA256SUMS.txt','命令与输出记录.txt') } | Get-FileHash -Algorithm SHA256 | ForEach-Object { '{0} *{1}' -f $_.Hash,$_.Path.Substring($target.Length + 1) } | Tee-Object -FilePath (Join-Path $target 'SHA256SUMS.txt')
+DA886BB3E9C0424CEE5443E152B272C0B290D3E28134B3687422A8DF0CBAE808 *data_区段.txt
+599BD4CEAB98F89B3010A5C8432A34A1EEDF8379DE4AA0728926D9A052340F04 *independent_forward_check.py
+BA78D9F2DEEB51CF5F220800088CD6EBFB846972C564ADB6828CC61A85E3CED1 *README.md
+7108284738537E91DBBA447F8CDBFF7C492BAFC192B077A0B3D4D031E91076EF *sections.txt
+CBB87594BCE7D3518694C00949FD44F4CF7C1DE62079B1EA407363B050556D84 *solve_checker.py
+730998B7970EFA9364596BA1B45204059D8BD57278250F34D39ED2FF2B3E8334 *strings_ascii.txt
+C054A7A3269DFB74718B171AE0E4452B4CEDDE3B4B668F2987596221864A79A1 *symbols_full.txt
+69FC7CBC10BC3745057459570F9A1E4DE882BFD7FA2AD7364CFB61A1205F5AC3 *WP_第一届启航杯checker.md
+31FD5B6A0968CB11437FA3465F2B88F26167D48987BF78A0690E6192D885AAB8 *关键函数反汇编.txt
+773D245A658774E794F276C5A40544453893C64D6A09959E4EEBEFB7273C7D0F *正向复算输出.txt
+B4DCBE3ED773CCEF4CA7A50C77F304EF758439BE5516178DC300AA57F83BBB34 *独立执行复核输出.txt
+449D9F4569A0ED70FCB9BC8B96737719B62CFD8AE7C1E99D2864A3999887FDF5 *复核_独立\checker.exe
+449D9F4569A0ED70FCB9BC8B96737719B62CFD8AE7C1E99D2864A3999887FDF5 *提取_分析\checker.exe
+598E457DCDFFCB89F4A1B5CF56133E1D8A194E737B8C25C6C0EA722854426D36 *附件_原始\checker_20260929.zip
+PS C:\Users\mzj\Desktop\CTF> Stop-Transcript
+**********************
+Windows PowerShell transcript end
+End time: 20260929160708
+**********************

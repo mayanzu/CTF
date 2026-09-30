@@ -1,0 +1,752 @@
+**********************
+PowerShell transcript start
+Start time: 20260929135332
+Username: DESKTOP-412KTAR\mzj
+RunAs User: DESKTOP-412KTAR\mzj
+Configuration Name: 
+Machine: DESKTOP-412KTAR (Microsoft Windows NT 10.0.26200.0)
+Host Application: C:\Users\mzj\.cache\codex-runtimes\codex-primary-runtime\dependencies\native\powershell\pwsh.dll -NoProfile -Command try { [Console]::OutputEncoding=[System.Text.Encoding]::UTF8 } catch {}
+$ErrorActionPreference = 'Continue'; $root = 'C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\批次12_20260929\534_天下谁人不识君'; $analysis = Join-Path $root 'analysis'; New-Item -ItemType Directory -Path $analysis -Force | Out-Null; $transcript = Join-Path $analysis 'command_transcript_20260929.txt'; Start-Transcript -Path $transcript -Force; Write-Output 'COMMAND 1: Get-FileHash -Algorithm SHA256 <attachment>'; Get-FileHash -LiteralPath (Join-Path $root 'originals\天下谁人不识君.zip') -Algorithm SHA256 | Format-List *; Write-Output 'COMMAND 2: Enumerate ZIP member names, sizes, compressed sizes'; Add-Type -AssemblyName System.IO.Compression.FileSystem; $zip = [System.IO.Compression.ZipFile]::OpenRead((Join-Path $root 'originals\天下谁人不识君.zip')); $zip.Entries | Select-Object FullName,Length,CompressedLength | Format-Table -AutoSize; $zip.Dispose(); Stop-Transcript
+Process ID: 29172
+PSVersion: 7.6.5
+PSEdition: Core
+GitCommitId: 7.6.5
+OS: Microsoft Windows 10.0.26200
+Platform: Win32NT
+PSCompatibleVersions: 1.0, 2.0, 3.0, 4.0, 5.0, 5.1, 6.0, 7.0
+PSRemotingProtocolVersion: 2.4
+SerializationVersion: 1.1.0.1
+WSManStackVersion: 3.0
+**********************
+Transcript started, output file is C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\批次12_20260929\534_天下谁人不识君\analysis\command_transcript_20260929.txt
+COMMAND 1: Get-FileHash -Algorithm SHA256 <attachment>
+
+Algorithm : SHA256
+Hash      : EE9F84EA4ED73201BDE00509C5EAD9FD3476F22D07D9390ED9EAA7F022FB10AA
+Path      : C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\批次12_20260929\534_天下谁人不识君\originals\天下谁人不识君.zip
+
+COMMAND 2: Enumerate ZIP member names, sizes, compressed sizes
+
+FullName          Length CompressedLength
+--------          ------ ----------------
+天下谁人不识君.py    295              221
+
+**********************
+PowerShell transcript end
+End time: 20260929135332
+**********************
+**********************
+PowerShell transcript start
+Start time: 20260929135348
+Username: DESKTOP-412KTAR\mzj
+RunAs User: DESKTOP-412KTAR\mzj
+Configuration Name: 
+Machine: DESKTOP-412KTAR (Microsoft Windows NT 10.0.26200.0)
+Host Application: C:\Users\mzj\.cache\codex-runtimes\codex-primary-runtime\dependencies\native\powershell\pwsh.dll -NoProfile -Command try { [Console]::OutputEncoding=[System.Text.Encoding]::UTF8 } catch {}
+$ErrorActionPreference = 'Continue'; $root = 'C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\批次12_20260929\534_天下谁人不识君'; $transcript = Join-Path $root 'analysis\command_transcript_20260929.txt'; Start-Transcript -Path $transcript -Append; Write-Output 'COMMAND 3: Read ZIP member bytes as text (static; no extraction or execution)'; Add-Type -AssemblyName System.IO.Compression; $fs = [System.IO.File]::OpenRead((Join-Path $root 'originals\天下谁人不识君.zip')); $za = [System.IO.Compression.ZipArchive]::new($fs, [System.IO.Compression.ZipArchiveMode]::Read); $entry = $za.GetEntry('天下谁人不识君.py'); $ms = [System.IO.MemoryStream]::new(); $stream = $entry.Open(); $stream.CopyTo($ms); $bytes = $ms.ToArray(); Write-Output ('Member length: ' + $bytes.Length); Write-Output ('Member SHA256: ' + [Convert]::ToHexString([System.Security.Cryptography.SHA256]::HashData($bytes))); Write-Output '--- source begin ---'; [Console]::WriteLine([System.Text.Encoding]::UTF8.GetString($bytes)); Write-Output '--- source end ---'; $stream.Dispose(); $za.Dispose(); $fs.Dispose(); Stop-Transcript
+Process ID: 25372
+PSVersion: 7.6.5
+PSEdition: Core
+GitCommitId: 7.6.5
+OS: Microsoft Windows 10.0.26200
+Platform: Win32NT
+PSCompatibleVersions: 1.0, 2.0, 3.0, 4.0, 5.0, 5.1, 6.0, 7.0
+PSRemotingProtocolVersion: 2.4
+SerializationVersion: 1.1.0.1
+WSManStackVersion: 3.0
+**********************
+Transcript started, output file is C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\批次12_20260929\534_天下谁人不识君\analysis\command_transcript_20260929.txt
+COMMAND 3: Read ZIP member bytes as text (static; no extraction or execution)
+Member length: 295
+Member SHA256: FCCC83EABCB024E83DAC3A6A646F62E21C1CA6A43C031637D6C1B47A7FE26B2B
+--- source begin ---
+--- source end ---
+**********************
+PowerShell transcript end
+End time: 20260929135348
+**********************
+**********************
+PowerShell transcript start
+Start time: 20260929135504
+Username: DESKTOP-412KTAR\mzj
+RunAs User: DESKTOP-412KTAR\mzj
+Configuration Name: 
+Machine: DESKTOP-412KTAR (Microsoft Windows NT 10.0.26200.0)
+Host Application: C:\Users\mzj\.cache\codex-runtimes\codex-primary-runtime\dependencies\native\powershell\pwsh.dll -NoProfile -Command try { [Console]::OutputEncoding=[System.Text.Encoding]::UTF8 } catch {}
+$ErrorActionPreference = 'Continue'; $root = 'C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\批次12_20260929\534_天下谁人不识君'; $transcript = Join-Path $root 'analysis\command_transcript_20260929.txt'; Start-Transcript -Path $transcript -Append; Write-Output 'COMMAND 4: Get-Command python, py (check local interpreter availability; no challenge code execution)'; Get-Command python,py -ErrorAction SilentlyContinue | Select-Object Name,CommandType,Source | Format-Table -AutoSize; Stop-Transcript
+Process ID: 36324
+PSVersion: 7.6.5
+PSEdition: Core
+GitCommitId: 7.6.5
+OS: Microsoft Windows 10.0.26200
+Platform: Win32NT
+PSCompatibleVersions: 1.0, 2.0, 3.0, 4.0, 5.0, 5.1, 6.0, 7.0
+PSRemotingProtocolVersion: 2.4
+SerializationVersion: 1.1.0.1
+WSManStackVersion: 3.0
+**********************
+Transcript started, output file is C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\批次12_20260929\534_天下谁人不识君\analysis\command_transcript_20260929.txt
+COMMAND 4: Get-Command python, py (check local interpreter availability; no challenge code execution)
+
+Name       CommandType Source
+----       ----------- ------
+python.exe Application C:\Users\mzj\AppData\Local\Programs\Python\Python312\python.exe
+py.exe     Application C:\WINDOWS\py.exe
+
+**********************
+PowerShell transcript end
+End time: 20260929135504
+**********************
+**********************
+PowerShell transcript start
+Start time: 20260929135546
+Username: DESKTOP-412KTAR\mzj
+RunAs User: DESKTOP-412KTAR\mzj
+Configuration Name: 
+Machine: DESKTOP-412KTAR (Microsoft Windows NT 10.0.26200.0)
+Host Application: C:\Users\mzj\.cache\codex-runtimes\codex-primary-runtime\dependencies\native\powershell\pwsh.dll -NoProfile -Command try { [Console]::OutputEncoding=[System.Text.Encoding]::UTF8 } catch {}
+$ErrorActionPreference = 'Continue'; $root = 'C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\批次12_20260929\534_天下谁人不识君'; $analysis = Join-Path $root 'analysis'; $transcript = Join-Path $analysis 'command_transcript_20260929.txt'; Start-Transcript -Path $transcript -Append; $solve = @'
+from hashlib import sha256
+
+alphabet = 'wesyvbniazxchjko1973652048@$+-&*<>'
+ciphertext = 'v7b3boika$h4h5j0jhkh161h79393i5x010j0y8n$i'
+size = len(alphabet)
+assert size == 34 and len(set(alphabet)) == size
+assert len(ciphertext) % 2 == 0
+index = {ch: pos for pos, ch in enumerate(alphabet)}
+
+print(f'alphabet length={size}; unique={len(index)}')
+print(f'ciphertext length={len(ciphertext)}; decoded character count={len(ciphertext)//2}')
+recovered = []
+for i in range(len(ciphertext) // 2):
+    first, second = ciphertext[2*i:2*i+2]
+    j1, j2 = index[first], index[second]
+    q = (j1 - i) % size
+    r = (-j2 - i - 1) % size
+    codepoint = 17*q + r
+    assert 0 <= q <= 7, (i, first, second, q, r)
+    assert 0 <= r <= 16, (i, first, second, q, r)
+    recovered.append(chr(codepoint))
+    print(f'i={i:02d} pair={first!r}{second!r} indices=({j1:02d},{j2:02d}) q={q} r={r:02d} codepoint={codepoint:03d} char={chr(codepoint)!r}')
+flag = ''.join(recovered)
+print('recovered flag:', flag)
+
+reencoded = ''.join(
+    alphabet[(ord(ch)//17 + i) % size] + alphabet[-(ord(ch)%17 + i + 1) % size]
+    for i, ch in enumerate(flag)
+)
+print('re-encoded ciphertext:', reencoded)
+print('matches source comment:', reencoded == ciphertext)
+assert reencoded == ciphertext
+'@; [System.IO.File]::WriteAllText((Join-Path $analysis 'solve.py'), $solve, [System.Text.UTF8Encoding]::new($false)); Write-Output 'COMMAND 5: python -B analysis\solve.py  (runs only the locally authored recovery script)'; & python -B (Join-Path $analysis 'solve.py') 2>&1; Write-Output ('Exit code: ' + $LASTEXITCODE); Stop-Transcript
+Process ID: 8864
+PSVersion: 7.6.5
+PSEdition: Core
+GitCommitId: 7.6.5
+OS: Microsoft Windows 10.0.26200
+Platform: Win32NT
+PSCompatibleVersions: 1.0, 2.0, 3.0, 4.0, 5.0, 5.1, 6.0, 7.0
+PSRemotingProtocolVersion: 2.4
+SerializationVersion: 1.1.0.1
+WSManStackVersion: 3.0
+**********************
+Transcript started, output file is C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\批次12_20260929\534_天下谁人不识君\analysis\command_transcript_20260929.txt
+COMMAND 5: python -B analysis\solve.py  (runs only the locally authored recovery script)
+Exit code: 0
+**********************
+PowerShell transcript end
+End time: 20260929135546
+**********************
+**********************
+PowerShell transcript start
+Start time: 20260929135653
+Username: DESKTOP-412KTAR\mzj
+RunAs User: DESKTOP-412KTAR\mzj
+Configuration Name: 
+Machine: DESKTOP-412KTAR (Microsoft Windows NT 10.0.26200.0)
+Host Application: C:\Users\mzj\.cache\codex-runtimes\codex-primary-runtime\dependencies\native\powershell\pwsh.dll -NoProfile -Command try { [Console]::OutputEncoding=[System.Text.Encoding]::UTF8 } catch {}
+$ErrorActionPreference = 'Continue'; $root = 'C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\批次12_20260929\534_天下谁人不识君'; $analysis = Join-Path $root 'analysis'; $transcript = Join-Path $analysis 'command_transcript_20260929.txt'; Start-Transcript -Path $transcript -Append; $check = @'
+from pathlib import Path
+
+alphabet = 'wesyvbniazxchjko1973652048@$+-&*<>'
+comment_ciphertext = 'v7b3boika$h4h5j0jhkh161h79393i5x010j0y8n$i'
+source_literal = 'flag{0af4edfd-3b6c-4f6f-853c-5b83acb20708}'
+source_output = ''.join(
+    alphabet[(ord(ch)//17 + i) % 34] + alphabet[-(ord(ch)%17 + i + 1) % 34]
+    for i, ch in enumerate(source_literal)
+)
+print(f'source flag literal length: {len(source_literal)}')
+print(f'comment ciphertext length: {len(comment_ciphertext)}')
+print(f'ciphertext length expected from source literal: {len(source_output)}')
+print(f'source literal re-encoded: {source_output}')
+print(f're-encoded source literal equals comment: {source_output == comment_ciphertext}')
+'@; [System.IO.File]::WriteAllText((Join-Path $analysis 'check_source_mismatch.py'), $check, [System.Text.UTF8Encoding]::new($false)); Write-Output 'COMMAND 6: python -B analysis\check_source_mismatch.py (authored diagnostic; challenge file is not run)'; & python -B (Join-Path $analysis 'check_source_mismatch.py') 2>&1; Write-Output ('Exit code: ' + $LASTEXITCODE); Stop-Transcript
+Process ID: 12516
+PSVersion: 7.6.5
+PSEdition: Core
+GitCommitId: 7.6.5
+OS: Microsoft Windows 10.0.26200
+Platform: Win32NT
+PSCompatibleVersions: 1.0, 2.0, 3.0, 4.0, 5.0, 5.1, 6.0, 7.0
+PSRemotingProtocolVersion: 2.4
+SerializationVersion: 1.1.0.1
+WSManStackVersion: 3.0
+**********************
+Transcript started, output file is C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\批次12_20260929\534_天下谁人不识君\analysis\command_transcript_20260929.txt
+COMMAND 6: python -B analysis\check_source_mismatch.py (authored diagnostic; challenge file is not run)
+Exit code: 0
+**********************
+PowerShell transcript end
+End time: 20260929135653
+**********************
+**********************
+PowerShell transcript start
+Start time: 20260929135955
+Username: DESKTOP-412KTAR\mzj
+RunAs User: DESKTOP-412KTAR\mzj
+Configuration Name: 
+Machine: DESKTOP-412KTAR (Microsoft Windows NT 10.0.26200.0)
+Host Application: C:\Users\mzj\.cache\codex-runtimes\codex-primary-runtime\dependencies\native\powershell\pwsh.dll -NoProfile -Command try { [Console]::OutputEncoding=[System.Text.Encoding]::UTF8 } catch {}
+$ErrorActionPreference = 'Continue'
+$root = 'C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\批次12_20260929\534_天下谁人不识君'
+$analysis = Join-Path $root 'analysis'
+$transcript = Join-Path $analysis 'command_transcript_20260929.txt'
+Start-Transcript -Path $transcript -Append
+Write-Output 'COMMAND 7: Write wp.md and README.md (UTF-8, no BOM)'
+$wp = @'
+# 玄机 CTF #534《天下谁人不识君》WP
+
+## 结论
+
+由压缩包内 Python 源码注释给出的密文，按源码定义的 34 字符字母表逐字符反解，得到候选：
+
+```text
+SQCTF{libai_jianxian}
+```
+
+反解后用源码的正向公式重新编码，结果与注释密文完全相同。注意：源码最上方另写了一个 42 字符的 `flag{...}` 字面量，但它按同一公式会编码成 84 字符，和注释中的 42 字符密文不匹配。因此本 WP 将 `SQCTF{libai_jianxian}` 作为密文推导出的候选；源码内部存在未解释的不一致，最终是否为平台接受值需由题目页面验证。本题附件未运行，也没有提交 flag。
+
+## 1. 附件与静态检查
+
+附件为 `originals/天下谁人不识君.zip`，SHA-256：
+
+```text
+EE9F84EA4ED73201BDE00509C5EAD9FD3476F22D07D9390ED9EAA7F022FB10AA
+```
+
+压缩包仅含一个成员 `天下谁人不识君.py`，未解压、未执行。成员长度 295 字节，成员 SHA-256：
+
+```text
+FCCC83EABCB024E83DAC3A6A646F62E21C1CA6A43C031637D6C1B47A7FE26B2B
+```
+
+静态读取可见核心逻辑：
+
+```python
+flag = 'flag{0af4edfd-3b6c-4f6f-853c-5b83acb20708}'
+s = 'wesyvbniazxchjko1973652048@$+-&*<>'
+result = ''
+for i in range(len(flag)):
+    s1 = ord(flag[i])//17
+    s2 = ord(flag[i])%17
+    result += s[(s1+i)%34]+s[-(s2+i+1)%34]
+print(result)
+# result = 'v7b3boika$h4h5j0jhkh161h79393i5x010j0y8n$i'
+```
+
+题目脚本没有被运行；下文公式是从源码静态抄录后独立实现的。
+
+## 2. 反解公式
+
+令第 `i` 个明文字符为 `x`，并定义：
+
+```text
+q = ord(x) // 17
+r = ord(x) % 17
+```
+
+源码把它编码为两个字符：
+
+```text
+第一字符 = s[(q + i) % 34]
+第二字符 = s[-(r + i + 1) % 34]
+```
+
+Python 的 `%` 结果在此为 `0..33`，所以第二个下标等价于：
+
+```text
+j2 = (-(r + i + 1)) % 34
+```
+
+对密文字符在字母表 `s` 中查下标 `j1`、`j2` 后，移项得到：
+
+```text
+q = (j1 - i) % 34
+r = (-j2 - i - 1) % 34
+ord(x) = 17*q + r
+```
+
+用常见 flag 可打印 ASCII 范围约束（本例解出的每个字符都在 `0x20..0x7e`），每对密文字符唯一确定一个 `q`、`r` 和明文字符。
+
+## 3. 逐字符计算
+
+密文长度为 42，因此有 21 对字符。表中 `j1/j2` 是两字符在字母表中的零起点位置。
+
+| i | 密文对 | j1/j2 | q | r | ord | 字符 |
+|---:|:---:|:---:|---:|---:|---:|:---:|
+| 0 | `v7` | 4/18 | 4 | 15 | 83 | S |
+| 1 | `b3` | 5/19 | 4 | 13 | 81 | Q |
+| 2 | `bo` | 5/15 | 3 | 16 | 67 | C |
+| 3 | `ik` | 7/14 | 4 | 16 | 84 | T |
+| 4 | `a$` | 8/27 | 4 | 2 | 70 | F |
+| 5 | `h4` | 12/24 | 7 | 4 | 123 | `{` |
+| 6 | `h5` | 12/21 | 6 | 6 | 108 | l |
+| 7 | `j0` | 13/23 | 6 | 3 | 105 | i |
+| 8 | `jh` | 13/12 | 5 | 13 | 98 | b |
+| 9 | `kh` | 14/12 | 5 | 12 | 97 | a |
+| 10 | `16` | 16/20 | 6 | 3 | 105 | i |
+| 11 | `1h` | 16/12 | 5 | 10 | 95 | `_` |
+| 12 | `79` | 18/17 | 6 | 4 | 106 | j |
+| 13 | `39` | 19/17 | 6 | 3 | 105 | i |
+| 14 | `3i` | 19/7 | 5 | 12 | 97 | a |
+| 15 | `5x` | 21/10 | 6 | 8 | 110 | n |
+| 16 | `01` | 23/16 | 7 | 1 | 120 | x |
+| 17 | `0j` | 23/13 | 6 | 3 | 105 | i |
+| 18 | `0y` | 23/3 | 5 | 12 | 97 | a |
+| 19 | `8n` | 25/6 | 6 | 8 | 110 | n |
+| 20 | `$i` | 27/7 | 7 | 6 | 125 | `}` |
+
+拼接结果为 `SQCTF{libai_jianxian}`。
+
+## 4. 本地复现
+
+在题目目录运行本分析目录中的自编脚本（不是运行附件）：
+
+```powershell
+python -B analysis\solve.py
+```
+
+脚本打印 21 组下标和字符，随后用推导结果重新计算完整密文，并断言结果等于源码注释中的密文。运行结果末尾应为：
+
+```text
+recovered flag: SQCTF{libai_jianxian}
+re-encoded ciphertext: v7b3boika$h4h5j0jhkh161h79393i5x010j0y8n$i
+matches source comment: True
+```
+
+复现源文件为 `analysis/solve.py`。
+
+## 5. 源码内部不一致的复核
+
+源码顶部字面量 `flag{0af4edfd-3b6c-4f6f-853c-5b83acb20708}` 长 42 字符。循环每个输入字符输出两个字符，因此如果该变量就是注释结果的输入，结果长度应为 84，而实际注释密文只有 42 字符。再用同一公式独立重编码该字面量，得到：
+
+```text
+n>i@i3z-c8ikcoj@c4kaoa929noz936b3k2s6v2j@j4z+c8>$v+n-i<@&+<se4w*eev2b3n3vob1i8ikz2k6
+```
+
+该值不等于注释密文。可用下列诊断复现长度和比较：
+
+```powershell
+python -B analysis\check_source_mismatch.py
+```
+
+证据支持“注释密文编码的是 `SQCTF{libai_jianxian}`，而源码明文字段与注释不一致”。仅凭本地附件无法判断该不一致是占位明文、拼接错误还是其他原因，故把平台接受情况标记为待前台验证。
+
+## 6. 当前状态与限制
+
+本地密文反解和正向校验均通过。题目页面初始状态据任务记录为免费、中等、未完成、1 步 0/1；本工作未向平台提交 flag。候选及本地验证证据已交由 root 在前台验证。
+'@
+$readme = @'
+# #534 天下谁人不识君
+
+## 状态
+
+- 本地分析：已完成注释密文反解及正向复算。
+- 候选：`SQCTF{libai_jianxian}`（待题目页面验证）。
+- 初始平台状态：免费、中等、未完成、1 步 0/1（来自任务上下文）。
+- 重要限制：附件源文件没有执行；源码内 `flag` 字面量重编码后与注释密文不一致，详见 [wp.md](wp.md)。未提交平台。
+
+## 附件与哈希
+
+| 文件 | 大小 | SHA-256 |
+|---|---:|---|
+| `originals/天下谁人不识君.zip` | — | `EE9F84EA4ED73201BDE00509C5EAD9FD3476F22D07D9390ED9EAA7F022FB10AA` |
+| ZIP 成员 `天下谁人不识君.py` | 295 B | `FCCC83EABCB024E83DAC3A6A646F62E21C1CA6A43C031637D6C1B47A7FE26B2B` |
+
+## 文件索引
+
+- `originals/天下谁人不识君.zip`：玄机前台下载的原始附件。
+- `analysis/command_transcript_20260929.txt`：本题本地命令标记及完整标准输出/错误流转录。
+- `analysis/solve.py`：注释密文的逐字符反解及正向复算脚本。
+- `analysis/check_source_mismatch.py`：检查源码字面量长度、正向编码与注释密文是否相符。
+- `wp.md`：完整中文推导、逐字符表、复现方式及限制说明。
+
+## 重要分析结论
+
+ZIP 只有一个 Python 源文件，未解压或执行。注释密文为 42 字符，反解为 21 字符候选；源码顶部硬编码明文有 42 字符，按循环应产生 84 字符输出，实际复算也与注释值不同。故平台验证前，密文候选和源码变量必须区别记录。
+'@
+[System.IO.File]::WriteAllText((Join-Path $root 'wp.md'), $wp, [System.Text.UTF8Encoding]::new($false))
+[System.IO.File]::WriteAllText((Join-Path $root 'README.md'), $readme, [System.Text.UTF8Encoding]::new($false))
+Write-Output 'COMMAND 8: Get-ChildItem -LiteralPath <problem root>, analysis -File | Select Name, Length'
+Get-ChildItem -LiteralPath $root -File | Select-Object Name,Length | Format-Table -AutoSize
+Get-ChildItem -LiteralPath $analysis -File | Select-Object Name,Length | Format-Table -AutoSize
+Write-Output 'COMMAND 9: Get-FileHash -Algorithm SHA256 <ZIP>'
+Get-FileHash -LiteralPath (Join-Path $root 'originals\天下谁人不识君.zip') -Algorithm SHA256 | Format-List Algorithm,Hash,Path
+Write-Output 'COMMAND 10: Append command-line reconstruction note'
+Write-Output 'Exact analysis invocations represented by markers above: Get-FileHash -LiteralPath <zip> -Algorithm SHA256; [System.IO.Compression.ZipFile]::OpenRead(<zip>).Entries | Select-Object FullName,Length,CompressedLength; System.IO.Compression.ZipArchive(<zip>, Read) then read member 天下谁人不识君.py to bytes, SHA256 and UTF-8 text; Get-Command python,py; python -B analysis\solve.py; python -B analysis\check_source_mismatch.py; Get-ChildItem <problem root> -File and Get-ChildItem <analysis> -File.'
+Stop-Transcript
+Process ID: 33704
+PSVersion: 7.6.5
+PSEdition: Core
+GitCommitId: 7.6.5
+OS: Microsoft Windows 10.0.26200
+Platform: Win32NT
+PSCompatibleVersions: 1.0, 2.0, 3.0, 4.0, 5.0, 5.1, 6.0, 7.0
+PSRemotingProtocolVersion: 2.4
+SerializationVersion: 1.1.0.1
+WSManStackVersion: 3.0
+**********************
+Transcript started, output file is C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\批次12_20260929\534_天下谁人不识君\analysis\command_transcript_20260929.txt
+COMMAND 7: Write wp.md and README.md (UTF-8, no BOM)
+COMMAND 8: Get-ChildItem -LiteralPath <problem root>, analysis -File | Select Name, Length
+
+Name      Length
+----      ------
+README.md   1521
+wp.md       4844
+
+
+Name                            Length
+----                            ------
+check_source_mismatch.py           692
+command_transcript_20260929.txt  21324
+solve.py                          1254
+
+COMMAND 9: Get-FileHash -Algorithm SHA256 <ZIP>
+
+Algorithm : SHA256
+Hash      : EE9F84EA4ED73201BDE00509C5EAD9FD3476F22D07D9390ED9EAA7F022FB10AA
+Path      : C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\批次12_20260929\534_天下谁人不识君\originals\天下谁人不识君.zip
+
+COMMAND 10: Append command-line reconstruction note
+Exact analysis invocations represented by markers above: Get-FileHash -LiteralPath <zip> -Algorithm SHA256; [System.IO.Compression.ZipFile]::OpenRead(<zip>).Entries | Select-Object FullName,Length,CompressedLength; System.IO.Compression.ZipArchive(<zip>, Read) then read member 天下谁人不识君.py to bytes, SHA256 and UTF-8 text; Get-Command python,py; python -B analysis\solve.py; python -B analysis\check_source_mismatch.py; Get-ChildItem <problem root> -File and Get-ChildItem <analysis> -File.
+**********************
+PowerShell transcript end
+End time: 20260929135955
+**********************
+**********************
+PowerShell transcript start
+Start time: 20260929140031
+Username: DESKTOP-412KTAR\mzj
+RunAs User: DESKTOP-412KTAR\mzj
+Configuration Name: 
+Machine: DESKTOP-412KTAR (Microsoft Windows NT 10.0.26200.0)
+Host Application: C:\Users\mzj\.cache\codex-runtimes\codex-primary-runtime\dependencies\native\powershell\pwsh.dll -NoProfile -Command try { [Console]::OutputEncoding=[System.Text.Encoding]::UTF8 } catch {}
+$ErrorActionPreference = 'Continue'
+$root = 'C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\批次12_20260929\534_天下谁人不识君'
+$analysis = Join-Path $root 'analysis'
+$transcript = Join-Path $analysis 'command_transcript_20260929.txt'
+Start-Transcript -Path $transcript -Append
+Write-Output 'COMMAND 11: python -B analysis\solve.py (final reproducibility rerun; authored script only)'
+& python -B (Join-Path $analysis 'solve.py') 2>&1
+Write-Output ('Exit code: ' + $LASTEXITCODE)
+Write-Output 'COMMAND 12: python -B analysis\check_source_mismatch.py (final reproducibility rerun; authored script only)'
+& python -B (Join-Path $analysis 'check_source_mismatch.py') 2>&1
+Write-Output ('Exit code: ' + $LASTEXITCODE)
+Write-Output 'COMMAND 13: Hash authored deliverables (excluding the live transcript)'
+Get-FileHash -LiteralPath (Join-Path $root 'README.md'),(Join-Path $root 'wp.md'),(Join-Path $analysis 'solve.py'),(Join-Path $analysis 'check_source_mismatch.py') -Algorithm SHA256 | Select-Object Path,Hash | Format-List
+Stop-Transcript
+Process ID: 4208
+PSVersion: 7.6.5
+PSEdition: Core
+GitCommitId: 7.6.5
+OS: Microsoft Windows 10.0.26200
+Platform: Win32NT
+PSCompatibleVersions: 1.0, 2.0, 3.0, 4.0, 5.0, 5.1, 6.0, 7.0
+PSRemotingProtocolVersion: 2.4
+SerializationVersion: 1.1.0.1
+WSManStackVersion: 3.0
+**********************
+Transcript started, output file is C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\批次12_20260929\534_天下谁人不识君\analysis\command_transcript_20260929.txt
+COMMAND 11: python -B analysis\solve.py (final reproducibility rerun; authored script only)
+Exit code: 0
+COMMAND 12: python -B analysis\check_source_mismatch.py (final reproducibility rerun; authored script only)
+Exit code: 0
+COMMAND 13: Hash authored deliverables (excluding the live transcript)
+
+Path : C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\批次12_20260929\534_天下谁人不识君\README.md
+Hash : F99FB7BCAB59C0BA5A967D87BA9710A48D698B499E24D9B407E35474ED06C5C5
+
+Path : C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\批次12_20260929\534_天下谁人不识君\wp.md
+Hash : 47F6B17E7BFF0CA19B14EA4FE6A3DAAC4B6DC288F3E72E6D8A316209DA233907
+
+Path : C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\批次12_20260929\534_天下谁人不识君\analysis\solve.py
+Hash : 356127D3018916EF2D38D5AE91E2122A30973108D2C3434E5979E38895C58843
+
+Path : C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\批次12_20260929\534_天下谁人不识君\analysis\check_source_mismatch.py
+Hash : 62B8CEE6EA2D121837F927300429364EEBA95EF6CE4B0467A8530675DE4D3288
+
+**********************
+PowerShell transcript end
+End time: 20260929140033
+**********************
+**********************
+PowerShell transcript start
+Start time: 20260929140417
+Username: DESKTOP-412KTAR\mzj
+RunAs User: DESKTOP-412KTAR\mzj
+Configuration Name: 
+Machine: DESKTOP-412KTAR (Microsoft Windows NT 10.0.26200.0)
+Host Application: C:\Users\mzj\.cache\codex-runtimes\codex-primary-runtime\dependencies\native\powershell\pwsh.dll -NoProfile -Command try { [Console]::OutputEncoding=[System.Text.Encoding]::UTF8 } catch {}
+$ErrorActionPreference = 'Continue'
+$root = 'C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\批次12_20260929\534_天下谁人不识君'
+$analysis = Join-Path $root 'analysis'
+$transcript = Join-Path $analysis 'command_transcript_20260929.txt'
+Start-Transcript -Path $transcript -Append
+$audit = @'
+alphabet = 'wesyvbniazxchjko1973652048@$+-&*<>'
+ciphertext = 'v7b3boika$h4h5j0jhkh161h79393i5x010j0y8n$i'
+assert len(alphabet) == 34 and len(set(alphabet)) == 34
+assert len(ciphertext) % 2 == 0
+
+def encode_char(ch, i):
+    code = ord(ch)
+    return alphabet[(code // 17 + i) % 34] + alphabet[-(code % 17 + i + 1) % 34]
+
+recovered = []
+for i in range(len(ciphertext) // 2):
+    pair = ciphertext[2*i:2*i+2]
+    matches = [chr(code) for code in range(32, 127) if encode_char(chr(code), i) == pair]
+    assert len(matches) == 1, (i, pair, matches)
+    recovered.append(matches[0])
+    print(f'i={i:02d}, pair={pair!r}, printable-ASCII matches={matches[0]!r} (exactly one)')
+flag = ''.join(recovered)
+print('unique printable-ASCII plaintext:', flag)
+assert flag == 'SQCTF{libai_jianxian}'
+'@
+[System.IO.File]::WriteAllText((Join-Path $analysis 'audit_ascii_uniqueness.py'), $audit, [System.Text.UTF8Encoding]::new($false))
+Write-Output 'COMMAND 14: python -B analysis\audit_ascii_uniqueness.py (exhaustively checks U+0020..U+007E per ciphertext pair; authored script only)'
+& python -B (Join-Path $analysis 'audit_ascii_uniqueness.py') 2>&1
+Write-Output ('Exit code: ' + $LASTEXITCODE)
+Write-Output 'COMMAND 15: Update README.md and wp.md with platform rejection and uniqueness audit'
+$wpPath = Join-Path $root 'wp.md'
+$wp = [System.IO.File]::ReadAllText($wpPath, [System.Text.Encoding]::UTF8)
+$old1 = '最终是否为平台接受值需由题目页面验证。本题附件未运行，也没有提交 flag。'
+$new1 = '主线程随后已将该候选提交至玄机页面，平台提示“FLAG 不正确~”，状态仍为 0/1；因此候选没有通过平台验证。本题附件未运行。'
+$old2 = '本地密文反解和正向校验均通过。题目页面初始状态据任务记录为免费、中等、未完成、1 步 0/1；本工作未向平台提交 flag。候选及本地验证证据已交由 root 在前台验证。'
+$new2 = '本地密文反解和正向校验均通过。初始题目状态据任务记录为免费、中等、未完成、1 步 0/1。主线程提交密文反解候选后页面提示“FLAG 不正确~”，仍为 0/1。原因尚未确定，详见第 7 节。'
+if (-not $wp.Contains($old1) -or -not $wp.Contains($old2)) { throw 'WP replacement anchor missing' }
+$wp = $wp.Replace($old1, $new1).Replace($old2, $new2)
+$wp += @'
+
+## 7. 前台拒绝后的候选审计
+
+主线程曾将密文反解值 `SQCTF{libai_jianxian}` 提交到题目页面，页面返回“FLAG 不正确~”，进度仍为 0/1。故它是密文的确定解（在可打印 ASCII flag 假设下），但不是已验证的可提交 flag。
+
+为检查密文是否还支持另一个可打印 ASCII 明文，`analysis/audit_ascii_uniqueness.py` 对每个密文字符对穷举 U+0020 至 U+007E，并按源码原公式重算。每一对都恰好只匹配一个字符，拼成的唯一可打印 ASCII 明文仍为 `SQCTF{libai_jianxian}`。因此在这一常见题目约束下，附件没有给出第二个不同的密文解；仅更换外层前缀没有附件证据支持。
+
+附件内另一个 flag-shaped 字符串是源码直接写出的 `flag{0af4edfd-3b6c-4f6f-853c-5b83acb20708}`。它是文件中可见的字面量，但同一源码的编码循环将它变成 84 字符串，既不等于 42 字符的注释密文，也不属于注释密文的可打印 ASCII 反解。因此只能记作源码/注释矛盾值，无法据附件证明它是平台答案。
+
+当前掌握的本地资料只有题目标题、附件及初始状态；未包含完整题面正文或平台答案格式说明。拒绝结果可能涉及题面规定的 flag 前缀/提交格式，也可能是附件本身与平台预期不一致，但这些原因没有本地证据区分。建议停止盲试前缀或源码字面量；若继续排查，应先取得并核对平台完整题面、明确的 flag 格式/提交字段，或向题目附件来源确认这份源码的版本。没有这些新证据时，建议将本题标记为“密文已唯一反解、平台答案未确定”，停止猜测性提交。
+'@
+[System.IO.File]::WriteAllText($wpPath, $wp, [System.Text.UTF8Encoding]::new($false))
+$readmePath = Join-Path $root 'README.md'
+$readme = [System.IO.File]::ReadAllText($readmePath, [System.Text.Encoding]::UTF8)
+$readmeOld1 = '- 本地分析：已完成注释密文反解及正向复算。' + "`r`n" + '- 候选：`SQCTF{libai_jianxian}`（待题目页面验证）。'
+$readmeNew1 = '- 本地分析：已完成注释密文反解、正向复算及可打印 ASCII 穷举唯一性检查。' + "`r`n" + '- 密文唯一可打印 ASCII 候选：`SQCTF{libai_jianxian}`；主线程提交后页面提示“FLAG 不正确~”，仍为 0/1。'
+if (-not $readme.Contains($readmeOld1)) { $readmeOld1 = $readmeOld1.Replace("`r`n", "`n"); $readmeNew1 = $readmeNew1.Replace("`r`n", "`n") }
+if (-not $readme.Contains($readmeOld1)) { throw 'README replacement anchor missing' }
+$readme = $readme.Replace($readmeOld1, $readmeNew1)
+$readme = $readme.Replace('重要限制：附件源文件没有执行；源码内 `flag` 字面量重编码后与注释密文不一致，详见 [wp.md](wp.md)。未提交平台。', '重要限制：附件源文件没有执行；源码内 `flag` 字面量与注释密文不一致；密文候选已被平台拒绝。完整题面/格式未包含在本地资料中，详见 [wp.md](wp.md)。')
+$readme = $readme.Replace('- `analysis/check_source_mismatch.py`：检查源码字面量长度、正向编码与注释密文是否相符。', '- `analysis/check_source_mismatch.py`：检查源码字面量长度、正向编码与注释密文是否相符。' + "`n" + '- `analysis/audit_ascii_uniqueness.py`：对每个密文对穷举可打印 ASCII，检查明文唯一性。')
+[System.IO.File]::WriteAllText($readmePath, $readme, [System.Text.UTF8Encoding]::new($false))
+Write-Output 'README.md and wp.md updated.'
+Write-Output 'COMMAND 16: Get-ChildItem -LiteralPath <analysis> -File | Select Name, Length'
+Get-ChildItem -LiteralPath $analysis -File | Select-Object Name,Length | Format-Table -AutoSize
+Stop-Transcript
+Process ID: 3648
+PSVersion: 7.6.5
+PSEdition: Core
+GitCommitId: 7.6.5
+OS: Microsoft Windows 10.0.26200
+Platform: Win32NT
+PSCompatibleVersions: 1.0, 2.0, 3.0, 4.0, 5.0, 5.1, 6.0, 7.0
+PSRemotingProtocolVersion: 2.4
+SerializationVersion: 1.1.0.1
+WSManStackVersion: 3.0
+**********************
+Transcript started, output file is C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\批次12_20260929\534_天下谁人不识君\analysis\command_transcript_20260929.txt
+COMMAND 14: python -B analysis\audit_ascii_uniqueness.py (exhaustively checks U+0020..U+007E per ciphertext pair; authored script only)
+Exit code: 0
+COMMAND 15: Update README.md and wp.md with platform rejection and uniqueness audit
+README.md and wp.md updated.
+COMMAND 16: Get-ChildItem -LiteralPath <analysis> -File | Select Name, Length
+
+Name                            Length
+----                            ------
+audit_ascii_uniqueness.py          784
+check_source_mismatch.py           692
+command_transcript_20260929.txt  33266
+solve.py                          1254
+
+**********************
+PowerShell transcript end
+End time: 20260929140418
+**********************
+**********************
+PowerShell transcript start
+Start time: 20260929140432
+Username: DESKTOP-412KTAR\mzj
+RunAs User: DESKTOP-412KTAR\mzj
+Configuration Name: 
+Machine: DESKTOP-412KTAR (Microsoft Windows NT 10.0.26200.0)
+Host Application: C:\Users\mzj\.cache\codex-runtimes\codex-primary-runtime\dependencies\native\powershell\pwsh.dll -NoProfile -Command try { [Console]::OutputEncoding=[System.Text.Encoding]::UTF8 } catch {}
+$ErrorActionPreference = 'Continue'
+$root = 'C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\批次12_20260929\534_天下谁人不识君'
+$transcript = Join-Path $root 'analysis\command_transcript_20260929.txt'
+Start-Transcript -Path $transcript -Append
+Write-Output 'COMMAND 17: Read README.md and relevant wp.md status lines after update'
+Get-Content -LiteralPath (Join-Path $root 'README.md')
+Write-Output '--- WP beginning and ending ---'
+$wpLines = Get-Content -LiteralPath (Join-Path $root 'wp.md')
+$wpLines | Select-Object -First 13
+$wpLines | Select-Object -Last 28
+Stop-Transcript
+Process ID: 21724
+PSVersion: 7.6.5
+PSEdition: Core
+GitCommitId: 7.6.5
+OS: Microsoft Windows 10.0.26200
+Platform: Win32NT
+PSCompatibleVersions: 1.0, 2.0, 3.0, 4.0, 5.0, 5.1, 6.0, 7.0
+PSRemotingProtocolVersion: 2.4
+SerializationVersion: 1.1.0.1
+WSManStackVersion: 3.0
+**********************
+Transcript started, output file is C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\批次12_20260929\534_天下谁人不识君\analysis\command_transcript_20260929.txt
+COMMAND 17: Read README.md and relevant wp.md status lines after update
+# #534 天下谁人不识君
+
+## 状态
+
+- 本地分析：已完成注释密文反解、正向复算及可打印 ASCII 穷举唯一性检查。
+- 密文唯一可打印 ASCII 候选：`SQCTF{libai_jianxian}`；主线程提交后页面提示“FLAG 不正确~”，仍为 0/1。
+- 初始平台状态：免费、中等、未完成、1 步 0/1（来自任务上下文）。
+- 重要限制：附件源文件没有执行；源码内 `flag` 字面量与注释密文不一致；密文候选已被平台拒绝。完整题面/格式未包含在本地资料中，详见 [wp.md](wp.md)。
+
+## 附件与哈希
+
+| 文件 | 大小 | SHA-256 |
+|---|---:|---|
+| `originals/天下谁人不识君.zip` | — | `EE9F84EA4ED73201BDE00509C5EAD9FD3476F22D07D9390ED9EAA7F022FB10AA` |
+| ZIP 成员 `天下谁人不识君.py` | 295 B | `FCCC83EABCB024E83DAC3A6A646F62E21C1CA6A43C031637D6C1B47A7FE26B2B` |
+
+## 文件索引
+
+- `originals/天下谁人不识君.zip`：玄机前台下载的原始附件。
+- `analysis/command_transcript_20260929.txt`：本题本地命令标记及完整标准输出/错误流转录。
+- `analysis/solve.py`：注释密文的逐字符反解及正向复算脚本。
+- `analysis/check_source_mismatch.py`：检查源码字面量长度、正向编码与注释密文是否相符。
+- `analysis/audit_ascii_uniqueness.py`：对每个密文对穷举可打印 ASCII，检查明文唯一性。
+- `wp.md`：完整中文推导、逐字符表、复现方式及限制说明。
+
+## 重要分析结论
+
+ZIP 只有一个 Python 源文件，未解压或执行。注释密文为 42 字符，反解为 21 字符候选；源码顶部硬编码明文有 42 字符，按循环应产生 84 字符输出，实际复算也与注释值不同。故平台验证前，密文候选和源码变量必须区别记录。
+--- WP beginning and ending ---
+# 玄机 CTF #534《天下谁人不识君》WP
+
+## 结论
+
+由压缩包内 Python 源码注释给出的密文，按源码定义的 34 字符字母表逐字符反解，得到候选：
+
+```text
+SQCTF{libai_jianxian}
+```
+
+反解后用源码的正向公式重新编码，结果与注释密文完全相同。注意：源码最上方另写了一个 42 字符的 `flag{...}` 字面量，但它按同一公式会编码成 84 字符，和注释中的 42 字符密文不匹配。因此本 WP 将 `SQCTF{libai_jianxian}` 作为密文推导出的候选；源码内部存在未解释的不一致，主线程随后已将该候选提交至玄机页面，平台提示“FLAG 不正确~”，状态仍为 0/1；因此候选没有通过平台验证。本题附件未运行。
+
+## 1. 附件与静态检查
+## 5. 源码内部不一致的复核
+
+源码顶部字面量 `flag{0af4edfd-3b6c-4f6f-853c-5b83acb20708}` 长 42 字符。循环每个输入字符输出两个字符，因此如果该变量就是注释结果的输入，结果长度应为 84，而实际注释密文只有 42 字符。再用同一公式独立重编码该字面量，得到：
+
+```text
+n>i@i3z-c8ikcoj@c4kaoa929noz936b3k2s6v2j@j4z+c8>$v+n-i<@&+<se4w*eev2b3n3vob1i8ikz2k6
+```
+
+该值不等于注释密文。可用下列诊断复现长度和比较：
+
+```powershell
+python -B analysis\check_source_mismatch.py
+```
+
+证据支持“注释密文编码的是 `SQCTF{libai_jianxian}`，而源码明文字段与注释不一致”。仅凭本地附件无法判断该不一致是占位明文、拼接错误还是其他原因，故把平台接受情况标记为待前台验证。
+
+## 6. 当前状态与限制
+
+本地密文反解和正向校验均通过。初始题目状态据任务记录为免费、中等、未完成、1 步 0/1。主线程提交密文反解候选后页面提示“FLAG 不正确~”，仍为 0/1。原因尚未确定，详见第 7 节。
+## 7. 前台拒绝后的候选审计
+
+主线程曾将密文反解值 `SQCTF{libai_jianxian}` 提交到题目页面，页面返回“FLAG 不正确~”，进度仍为 0/1。故它是密文的确定解（在可打印 ASCII flag 假设下），但不是已验证的可提交 flag。
+
+为检查密文是否还支持另一个可打印 ASCII 明文，`analysis/audit_ascii_uniqueness.py` 对每个密文字符对穷举 U+0020 至 U+007E，并按源码原公式重算。每一对都恰好只匹配一个字符，拼成的唯一可打印 ASCII 明文仍为 `SQCTF{libai_jianxian}`。因此在这一常见题目约束下，附件没有给出第二个不同的密文解；仅更换外层前缀没有附件证据支持。
+
+附件内另一个 flag-shaped 字符串是源码直接写出的 `flag{0af4edfd-3b6c-4f6f-853c-5b83acb20708}`。它是文件中可见的字面量，但同一源码的编码循环将它变成 84 字符串，既不等于 42 字符的注释密文，也不属于注释密文的可打印 ASCII 反解。因此只能记作源码/注释矛盾值，无法据附件证明它是平台答案。
+
+当前掌握的本地资料只有题目标题、附件及初始状态；未包含完整题面正文或平台答案格式说明。拒绝结果可能涉及题面规定的 flag 前缀/提交格式，也可能是附件本身与平台预期不一致，但这些原因没有本地证据区分。建议停止盲试前缀或源码字面量；若继续排查，应先取得并核对平台完整题面、明确的 flag 格式/提交字段，或向题目附件来源确认这份源码的版本。没有这些新证据时，建议将本题标记为“密文已唯一反解、平台答案未确定”，停止猜测性提交。
+**********************
+PowerShell transcript end
+End time: 20260929140432
+**********************
+**********************
+PowerShell transcript start
+Start time: 20260929140523
+Username: DESKTOP-412KTAR\mzj
+RunAs User: DESKTOP-412KTAR\mzj
+Configuration Name: 
+Machine: DESKTOP-412KTAR (Microsoft Windows NT 10.0.26200.0)
+Host Application: C:\Users\mzj\.cache\codex-runtimes\codex-primary-runtime\dependencies\native\powershell\pwsh.dll -NoProfile -Command try { [Console]::OutputEncoding=[System.Text.Encoding]::UTF8 } catch {}
+$ErrorActionPreference = 'Continue'
+$root = 'C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\批次12_20260929\534_天下谁人不识君'
+$transcript = Join-Path $root 'analysis\command_transcript_20260929.txt'
+Start-Transcript -Path $transcript -Append
+Write-Output 'COMMAND 18: Correct stale pre-submission wording in README.md and wp.md'
+$wpPath = Join-Path $root 'wp.md'
+$wp = [System.IO.File]::ReadAllText($wpPath, [System.Text.Encoding]::UTF8)
+$wp = $wp.Replace('证据支持“注释密文编码的是 `SQCTF{libai_jianxian}`，而源码明文字段与注释不一致”。仅凭本地附件无法判断该不一致是占位明文、拼接错误还是其他原因，故把平台接受情况标记为待前台验证。', '证据支持“注释密文编码的是 `SQCTF{libai_jianxian}`，而源码明文字段与注释不一致”。仅凭本地附件无法判断该不一致是占位明文、拼接错误还是其他原因；前台拒绝结果和剩余候选审计见第 7 节。')
+$wp = $wp.Replace('将它变成 84 字符串', '将它变成 84 个字符的字符串')
+$wp = $wp.Replace('详见第 7 节。' + "`n" + '## 7.', '详见第 7 节。' + "`n`n" + '## 7.')
+[System.IO.File]::WriteAllText($wpPath, $wp, [System.Text.UTF8Encoding]::new($false))
+$readmePath = Join-Path $root 'README.md'
+$readme = [System.IO.File]::ReadAllText($readmePath, [System.Text.Encoding]::UTF8)
+$readme = $readme.Replace('故平台验证前，密文候选和源码变量必须区别记录。', '平台已拒绝密文反解候选；密文候选和源码变量仍须区别记录，剩余矛盾及停止建议见 wp.md 第 7 节。')
+[System.IO.File]::WriteAllText($readmePath, $readme, [System.Text.UTF8Encoding]::new($false))
+Write-Output 'COMMAND 19: Confirm updated conclusion lines'
+Select-String -LiteralPath $wpPath,$readmePath -Pattern '待前台验证|平台验证前|不正确|剩余矛盾|84 个字符|第 7 节' | ForEach-Object { '{0}:{1}: {2}' -f $_.Path,$_.LineNumber,$_.Line }
+Stop-Transcript
+Process ID: 22552
+PSVersion: 7.6.5
+PSEdition: Core
+GitCommitId: 7.6.5
+OS: Microsoft Windows 10.0.26200
+Platform: Win32NT
+PSCompatibleVersions: 1.0, 2.0, 3.0, 4.0, 5.0, 5.1, 6.0, 7.0
+PSRemotingProtocolVersion: 2.4
+SerializationVersion: 1.1.0.1
+WSManStackVersion: 3.0
+**********************
+Transcript started, output file is C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\批次12_20260929\534_天下谁人不识君\analysis\command_transcript_20260929.txt
+COMMAND 18: Correct stale pre-submission wording in README.md and wp.md
+COMMAND 19: Confirm updated conclusion lines
+C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\批次12_20260929\534_天下谁人不识君\wp.md:11: 反解后用源码的正向公式重新编码，结果与注释密文完全相同。注意：源码最上方另写了一个 42 字符的 `flag{...}` 字面量，但它按同一公式会编码成 84 字符，和注释中的 42 字符密文不匹配。因此本 WP 将 `SQCTF{libai_jianxian}` 作为密文推导出的候选；源码内部存在未解释的不一致，主线程随后已将该候选提交至玄机页面，平台提示“FLAG 不正确~”，状态仍为 0/1；因此候选没有通过平台验证。本题附件未运行。
+C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\批次12_20260929\534_天下谁人不识君\wp.md:137: 证据支持“注释密文编码的是 `SQCTF{libai_jianxian}`，而源码明文字段与注释不一致”。仅凭本地附件无法判断该不一致是占位明文、拼接错误还是其他原因；前台拒绝结果和剩余候选审计见第 7 节。
+C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\批次12_20260929\534_天下谁人不识君\wp.md:141: 本地密文反解和正向校验均通过。初始题目状态据任务记录为免费、中等、未完成、1 步 0/1。主线程提交密文反解候选后页面提示“FLAG 不正确~”，仍为 0/1。原因尚未确定，详见第 7 节。
+C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\批次12_20260929\534_天下谁人不识君\wp.md:145: 主线程曾将密文反解值 `SQCTF{libai_jianxian}` 提交到题目页面，页面返回“FLAG 不正确~”，进度仍为 0/1。故它是密文的确定解（在可打印 ASCII flag 假设下），但不是已验证的可提交 flag。
+C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\批次12_20260929\534_天下谁人不识君\wp.md:149: 附件内另一个 flag-shaped 字符串是源码直接写出的 `flag{0af4edfd-3b6c-4f6f-853c-5b83acb20708}`。它是文件中可见的字面量，但同一源码的编码循环将它变成 84 个字符的字符串，既不等于 42 字符的注释密文，也不属于注释密文的可打印 ASCII 反解。因此只能记作源码/注释矛盾值，无法据附件证明它是平台答案。
+C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\批次12_20260929\534_天下谁人不识君\README.md:6: - 密文唯一可打印 ASCII 候选：`SQCTF{libai_jianxian}`；主线程提交后页面提示“FLAG 不正确~”，仍为 0/1。
+C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\批次12_20260929\534_天下谁人不识君\README.md:28: ZIP 只有一个 Python 源文件，未解压或执行。注释密文为 42 字符，反解为 21 字符候选；源码顶部硬编码明文有 42 字符，按循环应产生 84 字符输出，实际复算也与注释值不同。平台已拒绝密文反解候选；密文候选和源码变量仍须区别记录，剩余矛盾及停止建议见 wp.md 第 7 节。
+**********************
+PowerShell transcript end
+End time: 20260929140523
+**********************

@@ -1,0 +1,26 @@
+**********************
+PowerShell transcript start
+Start time: 20260930131415
+Username: DESKTOP-412KTAR\mzj
+RunAs User: DESKTOP-412KTAR\mzj
+Configuration Name: 
+Machine: DESKTOP-412KTAR (Microsoft Windows NT 10.0.26200.0)
+Host Application: C:\Users\mzj\.cache\codex-runtimes\codex-primary-runtime\dependencies\native\powershell\pwsh.dll -Command try { [Console]::OutputEncoding=[System.Text.Encoding]::UTF8 } catch {}
+$log='C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\题目分类\逆向工程\第一届启航杯checker_562\analysis\original_vs_platform_20260930.txt'; Start-Transcript -LiteralPath $log -Force; python -c "a=bytes.fromhex('726B607765584646154014411A400E461445160E174542410E1A4147450E4642131446131017451542165E'); print('original len',len(a)); print('original decoded',bytes(x^0x23 for x in a).decode()); import zipfile; p=r'C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\题目分类\逆向工程\第一届启航杯checker_562\originals\checker.zip'; z=zipfile.ZipFile(p); b=z.read('checker.exe'); c=b[0x3220:0x3220+43]; print('xuanji len',len(c)); print('xuanji decoded',bytes(x^0x23 for x in c).decode()); print('same ciphertext',a==c)"; Stop-Transcript
+Process ID: 20004
+PSVersion: 7.6.5
+PSEdition: Core
+GitCommitId: 7.6.5
+OS: Microsoft Windows 10.0.26200
+Platform: Win32NT
+PSCompatibleVersions: 1.0, 2.0, 3.0, 4.0, 5.0, 5.1, 6.0, 7.0
+PSRemotingProtocolVersion: 2.4
+SerializationVersion: 1.1.0.1
+WSManStackVersion: 3.0
+**********************
+Transcript started, output file is C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\题目分类\逆向工程\第一届启航杯checker_562\analysis\original_vs_platform_20260930.txt
+
+**********************
+PowerShell transcript end
+End time: 20260930131415
+**********************

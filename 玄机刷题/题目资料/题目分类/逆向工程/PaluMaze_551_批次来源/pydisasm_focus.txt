@@ -1,0 +1,417 @@
+# pydisasm version 6.3.0
+# CPython Python bytecode 3.11 (3495)
+#   Disassembled from CPython Python 3.12.10 (tags/v3.12.10:0cc8128, Apr  8 2025, 12:21:36) [MSC v.1943 64 bit (AMD64)]
+# Timestamp in code: 0 (1970-01-01 08:00:00)
+# Source code size mod 2**32: 0 bytes
+
+# Method Name:       generate_maze
+# Filename:          game.py
+# Argument count:    3
+# Position-only argument count: 0
+# Keyword-only arguments: 0
+# Number of locals:  10
+# Stack size:        6
+# Flags:             0x00000003 (NEWLOCALS | OPTIMIZED)
+# First Line:        5
+# Constants:
+#    0: None
+#    1: <Code311 code object <listcomp> at 0x1cf57f0, file game.py>, line 9
+#    2: 3
+#    3: 1
+#    4: <Code311 code object carve_path at 0xff7950, file game.py>, line 12
+#    5: 2
+#    6: ((0, 1), (1, 0), (0, -1), (-1, 0))
+#    7: 0
+# Names:
+#    0: min
+#    1: random
+#    2: seed
+#    3: range
+# Varnames:
+#	width, height, seed, exits, x, y, dx, dy, nx, ny
+# Positional arguments:
+#	width, height, seed
+# Local variables:
+#    3: exits
+#    4: x
+#    5: y
+#    6: dx
+#    7: dy
+#    8: nx
+#    9: ny
+# Cell variables:
+#    0: carve_path
+#    1: maze
+#    2: size
+               0 MAKE_CELL            (carve_path)
+               2 MAKE_CELL            (maze)
+               4 MAKE_CELL            (size)
+
+  5:           6 RESUME               0
+
+  7:           8 LOAD_GLOBAL          (NULL + min)
+              20 LOAD_FAST            (width)
+              22 LOAD_FAST            (height)
+              24 PRECALL              2
+              28 CALL                 2
+              38 STORE_DEREF          (size)
+
+  8:          40 LOAD_GLOBAL          (NULL + random)
+              52 LOAD_ATTR            (seed)
+              62 LOAD_FAST            (seed)
+              64 PRECALL              1
+              68 CALL                 1
+              78 POP_TOP
+
+  9:          80 LOAD_CLOSURE         (size)
+              82 BUILD_TUPLE          1
+              84 LOAD_CONST           (<Code311 code object <listcomp> at 0x1cf57f0, file game.py>, line 9)
+              86 MAKE_FUNCTION        (closure)
+              88 LOAD_GLOBAL          (NULL + range)
+             100 LOAD_DEREF           (size)
+             102 PRECALL              1
+             106 CALL                 1
+             116 GET_ITER
+             118 PRECALL              0
+             122 CALL                 0
+             132 STORE_DEREF          (maze)
+
+ 10:         134 LOAD_CONST           (3)
+             136 LOAD_DEREF           (maze)
+             138 LOAD_CONST           (1)
+             140 BINARY_SUBSCR
+             150 LOAD_CONST           (1)
+             152 STORE_SUBSCR
+
+ 12:         156 LOAD_CLOSURE         (carve_path)
+             158 LOAD_CLOSURE         (maze)
+             160 LOAD_CLOSURE         (size)
+             162 BUILD_TUPLE          3
+             164 LOAD_CONST           (<Code311 code object carve_path at 0xff7950, file game.py>, line 12)
+             166 MAKE_FUNCTION        (closure)
+             168 STORE_DEREF          (carve_path)
+
+ 24:         170 PUSH_NULL
+             172 LOAD_DEREF           (carve_path)
+             174 LOAD_CONST           (1)
+             176 LOAD_CONST           (1)
+             178 PRECALL              2
+             182 CALL                 2
+             192 POP_TOP
+
+ 28:         194 LOAD_CONST           (1)
+             196 LOAD_DEREF           (size)
+             198 LOAD_CONST           (2)
+             200 BINARY_OP            (-)
+             204 BUILD_TUPLE          2
+
+ 29:         206 LOAD_DEREF           (size)
+             208 LOAD_CONST           (2)
+             210 BINARY_OP            (-)
+             214 LOAD_DEREF           (size)
+             216 LOAD_CONST           (2)
+             218 BINARY_OP            (-)
+             222 BUILD_TUPLE          2
+
+ 30:         224 LOAD_DEREF           (size)
+             226 LOAD_CONST           (2)
+             228 BINARY_OP            (-)
+             232 LOAD_DEREF           (size)
+             234 LOAD_CONST           (2)
+             236 BINARY_OP            (//)
+             240 BUILD_TUPLE          2
+
+ 31:         242 LOAD_DEREF           (size)
+             244 LOAD_CONST           (2)
+             246 BINARY_OP            (-)
+             250 LOAD_CONST           (1)
+             252 BUILD_TUPLE          2
+
+ 32:         254 LOAD_DEREF           (size)
+             256 LOAD_CONST           (2)
+             258 BINARY_OP            (//)
+             262 LOAD_CONST           (1)
+             264 BUILD_TUPLE          2
+
+ 27:         266 BUILD_LIST           5
+             268 STORE_FAST           (exits)
+
+ 36:         270 LOAD_FAST            (exits)
+             272 GET_ITER
+             274 FOR_ITER             (to 430)
+             276 UNPACK_SEQUENCE      2
+             280 STORE_FAST           (x)
+             282 STORE_FAST           (y)
+
+ 38:         284 LOAD_CONST           (((0, 1), (1, 0), (0, -1), (-1, 0)))
+             286 GET_ITER
+             288 FOR_ITER             (to 406)
+             290 UNPACK_SEQUENCE      2
+             294 STORE_FAST           (dx)
+             296 STORE_FAST           (dy)
+
+ 39:         298 LOAD_FAST            (x)
+             300 LOAD_FAST            (dx)
+             302 BINARY_OP            (+)
+             306 LOAD_FAST            (y)
+             308 LOAD_FAST            (dy)
+             310 BINARY_OP            (+)
+             314 STORE_FAST           (ny)
+             316 STORE_FAST           (nx)
+
+ 40:         318 LOAD_CONST           (0)
+             320 LOAD_FAST            (nx)
+             322 SWAP                 (TOS <-> TOS1)
+             324 COPY                 2
+             326 COMPARE_OP           (<=)
+             332 POP_JUMP_FORWARD_IF_FALSE (to 346)
+             334 LOAD_DEREF           (size)
+             336 COMPARE_OP           (<)
+             342 POP_JUMP_FORWARD_IF_FALSE (to 404)
+             344 JUMP_FORWARD         (to 350)
+         >>  346 POP_TOP
+             348 JUMP_BACKWARD        (to 288)
+         >>  350 LOAD_CONST           (0)
+             352 LOAD_FAST            (ny)
+             354 SWAP                 (TOS <-> TOS1)
+             356 COPY                 2
+             358 COMPARE_OP           (<=)
+             364 POP_JUMP_FORWARD_IF_FALSE (to 378)
+             366 LOAD_DEREF           (size)
+             368 COMPARE_OP           (<)
+             374 POP_JUMP_FORWARD_IF_FALSE (to 404)
+             376 JUMP_FORWARD         (to 382)
+         >>  378 POP_TOP
+             380 JUMP_BACKWARD        (to 288)
+
+ 41:     >>  382 LOAD_CONST           (0)
+             384 LOAD_DEREF           (maze)
+             386 LOAD_FAST            (nx)
+             388 BINARY_SUBSCR
+             398 LOAD_FAST            (ny)
+             400 STORE_SUBSCR
+         >>  404 JUMP_BACKWARD        (to 288)
+
+ 43:     >>  406 LOAD_CONST           (2)
+             408 LOAD_DEREF           (maze)
+             410 LOAD_FAST            (x)
+         >>  412 BINARY_SUBSCR
+             422 LOAD_FAST            (y)
+             424 STORE_SUBSCR
+             428 JUMP_BACKWARD        (to 274)
+
+ 45:     >>  430 LOAD_DEREF           (maze)
+             432 RETURN_VALUE
+
+
+# Method Name:       move
+# Filename:          game.py
+# Argument count:    1
+# Position-only argument count: 0
+# Keyword-only arguments: 0
+# Number of locals:  5
+# Stack size:        5
+# Flags:             0x00000003 (NEWLOCALS | OPTIMIZED)
+# First Line:        102
+# Constants:
+#    0: None
+#    1: 'w'
+#    2: 1
+#    3: 's'
+#    4: 'a'
+#    5: 'd'
+#    6: 0
+#    7: 2
+#    8: 4
+#    9: 3
+#   10: 5
+#   11: '恭喜完成！'
+#   12: True
+#   13: False
+# Names:
+#    0: get_player_pos
+#    1: len
+#    2: maze
+#    3: visited_exits
+#    4: append
+#    5: total_steps
+#    6: print_maze
+#    7: print
+# Varnames:
+#	direction, x, y, new_x, new_y
+# Positional arguments:
+#	direction
+# Local variables:
+#    1: x
+#    2: y
+#    3: new_x
+#    4: new_y
+
+102:           0 RESUME               0
+
+104:           2 LOAD_GLOBAL          (NULL + get_player_pos)
+              14 PRECALL              0
+              18 CALL                 0
+              28 UNPACK_SEQUENCE      2
+              32 STORE_FAST           (x)
+              34 STORE_FAST           (y)
+
+105:          36 LOAD_FAST            (x)
+              38 LOAD_FAST            (y)
+              40 STORE_FAST           (new_y)
+              42 STORE_FAST           (new_x)
+
+107:          44 LOAD_FAST            (direction)
+              46 LOAD_CONST           ("w")
+              48 COMPARE_OP           (==)
+              54 POP_JUMP_FORWARD_IF_FALSE (to 68)
+
+108:          56 LOAD_FAST            (x)
+              58 LOAD_CONST           (1)
+              60 BINARY_OP            (-)
+              64 STORE_FAST           (new_x)
+              66 JUMP_FORWARD         (to 138)
+
+109:     >>   68 LOAD_FAST            (direction)
+              70 LOAD_CONST           ("s")
+              72 COMPARE_OP           (==)
+              78 POP_JUMP_FORWARD_IF_FALSE (to 92)
+
+110:          80 LOAD_FAST            (x)
+              82 LOAD_CONST           (1)
+              84 BINARY_OP            (+)
+              88 STORE_FAST           (new_x)
+              90 JUMP_FORWARD         (to 138)
+
+111:     >>   92 LOAD_FAST            (direction)
+              94 LOAD_CONST           ("a")
+              96 COMPARE_OP           (==)
+             102 POP_JUMP_FORWARD_IF_FALSE (to 116)
+
+112:         104 LOAD_FAST            (y)
+             106 LOAD_CONST           (1)
+             108 BINARY_OP            (-)
+             112 STORE_FAST           (new_y)
+             114 JUMP_FORWARD         (to 138)
+
+113:     >>  116 LOAD_FAST            (direction)
+             118 LOAD_CONST           ("d")
+             120 COMPARE_OP           (==)
+             126 POP_JUMP_FORWARD_IF_FALSE (to 138)
+
+114:         128 LOAD_FAST            (y)
+             130 LOAD_CONST           (1)
+             132 BINARY_OP            (+)
+             136 STORE_FAST           (new_y)
+
+116:     >>  138 LOAD_CONST           (0)
+             140 LOAD_FAST            (new_x)
+             142 SWAP                 (TOS <-> TOS1)
+             144 COPY                 2
+             146 COMPARE_OP           (<=)
+             152 POP_JUMP_FORWARD_IF_FALSE (to 202)
+             154 LOAD_GLOBAL          (NULL + len)
+             166 LOAD_GLOBAL          (maze)
+             178 PRECALL              1
+             182 CALL                 1
+             192 COMPARE_OP           (<)
+             198 POP_JUMP_FORWARD_IF_FALSE (to 660)
+             200 JUMP_FORWARD         (to 206)
+         >>  202 POP_TOP
+             204 JUMP_FORWARD         (to 660)
+         >>  206 LOAD_CONST           (0)
+             208 LOAD_FAST            (new_y)
+             210 SWAP                 (TOS <-> TOS1)
+             212 COPY                 2
+             214 COMPARE_OP           (<=)
+             220 POP_JUMP_FORWARD_IF_FALSE (to 282)
+             222 LOAD_GLOBAL          (NULL + len)
+             234 LOAD_GLOBAL          (maze)
+             246 LOAD_CONST           (0)
+             248 BINARY_SUBSCR
+             258 PRECALL              1
+             262 CALL                 1
+             272 COMPARE_OP           (<)
+             278 POP_JUMP_FORWARD_IF_FALSE (to 660)
+             280 JUMP_FORWARD         (to 286)
+         >>  282 POP_TOP
+             284 JUMP_FORWARD         (to 660)
+
+117:     >>  286 LOAD_GLOBAL          (maze)
+             298 LOAD_FAST            (new_x)
+             300 BINARY_SUBSCR
+             310 LOAD_FAST            (new_y)
+             312 BINARY_SUBSCR
+             322 LOAD_CONST           (1)
+             324 COMPARE_OP           (!=)
+             330 POP_JUMP_FORWARD_IF_FALSE (to 660)
+
+118:         332 LOAD_CONST           (0)
+             334 LOAD_GLOBAL          (maze)
+             346 LOAD_FAST            (x)
+             348 BINARY_SUBSCR
+             358 LOAD_FAST            (y)
+             360 STORE_SUBSCR
+
+120:         364 LOAD_GLOBAL          (maze)
+             376 LOAD_FAST            (new_x)
+             378 BINARY_SUBSCR
+             388 LOAD_FAST            (new_y)
+             390 BINARY_SUBSCR
+             400 LOAD_CONST           (2)
+             402 COMPARE_OP           (==)
+             408 POP_JUMP_FORWARD_IF_FALSE (to 498)
+
+121:         410 LOAD_GLOBAL          (visited_exits)
+             422 LOAD_METHOD          (append)
+             444 LOAD_FAST            (new_x)
+             446 LOAD_FAST            (new_y)
+             448 BUILD_TUPLE          2
+             450 PRECALL              1
+             454 CALL                 1
+             464 POP_TOP
+
+122:         466 LOAD_CONST           (4)
+             468 LOAD_GLOBAL          (maze)
+             480 LOAD_FAST            (new_x)
+             482 BINARY_SUBSCR
+             492 LOAD_FAST            (new_y)
+             494 STORE_SUBSCR
+
+123:     >>  498 LOAD_CONST           (3)
+             500 LOAD_GLOBAL          (maze)
+             512 LOAD_FAST            (new_x)
+             514 BINARY_SUBSCR
+             524 LOAD_FAST            (new_y)
+             526 STORE_SUBSCR
+
+125:         530 LOAD_GLOBAL          (total_steps)
+             542 LOAD_CONST           (1)
+             544 BINARY_OP            (+=)
+             548 STORE_GLOBAL         (total_steps)
+
+127:         550 LOAD_GLOBAL          (NULL + len)
+             562 LOAD_GLOBAL          (visited_exits)
+             574 PRECALL              1
+             578 CALL                 1
+             588 LOAD_CONST           (5)
+             590 COMPARE_OP           (==)
+             596 POP_JUMP_FORWARD_IF_FALSE (to 660)
+
+128:         598 LOAD_GLOBAL          (NULL + print_maze)
+             610 PRECALL              0
+             614 CALL                 0
+             624 POP_TOP
+
+129:         626 LOAD_GLOBAL          (NULL + print)
+             638 LOAD_CONST           ("恭喜完成！")
+             640 PRECALL              1
+             644 CALL                 1
+             654 POP_TOP
+
+130:         656 LOAD_CONST           (True)
+             658 RETURN_VALUE
+
+131:     >>  660 LOAD_CONST           (False)
+             662 RETURN_VALUE
+

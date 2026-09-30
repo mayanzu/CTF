@@ -1,0 +1,37 @@
+**********************
+PowerShell transcript start
+Start time: 20260929110316
+Username: DESKTOP-412KTAR\mzj
+RunAs User: DESKTOP-412KTAR\mzj
+Configuration Name: 
+Machine: DESKTOP-412KTAR (Microsoft Windows NT 10.0.26200.0)
+Host Application: C:\Users\mzj\.cache\codex-runtimes\codex-primary-runtime\dependencies\native\powershell\pwsh.dll -Command try { [Console]::OutputEncoding=[System.Text.Encoding]::UTF8 } catch {}
+$root='C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\批次10_20260929\542_hookme'; $failed=Join-Path $root 'analysis\failed_seed_little_endian.py'; (Get-Content -LiteralPath $failed -Raw -Encoding utf8).Replace('SEED=(key[0]<<8)|key[1]','SEED=key[0]|(key[1]<<8)') | Set-Content -LiteralPath $failed -Encoding utf8
+$log=Join-Path $root 'records\final_solver_replay_20260929.txt'
+Start-Transcript -LiteralPath $log -Force
+$env:PYTHONIOENCODING='utf-8'
+Write-Output 'ATTEMPT 1: little-endian seed hypothesis, expected to fail readability'
+& 'C:\Users\mzj\AppData\Local\Programs\Python\Python312\python.exe' $failed
+Write-Output 'ATTEMPT 2: seed byte order derived from AArch64 instruction, expected correct'
+& 'C:\Users\mzj\AppData\Local\Programs\Python\Python312\python.exe' (Join-Path $root 'analysis\solve_static.py')
+Stop-Transcript
+Process ID: 36104
+PSVersion: 7.6.5
+PSEdition: Core
+GitCommitId: 7.6.5
+OS: Microsoft Windows 10.0.26200
+Platform: Win32NT
+PSCompatibleVersions: 1.0, 2.0, 3.0, 4.0, 5.0, 5.1, 6.0, 7.0
+PSRemotingProtocolVersion: 2.4
+SerializationVersion: 1.1.0.1
+WSManStackVersion: 3.0
+**********************
+Transcript started, output file is C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\批次10_20260929\542_hookme\records\final_solver_replay_20260929.txt
+ATTEMPT 1: little-endian seed hypothesis, expected to fail readability
+
+ATTEMPT 2: seed byte order derived from AArch64 instruction, expected correct
+
+**********************
+PowerShell transcript end
+End time: 20260929110317
+**********************

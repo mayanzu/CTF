@@ -1,0 +1,103 @@
+from pathlib import Path
+from zipfile import ZipFile
+import re, struct, hashlib
+root=Path(r"C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\题目分类\逆向工程\hookme_542")
+apk=root/"附件解包"/"hookme"/"HookMe.apk"
+# Facts taken from APK resource table and AArch64 JNI/native code:
+package_name="com.example.hookme"
+with ZipFile(apk) as zf:
+    arsc=zf.read("resources.arsc")
+# Pull the exact resource value from the compiled global string pool via the parsed record.
+parsed=(root/"analysis"/"resources"/"arsc_parse.txt").read_text(encoding="utf-8")
+m=re.search(r"RESOURCE 0x[0-9a-f]+ string/correct_ciphertext = '([0-9a-f]+)'",parsed)
+if not m: raise SystemExit("could not find correct_ciphertext in ARSC parse report")
+ciphertext=bytes.fromhex(m.group(1))
+key=package_name.encode("utf-8")
+seed=(key[0]<<8) | key[1]
+MASK32=0xffffffff
+N=624
+
+def mt_seed(seed):
+    state=[0]*N
+    state[0]=seed & MASK32
+    for i in range(1,N):
+        prev=state[i-1]
+        state[i]=(1812433253*(prev^(prev>>30))+i)&MASK32
+    return state
+
+def mt_reference(seed,count):
+    state=mt_seed(seed)
+    index=N
+    result=[]
+    for _ in range(count):
+        if index>=N:
+            for i in range(N):
+                y=(state[i]&0x80000000)|(state[(i+1)%N]&0x7fffffff)
+                state[i]=(state[(i+397)%N]^(y>>1)^(0x9908b0df if y&1 else 0))&MASK32
+            index=0
+        y=state[index]
+        index+=1
+        y^=y>>11
+        y^=(y<<7)&0x9d2c5680
+        y^=(y<<15)&0xefc60000
+        y^=y>>18
+        result.append(y&MASK32)
+    return result
+
+def mt_native_incremental(seed,count):
+    # Mirrors native mt19937 call: state index starts at zero; each draw twists one slot.
+    state=mt_seed(seed); index=0; result=[]
+    for _ in range(count):
+        i=index
+        y=(state[i]&0x80000000)|(state[(i+1)%N]&0x7fffffff)
+        v=(state[(i+397)%N]^(y>>1)^(0x9908b0df if y&1 else 0))&MASK32
+        state[i]=v
+        index=(i+1)%N
+        y=v
+        y^=y>>11
+        y^=(y<<7)&0x9d2c5680
+        y^=(y<<15)&0xefc60000
+        y^=y>>18
+        result.append(y&MASK32)
+    return result
+
+ref=mt_reference(seed,256)
+native=mt_native_incremental(seed,256)
+if ref!=native: raise SystemExit("MT reference and native-style recurrence differ")
+initial_s=[x&0xff for x in native]
+S=initial_s.copy()
+j=0
+for i in range(256):
+    j=(j+S[i]+key[i%len(key)])&0xff
+    S[i],S[j]=S[j],S[i]
+# RC4 PRGA is symmetric: XOR ciphertext with the generated stream to recover input.
+i=j=0; plain=bytearray(); stream=bytearray()
+for c in ciphertext:
+    i=(i+1)&0xff
+    j=(j+S[i])&0xff
+    S[i],S[j]=S[j],S[i]
+    k=S[(S[i]+S[j])&0xff]
+    stream.append(k); plain.append(c^k)
+# Re-run encryption from a fresh S-box to prove exact forward closure.
+S2=initial_s.copy(); j=0
+for i in range(256):
+    j=(j+S2[i]+key[i%len(key)])&0xff
+    S2[i],S2[j]=S2[j],S2[i]
+i=j=0; reproduced=bytearray()
+for p in plain:
+    i=(i+1)&0xff; j=(j+S2[i])&0xff; S2[i],S2[j]=S2[j],S2[i]
+    reproduced.append(p^S2[(S2[i]+S2[j])&0xff])
+print(f"APK_SHA256={hashlib.sha256(apk.read_bytes()).hexdigest().upper()}")
+print(f"PACKAGE={package_name}")
+print(f"KEY_HEX={key.hex()}")
+print(f"SEED=(key[0]<<8)|key[1]=0x{seed:04x} ({seed})")
+print(f"MT_FIRST_8={','.join(f'{x:08x}' for x in native[:8])}")
+print(f"MT_IMPL_MATCH={ref==native}")
+print(f"SBOX_FIRST_32={bytes(initial_s[:32]).hex()}")
+print(f"CIPHERTEXT_HEX={ciphertext.hex()}")
+print(f"CIPHERTEXT_LEN={len(ciphertext)}")
+print(f"PLAINTEXT_HEX={plain.hex()}")
+print(f"PLAINTEXT_UTF8={plain.decode('utf-8','replace')}")
+print(f"FLAG_CANDIDATE={plain.decode('ascii','replace')}")
+print(f"FORWARD_CLOSURE={bytes(reproduced)==ciphertext}")
+print(f"REPRODUCED_HEX={reproduced.hex()}")

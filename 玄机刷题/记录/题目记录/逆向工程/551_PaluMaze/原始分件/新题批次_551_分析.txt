@@ -1,0 +1,138 @@
+批次：新题独立解题 | #551 第二届Parloo杯 帕鲁迷宫
+
+COMMAND> Get-Item -LiteralPath 'D:\Downloads\game_flag (1).exe' | Select-Object Name,Length,LastWriteTime,FullName | Format-List
+
+Name          : game_flag (1).exe
+Length        : 6731652
+LastWriteTime : 2026/9/28 23:55:55
+FullName      : D:\Downloads\game_flag (1).exe
+
+
+COMMAND> Get-FileHash -LiteralPath 'D:\Downloads\game_flag (1).exe' -Algorithm SHA256
+
+Algorithm : SHA256
+Hash      : 319DE70C476CC7C2761A57D88B83A5529D06CFD0A909D0EC48EC9CD588F82556
+Path      : D:\Downloads\game_flag (1).exe
+
+
+COMMAND> objdump -f 'D:\Downloads\game_flag (1).exe'
+
+D:\Downloads\game_flag (1).exe:     file format pei-x86-64
+architecture: i386:x86-64, flags 0x0000012f:
+HAS_RELOC, EXEC_P, HAS_LINENO, HAS_DEBUG, HAS_LOCALS, D_PAGED
+start address 0x000000014000b220
+
+
+COMMAND> strings -a 'D:\Downloads\game_flag (1).exe' | rg -i 'flag|maze|exit|key|md5|pal|step' | Select-Object -First 80
+Py_ExitStatusException
+PyRun_SimpleStringFlags
+exit
+unknown header flags set
+`dynamic atexit destructor for '
+CorExitProcess
+GetExitCodeProcess
+ExitProcess
+HeapAlloc
+      <assemblyIdentity type="win32" name="Microsoft.Windows.Common-Controls" version="6.0.0.0" processorArchitecture="*" publicKeyToken="6595b64144ccf1df" language="*"/>
+C;_o<;~KeY
+kEy0
+40KEy
+>^^0pAln@
+
+COMMAND> python -c "from pathlib import Path; p=Path(r'D:\Downloads\game_flag (1).exe'); d=p.read_bytes(); m=b'MEI\\x0c\\x0b\\x0a\\x0b\\x0e'; print('size=',len(d)); print('cookie_offset=',d.rfind(m)); print('tail88=',d[-88:].hex())"
+size= 6731652
+cookie_offset= -1
+tail88= 4d45490c0b0a0b0e0061c5840061b82c00000d0000000137707974686f6e3331312e646c6c000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000
+
+COMMAND> python -c "import struct; from pathlib import Path; d=Path(r'D:\Downloads\game_flag (1).exe').read_bytes(); c=d[-88:]; m,n,t,l,v,dll=struct.unpack('!8sIIII64s',c); s=len(d)-n; toc=d[s+t:s+t+l]; print('magic=',m.hex(), 'package_length=',n, 'toc_offset=',t, 'toc_length=',l, 'python_version=',v, 'python_dll=',dll.split(bytes([0]))[0].decode()); print('package_start=',s, 'toc_prefix_hex=',toc[:96].hex()); print('toc_prefix_repr=',repr(toc[:96]))" (parse the 88-byte PyInstaller cookie and table prefix)
+magic= 4d45490c0b0a0b0e package_length= 6407556 toc_offset= 6404140 toc_length= 3328 python_version= 311 python_dll= python311.dll
+package_start= 324096 toc_prefix_hex= 0000002000000000000000f800000158016d737472756374000000000000000000000030000000f800000c3100001852016d7079696d6f6430315f6172636869766500000000000000000000000000000000003000000d2900002b4d00006593
+toc_prefix_repr= b'\x00\x00\x00 \x00\x00\x00\x00\x00\x00\x00\xf8\x00\x00\x01X\x01mstruct\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x000\x00\x00\x00\xf8\x00\x00\x0c1\x00\x00\x18R\x01mpyimod01_archive\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x000\x00\x00\r)\x00\x00+M\x00\x00e\x93'
+
+COMMAND> New-Item -ItemType Directory -Path 'C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\新题批次\PaluMaze_551' -Force; Copy-Item -LiteralPath 'D:\Downloads\game_flag (1).exe' -Destination 'C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\新题批次\PaluMaze_551\game_flag.exe' -Force
+
+COMMAND> Get-FileHash -LiteralPath 'C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\新题批次\PaluMaze_551\game_flag.exe' -Algorithm SHA256
+
+Algorithm : SHA256
+Hash      : 319DE70C476CC7C2761A57D88B83A5529D06CFD0A909D0EC48EC9CD588F82556
+Path      : C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\新题批次\PaluMaze_551\game_flag.exe
+
+
+COMMAND> Get-Item -LiteralPath 'C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\新题批次\PaluMaze_551\game_flag.exe' | Select-Object Name,Length,FullName | Format-List
+
+Name     : game_flag.exe
+Length   : 6731652
+FullName : C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\新题批次\PaluMaze_551\game_flag.exe
+
+
+COMMAND> Set-Content 'C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\新题批次\PaluMaze_551\inspect_archive.py' (PyInstaller CArchive TOC inspector)
+
+COMMAND> python 'C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\新题批次\PaluMaze_551\inspect_archive.py'
+file_size=6731652 package_start=324096 package_len=6407556 toc_offset=6404140 toc_len=3328 python=311 dll=python311.dll
+entry | type | compressed | offset | stored | original | name
+000 | m | 1 | 0 | 248 | 344 | struct
+001 | m | 1 | 248 | 3121 | 6226 | pyimod01_archive
+002 | m | 1 | 3369 | 11085 | 26003 | pyimod02_importers
+003 | m | 1 | 14454 | 2863 | 7035 | pyimod03_ctypes
+004 | m | 1 | 17317 | 1047 | 1942 | pyimod04_pywin32
+005 | s | 1 | 18364 | 1069 | 1838 | pyiboot01_bootstrap
+006 | s | 1 | 19433 | 1043 | 1842 | pyi_rth_inspect
+007 | s | 1 | 20476 | 3927 | 7955 | game
+008 | b | 1 | 24403 | 58206 | 119192 | VCRUNTIME140.dll
+009 | b | 1 | 82609 | 42268 | 49432 | _bz2.pyd
+010 | b | 1 | 124877 | 102289 | 109848 | _decimal.pyd
+011 | b | 1 | 227166 | 28954 | 36632 | _hashlib.pyd
+012 | b | 1 | 256120 | 80833 | 88344 | _lzma.pyd
+013 | b | 1 | 336953 | 36358 | 44312 | _socket.pyd
+014 | b | 1 | 373311 | 7729 | 22112 | api-ms-win-core-console-l1-1-0.dll
+015 | b | 1 | 381040 | 7576 | 22120 | api-ms-win-core-datetime-l1-1-0.dll
+016 | b | 1 | 388616 | 7589 | 22120 | api-ms-win-core-debug-l1-1-0.dll
+017 | b | 1 | 396205 | 7669 | 22136 | api-ms-win-core-errorhandling-l1-1-0.dll
+018 | b | 1 | 403874 | 8710 | 26216 | api-ms-win-core-file-l1-1-0.dll
+019 | b | 1 | 412584 | 7628 | 22136 | api-ms-win-core-file-l1-2-0.dll
+020 | b | 1 | 420212 | 10482 | 18696 | api-ms-win-core-file-l2-1-0.dll
+021 | b | 1 | 430694 | 7636 | 22136 | api-ms-win-core-handle-l1-1-0.dll
+022 | b | 1 | 438330 | 7803 | 22136 | api-ms-win-core-heap-l1-1-0.dll
+023 | b | 1 | 446133 | 7633 | 22120 | api-ms-win-core-interlocked-l1-1-0.dll
+024 | b | 1 | 453766 | 7941 | 22120 | api-ms-win-core-libraryloader-l1-1-0.dll
+025 | b | 1 | 461707 | 8470 | 22120 | api-ms-win-core-localization-l1-2-0.dll
+026 | b | 1 | 470177 | 7778 | 22120 | api-ms-win-core-memory-l1-1-0.dll
+027 | b | 1 | 477955 | 7732 | 22136 | api-ms-win-core-namedpipe-l1-1-0.dll
+028 | b | 1 | 485687 | 7857 | 22120 | api-ms-win-core-processenvironment-l1-1-0.dll
+029 | b | 1 | 493544 | 8389 | 22136 | api-ms-win-core-processthreads-l1-1-0.dll
+030 | b | 1 | 501933 | 7828 | 22136 | api-ms-win-core-processthreads-l1-1-1.dll
+031 | b | 1 | 509761 | 7586 | 22136 | api-ms-win-core-profile-l1-1-0.dll
+032 | b | 1 | 517347 | 7833 | 22136 | api-ms-win-core-rtlsupport-l1-1-0.dll
+033 | b | 1 | 525180 | 7683 | 22136 | api-ms-win-core-string-l1-1-0.dll
+034 | b | 1 | 532863 | 8209 | 22136 | api-ms-win-core-synch-l1-1-0.dll
+035 | b | 1 | 541072 | 7864 | 22136 | api-ms-win-core-synch-l1-2-0.dll
+036 | b | 1 | 548936 | 7960 | 22136 | api-ms-win-core-sysinfo-l1-1-0.dll
+037 | b | 1 | 556896 | 7793 | 22136 | api-ms-win-core-timezone-l1-1-0.dll
+038 | b | 1 | 564689 | 7615 | 22136 | api-ms-win-core-util-l1-1-0.dll
+039 | b | 1 | 572304 | 7951 | 22136 | api-ms-win-crt-conio-l1-1-0.dll
+040 | b | 1 | 580255 | 9009 | 26216 | api-ms-win-crt-convert-l1-1-0.dll
+041 | b | 1 | 589264 | 7760 | 22120 | api-ms-win-crt-environment-l1-1-0.dll
+042 | b | 1 | 597024 | 8373 | 22120 | api-ms-win-crt-filesystem-l1-1-0.dll
+043 | b | 1 | 605397 | 7907 | 22120 | api-ms-win-crt-heap-l1-1-0.dll
+044 | b | 1 | 613304 | 7897 | 22136 | api-ms-win-crt-locale-l1-1-0.dll
+045 | b | 1 | 621201 | 10917 | 30328 | api-ms-win-crt-math-l1-1-0.dll
+046 | b | 1 | 632118 | 7956 | 22120 | api-ms-win-crt-process-l1-1-0.dll
+047 | b | 1 | 640074 | 9188 | 26208 | api-ms-win-crt-runtime-l1-1-0.dll
+048 | b | 1 | 649262 | 9636 | 26232 | api-ms-win-crt-stdio-l1-1-0.dll
+049 | b | 1 | 658898 | 9812 | 26232 | api-ms-win-crt-string-l1-1-0.dll
+050 | b | 1 | 668710 | 8469 | 22120 | api-ms-win-crt-time-l1-1-0.dll
+051 | b | 1 | 677179 | 7934 | 22136 | api-ms-win-crt-utility-l1-1-0.dll
+052 | b | 1 | 685113 | 412125 | 1443565 | base_library.zip
+053 | b | 1 | 1097238 | 1522083 | 1635096 | libcrypto-3.dll
+054 | b | 1 | 2619321 | 1675755 | 1713432 | python311.dll
+055 | b | 1 | 4295076 | 18793 | 26392 | select.pyd
+056 | b | 1 | 4313869 | 476521 | 1016584 | ucrtbase.dll
+057 | b | 1 | 4790390 | 294432 | 302360 | unicodedata.pyd
+058 | o | 0 | 5084822 | 0 | 0 | pyi-contents-directory _internal
+059 | z | 0 | 5084822 | 1319318 | 1319318 | PYZ-00.pyz
+entries=60 parsed_toc_bytes=3328
+
+COMMAND> py -0p
+ -V:3.14 *        C:\Users\mzj\AppData\Local\Python\pythoncore-3.14-64\python.exe
+ -V:3.13          C:\Users\mzj\AppData\Local\Programs\Python\Python313\python.exe
+ -V:3.12          C:\Users\mzj\AppData\Local\Programs\Python\Python312\python.exe

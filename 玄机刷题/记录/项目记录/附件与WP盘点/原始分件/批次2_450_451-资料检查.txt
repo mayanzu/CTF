@@ -1,0 +1,107 @@
+**********************
+PowerShell transcript start
+Start time: 20260928231229
+Username: DESKTOP-412KTAR\mzj
+RunAs User: DESKTOP-412KTAR\mzj
+Configuration Name: 
+Machine: DESKTOP-412KTAR (Microsoft Windows NT 10.0.26200.0)
+Host Application: C:\Users\mzj\.cache\codex-runtimes\codex-primary-runtime\dependencies\native\powershell\pwsh.dll -Command try { [Console]::OutputEncoding=[System.Text.Encoding]::UTF8 } catch {}
+$log='C:\Users\mzj\Desktop\CTF\玄机刷题\记录\批次2_450_451-资料检查.txt'; Start-Transcript -LiteralPath $log -Append; Write-Output '=== 搜索 #450 / #451 现有附件和历史资料 ==='; Write-Output 'COMMAND> rg --files D:\Downloads C:\Users\mzj\Desktop\CTF | rg -i "access|database|sql|ccf|450|451"'; rg --files 'D:\Downloads' 'C:\Users\mzj\Desktop\CTF' | rg -i 'access|database|sql|ccf|450|451' | Select-Object -First 250; Write-Output '=== 下载目录中最近文件 ==='; Get-ChildItem -LiteralPath 'D:\Downloads' -File | Sort-Object LastWriteTime -Descending | Select-Object -First 60 Name,Length,LastWriteTime | Format-Table -AutoSize; Stop-Transcript
+Process ID: 4592
+PSVersion: 7.6.5
+PSEdition: Core
+GitCommitId: 7.6.5
+OS: Microsoft Windows 10.0.26200
+Platform: Win32NT
+PSCompatibleVersions: 1.0, 2.0, 3.0, 4.0, 5.0, 5.1, 6.0, 7.0
+PSRemotingProtocolVersion: 2.4
+SerializationVersion: 1.1.0.1
+WSManStackVersion: 3.0
+**********************
+Transcript started, output file is C:\Users\mzj\Desktop\CTF\玄机刷题\记录\批次2_450_451-资料检查.txt
+=== 搜索 #450 / #451 现有附件和历史资料 ===
+COMMAND> rg --files D:\Downloads C:\Users\mzj\Desktop\CTF | rg -i "access|database|sql|ccf|450|451"
+D:\Downloads\Programs\WorkBuddy-win32-x64-user-4.24.2.29266680-b451b1ea.exe
+D:\Downloads\Compressed\B450 Gaming-ITXac(10.60)ROM.zip
+C:\Users\mzj\Desktop\CTF\玄机刷题\记录\批次2_450_451-资料检查.txt
+C:\Users\mzj\Desktop\CTF\figures\fig-web-08-notes-sqli-urlencoded.png
+C:\Users\mzj\Desktop\CTF\figures\fig-web-07-notes-sqli-curl.png
+C:\Users\mzj\Desktop\CTF\figures\fig-web-18-notes-sqli-crop.png
+C:\Users\mzj\Desktop\CTF\figures\fig-web-18-notes-sqli.png
+C:\Users\mzj\Desktop\CTF\figures\fig-web-20-sql-normal.png
+C:\Users\mzj\Desktop\CTF\figures\fig-web-21-sql-inject.png
+D:\Downloads\Documents\Fatal1ty B450 Gaming-ITXac.pdf
+C:\Users\mzj\Desktop\CTF\figures\raw\fig-web-08-notes-sqli-urlencoded.txt
+C:\Users\mzj\Desktop\CTF\figures\raw\fig-web-07-notes-sqli-curl.txt
+C:\Users\mzj\Desktop\CTF\figures\raw\fig-web-21-sql-inject.txt
+C:\Users\mzj\Desktop\CTF\figures\raw\fig-web-20-sqlite-demo.py
+C:\Users\mzj\Desktop\CTF\figures\raw\fig-web-20-sql-normal.txt
+=== 下载目录中最近文件 ===
+
+Name                                                                 Length LastWriteTime
+----                                                                 ------ -------------
+WPS_Setup_x64_28488.exe                                           342602512 2026/9/28 22:07:25
+game_flag.exe                                                       6731652 2026/9/28 20:20:13
+Victory_Melody.zip                                                    13676 2026/9/28 20:19:32
+encrypted_flag.zip                                                      198 2026/9/28 20:15:57
+hookme.rar                                                          5125397 2026/9/27 20:08:39
+你知道Base么-20250521104202-am92t17.rar                               14603 2026/9/27 20:08:25
+PaluArray_flag.zip                                                    73952 2026/9/27 20:07:40
+ezBase-20250521104055-dq14shk.rar                                      7833 2026/9/27 20:04:46
+go_for_it.zip                                                        636919 2026/9/27 19:44:27
+checker.zip                                                           17498 2026/9/27 19:28:15
+secret.zip                                                          1170497 2026/9/27 19:27:50
+easyre.zip                                                           117343 2026/9/27 19:27:31
+arkt.zip                                                             109627 2026/9/27 19:27:07
+babyRe.zip                                                          5883266 2026/9/27 19:03:03
+note.zip                                                               5832 2026/9/27 18:57:46
+rainbow.zip                                                            4038 2026/9/27 18:56:56
+spring.zip                                                            30014 2026/9/27 18:55:53
+crazyaes-20240524094418-p72tac5.zip                                  155757 2026/9/27 12:34:36
+attachments.zip                                                     6049341 2026/9/27 12:08:21
+babyrsa.zip                                                            1661 2026/9/27 11:45:04
+tradre.zip                                                            11073 2026/9/27 11:35:19
+可疑流量分析附件.zip                                                 266740 2026/9/27 11:06:48
+班次邮戳附件.zip                                                     160365 2026/9/27 10:49:14
+即随本心.zip                                                       12817910 2026/9/26 23:53:50
+Prompt+Trace附件.zip                                                   2579 2026/9/26 20:23:36
+CTF_5_Directions_Guide.pdf                                          1718739 2026/9/26 17:59:17
+abs.zip                                                              859189 2026/9/26 13:50:45
+ROP2.zip                                                               2902 2026/9/26 13:50:40
+mqtt.zip                                                            1153267 2026/9/26 13:50:38
+闸机票根附件.zip                                                       2549 2026/9/25 13:49:34
+Poisoned+Samples附件.zip                                               1658 2026/9/25 13:45:49
+附件.zip                                                               4870 2026/9/25 12:14:32
+题目附件.zip                                                           4282 2026/9/25 12:13:09
+外泄流量取证附件.zip                                                  57931 2026/9/25 12:09:37
+Veiled+Shell附件.zip                                                   7404 2026/9/24 21:39:21
+qgd.zip                                                              909049 2026/9/24 11:20:19
+像素囚笼附件.zip                                                       3902 2026/9/24 11:12:43
+联号回执附件.zip                                                       1478 2026/9/24 11:12:01
+五格电文附件.zip                                                       1163 2026/9/24 11:09:26
+eNSP基础网络实验指导书_14个递进实验_重构版_1.3.00.100.docx           299070 2026/9/23 10:56:38
+Claude Setup.exe                                                    7090336 2026/9/22 21:12:25
+点名册-552674-001.pdf                                                 37221 2026/9/20 11:18:23
+jwxt-schedule.html                                                    61627 2026/9/18 21:53:28
+84c0bd2a-a01a-42bd-ba2e-dcbcf144696d.mp4                            7229020 2026/9/16 22:32:48
+附件1-2027届新版毕设系统添加选题理由、任务书操作流程.docx           1048526 2026/9/15 19:17:30
+2027届毕业设计（论文）新系统操作参考文件.zip                        6956118 2026/9/15 19:15:24
+2026-2027学年第一学期教师课表.xls                                     14336 2026/9/15 14:54:45
+CentOS-7-x86_64-DVD-2009.iso                                     4712300544 2026/9/4 16:11:10
+Spark-X2.5-4B.gguf                                               8229920352 2026/9/3 13:09:47
+d8124e4dc943de4d4b49cf7d9019458e39ec47a9.docx                         15051 2026/9/2 11:13:51
+2026-2027学年第一学期前三周教学资料模板.zip                         1781096 2026/9/1 15:01:35
+教字〔2026〕67号关于启动2027届本科毕业设计（论文）工作的通知.zip    8429088 2026/9/1 10:04:23
+外聘审核表模板.docx                                                   25163 2026/8/31 21:59:50
+外聘教师协议书模板.docx                                               25665 2026/8/31 21:59:49
+外聘教师承诺书.docx                                                  134891 2026/8/31 21:59:48
+[041103]马仲军2026-2027学年第一学期.xls                               12194 2026/8/31 11:52:08
+云计算技术与应用（第二版）PPT.zip                                 658847195 2026/8/30 10:31:56
+5.《安徽林业职业技术学院外聘教师管理办法（修订）》.pdf               333695 2026/8/29 14:53:16
+张为-基于启发式调度算法的多层仓储车路径规划系统.pdf                  541164 2026/8/29 13:42:51
+倪潇殊-基于启发式搜索策略的推箱子游戏求解系统.pdf                   2710146 2026/8/29 13:42:44
+
+**********************
+PowerShell transcript end
+End time: 20260928231229
+**********************

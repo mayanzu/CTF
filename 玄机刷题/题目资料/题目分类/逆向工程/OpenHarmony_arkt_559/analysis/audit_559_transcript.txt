@@ -1,0 +1,611 @@
+**********************
+PowerShell transcript start
+Start time: 20260929071242
+Username: DESKTOP-412KTAR\mzj
+RunAs User: DESKTOP-412KTAR\mzj
+Configuration Name: 
+Machine: DESKTOP-412KTAR (Microsoft Windows NT 10.0.26200.0)
+Host Application: C:\Users\mzj\.cache\codex-runtimes\codex-primary-runtime\dependencies\native\powershell\pwsh.dll -Command try { [Console]::OutputEncoding=[System.Text.Encoding]::UTF8 } catch {}
+$analysis='C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\OpenHarmony_arkt_559\analysis'; $script=Join-Path $analysis 'audit_559_reproduce.py'; @'
+from __future__ import annotations
+import base64
+import hashlib
+import math
+import struct
+from pathlib import Path
+
+ROOT = Path(r'C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\OpenHarmony_arkt_559')
+ABC = ROOT / '附件解包' / 'HAP内容' / 'ets' / 'modules.abc'
+ZIP = ROOT / '附件' / 'arkt_platform_20260929.zip'
+HAP = ROOT / '附件解包' / 'task_5.hap'
+ARRAY_INDEX = 17
+ARRAY_ADDRESS_FROM_CODE = 0x265A
+RSA_N, RSA_E = 75067, 7
+RSA_P, RSA_Q = 271, 277
+RUNTIME_KEY = b'OHCTF2026'
+STD_B64 = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/'
+CUSTOM_B64 = 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789+/'
+EXPECTED_FLAG = b'flag{b80ebf0f0e210ad73664bdd19c16387e}'
+
+def sha256(path: Path) -> str:
+    return hashlib.sha256(path.read_bytes()).hexdigest().upper()
+
+def read_uvar(data: bytes, cursor: int) -> tuple[int, int]:
+    result = 0
+    shift = 0
+    while True:
+        if cursor >= len(data):
+            raise ValueError('unterminated variable-length integer')
+        octet = data[cursor]
+        cursor += 1
+        result |= (octet & 0x7F) << shift
+        if octet < 0x80:
+            return result, cursor
+        shift += 7
+        if shift > 63:
+            raise ValueError('variable-length integer overflow')
+
+def string_at(data: bytes, offset: int) -> str:
+    tagged_length, begin = read_uvar(data, offset)
+    byte_length = tagged_length >> 1
+    end = begin + byte_length
+    if end >= len(data) or data[end] != 0:
+        raise ValueError(f'bad terminated ABC string at {offset:#x}')
+    return data[begin:end].decode('ascii', errors='strict')
+
+def extract_target_strings(data: bytes) -> tuple[int, list[str], list[int]]:
+    # The ABC header stores the literal-array count and its offset table at these fields.
+    array_total = struct.unpack_from('<I', data, 0x2C)[0]
+    array_index_table = struct.unpack_from('<I', data, 0x30)[0]
+    if not (0 < array_total <= 100000 and 0 < array_index_table < len(data)):
+        raise ValueError('implausible literal-array header values')
+    if ARRAY_INDEX >= array_total:
+        raise ValueError('target array index is outside the header table')
+    array_offset = struct.unpack_from('<I', data, array_index_table + ARRAY_INDEX * 4)[0]
+    if array_offset != ARRAY_ADDRESS_FROM_CODE:
+        raise ValueError(f'constructor reference disagrees with header array index: {array_offset:#x}')
+    slots = struct.unpack_from('<I', data, array_offset)[0]
+    if slots != 76 or slots % 2:
+        raise ValueError(f'unexpected LiteralArray slot count {slots}')
+    cursor = array_offset + 4
+    texts: list[str] = []
+    offsets: list[int] = []
+    for i in range(slots // 2):
+        tag = data[cursor]
+        cursor += 1
+        value_offset = struct.unpack_from('<I', data, cursor)[0]
+        cursor += 4
+        if tag != 0x05:
+            raise ValueError(f'item {i} tag {tag:#x}, expected STRING')
+        texts.append(string_at(data, value_offset))
+        offsets.append(value_offset)
+    return array_offset, texts, offsets
+
+def custom_b64_decode(token: str) -> bytes:
+    back_map = {custom: standard for standard, custom in zip(STD_B64, CUSTOM_B64)}
+    try:
+        standard_token = ''.join(back_map[char] for char in token)
+    except KeyError as exc:
+        raise ValueError(f'bad custom Base64 character {exc.args[0]!r}') from exc
+    return base64.b64decode(standard_token.encode('ascii'), validate=True)
+
+def custom_b64_encode(raw: bytes) -> str:
+    forward_map = {standard: custom for standard, custom in zip(STD_B64, CUSTOM_B64)}
+    standard_token = base64.b64encode(raw).decode('ascii')
+    return ''.join(forward_map[char] for char in standard_token)
+
+def modular_inverse(a: int, modulus: int) -> int:
+    old_r, r = a, modulus
+    old_s, s = 1, 0
+    while r:
+        q = old_r // r
+        old_r, r = r, old_r - q * r
+        old_s, s = s, old_s - q * s
+    if old_r != 1:
+        raise ValueError('RSA exponent has no inverse')
+    return old_s % modulus
+
+def rc4_style(data: bytes, key: bytes, subtract: bool) -> bytes:
+    # Directly transcribed mathematical form of the Ark bytecode's variant:
+    # KSA reads both S[j] and key[j % keylen]; PRGA output is +/- stream, not XOR.
+    if not key:
+        raise ValueError('empty key')
+    box = list(range(256))
+    j = 0
+    for i in range(256):
+        j = (j + box[j] + key[j % len(key)]) % 256
+        box[i], box[j] = box[j], box[i]
+    i = j = 0
+    result = bytearray()
+    for octet in data:
+        i = (i + 1) % 256
+        j = (j + box[i]) % 256
+        box[i], box[j] = box[j], box[i]
+        stream = box[(box[i] + box[j]) % 256]
+        result.append((octet - stream if subtract else octet + stream) % 256)
+    return bytes(result)
+
+def main() -> None:
+    for label, path in [('platform ZIP', ZIP), ('HAP', HAP), ('Ark ABC', ABC)]:
+        print(f'{label} SHA256={sha256(path)} SIZE={path.stat().st_size}')
+    abc = ABC.read_bytes()
+    print('ABC_MAGIC=', abc[:8].hex(), 'FILE_SIZE=', len(abc))
+    array_offset, targets, string_offsets = extract_target_strings(abc)
+    print(f'LITERAL_ARRAY_TABLE_COUNT={struct.unpack_from("<I", abc, 0x2C)[0]} TABLE_OFFSET=0x{struct.unpack_from("<I", abc, 0x30)[0]:x}')
+    print(f'ARRAY_INDEX={ARRAY_INDEX} ARRAY_OFFSET=0x{array_offset:x} RAW_SLOT_COUNT=76 TARGET_COUNT={len(targets)}')
+    for i, (target, offset) in enumerate(zip(targets, string_offsets)):
+        print(f'TARGET[{i:02d}] string_offset=0x{offset:x} token={target}')
+    if len(targets) != 38:
+        raise ValueError(f'expected exactly 38 strings, got {len(targets)}')
+
+    cipher_integers: list[int] = []
+    for i, token in enumerate(targets):
+        raw = custom_b64_decode(token)
+        numeric = raw.decode('ascii')
+        if not numeric.isdecimal() or str(int(numeric)) != numeric:
+            raise ValueError(f'target {i} is not canonical decimal ASCII: {raw!r}')
+        cipher_integers.append(int(numeric))
+        print(f'DECODE[{i:02d}] custom_b64={token} decimal={numeric}')
+
+    phi = (RSA_P - 1) * (RSA_Q - 1)
+    private_d = modular_inverse(RSA_E, phi)
+    assert RSA_P * RSA_Q == RSA_N and math.gcd(RSA_E, phi) == 1 and private_d == 42583
+    rsa_preimages = [pow(cipher, private_d, RSA_N) for cipher in cipher_integers]
+    rsa_roundtrip = [pow(pre, RSA_E, RSA_N) for pre in rsa_preimages]
+    if rsa_roundtrip != cipher_integers or any(x > 255 for x in rsa_preimages):
+        raise ValueError('RSA inversion did not round-trip all 38 byte values')
+    rsa_layer = bytes(rsa_preimages)
+    flag = rc4_style(rsa_layer, RUNTIME_KEY, subtract=True)
+    print(f'RSA={RSA_P}*{RSA_Q}={RSA_N}; phi={phi}; e={RSA_E}; d={private_d}')
+    print(f'RSA_LAYER_COUNT={len(rsa_layer)} RSA_LAYER_HEX={rsa_layer.hex()}')
+    print(f'CANDIDATE={flag.decode("ascii")} LENGTH={len(flag)}')
+    print('CANDIDATE_BYTES_HEX=', flag.hex())
+    if flag != EXPECTED_FLAG:
+        raise ValueError(f'independently recovered candidate differs: {flag!r}')
+
+    rc4_forward = rc4_style(flag, RUNTIME_KEY, subtract=False)
+    forward_numbers = [pow(byte, RSA_E, RSA_N) for byte in rc4_forward]
+    generated = [custom_b64_encode(str(value).encode('ascii')) for value in forward_numbers]
+    print('=== 38 END-TO-END TOKEN COMPARISONS ===')
+    mismatches = []
+    for i, (source, out) in enumerate(zip(targets, generated)):
+        passed = source == out
+        print(f'ITEM[{i:02d}] expected={source} actual={out} MATCH={passed}')
+        if not passed:
+            mismatches.append(i)
+    all_38 = len(targets) == len(generated) == 38 and not mismatches
+    print(f'TOKEN_COUNTS target={len(targets)} generated={len(generated)} all_38_match={all_38}')
+    print('CHECK RSA per-item public roundtrip:', all(a == b for a, b in zip(cipher_integers, rsa_roundtrip)))
+    print('CHECK recovered flag syntax:', flag.startswith(b'flag{') and flag.endswith(b'}'))
+    print('CHECK exact candidate bytes:', flag == EXPECTED_FLAG)
+    print('CHECK all 38 end-to-end tokens:', all_38)
+    if not all_38:
+        raise SystemExit(1)
+
+if __name__ == '__main__':
+    main()
+'@ | Set-Content -LiteralPath $script -Encoding utf8; $output=Join-Path $analysis 'audit_559_output.txt'; $trans=Join-Path $analysis 'audit_559_transcript.txt'; Start-Transcript -LiteralPath $trans -Force; Write-Output "COMMAND> python -B -u `"$script`" (static local ABC parse and pure-Python crypto, no attachment execution)"; python -B -u $script | Tee-Object -FilePath $output; Write-Output ('EXIT_CODE=' + $LASTEXITCODE); Stop-Transcript
+Process ID: 4396
+PSVersion: 7.6.5
+PSEdition: Core
+GitCommitId: 7.6.5
+OS: Microsoft Windows 10.0.26200
+Platform: Win32NT
+PSCompatibleVersions: 1.0, 2.0, 3.0, 4.0, 5.0, 5.1, 6.0, 7.0
+PSRemotingProtocolVersion: 2.4
+SerializationVersion: 1.1.0.1
+WSManStackVersion: 3.0
+**********************
+Transcript started, output file is C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\OpenHarmony_arkt_559\analysis\audit_559_transcript.txt
+COMMAND> python -B -u "C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\OpenHarmony_arkt_559\analysis\audit_559_reproduce.py" (static local ABC parse and pure-Python crypto, no attachment execution)
+platform ZIP SHA256=81D7F3225DC36345A968A2F498E00AAD570C08B8DCAD89E13405BD3195A4263B SIZE=109627
+HAP SHA256=AFF302A750AF02C649ECCC1FB504F348B74F76366B708389CE38971A0B58F3DA SIZE=135682
+Ark ABC SHA256=AA0579A16AF1D76438040F1470C46A007B5C7AE386AFF775C09EB82C0BE6F03F SIZE=22072
+ABC_MAGIC= 50414e4441000000 FILE_SIZE= 22072
+LITERAL_ARRAY_TABLE_COUNT=21 TABLE_OFFSET=0x6c
+ARRAY_INDEX=17 ARRAY_OFFSET=0x265a RAW_SLOT_COUNT=76 TARGET_COUNT=38
+TARGET[00] string_offset=0x218e token=ndG5nZa=
+TARGET[01] string_offset=0x2198 token=nte3ndK=
+TARGET[02] string_offset=0x21a2 token=nJy2nJi=
+TARGET[03] string_offset=0x21ac token=mtK0mJG=
+TARGET[04] string_offset=0x21b6 token=nde5mZK=
+TARGET[05] string_offset=0x21c0 token=nJG4mW==
+TARGET[06] string_offset=0x21ca token=mJu4nti=
+TARGET[07] string_offset=0x21d4 token=mJq4ndK=
+TARGET[08] string_offset=0x2198 token=nte3ndK=
+TARGET[09] string_offset=0x21de token=nJG4mW==
+TARGET[10] string_offset=0x21e8 token=mJa0mZG=
+TARGET[11] string_offset=0x21f2 token=nJaXma==
+TARGET[12] string_offset=0x21fc token=mta5nZa=
+TARGET[13] string_offset=0x2206 token=mta4nta=
+TARGET[14] string_offset=0x2210 token=mZa2ndG=
+TARGET[15] string_offset=0x221a token=mJy1ntm=
+TARGET[16] string_offset=0x2224 token=mZiYmJC=
+TARGET[17] string_offset=0x222e token=mJy5ntq=
+TARGET[18] string_offset=0x2238 token=odqXmG==
+TARGET[19] string_offset=0x2242 token=mta1otC=
+TARGET[20] string_offset=0x224c token=nJyZndq=
+TARGET[21] string_offset=0x2256 token=nZaYotq=
+TARGET[22] string_offset=0x2260 token=ndq0odK=
+TARGET[23] string_offset=0x226a token=nJG4mW==
+TARGET[24] string_offset=0x2274 token=mZa2ndG=
+TARGET[25] string_offset=0x227e token=nJaZmq==
+TARGET[26] string_offset=0x2288 token=mtK0nJa=
+TARGET[27] string_offset=0x2292 token=ndy5ndu=
+TARGET[28] string_offset=0x229c token=mJmZma==
+TARGET[29] string_offset=0x22a6 token=nZaZndm=
+TARGET[30] string_offset=0x22b0 token=ndy3nZG=
+TARGET[31] string_offset=0x22ba token=nJe4mta=
+TARGET[32] string_offset=0x22c4 token=ndaZnde=
+TARGET[33] string_offset=0x22ce token=nZm3ndy=
+TARGET[34] string_offset=0x22d8 token=mJmZma==
+TARGET[35] string_offset=0x21f2 token=nJaXma==
+TARGET[36] string_offset=0x22e2 token=nJyYmJe=
+TARGET[37] string_offset=0x22ec token=mtK0nJa=
+EXIT_CODE=1
+**********************
+PowerShell transcript end
+End time: 20260929071243
+**********************
+**********************
+PowerShell transcript start
+Start time: 20260929071255
+Username: DESKTOP-412KTAR\mzj
+RunAs User: DESKTOP-412KTAR\mzj
+Configuration Name: 
+Machine: DESKTOP-412KTAR (Microsoft Windows NT 10.0.26200.0)
+Host Application: C:\Users\mzj\.cache\codex-runtimes\codex-primary-runtime\dependencies\native\powershell\pwsh.dll -Command try { [Console]::OutputEncoding=[System.Text.Encoding]::UTF8 } catch {}
+$script='.\题目资料\OpenHarmony_arkt_559\analysis\audit_559_reproduce.py'; $text=Get-Content -LiteralPath $script -Raw; $old="standard_token = ''.join(back_map[char] for char in token)"; $new="standard_token = ''.join('=' if char == '=' else back_map[char] for char in token)"; if (-not $text.Contains($old)) { throw 'decode expression not found' }; $text=$text.Replace($old,$new); Set-Content -LiteralPath $script -Value $text -Encoding utf8; $analysis='.\题目资料\OpenHarmony_arkt_559\analysis'; $output=Join-Path $analysis 'audit_559_output.txt'; $trans=Join-Path $analysis 'audit_559_transcript.txt'; Start-Transcript -LiteralPath $trans -Append; Write-Output "COMMAND> patch custom Base64 decoder to preserve '=' padding, then python -B -u `"$script`""; python -B -u $script 2>&1 | Tee-Object -FilePath $output; Write-Output ('EXIT_CODE=' + $LASTEXITCODE); Stop-Transcript
+Process ID: 20972
+PSVersion: 7.6.5
+PSEdition: Core
+GitCommitId: 7.6.5
+OS: Microsoft Windows 10.0.26200
+Platform: Win32NT
+PSCompatibleVersions: 1.0, 2.0, 3.0, 4.0, 5.0, 5.1, 6.0, 7.0
+PSRemotingProtocolVersion: 2.4
+SerializationVersion: 1.1.0.1
+WSManStackVersion: 3.0
+**********************
+Transcript started, output file is .\题目资料\OpenHarmony_arkt_559\analysis\audit_559_transcript.txt
+COMMAND> patch custom Base64 decoder to preserve '=' padding, then python -B -u ".\题目资料\OpenHarmony_arkt_559\analysis\audit_559_reproduce.py"
+platform ZIP SHA256=81D7F3225DC36345A968A2F498E00AAD570C08B8DCAD89E13405BD3195A4263B SIZE=109627
+HAP SHA256=AFF302A750AF02C649ECCC1FB504F348B74F76366B708389CE38971A0B58F3DA SIZE=135682
+Ark ABC SHA256=AA0579A16AF1D76438040F1470C46A007B5C7AE386AFF775C09EB82C0BE6F03F SIZE=22072
+ABC_MAGIC= 50414e4441000000 FILE_SIZE= 22072
+LITERAL_ARRAY_TABLE_COUNT=21 TABLE_OFFSET=0x6c
+ARRAY_INDEX=17 ARRAY_OFFSET=0x265a RAW_SLOT_COUNT=76 TARGET_COUNT=38
+TARGET[00] string_offset=0x218e token=ndG5nZa=
+TARGET[01] string_offset=0x2198 token=nte3ndK=
+TARGET[02] string_offset=0x21a2 token=nJy2nJi=
+TARGET[03] string_offset=0x21ac token=mtK0mJG=
+TARGET[04] string_offset=0x21b6 token=nde5mZK=
+TARGET[05] string_offset=0x21c0 token=nJG4mW==
+TARGET[06] string_offset=0x21ca token=mJu4nti=
+TARGET[07] string_offset=0x21d4 token=mJq4ndK=
+TARGET[08] string_offset=0x2198 token=nte3ndK=
+TARGET[09] string_offset=0x21de token=nJG4mW==
+TARGET[10] string_offset=0x21e8 token=mJa0mZG=
+TARGET[11] string_offset=0x21f2 token=nJaXma==
+TARGET[12] string_offset=0x21fc token=mta5nZa=
+TARGET[13] string_offset=0x2206 token=mta4nta=
+TARGET[14] string_offset=0x2210 token=mZa2ndG=
+TARGET[15] string_offset=0x221a token=mJy1ntm=
+TARGET[16] string_offset=0x2224 token=mZiYmJC=
+TARGET[17] string_offset=0x222e token=mJy5ntq=
+TARGET[18] string_offset=0x2238 token=odqXmG==
+TARGET[19] string_offset=0x2242 token=mta1otC=
+TARGET[20] string_offset=0x224c token=nJyZndq=
+TARGET[21] string_offset=0x2256 token=nZaYotq=
+TARGET[22] string_offset=0x2260 token=ndq0odK=
+TARGET[23] string_offset=0x226a token=nJG4mW==
+TARGET[24] string_offset=0x2274 token=mZa2ndG=
+TARGET[25] string_offset=0x227e token=nJaZmq==
+TARGET[26] string_offset=0x2288 token=mtK0nJa=
+TARGET[27] string_offset=0x2292 token=ndy5ndu=
+TARGET[28] string_offset=0x229c token=mJmZma==
+TARGET[29] string_offset=0x22a6 token=nZaZndm=
+TARGET[30] string_offset=0x22b0 token=ndy3nZG=
+TARGET[31] string_offset=0x22ba token=nJe4mta=
+TARGET[32] string_offset=0x22c4 token=ndaZnde=
+TARGET[33] string_offset=0x22ce token=nZm3ndy=
+TARGET[34] string_offset=0x22d8 token=mJmZma==
+TARGET[35] string_offset=0x21f2 token=nJaXma==
+TARGET[36] string_offset=0x22e2 token=nJyYmJe=
+TARGET[37] string_offset=0x22ec token=mtK0nJa=
+DECODE[00] custom_b64=ndG5nZa= decimal=48970
+DECODE[01] custom_b64=nte3ndK= decimal=51749
+DECODE[02] custom_b64=nJy2nJi= decimal=66662
+DECODE[03] custom_b64=mtK0mJG= decimal=19428
+DECODE[04] custom_b64=nde5mZK= decimal=41939
+DECODE[05] custom_b64=nJG4mW== decimal=6883
+DECODE[06] custom_b64=mJu4nti= decimal=25852
+DECODE[07] custom_b64=mJq4ndK= decimal=24849
+DECODE[08] custom_b64=nte3ndK= decimal=51749
+DECODE[09] custom_b64=nJG4mW== decimal=6883
+DECODE[10] custom_b64=mJa0mZG= decimal=20438
+DECODE[11] custom_b64=nJaXma== decimal=6010
+DECODE[12] custom_b64=mta5nZa= decimal=10970
+DECODE[13] custom_b64=mta4nta= decimal=10850
+DECODE[14] custom_b64=mZa2ndG= decimal=30648
+DECODE[15] custom_b64=mJy1ntm= decimal=26553
+DECODE[16] custom_b64=mZiYmJC= decimal=32227
+DECODE[17] custom_b64=mJy5ntq= decimal=26954
+DECODE[18] custom_b64=odqXmG== decimal=8412
+DECODE[19] custom_b64=mta1otC= decimal=10597
+DECODE[20] custom_b64=nJyZndq= decimal=66344
+DECODE[21] custom_b64=nZaYotq= decimal=70294
+DECODE[22] custom_b64=ndq0odK= decimal=44489
+DECODE[23] custom_b64=nJG4mW== decimal=6883
+DECODE[24] custom_b64=mZa2ndG= decimal=30648
+DECODE[25] custom_b64=nJaZmq== decimal=6031
+DECODE[26] custom_b64=mtK0nJa= decimal=19460
+DECODE[27] custom_b64=ndy5ndu= decimal=46945
+DECODE[28] custom_b64=mJmZma== decimal=2330
+DECODE[29] custom_b64=nZaZndm= decimal=70343
+DECODE[30] custom_b64=ndy3nZG= decimal=46778
+DECODE[31] custom_b64=nJe4mta= decimal=61810
+DECODE[32] custom_b64=ndaZnde= decimal=40341
+DECODE[33] custom_b64=nZm3ndy= decimal=73746
+DECODE[34] custom_b64=mJmZma== decimal=2330
+DECODE[35] custom_b64=nJaXma== decimal=6010
+DECODE[36] custom_b64=nJyYmJe= decimal=66221
+DECODE[37] custom_b64=mtK0nJa= decimal=19460
+RSA=271*277=75067; phi=74520; e=7; d=42583
+RSA_LAYER_COUNT=38 RSA_LAYER_HEX=138c5ff4280f930c8c0f3c15e8bb72bcb6f8e11c70ecaf0f724fe48a4e082359d4294e15eae4
+CANDIDATE=flag{b80ebf0f0e210ad73664bdd19c16387e} LENGTH=38
+CANDIDATE_BYTES_HEX= 666c61677b62383065626630663065323130616437333636346264643139633136333837657d
+Traceback (most recent call last):
+  File "C:\Users\mzj\Desktop\CTF\����ˢ��\��Ŀ����\OpenHarmony_arkt_559\analysis\audit_559_reproduce.py", line 177, in <module>
+    main()
+  File "C:\Users\mzj\Desktop\CTF\����ˢ��\��Ŀ����\OpenHarmony_arkt_559\analysis\audit_559_reproduce.py", line 159, in main
+    generated = [custom_b64_encode(str(value).encode('ascii')) for value in forward_numbers]
+                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\mzj\Desktop\CTF\����ˢ��\��Ŀ����\OpenHarmony_arkt_559\analysis\audit_559_reproduce.py", line 86, in custom_b64_encode
+    return ''.join(forward_map[char] for char in standard_token)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\mzj\Desktop\CTF\����ˢ��\��Ŀ����\OpenHarmony_arkt_559\analysis\audit_559_reproduce.py", line 86, in <genexpr>
+    return ''.join(forward_map[char] for char in standard_token)
+                   ~~~~~~~~~~~^^^^^^
+KeyError: '='
+EXIT_CODE=1
+**********************
+PowerShell transcript end
+End time: 20260929071256
+**********************
+**********************
+PowerShell transcript start
+Start time: 20260929071305
+Username: DESKTOP-412KTAR\mzj
+RunAs User: DESKTOP-412KTAR\mzj
+Configuration Name: 
+Machine: DESKTOP-412KTAR (Microsoft Windows NT 10.0.26200.0)
+Host Application: C:\Users\mzj\.cache\codex-runtimes\codex-primary-runtime\dependencies\native\powershell\pwsh.dll -Command try { [Console]::OutputEncoding=[System.Text.Encoding]::UTF8 } catch {}
+$script='.\题目资料\OpenHarmony_arkt_559\analysis\audit_559_reproduce.py'; $text=Get-Content -LiteralPath $script -Raw; $old="return ''.join(forward_map[char] for char in standard_token)"; $new="return ''.join('=' if char == '=' else forward_map[char] for char in standard_token)"; if (-not $text.Contains($old)) { throw 'encode expression not found' }; $text=$text.Replace($old,$new); Set-Content -LiteralPath $script -Value $text -Encoding utf8; $analysis='.\题目资料\OpenHarmony_arkt_559\analysis'; $output=Join-Path $analysis 'audit_559_output.txt'; $trans=Join-Path $analysis 'audit_559_transcript.txt'; Start-Transcript -LiteralPath $trans -Append; Write-Output "COMMAND> preserve Base64 padding in forward encoder; run python -B -u `"$script`""; python -B -u $script 2>&1 | Tee-Object -FilePath $output; Write-Output ('EXIT_CODE=' + $LASTEXITCODE); Stop-Transcript
+Process ID: 15852
+PSVersion: 7.6.5
+PSEdition: Core
+GitCommitId: 7.6.5
+OS: Microsoft Windows 10.0.26200
+Platform: Win32NT
+PSCompatibleVersions: 1.0, 2.0, 3.0, 4.0, 5.0, 5.1, 6.0, 7.0
+PSRemotingProtocolVersion: 2.4
+SerializationVersion: 1.1.0.1
+WSManStackVersion: 3.0
+**********************
+Transcript started, output file is .\题目资料\OpenHarmony_arkt_559\analysis\audit_559_transcript.txt
+COMMAND> preserve Base64 padding in forward encoder; run python -B -u ".\题目资料\OpenHarmony_arkt_559\analysis\audit_559_reproduce.py"
+platform ZIP SHA256=81D7F3225DC36345A968A2F498E00AAD570C08B8DCAD89E13405BD3195A4263B SIZE=109627
+HAP SHA256=AFF302A750AF02C649ECCC1FB504F348B74F76366B708389CE38971A0B58F3DA SIZE=135682
+Ark ABC SHA256=AA0579A16AF1D76438040F1470C46A007B5C7AE386AFF775C09EB82C0BE6F03F SIZE=22072
+ABC_MAGIC= 50414e4441000000 FILE_SIZE= 22072
+LITERAL_ARRAY_TABLE_COUNT=21 TABLE_OFFSET=0x6c
+ARRAY_INDEX=17 ARRAY_OFFSET=0x265a RAW_SLOT_COUNT=76 TARGET_COUNT=38
+TARGET[00] string_offset=0x218e token=ndG5nZa=
+TARGET[01] string_offset=0x2198 token=nte3ndK=
+TARGET[02] string_offset=0x21a2 token=nJy2nJi=
+TARGET[03] string_offset=0x21ac token=mtK0mJG=
+TARGET[04] string_offset=0x21b6 token=nde5mZK=
+TARGET[05] string_offset=0x21c0 token=nJG4mW==
+TARGET[06] string_offset=0x21ca token=mJu4nti=
+TARGET[07] string_offset=0x21d4 token=mJq4ndK=
+TARGET[08] string_offset=0x2198 token=nte3ndK=
+TARGET[09] string_offset=0x21de token=nJG4mW==
+TARGET[10] string_offset=0x21e8 token=mJa0mZG=
+TARGET[11] string_offset=0x21f2 token=nJaXma==
+TARGET[12] string_offset=0x21fc token=mta5nZa=
+TARGET[13] string_offset=0x2206 token=mta4nta=
+TARGET[14] string_offset=0x2210 token=mZa2ndG=
+TARGET[15] string_offset=0x221a token=mJy1ntm=
+TARGET[16] string_offset=0x2224 token=mZiYmJC=
+TARGET[17] string_offset=0x222e token=mJy5ntq=
+TARGET[18] string_offset=0x2238 token=odqXmG==
+TARGET[19] string_offset=0x2242 token=mta1otC=
+TARGET[20] string_offset=0x224c token=nJyZndq=
+TARGET[21] string_offset=0x2256 token=nZaYotq=
+TARGET[22] string_offset=0x2260 token=ndq0odK=
+TARGET[23] string_offset=0x226a token=nJG4mW==
+TARGET[24] string_offset=0x2274 token=mZa2ndG=
+TARGET[25] string_offset=0x227e token=nJaZmq==
+TARGET[26] string_offset=0x2288 token=mtK0nJa=
+TARGET[27] string_offset=0x2292 token=ndy5ndu=
+TARGET[28] string_offset=0x229c token=mJmZma==
+TARGET[29] string_offset=0x22a6 token=nZaZndm=
+TARGET[30] string_offset=0x22b0 token=ndy3nZG=
+TARGET[31] string_offset=0x22ba token=nJe4mta=
+TARGET[32] string_offset=0x22c4 token=ndaZnde=
+TARGET[33] string_offset=0x22ce token=nZm3ndy=
+TARGET[34] string_offset=0x22d8 token=mJmZma==
+TARGET[35] string_offset=0x21f2 token=nJaXma==
+TARGET[36] string_offset=0x22e2 token=nJyYmJe=
+TARGET[37] string_offset=0x22ec token=mtK0nJa=
+DECODE[00] custom_b64=ndG5nZa= decimal=48970
+DECODE[01] custom_b64=nte3ndK= decimal=51749
+DECODE[02] custom_b64=nJy2nJi= decimal=66662
+DECODE[03] custom_b64=mtK0mJG= decimal=19428
+DECODE[04] custom_b64=nde5mZK= decimal=41939
+DECODE[05] custom_b64=nJG4mW== decimal=6883
+DECODE[06] custom_b64=mJu4nti= decimal=25852
+DECODE[07] custom_b64=mJq4ndK= decimal=24849
+DECODE[08] custom_b64=nte3ndK= decimal=51749
+DECODE[09] custom_b64=nJG4mW== decimal=6883
+DECODE[10] custom_b64=mJa0mZG= decimal=20438
+DECODE[11] custom_b64=nJaXma== decimal=6010
+DECODE[12] custom_b64=mta5nZa= decimal=10970
+DECODE[13] custom_b64=mta4nta= decimal=10850
+DECODE[14] custom_b64=mZa2ndG= decimal=30648
+DECODE[15] custom_b64=mJy1ntm= decimal=26553
+DECODE[16] custom_b64=mZiYmJC= decimal=32227
+DECODE[17] custom_b64=mJy5ntq= decimal=26954
+DECODE[18] custom_b64=odqXmG== decimal=8412
+DECODE[19] custom_b64=mta1otC= decimal=10597
+DECODE[20] custom_b64=nJyZndq= decimal=66344
+DECODE[21] custom_b64=nZaYotq= decimal=70294
+DECODE[22] custom_b64=ndq0odK= decimal=44489
+DECODE[23] custom_b64=nJG4mW== decimal=6883
+DECODE[24] custom_b64=mZa2ndG= decimal=30648
+DECODE[25] custom_b64=nJaZmq== decimal=6031
+DECODE[26] custom_b64=mtK0nJa= decimal=19460
+DECODE[27] custom_b64=ndy5ndu= decimal=46945
+DECODE[28] custom_b64=mJmZma== decimal=2330
+DECODE[29] custom_b64=nZaZndm= decimal=70343
+DECODE[30] custom_b64=ndy3nZG= decimal=46778
+DECODE[31] custom_b64=nJe4mta= decimal=61810
+DECODE[32] custom_b64=ndaZnde= decimal=40341
+DECODE[33] custom_b64=nZm3ndy= decimal=73746
+DECODE[34] custom_b64=mJmZma== decimal=2330
+DECODE[35] custom_b64=nJaXma== decimal=6010
+DECODE[36] custom_b64=nJyYmJe= decimal=66221
+DECODE[37] custom_b64=mtK0nJa= decimal=19460
+RSA=271*277=75067; phi=74520; e=7; d=42583
+RSA_LAYER_COUNT=38 RSA_LAYER_HEX=138c5ff4280f930c8c0f3c15e8bb72bcb6f8e11c70ecaf0f724fe48a4e082359d4294e15eae4
+CANDIDATE=flag{b80ebf0f0e210ad73664bdd19c16387e} LENGTH=38
+CANDIDATE_BYTES_HEX= 666c61677b62383065626630663065323130616437333636346264643139633136333837657d
+=== 38 END-TO-END TOKEN COMPARISONS ===
+ITEM[00] expected=ndG5nZa= actual=ndG5nZa= MATCH=True
+ITEM[01] expected=nte3ndK= actual=nte3ndK= MATCH=True
+ITEM[02] expected=nJy2nJi= actual=nJy2nJi= MATCH=True
+ITEM[03] expected=mtK0mJG= actual=mtK0mJG= MATCH=True
+ITEM[04] expected=nde5mZK= actual=nde5mZK= MATCH=True
+ITEM[05] expected=nJG4mW== actual=nJG4mW== MATCH=True
+ITEM[06] expected=mJu4nti= actual=mJu4nti= MATCH=True
+ITEM[07] expected=mJq4ndK= actual=mJq4ndK= MATCH=True
+ITEM[08] expected=nte3ndK= actual=nte3ndK= MATCH=True
+ITEM[09] expected=nJG4mW== actual=nJG4mW== MATCH=True
+ITEM[10] expected=mJa0mZG= actual=mJa0mZG= MATCH=True
+ITEM[11] expected=nJaXma== actual=nJaXma== MATCH=True
+ITEM[12] expected=mta5nZa= actual=mta5nZa= MATCH=True
+ITEM[13] expected=mta4nta= actual=mta4nta= MATCH=True
+ITEM[14] expected=mZa2ndG= actual=mZa2ndG= MATCH=True
+ITEM[15] expected=mJy1ntm= actual=mJy1ntm= MATCH=True
+ITEM[16] expected=mZiYmJC= actual=mZiYmJC= MATCH=True
+ITEM[17] expected=mJy5ntq= actual=mJy5ntq= MATCH=True
+ITEM[18] expected=odqXmG== actual=odqXmG== MATCH=True
+ITEM[19] expected=mta1otC= actual=mta1otC= MATCH=True
+ITEM[20] expected=nJyZndq= actual=nJyZndq= MATCH=True
+ITEM[21] expected=nZaYotq= actual=nZaYotq= MATCH=True
+ITEM[22] expected=ndq0odK= actual=ndq0odK= MATCH=True
+ITEM[23] expected=nJG4mW== actual=nJG4mW== MATCH=True
+ITEM[24] expected=mZa2ndG= actual=mZa2ndG= MATCH=True
+ITEM[25] expected=nJaZmq== actual=nJaZmq== MATCH=True
+ITEM[26] expected=mtK0nJa= actual=mtK0nJa= MATCH=True
+ITEM[27] expected=ndy5ndu= actual=ndy5ndu= MATCH=True
+ITEM[28] expected=mJmZma== actual=mJmZma== MATCH=True
+ITEM[29] expected=nZaZndm= actual=nZaZndm= MATCH=True
+ITEM[30] expected=ndy3nZG= actual=ndy3nZG= MATCH=True
+ITEM[31] expected=nJe4mta= actual=nJe4mta= MATCH=True
+ITEM[32] expected=ndaZnde= actual=ndaZnde= MATCH=True
+ITEM[33] expected=nZm3ndy= actual=nZm3ndy= MATCH=True
+ITEM[34] expected=mJmZma== actual=mJmZma== MATCH=True
+ITEM[35] expected=nJaXma== actual=nJaXma== MATCH=True
+ITEM[36] expected=nJyYmJe= actual=nJyYmJe= MATCH=True
+ITEM[37] expected=mtK0nJa= actual=mtK0nJa= MATCH=True
+TOKEN_COUNTS target=38 generated=38 all_38_match=True
+CHECK RSA per-item public roundtrip: True
+CHECK recovered flag syntax: True
+CHECK exact candidate bytes: True
+CHECK all 38 end-to-end tokens: True
+EXIT_CODE=0
+**********************
+PowerShell transcript end
+End time: 20260929071305
+**********************
+**********************
+PowerShell transcript start
+Start time: 20260929071435
+Username: DESKTOP-412KTAR\mzj
+RunAs User: DESKTOP-412KTAR\mzj
+Configuration Name: 
+Machine: DESKTOP-412KTAR (Microsoft Windows NT 10.0.26200.0)
+Host Application: C:\Users\mzj\.cache\codex-runtimes\codex-primary-runtime\dependencies\native\powershell\pwsh.dll -Command try { [Console]::OutputEncoding=[System.Text.Encoding]::UTF8 } catch {}
+$analysis='C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\OpenHarmony_arkt_559\analysis'; $report=Join-Path $analysis 'audit_559_report.md'; @'
+# #559 OpenHarmony arkt：独立候选与 38 项前向复核
+
+## 结论
+
+独立从本地 `modules.abc` 解析得到的候选为：
+
+```text
+flag{b80ebf0f0e210ad73664bdd19c16387e}
+```
+
+纯 Python 静态复算将候选经题目加密链正向处理后，逐项比较 38 个 `targetCipher` 字符串：38/38 完全相同，重复条目也按原索引保留。未运行 HAP/应用或附件中的可执行文件；未联网或提交平台。
+
+## 附件与数组核验
+
+- 平台 ZIP SHA-256：`81D7F3225DC36345A968A2F498E00AAD570C08B8DCAD89E13405BD3195A4263B`
+- HAP SHA-256：`AFF302A750AF02C649ECCC1FB504F348B74F76366B708389CE38971A0B58F3DA`
+- `modules.abc` SHA-256：`AA0579A16AF1D76438040F1470C46A007B5C7AE386AFF775C09EB82C0BE6F03F`
+- ABC literal-array header reports 21 arrays and index table offset `0x6c`; entry 17 resolves to offset `0x265a`.
+- Constructor method listing in `arkt_crypto_audit_methods_20260929.txt` ties `createarraywithbuffer` to literal array `0x265a`, stored as `targetCipher`.
+- Array header count is 76 slots. Parsing 38 tag/value pairs yields exactly 38 strings, all STRING tag `0x05`.
+
+## 独立计算
+
+1. Each target token maps from the custom Base64 alphabet `abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789+/` back to the standard Base64 alphabet. The decoded payload is canonical decimal ASCII.
+2. The bytecode values `n=75067` and `e=7` factor as `271 × 277`; `phi(n)=74520` and `d=42583`. Each of the 38 RSA preimages is a single byte and re-encrypts with `pow(m,7,75067)` to the corresponding decimal target.
+3. The key used is `OHCTF2026`, as the page lifecycle disassembly records `onPageShow` replacing the constructor's `OHCTF2025` default before input checking.
+4. The RC4-style KSA uses `j=(j+S[j]+key[j mod keylen]) mod 256`, and the PRGA output combines with plaintext using addition modulo 256. Inversion subtracts the stream byte modulo 256.
+5. The candidate replays that transform, RSA exponentiation, decimal ASCII conversion, Base64, and alphabet substitution. `audit_559_output.txt` includes all target and generated tokens side by side under `ITEM[00]` through `ITEM[37]`; every row is `MATCH=True`, and the final count assertion is `all_38_match=True`.
+
+The independent verifier is [audit_559_reproduce.py](audit_559_reproduce.py). It parses the ABC header/index table and the literal array itself, performs the reverse and forward calculations, prints each of the 38 comparisons, and exits nonzero on any mismatch. Run it with:
+
+```powershell
+python -B -u "C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\OpenHarmony_arkt_559\analysis\audit_559_reproduce.py"
+```
+
+## Saved audit artifacts
+
+- `audit_559_reproduce.py` — independent parser, reverse calculation, and per-token forward comparison.
+- `audit_559_output.txt` — successful complete output, including all 38 matches.
+- `audit_559_transcript.txt` — commands and output, including two initial Base64-padding errors and the corrected successful reruns.
+- `audit_559_report.md` — this review.
+
+The candidate is strongly validated against the local target data. Platform acceptance remains unverified until the authorized submission flow is completed.
+'@ | Set-Content -LiteralPath $report -Encoding utf8; $trans=Join-Path $analysis 'audit_559_transcript.txt'; Start-Transcript -LiteralPath $trans -Append; Write-Output "COMMAND> save independent audit report to `"$report`" and verify audit outputs"; Get-Item -LiteralPath $report,(Join-Path $analysis 'audit_559_reproduce.py'),(Join-Path $analysis 'audit_559_output.txt') | Select-Object FullName,Length,LastWriteTime | Format-Table -AutoSize; $n=(Select-String -LiteralPath (Join-Path $analysis 'audit_559_output.txt') -Pattern '^ITEM\[\d+\].*MATCH=True$').Count; Write-Output "MATCH_TRUE_ROW_COUNT=$n"; Select-String -LiteralPath (Join-Path $analysis 'audit_559_output.txt') -Pattern 'TOKEN_COUNTS|CHECK all 38|CHECK exact candidate|CHECK RSA per-item' ; Stop-Transcript
+Process ID: 25376
+PSVersion: 7.6.5
+PSEdition: Core
+GitCommitId: 7.6.5
+OS: Microsoft Windows 10.0.26200
+Platform: Win32NT
+PSCompatibleVersions: 1.0, 2.0, 3.0, 4.0, 5.0, 5.1, 6.0, 7.0
+PSRemotingProtocolVersion: 2.4
+SerializationVersion: 1.1.0.1
+WSManStackVersion: 3.0
+**********************
+Transcript started, output file is C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\OpenHarmony_arkt_559\analysis\audit_559_transcript.txt
+COMMAND> save independent audit report to "C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\OpenHarmony_arkt_559\analysis\audit_559_report.md" and verify audit outputs
+
+FullName                                                                                        Length LastWriteTime
+--------                                                                                        ------ -------------
+C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\OpenHarmony_arkt_559\analysis\audit_559_report.md      3182 2026/9/29 7:14:…
+C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\OpenHarmony_arkt_559\analysis\audit_559_reproduce.py   8108 2026/9/29 7:13:…
+C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\OpenHarmony_arkt_559\analysis\audit_559_output.txt     6657 2026/9/29 7:13:…
+
+MATCH_TRUE_ROW_COUNT=38
+
+**********************
+PowerShell transcript end
+End time: 20260929071435
+**********************

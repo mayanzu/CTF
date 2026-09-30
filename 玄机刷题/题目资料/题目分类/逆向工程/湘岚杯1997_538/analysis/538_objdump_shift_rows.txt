@@ -1,0 +1,82 @@
+
+xj538.exe:     file format pei-x86-64
+
+
+Disassembly of section .text:
+
+0000000000401574 <shift_rows>:
+  401574:	55                   	push   rbp
+  401575:	48 89 e5             	mov    rbp,rsp
+  401578:	48 83 ec 10          	sub    rsp,0x10
+  40157c:	48 89 4d 10          	mov    QWORD PTR [rbp+0x10],rcx
+  401580:	48 8b 45 10          	mov    rax,QWORD PTR [rbp+0x10]
+  401584:	0f b6 40 0c          	movzx  eax,BYTE PTR [rax+0xc]
+  401588:	88 45 ff             	mov    BYTE PTR [rbp-0x1],al
+  40158b:	48 8b 45 10          	mov    rax,QWORD PTR [rbp+0x10]
+  40158f:	48 8d 50 0c          	lea    rdx,[rax+0xc]
+  401593:	48 8b 45 10          	mov    rax,QWORD PTR [rbp+0x10]
+  401597:	0f b6 40 08          	movzx  eax,BYTE PTR [rax+0x8]
+  40159b:	88 02                	mov    BYTE PTR [rdx],al
+  40159d:	48 8b 45 10          	mov    rax,QWORD PTR [rbp+0x10]
+  4015a1:	48 8d 50 08          	lea    rdx,[rax+0x8]
+  4015a5:	48 8b 45 10          	mov    rax,QWORD PTR [rbp+0x10]
+  4015a9:	0f b6 40 04          	movzx  eax,BYTE PTR [rax+0x4]
+  4015ad:	88 02                	mov    BYTE PTR [rdx],al
+  4015af:	48 8b 45 10          	mov    rax,QWORD PTR [rbp+0x10]
+  4015b3:	48 8d 50 04          	lea    rdx,[rax+0x4]
+  4015b7:	48 8b 45 10          	mov    rax,QWORD PTR [rbp+0x10]
+  4015bb:	0f b6 00             	movzx  eax,BYTE PTR [rax]
+  4015be:	88 02                	mov    BYTE PTR [rdx],al
+  4015c0:	48 8b 55 10          	mov    rdx,QWORD PTR [rbp+0x10]
+  4015c4:	0f b6 45 ff          	movzx  eax,BYTE PTR [rbp-0x1]
+  4015c8:	88 02                	mov    BYTE PTR [rdx],al
+  4015ca:	48 8b 45 10          	mov    rax,QWORD PTR [rbp+0x10]
+  4015ce:	0f b6 40 01          	movzx  eax,BYTE PTR [rax+0x1]
+  4015d2:	88 45 ff             	mov    BYTE PTR [rbp-0x1],al
+  4015d5:	48 8b 45 10          	mov    rax,QWORD PTR [rbp+0x10]
+  4015d9:	48 8d 50 01          	lea    rdx,[rax+0x1]
+  4015dd:	48 8b 45 10          	mov    rax,QWORD PTR [rbp+0x10]
+  4015e1:	0f b6 40 09          	movzx  eax,BYTE PTR [rax+0x9]
+  4015e5:	88 02                	mov    BYTE PTR [rdx],al
+  4015e7:	48 8b 45 10          	mov    rax,QWORD PTR [rbp+0x10]
+  4015eb:	48 8d 50 09          	lea    rdx,[rax+0x9]
+  4015ef:	0f b6 45 ff          	movzx  eax,BYTE PTR [rbp-0x1]
+  4015f3:	88 02                	mov    BYTE PTR [rdx],al
+  4015f5:	48 8b 45 10          	mov    rax,QWORD PTR [rbp+0x10]
+  4015f9:	0f b6 40 05          	movzx  eax,BYTE PTR [rax+0x5]
+  4015fd:	88 45 ff             	mov    BYTE PTR [rbp-0x1],al
+  401600:	48 8b 45 10          	mov    rax,QWORD PTR [rbp+0x10]
+  401604:	48 8d 50 05          	lea    rdx,[rax+0x5]
+  401608:	48 8b 45 10          	mov    rax,QWORD PTR [rbp+0x10]
+  40160c:	0f b6 40 0d          	movzx  eax,BYTE PTR [rax+0xd]
+  401610:	88 02                	mov    BYTE PTR [rdx],al
+  401612:	48 8b 45 10          	mov    rax,QWORD PTR [rbp+0x10]
+  401616:	48 8d 50 0d          	lea    rdx,[rax+0xd]
+  40161a:	0f b6 45 ff          	movzx  eax,BYTE PTR [rbp-0x1]
+  40161e:	88 02                	mov    BYTE PTR [rdx],al
+  401620:	48 8b 45 10          	mov    rax,QWORD PTR [rbp+0x10]
+  401624:	0f b6 40 02          	movzx  eax,BYTE PTR [rax+0x2]
+  401628:	88 45 ff             	mov    BYTE PTR [rbp-0x1],al
+  40162b:	48 8b 45 10          	mov    rax,QWORD PTR [rbp+0x10]
+  40162f:	48 8d 50 02          	lea    rdx,[rax+0x2]
+  401633:	48 8b 45 10          	mov    rax,QWORD PTR [rbp+0x10]
+  401637:	0f b6 40 06          	movzx  eax,BYTE PTR [rax+0x6]
+  40163b:	88 02                	mov    BYTE PTR [rdx],al
+  40163d:	48 8b 45 10          	mov    rax,QWORD PTR [rbp+0x10]
+  401641:	48 8d 50 06          	lea    rdx,[rax+0x6]
+  401645:	48 8b 45 10          	mov    rax,QWORD PTR [rbp+0x10]
+  401649:	0f b6 40 0a          	movzx  eax,BYTE PTR [rax+0xa]
+  40164d:	88 02                	mov    BYTE PTR [rdx],al
+  40164f:	48 8b 45 10          	mov    rax,QWORD PTR [rbp+0x10]
+  401653:	48 8d 50 0a          	lea    rdx,[rax+0xa]
+  401657:	48 8b 45 10          	mov    rax,QWORD PTR [rbp+0x10]
+  40165b:	0f b6 40 0e          	movzx  eax,BYTE PTR [rax+0xe]
+  40165f:	88 02                	mov    BYTE PTR [rdx],al
+  401661:	48 8b 45 10          	mov    rax,QWORD PTR [rbp+0x10]
+  401665:	48 8d 50 0e          	lea    rdx,[rax+0xe]
+  401669:	0f b6 45 ff          	movzx  eax,BYTE PTR [rbp-0x1]
+  40166d:	88 02                	mov    BYTE PTR [rdx],al
+  40166f:	90                   	nop
+  401670:	48 83 c4 10          	add    rsp,0x10
+  401674:	5d                   	pop    rbp
+  401675:	c3                   	ret

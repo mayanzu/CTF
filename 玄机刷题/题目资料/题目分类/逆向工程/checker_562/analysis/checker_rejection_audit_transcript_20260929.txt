@@ -1,0 +1,362 @@
+**********************
+PowerShell transcript start
+Start time: 20260929094558
+Username: DESKTOP-412KTAR\mzj
+RunAs User: DESKTOP-412KTAR\mzj
+Configuration Name: 
+Machine: DESKTOP-412KTAR (Microsoft Windows NT 10.0.26200.0)
+Host Application: C:\Users\mzj\.cache\codex-runtimes\codex-primary-runtime\dependencies\native\powershell\pwsh.dll -Command try { [Console]::OutputEncoding=[System.Text.Encoding]::UTF8 } catch {}
+$ErrorActionPreference = 'Stop'
+$root = 'C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\checker_562'
+$analysis = Join-Path $root 'analysis'
+$scriptPath = Join-Path $analysis 'checker_rejection_audit_static.py'
+$transcriptPath = Join-Path $analysis 'checker_rejection_audit_transcript_20260929.txt'
+Start-Transcript -LiteralPath $transcriptPath
+Write-Output 'COMMAND> Set-Content static-only audit script; no executable is launched'
+@'
+from pathlib import Path
+import hashlib
+import struct
+import zipfile
+
+root = Path(r"C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\checker_562")
+archives = [
+    root / "checker_platform_20260929.zip",
+    root / "originals" / "checker_platform_download_20260929_051349.zip",
+    root.parent / "第一届启航杯checker_562" / "originals" / "checker.zip",
+    root.parent / "原始下载附件" / "checker.zip",
+]
+extracted = root / "附件_20260929" / "checker.exe"
+
+def sha256(data: bytes) -> str:
+    return hashlib.sha256(data).hexdigest().upper()
+
+member_blobs = []
+zip_blobs = []
+for archive in archives:
+    raw = archive.read_bytes()
+    zip_blobs.append(raw)
+    with zipfile.ZipFile(archive) as zf:
+        names = [n for n in zf.namelist() if not n.endswith("/")]
+        if len(names) != 1:
+            raise SystemExit(f"unexpected non-directory members: {archive}: {names}")
+        member = zf.read(names[0])
+    member_blobs.append(member)
+    print(f"archive: {archive}")
+    print(f"  bytes: {len(raw)}")
+    print(f"  SHA-256: {sha256(raw)}")
+    print(f"  member: {names[0]} ({len(member)} bytes)")
+    print(f"  member SHA-256: {sha256(member)}")
+
+if not all(blob == zip_blobs[0] for blob in zip_blobs[1:]):
+    raise SystemExit("archive copies differ")
+if not all(blob == member_blobs[0] for blob in member_blobs[1:]):
+    raise SystemExit("ZIP member copies differ")
+print("all four ZIP byte streams identical: True")
+print("all four extracted checker.exe members identical: True")
+
+exe = extracted.read_bytes()
+print(f"extracted file: {extracted}")
+print(f"extracted bytes: {len(exe)}")
+print(f"extracted SHA-256: {sha256(exe)}")
+print(f"matches ZIP member: {exe == member_blobs[0]}")
+if exe != member_blobs[0]:
+    raise SystemExit("extracted executable differs from ZIP member")
+
+if exe[:2] != b"MZ":
+    raise SystemExit("DOS MZ header not found")
+pe = struct.unpack_from("<I", exe, 0x3C)[0]
+if exe[pe:pe+4] != b"PE\0\0":
+    raise SystemExit("PE header not found")
+coff = pe + 4
+section_count = struct.unpack_from("<H", exe, coff + 2)[0]
+optional_size = struct.unpack_from("<H", exe, coff + 16)[0]
+opt = coff + 20
+if struct.unpack_from("<H", exe, opt)[0] != 0x10B:
+    raise SystemExit("not PE32")
+image_base = struct.unpack_from("<I", exe, opt + 28)[0]
+sections = []
+for i in range(section_count):
+    off = opt + optional_size + 40 * i
+    name = exe[off:off+8].split(b"\0", 1)[0].decode("ascii")
+    vsize, rva, raw_size, raw_ptr = struct.unpack_from("<IIII", exe, off+8)
+    sections.append((name, vsize, rva, raw_size, raw_ptr))
+
+target_va = 0x404020
+rva = target_va - image_base
+matches = []
+for name, vsize, sec_rva, raw_size, raw_ptr in sections:
+    if sec_rva <= rva < sec_rva + max(vsize, raw_size):
+        delta = rva - sec_rva
+        if delta < raw_size:
+            matches.append((name, raw_ptr + delta))
+if len(matches) != 1:
+    raise SystemExit(f"could not uniquely map target VA {target_va:#x}: {matches}")
+section, file_off = matches[0]
+end = exe.find(b"\0", file_off)
+if end < 0:
+    raise SystemExit("target string is not NUL terminated")
+cipher = exe[file_off:end]
+plain = bytes(b ^ 0x23 for b in cipher)
+if bytes(b ^ 0x23 for b in plain) != cipher:
+    raise SystemExit("XOR round-trip failed")
+candidate = plain.decode("ascii")
+print(f"PE image base: 0x{image_base:08X}")
+print(f"target VA: 0x{target_va:08X}")
+print(f"mapped section: {section}")
+print(f"target file offset: 0x{file_off:X}")
+print(f"cipher bytes: {len(cipher)}")
+print(f"XOR-0x23 plaintext: {candidate}")
+print(f"candidate ASCII length: {len(plain)}")
+print(f"format flag{{[A-Za-z0-9_]+}}: {candidate.startswith('flag{') and candidate.endswith('}') and candidate[5:-1].isalnum()}")
+print("XOR round-trip matches embedded cipher: True")
+'@ | Set-Content -LiteralPath $scriptPath -Encoding utf8
+Write-Output ('COMMAND> python "' + $scriptPath + '"')
+python $scriptPath
+Write-Output 'COMMAND> Select-String previous recorded #562 platform action and result'
+$record = 'C:\Users\mzj\Desktop\CTF\玄机刷题\记录\续攻-主线程终端记录.txt'
+Select-String -LiteralPath $record -Pattern '操作：在 /challenges/562 的提交 FLAG 对话框输入|前台 AX 提交响应：FLAG 不正确' | ForEach-Object { $_.Line.Substring(0,[Math]::Min($_.Line.Length,600)) }
+Write-Output 'COMMAND> Select-String platform download hash summary from project record'
+$summary = 'C:\Users\mzj\Desktop\CTF\玄机刷题\记录\批次_20260929_第二批选题与核对.md'
+Select-String -LiteralPath $summary -Pattern '#562' | ForEach-Object { $_.Line.Substring(0,[Math]::Min($_.Line.Length,1000)) }
+Stop-Transcript
+Write-Output ("TRANSCRIPT=" + $transcriptPath)
+Write-Output ("SCRIPT=" + $scriptPath)
+Process ID: 30460
+PSVersion: 7.6.5
+PSEdition: Core
+GitCommitId: 7.6.5
+OS: Microsoft Windows 10.0.26200
+Platform: Win32NT
+PSCompatibleVersions: 1.0, 2.0, 3.0, 4.0, 5.0, 5.1, 6.0, 7.0
+PSRemotingProtocolVersion: 2.4
+SerializationVersion: 1.1.0.1
+WSManStackVersion: 3.0
+**********************
+Transcript started, output file is C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\checker_562\analysis\checker_rejection_audit_transcript_20260929.txt
+COMMAND> Set-Content static-only audit script; no executable is launched
+COMMAND> python "C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\checker_562\analysis\checker_rejection_audit_static.py"
+
+COMMAND> Select-String previous recorded #562 platform action and result
+3377:$log = 'C:\Users\mzj\Desktop\CTF\玄机刷题\记录\新批次中等题攻关终端记录.txt'; Start-Transcript -LiteralPath $log -Append; Write-Output '=== 前台玄机操作记录：checker #562 提交验证（2026-09-27） ==='; Write-Output '操作：在 /challenges/562 的提交 FLAG 对话框输入 flag{enp17I4p8TZmAriao2lq5tAArZ2P1wxBUwXU2} 并点击提交。'; Write-Output '前台 AX 提交响应：FLAG 不正确。页面步骤仍显示 0 / 1，完成情况 0%；因此没有记为平台解出。'; Write-Output '证据：提交后可见挑战详情页仍未完成；本地 Windows checker.exe 对同一输入输出 Correct! You have the flag. 两者结果冲突，需复查题目/校验逻辑。'; Stop-Transcript
+3392:前台 AX 提交响应：FLAG 不正确。页面步骤仍显示 0 / 1，完成情况 0%；因此没有记为平台解出。
+3552:前台 AX 提交响应：FLAG 不正确。页面步骤仍显示 0 / 1，完成情况 0%；因此没有记为平台解出。
+COMMAND> Select-String platform download hash summary from project record
+- #562：本轮从登录后的玄机题页通过前台“下载附件”重新下载。当前详情页显示免费、中等、步骤 `0/1`。下载 ZIP SHA-256：`598E457DCDFFCB89F4A1B5CF56133E1D8A194E737B8C25C6C0EA722854426D36`；其中 `checker.exe` SHA-256：`449D9F4569A0ED70FCB9BC8B96737719B62CFD8AE7C1E99D2864A3999887FDF5`，与项目内验证附件一致。平台副本保存在 `题目资料/checker_562/originals/checker_platform_download_20260929_051349.zip`。
+- #562：本地 candidate `flag{enp17I4p8TZmAriao2lq5tAArZ2P1wxBUwXU2}` 由同哈希 checker 输出 `Correct! You have the flag.`；平台附件已重新下载并证实与本地二进制相同。平台当前仍 `0/1`，未再提交，等待用户对精确重试确认。
+第二批状态汇总：#558 本地完成、平台待确认；#562 本地通过、平台待确认；#561 平台未通过且暂时卡在题面示例矛盾。所有平台状态与本地附件结论分开记录。
+**********************
+PowerShell transcript end
+End time: 20260929094558
+**********************
+**********************
+PowerShell transcript start
+Start time: 20260929094658
+Username: DESKTOP-412KTAR\mzj
+RunAs User: DESKTOP-412KTAR\mzj
+Configuration Name: 
+Machine: DESKTOP-412KTAR (Microsoft Windows NT 10.0.26200.0)
+Host Application: C:\Users\mzj\.cache\codex-runtimes\codex-primary-runtime\dependencies\native\powershell\pwsh.dll -Command try { [Console]::OutputEncoding=[System.Text.Encoding]::UTF8 } catch {}
+$ErrorActionPreference='Stop'
+$root='C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\checker_562'
+$analysis=Join-Path $root 'analysis'
+$scriptPath=Join-Path $analysis 'checker_rejection_audit_static.py'
+$transcriptPath=Join-Path $analysis 'checker_rejection_audit_transcript_20260929.txt'
+Start-Transcript -LiteralPath $transcriptPath -Append
+Write-Output 'COMMAND> Rewrite Python path printing as ASCII Unicode escapes to keep the audit output readable'
+$source=Get-Content -LiteralPath $scriptPath -Raw
+$source=$source.Replace('print(f"archive: {archive}")','print("archive: " + str(archive).encode("unicode_escape").decode("ascii"))')
+$source=$source.Replace('print(f"extracted file: {extracted}")','print("extracted file: " + str(extracted).encode("unicode_escape").decode("ascii"))')
+Set-Content -LiteralPath $scriptPath -Value $source -Encoding utf8
+Write-Output ('COMMAND> python "'+$scriptPath+'"')
+python $scriptPath
+Write-Output 'COMMAND> Confirm all original archives remain present and unmodified by the analysis'
+$archivePaths=@(
+ (Join-Path $root 'checker_platform_20260929.zip'),
+ (Join-Path $root 'originals\checker_platform_download_20260929_051349.zip'),
+ 'C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\第一届启航杯checker_562\originals\checker.zip',
+ 'C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\原始下载附件\checker.zip'
+)
+Get-Item -LiteralPath $archivePaths | Select-Object FullName,Length | Format-Table -AutoSize
+Stop-Transcript
+Write-Output ('TRANSCRIPT=' + $transcriptPath)
+Write-Output ('SCRIPT=' + $scriptPath)
+Process ID: 21100
+PSVersion: 7.6.5
+PSEdition: Core
+GitCommitId: 7.6.5
+OS: Microsoft Windows 10.0.26200
+Platform: Win32NT
+PSCompatibleVersions: 1.0, 2.0, 3.0, 4.0, 5.0, 5.1, 6.0, 7.0
+PSRemotingProtocolVersion: 2.4
+SerializationVersion: 1.1.0.1
+WSManStackVersion: 3.0
+**********************
+Transcript started, output file is C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\checker_562\analysis\checker_rejection_audit_transcript_20260929.txt
+COMMAND> Rewrite Python path printing as ASCII Unicode escapes to keep the audit output readable
+COMMAND> python "C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\checker_562\analysis\checker_rejection_audit_static.py"
+
+COMMAND> Confirm all original archives remain present and unmodified by the analysis
+
+FullName                                                                                                       Length
+--------                                                                                                       ------
+C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\checker_562\checker_platform_20260929.zip                            17498
+C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\checker_562\originals\checker_platform_download_20260929_051349.zip  17498
+C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\第一届启航杯checker_562\originals\checker.zip                        17498
+C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\原始下载附件\checker.zip                                             17498
+
+**********************
+PowerShell transcript end
+End time: 20260929094659
+**********************
+**********************
+PowerShell transcript start
+Start time: 20260929094841
+Username: DESKTOP-412KTAR\mzj
+RunAs User: DESKTOP-412KTAR\mzj
+Configuration Name: 
+Machine: DESKTOP-412KTAR (Microsoft Windows NT 10.0.26200.0)
+Host Application: C:\Users\mzj\.cache\codex-runtimes\codex-primary-runtime\dependencies\native\powershell\pwsh.dll -Command try { [Console]::OutputEncoding=[System.Text.Encoding]::UTF8 } catch {}
+$ErrorActionPreference='Stop'
+$root='C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\checker_562'
+$analysis=Join-Path $root 'analysis'
+$wp=Join-Path $analysis 'checker_562_WP.md'
+$audit=Join-Path $analysis 'checker_rejection_audit_20260929.md'
+$transcript=Join-Path $analysis 'checker_rejection_audit_transcript_20260929.txt'
+$script=Join-Path $analysis 'checker_rejection_audit_static.py'
+Start-Transcript -LiteralPath $transcript -Append
+Write-Output 'COMMAND> Create concise findings note for checker #562 rejection audit'
+@'
+# #562 checker：平台拒绝原因静态复核（2026-09-29）
+
+## 结论
+
+没有发现可证实的候选 flag 差异，也没有发现不同版本的附件。项目中四份 ZIP 的完整字节流相同，SHA-256 均为 598E457DCDFFCB89F4A1B5CF56133E1D8A194E737B8C25C6C0EA722854426D36；各自唯一成员 checker.exe 均为 42,857 字节、SHA-256 449D9F4569A0ED70FCB9BC8B96737719B62CFD8AE7C1E99D2864A3999887FDF5。解压副本也与成员完全相同。
+
+静态 PE 复算将 VA 0x00404020 映射到 .data 文件偏移 0x3220，对 43 字节密文逐字节 XOR 0x23，唯一得到：
+
+    flag{enp17I4p8TZmAriao2lq5tAArZ2P1wxBUwXU2}
+
+再次 XOR 可逐字节还原原密文，格式为 43 个 ASCII 字符。脚本只解析 ZIP/PE 文件内容；没有运行任何 .exe。
+
+## 已有平台提交记录
+
+项目旧记录记载：2026-09-27 在 /challenges/562 输入上述完整候选并提交，前台 AX 显示“FLAG 不正确”，进度保持 0/1。该文字记录也记录了输入内容，但当前可读记录没有保存提交时截图或输入框快照，因此无法从文件证明浏览器当时字段中的最终字节（例如不可见空白）与记录文本完全一致。
+
+后续在玄机题页前台重新下载的附件被保存为 originals/checker_platform_download_20260929_051349.zip。项目既有题页记录称当前页面为 #562、免费、中等、0/1，其 ZIP 与本地附件哈希相同。本次审计没有访问网站或接口；只复核项目保留的副本和这些既有记录。
+
+## 判断
+
+证据排除了“项目内多个下载版本不同”这一解释，但不能解释为什么服务器拒绝本地程序接受的候选。附件内的 checker 只证明字符串能通过这份本地 PE；它本身不能证明平台服务端配置使用相同答案。当前没有经证据支持的替代 flag，不应把变换大小写、去掉 flag{} 或随意加空格当成修正。#562 仍应标记为“本地附件已逆出，平台未验证”，不计入已完成题目。
+
+要安全地推进平台验证，需要新的外部证据（例如提交时的可见输入快照，或平台侧明确的答案/校验规则）；本轮不提交。
+
+## 文件与复现
+
+- 静态复算脚本：checker_rejection_audit_static.py
+- 命令/输出 transcript：checker_rejection_audit_transcript_20260929.txt
+- 本审计未改写或删除原始 ZIP、PE 附件。
+- 复现命令：python .\analysis\checker_rejection_audit_static.py
+'@ | Set-Content -LiteralPath $audit -Encoding utf8
+Write-Output ('COMMAND> Get-Content "'+$audit+'"')
+Get-Content -LiteralPath $audit
+Write-Output 'COMMAND> Append dated static rejection-audit findings to current WP'
+@'
+
+## 平台拒绝原因独立复核（2026-09-29）
+
+本轮没有访问玄机网站或接口，也没有运行附件可执行文件；仅静态读取项目副本。使用 analysis/checker_rejection_audit_static.py 对项目内四份附件 ZIP 逐一核对，完整 ZIP 字节流全部相同（SHA-256 598E457DCDFFCB89F4A1B5CF56133E1D8A194E737B8C25C6C0EA722854426D36），ZIP 唯一成员 checker.exe 也全部相同（42,857 字节，SHA-256 449D9F4569A0ED70FCB9BC8B96737719B62CFD8AE7C1E99D2864A3999887FDF5）。成员与解压副本逐字节一致。
+
+独立 PE 静态解析再次将比较目标 VA 0x00404020 定位到 .data 偏移 0x3220，固定 XOR 0x23 得到同一 43 字符候选；往返异或与嵌入密文逐字节相同。没有发现第二个候选或附件版本差异。
+
+已有前台操作文字记录称，2026-09-27 在 /challenges/562 提交了上述完整候选，AX 回报“FLAG 不正确”且进度为 0/1。该拒绝记录没有提交时截图或输入框快照，故本轮无法独立核对当时字段最终内容。现存证据只能说明本地 PE 接受此字符串、此前平台记录拒绝该字符串；不能推断具体后端原因。本题继续标记为本地附件已逆出，平台未验证，不计入完成题目，也不猜测或提交变体。
+
+复现脚本与完整命令/输出见 analysis/checker_rejection_audit_static.py 和 analysis/checker_rejection_audit_transcript_20260929.txt；本轮未更改原始附件。
+'@ | Add-Content -LiteralPath $wp -Encoding utf8
+Write-Output 'COMMAND> Verify appended WP section and analysis artifacts'
+Get-Content -LiteralPath $wp -Tail 25
+Get-Item -LiteralPath $audit,$script,$transcript | Select-Object FullName,Length | Format-Table -AutoSize
+Stop-Transcript
+Write-Output ('TRANSCRIPT=' + $transcript)
+Process ID: 1836
+PSVersion: 7.6.5
+PSEdition: Core
+GitCommitId: 7.6.5
+OS: Microsoft Windows 10.0.26200
+Platform: Win32NT
+PSCompatibleVersions: 1.0, 2.0, 3.0, 4.0, 5.0, 5.1, 6.0, 7.0
+PSRemotingProtocolVersion: 2.4
+SerializationVersion: 1.1.0.1
+WSManStackVersion: 3.0
+**********************
+Transcript started, output file is C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\checker_562\analysis\checker_rejection_audit_transcript_20260929.txt
+COMMAND> Create concise findings note for checker #562 rejection audit
+COMMAND> Get-Content "C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\checker_562\analysis\checker_rejection_audit_20260929.md"
+# #562 checker：平台拒绝原因静态复核（2026-09-29）
+
+## 结论
+
+没有发现可证实的候选 flag 差异，也没有发现不同版本的附件。项目中四份 ZIP 的完整字节流相同，SHA-256 均为 598E457DCDFFCB89F4A1B5CF56133E1D8A194E737B8C25C6C0EA722854426D36；各自唯一成员 checker.exe 均为 42,857 字节、SHA-256 449D9F4569A0ED70FCB9BC8B96737719B62CFD8AE7C1E99D2864A3999887FDF5。解压副本也与成员完全相同。
+
+静态 PE 复算将 VA 0x00404020 映射到 .data 文件偏移 0x3220，对 43 字节密文逐字节 XOR 0x23，唯一得到：
+
+    flag{enp17I4p8TZmAriao2lq5tAArZ2P1wxBUwXU2}
+
+再次 XOR 可逐字节还原原密文，格式为 43 个 ASCII 字符。脚本只解析 ZIP/PE 文件内容；没有运行任何 .exe。
+
+## 已有平台提交记录
+
+项目旧记录记载：2026-09-27 在 /challenges/562 输入上述完整候选并提交，前台 AX 显示“FLAG 不正确”，进度保持 0/1。该文字记录也记录了输入内容，但当前可读记录没有保存提交时截图或输入框快照，因此无法从文件证明浏览器当时字段中的最终字节（例如不可见空白）与记录文本完全一致。
+
+后续在玄机题页前台重新下载的附件被保存为 originals/checker_platform_download_20260929_051349.zip。项目既有题页记录称当前页面为 #562、免费、中等、0/1，其 ZIP 与本地附件哈希相同。本次审计没有访问网站或接口；只复核项目保留的副本和这些既有记录。
+
+## 判断
+
+证据排除了“项目内多个下载版本不同”这一解释，但不能解释为什么服务器拒绝本地程序接受的候选。附件内的 checker 只证明字符串能通过这份本地 PE；它本身不能证明平台服务端配置使用相同答案。当前没有经证据支持的替代 flag，不应把变换大小写、去掉 flag{} 或随意加空格当成修正。#562 仍应标记为“本地附件已逆出，平台未验证”，不计入已完成题目。
+
+要安全地推进平台验证，需要新的外部证据（例如提交时的可见输入快照，或平台侧明确的答案/校验规则）；本轮不提交。
+
+## 文件与复现
+
+- 静态复算脚本：checker_rejection_audit_static.py
+- 命令/输出 transcript：checker_rejection_audit_transcript_20260929.txt
+- 本审计未改写或删除原始 ZIP、PE 附件。
+- 复现命令：python .\analysis\checker_rejection_audit_static.py
+COMMAND> Append dated static rejection-audit findings to current WP
+COMMAND> Verify appended WP section and analysis artifacts
+平台重新下载的原始压缩包已保存至：
+
+    ../originals/checker_platform_download_20260929_051349.zip
+
+核验结果：
+
+- ZIP 大小：17,498 字节
+- ZIP SHA-256：598E457DCDFFCB89F4A1B5CF56133E1D8A194E737B8C25C6C0EA722854426D36
+- ZIP 唯一成员：checker.exe，42,857 字节
+- 成员 SHA-256：449D9F4569A0ED70FCB9BC8B96737719B62CFD8AE7C1E99D2864A3999887FDF5
+- 成员哈希与项目附件和之前逆向所用文件完全一致；平台当前下载 ZIP 哈希也与原项目 ZIP 完全一致。
+
+平台前台下载、压缩包/成员哈希命令与输出见[根批次 PowerShell transcript](../../../记录/批次_20260929_继续协调.txt)。在该 transcript 中搜索“当前玄机 #562 平台附件哈希与 ZIP 成员”可定位对应过程。页面状态与批次摘要另见[第二批选题与核对记录](../../../记录/批次_20260929_第二批选题与核对.md)。本次独立复核与成员重算记录见[附件证据 transcript](agent_checker562_platform_attachment_evidence_20260929.txt)。
+
+这项证据确认了当前 #562 页面提供的附件与本地候选分析对象相同，故“当前平台页附件版本与本地附件不同”不能解释现有矛盾。由于页面仍显示 0/1、没有保存此前拒绝时的原始页面回执，平台拒绝的剩余具体原因尚不能由附件哈希推断。当前状态应记录为：本地 checker 已验证候选；平台进度仍 0/1；未完成平台验证。
+
+## 平台拒绝原因独立复核（2026-09-29）
+
+本轮没有访问玄机网站或接口，也没有运行附件可执行文件；仅静态读取项目副本。使用 analysis/checker_rejection_audit_static.py 对项目内四份附件 ZIP 逐一核对，完整 ZIP 字节流全部相同（SHA-256 598E457DCDFFCB89F4A1B5CF56133E1D8A194E737B8C25C6C0EA722854426D36），ZIP 唯一成员 checker.exe 也全部相同（42,857 字节，SHA-256 449D9F4569A0ED70FCB9BC8B96737719B62CFD8AE7C1E99D2864A3999887FDF5）。成员与解压副本逐字节一致。
+
+独立 PE 静态解析再次将比较目标 VA 0x00404020 定位到 .data 偏移 0x3220，固定 XOR 0x23 得到同一 43 字符候选；往返异或与嵌入密文逐字节相同。没有发现第二个候选或附件版本差异。
+
+已有前台操作文字记录称，2026-09-27 在 /challenges/562 提交了上述完整候选，AX 回报“FLAG 不正确”且进度为 0/1。该拒绝记录没有提交时截图或输入框快照，故本轮无法独立核对当时字段最终内容。现存证据只能说明本地 PE 接受此字符串、此前平台记录拒绝该字符串；不能推断具体后端原因。本题继续标记为本地附件已逆出，平台未验证，不计入完成题目，也不猜测或提交变体。
+
+复现脚本与完整命令/输出见 analysis/checker_rejection_audit_static.py 和 analysis/checker_rejection_audit_transcript_20260929.txt；本轮未更改原始附件。
+
+FullName                                                                                                        Length
+--------                                                                                                        ------
+C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\checker_562\analysis\checker_rejection_audit_20260929.md               2456
+C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\checker_562\analysis\checker_rejection_audit_static.py                 3858
+C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\checker_562\analysis\checker_rejection_audit_transcript_20260929.txt  23697
+
+**********************
+PowerShell transcript end
+End time: 20260929094842
+**********************

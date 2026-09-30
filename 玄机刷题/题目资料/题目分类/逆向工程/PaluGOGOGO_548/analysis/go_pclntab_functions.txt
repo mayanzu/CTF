@@ -1,0 +1,46 @@
+Go pcHeader candidates: 1
+(902816, 1749, 204, 4198400, (96, 64352, 66592, 75808, 304416, 0))
+pcHeader file offset=0xdc6a0 VA=0x4ddaa0; nfunc=1749; nfiles=204; textStart=0x401000
+funcname offset=0x60 -> file 0xdc700
+cu offset=0xfb60 -> file 0xec200
+filetab offset=0x10420 -> file 0xecac0
+pctab offset=0x12820 -> file 0xeeec0
+pcln offset=0x4a520 -> file 0x126bc0
+reserved offset=0x0 -> file 0xdc6a0
+func table file offset=0x126bc0; first=[(0, 14000), (128, 14048), (224, 14136), (256, 14224), (416, 14312)]; last=[(607488, 157568), (607512, 0)]
+
+--- parsed non-runtime functions ---
+main.WhatAreYouDoing: entry=0x494e80, end=0x494f40, size=0xc0, _func=0x14d200, nameOff=64040
+main.complexEncrypt: entry=0x494f40, end=0x4950a0, size=0x160, _func=0x14d248, nameOff=64088
+main.GetValue: entry=0x4950a0, end=0x495180, size=0xe0, _func=0x14d2a0, nameOff=64108
+main.checkFlag: entry=0x495180, end=0x495500, size=0x380, _func=0x14d2f8, nameOff=64122
+main.main: entry=0x495500, end=0x495518, size=0x18, _func=0x14d340, nameOff=64217
+
+--- function list around main ---
+1742 0x494d20 0x494dc0 math/rand.(*rngSource).Int63
+1743 0x494dc0 0x494e80 type:.eq.math/rand.Rand
+1744 0x494e80 0x494f40 main.WhatAreYouDoing
+1745 0x494f40 0x4950a0 main.complexEncrypt
+1746 0x4950a0 0x495180 main.GetValue
+
+1743 0x494dc0 0x494e80 type:.eq.math/rand.Rand
+1744 0x494e80 0x494f40 main.WhatAreYouDoing
+1745 0x494f40 0x4950a0 main.complexEncrypt
+1746 0x4950a0 0x495180 main.GetValue
+1747 0x495180 0x495500 main.checkFlag
+
+1744 0x494e80 0x494f40 main.WhatAreYouDoing
+1745 0x494f40 0x4950a0 main.complexEncrypt
+1746 0x4950a0 0x495180 main.GetValue
+1747 0x495180 0x495500 main.checkFlag
+1748 0x495500 0x495518 main.main
+
+1745 0x494f40 0x4950a0 main.complexEncrypt
+1746 0x4950a0 0x495180 main.GetValue
+1747 0x495180 0x495500 main.checkFlag
+1748 0x495500 0x495518 main.main
+
+1746 0x4950a0 0x495180 main.GetValue
+1747 0x495180 0x495500 main.checkFlag
+1748 0x495500 0x495518 main.main
+

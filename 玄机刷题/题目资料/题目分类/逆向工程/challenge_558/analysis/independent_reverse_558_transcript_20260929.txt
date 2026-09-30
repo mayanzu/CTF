@@ -1,0 +1,313 @@
+**********************
+PowerShell transcript start
+Start time: 20260929052620
+Username: DESKTOP-412KTAR\mzj
+RunAs User: DESKTOP-412KTAR\mzj
+Configuration Name: 
+Machine: DESKTOP-412KTAR (Microsoft Windows NT 10.0.26200.0)
+Host Application: C:\Users\mzj\.cache\codex-runtimes\codex-primary-runtime\dependencies\native\powershell\pwsh.dll -Command try { [Console]::OutputEncoding=[System.Text.Encoding]::UTF8 } catch {}
+$log='C:\Users\mzj\Desktop\CTF\玄机刷题\题目資料\challenge_558\analysis\independent_static_audit_transcript_20260929.txt'; Start-Transcript -LiteralPath $log -Append; foreach($r in @(@{A='0x140005100';B='0x1400051a0';Name='range helper near 0x5120'},@{A='0x140005600';B='0x1400056b0';Name='array constructor near 0x5620'},@{A='0x1400057b0';B='0x140005890';Name='KSA swap helper near 0x57d0'},@{A='0x1400021e0';B='0x140002300';Name='range collect helper near 0x2200'})){ Write-Output ('COMMAND> static disassembly of '+$r['Name']); & 'C:\msys64\mingw64\bin\objdump.exe' -d -Mintel ('--start-address='+$r['A']) ('--stop-address='+$r['B']) '.\attachment\R.exe' }; Stop-Transcript
+Process ID: 17848
+PSVersion: 7.6.5
+PSEdition: Core
+GitCommitId: 7.6.5
+OS: Microsoft Windows 10.0.26200
+Platform: Win32NT
+PSCompatibleVersions: 1.0, 2.0, 3.0, 4.0, 5.0, 5.1, 6.0, 7.0
+PSRemotingProtocolVersion: 2.4
+SerializationVersion: 1.1.0.1
+WSManStackVersion: 3.0
+**********************
+Transcript started, output file is C:\Users\mzj\Desktop\CTF\玄机刷题\题目資料\challenge_558\analysis\independent_static_audit_transcript_20260929.txt
+COMMAND> static disassembly of range helper near 0x5120
+
+COMMAND> static disassembly of array constructor near 0x5620
+
+COMMAND> static disassembly of KSA swap helper near 0x57d0
+
+COMMAND> static disassembly of range collect helper near 0x2200
+
+**********************
+PowerShell transcript end
+End time: 20260929052620
+**********************
+**********************
+PowerShell transcript start
+Start time: 20260929053008
+Username: DESKTOP-412KTAR\mzj
+RunAs User: DESKTOP-412KTAR\mzj
+Configuration Name: 
+Machine: DESKTOP-412KTAR (Microsoft Windows NT 10.0.26200.0)
+Host Application: C:\Users\mzj\.cache\codex-runtimes\codex-primary-runtime\dependencies\native\powershell\pwsh.dll -Command try { [Console]::OutputEncoding=[System.Text.Encoding]::UTF8 } catch {}
+$log='C:\Users\mzj\Desktop\CTF\玄机刷题\题目資料\challenge_558\analysis\independent_static_audit_transcript_20260929.txt'; Start-Transcript -LiteralPath $log -Append; Write-Output 'COMMAND> inspect the concrete range-to-Vec construction and allocation path called by the inclusive-range wrapper'; & 'C:\msys64\mingw64\bin\objdump.exe' -d -Mintel --start-address=0x1400048a0 --stop-address=0x140004b10 '.\attachment\R.exe'; Stop-Transcript
+Process ID: 32360
+PSVersion: 7.6.5
+PSEdition: Core
+GitCommitId: 7.6.5
+OS: Microsoft Windows 10.0.26200
+Platform: Win32NT
+PSCompatibleVersions: 1.0, 2.0, 3.0, 4.0, 5.0, 5.1, 6.0, 7.0
+PSRemotingProtocolVersion: 2.4
+SerializationVersion: 1.1.0.1
+WSManStackVersion: 3.0
+**********************
+Transcript started, output file is C:\Users\mzj\Desktop\CTF\玄机刷题\题目資料\challenge_558\analysis\independent_static_audit_transcript_20260929.txt
+COMMAND> inspect the concrete range-to-Vec construction and allocation path called by the inclusive-range wrapper
+
+**********************
+PowerShell transcript end
+End time: 20260929053008
+**********************
+**********************
+PowerShell transcript start
+Start time: 20260929053917
+Username: DESKTOP-412KTAR\mzj
+RunAs User: DESKTOP-412KTAR\mzj
+Configuration Name: 
+Machine: DESKTOP-412KTAR (Microsoft Windows NT 10.0.26200.0)
+Host Application: C:\Users\mzj\.cache\codex-runtimes\codex-primary-runtime\dependencies\native\powershell\pwsh.dll -Command try { [Console]::OutputEncoding=[System.Text.Encoding]::UTF8 } catch {}
+$exe = Get-ChildItem -Path . -Recurse -File -Filter R.exe | Where-Object { $_.FullName -match 'challenge_558' } | Select-Object -First 1 -ExpandProperty FullName; $log = Get-ChildItem -Path . -Recurse -File -Filter independent_static_audit_transcript_20260929.txt | Select-Object -First 1 -ExpandProperty FullName; Start-Transcript -LiteralPath $log -Append; Write-Output ('=== Additional audit: input pre-transform XOR with index, exe=' + $exe + ' ==='); & 'C:\msys64\mingw64\bin\objdump.exe' -d -Mintel --start-address=0x1400043d0 --stop-address=0x140004430 $exe; Stop-Transcript
+Process ID: 32648
+PSVersion: 7.6.5
+PSEdition: Core
+GitCommitId: 7.6.5
+OS: Microsoft Windows 10.0.26200
+Platform: Win32NT
+PSCompatibleVersions: 1.0, 2.0, 3.0, 4.0, 5.0, 5.1, 6.0, 7.0
+PSRemotingProtocolVersion: 2.4
+SerializationVersion: 1.1.0.1
+WSManStackVersion: 3.0
+**********************
+Transcript started, output file is C:\Users\mzj\Desktop\CTF\玄机刷题\题目資料\challenge_558\analysis\independent_static_audit_transcript_20260929.txt
+=== Additional audit: input pre-transform XOR with index, exe=C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\challenge_558\attachment\R.exe ===
+
+**********************
+PowerShell transcript end
+End time: 20260929053917
+**********************
+**********************
+PowerShell transcript start
+Start time: 20260929053957
+Username: DESKTOP-412KTAR\mzj
+RunAs User: DESKTOP-412KTAR\mzj
+Configuration Name: 
+Machine: DESKTOP-412KTAR (Microsoft Windows NT 10.0.26200.0)
+Host Application: C:\Users\mzj\.cache\codex-runtimes\codex-primary-runtime\dependencies\native\powershell\pwsh.dll -Command try { [Console]::OutputEncoding=[System.Text.Encoding]::UTF8 } catch {}
+$log = Get-ChildItem -Path . -Recurse -File -Filter independent_static_audit_transcript_20260929.txt | Select-Object -First 1 -ExpandProperty FullName; $asciiExe = Join-Path (Get-Location) 'R558_audit_temp.exe'; Start-Transcript -LiteralPath $log -Append; Write-Output '=== Additional audit: main checker in-place XOR with the position index ==='; & 'C:\msys64\mingw64\bin\objdump.exe' -d -Mintel --start-address=0x1400043d0 --stop-address=0x140004430 $asciiExe; Stop-Transcript
+Process ID: 28944
+PSVersion: 7.6.5
+PSEdition: Core
+GitCommitId: 7.6.5
+OS: Microsoft Windows 10.0.26200
+Platform: Win32NT
+PSCompatibleVersions: 1.0, 2.0, 3.0, 4.0, 5.0, 5.1, 6.0, 7.0
+PSRemotingProtocolVersion: 2.4
+SerializationVersion: 1.1.0.1
+WSManStackVersion: 3.0
+**********************
+Transcript started, output file is C:\Users\mzj\Desktop\CTF\玄机刷题\题目資料\challenge_558\analysis\independent_static_audit_transcript_20260929.txt
+=== Additional audit: main checker in-place XOR with the position index ===
+
+**********************
+PowerShell transcript end
+End time: 20260929053957
+**********************
+**********************
+PowerShell transcript start
+Start time: 20260929054024
+Username: DESKTOP-412KTAR\mzj
+RunAs User: DESKTOP-412KTAR\mzj
+Configuration Name: 
+Machine: DESKTOP-412KTAR (Microsoft Windows NT 10.0.26200.0)
+Host Application: C:\Users\mzj\.cache\codex-runtimes\codex-primary-runtime\dependencies\native\powershell\pwsh.dll -Command try { [Console]::OutputEncoding=[System.Text.Encoding]::UTF8 } catch {}
+$log = Get-ChildItem -Path . -Recurse -File -Filter independent_static_audit_transcript_20260929.txt | Select-Object -First 1 -ExpandProperty FullName; $asciiExe = Join-Path (Get-Location) 'R558_audit_temp.exe'; Start-Transcript -LiteralPath $log -Append; Write-Output '=== KSA and PRGA closure static review, confirming masked key input and state update ==='; & 'C:\msys64\mingw64\bin\objdump.exe' -d -Mintel --start-address=0x140003c80 --stop-address=0x140004020 $asciiExe; Stop-Transcript
+Process ID: 26564
+PSVersion: 7.6.5
+PSEdition: Core
+GitCommitId: 7.6.5
+OS: Microsoft Windows 10.0.26200
+Platform: Win32NT
+PSCompatibleVersions: 1.0, 2.0, 3.0, 4.0, 5.0, 5.1, 6.0, 7.0
+PSRemotingProtocolVersion: 2.4
+SerializationVersion: 1.1.0.1
+WSManStackVersion: 3.0
+**********************
+Transcript started, output file is C:\Users\mzj\Desktop\CTF\玄机刷题\题目資料\challenge_558\analysis\independent_static_audit_transcript_20260929.txt
+=== KSA and PRGA closure static review, confirming masked key input and state update ===
+
+**********************
+PowerShell transcript end
+End time: 20260929054024
+**********************
+**********************
+PowerShell transcript start
+Start time: 20260929054034
+Username: DESKTOP-412KTAR\mzj
+RunAs User: DESKTOP-412KTAR\mzj
+Configuration Name: 
+Machine: DESKTOP-412KTAR (Microsoft Windows NT 10.0.26200.0)
+Host Application: C:\Users\mzj\.cache\codex-runtimes\codex-primary-runtime\dependencies\native\powershell\pwsh.dll -Command try { [Console]::OutputEncoding=[System.Text.Encoding]::UTF8 } catch {}
+$log = Get-ChildItem -Path . -Recurse -File -Filter independent_static_audit_transcript_20260929.txt | Select-Object -First 1 -ExpandProperty FullName; $asciiExe = Join-Path (Get-Location) 'R558_audit_temp.exe'; Start-Transcript -LiteralPath $log -Append; Write-Output '=== Main checker: key setup, index-XOR preprocessing, encrypt call and comparison ==='; & 'C:\msys64\mingw64\bin\objdump.exe' -d -Mintel --start-address=0x1400041b0 --stop-address=0x1400043d0 $asciiExe; Stop-Transcript
+Process ID: 11040
+PSVersion: 7.6.5
+PSEdition: Core
+GitCommitId: 7.6.5
+OS: Microsoft Windows 10.0.26200
+Platform: Win32NT
+PSCompatibleVersions: 1.0, 2.0, 3.0, 4.0, 5.0, 5.1, 6.0, 7.0
+PSRemotingProtocolVersion: 2.4
+SerializationVersion: 1.1.0.1
+WSManStackVersion: 3.0
+**********************
+Transcript started, output file is C:\Users\mzj\Desktop\CTF\玄机刷题\题目資料\challenge_558\analysis\independent_static_audit_transcript_20260929.txt
+=== Main checker: key setup, index-XOR preprocessing, encrypt call and comparison ===
+
+**********************
+PowerShell transcript end
+End time: 20260929054034
+**********************
+**********************
+PowerShell transcript start
+Start time: 20260929054113
+Username: DESKTOP-412KTAR\mzj
+RunAs User: DESKTOP-412KTAR\mzj
+Configuration Name: 
+Machine: DESKTOP-412KTAR (Microsoft Windows NT 10.0.26200.0)
+Host Application: C:\Users\mzj\.cache\codex-runtimes\codex-primary-runtime\dependencies\native\powershell\pwsh.dll -Command try { [Console]::OutputEncoding=[System.Text.Encoding]::UTF8 } catch {}
+$log = Get-ChildItem -Path . -Recurse -File -Filter independent_static_audit_transcript_20260929.txt | Select-Object -First 1 -ExpandProperty FullName; $asciiExe = Join-Path (Get-Location) 'R558_audit_temp.exe'; Start-Transcript -LiteralPath $log -Append; Write-Output '=== PRGA closure remainder: swap, S-box output, byte transforms ==='; & 'C:\msys64\mingw64\bin\objdump.exe' -d -Mintel --start-address=0x140004018 --stop-address=0x1400040f0 $asciiExe; Stop-Transcript
+Process ID: 34984
+PSVersion: 7.6.5
+PSEdition: Core
+GitCommitId: 7.6.5
+OS: Microsoft Windows 10.0.26200
+Platform: Win32NT
+PSCompatibleVersions: 1.0, 2.0, 3.0, 4.0, 5.0, 5.1, 6.0, 7.0
+PSRemotingProtocolVersion: 2.4
+SerializationVersion: 1.1.0.1
+WSManStackVersion: 3.0
+**********************
+Transcript started, output file is C:\Users\mzj\Desktop\CTF\玄机刷题\题目資料\challenge_558\analysis\independent_static_audit_transcript_20260929.txt
+=== PRGA closure remainder: swap, S-box output, byte transforms ===
+
+**********************
+PowerShell transcript end
+End time: 20260929054113
+**********************
+**********************
+PowerShell transcript start
+Start time: 20260929054147
+Username: DESKTOP-412KTAR\mzj
+RunAs User: DESKTOP-412KTAR\mzj
+Configuration Name: 
+Machine: DESKTOP-412KTAR (Microsoft Windows NT 10.0.26200.0)
+Host Application: C:\Users\mzj\.cache\codex-runtimes\codex-primary-runtime\dependencies\native\powershell\pwsh.dll -Command try { [Console]::OutputEncoding=[System.Text.Encoding]::UTF8 } catch {}
+$challenge = Get-ChildItem -Path . -Recurse -Directory | Where-Object { $_.Name -eq 'challenge_558' } | Select-Object -First 1 -ExpandProperty FullName; $analysis = Join-Path $challenge 'analysis'; $script = Join-Path $analysis 'independent_reverse_558.py'; $log = Join-Path $analysis 'independent_static_audit_transcript_20260929.txt'; Set-Content -LiteralPath $script -Encoding utf8 -Value @'
+from pathlib import Path
+
+# Static-only reproduction of the transform recovered from R.exe.
+key_literal = b"lntfvpus"
+key = bytes(value ^ index for index, value in enumerate(key_literal))
+target = bytes.fromhex("18 59 07 28 f4 ad c8 c3 b6 3f 2d 39 ca 34 d1 8e f5 03 b0")
+assert len(target) == 19 and len(key) == 8
+
+# KSA: j = (j + S[i] + (key[i % 8] ^ 0x66)) mod 256; swap S[i], S[j].
+S = list(range(256))
+j = 0
+for i in range(256):
+    j = (j + S[i] + (key[i % len(key)] ^ 0x66)) & 0xff
+    S[i], S[j] = S[j], S[i]
+
+# Invert output = ((plain ^ (nibble_swap(K) + 1)) + 1) mod 256.
+# PRGA K = S[(S[i] + S[j]) mod 256] after swapping.
+i = j = 0
+plain = bytearray()
+keystream = bytearray()
+for c in target:
+    i = (i + 1) & 0xff
+    j = (j + S[i]) & 0xff
+    S[i], S[j] = S[j], S[i]
+    k = S[(S[i] + S[j]) & 0xff]
+    mask = (((k << 4) | (k >> 4)) & 0xff) + 1
+    mask &= 0xff
+    keystream.append(mask)
+    # Inverse: plain = ((cipher - 1) mod 256) XOR mask.
+    plain.append(((c - 1) & 0xff) ^ mask)
+
+# Independent forward calculation against the hard-coded byte target.
+S2 = list(range(256))
+j = 0
+for i in range(256):
+    j = (j + S2[i] + (key[i % len(key)] ^ 0x66)) & 0xff
+    S2[i], S2[j] = S2[j], S2[i]
+i = j = 0
+forward = bytearray()
+for p in plain:
+    i = (i + 1) & 0xff
+    j = (j + S2[i]) & 0xff
+    S2[i], S2[j] = S2[j], S2[i]
+    k = S2[(S2[i] + S2[j]) & 0xff]
+    mask = ((((k << 4) | (k >> 4)) & 0xff) + 1) & 0xff
+    forward.append((((p ^ mask) + 1) & 0xff))
+
+print("key literal ASCII:", key_literal.decode("ascii"))
+print("key after byte[i] ^= i:", key.decode("ascii"))
+print("KSA byte formula: key[i % 8] ^ 0x66")
+print("target length:", len(target))
+print("candidate hex:", plain.hex())
+print("candidate repr:", repr(bytes(plain)))
+print("candidate ASCII:", bytes(plain).decode("ascii", errors="backslashreplace"))
+print("starts flag{:", bytes(plain).startswith(b"flag{"))
+print("forward hex:", forward.hex())
+print("full target match:", bytes(forward) == target)
+'@; Start-Transcript -LiteralPath $log -Append; Write-Output ('=== Static-only corrected reverse reproduction: script=' + $script + ' ==='); & python $script; Stop-Transcript
+Process ID: 25204
+PSVersion: 7.6.5
+PSEdition: Core
+GitCommitId: 7.6.5
+OS: Microsoft Windows 10.0.26200
+Platform: Win32NT
+PSCompatibleVersions: 1.0, 2.0, 3.0, 4.0, 5.0, 5.1, 6.0, 7.0
+PSRemotingProtocolVersion: 2.4
+SerializationVersion: 1.1.0.1
+WSManStackVersion: 3.0
+**********************
+Transcript started, output file is C:\Users\mzj\Desktop\CTF\玄机刷题\题目資料\challenge_558\analysis\independent_static_audit_transcript_20260929.txt
+=== Static-only corrected reverse reproduction: script=C:\Users\mzj\Desktop\CTF\玄机刷题\题目資料\challenge_558\analysis\independent_reverse_558.py ===
+
+**********************
+PowerShell transcript end
+End time: 20260929054147
+**********************
+**********************
+PowerShell transcript start
+Start time: 20260929054543
+Username: DESKTOP-412KTAR\mzj
+RunAs User: DESKTOP-412KTAR\mzj
+Configuration Name: 
+Machine: DESKTOP-412KTAR (Microsoft Windows NT 10.0.26200.0)
+Host Application: C:\Users\mzj\.cache\codex-runtimes\codex-primary-runtime\dependencies\native\powershell\pwsh.dll -Command try { [Console]::OutputEncoding=[System.Text.Encoding]::UTF8 } catch {}
+$challenge = Get-ChildItem -Path . -Recurse -Directory | Where-Object { $_.Name -eq 'challenge_558' } | Select-Object -First 1 -ExpandProperty FullName; $analysis = Join-Path $challenge 'analysis'; $log = Join-Path $analysis 'independent_static_audit_transcript_20260929.txt'; $report = Join-Path $analysis 'independent_static_audit_20260929.md'; $temp = Join-Path (Get-Location) 'R558_audit_temp.exe'; Start-Transcript -LiteralPath $log -Append; Write-Output '=== Verify analysis-only ASCII-path copy and correct cleanup status in report ==='; Write-Output ('Temporary copy exists=' + (Test-Path -LiteralPath $temp)); Get-FileHash -LiteralPath $temp -Algorithm SHA256 | Format-List; $raw = Get-Content -LiteralPath $report -Raw; $old = '分析完成后已清理该副本。临时副本未执行。'; $new = '分析完成后尝试删除该副本，但本地命令执行策略拒绝删除操作，所以临时副本 `C:\Users\mzj\Desktop\CTF\R558_audit_temp.exe` 暂时留在工作区根目录。其 SHA-256 与原附件一致，未执行。'; if (-not $raw.Contains($old)) { throw 'Expected cleanup sentence was not found in report.' }; $raw = $raw.Replace($old, $new); Set-Content -LiteralPath $report -Encoding utf8 -Value $raw; Write-Output ('Updated report=' + $report); Stop-Transcript
+Process ID: 34116
+PSVersion: 7.6.5
+PSEdition: Core
+GitCommitId: 7.6.5
+OS: Microsoft Windows 10.0.26200
+Platform: Win32NT
+PSCompatibleVersions: 1.0, 2.0, 3.0, 4.0, 5.0, 5.1, 6.0, 7.0
+PSRemotingProtocolVersion: 2.4
+SerializationVersion: 1.1.0.1
+WSManStackVersion: 3.0
+**********************
+Transcript started, output file is C:\Users\mzj\Desktop\CTF\玄机刷题\题目資料\challenge_558\analysis\independent_static_audit_transcript_20260929.txt
+=== Verify analysis-only ASCII-path copy and correct cleanup status in report ===
+Temporary copy exists=True
+
+Algorithm : SHA256
+Hash      : E2B0CA7ED72159F82649C33F373E3B38C0E9C9283AA1DAEC627018A328F08651
+Path      : C:\Users\mzj\Desktop\CTF\R558_audit_temp.exe
+
+Updated report=C:\Users\mzj\Desktop\CTF\玄机刷题\题目資料\challenge_558\analysis\independent_static_audit_20260929.md
+**********************
+PowerShell transcript end
+End time: 20260929054543
+**********************

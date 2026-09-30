@@ -1,0 +1,1254 @@
+FILE C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\PaluArray_546\PaluArray_flag_unpacked.exe BYTES 105472 SHA256 8b1263de36eda3e5e3f1183c2d08c520ecae09649b1a04891f597033fdf842a5 IMAGE_BASE 0x140000000 ENTRY_RVA 0x37d0 ENTRY_VA 0x1400037d0
+SECTIONS [('.text', '0x1000', '0x3e00', '0x400', '0x60000020'), ('.rdata', '0x5000', '0x3800', '0x4200', '0x40000040'), ('.data', '0x9000', '0x400', '0x7a00', '0xc0000040'), ('.pdata', '0xa000', '0x600', '0x7e00', '0x40000040'), ('.rsrc', '0xb000', '0x11400', '0x8400', '0x40000040'), ('.reloc', '0x1d000', '0x400', '0x19800', '0x42000040')]
+IMPORTS 256
+IMPORT 0x140005020 KERNEL32.DLL!OutputDebugStringW
+IMPORT 0x1400052c0 api-ms-win-crt-string-l1-1-0.dll!strlen
+IMPORT 0x1400052c8 api-ms-win-crt-string-l1-1-0.dll!wcslen
+
+===== DISASSEMBLY RVA 0x1700..0x1a48 VA 0x140001700 =====
+0x140001700: sub      rsp, 0x48 
+0x140001704: lea      rcx, [rsp + 0x20] 
+0x140001709: call     0x1400016c4 CALL_TARGET=0x1400016c4
+0x14000170e: lea      rdx, [rip + 0x5f8b] 
+0x140001715: lea      rcx, [rsp + 0x20] 
+0x14000171a: call     0x140004812 CALL_TARGET=0x140004812
+0x14000171f: int3      
+0x140001720: push     rbx 
+0x140001722: sub      rsp, 0x20 
+0x140001726: mov      rbx, rcx 
+0x140001729: mov      rax, rdx 
+0x14000172c: lea      rcx, [rip + 0x4bb5] 
+0x140001733: xorps    xmm0, xmm0 
+0x140001736: mov      qword ptr [rbx], rcx 
+0x140001739: lea      rdx, [rbx + 8] 
+0x14000173d: lea      rcx, [rax + 8] 
+0x140001741: movups   xmmword ptr [rdx], xmm0 
+0x140001744: call     qword ptr [rip + 0x3a46] IAT=VCRUNTIME140.dll!__std_exception_copy UTF16='莂'
+0x14000174a: lea      rax, [rip + 0x4b67] 
+0x140001751: mov      qword ptr [rbx], rax 
+0x140001754: mov      rax, rbx 
+0x140001757: add      rsp, 0x20 
+0x14000175b: pop      rbx 
+0x14000175c: ret       
+0x14000175d: int3      
+0x14000175e: int3      
+0x14000175f: int3      
+0x140001760: push     rbx 
+0x140001762: sub      rsp, 0x20 
+0x140001766: mov      rbx, rcx 
+0x140001769: mov      rax, rdx 
+0x14000176c: lea      rcx, [rip + 0x4b75] 
+0x140001773: xorps    xmm0, xmm0 
+0x140001776: mov      qword ptr [rbx], rcx 
+0x140001779: lea      rdx, [rbx + 8] 
+0x14000177d: lea      rcx, [rax + 8] 
+0x140001781: movups   xmmword ptr [rdx], xmm0 
+0x140001784: call     qword ptr [rip + 0x3a06] IAT=VCRUNTIME140.dll!__std_exception_copy UTF16='莂'
+0x14000178a: lea      rax, [rip + 0x4b3f] 
+0x140001791: mov      qword ptr [rbx], rax 
+0x140001794: mov      rax, rbx 
+0x140001797: add      rsp, 0x20 
+0x14000179b: pop      rbx 
+0x14000179c: ret       
+0x14000179d: int3      
+0x14000179e: int3      
+0x14000179f: int3      
+0x1400017a0: sub      rsp, 0x28 
+0x1400017a4: lea      rcx, [rip + 0x46ad] UTF16='瑳楲杮琠潯氠湯gPalu_996!?' ASCII='string too long'
+0x1400017ab: call     qword ptr [rip + 0x391f] IAT=MSVCP140.dll!?_Xlength_error@std@@YAXPEBD@Z UTF16='苼'
+0x1400017b1: int3      
+0x1400017b2: int3      
+0x1400017b3: int3      
+0x1400017b4: mov      qword ptr [rsp + 8], rbx 
+0x1400017b9: push     rdi 
+0x1400017ba: sub      rsp, 0x20 
+0x1400017be: mov      rbx, rcx 
+0x1400017c1: mov      edi, edx 
+0x1400017c3: add      rcx, 0x158 
+0x1400017ca: call     qword ptr [rip + 0x3cc8] IAT=mfc140u.dll!ordinal_1091 UTF16='у'
+0x1400017d0: lea      rcx, [rbx + 0x140] 
+0x1400017d7: lea      rax, [rip + 0x45da] 
+0x1400017de: mov      qword ptr [rcx], rax 
+0x1400017e1: call     0x140001188 CALL_TARGET=0x140001188
+0x1400017e6: mov      rcx, rbx 
+0x1400017e9: call     qword ptr [rip + 0x3cc9] IAT=mfc140u.dll!ordinal_1089 UTF16='с'
+0x1400017ef: test     dil, 1 
+0x1400017f3: je       0x140001810 
+0x1400017f5: mov      rcx, rbx 
+0x1400017f8: test     dil, 4 
+0x1400017fc: jne      0x140001806 
+0x1400017fe: call     qword ptr [rip + 0x4054] IAT=mfc140u.dll!ordinal_1491 UTF16='ד'
+0x140001804: jmp      0x140001810 
+0x140001806: mov      edx, 0x178 
+0x14000180b: call     0x1400010e4 CALL_TARGET=0x1400010e4
+0x140001810: mov      rax, rbx 
+0x140001813: mov      rbx, qword ptr [rsp + 0x30] 
+0x140001818: add      rsp, 0x20 
+0x14000181c: pop      rdi 
+0x14000181d: ret       
+0x14000181e: int3      
+0x14000181f: int3      
+0x140001820: lea      rax, [rip + 0x4ad1] 
+0x140001827: ret       
+0x140001828: push     rbx 
+0x14000182a: sub      rsp, 0x20 
+0x14000182e: mov      rbx, rcx 
+0x140001831: call     qword ptr [rip + 0x3b79] IAT=mfc140u.dll!ordinal_10163 UTF16='➳'
+0x140001837: mov      r9, qword ptr [rbx + 0x170] 
+0x14000183e: mov      edx, 0x80 
+0x140001843: mov      rcx, qword ptr [rbx + 0x40] 
+0x140001847: lea      r8d, [rdx - 0x7f] 
+0x14000184b: call     qword ptr [rip + 0x38d7] IAT=USER32.dll!SendMessageW UTF16='芞'
+0x140001851: mov      r9, qword ptr [rbx + 0x170] 
+0x140001858: xor      r8d, r8d 
+0x14000185b: mov      rcx, qword ptr [rbx + 0x40] 
+0x14000185f: mov      edx, 0x80 
+0x140001864: call     qword ptr [rip + 0x38be] IAT=USER32.dll!SendMessageW UTF16='芞'
+0x14000186a: mov      eax, 1 
+0x14000186f: add      rsp, 0x20 
+0x140001873: pop      rbx 
+0x140001874: ret       
+0x140001875: int3      
+0x140001876: int3      
+0x140001877: int3      
+0x140001878: mov      qword ptr [rsp + 0x10], rbx 
+0x14000187d: mov      qword ptr [rsp + 0x18], rsi 
+0x140001882: push     rdi 
+0x140001883: sub      rsp, 0xb0 
+0x14000188a: mov      rax, qword ptr [rip + 0x77af] 
+0x140001891: xor      rax, rsp 
+0x140001894: mov      qword ptr [rsp + 0xa0], rax 
+0x14000189c: mov      rsi, rcx 
+0x14000189f: mov      rcx, qword ptr [rcx + 0x40] 
+0x1400018a3: call     qword ptr [rip + 0x386f] IAT=USER32.dll!IsIconic UTF16='艖'
+0x1400018a9: test     eax, eax 
+0x1400018ab: je       0x14000195d 
+0x1400018b1: xor      edx, edx 
+0x1400018b3: lea      rcx, [rsp + 0x30] 
+0x1400018b8: lea      r8d, [rdx + 0x70] 
+0x1400018bc: call     0x1400047ee CALL_TARGET=0x1400047ee
+0x1400018c1: mov      rdx, rsi 
+0x1400018c4: lea      rcx, [rsp + 0x30] 
+0x1400018c9: call     qword ptr [rip + 0x3b11] IAT=mfc140u.dll!ordinal_878 UTF16='ͮ'
+0x1400018cf: mov      r8, qword ptr [rsp + 0x38] 
+0x1400018d4: xor      r9d, r9d 
+0x1400018d7: mov      rcx, qword ptr [rsi + 0x40] 
+0x1400018db: lea      edx, [r9 + 0x27] 
+0x1400018df: call     qword ptr [rip + 0x3843] IAT=USER32.dll!SendMessageW UTF16='芞'
+0x1400018e5: mov      ecx, 0xb 
+0x1400018ea: call     qword ptr [rip + 0x3858] IAT=USER32.dll!GetSystemMetrics UTF16='芊'
+0x1400018f0: mov      ecx, 0xc 
+0x1400018f5: mov      edi, eax 
+0x1400018f7: call     qword ptr [rip + 0x384b] IAT=USER32.dll!GetSystemMetrics UTF16='芊'
+0x1400018fd: mov      rcx, qword ptr [rsi + 0x40] 
+0x140001901: lea      rdx, [rsp + 0x20] 
+0x140001906: xorps    xmm0, xmm0 
+0x140001909: mov      ebx, eax 
+0x14000190b: movdqu   xmmword ptr [rsp + 0x20], xmm0 
+0x140001911: call     qword ptr [rip + 0x3819] IAT=USER32.dll!GetClientRect UTF16='艢'
+0x140001917: mov      eax, dword ptr [rsp + 0x2c] 
+0x14000191b: sub      eax, dword ptr [rsp + 0x24] 
+0x14000191f: mov      r9, qword ptr [rsi + 0x170] 
+0x140001926: sub      eax, ebx 
+0x140001928: mov      rcx, qword ptr [rsp + 0x38] 
+0x14000192d: inc      eax 
+0x14000192f: cdq       
+0x140001930: sub      eax, edx 
+0x140001932: sar      eax, 1 
+0x140001934: mov      r8d, eax 
+0x140001937: mov      eax, dword ptr [rsp + 0x28] 
+0x14000193b: sub      eax, dword ptr [rsp + 0x20] 
+0x14000193f: sub      eax, edi 
+0x140001941: inc      eax 
+0x140001943: cdq       
+0x140001944: sub      eax, edx 
+0x140001946: sar      eax, 1 
+0x140001948: mov      edx, eax 
+0x14000194a: call     qword ptr [rip + 0x37f0] IAT=USER32.dll!DrawIcon UTF16='艾'
+0x140001950: lea      rcx, [rsp + 0x30] 
+0x140001955: call     qword ptr [rip + 0x3a7d] IAT=mfc140u.dll!ordinal_1369 UTF16='ՙ'
+0x14000195b: jmp      0x140001966 
+0x14000195d: mov      rcx, rsi 
+0x140001960: call     qword ptr [rip + 0x3a02] IAT=mfc140u.dll!ordinal_10727 UTF16='⧧'
+0x140001966: mov      rcx, qword ptr [rsp + 0xa0] 
+0x14000196e: xor      rcx, rsp 
+0x140001971: call     0x140003800 CALL_TARGET=0x140003800
+0x140001976: lea      r11, [rsp + 0xb0] 
+0x14000197e: mov      rbx, qword ptr [r11 + 0x18] 
+0x140001982: mov      rsi, qword ptr [r11 + 0x20] 
+0x140001986: mov      rsp, r11 
+0x140001989: pop      rdi 
+0x14000198a: ret       
+0x14000198b: int3      
+0x14000198c: mov      rax, qword ptr [rcx + 0x170] 
+0x140001993: ret       
+0x140001994: mov      r11, rsp 
+0x140001997: mov      qword ptr [r11 + 0x18], rbx 
+0x14000199b: mov      qword ptr [r11 + 0x20], rsi 
+0x14000199f: push     rdi 
+0x1400019a0: sub      rsp, 0x40 
+0x1400019a4: mov      rax, qword ptr [rip + 0x7695] 
+0x1400019ab: xor      rax, rsp 
+0x1400019ae: mov      qword ptr [rsp + 0x38], rax 
+0x1400019b3: mov      rdi, rdx 
+0x1400019b6: mov      rsi, rcx 
+0x1400019b9: mov      qword ptr [r11 - 0x20], rcx 
+0x1400019bd: mov      qword ptr [r11 - 0x18], rdx 
+0x1400019c1: xor      ebx, ebx 
+0x1400019c3: mov      dword ptr [rsp + 0x20], ebx 
+0x1400019c7: call     qword ptr [rip + 0x3ddb] IAT=mfc140u.dll!ordinal_296 UTF16='Ĩ'
+0x1400019cd: mov      dword ptr [rsp + 0x20], 1 
+0x1400019d5: mov      rax, qword ptr [rdi] 
+0x1400019d8: cmp      dword ptr [rax - 0x10], ebx 
+0x1400019db: jle      0x140001a1d 
+0x1400019dd: mov      edx, ebx 
+0x1400019df: mov      rcx, rdi 
+0x1400019e2: call     qword ptr [rip + 0x3a30] IAT=mfc140u.dll!ordinal_1631 UTF16='ٟ'
+0x1400019e8: xor      r8d, r8d 
+0x1400019eb: movzx    edx, ax 
+0x1400019ee: lea      rcx, [rip + 0x8153] 
+0x1400019f5: call     qword ptr [rip + 0x3a3d] IAT=mfc140u.dll!ordinal_4510 UTF16='ᆞ'
+0x1400019fb: cmp      eax, -1 
+0x1400019fe: je       0x140001a13 
+0x140001a00: mov      r8d, eax 
+0x140001a03: lea      rdx, [rip + 0x4416] UTF16='%d'
+0x140001a0a: mov      rcx, rsi 
+0x140001a0d: call     qword ptr [rip + 0x39bd] IAT=mfc140u.dll!ordinal_2431 UTF16='ॿ'
+0x140001a13: inc      ebx 
+0x140001a15: mov      rdx, qword ptr [rdi] 
+0x140001a18: cmp      ebx, dword ptr [rdx - 0x10] 
+0x140001a1b: jl       0x1400019dd 
+0x140001a1d: mov      rcx, rdi 
+0x140001a20: call     qword ptr [rip + 0x3d7a] IAT=mfc140u.dll!ordinal_1033 UTF16='Љ'
+0x140001a26: mov      rax, rsi 
+0x140001a29: mov      rcx, qword ptr [rsp + 0x38] 
+0x140001a2e: xor      rcx, rsp 
+0x140001a31: call     0x140003800 CALL_TARGET=0x140003800
+0x140001a36: mov      rbx, qword ptr [rsp + 0x60] 
+0x140001a3b: mov      rsi, qword ptr [rsp + 0x68] 
+0x140001a40: add      rsp, 0x40 
+0x140001a44: pop      rdi 
+0x140001a45: ret       
+0x140001a46: int3      
+0x140001a47: int3      
+
+===== DISASSEMBLY RVA 0x1a48..0x1d96 VA 0x140001a48 =====
+0x140001a48: mov      rax, rsp 
+0x140001a4b: mov      qword ptr [rax + 0x10], rbx 
+0x140001a4f: mov      qword ptr [rax + 0x18], rsi 
+0x140001a53: mov      qword ptr [rax + 0x20], rdi 
+0x140001a57: push     rbp 
+0x140001a58: push     r13 
+0x140001a5a: push     r14 
+0x140001a5c: lea      rbp, [rax - 0x28] 
+0x140001a60: sub      rsp, 0x110 
+0x140001a67: mov      rax, qword ptr [rip + 0x75d2] 
+0x140001a6e: xor      rax, rsp 
+0x140001a71: mov      qword ptr [rbp], rax 
+0x140001a75: mov      rsi, rcx 
+0x140001a78: mov      qword ptr [rbp - 0x30], rcx 
+0x140001a7c: xor      r14d, r14d 
+0x140001a7f: mov      dword ptr [rsp + 0x30], r14d 
+0x140001a84: mov      byte ptr [rsp + 0x60], r14b 
+0x140001a89: mov      qword ptr [rsp + 0x74], r14 
+0x140001a8e: mov      dword ptr [rsp + 0x64], 0x67452301 
+0x140001a96: mov      dword ptr [rsp + 0x68], 0xefcdab89 
+0x140001a9e: mov      dword ptr [rsp + 0x6c], 0x98badcfe 
+0x140001aa6: mov      dword ptr [rsp + 0x70], 0x10325476 
+0x140001aae: mov      rdx, rcx 
+0x140001ab1: cmp      qword ptr [rcx + 0x18], 0xf 
+0x140001ab6: jbe      0x140001abb 
+0x140001ab8: mov      rdx, qword ptr [rcx] 
+0x140001abb: mov      r8, qword ptr [rcx + 0x10] 
+0x140001abf: lea      rcx, [rsp + 0x60] 
+0x140001ac4: call     0x140002404 CALL_TARGET=0x140002404
+0x140001ac9: lea      rdx, [rbp - 0x20] 
+0x140001acd: lea      rcx, [rsp + 0x60] 
+0x140001ad2: call     0x140002d70 CALL_TARGET=0x140002d70
+0x140001ad7: nop       
+0x140001ad8: lea      rdx, [rbp - 0x20] 
+0x140001adc: cmp      qword ptr [rbp - 8], 0xf 
+0x140001ae1: cmova    rdx, qword ptr [rbp - 0x20] 
+0x140001ae6: lea      rcx, [rbp - 0x28] 
+0x140001aea: call     qword ptr [rip + 0x3940] IAT=mfc140u.dll!ordinal_290 UTF16='Ģ'
+0x140001af0: nop       
+0x140001af1: mov      r13d, 0x18 
+0x140001af7: mov      ecx, r13d 
+0x140001afa: call     qword ptr [rip + 0x39c0] IAT=mfc140u.dll!ordinal_1489 UTF16='ב'
+0x140001b00: mov      rbx, rax 
+0x140001b03: mov      qword ptr [rsp + 0x40], rax 
+0x140001b08: test     rax, rax 
+0x140001b0b: je       0x140001b35 
+0x140001b0d: xorps    xmm0, xmm0 
+0x140001b10: xor      eax, eax 
+0x140001b12: movups   xmmword ptr [rbx], xmm0 
+0x140001b15: mov      qword ptr [rbx + 0x10], rax 
+0x140001b19: mov      qword ptr [rbx + 8], r14 
+0x140001b1d: mov      dword ptr [rbx + 0x10], 1 
+0x140001b24: lea      rcx, [rip + 0x4361] UTF16='}'
+0x140001b2b: call     0x1400044d0 CALL_TARGET=0x1400044d0
+0x140001b30: mov      qword ptr [rbx], rax 
+0x140001b33: jmp      0x140001b38 
+0x140001b35: mov      rbx, r14 
+0x140001b38: mov      qword ptr [rsp + 0x40], rbx 
+0x140001b3d: test     rbx, rbx 
+0x140001b40: je       0x140001db5 
+0x140001b46: lea      rcx, [rbp - 0x28] 
+0x140001b4a: call     qword ptr [rip + 0x38b8] IAT=mfc140u.dll!ordinal_5709 UTF16='ᙍ'
+0x140001b50: mov      rdx, rax 
+0x140001b53: lea      rcx, [rsp + 0x38] 
+0x140001b58: call     qword ptr [rip + 0x38a2] IAT=mfc140u.dll!ordinal_285 UTF16='ĝ'
+0x140001b5e: mov      dword ptr [rsp + 0x30], 1 
+0x140001b66: mov      rdi, qword ptr [rbp - 0x28] 
+0x140001b6a: mov      ebx, dword ptr [rdi - 0x10] 
+0x140001b6d: lea      rcx, [rip + 0x431c] UTF16='palu{'
+0x140001b74: call     qword ptr [rip + 0x374e] IAT=api-ms-win-crt-string-l1-1-0.dll!wcslen UTF16='葰'
+0x140001b7a: mov      dword ptr [rsp + 0x20], ebx 
+0x140001b7e: mov      r9, rdi 
+0x140001b81: mov      r8d, eax 
+0x140001b84: lea      rdx, [rip + 0x4305] UTF16='palu{'
+0x140001b8b: lea      rcx, [rsp + 0x38] 
+0x140001b90: call     qword ptr [rip + 0x3862] IAT=mfc140u.dll!ordinal_2921 UTF16='୩'
+0x140001b96: mov      rdi, qword ptr [rsp + 0x38] 
+0x140001b9b: mov      qword ptr [rsp + 0x48], r14 
+0x140001ba0: mov      rcx, r13 
+0x140001ba3: call     qword ptr [rip + 0x3917] IAT=mfc140u.dll!ordinal_1489 UTF16='ב'
+0x140001ba9: mov      rbx, rax 
+0x140001bac: mov      qword ptr [rsp + 0x50], rax 
+0x140001bb1: test     rax, rax 
+0x140001bb4: je       0x140001be9 
+0x140001bb6: xorps    xmm0, xmm0 
+0x140001bb9: xor      eax, eax 
+0x140001bbb: movups   xmmword ptr [rbx], xmm0 
+0x140001bbe: mov      qword ptr [rbx + 0x10], rax 
+0x140001bc2: mov      qword ptr [rbx + 8], r14 
+0x140001bc6: mov      dword ptr [rbx + 0x10], 1 
+0x140001bcd: mov      rcx, rdi 
+0x140001bd0: call     qword ptr [rip + 0x3522] IAT=OLEAUT32.dll!ordinal_2
+0x140001bd6: mov      qword ptr [rbx], rax 
+0x140001bd9: test     rax, rax 
+0x140001bdc: jne      0x140001bec 
+0x140001bde: test     rdi, rdi 
+0x140001be1: jne      0x140001dc0 
+0x140001be7: jmp      0x140001bec 
+0x140001be9: mov      rbx, r14 
+0x140001bec: mov      qword ptr [rsp + 0x48], rbx 
+0x140001bf1: test     rbx, rbx 
+0x140001bf4: je       0x140001dcb 
+0x140001bfa: mov      dword ptr [rsp + 0x30], 3 
+0x140001c02: mov      rcx, r13 
+0x140001c05: call     qword ptr [rip + 0x38b5] IAT=mfc140u.dll!ordinal_1489 UTF16='ב'
+0x140001c0b: mov      qword ptr [rsp + 0x50], rax 
+0x140001c10: test     rax, rax 
+0x140001c13: je       0x140001c38 
+0x140001c15: xorps    xmm0, xmm0 
+0x140001c18: xor      ecx, ecx 
+0x140001c1a: movups   xmmword ptr [rax], xmm0 
+0x140001c1d: mov      qword ptr [rax + 0x10], rcx 
+0x140001c21: lea      r8, [rsp + 0x40] 
+0x140001c26: lea      rdx, [rsp + 0x48] 
+0x140001c2b: mov      rcx, rax 
+0x140001c2e: call     0x1400014d8 CALL_TARGET=0x1400014d8
+0x140001c33: mov      rdi, rax 
+0x140001c36: jmp      0x140001c3b 
+0x140001c38: mov      rdi, r14 
+0x140001c3b: test     rdi, rdi 
+0x140001c3e: je       0x140001dcb 
+0x140001c44: or       eax, 0xffffffff 
+0x140001c47: lock xadd dword ptr [rbx + 0x10], eax 
+0x140001c4c: cmp      eax, 1 
+0x140001c4f: jne      0x140001c80 
+0x140001c51: mov      rcx, qword ptr [rbx] 
+0x140001c54: test     rcx, rcx 
+0x140001c57: je       0x140001c62 
+0x140001c59: call     qword ptr [rip + 0x3489] IAT=OLEAUT32.dll!ordinal_6
+0x140001c5f: mov      qword ptr [rbx], r14 
+0x140001c62: mov      rcx, qword ptr [rbx + 8] 
+0x140001c66: test     rcx, rcx 
+0x140001c69: je       0x140001c75 
+0x140001c6b: call     qword ptr [rip + 0x3b27] IAT=mfc140u.dll!ordinal_266 UTF16='Ċ'
+0x140001c71: mov      qword ptr [rbx + 8], r14 
+0x140001c75: mov      rdx, r13 
+0x140001c78: mov      rcx, rbx 
+0x140001c7b: call     0x140003a60 CALL_TARGET=0x140003a60
+0x140001c80: xor      r9d, r9d 
+0x140001c83: lea      r8, [rip + 0x41f6] UTF16='flag'
+0x140001c8a: mov      rdx, qword ptr [rdi] 
+0x140001c8d: xor      ecx, ecx 
+0x140001c8f: call     qword ptr [rip + 0x348b] IAT=USER32.dll!MessageBoxW UTF16='芮'
+0x140001c95: nop       
+0x140001c96: or       eax, 0xffffffff 
+0x140001c99: lock xadd dword ptr [rdi + 0x10], eax 
+0x140001c9e: cmp      eax, 1 
+0x140001ca1: jne      0x140001cd3 
+0x140001ca3: mov      rcx, qword ptr [rdi] 
+0x140001ca6: test     rcx, rcx 
+0x140001ca9: je       0x140001cb4 
+0x140001cab: call     qword ptr [rip + 0x3437] IAT=OLEAUT32.dll!ordinal_6
+0x140001cb1: mov      qword ptr [rdi], r14 
+0x140001cb4: mov      rcx, qword ptr [rdi + 8] 
+0x140001cb8: test     rcx, rcx 
+0x140001cbb: je       0x140001cc7 
+0x140001cbd: call     qword ptr [rip + 0x3ad5] IAT=mfc140u.dll!ordinal_266 UTF16='Ċ'
+0x140001cc3: mov      qword ptr [rdi + 8], r14 
+0x140001cc7: mov      rdx, r13 
+0x140001cca: mov      rcx, rdi 
+0x140001ccd: call     0x140003a60 CALL_TARGET=0x140003a60
+0x140001cd2: nop       
+0x140001cd3: lea      rcx, [rsp + 0x38] 
+0x140001cd8: call     qword ptr [rip + 0x3ac2] IAT=mfc140u.dll!ordinal_1033 UTF16='Љ'
+0x140001cde: nop       
+0x140001cdf: lea      rcx, [rsp + 0x40] 
+0x140001ce4: call     0x140001468 CALL_TARGET=0x140001468
+0x140001ce9: nop       
+0x140001cea: lea      rcx, [rbp - 0x28] 
+0x140001cee: call     qword ptr [rip + 0x3aac] IAT=mfc140u.dll!ordinal_1033 UTF16='Љ'
+0x140001cf4: nop       
+0x140001cf5: mov      ebx, 0x1000 
+0x140001cfa: mov      rdx, qword ptr [rbp - 8] 
+0x140001cfe: cmp      rdx, 0xf 
+0x140001d02: jbe      0x140001d34 
+0x140001d04: inc      rdx 
+0x140001d07: mov      rcx, qword ptr [rbp - 0x20] 
+0x140001d0b: mov      rax, rcx 
+0x140001d0e: cmp      rdx, rbx 
+0x140001d11: jb       0x140001d2f 
+0x140001d13: add      rdx, 0x27 
+0x140001d17: mov      rcx, qword ptr [rcx - 8] 
+0x140001d1b: sub      rax, rcx 
+0x140001d1e: add      rax, -8 
+0x140001d22: cmp      rax, 0x1f 
+0x140001d26: jbe      0x140001d2f 
+0x140001d28: call     qword ptr [rip + 0x356a] IAT=api-ms-win-crt-runtime-l1-1-0.dll!_invalid_parameter_noinfo_noreturn UTF16='葺'
+0x140001d2e: int3      
+0x140001d2f: call     0x140003a60 CALL_TARGET=0x140003a60
+0x140001d34: mov      qword ptr [rbp - 0x10], r14 
+0x140001d38: mov      qword ptr [rbp - 8], 0xf 
+0x140001d40: mov      byte ptr [rbp - 0x20], r14b 
+0x140001d44: mov      rdx, qword ptr [rsi + 0x18] 
+0x140001d48: cmp      rdx, 0xf 
+0x140001d4c: jbe      0x140001d76 
+0x140001d4e: inc      rdx 
+0x140001d51: mov      rcx, qword ptr [rsi] 
+0x140001d54: cmp      rdx, rbx 
+0x140001d57: jb       0x140001d71 
+0x140001d59: add      rdx, 0x27 
+0x140001d5d: mov      r8, qword ptr [rcx - 8] 
+0x140001d61: sub      rcx, r8 
+0x140001d64: lea      rax, [rcx - 8] 
+0x140001d68: cmp      rax, 0x1f 
+0x140001d6c: ja       0x140001dae 
+0x140001d6e: mov      rcx, r8 
+0x140001d71: call     0x140003a60 CALL_TARGET=0x140003a60
+0x140001d76: mov      qword ptr [rsi + 0x10], r14 
+0x140001d7a: mov      qword ptr [rsi + 0x18], 0xf 
+0x140001d82: mov      byte ptr [rsi], r14b 
+0x140001d85: mov      rcx, qword ptr [rbp] 
+0x140001d89: xor      rcx, rsp 
+0x140001d8c: call     0x140003800 CALL_TARGET=0x140003800
+
+===== DISASSEMBLY RVA 0x1d80..0x1f60 VA 0x140001d80 =====
+0x140001d80: add      byte ptr [rax], al 
+0x140001d82: mov      byte ptr [rsi], r14b 
+0x140001d85: mov      rcx, qword ptr [rbp] 
+0x140001d89: xor      rcx, rsp 
+0x140001d8c: call     0x140003800 CALL_TARGET=0x140003800
+0x140001d91: lea      r11, [rsp + 0x110] 
+0x140001d99: mov      rbx, qword ptr [r11 + 0x28] 
+0x140001d9d: mov      rsi, qword ptr [r11 + 0x30] 
+0x140001da1: mov      rdi, qword ptr [r11 + 0x38] 
+0x140001da5: mov      rsp, r11 
+0x140001da8: pop      r14 
+0x140001daa: pop      r13 
+0x140001dac: pop      rbp 
+0x140001dad: ret       
+0x140001dae: call     qword ptr [rip + 0x34e4] IAT=api-ms-win-crt-runtime-l1-1-0.dll!_invalid_parameter_noinfo_noreturn UTF16='葺'
+0x140001db4: nop       
+0x140001db5: mov      ecx, 0x8007000e 
+0x140001dba: call     0x1400044c0 CALL_TARGET=0x1400044c0
+0x140001dbf: nop       
+0x140001dc0: mov      ecx, 0x8007000e 
+0x140001dc5: call     0x1400044c0 CALL_TARGET=0x1400044c0
+0x140001dca: nop       
+0x140001dcb: mov      ecx, 0x8007000e 
+0x140001dd0: call     0x1400044c0 CALL_TARGET=0x1400044c0
+0x140001dd5: int3      
+0x140001dd6: int3      
+0x140001dd7: int3      
+0x140001dd8: mov      qword ptr [rsp + 0x10], rbx 
+0x140001ddd: mov      qword ptr [rsp + 0x18], rdi 
+0x140001de2: push     rbp 
+0x140001de3: lea      rbp, [rsp - 0x20] 
+0x140001de8: sub      rsp, 0x120 
+0x140001def: mov      rax, qword ptr [rip + 0x724a] 
+0x140001df6: xor      rax, rsp 
+0x140001df9: mov      qword ptr [rbp + 0x10], rax 
+0x140001dfd: mov      rbx, rcx 
+0x140001e00: call     qword ptr [rip + 0x359a] IAT=mfc140u.dll!ordinal_10704 UTF16='⧐'
+0x140001e06: mov      edx, 0x3e8 
+0x140001e0b: mov      rcx, rbx 
+0x140001e0e: call     qword ptr [rip + 0x3514] IAT=mfc140u.dll!ordinal_5240 UTF16='ᑸ'
+0x140001e14: mov      rdi, rax 
+0x140001e17: test     rax, rax 
+0x140001e1a: je       0x140001f2e 
+0x140001e20: lea      rcx, [rbp - 0x20] 
+0x140001e24: call     qword ptr [rip + 0x397e] IAT=mfc140u.dll!ordinal_296 UTF16='Ĩ'
+0x140001e2a: nop       
+0x140001e2b: lea      rdx, [rbp - 0x20] 
+0x140001e2f: mov      rcx, rdi 
+0x140001e32: call     qword ptr [rip + 0x34e8] IAT=mfc140u.dll!ordinal_7551 UTF16='ᵿ'
+0x140001e38: lea      rdx, [rbp - 0x20] 
+0x140001e3c: lea      rcx, [rsp + 0x20] 
+0x140001e41: call     qword ptr [rip + 0x35d9] IAT=mfc140u.dll!ordinal_280 UTF16='Ę'
+0x140001e47: mov      rdx, rax 
+0x140001e4a: lea      rcx, [rbp - 0x18] 
+0x140001e4e: call     0x140001994 CALL_TARGET=0x140001994
+0x140001e53: nop       
+0x140001e54: lea      rdx, [rip + 0x4045] UTF16='1145141919810'
+0x140001e5b: lea      rcx, [rbp - 0x18] 
+0x140001e5f: call     qword ptr [rip + 0x35ab] IAT=mfc140u.dll!ordinal_2903 UTF16='ୗ'
+0x140001e65: xor      r9d, r9d 
+0x140001e68: xor      r8d, r8d 
+0x140001e6b: mov      rcx, rbx 
+0x140001e6e: test     eax, eax 
+0x140001e70: jne      0x140001f0b 
+0x140001e76: lea      rdx, [rip + 0x4043] UTF16='Success'
+0x140001e7d: call     qword ptr [rip + 0x3475] IAT=mfc140u.dll!ordinal_8449 UTF16='℁'
+0x140001e83: mov      rdx, qword ptr [rbp - 0x20] 
+0x140001e87: lea      rcx, [rsp + 0x50] 
+0x140001e8c: call     0x140001f6c CALL_TARGET=0x140001f6c
+0x140001e91: nop       
+0x140001e92: mov      rdx, qword ptr [rax] 
+0x140001e95: lea      rcx, [rbp - 0x10] 
+0x140001e99: call     0x140002118 CALL_TARGET=0x140002118
+0x140001e9e: nop       
+0x140001e9f: lea      rax, [rsp + 0x58] 
+0x140001ea4: mov      rcx, qword ptr [rsp + 0x50] 
+0x140001ea9: cmp      rcx, rax 
+0x140001eac: je       0x140001eb4 
+0x140001eae: call     qword ptr [rip + 0x3324] IAT=api-ms-win-crt-heap-l1-1-0.dll!free UTF16='萢'
+0x140001eb4: lea      rdx, [rbp - 0x10] 
+0x140001eb8: lea      rcx, [rsp + 0x28] 
+0x140001ebd: call     0x140002244 CALL_TARGET=0x140002244
+0x140001ec2: mov      rcx, rax 
+0x140001ec5: call     0x140001a48 CALL_TARGET=0x140001a48
+0x140001eca: nop       
+0x140001ecb: mov      rdx, qword ptr [rbp + 8] 
+0x140001ecf: cmp      rdx, 0xf 
+0x140001ed3: jbe      0x140001f19 
+0x140001ed5: inc      rdx 
+0x140001ed8: mov      rcx, qword ptr [rbp - 0x10] 
+0x140001edc: mov      rax, rcx 
+0x140001edf: cmp      rdx, 0x1000 
+0x140001ee6: jb       0x140001f04 
+0x140001ee8: add      rdx, 0x27 
+0x140001eec: mov      rcx, qword ptr [rcx - 8] 
+0x140001ef0: sub      rax, rcx 
+0x140001ef3: add      rax, -8 
+0x140001ef7: cmp      rax, 0x1f 
+0x140001efb: jbe      0x140001f04 
+0x140001efd: call     qword ptr [rip + 0x3395] IAT=api-ms-win-crt-runtime-l1-1-0.dll!_invalid_parameter_noinfo_noreturn UTF16='葺'
+0x140001f03: int3      
+0x140001f04: call     0x140003a60 CALL_TARGET=0x140003a60
+0x140001f09: jmp      0x140001f19 
+0x140001f0b: lea      rdx, [rip + 0x3fbe] UTF16='Failed'
+0x140001f12: call     qword ptr [rip + 0x33e0] IAT=mfc140u.dll!ordinal_8449 UTF16='℁'
+0x140001f18: nop       
+0x140001f19: lea      rcx, [rbp - 0x18] 
+0x140001f1d: call     qword ptr [rip + 0x387d] IAT=mfc140u.dll!ordinal_1033 UTF16='Љ'
+0x140001f23: nop       
+0x140001f24: lea      rcx, [rbp - 0x20] 
+0x140001f28: call     qword ptr [rip + 0x3872] IAT=mfc140u.dll!ordinal_1033 UTF16='Љ'
+0x140001f2e: mov      rcx, qword ptr [rbp + 0x10] 
+0x140001f32: xor      rcx, rsp 
+0x140001f35: call     0x140003800 CALL_TARGET=0x140003800
+0x140001f3a: lea      r11, [rsp + 0x120] 
+0x140001f42: mov      rbx, qword ptr [r11 + 0x18] 
+0x140001f46: mov      rdi, qword ptr [r11 + 0x20] 
+0x140001f4a: mov      rsp, r11 
+0x140001f4d: pop      rbp 
+0x140001f4e: ret       
+0x140001f4f: int3      
+0x140001f50: sub      rsp, 0x28 
+0x140001f54: lea      rax, [rcx + 8] 
+0x140001f58: cmp      qword ptr [rcx], rax 
+0x140001f5b: je       0x140001f66 
+0x140001f5d: mov      rcx, qword ptr [rcx] 
+
+===== DISASSEMBLY RVA 0x1f50..0x2118 VA 0x140001f50 =====
+0x140001f50: sub      rsp, 0x28 
+0x140001f54: lea      rax, [rcx + 8] 
+0x140001f58: cmp      qword ptr [rcx], rax 
+0x140001f5b: je       0x140001f66 
+0x140001f5d: mov      rcx, qword ptr [rcx] 
+0x140001f60: call     qword ptr [rip + 0x3272] IAT=api-ms-win-crt-heap-l1-1-0.dll!free UTF16='萢'
+0x140001f66: add      rsp, 0x28 
+0x140001f6a: ret       
+0x140001f6b: int3      
+0x140001f6c: mov      rax, rsp 
+0x140001f6f: mov      qword ptr [rax + 8], rbx 
+0x140001f73: mov      qword ptr [rax + 0x10], rbp 
+0x140001f77: mov      qword ptr [rax + 0x18], rsi 
+0x140001f7b: mov      qword ptr [rax + 0x20], rdi 
+0x140001f7f: push     r14 
+0x140001f81: sub      rsp, 0x40 
+0x140001f85: lea      rsi, [rcx + 8] 
+0x140001f89: mov      rbp, rdx 
+0x140001f8c: mov      qword ptr [rcx], rsi 
+0x140001f8f: mov      rdi, rcx 
+0x140001f92: test     rdx, rdx 
+0x140001f95: jne      0x140001fb8 
+0x140001f97: mov      qword ptr [rcx], rdx 
+0x140001f9a: mov      rbx, qword ptr [rsp + 0x50] 
+0x140001f9f: mov      rax, rdi 
+0x140001fa2: mov      rdi, qword ptr [rsp + 0x68] 
+0x140001fa7: mov      rbp, qword ptr [rsp + 0x58] 
+0x140001fac: mov      rsi, qword ptr [rsp + 0x60] 
+0x140001fb1: add      rsp, 0x40 
+0x140001fb5: pop      r14 
+0x140001fb7: ret       
+0x140001fb8: mov      rcx, rbp 
+0x140001fbb: call     qword ptr [rip + 0x3307] IAT=api-ms-win-crt-string-l1-1-0.dll!wcslen UTF16='葰'
+0x140001fc1: mov      r8, rsi 
+0x140001fc4: mov      rcx, rdi 
+0x140001fc7: lea      r14d, [rax + 1] 
+0x140001fcb: lea      ebx, [r14*4] 
+0x140001fd3: mov      edx, ebx 
+0x140001fd5: call     0x140002368 CALL_TARGET=0x140002368
+0x140001fda: mov      rcx, qword ptr [rdi] 
+0x140001fdd: xor      edx, edx 
+0x140001fdf: mov      qword ptr [rsp + 0x38], 0 
+0x140001fe8: mov      r9d, r14d 
+0x140001feb: mov      qword ptr [rsp + 0x30], 0 
+0x140001ff4: mov      r8, rbp 
+0x140001ff7: mov      dword ptr [rsp + 0x28], ebx 
+0x140001ffb: mov      qword ptr [rsp + 0x20], rcx 
+0x140002000: lea      ecx, [rdx + 3] 
+0x140002003: call     qword ptr [rip + 0x30b7] IAT=KERNEL32.DLL!WideCharToMultiByte UTF16='育'
+0x140002009: xor      ebx, ebx 
+0x14000200b: test     eax, eax 
+0x14000200d: sete     bl 
+0x140002010: test     eax, eax 
+0x140002012: jne      0x14000209c 
+0x140002018: call     qword ptr [rip + 0x3012] IAT=KERNEL32.DLL!GetLastError UTF16='肊'
+0x14000201e: cmp      eax, 0x7a 
+0x140002021: jne      0x14000209c 
+0x140002023: mov      qword ptr [rsp + 0x38], 0 
+0x14000202c: lea      ecx, [rax - 0x77] 
+0x14000202f: mov      qword ptr [rsp + 0x30], 0 
+0x140002038: mov      r9d, r14d 
+0x14000203b: mov      dword ptr [rsp + 0x28], 0 
+0x140002043: mov      r8, rbp 
+0x140002046: xor      edx, edx 
+0x140002048: mov      qword ptr [rsp + 0x20], 0 
+0x140002051: call     qword ptr [rip + 0x3069] IAT=KERNEL32.DLL!WideCharToMultiByte UTF16='育'
+0x140002057: mov      r8, rsi 
+0x14000205a: mov      rcx, rdi 
+0x14000205d: mov      edx, eax 
+0x14000205f: mov      ebx, eax 
+0x140002061: call     0x140002368 CALL_TARGET=0x140002368
+0x140002066: mov      rax, qword ptr [rdi] 
+0x140002069: xor      edx, edx 
+0x14000206b: mov      qword ptr [rsp + 0x38], 0 
+0x140002074: mov      r9d, r14d 
+0x140002077: mov      qword ptr [rsp + 0x30], 0 
+0x140002080: mov      r8, rbp 
+0x140002083: mov      dword ptr [rsp + 0x28], ebx 
+0x140002087: lea      ecx, [rdx + 3] 
+0x14000208a: mov      qword ptr [rsp + 0x20], rax 
+0x14000208f: call     qword ptr [rip + 0x302b] IAT=KERNEL32.DLL!WideCharToMultiByte UTF16='育'
+0x140002095: xor      ebx, ebx 
+0x140002097: test     eax, eax 
+0x140002099: sete     bl 
+0x14000209c: test     ebx, ebx 
+0x14000209e: je       0x140001f9a 
+0x1400020a4: mov      rcx, qword ptr [rdi] 
+0x1400020a7: mov      rdx, rsi 
+0x1400020aa: call     0x140002354 CALL_TARGET=0x140002354
+0x1400020af: call     0x14000141c CALL_TARGET=0x14000141c
+0x1400020b4: int3      
+0x1400020b5: int3      
+0x1400020b6: int3      
+0x1400020b7: int3      
+0x1400020b8: push     rbx 
+0x1400020ba: sub      rsp, 0x20 
+0x1400020be: mov      rdx, qword ptr [rcx + 0x18] 
+0x1400020c2: mov      rbx, rcx 
+0x1400020c5: cmp      rdx, 0xf 
+0x1400020c9: jbe      0x1400020f7 
+0x1400020cb: mov      rcx, qword ptr [rcx] 
+0x1400020ce: inc      rdx 
+0x1400020d1: cmp      rdx, 0x1000 
+0x1400020d8: jb       0x1400020f2 
+0x1400020da: mov      r8, qword ptr [rcx - 8] 
+0x1400020de: add      rdx, 0x27 
+0x1400020e2: sub      rcx, r8 
+0x1400020e5: lea      rax, [rcx - 8] 
+0x1400020e9: cmp      rax, 0x1f 
+0x1400020ed: ja       0x140002110 
+0x1400020ef: mov      rcx, r8 
+0x1400020f2: call     0x140003a60 CALL_TARGET=0x140003a60
+0x1400020f7: mov      qword ptr [rbx + 0x10], 0 
+0x1400020ff: mov      qword ptr [rbx + 0x18], 0xf 
+0x140002107: mov      byte ptr [rbx], 0 
+0x14000210a: add      rsp, 0x20 
+0x14000210e: pop      rbx 
+0x14000210f: ret       
+0x140002110: call     qword ptr [rip + 0x3182] IAT=api-ms-win-crt-runtime-l1-1-0.dll!_invalid_parameter_noinfo_noreturn UTF16='葺'
+0x140002116: int3      
+0x140002117: int3      
+
+===== DISASSEMBLY RVA 0x2118..0x2244 VA 0x140002118 =====
+0x140002118: mov      qword ptr [rsp + 0x18], rbx 
+0x14000211d: mov      qword ptr [rsp + 0x20], rbp 
+0x140002122: push     rsi 
+0x140002123: push     rdi 
+0x140002124: push     r14 
+0x140002126: sub      rsp, 0x20 
+0x14000212a: xorps    xmm0, xmm0 
+0x14000212d: mov      rbx, rcx 
+0x140002130: movups   xmmword ptr [rcx], xmm0 
+0x140002133: mov      qword ptr [rcx + 0x10], 0 
+0x14000213b: mov      r14, rdx 
+0x14000213e: mov      qword ptr [rcx + 0x18], 0 
+0x140002146: mov      rcx, rdx 
+0x140002149: call     qword ptr [rip + 0x3171] IAT=api-ms-win-crt-string-l1-1-0.dll!strlen UTF16='葜'
+0x14000214f: movabs   rbp, 0x7fffffffffffffff 
+0x140002159: mov      rsi, rax 
+0x14000215c: cmp      rax, rbp 
+0x14000215f: ja       0x140002236 
+0x140002165: cmp      rax, 0xf 
+0x140002169: ja       0x14000218f 
+0x14000216b: mov      r8, rax 
+0x14000216e: mov      qword ptr [rbx + 0x10], rax 
+0x140002172: mov      rdx, r14 
+0x140002175: mov      qword ptr [rbx + 0x18], 0xf 
+0x14000217d: mov      rcx, rbx 
+0x140002180: call     qword ptr [rip + 0x3002] IAT=VCRUNTIME140.dll!memcpy UTF16='荸'
+0x140002186: mov      byte ptr [rbx + rsi], 0 
+0x14000218a: jmp      0x140002220 
+0x14000218f: or       rax, 0xf 
+0x140002193: cmp      rax, rbp 
+0x140002196: jbe      0x1400021c2 
+0x140002198: movabs   rax, 0x8000000000000000 
+0x1400021a2: add      rax, 0x27 
+0x1400021a6: mov      rcx, rax 
+0x1400021a9: call     qword ptr [rip + 0x3311] IAT=mfc140u.dll!ordinal_1489 UTF16='ב'
+0x1400021af: test     rax, rax 
+0x1400021b2: je       0x1400021f2 
+0x1400021b4: lea      rdi, [rax + 0x27] 
+0x1400021b8: and      rdi, 0xffffffffffffffe0 
+0x1400021bc: mov      qword ptr [rdi - 8], rax 
+0x1400021c0: jmp      0x140002202 
+0x1400021c2: mov      ecx, 0x16 
+0x1400021c7: mov      rbp, rax 
+0x1400021ca: cmp      rax, rcx 
+0x1400021cd: cmovb    rbp, rcx 
+0x1400021d1: lea      rcx, [rbp + 1] 
+0x1400021d5: test     rcx, rcx 
+0x1400021d8: jne      0x1400021de 
+0x1400021da: xor      edi, edi 
+0x1400021dc: jmp      0x140002202 
+0x1400021de: cmp      rcx, 0x1000 
+0x1400021e5: jb       0x1400021f9 
+0x1400021e7: lea      rax, [rcx + 0x27] 
+0x1400021eb: cmp      rax, rcx 
+0x1400021ee: jbe      0x14000223c 
+0x1400021f0: jmp      0x1400021a6 
+0x1400021f2: call     qword ptr [rip + 0x30a0] IAT=api-ms-win-crt-runtime-l1-1-0.dll!_invalid_parameter_noinfo_noreturn UTF16='葺'
+0x1400021f8: int3      
+0x1400021f9: call     qword ptr [rip + 0x32c1] IAT=mfc140u.dll!ordinal_1489 UTF16='ב'
+0x1400021ff: mov      rdi, rax 
+0x140002202: mov      r8, rsi 
+0x140002205: mov      qword ptr [rbx], rdi 
+0x140002208: mov      rdx, r14 
+0x14000220b: mov      qword ptr [rbx + 0x10], rsi 
+0x14000220f: mov      rcx, rdi 
+0x140002212: mov      qword ptr [rbx + 0x18], rbp 
+0x140002216: call     qword ptr [rip + 0x2f6c] IAT=VCRUNTIME140.dll!memcpy UTF16='荸'
+0x14000221c: mov      byte ptr [rdi + rsi], 0 
+0x140002220: mov      rbp, qword ptr [rsp + 0x58] 
+0x140002225: mov      rax, rbx 
+0x140002228: mov      rbx, qword ptr [rsp + 0x50] 
+0x14000222d: add      rsp, 0x20 
+0x140002231: pop      r14 
+0x140002233: pop      rdi 
+0x140002234: pop      rsi 
+0x140002235: ret       
+0x140002236: call     0x1400017a0 CALL_TARGET=0x1400017a0
+0x14000223b: int3      
+0x14000223c: call     0x140001700 CALL_TARGET=0x140001700
+0x140002241: int3      
+0x140002242: int3      
+0x140002243: int3      
+
+===== DISASSEMBLY RVA 0x2244..0x2404 VA 0x140002244 =====
+0x140002244: mov      qword ptr [rsp + 0x18], rbx 
+0x140002249: mov      qword ptr [rsp + 0x20], rbp 
+0x14000224e: push     rsi 
+0x14000224f: push     rdi 
+0x140002250: push     r14 
+0x140002252: sub      rsp, 0x20 
+0x140002256: xor      ebx, ebx 
+0x140002258: xorps    xmm0, xmm0 
+0x14000225b: movups   xmmword ptr [rcx], xmm0 
+0x14000225e: mov      qword ptr [rcx + 0x10], rbx 
+0x140002262: mov      rdi, rcx 
+0x140002265: mov      qword ptr [rcx + 0x18], rbx 
+0x140002269: mov      r14, rdx 
+0x14000226c: lea      ecx, [rbx + 0xf] 
+0x14000226f: cmp      qword ptr [rdx + 0x18], rcx 
+0x140002273: jbe      0x140002278 
+0x140002275: mov      r14, qword ptr [rdx] 
+0x140002278: mov      rbp, qword ptr [rdx + 0x10] 
+0x14000227c: movabs   rsi, 0x7fffffffffffffff 
+0x140002286: cmp      rbp, rsi 
+0x140002289: ja       0x140002345 
+0x14000228f: cmp      rbp, rcx 
+0x140002292: ja       0x1400022a3 
+0x140002294: mov      qword ptr [rdi + 0x18], rcx 
+0x140002298: mov      r8d, 0x10 
+0x14000229e: mov      rcx, rdi 
+0x1400022a1: jmp      0x140002322 
+0x1400022a3: mov      rax, rbp 
+0x1400022a6: or       rax, rcx 
+0x1400022a9: cmp      rax, rsi 
+0x1400022ac: jbe      0x1400022d8 
+0x1400022ae: movabs   rax, 0x8000000000000000 
+0x1400022b8: add      rax, 0x27 
+0x1400022bc: mov      rcx, rax 
+0x1400022bf: call     qword ptr [rip + 0x31fb] IAT=mfc140u.dll!ordinal_1489 UTF16='ב'
+0x1400022c5: test     rax, rax 
+0x1400022c8: je       0x140002304 
+0x1400022ca: lea      rbx, [rax + 0x27] 
+0x1400022ce: and      rbx, 0xffffffffffffffe0 
+0x1400022d2: mov      qword ptr [rbx - 8], rax 
+0x1400022d6: jmp      0x140002314 
+0x1400022d8: mov      ecx, 0x16 
+0x1400022dd: mov      rsi, rax 
+0x1400022e0: cmp      rax, rcx 
+0x1400022e3: cmovb    rsi, rcx 
+0x1400022e7: lea      rcx, [rsi + 1] 
+0x1400022eb: test     rcx, rcx 
+0x1400022ee: je       0x140002314 
+0x1400022f0: cmp      rcx, 0x1000 
+0x1400022f7: jb       0x14000230b 
+0x1400022f9: lea      rax, [rcx + 0x27] 
+0x1400022fd: cmp      rax, rcx 
+0x140002300: jbe      0x14000234b 
+0x140002302: jmp      0x1400022bc 
+0x140002304: call     qword ptr [rip + 0x2f8e] IAT=api-ms-win-crt-runtime-l1-1-0.dll!_invalid_parameter_noinfo_noreturn UTF16='葺'
+0x14000230a: int3      
+0x14000230b: call     qword ptr [rip + 0x31af] IAT=mfc140u.dll!ordinal_1489 UTF16='ב'
+0x140002311: mov      rbx, rax 
+0x140002314: mov      qword ptr [rdi], rbx 
+0x140002317: lea      r8, [rbp + 1] 
+0x14000231b: mov      qword ptr [rdi + 0x18], rsi 
+0x14000231f: mov      rcx, rbx 
+0x140002322: mov      rdx, r14 
+0x140002325: mov      qword ptr [rdi + 0x10], rbp 
+0x140002329: call     qword ptr [rip + 0x2e59] IAT=VCRUNTIME140.dll!memcpy UTF16='荸'
+0x14000232f: mov      rbx, qword ptr [rsp + 0x50] 
+0x140002334: mov      rax, rdi 
+0x140002337: mov      rbp, qword ptr [rsp + 0x58] 
+0x14000233c: add      rsp, 0x20 
+0x140002340: pop      r14 
+0x140002342: pop      rdi 
+0x140002343: pop      rsi 
+0x140002344: ret       
+0x140002345: call     0x1400017a0 CALL_TARGET=0x1400017a0
+0x14000234a: int3      
+0x14000234b: call     0x140001700 CALL_TARGET=0x140001700
+0x140002350: int3      
+0x140002351: int3      
+0x140002352: int3      
+0x140002353: int3      
+0x140002354: sub      rsp, 0x28 
+0x140002358: cmp      rcx, rdx 
+0x14000235b: je       0x140002363 
+0x14000235d: call     qword ptr [rip + 0x2e75] IAT=api-ms-win-crt-heap-l1-1-0.dll!free UTF16='萢'
+0x140002363: add      rsp, 0x28 
+0x140002367: ret       
+0x140002368: mov      qword ptr [rsp + 8], rbx 
+0x14000236d: push     rdi 
+0x14000236e: sub      rsp, 0x20 
+0x140002372: mov      rbx, r8 
+0x140002375: mov      rdi, rcx 
+0x140002378: test     rcx, rcx 
+0x14000237b: je       0x1400023f9 
+0x14000237d: test     edx, edx 
+0x14000237f: js       0x1400023f9 
+0x140002381: test     rbx, rbx 
+0x140002384: je       0x1400023f9 
+0x140002386: cmp      qword ptr [rcx], rbx 
+0x140002389: je       0x1400023b7 
+0x14000238b: mov      rcx, qword ptr [rcx] 
+0x14000238e: cmp      edx, 0x80 
+0x140002394: jle      0x1400023af 
+0x140002396: movsxd   rdx, edx 
+0x140002399: mov      r8d, 1 
+0x14000239f: call     qword ptr [rip + 0x2e2b] IAT=api-ms-win-crt-heap-l1-1-0.dll!_recalloc UTF16='萴'
+0x1400023a5: mov      rbx, rax 
+0x1400023a8: test     rax, rax 
+0x1400023ab: je       0x1400023e3 
+0x1400023ad: jmp      0x1400023d0 
+0x1400023af: call     qword ptr [rip + 0x2e23] IAT=api-ms-win-crt-heap-l1-1-0.dll!free UTF16='萢'
+0x1400023b5: jmp      0x1400023d0 
+0x1400023b7: cmp      edx, 0x80 
+0x1400023bd: jle      0x1400023d0 
+0x1400023bf: movsxd   rcx, edx 
+0x1400023c2: mov      edx, 1 
+0x1400023c7: call     qword ptr [rip + 0x2deb] IAT=api-ms-win-crt-heap-l1-1-0.dll!calloc UTF16='萪'
+0x1400023cd: mov      rbx, rax 
+0x1400023d0: mov      qword ptr [rdi], rbx 
+0x1400023d3: test     rbx, rbx 
+0x1400023d6: je       0x1400023ee 
+0x1400023d8: mov      rbx, qword ptr [rsp + 0x30] 
+0x1400023dd: add      rsp, 0x20 
+0x1400023e1: pop      rdi 
+0x1400023e2: ret       
+0x1400023e3: mov      ecx, 0x8007000e 
+0x1400023e8: call     0x1400010c0 CALL_TARGET=0x1400010c0
+0x1400023ed: int3      
+0x1400023ee: mov      ecx, 0x8007000e 
+0x1400023f3: call     0x1400010c0 CALL_TARGET=0x1400010c0
+0x1400023f8: int3      
+0x1400023f9: mov      ecx, 0x80070057 
+0x1400023fe: call     0x1400010c0 CALL_TARGET=0x1400010c0
+0x140002403: int3      
+
+===== DISASSEMBLY RVA 0x2410..0x26a0 VA 0x140002410 =====
+0x140002410: je       0x140002436 
+0x140002412: sbb      byte ptr [rdi + 0x48], dl 
+0x140002415: sub      esp, 0x20 
+0x140002418: mov      eax, dword ptr [rcx + 0x14] 
+0x14000241b: mov      rdi, r8 
+0x14000241e: mov      r9d, eax 
+0x140002421: mov      byte ptr [rcx], 0 
+0x140002424: shr      r9d, 3 
+0x140002428: lea      r8d, [r8*8] 
+0x140002430: add      eax, r8d 
+0x140002433: and      r9d, 0x3f 
+0x140002437: mov      dword ptr [rcx + 0x14], eax 
+0x14000243a: mov      rbp, rdx 
+0x14000243d: mov      rsi, rcx 
+0x140002440: cmp      eax, r8d 
+0x140002443: jae      0x140002448 
+0x140002445: inc      dword ptr [rcx + 0x18] 
+0x140002448: mov      eax, edi 
+0x14000244a: mov      ebx, 0x40 
+0x14000244f: shr      eax, 0x1d 
+0x140002452: sub      ebx, r9d 
+0x140002455: add      dword ptr [rcx + 0x18], eax 
+0x140002458: mov      r8d, ebx 
+0x14000245b: cmp      rdi, r8 
+0x14000245e: jb       0x14000249b 
+0x140002460: mov      ecx, r9d 
+0x140002463: add      rcx, 0x1c 
+0x140002467: add      rcx, rsi 
+0x14000246a: call     qword ptr [rip + 0x2d18] IAT=VCRUNTIME140.dll!memcpy UTF16='荸'
+0x140002470: lea      rdx, [rsi + 0x1c] 
+0x140002474: mov      rcx, rsi 
+0x140002477: call     0x1400024d0 CALL_TARGET=0x1400024d0
+0x14000247c: jmp      0x14000248e 
+0x14000247e: mov      edx, ebx 
+0x140002480: mov      rcx, rsi 
+0x140002483: add      rdx, rbp 
+0x140002486: call     0x1400024d0 CALL_TARGET=0x1400024d0
+0x14000248b: add      ebx, 0x40 
+0x14000248e: lea      ecx, [rbx + 0x3f] 
+0x140002491: cmp      rcx, rdi 
+0x140002494: jb       0x14000247e 
+0x140002496: xor      r9d, r9d 
+0x140002499: jmp      0x14000249d 
+0x14000249b: xor      ebx, ebx 
+0x14000249d: mov      eax, ebx 
+0x14000249f: lea      rdx, [rbx + rbp] 
+0x1400024a3: sub      rdi, rax 
+0x1400024a6: mov      ecx, r9d 
+0x1400024a9: add      rsi, 0x1c 
+0x1400024ad: mov      r8, rdi 
+0x1400024b0: add      rcx, rsi 
+0x1400024b3: mov      rbx, qword ptr [rsp + 0x30] 
+0x1400024b8: mov      rbp, qword ptr [rsp + 0x38] 
+0x1400024bd: mov      rsi, qword ptr [rsp + 0x40] 
+0x1400024c2: add      rsp, 0x20 
+0x1400024c6: pop      rdi 
+0x1400024c7: jmp      qword ptr [rip + 0x2cba] IAT=VCRUNTIME140.dll!memcpy UTF16='荸'
+0x1400024ce: int3      
+0x1400024cf: int3      
+0x1400024d0: mov      qword ptr [rsp + 0x10], rbx 
+0x1400024d5: mov      qword ptr [rsp + 0x18], rsi 
+0x1400024da: mov      qword ptr [rsp + 0x20], rdi 
+0x1400024df: push     rbp 
+0x1400024e0: push     r12 
+0x1400024e2: push     r13 
+0x1400024e4: push     r14 
+0x1400024e6: push     r15 
+0x1400024e8: mov      rbp, rsp 
+0x1400024eb: sub      rsp, 0x60 
+0x1400024ef: mov      rax, qword ptr [rip + 0x6b4a] 
+0x1400024f6: xor      rax, rsp 
+0x1400024f9: mov      qword ptr [rbp - 0x10], rax 
+0x1400024fd: mov      edi, dword ptr [rcx + 4] 
+0x140002500: lea      r8, [rbp - 0x50] 
+0x140002504: mov      r10d, dword ptr [rcx + 8] 
+0x140002508: add      rdx, 2 
+0x14000250c: mov      r11d, dword ptr [rcx + 0xc] 
+0x140002510: mov      r9d, 0x10 
+0x140002516: mov      ebx, dword ptr [rcx + 0x10] 
+0x140002519: mov      dword ptr [rbp - 0x60], edi 
+0x14000251c: mov      qword ptr [rbp - 0x58], rcx 
+0x140002520: movzx    eax, byte ptr [rdx] 
+0x140002523: movzx    ecx, byte ptr [rdx + 1] 
+0x140002527: lea      rdx, [rdx + 4] 
+0x14000252b: shl      ecx, 8 
+0x14000252e: or       ecx, eax 
+0x140002530: movzx    eax, byte ptr [rdx - 5] 
+0x140002534: shl      ecx, 8 
+0x140002537: or       ecx, eax 
+0x140002539: movzx    eax, byte ptr [rdx - 6] 
+0x14000253d: shl      ecx, 8 
+0x140002540: or       ecx, eax 
+0x140002542: mov      dword ptr [r8], ecx 
+0x140002545: lea      r8, [r8 + 4] 
+0x140002549: sub      r9, 1 
+0x14000254d: jne      0x140002520 
+0x14000254f: mov      eax, r11d 
+0x140002552: mov      edx, r10d 
+0x140002555: and      eax, r10d 
+0x140002558: not      edx 
+0x14000255a: and      edx, ebx 
+0x14000255c: or       edx, eax 
+0x14000255e: mov      eax, r10d 
+0x140002561: add      edx, 0xd76aa478 
+0x140002567: add      edx, dword ptr [rbp - 0x50] 
+0x14000256a: add      edx, edi 
+0x14000256c: ror      edx, 0x19 
+0x14000256f: add      edx, r10d 
+0x140002572: and      eax, edx 
+0x140002574: mov      r8d, edx 
+0x140002577: not      r8d 
+0x14000257a: and      r8d, r11d 
+0x14000257d: add      r11d, 0x242070db 
+0x140002584: or       r8d, eax 
+0x140002587: add      r8d, 0xe8c7b756 
+0x14000258e: add      r8d, dword ptr [rbp - 0x4c] 
+0x140002592: add      r8d, ebx 
+0x140002595: ror      r8d, 0x14 
+0x140002599: add      r8d, edx 
+0x14000259c: mov      r9d, r8d 
+0x14000259f: mov      eax, r8d 
+0x1400025a2: and      eax, edx 
+0x1400025a4: not      r9d 
+0x1400025a7: and      r9d, r10d 
+0x1400025aa: add      r10d, 0xc1bdceee 
+0x1400025b1: or       r9d, eax 
+0x1400025b4: mov      eax, r8d 
+0x1400025b7: add      r9d, dword ptr [rbp - 0x48] 
+0x1400025bb: add      r9d, r11d 
+0x1400025be: lea      r11d, [rdx - 0xa83f051] 
+0x1400025c5: ror      r9d, 0xf 
+0x1400025c9: add      r9d, r8d 
+0x1400025cc: and      eax, r9d 
+0x1400025cf: mov      ecx, r9d 
+0x1400025d2: not      ecx 
+0x1400025d4: and      ecx, edx 
+0x1400025d6: lea      edx, [r8 + 0x4787c62a] 
+0x1400025dd: or       ecx, eax 
+0x1400025df: mov      eax, r9d 
+0x1400025e2: add      ecx, dword ptr [rbp - 0x44] 
+0x1400025e5: add      r10d, ecx 
+0x1400025e8: ror      r10d, 0xa 
+0x1400025ec: add      r10d, r9d 
+0x1400025ef: and      eax, r10d 
+0x1400025f2: mov      ecx, r10d 
+0x1400025f5: not      ecx 
+0x1400025f7: and      ecx, r8d 
+0x1400025fa: lea      r8d, [r9 - 0x57cfb9ed] 
+0x140002601: or       ecx, eax 
+0x140002603: mov      eax, r10d 
+0x140002606: add      ecx, dword ptr [rbp - 0x40] 
+0x140002609: add      r11d, ecx 
+0x14000260c: ror      r11d, 0x19 
+0x140002610: add      r11d, r10d 
+0x140002613: and      eax, r11d 
+0x140002616: mov      ecx, r11d 
+0x140002619: not      ecx 
+0x14000261b: and      ecx, r9d 
+0x14000261e: or       ecx, eax 
+0x140002620: add      ecx, dword ptr [rbp - 0x3c] 
+0x140002623: add      edx, ecx 
+0x140002625: ror      edx, 0x14 
+0x140002628: add      edx, r11d 
+0x14000262b: mov      ecx, edx 
+0x14000262d: mov      eax, edx 
+0x14000262f: not      ecx 
+0x140002631: and      eax, r11d 
+0x140002634: and      ecx, r10d 
+0x140002637: or       ecx, eax 
+0x140002639: mov      eax, edx 
+0x14000263b: add      ecx, dword ptr [rbp - 0x38] 
+0x14000263e: add      r8d, ecx 
+0x140002641: ror      r8d, 0xf 
+0x140002645: add      r8d, edx 
+0x140002648: mov      ecx, r8d 
+0x14000264b: not      ecx 
+0x14000264d: and      ecx, r11d 
+0x140002650: mov      r15d, dword ptr [rbp - 0x34] 
+0x140002654: lea      r9d, [r10 - 0x2b96aff] 
+0x14000265b: mov      r12d, dword ptr [rbp - 0x28] 
+0x14000265f: and      eax, r8d 
+0x140002662: or       ecx, eax 
+0x140002664: mov      r14d, dword ptr [rbp - 0x20] 
+0x140002668: mov      r13d, dword ptr [rbp - 0x1c] 
+0x14000266c: add      ecx, r15d 
+0x14000266f: add      r9d, ecx 
+0x140002672: mov      eax, r8d 
+0x140002675: ror      r9d, 0xa 
+0x140002679: add      r9d, r8d 
+0x14000267c: and      eax, r9d 
+0x14000267f: mov      r10d, r9d 
+0x140002682: not      r10d 
+0x140002685: and      r10d, edx 
+0x140002688: or       r10d, eax 
+0x14000268b: mov      eax, r9d 
+0x14000268e: add      r10d, 0x698098d8 
+0x140002695: add      r10d, dword ptr [rbp - 0x30] 
+0x140002699: add      r10d, r11d 
+0x14000269c: ror      r10d, 0x19 
+
+===== DISASSEMBLY RVA 0x2d70..0x2f50 VA 0x140002d70 =====
+0x140002d70: mov      qword ptr [rsp + 0x18], rbx 
+0x140002d75: push     rbp 
+0x140002d76: push     rsi 
+0x140002d77: push     rdi 
+0x140002d78: push     r14 
+0x140002d7a: push     r15 
+0x140002d7c: mov      rbp, rsp 
+0x140002d7f: sub      rsp, 0x60 
+0x140002d83: mov      rax, qword ptr [rip + 0x62b6] 
+0x140002d8a: xor      rax, rsp 
+0x140002d8d: mov      qword ptr [rbp - 0x10], rax 
+0x140002d91: mov      rdi, rdx 
+0x140002d94: mov      r14, rcx 
+0x140002d97: mov      qword ptr [rbp - 0x38], rdx 
+0x140002d9b: xor      esi, esi 
+0x140002d9d: mov      dword ptr [rbp - 0x40], esi 
+0x140002da0: cmp      byte ptr [rcx], sil 
+0x140002da3: jne      0x140002e9d 
+0x140002da9: mov      byte ptr [rcx], 1 
+0x140002dac: lea      r8d, [rsi + 0x10] 
+0x140002db0: lea      rdx, [rcx + 4] 
+0x140002db4: lea      rcx, [rbp - 0x28] 
+0x140002db8: call     qword ptr [rip + 0x23ca] IAT=VCRUNTIME140.dll!memcpy UTF16='荸'
+0x140002dbe: lea      rbx, [r14 + 0x14] 
+0x140002dc2: lea      r8d, [rsi + 8] 
+0x140002dc6: mov      rdx, rbx 
+0x140002dc9: lea      rcx, [rbp - 0x30] 
+0x140002dcd: call     qword ptr [rip + 0x23b5] IAT=VCRUNTIME140.dll!memcpy UTF16='荸'
+0x140002dd3: mov      ecx, esi 
+0x140002dd5: lea      rdx, [rbx + 2] 
+0x140002dd9: mov      al, byte ptr [rdx - 2] 
+0x140002ddc: mov      byte ptr [rbp + rcx - 0x18], al 
+0x140002de0: mov      al, byte ptr [rdx - 1] 
+0x140002de3: mov      byte ptr [rbp + rcx - 0x17], al 
+0x140002de7: mov      al, byte ptr [rdx] 
+0x140002de9: mov      byte ptr [rbp + rcx - 0x16], al 
+0x140002ded: mov      al, byte ptr [rdx + 1] 
+0x140002df0: mov      byte ptr [rbp + rcx - 0x15], al 
+0x140002df4: lea      rdx, [rdx + 4] 
+0x140002df8: add      rcx, 4 
+0x140002dfc: cmp      rcx, 8 
+0x140002e00: jb       0x140002dd9 
+0x140002e02: mov      edx, dword ptr [rbx] 
+0x140002e04: shr      edx, 3 
+0x140002e07: and      edx, 0x3f 
+0x140002e0a: mov      eax, 0x38 
+0x140002e0f: sub      eax, edx 
+0x140002e11: mov      r8d, 0x78 
+0x140002e17: sub      r8d, edx 
+0x140002e1a: cmp      edx, 0x38 
+0x140002e1d: cmovb    r8d, eax 
+0x140002e21: lea      rdx, [rip + 0x3508] 
+0x140002e28: mov      rcx, r14 
+0x140002e2b: call     0x140002404 CALL_TARGET=0x140002404
+0x140002e30: mov      r8d, 8 
+0x140002e36: lea      rdx, [rbp - 0x18] 
+0x140002e3a: mov      rcx, r14 
+0x140002e3d: call     0x140002404 CALL_TARGET=0x140002404
+0x140002e42: lea      rdx, [r14 + 0x5e] 
+0x140002e46: lea      r9, [r14 + 6] 
+0x140002e4a: mov      r10d, 4 
+0x140002e50: mov      al, byte ptr [r9 - 2] 
+0x140002e54: mov      byte ptr [rdx - 2], al 
+0x140002e57: mov      al, byte ptr [r9 - 1] 
+0x140002e5b: mov      byte ptr [rdx - 1], al 
+0x140002e5e: mov      al, byte ptr [r9] 
+0x140002e61: mov      byte ptr [rdx], al 
+0x140002e63: mov      al, byte ptr [r9 + 1] 
+0x140002e67: mov      byte ptr [rdx + 1], al 
+0x140002e6a: lea      r9, [r9 + 4] 
+0x140002e6e: lea      rdx, [rdx + 4] 
+0x140002e72: sub      r10, 1 
+0x140002e76: jne      0x140002e50 
+0x140002e78: lea      r8d, [r10 + 0x10] 
+0x140002e7c: lea      rdx, [rbp - 0x28] 
+0x140002e80: lea      rcx, [r14 + 4] 
+0x140002e84: call     qword ptr [rip + 0x22fe] IAT=VCRUNTIME140.dll!memcpy UTF16='荸'
+0x140002e8a: mov      r8d, 8 
+0x140002e90: lea      rdx, [rbp - 0x30] 
+0x140002e94: mov      rcx, rbx 
+0x140002e97: call     qword ptr [rip + 0x22eb] IAT=VCRUNTIME140.dll!memcpy UTF16='荸'
+0x140002e9d: xorps    xmm0, xmm0 
+0x140002ea0: movups   xmmword ptr [rdi], xmm0 
+0x140002ea3: mov      qword ptr [rdi + 0x10], rsi 
+0x140002ea7: mov      qword ptr [rdi + 0x18], 0xf 
+0x140002eaf: mov      byte ptr [rdi], sil 
+0x140002eb2: mov      dword ptr [rbp - 0x40], 1 
+0x140002eb9: mov      edx, 0x20 
+0x140002ebe: mov      rcx, rdi 
+0x140002ec1: call     0x1400030e8 CALL_TARGET=0x1400030e8
+0x140002ec6: mov      qword ptr [rdi + 0x10], rsi 
+0x140002eca: lea      r15, [rip + 0x3447] UTF16='\u3130㌲㔴㜶㤸扡摣晥' ASCII='0123456789abcdef'
+0x140002ed1: movzx    ebx, byte ptr [r14 + rsi + 0x5c] 
+0x140002ed7: mov      r8d, ebx 
+0x140002eda: shr      r8, 4 
+0x140002ede: mov      r8b, byte ptr [r8 + r15] 
+0x140002ee2: mov      rcx, rdi 
+0x140002ee5: call     0x140002f2c CALL_TARGET=0x140002f2c
+0x140002eea: mov      r8d, ebx 
+0x140002eed: and      r8d, 0xf 
+0x140002ef1: mov      r8b, byte ptr [r8 + r15] 
+0x140002ef5: mov      rcx, rdi 
+0x140002ef8: call     0x140002f2c CALL_TARGET=0x140002f2c
+0x140002efd: inc      rsi 
+0x140002f00: cmp      rsi, 0x10 
+0x140002f04: jb       0x140002ed1 
+0x140002f06: mov      rax, rdi 
+0x140002f09: mov      rcx, qword ptr [rbp - 0x10] 
+0x140002f0d: xor      rcx, rsp 
+0x140002f10: call     0x140003800 CALL_TARGET=0x140003800
+0x140002f15: mov      rbx, qword ptr [rsp + 0xa0] 
+0x140002f1d: add      rsp, 0x60 
+0x140002f21: pop      r15 
+0x140002f23: pop      r14 
+0x140002f25: pop      rdi 
+0x140002f26: pop      rsi 
+0x140002f27: pop      rbp 
+0x140002f28: ret       
+0x140002f29: int3      
+0x140002f2a: int3      
+0x140002f2b: int3      
+0x140002f2c: mov      qword ptr [rsp + 0x10], rbx 
+0x140002f31: push     rbp 
+0x140002f32: push     rsi 
+0x140002f33: push     rdi 
+0x140002f34: push     r12 
+0x140002f36: push     r13 
+0x140002f38: push     r14 
+0x140002f3a: push     r15 
+0x140002f3c: sub      rsp, 0x20 
+0x140002f40: mov      r14, qword ptr [rcx + 0x18] 
+0x140002f44: mov      r13d, 1 
+0x140002f4a: mov      rbp, qword ptr [rcx + 0x10] 

@@ -1,0 +1,260 @@
+
+Z:\ezbase_unpacked.exe:     file format pei-i386
+
+
+Disassembly of section .text:
+
+00401000 <.text>:
+  401000:	83 ec 1c             	sub    esp,0x1c
+  401003:	8b 44 24 20          	mov    eax,DWORD PTR [esp+0x20]
+  401007:	8b 00                	mov    eax,DWORD PTR [eax]
+  401009:	8b 00                	mov    eax,DWORD PTR [eax]
+  40100b:	3d 93 00 00 c0       	cmp    eax,0xc0000093
+  401010:	74 1b                	je     40102d <.text+0x2d>
+  401012:	77 4c                	ja     401060 <.text+0x60>
+  401014:	3d 1d 00 00 c0       	cmp    eax,0xc000001d
+  401019:	0f 84 cc 00 00 00    	je     4010eb <.text+0xeb>
+  40101f:	76 7f                	jbe    4010a0 <.text+0xa0>
+  401021:	05 73 ff ff 3f       	add    eax,0x3fffff73
+  401026:	31 d2                	xor    edx,edx
+  401028:	83 f8 04             	cmp    eax,0x4
+  40102b:	77 27                	ja     401054 <.text+0x54>
+  40102d:	c7 44 24 04 00 00 00 	mov    DWORD PTR [esp+0x4],0x0
+  401034:	00 
+  401035:	c7 04 24 08 00 00 00 	mov    DWORD PTR [esp],0x8
+  40103c:	e8 63 31 00 00       	call   4041a4 <_signal>
+  401041:	83 f8 01             	cmp    eax,0x1
+  401044:	0f 84 d6 00 00 00    	je     401120 <.text+0x120>
+  40104a:	85 c0                	test   eax,eax
+  40104c:	0f 85 fe 00 00 00    	jne    401150 <.text+0x150>
+  401052:	31 d2                	xor    edx,edx
+  401054:	89 d0                	mov    eax,edx
+  401056:	83 c4 1c             	add    esp,0x1c
+  401059:	c2 04 00             	ret    0x4
+  40105c:	8d 74 26 00          	lea    esi,[esi+eiz*1+0x0]
+  401060:	3d 94 00 00 c0       	cmp    eax,0xc0000094
+  401065:	75 79                	jne    4010e0 <.text+0xe0>
+  401067:	c7 44 24 04 00 00 00 	mov    DWORD PTR [esp+0x4],0x0
+  40106e:	00 
+  40106f:	c7 04 24 08 00 00 00 	mov    DWORD PTR [esp],0x8
+  401076:	e8 29 31 00 00       	call   4041a4 <_signal>
+  40107b:	83 f8 01             	cmp    eax,0x1
+  40107e:	75 ca                	jne    40104a <.text+0x4a>
+  401080:	c7 44 24 04 01 00 00 	mov    DWORD PTR [esp+0x4],0x1
+  401087:	00 
+  401088:	c7 04 24 08 00 00 00 	mov    DWORD PTR [esp],0x8
+  40108f:	e8 10 31 00 00       	call   4041a4 <_signal>
+  401094:	ba ff ff ff ff       	mov    edx,0xffffffff
+  401099:	eb b9                	jmp    401054 <.text+0x54>
+  40109b:	8d 74 26 00          	lea    esi,[esi+eiz*1+0x0]
+  40109f:	90                   	nop
+  4010a0:	3d 05 00 00 c0       	cmp    eax,0xc0000005
+  4010a5:	75 ab                	jne    401052 <.text+0x52>
+  4010a7:	c7 44 24 04 00 00 00 	mov    DWORD PTR [esp+0x4],0x0
+  4010ae:	00 
+  4010af:	c7 04 24 0b 00 00 00 	mov    DWORD PTR [esp],0xb
+  4010b6:	e8 e9 30 00 00       	call   4041a4 <_signal>
+  4010bb:	83 f8 01             	cmp    eax,0x1
+  4010be:	0f 84 9f 00 00 00    	je     401163 <.text+0x163>
+  4010c4:	85 c0                	test   eax,eax
+  4010c6:	74 8a                	je     401052 <.text+0x52>
+  4010c8:	c7 04 24 0b 00 00 00 	mov    DWORD PTR [esp],0xb
+  4010cf:	ff d0                	call   eax
+  4010d1:	ba ff ff ff ff       	mov    edx,0xffffffff
+  4010d6:	e9 79 ff ff ff       	jmp    401054 <.text+0x54>
+  4010db:	8d 74 26 00          	lea    esi,[esi+eiz*1+0x0]
+  4010df:	90                   	nop
+  4010e0:	3d 96 00 00 c0       	cmp    eax,0xc0000096
+  4010e5:	0f 85 67 ff ff ff    	jne    401052 <.text+0x52>
+  4010eb:	c7 44 24 04 00 00 00 	mov    DWORD PTR [esp+0x4],0x0
+  4010f2:	00 
+  4010f3:	c7 04 24 04 00 00 00 	mov    DWORD PTR [esp],0x4
+  4010fa:	e8 a5 30 00 00       	call   4041a4 <_signal>
+  4010ff:	83 f8 01             	cmp    eax,0x1
+  401102:	74 7b                	je     40117f <.text+0x17f>
+  401104:	85 c0                	test   eax,eax
+  401106:	0f 84 46 ff ff ff    	je     401052 <.text+0x52>
+  40110c:	c7 04 24 04 00 00 00 	mov    DWORD PTR [esp],0x4
+  401113:	ff d0                	call   eax
+  401115:	ba ff ff ff ff       	mov    edx,0xffffffff
+  40111a:	e9 35 ff ff ff       	jmp    401054 <.text+0x54>
+  40111f:	90                   	nop
+  401120:	c7 44 24 04 01 00 00 	mov    DWORD PTR [esp+0x4],0x1
+  401127:	00 
+  401128:	c7 04 24 08 00 00 00 	mov    DWORD PTR [esp],0x8
+  40112f:	e8 70 30 00 00       	call   4041a4 <_signal>
+  401134:	c7 04 24 00 00 00 00 	mov    DWORD PTR [esp],0x0
+  40113b:	e8 b0 12 00 00       	call   4023f0 <_fesetenv>
+  401140:	ba ff ff ff ff       	mov    edx,0xffffffff
+  401145:	e9 0a ff ff ff       	jmp    401054 <.text+0x54>
+  40114a:	8d b6 00 00 00 00    	lea    esi,[esi+0x0]
+  401150:	c7 04 24 08 00 00 00 	mov    DWORD PTR [esp],0x8
+  401157:	ff d0                	call   eax
+  401159:	ba ff ff ff ff       	mov    edx,0xffffffff
+  40115e:	e9 f1 fe ff ff       	jmp    401054 <.text+0x54>
+  401163:	c7 44 24 04 01 00 00 	mov    DWORD PTR [esp+0x4],0x1
+  40116a:	00 
+  40116b:	c7 04 24 0b 00 00 00 	mov    DWORD PTR [esp],0xb
+  401172:	e8 2d 30 00 00       	call   4041a4 <_signal>
+  401177:	83 ca ff             	or     edx,0xffffffff
+  40117a:	e9 d5 fe ff ff       	jmp    401054 <.text+0x54>
+  40117f:	c7 44 24 04 01 00 00 	mov    DWORD PTR [esp+0x4],0x1
+  401186:	00 
+  401187:	c7 04 24 04 00 00 00 	mov    DWORD PTR [esp],0x4
+  40118e:	e8 11 30 00 00       	call   4041a4 <_signal>
+  401193:	83 ca ff             	or     edx,0xffffffff
+  401196:	e9 b9 fe ff ff       	jmp    401054 <.text+0x54>
+  40119b:	8d 74 26 00          	lea    esi,[esi+eiz*1+0x0]
+  40119f:	90                   	nop
+  4011a0:	53                   	push   ebx
+  4011a1:	83 ec 18             	sub    esp,0x18
+  4011a4:	a1 ec 61 40 00       	mov    eax,ds:0x4061ec
+  4011a9:	85 c0                	test   eax,eax
+  4011ab:	74 1c                	je     4011c9 <.text+0x1c9>
+  4011ad:	c7 44 24 08 00 00 00 	mov    DWORD PTR [esp+0x8],0x0
+  4011b4:	00 
+  4011b5:	c7 44 24 04 02 00 00 	mov    DWORD PTR [esp+0x4],0x2
+  4011bc:	00 
+  4011bd:	c7 04 24 00 00 00 00 	mov    DWORD PTR [esp],0x0
+  4011c4:	ff d0                	call   eax
+  4011c6:	83 ec 0c             	sub    esp,0xc
+  4011c9:	c7 04 24 00 10 40 00 	mov    DWORD PTR [esp],0x401000
+  4011d0:	e8 8f 30 00 00       	call   404264 <_SetUnhandledExceptionFilter@4>
+  4011d5:	83 ec 04             	sub    esp,0x4
+  4011d8:	e8 d3 09 00 00       	call   401bb0 <___cpu_features_init>
+  4011dd:	a1 08 50 40 00       	mov    eax,ds:0x405008
+  4011e2:	89 04 24             	mov    DWORD PTR [esp],eax
+  4011e5:	e8 06 12 00 00       	call   4023f0 <_fesetenv>
+  4011ea:	e8 21 06 00 00       	call   401810 <__setargv>
+  4011ef:	a1 20 80 40 00       	mov    eax,ds:0x408020
+  4011f4:	85 c0                	test   eax,eax
+  4011f6:	75 4a                	jne    401242 <.text+0x242>
+  4011f8:	e8 37 30 00 00       	call   404234 <___p__fmode>
+  4011fd:	8b 15 0c 50 40 00    	mov    edx,DWORD PTR ds:0x40500c
+  401203:	89 10                	mov    DWORD PTR [eax],edx
+  401205:	e8 f6 0f 00 00       	call   402200 <__pei386_runtime_relocator>
+  40120a:	83 e4 f0             	and    esp,0xfffffff0
+  40120d:	e8 4e 0b 00 00       	call   401d60 <___main>
+  401212:	e8 25 30 00 00       	call   40423c <___p__environ>
+  401217:	8b 00                	mov    eax,DWORD PTR [eax]
+  401219:	89 44 24 08          	mov    DWORD PTR [esp+0x8],eax
+  40121d:	a1 00 80 40 00       	mov    eax,ds:0x408000
+  401222:	89 44 24 04          	mov    DWORD PTR [esp+0x4],eax
+  401226:	a1 04 80 40 00       	mov    eax,ds:0x408004
+  40122b:	89 04 24             	mov    DWORD PTR [esp],eax
+  40122e:	e8 a4 03 00 00       	call   4015d7 <_main>
+  401233:	89 c3                	mov    ebx,eax
+  401235:	e8 f2 2f 00 00       	call   40422c <__cexit>
+  40123a:	89 1c 24             	mov    DWORD PTR [esp],ebx
+  40123d:	e8 82 30 00 00       	call   4042c4 <_ExitProcess@4>
+  401242:	8b 1d b4 91 40 00    	mov    ebx,DWORD PTR ds:0x4091b4
+  401248:	89 44 24 04          	mov    DWORD PTR [esp+0x4],eax
+  40124c:	a3 0c 50 40 00       	mov    ds:0x40500c,eax
+  401251:	8b 43 10             	mov    eax,DWORD PTR [ebx+0x10]
+  401254:	89 04 24             	mov    DWORD PTR [esp],eax
+  401257:	e8 a8 2f 00 00       	call   404204 <__setmode>
+  40125c:	a1 20 80 40 00       	mov    eax,ds:0x408020
+  401261:	89 44 24 04          	mov    DWORD PTR [esp+0x4],eax
+  401265:	8b 43 30             	mov    eax,DWORD PTR [ebx+0x30]
+  401268:	89 04 24             	mov    DWORD PTR [esp],eax
+  40126b:	e8 94 2f 00 00       	call   404204 <__setmode>
+  401270:	a1 20 80 40 00       	mov    eax,ds:0x408020
+  401275:	89 44 24 04          	mov    DWORD PTR [esp+0x4],eax
+  401279:	8b 43 50             	mov    eax,DWORD PTR [ebx+0x50]
+  40127c:	89 04 24             	mov    DWORD PTR [esp],eax
+  40127f:	e8 80 2f 00 00       	call   404204 <__setmode>
+  401284:	e9 6f ff ff ff       	jmp    4011f8 <.text+0x1f8>
+  401289:	8d b4 26 00 00 00 00 	lea    esi,[esi+eiz*1+0x0]
+
+00401290 <__mingw32_init_mainargs>:
+  401290:	83 ec 3c             	sub    esp,0x3c
+  401293:	8d 44 24 2c          	lea    eax,[esp+0x2c]
+  401297:	c7 44 24 04 00 80 40 	mov    DWORD PTR [esp+0x4],0x408000
+  40129e:	00 
+  40129f:	89 44 24 10          	mov    DWORD PTR [esp+0x10],eax
+  4012a3:	a1 04 50 40 00       	mov    eax,ds:0x405004
+  4012a8:	c7 04 24 04 80 40 00 	mov    DWORD PTR [esp],0x408004
+  4012af:	83 e0 01             	and    eax,0x1
+  4012b2:	c7 44 24 2c 00 00 00 	mov    DWORD PTR [esp+0x2c],0x0
+  4012b9:	00 
+  4012ba:	89 44 24 0c          	mov    DWORD PTR [esp+0xc],eax
+  4012be:	8d 44 24 28          	lea    eax,[esp+0x28]
+  4012c2:	89 44 24 08          	mov    DWORD PTR [esp+0x8],eax
+  4012c6:	e8 79 2f 00 00       	call   404244 <___getmainargs>
+  4012cb:	83 c4 3c             	add    esp,0x3c
+  4012ce:	c3                   	ret
+  4012cf:	90                   	nop
+
+004012d0 <_mainCRTStartup>:
+  4012d0:	83 ec 1c             	sub    esp,0x1c
+  4012d3:	c7 04 24 01 00 00 00 	mov    DWORD PTR [esp],0x1
+  4012da:	ff 15 a0 91 40 00    	call   DWORD PTR ds:0x4091a0
+  4012e0:	e8 bb fe ff ff       	call   4011a0 <.text+0x1a0>
+  4012e5:	8d b4 26 00 00 00 00 	lea    esi,[esi+eiz*1+0x0]
+  4012ec:	8d 74 26 00          	lea    esi,[esi+eiz*1+0x0]
+
+004012f0 <_WinMainCRTStartup>:
+  4012f0:	83 ec 1c             	sub    esp,0x1c
+  4012f3:	c7 04 24 02 00 00 00 	mov    DWORD PTR [esp],0x2
+  4012fa:	ff 15 a0 91 40 00    	call   DWORD PTR ds:0x4091a0
+  401300:	e8 9b fe ff ff       	call   4011a0 <.text+0x1a0>
+  401305:	8d b4 26 00 00 00 00 	lea    esi,[esi+eiz*1+0x0]
+  40130c:	8d 74 26 00          	lea    esi,[esi+eiz*1+0x0]
+
+00401310 <_atexit>:
+  401310:	ff 25 d0 91 40 00    	jmp    DWORD PTR ds:0x4091d0
+  401316:	8d b4 26 00 00 00 00 	lea    esi,[esi+eiz*1+0x0]
+  40131d:	8d 76 00             	lea    esi,[esi+0x0]
+
+00401320 <__onexit>:
+  401320:	ff 25 c0 91 40 00    	jmp    DWORD PTR ds:0x4091c0
+  401326:	90                   	nop
+  401327:	90                   	nop
+  401328:	90                   	nop
+  401329:	90                   	nop
+  40132a:	90                   	nop
+  40132b:	90                   	nop
+  40132c:	90                   	nop
+  40132d:	90                   	nop
+  40132e:	90                   	nop
+  40132f:	90                   	nop
+
+00401330 <___gcc_register_frame>:
+  401330:	55                   	push   ebp
+  401331:	89 e5                	mov    ebp,esp
+  401333:	56                   	push   esi
+  401334:	53                   	push   ebx
+  401335:	83 ec 10             	sub    esp,0x10
+  401338:	c7 04 24 00 60 40 00 	mov    DWORD PTR [esp],0x406000
+  40133f:	e8 48 2f 00 00       	call   40428c <_GetModuleHandleA@4>
+  401344:	83 ec 04             	sub    esp,0x4
+  401347:	85 c0                	test   eax,eax
+  401349:	74 75                	je     4013c0 <___gcc_register_frame+0x90>
+  40134b:	c7 04 24 00 60 40 00 	mov    DWORD PTR [esp],0x406000
+  401352:	89 c3                	mov    ebx,eax
+  401354:	e8 13 2f 00 00       	call   40426c <_LoadLibraryA@4>
+  401359:	83 ec 04             	sub    esp,0x4
+  40135c:	a3 70 80 40 00       	mov    ds:0x408070,eax
+  401361:	c7 44 24 04 13 60 40 	mov    DWORD PTR [esp+0x4],0x406013
+  401368:	00 
+  401369:	89 1c 24             	mov    DWORD PTR [esp],ebx
+  40136c:	e8 13 2f 00 00       	call   404284 <_GetProcAddress@8>
+  401371:	83 ec 08             	sub    esp,0x8
+  401374:	89 c6                	mov    esi,eax
+  401376:	c7 44 24 04 29 60 40 	mov    DWORD PTR [esp+0x4],0x406029
+  40137d:	00 
+  40137e:	89 1c 24             	mov    DWORD PTR [esp],ebx
+  401381:	e8 fe 2e 00 00       	call   404284 <_GetProcAddress@8>
+  401386:	a3 00 50 40 00       	mov    ds:0x405000,eax
+  40138b:	83 ec 08             	sub    esp,0x8
+  40138e:	85 f6                	test   esi,esi
+  401390:	74 11                	je     4013a3 <___gcc_register_frame+0x73>
+  401392:	c7 44 24 04 08 80 40 	mov    DWORD PTR [esp+0x4],0x408008
+  401399:	00 
+  40139a:	c7 04 24 c8 70 40 00 	mov    DWORD PTR [esp],0x4070c8
+  4013a1:	ff d6                	call   esi
+  4013a3:	c7 04 24 e0 13 40 00 	mov    DWORD PTR [esp],0x4013e0
+  4013aa:	e8 61 ff ff ff       	call   401310 <_atexit>
+  4013af:	8d 65 f8             	lea    esp,[ebp-0x8]
+  4013b2:	5b                   	pop    ebx
+  4013b3:	5e                   	pop    esi

@@ -1,0 +1,16 @@
+SM4-like custom schedule source: native .rodata S-box @0x44e0, CK @0x45e0
+S-box head/tail: d690e9fecce13db7 79ee5f3ed7cb3948
+CK head/tail: ['00070e15', '1c232a31', '383f464d', '545b6269'] ['10171e25', '2c333a41', '484f565d', '646b7279']
+key words: ['e52bcc34', '1f1b5b18', '5f1ed75a', 'f108fe7f']
+round key first/last: ['f4b2ab3a', '85da239d', '53c0cf55', '6161c119'] ['7395efbd', 'd8bb3746', 'a9d6b03d', '0f205568']
+internal block round-trip: True
+test block/cipher: 000102030405060708090a0b0c0d0e0f d426f645577563f4b95a4421d64a7d39
+enc ASCII length/SHA256: 60352 2ba36e4deece0d74ef13765352af25f9063be11bdec3c582206fbad6556bdfcc
+decoded ciphertext length/SHA256: 45264 1fd44a44ef5ef4718110c7046513bc8f149c3a22b9cc27c6114ff1d03f03a27d
+block aligned: True
+decrypted length/SHA256: 45264 1ed54dcfb684aa6fd8583fef8ec874ab27b6d6ed2c68d0464fa88d5cd07e78ba
+first 96 plaintext bytes: 2f396a2f34414151536b5a4a5267414241514141415141424141442f3467485953554e445831425354305a4a544555414151454141414849414141414141517741414274626e5279556b64434946685a57694148344141424141454141414141
+first 96 plaintext repr: b'/9j/4AAQSkZJRgABAQAAAQABAAD/4gHYSUNDX1BST0ZJTEUAAQEAAAHIAAAAAAQwAABtbnRyUkdCIFhZWiAH4AABAAEAAAAA'
+printable ASCII ratio: 0.9997348886532343
+first-block re-encryption matches input: True
+output path: C:\Users\mzj\Desktop\CTF\����ˢ��\��Ŀ����\����14_20260929\561_OpenHarmony_secret\analysis\enc.custom-sm4-decrypted.bin

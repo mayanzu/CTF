@@ -1,0 +1,160 @@
+**********************
+PowerShell transcript start
+Start time: 20260929161438
+Username: DESKTOP-412KTAR\mzj
+RunAs User: DESKTOP-412KTAR\mzj
+Configuration Name: 
+Machine: DESKTOP-412KTAR (Microsoft Windows NT 10.0.26200.0)
+Host Application: C:\Users\mzj\.cache\codex-runtimes\codex-primary-runtime\dependencies\native\powershell\pwsh.dll -Command try { [Console]::OutputEncoding=[System.Text.Encoding]::UTF8 } catch {}
+$ErrorActionPreference = 'Continue'
+$transcriptPath = 'C:\Users\mzj\Desktop\CTF\玄机刷题\记录\批次14_文档核验_2.txt'
+Start-Transcript -LiteralPath $transcriptPath -Force
+Write-Output "COMMAND> Find #527 and totals in the guide and README"
+Select-String -Path 'C:\Users\mzj\Desktop\CTF\玄机刷题\指南\玄机刷题指南_合并源.md','C:\Users\mzj\Desktop\CTF\玄机刷题\README.md' -Pattern '527|48题|48 道|47题|47 道|45个|46个' | ForEach-Object { Write-Output ("MATCH> " + $_.Path + " line=" + $_.LineNumber + " " + $_.Line) }
+Write-Output "COMMAND> List batch14 folders"
+Get-ChildItem 'C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\批次14_20260929' -Force | ForEach-Object { Write-Output ("ENTRY> " + $_.Name + " | " + $_.Mode + " | " + $_.LastWriteTime) }
+Stop-Transcript
+Process ID: 21564
+PSVersion: 7.6.5
+PSEdition: Core
+GitCommitId: 7.6.5
+OS: Microsoft Windows 10.0.26200
+Platform: Win32NT
+PSCompatibleVersions: 1.0, 2.0, 3.0, 4.0, 5.0, 5.1, 6.0, 7.0
+PSRemotingProtocolVersion: 2.4
+SerializationVersion: 1.1.0.1
+WSManStackVersion: 3.0
+**********************
+Transcript started, output file is C:\Users\mzj\Desktop\CTF\玄机刷题\记录\批次14_文档核验_2.txt
+COMMAND> Find #527 and totals in the guide and README
+MATCH> C:\Users\mzj\Desktop\CTF\玄机刷题\指南\玄机刷题指南_合并源.md line=15 本指南原记录了玄机平台“已完成”筛选中的 28 道题。此后 #367、#450、#451、#520、#551、#530、#531、#559、#588、#549、#558、#547、#548、#552、#539、#540、#535、#536、#537、#527 共 20 道新题均取得平台接受回执，手册现收录 48 道已完成题。解题状态、flag 与过程分别以平台回执、附件分析和命令输出为证；不把完成徽标扩写成没有证据的步骤细节。
+MATCH> C:\Users\mzj\Desktop\CTF\玄机刷题\指南\玄机刷题指南_合并源.md line=23 ## 平台已完成（48 道）
+MATCH> C:\Users\mzj\Desktop\CTF\玄机刷题\指南\玄机刷题指南_合并源.md line=66 | 527 | 商丘师范学院第四届网络安全及信息对抗大赛 唧唧复唧唧，木兰当户织 | REVERSE / 中等 | 平台已接受、一血；Base64 还原并由程序输出闭环验证；flag：`flag{08174158-ccb5-4d03-93aa-9ef1}`；详见第十四批及 `题目资料/批次14_20260929/527_木兰当户织/` |
+MATCH> C:\Users\mzj\Desktop\CTF\玄机刷题\指南\玄机刷题指南_合并源.md line=80 **统计：本指南原收录 28 道，后续新增的 #367、#450、#451、#520、#551、#530、#531、#559、#588、#549、#558、#547、#548、#552、#539、#540、#535、#536、#537、#527 共 20 道均有逐题平台接受回执，当前共 48 道。现有证据可给出 46 道已完成题的 flag 候选或公开 Writeup 结果；Ancient-Recall 与 pwn-ezpwn 的最终 flag 输出仍缺失。#532、#533、#534、#538、#541、#546、#561、#562 均未获平台接受，不计入已完成总数；其中 #538 的程序输入约束矛盾使校验长度条件不可达。旧题若只有平台完成徽标或离线候选，仍与具体 flag 的提交回执分开标注。**
+MATCH> C:\Users\mzj\Desktop\CTF\玄机刷题\指南\玄机刷题指南_合并源.md line=164 **思路：** 附件 PE 头有损坏、内部还 UPX，所以先把“修头 / 解包 / 反推 / 运行”拆成独立步骤：复制后修 PE 签名，用官方 UPX 解包得到 527,872 字节的工作副本，再静态定位比较逻辑——读入前 16 字节、跑自定义 AES、与 16 字节目标常量比较。它借用 AES-128 骨架（Nk=4、Nr=10），但每轮有三处自定义：状态 SubBytes 后再 XOR `0xA1`、MixColumns 每输出字节再 XOR `0x54`、每次 AddRoundKey 后再 XOR 固定 16 字节 round mask。另外初始化函数有反调试分支：无调试器时把 key 第 3 字节写成 `h`。
+MATCH> C:\Users\mzj\Desktop\CTF\玄机刷题\指南\玄机刷题指南_合并源.md line=321 - **客户端口 / 时间:** 35272 / 02:25:36；**解密出的请求明文:** `assert|system('id');`；**解密后的服务端输出:** `uid=33(www-data) gid=33(www-data) groups=33(www-data)`；**用途:** 确认命令以 Web 服务用户运行
+MATCH> C:\Users\mzj\Desktop\CTF\玄机刷题\指南\玄机刷题指南_合并源.md line=322 - **客户端口 / 时间:** 35274 / 02:25:38；**解密出的请求明文:** `assert|system('whoami');`；**解密后的服务端输出:** `www-data`；**用途:** 与 `id` 输出相互印证
+MATCH> C:\Users\mzj\Desktop\CTF\玄机刷题\指南\玄机刷题指南_合并源.md line=996 初始 PE signature 的首字节在文件偏移 0x108 处异常。我们没有覆盖原始文件，而是复制后恢复分析副本的 PE 签名，再准备 UPX 输入副本。早期尝试用自写 NRV 解压器解析时遇到输出边界错误；它只是说明自写解码器假设不完整，不构成附件损坏的结论。随后对照官方 UPX 5.2.0 静态解包成功，得到 527,872 字节的 unpacked PE。
+MATCH> C:\Users\mzj\Desktop\CTF\玄机刷题\指南\玄机刷题指南_合并源.md line=1002 crazyaes-upx-unpacked.exe    527,872 bytes
+MATCH> C:\Users\mzj\Desktop\CTF\玄机刷题\指南\玄机刷题指南_合并源.md line=2187 本批 #527「唧唧复唧唧，木兰当户织」已通过玄机平台验证；#561、#562 仍未解决，不计入完成数，其完整 WP 与分析材料保留在各自题目资料目录中。
+MATCH> C:\Users\mzj\Desktop\CTF\玄机刷题\指南\玄机刷题指南_合并源.md line=2189 ### #527 唧唧复唧唧，木兰当户织（平台已接受）
+MATCH> C:\Users\mzj\Desktop\CTF\玄机刷题\指南\玄机刷题指南_合并源.md line=2191 - 平台 ID：527；REVERSE / 中等。提交后页面显示“已完成”1/1，并记录账号 slu_mzj 一血。最终 flag：`flag{08174158-ccb5-4d03-93aa-9ef1}`。
+MATCH> C:\Users\mzj\Desktop\CTF\玄机刷题\指南\玄机刷题指南_合并源.md line=2195 - 完整中文 WP、原始 ZIP、提取程序、复现脚本、完整反汇编及命令/输出记录：`题目资料/批次14_20260929/527_木兰当户织/`。
+MATCH> C:\Users\mzj\Desktop\CTF\玄机刷题\README.md line=19 《指南/玄机刷题指南_合并源.md》是状态与逐题 WP 的主索引；手册已同步列出 48 道平台接受题；平台当前已接受总数为 48 道；旧版 README 的 10 题统计已废止。第十一批的逐题验收状态见 `记录/提交核验_20260929_第十一批.md`。独立 WP 和过程补充保存在 `记录/`。
+MATCH> C:\Users\mzj\Desktop\CTF\玄机刷题\README.md line=35 第十四批核验：#527「唧唧复唧唧，木兰当户织」的 Base64 常量还原结果为 `flag{08174158-ccb5-4d03-93aa-9ef1}`；主代理已在玄机前台提交，平台显示“已完成”1/1并记录 slu_mzj 一血，当前接受总数由 47 更新为 48。#561 与 #562 仍未解决且不计入完成数；各自完整 WP 和分析资料保留在 `题目资料/批次14_20260929/OpenHarmony_secret_561/` 与 `题目资料/批次14_20260929/562_checker/`。#527 的完整 WP、附件、复现脚本、反汇编和命令输出记录见 `题目资料/批次14_20260929/527_木兰当户织/`。
+COMMAND> List batch14 folders
+ENTRY> 527_木兰当户织 | d---- | 09/29/2026 15:49:24
+ENTRY> 561_OpenHarmony_secret | d---- | 09/29/2026 15:51:20
+ENTRY> 562_checker | d---- | 09/29/2026 15:59:22
+**********************
+PowerShell transcript end
+End time: 20260929161438
+**********************
+**********************
+PowerShell transcript start
+Start time: 20260929161612
+Username: DESKTOP-412KTAR\mzj
+RunAs User: DESKTOP-412KTAR\mzj
+Configuration Name: 
+Machine: DESKTOP-412KTAR (Microsoft Windows NT 10.0.26200.0)
+Host Application: C:\Users\mzj\.cache\codex-runtimes\codex-primary-runtime\dependencies\native\powershell\pwsh.dll -Command try { [Console]::OutputEncoding=[System.Text.Encoding]::UTF8 } catch {}
+$project = 'C:\Users\mzj\Desktop\CTF\玄机刷题'
+$readme = Join-Path $project 'README.md'
+$guide = Join-Path $project '指南\玄机刷题指南_合并源.md'
+$transcript = Join-Path $project '记录\批次14_文档核验_2.txt'
+Start-Transcript -LiteralPath $transcript -Append | Out-Null
+Write-Output "COMMAND> Select-String -LiteralPath '$readme' -Pattern '#561|第十四批核验|48 道' | ForEach-Object { \"$($_.LineNumber):$($_.Line)\" }"
+Select-String -LiteralPath $readme -Pattern '#561|第十四批核验|48 道' | ForEach-Object { "$($_.LineNumber):$($_.Line)" }
+Write-Output "COMMAND> Select-String -LiteralPath '$guide' -Pattern '平台已完成（48 道）|当前共 48 道|527.*唧唧复唧唧|第十四批' | ForEach-Object { \"$($_.LineNumber):$($_.Line)\" }"
+Select-String -LiteralPath $guide -Pattern '平台已完成（48 道）|当前共 48 道|527.*唧唧复唧唧|第十四批' | ForEach-Object { "$($_.LineNumber):$($_.Line)" }
+Write-Output "COMMAND> Get-FileHash -LiteralPath '$readme','$guide' -Algorithm SHA256 | Format-Table Algorithm,Hash,Path -AutoSize"
+Get-FileHash -LiteralPath $readme,$guide -Algorithm SHA256 | Format-Table Algorithm,Hash,Path -AutoSize
+Stop-Transcript | Out-Null
+Process ID: 32380
+PSVersion: 7.6.5
+PSEdition: Core
+GitCommitId: 7.6.5
+OS: Microsoft Windows 10.0.26200
+Platform: Win32NT
+PSCompatibleVersions: 1.0, 2.0, 3.0, 4.0, 5.0, 5.1, 6.0, 7.0
+PSRemotingProtocolVersion: 2.4
+SerializationVersion: 1.1.0.1
+WSManStackVersion: 3.0
+**********************
+COMMAND> Select-String -LiteralPath 'C:\Users\mzj\Desktop\CTF\玄机刷题\README.md' -Pattern '#561|第十四批核验|48 道' | ForEach-Object { \
+:\ }
+19:《指南/玄机刷题指南_合并源.md》是状态与逐题 WP 的主索引；手册已同步列出 48 道平台接受题；平台当前已接受总数为 48 道；旧版 README 的 10 题统计已废止。第十一批的逐题验收状态见 `记录/提交核验_20260929_第十一批.md`。独立 WP 和过程补充保存在 `记录/`。
+35:第十四批核验：#527「唧唧复唧唧，木兰当户织」的 Base64 常量还原结果为 `flag{08174158-ccb5-4d03-93aa-9ef1}`；主代理已在玄机前台提交，平台显示“已完成”1/1并记录 slu_mzj 一血，当前接受总数由 47 更新为 48。#561 与 #562 仍未解决且不计入完成数；各自完整 WP 和分析资料保留在 `题目资料/批次14_20260929/OpenHarmony_secret_561/` 与 `题目资料/批次14_20260929/562_checker/`。#527 的完整 WP、附件、复现脚本、反汇编和命令输出记录见 `题目资料/批次14_20260929/527_木兰当户织/`。
+COMMAND> Select-String -LiteralPath 'C:\Users\mzj\Desktop\CTF\玄机刷题\指南\玄机刷题指南_合并源.md' -Pattern '平台已完成（48 道）|当前共 48 道|527.*唧唧复唧唧|第十四批' | ForEach-Object { \
+:\ }
+23:## 平台已完成（48 道）
+66:| 527 | 商丘师范学院第四届网络安全及信息对抗大赛 唧唧复唧唧，木兰当户织 | REVERSE / 中等 | 平台已接受、一血；Base64 还原并由程序输出闭环验证；flag：`flag{08174158-ccb5-4d03-93aa-9ef1}`；详见第十四批及 `题目资料/批次14_20260929/527_木兰当户织/` |
+80:**统计：本指南原收录 28 道，后续新增的 #367、#450、#451、#520、#551、#530、#531、#559、#588、#549、#558、#547、#548、#552、#539、#540、#535、#536、#537、#527 共 20 道均有逐题平台接受回执，当前共 48 道。现有证据可给出 46 道已完成题的 flag 候选或公开 Writeup 结果；Ancient-Recall 与 pwn-ezpwn 的最终 flag 输出仍缺失。#532、#533、#534、#538、#541、#546、#561、#562 均未获平台接受，不计入已完成总数；其中 #538 的程序输入约束矛盾使校验长度条件不可达。旧题若只有平台完成徽标或离线候选，仍与具体 flag 的提交回执分开标注。**
+2185:## 第十四批：中等难度题
+2187:本批 #527「唧唧复唧唧，木兰当户织」已通过玄机平台验证；#561、#562 仍未解决，不计入完成数，其完整 WP 与分析材料保留在各自题目资料目录中。
+2189:### #527 唧唧复唧唧，木兰当户织（平台已接受）
+COMMAND> Get-FileHash -LiteralPath 'C:\Users\mzj\Desktop\CTF\玄机刷题\README.md','C:\Users\mzj\Desktop\CTF\玄机刷题\指南\玄机刷题指南_合并源.md' -Algorithm SHA256 | Format-Table Algorithm,Hash,Path -AutoSize
+
+Algorithm Hash                                                             Path
+--------- ----                                                             ----
+SHA256    74BCC554CC8F2B16F5F9BBFB711ABCA8C11814FDDF1559C13C18B12F2EC8E8CA C:\Users\mzj\Desktop\CTF\玄机刷题\README.md
+SHA256    485E66110EC5BA12D42F072AD9816EA19421D2ECEAF3E543E03BAC596B1D916A C:\Users\mzj\Desktop\CTF\玄机刷题\指南\玄机…
+
+**********************
+PowerShell transcript end
+End time: 20260929161612
+**********************
+**********************
+PowerShell transcript start
+Start time: 20260929161645
+Username: DESKTOP-412KTAR\mzj
+RunAs User: DESKTOP-412KTAR\mzj
+Configuration Name: 
+Machine: DESKTOP-412KTAR (Microsoft Windows NT 10.0.26200.0)
+Host Application: C:\Users\mzj\.cache\codex-runtimes\codex-primary-runtime\dependencies\native\powershell\pwsh.dll -Command try { [Console]::OutputEncoding=[System.Text.Encoding]::UTF8 } catch {}
+$project = 'C:\Users\mzj\Desktop\CTF\玄机刷题'
+$readme = Join-Path $project 'README.md'
+$guide = Join-Path $project '指南\玄机刷题指南_合并源.md'
+$transcript = Join-Path $project '记录\批次14_文档核验_2.txt'
+Start-Transcript -LiteralPath $transcript -Append | Out-Null
+Write-Output "COMMAND> Select-String -LiteralPath '$readme' -Pattern '#561|第十四批核验|48 道' | ForEach-Object { \"$($_.LineNumber):$($_.Line)\" }"
+Select-String -LiteralPath $readme -Pattern '#561|第十四批核验|48 道' | ForEach-Object { "$($_.LineNumber):$($_.Line)" }
+Write-Output "COMMAND> Select-String -LiteralPath '$guide' -Pattern '平台已完成（48 道）|当前共 48 道|527.*唧唧复唧唧|第十四批' | ForEach-Object { \"$($_.LineNumber):$($_.Line)\" }"
+Select-String -LiteralPath $guide -Pattern '平台已完成（48 道）|当前共 48 道|527.*唧唧复唧唧|第十四批' | ForEach-Object { "$($_.LineNumber):$($_.Line)" }
+Write-Output "COMMAND> Get-FileHash -LiteralPath '$readme','$guide' -Algorithm SHA256 | Format-Table Algorithm,Hash,Path -AutoSize"
+Get-FileHash -LiteralPath $readme,$guide -Algorithm SHA256 | Format-Table Algorithm,Hash,Path -AutoSize
+Stop-Transcript | Out-Null
+Process ID: 19236
+PSVersion: 7.6.5
+PSEdition: Core
+GitCommitId: 7.6.5
+OS: Microsoft Windows 10.0.26200
+Platform: Win32NT
+PSCompatibleVersions: 1.0, 2.0, 3.0, 4.0, 5.0, 5.1, 6.0, 7.0
+PSRemotingProtocolVersion: 2.4
+SerializationVersion: 1.1.0.1
+WSManStackVersion: 3.0
+**********************
+COMMAND> Select-String -LiteralPath 'C:\Users\mzj\Desktop\CTF\玄机刷题\README.md' -Pattern '#561|第十四批核验|48 道' | ForEach-Object { \
+:\ }
+19:《指南/玄机刷题指南_合并源.md》是状态与逐题 WP 的主索引；手册已同步列出 48 道平台接受题；平台当前已接受总数为 48 道；旧版 README 的 10 题统计已废止。第十一批的逐题验收状态见 `记录/提交核验_20260929_第十一批.md`。独立 WP 和过程补充保存在 `记录/`。
+35:第十四批核验：#527「唧唧复唧唧，木兰当户织」的 Base64 常量还原结果为 `flag{08174158-ccb5-4d03-93aa-9ef1}`；主代理已在玄机前台提交，平台显示“已完成”1/1并记录 slu_mzj 一血，当前接受总数由 47 更新为 48。#561 与 #562 仍未解决且不计入完成数；各自完整 WP 和分析资料保留在 `题目资料/批次14_20260929/561_OpenHarmony_secret/` 与 `题目资料/批次14_20260929/562_checker/`。#527 的完整 WP、附件、复现脚本、反汇编和命令输出记录见 `题目资料/批次14_20260929/527_木兰当户织/`。
+COMMAND> Select-String -LiteralPath 'C:\Users\mzj\Desktop\CTF\玄机刷题\指南\玄机刷题指南_合并源.md' -Pattern '平台已完成（48 道）|当前共 48 道|527.*唧唧复唧唧|第十四批' | ForEach-Object { \
+:\ }
+23:## 平台已完成（48 道）
+66:| 527 | 商丘师范学院第四届网络安全及信息对抗大赛 唧唧复唧唧，木兰当户织 | REVERSE / 中等 | 平台已接受、一血；Base64 还原并由程序输出闭环验证；flag：`flag{08174158-ccb5-4d03-93aa-9ef1}`；详见第十四批及 `题目资料/批次14_20260929/527_木兰当户织/` |
+80:**统计：本指南原收录 28 道，后续新增的 #367、#450、#451、#520、#551、#530、#531、#559、#588、#549、#558、#547、#548、#552、#539、#540、#535、#536、#537、#527 共 20 道均有逐题平台接受回执，当前共 48 道。现有证据可给出 46 道已完成题的 flag 候选或公开 Writeup 结果；Ancient-Recall 与 pwn-ezpwn 的最终 flag 输出仍缺失。#532、#533、#534、#538、#541、#546、#561、#562 均未获平台接受，不计入已完成总数；其中 #538 的程序输入约束矛盾使校验长度条件不可达。旧题若只有平台完成徽标或离线候选，仍与具体 flag 的提交回执分开标注。**
+2185:## 第十四批：中等难度题
+2187:本批 #527「唧唧复唧唧，木兰当户织」已通过玄机平台验证；#561、#562 仍未解决，不计入完成数，其完整 WP 与分析材料保留在各自题目资料目录中。
+2189:### #527 唧唧复唧唧，木兰当户织（平台已接受）
+COMMAND> Get-FileHash -LiteralPath 'C:\Users\mzj\Desktop\CTF\玄机刷题\README.md','C:\Users\mzj\Desktop\CTF\玄机刷题\指南\玄机刷题指南_合并源.md' -Algorithm SHA256 | Format-Table Algorithm,Hash,Path -AutoSize
+
+Algorithm Hash                                                             Path
+--------- ----                                                             ----
+SHA256    D5F5ABC3D0A46EEF9968DB10B75A5F888DC80BC1EF4915CD3BAB4868B1E684A0 C:\Users\mzj\Desktop\CTF\玄机刷题\README.md
+SHA256    485E66110EC5BA12D42F072AD9816EA19421D2ECEAF3E543E03BAC596B1D916A C:\Users\mzj\Desktop\CTF\玄机刷题\指南\玄机…
+
+**********************
+PowerShell transcript end
+End time: 20260929161645
+**********************

@@ -1,0 +1,289 @@
+玄机 #543《你知道Base么》完整静态分析命令与输出汇总
+约束：只静态读取与反汇编；没有执行附件，也没有连接/提交玄机平台。
+项目工作目录：C:\Users\mzj\Desktop\CTF
+
+I. 探查与文件类型确认（PowerShell）
+COMMAND> Get-Location; Get-ChildItem -Force '<题目目录>' | Select Mode,Length,Name; Get-FileHash -Algorithm SHA256 -LiteralPath '<原始RAR>' | Format-List
+OUTPUT> Path=C:\Users\mzj\Desktop\CTF
+OUTPUT> 题目目录仅见 originals 子目录
+OUTPUT> RAR SHA256=3FEC5E1930230660DCABDF0F31F4D97F8BB980D67306242D48A4377B74590801
+COMMAND> Get-Command 7z.exe,7za.exe,rar.exe,unrar.exe,tar.exe -ErrorAction SilentlyContinue | Select Name,Source
+OUTPUT> tar.exe C:\WINDOWS\system32\tar.exe（本机未发现7z/UnRAR）
+COMMAND> Format-Hex -LiteralPath '<原始RAR>' | Select-Object -First 3; tar.exe -tf '<原始RAR>'
+OUTPUT> 文件头字节 52 61 72 21 1A 07 01 00，即RAR5；第一次控制台中文显示乱码，随后用Python捕获tar原始stdout并按GBK解码校正。
+
+II. 安全归档清单与解压
+COMMAND> python .\玄机刷题\题目资料\批次10_20260929\543_Base\analysis\inventory_543.py
+OUTPUT> 两成员：你知道Base么/你知道Base么.exe（70144 bytes）；你知道Base么（目录项）。路径检查 members=2, members_safe=True, unsafe_members=[]。
+COMMAND> python .\玄机刷题\题目资料\批次10_20260929\543_Base\analysis\extract_543.py
+OUTPUT> tar.exe -xf <RAR> -C <新建空目录> -- '你知道Base么/你知道Base么.exe' '你知道Base么'；EXIT_CODE=0。
+OUTPUT> EXE SHA256=EF7DEACF6594E9353E934564B38761E8AAF614EBF39DCB17EFED36263DF2C773；70,144 bytes。
+
+III. PE静态分析（包括失败分支）
+COMMAND> python .\玄机刷题\题目资料\批次10_20260929\543_Base\analysis\static_543.py
+OUTPUT> strings/strings -el 成功；objdump 的 Unicode 源路径尝试失败，stderr 为 objdump: <中文路径>: No such file or directory。失败原日志与空输出均保留。
+原因与处理> MSYS2 objdump 对当前Unicode路径无法打开；未更改源文件。以 Python shutil.copyfile 复制到纯ASCII临时路径并核对SHA256后再调用objdump。
+COMMAND> python .\玄机刷题\题目资料\批次10_20260929\543_Base\analysis\static_543_ascii_retry.py
+OUTPUT> 源与ASCII副本SHA256同为 EF7DEACF6594E9353E934564B38761E8AAF614EBF39DCB17EFED36263DF2C773。
+OUTPUT> PE header/section/imports、ASCII/UTF16 strings、Intel完整反汇编均已生成；完整反汇编文件大小 1,083,898 bytes。
+OUTPUT> PE32+ amd64、ImageBase 0x140000000、入口RVA 0x11299、入口VA 0x140011299、Subsystem Windows CUI、TimeDate 2025-05-02 20:56:54。
+COMMAND> strings -a -t x -n 3 C:\Users\mzj\Desktop\CTF\challenge543_static.exe | Select-String 'input|error|Successful|failed|level|CTFer|key|Table|flag|%8s|%64s|%29s'
+OUTPUT> input1@0xa7b0, input3@0xa7d0, error!@0xaac8, Successful!@0xaad8, You are failed!!!@0xaae8, You have passed the second level!!@0xab00, Hello CTFer!@0xab30, give me your key@0xab48, %8s@0xab60, you failed!!!@0xab68, You have passed the first level!!!@0xab80, Where is my Base_Table???@0xabb0, Plz input your found Table:@0xabd0, %64s@0xabf4, Plz input Your flag:@0xac00, %29s@0xac1c。
+COMMAND> python .\玄机刷题\题目资料\批次10_20260929\543_Base\analysis\pe_layout_543.py
+OUTPUT> 完整section/RVA/raw偏移、任务字符串VA映射与直接反汇编引用在 analysis\pe_layout_string_map.txt；字符串引用指向 0x14001c148 等位置；控制流中 Base32编码器为0x140012ae0、RC4 KSA为0x140011d10、加法PRGA为0x140011ea0、逐字节对比为0x1400124f0/0x140012400。
+
+IV. 保留的失败尝试
+COMMAND> 一次把反斜杠+n作为字面字符传给 python -c 的多行代码尝试
+OUTPUT> SyntaxError: unexpected character after line continuation character；没有执行任何算法。改为保存 analysis\decrypt_543_key.py 并运行。
+COMMAND> objdump 使用Unicode源路径的第一次尝试
+OUTPUT> exit 1 / No such file or directory；完整stderr在 records\543_static_analysis_transcript.txt；没有文件损坏或写入。
+
+V. 关键候选与正向验证脚本
+COMMAND> python .\玄机刷题\题目资料\批次10_20260929\543_Base\analysis\decrypt_543_key.py
+OUTPUT> 解密 DWORD 0xa92f3865,0x9e60e953 得到 y0uokTea；32轮正向加密严格还原这两个 DWORD。
+COMMAND> python .\玄机刷题\题目资料\批次10_20260929\543_Base\analysis\derive_543_table_flag.py
+OUTPUT> 从反汇编立即数恢复64字节目标；以 y0uokTea 复现 RC4 KSA + 加法PRGA，逆得64字符 Base_Table。完整输出保存在 records\543_table_flag_derivation.txt。
+COMMAND> python .\玄机刷题\题目资料\批次10_20260929\543_Base\analysis\verify_543_end_to_end.py
+OUTPUT> 第一关正向精确匹配；RC4/additive 64/64字节匹配；完整30字节 flag 的48字符 Base32输出与内嵌目标48/48字节匹配。完整结果在 records\543_final_verification.txt。
+
+VI. ASCII临时副本清理尝试
+COMMAND> Remove-Item -LiteralPath 'C:\Users\mzj\Desktop\CTF\challenge543_static.exe' -Force
+OUTPUT> exec_command 在命令执行前返回 Rejected (blocked by policy)；命令未执行。后续只读检查确认临时副本仍存在，SHA256与项目内提取件相同。没有改用其他删除方式。
+
+逐次原生命令、退出码、stderr与标准输出文件清单：
+
+==============================================================================
+VERBATIM ATTACHED RECORD: 543_inventory_transcript.txt
+==============================================================================
+Xuanji #543 Base.rar safe inventory
+Purpose: inspect the archive directory before any extraction.
+No challenge executable was run.
+
+COMMAND> Get-FileHash -Algorithm SHA256 -LiteralPath C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\批次10_20260929\543_Base\originals\Base.rar
+OUTPUT> SHA256=3FEC5E1930230660DCABDF0F31F4D97F8BB980D67306242D48A4377B74590801
+
+COMMAND> tar.exe -tvf C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\批次10_20260929\543_Base\originals\Base.rar
+EXIT_CODE> 0
+OUTPUT_BEGIN
+-rw-r--r--  0 0      0       70144 5月 02  2025 你知道Base么/你知道Base么.exe
+drwxr-xr-x  0 0      0           0 5月 19  2025 你知道Base么
+OUTPUT_END
+
+COMMAND> tar.exe -tf C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\批次10_20260929\543_Base\originals\Base.rar
+EXIT_CODE> 0
+OUTPUT_BEGIN
+你知道Base么/你知道Base么.exe
+你知道Base么
+OUTPUT_END
+
+PATH_VALIDATION>
+members=2
+members_safe=True
+unsafe_members=[]
+Decision: do not extract unless members_safe=True and the member list is reviewed.
+
+==============================================================================
+VERBATIM ATTACHED RECORD: 543_extraction_transcript.txt
+==============================================================================
+Xuanji #543 reviewed-member extraction
+Safety: extracted only the two names from inventory_543.py; no executable was launched.
+Destination was empty before extraction: True
+COMMAND> tar.exe -xf C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\批次10_20260929\543_Base\originals\Base.rar -C C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\批次10_20260929\543_Base\analysis\unpacked -- 你知道Base么/你知道Base么.exe 你知道Base么
+EXIT_CODE> 0
+STDOUT_BEGIN
+
+STDOUT_END
+STDERR_BEGIN
+
+STDERR_END
+EXTRACTED_MEMBER_SHA256> EF7DEACF6594E9353E934564B38761E8AAF614EBF39DCB17EFED36263DF2C773
+EXTRACTED_TREE>
+你知道Base么 | size=0
+你知道Base么/你知道Base么.exe | size=70144
+
+==============================================================================
+VERBATIM ATTACHED RECORD: 543_static_analysis_transcript.txt
+==============================================================================
+Xuanji #543 static PE analysis transcript
+Scope: static parsing only. The challenge executable was never launched.
+Input: C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\批次10_20260929\543_Base\analysis\unpacked\你知道Base么\你知道Base么.exe
+
+COMMAND> objdump -f -x C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\批次10_20260929\543_Base\analysis\unpacked\你知道Base么\你知道Base么.exe
+EXIT_CODE> 1
+STDOUT_FILE> C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\批次10_20260929\543_Base\analysis\objdump_pe_header.txt
+STDOUT_BYTES> 0
+STDERR_BEGIN
+objdump: C:\Users\mzj\Desktop\CTF\����ˢ��\��Ŀ����\����10_20260929\543_Base\analysis\unpacked\��֪��Baseô\��֪��Baseô.exe: No such file or directory
+STDERR_END
+
+COMMAND> objdump -h C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\批次10_20260929\543_Base\analysis\unpacked\你知道Base么\你知道Base么.exe
+EXIT_CODE> 1
+STDOUT_FILE> C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\批次10_20260929\543_Base\analysis\objdump_sections.txt
+STDOUT_BYTES> 0
+STDERR_BEGIN
+objdump: C:\Users\mzj\Desktop\CTF\����ˢ��\��Ŀ����\����10_20260929\543_Base\analysis\unpacked\��֪��Baseô\��֪��Baseô.exe: No such file or directory
+STDERR_END
+
+COMMAND> objdump -p C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\批次10_20260929\543_Base\analysis\unpacked\你知道Base么\你知道Base么.exe
+EXIT_CODE> 1
+STDOUT_FILE> C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\批次10_20260929\543_Base\analysis\objdump_imports.txt
+STDOUT_BYTES> 0
+STDERR_BEGIN
+objdump: C:\Users\mzj\Desktop\CTF\����ˢ��\��Ŀ����\����10_20260929\543_Base\analysis\unpacked\��֪��Baseô\��֪��Baseô.exe: No such file or directory
+STDERR_END
+
+COMMAND> strings -a -n 3 C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\批次10_20260929\543_Base\analysis\unpacked\你知道Base么\你知道Base么.exe
+EXIT_CODE> 0
+STDOUT_FILE> C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\批次10_20260929\543_Base\analysis\strings_ascii.txt
+STDOUT_BYTES> 7782
+STDERR_BEGIN
+
+STDERR_END
+
+COMMAND> strings -a -el -n 3 C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\批次10_20260929\543_Base\analysis\unpacked\你知道Base么\你知道Base么.exe
+EXIT_CODE> 0
+STDOUT_FILE> C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\批次10_20260929\543_Base\analysis\strings_utf16le.txt
+STDOUT_BYTES> 278
+STDERR_BEGIN
+
+STDERR_END
+
+COMMAND> objdump -d -M intel -w C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\批次10_20260929\543_Base\analysis\unpacked\你知道Base么\你知道Base么.exe
+EXIT_CODE> 1
+STDOUT_FILE> C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\批次10_20260929\543_Base\analysis\objdump_disassembly_intel.txt
+STDOUT_BYTES> 0
+STDERR_BEGIN
+objdump: C:\Users\mzj\Desktop\CTF\����ˢ��\��Ŀ����\����10_20260929\543_Base\analysis\unpacked\��֪��Baseô\��֪��Baseô.exe: No such file or directory
+STDERR_END
+
+==============================================================================
+VERBATIM ATTACHED RECORD: 543_static_analysis_retry_transcript.txt
+==============================================================================
+Xuanji #543 static PE analysis retry transcript
+Reason: first objdump attempt against the Unicode path failed with 'No such file or directory'; original log/output preserved.
+Copy action: Python shutil.copyfile(SOURCE, TEMP), byte-for-byte hash checked.
+Source SHA256=EF7DEACF6594E9353E934564B38761E8AAF614EBF39DCB17EFED36263DF2C773
+ASCII-copy SHA256=EF7DEACF6594E9353E934564B38761E8AAF614EBF39DCB17EFED36263DF2C773
+All following commands are static parsers/readers. The executable was never launched.
+
+COMMAND> objdump -f -x C:\Users\mzj\Desktop\CTF\challenge543_static.exe
+EXIT_CODE> 0
+STDOUT_FILE> C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\批次10_20260929\543_Base\analysis\objdump_pe_header_ascii.txt
+STDOUT_BYTES> 10851
+STDERR_BEGIN
+
+STDERR_END
+
+COMMAND> objdump -h C:\Users\mzj\Desktop\CTF\challenge543_static.exe
+EXIT_CODE> 0
+STDOUT_FILE> C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\批次10_20260929\543_Base\analysis\objdump_sections_ascii.txt
+STDOUT_BYTES> 1503
+STDERR_BEGIN
+
+STDERR_END
+
+COMMAND> objdump -p C:\Users\mzj\Desktop\CTF\challenge543_static.exe
+EXIT_CODE> 0
+STDOUT_FILE> C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\批次10_20260929\543_Base\analysis\objdump_imports_ascii.txt
+STDOUT_BYTES> 9206
+STDERR_BEGIN
+
+STDERR_END
+
+COMMAND> strings -a -n 3 C:\Users\mzj\Desktop\CTF\challenge543_static.exe
+EXIT_CODE> 0
+STDOUT_FILE> C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\批次10_20260929\543_Base\analysis\strings_ascii_ascii.txt
+STDOUT_BYTES> 7782
+STDERR_BEGIN
+
+STDERR_END
+
+COMMAND> strings -a -el -n 3 C:\Users\mzj\Desktop\CTF\challenge543_static.exe
+EXIT_CODE> 0
+STDOUT_FILE> C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\批次10_20260929\543_Base\analysis\strings_utf16le_ascii.txt
+STDOUT_BYTES> 278
+STDERR_BEGIN
+
+STDERR_END
+
+COMMAND> objdump -d -M intel -w C:\Users\mzj\Desktop\CTF\challenge543_static.exe
+EXIT_CODE> 0
+STDOUT_FILE> C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\批次10_20260929\543_Base\analysis\objdump_disassembly_intel_ascii.txt
+STDOUT_BYTES> 1083898
+STDERR_BEGIN
+
+STDERR_END
+
+==============================================================================
+VERBATIM ATTACHED RECORD: 543_key_decrypt_trace.txt
+==============================================================================
+First-level target output dwords from main: 0xa92f3865 and 0x9e60e953.
+Main passes data as two little-endian DWORDs; key words are 12345678,3456789a,89abcdef,12345678.
+Round: sum+=0x9e3779b9; v0+=mix(v1,sum,k0,k1); v1+=mix(v0,sum,k2,k3), modulo 2^32.
+mix(y,sum,a,b)=((y<<4)+a) XOR (y+sum) XOR ((y>>5)+b), modulo 2^32 on additions.
+DEC round 32: sum=0xc6ef3720 a92f3865,9e60e953 -> c4e09883,2263fdd2
+DEC round 31: sum=0x28b7bd67 c4e09883,2263fdd2 -> bee277c9,ffeda509
+DEC round 02: sum=0x3c6ef372 ccb599e9,19011c5f -> 4fea20aa,d44539fc
+DEC round 01: sum=0x9e3779b9 4fea20aa,d44539fc -> 6f753079,6165546b
+Decrypted words: 0x6f753079, 0x6165546b
+Little-endian input bytes: 79 30 75 6f 6b 54 65 61
+Input representation: b'y0uokTea'
+Forward check: 0xa92f3865, 0x9e60e953
+Forward matches embedded target: True
+All eight bytes printable ASCII: True
+
+==============================================================================
+VERBATIM ATTACHED RECORD: 543_table_flag_derivation.txt
+==============================================================================
+Base_Table and flag derivation from PE immediates; no binary execution.
+RC4/additive key: b'y0uokTea' (8 bytes from verified first-level inverse).
+Encrypted 64-byte table hex: d4592376b4bfe32c588f5619daf0c0bd363d7b461bb8171fe3d00345cd04edc967e6ab29a7bc0bde5c3071d7d55ac69f4065c471a9c3aed9b5e5128c80523436
+64-byte keystream hex: 6d03abff45797bdcdf3b27c08dc07e72d3f51612b980d0dc8e768fd95fb89697149c5cf47673c66cf10500a15fe0563ed301831f518a3b7067a1df172feccaff
+Operation in target: out[i]=(in[i]+keystream[i]) mod 256.
+Inverse: in[i]=(target[i]-keystream[i]) mod 256.
+Recovered table bytes: b'gVxwoFhPyT/YM0BKcHe4b8GCUZtlnLW2SJO51IErk+q6vzpamdARX9siND3uQfj7'
+Recovered table ASCII view: gVxwoFhPyT/YM0BKcHe4b8GCUZtlnLW2SJO51IErk+q6vzpamdARX9siND3uQfj7
+Recovered table hex: 675678776f46685079542f594d30424b6348653462384743555a746c6e4c5732534a4f35314945726b2b7136767a70616d644152583973694e44337551666a37
+All table bytes printable ASCII: True
+Alphabet used by encoder (table[1:33]): b'VxwoFhPyT/YM0BKcHe4b8GCUZtlnLW2S'
+Alphabet length: 32, unique entries: 32
+Expected 64-byte transformed table forward check: d4592376b4bfe32c588f5619daf0c0bd363d7b461bb8171fe3d00345cd04edc967e6ab29a7bc0bde5c3071d7d55ac69f4065c471a9c3aed9b5e5128c80523436
+Forward matches embedded table: True
+Embedded Base32-like output bytes (48): b'0tCPwtnncFZyYUlSK/4Cw0/echcG2lteBWnG2Ulw0htCYTMW'
+Embedded output as ASCII: 0tCPwtnncFZyYUlSK/4Cw0/echcG2lteBWnG2Ulw0htCYTMW
+Target chars missing from alphabet: b''
+Decoded bytes from all 48 output chars: b'flag{y0u__rea11y__k1ow__Base!}'
+Decoded bytes hex: 666c61677b7930755f5f7265613131795f5f6b316f775f5f42617365217d
+Decoded length: 30
+Decoded bytes without trailing zero: b'flag{y0u__rea11y__k1ow__Base!}'
+Decoded text without trailing zero: flag{y0u__rea11y__k1ow__Base!}
+
+==============================================================================
+VERBATIM ATTACHED RECORD: 543_final_verification.txt
+==============================================================================
+Challenge #543 static end-to-end closure; executable never launched.
+First-level key bytes: b'y0uokTea'
+First-level key ASCII: y0uokTea
+Forward 32-round block result: ['0xa92f3865', '0x9e60e953']
+Expected target words: ['0xa92f3865', '0x9e60e953']
+First-level exact match: True
+Embedded 64-byte second-stage target: d4592376b4bfe32c588f5619daf0c0bd363d7b461bb8171fe3d00345cd04edc967e6ab29a7bc0bde5c3071d7d55ac69f4065c471a9c3aed9b5e5128c80523436
+RC4/additive keystream: 6d03abff45797bdcdf3b27c08dc07e72d3f51612b980d0dc8e768fd95fb89697149c5cf47673c66cf10500a15fe0563ed301831f518a3b7067a1df172feccaff
+Recovered 64-byte Base_Table: gVxwoFhPyT/YM0BKcHe4b8GCUZtlnLW2SJO51IErk+q6vzpamdARX9siND3uQfj7
+Base_Table length / printable / unique: 64 / True / 64
+Alphabet selected by assembly (table[1:33]): VxwoFhPyT/YM0BKcHe4b8GCUZtlnLW2S
+Alphabet length and uniqueness: 32 / 32
+Additive RC4 forward output: d4592376b4bfe32c588f5619daf0c0bd363d7b461bb8171fe3d00345cd04edc967e6ab29a7bc0bde5c3071d7d55ac69f4065c471a9c3aed9b5e5128c80523436
+64-byte forward match: True
+Embedded Base32-like target (48 bytes): 0tCPwtnncFZyYUlSK/4Cw0/echcG2lteBWnG2Ulw0htCYTMW
+Decoded exact 30-byte candidate: flag{y0u__rea11y__k1ow__Base!}
+Full candidate Base32 forward output: 0tCPwtnncFZyYUlSK/4Cw0/echcG2lteBWnG2Ulw0htCYTMW
+Full 48-byte match: True
+29-byte prefix (for local scanf cap): flag{y0u__rea11y__k1ow__Base!
+29-byte prefix forward output begins: 0tCPwtnncFZyYUlSK/4Cw0/echcG2l
+Comparator range from disassembly: 30 bytes (i=0..29)
+Prefix matches locally compared target: True
+Caveat: scanf format is %29s (max 29 ASCII bytes); the complete platform candidate is recovered from the embedded 48-byte target and is 30 bytes. The static comparator only checks first 30 encoded bytes, which makes the local interactive check weaker than the embedded full target.
+
+附属原始静态分析输出：analysis\objdump_pe_header_ascii.txt、objdump_sections_ascii.txt、objdump_imports_ascii.txt、strings_ascii_ascii.txt、strings_utf16le_ascii.txt、objdump_disassembly_intel_ascii.txt、pe_layout_string_map.txt。
+说明：objdump_Disassembly保存完整1MB输出。探索时的地址区间查询可直接按目标地址从完整反汇编重现；本汇总同时保留每项分析的专用命令脚本与解释性输出。

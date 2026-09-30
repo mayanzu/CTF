@@ -1,0 +1,294 @@
+**********************
+PowerShell transcript start
+Start time: 20260929165334
+Username: DESKTOP-412KTAR\mzj
+RunAs User: DESKTOP-412KTAR\mzj
+Configuration Name: 
+Machine: DESKTOP-412KTAR (Microsoft Windows NT 10.0.26200.0)
+Host Application: C:\Users\mzj\.cache\codex-runtimes\codex-primary-runtime\dependencies\native\powershell\pwsh.dll -NoProfile -Command try { [Console]::OutputEncoding=[System.Text.Encoding]::UTF8 } catch {}
+$ErrorActionPreference='Continue';$project='C:\Users\mzj\Desktop\CTF\玄机刷题';$log=Join-Path $project '记录\完成徽标题_缺口检索_20260929.txt';Start-Transcript -LiteralPath $log -Force|Out-Null
+$terms=@('Poisoned','闸机票根','联号回执','五格电文','外泄流量','不劳春风','ezRe','rainbow','OpenHarmony secret','OpenHarmony arkt','OpenHarmony easyre','黄河流域公安院校网络安全技能挑战赛R','qgd','Victory_Melody','tradre','butterfly','帕鲁迷宫','PositionalXOR','ParlooChecker','PaluGOGOGO','PaluArray','CatchPalu','ezBase-202505','湘岚杯1997','湘岚杯ezbase','遇事不决','人生自古谁无死','你若安好','看山不是山','即随本心','远程诊断配置','AURIX Shadow','不安全的远程桌面','被入侵的数据库','CVE-2025-58360','mediadrive','DMZ_windows','true_or_false','crypto-LUC','MiracleStruct','BlindFlowanalyis')
+Write-Output 'COMMAND> search filenames and guide text for completed task titles with uncertain local crosswalk'
+$roots=@($project,'C:\Users\mzj\Desktop\CTF\labs\platform\attachments','D:\Downloads');$fileHits=@();foreach($r in $roots){if(Test-Path -LiteralPath $r){$fileHits+=Get-ChildItem -LiteralPath $r -File -Recurse -Force -ErrorAction SilentlyContinue|Where-Object{$_.FullName -notmatch '\\(__pycache__|node_modules|\.git)\\'}}};$g=Join-Path $project '指南\玄机刷题指南_合并源.md';foreach($t in $terms){$hits=@($fileHits|Where-Object{$_.FullName -match [regex]::Escape($t)}|Select-Object -First 8|ForEach-Object{$_.FullName+' ['+$_.Length+' B]'});$guideHits=@(Select-String -LiteralPath $g -SimpleMatch -Pattern $t -ErrorAction SilentlyContinue|Select-Object -First 2|ForEach-Object{'L'+$_.LineNumber+': '+$_.Line.Trim()});Write-Output "TERM $t";if($hits.Count){$hits|ForEach-Object{' FILE '+$_}}else{Write-Output ' FILE [none by filename/path]'};if($guideHits.Count){$guideHits|ForEach-Object{' GUIDE '+$_}}else{Write-Output ' GUIDE [none]'}}
+Stop-Transcript|Out-Null;Write-Output "TRANSCRIPT=$log"
+Process ID: 43124
+PSVersion: 7.6.5
+PSEdition: Core
+GitCommitId: 7.6.5
+OS: Microsoft Windows 10.0.26200
+Platform: Win32NT
+PSCompatibleVersions: 1.0, 2.0, 3.0, 4.0, 5.0, 5.1, 6.0, 7.0
+PSRemotingProtocolVersion: 2.4
+SerializationVersion: 1.1.0.1
+WSManStackVersion: 3.0
+**********************
+COMMAND> search filenames and guide text for completed task titles with uncertain local crosswalk
+TERM Poisoned
+ FILE C:\Users\mzj\Desktop\CTF\玄机刷题\labs\platform\solve_591_poisoned_samples.py [1814 B]
+ FILE C:\Users\mzj\Desktop\CTF\玄机刷题\labs\platform\attachments\591-poisoned-samples.zip [1658 B]
+ FILE C:\Users\mzj\Desktop\CTF\玄机刷题\labs\platform\attachments\591-poisoned-samples\poisoned_samples_bundle\metadata.json [160 B]
+ FILE C:\Users\mzj\Desktop\CTF\玄机刷题\labs\platform\attachments\591-poisoned-samples\poisoned_samples_bundle\README.txt [205 B]
+ FILE C:\Users\mzj\Desktop\CTF\玄机刷题\labs\platform\attachments\591-poisoned-samples\poisoned_samples_bundle\train_samples.csv [1563 B]
+ FILE C:\Users\mzj\Desktop\CTF\labs\platform\attachments\591-poisoned-samples.zip [1658 B]
+ FILE C:\Users\mzj\Desktop\CTF\labs\platform\attachments\591-poisoned-samples\poisoned_samples_bundle\metadata.json [160 B]
+ FILE C:\Users\mzj\Desktop\CTF\labs\platform\attachments\591-poisoned-samples\poisoned_samples_bundle\README.txt [205 B]
+ GUIDE L31: | 591 | 2026安网杯-Poisoned Samples | AI / 中等 | ZIP、求解器及本地复现输出齐全 |
+ GUIDE L1545: ## 13. 2026安网杯—Poisoned Samples（ID 591，AI / 中等）
+TERM 闸机票根
+ FILE D:\Downloads\闸机票根附件.zip [2549 B]
+ GUIDE L33: | 589 | 2026安网杯-闸机票根 | REVERSE / 中等 | ELF 附件、RC4 求解器及本地复现输出齐全 |
+ GUIDE L1564: ## 14. 2026安网杯—闸机票根（ID 589，REVERSE / 中等）
+TERM 联号回执
+ FILE D:\Downloads\联号回执附件.zip [1478 B]
+ GUIDE L35: | 587 | 2026安网杯-联号回执 | Crypto / 中等 | ZIP 附件、RSA 求解器及本地复现输出齐全 |
+ GUIDE L1577: ## 15. 2026安网杯—联号回执（ID 587，Crypto / 中等）
+TERM 五格电文
+ FILE D:\Downloads\五格电文附件.zip [1163 B]
+ GUIDE L36: | 586 | 2026安网杯-五格电文 | Crypto / 中等 | ZIP 附件、编码器逆变换及本地复现输出齐全 |
+ GUIDE L1591: ## 16. 2026安网杯—五格电文（ID 586，Crypto / 中等）
+TERM 外泄流量
+ FILE D:\Downloads\外泄流量取证附件.zip [57931 B]
+ GUIDE L40: | 581 | 2026安网杯-外泄流量取证 | MISC / 中等 | PCAP 附件、提取器及本地复现输出齐全 |
+ GUIDE L1605: ## 17. 2026安网杯—外泄流量取证（ID 581，MISC / 中等）
+TERM 不劳春风
+ FILE C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\不劳春风解我忧\main.exe [62976 B]
+ FILE C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\不劳春风解我忧\solve_xxtea.py [1920 B]
+ GUIDE L42: | — | 商丘师范学院第四届网络安全及信息对抗大赛（校外赛）不劳春风解我忧 | REVERSE / 中等 | 样本、XXTEA 解密/重加密脚本和候选输出齐全；无原平台回执 |
+ GUIDE L88: - ezRe、rainbow、note、go_for_it 和“不劳春风解我忧”保留离线候选与对应代码/日志；旧终端记录或当前题目页未能确认同一串候选当时的提交回执，相关表述严格限定为“本地解出候选”或“平台完成徽标”。
+TERM ezRe
+ FILE C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\ezBase_541\ezBase\ezre.exe [9216 B]
+ FILE C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\ezBase_541\runshim\ezre.exe [9216 B]
+ FILE C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\ezBase_541\附件_平台原件\解压复核_20260929\ezBase\ezre.exe [9216 B]
+ FILE C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\ezRe\33.exe [5935851 B]
+ FILE C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\ezRe\extract_pyi.py [1390 B]
+ FILE C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\ezRe\pyi_toc.py [1522 B]
+ FILE C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\ezRe\pyi_extracted\_bz2.pyd.bin [86704 B]
+ FILE C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\ezRe\pyi_extracted\_decimal.pyd.bin [271024 B]
+ GUIDE L43: | — | 商丘师范学院第四届网络安全及信息对抗大赛 ezRe | REVERSE / 中等 | PyInstaller 样本和 marshal 字节码齐全；有 Base64 候选，无独立程序验证/平台回执 |
+ GUIDE L88: - ezRe、rainbow、note、go_for_it 和“不劳春风解我忧”保留离线候选与对应代码/日志；旧终端记录或当前题目页未能确认同一串候选当时的提交回执，相关表述严格限定为“本地解出候选”或“平台完成徽标”。
+TERM rainbow
+ FILE C:\Users\mzj\Desktop\CTF\玄机刷题\记录\代理-Rainbow-终端记录.txt [25148 B]
+ FILE C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\rainbow\分析记录.md [2635 B]
+ FILE C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\rainbow\分析脚本\rainbow_verify_key.py [1296 B]
+ FILE C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\rainbow\分析脚本\rainbow_xor_decrypt.py [886 B]
+ FILE C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\rainbow\附件\output.txt [103 B]
+ FILE C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\rainbow\附件\rainbow [16976 B]
+ FILE C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\原始下载附件\rainbow.zip [4038 B]
+ FILE D:\Downloads\rainbow.zip [4038 B]
+ GUIDE L44: | 564 | 第一届启航杯 rainbow | REVERSE / 中等 | 平台筛选显示已完成；本地有分析记录与复现脚本 |
+ GUIDE L88: - ezRe、rainbow、note、go_for_it 和“不劳春风解我忧”保留离线候选与对应代码/日志；旧终端记录或当前题目页未能确认同一串候选当时的提交回执，相关表述严格限定为“本地解出候选”或“平台完成徽标”。
+TERM OpenHarmony secret
+ FILE [none by filename/path]
+ GUIDE L2111: #532《人生自古谁无死》的两个已提交候选均无平台完成回执，需新的独立证据后再决定；#546《PaluArray》的静态候选被平台明确拒绝，需解释二进制推导与平台 flag 不一致的原因；#561《第一届OpenHarmony secret》的 pattern 闭环已复核，但题内 MD5 示例与明文公式不符，现有候选也未获平台确认；#562 checker 的 ZIP 与 checker.exe 副本哈希一致，静态复核仍得到已被拒绝的同一候选；#541《ezBase》本批静态逆向候选被前台平台拒绝，且附件比较常量存在填充分支歧义，暂不盲目重交。这五题都不计入已完成总数。
+TERM OpenHarmony arkt
+ FILE [none by filename/path]
+ GUIDE L46: | 559 | 第一届 OpenHarmony arkt | REVERSE / 中等 | 平台已接受；HAP/ABC 溯源、双实现复现及 38 项正向校验齐全 |
+ GUIDE L2027: ## #559 第一届 OpenHarmony arkt
+TERM OpenHarmony easyre
+ FILE [none by filename/path]
+ GUIDE [none]
+TERM 黄河流域公安院校网络安全技能挑战赛R
+ FILE [none by filename/path]
+ GUIDE [none]
+TERM qgd
+ FILE C:\Users\mzj\Desktop\CTF\玄机刷题\labs\platform\solve_qgd.py [2529 B]
+ FILE C:\Users\mzj\Desktop\CTF\玄机刷题\labs\platform\attachments\557-qgd.zip [909049 B]
+ FILE C:\Users\mzj\Desktop\CTF\labs\platform\attachments\557-qgd.zip [909049 B]
+ FILE D:\Downloads\qgd.zip [909049 B]
+ GUIDE L48: | 557 | 第三届黄河流域公安院校网络安全技能挑战赛 qgd | REVERSE / 中等 | ZIP、双分支求解器、SHA-256 校验及本地输出齐全 |
+ GUIDE L1620: ## 18. 第三届黄河流域公安院校赛—qgd（ID 557，REVERSE / 中等）
+TERM Victory_Melody
+ FILE C:\Users\mzj\Desktop\CTF\玄机刷题\记录\Victory_Melody_555-终端记录.txt [62310 B]
+ FILE C:\Users\mzj\Desktop\CTF\玄机刷题\记录\Victory_Melody_555-WP.md [7336 B]
+ FILE C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\Victory_Melody_555\Victory_Melody.exe [64512 B]
+ FILE C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\原始下载附件\Victory_Melody.zip [13676 B]
+ FILE D:\Downloads\Victory_Melody.zip [13676 B]
+ GUIDE L50: | 555 | 第三届黄河流域公安院校网络安全技能挑战赛 Victory_Melody | REVERSE / 中等 | 平台已完成；本指南有逐步记录 |
+ GUIDE L194: ## 12. Victory_Melody（ID 555，REVERSE / 中等）
+TERM tradre
+ FILE C:\Users\mzj\Desktop\CTF\玄机刷题\记录\tradre-分析过程记录.md [6680 B]
+ FILE C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\tradre\分析脚本\libtradre_ptrace_logger.so [15944 B]
+ FILE C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\tradre\分析脚本\libtradre_trap_shim.so [15712 B]
+ FILE C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\tradre\分析脚本\tradre_decrypt_flag.ps1 [1214 B]
+ FILE C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\tradre\分析脚本\tradre_ptrace_logger.c [2056 B]
+ FILE C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\tradre\分析脚本\tradre_ptrace_trace.log [2047778 B]
+ FILE C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\tradre\分析脚本\tradre_trap_shim.c [647 B]
+ FILE C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\tradre\附件\tradre [29160 B]
+ GUIDE L51: | 554 | 第九届“强网杯”全国网络安全挑战赛 tradre | REVERSE / 中等 | 平台已完成；本指南有逐步记录 |
+ GUIDE L170: ## 9. tradre（ID 554，REVERSE / 中等）
+TERM butterfly
+ FILE C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\butterfly_552\wp.md [17473 B]
+ FILE C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\butterfly_552\analysis\audit_tail_framing.py [528 B]
+ FILE C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\butterfly_552\analysis\audit_tail_math.py [2965 B]
+ FILE C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\butterfly_552\analysis\commands_output.log [120676 B]
+ FILE C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\butterfly_552\analysis\decode_flag.py [3220 B]
+ FILE C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\butterfly_552\analysis\enumerate_tail.py [1302 B]
+ FILE C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\butterfly_552\analysis\independent_verify.py [2906 B]
+ FILE C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\butterfly_552\analysis\inspect_buffer_calls.py [440 B]
+ GUIDE L52: | 552 | 第九届“强网杯”全国网络安全挑战赛 Butterfly | REVERSE / 中等 | 平台已接受；8 字节块变换逆算、36 字节正向闭环与完整命令记录齐全 |
+ GUIDE L2117: ### #552 Butterfly（平台已接受）
+TERM 帕鲁迷宫
+ FILE [none by filename/path]
+ GUIDE L53: | 551 | 第二届 Parloo 杯「帕鲁迷宫」 | REVERSE / 中等 | 本批平台已验证；完整路线、平局分析与复放记录齐全 |
+ GUIDE L1819: ## 29. 第二届 Parloo 杯「帕鲁迷宫」（ID 551，REVERSE / 中等）
+TERM PositionalXOR
+ FILE C:\Users\mzj\Desktop\CTF\玄机刷题\记录\PositionalXOR_550-终端记录.txt [10266 B]
+ FILE C:\Users\mzj\Desktop\CTF\玄机刷题\记录\PositionalXOR_550-WP.md [10056 B]
+ FILE C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\PositionalXOR_550\analysis\recovered_flag.txt [26 B]
+ FILE C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\PositionalXOR_550\附件\encrypted_flag.bin [26 B]
+ GUIDE L54: | 550 | 第二届 Parloo 杯 PositionalXOR | REVERSE / 中等 | 平台已完成；本指南有逐步记录 |
+ GUIDE L186: ## 11. PositionalXOR（ID 550，REVERSE / 中等）
+TERM ParlooChecker
+ FILE C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\ParlooChecker_549\wp.md [10701 B]
+ FILE C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\ParlooChecker_549\analysis\analyze_app_strings.py [1331 B]
+ FILE C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\ParlooChecker_549\analysis\app_string_analysis.txt [24367 B]
+ FILE C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\ParlooChecker_549\analysis\classes3_strings_full.txt [59425 B]
+ FILE C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\ParlooChecker_549\analysis\classes3_strings.txt [1180 B]
+ FILE C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\ParlooChecker_549\analysis\commands_output.log [181850 B]
+ FILE C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\ParlooChecker_549\analysis\decode_dex_switches.py [4179 B]
+ FILE C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\ParlooChecker_549\analysis\dex_disassembly_fixed.txt [38254 B]
+ GUIDE L55: | 549 | 第二届 Parloo 杯 ParlooChecker | REVERSE / 中等 | 平台已接受；APK/native 静态逆向、CBC 重加密验证齐全 |
+ GUIDE L2082: ## #549 第二届 Parloo 杯 ParlooChecker
+TERM PaluGOGOGO
+ FILE C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\PaluGOGOGO_548\wp.md [12086 B]
+ FILE C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\PaluGOGOGO_548\analysis\audit_independent_output.txt [2506 B]
+ FILE C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\PaluGOGOGO_548\analysis\audit_independent_transcript.txt [4231 B]
+ FILE C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\PaluGOGOGO_548\analysis\audit_independent.py [6926 B]
+ FILE C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\PaluGOGOGO_548\analysis\commands_output.log [199197 B]
+ FILE C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\PaluGOGOGO_548\analysis\decode_go_constants.py [1069 B]
+ FILE C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\PaluGOGOGO_548\analysis\decoded_constants.txt [1384 B]
+ FILE C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\PaluGOGOGO_548\analysis\disasm_checkFlag.txt [10344 B]
+ GUIDE L56: | 548 | 第二届 Parloo 杯 PaluGOGOGO | REVERSE / 中等 | 平台已接受；Go math/rand 状态恢复、常量逆变换及 84 字节正向闭环齐全 |
+ GUIDE L2090: ## 第九批：PaluFlat、PaluGOGOGO 与 PaluArray
+TERM PaluArray
+ FILE C:\Users\mzj\Desktop\CTF\玄机刷题\记录\代理-PaluArray-独立复核终端记录.txt [61999 B]
+ FILE C:\Users\mzj\Desktop\CTF\玄机刷题\记录\代理-PaluArray-终端记录.txt [92970 B]
+ FILE C:\Users\mzj\Desktop\CTF\玄机刷题\记录\代理-PaluArray-MD5复核终端记录.txt [257885 B]
+ FILE C:\Users\mzj\Desktop\CTF\玄机刷题\记录\限时攻关-PaluArray-终端记录.txt [118698 B]
+ FILE C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\PaluArray_546\check_md5_constants.py [307 B]
+ FILE C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\PaluArray_546\check_re_tools.py [180 B]
+ FILE C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\PaluArray_546\disassemble_core_funcs.py [807 B]
+ FILE C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\PaluArray_546\disassemble_entry.py [1155 B]
+ GUIDE L2090: ## 第九批：PaluFlat、PaluGOGOGO 与 PaluArray
+ GUIDE L2104: ### #546 第二届 Parloo 杯 PaluArray（仍未解决）
+TERM CatchPalu
+ FILE C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\CatchPalu_545\wp.md [8921 B]
+ FILE C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\CatchPalu_545\analysis\archive_check_output.txt [278 B]
+ FILE C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\CatchPalu_545\analysis\archive_check.py [624 B]
+ FILE C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\CatchPalu_545\analysis\commands_output.log [176082 B]
+ FILE C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\CatchPalu_545\analysis\data_dump.txt [2096 B]
+ FILE C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\CatchPalu_545\analysis\disassembly.txt [91022 B]
+ FILE C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\CatchPalu_545\analysis\input_path_branch_target.txt [2058 B]
+ FILE C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\CatchPalu_545\analysis\input_path_linear.txt [2242 B]
+ GUIDE [none]
+TERM ezBase-202505
+ FILE C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\原始下载附件\ezBase-20250521104055-dq14shk.rar [7833 B]
+ FILE C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\批次11_20260929\541_ezBase\originals\ezBase-20250521104055-dq14shk (2).rar [7833 B]
+ FILE D:\Downloads\ezBase-20250521104055-dq14shk (1).rar [7833 B]
+ FILE D:\Downloads\ezBase-20250521104055-dq14shk (2).rar [7833 B]
+ FILE D:\Downloads\ezBase-20250521104055-dq14shk.rar [7833 B]
+ GUIDE [none]
+TERM 湘岚杯1997
+ FILE C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\批次13_20260929\538_湘岚杯1997\README.md [1041 B]
+ FILE C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\批次13_20260929\538_湘岚杯1997\wp.md [8441 B]
+ FILE C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\批次13_20260929\538_湘岚杯1997\analysis\123.exe [63228 B]
+ FILE C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\批次13_20260929\538_湘岚杯1997\analysis\538_custom_aes_verify.py [5021 B]
+ FILE C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\批次13_20260929\538_湘岚杯1997\analysis\538_decrypt_verify.py [1369 B]
+ FILE C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\批次13_20260929\538_湘岚杯1997\analysis\538_objdump_aes_encrypt.txt [13541 B]
+ FILE C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\批次13_20260929\538_湘岚杯1997\analysis\538_objdump_data.txt [3106 B]
+ FILE C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\批次13_20260929\538_湘岚杯1997\analysis\538_objdump_headers.txt [108731 B]
+ GUIDE L2164: 本批从玄机“全部”列表确认三道免费、中等 REVERSE 题：#533「圣人当仁不让」、#537「湘岚杯ezbase」、#538「湘岚杯1997」。本批只有 #537 获平台接受；#533 仍未解决，#538 因程序输入约束矛盾而没有可提交 flag。后二题均不计入平台已完成数。
+ GUIDE L2184: - **#538 湘岚杯1997：** 独立静态逆变换的 32 字节前像虽可正向重加密匹配目标，但第 28 字节为 `0x20` 空格。输入由 `scanf("%s")` 读取，空格会提前结束输入，故程序随后要求的长度 32 条件不可达；没有可提交 flag，本批未提交，不计入已完成题数。
+TERM 湘岚杯ezbase
+ FILE C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\批次13_20260929\537_湘岚杯ezbase\平台核验.md [563 B]
+ FILE C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\批次13_20260929\537_湘岚杯ezbase\README.md [1276 B]
+ FILE C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\批次13_20260929\537_湘岚杯ezbase\wp.md [7849 B]
+ FILE C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\批次13_20260929\537_湘岚杯ezbase\analysis\537_base64_main_disassembly.txt [16384 B]
+ FILE C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\批次13_20260929\537_湘岚杯ezbase\analysis\537_static_analysis_transcript.txt [124750 B]
+ FILE C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\批次13_20260929\537_湘岚杯ezbase\analysis\ezbase_names_restored.exe [40719 B]
+ FILE C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\批次13_20260929\537_湘岚杯ezbase\analysis\ezbase_unpacked_disassembly_full.txt [225200 B]
+ FILE C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\批次13_20260929\537_湘岚杯ezbase\analysis\ezbase_unpacked_disassembly.txt [13246 B]
+ GUIDE L60: | 537 | 湘岚杯ezbase | REVERSE / 中等 | 平台已接受；自定义 Base64 逆变换、正向闭环及前台一血 |
+ GUIDE L2164: 本批从玄机“全部”列表确认三道免费、中等 REVERSE 题：#533「圣人当仁不让」、#537「湘岚杯ezbase」、#538「湘岚杯1997」。本批只有 #537 获平台接受；#533 仍未解决，#538 因程序输入约束矛盾而没有可提交 flag。后二题均不计入平台已完成数。
+TERM 遇事不决
+ FILE C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\批次12_20260929\536_遇事不决可问春风\README.md [4810 B]
+ FILE C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\批次12_20260929\536_遇事不决可问春风\wp.md [5261 B]
+ FILE C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\批次12_20260929\536_遇事不决可问春风\analysis\analyze_dex.py [11691 B]
+ FILE C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\批次12_20260929\536_遇事不决可问春风\analysis\apk_audit_report.txt [2902 B]
+ FILE C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\批次12_20260929\536_遇事不决可问春风\analysis\apk_contents_index.txt [49942 B]
+ FILE C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\批次12_20260929\536_遇事不决可问春风\analysis\app-debug.apk [4609869 B]
+ FILE C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\批次12_20260929\536_遇事不决可问春风\analysis\audit_apk.py [1573 B]
+ FILE C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\批次12_20260929\536_遇事不决可问春风\analysis\command_transcript_20260929.txt [173319 B]
+ GUIDE L62: | 536 | 商丘师范学院第四届网络安全及信息对抗大赛 遇事不决，可问春风 | REVERSE / 中等 | 平台已接受；DEX XOR 逆向、opcode 独立复核及平台一血 |
+ GUIDE L2155: ### #536 遇事不决，可问春风（平台已接受）
+TERM 人生自古谁无死
+ FILE C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\人生自古谁无死_532\wp.md [9701 B]
+ FILE C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\人生自古谁无死_532\analysis\analyze_1enc_patterns_output.txt [285 B]
+ FILE C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\人生自古谁无死_532\analysis\analyze_1enc_patterns.py [1364 B]
+ FILE C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\人生自古谁无死_532\analysis\challenge_disassembly.txt [33789 B]
+ FILE C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\人生自古谁无死_532\analysis\commands_output.log [146788 B]
+ FILE C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\人生自古谁无死_532\analysis\data_dump.txt [992 B]
+ FILE C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\人生自古谁无死_532\analysis\independent_commands.log [98750 B]
+ FILE C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\人生自古谁无死_532\analysis\independent_review_output.txt [3408 B]
+ GUIDE L2111: #532《人生自古谁无死》的两个已提交候选均无平台完成回执，需新的独立证据后再决定；#546《PaluArray》的静态候选被平台明确拒绝，需解释二进制推导与平台 flag 不一致的原因；#561《第一届OpenHarmony secret》的 pattern 闭环已复核，但题内 MD5 示例与明文公式不符，现有候选也未获平台确认；#562 checker 的 ZIP 与 checker.exe 副本哈希一致，静态复核仍得到已被拒绝的同一候选；#541《ezBase》本批静态逆向候选被前台平台拒绝，且附件比较常量存在填充分支歧义，暂不盲目重交。这五题都不计入已完成总数。
+TERM 你若安好
+ FILE C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\你若安好便是晴_531\wp.md [7179 B]
+ FILE C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\你若安好便是晴_531\analysis\commands_output.log [96793 B]
+ FILE C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\你若安好便是晴_531\analysis\decrypt_static_output.txt [1422 B]
+ FILE C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\你若安好便是晴_531\analysis\decrypt_static.py [10800 B]
+ FILE C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\你若安好便是晴_531\analysis\independent_review_commands.log [19828 B]
+ FILE C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\你若安好便是晴_531\analysis\independent_review_output.txt [1175 B]
+ FILE C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\你若安好便是晴_531\analysis\independent_review.md [3089 B]
+ FILE C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\你若安好便是晴_531\analysis\program_disassembly.txt [14015 B]
+ GUIDE L63: | 531 | 商丘师范学院第四届网络安全及信息对抗大赛 你若安好便是晴 | REVERSE / 中等 | 平台已接受；TEA 解密与重加密回验及题目附件齐全 |
+ GUIDE L2043: ## #531 你若安好便是晴
+TERM 看山不是山
+ FILE [none by filename/path]
+ GUIDE [none]
+TERM 即随本心
+ FILE C:\Users\mzj\Desktop\CTF\玄机刷题\记录\即随本心-解题记录.md [7797 B]
+ FILE C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\即随本心\附件\即随本心.exe [13095886 B]
+ FILE C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\原始下载附件\即随本心.zip [12817910 B]
+ FILE D:\Downloads\即随本心.zip [12817910 B]
+ GUIDE L65: | 528 | 商丘师范学院第四届网络安全及信息对抗大赛 即随本心 | REVERSE / 简单 | 平台已完成；本指南有逐步记录 |
+ GUIDE L114: ## 2. 即随本心（ID 528，REVERSE / 简单）
+TERM 远程诊断配置
+ FILE [none by filename/path]
+ GUIDE [none]
+TERM AURIX Shadow
+ FILE [none by filename/path]
+ GUIDE [none]
+TERM 不安全的远程桌面
+ FILE [none by filename/path]
+ GUIDE [none]
+TERM 被入侵的数据库
+ FILE C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\原始下载附件\被入侵的数据库.zip [29595 B]
+ FILE C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\被入侵的数据库_451\access.log [390388 B]
+ FILE D:\Downloads\被入侵的数据库.zip [29595 B]
+ GUIDE L69: | 451 | 2026CCF-被入侵的数据库 | 应急响应 / 中等 | 本批平台已验证；日志枚举、hex 解码和提交回执齐全 |
+ GUIDE L1921: ## 31. 2026CCF 被入侵的数据库（ID 451，应急响应 / 中等）
+TERM CVE-2025-58360
+ FILE [none by filename/path]
+ GUIDE [none]
+TERM mediadrive
+ FILE [none by filename/path]
+ GUIDE [none]
+TERM DMZ_windows
+ FILE [none by filename/path]
+ GUIDE [none]
+TERM true_or_false
+ FILE [none by filename/path]
+ GUIDE [none]
+TERM crypto-LUC
+ FILE [none by filename/path]
+ GUIDE [none]
+TERM MiracleStruct
+ FILE [none by filename/path]
+ GUIDE [none]
+TERM BlindFlowanalyis
+ FILE [none by filename/path]
+ GUIDE [none]
+**********************
+PowerShell transcript end
+End time: 20260929165337
+**********************

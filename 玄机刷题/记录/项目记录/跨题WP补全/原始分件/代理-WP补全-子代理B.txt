@@ -1,0 +1,138 @@
+**********************
+PowerShell transcript start
+Start time: 20260928223215
+Username: DESKTOP-412KTAR\mzj
+RunAs User: DESKTOP-412KTAR\mzj
+Configuration Name: 
+Machine: DESKTOP-412KTAR (Microsoft Windows NT 10.0.26200.0)
+Host Application: C:\Users\mzj\.cache\codex-runtimes\codex-primary-runtime\dependencies\native\powershell\pwsh.dll -Command try { [Console]::OutputEncoding=[System.Text.Encoding]::UTF8 } catch {}
+$ErrorActionPreference='Continue'; $logPath='C:\Users\mzj\Desktop\CTF\玄机刷题\记录\代理-WP补全-子代理B.txt'; Start-Transcript -LiteralPath $logPath -Append | Out-Null; try { Write-Output '=== Spring XXTEA script ==='; Write-Output 'COMMAND: python -B .\solve_xxtea.py'; Push-Location 'C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\不劳春风解我忧'; python -B .\solve_xxtea.py 2>&1; Write-Output ("exit_code=$LASTEXITCODE"); Pop-Location; Write-Output '=== Rainbow XOR candidate ==='; Write-Output 'COMMAND: python -B .\分析脚本\rainbow_xor_decrypt.py'; Push-Location 'C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\rainbow'; python -B .\分析脚本\rainbow_xor_decrypt.py 2>&1; Write-Output ("exit_code=$LASTEXITCODE"); Write-Output '=== Rainbow ELF cross-check ==='; Write-Output 'COMMAND: python -B .\分析脚本\rainbow_verify_key.py'; python -B .\分析脚本\rainbow_verify_key.py 2>&1; Write-Output ("exit_code=$LASTEXITCODE"); Pop-Location; Write-Output '=== ezRe original and extracted module inventory ==='; Get-Item 'C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\ezRe\33.exe'; Get-ChildItem 'C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\ezRe\pyi_extracted' -File | Sort-Object Name | Select-Object Name,Length | Format-Table -AutoSize; Write-Output '=== ezRe module bytes summary ==='; python -B -c "from pathlib import Path; import importlib.util; p=Path(r'C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\ezRe\pyi_extracted\33.marshal'); b=p.read_bytes(); print('marshal_bytes',len(b)); print('header_hex',b[:16].hex()); print('python_magic_current',importlib.util.MAGIC_NUMBER.hex())" 2>&1; Write-Output ("exit_code=$LASTEXITCODE"); } finally { Stop-Transcript | Out-Null }
+Process ID: 14924
+PSVersion: 7.6.5
+PSEdition: Core
+GitCommitId: 7.6.5
+OS: Microsoft Windows 10.0.26200
+Platform: Win32NT
+PSCompatibleVersions: 1.0, 2.0, 3.0, 4.0, 5.0, 5.1, 6.0, 7.0
+PSRemotingProtocolVersion: 2.4
+SerializationVersion: 1.1.0.1
+WSManStackVersion: 3.0
+**********************
+=== Spring XXTEA script ===
+COMMAND: python -B .\solve_xxtea.py
+exit_code=0
+=== Rainbow XOR candidate ===
+COMMAND: python -B .\分析脚本\rainbow_xor_decrypt.py
+exit_code=0
+=== Rainbow ELF cross-check ===
+COMMAND: python -B .\分析脚本\rainbow_verify_key.py
+exit_code=0
+=== ezRe original and extracted module inventory ===
+
+    Directory: C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\ezRe
+
+Mode                 LastWriteTime         Length Name
+----                 -------------         ------ ----
+-a---           2026/7/17    16:49        5935851 33.exe
+
+
+Name                                               Length
+----                                               ------
+_bz2.pyd.bin                                        86704
+_decimal.pyd.bin                                   271024
+_hashlib.pyd.bin                                    66224
+_lzma.pyd.bin                                      162992
+_socket.pyd.bin                                     80048
+33.marshal                                            235
+api-ms-win-core-console-l1-1-0.dll.bin              12224
+api-ms-win-core-datetime-l1-1-0.dll.bin             11712
+api-ms-win-core-debug-l1-1-0.dll.bin                11720
+api-ms-win-core-errorhandling-l1-1-0.dll.bin        11720
+api-ms-win-core-file-l1-1-0.dll.bin                 15304
+api-ms-win-core-file-l1-2-0.dll.bin                 11712
+api-ms-win-core-file-l2-1-0.dll.bin                 11720
+api-ms-win-core-handle-l1-1-0.dll.bin               11720
+api-ms-win-core-heap-l1-1-0.dll.bin                 12232
+api-ms-win-core-interlocked-l1-1-0.dll.bin          11712
+api-ms-win-core-libraryloader-l1-1-0.dll.bin        12736
+api-ms-win-core-localization-l1-2-0.dll.bin         14280
+api-ms-win-core-memory-l1-1-0.dll.bin               12224
+api-ms-win-core-namedpipe-l1-1-0.dll.bin            11720
+api-ms-win-core-processenvironment-l1-1-0.dll.bin   12744
+api-ms-win-core-processthreads-l1-1-0.dll.bin       14272
+api-ms-win-core-processthreads-l1-1-1.dll.bin       12232
+api-ms-win-core-profile-l1-1-0.dll.bin              11200
+api-ms-win-core-rtlsupport-l1-1-0.dll.bin           12224
+api-ms-win-core-string-l1-1-0.dll.bin               11720
+api-ms-win-core-synch-l1-1-0.dll.bin                13760
+api-ms-win-core-synch-l1-2-0.dll.bin                12232
+api-ms-win-core-sysinfo-l1-1-0.dll.bin              12744
+api-ms-win-core-timezone-l1-1-0.dll.bin             12232
+api-ms-win-core-util-l1-1-0.dll.bin                 11720
+api-ms-win-crt-conio-l1-1-0.dll.bin                 12744
+api-ms-win-crt-convert-l1-1-0.dll.bin               15816
+api-ms-win-crt-environment-l1-1-0.dll.bin           12232
+api-ms-win-crt-filesystem-l1-1-0.dll.bin            13768
+api-ms-win-crt-heap-l1-1-0.dll.bin                  12744
+api-ms-win-crt-locale-l1-1-0.dll.bin                12232
+api-ms-win-crt-math-l1-1-0.dll.bin                  20928
+api-ms-win-crt-process-l1-1-0.dll.bin               12736
+api-ms-win-crt-runtime-l1-1-0.dll.bin               16328
+api-ms-win-crt-stdio-l1-1-0.dll.bin                 17864
+api-ms-win-crt-string-l1-1-0.dll.bin                18368
+api-ms-win-crt-time-l1-1-0.dll.bin                  14280
+api-ms-win-crt-utility-l1-1-0.dll.bin               12224
+base_library.zip.bin                               846629
+libcrypto-1_1.dll.bin                             3406016
+pyiboot01_bootstrap.marshal                           851
+pyimod01_archive.bin                                 3026
+pyimod02_importers.bin                              22914
+pyimod03_ctypes.bin                                  4029
+pyimod04_pywin32.bin                                 1074
+python39.dll.bin                                  4462768
+PYZ-00.pyz.bin                                     700252
+select.pyd.bin                                      28848
+struct.bin                                            269
+ucrtbase.dll.bin                                  1011656
+unicodedata.pyd.bin                               1120944
+VCRUNTIME140.dll.bin                                96120
+
+=== ezRe module bytes summary ===
+exit_code=0
+**********************
+PowerShell transcript end
+End time: 20260928223218
+**********************
+**********************
+PowerShell transcript start
+Start time: 20260928223720
+Username: DESKTOP-412KTAR\mzj
+RunAs User: DESKTOP-412KTAR\mzj
+Configuration Name: 
+Machine: DESKTOP-412KTAR (Microsoft Windows NT 10.0.26200.0)
+Host Application: C:\Users\mzj\.cache\codex-runtimes\codex-primary-runtime\dependencies\native\powershell\pwsh.dll -Command try { [Console]::OutputEncoding=[System.Text.Encoding]::UTF8 } catch {}
+$ErrorActionPreference='Continue'; $logPath='C:\Users\mzj\Desktop\CTF\玄机刷题\记录\代理-WP补全-子代理B.txt'; Start-Transcript -LiteralPath $logPath -Append | Out-Null; try { Write-Output '=== note #563 exact local decoder ==='; $code='ct=bytes.fromhex("2559c31f3c41df061b7af835057cec5e6169f30c1347fe2a294b890b1e1c8b132873ba6e3e57ea3a1e5af7"); key=bytes.fromhex("4237a17c"); pt=bytes(c^key[i%4]^((i+1)&255) for i,c in enumerate(ct)); print("cipher_len",len(ct)); print("plain_len",len(pt)); print("plain_text",pt.decode("ascii")); print("formula", "pt[i]=ct[i]^key[i%4]^((i+1)&0xff)")'; Write-Output "COMMAND: python -B -c $code"; python -B -c $code 2>&1; Write-Output ("exit_code=$LASTEXITCODE"); Write-Output '=== ezRe recovered base64 constant ==='; $code2='import base64; s="ZmxhZ3s0YjE0YTI1Ny00MzM2LTQxNTItOWYwNi00OGM3YjF9"; b=base64.b64decode(s); print("encoded=",s); print("decoded_bytes=",b); print("flag=",b.decode()); print("length=",len(b))'; Write-Output "COMMAND: python -B -c $code2"; python -B -c $code2 2>&1; Write-Output ("exit_code=$LASTEXITCODE"); Write-Output '=== recovered PyInstaller module raw bytes ==='; Write-Output 'COMMAND: python -B -c <read 33.marshal and print exact raw bytes>'; python -B -c "from pathlib import Path; b=Path(r'C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\ezRe\pyi_extracted\33.marshal').read_bytes(); print('marshal_bytes=',len(b)); print('hex=',b.hex(' ')); print('repr=',repr(b))" 2>&1; Write-Output ("exit_code=$LASTEXITCODE"); } finally { Stop-Transcript | Out-Null }
+Process ID: 19432
+PSVersion: 7.6.5
+PSEdition: Core
+GitCommitId: 7.6.5
+OS: Microsoft Windows 10.0.26200
+Platform: Win32NT
+PSCompatibleVersions: 1.0, 2.0, 3.0, 4.0, 5.0, 5.1, 6.0, 7.0
+PSRemotingProtocolVersion: 2.4
+SerializationVersion: 1.1.0.1
+WSManStackVersion: 3.0
+**********************
+=== note #563 exact local decoder ===
+COMMAND: python -B -c ct=bytes.fromhex("2559c31f3c41df061b7af835057cec5e6169f30c1347fe2a294b890b1e1c8b132873ba6e3e57ea3a1e5af7"); key=bytes.fromhex("4237a17c"); pt=bytes(c^key[i%4]^((i+1)&255) for i,c in enumerate(ct)); print("cipher_len",len(ct)); print("plain_len",len(pt)); print("plain_text",pt.decode("ascii")); print("formula", "pt[i]=ct[i]^key[i%4]^((i+1)&0xff)")
+exit_code=0
+=== ezRe recovered base64 constant ===
+COMMAND: python -B -c import base64; s="ZmxhZ3s0YjE0YTI1Ny00MzM2LTQxNTItOWYwNi00OGM3YjF9"; b=base64.b64decode(s); print("encoded=",s); print("decoded_bytes=",b); print("flag=",b.decode()); print("length=",len(b))
+exit_code=0
+=== recovered PyInstaller module raw bytes ===
+COMMAND: python -B -c <read 33.marshal and print exact raw bytes>
+exit_code=0
+**********************
+PowerShell transcript end
+End time: 20260928223723
+**********************

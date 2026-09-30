@@ -1,0 +1,3005 @@
+**********************
+PowerShell transcript start
+Start time: 20260929034716
+Username: DESKTOP-412KTAR\mzj
+RunAs User: DESKTOP-412KTAR\mzj
+Configuration Name: 
+Machine: DESKTOP-412KTAR (Microsoft Windows NT 10.0.26200.0)
+Host Application: C:\Users\mzj\.cache\codex-runtimes\codex-primary-runtime\dependencies\native\powershell\pwsh.dll -Command try { [Console]::OutputEncoding=[System.Text.Encoding]::UTF8 } catch {}
+$root='C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\Maybesignin_540'; New-Item -ItemType Directory -Force "$root\analysis" | Out-Null; $log="$root\analysis\maybesignin_540_transcript_20260929.txt"; Start-Transcript -LiteralPath $log -Force; Get-ChildItem -Force $root | Select-Object Mode,Length,Name | Format-Table -AutoSize; Get-FileHash -Algorithm SHA256 "$root\附件\MaybeSignin_platform_20260929.zip"; Get-FileHash -Algorithm SHA256 "$root\附件解包\ezsignin.exe"; Get-Command py,python,strings,objdump,rabin2,ghidra,dumpbin -ErrorAction SilentlyContinue | Select-Object Name,Source | Format-Table -AutoSize; Stop-Transcript
+Process ID: 19000
+PSVersion: 7.6.5
+PSEdition: Core
+GitCommitId: 7.6.5
+OS: Microsoft Windows 10.0.26200
+Platform: Win32NT
+PSCompatibleVersions: 1.0, 2.0, 3.0, 4.0, 5.0, 5.1, 6.0, 7.0
+PSRemotingProtocolVersion: 2.4
+SerializationVersion: 1.1.0.1
+WSManStackVersion: 3.0
+**********************
+Transcript started, output file is C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\Maybesignin_540\analysis\maybesignin_540_transcript_20260929.txt
+
+Mode  Length Name
+----  ------ ----
+d----        附件
+d----        附件解包
+d----        analysis
+
+
+Algorithm Hash                                                             Path
+--------- ----                                                             ----
+SHA256    79D0749B152E8A886AF6911CAEF49730CCC29067D66BF30739B89D2EAE13F8A2 C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\…
+SHA256    DA87C9A85AB1E99370891AEBC6494A97B4AA1BB6694AF415DC455D68F5E18AE5 C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\…
+
+
+Name        Source
+----        ------
+py.exe      C:\WINDOWS\py.exe
+python.exe  C:\Users\mzj\AppData\Local\Programs\Python\Python312\python.exe
+strings.exe C:\msys64\mingw64\bin\strings.exe
+objdump.exe C:\msys64\mingw64\bin\objdump.exe
+
+**********************
+PowerShell transcript end
+End time: 20260929034717
+**********************
+**********************
+PowerShell transcript start
+Start time: 20260929034741
+Username: DESKTOP-412KTAR\mzj
+RunAs User: DESKTOP-412KTAR\mzj
+Configuration Name: 
+Machine: DESKTOP-412KTAR (Microsoft Windows NT 10.0.26200.0)
+Host Application: C:\Users\mzj\.cache\codex-runtimes\codex-primary-runtime\dependencies\native\powershell\pwsh.dll -Command try { [Console]::OutputEncoding=[System.Text.Encoding]::UTF8 } catch {}
+$root='C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\Maybesignin_540'; $log="$root\analysis\maybesignin_540_transcript_20260929.txt"; Start-Transcript -LiteralPath $log -Append; $exe="$root\附件解包\ezsignin.exe"; Get-Item $exe | Format-List FullName,Length,CreationTimeUtc,LastWriteTimeUtc; objdump -h $exe | Tee-Object -FilePath "$root\analysis\objdump_sections.txt"; objdump -p $exe | Tee-Object -FilePath "$root\analysis\objdump_pe_imports.txt"; strings -a -n 4 $exe | Tee-Object -FilePath "$root\analysis\strings_ascii.txt"; strings -el -n 4 $exe | Tee-Object -FilePath "$root\analysis\strings_utf16le.txt"; Stop-Transcript
+Process ID: 13060
+PSVersion: 7.6.5
+PSEdition: Core
+GitCommitId: 7.6.5
+OS: Microsoft Windows 10.0.26200
+Platform: Win32NT
+PSCompatibleVersions: 1.0, 2.0, 3.0, 4.0, 5.0, 5.1, 6.0, 7.0
+PSRemotingProtocolVersion: 2.4
+SerializationVersion: 1.1.0.1
+WSManStackVersion: 3.0
+**********************
+Transcript started, output file is C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\Maybesignin_540\analysis\maybesignin_540_transcript_20260929.txt
+
+FullName         : C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\Maybesignin_540\附件解包\ezsignin.exe
+Length           : 12800
+CreationTimeUtc  : 2026/9/28 19:46:08
+LastWriteTimeUtc : 2026/7/24 5:19:54
+
+!This program cannot be run in DOS mode.
+Rich
+EUMg
+.text
+`.rdata
+@.data
+.pdata
+@.rsrc
+@.reloc
+L$ SVWH
+t$ L
+0_^[
+L$ SVWH
+t$X3
+t$ L
+0_^[
+UATAUAVAWH
+L$,3
+oL$
+L$HA
+\$@A
+L$Lfff
+3T4L3T4H3T4D
+3L4@A3
+L4PH
+M`H3
+A_A^A]A\]
+MOH3
+\$@H
+t$HH
+D$8H
+D$8H
+D$@H
+@SVWH
+T$`H
+L$hH
+T$`L
+L$0L
+L$pH
+L$(3
+@_^[
+t!eH
+uxHc
+uTL+
+ H3E
+\$PH
+L$0L
+L$(H
+L$ 3
+L$PH
+D$PH
+D$@H
+D$H3
+u/HcH<H
+;csm
+\$03
+\$0H
+\$0H
+ntelA
+ineID
+Genu
+t(=`
+t!=p
+ w$H
+T$ H
+D$ "
+D$ $
+\$(3
+t$0H
+plz input your flag:
+success
+pause
+%"|;
+'RL6
+jrml[Q
+MF?8ib[T
+IB;4e^WP
+E>70aZSL}voh
+A:3,]VOHyrkd@
+EUMg
+EUMg
+EUMg
+EUMg
+RSDSV
+/dMK
+D:\visual studio projects\Project16\x64\Release\Project16.pdb
+GCTL
+.text$mn
+.text$mn$00
+.text$x
+.idata$5
+.00cfg
+.CRT$XCA
+.CRT$XCAA
+.CRT$XCZ
+.CRT$XIA
+.CRT$XIAA
+.CRT$XIAC
+.CRT$XIZ
+.CRT$XPA
+.CRT$XPZ
+.CRT$XTA
+.CRT$XTZ
+.rdata
+.rdata$voltmd
+.rdata$zzzdbg
+.rtc$IAA
+.rtc$IZZ
+.rtc$TAA
+.rtc$TZZ
+.xdata
+.idata$2
+.idata$3
+.idata$4
+.idata$6
+.data
+.bss
+.pdata
+.rsrc$01
+.rsrc$02
+__C_specific_handler
+__current_exception
+__current_exception_context
+memset
+VCRUNTIME140.dll
+exit
+__acrt_iob_func
+__stdio_common_vfprintf
+system
+__stdio_common_vfscanf
+free
+malloc
+_seh_filter_exe
+_set_app_type
+__setusermatherr
+_configure_narrow_argv
+_initialize_narrow_environment
+_get_initial_narrow_environment
+_initterm
+_initterm_e
+_exit
+_set_fmode
+__p___argc
+__p___argv
+_cexit
+_c_exit
+_register_thread_local_exe_atexit_callback
+_configthreadlocale
+_set_new_mode
+__p__commode
+_initialize_onexit_table
+_register_onexit_function
+_crt_atexit
+terminate
+api-ms-win-crt-runtime-l1-1-0.dll
+api-ms-win-crt-stdio-l1-1-0.dll
+api-ms-win-crt-heap-l1-1-0.dll
+api-ms-win-crt-math-l1-1-0.dll
+api-ms-win-crt-locale-l1-1-0.dll
+RtlCaptureContext
+RtlLookupFunctionEntry
+RtlVirtualUnwind
+UnhandledExceptionFilter
+SetUnhandledExceptionFilter
+GetCurrentProcess
+TerminateProcess
+IsProcessorFeaturePresent
+QueryPerformanceCounter
+GetCurrentProcessId
+GetCurrentThreadId
+GetSystemTimeAsFileTime
+InitializeSListHead
+IsDebuggerPresent
+GetModuleHandleW
+KERNEL32.dll
+memcpy
+<?xml version='1.0' encoding='UTF-8' standalone='yes'?>
+<assembly xmlns='urn:schemas-microsoft-com:asm.v1' manifestVersion='1.0'>
+  <trustInfo xmlns="urn:schemas-microsoft-com:asm.v3">
+    <security>
+      <requestedPrivileges>
+        <requestedExecutionLevel level='asInvoker' uiAccess='false' />
+      </requestedPrivileges>
+    </security>
+  </trustInfo>
+</assembly>
+**********************
+PowerShell transcript end
+End time: 20260929034741
+**********************
+**********************
+PowerShell transcript start
+Start time: 20260929034811
+Username: DESKTOP-412KTAR\mzj
+RunAs User: DESKTOP-412KTAR\mzj
+Configuration Name: 
+Machine: DESKTOP-412KTAR (Microsoft Windows NT 10.0.26200.0)
+Host Application: C:\Users\mzj\.cache\codex-runtimes\codex-primary-runtime\dependencies\native\powershell\pwsh.dll -Command try { [Console]::OutputEncoding=[System.Text.Encoding]::UTF8 } catch {}
+$root='C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\Maybesignin_540'; $log="$root\analysis\maybesignin_540_transcript_20260929.txt"; Start-Transcript -LiteralPath $log -Append; $tempExe='C:\Users\mzj\AppData\Local\Temp\ezsignin_540_ascii.exe'; Copy-Item -LiteralPath "$root\附件解包\ezsignin.exe" -Destination $tempExe -Force; Get-FileHash -Algorithm SHA256 $tempExe; objdump -h $tempExe | Tee-Object -FilePath "$root\analysis\objdump_sections.txt"; objdump -x $tempExe | Tee-Object -FilePath "$root\analysis\objdump_headers_imports.txt"; Stop-Transcript
+Process ID: 29028
+PSVersion: 7.6.5
+PSEdition: Core
+GitCommitId: 7.6.5
+OS: Microsoft Windows 10.0.26200
+Platform: Win32NT
+PSCompatibleVersions: 1.0, 2.0, 3.0, 4.0, 5.0, 5.1, 6.0, 7.0
+PSRemotingProtocolVersion: 2.4
+SerializationVersion: 1.1.0.1
+WSManStackVersion: 3.0
+**********************
+Transcript started, output file is C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\Maybesignin_540\analysis\maybesignin_540_transcript_20260929.txt
+
+Algorithm       Hash                                                                   Path
+---------       ----                                                                   ----
+SHA256          DA87C9A85AB1E99370891AEBC6494A97B4AA1BB6694AF415DC455D68F5E18AE5       C:\Users\mzj\AppData\Local\Temp…
+
+C:\Users\mzj\AppData\Local\Temp\ezsignin_540_ascii.exe:     file format pei-x86-64
+
+Sections:
+Idx Name          Size      VMA               LMA               File off  Algn
+  0 .text         000013dc  0000000140001000  0000000140001000  00000400  2**4
+                  CONTENTS, ALLOC, LOAD, READONLY, CODE
+  1 .rdata        0000118e  0000000140003000  0000000140003000  00001800  2**4
+                  CONTENTS, ALLOC, LOAD, READONLY, DATA
+  2 .data         00000200  0000000140005000  0000000140005000  00002a00  2**4
+                  CONTENTS, ALLOC, LOAD, DATA
+  3 .pdata        000001a4  0000000140006000  0000000140006000  00002c00  2**2
+                  CONTENTS, ALLOC, LOAD, READONLY, DATA
+  4 .rsrc         000001e0  0000000140007000  0000000140007000  00002e00  2**2
+                  CONTENTS, ALLOC, LOAD, READONLY, DATA
+  5 .reloc        00000030  0000000140008000  0000000140008000  00003000  2**2
+                  CONTENTS, ALLOC, LOAD, READONLY, DATA
+
+C:\Users\mzj\AppData\Local\Temp\ezsignin_540_ascii.exe:     file format pei-x86-64
+C:\Users\mzj\AppData\Local\Temp\ezsignin_540_ascii.exe
+architecture: i386:x86-64, flags 0x0000012f:
+HAS_RELOC, EXEC_P, HAS_LINENO, HAS_DEBUG, HAS_LOCALS, D_PAGED
+start address 0x0000000140001900
+
+Characteristics 0x22
+	executable
+	large address aware
+
+Time/Date		Mon Dec 02 14:35:49 2024
+Magic			020b	(PE32+)
+MajorLinkerVersion	14
+MinorLinkerVersion	37
+SizeOfCode		0000000000001400
+SizeOfInitializedData	0000000000002000
+SizeOfUninitializedData	0000000000000000
+AddressOfEntryPoint	0000000000001900
+BaseOfCode		0000000000001000
+ImageBase		0000000140000000
+SectionAlignment	00001000
+FileAlignment		00000200
+MajorOSystemVersion	6
+MinorOSystemVersion	0
+MajorImageVersion	0
+MinorImageVersion	0
+MajorSubsystemVersion	6
+MinorSubsystemVersion	0
+Win32Version		00000000
+SizeOfImage		00009000
+SizeOfHeaders		00000400
+CheckSum		00009aac
+Subsystem		00000003	(Windows CUI)
+DllCharacteristics	00008160
+					HIGH_ENTROPY_VA
+					DYNAMIC_BASE
+					NX_COMPAT
+					TERMINAL_SERVICE_AWARE
+SizeOfStackReserve	0000000000100000
+SizeOfStackCommit	0000000000001000
+SizeOfHeapReserve	0000000000100000
+SizeOfHeapCommit	0000000000001000
+LoaderFlags		00000000
+NumberOfRvaAndSizes	00000010
+
+The Data Directory
+Entry 0 0000000000000000 00000000 Export Directory [.edata (or where ever we found it)]
+Entry 1 0000000000003a94 000000a0 Import Directory [parts of .idata]
+Entry 2 0000000000007000 000001e0 Resource Directory [.rsrc]
+Entry 3 0000000000006000 000001a4 Exception Directory [.pdata]
+Entry 4 0000000000000000 00000000 Security Directory
+Entry 5 0000000000008000 00000030 Base Relocation Directory [.reloc]
+Entry 6 0000000000003570 00000070 Debug Directory
+Entry 7 0000000000000000 00000000 Description Directory
+Entry 8 0000000000000000 00000000 Special Directory
+Entry 9 0000000000000000 00000000 Thread Storage Directory [.tls]
+Entry a 0000000000003430 00000140 Load Configuration Directory
+Entry b 0000000000000000 00000000 Bound Import Directory
+Entry c 0000000000003000 000001c0 Import Address Table Directory
+Entry d 0000000000000000 00000000 Delay Import Directory
+Entry e 0000000000000000 00000000 CLR Runtime Header
+Entry f 0000000000000000 00000000 Reserved
+
+There is an import table in .rdata at 0x40003a94
+
+The Import Tables (interpreted .rdata section contents)
+ vma:            Hint    Time      Forward  DLL       First
+                 Table   Stamp     Chain    Name      Thunk
+ 00003a94	00003bb8 00000000 00000000 00003d4e 00003080
+
+	DLL Name: VCRUNTIME140.dll
+	vma:     Ordinal  Hint  Member-Name  Bound-To
+	00003080  <none>  001c  __current_exception_context
+	00003088  <none>  001b  __current_exception
+	00003090  <none>  0008  __C_specific_handler
+	00003098  <none>  003e  memset
+	000030a0  <none>  003c  memcpy
+
+ 00003aa8	00003c28 00000000 00000000 00003f74 000030f0
+
+	DLL Name: api-ms-win-crt-runtime-l1-1-0.dll
+	vma:     Ordinal  Hint  Member-Name  Bound-To
+	000030f0  <none>  0034  _initialize_onexit_table
+	000030f8  <none>  003c  _register_onexit_function
+	00003100  <none>  001e  _crt_atexit
+	00003108  <none>  0067  terminate
+	00003110  <none>  0066  system
+	00003118  <none>  0023  _exit
+	00003120  <none>  003d  _register_thread_local_exe_atexit_callback
+	00003128  <none>  0004  __p___argc
+	00003130  <none>  0015  _c_exit
+	00003138  <none>  0037  _initterm_e
+	00003140  <none>  0036  _initterm
+	00003148  <none>  0028  _get_initial_narrow_environment
+	00003150  <none>  0033  _initialize_narrow_environment
+	00003158  <none>  0018  _configure_narrow_argv
+	00003160  <none>  0016  _cexit
+	00003168  <none>  0042  _set_app_type
+	00003170  <none>  0040  _seh_filter_exe
+	00003178  <none>  0005  __p___argv
+	00003180  <none>  0055  exit
+
+ 00003abc	00003cc8 00000000 00000000 00003f96 00003190
+
+	DLL Name: api-ms-win-crt-stdio-l1-1-0.dll
+	vma:     Ordinal  Hint  Member-Name  Bound-To
+	00003190  <none>  0003  __stdio_common_vfprintf
+	00003198  <none>  0000  __acrt_iob_func
+	000031a0  <none>  0006  __stdio_common_vfscanf
+	000031a8  <none>  0054  _set_fmode
+	000031b0  <none>  0001  __p__commode
+
+ 00003ad0	00003be8 00000000 00000000 00003fb6 000030b0
+
+	DLL Name: api-ms-win-crt-heap-l1-1-0.dll
+	vma:     Ordinal  Hint  Member-Name  Bound-To
+	000030b0  <none>  0019  malloc
+	000030b8  <none>  0016  _set_new_mode
+	000030c0  <none>  0018  free
+
+ 00003ae4	00003c18 00000000 00000000 00003fd6 000030e0
+
+	DLL Name: api-ms-win-crt-math-l1-1-0.dll
+	vma:     Ordinal  Hint  Member-Name  Bound-To
+	000030e0  <none>  0009  __setusermatherr
+
+ 00003af8	00003c08 00000000 00000000 00003ff6 000030d0
+
+	DLL Name: api-ms-win-crt-locale-l1-1-0.dll
+	vma:     Ordinal  Hint  Member-Name  Bound-To
+	000030d0  <none>  0008  _configthreadlocale
+
+ 00003b0c	00003b38 00000000 00000000 00004176 00003000
+
+	DLL Name: KERNEL32.dll
+	vma:     Ordinal  Hint  Member-Name  Bound-To
+	00003000  <none>  0237  GetCurrentThreadId
+	00003008  <none>  04fd  RtlLookupFunctionEntry
+	00003010  <none>  0504  RtlVirtualUnwind
+	00003018  <none>  05e6  UnhandledExceptionFilter
+	00003020  <none>  05a4  SetUnhandledExceptionFilter
+	00003028  <none>  0232  GetCurrentProcess
+	00003030  <none>  0295  GetModuleHandleW
+	00003038  <none>  03a0  IsDebuggerPresent
+	00003040  <none>  038a  InitializeSListHead
+	00003048  <none>  030a  GetSystemTimeAsFileTime
+	00003050  <none>  04f5  RtlCaptureContext
+	00003058  <none>  0233  GetCurrentProcessId
+	00003060  <none>  0470  QueryPerformanceCounter
+	00003068  <none>  03a8  IsProcessorFeaturePresent
+	00003070  <none>  05c4  TerminateProcess
+
+ 00003b20	00000000 00000000 00000000 00000000 00000000
+
+The Function Table (interpreted .pdata section contents)
+vma:			BeginAddress	 EndAddress	  UnwindData
+ 0000000140006000:	0000000140001020 0000000140001075 0000000140003970
+ 000000014000600c:	0000000140001080 00000001400010d2 0000000140003970
+ 0000000140006018:	00000001400010e0 000000014000155d 000000014000397c
+ 0000000140006024:	0000000140001560 0000000140001670 00000001400039a4
+ 0000000140006030:	0000000140001680 000000014000169e 00000001400039b8
+ 000000014000603c:	00000001400016a0 0000000140001756 00000001400039bc
+ 0000000140006048:	0000000140001758 0000000140001768 00000001400039c4
+ 0000000140006054:	0000000140001768 0000000140001781 00000001400039c4
+ 0000000140006060:	0000000140001784 0000000140001900 00000001400039cc
+ 000000014000606c:	0000000140001900 0000000140001912 00000001400039c4
+ 0000000140006078:	0000000140001914 0000000140001948 00000001400039bc
+ 0000000140006084:	0000000140001948 0000000140001a1a 0000000140003a0c
+ 0000000140006090:	0000000140001a1c 0000000140001a8d 0000000140003a14
+ 000000014000609c:	0000000140001a90 0000000140001ac9 00000001400039c4
+ 00000001400060a8:	0000000140001acc 0000000140001b15 00000001400039bc
+ 00000001400060b4:	0000000140001b18 0000000140001ba3 00000001400039bc
+ 00000001400060c0:	0000000140001ba4 0000000140001c3c 0000000140003a20
+ 00000001400060cc:	0000000140001c3c 0000000140001c60 00000001400039bc
+ 00000001400060d8:	0000000140001c60 0000000140001c89 00000001400039bc
+ 00000001400060e4:	0000000140001c8c 0000000140001cc6 00000001400039bc
+ 00000001400060f0:	0000000140001cc8 0000000140001cdf 00000001400039c4
+ 00000001400060fc:	0000000140001ce0 0000000140001d8c 0000000140003a48
+ 0000000140006108:	0000000140001db8 0000000140001dd3 00000001400039c4
+ 0000000140006114:	0000000140001df8 0000000140001f43 0000000140003a54
+ 0000000140006120:	0000000140001f4c 0000000140001f9d 00000001400039c4
+ 000000014000612c:	0000000140001fb0 000000014000200b 0000000140003a64
+ 0000000140006138:	000000014000200c 0000000140002048 0000000140003a64
+ 0000000140006144:	0000000140002048 0000000140002084 0000000140003a64
+ 0000000140006150:	0000000140002084 0000000140002230 0000000140003a70
+ 000000014000615c:	00000001400022e4 0000000140002301 00000001400039c4
+ 0000000140006168:	0000000140002304 000000014000235f 0000000140003a8c
+ 0000000140006174:	0000000140002380 0000000140002382 0000000140003a80
+ 0000000140006180:	00000001400023a0 00000001400023a6 0000000140003a88
+ 000000014000618c:	00000001400023a6 00000001400023c4 0000000140003a04
+ 0000000140006198:	00000001400023c4 00000001400023dc 0000000140003a40
+
+Dump of .rdata
+ 0000000140003970 (rva: 00003970): 0000000140001020 - 0000000140001075
+	Version: 1, Flags: none
+	Nbr codes: 4, Prologue size: 0x1b, Frame offset: 0x0, Frame reg: none
+	  pc+0x1b: alloc small area: rsp = rsp - 0x30
+	  pc+0x17: push rdi
+	  pc+0x16: push rsi
+	  pc+0x15: push rbx
+ 0000000140003970 also used for function at 0000000140001080
+ 000000014000397c (rva: 0000397c): 00000001400010e0 - 000000014000155d
+	Version: 1, Flags: UNW_FLAG_EHANDLER | UNW_FLAG_UHANDLER
+	Nbr codes: 13, Prologue size: 0x32, Frame offset: 0x0, Frame reg: none
+	  pc+0x24: save rdi at rsp + 0x1b0
+	  pc+0x24: save rsi at rsp + 0x1a8
+	  pc+0x24: save rbx at rsp + 0x1a0
+	  pc+0x24: alloc large area: rsp = rsp - 0x170
+	  pc+0x18: push r15
+	  pc+0x16: push r14
+	  pc+0x14: push r13
+	  pc+0x12: push r12
+	  pc+0x10: push rbp
+	Handler: 00000001400022e4.
+	User data:
+	  000: 60 01 00 00
+ 00000001400039a4 (rva: 000039a4): 0000000140001560 - 0000000140001670
+	Version: 1, Flags: UNW_FLAG_EHANDLER | UNW_FLAG_UHANDLER
+	Nbr codes: 3, Prologue size: 0x1c, Frame offset: 0x0, Frame reg: none
+	  pc+0x0e: alloc large area: rsp = rsp - 0xa0
+	  pc+0x02: push rbp
+	Handler: 00000001400022e4.
+	User data:
+	  000: 98 00 00 00
+ 00000001400039b8 (rva: 000039b8): 0000000140001680 - 000000014000169e
+	Version: 1, Flags: none
+	Nbr codes: 0, Prologue size: 0x00, Frame offset: 0x0, Frame reg: none
+ 00000001400039bc (rva: 000039bc): 00000001400016a0 - 0000000140001756
+	Version: 1, Flags: none
+	Nbr codes: 2, Prologue size: 0x06, Frame offset: 0x0, Frame reg: none
+	  pc+0x06: alloc small area: rsp = rsp - 0x20
+	  pc+0x02: push rbx
+ 00000001400039c4 (rva: 000039c4): 0000000140001758 - 0000000140001768
+	Version: 1, Flags: none
+	Nbr codes: 1, Prologue size: 0x04, Frame offset: 0x0, Frame reg: none
+	  pc+0x04: alloc small area: rsp = rsp - 0x28
+ 00000001400039c4 also used for function at 0000000140001768
+ 00000001400039cc (rva: 000039cc): 0000000140001784 - 0000000140001900
+	Version: 1, Flags: UNW_FLAG_EHANDLER
+	Nbr codes: 6, Prologue size: 0x0f, Frame offset: 0x0, Frame reg: none
+	  pc+0x0f: save rsi at rsp + 0x48
+	  pc+0x0f: save rbx at rsp + 0x40
+	  pc+0x0f: alloc small area: rsp = rsp - 0x30
+	  pc+0x0b: push rdi
+	Handler: 0000000140002240.
+	User data:
+	  000: 02 00 00 00 ad 17 00 00 b2 18 00 00 a6 23 00 00
+	  010: b2 18 00 00 e6 18 00 00 f8 18 00 00 a6 23 00 00
+	  020: b2 18 00 00
+ 00000001400039c4 (rva: 000039c4): 0000000140001900 - 0000000140001912
+	Version: 1, Flags: none
+	Nbr codes: 1, Prologue size: 0x04, Frame offset: 0x0, Frame reg: none
+	  pc+0x04: alloc small area: rsp = rsp - 0x28
+ 00000001400039bc (rva: 000039bc): 0000000140001914 - 0000000140001948
+	Version: 1, Flags: none
+	Nbr codes: 2, Prologue size: 0x06, Frame offset: 0x0, Frame reg: none
+	  pc+0x06: alloc small area: rsp = rsp - 0x20
+	  pc+0x02: push rbx
+ 0000000140003a0c (rva: 00003a0c): 0000000140001948 - 0000000140001a1a
+	Version: 1, Flags: none
+	Nbr codes: 1, Prologue size: 0x09, Frame offset: 0x0, Frame reg: none
+	  pc+0x09: alloc small area: rsp = rsp - 0x38
+ 0000000140003a14 (rva: 00003a14): 0000000140001a1c - 0000000140001a8d
+	Version: 1, Flags: none
+	Nbr codes: 4, Prologue size: 0x08, Frame offset: 0x0, Frame reg: none
+	  pc+0x08: alloc small area: rsp = rsp - 0x40
+	  pc+0x04: push rdi
+	  pc+0x03: push rsi
+	  pc+0x02: push rbx
+ 00000001400039c4 (rva: 000039c4): 0000000140001a90 - 0000000140001ac9
+	Version: 1, Flags: none
+	Nbr codes: 1, Prologue size: 0x04, Frame offset: 0x0, Frame reg: none
+	  pc+0x04: alloc small area: rsp = rsp - 0x28
+ 00000001400039bc (rva: 000039bc): 0000000140001acc - 0000000140001b15
+	Version: 1, Flags: none
+	Nbr codes: 2, Prologue size: 0x06, Frame offset: 0x0, Frame reg: none
+	  pc+0x06: alloc small area: rsp = rsp - 0x20
+	  pc+0x02: push rbx
+ 00000001400039bc also used for function at 0000000140001b18
+ 0000000140003a20 (rva: 00003a20): 0000000140001ba4 - 0000000140001c3c
+	Version: 1, Flags: UNW_FLAG_EHANDLER
+	Nbr codes: 1, Prologue size: 0x04, Frame offset: 0x0, Frame reg: none
+	  pc+0x04: alloc small area: rsp = rsp - 0x18
+	Handler: 0000000140002240.
+	User data:
+	  000: 01 00 00 00 ab 1b 00 00 35 1c 00 00 c4 23 00 00
+	  010: 35 1c 00 00
+ 00000001400039bc (rva: 000039bc): 0000000140001c3c - 0000000140001c60
+	Version: 1, Flags: none
+	Nbr codes: 2, Prologue size: 0x06, Frame offset: 0x0, Frame reg: none
+	  pc+0x06: alloc small area: rsp = rsp - 0x20
+	  pc+0x02: push rbx
+ 00000001400039bc also used for function at 0000000140001c60
+ 00000001400039bc also used for function at 0000000140001c8c
+ 00000001400039c4 (rva: 000039c4): 0000000140001cc8 - 0000000140001cdf
+	Version: 1, Flags: none
+	Nbr codes: 1, Prologue size: 0x04, Frame offset: 0x0, Frame reg: none
+	  pc+0x04: alloc small area: rsp = rsp - 0x28
+ 0000000140003a48 (rva: 00003a48): 0000000140001ce0 - 0000000140001d8c
+	Version: 1, Flags: none
+	Nbr codes: 4, Prologue size: 0x0d, Frame offset: 0x0, Frame reg: none
+	  pc+0x0d: save rbx at rsp + 0x50
+	  pc+0x0d: alloc small area: rsp = rsp - 0x30
+	  pc+0x06: push rbp
+ 00000001400039c4 (rva: 000039c4): 0000000140001db8 - 0000000140001dd3
+	Version: 1, Flags: none
+	Nbr codes: 1, Prologue size: 0x04, Frame offset: 0x0, Frame reg: none
+	  pc+0x04: alloc small area: rsp = rsp - 0x28
+ 0000000140003a54 (rva: 00003a54): 0000000140001df8 - 0000000140001f43
+	Version: 1, Flags: none
+	Nbr codes: 5, Prologue size: 0x15, Frame offset: 0x0, Frame reg: none
+	  pc+0x15: save rbx at rsp + 0x5d0
+	  pc+0x15: alloc large area: rsp = rsp - 0x5c0
+	  pc+0x06: push rbp
+ 00000001400039c4 (rva: 000039c4): 0000000140001f4c - 0000000140001f9d
+	Version: 1, Flags: none
+	Nbr codes: 1, Prologue size: 0x04, Frame offset: 0x0, Frame reg: none
+	  pc+0x04: alloc small area: rsp = rsp - 0x28
+ 0000000140003a64 (rva: 00003a64): 0000000140001fb0 - 000000014000200b
+	Version: 1, Flags: none
+	Nbr codes: 4, Prologue size: 0x0a, Frame offset: 0x0, Frame reg: none
+	  pc+0x0a: save rbx at rsp + 0x30
+	  pc+0x0a: alloc small area: rsp = rsp - 0x20
+	  pc+0x06: push rdi
+ 0000000140003a64 also used for function at 000000014000200c
+ 0000000140003a64 also used for function at 0000000140002048
+ 0000000140003a70 (rva: 00003a70): 0000000140002084 - 0000000140002230
+	Version: 1, Flags: none
+	Nbr codes: 6, Prologue size: 0x0f, Frame offset: 0x0, Frame reg: none
+	  pc+0x0f: save rsi at rsp + 0x30
+	  pc+0x0f: save rbx at rsp + 0x28
+	  pc+0x0f: alloc small area: rsp = rsp - 0x10
+	  pc+0x0b: push rdi
+ 00000001400039c4 (rva: 000039c4): 00000001400022e4 - 0000000140002301
+	Version: 1, Flags: none
+	Nbr codes: 1, Prologue size: 0x04, Frame offset: 0x0, Frame reg: none
+	  pc+0x04: alloc small area: rsp = rsp - 0x28
+ 0000000140003a8c (rva: 00003a8c): 0000000140002304 - 000000014000235f
+	Version: 1, Flags: none
+	Nbr codes: 1, Prologue size: 0x02, Frame offset: 0x0, Frame reg: none
+	  pc+0x02: push rbx
+	User data:
+	  000: b8 3b 00 00 00 00 00 00 00 00 00 00 4e 3d 00 00
+	  010: 80 30 00 00 28 3c 00 00 00 00 00 00 00 00 00 00
+	  020: 74 3f 00 00 f0 30 00 00 c8 3c 00 00 00 00 00 00
+	  030: 00 00 00 00 96 3f 00 00 90 31 00 00 e8 3b 00 00
+	  040: 00 00 00 00 00 00 00 00 b6 3f 00 00 b0 30 00 00
+	  050: 18 3c 00 00 00 00 00 00 00 00 00 00 d6 3f 00 00
+	  060: e0 30 00 00 08 3c 00 00 00 00 00 00 00 00 00 00
+	  070: f6 3f 00 00 d0 30 00 00 38 3b 00 00 00 00 00 00
+	  080: 00 00 00 00 76 41 00 00 00 30 00 00 00 00 00 00
+	  090: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+	  0a0: 00 00 00 00 08 41 00 00 00 00 00 00 2c 40 00 00
+	  0b0: 00 00 00 00 46 40 00 00 00 00 00 00 5a 40 00 00
+	  0c0: 00 00 00 00 76 40 00 00 00 00 00 00 94 40 00 00
+	  0d0: 00 00 00 00 62 41 00 00 00 00 00 00 4e 41 00 00
+	  0e0: 00 00 00 00 38 41 00 00 00 00 00 00 1e 41 00 00
+	  0f0: 00 00 00 00 18 40 00 00 00 00 00 00 f2 40 00 00
+	  100: 00 00 00 00 d8 40 00 00 00 00 00 00 bc 40 00 00
+	  110: 00 00 00 00 a8 40 00 00 00 00 00 00 00 00 00 00
+	  120: 00 00 00 00 26 3d 00 00 00 00 00 00 10 3d 00 00
+	  130: 00 00 00 00 f8 3c 00 00 00 00 00 00 44 3d 00 00
+	  140: 00 00 00 00 84 41 00 00 00 00 00 00 00 00 00 00
+	  150: 00 00 00 00 c0 3d 00 00 00 00 00 00 02 3f 00 00
+	  160: 00 00 00 00 b8 3d 00 00 00 00 00 00 00 00 00 00
+	  170: 00 00 00 00 ec 3e 00 00 00 00 00 00 00 00 00 00
+	  180: 00 00 00 00 ec 3d 00 00 00 00 00 00 00 00 00 00
+	  190: 00 00 00 00 22 3f 00 00 00 00 00 00 3e 3f 00 00
+	  1a0: 00 00 00 00 5a 3f 00 00 00 00 00 00 68 3f 00 00
+	  1b0: 00 00 00 00 94 3d 00 00 00 00 00 00 78 3e 00 00
+	  1c0: 00 00 00 00 be 3e 00 00 00 00 00 00 8e 3e 00 00
+	  1d0: 00 00 00 00 b4 3e 00 00 00 00 00 00 6a 3e 00 00
+	  1e0: 00 00 00 00 5e 3e 00 00 00 00 00 00 3c 3e 00 00
+	  1f0: 00 00 00 00 1a 3e 00 00 00 00 00 00 00 3e 00 00
+	  200: 00 00 00 00 aa 3e 00 00 00 00 00 00 dc 3d 00 00
+	  210: 00 00 00 00 ca 3d 00 00 00 00 00 00 9c 3e 00 00
+	  220: 00 00 00 00 60 3d 00 00 00 00 00 00 00 00 00 00
+	  230: 00 00 00 00 7a 3d 00 00 00 00 00 00 68 3d 00 00
+	  240: 00 00 00 00 9e 3d 00 00 00 00 00 00 80 3e 00 00
+	  250: 00 00 00 00 12 3f 00 00 00 00 00 00 00 00 00 00
+	  260: 00 00 00 00 08 00 5f 5f 43 5f 73 70 65 63 69 66
+	  270: 69 63 5f 68 61 6e 64 6c 65 72 00 00 1b 00 5f 5f
+	  280: 63 75 72 72 65 6e 74 5f 65 78 63 65 70 74 69 6f
+	  290: 6e 00 1c 00 5f 5f 63 75 72 72 65 6e 74 5f 65 78
+	  2a0: 63 65 70 74 69 6f 6e 5f 63 6f 6e 74 65 78 74 00
+	  2b0: 3e 00 6d 65 6d 73 65 74 00 00 56 43 52 55 4e 54
+	  2c0: 49 4d 45 31 34 30 2e 64 6c 6c 00 00 55 00 65 78
+	  2d0: 69 74 00 00 00 00 5f 5f 61 63 72 74 5f 69 6f 62
+	  2e0: 5f 66 75 6e 63 00 03 00 5f 5f 73 74 64 69 6f 5f
+	  2f0: 63 6f 6d 6d 6f 6e 5f 76 66 70 72 69 6e 74 66 00
+	  300: 66 00 73 79 73 74 65 6d 00 00 06 00 5f 5f 73 74
+	  310: 64 69 6f 5f 63 6f 6d 6d 6f 6e 5f 76 66 73 63 61
+	  320: 6e 66 00 00 18 00 66 72 65 65 00 00 19 00 6d 61
+	  330: 6c 6c 6f 63 00 00 40 00 5f 73 65 68 5f 66 69 6c
+	  340: 74 65 72 5f 65 78 65 00 42 00 5f 73 65 74 5f 61
+	  350: 70 70 5f 74 79 70 65 00 09 00 5f 5f 73 65 74 75
+	  360: 73 65 72 6d 61 74 68 65 72 72 00 00 18 00 5f 63
+	  370: 6f 6e 66 69 67 75 72 65 5f 6e 61 72 72 6f 77 5f
+	  380: 61 72 67 76 00 00 33 00 5f 69 6e 69 74 69 61 6c
+	  390: 69 7a 65 5f 6e 61 72 72 6f 77 5f 65 6e 76 69 72
+	  3a0: 6f 6e 6d 65 6e 74 00 00 28 00 5f 67 65 74 5f 69
+	  3b0: 6e 69 74 69 61 6c 5f 6e 61 72 72 6f 77 5f 65 6e
+	  3c0: 76 69 72 6f 6e 6d 65 6e 74 00 36 00 5f 69 6e 69
+	  3d0: 74 74 65 72 6d 00 37 00 5f 69 6e 69 74 74 65 72
+	  3e0: 6d 5f 65 00 23 00 5f 65 78 69 74 00 54 00 5f 73
+	  3f0: 65 74 5f 66 6d 6f 64 65 00 00 04 00 5f 5f 70 5f
+	  400: 5f 5f 61 72 67 63 00 00 05 00 5f 5f 70 5f 5f 5f
+	  410: 61 72 67 76 00 00 16 00 5f 63 65 78 69 74 00 00
+	  420: 15 00 5f 63 5f 65 78 69 74 00 3d 00 5f 72 65 67
+	  430: 69 73 74 65 72 5f 74 68 72 65 61 64 5f 6c 6f 63
+	  440: 61 6c 5f 65 78 65 5f 61 74 65 78 69 74 5f 63 61
+	  450: 6c 6c 62 61 63 6b 00 00 08 00 5f 63 6f 6e 66 69
+	  460: 67 74 68 72 65 61 64 6c 6f 63 61 6c 65 00 16 00
+	  470: 5f 73 65 74 5f 6e 65 77 5f 6d 6f 64 65 00 01 00
+	  480: 5f 5f 70 5f 5f 63 6f 6d 6d 6f 64 65 00 00 34 00
+	  490: 5f 69 6e 69 74 69 61 6c 69 7a 65 5f 6f 6e 65 78
+	  4a0: 69 74 5f 74 61 62 6c 65 00 00 3c 00 5f 72 65 67
+	  4b0: 69 73 74 65 72 5f 6f 6e 65 78 69 74 5f 66 75 6e
+	  4c0: 63 74 69 6f 6e 00 1e 00 5f 63 72 74 5f 61 74 65
+	  4d0: 78 69 74 00 67 00 74 65 72 6d 69 6e 61 74 65 00
+	  4e0: 61 70 69 2d 6d 73 2d 77 69 6e 2d 63 72 74 2d 72
+	  4f0: 75 6e 74 69 6d 65 2d 6c 31 2d 31 2d 30 2e 64 6c
+	  500: 6c 00 61 70 69 2d 6d 73 2d 77 69 6e 2d 63 72 74
+	  510: 2d 73 74 64 69 6f 2d 6c 31 2d 31 2d 30 2e 64 6c
+	  520: 6c 00 61 70 69 2d 6d 73 2d 77 69 6e 2d 63 72 74
+	  530: 2d 68 65 61 70 2d 6c 31 2d 31 2d 30 2e 64 6c 6c
+	  540: 00 00 61 70 69 2d 6d 73 2d 77 69 6e 2d 63 72 74
+	  550: 2d 6d 61 74 68 2d 6c 31 2d 31 2d 30 2e 64 6c 6c
+	  560: 00 00 61 70 69 2d 6d 73 2d 77 69 6e 2d 63 72 74
+	  570: 2d 6c 6f 63 61 6c 65 2d 6c 31 2d 31 2d 30 2e 64
+	  580: 6c 6c 00 00 f5 04 52 74 6c 43 61 70 74 75 72 65
+	  590: 43 6f 6e 74 65 78 74 00 fd 04 52 74 6c 4c 6f 6f
+	  5a0: 6b 75 70 46 75 6e 63 74 69 6f 6e 45 6e 74 72 79
+	  5b0: 00 00 04 05 52 74 6c 56 69 72 74 75 61 6c 55 6e
+	  5c0: 77 69 6e 64 00 00 e6 05 55 6e 68 61 6e 64 6c 65
+	  5d0: 64 45 78 63 65 70 74 69 6f 6e 46 69 6c 74 65 72
+	  5e0: 00 00 a4 05 53 65 74 55 6e 68 61 6e 64 6c 65 64
+	  5f0: 45 78 63 65 70 74 69 6f 6e 46 69 6c 74 65 72 00
+	  600: 32 02 47 65 74 43 75 72 72 65 6e 74 50 72 6f 63
+	  610: 65 73 73 00 c4 05 54 65 72 6d 69 6e 61 74 65 50
+	  620: 72 6f 63 65 73 73 00 00 a8 03 49 73 50 72 6f 63
+	  630: 65 73 73 6f 72 46 65 61 74 75 72 65 50 72 65 73
+	  640: 65 6e 74 00 70 04 51 75 65 72 79 50 65 72 66 6f
+	  650: 72 6d 61 6e 63 65 43 6f 75 6e 74 65 72 00 33 02
+	  660: 47 65 74 43 75 72 72 65 6e 74 50 72 6f 63 65 73
+	  670: 73 49 64 00 37 02 47 65 74 43 75 72 72 65 6e 74
+	  680: 54 68 72 65 61 64 49 64 00 00 0a 03 47 65 74 53
+	  690: 79 73 74 65 6d 54 69 6d 65 41 73 46 69 6c 65 54
+	  6a0: 69 6d 65 00 8a 03 49 6e 69 74 69 61 6c 69 7a 65
+	  6b0: 53 4c 69 73 74 48 65 61 64 00 a0 03 49 73 44 65
+	  6c0: 62 75 67 67 65 72 50 72 65 73 65 6e 74 00 95 02
+	  6d0: 47 65 74 4d 6f 64 75 6c 65 48 61 6e 64 6c 65 57
+	  6e0: 00 00 4b 45 52 4e 45 4c 33 32 2e 64 6c 6c 00 00
+	  6f0: 3c 00 6d 65 6d 63 70 79 00 00
+ 0000000140003a80 (rva: 00003a80): 0000000140002380 - 0000000140002382
+	Version: 1, Flags: none
+	Nbr codes: 0, Prologue size: 0x00, Frame offset: 0x0, Frame reg: none
+	User data:
+	  000: 00 00 00 00
+ 0000000140003a88 (rva: 00003a88): 00000001400023a0 - 00000001400023a6
+	Version: 1, Flags: none
+	Nbr codes: 0, Prologue size: 0x00, Frame offset: 0x0, Frame reg: none
+ 0000000140003a04 (rva: 00003a04): 00000001400023a6 - 00000001400023c4
+	Version: 1, Flags: none
+	Nbr codes: 2, Prologue size: 0x06, Frame offset: 0x0, Frame reg: none
+	  pc+0x06: alloc small area: rsp = rsp - 0x20
+	  pc+0x02: push rbp
+ 0000000140003a40 (rva: 00003a40): 00000001400023c4 - 00000001400023dc
+	Version: 1, Flags: none
+	Nbr codes: 1, Prologue size: 0x02, Frame offset: 0x0, Frame reg: none
+	  pc+0x02: push rbp
+
+
+PE File Base Relocations (interpreted .reloc section contents)
+
+Virtual Address: 00003000 Chunk size 48 (0x30) Number of fixups 20
+	reloc    0 offset  1c0 [31c0] DIR64
+	reloc    1 offset  1c8 [31c8] DIR64
+	reloc    2 offset  1d0 [31d0] DIR64
+	reloc    3 offset  1d8 [31d8] DIR64
+	reloc    4 offset  1e0 [31e0] DIR64
+	reloc    5 offset  1f0 [31f0] DIR64
+	reloc    6 offset  200 [3200] DIR64
+	reloc    7 offset  218 [3218] DIR64
+	reloc    8 offset  220 [3220] DIR64
+	reloc    9 offset  250 [3250] DIR64
+	reloc   10 offset  258 [3258] DIR64
+	reloc   11 offset  488 [3488] DIR64
+	reloc   12 offset  4a0 [34a0] DIR64
+	reloc   13 offset  4a8 [34a8] DIR64
+	reloc   14 offset  530 [3530] DIR64
+	reloc   15 offset  548 [3548] DIR64
+	reloc   16 offset  550 [3550] DIR64
+	reloc   17 offset  558 [3558] DIR64
+	reloc   18 offset  560 [3560] DIR64
+	reloc   19 offset  568 [3568] DIR64
+
+There is a debug directory in .rdata at 0x40003570
+
+Type                Size     Rva      Offset
+  2        CodeView 00000056 0000365c 00001e5c
+(format RSDS signature 89afe456642f4b4db832431661bf4458 age 2 pdb D:\visual studio projects\Project16\x64\Release\Project16.pdb)
+ 12         Feature 00000014 000036b4 00001eb4
+ 13         CoffGrp 00000284 000036c8 00001ec8
+ 14           ILTCG 00000000 00000000 00000000
+
+The .rsrc Resource Directory section:
+000  Type Table: Char: 0, Time: 00000000, Ver: 0/0, Num Names: 0, IDs: 1
+010   Entry: ID: 0x000018, Value: 0x80000018
+018    Name Table: Char: 0, Time: 00000000, Ver: 0/0, Num Names: 0, IDs: 1
+028     Entry: ID: 0x000001, Value: 0x80000030
+030      Language Table: Char: 0, Time: 00000000, Ver: 0/0, Num Names: 0, IDs: 1
+040       Entry: ID: 0x000409, Value: 0x000048
+048        Leaf: Addr: 0x007060, Size: 0x00017d, Codepage: 0
+ Resources start at offset: 0x60
+
+Sections:
+Idx Name          Size      VMA               LMA               File off  Algn
+  0 .text         000013dc  0000000140001000  0000000140001000  00000400  2**4
+                  CONTENTS, ALLOC, LOAD, READONLY, CODE
+  1 .rdata        0000118e  0000000140003000  0000000140003000  00001800  2**4
+                  CONTENTS, ALLOC, LOAD, READONLY, DATA
+  2 .data         00000200  0000000140005000  0000000140005000  00002a00  2**4
+                  CONTENTS, ALLOC, LOAD, DATA
+  3 .pdata        000001a4  0000000140006000  0000000140006000  00002c00  2**2
+                  CONTENTS, ALLOC, LOAD, READONLY, DATA
+  4 .rsrc         000001e0  0000000140007000  0000000140007000  00002e00  2**2
+                  CONTENTS, ALLOC, LOAD, READONLY, DATA
+  5 .reloc        00000030  0000000140008000  0000000140008000  00003000  2**2
+                  CONTENTS, ALLOC, LOAD, READONLY, DATA
+SYMBOL TABLE:
+no symbols
+
+
+**********************
+PowerShell transcript end
+End time: 20260929034811
+**********************
+**********************
+PowerShell transcript start
+Start time: 20260929034847
+Username: DESKTOP-412KTAR\mzj
+RunAs User: DESKTOP-412KTAR\mzj
+Configuration Name: 
+Machine: DESKTOP-412KTAR (Microsoft Windows NT 10.0.26200.0)
+Host Application: C:\Users\mzj\.cache\codex-runtimes\codex-primary-runtime\dependencies\native\powershell\pwsh.dll -Command try { [Console]::OutputEncoding=[System.Text.Encoding]::UTF8 } catch {}
+$root='C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\Maybesignin_540'; $log="$root\analysis\maybesignin_540_transcript_20260929.txt"; Start-Transcript -LiteralPath $log -Append; $tempExe='C:\Users\mzj\AppData\Local\Temp\ezsignin_540_ascii.exe'; strings -a -t x -n 3 $tempExe | Tee-Object -FilePath "$root\analysis\strings_ascii_offsets.txt"; objdump -d -Mintel $tempExe | Tee-Object -FilePath "$root\analysis\disassembly_full.txt" | Out-Null; Get-Item "$root\analysis\disassembly_full.txt" | Select-Object FullName,Length; Stop-Transcript
+Process ID: 27452
+PSVersion: 7.6.5
+PSEdition: Core
+GitCommitId: 7.6.5
+OS: Microsoft Windows 10.0.26200
+Platform: Win32NT
+PSCompatibleVersions: 1.0, 2.0, 3.0, 4.0, 5.0, 5.1, 6.0, 7.0
+PSRemotingProtocolVersion: 2.4
+SerializationVersion: 1.1.0.1
+WSManStackVersion: 3.0
+**********************
+Transcript started, output file is C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\Maybesignin_540\analysis\maybesignin_540_transcript_20260929.txt
+     4d !This program cannot be run in DOS mode.
+     e0 Rich
+    108 EUMg
+    208 .text
+    22f `.rdata
+    257 @.data
+    280 .pdata
+    2a7 @.rsrc
+    2cf @.reloc
+    431 L$ SVWH
+    440 t$X
+    45b t$ L
+    470 0_^[
+    491 L$ SVWH
+    4a0 t$X3
+    4b8 t$ L
+    4cd 0_^[
+    4ef UATAUAVAWH
+    55a D$
+    55e L$
+    581 L$$
+    5a4 L$(
+    5c7 L$,3
+    5ed oL$
+    5f3 D$P
+    5f8 D$`
+    5fd D$p
+    638 B3T
+    63d B3T
+    642 B3T
+    6aa 	A3
+    6b3 B3L
+    724 E	A
+    728 G	A
+    76b G	A
+    7b2 L$HA
+    7d0 \$@A
+    7de |$D
+    7e2 L$Lfff
+    7f4 3T4L3T4H3T4D
+    884 3L4@A3
+    88c L4PH
+    932 M`H3
+    946 [0I
+    94a s8I
+    94e {@I
+    953 A_A^A]A\]
+    960 @UH
+    a51 MOH3
+    aa0 @SH
+    baa t$
+    c16 t$
+    c99 tU@
+    cbe |$
+    ccd \$@H
+    cd2 t$HH
+    d14 @SH
+    d3f  [H
+    d75 D$8H
+    d81 D$8H
+    d9f D$@H
+    e1c @SVWH
+    e3b T$`H
+    e4a t9H
+    e4e d$8
+    e54 L$hH
+    e59 T$`L
+    e61 L$0L
+    e69 L$pH
+    e6e L$(3
+    e75 \$
+    e88 @_^[
+    e9b t!eH
+    ecc @SH
+    f02 u	3
+    f18 @SH
+    f39 u$H
+    f59 t.2
+    fb7 uxHc
+    fcb 9PE
+    fd7 f9A
+    fdb uTL+
+    ffa $I;
+   103c @SH
+   1060 @SH
+   1067 =S9
+   108c @SH
+   1094 =.9
+   1101 utH
+   1122 H1E
+   1132 H1E
+   1146  H3E
+   114b H3E
+   1179 \$PH
+   1264 t<H
+   1268 d$8
+   127f L$0L
+   128e L$(H
+   1297 L$ 3
+   12ab L$PH
+   12dd D$`
+   12e1 D$P
+   12e9 D$T
+   12fb D$PH
+   1300 D$@H
+   130c D$H3
+   1319 L$@
+   1365 u/HcH<H
+   136f 9PE
+   137b f9A
+   13c1 ;csm
+   13e6 \$03
+   143f \$0H
+   147b \$0H
+   14a5 ntelA
+   14ac ineID
+   14c3 Genu
+   14db u[H
+   14fa t(=`
+   1501 t!=p
+   1511  w$H
+   154a |&3
+   15a9 ss3
+   15b9 T$ H
+   15be D$ "
+   15e3  t8
+   1608 D$ $
+   1620 \$(3
+   1627 t$0H
+   16ea A8H
+   1704 @SE
+   1720 McP
+   17a6 @UH
+   17c4 @UH
+   1a70 plz input your flag:
+   1a90 success
+   1a98 pause
+   1ac7 z3T
+   1afb KpV
+   1b03 ^cX
+   1b08 %"|;
+   1b16 'RL6
+   1b4d SNo
+   1b5a jrml[Q
+   1b86 w~e
+   1b96 M y
+   1bb4 1*#
+   1bb8 MF?8ib[T
+   1bc1 ~wp
+   1bdc IB;4e^WP
+   1be5 zsl
+   1c00 E>70aZSL}voh
+   1c24 A:3,]VOHyrkd@
+   1d74 EUMg
+   1d90 EUMg
+   1dac EUMg
+   1dc8 EUMg
+   1e5c RSDSV
+   1e64 /dMK
+   1e74 D:\visual studio projects\Project16\x64\Release\Project16.pdb
+   1ec8 GCTL
+   1ed4 .text$mn
+   1ee8 .text$mn$00
+   1efc .text$x
+   1f0c .idata$5
+   1f20 .00cfg
+   1f30 .CRT$XCA
+   1f44 .CRT$XCAA
+   1f58 .CRT$XCZ
+   1f6c .CRT$XIA
+   1f80 .CRT$XIAA
+   1f94 .CRT$XIAC
+   1fa8 .CRT$XIZ
+   1fbc .CRT$XPA
+   1fd0 .CRT$XPZ
+   1fe4 .CRT$XTA
+   1ff8 .CRT$XTZ
+   200c .rdata
+   201c .rdata$voltmd
+   2034 .rdata$zzzdbg
+   204c .rtc$IAA
+   2060 .rtc$IZZ
+   2074 .rtc$TAA
+   2088 .rtc$TZZ
+   209c .xdata
+   20ac .idata$2
+   20c0 .idata$3
+   20d4 .idata$4
+   20e8 .idata$6
+   20fc .data
+   210c .bss
+   211c .pdata
+   212c .rsrc$01
+   2140 .rsrc$02
+   2180 $t6
+   2184 $d5
+   2188 $44
+   21db p@"
+   24fa __C_specific_handler
+   2512 __current_exception
+   2528 __current_exception_context
+   2546 memset
+   254e VCRUNTIME140.dll
+   2562 exit
+   256a __acrt_iob_func
+   257c __stdio_common_vfprintf
+   2596 system
+   25a0 __stdio_common_vfscanf
+   25ba free
+   25c2 malloc
+   25cc _seh_filter_exe
+   25de _set_app_type
+   25ee __setusermatherr
+   2602 _configure_narrow_argv
+   261c _initialize_narrow_environment
+   263e _get_initial_narrow_environment
+   2660 _initterm
+   266c _initterm_e
+   267a _exit
+   2682 _set_fmode
+   2690 __p___argc
+   269e __p___argv
+   26ac _cexit
+   26b6 _c_exit
+   26c0 _register_thread_local_exe_atexit_callback
+   26ee _configthreadlocale
+   2704 _set_new_mode
+   2714 __p__commode
+   2724 _initialize_onexit_table
+   2740 _register_onexit_function
+   275c _crt_atexit
+   276a terminate
+   2774 api-ms-win-crt-runtime-l1-1-0.dll
+   2796 api-ms-win-crt-stdio-l1-1-0.dll
+   27b6 api-ms-win-crt-heap-l1-1-0.dll
+   27d6 api-ms-win-crt-math-l1-1-0.dll
+   27f6 api-ms-win-crt-locale-l1-1-0.dll
+   281a RtlCaptureContext
+   282e RtlLookupFunctionEntry
+   2848 RtlVirtualUnwind
+   285c UnhandledExceptionFilter
+   2878 SetUnhandledExceptionFilter
+   2896 GetCurrentProcess
+   28aa TerminateProcess
+   28be IsProcessorFeaturePresent
+   28da QueryPerformanceCounter
+   28f4 GetCurrentProcessId
+   290a GetCurrentThreadId
+   2920 GetSystemTimeAsFileTime
+   293a InitializeSListHead
+   2950 IsDebuggerPresent
+   2964 GetModuleHandleW
+   2976 KERNEL32.dll
+   2986 memcpy
+   2e60 <?xml version='1.0' encoding='UTF-8' standalone='yes'?>
+   2e99 <assembly xmlns='urn:schemas-microsoft-com:asm.v1' manifestVersion='1.0'>
+   2ee4   <trustInfo xmlns="urn:schemas-microsoft-com:asm.v3">
+   2f1c     <security>
+   2f2c       <requestedPrivileges>
+   2f49         <requestedExecutionLevel level='asInvoker' uiAccess='false' />
+   2f91       </requestedPrivileges>
+   2faf     </security>
+   2fc0   </trustInfo>
+   2fd0 </assembly>
+
+**********************
+PowerShell transcript end
+End time: 20260929034848
+**********************
+**********************
+PowerShell transcript start
+Start time: 20260929034900
+Username: DESKTOP-412KTAR\mzj
+RunAs User: DESKTOP-412KTAR\mzj
+Configuration Name: 
+Machine: DESKTOP-412KTAR (Microsoft Windows NT 10.0.26200.0)
+Host Application: C:\Users\mzj\.cache\codex-runtimes\codex-primary-runtime\dependencies\native\powershell\pwsh.dll -Command try { [Console]::OutputEncoding=[System.Text.Encoding]::UTF8 } catch {}
+$root='C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\Maybesignin_540'; $log="$root\analysis\maybesignin_540_transcript_20260929.txt"; Start-Transcript -LiteralPath $log -Append; Get-Content "$root\analysis\disassembly_full.txt" -TotalCount 360; Stop-Transcript
+Process ID: 12816
+PSVersion: 7.6.5
+PSEdition: Core
+GitCommitId: 7.6.5
+OS: Microsoft Windows 10.0.26200
+Platform: Win32NT
+PSCompatibleVersions: 1.0, 2.0, 3.0, 4.0, 5.0, 5.1, 6.0, 7.0
+PSRemotingProtocolVersion: 2.4
+SerializationVersion: 1.1.0.1
+WSManStackVersion: 3.0
+**********************
+Transcript started, output file is C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\Maybesignin_540\analysis\maybesignin_540_transcript_20260929.txt
+
+C:\Users\mzj\AppData\Local\Temp\ezsignin_540_ascii.exe:     file format pei-x86-64
+
+
+Disassembly of section .text:
+
+0000000140001000 <.text>:
+   140001000:	48 8d 05 19 46 00 00 	lea    rax,[rip+0x4619]        # 0x140005620
+   140001007:	c3                   	ret
+   140001008:	cc                   	int3
+   140001009:	cc                   	int3
+   14000100a:	cc                   	int3
+   14000100b:	cc                   	int3
+   14000100c:	cc                   	int3
+   14000100d:	cc                   	int3
+   14000100e:	cc                   	int3
+   14000100f:	cc                   	int3
+   140001010:	48 8d 05 01 46 00 00 	lea    rax,[rip+0x4601]        # 0x140005618
+   140001017:	c3                   	ret
+   140001018:	cc                   	int3
+   140001019:	cc                   	int3
+   14000101a:	cc                   	int3
+   14000101b:	cc                   	int3
+   14000101c:	cc                   	int3
+   14000101d:	cc                   	int3
+   14000101e:	cc                   	int3
+   14000101f:	cc                   	int3
+   140001020:	48 89 4c 24 08       	mov    QWORD PTR [rsp+0x8],rcx
+   140001025:	48 89 54 24 10       	mov    QWORD PTR [rsp+0x10],rdx
+   14000102a:	4c 89 44 24 18       	mov    QWORD PTR [rsp+0x18],r8
+   14000102f:	4c 89 4c 24 20       	mov    QWORD PTR [rsp+0x20],r9
+   140001034:	53                   	push   rbx
+   140001035:	56                   	push   rsi
+   140001036:	57                   	push   rdi
+   140001037:	48 83 ec 30          	sub    rsp,0x30
+   14000103b:	48 8b f9             	mov    rdi,rcx
+   14000103e:	48 8d 74 24 58       	lea    rsi,[rsp+0x58]
+   140001043:	b9 01 00 00 00       	mov    ecx,0x1
+   140001048:	ff 15 4a 21 00 00    	call   QWORD PTR [rip+0x214a]        # 0x140003198
+   14000104e:	48 8b d8             	mov    rbx,rax
+   140001051:	e8 aa ff ff ff       	call   0x140001000
+   140001056:	45 33 c9             	xor    r9d,r9d
+   140001059:	48 89 74 24 20       	mov    QWORD PTR [rsp+0x20],rsi
+   14000105e:	4c 8b c7             	mov    r8,rdi
+   140001061:	48 8b d3             	mov    rdx,rbx
+   140001064:	48 8b 08             	mov    rcx,QWORD PTR [rax]
+   140001067:	ff 15 23 21 00 00    	call   QWORD PTR [rip+0x2123]        # 0x140003190
+   14000106d:	48 83 c4 30          	add    rsp,0x30
+   140001071:	5f                   	pop    rdi
+   140001072:	5e                   	pop    rsi
+   140001073:	5b                   	pop    rbx
+   140001074:	c3                   	ret
+   140001075:	cc                   	int3
+   140001076:	cc                   	int3
+   140001077:	cc                   	int3
+   140001078:	cc                   	int3
+   140001079:	cc                   	int3
+   14000107a:	cc                   	int3
+   14000107b:	cc                   	int3
+   14000107c:	cc                   	int3
+   14000107d:	cc                   	int3
+   14000107e:	cc                   	int3
+   14000107f:	cc                   	int3
+   140001080:	48 89 4c 24 08       	mov    QWORD PTR [rsp+0x8],rcx
+   140001085:	48 89 54 24 10       	mov    QWORD PTR [rsp+0x10],rdx
+   14000108a:	4c 89 44 24 18       	mov    QWORD PTR [rsp+0x18],r8
+   14000108f:	4c 89 4c 24 20       	mov    QWORD PTR [rsp+0x20],r9
+   140001094:	53                   	push   rbx
+   140001095:	56                   	push   rsi
+   140001096:	57                   	push   rdi
+   140001097:	48 83 ec 30          	sub    rsp,0x30
+   14000109b:	48 8b f9             	mov    rdi,rcx
+   14000109e:	48 8d 74 24 58       	lea    rsi,[rsp+0x58]
+   1400010a3:	33 c9                	xor    ecx,ecx
+   1400010a5:	ff 15 ed 20 00 00    	call   QWORD PTR [rip+0x20ed]        # 0x140003198
+   1400010ab:	48 8b d8             	mov    rbx,rax
+   1400010ae:	e8 5d ff ff ff       	call   0x140001010
+   1400010b3:	45 33 c9             	xor    r9d,r9d
+   1400010b6:	48 89 74 24 20       	mov    QWORD PTR [rsp+0x20],rsi
+   1400010bb:	4c 8b c7             	mov    r8,rdi
+   1400010be:	48 8b d3             	mov    rdx,rbx
+   1400010c1:	48 8b 08             	mov    rcx,QWORD PTR [rax]
+   1400010c4:	ff 15 d6 20 00 00    	call   QWORD PTR [rip+0x20d6]        # 0x1400031a0
+   1400010ca:	48 83 c4 30          	add    rsp,0x30
+   1400010ce:	5f                   	pop    rdi
+   1400010cf:	5e                   	pop    rsi
+   1400010d0:	5b                   	pop    rbx
+   1400010d1:	c3                   	ret
+   1400010d2:	cc                   	int3
+   1400010d3:	cc                   	int3
+   1400010d4:	cc                   	int3
+   1400010d5:	cc                   	int3
+   1400010d6:	cc                   	int3
+   1400010d7:	cc                   	int3
+   1400010d8:	cc                   	int3
+   1400010d9:	cc                   	int3
+   1400010da:	cc                   	int3
+   1400010db:	cc                   	int3
+   1400010dc:	cc                   	int3
+   1400010dd:	cc                   	int3
+   1400010de:	cc                   	int3
+   1400010df:	cc                   	int3
+   1400010e0:	48 89 5c 24 08       	mov    QWORD PTR [rsp+0x8],rbx
+   1400010e5:	48 89 74 24 10       	mov    QWORD PTR [rsp+0x10],rsi
+   1400010ea:	48 89 7c 24 18       	mov    QWORD PTR [rsp+0x18],rdi
+   1400010ef:	55                   	push   rbp
+   1400010f0:	41 54                	push   r12
+   1400010f2:	41 55                	push   r13
+   1400010f4:	41 56                	push   r14
+   1400010f6:	41 57                	push   r15
+   1400010f8:	48 8d 6c 24 90       	lea    rbp,[rsp-0x70]
+   1400010fd:	48 81 ec 70 01 00 00 	sub    rsp,0x170
+   140001104:	48 8b 05 fd 3e 00 00 	mov    rax,QWORD PTR [rip+0x3efd]        # 0x140005008
+   14000110b:	48 33 c4             	xor    rax,rsp
+   14000110e:	48 89 45 60          	mov    QWORD PTR [rbp+0x60],rax
+   140001112:	b9 32 00 00 00       	mov    ecx,0x32
+   140001117:	4d 8b f1             	mov    r14,r9
+   14000111a:	4d 8b e8             	mov    r13,r8
+   14000111d:	48 8b da             	mov    rbx,rdx
+   140001120:	ff 15 8a 1f 00 00    	call   QWORD PTR [rip+0x1f8a]        # 0x1400030b0
+   140001126:	0f b6 0b             	movzx  ecx,BYTE PTR [rbx]
+   140001129:	4c 8d 25 d0 ee ff ff 	lea    r12,[rip+0xffffffffffffeed0]        # 0x140000000
+   140001130:	c1 e1 08             	shl    ecx,0x8
+   140001133:	4c 8b f8             	mov    r15,rax
+   140001136:	0f b6 43 01          	movzx  eax,BYTE PTR [rbx+0x1]
+   14000113a:	0f 57 c0             	xorps  xmm0,xmm0
+   14000113d:	33 c8                	xor    ecx,eax
+   14000113f:	0f 57 c9             	xorps  xmm1,xmm1
+   140001142:	0f b6 43 02          	movzx  eax,BYTE PTR [rbx+0x2]
+   140001146:	c1 e1 08             	shl    ecx,0x8
+   140001149:	33 c8                	xor    ecx,eax
+   14000114b:	0f b6 43 03          	movzx  eax,BYTE PTR [rbx+0x3]
+   14000114f:	c1 e1 08             	shl    ecx,0x8
+   140001152:	33 c8                	xor    ecx,eax
+   140001154:	0f b6 43 05          	movzx  eax,BYTE PTR [rbx+0x5]
+   140001158:	0f 11 44 24 20       	movups XMMWORD PTR [rsp+0x20],xmm0
+   14000115d:	89 4c 24 20          	mov    DWORD PTR [rsp+0x20],ecx
+   140001161:	0f b6 4b 04          	movzx  ecx,BYTE PTR [rbx+0x4]
+   140001165:	c1 e1 08             	shl    ecx,0x8
+   140001168:	33 c8                	xor    ecx,eax
+   14000116a:	0f b6 43 06          	movzx  eax,BYTE PTR [rbx+0x6]
+   14000116e:	c1 e1 08             	shl    ecx,0x8
+   140001171:	33 c8                	xor    ecx,eax
+   140001173:	0f b6 43 07          	movzx  eax,BYTE PTR [rbx+0x7]
+   140001177:	c1 e1 08             	shl    ecx,0x8
+   14000117a:	33 c8                	xor    ecx,eax
+   14000117c:	0f b6 43 09          	movzx  eax,BYTE PTR [rbx+0x9]
+   140001180:	89 4c 24 24          	mov    DWORD PTR [rsp+0x24],ecx
+   140001184:	0f b6 4b 08          	movzx  ecx,BYTE PTR [rbx+0x8]
+   140001188:	c1 e1 08             	shl    ecx,0x8
+   14000118b:	33 c8                	xor    ecx,eax
+   14000118d:	0f b6 43 0a          	movzx  eax,BYTE PTR [rbx+0xa]
+   140001191:	c1 e1 08             	shl    ecx,0x8
+   140001194:	33 c8                	xor    ecx,eax
+   140001196:	0f b6 43 0b          	movzx  eax,BYTE PTR [rbx+0xb]
+   14000119a:	c1 e1 08             	shl    ecx,0x8
+   14000119d:	33 c8                	xor    ecx,eax
+   14000119f:	0f b6 43 0d          	movzx  eax,BYTE PTR [rbx+0xd]
+   1400011a3:	89 4c 24 28          	mov    DWORD PTR [rsp+0x28],ecx
+   1400011a7:	0f b6 4b 0c          	movzx  ecx,BYTE PTR [rbx+0xc]
+   1400011ab:	c1 e1 08             	shl    ecx,0x8
+   1400011ae:	33 c8                	xor    ecx,eax
+   1400011b0:	0f b6 43 0e          	movzx  eax,BYTE PTR [rbx+0xe]
+   1400011b4:	c1 e1 08             	shl    ecx,0x8
+   1400011b7:	33 c8                	xor    ecx,eax
+   1400011b9:	0f b6 43 0f          	movzx  eax,BYTE PTR [rbx+0xf]
+   1400011bd:	c1 e1 08             	shl    ecx,0x8
+   1400011c0:	33 c8                	xor    ecx,eax
+   1400011c2:	0f 11 4d e0          	movups XMMWORD PTR [rbp-0x20],xmm1
+   1400011c6:	89 4c 24 2c          	mov    DWORD PTR [rsp+0x2c],ecx
+   1400011ca:	33 f6                	xor    esi,esi
+   1400011cc:	0f 11 4d f0          	movups XMMWORD PTR [rbp-0x10],xmm1
+   1400011d0:	44 8b ce             	mov    r9d,esi
+   1400011d3:	0f 11 4d 00          	movups XMMWORD PTR [rbp+0x0],xmm1
+   1400011d7:	0f 11 4d 10          	movups XMMWORD PTR [rbp+0x10],xmm1
+   1400011db:	0f 11 4d 20          	movups XMMWORD PTR [rbp+0x20],xmm1
+   1400011df:	0f 11 4d 30          	movups XMMWORD PTR [rbp+0x30],xmm1
+   1400011e3:	0f 11 4d 40          	movups XMMWORD PTR [rbp+0x40],xmm1
+   1400011e7:	0f 11 4d 50          	movups XMMWORD PTR [rbp+0x50],xmm1
+   1400011eb:	f3 0f 6f 4c 24 20    	movdqu xmm1,XMMWORD PTR [rsp+0x20]
+   1400011f1:	0f 11 44 24 50       	movups XMMWORD PTR [rsp+0x50],xmm0
+   1400011f6:	0f 11 44 24 60       	movups XMMWORD PTR [rsp+0x60],xmm0
+   1400011fb:	0f 11 44 24 70       	movups XMMWORD PTR [rsp+0x70],xmm0
+   140001200:	0f 11 45 80          	movups XMMWORD PTR [rbp-0x80],xmm0
+   140001204:	0f 11 45 90          	movups XMMWORD PTR [rbp-0x70],xmm0
+   140001208:	0f 11 45 a0          	movups XMMWORD PTR [rbp-0x60],xmm0
+   14000120c:	0f 11 45 b0          	movups XMMWORD PTR [rbp-0x50],xmm0
+   140001210:	0f 11 45 c0          	movups XMMWORD PTR [rbp-0x40],xmm0
+   140001214:	f3 0f 6f 05 84 21 00 	movdqu xmm0,XMMWORD PTR [rip+0x2184]        # 0x1400033a0
+   14000121b:	00
+   14000121c:	0f 57 c8             	xorps  xmm1,xmm0
+   14000121f:	f3 0f 7f 4d d0       	movdqu XMMWORD PTR [rbp-0x30],xmm1
+   140001224:	0f 1f 40 00          	nop    DWORD PTR [rax+0x0]
+   140001228:	0f 1f 84 00 00 00 00 	nop    DWORD PTR [rax+rax*1+0x0]
+   14000122f:	00
+   140001230:	43 8b 94 21 b0 33 00 	mov    edx,DWORD PTR [r9+r12*1+0x33b0]
+   140001237:	00
+   140001238:	42 33 54 0d dc       	xor    edx,DWORD PTR [rbp+r9*1-0x24]
+   14000123d:	42 33 54 0d d4       	xor    edx,DWORD PTR [rbp+r9*1-0x2c]
+   140001242:	42 33 54 0d d8       	xor    edx,DWORD PTR [rbp+r9*1-0x28]
+   140001247:	8b c2                	mov    eax,edx
+   140001249:	48 c1 e8 18          	shr    rax,0x18
+   14000124d:	46 0f b6 84 20 a0 32 	movzx  r8d,BYTE PTR [rax+r12*1+0x32a0]
+   140001254:	00 00
+   140001256:	8b c2                	mov    eax,edx
+   140001258:	c1 e8 10             	shr    eax,0x10
+   14000125b:	0f b6 c8             	movzx  ecx,al
+   14000125e:	41 c1 e0 08          	shl    r8d,0x8
+   140001262:	42 0f b6 84 21 a0 32 	movzx  eax,BYTE PTR [rcx+r12*1+0x32a0]
+   140001269:	00 00
+   14000126b:	44 33 c0             	xor    r8d,eax
+   14000126e:	8b c2                	mov    eax,edx
+   140001270:	c1 e8 08             	shr    eax,0x8
+   140001273:	0f b6 c8             	movzx  ecx,al
+   140001276:	41 c1 e0 08          	shl    r8d,0x8
+   14000127a:	42 0f b6 84 21 a0 32 	movzx  eax,BYTE PTR [rcx+r12*1+0x32a0]
+   140001281:	00 00
+   140001283:	44 33 c0             	xor    r8d,eax
+   140001286:	0f b6 c2             	movzx  eax,dl
+   140001289:	41 c1 e0 08          	shl    r8d,0x8
+   14000128d:	42 0f b6 84 20 a0 32 	movzx  eax,BYTE PTR [rax+r12*1+0x32a0]
+   140001294:	00 00
+   140001296:	44 33 c0             	xor    r8d,eax
+   140001299:	41 8b c8             	mov    ecx,r8d
+   14000129c:	41 8b c0             	mov    eax,r8d
+   14000129f:	c1 e9 0a             	shr    ecx,0xa
+   1400012a2:	41 33 c8             	xor    ecx,r8d
+   1400012a5:	c1 e0 0a             	shl    eax,0xa
+   1400012a8:	c1 e9 09             	shr    ecx,0x9
+   1400012ab:	41 33 c0             	xor    eax,r8d
+   1400012ae:	c1 e0 0d             	shl    eax,0xd
+   1400012b1:	33 c8                	xor    ecx,eax
+   1400012b3:	42 33 4c 0d d0       	xor    ecx,DWORD PTR [rbp+r9*1-0x30]
+   1400012b8:	41 33 c8             	xor    ecx,r8d
+   1400012bb:	42 89 4c 0d e0       	mov    DWORD PTR [rbp+r9*1-0x20],ecx
+   1400012c0:	49 83 c1 04          	add    r9,0x4
+   1400012c4:	49 81 f9 80 00 00 00 	cmp    r9,0x80
+   1400012cb:	0f 8c 5f ff ff ff    	jl     0x140001230
+   1400012d1:	41 0f b6 4d 01       	movzx  ecx,BYTE PTR [r13+0x1]
+   1400012d6:	41 0f b6 45 08       	movzx  eax,BYTE PTR [r13+0x8]
+   1400012db:	45 0f b6 5d 00       	movzx  r11d,BYTE PTR [r13+0x0]
+   1400012e0:	41 0f b6 55 02       	movzx  edx,BYTE PTR [r13+0x2]
+   1400012e5:	45 0f b6 45 03       	movzx  r8d,BYTE PTR [r13+0x3]
+   1400012ea:	41 0f b6 7d 04       	movzx  edi,BYTE PTR [r13+0x4]
+   1400012ef:	45 0f b6 4d 05       	movzx  r9d,BYTE PTR [r13+0x5]
+   1400012f4:	45 0f b6 55 06       	movzx  r10d,BYTE PTR [r13+0x6]
+   1400012f9:	41 0f b6 5d 07       	movzx  ebx,BYTE PTR [r13+0x7]
+   1400012fe:	45 88 1f             	mov    BYTE PTR [r15],r11b
+   140001301:	41 88 4f 01          	mov    BYTE PTR [r15+0x1],cl
+   140001305:	41 88 57 02          	mov    BYTE PTR [r15+0x2],dl
+   140001309:	45 88 47 03          	mov    BYTE PTR [r15+0x3],r8b
+   14000130d:	41 88 7f 04          	mov    BYTE PTR [r15+0x4],dil
+   140001311:	45 88 4f 05          	mov    BYTE PTR [r15+0x5],r9b
+   140001315:	45 88 57 06          	mov    BYTE PTR [r15+0x6],r10b
+   140001319:	41 88 5f 07          	mov    BYTE PTR [r15+0x7],bl
+   14000131d:	41 88 47 08          	mov    BYTE PTR [r15+0x8],al
+   140001321:	41 0f b6 45 09       	movzx  eax,BYTE PTR [r13+0x9]
+   140001326:	41 88 47 09          	mov    BYTE PTR [r15+0x9],al
+   14000132a:	41 0f b6 45 0a       	movzx  eax,BYTE PTR [r13+0xa]
+   14000132f:	41 88 47 0a          	mov    BYTE PTR [r15+0xa],al
+   140001333:	41 0f b6 45 0b       	movzx  eax,BYTE PTR [r13+0xb]
+   140001338:	41 88 47 0b          	mov    BYTE PTR [r15+0xb],al
+   14000133c:	41 0f b6 45 0c       	movzx  eax,BYTE PTR [r13+0xc]
+   140001341:	41 88 47 0c          	mov    BYTE PTR [r15+0xc],al
+   140001345:	41 0f b6 45 0d       	movzx  eax,BYTE PTR [r13+0xd]
+   14000134a:	41 88 47 0d          	mov    BYTE PTR [r15+0xd],al
+   14000134e:	41 0f b6 45 0e       	movzx  eax,BYTE PTR [r13+0xe]
+   140001353:	41 88 47 0e          	mov    BYTE PTR [r15+0xe],al
+   140001357:	41 0f b6 45 0f       	movzx  eax,BYTE PTR [r13+0xf]
+   14000135c:	41 88 47 0f          	mov    BYTE PTR [r15+0xf],al
+   140001360:	49 89 77 10          	mov    QWORD PTR [r15+0x10],rsi
+   140001364:	49 89 77 18          	mov    QWORD PTR [r15+0x18],rsi
+   140001368:	41 0f b6 47 09       	movzx  eax,BYTE PTR [r15+0x9]
+   14000136d:	41 c1 e3 08          	shl    r11d,0x8
+   140001371:	44 33 d9             	xor    r11d,ecx
+   140001374:	c1 e7 08             	shl    edi,0x8
+   140001377:	41 0f b6 4f 08       	movzx  ecx,BYTE PTR [r15+0x8]
+   14000137c:	41 33 f9             	xor    edi,r9d
+   14000137f:	c1 e1 08             	shl    ecx,0x8
+   140001382:	33 c8                	xor    ecx,eax
+   140001384:	41 c1 e3 08          	shl    r11d,0x8
+   140001388:	41 0f b6 47 0a       	movzx  eax,BYTE PTR [r15+0xa]
+   14000138d:	44 33 da             	xor    r11d,edx
+   140001390:	c1 e1 08             	shl    ecx,0x8
+   140001393:	33 c8                	xor    ecx,eax
+   140001395:	c1 e7 08             	shl    edi,0x8
+   140001398:	41 0f b6 47 0b       	movzx  eax,BYTE PTR [r15+0xb]
+   14000139d:	41 33 fa             	xor    edi,r10d
+   1400013a0:	c1 e1 08             	shl    ecx,0x8
+   1400013a3:	33 c8                	xor    ecx,eax
+   1400013a5:	41 c1 e3 08          	shl    r11d,0x8
+   1400013a9:	41 0f b6 47 0d       	movzx  eax,BYTE PTR [r15+0xd]
+   1400013ae:	45 33 d8             	xor    r11d,r8d
+   1400013b1:	89 4c 24 48          	mov    DWORD PTR [rsp+0x48],ecx
+   1400013b5:	41 0f b6 4f 0c       	movzx  ecx,BYTE PTR [r15+0xc]
+   1400013ba:	c1 e1 08             	shl    ecx,0x8
+   1400013bd:	33 c8                	xor    ecx,eax
+   1400013bf:	c1 e7 08             	shl    edi,0x8
+   1400013c2:	41 0f b6 47 0e       	movzx  eax,BYTE PTR [r15+0xe]
+   1400013c7:	33 fb                	xor    edi,ebx
+   1400013c9:	c1 e1 08             	shl    ecx,0x8
+   1400013cc:	33 c8                	xor    ecx,eax
+   1400013ce:	44 89 5c 24 40       	mov    DWORD PTR [rsp+0x40],r11d
+   1400013d3:	41 0f b6 47 0f       	movzx  eax,BYTE PTR [r15+0xf]
+   1400013d8:	c1 e1 08             	shl    ecx,0x8
+   1400013db:	33 c8                	xor    ecx,eax
+   1400013dd:	89 7c 24 44          	mov    DWORD PTR [rsp+0x44],edi
+   1400013e1:	89 4c 24 4c          	mov    DWORD PTR [rsp+0x4c],ecx
+   1400013e5:	66 66 66 0f 1f 84 00 	data16 data16 nop WORD PTR [rax+rax*1+0x0]
+   1400013ec:	00 00 00 00
+   1400013f0:	8b 54 35 e0          	mov    edx,DWORD PTR [rbp+rsi*1-0x20]
+   1400013f4:	33 54 34 4c          	xor    edx,DWORD PTR [rsp+rsi*1+0x4c]
+   1400013f8:	33 54 34 48          	xor    edx,DWORD PTR [rsp+rsi*1+0x48]
+   1400013fc:	33 54 34 44          	xor    edx,DWORD PTR [rsp+rsi*1+0x44]
+   140001400:	8b c2                	mov    eax,edx
+   140001402:	48 c1 e8 18          	shr    rax,0x18
+   140001406:	46 0f b6 84 20 a0 32 	movzx  r8d,BYTE PTR [rax+r12*1+0x32a0]
+   14000140d:	00 00
+   14000140f:	8b c2                	mov    eax,edx
+   140001411:	c1 e8 10             	shr    eax,0x10
+   140001414:	0f b6 c8             	movzx  ecx,al
+   140001417:	41 c1 e0 08          	shl    r8d,0x8
+   14000141b:	42 0f b6 84 21 a0 32 	movzx  eax,BYTE PTR [rcx+r12*1+0x32a0]
+   140001422:	00 00
+   140001424:	44 33 c0             	xor    r8d,eax
+   140001427:	8b c2                	mov    eax,edx
+   140001429:	c1 e8 08             	shr    eax,0x8
+   14000142c:	0f b6 c8             	movzx  ecx,al
+   14000142f:	41 c1 e0 08          	shl    r8d,0x8
+   140001433:	42 0f b6 84 21 a0 32 	movzx  eax,BYTE PTR [rcx+r12*1+0x32a0]
+   14000143a:	00 00
+   14000143c:	44 33 c0             	xor    r8d,eax
+   14000143f:	0f b6 c2             	movzx  eax,dl
+   140001442:	41 c1 e0 08          	shl    r8d,0x8
+   140001446:	42 0f b6 84 20 a0 32 	movzx  eax,BYTE PTR [rax+r12*1+0x32a0]
+   14000144d:	00 00
+   14000144f:	44 33 c0             	xor    r8d,eax
+   140001452:	41 8b c8             	mov    ecx,r8d
+   140001455:	41 8b c0             	mov    eax,r8d
+   140001458:	c1 e9 08             	shr    ecx,0x8
+   14000145b:	41 33 c8             	xor    ecx,r8d
+   14000145e:	c1 e0 06             	shl    eax,0x6
+   140001461:	c1 e9 08             	shr    ecx,0x8
+   140001464:	41 33 c0             	xor    eax,r8d
+   140001467:	41 33 c8             	xor    ecx,r8d
+   14000146a:	c1 e0 08             	shl    eax,0x8
+   14000146d:	c1 e9 06             	shr    ecx,0x6
+   140001470:	41 33 c0             	xor    eax,r8d
+   140001473:	41 33 c8             	xor    ecx,r8d
+   140001476:	c1 e0 08             	shl    eax,0x8
+   140001479:	c1 e9 08             	shr    ecx,0x8
+   14000147c:	41 33 c0             	xor    eax,r8d
+   14000147f:	c1 e0 02             	shl    eax,0x2
+   140001482:	33 c8                	xor    ecx,eax
+   140001484:	33 4c 34 40          	xor    ecx,DWORD PTR [rsp+rsi*1+0x40]
+   140001488:	41 33 c8             	xor    ecx,r8d
+   14000148b:	89 4c 34 50          	mov    DWORD PTR [rsp+rsi*1+0x50],ecx
+   14000148f:	48 83 c6 04          	add    rsi,0x4
+   140001493:	48 81 fe 80 00 00 00 	cmp    rsi,0x80
+   14000149a:	0f 8c 50 ff ff ff    	jl     0x1400013f0
+**********************
+PowerShell transcript end
+End time: 20260929034900
+**********************
+**********************
+PowerShell transcript start
+Start time: 20260929034917
+Username: DESKTOP-412KTAR\mzj
+RunAs User: DESKTOP-412KTAR\mzj
+Configuration Name: 
+Machine: DESKTOP-412KTAR (Microsoft Windows NT 10.0.26200.0)
+Host Application: C:\Users\mzj\.cache\codex-runtimes\codex-primary-runtime\dependencies\native\powershell\pwsh.dll -Command try { [Console]::OutputEncoding=[System.Text.Encoding]::UTF8 } catch {}
+$root='C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\Maybesignin_540'; $log="$root\analysis\maybesignin_540_transcript_20260929.txt"; Start-Transcript -LiteralPath $log -Append; Select-String -Path "$root\analysis\disassembly_full.txt" -Pattern '0x140003270|0x140003290|0x140003298|0x1400032c7|0x1400032fb|0x140003308|0x140003316|0x14000335a|0x1400033b8|0x1400033dc|0x140003400|0x140003424' -Context 8,10 | Format-List; Stop-Transcript
+Process ID: 23356
+PSVersion: 7.6.5
+PSEdition: Core
+GitCommitId: 7.6.5
+OS: Microsoft Windows 10.0.26200
+Platform: Win32NT
+PSCompatibleVersions: 1.0, 2.0, 3.0, 4.0, 5.0, 5.1, 6.0, 7.0
+PSRemotingProtocolVersion: 2.4
+SerializationVersion: 1.1.0.1
+WSManStackVersion: 3.0
+**********************
+Transcript started, output file is C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\Maybesignin_540\analysis\maybesignin_540_transcript_20260929.txt
+
+IgnoreCase : True
+LineNumber : 435
+Line       :    14000158f:	48 8d 0d da 1c 00 00 	lea    rcx,[rip+0x1cda]        # 0x140003270
+Filename   : disassembly_full.txt
+Path       : C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\Maybesignin_540\analysis\disassembly_full.txt
+Pattern    : 0x140003270|0x140003290|0x140003298|0x1400032c7|0x1400032fb|0x140003308|0x140003316|0x14000335a|0x1400033b
+             8|0x1400033dc|0x140003400|0x140003424
+Context    : Microsoft.PowerShell.Commands.MatchInfoContext
+Matches    : {0}
+
+IgnoreCase : True
+LineNumber : 469
+Line       :    140001634:	48 8d 0d 55 1c 00 00 	lea    rcx,[rip+0x1c55]        # 0x140003290
+Filename   : disassembly_full.txt
+Path       : C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\Maybesignin_540\analysis\disassembly_full.txt
+Pattern    : 0x140003270|0x140003290|0x140003298|0x1400032c7|0x1400032fb|0x140003308|0x140003316|0x14000335a|0x1400033b
+             8|0x1400033dc|0x140003400|0x140003424
+Context    : Microsoft.PowerShell.Commands.MatchInfoContext
+Matches    : {0}
+
+IgnoreCase : True
+LineNumber : 471
+Line       :    140001640:	48 8d 0d 51 1c 00 00 	lea    rcx,[rip+0x1c51]        # 0x140003298
+Filename   : disassembly_full.txt
+Path       : C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\Maybesignin_540\analysis\disassembly_full.txt
+Pattern    : 0x140003270|0x140003290|0x140003298|0x1400032c7|0x1400032fb|0x140003308|0x140003316|0x14000335a|0x1400033b
+             8|0x1400033dc|0x140003400|0x140003424
+Context    : Microsoft.PowerShell.Commands.MatchInfoContext
+Matches    : {0}
+
+**********************
+PowerShell transcript end
+End time: 20260929034917
+**********************
+**********************
+PowerShell transcript start
+Start time: 20260929034925
+Username: DESKTOP-412KTAR\mzj
+RunAs User: DESKTOP-412KTAR\mzj
+Configuration Name: 
+Machine: DESKTOP-412KTAR (Microsoft Windows NT 10.0.26200.0)
+Host Application: C:\Users\mzj\.cache\codex-runtimes\codex-primary-runtime\dependencies\native\powershell\pwsh.dll -Command try { [Console]::OutputEncoding=[System.Text.Encoding]::UTF8 } catch {}
+$root='C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\Maybesignin_540'; $log="$root\analysis\maybesignin_540_transcript_20260929.txt"; Start-Transcript -LiteralPath $log -Append; Get-Content "$root\analysis\disassembly_full.txt" | Select-Object -Skip 340 -First 340; Stop-Transcript
+Process ID: 14240
+PSVersion: 7.6.5
+PSEdition: Core
+GitCommitId: 7.6.5
+OS: Microsoft Windows 10.0.26200
+Platform: Win32NT
+PSCompatibleVersions: 1.0, 2.0, 3.0, 4.0, 5.0, 5.1, 6.0, 7.0
+PSRemotingProtocolVersion: 2.4
+SerializationVersion: 1.1.0.1
+WSManStackVersion: 3.0
+**********************
+Transcript started, output file is C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\Maybesignin_540\analysis\maybesignin_540_transcript_20260929.txt
+   14000145b:	41 33 c8             	xor    ecx,r8d
+   14000145e:	c1 e0 06             	shl    eax,0x6
+   140001461:	c1 e9 08             	shr    ecx,0x8
+   140001464:	41 33 c0             	xor    eax,r8d
+   140001467:	41 33 c8             	xor    ecx,r8d
+   14000146a:	c1 e0 08             	shl    eax,0x8
+   14000146d:	c1 e9 06             	shr    ecx,0x6
+   140001470:	41 33 c0             	xor    eax,r8d
+   140001473:	41 33 c8             	xor    ecx,r8d
+   140001476:	c1 e0 08             	shl    eax,0x8
+   140001479:	c1 e9 08             	shr    ecx,0x8
+   14000147c:	41 33 c0             	xor    eax,r8d
+   14000147f:	c1 e0 02             	shl    eax,0x2
+   140001482:	33 c8                	xor    ecx,eax
+   140001484:	33 4c 34 40          	xor    ecx,DWORD PTR [rsp+rsi*1+0x40]
+   140001488:	41 33 c8             	xor    ecx,r8d
+   14000148b:	89 4c 34 50          	mov    DWORD PTR [rsp+rsi*1+0x50],ecx
+   14000148f:	48 83 c6 04          	add    rsi,0x4
+   140001493:	48 81 fe 80 00 00 00 	cmp    rsi,0x80
+   14000149a:	0f 8c 50 ff ff ff    	jl     0x1400013f0
+   1400014a0:	8b 4d cc             	mov    ecx,DWORD PTR [rbp-0x34]
+   1400014a3:	8b c1                	mov    eax,ecx
+   1400014a5:	8b 55 c4             	mov    edx,DWORD PTR [rbp-0x3c]
+   1400014a8:	c1 e8 18             	shr    eax,0x18
+   1400014ab:	41 88 06             	mov    BYTE PTR [r14],al
+   1400014ae:	8b c1                	mov    eax,ecx
+   1400014b0:	c1 e8 10             	shr    eax,0x10
+   1400014b3:	41 88 46 01          	mov    BYTE PTR [r14+0x1],al
+   1400014b7:	8b c1                	mov    eax,ecx
+   1400014b9:	c1 e8 08             	shr    eax,0x8
+   1400014bc:	41 88 46 02          	mov    BYTE PTR [r14+0x2],al
+   1400014c0:	41 88 4e 03          	mov    BYTE PTR [r14+0x3],cl
+   1400014c4:	8b 4d c8             	mov    ecx,DWORD PTR [rbp-0x38]
+   1400014c7:	8b c1                	mov    eax,ecx
+   1400014c9:	c1 e8 18             	shr    eax,0x18
+   1400014cc:	41 88 46 04          	mov    BYTE PTR [r14+0x4],al
+   1400014d0:	8b c1                	mov    eax,ecx
+   1400014d2:	c1 e8 10             	shr    eax,0x10
+   1400014d5:	41 88 46 05          	mov    BYTE PTR [r14+0x5],al
+   1400014d9:	8b c1                	mov    eax,ecx
+   1400014db:	c1 e8 08             	shr    eax,0x8
+   1400014de:	41 88 46 06          	mov    BYTE PTR [r14+0x6],al
+   1400014e2:	8b c2                	mov    eax,edx
+   1400014e4:	c1 e8 18             	shr    eax,0x18
+   1400014e7:	41 88 4e 07          	mov    BYTE PTR [r14+0x7],cl
+   1400014eb:	49 8b cf             	mov    rcx,r15
+   1400014ee:	41 88 46 08          	mov    BYTE PTR [r14+0x8],al
+   1400014f2:	8b c2                	mov    eax,edx
+   1400014f4:	c1 e8 10             	shr    eax,0x10
+   1400014f7:	41 88 46 09          	mov    BYTE PTR [r14+0x9],al
+   1400014fb:	8b c2                	mov    eax,edx
+   1400014fd:	c1 e8 08             	shr    eax,0x8
+   140001500:	41 88 46 0a          	mov    BYTE PTR [r14+0xa],al
+   140001504:	41 88 56 0b          	mov    BYTE PTR [r14+0xb],dl
+   140001508:	8b 55 c0             	mov    edx,DWORD PTR [rbp-0x40]
+   14000150b:	8b c2                	mov    eax,edx
+   14000150d:	c1 e8 18             	shr    eax,0x18
+   140001510:	41 88 46 0c          	mov    BYTE PTR [r14+0xc],al
+   140001514:	8b c2                	mov    eax,edx
+   140001516:	c1 e8 10             	shr    eax,0x10
+   140001519:	41 88 46 0d          	mov    BYTE PTR [r14+0xd],al
+   14000151d:	8b c2                	mov    eax,edx
+   14000151f:	c1 e8 08             	shr    eax,0x8
+   140001522:	41 88 46 0e          	mov    BYTE PTR [r14+0xe],al
+   140001526:	41 88 56 0f          	mov    BYTE PTR [r14+0xf],dl
+   14000152a:	ff 15 90 1b 00 00    	call   QWORD PTR [rip+0x1b90]        # 0x1400030c0
+   140001530:	48 8b 4d 60          	mov    rcx,QWORD PTR [rbp+0x60]
+   140001534:	48 33 cc             	xor    rcx,rsp
+   140001537:	e8 44 01 00 00       	call   0x140001680
+   14000153c:	4c 8d 9c 24 70 01 00 	lea    r11,[rsp+0x170]
+   140001543:	00
+   140001544:	49 8b 5b 30          	mov    rbx,QWORD PTR [r11+0x30]
+   140001548:	49 8b 73 38          	mov    rsi,QWORD PTR [r11+0x38]
+   14000154c:	49 8b 7b 40          	mov    rdi,QWORD PTR [r11+0x40]
+   140001550:	49 8b e3             	mov    rsp,r11
+   140001553:	41 5f                	pop    r15
+   140001555:	41 5e                	pop    r14
+   140001557:	41 5d                	pop    r13
+   140001559:	41 5c                	pop    r12
+   14000155b:	5d                   	pop    rbp
+   14000155c:	c3                   	ret
+   14000155d:	cc                   	int3
+   14000155e:	cc                   	int3
+   14000155f:	cc                   	int3
+   140001560:	40 55                	rex push rbp
+   140001562:	48 8d 6c 24 a9       	lea    rbp,[rsp-0x57]
+   140001567:	48 81 ec a0 00 00 00 	sub    rsp,0xa0
+   14000156e:	48 8b 05 93 3a 00 00 	mov    rax,QWORD PTR [rip+0x3a93]        # 0x140005008
+   140001575:	48 33 c4             	xor    rax,rsp
+   140001578:	48 89 45 4f          	mov    QWORD PTR [rbp+0x4f],rax
+   14000157c:	0f 57 c0             	xorps  xmm0,xmm0
+   14000157f:	c7 45 f7 01 02 03 04 	mov    DWORD PTR [rbp-0x9],0x4030201
+   140001586:	33 c0                	xor    eax,eax
+   140001588:	c7 45 fb 05 06 07 08 	mov    DWORD PTR [rbp-0x5],0x8070605
+   14000158f:	48 8d 0d da 1c 00 00 	lea    rcx,[rip+0x1cda]        # 0x140003270
+   140001596:	66 89 45 47          	mov    WORD PTR [rbp+0x47],ax
+   14000159a:	0f 11 45 17          	movups XMMWORD PTR [rbp+0x17],xmm0
+   14000159e:	c7 45 ff 09 10 11 12 	mov    DWORD PTR [rbp-0x1],0x12111009
+   1400015a5:	0f 11 45 27          	movups XMMWORD PTR [rbp+0x27],xmm0
+   1400015a9:	c7 45 03 13 14 15 16 	mov    DWORD PTR [rbp+0x3],0x16151413
+   1400015b0:	0f 11 45 37          	movups XMMWORD PTR [rbp+0x37],xmm0
+   1400015b4:	c7 45 d7 1c 84 be 51 	mov    DWORD PTR [rbp-0x29],0x51be841c
+   1400015bb:	0f 11 45 07          	movups XMMWORD PTR [rbp+0x7],xmm0
+   1400015bf:	c7 45 db 45 ce 1a f3 	mov    DWORD PTR [rbp-0x25],0xf31ace45
+   1400015c6:	c7 45 df 1f a3 f7 5e 	mov    DWORD PTR [rbp-0x21],0x5ef7a31f
+   1400015cd:	c7 45 e3 3a 38 d0 be 	mov    DWORD PTR [rbp-0x1d],0xbed0383a
+   1400015d4:	c7 45 e7 fa 00 8a 5a 	mov    DWORD PTR [rbp-0x19],0x5a8a00fa
+   1400015db:	c7 45 eb ba 84 5d 57 	mov    DWORD PTR [rbp-0x15],0x575d84ba
+   1400015e2:	c7 45 ef 84 71 4f d5 	mov    DWORD PTR [rbp-0x11],0xd54f7184
+   1400015e9:	c7 45 f3 cc f2 50 e1 	mov    DWORD PTR [rbp-0xd],0xe150f2cc
+   1400015f0:	e8 2b fa ff ff       	call   0x140001020
+   1400015f5:	48 8d 55 07          	lea    rdx,[rbp+0x7]
+   1400015f9:	48 8d 0d 88 1c 00 00 	lea    rcx,[rip+0x1c88]        # 0x140003288
+   140001600:	e8 7b fa ff ff       	call   0x140001080
+   140001605:	4c 8d 4d 17          	lea    r9,[rbp+0x17]
+   140001609:	4c 8d 45 07          	lea    r8,[rbp+0x7]
+   14000160d:	48 8d 55 f7          	lea    rdx,[rbp-0x9]
+   140001611:	e8 ca fa ff ff       	call   0x1400010e0
+   140001616:	32 c0                	xor    al,al
+   140001618:	0f 1f 84 00 00 00 00 	nop    DWORD PTR [rax+rax*1+0x0]
+   14000161f:	00
+   140001620:	0f b6 d0             	movzx  edx,al
+   140001623:	0f b6 4c 15 d7       	movzx  ecx,BYTE PTR [rbp+rdx*1-0x29]
+   140001628:	38 4c 15 17          	cmp    BYTE PTR [rbp+rdx*1+0x17],cl
+   14000162c:	75 36                	jne    0x140001664
+   14000162e:	fe c0                	inc    al
+   140001630:	3c 10                	cmp    al,0x10
+   140001632:	72 ec                	jb     0x140001620
+   140001634:	48 8d 0d 55 1c 00 00 	lea    rcx,[rip+0x1c55]        # 0x140003290
+   14000163b:	e8 e0 f9 ff ff       	call   0x140001020
+   140001640:	48 8d 0d 51 1c 00 00 	lea    rcx,[rip+0x1c51]        # 0x140003298
+   140001647:	ff 15 c3 1a 00 00    	call   QWORD PTR [rip+0x1ac3]        # 0x140003110
+   14000164d:	33 c0                	xor    eax,eax
+   14000164f:	48 8b 4d 4f          	mov    rcx,QWORD PTR [rbp+0x4f]
+   140001653:	48 33 cc             	xor    rcx,rsp
+   140001656:	e8 25 00 00 00       	call   0x140001680
+   14000165b:	48 81 c4 a0 00 00 00 	add    rsp,0xa0
+   140001662:	5d                   	pop    rbp
+   140001663:	c3                   	ret
+   140001664:	b9 ef be ad de       	mov    ecx,0xdeadbeef
+   140001669:	ff 15 11 1b 00 00    	call   QWORD PTR [rip+0x1b11]        # 0x140003180
+   14000166f:	cc                   	int3
+   140001670:	cc                   	int3
+   140001671:	cc                   	int3
+   140001672:	cc                   	int3
+   140001673:	cc                   	int3
+   140001674:	cc                   	int3
+   140001675:	cc                   	int3
+   140001676:	66 66 0f 1f 84 00 00 	data16 nop WORD PTR [rax+rax*1+0x0]
+   14000167d:	00 00 00
+   140001680:	48 3b 0d 81 39 00 00 	cmp    rcx,QWORD PTR [rip+0x3981]        # 0x140005008
+   140001687:	75 10                	jne    0x140001699
+   140001689:	48 c1 c1 10          	rol    rcx,0x10
+   14000168d:	66 f7 c1 ff ff       	test   cx,0xffff
+   140001692:	75 01                	jne    0x140001695
+   140001694:	c3                   	ret
+   140001695:	48 c1 c9 10          	ror    rcx,0x10
+   140001699:	e9 aa 02 00 00       	jmp    0x140001948
+   14000169e:	cc                   	int3
+   14000169f:	cc                   	int3
+   1400016a0:	40 53                	rex push rbx
+   1400016a2:	48 83 ec 20          	sub    rsp,0x20
+   1400016a6:	b9 01 00 00 00       	mov    ecx,0x1
+   1400016ab:	e8 b4 0b 00 00       	call   0x140002264
+   1400016b0:	e8 e3 06 00 00       	call   0x140001d98
+   1400016b5:	8b c8                	mov    ecx,eax
+   1400016b7:	e8 d8 0b 00 00       	call   0x140002294
+   1400016bc:	e8 cb 06 00 00       	call   0x140001d8c
+   1400016c1:	8b d8                	mov    ebx,eax
+   1400016c3:	e8 fc 0b 00 00       	call   0x1400022c4
+   1400016c8:	b9 01 00 00 00       	mov    ecx,0x1
+   1400016cd:	89 18                	mov    DWORD PTR [rax],ebx
+   1400016cf:	e8 44 04 00 00       	call   0x140001b18
+   1400016d4:	84 c0                	test   al,al
+   1400016d6:	74 73                	je     0x14000174b
+   1400016d8:	e8 2f 09 00 00       	call   0x14000200c
+   1400016dd:	48 8d 0d 64 09 00 00 	lea    rcx,[rip+0x964]        # 0x140002048
+   1400016e4:	e8 df 05 00 00       	call   0x140001cc8
+   1400016e9:	e8 a2 06 00 00       	call   0x140001d90
+   1400016ee:	8b c8                	mov    ecx,eax
+   1400016f0:	e8 7b 0b 00 00       	call   0x140002270
+   1400016f5:	85 c0                	test   eax,eax
+   1400016f7:	75 52                	jne    0x14000174b
+   1400016f9:	e8 a2 06 00 00       	call   0x140001da0
+   1400016fe:	e8 d1 06 00 00       	call   0x140001dd4
+   140001703:	85 c0                	test   eax,eax
+   140001705:	74 0c                	je     0x140001713
+   140001707:	48 8d 0d 7e 06 00 00 	lea    rcx,[rip+0x67e]        # 0x140001d8c
+   14000170e:	e8 57 0b 00 00       	call   0x14000226a
+   140001713:	e8 9c 06 00 00       	call   0x140001db4
+   140001718:	e8 97 06 00 00       	call   0x140001db4
+   14000171d:	e8 6a 06 00 00       	call   0x140001d8c
+   140001722:	8b c8                	mov    ecx,eax
+   140001724:	e8 8f 0b 00 00       	call   0x1400022b8
+   140001729:	e8 82 06 00 00       	call   0x140001db0
+   14000172e:	84 c0                	test   al,al
+   140001730:	74 05                	je     0x140001737
+   140001732:	e8 3f 0b 00 00       	call   0x140002276
+   140001737:	e8 50 06 00 00       	call   0x140001d8c
+   14000173c:	e8 03 08 00 00       	call   0x140001f44
+   140001741:	85 c0                	test   eax,eax
+   140001743:	75 06                	jne    0x14000174b
+   140001745:	48 83 c4 20          	add    rsp,0x20
+   140001749:	5b                   	pop    rbx
+   14000174a:	c3                   	ret
+   14000174b:	b9 07 00 00 00       	mov    ecx,0x7
+   140001750:	e8 a3 06 00 00       	call   0x140001df8
+   140001755:	cc                   	int3
+   140001756:	cc                   	int3
+   140001757:	cc                   	int3
+   140001758:	48 83 ec 28          	sub    rsp,0x28
+   14000175c:	e8 57 06 00 00       	call   0x140001db8
+   140001761:	33 c0                	xor    eax,eax
+   140001763:	48 83 c4 28          	add    rsp,0x28
+   140001767:	c3                   	ret
+   140001768:	48 83 ec 28          	sub    rsp,0x28
+   14000176c:	e8 2f 08 00 00       	call   0x140001fa0
+   140001771:	e8 16 06 00 00       	call   0x140001d8c
+   140001776:	8b c8                	mov    ecx,eax
+   140001778:	48 83 c4 28          	add    rsp,0x28
+   14000177c:	e9 3d 0b 00 00       	jmp    0x1400022be
+   140001781:	cc                   	int3
+   140001782:	cc                   	int3
+   140001783:	cc                   	int3
+   140001784:	48 89 5c 24 08       	mov    QWORD PTR [rsp+0x8],rbx
+   140001789:	48 89 74 24 10       	mov    QWORD PTR [rsp+0x10],rsi
+   14000178e:	57                   	push   rdi
+   14000178f:	48 83 ec 30          	sub    rsp,0x30
+   140001793:	b9 01 00 00 00       	mov    ecx,0x1
+   140001798:	e8 2f 03 00 00       	call   0x140001acc
+   14000179d:	84 c0                	test   al,al
+   14000179f:	0f 84 36 01 00 00    	je     0x1400018db
+   1400017a5:	40 32 f6             	xor    sil,sil
+   1400017a8:	40 88 74 24 20       	mov    BYTE PTR [rsp+0x20],sil
+   1400017ad:	e8 de 02 00 00       	call   0x140001a90
+   1400017b2:	8a d8                	mov    bl,al
+   1400017b4:	8b 0d f6 3d 00 00    	mov    ecx,DWORD PTR [rip+0x3df6]        # 0x1400055b0
+   1400017ba:	83 f9 01             	cmp    ecx,0x1
+   1400017bd:	0f 84 23 01 00 00    	je     0x1400018e6
+   1400017c3:	85 c9                	test   ecx,ecx
+   1400017c5:	75 4a                	jne    0x140001811
+   1400017c7:	c7 05 df 3d 00 00 01 	mov    DWORD PTR [rip+0x3ddf],0x1        # 0x1400055b0
+   1400017ce:	00 00 00
+   1400017d1:	48 8d 15 50 1a 00 00 	lea    rdx,[rip+0x1a50]        # 0x140003228
+   1400017d8:	48 8d 0d 31 1a 00 00 	lea    rcx,[rip+0x1a31]        # 0x140003210
+   1400017df:	e8 a4 0a 00 00       	call   0x140002288
+   1400017e4:	85 c0                	test   eax,eax
+   1400017e6:	74 0a                	je     0x1400017f2
+   1400017e8:	b8 ff 00 00 00       	mov    eax,0xff
+   1400017ed:	e9 d9 00 00 00       	jmp    0x1400018cb
+   1400017f2:	48 8d 15 0f 1a 00 00 	lea    rdx,[rip+0x1a0f]        # 0x140003208
+   1400017f9:	48 8d 0d f8 19 00 00 	lea    rcx,[rip+0x19f8]        # 0x1400031f8
+   140001800:	e8 7d 0a 00 00       	call   0x140002282
+   140001805:	c7 05 a1 3d 00 00 02 	mov    DWORD PTR [rip+0x3da1],0x2        # 0x1400055b0
+   14000180c:	00 00 00
+   14000180f:	eb 08                	jmp    0x140001819
+   140001811:	40 b6 01             	mov    sil,0x1
+   140001814:	40 88 74 24 20       	mov    BYTE PTR [rsp+0x20],sil
+   140001819:	8a cb                	mov    cl,bl
+   14000181b:	e8 1c 04 00 00       	call   0x140001c3c
+   140001820:	e8 bb 05 00 00       	call   0x140001de0
+   140001825:	48 8b d8             	mov    rbx,rax
+   140001828:	48 83 38 00          	cmp    QWORD PTR [rax],0x0
+   14000182c:	74 1e                	je     0x14000184c
+   14000182e:	48 8b c8             	mov    rcx,rax
+   140001831:	e8 6e 03 00 00       	call   0x140001ba4
+   140001836:	84 c0                	test   al,al
+   140001838:	74 12                	je     0x14000184c
+   14000183a:	45 33 c0             	xor    r8d,r8d
+   14000183d:	41 8d 50 02          	lea    edx,[r8+0x2]
+   140001841:	33 c9                	xor    ecx,ecx
+   140001843:	48 8b 03             	mov    rax,QWORD PTR [rbx]
+   140001846:	ff 15 84 19 00 00    	call   QWORD PTR [rip+0x1984]        # 0x1400031d0
+   14000184c:	e8 97 05 00 00       	call   0x140001de8
+   140001851:	48 8b d8             	mov    rbx,rax
+   140001854:	48 83 38 00          	cmp    QWORD PTR [rax],0x0
+   140001858:	74 14                	je     0x14000186e
+   14000185a:	48 8b c8             	mov    rcx,rax
+   14000185d:	e8 42 03 00 00       	call   0x140001ba4
+   140001862:	84 c0                	test   al,al
+   140001864:	74 08                	je     0x14000186e
+   140001866:	48 8b 0b             	mov    rcx,QWORD PTR [rbx]
+   140001869:	e8 44 0a 00 00       	call   0x1400022b2
+   14000186e:	e8 09 0a 00 00       	call   0x14000227c
+   140001873:	48 8b f8             	mov    rdi,rax
+   140001876:	e8 25 0a 00 00       	call   0x1400022a0
+   14000187b:	48 8b 18             	mov    rbx,QWORD PTR [rax]
+   14000187e:	e8 17 0a 00 00       	call   0x14000229a
+   140001883:	4c 8b c7             	mov    r8,rdi
+   140001886:	48 8b d3             	mov    rdx,rbx
+   140001889:	8b 08                	mov    ecx,DWORD PTR [rax]
+   14000188b:	e8 d0 fc ff ff       	call   0x140001560
+   140001890:	8b d8                	mov    ebx,eax
+   140001892:	e8 b5 06 00 00       	call   0x140001f4c
+   140001897:	84 c0                	test   al,al
+   140001899:	74 55                	je     0x1400018f0
+   14000189b:	40 84 f6             	test   sil,sil
+   14000189e:	75 05                	jne    0x1400018a5
+   1400018a0:	e8 01 0a 00 00       	call   0x1400022a6
+   1400018a5:	33 d2                	xor    edx,edx
+   1400018a7:	b1 01                	mov    cl,0x1
+   1400018a9:	e8 b2 03 00 00       	call   0x140001c60
+   1400018ae:	8b c3                	mov    eax,ebx
+   1400018b0:	eb 19                	jmp    0x1400018cb
+   1400018b2:	8b d8                	mov    ebx,eax
+   1400018b4:	e8 93 06 00 00       	call   0x140001f4c
+   1400018b9:	84 c0                	test   al,al
+   1400018bb:	74 3b                	je     0x1400018f8
+   1400018bd:	80 7c 24 20 00       	cmp    BYTE PTR [rsp+0x20],0x0
+   1400018c2:	75 05                	jne    0x1400018c9
+   1400018c4:	e8 e3 09 00 00       	call   0x1400022ac
+   1400018c9:	8b c3                	mov    eax,ebx
+   1400018cb:	48 8b 5c 24 40       	mov    rbx,QWORD PTR [rsp+0x40]
+   1400018d0:	48 8b 74 24 48       	mov    rsi,QWORD PTR [rsp+0x48]
+   1400018d5:	48 83 c4 30          	add    rsp,0x30
+   1400018d9:	5f                   	pop    rdi
+   1400018da:	c3                   	ret
+   1400018db:	b9 07 00 00 00       	mov    ecx,0x7
+   1400018e0:	e8 13 05 00 00       	call   0x140001df8
+   1400018e5:	90                   	nop
+   1400018e6:	b9 07 00 00 00       	mov    ecx,0x7
+   1400018eb:	e8 08 05 00 00       	call   0x140001df8
+   1400018f0:	8b cb                	mov    ecx,ebx
+   1400018f2:	e8 61 09 00 00       	call   0x140002258
+   1400018f7:	90                   	nop
+   1400018f8:	8b cb                	mov    ecx,ebx
+   1400018fa:	e8 8f 09 00 00       	call   0x14000228e
+   1400018ff:	90                   	nop
+   140001900:	48 83 ec 28          	sub    rsp,0x28
+   140001904:	e8 d7 03 00 00       	call   0x140001ce0
+   140001909:	48 83 c4 28          	add    rsp,0x28
+   14000190d:	e9 72 fe ff ff       	jmp    0x140001784
+   140001912:	cc                   	int3
+   140001913:	cc                   	int3
+   140001914:	40 53                	rex push rbx
+   140001916:	48 83 ec 20          	sub    rsp,0x20
+   14000191a:	48 8b d9             	mov    rbx,rcx
+   14000191d:	33 c9                	xor    ecx,ecx
+   14000191f:	ff 15 fb 16 00 00    	call   QWORD PTR [rip+0x16fb]        # 0x140003020
+   140001925:	48 8b cb             	mov    rcx,rbx
+**********************
+PowerShell transcript end
+End time: 20260929034925
+**********************
+**********************
+PowerShell transcript start
+Start time: 20260929035232
+Username: DESKTOP-412KTAR\mzj
+RunAs User: DESKTOP-412KTAR\mzj
+Configuration Name: 
+Machine: DESKTOP-412KTAR (Microsoft Windows NT 10.0.26200.0)
+Host Application: C:\Users\mzj\.cache\codex-runtimes\codex-primary-runtime\dependencies\native\powershell\pwsh.dll -Command try { [Console]::OutputEncoding=[System.Text.Encoding]::UTF8 } catch {}
+$root='C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\Maybesignin_540'; $log="$root\analysis\maybesignin_540_transcript_20260929.txt"; Start-Transcript -LiteralPath $log -Append; $tempExe='C:\Users\mzj\AppData\Local\Temp\ezsignin_540_ascii.exe'; py -3 -c "from pathlib import Path; import importlib.util; b=Path(r'$tempExe').read_bytes(); print('sbox_256 =',b[0x1aa0:0x1ba0].hex()); print('roundkey_16 =',b[0x1ba0:0x1bb0].hex()); print('rcon_32 =',b[0x1bb0:0x1bd0].hex()); print('candidate modules:', {m:bool(importlib.util.find_spec(m)) for m in ('Crypto','cryptography')})"; Stop-Transcript
+Process ID: 14128
+PSVersion: 7.6.5
+PSEdition: Core
+GitCommitId: 7.6.5
+OS: Microsoft Windows 10.0.26200
+Platform: Win32NT
+PSCompatibleVersions: 1.0, 2.0, 3.0, 4.0, 5.0, 5.1, 6.0, 7.0
+PSRemotingProtocolVersion: 2.4
+SerializationVersion: 1.1.0.1
+WSManStackVersion: 3.0
+**********************
+Transcript started, output file is C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\Maybesignin_540\analysis\maybesignin_540_transcript_20260929.txt
+
+**********************
+PowerShell transcript end
+End time: 20260929035232
+**********************
+**********************
+PowerShell transcript start
+Start time: 20260929035426
+Username: DESKTOP-412KTAR\mzj
+RunAs User: DESKTOP-412KTAR\mzj
+Configuration Name: 
+Machine: DESKTOP-412KTAR (Microsoft Windows NT 10.0.26200.0)
+Host Application: C:\Users\mzj\.cache\codex-runtimes\codex-primary-runtime\dependencies\native\powershell\pwsh.dll -Command try { [Console]::OutputEncoding=[System.Text.Encoding]::UTF8 } catch {}
+$root='C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\Maybesignin_540'; $log="$root\analysis\maybesignin_540_transcript_20260929.txt"; Start-Transcript -LiteralPath $log -Append; py -3 "$root\analysis\solve_maybesignin_540.py"; Stop-Transcript
+Process ID: 20460
+PSVersion: 7.6.5
+PSEdition: Core
+GitCommitId: 7.6.5
+OS: Microsoft Windows 10.0.26200
+Platform: Win32NT
+PSCompatibleVersions: 1.0, 2.0, 3.0, 4.0, 5.0, 5.1, 6.0, 7.0
+PSRemotingProtocolVersion: 2.4
+SerializationVersion: 1.1.0.1
+WSManStackVersion: 3.0
+**********************
+Transcript started, output file is C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\Maybesignin_540\analysis\maybesignin_540_transcript_20260929.txt
+
+**********************
+PowerShell transcript end
+End time: 20260929035426
+**********************
+**********************
+PowerShell transcript start
+Start time: 20260929035441
+Username: DESKTOP-412KTAR\mzj
+RunAs User: DESKTOP-412KTAR\mzj
+Configuration Name: 
+Machine: DESKTOP-412KTAR (Microsoft Windows NT 10.0.26200.0)
+Host Application: C:\Users\mzj\.cache\codex-runtimes\codex-primary-runtime\dependencies\native\powershell\pwsh.dll -Command try { [Console]::OutputEncoding=[System.Text.Encoding]::UTF8 } catch {}
+$root='C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\Maybesignin_540'; $log="$root\analysis\maybesignin_540_transcript_20260929.txt"; Start-Transcript -LiteralPath $log -Append; py -3 -c "from pathlib import Path; import importlib.util; p=Path(r'$root\analysis\solve_maybesignin_540.py'); spec=importlib.util.spec_from_file_location('solver',p); m=importlib.util.module_from_spec(spec); spec.loader.exec_module(m); b=Path(r'C:\Users\mzj\AppData\Local\Temp\ezsignin_540_ascii.exe').read_bytes()[0x1aa0:0x1ba0]; print('embedded sbox bytes',len(m.SBOX),'binary sbox bytes',len(b)); print('first mismatch',next(((i,x,y) for i,(x,y) in enumerate(zip(m.SBOX,b)) if x!=y),None)); print('embedded tail',m.SBOX[-16:].hex()); print('binary tail',b[-16:].hex())"; Stop-Transcript
+Process ID: 18084
+PSVersion: 7.6.5
+PSEdition: Core
+GitCommitId: 7.6.5
+OS: Microsoft Windows 10.0.26200
+Platform: Win32NT
+PSCompatibleVersions: 1.0, 2.0, 3.0, 4.0, 5.0, 5.1, 6.0, 7.0
+PSRemotingProtocolVersion: 2.4
+SerializationVersion: 1.1.0.1
+WSManStackVersion: 3.0
+**********************
+Transcript started, output file is C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\Maybesignin_540\analysis\maybesignin_540_transcript_20260929.txt
+
+**********************
+PowerShell transcript end
+End time: 20260929035441
+**********************
+**********************
+PowerShell transcript start
+Start time: 20260929035458
+Username: DESKTOP-412KTAR\mzj
+RunAs User: DESKTOP-412KTAR\mzj
+Configuration Name: 
+Machine: DESKTOP-412KTAR (Microsoft Windows NT 10.0.26200.0)
+Host Application: C:\Users\mzj\.cache\codex-runtimes\codex-primary-runtime\dependencies\native\powershell\pwsh.dll -Command try { [Console]::OutputEncoding=[System.Text.Encoding]::UTF8 } catch {}
+$root='C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\Maybesignin_540'; $log="$root\analysis\maybesignin_540_transcript_20260929.txt"; Start-Transcript -LiteralPath $log -Append; py -3 -c "from pathlib import Path; import importlib.util; p=Path(r'$root\analysis\solve_maybesignin_540.py'); spec=importlib.util.spec_from_file_location('solver',p); m=importlib.util.module_from_spec(spec); spec.loader.exec_module(m); b=Path(r'C:\Users\mzj\AppData\Local\Temp\ezsignin_540_ascii.exe').read_bytes()[0x1aa0:0x1ba0]; print([(i,hex(x),hex(y)) for i,(x,y) in enumerate(zip(m.SBOX,b)) if x!=y])"; Stop-Transcript
+Process ID: 23664
+PSVersion: 7.6.5
+PSEdition: Core
+GitCommitId: 7.6.5
+OS: Microsoft Windows 10.0.26200
+Platform: Win32NT
+PSCompatibleVersions: 1.0, 2.0, 3.0, 4.0, 5.0, 5.1, 6.0, 7.0
+PSRemotingProtocolVersion: 2.4
+SerializationVersion: 1.1.0.1
+WSManStackVersion: 3.0
+**********************
+Transcript started, output file is C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\Maybesignin_540\analysis\maybesignin_540_transcript_20260929.txt
+
+**********************
+PowerShell transcript end
+End time: 20260929035458
+**********************
+**********************
+PowerShell transcript start
+Start time: 20260929035512
+Username: DESKTOP-412KTAR\mzj
+RunAs User: DESKTOP-412KTAR\mzj
+Configuration Name: 
+Machine: DESKTOP-412KTAR (Microsoft Windows NT 10.0.26200.0)
+Host Application: C:\Users\mzj\.cache\codex-runtimes\codex-primary-runtime\dependencies\native\powershell\pwsh.dll -Command try { [Console]::OutputEncoding=[System.Text.Encoding]::UTF8 } catch {}
+$root='C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\Maybesignin_540'; $log="$root\analysis\maybesignin_540_transcript_20260929.txt"; Start-Transcript -LiteralPath $log -Append; py -3 -c "from pathlib import Path; b=Path(r'C:\Users\mzj\AppData\Local\Temp\ezsignin_540_ascii.exe').read_bytes()[0x1aa0:0x1ba0]; print('\\n'.join(b[i:i+16].hex() for i in range(0,len(b),16)))"; Stop-Transcript
+Process ID: 3164
+PSVersion: 7.6.5
+PSEdition: Core
+GitCommitId: 7.6.5
+OS: Microsoft Windows 10.0.26200
+Platform: Win32NT
+PSCompatibleVersions: 1.0, 2.0, 3.0, 4.0, 5.0, 5.1, 6.0, 7.0
+PSRemotingProtocolVersion: 2.4
+SerializationVersion: 1.1.0.1
+WSManStackVersion: 3.0
+**********************
+Transcript started, output file is C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\Maybesignin_540\analysis\maybesignin_540_transcript_20260929.txt
+
+**********************
+PowerShell transcript end
+End time: 20260929035513
+**********************
+**********************
+PowerShell transcript start
+Start time: 20260929035559
+Username: DESKTOP-412KTAR\mzj
+RunAs User: DESKTOP-412KTAR\mzj
+Configuration Name: 
+Machine: DESKTOP-412KTAR (Microsoft Windows NT 10.0.26200.0)
+Host Application: C:\Users\mzj\.cache\codex-runtimes\codex-primary-runtime\dependencies\native\powershell\pwsh.dll -Command try { [Console]::OutputEncoding=[System.Text.Encoding]::UTF8 } catch {}
+$root='C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\Maybesignin_540'; $log="$root\analysis\maybesignin_540_transcript_20260929.txt"; Start-Transcript -LiteralPath $log -Append; Get-Content "$root\analysis\solve_maybesignin_540.py" -TotalCount 40; py -3 -c "from pathlib import Path; import importlib.util; p=Path(r'$root\analysis\solve_maybesignin_540.py'); spec=importlib.util.spec_from_file_location('solver',p); m=importlib.util.module_from_spec(spec); spec.loader.exec_module(m); b=Path(r'C:\Users\mzj\AppData\Local\Temp\ezsignin_540_ascii.exe').read_bytes()[0x1aa0:0x1ba0]; print('length',len(m.SBOX)); print('binary match',m.SBOX==b); print('mismatches',[(i,x,y) for i,(x,y) in enumerate(zip(m.SBOX,b)) if x!=y][:10])"; Stop-Transcript
+Process ID: 21924
+PSVersion: 7.6.5
+PSEdition: Core
+GitCommitId: 7.6.5
+OS: Microsoft Windows 10.0.26200
+Platform: Win32NT
+PSCompatibleVersions: 1.0, 2.0, 3.0, 4.0, 5.0, 5.1, 6.0, 7.0
+PSRemotingProtocolVersion: 2.4
+SerializationVersion: 1.1.0.1
+WSManStackVersion: 3.0
+**********************
+Transcript started, output file is C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\Maybesignin_540\analysis\maybesignin_540_transcript_20260929.txt
+#!/usr/bin/env python3
+"""Recover the 16-byte plaintext checked by ezsignin.exe using SM4 decryption."""
+
+from __future__ import annotations
+
+MASK = 0xFFFFFFFF
+SBOX = bytes.fromhex(
+    "d690e9fecce13db716b614c228fb2c05"
+    "2b679a762abe04c3aa44132649860699"
+    "9c4250f491ef987a33540b43edcfac62"
+    "e4b31ca9c908e89580df94fa758f3fa6"
+    "4707a7fcf37317ba83593c19e6854fa8"
+    "686b81b27164da8bf8eb0f4b70569d35"
+    "1e240e5e6358d1a225227c3b01217887"
+    "d40046579fd327524c3602e7a0c4c89e"
+    "eabf8ad240c738b5a3f7f2cef96115a1"
+    "e0ae5da49b341a55ad933230f58cb1e3"
+    "1df6e22e8266ca60c02923ab0d534e6f"
+    "d5db3745defd8e2f03ff6a726d6c5b51"
+    "8d1baf92bbddbc7f11d95c411f105ad8"
+    "0ac13188a5cd7bbd2d74d012b8e5b4b0"
+    "8969974a0c96777e65b9f109c56ec684"
+    "8418f07dec3adc4d2079ee5f3ed7cb3948"
+)
+FK = (0xA3B1BAC6, 0x56AA3350, 0x677D9197, 0xB27022DC)
+CK = tuple(
+    int.from_bytes(bytes((i * 4 * 7 & 0xFF, (i * 4 + 1) * 7 & 0xFF,
+                          (i * 4 + 2) * 7 & 0xFF, (i * 4 + 3) * 7 & 0xFF)), "big")
+    for i in range(32)
+)
+
+
+def rol32(value: int, count: int) -> int:
+    value &= MASK
+    return ((value << count) | (value >> (32 - count))) & MASK
+
+
+def tau(value: int) -> int:
+    return sum(SBOX[(value >> (24 - 8 * i)) & 0xFF] << (24 - 8 * i)
+               for i in range(4))
+
+**********************
+PowerShell transcript end
+End time: 20260929035600
+**********************
+**********************
+PowerShell transcript start
+Start time: 20260929035611
+Username: DESKTOP-412KTAR\mzj
+RunAs User: DESKTOP-412KTAR\mzj
+Configuration Name: 
+Machine: DESKTOP-412KTAR (Microsoft Windows NT 10.0.26200.0)
+Host Application: C:\Users\mzj\.cache\codex-runtimes\codex-primary-runtime\dependencies\native\powershell\pwsh.dll -Command try { [Console]::OutputEncoding=[System.Text.Encoding]::UTF8 } catch {}
+$root='C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\Maybesignin_540'; $log="$root\analysis\maybesignin_540_transcript_20260929.txt"; Start-Transcript -LiteralPath $log -Append; py -3 "$root\analysis\solve_maybesignin_540.py"; Stop-Transcript
+Process ID: 14728
+PSVersion: 7.6.5
+PSEdition: Core
+GitCommitId: 7.6.5
+OS: Microsoft Windows 10.0.26200
+Platform: Win32NT
+PSCompatibleVersions: 1.0, 2.0, 3.0, 4.0, 5.0, 5.1, 6.0, 7.0
+PSRemotingProtocolVersion: 2.4
+SerializationVersion: 1.1.0.1
+WSManStackVersion: 3.0
+**********************
+Transcript started, output file is C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\Maybesignin_540\analysis\maybesignin_540_transcript_20260929.txt
+
+**********************
+PowerShell transcript end
+End time: 20260929035612
+**********************
+**********************
+PowerShell transcript start
+Start time: 20260929040023
+Username: DESKTOP-412KTAR\mzj
+RunAs User: DESKTOP-412KTAR\mzj
+Configuration Name: 
+Machine: DESKTOP-412KTAR (Microsoft Windows NT 10.0.26200.0)
+Host Application: C:\Users\mzj\.cache\codex-runtimes\codex-primary-runtime\dependencies\native\powershell\pwsh.dll -Command try { [Console]::OutputEncoding=[System.Text.Encoding]::UTF8 } catch {}
+$root='C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\Maybesignin_540'; $log="$root\analysis\maybesignin_540_transcript_20260929.txt"; Start-Transcript -LiteralPath $log -Append; py -3 -c "from pathlib import Path; import importlib.util; p=Path(r'$root\analysis\solve_maybesignin_540.py'); q=importlib.util.spec_from_file_location('s',p); s=importlib.util.module_from_spec(q); q.loader.exec_module(s); key=bytes(range(1,17)); data=bytes.fromhex('1c84be5145ce1af31fa3f75e3a38d0be fa008a5aba845d5784714fd5ccf250e1'); print('target block 1 decrypted:',s.crypt_block(data[:16],key,True).hex()); print('target block 2 decrypted:',s.crypt_block(data[16:],key,True).hex())"; Stop-Transcript
+Process ID: 34520
+PSVersion: 7.6.5
+PSEdition: Core
+GitCommitId: 7.6.5
+OS: Microsoft Windows 10.0.26200
+Platform: Win32NT
+PSCompatibleVersions: 1.0, 2.0, 3.0, 4.0, 5.0, 5.1, 6.0, 7.0
+PSRemotingProtocolVersion: 2.4
+SerializationVersion: 1.1.0.1
+WSManStackVersion: 3.0
+**********************
+Transcript started, output file is C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\Maybesignin_540\analysis\maybesignin_540_transcript_20260929.txt
+
+**********************
+PowerShell transcript end
+End time: 20260929040023
+**********************
+**********************
+PowerShell transcript start
+Start time: 20260929040038
+Username: DESKTOP-412KTAR\mzj
+RunAs User: DESKTOP-412KTAR\mzj
+Configuration Name: 
+Machine: DESKTOP-412KTAR (Microsoft Windows NT 10.0.26200.0)
+Host Application: C:\Users\mzj\.cache\codex-runtimes\codex-primary-runtime\dependencies\native\powershell\pwsh.dll -Command try { [Console]::OutputEncoding=[System.Text.Encoding]::UTF8 } catch {}
+$root='C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\Maybesignin_540'; $log="$root\analysis\maybesignin_540_transcript_20260929.txt"; Start-Transcript -LiteralPath $log -Append; py -3 -c "from pathlib import Path; import importlib.util; p=Path(r'$root\analysis\solve_maybesignin_540.py'); q=importlib.util.spec_from_file_location('s',p); s=importlib.util.module_from_spec(q); q.loader.exec_module(s); key=bytes(range(1,17)); target=bytes.fromhex('1c84be5145ce1af31fa3f75e3a38d0be'); print('SM4(target,key) =',s.crypt_block(target,key).hex(),repr(s.crypt_block(target,key)))"; Stop-Transcript
+Process ID: 31712
+PSVersion: 7.6.5
+PSEdition: Core
+GitCommitId: 7.6.5
+OS: Microsoft Windows 10.0.26200
+Platform: Win32NT
+PSCompatibleVersions: 1.0, 2.0, 3.0, 4.0, 5.0, 5.1, 6.0, 7.0
+PSRemotingProtocolVersion: 2.4
+SerializationVersion: 1.1.0.1
+WSManStackVersion: 3.0
+**********************
+Transcript started, output file is C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\Maybesignin_540\analysis\maybesignin_540_transcript_20260929.txt
+
+**********************
+PowerShell transcript end
+End time: 20260929040039
+**********************
+**********************
+PowerShell transcript start
+Start time: 20260929040247
+Username: DESKTOP-412KTAR\mzj
+RunAs User: DESKTOP-412KTAR\mzj
+Configuration Name: 
+Machine: DESKTOP-412KTAR (Microsoft Windows NT 10.0.26200.0)
+Host Application: C:\Users\mzj\.cache\codex-runtimes\codex-primary-runtime\dependencies\native\powershell\pwsh.dll -Command try { [Console]::OutputEncoding=[System.Text.Encoding]::UTF8 } catch {}
+$root='C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\Maybesignin_540'; $log="$root\analysis\maybesignin_540_transcript_20260929.txt"; Start-Transcript -LiteralPath $log -Append; py -3 -c "import subprocess; exe=r'C:\Users\mzj\AppData\Local\Temp\ezsignin_540_ascii.exe'; data=bytes.fromhex('8d8ed47a1eddc5c9a2875e2ada595746')+b'\\n'; p=subprocess.run([exe],input=data,stdout=subprocess.PIPE,stderr=subprocess.PIPE,timeout=5); print('exit code:',p.returncode); print('stdout repr:',repr(p.stdout)); print('stderr repr:',repr(p.stderr))"; Stop-Transcript
+Process ID: 2060
+PSVersion: 7.6.5
+PSEdition: Core
+GitCommitId: 7.6.5
+OS: Microsoft Windows 10.0.26200
+Platform: Win32NT
+PSCompatibleVersions: 1.0, 2.0, 3.0, 4.0, 5.0, 5.1, 6.0, 7.0
+PSRemotingProtocolVersion: 2.4
+SerializationVersion: 1.1.0.1
+WSManStackVersion: 3.0
+**********************
+Transcript started, output file is C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\Maybesignin_540\analysis\maybesignin_540_transcript_20260929.txt
+
+**********************
+PowerShell transcript end
+End time: 20260929040248
+**********************
+**********************
+PowerShell transcript start
+Start time: 20260929040456
+Username: DESKTOP-412KTAR\mzj
+RunAs User: DESKTOP-412KTAR\mzj
+Configuration Name: 
+Machine: DESKTOP-412KTAR (Microsoft Windows NT 10.0.26200.0)
+Host Application: C:\Users\mzj\.cache\codex-runtimes\codex-primary-runtime\dependencies\native\powershell\pwsh.dll -Command try { [Console]::OutputEncoding=[System.Text.Encoding]::UTF8 } catch {}
+$root='C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\Maybesignin_540'; $log="$root\analysis\maybesignin_540_transcript_20260929.txt"; Start-Transcript -LiteralPath $log -Append; Get-Content "$root\analysis\disassembly_full.txt" | Select-Object -Skip 185 -First 180; py -3 -c "from pathlib import Path; b=Path(r'C:\Users\mzj\AppData\Local\Temp\ezsignin_540_ascii.exe').read_bytes(); print('input format vicinity 0x1a80:',repr(b[0x1a80:0x1a98])); print('target immediates at code file offset 0x9b4:',b[0x9b4:0x9d4].hex())"; Stop-Transcript
+Process ID: 23636
+PSVersion: 7.6.5
+PSEdition: Core
+GitCommitId: 7.6.5
+OS: Microsoft Windows 10.0.26200
+Platform: Win32NT
+PSCompatibleVersions: 1.0, 2.0, 3.0, 4.0, 5.0, 5.1, 6.0, 7.0
+PSRemotingProtocolVersion: 2.4
+SerializationVersion: 1.1.0.1
+WSManStackVersion: 3.0
+**********************
+Transcript started, output file is C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\Maybesignin_540\analysis\maybesignin_540_transcript_20260929.txt
+   140001208:	0f 11 45 a0          	movups XMMWORD PTR [rbp-0x60],xmm0
+   14000120c:	0f 11 45 b0          	movups XMMWORD PTR [rbp-0x50],xmm0
+   140001210:	0f 11 45 c0          	movups XMMWORD PTR [rbp-0x40],xmm0
+   140001214:	f3 0f 6f 05 84 21 00 	movdqu xmm0,XMMWORD PTR [rip+0x2184]        # 0x1400033a0
+   14000121b:	00
+   14000121c:	0f 57 c8             	xorps  xmm1,xmm0
+   14000121f:	f3 0f 7f 4d d0       	movdqu XMMWORD PTR [rbp-0x30],xmm1
+   140001224:	0f 1f 40 00          	nop    DWORD PTR [rax+0x0]
+   140001228:	0f 1f 84 00 00 00 00 	nop    DWORD PTR [rax+rax*1+0x0]
+   14000122f:	00
+   140001230:	43 8b 94 21 b0 33 00 	mov    edx,DWORD PTR [r9+r12*1+0x33b0]
+   140001237:	00
+   140001238:	42 33 54 0d dc       	xor    edx,DWORD PTR [rbp+r9*1-0x24]
+   14000123d:	42 33 54 0d d4       	xor    edx,DWORD PTR [rbp+r9*1-0x2c]
+   140001242:	42 33 54 0d d8       	xor    edx,DWORD PTR [rbp+r9*1-0x28]
+   140001247:	8b c2                	mov    eax,edx
+   140001249:	48 c1 e8 18          	shr    rax,0x18
+   14000124d:	46 0f b6 84 20 a0 32 	movzx  r8d,BYTE PTR [rax+r12*1+0x32a0]
+   140001254:	00 00
+   140001256:	8b c2                	mov    eax,edx
+   140001258:	c1 e8 10             	shr    eax,0x10
+   14000125b:	0f b6 c8             	movzx  ecx,al
+   14000125e:	41 c1 e0 08          	shl    r8d,0x8
+   140001262:	42 0f b6 84 21 a0 32 	movzx  eax,BYTE PTR [rcx+r12*1+0x32a0]
+   140001269:	00 00
+   14000126b:	44 33 c0             	xor    r8d,eax
+   14000126e:	8b c2                	mov    eax,edx
+   140001270:	c1 e8 08             	shr    eax,0x8
+   140001273:	0f b6 c8             	movzx  ecx,al
+   140001276:	41 c1 e0 08          	shl    r8d,0x8
+   14000127a:	42 0f b6 84 21 a0 32 	movzx  eax,BYTE PTR [rcx+r12*1+0x32a0]
+   140001281:	00 00
+   140001283:	44 33 c0             	xor    r8d,eax
+   140001286:	0f b6 c2             	movzx  eax,dl
+   140001289:	41 c1 e0 08          	shl    r8d,0x8
+   14000128d:	42 0f b6 84 20 a0 32 	movzx  eax,BYTE PTR [rax+r12*1+0x32a0]
+   140001294:	00 00
+   140001296:	44 33 c0             	xor    r8d,eax
+   140001299:	41 8b c8             	mov    ecx,r8d
+   14000129c:	41 8b c0             	mov    eax,r8d
+   14000129f:	c1 e9 0a             	shr    ecx,0xa
+   1400012a2:	41 33 c8             	xor    ecx,r8d
+   1400012a5:	c1 e0 0a             	shl    eax,0xa
+   1400012a8:	c1 e9 09             	shr    ecx,0x9
+   1400012ab:	41 33 c0             	xor    eax,r8d
+   1400012ae:	c1 e0 0d             	shl    eax,0xd
+   1400012b1:	33 c8                	xor    ecx,eax
+   1400012b3:	42 33 4c 0d d0       	xor    ecx,DWORD PTR [rbp+r9*1-0x30]
+   1400012b8:	41 33 c8             	xor    ecx,r8d
+   1400012bb:	42 89 4c 0d e0       	mov    DWORD PTR [rbp+r9*1-0x20],ecx
+   1400012c0:	49 83 c1 04          	add    r9,0x4
+   1400012c4:	49 81 f9 80 00 00 00 	cmp    r9,0x80
+   1400012cb:	0f 8c 5f ff ff ff    	jl     0x140001230
+   1400012d1:	41 0f b6 4d 01       	movzx  ecx,BYTE PTR [r13+0x1]
+   1400012d6:	41 0f b6 45 08       	movzx  eax,BYTE PTR [r13+0x8]
+   1400012db:	45 0f b6 5d 00       	movzx  r11d,BYTE PTR [r13+0x0]
+   1400012e0:	41 0f b6 55 02       	movzx  edx,BYTE PTR [r13+0x2]
+   1400012e5:	45 0f b6 45 03       	movzx  r8d,BYTE PTR [r13+0x3]
+   1400012ea:	41 0f b6 7d 04       	movzx  edi,BYTE PTR [r13+0x4]
+   1400012ef:	45 0f b6 4d 05       	movzx  r9d,BYTE PTR [r13+0x5]
+   1400012f4:	45 0f b6 55 06       	movzx  r10d,BYTE PTR [r13+0x6]
+   1400012f9:	41 0f b6 5d 07       	movzx  ebx,BYTE PTR [r13+0x7]
+   1400012fe:	45 88 1f             	mov    BYTE PTR [r15],r11b
+   140001301:	41 88 4f 01          	mov    BYTE PTR [r15+0x1],cl
+   140001305:	41 88 57 02          	mov    BYTE PTR [r15+0x2],dl
+   140001309:	45 88 47 03          	mov    BYTE PTR [r15+0x3],r8b
+   14000130d:	41 88 7f 04          	mov    BYTE PTR [r15+0x4],dil
+   140001311:	45 88 4f 05          	mov    BYTE PTR [r15+0x5],r9b
+   140001315:	45 88 57 06          	mov    BYTE PTR [r15+0x6],r10b
+   140001319:	41 88 5f 07          	mov    BYTE PTR [r15+0x7],bl
+   14000131d:	41 88 47 08          	mov    BYTE PTR [r15+0x8],al
+   140001321:	41 0f b6 45 09       	movzx  eax,BYTE PTR [r13+0x9]
+   140001326:	41 88 47 09          	mov    BYTE PTR [r15+0x9],al
+   14000132a:	41 0f b6 45 0a       	movzx  eax,BYTE PTR [r13+0xa]
+   14000132f:	41 88 47 0a          	mov    BYTE PTR [r15+0xa],al
+   140001333:	41 0f b6 45 0b       	movzx  eax,BYTE PTR [r13+0xb]
+   140001338:	41 88 47 0b          	mov    BYTE PTR [r15+0xb],al
+   14000133c:	41 0f b6 45 0c       	movzx  eax,BYTE PTR [r13+0xc]
+   140001341:	41 88 47 0c          	mov    BYTE PTR [r15+0xc],al
+   140001345:	41 0f b6 45 0d       	movzx  eax,BYTE PTR [r13+0xd]
+   14000134a:	41 88 47 0d          	mov    BYTE PTR [r15+0xd],al
+   14000134e:	41 0f b6 45 0e       	movzx  eax,BYTE PTR [r13+0xe]
+   140001353:	41 88 47 0e          	mov    BYTE PTR [r15+0xe],al
+   140001357:	41 0f b6 45 0f       	movzx  eax,BYTE PTR [r13+0xf]
+   14000135c:	41 88 47 0f          	mov    BYTE PTR [r15+0xf],al
+   140001360:	49 89 77 10          	mov    QWORD PTR [r15+0x10],rsi
+   140001364:	49 89 77 18          	mov    QWORD PTR [r15+0x18],rsi
+   140001368:	41 0f b6 47 09       	movzx  eax,BYTE PTR [r15+0x9]
+   14000136d:	41 c1 e3 08          	shl    r11d,0x8
+   140001371:	44 33 d9             	xor    r11d,ecx
+   140001374:	c1 e7 08             	shl    edi,0x8
+   140001377:	41 0f b6 4f 08       	movzx  ecx,BYTE PTR [r15+0x8]
+   14000137c:	41 33 f9             	xor    edi,r9d
+   14000137f:	c1 e1 08             	shl    ecx,0x8
+   140001382:	33 c8                	xor    ecx,eax
+   140001384:	41 c1 e3 08          	shl    r11d,0x8
+   140001388:	41 0f b6 47 0a       	movzx  eax,BYTE PTR [r15+0xa]
+   14000138d:	44 33 da             	xor    r11d,edx
+   140001390:	c1 e1 08             	shl    ecx,0x8
+   140001393:	33 c8                	xor    ecx,eax
+   140001395:	c1 e7 08             	shl    edi,0x8
+   140001398:	41 0f b6 47 0b       	movzx  eax,BYTE PTR [r15+0xb]
+   14000139d:	41 33 fa             	xor    edi,r10d
+   1400013a0:	c1 e1 08             	shl    ecx,0x8
+   1400013a3:	33 c8                	xor    ecx,eax
+   1400013a5:	41 c1 e3 08          	shl    r11d,0x8
+   1400013a9:	41 0f b6 47 0d       	movzx  eax,BYTE PTR [r15+0xd]
+   1400013ae:	45 33 d8             	xor    r11d,r8d
+   1400013b1:	89 4c 24 48          	mov    DWORD PTR [rsp+0x48],ecx
+   1400013b5:	41 0f b6 4f 0c       	movzx  ecx,BYTE PTR [r15+0xc]
+   1400013ba:	c1 e1 08             	shl    ecx,0x8
+   1400013bd:	33 c8                	xor    ecx,eax
+   1400013bf:	c1 e7 08             	shl    edi,0x8
+   1400013c2:	41 0f b6 47 0e       	movzx  eax,BYTE PTR [r15+0xe]
+   1400013c7:	33 fb                	xor    edi,ebx
+   1400013c9:	c1 e1 08             	shl    ecx,0x8
+   1400013cc:	33 c8                	xor    ecx,eax
+   1400013ce:	44 89 5c 24 40       	mov    DWORD PTR [rsp+0x40],r11d
+   1400013d3:	41 0f b6 47 0f       	movzx  eax,BYTE PTR [r15+0xf]
+   1400013d8:	c1 e1 08             	shl    ecx,0x8
+   1400013db:	33 c8                	xor    ecx,eax
+   1400013dd:	89 7c 24 44          	mov    DWORD PTR [rsp+0x44],edi
+   1400013e1:	89 4c 24 4c          	mov    DWORD PTR [rsp+0x4c],ecx
+   1400013e5:	66 66 66 0f 1f 84 00 	data16 data16 nop WORD PTR [rax+rax*1+0x0]
+   1400013ec:	00 00 00 00
+   1400013f0:	8b 54 35 e0          	mov    edx,DWORD PTR [rbp+rsi*1-0x20]
+   1400013f4:	33 54 34 4c          	xor    edx,DWORD PTR [rsp+rsi*1+0x4c]
+   1400013f8:	33 54 34 48          	xor    edx,DWORD PTR [rsp+rsi*1+0x48]
+   1400013fc:	33 54 34 44          	xor    edx,DWORD PTR [rsp+rsi*1+0x44]
+   140001400:	8b c2                	mov    eax,edx
+   140001402:	48 c1 e8 18          	shr    rax,0x18
+   140001406:	46 0f b6 84 20 a0 32 	movzx  r8d,BYTE PTR [rax+r12*1+0x32a0]
+   14000140d:	00 00
+   14000140f:	8b c2                	mov    eax,edx
+   140001411:	c1 e8 10             	shr    eax,0x10
+   140001414:	0f b6 c8             	movzx  ecx,al
+   140001417:	41 c1 e0 08          	shl    r8d,0x8
+   14000141b:	42 0f b6 84 21 a0 32 	movzx  eax,BYTE PTR [rcx+r12*1+0x32a0]
+   140001422:	00 00
+   140001424:	44 33 c0             	xor    r8d,eax
+   140001427:	8b c2                	mov    eax,edx
+   140001429:	c1 e8 08             	shr    eax,0x8
+   14000142c:	0f b6 c8             	movzx  ecx,al
+   14000142f:	41 c1 e0 08          	shl    r8d,0x8
+   140001433:	42 0f b6 84 21 a0 32 	movzx  eax,BYTE PTR [rcx+r12*1+0x32a0]
+   14000143a:	00 00
+   14000143c:	44 33 c0             	xor    r8d,eax
+   14000143f:	0f b6 c2             	movzx  eax,dl
+   140001442:	41 c1 e0 08          	shl    r8d,0x8
+   140001446:	42 0f b6 84 20 a0 32 	movzx  eax,BYTE PTR [rax+r12*1+0x32a0]
+   14000144d:	00 00
+   14000144f:	44 33 c0             	xor    r8d,eax
+   140001452:	41 8b c8             	mov    ecx,r8d
+   140001455:	41 8b c0             	mov    eax,r8d
+   140001458:	c1 e9 08             	shr    ecx,0x8
+   14000145b:	41 33 c8             	xor    ecx,r8d
+   14000145e:	c1 e0 06             	shl    eax,0x6
+   140001461:	c1 e9 08             	shr    ecx,0x8
+   140001464:	41 33 c0             	xor    eax,r8d
+   140001467:	41 33 c8             	xor    ecx,r8d
+   14000146a:	c1 e0 08             	shl    eax,0x8
+   14000146d:	c1 e9 06             	shr    ecx,0x6
+   140001470:	41 33 c0             	xor    eax,r8d
+   140001473:	41 33 c8             	xor    ecx,r8d
+   140001476:	c1 e0 08             	shl    eax,0x8
+   140001479:	c1 e9 08             	shr    ecx,0x8
+   14000147c:	41 33 c0             	xor    eax,r8d
+   14000147f:	c1 e0 02             	shl    eax,0x2
+   140001482:	33 c8                	xor    ecx,eax
+   140001484:	33 4c 34 40          	xor    ecx,DWORD PTR [rsp+rsi*1+0x40]
+   140001488:	41 33 c8             	xor    ecx,r8d
+   14000148b:	89 4c 34 50          	mov    DWORD PTR [rsp+rsi*1+0x50],ecx
+   14000148f:	48 83 c6 04          	add    rsi,0x4
+   140001493:	48 81 fe 80 00 00 00 	cmp    rsi,0x80
+   14000149a:	0f 8c 50 ff ff ff    	jl     0x1400013f0
+   1400014a0:	8b 4d cc             	mov    ecx,DWORD PTR [rbp-0x34]
+   1400014a3:	8b c1                	mov    eax,ecx
+   1400014a5:	8b 55 c4             	mov    edx,DWORD PTR [rbp-0x3c]
+   1400014a8:	c1 e8 18             	shr    eax,0x18
+   1400014ab:	41 88 06             	mov    BYTE PTR [r14],al
+
+**********************
+PowerShell transcript end
+End time: 20260929040457
+**********************
+**********************
+PowerShell transcript start
+Start time: 20260929040601
+Username: DESKTOP-412KTAR\mzj
+RunAs User: DESKTOP-412KTAR\mzj
+Configuration Name: 
+Machine: DESKTOP-412KTAR (Microsoft Windows NT 10.0.26200.0)
+Host Application: C:\Users\mzj\.cache\codex-runtimes\codex-primary-runtime\dependencies\native\powershell\pwsh.dll -Command try { [Console]::OutputEncoding=[System.Text.Encoding]::UTF8 } catch {}
+$root='C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\Maybesignin_540'; $log="$root\analysis\maybesignin_540_transcript_20260929.txt"; Start-Transcript -LiteralPath $log -Append; py -3 -c "from pathlib import Path; import importlib.util,subprocess; p=Path(r'$root\analysis\solve_maybesignin_540.py'); q=importlib.util.spec_from_file_location('s',p); s=importlib.util.module_from_spec(q); q.loader.exec_module(s); src=Path(r'C:\Users\mzj\AppData\Local\Temp\ezsignin_540_ascii.exe'); out=Path(r'C:\Users\mzj\AppData\Local\Temp\ezsignin_540_patched.exe'); b=bytearray(src.read_bytes()); plain=b'A'*16; cipher=s.crypt_block(plain,bytes(range(1,17))); b[0x9b7:0x9bb]=cipher[0:4][::-1]; b[0x9c2:0x9c6]=cipher[4:8][::-1]; b[0x9c9:0x9cd]=cipher[8:12][::-1]; b[0x9d0:0x9d4]=cipher[12:16][::-1]; out.write_bytes(b); print('patched target immediate as little-endian DWORDs:',cipher.hex()); print('patched exe path:',out); r=subprocess.run([str(out)],input=plain+b'\\n',stdout=subprocess.PIPE,stderr=subprocess.PIPE,timeout=5); print('exit:',r.returncode); print('stdout:',repr(r.stdout)); print('stderr:',repr(r.stderr))"; Stop-Transcript
+Process ID: 18624
+PSVersion: 7.6.5
+PSEdition: Core
+GitCommitId: 7.6.5
+OS: Microsoft Windows 10.0.26200
+Platform: Win32NT
+PSCompatibleVersions: 1.0, 2.0, 3.0, 4.0, 5.0, 5.1, 6.0, 7.0
+PSRemotingProtocolVersion: 2.4
+SerializationVersion: 1.1.0.1
+WSManStackVersion: 3.0
+**********************
+Transcript started, output file is C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\Maybesignin_540\analysis\maybesignin_540_transcript_20260929.txt
+
+**********************
+PowerShell transcript end
+End time: 20260929040601
+**********************
+**********************
+PowerShell transcript start
+Start time: 20260929040621
+Username: DESKTOP-412KTAR\mzj
+RunAs User: DESKTOP-412KTAR\mzj
+Configuration Name: 
+Machine: DESKTOP-412KTAR (Microsoft Windows NT 10.0.26200.0)
+Host Application: C:\Users\mzj\.cache\codex-runtimes\codex-primary-runtime\dependencies\native\powershell\pwsh.dll -Command try { [Console]::OutputEncoding=[System.Text.Encoding]::UTF8 } catch {}
+$root='C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\Maybesignin_540'; $log="$root\analysis\maybesignin_540_transcript_20260929.txt"; Start-Transcript -LiteralPath $log -Append; py -3 -c "from pathlib import Path; import importlib.util,subprocess; p=Path(r'$root\analysis\solve_maybesignin_540.py'); q=importlib.util.spec_from_file_location('s',p); s=importlib.util.module_from_spec(q); q.loader.exec_module(s); src=Path(r'C:\Users\mzj\AppData\Local\Temp\ezsignin_540_ascii.exe'); out=Path(r'C:\Users\mzj\AppData\Local\Temp\ezsignin_540_patched.exe'); b=bytearray(src.read_bytes()); plain=b'A'*16; cipher=s.crypt_block(plain,bytes(range(1,17))); b[0x9b7:0x9bb]=cipher[0:4]; b[0x9c2:0x9c6]=cipher[4:8]; b[0x9c9:0x9cd]=cipher[8:12]; b[0x9d0:0x9d4]=cipher[12:16]; out.write_bytes(b); print('patched target memory bytes:',cipher.hex()); r=subprocess.run([str(out)],input=plain+b'\\n',stdout=subprocess.PIPE,stderr=subprocess.PIPE,timeout=5); print('exit:',r.returncode); print('stdout:',repr(r.stdout)); print('stderr:',repr(r.stderr))"; Stop-Transcript
+Process ID: 31384
+PSVersion: 7.6.5
+PSEdition: Core
+GitCommitId: 7.6.5
+OS: Microsoft Windows 10.0.26200
+Platform: Win32NT
+PSCompatibleVersions: 1.0, 2.0, 3.0, 4.0, 5.0, 5.1, 6.0, 7.0
+PSRemotingProtocolVersion: 2.4
+SerializationVersion: 1.1.0.1
+WSManStackVersion: 3.0
+**********************
+Transcript started, output file is C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\Maybesignin_540\analysis\maybesignin_540_transcript_20260929.txt
+
+**********************
+PowerShell transcript end
+End time: 20260929040622
+**********************
+**********************
+PowerShell transcript start
+Start time: 20260929040746
+Username: DESKTOP-412KTAR\mzj
+RunAs User: DESKTOP-412KTAR\mzj
+Configuration Name: 
+Machine: DESKTOP-412KTAR (Microsoft Windows NT 10.0.26200.0)
+Host Application: C:\Users\mzj\.cache\codex-runtimes\codex-primary-runtime\dependencies\native\powershell\pwsh.dll -Command try { [Console]::OutputEncoding=[System.Text.Encoding]::UTF8 } catch {}
+$root='C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\Maybesignin_540'; $log="$root\analysis\maybesignin_540_transcript_20260929.txt"; Start-Transcript -LiteralPath $log -Append; objdump -d -Mintel 'C:\Users\mzj\AppData\Local\Temp\ezsignin_540_patched.exe' | Select-String -Pattern '1400015b4:|1400015bf:|1400015c6:|1400015cd:' -Context 0,0; py -3 -c "from pathlib import Path; a=Path(r'C:\Users\mzj\AppData\Local\Temp\ezsignin_540_ascii.exe').read_bytes(); b=Path(r'C:\Users\mzj\AppData\Local\Temp\ezsignin_540_patched.exe').read_bytes(); print('orig bytes:',a[0x9b4:0x9d4].hex()); print('patch bytes:',b[0x9b4:0x9d4].hex()); print('changed offsets:',[(hex(i),hex(x),hex(y)) for i,(x,y) in enumerate(zip(a,b)) if x!=y][:64])"; Stop-Transcript
+Process ID: 24520
+PSVersion: 7.6.5
+PSEdition: Core
+GitCommitId: 7.6.5
+OS: Microsoft Windows 10.0.26200
+Platform: Win32NT
+PSCompatibleVersions: 1.0, 2.0, 3.0, 4.0, 5.0, 5.1, 6.0, 7.0
+PSRemotingProtocolVersion: 2.4
+SerializationVersion: 1.1.0.1
+WSManStackVersion: 3.0
+**********************
+Transcript started, output file is C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\Maybesignin_540\analysis\maybesignin_540_transcript_20260929.txt
+
+   1400015b4:	c7 45 d7 dd 1b c6 bf 	mov    DWORD PTR [rbp-0x29],0xbfc61bdd
+   1400015bf:	c7 45 db 90 78 a1 61 	mov    DWORD PTR [rbp-0x25],0x61a17890
+   1400015c6:	c7 45 df 88 4a d1 95 	mov    DWORD PTR [rbp-0x21],0x95d14a88
+   1400015cd:	c7 45 e3 0e 6e 99 ec 	mov    DWORD PTR [rbp-0x1d],0xec996e0e
+
+**********************
+PowerShell transcript end
+End time: 20260929040747
+**********************
+**********************
+PowerShell transcript start
+Start time: 20260929040934
+Username: DESKTOP-412KTAR\mzj
+RunAs User: DESKTOP-412KTAR\mzj
+Configuration Name: 
+Machine: DESKTOP-412KTAR (Microsoft Windows NT 10.0.26200.0)
+Host Application: C:\Users\mzj\.cache\codex-runtimes\codex-primary-runtime\dependencies\native\powershell\pwsh.dll -Command try { [Console]::OutputEncoding=[System.Text.Encoding]::UTF8 } catch {}
+$root='C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\Maybesignin_540'; $log="$root\analysis\maybesignin_540_transcript_20260929.txt"; Start-Transcript -LiteralPath $log -Append; Get-Command gdb,gdb.exe,cdb,windbg,windbgx -ErrorAction SilentlyContinue | Select-Object Name,Source | Format-Table -AutoSize; Get-ChildItem 'C:\msys64\mingw64\bin' -Filter '*gdb*' -ErrorAction SilentlyContinue | Select-Object FullName,Length | Format-Table -AutoSize; Stop-Transcript
+Process ID: 24628
+PSVersion: 7.6.5
+PSEdition: Core
+GitCommitId: 7.6.5
+OS: Microsoft Windows 10.0.26200
+Platform: Win32NT
+PSCompatibleVersions: 1.0, 2.0, 3.0, 4.0, 5.0, 5.1, 6.0, 7.0
+PSRemotingProtocolVersion: 2.4
+SerializationVersion: 1.1.0.1
+WSManStackVersion: 3.0
+**********************
+Transcript started, output file is C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\Maybesignin_540\analysis\maybesignin_540_transcript_20260929.txt
+
+Name        Source
+----        ------
+gdb.exe     C:\msys64\mingw64\bin\gdb.exe
+WinDbgX.exe C:\Users\mzj\AppData\Local\Microsoft\WindowsApps\WinDbgX.exe
+
+
+FullName                             Length
+--------                             ------
+C:\msys64\mingw64\bin\gdb-add-index    4662
+C:\msys64\mingw64\bin\gdb.exe       9685510
+C:\msys64\mingw64\bin\gdbserver.exe  486756
+
+**********************
+PowerShell transcript end
+End time: 20260929040934
+**********************
+**********************
+PowerShell transcript start
+Start time: 20260929041007
+Username: DESKTOP-412KTAR\mzj
+RunAs User: DESKTOP-412KTAR\mzj
+Configuration Name: 
+Machine: DESKTOP-412KTAR (Microsoft Windows NT 10.0.26200.0)
+Host Application: C:\Users\mzj\.cache\codex-runtimes\codex-primary-runtime\dependencies\native\powershell\pwsh.dll -Command try { [Console]::OutputEncoding=[System.Text.Encoding]::UTF8 } catch {}
+$root='C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\Maybesignin_540'; $log="$root\analysis\maybesignin_540_transcript_20260929.txt"; Start-Transcript -LiteralPath $log -Append; py -3 -c "from pathlib import Path; Path(r'C:\Users\mzj\AppData\Local\Temp\ezsignin_input.bin').write_bytes(b'A'*16+b'\\n')"; & 'C:\msys64\mingw64\bin\gdb.exe' -q --batch -ex 'set pagination off' -ex 'set disable-randomization on' -ex 'break *0x140001620' -ex 'run < C:/Users/mzj/AppData/Local/Temp/ezsignin_input.bin' -ex 'info registers rip rbp rsp rsi rax rdx rcx' -ex 'x/16bx $rbp+0x17' -ex 'x/16bx $rbp-0x29' -ex 'continue' 'C:\Users\mzj\AppData\Local\Temp\ezsignin_540_patched.exe'; Stop-Transcript
+Process ID: 7516
+PSVersion: 7.6.5
+PSEdition: Core
+GitCommitId: 7.6.5
+OS: Microsoft Windows 10.0.26200
+Platform: Win32NT
+PSCompatibleVersions: 1.0, 2.0, 3.0, 4.0, 5.0, 5.1, 6.0, 7.0
+PSRemotingProtocolVersion: 2.4
+SerializationVersion: 1.1.0.1
+WSManStackVersion: 3.0
+**********************
+Transcript started, output file is C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\Maybesignin_540\analysis\maybesignin_540_transcript_20260929.txt
+
+
+**********************
+PowerShell transcript end
+End time: 20260929041009
+**********************
+**********************
+PowerShell transcript start
+Start time: 20260929041017
+Username: DESKTOP-412KTAR\mzj
+RunAs User: DESKTOP-412KTAR\mzj
+Configuration Name: 
+Machine: DESKTOP-412KTAR (Microsoft Windows NT 10.0.26200.0)
+Host Application: C:\Users\mzj\.cache\codex-runtimes\codex-primary-runtime\dependencies\native\powershell\pwsh.dll -Command try { [Console]::OutputEncoding=[System.Text.Encoding]::UTF8 } catch {}
+$root='C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\Maybesignin_540'; $log="$root\analysis\maybesignin_540_transcript_20260929.txt"; Start-Transcript -LiteralPath $log -Append; & 'C:\msys64\mingw64\bin\gdb.exe' --version 2>&1 | Tee-Object -FilePath "$root\analysis\gdb_version.txt"; Get-Content "$root\analysis\gdb_version.txt"; Stop-Transcript
+Process ID: 32976
+PSVersion: 7.6.5
+PSEdition: Core
+GitCommitId: 7.6.5
+OS: Microsoft Windows 10.0.26200
+Platform: Win32NT
+PSCompatibleVersions: 1.0, 2.0, 3.0, 4.0, 5.0, 5.1, 6.0, 7.0
+PSRemotingProtocolVersion: 2.4
+SerializationVersion: 1.1.0.1
+WSManStackVersion: 3.0
+**********************
+Transcript started, output file is C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\Maybesignin_540\analysis\maybesignin_540_transcript_20260929.txt
+Get-Content: 
+Line |
+   2 |  … db_version.txt"; Get-Content "$root\analysis\gdb_version.txt"; Stop-T …
+     |                     ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+     | Cannot find path 'C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\Maybesignin_540\analysis\gdb_version.txt' because it does not exist.
+Get-Content:
+Line |
+   2 |  … db_version.txt"; Get-Content "$root\analysis\gdb_version.txt"; Stop-T …
+     |                     ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+     | Cannot find path 'C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\Maybesignin_540\analysis\gdb_version.txt' because it does not exist.
+**********************
+PowerShell transcript end
+End time: 20260929041017
+**********************
+**********************
+PowerShell transcript start
+Start time: 20260929041041
+Username: DESKTOP-412KTAR\mzj
+RunAs User: DESKTOP-412KTAR\mzj
+Configuration Name: 
+Machine: DESKTOP-412KTAR (Microsoft Windows NT 10.0.26200.0)
+Host Application: C:\Users\mzj\.cache\codex-runtimes\codex-primary-runtime\dependencies\native\powershell\pwsh.dll -Command try { [Console]::OutputEncoding=[System.Text.Encoding]::UTF8 } catch {}
+$root='C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\Maybesignin_540'; $log="$root\analysis\maybesignin_540_transcript_20260929.txt"; Start-Transcript -LiteralPath $log -Append; $out="$root\analysis\gdb_stdout.txt"; $err="$root\analysis\gdb_stderr.txt"; $p=Start-Process -FilePath 'C:\msys64\mingw64\bin\gdb.exe' -ArgumentList '--version' -NoNewWindow -Wait -PassThru -RedirectStandardOutput $out -RedirectStandardError $err; Write-Output "ExitCode=$($p.ExitCode)"; Get-Content $out,$err -ErrorAction SilentlyContinue; Stop-Transcript
+Process ID: 35420
+PSVersion: 7.6.5
+PSEdition: Core
+GitCommitId: 7.6.5
+OS: Microsoft Windows 10.0.26200
+Platform: Win32NT
+PSCompatibleVersions: 1.0, 2.0, 3.0, 4.0, 5.0, 5.1, 6.0, 7.0
+PSRemotingProtocolVersion: 2.4
+SerializationVersion: 1.1.0.1
+WSManStackVersion: 3.0
+**********************
+Transcript started, output file is C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\Maybesignin_540\analysis\maybesignin_540_transcript_20260929.txt
+ExitCode=-1073741515
+**********************
+PowerShell transcript end
+End time: 20260929041041
+**********************
+**********************
+PowerShell transcript start
+Start time: 20260929041110
+Username: DESKTOP-412KTAR\mzj
+RunAs User: DESKTOP-412KTAR\mzj
+Configuration Name: 
+Machine: DESKTOP-412KTAR (Microsoft Windows NT 10.0.26200.0)
+Host Application: C:\Users\mzj\.cache\codex-runtimes\codex-primary-runtime\dependencies\native\powershell\pwsh.dll -Command try { [Console]::OutputEncoding=[System.Text.Encoding]::UTF8 } catch {}
+$root='C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\Maybesignin_540'; $log="$root\analysis\maybesignin_540_transcript_20260929.txt"; Start-Transcript -LiteralPath $log -Append; py -3 "$root\analysis\solve_maybesignin_540.py"; Stop-Transcript
+Process ID: 35644
+PSVersion: 7.6.5
+PSEdition: Core
+GitCommitId: 7.6.5
+OS: Microsoft Windows 10.0.26200
+Platform: Win32NT
+PSCompatibleVersions: 1.0, 2.0, 3.0, 4.0, 5.0, 5.1, 6.0, 7.0
+PSRemotingProtocolVersion: 2.4
+SerializationVersion: 1.1.0.1
+WSManStackVersion: 3.0
+**********************
+Transcript started, output file is C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\Maybesignin_540\analysis\maybesignin_540_transcript_20260929.txt
+
+**********************
+PowerShell transcript end
+End time: 20260929041110
+**********************
+**********************
+PowerShell transcript start
+Start time: 20260929041119
+Username: DESKTOP-412KTAR\mzj
+RunAs User: DESKTOP-412KTAR\mzj
+Configuration Name: 
+Machine: DESKTOP-412KTAR (Microsoft Windows NT 10.0.26200.0)
+Host Application: C:\Users\mzj\.cache\codex-runtimes\codex-primary-runtime\dependencies\native\powershell\pwsh.dll -Command try { [Console]::OutputEncoding=[System.Text.Encoding]::UTF8 } catch {}
+$root='C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\Maybesignin_540'; $log="$root\analysis\maybesignin_540_transcript_20260929.txt"; Start-Transcript -LiteralPath $log -Append; py -3 -c "import subprocess; exe=r'C:\Users\mzj\AppData\Local\Temp\ezsignin_540_ascii.exe'; data=b'flag{wlascJDAFS}\\n'; p=subprocess.run([exe],input=data,stdout=subprocess.PIPE,stderr=subprocess.PIPE,timeout=5); print('input repr:',repr(data)); print('exit code:',p.returncode); print('stdout repr:',repr(p.stdout)); print('stderr repr:',repr(p.stderr))"; Stop-Transcript
+Process ID: 21264
+PSVersion: 7.6.5
+PSEdition: Core
+GitCommitId: 7.6.5
+OS: Microsoft Windows 10.0.26200
+Platform: Win32NT
+PSCompatibleVersions: 1.0, 2.0, 3.0, 4.0, 5.0, 5.1, 6.0, 7.0
+PSRemotingProtocolVersion: 2.4
+SerializationVersion: 1.1.0.1
+WSManStackVersion: 3.0
+**********************
+Transcript started, output file is C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\Maybesignin_540\analysis\maybesignin_540_transcript_20260929.txt
+
+**********************
+PowerShell transcript end
+End time: 20260929041120
+**********************
+**********************
+PowerShell transcript start
+Start time: 20260929041139
+Username: DESKTOP-412KTAR\mzj
+RunAs User: DESKTOP-412KTAR\mzj
+Configuration Name: 
+Machine: DESKTOP-412KTAR (Microsoft Windows NT 10.0.26200.0)
+Host Application: C:\Users\mzj\.cache\codex-runtimes\codex-primary-runtime\dependencies\native\powershell\pwsh.dll -Command try { [Console]::OutputEncoding=[System.Text.Encoding]::UTF8 } catch {}
+$root='C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\Maybesignin_540'; $log="$root\analysis\maybesignin_540_transcript_20260929.txt"; Start-Transcript -LiteralPath $log -Append; py -3 -c "import subprocess; exe=r'C:\Users\mzj\AppData\Local\Temp\ezsignin_540_ascii.exe'; data=b'flag{wlascJDAFS}'+bytes([10]); p=subprocess.run([exe],input=data,stdout=subprocess.PIPE,stderr=subprocess.PIPE,timeout=5); print('input repr:',repr(data)); print('exit code:',p.returncode); print('stdout repr:',repr(p.stdout)); print('stderr repr:',repr(p.stderr))"; Stop-Transcript
+Process ID: 33284
+PSVersion: 7.6.5
+PSEdition: Core
+GitCommitId: 7.6.5
+OS: Microsoft Windows 10.0.26200
+Platform: Win32NT
+PSCompatibleVersions: 1.0, 2.0, 3.0, 4.0, 5.0, 5.1, 6.0, 7.0
+PSRemotingProtocolVersion: 2.4
+SerializationVersion: 1.1.0.1
+WSManStackVersion: 3.0
+**********************
+Transcript started, output file is C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\Maybesignin_540\analysis\maybesignin_540_transcript_20260929.txt
+
+**********************
+PowerShell transcript end
+End time: 20260929041140
+**********************
+**********************
+PowerShell transcript start
+Start time: 20260929041304
+Username: DESKTOP-412KTAR\mzj
+RunAs User: DESKTOP-412KTAR\mzj
+Configuration Name: 
+Machine: DESKTOP-412KTAR (Microsoft Windows NT 10.0.26200.0)
+Host Application: C:\Users\mzj\.cache\codex-runtimes\codex-primary-runtime\dependencies\native\powershell\pwsh.dll -Command try { [Console]::OutputEncoding=[System.Text.Encoding]::UTF8 } catch {}
+$root='C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\Maybesignin_540'; $log="$root\analysis\maybesignin_540_transcript_20260929.txt"; Start-Transcript -LiteralPath $log -Append; py -3 "$root\analysis\solve_maybesignin_540.py" | Tee-Object -FilePath "$root\analysis\solve_maybesignin_540_output.txt"; Get-FileHash -Algorithm SHA256 "$root\analysis\solve_maybesignin_540.py","$root\analysis\disassembly_full.txt","$root\analysis\maybesignin_540_transcript_20260929.txt"; Stop-Transcript
+Process ID: 11524
+PSVersion: 7.6.5
+PSEdition: Core
+GitCommitId: 7.6.5
+OS: Microsoft Windows 10.0.26200
+Platform: Win32NT
+PSCompatibleVersions: 1.0, 2.0, 3.0, 4.0, 5.0, 5.1, 6.0, 7.0
+PSRemotingProtocolVersion: 2.4
+SerializationVersion: 1.1.0.1
+WSManStackVersion: 3.0
+**********************
+Transcript started, output file is C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\Maybesignin_540\analysis\maybesignin_540_transcript_20260929.txt
+key bytes (from main local buffer) = 01020304050607080910111213141516
+target bytes (first 16 compared)  = 1c84be5145ce1af31fa3f75e3a38d0be
+SM4 known vector                  = OK
+decrypted plaintext hex           = 666c61677b776c6173634a444146537d
+decrypted plaintext repr          = b'flag{wlascJDAFS}'
+SM4 re-encrypt                    = 1c84be5145ce1af31fa3f75e3a38d0be
+round-trip                        = True
+
+Algorithm       Hash                                                                   Path
+---------       ----                                                                   ----
+SHA256          64823475644E7A30F36F39861CCDA85180A375B9EEDF2CE7DAF0659B8EAD1A21       C:\Users\mzj\Desktop\CTF\玄机刷…
+SHA256          94557A6DA4D464CA886F551E0D298B1864A01A26A634DF38AA35763FBA9A565D       C:\Users\mzj\Desktop\CTF\玄机刷…
+Get-FileHash: 
+Line |
+   2 |  … utput.txt"; Get-FileHash -Algorithm SHA256 "$root\analysis\solve_mayb …
+     |                ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+     | The process cannot access the file 'C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\Maybesignin_540\analysis\maybesignin_540_transcript_20260929.txt' because it is being used by another process.
+Get-FileHash:
+Line |
+   2 |  … utput.txt"; Get-FileHash -Algorithm SHA256 "$root\analysis\solve_mayb …
+     |                ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+     | The process cannot access the file 'C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\Maybesignin_540\analysis\maybesignin_540_transcript_20260929.txt' because it is being used by another process.
+**********************
+PowerShell transcript end
+End time: 20260929041304
+**********************
+**********************
+PowerShell transcript start
+Start time: 20260929041447
+Username: DESKTOP-412KTAR\mzj
+RunAs User: DESKTOP-412KTAR\mzj
+Configuration Name: 
+Machine: DESKTOP-412KTAR (Microsoft Windows NT 10.0.26200.0)
+Host Application: C:\Users\mzj\.cache\codex-runtimes\codex-primary-runtime\dependencies\native\powershell\pwsh.dll -Command try { [Console]::OutputEncoding=[System.Text.Encoding]::UTF8 } catch {}
+$root='C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\Maybesignin_540'; $log="$root\analysis\maybesignin_540_transcript_20260929.txt"; Start-Transcript -LiteralPath $log -Append; Get-ChildItem -Force "$root\analysis" | Select-Object Mode,Length,Name | Sort-Object Name | Format-Table -AutoSize; Get-FileHash -Algorithm SHA256 "$root\analysis\solve_maybesignin_540.py","$root\analysis\disassembly_full.txt","$root\附件\MaybeSignin_platform_20260929.zip","$root\附件解包\ezsignin.exe"; Get-Content "$root\WP.md" -TotalCount 30; Stop-Transcript
+Process ID: 13144
+PSVersion: 7.6.5
+PSEdition: Core
+GitCommitId: 7.6.5
+OS: Microsoft Windows 10.0.26200
+Platform: Win32NT
+PSCompatibleVersions: 1.0, 2.0, 3.0, 4.0, 5.0, 5.1, 6.0, 7.0
+PSRemotingProtocolVersion: 2.4
+SerializationVersion: 1.1.0.1
+WSManStackVersion: 3.0
+**********************
+Transcript started, output file is C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\Maybesignin_540\analysis\maybesignin_540_transcript_20260929.txt
+
+Mode  Length Name
+----  ------ ----
+d----        __pycache__
+-a--- 84074  disassembly_full.txt
+-a--- 0      gdb_stderr.txt
+-a--- 0      gdb_stdout.txt
+-a--- 137053 maybesignin_540_transcript_20260929.txt
+-a--- 25241  objdump_headers_imports.txt
+-a--- 991    objdump_sections.txt
+-a--- 420    solve_maybesignin_540_output.txt
+-a--- 3554   solve_maybesignin_540.py
+-a--- 5027   strings_ascii_offsets.txt
+-a--- 2525   strings_ascii.txt
+
+
+**********************
+PowerShell transcript end
+End time: 20260929041447
+**********************
+**********************
+PowerShell transcript start
+Start time: 20260929041902
+Username: DESKTOP-412KTAR\mzj
+RunAs User: DESKTOP-412KTAR\mzj
+Configuration Name: 
+Machine: DESKTOP-412KTAR (Microsoft Windows NT 10.0.26200.0)
+Host Application: C:\Users\mzj\.cache\codex-runtimes\codex-primary-runtime\dependencies\native\powershell\pwsh.dll -Command try { [Console]::OutputEncoding=[System.Text.Encoding]::UTF8 } catch {}
+$root='C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\Maybesignin_540'; $log="$root\analysis\maybesignin_540_transcript_20260929.txt"; Start-Transcript -LiteralPath $log -Append; Write-Output '=== transform calling convention evidence ==='; Select-String -LiteralPath "$root\analysis\disassembly_full.txt" -Pattern '140001112:|140001117:|14000111a:|14000111d:|140001120:|140001605:|140001609:|14000160d:|140001611:'; Write-Output 'RCX note: entry RCX is not saved/read; ECX is overwritten with 0x32 for malloc; transform consumes key/input/output from RDX/R8/R9.'; Write-Output '=== original EXE candidate replay ==='; py -3 "$root\analysis\verify_maybesignin_540.py" | Tee-Object -FilePath "$root\analysis\verify_maybesignin_540_output.txt"; Stop-Transcript
+Process ID: 32576
+PSVersion: 7.6.5
+PSEdition: Core
+GitCommitId: 7.6.5
+OS: Microsoft Windows 10.0.26200
+Platform: Win32NT
+PSCompatibleVersions: 1.0, 2.0, 3.0, 4.0, 5.0, 5.1, 6.0, 7.0
+PSRemotingProtocolVersion: 2.4
+SerializationVersion: 1.1.0.1
+WSManStackVersion: 3.0
+**********************
+Transcript started, output file is C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\Maybesignin_540\analysis\maybesignin_540_transcript_20260929.txt
+=== transform calling convention evidence ===
+
+玄机刷题\题目资料\Maybesignin_540\analysis\disassembly_full.txt:116:   140001112:	b9 32 00 00 00       	mov    ecx,0x32
+玄机刷题\题目资料\Maybesignin_540\analysis\disassembly_full.txt:117:   140001117:	4d 8b f1             	mov    r14,r9
+玄机刷题\题目资料\Maybesignin_540\analysis\disassembly_full.txt:118:   14000111a:	4d 8b e8             	mov    r13,r8
+玄机刷题\题目资料\Maybesignin_540\analysis\disassembly_full.txt:119:   14000111d:	48 8b da             	mov    rbx,rdx
+玄机刷题\题目资料\Maybesignin_540\analysis\disassembly_full.txt:120:   140001120:	ff 15 8a 1f 00 00    	call   QWORD PT
+R [rip+0x1f8a]        # 0x1400030b0
+玄机刷题\题目资料\Maybesignin_540\analysis\disassembly_full.txt:455:   140001605:	4c 8d 4d 17          	lea    r9,[rbp+
+0x17]
+玄机刷题\题目资料\Maybesignin_540\analysis\disassembly_full.txt:456:   140001609:	4c 8d 45 07          	lea    r8,[rbp+
+0x7]
+玄机刷题\题目资料\Maybesignin_540\analysis\disassembly_full.txt:457:   14000160d:	48 8d 55 f7          	lea    rdx,[rbp
+-0x9]
+玄机刷题\题目资料\Maybesignin_540\analysis\disassembly_full.txt:458:   140001611:	e8 ca fa ff ff       	call   0x140001
+0e0
+RCX note: entry RCX is not saved/read; ECX is overwritten with 0x32 for malloc; transform consumes key/input/output from RDX/R8/R9.
+=== original EXE candidate replay ===
+original EXE: C:\Users\mzj\Desktop\CTF\����ˢ��\��Ŀ����\Maybesignin_540\�������\ezsignin.exe
+original EXE SHA256: DA87C9A85AB1E99370891AEBC6494A97B4AA1BB6694AF415DC455D68F5E18AE5
+case: old decimal-sequence key assumption
+candidate bytes hex: 8d8ed47a1eddc5c9a2875e2ada595746
+stdin bytes repr: b'\x8d\x8e\xd4z\x1e\xdd\xc5\xc9\xa2\x87^*\xdaYWF\n'
+exit code: 3735928559
+stdout repr: b'plz input your flag:\r\n'
+stderr repr: b''
+case: correct little-endian immediate decoding
+candidate bytes hex: 666c61677b776c6173634a444146537d
+stdin bytes repr: b'flag{wlascJDAFS}\n'
+exit code: 0
+stdout repr: b'Press any key to continue . . . \r\nplz input your flag:\r\nsuccess'
+stderr repr: b''
+**********************
+PowerShell transcript end
+End time: 20260929041902
+**********************
+**********************
+PowerShell transcript start
+Start time: 20260929042238
+Username: DESKTOP-412KTAR\mzj
+RunAs User: DESKTOP-412KTAR\mzj
+Configuration Name: 
+Machine: DESKTOP-412KTAR (Microsoft Windows NT 10.0.26200.0)
+Host Application: C:\Users\mzj\.cache\codex-runtimes\codex-primary-runtime\dependencies\native\powershell\pwsh.dll -Command try { [Console]::OutputEncoding=[System.Text.Encoding]::UTF8 } catch {}
+$root='C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\Maybesignin_540'; $log="$root\analysis\maybesignin_540_transcript_20260929.txt"; Start-Transcript -LiteralPath $log -Append; Write-Output '=== replay original EXE after transcript/verification script cleanup ==='; py -3 "$root\analysis\verify_maybesignin_540.py" | Tee-Object -FilePath "$root\analysis\verify_maybesignin_540_output.txt"; Stop-Transcript
+Process ID: 27120
+PSVersion: 7.6.5
+PSEdition: Core
+GitCommitId: 7.6.5
+OS: Microsoft Windows 10.0.26200
+Platform: Win32NT
+PSCompatibleVersions: 1.0, 2.0, 3.0, 4.0, 5.0, 5.1, 6.0, 7.0
+PSRemotingProtocolVersion: 2.4
+SerializationVersion: 1.1.0.1
+WSManStackVersion: 3.0
+**********************
+Transcript started, output file is C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\Maybesignin_540\analysis\maybesignin_540_transcript_20260929.txt
+=== replay original EXE after transcript/verification script cleanup ===
+original EXE name: ezsignin.exe
+original EXE SHA256: DA87C9A85AB1E99370891AEBC6494A97B4AA1BB6694AF415DC455D68F5E18AE5
+case: old decimal-sequence key assumption
+candidate bytes hex: 8d8ed47a1eddc5c9a2875e2ada595746
+stdin bytes repr: b'\x8d\x8e\xd4z\x1e\xdd\xc5\xc9\xa2\x87^*\xdaYWF\n'
+exit code: 3735928559
+stdout repr: b'plz input your flag:\r\n'
+stderr repr: b''
+case: correct little-endian immediate decoding
+candidate bytes hex: 666c61677b776c6173634a444146537d
+stdin bytes repr: b'flag{wlascJDAFS}\n'
+exit code: 0
+stdout repr: b'Press any key to continue . . . \r\nplz input your flag:\r\nsuccess'
+stderr repr: b''
+**********************
+PowerShell transcript end
+End time: 20260929042238
+**********************
+**********************
+PowerShell transcript start
+Start time: 20260929042254
+Username: DESKTOP-412KTAR\mzj
+RunAs User: DESKTOP-412KTAR\mzj
+Configuration Name: 
+Machine: DESKTOP-412KTAR (Microsoft Windows NT 10.0.26200.0)
+Host Application: C:\Users\mzj\.cache\codex-runtimes\codex-primary-runtime\dependencies\native\powershell\pwsh.dll -Command try { [Console]::OutputEncoding=[System.Text.Encoding]::UTF8 } catch {}
+$root='C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\Maybesignin_540'; $log="$root\analysis\maybesignin_540_transcript_20260929.txt"; Start-Transcript -LiteralPath $log -Append; py -3 "$root\analysis\verify_maybesignin_540.py" | Tee-Object -FilePath "$root\analysis\verify_maybesignin_540_output.txt"; Stop-Transcript
+Process ID: 13652
+PSVersion: 7.6.5
+PSEdition: Core
+GitCommitId: 7.6.5
+OS: Microsoft Windows 10.0.26200
+Platform: Win32NT
+PSCompatibleVersions: 1.0, 2.0, 3.0, 4.0, 5.0, 5.1, 6.0, 7.0
+PSRemotingProtocolVersion: 2.4
+SerializationVersion: 1.1.0.1
+WSManStackVersion: 3.0
+**********************
+Transcript started, output file is C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\Maybesignin_540\analysis\maybesignin_540_transcript_20260929.txt
+original EXE name: ezsignin.exe
+original EXE SHA256: DA87C9A85AB1E99370891AEBC6494A97B4AA1BB6694AF415DC455D68F5E18AE5
+case: old continuous-byte-sequence key guess
+candidate bytes hex: 8d8ed47a1eddc5c9a2875e2ada595746
+stdin bytes repr: b'\x8d\x8e\xd4z\x1e\xdd\xc5\xc9\xa2\x87^*\xdaYWF\n'
+exit code: 3735928559
+stdout repr: b'plz input your flag:\r\n'
+stderr repr: b''
+case: correct little-endian immediate decoding
+candidate bytes hex: 666c61677b776c6173634a444146537d
+stdin bytes repr: b'flag{wlascJDAFS}\n'
+exit code: 0
+stdout repr: b'Press any key to continue . . . \r\nplz input your flag:\r\nsuccess'
+stderr repr: b''
+**********************
+PowerShell transcript end
+End time: 20260929042255
+**********************
+**********************
+PowerShell transcript start
+Start time: 20260929042332
+Username: DESKTOP-412KTAR\mzj
+RunAs User: DESKTOP-412KTAR\mzj
+Configuration Name: 
+Machine: DESKTOP-412KTAR (Microsoft Windows NT 10.0.26200.0)
+Host Application: C:\Users\mzj\.cache\codex-runtimes\codex-primary-runtime\dependencies\native\powershell\pwsh.dll -Command try { [Console]::OutputEncoding=[System.Text.Encoding]::UTF8 } catch {}
+$root='C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\Maybesignin_540'; $log="$root\analysis\maybesignin_540_transcript_20260929.txt"; Start-Transcript -LiteralPath $log -Append; Write-Output '=== SM4 solver final replay ==='; py -3 "$root\analysis\solve_maybesignin_540.py" | Tee-Object -FilePath "$root\analysis\solve_maybesignin_540_output.txt"; Write-Output '=== Original EXE verification final replay ==='; py -3 "$root\analysis\verify_maybesignin_540.py" | Tee-Object -FilePath "$root\analysis\verify_maybesignin_540_output.txt"; Stop-Transcript
+Process ID: 35000
+PSVersion: 7.6.5
+PSEdition: Core
+GitCommitId: 7.6.5
+OS: Microsoft Windows 10.0.26200
+Platform: Win32NT
+PSCompatibleVersions: 1.0, 2.0, 3.0, 4.0, 5.0, 5.1, 6.0, 7.0
+PSRemotingProtocolVersion: 2.4
+SerializationVersion: 1.1.0.1
+WSManStackVersion: 3.0
+**********************
+Transcript started, output file is C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\Maybesignin_540\analysis\maybesignin_540_transcript_20260929.txt
+=== SM4 solver final replay ===
+key bytes (from main local buffer) = 01020304050607080910111213141516
+target bytes (first 16 compared)  = 1c84be5145ce1af31fa3f75e3a38d0be
+SM4 known vector                  = OK
+decrypted plaintext hex           = 666c61677b776c6173634a444146537d
+decrypted plaintext repr          = b'flag{wlascJDAFS}'
+SM4 re-encrypt                    = 1c84be5145ce1af31fa3f75e3a38d0be
+round-trip                        = True
+=== Original EXE verification final replay ===
+original EXE name: ezsignin.exe
+original EXE SHA256: DA87C9A85AB1E99370891AEBC6494A97B4AA1BB6694AF415DC455D68F5E18AE5
+case: old continuous-byte-sequence key guess
+candidate bytes hex: 8d8ed47a1eddc5c9a2875e2ada595746
+stdin bytes repr: b'\x8d\x8e\xd4z\x1e\xdd\xc5\xc9\xa2\x87^*\xdaYWF\n'
+exit code: 3735928559
+stdout repr: b'plz input your flag:\r\n'
+stderr repr: b''
+case: correct little-endian immediate decoding
+candidate bytes hex: 666c61677b776c6173634a444146537d
+stdin bytes repr: b'flag{wlascJDAFS}\n'
+exit code: 0
+stdout repr: b'Press any key to continue . . . \r\nplz input your flag:\r\nsuccess'
+stderr repr: b''
+**********************
+PowerShell transcript end
+End time: 20260929042334
+**********************

@@ -1,0 +1,68 @@
+
+Z:\palu548_static_copy.exe:     file format pei-x86-64
+
+
+Disassembly of section .text:
+
+00000000004949a0 <.text+0x939a0>:
+  4949a0:	49 3b 66 10          	cmp    rsp,QWORD PTR [r14+0x10]
+  4949a4:	76 65                	jbe    0x494a0b
+  4949a6:	55                   	push   rbp
+  4949a7:	48 89 e5             	mov    rbp,rsp
+  4949aa:	48 83 ec 10          	sub    rsp,0x10
+  4949ae:	48 89 44 24 20       	mov    QWORD PTR [rsp+0x20],rax
+  4949b3:	48 89 c1             	mov    rcx,rax
+  4949b6:	31 c0                	xor    eax,eax
+  4949b8:	ba 01 00 00 00       	mov    edx,0x1
+  4949bd:	f0 0f b1 11          	lock cmpxchg DWORD PTR [rcx],edx
+  4949c1:	0f 94 c2             	sete   dl
+  4949c4:	84 d2                	test   dl,dl
+  4949c6:	75 17                	jne    0x4949df
+  4949c8:	48 89 5c 24 28       	mov    QWORD PTR [rsp+0x28],rbx
+  4949cd:	48 89 c8             	mov    rax,rcx
+  4949d0:	e8 eb 83 fd ff       	call   0x46cdc0
+  4949d5:	48 8b 4c 24 20       	mov    rcx,QWORD PTR [rsp+0x20]
+  4949da:	48 8b 5c 24 28       	mov    rbx,QWORD PTR [rsp+0x28]
+  4949df:	48 89 c8             	mov    rax,rcx
+  4949e2:	e8 f9 00 00 00       	call   0x494ae0
+  4949e7:	90                   	nop
+  4949e8:	bb ff ff ff ff       	mov    ebx,0xffffffff
+  4949ed:	48 8b 44 24 20       	mov    rax,QWORD PTR [rsp+0x20]
+  4949f2:	f0 0f c1 18          	lock xadd DWORD PTR [rax],ebx
+  4949f6:	ff cb                	dec    ebx
+  4949f8:	85 db                	test   ebx,ebx
+  4949fa:	74 09                	je     0x494a05
+  4949fc:	0f 1f 40 00          	nop    DWORD PTR [rax+0x0]
+  494a00:	e8 9b 86 fd ff       	call   0x46d0a0
+  494a05:	48 83 c4 10          	add    rsp,0x10
+  494a09:	5d                   	pop    rbp
+  494a0a:	c3                   	ret
+  494a0b:	48 89 44 24 08       	mov    QWORD PTR [rsp+0x8],rax
+  494a10:	48 89 5c 24 10       	mov    QWORD PTR [rsp+0x10],rbx
+  494a15:	e8 e6 f3 fc ff       	call   0x463e00
+  494a1a:	48 8b 44 24 08       	mov    rax,QWORD PTR [rsp+0x8]
+  494a1f:	48 8b 5c 24 10       	mov    rbx,QWORD PTR [rsp+0x10]
+  494a24:	e9 77 ff ff ff       	jmp    0x4949a0
+  494a29:	cc                   	int3
+  494a2a:	cc                   	int3
+  494a2b:	cc                   	int3
+  494a2c:	cc                   	int3
+  494a2d:	cc                   	int3
+  494a2e:	cc                   	int3
+  494a2f:	cc                   	int3
+  494a30:	cc                   	int3
+  494a31:	cc                   	int3
+  494a32:	cc                   	int3
+  494a33:	cc                   	int3
+  494a34:	cc                   	int3
+  494a35:	cc                   	int3
+  494a36:	cc                   	int3
+  494a37:	cc                   	int3
+  494a38:	cc                   	int3
+  494a39:	cc                   	int3
+  494a3a:	cc                   	int3
+  494a3b:	cc                   	int3
+  494a3c:	cc                   	int3
+  494a3d:	cc                   	int3
+  494a3e:	cc                   	int3
+  494a3f:	cc                   	int3

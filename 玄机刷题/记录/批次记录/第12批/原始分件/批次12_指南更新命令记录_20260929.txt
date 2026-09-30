@@ -1,0 +1,518 @@
+**********************
+PowerShell transcript start
+Start time: 20260929135431
+Username: DESKTOP-412KTAR\mzj
+RunAs User: DESKTOP-412KTAR\mzj
+Configuration Name: 
+Machine: DESKTOP-412KTAR (Microsoft Windows NT 10.0.26200.0)
+Host Application: C:\Users\mzj\.cache\codex-runtimes\codex-primary-runtime\dependencies\native\powershell\pwsh.dll -NoProfile -Command try { [Console]::OutputEncoding=[System.Text.Encoding]::UTF8 } catch {}
+$log = 'C:\Users\mzj\Desktop\CTF\玄机刷题\记录\批次12_指南更新命令记录_20260929.txt'; Start-Transcript -LiteralPath $log -Force; $guide = 'C:\Users\mzj\Desktop\CTF\玄机刷题\指南\玄机刷题指南_合并源.md'; Select-String -LiteralPath $guide -Pattern '^本指南原记录','^## 平台已完成','^\*\*统计','^\| 547 \|','^\| 531 \|','^# 第十批','^# 终端记录' | Select-Object LineNumber,Line; Stop-Transcript
+Process ID: 40452
+PSVersion: 7.6.5
+PSEdition: Core
+GitCommitId: 7.6.5
+OS: Microsoft Windows 10.0.26200
+Platform: Win32NT
+PSCompatibleVersions: 1.0, 2.0, 3.0, 4.0, 5.0, 5.1, 6.0, 7.0
+PSRemotingProtocolVersion: 2.4
+SerializationVersion: 1.1.0.1
+WSManStackVersion: 3.0
+**********************
+Transcript started, output file is C:\Users\mzj\Desktop\CTF\玄机刷题\记录\批次12_指南更新命令记录_20260929.txt
+
+**********************
+PowerShell transcript end
+End time: 20260929135431
+**********************
+**********************
+PowerShell transcript start
+Start time: 20260929135442
+Username: DESKTOP-412KTAR\mzj
+RunAs User: DESKTOP-412KTAR\mzj
+Configuration Name: 
+Machine: DESKTOP-412KTAR (Microsoft Windows NT 10.0.26200.0)
+Host Application: C:\Users\mzj\.cache\codex-runtimes\codex-primary-runtime\dependencies\native\powershell\pwsh.dll -NoProfile -Command try { [Console]::OutputEncoding=[System.Text.Encoding]::UTF8 } catch {}
+$log = 'C:\Users\mzj\Desktop\CTF\玄机刷题\记录\批次12_指南更新命令记录_20260929.txt'; Start-Transcript -LiteralPath $log -Append; $p = 'C:\Users\mzj\Desktop\CTF\玄机刷题\指南\玄机刷题指南_合并源.md'; $lines = Get-Content -LiteralPath $p; $lines[14]; $lines[22]; $lines[73]; $lines | Select-Object -Skip 2085 -First 36; Stop-Transcript
+Process ID: 19364
+PSVersion: 7.6.5
+PSEdition: Core
+GitCommitId: 7.6.5
+OS: Microsoft Windows 10.0.26200
+Platform: Win32NT
+PSCompatibleVersions: 1.0, 2.0, 3.0, 4.0, 5.0, 5.1, 6.0, 7.0
+PSRemotingProtocolVersion: 2.4
+SerializationVersion: 1.1.0.1
+WSManStackVersion: 3.0
+**********************
+Transcript started, output file is C:\Users\mzj\Desktop\CTF\玄机刷题\记录\批次12_指南更新命令记录_20260929.txt
+本指南原记录了玄机平台“已完成”筛选中的 28 道题。此后 #367、#450、#451、#520、#551、#530、#531、#559、#588、#549、#558、#547、#548、#552 共 14 道新题均取得平台接受回执，手册现收录 42 道已完成题。解题状态、flag 与过程分别以平台回执、附件分析和命令输出为证；不把完成徽标扩写成没有证据的步骤细节。
+## 平台已完成（42 道）
+**统计：本指南原收录 28 道，后续新增的 #367、#450、#451、#520、#551、#530、#531、#559、#588、#549、#558、#547、#548、#552 均有逐题平台接受回执，当前共 42 道。现有证据可给出 40 道题的 flag 候选或公开 Writeup 结果；Ancient-Recall 与 pwn-ezpwn 的最终 flag 输出仍缺失。#546 的新静态候选被平台拒绝，不计入已完成总数。旧题若只有平台完成徽标或离线候选，仍与具体 flag 的提交回执分开标注。**
+### #547 第二届 Parloo 杯 RE PaluFlat
+
+- 平台 ID：547；REVERSE；免费、中等。候选 `flag{bdm23Ne6ljz5O}` 由附件目标字节逆算，并经正向变换逐字节匹配 19 字节常量；玄机前台提交后显示“FLAG 正确~，恭喜你完成此挑战~”，页面为“已完成”、步骤 1/1。
+- 输入校验函数依状态机执行 `x ^= key; x = ROL4(x); x = x - 0x55; x = ~x`。状态 0 的 key 指针选择以及状态 10、12、2、3、4 的转移还原后，重复 key 字节为 `p,l,l,t`。
+- 附件的比较目标第 16 字节为 NUL；虽然目标和候选正向输出完全相同，`strlen(output)` 实际为 16，与代码要求 19 冲突。因此本地附件的成功分支不可达；平台接受回执是 flag 正确的最终依据，不能声称附件本地运行通过。ZIP、7z、PE 归档完整性及分块检查材料见 `题目资料/PaluFlat_547/analysis/`，逐步 WP 见 `题目资料/PaluFlat_547/wp.md`。
+
+### #548 第二届 Parloo 杯 PaluGOGOGO
+
+- 平台 ID：548；REVERSE；免费、中等。玄机前台提交 `flag{bg92Oejpfgl}` 后显示“FLAG 正确~，恭喜你完成此挑战~”，题目“已完成”、步骤 1/1。
+- `GetValue` 使用 Go `math/rand` 的 `Seed(996)`，10 次 `Intn(100)` 改写输入数组，再取 `Intn(2)` 选择 key。静态复现得 key=79。程序逐字符生成十六进制 token：`ord(ch)+79+(i mod 5)`，并以逗号连接；附件中 84 字节目标共 17 项。逐项逆算得到候选，再正向生成完整 84 字节串，与附件常量完全一致。
+- 附件没有运行；Go PRNG 状态、函数反汇编、目标数据映射与复现脚本见 `题目资料/PaluGOGOGO_548/analysis/`，完整 WP 见同目录 `wp.md`。
+
+### #546 第二届 Parloo 杯 PaluArray（仍未解决）
+
+- 平台 ID：546；REVERSE；免费、中等。独立静态分析确认实际字符表为 `Palu_996!?`（起始 RVA `0x5e68`），目标索引串为 `1145141919810`；可逆得输入 `aa_9a_a?a?!aP`，MD5 为 `1b501325fc96d5a845cbdd2ba4f01cd7`。
+- 按静态显示包装，候选 `palu{1b501325fc96d5a845cbdd2ba4f01cd7}` 已在玄机前台提交，但页面返回“FLAG 不正确”。因此这项本地计算不能算答案，未重复盲交；平台配置或 flag 格式仍待有证据地排查。旧字符表候选也曾被拒绝。完整审计和失败修正见 `题目资料/PaluArray_546/wp.md` 与 `analysis` 子目录；前台回执见 `记录/提交核验_20260929_第九批.md`。
+
+### 本批仍待解决
+
+#532《人生自古谁无死》的两个已提交候选均无平台完成回执，需新的独立证据后再决定；#546《PaluArray》的静态候选被平台明确拒绝，需解释二进制推导与平台 flag 不一致的原因；#561《第一届OpenHarmony secret》的 pattern 闭环已复核，但题内 MD5 示例与明文公式不符，现有候选也未获平台确认；#562 `checker` 的 ZIP 与 checker.exe 副本哈希一致，静态复核仍得到已被拒绝的同一候选；没有提交时输入框截图可核对输入细节，也没有新候选，不重复提交。这四题都不计入已完成总数。
+
+## 第十批：平台已验证题目
+
+本批从平台“全部”列表中筛选并分析了三道免费、中等 REVERSE 题。本指南只把取得平台接受回执的题目纳入已完成题解；本批其余候选和平台状态保存在单独的题目资料与提交记录中，待解决后再加入。
+
+### #552 Butterfly（平台已接受）
+
+ELF 为静态链接 x86-64。反汇编还原每个 8 字节块的加密流程：按字节 XOR `MMXEncod`，每个 16 位字交换高低字节，把小端 64 位值循环左移一位，最后逐字节加 key 并模 256。逆变换完整恢复 32 字节主体；`encode.dat` 尾部四字节没有经过块变换，其中 `i}` 属于 flag，末尾 LF 是文件换行。候选为 `flag{66eec38e269e0e267849a1f7b708i}`。重新正向处理后 36 字节与附件完全一致，平台显示“已完成”、步骤 `1/1`。注意候选本体不包含换行。完整逐步 WP、反汇编、块级 trace 与终端记录在 `题目资料/批次10_20260929/552_butterfly/`。
+
+# 终端记录与复现文件
+
+指南正文逐题保留解题推理、关键命令、关键输出、错误分支和平台状态；补充命令记录与复核材料按题目保存在 `记录/` 和 `题目资料/`：
+
+- Pixel 本地补查：`记录/代理-Pixel-终端记录.txt`
+- 项目清理过程：`记录/项目清理终端记录.txt`
+- 本轮附件普查、六题脚本复跑与 Webmin HTTP 命令/响应：`记录/WP补全-资料普查记录.txt`
+**********************
+PowerShell transcript end
+End time: 20260929135442
+**********************
+**********************
+PowerShell transcript start
+Start time: 20260929140320
+Username: DESKTOP-412KTAR\mzj
+RunAs User: DESKTOP-412KTAR\mzj
+Configuration Name: 
+Machine: DESKTOP-412KTAR (Microsoft Windows NT 10.0.26200.0)
+Host Application: C:\Users\mzj\.cache\codex-runtimes\codex-primary-runtime\dependencies\native\powershell\pwsh.dll -NoProfile -Command try { [Console]::OutputEncoding=[System.Text.Encoding]::UTF8 } catch {}
+$scriptPath = 'C:\Users\mzj\Desktop\CTF\玄机刷题\记录\批次12_更新指南并确认题目.ps1'; $scriptBody = @'
+$ErrorActionPreference = 'Stop'
+$root = 'C:\Users\mzj\Desktop\CTF\玄机刷题'
+$guidePath = Join-Path $root '指南\玄机刷题指南_合并源.md'
+$readmePath = Join-Path $root 'README.md'
+$selectionPath = Join-Path $root '记录\批次_20260929_第十二批题目确认.md'
+$submissionPath = Join-Path $root '记录\提交核验_20260929_第十二批.md'
+$logPath = Join-Path $root '记录\批次12_指南更新命令记录_20260929.txt'
+Start-Transcript -LiteralPath $logPath -Append
+Write-Output 'COMMAND> Update verified batch 11 guide entries and counts; update README; write batch 12 selection and platform submission records.'
+$guideText = [System.IO.File]::ReadAllText($guidePath, [System.Text.Encoding]::UTF8)
+$oldIntro = '此后 #367、#450、#451、#520、#551、#530、#531、#559、#588、#549、#558、#547、#548、#552 共 14 道新题均取得平台接受回执，手册现收录 42 道已完成题。'
+$newIntro = '此后 #367、#450、#451、#520、#551、#530、#531、#559、#588、#549、#558、#547、#548、#552、#539、#540 共 16 道新题均取得平台接受回执，手册现收录 44 道已完成题。'
+if (-not $guideText.Contains($oldIntro)) { throw 'Expected guide intro missing; no changes were written.' }
+$guideText = $guideText.Replace($oldIntro, $newIntro)
+$guideText = $guideText.Replace('## 平台已完成（42 道）', '## 平台已完成（44 道）')
+$tableMarker = '| 531 | 商丘师范学院第四届网络安全及信息对抗大赛 你若安好便是晴 |'
+if (-not $guideText.Contains($tableMarker)) { throw 'Expected table insertion marker missing.' }
+if ($guideText.Contains('| 540 | 湘岚杯maybesignin |') -or $guideText.Contains('| 539 | 湘岚杯cryptor |')) { throw 'Batch 11 rows already exist.' }
+$tableRows = '| 540 | 湘岚杯maybesignin | REVERSE / 中等 | 平台已接受；SM4 静态逆向、Python 与 OpenSSL 独立解密及复加密验证齐全 |' + [Environment]::NewLine + '| 539 | 湘岚杯cryptor | REVERSE / 中等 | 平台已接受；Cython 扩展静态分析、AES-CBC 双实现复核及完整命令记录齐全 |' + [Environment]::NewLine
+$guideText = $guideText.Replace($tableMarker, $tableRows + $tableMarker)
+$newStats = '**统计：本指南原收录 28 道，后续新增的 #367、#450、#451、#520、#551、#530、#531、#559、#588、#549、#558、#547、#548、#552、#539、#540 均有逐题平台接受回执，当前共 44 道。现有证据可给出 42 道题的 flag 候选或公开 Writeup 结果；Ancient-Recall 与 pwn-ezpwn 的最终 flag 输出仍缺失。#541 ezBase 与 #546 PaluArray 的新候选均被平台拒绝，不计入已完成总数。旧题若只有平台完成徽标或离线候选，仍与具体 flag 的提交回执分开标注。**'
+$guideText = [System.Text.RegularExpressions.Regex]::Replace($guideText, '(?m)^\*\*统计：.*\*\*$', $newStats)
+$newPending = '#532《人生自古谁无死》的两个已提交候选均无平台完成回执，需新的独立证据后再决定；#546《PaluArray》的静态候选被平台明确拒绝，需解释二进制推导与平台 flag 不一致的原因；#561《第一届OpenHarmony secret》的 pattern 闭环已复核，但题内 MD5 示例与明文公式不符，现有候选也未获平台确认；#562 checker 的 ZIP 与 checker.exe 副本哈希一致，静态复核仍得到已被拒绝的同一候选；#541《ezBase》本批静态逆向候选被前台平台拒绝，且附件比较常量存在填充分支歧义，暂不盲目重交。这五题都不计入已完成总数。'
+$guideText = [System.Text.RegularExpressions.Regex]::Replace($guideText, '(?m)^#532《人生自古谁无死》.*这四题都不计入已完成总数。$', [System.Text.RegularExpressions.MatchEvaluator]{ param($m) $newPending })
+$batch11 = @(
+'## 第十一批：湘岚杯静态逆向题',
+'',
+'本批在玄机平台“全部”题目列表中核对免费、中等 REVERSE 项。#539「湘岚杯cryptor」和 #540「湘岚杯maybesignin」取得前台正确回执；#541「ezBase」的候选被拒绝，因此未放入已完成表。',
+'',
+'### #539 湘岚杯 cryptor（平台已接受）',
+'',
+'- 平台 ID：539；REVERSE；免费、中等。候选 flag{AtYpXBh38fNvc1ymsQ7vL} 在玄机前台提交后显示正确、步骤 1/1 和一血。',
+'- main.py 只接收输入并调用 cryptor.check；判定逻辑位于 CPython 3.10 x64 的 Cython .pyd。静态字符串与数据区提供 AES 模式、零填充提示、Base64 密文、16 字节 key EzCrypt0ofPython 和 16 字节 IV 1145140A01919810。IV 按 16 个 ASCII 字符处理。',
+'- Base64 解码得到 32 字节密文。按 AES-128-CBC、关闭标准填充解密，明文为 flag 后接 5 个 NUL 字节；去掉 NUL 后得到候选。Python cryptography 与 OpenSSL 两套独立实现的明文十六进制相同；扩展未加载或运行。',
+'- 首轮尝试 ECB / PKCS#7 未得到有效明文；缺少 PyCryptodome、PowerShell/.NET API 差异和中文路径工具调用问题均保留在命令记录中。完整常量定位、错误分支、命令输出和复现代码见 题目资料/批次11_20260929/539_cryptor/wp.md 及其 analysis 子目录。',
+'',
+'### #540 湘岚杯 maybesignin（平台已接受）',
+'',
+'- 平台 ID：540；REVERSE；免费、中等。候选 flag{wlascJDAFS} 前台提交后显示正确、步骤 1/1。',
+'- 附件是 12,800 字节 PE32+ x86-64。静态识别比较目标块 1C84BE5145CE1AF31FA3F75E3A38D0BE，并从 S-box、FK、CK 和轮函数常量确认校验算法为标准 SM4 单块变换。',
+'- 关键字节序检查：四个 mov dword 立即数按小端存储组成 16 字节 key 01 02 03 04 05 06 07 08 09 10 11 12 13 14 15 16（十六进制字节）。逆序轮密钥解密得到 flag{wlascJDAFS}；本地 Python 正向加密回目标块，且 OpenSSL SM4-ECB 独立解密得到相同明文。附件 EXE 未运行。',
+'- 首次将 key 误读成更长的十六进制序列，虽然自洽重加密仍不对；回到小端立即数还原后才得到正确 16 字节 key。详细反汇编、常量表、错误假设、复算命令和输出见 题目资料/批次11_20260929/540_maybesignin/wp.md 与 analysis。',
+'',
+'### 第十一批其他记录',
+'',
+'#541 ezBase 的本地候选仅是分析分支，平台明确拒绝；不把它作为答案。候选输入、拒绝回执、解包修正、分支检查和逐命令记录见 题目资料/批次11_20260929/541_ezBase/ 与 记录/提交核验_20260929_第十一批.md。',
+''
+) -join [Environment]::NewLine
+$terminalMarker = '# 终端记录与复现文件'
+if (-not $guideText.Contains($terminalMarker)) { throw 'Terminal record marker missing.' }
+if ($guideText.Contains('## 第十一批：湘岚杯静态逆向题')) { throw 'Batch 11 section already exists.' }
+$guideText = $guideText.Replace($terminalMarker, $batch11 + [Environment]::NewLine + $terminalMarker)
+$terminalBullet = '- 第十一批 #539/#540 平台接受、#541 被拒绝的前台核验及附件确认：记录/批次_20260929_第十一批题目确认.md、记录/提交核验_20260929_第十一批.md；附件哈希、逐题 WP、静态分析产物与终端记录见 题目资料/批次11_20260929/。'
+$guideIndexMarker = '- 各题逐题记录：'
+if (-not $guideText.Contains($guideIndexMarker)) { throw 'File index marker missing.' }
+$guideText = $guideText.Replace($guideIndexMarker, $terminalBullet + [Environment]::NewLine + $guideIndexMarker)
+[System.IO.File]::WriteAllText($guidePath, $guideText, [System.Text.UTF8Encoding]::new($false))
+Write-Output ('GUIDE UPDATED: ' + $guidePath)
+Write-Output ('GUIDE SHA256: ' + (Get-FileHash -Algorithm SHA256 -LiteralPath $guidePath).Hash)
+Select-String -LiteralPath $guidePath -Pattern '^本指南原记录','^## 平台已完成','^\*\*统计','^\| 540 \|','^\| 539 \|','^## 第十一批','^### #539','^### #540','^# 终端记录' | ForEach-Object { Write-Output ($_.LineNumber.ToString() + ': ' + $_.Line) }
+$readmeText = [System.IO.File]::ReadAllText($readmePath, [System.Text.Encoding]::UTF8)
+$readmeText = $readmeText.Replace('第十一批手册整合待本批结束后更新。平台当前已接受 44 道题（此前主手册列出 42 道）', '手册已同步列出 44 道平台接受题；平台当前已接受总数为 44 道')
+$readmeText = $readmeText.Replace('第十一批处理中：', '第十一批已归档：')
+if (-not $readmeText.Contains('第十二批处理中：')) {
+  $readmeText += [Environment]::NewLine + '第十二批处理中：通过“全部”列表和中等难度题卡核验，选定免费、未完成的 #536「遇事不决，可问春风」、#535「往事暗沉不可追」、#534「天下谁人不识君」。前台题页与下载记录见 记录/批次_20260929_第十二批题目确认.md、记录/批次12_附件归档_20260929.txt；三份原始附件副本和独立 WP 分别保存在 题目资料/批次12_20260929/。三名子代理并行静态分析中；完成和平台验证状态待更新，尚不计入已完成数。' + [Environment]::NewLine
+}
+[System.IO.File]::WriteAllText($readmePath, $readmeText, [System.Text.UTF8Encoding]::new($false))
+Write-Output ('README UPDATED: ' + $readmePath)
+Write-Output ('README SHA256: ' + (Get-FileHash -Algorithm SHA256 -LiteralPath $readmePath).Hash)
+$batch = Join-Path $root '题目资料\批次12_20260929'
+$items = @(
+  @{Id='534'; Name='天下谁人不识君'; File='天下谁人不识君.zip'; Folder='534_天下谁人不识君'; Download='D:\Downloads\天下谁人不识君.zip'; Difficulty='中等'; Price='免费'; Unfinished='前台详情 0/1'}
+  @{Id='535'; Name='往事暗沉不可追'; File='来日之路光明灿烂.zip'; Folder='535_往事暗沉不可追'; Download='D:\Downloads\来日之路光明灿烂.zip'; Difficulty='中等'; Price='免费'; Unfinished='前台详情 0/1'}
+  @{Id='536'; Name='遇事不决，可问春风'; File='app-debug.zip'; Folder='536_遇事不决可问春风'; Download='D:\Downloads\app-debug.zip'; Difficulty='中等'; Price='免费'; Unfinished='前台详情 0/1'}
+)
+$selectionLines = @(
+'# 第十二批题目确认（2026-09-29）',
+'',
+'## 选择方法与筛选状态',
+'',
+'- 前台打开玄机题目列表 https://xj.edisec.net/challenges，确认状态筛选选中“全部”，没有用“已完成/未完成”作为唯一来源。列表按中等难度和 REVERSE 分类浏览，另以平台搜索定位第三题。',
+'- 每个详情页均在前台核对题名、ID、类别、难度、费用与进度；三题都是免费 / 中等 / REVERSE / 未完成（详情页 0/1）。#541、#542、#543 此前已经尝试，本批排除。',
+'- 每题交由一个子代理分析。候选只由主线程在前台提交验证；平台未接受的候选不算完成，也不进入已完成手册章节。',
+'',
+'## 已选题目',
+''
+)
+foreach ($item in $items) {
+  $archive = Join-Path (Join-Path $batch $item.Folder) ('originals\' + $item.File)
+  $hash = (Get-FileHash -Algorithm SHA256 -LiteralPath $archive).Hash
+  $size = (Get-Item -LiteralPath $archive).Length
+  Add-Type -AssemblyName System.IO.Compression.FileSystem
+  $zip = [System.IO.Compression.ZipFile]::OpenRead($archive)
+  $entryLines = @($zip.Entries | ForEach-Object { '- ' + $_.FullName + ' (' + $_.Length + ' bytes)' })
+  $zip.Dispose()
+  $selectionLines += @(
+    '### #' + $item.Id + ' ' + $item.Name,
+    '',
+    '- 详情页：https://xj.edisec.net/challenges/' + $item.Id,
+    '- 类别 / 难度 / 费用 / 状态：REVERSE / ' + $item.Difficulty + ' / ' + $item.Price + ' / ' + $item.Unfinished,
+    '- 下载来源：前台点击玄机“下载附件”；Downloads 原始文件：' + $item.Download,
+    '- 项目原件：题目资料/批次12_20260929/' + $item.Folder + '/originals/' + $item.File,
+    '- 大小：' + $size + ' bytes；SHA-256：' + $hash,
+    '- ZIP 成员：',
+    ($entryLines -join [Environment]::NewLine),
+    ''
+  )
+  Write-Output ('ARCHIVE #' + $item.Id + ': size=' + $size + '; SHA256=' + $hash)
+  foreach ($entry in $entryLines) { Write-Output $entry }
+}
+$selectionLines += @(
+'',
+'## 当前状态',
+'',
+'#534 本地候选 SQCTF{libai_jianxian} 经正向复算与注释密文一致，但 2026-09-29 玄机前台提交后提示“FLAG 不正确~”，详情页仍为 0/1；不得计为已解决。代理继续审计源码中注释密文与硬编码 flag 的冲突。#535、#536 正在分析，最终候选与回执待补。',
+'',
+'## 归档目录',
+'',
+'- 题目资料/批次12_20260929/534_天下谁人不识君/',
+'- 题目资料/批次12_20260929/535_往事暗沉不可追/',
+'- 题目资料/批次12_20260929/536_遇事不决可问春风/',
+''
+)
+[System.IO.File]::WriteAllText($selectionPath, ($selectionLines -join [Environment]::NewLine), [System.Text.UTF8Encoding]::new($false))
+Write-Output ('SELECTION RECORD: ' + $selectionPath)
+Write-Output ('SELECTION SHA256: ' + (Get-FileHash -Algorithm SHA256 -LiteralPath $selectionPath).Hash)
+$submission = @(
+'# 第十二批提交核验（2026-09-29）',
+'',
+'## #534 天下谁人不识君',
+'',
+'- 题目页：https://xj.edisec.net/challenges/534',
+'- 前置状态：免费、中等、REVERSE；提交前步骤 1 为 0/1，题页无“已完成”徽标。',
+'- 候选来源：静态反解附件注释密文得 SQCTF{libai_jianxian}；使用同一变换正向计算得到原注释密文，逐字符一致。源码顶部硬编码 flag 与注释密文长度不一致，候选存在来源冲突。',
+'- 前台步骤：Computer Use 打开该题页 → 点击“提交FLAG” → 输入框准确输入 SQCTF{libai_jianxian} → 点击“提交”。',
+'- 回执：玄机可访问文本返回“FLAG 不正确~”；截图显示完成情况 0%、1 人参与 / 0 人完成，步骤为 0/1。该候选已拒绝，题目未解决，不计入平台完成统计；未盲试其它包装。',
+'- Computer Use 会话输出含提交后页面截图；该图未另存为项目中的 PNG，故不在此声称存在本地截图文件。',
+'',
+'## #535、#536',
+'',
+'尚未提交；待两题完成静态分析、独立复算并给出唯一候选后再在前台提交。'
+)
+[System.IO.File]::WriteAllText($submissionPath, ($submission -join [Environment]::NewLine), [System.Text.UTF8Encoding]::new($false))
+Write-Output ('SUBMISSION RECORD: ' + $submissionPath)
+Write-Output ('SUBMISSION SHA256: ' + (Get-FileHash -Algorithm SHA256 -LiteralPath $submissionPath).Hash)
+Stop-Transcript
+
+'@; Set-Content -LiteralPath $scriptPath -Value $scriptBody -Encoding UTF8; Write-Output ('SCRIPT SAVED: ' + $scriptPath); & $scriptPath
+Process ID: 40228
+PSVersion: 7.6.5
+PSEdition: Core
+GitCommitId: 7.6.5
+OS: Microsoft Windows 10.0.26200
+Platform: Win32NT
+PSCompatibleVersions: 1.0, 2.0, 3.0, 4.0, 5.0, 5.1, 6.0, 7.0
+PSRemotingProtocolVersion: 2.4
+SerializationVersion: 1.1.0.1
+WSManStackVersion: 3.0
+**********************
+Transcript started, output file is C:\Users\mzj\Desktop\CTF\玄机刷题\记录\批次12_指南更新命令记录_20260929.txt
+COMMAND> Update verified batch 11 guide entries and counts; update README; write batch 12 selection and platform submission records.
+GUIDE UPDATED: C:\Users\mzj\Desktop\CTF\玄机刷题\指南\玄机刷题指南_合并源.md
+GUIDE SHA256: 1744C7D5D6DD2B553486BA7F8FD23FA6EC09E2BF83A6000DCF081C8DBC4AD8AC
+15: 本指南原记录了玄机平台“已完成”筛选中的 28 道题。此后 #367、#450、#451、#520、#551、#530、#531、#559、#588、#549、#558、#547、#548、#552、#539、#540 共 16 道新题均取得平台接受回执，手册现收录 44 道已完成题。解题状态、flag 与过程分别以平台回执、附件分析和命令输出为证；不把完成徽标扩写成没有证据的步骤细节。
+23: ## 平台已完成（44 道）
+58: | 540 | 湘岚杯maybesignin | REVERSE / 中等 | 平台已接受；SM4 静态逆向、Python 与 OpenSSL 独立解密及复加密验证齐全 |
+59: | 539 | 湘岚杯cryptor | REVERSE / 中等 | 平台已接受；Cython 扩展静态分析、AES-CBC 双实现复核及完整命令记录齐全 |
+76: **统计：本指南原收录 28 道，后续新增的 #367、#450、#451、#520、#551、#530、#531、#559、#588、#549、#558、#547、#548、#552、#539、#540 均有逐题平台接受回执，当前共 44 道。现有证据可给出 42 道题的 flag 候选或公开 Writeup 结果；Ancient-Recall 与 pwn-ezpwn 的最终 flag 输出仍缺失。#541 ezBase 与 #546 PaluArray 的新候选均被平台拒绝，不计入已完成总数。旧题若只有平台完成徽标或离线候选，仍与具体 flag 的提交回执分开标注。**
+2117: ## 第十一批：湘岚杯静态逆向题
+2121: ### #539 湘岚杯 cryptor（平台已接受）
+2128: ### #540 湘岚杯 maybesignin（平台已接受）
+2139: # 终端记录与复现文件
+README UPDATED: C:\Users\mzj\Desktop\CTF\玄机刷题\README.md
+README SHA256: 62EBB0499951589149B5914F129F17BA3C864FC9A8D3A9717B40B0534A1A42E7
+ARCHIVE #534: size=367; SHA256=EE9F84EA4ED73201BDE00509C5EAD9FD3476F22D07D9390ED9EAA7F022FB10AA
+- 天下谁人不识君.py (295 bytes)
+ARCHIVE #535: size=5290473; SHA256=3D83F586009E705F48172F59148A536F919F17994959ED863782AA629D079365
+- 来日之路光明灿烂.exe (5465233 bytes)
+ARCHIVE #536: size=4419022; SHA256=A366F7C8B031940BC96016811BBD441A17B3473F8B9D288511E02CC63E6A1D59
+- app-debug.apk (4609869 bytes)
+SELECTION RECORD: C:\Users\mzj\Desktop\CTF\玄机刷题\记录\批次_20260929_第十二批题目确认.md
+SELECTION SHA256: 25C33160A536496288EFB0845AB9466155751C31F0F2B8F912E590D8C4FF7854
+SUBMISSION RECORD: C:\Users\mzj\Desktop\CTF\玄机刷题\记录\提交核验_20260929_第十二批.md
+SUBMISSION SHA256: F46DFA5D4336873C5880DBDB066480FC8982A855382466B8B5B030CE4762A2AA
+**********************
+PowerShell transcript end
+End time: 20260929140320
+**********************
+**********************
+PowerShell transcript start
+Start time: 20260929140439
+Username: DESKTOP-412KTAR\mzj
+RunAs User: DESKTOP-412KTAR\mzj
+Configuration Name: 
+Machine: DESKTOP-412KTAR (Microsoft Windows NT 10.0.26200.0)
+Host Application: C:\Users\mzj\.cache\codex-runtimes\codex-primary-runtime\dependencies\native\powershell\pwsh.dll -NoProfile -Command try { [Console]::OutputEncoding=[System.Text.Encoding]::UTF8 } catch {}
+$log = 'C:\Users\mzj\Desktop\CTF\玄机刷题\记录\批次12_指南更新命令记录_20260929.txt'; Start-Transcript -LiteralPath $log -Append; $guide = 'C:\Users\mzj\Desktop\CTF\玄机刷题\指南\玄机刷题指南_合并源.md'; $readme = 'C:\Users\mzj\Desktop\CTF\玄机刷题\README.md'; $selection = 'C:\Users\mzj\Desktop\CTF\玄机刷题\记录\批次_20260929_第十二批题目确认.md'; $submission = 'C:\Users\mzj\Desktop\CTF\玄机刷题\记录\提交核验_20260929_第十二批.md'; Write-Output 'GUIDE PENDING STATUS:'; Select-String -LiteralPath $guide -Pattern '^#532《人生自古','^### #539','^### #540','^# 终端记录'; Write-Output 'README BATCH STATUS:'; Get-Content -LiteralPath $readme | Select-Object -Last 12; Write-Output 'BATCH SELECTION RECORD:'; Get-Content -LiteralPath $selection; Write-Output 'SUBMISSION RECORD:'; Get-Content -LiteralPath $submission; Stop-Transcript
+Process ID: 27920
+PSVersion: 7.6.5
+PSEdition: Core
+GitCommitId: 7.6.5
+OS: Microsoft Windows 10.0.26200
+Platform: Win32NT
+PSCompatibleVersions: 1.0, 2.0, 3.0, 4.0, 5.0, 5.1, 6.0, 7.0
+PSRemotingProtocolVersion: 2.4
+SerializationVersion: 1.1.0.1
+WSManStackVersion: 3.0
+**********************
+Transcript started, output file is C:\Users\mzj\Desktop\CTF\玄机刷题\记录\批次12_指南更新命令记录_20260929.txt
+GUIDE PENDING STATUS:
+
+玄机刷题\指南\玄机刷题指南_合并源.md:2107:#532《人生自古谁无死》的两个已提交候选均无平台完成回执，需新的独立证据后再决
+定；#546《PaluArray》的静态候选被平台明确拒绝，需解释二进制推导与平台 flag 不一致的原因；#561《第一届OpenHarmony secret
+》的 pattern 闭环已复核，但题内 MD5 示例与明文公式不符，现有候选也未获平台确认；#562 checker 的 ZIP 与 checker.exe 副本
+哈希一致，静态复核仍得到已被拒绝的同一候选；#541《ezBase》本批静态逆向候选被前台平台拒绝，且附件比较常量存在填充分支歧
+义，暂不盲目重交。这五题都不计入已完成总数。
+玄机刷题\指南\玄机刷题指南_合并源.md:2121:### #539 湘岚杯 cryptor（平台已接受）
+玄机刷题\指南\玄机刷题指南_合并源.md:2128:### #540 湘岚杯 maybesignin（平台已接受）
+玄机刷题\指南\玄机刷题指南_合并源.md:2139:# 终端记录与复现文件
+README BATCH STATUS:
+平台验收记录在 `记录/提交核验_20260929_第六批.md`、`记录/批次_20260929_第七批平台核对.md`、`记录/提交核验_20260929_第八批.md` 和 `记录/提交核验_20260929_第九批.md`；#562 的拒绝原因静态复核见其 `analysis/` 子目录。未通过平台的题目不计入已完成总数。
+第九批 #547、#548 已由前台平台接受；#546 的候选已被拒绝，仍待复核。三题详情、附件哈希与任务范围见 `记录/批次_20260929_第九批题目确认.md`，提交过程与回执见第九批平台验收记录。第十批从“全部”列表选出的免费中等题 #552、#543、#542 中，#552 已接受，#543、#542 的候选被平台拒绝；提交过程与状态见 `记录/提交核验_20260929_第十批.md`，附件副本与哈希见 `记录/批次_20260929_第十批题目确认.md` 和 `记录/第十批_附件归档_20260929.txt`。两道未解决题不计入完成数，静态 WP 保存在各自题目资料目录，等待新证据后再纳入已完成题解。
+
+第十一批已归档：按“全部”列表筛选并逐题确认了免费、中等题 #539「湘岚杯cryptor」、#540「湘岚杯maybesignin」、#541「ezBase」。#539 与 #540 已通过前台提交，平台当前已接受数从 42 变为 44；#541 的候选被平台拒绝，仍待复核。题目确认与平台详情见 `记录/批次_20260929_第十一批题目确认.md` 和 `记录/提交核验_20260929_第十一批.md`；附件副本、SHA-256、逐命令记录和 WPs 位于 `题目资料/批次11_20260929/`。
+
+KROP2（ID 270）和 abs（ID 271）的原始资料现已归档在 WSL 平台副本中，但尚未作为已解题目补写到主手册；附件归档不代表题目完成或 flag 已验证。
+
+## 证据与去重
+
+历史终端记录保留当时实际输入的原始路径，避免改写操作证据；所引用的外部来源文件已在本项目相应目录留存副本。附件若在项目内已有相同 SHA-256，则不重复占用空间，映射记录在 `题目资料/原始下载附件/manifest.csv`。账户凭据不写入项目记录。
+
+第十二批处理中：通过“全部”列表和中等难度题卡核验，选定免费、未完成的 #536「遇事不决，可问春风」、#535「往事暗沉不可追」、#534「天下谁人不识君」。前台题页与下载记录见 记录/批次_20260929_第十二批题目确认.md、记录/批次12_附件归档_20260929.txt；三份原始附件副本和独立 WP 分别保存在 题目资料/批次12_20260929/。三名子代理并行静态分析中；完成和平台验证状态待更新，尚不计入已完成数。
+BATCH SELECTION RECORD:
+# 第十二批题目确认（2026-09-29）
+
+## 选择方法与筛选状态
+
+- 前台打开玄机题目列表 https://xj.edisec.net/challenges，确认状态筛选选中“全部”，没有用“已完成/未完成”作为唯一来源。列表按中等难度和 REVERSE 分类浏览，另以平台搜索定位第三题。
+- 每个详情页均在前台核对题名、ID、类别、难度、费用与进度；三题都是免费 / 中等 / REVERSE / 未完成（详情页 0/1）。#541、#542、#543 此前已经尝试，本批排除。
+- 每题交由一个子代理分析。候选只由主线程在前台提交验证；平台未接受的候选不算完成，也不进入已完成手册章节。
+
+## 已选题目
+
+### #534 天下谁人不识君  - 详情页：https://xj.edisec.net/challenges/534 - 类别 / 难度 / 费用 / 状态：REVERSE / 中等 / 免费 / 前台详情 0/1 - 下载来源：前台点击玄机“下载附件”；Downloads 原始文件：D:\Downloads\天下谁人不识君.zip - 项目原件：题目资料/批次12_20260929/534_天下谁人不识君/originals/天下谁人不识君.zip - 大小：367 bytes；SHA-256：EE9F84EA4ED73201BDE00509C5EAD9FD3476F22D07D9390ED9EAA7F022FB10AA - ZIP 成员： - 天下谁人不识君.py (295 bytes)
+### #535 往事暗沉不可追  - 详情页：https://xj.edisec.net/challenges/535 - 类别 / 难度 / 费用 / 状态：REVERSE / 中等 / 免费 / 前台详情 0/1 - 下载来源：前台点击玄机“下载附件”；Downloads 原始文件：D:\Downloads\来日之路光明灿烂.zip - 项目原件：题目资料/批次12_20260929/535_往事暗沉不可追/originals/来日之路光明灿烂.zip - 大小：5290473 bytes；SHA-256：3D83F586009E705F48172F59148A536F919F17994959ED863782AA629D079365 - ZIP 成员： - 来日之路光明灿烂.exe (5465233 bytes)
+### #536 遇事不决，可问春风  - 详情页：https://xj.edisec.net/challenges/536 - 类别 / 难度 / 费用 / 状态：REVERSE / 中等 / 免费 / 前台详情 0/1 - 下载来源：前台点击玄机“下载附件”；Downloads 原始文件：D:\Downloads\app-debug.zip - 项目原件：题目资料/批次12_20260929/536_遇事不决可问春风/originals/app-debug.zip - 大小：4419022 bytes；SHA-256：A366F7C8B031940BC96016811BBD441A17B3473F8B9D288511E02CC63E6A1D59 - ZIP 成员： - app-debug.apk (4609869 bytes)
+
+## 当前状态
+
+#534 本地候选 SQCTF{libai_jianxian} 经正向复算与注释密文一致，但 2026-09-29 玄机前台提交后提示“FLAG 不正确~”，详情页仍为 0/1；不得计为已解决。代理继续审计源码中注释密文与硬编码 flag 的冲突。#535、#536 正在分析，最终候选与回执待补。
+
+## 归档目录
+
+- 题目资料/批次12_20260929/534_天下谁人不识君/
+- 题目资料/批次12_20260929/535_往事暗沉不可追/
+- 题目资料/批次12_20260929/536_遇事不决可问春风/
+SUBMISSION RECORD:
+# 第十二批提交核验（2026-09-29）
+
+## #534 天下谁人不识君
+
+- 题目页：https://xj.edisec.net/challenges/534
+- 前置状态：免费、中等、REVERSE；提交前步骤 1 为 0/1，题页无“已完成”徽标。
+- 候选来源：静态反解附件注释密文得 SQCTF{libai_jianxian}；使用同一变换正向计算得到原注释密文，逐字符一致。源码顶部硬编码 flag 与注释密文长度不一致，候选存在来源冲突。
+- 前台步骤：Computer Use 打开该题页 → 点击“提交FLAG” → 输入框准确输入 SQCTF{libai_jianxian} → 点击“提交”。
+- 回执：玄机可访问文本返回“FLAG 不正确~”；截图显示完成情况 0%、1 人参与 / 0 人完成，步骤为 0/1。该候选已拒绝，题目未解决，不计入平台完成统计；未盲试其它包装。
+- Computer Use 会话输出含提交后页面截图；该图未另存为项目中的 PNG，故不在此声称存在本地截图文件。
+
+## #535、#536
+
+尚未提交；待两题完成静态分析、独立复算并给出唯一候选后再在前台提交。
+**********************
+PowerShell transcript end
+End time: 20260929140439
+**********************
+**********************
+PowerShell transcript start
+Start time: 20260929140535
+Username: DESKTOP-412KTAR\mzj
+RunAs User: DESKTOP-412KTAR\mzj
+Configuration Name: 
+Machine: DESKTOP-412KTAR (Microsoft Windows NT 10.0.26200.0)
+Host Application: C:\Users\mzj\.cache\codex-runtimes\codex-primary-runtime\dependencies\native\powershell\pwsh.dll -NoProfile -Command try { [Console]::OutputEncoding=[System.Text.Encoding]::UTF8 } catch {}
+$log = 'C:\Users\mzj\Desktop\CTF\玄机刷题\记录\批次12_指南更新命令记录_20260929.txt'; Start-Transcript -LiteralPath $log -Append; $p = 'C:\Users\mzj\Desktop\CTF\玄机刷题\记录\批次_20260929_第十二批题目确认.md'; $lines = [System.IO.File]::ReadAllLines($p, [System.Text.Encoding]::UTF8); Write-Output ('Selection file line count: ' + $lines.Count); for ($i = 0; $i -lt $lines.Count; $i++) { if ($lines[$i] -match '^###|^- 详情页|^- 类别 /|^- 下载来源|^- 项目原件|^- 大小|^- ZIP 成员|^#534 本地|^#535、#536') { Write-Output (($i + 1).ToString() + ': ' + $lines[$i]) } }; Stop-Transcript
+Process ID: 3520
+PSVersion: 7.6.5
+PSEdition: Core
+GitCommitId: 7.6.5
+OS: Microsoft Windows 10.0.26200
+Platform: Win32NT
+PSCompatibleVersions: 1.0, 2.0, 3.0, 4.0, 5.0, 5.1, 6.0, 7.0
+PSRemotingProtocolVersion: 2.4
+SerializationVersion: 1.1.0.1
+WSManStackVersion: 3.0
+**********************
+Transcript started, output file is C:\Users\mzj\Desktop\CTF\玄机刷题\记录\批次12_指南更新命令记录_20260929.txt
+Selection file line count: 23
+11: ### #534 天下谁人不识君  - 详情页：https://xj.edisec.net/challenges/534 - 类别 / 难度 / 费用 / 状态：REVERSE / 中等 / 免费 / 前台详情 0/1 - 下载来源：前台点击玄机“下载附件”；Downloads 原始文件：D:\Downloads\天下谁人不识君.zip - 项目原件：题目资料/批次12_20260929/534_天下谁人不识君/originals/天下谁人不识君.zip - 大小：367 bytes；SHA-256：EE9F84EA4ED73201BDE00509C5EAD9FD3476F22D07D9390ED9EAA7F022FB10AA - ZIP 成员： - 天下谁人不识君.py (295 bytes)
+12: ### #535 往事暗沉不可追  - 详情页：https://xj.edisec.net/challenges/535 - 类别 / 难度 / 费用 / 状态：REVERSE / 中等 / 免费 / 前台详情 0/1 - 下载来源：前台点击玄机“下载附件”；Downloads 原始文件：D:\Downloads\来日之路光明灿烂.zip - 项目原件：题目资料/批次12_20260929/535_往事暗沉不可追/originals/来日之路光明灿烂.zip - 大小：5290473 bytes；SHA-256：3D83F586009E705F48172F59148A536F919F17994959ED863782AA629D079365 - ZIP 成员： - 来日之路光明灿烂.exe (5465233 bytes)
+13: ### #536 遇事不决，可问春风  - 详情页：https://xj.edisec.net/challenges/536 - 类别 / 难度 / 费用 / 状态：REVERSE / 中等 / 免费 / 前台详情 0/1 - 下载来源：前台点击玄机“下载附件”；Downloads 原始文件：D:\Downloads\app-debug.zip - 项目原件：题目资料/批次12_20260929/536_遇事不决可问春风/originals/app-debug.zip - 大小：4419022 bytes；SHA-256：A366F7C8B031940BC96016811BBD441A17B3473F8B9D288511E02CC63E6A1D59 - ZIP 成员： - app-debug.apk (4609869 bytes)
+17: #534 本地候选 SQCTF{libai_jianxian} 经正向复算与注释密文一致，但 2026-09-29 玄机前台提交后提示“FLAG 不正确~”，详情页仍为 0/1；不得计为已解决。代理继续审计源码中注释密文与硬编码 flag 的冲突。#535、#536 正在分析，最终候选与回执待补。
+**********************
+PowerShell transcript end
+End time: 20260929140535
+**********************
+**********************
+PowerShell transcript start
+Start time: 20260929140648
+Username: DESKTOP-412KTAR\mzj
+RunAs User: DESKTOP-412KTAR\mzj
+Configuration Name: 
+Machine: DESKTOP-412KTAR (Microsoft Windows NT 10.0.26200.0)
+Host Application: C:\Users\mzj\.cache\codex-runtimes\codex-primary-runtime\dependencies\native\powershell\pwsh.dll -NoProfile -Command try { [Console]::OutputEncoding=[System.Text.Encoding]::UTF8 } catch {}
+$scriptPath = 'C:\Users\mzj\Desktop\CTF\玄机刷题\记录\批次12_修正题目确认记录.ps1'; $scriptBody = @'
+$ErrorActionPreference = 'Stop'
+$root = 'C:\Users\mzj\Desktop\CTF\玄机刷题'
+$batch = Join-Path $root '题目资料\批次12_20260929'
+$selectionPath = Join-Path $root '记录\批次_20260929_第十二批题目确认.md'
+$logPath = Join-Path $root '记录\批次12_指南更新命令记录_20260929.txt'
+Start-Transcript -LiteralPath $logPath -Append
+Write-Output 'COMMAND> Regenerate batch 12 selection record with one Markdown field per line; list archive entries and hashes.'
+$lines = New-Object 'System.Collections.Generic.List[string]'
+[void]$lines.Add('# 第十二批题目确认（2026-09-29）')
+[void]$lines.Add('')
+[void]$lines.Add('## 选择方法与筛选状态')
+[void]$lines.Add('')
+[void]$lines.Add('- 前台打开玄机题目列表 https://xj.edisec.net/challenges，确认状态筛选选中“全部”，没有用“已完成/未完成”作为唯一来源。列表按中等难度和 REVERSE 分类浏览，另以平台搜索定位第三题。')
+[void]$lines.Add('- 每个详情页均在前台核对题名、ID、类别、难度、费用与进度；三题都是免费 / 中等 / REVERSE / 未完成（详情页 0/1）。#541、#542、#543 此前已经尝试，本批排除。')
+[void]$lines.Add('- 每题交由一个子代理分析。候选只由主线程在前台提交验证；平台未接受的候选不算完成，也不进入已完成手册章节。')
+[void]$lines.Add('')
+[void]$lines.Add('## 已选题目')
+[void]$lines.Add('')
+$items = @(
+  @{Id='534'; Name='天下谁人不识君'; File='天下谁人不识君.zip'; Folder='534_天下谁人不识君'; Download='D:\Downloads\天下谁人不识君.zip'; Unfinished='前台详情 0/1'}
+  @{Id='535'; Name='往事暗沉不可追'; File='来日之路光明灿烂.zip'; Folder='535_往事暗沉不可追'; Download='D:\Downloads\来日之路光明灿烂.zip'; Unfinished='前台详情 0/1'}
+  @{Id='536'; Name='遇事不决，可问春风'; File='app-debug.zip'; Folder='536_遇事不决可问春风'; Download='D:\Downloads\app-debug.zip'; Unfinished='前台详情 0/1'}
+)
+foreach ($item in $items) {
+  $archive = Join-Path (Join-Path $batch $item.Folder) ('originals\' + $item.File)
+  $hash = (Get-FileHash -Algorithm SHA256 -LiteralPath $archive).Hash
+  $size = (Get-Item -LiteralPath $archive).Length
+  Add-Type -AssemblyName System.IO.Compression.FileSystem
+  $zip = [System.IO.Compression.ZipFile]::OpenRead($archive)
+  $entries = @($zip.Entries | ForEach-Object { $_.FullName + ' (' + $_.Length + ' bytes)' })
+  $zip.Dispose()
+  [void]$lines.Add('### #' + $item.Id + ' ' + $item.Name)
+  [void]$lines.Add('')
+  [void]$lines.Add('- 详情页：https://xj.edisec.net/challenges/' + $item.Id)
+  [void]$lines.Add('- 类别 / 难度 / 费用 / 状态：REVERSE / 中等 / 免费 / ' + $item.Unfinished)
+  [void]$lines.Add('- 下载来源：前台点击玄机“下载附件”；Downloads 原始文件：' + $item.Download)
+  [void]$lines.Add('- 项目原件：题目资料/批次12_20260929/' + $item.Folder + '/originals/' + $item.File)
+  [void]$lines.Add('- 大小：' + $size + ' bytes；SHA-256：' + $hash)
+  [void]$lines.Add('- ZIP 成员：')
+  foreach ($entry in $entries) { [void]$lines.Add('  - ' + $entry) }
+  [void]$lines.Add('')
+  Write-Output ('ARCHIVE #' + $item.Id + ': size=' + $size + '; SHA256=' + $hash)
+  foreach ($entry in $entries) { Write-Output ('ZIP ENTRY: ' + $entry) }
+}
+[void]$lines.Add('## 当前状态')
+[void]$lines.Add('')
+[void]$lines.Add('#534 本地候选 SQCTF{libai_jianxian} 经正向复算与注释密文一致，但 2026-09-29 玄机前台提交后提示“FLAG 不正确~”，详情页仍为 0/1；不得计为已解决。代理已复核可打印 ASCII 解唯一，附件内源码字面量与注释密文矛盾；没有题面格式证据，不做包装猜测。#535、#536 正在分析，最终候选与回执待补。')
+[void]$lines.Add('')
+[void]$lines.Add('## 归档目录')
+[void]$lines.Add('')
+[void]$lines.Add('- 题目资料/批次12_20260929/534_天下谁人不识君/')
+[void]$lines.Add('- 题目资料/批次12_20260929/535_往事暗沉不可追/')
+[void]$lines.Add('- 题目资料/批次12_20260929/536_遇事不决可问春风/')
+[void]$lines.Add('')
+[System.IO.File]::WriteAllLines($selectionPath, $lines, [System.Text.UTF8Encoding]::new($false))
+Write-Output ('SELECTION WRITTEN: ' + $selectionPath)
+Write-Output ('LINE COUNT: ' + ([System.IO.File]::ReadAllLines($selectionPath).Count))
+Select-String -LiteralPath $selectionPath -Pattern '^### #','^- 详情页','^- 类别 /','^- 大小','^  - '
+Stop-Transcript
+
+'@; Set-Content -LiteralPath $scriptPath -Value $scriptBody -Encoding UTF8; Write-Output ('SCRIPT SAVED: ' + $scriptPath); & $scriptPath
+Process ID: 31976
+PSVersion: 7.6.5
+PSEdition: Core
+GitCommitId: 7.6.5
+OS: Microsoft Windows 10.0.26200
+Platform: Win32NT
+PSCompatibleVersions: 1.0, 2.0, 3.0, 4.0, 5.0, 5.1, 6.0, 7.0
+PSRemotingProtocolVersion: 2.4
+SerializationVersion: 1.1.0.1
+WSManStackVersion: 3.0
+**********************
+Transcript started, output file is C:\Users\mzj\Desktop\CTF\玄机刷题\记录\批次12_指南更新命令记录_20260929.txt
+COMMAND> Regenerate batch 12 selection record with one Markdown field per line; list archive entries and hashes.
+ARCHIVE #534: size=367; SHA256=EE9F84EA4ED73201BDE00509C5EAD9FD3476F22D07D9390ED9EAA7F022FB10AA
+ZIP ENTRY: 天下谁人不识君.py (295 bytes)
+ARCHIVE #535: size=5290473; SHA256=3D83F586009E705F48172F59148A536F919F17994959ED863782AA629D079365
+ZIP ENTRY: 来日之路光明灿烂.exe (5465233 bytes)
+ARCHIVE #536: size=4419022; SHA256=A366F7C8B031940BC96016811BBD441A17B3473F8B9D288511E02CC63E6A1D59
+ZIP ENTRY: app-debug.apk (4609869 bytes)
+SELECTION WRITTEN: C:\Users\mzj\Desktop\CTF\玄机刷题\记录\批次_20260929_第十二批题目确认.md
+LINE COUNT: 50
+
+玄机刷题\记录\批次_20260929_第十二批题目确认.md:11:### #534 天下谁人不识君
+玄机刷题\记录\批次_20260929_第十二批题目确认.md:13:- 详情页：https://xj.edisec.net/challenges/534
+玄机刷题\记录\批次_20260929_第十二批题目确认.md:14:- 类别 / 难度 / 费用 / 状态：REVERSE / 中等 / 免费 / 前台详情 0/1
+玄机刷题\记录\批次_20260929_第十二批题目确认.md:17:- 大小：367 bytes；SHA-256：EE9F84EA4ED73201BDE00509C5EAD9FD3476F22D
+07D9390ED9EAA7F022FB10AA
+玄机刷题\记录\批次_20260929_第十二批题目确认.md:19:  - 天下谁人不识君.py (295 bytes)
+玄机刷题\记录\批次_20260929_第十二批题目确认.md:21:### #535 往事暗沉不可追
+玄机刷题\记录\批次_20260929_第十二批题目确认.md:23:- 详情页：https://xj.edisec.net/challenges/535
+玄机刷题\记录\批次_20260929_第十二批题目确认.md:24:- 类别 / 难度 / 费用 / 状态：REVERSE / 中等 / 免费 / 前台详情 0/1
+玄机刷题\记录\批次_20260929_第十二批题目确认.md:27:- 大小：5290473 bytes；SHA-256：3D83F586009E705F48172F59148A536F919F
+17994959ED863782AA629D079365
+玄机刷题\记录\批次_20260929_第十二批题目确认.md:29:  - 来日之路光明灿烂.exe (5465233 bytes)
+玄机刷题\记录\批次_20260929_第十二批题目确认.md:31:### #536 遇事不决，可问春风
+玄机刷题\记录\批次_20260929_第十二批题目确认.md:33:- 详情页：https://xj.edisec.net/challenges/536
+玄机刷题\记录\批次_20260929_第十二批题目确认.md:34:- 类别 / 难度 / 费用 / 状态：REVERSE / 中等 / 免费 / 前台详情 0/1
+玄机刷题\记录\批次_20260929_第十二批题目确认.md:37:- 大小：4419022 bytes；SHA-256：A366F7C8B031940BC96016811BBD441A17B3
+473F8B9D288511E02CC63E6A1D59
+玄机刷题\记录\批次_20260929_第十二批题目确认.md:39:  - app-debug.apk (4609869 bytes)
+**********************
+PowerShell transcript end
+End time: 20260929140648
+**********************

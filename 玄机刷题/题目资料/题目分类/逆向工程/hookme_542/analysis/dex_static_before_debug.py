@@ -1,0 +1,72 @@
+from pathlib import Path
+from zipfile import ZipFile
+import re, struct, hashlib
+root = Path(r"C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\题目分类\逆向工程\hookme_542")
+comp = root / "analysis" / "components"
+out = root / "analysis" / "dex"
+out.mkdir(parents=True, exist_ok=True)
+def uleb(buf, p):
+    value = shift = 0
+    while True:
+        b=buf[p]; p+=1; value |= (b & 0x7f) << shift
+        if not b & 0x80: return value,p
+
+def getstr(buf, p):
+    _, p = uleb(buf,p)
+    end=buf.index(b"\0",p)
+    return buf[p:end].decode("utf-8","replace")
+
+def app_owned(desc):
+    ignore=("Landroid/","Landroidx/","Lkotlin/","Lkotlinx/","Ljava/","Ljavax/","Ldalvik/","Lsun/","Lorg/","Lcom/google/","Lcom/bumptech/","Lcom/facebook/","Lcom/squareup/","Lcom/airbnb/","Lcom/stripe/","Lcom/intuit/")
+    return not desc.startswith(ignore)
+for dex in sorted(comp.glob("classes*.dex")):
+    b=dex.read_bytes()
+    if b[:4] != b"dex\n": continue
+    s_count,s_off=struct.unpack_from("<II",b,0x38)
+    strings=[]
+    for i in range(s_count):
+        pos=struct.unpack_from("<I",b,s_off+4*i)[0]
+        strings.append(getstr(b,pos))
+    allpath=out/(dex.name+".strings.txt")
+    allpath.write_text("".join(f"{i:06d}\t{s}\n" for i,s in enumerate(strings)),encoding="utf-8")
+    t_count,t_off=struct.unpack_from("<II",b,0x40)
+    t_ids=[struct.unpack_from("<I",b,t_off+4*i)[0] for i in range(t_count)]
+    m_count,m_off=struct.unpack_from("<II",b,0x58)
+    methods=[]
+    for i in range(m_count):
+        cls,proto,name=struct.unpack_from("<HHI",b,m_off+8*i)
+        methods.append((cls,proto,strings[name]))
+    c_count,c_off=struct.unpack_from("<II",b,0x60)
+    app_classes=[]; native_methods=[]
+    for i in range(c_count):
+        cls_idx,access,super_idx,if_off,src_idx,ann_off,cd_off,sv_off=struct.unpack_from("<IIIIIIII",b,c_off+32*i)
+        desc=strings[t_ids[cls_idx]]
+        if not app_owned(desc): continue
+        app_classes.append(desc)
+        if cd_off == 0: continue
+        p=cd_off
+        sf,p=uleb(b,p); inf,p=uleb(b,p); direct,p=uleb(b,p); virt,p=uleb(b,p)
+        for n in (sf,inf):
+            idx=0
+            for _ in range(n): idxd,p=uleb(b,p); _,p=uleb(b,p); idx+=idxd
+        for n in (direct,virt):
+            idx=0
+            for _ in range(n):
+                idxd,p=uleb(b,p); flags,p=uleb(b,p); code,p=uleb(b,p); idx+=idxd
+                if idx < len(methods):
+                    cidx,pr,name=methods[idx]
+                    if flags & 0x100: native_methods.append((desc,name,flags,code))
+    interesting=[]
+    rx=re.compile(r"(?i)flag|hook|native|check|verify|correct|wrong|success|fail|secret|sha|md5|xor|key|jni|token|password|submit|请输入|错误|成功|校验")
+    for i,s in enumerate(strings):
+        if rx.search(s): interesting.append(f"{i:06d}\t{s}")
+    report=[f"DEX {dex.name} sha256={hashlib.sha256(b).hexdigest().upper()} strings={s_count} classes={c_count}",f"APP_OWNED_CLASS_COUNT={len(app_classes)}","APP_OWNED_CLASSES:",*app_classes,"NATIVE_METHODS:"]
+    report += [f"{c} -> {n} access=0x{flags:x} code_off={code}" for c,n,flags,code in native_methods]
+    report += ["INTERESTING_STRINGS:",*interesting]
+    (out/(dex.name+".report.txt")).write_text("\n".join(report)+"\n",encoding="utf-8")
+    print(f"{dex.name}: bytes={len(b)} strings={s_count} class_defs={c_count} app_owned_classes={len(app_classes)} native_methods={len(native_methods)} interesting_strings={len(interesting)}")
+    for c in app_classes[:100]: print("  CLASS="+c)
+    for row in native_methods: print(f"  NATIVE={row[0]}->{row[1]} flags=0x{row[2]:x}")
+    for line in interesting[:100]:
+        # keep console strictly ASCII to avoid code page failures; detailed UTF-8 output is in the report
+        print("  STR="+line.encode("ascii","backslashreplace").decode("ascii"))

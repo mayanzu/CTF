@@ -1,0 +1,80 @@
+
+Z:\palu548_static_copy.exe:     file format pei-x86-64
+
+
+Disassembly of section .text:
+
+0000000000494380 <.text+0x93380>:
+  494380:	49 3b 66 10          	cmp    rsp,QWORD PTR [r14+0x10]
+  494384:	0f 86 b2 00 00 00    	jbe    0x49443c
+  49438a:	55                   	push   rbp
+  49438b:	48 89 e5             	mov    rbp,rsp
+  49438e:	48 83 ec 18          	sub    rsp,0x18
+  494392:	85 db                	test   ebx,ebx
+  494394:	0f 8e 8e 00 00 00    	jle    0x494428
+  49439a:	8d 4b ff             	lea    ecx,[rbx-0x1]
+  49439d:	0f 1f 00             	nop    DWORD PTR [rax]
+  4943a0:	85 cb                	test   ebx,ecx
+  4943a2:	74 35                	je     0x4943d9
+  4943a4:	48 89 44 24 28       	mov    QWORD PTR [rsp+0x28],rax
+  4943a9:	89 5c 24 30          	mov    DWORD PTR [rsp+0x30],ebx
+  4943ad:	48 89 c1             	mov    rcx,rax
+  4943b0:	b8 00 00 00 80       	mov    eax,0x80000000
+  4943b5:	31 d2                	xor    edx,edx
+  4943b7:	f7 f3                	div    ebx
+  4943b9:	81 c2 01 00 00 80    	add    edx,0x80000001
+  4943bf:	48 8b 31             	mov    rsi,QWORD PTR [rcx]
+  4943c2:	48 8b 41 08          	mov    rax,QWORD PTR [rcx+0x8]
+  4943c6:	48 8b 76 18          	mov    rsi,QWORD PTR [rsi+0x18]
+  4943ca:	f7 da                	neg    edx
+  4943cc:	89 54 24 14          	mov    DWORD PTR [rsp+0x14],edx
+  4943d0:	90                   	nop
+  4943d1:	ff d6                	call   rsi
+  4943d3:	48 c1 f8 20          	sar    rax,0x20
+  4943d7:	eb 38                	jmp    0x494411
+  4943d9:	89 4c 24 10          	mov    DWORD PTR [rsp+0x10],ecx
+  4943dd:	48 8b 08             	mov    rcx,QWORD PTR [rax]
+  4943e0:	48 8b 40 08          	mov    rax,QWORD PTR [rax+0x8]
+  4943e4:	48 8b 49 18          	mov    rcx,QWORD PTR [rcx+0x18]
+  4943e8:	ff d1                	call   rcx
+  4943ea:	48 c1 f8 20          	sar    rax,0x20
+  4943ee:	8b 4c 24 10          	mov    ecx,DWORD PTR [rsp+0x10]
+  4943f2:	21 c8                	and    eax,ecx
+  4943f4:	48 83 c4 18          	add    rsp,0x18
+  4943f8:	5d                   	pop    rbp
+  4943f9:	c3                   	ret
+  4943fa:	48 8b 4c 24 28       	mov    rcx,QWORD PTR [rsp+0x28]
+  4943ff:	48 8b 41 08          	mov    rax,QWORD PTR [rcx+0x8]
+  494403:	48 8b 11             	mov    rdx,QWORD PTR [rcx]
+  494406:	48 8b 52 18          	mov    rdx,QWORD PTR [rdx+0x18]
+  49440a:	90                   	nop
+  49440b:	ff d2                	call   rdx
+  49440d:	48 c1 f8 20          	sar    rax,0x20
+  494411:	8b 4c 24 14          	mov    ecx,DWORD PTR [rsp+0x14]
+  494415:	39 c8                	cmp    eax,ecx
+  494417:	7f e1                	jg     0x4943fa
+  494419:	8b 4c 24 30          	mov    ecx,DWORD PTR [rsp+0x30]
+  49441d:	99                   	cdq
+  49441e:	f7 f9                	idiv   ecx
+  494420:	89 d0                	mov    eax,edx
+  494422:	48 83 c4 18          	add    rsp,0x18
+  494426:	5d                   	pop    rbp
+  494427:	c3                   	ret
+  494428:	48 8d 05 71 a7 00 00 	lea    rax,[rip+0xa771]        # 0x49eba0
+  49442f:	48 8d 1d 5a 66 04 00 	lea    rbx,[rip+0x4665a]        # 0x4daa90
+  494436:	e8 05 1f fa ff       	call   0x436340
+  49443b:	90                   	nop
+  49443c:	48 89 44 24 08       	mov    QWORD PTR [rsp+0x8],rax
+  494441:	89 5c 24 10          	mov    DWORD PTR [rsp+0x10],ebx
+  494445:	e8 b6 f9 fc ff       	call   0x463e00
+  49444a:	48 8b 44 24 08       	mov    rax,QWORD PTR [rsp+0x8]
+  49444f:	8b 5c 24 10          	mov    ebx,DWORD PTR [rsp+0x10]
+  494453:	e9 28 ff ff ff       	jmp    0x494380
+  494458:	cc                   	int3
+  494459:	cc                   	int3
+  49445a:	cc                   	int3
+  49445b:	cc                   	int3
+  49445c:	cc                   	int3
+  49445d:	cc                   	int3
+  49445e:	cc                   	int3
+  49445f:	cc                   	int3

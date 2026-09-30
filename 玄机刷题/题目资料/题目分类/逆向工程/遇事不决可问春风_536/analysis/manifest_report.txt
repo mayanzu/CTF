@@ -1,0 +1,45 @@
+AndroidManifest.xml: 5336 bytes, 48 chunks
+START <manifest> line=2: versionCode='1', versionName='1.0', compileSdkVersion='35', compileSdkVersionCodename='15', package='com.example.wakurev', platformBuildVersionCode='35', platformBuildVersionName='15'
+START <uses-sdk> line=7: minSdkVersion='21', targetSdkVersion='35'
+END </uses-sdk>
+START <permission> line=11: name='com.example.wakurev.DYNAMIC_RECEIVER_NOT_EXPORTED_PERMISSION', protectionLevel='0x2'
+END </permission>
+START <uses-permission> line=15: name='com.example.wakurev.DYNAMIC_RECEIVER_NOT_EXPORTED_PERMISSION'
+END </uses-permission>
+START <application> line=17: theme='@0x7f100272', label='@0x7f0f001c', icon='@0x7f0d0000', debuggable='True', allowBackup='True', supportsRtl='True', extractNativeLibs='True', fullBackupContent='@0x7f120000', roundIcon='@0x7f0d0001', appComponentFactory='androidx.core.app.CoreComponentFactory', dataExtractionRules='@0x7f120001'
+START <activity> line=29: name='com.example.wakurev.MainActivity', exported='True'
+START <intent-filter> line=32: 
+START <action> line=33: name='android.intent.action.MAIN'
+END </action>
+START <category> line=35: name='android.intent.category.LAUNCHER'
+END </category>
+END </intent-filter>
+END </activity>
+START <provider> line=39: name='androidx.startup.InitializationProvider', exported='False', authorities='com.example.wakurev.androidx-startup'
+START <meta-data> line=43: name='androidx.emoji2.text.EmojiCompatInitializer', value='androidx.startup'
+END </meta-data>
+START <meta-data> line=46: name='androidx.lifecycle.ProcessLifecycleInitializer', value='androidx.startup'
+END </meta-data>
+START <meta-data> line=49: name='androidx.profileinstaller.ProfileInstallerInitializer', value='androidx.startup'
+END </meta-data>
+END </provider>
+START <receiver> line=54: name='androidx.profileinstaller.ProfileInstallReceiver', permission='android.permission.DUMP', enabled='True', exported='True', directBootAware='False'
+START <intent-filter> line=60: 
+START <action> line=61: name='androidx.profileinstaller.action.INSTALL_PROFILE'
+END </action>
+END </intent-filter>
+START <intent-filter> line=63: 
+START <action> line=64: name='androidx.profileinstaller.action.SKIP_FILE'
+END </action>
+END </intent-filter>
+START <intent-filter> line=66: 
+START <action> line=67: name='androidx.profileinstaller.action.SAVE_PROFILE'
+END </action>
+END </intent-filter>
+START <intent-filter> line=69: 
+START <action> line=70: name='androidx.profileinstaller.action.BENCHMARK_OPERATION'
+END </action>
+END </intent-filter>
+END </receiver>
+END </application>
+END </manifest>

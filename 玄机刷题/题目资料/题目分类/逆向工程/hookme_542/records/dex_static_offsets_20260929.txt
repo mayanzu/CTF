@@ -1,0 +1,29 @@
+**********************
+PowerShell transcript start
+Start time: 20260929110108
+Username: DESKTOP-412KTAR\mzj
+RunAs User: DESKTOP-412KTAR\mzj
+Configuration Name: 
+Machine: DESKTOP-412KTAR (Microsoft Windows NT 10.0.26200.0)
+Host Application: C:\Users\mzj\.cache\codex-runtimes\codex-primary-runtime\dependencies\native\powershell\pwsh.dll -Command try { [Console]::OutputEncoding=[System.Text.Encoding]::UTF8 } catch {}
+$root='C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\批次10_20260929\542_hookme'; $path=Join-Path $root 'analysis\dex_static.py'; $content=Get-Content -LiteralPath $path -Raw -Encoding utf8; $old='        for n in (direct,virt):'; $new=@'
+        if dex.name == "classes4.dex" and desc.endswith("MainActivity;"):
+            print(f"DEBUG_CLASS_COUNTS sf={sf} inf={inf} direct={direct} virt={virt} p=0x{p:x} bytes={b[p:p+48].hex()}")
+        for n in (direct,virt):
+'@; $content=$content.Replace($old,$new.TrimStart()); Set-Content -LiteralPath $path -Value $content -Encoding utf8; $log=Join-Path $root 'records\dex_static_offsets_20260929.txt'; Start-Transcript -LiteralPath $log -Force; $env:PYTHONIOENCODING='utf-8'; & 'C:\Users\mzj\AppData\Local\Programs\Python\Python312\python.exe' $path 2>&1 | Select-String -Pattern 'DEBUG_CLASS|DEBUG_METHOD|classes4.dex:' | ForEach-Object { $_.Line }; Stop-Transcript
+Process ID: 28228
+PSVersion: 7.6.5
+PSEdition: Core
+GitCommitId: 7.6.5
+OS: Microsoft Windows 10.0.26200
+Platform: Win32NT
+PSCompatibleVersions: 1.0, 2.0, 3.0, 4.0, 5.0, 5.1, 6.0, 7.0
+PSRemotingProtocolVersion: 2.4
+SerializationVersion: 1.1.0.1
+WSManStackVersion: 3.0
+**********************
+Transcript started, output file is C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\批次10_20260929\542_hookme\records\dex_static_offsets_20260929.txt
+**********************
+PowerShell transcript end
+End time: 20260929110108
+**********************

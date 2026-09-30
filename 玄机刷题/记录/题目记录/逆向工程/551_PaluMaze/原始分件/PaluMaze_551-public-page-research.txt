@@ -1,0 +1,278 @@
+**********************
+PowerShell transcript start
+Start time: 20260928232549
+Username: DESKTOP-412KTAR\mzj
+RunAs User: DESKTOP-412KTAR\mzj
+Configuration Name: 
+Machine: DESKTOP-412KTAR (Microsoft Windows NT 10.0.26200.0)
+Host Application: C:\Users\mzj\.cache\codex-runtimes\codex-primary-runtime\dependencies\native\powershell\pwsh.dll -Command try { [Console]::OutputEncoding=[System.Text.Encoding]::UTF8 } catch {}
+$url = 'https://xj.edisec.net/challenges/551'; $log = 'C:\Users\mzj\Desktop\CTF\玄机刷题\记录\PaluMaze_551-public-page-research.txt'; Start-Transcript -LiteralPath $log -Force; Write-Output "COMMAND> Invoke-WebRequest -Uri '$url' -MaximumRedirection 5"; try { $r = Invoke-WebRequest -Uri $url -MaximumRedirection 5 -TimeoutSec 20 -UseBasicParsing; Write-Output ('STATUS=' + [int]$r.StatusCode); Write-Output ('FINAL_URL=' + $r.BaseResponse.ResponseUri.AbsoluteUri); Write-Output ('CONTENT_TYPE=' + $r.Headers['Content-Type']); $r.Content | Select-String -Pattern '帕鲁|Parloo|flag|challenge|api|description|attachment' -CaseSensitive:$false | Select-Object -First 40 | ForEach-Object {$_.Line} } catch { Write-Output ('ERROR=' + $_.Exception.Message); if ($_.Exception.Response) { Write-Output ('STATUS=' + [int]$_.Exception.Response.StatusCode) } }; Stop-Transcript
+Process ID: 24004
+PSVersion: 7.6.5
+PSEdition: Core
+GitCommitId: 7.6.5
+OS: Microsoft Windows 10.0.26200
+Platform: Win32NT
+PSCompatibleVersions: 1.0, 2.0, 3.0, 4.0, 5.0, 5.1, 6.0, 7.0
+PSRemotingProtocolVersion: 2.4
+SerializationVersion: 1.1.0.1
+WSManStackVersion: 3.0
+**********************
+Transcript started, output file is C:\Users\mzj\Desktop\CTF\玄机刷题\记录\PaluMaze_551-public-page-research.txt
+COMMAND> Invoke-WebRequest -Uri 'https://xj.edisec.net/challenges/551' -MaximumRedirection 5
+STATUS=200
+FINAL_URL=
+CONTENT_TYPE=text/html
+<!DOCTYPE html>
+<html lang="en" data-color-mode="dark">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>玄机</title>
+    <meta
+      name="keywords"
+      content="玄机,玄机安全,玄机科技,云靶场,CTF平台,安全学习,安全竞赛,安全训练,安全培训,安全认证"
+    />
+    <meta
+      name="description"
+      content="玄机安全是一个专注于安全学习和实践的平台，提供云靶场、CTF平台等服务，帮助用户提升安全技能。"
+    />
+    <script type="module" crossorigin src="/assets/Dl7MQ8uB2g.js"></script>
+    <link rel="stylesheet" crossorigin href="/assets/DBOn2MWlrZ.css">
+  </head>
+  <body>
+    <div id="root"></div>
+  </body>
+</html>
+**********************
+PowerShell transcript end
+End time: 20260928232549
+**********************
+**********************
+PowerShell transcript start
+Start time: 20260928232612
+Username: DESKTOP-412KTAR\mzj
+RunAs User: DESKTOP-412KTAR\mzj
+Configuration Name: 
+Machine: DESKTOP-412KTAR (Microsoft Windows NT 10.0.26200.0)
+Host Application: C:\Users\mzj\.cache\codex-runtimes\codex-primary-runtime\dependencies\native\powershell\pwsh.dll -Command try { [Console]::OutputEncoding=[System.Text.Encoding]::UTF8 } catch {}
+$url = 'https://xj.edisec.net/assets/Dl7MQ8uB2g.js'; $log = 'C:\Users\mzj\Desktop\CTF\玄机刷题\记录\PaluMaze_551-public-page-research.txt'; Start-Transcript -LiteralPath $log -Append; Write-Output "COMMAND> Invoke-WebRequest -Uri '$url' | inspect challenge/API literals"; $r = Invoke-WebRequest -Uri $url -TimeoutSec 30 -UseBasicParsing; Write-Output ('JS_LENGTH=' + $r.Content.Length); $patterns = @('(?i).{0,100}(?:/api/[^"''` ]{1,160}|challenges/[^"''` ]{1,160}).{0,100}','(?i).{0,100}(?:帕鲁迷宫|Parloo|最短路径|challengeDetail|challenge_id|challengeId).{0,140}'); foreach($p in $patterns){ Write-Output ('PATTERN=' + $p); [regex]::Matches($r.Content,$p) | Select-Object -First 120 | ForEach-Object {$_.Value} }; Stop-Transcript
+Process ID: 27836
+PSVersion: 7.6.5
+PSEdition: Core
+GitCommitId: 7.6.5
+OS: Microsoft Windows 10.0.26200
+Platform: Win32NT
+PSCompatibleVersions: 1.0, 2.0, 3.0, 4.0, 5.0, 5.1, 6.0, 7.0
+PSRemotingProtocolVersion: 2.4
+SerializationVersion: 1.1.0.1
+WSManStackVersion: 3.0
+**********************
+Transcript started, output file is C:\Users\mzj\Desktop\CTF\玄机刷题\记录\PaluMaze_551-public-page-research.txt
+COMMAND> Invoke-WebRequest -Uri 'https://xj.edisec.net/assets/Dl7MQ8uB2g.js' | inspect challenge/API literals
+JS_LENGTH=1404552
+PATTERN=(?i).{0,100}(?:/api/[^"'` ]{1,160}|challenges/[^"'` ]{1,160}).{0,100}
+ication/octet-stream"}}),getChallenges:e=>Ct.get("/challenges",{params:e}),getChallenge:e=>Ct.get(`/challenges/${e}`),favoriteChallenge:e=>Ct.put(`/challenges/${e}/favorite`),unfavoriteChallenge:e=>Ct.delete(`/chall
+enges/${e}/favorite`),getChallengeFile:e=>Ct.get(`/challenges/${e}/file`),submitChallengeFlag:(e,t)=>Ct.put(`/challenges/${e}/flag`,{flag:t}),startChallenge:e=>Ct.put(`/ch
+allenges/${e}/start`),stopChallenge:e=>Ct.put(`/challenges/${e}/stop`),renewChallenge:e=>Ct.put(`/challenges/${e}/renew`),ratingChallenge:(e,t)=>Ct.put(`/challenges/${e}/rating`,t),getRunningChallenge:()=>Ct.get("/chall
+enges/running"),getChallengeEvents:(e,t)=>Ct.get(`/challenges/${e}/events`,{params:{after:t}}),getChallengeWriteupViewed:e=>Ct.get(`/challenges/${e}/writeup-viewed`),getChal
+lengeWriteupCount:e=>Ct.get(`/challenges/${e}/writeup-count`),getChallengeWriteup:(e,t)=>Ct.get(`/challenges/${e}/writeups/${t}`),getChallengeWriteups:e=>Ct.get(`/challenges/${e}/writeups`),createChallengeWriteup:(e,t)=>Ct.post
+(`/challenges/${e}/writeups`,t),updateChallengeWriteup:(e,t,n)=>Ct.put(`/challenges/${e}/writeups/${t}`,n),likeChallengeWriteup:(e,t)=>Ct.put(`/challenges/${e}/writeups/${t}/like`),dislikeChallengeWrite
+up:(e,t)=>Ct.put(`/challenges/${e}/writeups/${t}/dislike`),getUploadUrl:(e,t,n)=>Ct.get(`/upload/${e}`,{params:{contentType:n,size:t}}),orderCharge:(e,t)=>C
+tion/user/challenges",{params:e}),getOrganizationChallengeUserFilter:()=>Ct.get("/organization/user/challenges/filter"),getOrganizationUserAnalysis:e=>Ct.get(`/organization/users/${e}/analysis`),generateConversationTi
+hildren:de.jsx(S1e,{})})},{path:"/challenges",element:de.jsx(Ur,{children:de.jsx(R1e,{})})},{path:"/challenges/:id",element:de.jsx(Ur,{children:de.jsx(I1e,{})})},{path:"/challenges/:id/writeup",element:de.jsx(Ur,{c
+PATTERN=(?i).{0,100}(?:帕鲁迷宫|Parloo|最短路径|challengeDetail|challenge_id|challengeId).{0,140}
+**********************
+PowerShell transcript end
+End time: 20260928232626
+**********************
+**********************
+PowerShell transcript start
+Start time: 20260928232638
+Username: DESKTOP-412KTAR\mzj
+RunAs User: DESKTOP-412KTAR\mzj
+Configuration Name: 
+Machine: DESKTOP-412KTAR (Microsoft Windows NT 10.0.26200.0)
+Host Application: C:\Users\mzj\.cache\codex-runtimes\codex-primary-runtime\dependencies\native\powershell\pwsh.dll -Command try { [Console]::OutputEncoding=[System.Text.Encoding]::UTF8 } catch {}
+$url = 'https://xj.edisec.net/assets/Dl7MQ8uB2g.js'; $log = 'C:\Users\mzj\Desktop\CTF\玄机刷题\记录\PaluMaze_551-public-page-research.txt'; Start-Transcript -LiteralPath $log -Append; $body = (Invoke-WebRequest -Uri $url -TimeoutSec 30 -UseBasicParsing).Content; Write-Output "COMMAND> Select JavaScript excerpts containing baseURL/API prefix/challenge API calls"; foreach($needle in @('baseURL','getChallenges:e=>','getChallenge:e=>','/v1','axios.create')) { $i=$body.IndexOf($needle); Write-Output "NEEDLE=$needle INDEX=$i"; if($i -ge 0){ $s=[Math]::Max(0,$i-400); $n=[Math]::Min(1200,$body.Length-$s); Write-Output $body.Substring($s,$n) } }; Stop-Transcript
+Process ID: 29424
+PSVersion: 7.6.5
+PSEdition: Core
+GitCommitId: 7.6.5
+OS: Microsoft Windows 10.0.26200
+Platform: Win32NT
+PSCompatibleVersions: 1.0, 2.0, 3.0, 4.0, 5.0, 5.1, 6.0, 7.0
+PSRemotingProtocolVersion: 2.4
+SerializationVersion: 1.1.0.1
+WSManStackVersion: 3.0
+**********************
+Transcript started, output file is C:\Users\mzj\Desktop\CTF\玄机刷题\记录\PaluMaze_551-public-page-research.txt
+COMMAND> Select JavaScript excerpts containing baseURL/API prefix/challenge API calls
+NEEDLE=baseURL INDEX=1209453
+="function"&&(i=await r.onRequest(...i));let a=await n(...i);if(typeof r.onResponse=="function"){const s=await r.onResponse(a);if(!(s instanceof Response))throw new Error("The options.onResponse must return a Response instance!");a=s}if(!a.ok)throw new Error(`Fetch failed with status ${a.status}`);if(!a.body)throw new Error("The response body is empty.");return a};class Uw{constructor(t){Qn(this,"baseURL");Qn(this,"model");Qn(this,"defaultHeaders");Qn(this,"customOptions");Qn(this,"create",async(t,n,r)=>{var a,s;const o=new AbortController,i={method:"POST",body:JSON.stringify({model:this.model,...t}),headers:this.defaultHeaders,signal:o.signal};(a=n==null?void 0:n.onStream)==null||a.call(n,o);try{const u=await Hpe(this.baseURL,{fetch:this.customOptions.fetch,...i});if(r){await this.customResponseHandler(u,n,r);return}const f=u.headers.get("content-type")||"";switch(f.split(";")[0].trim()){case"text/event-stream":await this.sseResponseHandler(u,n);break;case"application/json":await this.jsonResponseHandler(u,n);break;default:throw new Error(`The response content-type: ${f} is not support!`)}}catch(u){const f=u instanceof Error?u:new Error("Unknown error!");throw(s=n==null?void 0:n.o
+NEEDLE=getChallenges:e=> INDEX=1346783
+sword:e=>Ct.post("/user/password",e),sendAuthCode:e=>Ct.post("/user/authentication/code",e),authenticate:e=>Ct.post("/user/authentication",e),getAuthenticationState:()=>Ct.get("/user/authentication"),getUserProVideo:()=>Ct.get("/user/video-pro-urls"),getCategories:()=>Ct.get("/categories"),updateAvatar:(e,t)=>Ct.post("/user/avatar",t,{params:e,headers:{"Content-Type":"application/octet-stream"}}),getChallenges:e=>Ct.get("/challenges",{params:e}),getChallenge:e=>Ct.get(`/challenges/${e}`),favoriteChallenge:e=>Ct.put(`/challenges/${e}/favorite`),unfavoriteChallenge:e=>Ct.delete(`/challenges/${e}/favorite`),getChallengeFile:e=>Ct.get(`/challenges/${e}/file`),submitChallengeFlag:(e,t)=>Ct.put(`/challenges/${e}/flag`,{flag:t}),startChallenge:e=>Ct.put(`/challenges/${e}/start`),stopChallenge:e=>Ct.put(`/challenges/${e}/stop`),renewChallenge:e=>Ct.put(`/challenges/${e}/renew`),ratingChallenge:(e,t)=>Ct.put(`/challenges/${e}/rating`,t),getRunningChallenge:()=>Ct.get("/challenges/running"),getChallengeEvents:(e,t)=>Ct.get(`/challenges/${e}/events`,{params:{after:t}}),getChallengeWriteupViewed:e=>Ct.get(`/challenges/${e}/writeup-viewed`),getChallengeWriteupCount:e=>Ct.get(`/challenges/${e}/w
+NEEDLE=getChallenge:e=> INDEX=1346833
+e=>Ct.post("/user/authentication/code",e),authenticate:e=>Ct.post("/user/authentication",e),getAuthenticationState:()=>Ct.get("/user/authentication"),getUserProVideo:()=>Ct.get("/user/video-pro-urls"),getCategories:()=>Ct.get("/categories"),updateAvatar:(e,t)=>Ct.post("/user/avatar",t,{params:e,headers:{"Content-Type":"application/octet-stream"}}),getChallenges:e=>Ct.get("/challenges",{params:e}),getChallenge:e=>Ct.get(`/challenges/${e}`),favoriteChallenge:e=>Ct.put(`/challenges/${e}/favorite`),unfavoriteChallenge:e=>Ct.delete(`/challenges/${e}/favorite`),getChallengeFile:e=>Ct.get(`/challenges/${e}/file`),submitChallengeFlag:(e,t)=>Ct.put(`/challenges/${e}/flag`,{flag:t}),startChallenge:e=>Ct.put(`/challenges/${e}/start`),stopChallenge:e=>Ct.put(`/challenges/${e}/stop`),renewChallenge:e=>Ct.put(`/challenges/${e}/renew`),ratingChallenge:(e,t)=>Ct.put(`/challenges/${e}/rating`,t),getRunningChallenge:()=>Ct.get("/challenges/running"),getChallengeEvents:(e,t)=>Ct.get(`/challenges/${e}/events`,{params:{after:t}}),getChallengeWriteupViewed:e=>Ct.get(`/challenges/${e}/writeup-viewed`),getChallengeWriteupCount:e=>Ct.get(`/challenges/${e}/writeup-count`),getChallengeWriteup:(e,t)=>Ct.get(`
+NEEDLE=/v1 INDEX=1344613
+=[{value:1,label:"入门",color:"#d4d4d5"},{value:2,label:"简单",color:"#18a058"},{value:3,label:"中等",color:"#2080f0"},{value:4,label:"困难",color:"#f0a020"},{value:5,label:"极难",color:"#d03050"}],xSe=sbe.reduce((e,t)=>Object.assign(e,{[t.value]:t}),{});class lA extends Error{constructor(n,r){super(n);Qn(this,"code");this.code=r}}class Lf extends Error{}class N0 extends Error{}const Ct=Er.create({baseURL:"/v1",timeout:6e4,headers:{common:{"X-Target":"API"}},adapter:"fetch"}),lbe="Authorization";Ct.interceptors.request.use(async e=>{const t=sA();if(t){const n=e.headers||{};n[lbe]=`Bearer ${t}`,e.headers=n}return e});class uA extends Error{constructor(n,r){super(n);Qn(this,"code");this.code=r}}Ct.interceptors.response.use(async e=>{const t=e.data;if(!t)throw new Error("network error");if(e.headers["content-type"]!=="application/json")return t;if(t.code===0)return t.data;throw t.code===3001?t:t.code===9e3?new lA(t.message,t.code):new uA(t.message,t.code)},async e=>{var r,o,i,a,s,u,f,m,h,g;const t=e,n=(r=t.response)==null?void 0:r.status;if(n===400)throw((i=(o=e.response)==null?void 0:o.data)==null?void 0:i.code)?new Lf((s=(a=e.response)==null?void 0:a.data)==null?void 0:s.message):new Lf("请求参数
+NEEDLE=axios.create INDEX=-1
+**********************
+PowerShell transcript end
+End time: 20260928232639
+**********************
+**********************
+PowerShell transcript start
+Start time: 20260928232648
+Username: DESKTOP-412KTAR\mzj
+RunAs User: DESKTOP-412KTAR\mzj
+Configuration Name: 
+Machine: DESKTOP-412KTAR (Microsoft Windows NT 10.0.26200.0)
+Host Application: C:\Users\mzj\.cache\codex-runtimes\codex-primary-runtime\dependencies\native\powershell\pwsh.dll -Command try { [Console]::OutputEncoding=[System.Text.Encoding]::UTF8 } catch {}
+$url = 'https://xj.edisec.net/v1/challenges/551'; $log = 'C:\Users\mzj\Desktop\CTF\玄机刷题\记录\PaluMaze_551-public-page-research.txt'; Start-Transcript -LiteralPath $log -Append; Write-Output "COMMAND> Invoke-WebRequest -Uri '$url' -Headers @{ 'X-Target'='API' }"; try { $r=Invoke-WebRequest -Uri $url -Headers @{ 'X-Target'='API' } -TimeoutSec 20 -UseBasicParsing; Write-Output ('STATUS=' + [int]$r.StatusCode); Write-Output ('CONTENT_TYPE=' + $r.Headers['Content-Type']); Write-Output $r.Content } catch { Write-Output ('ERROR=' + $_.Exception.Message); if($_.Exception.Response){ Write-Output ('STATUS=' + [int]$_.Exception.Response.StatusCode); $sr=New-Object IO.StreamReader($_.Exception.Response.GetResponseStream()); Write-Output ('BODY=' + $sr.ReadToEnd()) } }; Stop-Transcript
+Process ID: 9624
+PSVersion: 7.6.5
+PSEdition: Core
+GitCommitId: 7.6.5
+OS: Microsoft Windows 10.0.26200
+Platform: Win32NT
+PSCompatibleVersions: 1.0, 2.0, 3.0, 4.0, 5.0, 5.1, 6.0, 7.0
+PSRemotingProtocolVersion: 2.4
+SerializationVersion: 1.1.0.1
+WSManStackVersion: 3.0
+**********************
+Transcript started, output file is C:\Users\mzj\Desktop\CTF\玄机刷题\记录\PaluMaze_551-public-page-research.txt
+COMMAND> Invoke-WebRequest -Uri 'https://xj.edisec.net/v1/challenges/551' -Headers @{ 'X-Target'='API' }
+PS>TerminatingError(Invoke-WebRequest): "Response status code does not indicate success: 401 (Unauthorized)."
+ERROR=Response status code does not indicate success: 401 (Unauthorized).
+STATUS=401
+InvalidOperation: 
+Line |
+   2 |  … tatusCode); $sr=New-Object IO.StreamReader($_.Exception.Response.GetR …
+     |                ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+     | Method invocation failed because [System.Net.Http.HttpResponseMessage] does not contain a method named 'GetResponseStream'.
+InvalidOperation:
+Line |
+   2 |  … tatusCode); $sr=New-Object IO.StreamReader($_.Exception.Response.GetR …
+     |                ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+     | Method invocation failed because [System.Net.Http.HttpResponseMessage] does not contain a method named 'GetResponseStream'.
+**********************
+PowerShell transcript end
+End time: 20260928232648
+**********************
+**********************
+PowerShell transcript start
+Start time: 20260928232921
+Username: DESKTOP-412KTAR\mzj
+RunAs User: DESKTOP-412KTAR\mzj
+Configuration Name: 
+Machine: DESKTOP-412KTAR (Microsoft Windows NT 10.0.26200.0)
+Host Application: C:\Users\mzj\.cache\codex-runtimes\codex-primary-runtime\dependencies\native\powershell\pwsh.dll -Command try { [Console]::OutputEncoding=[System.Text.Encoding]::UTF8 } catch {}
+$dir='C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\PaluMaze_551'; $script=Join-Path $dir 'count_shortest_routes.py'; $log='C:\Users\mzj\Desktop\CTF\玄机刷题\记录\PaluMaze_551-public-page-research.txt'; $src=@'
+import contextlib,io,runpy
+from collections import deque,defaultdict
+base=r'C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\PaluMaze_551\solve_maze.py'
+with contextlib.redirect_stdout(io.StringIO()): ns=runpy.run_path(base)
+maze,exits=ns['maze'],ns['exits']; idx={p:i for i,p in enumerate(exits)}
+moves=[(-1,0,'w'),(0,-1,'a'),(1,0,'s'),(0,1,'d')]
+start=((1,1),0); dist={start:0}; ways={start:1}; q=deque([start]); best=None
+while q:
+    state=q.popleft(); pos,mask=state; d=dist[state]
+    if best is not None and d>=best: continue
+    for dx,dy,key in moves:
+        nxt=(pos[0]+dx,pos[1]+dy)
+        if not (0<=nxt[0]<32 and 0<=nxt[1]<32) or maze[nxt[0]][nxt[1]]==1: continue
+        nmask=mask|((1<<idx[nxt]) if nxt in idx else 0); nxtstate=(nxt,nmask); nd=d+1
+        if nxtstate not in dist:
+            dist[nxtstate]=nd; ways[nxtstate]=ways[state]; q.append(nxtstate)
+        elif dist[nxtstate]==nd:
+            ways[nxtstate]+=ways[state]
+        if nmask==31:
+            best=nd if best is None else min(best,nd)
+goals=[s for s,d in dist.items() if s[1]==31 and d==best]
+print('shortest_length=',best)
+print('shortest_goal_states=',len(goals))
+print('shortest_route_count=',sum(ways[s] for s in goals))
+for state in sorted(goals): print('goal=',state[0],'route_count_to_goal=',ways[state])
+'@; Set-Content -LiteralPath $script -Value $src -Encoding utf8; Start-Transcript -LiteralPath $log -Append; Write-Output "COMMAND> python -B '$script'"; python -B $script; Stop-Transcript
+Process ID: 5944
+PSVersion: 7.6.5
+PSEdition: Core
+GitCommitId: 7.6.5
+OS: Microsoft Windows 10.0.26200
+Platform: Win32NT
+PSCompatibleVersions: 1.0, 2.0, 3.0, 4.0, 5.0, 5.1, 6.0, 7.0
+PSRemotingProtocolVersion: 2.4
+SerializationVersion: 1.1.0.1
+WSManStackVersion: 3.0
+**********************
+Transcript started, output file is C:\Users\mzj\Desktop\CTF\玄机刷题\记录\PaluMaze_551-public-page-research.txt
+COMMAND> python -B 'C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\PaluMaze_551\count_shortest_routes.py'
+
+**********************
+PowerShell transcript end
+End time: 20260928232921
+**********************
+**********************
+PowerShell transcript start
+Start time: 20260928233434
+Username: DESKTOP-412KTAR\mzj
+RunAs User: DESKTOP-412KTAR\mzj
+Configuration Name: 
+Machine: DESKTOP-412KTAR (Microsoft Windows NT 10.0.26200.0)
+Host Application: C:\Users\mzj\.cache\codex-runtimes\codex-primary-runtime\dependencies\native\powershell\pwsh.dll -Command try { [Console]::OutputEncoding=[System.Text.Encoding]::UTF8 } catch {}
+$dir='C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\PaluMaze_551'; $script=Join-Path $dir 'enumerate_all_shortest_routes.py'; $log='C:\Users\mzj\Desktop\CTF\玄机刷题\记录\PaluMaze_551-public-page-research.txt'; $src=@'
+import contextlib,io,runpy,hashlib
+from collections import deque,defaultdict
+base=r'C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\PaluMaze_551\solve_maze.py'
+with contextlib.redirect_stdout(io.StringIO()): ns=runpy.run_path(base)
+maze,exits=ns['maze'],ns['exits']; idx={p:i for i,p in enumerate(exits)}
+moves=[(-1,0,'w'),(0,-1,'a'),(1,0,'s'),(0,1,'d')]
+start=((1,1),0); dist={start:0}; prev=defaultdict(list); q=deque([start]); best=None
+while q:
+    state=q.popleft(); pos,mask=state; d=dist[state]
+    if best is not None and d>=best: continue
+    for dx,dy,key in moves:
+        nxt=(pos[0]+dx,pos[1]+dy)
+        if not (0<=nxt[0]<32 and 0<=nxt[1]<32) or maze[nxt[0]][nxt[1]]==1: continue
+        nm=mask|((1<<idx[nxt]) if nxt in idx else 0); ns2=(nxt,nm); nd=d+1
+        if ns2 not in dist:
+            dist[ns2]=nd; prev[ns2].append((state,key)); q.append(ns2)
+        elif dist[ns2]==nd: prev[ns2].append((state,key))
+        if nm==31: best=nd if best is None else min(best,nd)
+goals=[s for s,d in dist.items() if s[1]==31 and d==best]
+cache={start:['']}
+def paths_to(state):
+    if state in cache:return cache[state]
+    out=[]
+    for parent,key in prev[state]:out.extend(prefix+key for prefix in paths_to(parent))
+    cache[state]=out
+    return out
+routes=[route for goal in goals for route in paths_to(goal)]
+digests={hashlib.md5(r.encode('ascii')).hexdigest() for r in routes}
+print('minimum_length=',best,'goal_states=',len(goals))
+print('shortest_routes=',len(routes),'unique_route_strings=',len(set(routes)),'unique_md5=',len(digests))
+print('first_route=',routes[0])
+print('first_route_md5=',hashlib.md5(routes[0].encode()).hexdigest())
+print('last_route=',routes[-1])
+print('last_route_md5=',hashlib.md5(routes[-1].encode()).hexdigest())
+print('md5_of_decimal_length=',hashlib.md5(str(best).encode('ascii')).hexdigest())
+'@; Set-Content -LiteralPath $script -Value $src -Encoding utf8; Start-Transcript -LiteralPath $log -Append; Write-Output "COMMAND> python -B '$script'"; python -B $script; Stop-Transcript
+Process ID: 18048
+PSVersion: 7.6.5
+PSEdition: Core
+GitCommitId: 7.6.5
+OS: Microsoft Windows 10.0.26200
+Platform: Win32NT
+PSCompatibleVersions: 1.0, 2.0, 3.0, 4.0, 5.0, 5.1, 6.0, 7.0
+PSRemotingProtocolVersion: 2.4
+SerializationVersion: 1.1.0.1
+WSManStackVersion: 3.0
+**********************
+Transcript started, output file is C:\Users\mzj\Desktop\CTF\玄机刷题\记录\PaluMaze_551-public-page-research.txt
+COMMAND> python -B 'C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\PaluMaze_551\enumerate_all_shortest_routes.py'
+
+**********************
+PowerShell transcript end
+End time: 20260928233435
+**********************

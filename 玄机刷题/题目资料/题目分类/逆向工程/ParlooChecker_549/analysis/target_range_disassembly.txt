@@ -1,0 +1,50 @@
+
+.\ParlooChecker_549_x86_64.so:     file format elf64-x86-64
+
+
+Disassembly of section .text:
+
+00000000000291d0 <Java_com_linkhash_parloochecker_MainActivity_onCreat3@@Base-0x450>:
+   291d0:	55                   	push   %rbp
+   291d1:	48 89 e5             	mov    %rsp,%rbp
+   291d4:	48 8d 05 95 9e 04 00 	lea    0x49e95(%rip),%rax        # 73070 <pthread_rwlock_rdlock@plt+0x6150>
+   291db:	f6 00 01             	testb  $0x1,(%rax)
+   291de:	0f 85 24 00 00 00    	jne    29208 <Java_com_linkhash_parloochecker_MainActivity_onCreat3@@Base-0x418>
+   291e4:	48 8d 3d 6d 9e 04 00 	lea    0x49e6d(%rip),%rdi        # 73058 <pthread_rwlock_rdlock@plt+0x6138>
+   291eb:	48 8d 35 3e 6f fe ff 	lea    -0x190c2(%rip),%rsi        # 10130 <Java_com_linkhash_parloochecker_MainActivity_onCreat3@@Base-0x194f0>
+   291f2:	48 89 f2             	mov    %rsi,%rdx
+   291f5:	48 83 c2 28          	add    $0x28,%rdx
+   291f9:	e8 12 00 00 00       	call   29210 <Java_com_linkhash_parloochecker_MainActivity_onCreat3@@Base-0x410>
+   291fe:	48 8d 05 6b 9e 04 00 	lea    0x49e6b(%rip),%rax        # 73070 <pthread_rwlock_rdlock@plt+0x6150>
+   29205:	c6 00 01             	movb   $0x1,(%rax)
+   29208:	5d                   	pop    %rbp
+   29209:	c3                   	ret
+   2920a:	cc                   	int3
+   2920b:	cc                   	int3
+   2920c:	cc                   	int3
+   2920d:	cc                   	int3
+   2920e:	cc                   	int3
+   2920f:	cc                   	int3
+   29210:	55                   	push   %rbp
+   29211:	48 89 e5             	mov    %rsp,%rbp
+   29214:	48 83 ec 70          	sub    $0x70,%rsp
+   29218:	64 48 8b 04 25 28 00 	mov    %fs:0x28,%rax
+   2921f:	00 00 
+   29221:	48 89 45 f8          	mov    %rax,-0x8(%rbp)
+   29225:	48 89 7d e8          	mov    %rdi,-0x18(%rbp)
+   29229:	48 89 75 e0          	mov    %rsi,-0x20(%rbp)
+   2922d:	48 89 55 d8          	mov    %rdx,-0x28(%rbp)
+   29231:	48 8b 45 e8          	mov    -0x18(%rbp),%rax
+   29235:	48 89 45 b0          	mov    %rax,-0x50(%rbp)
+   29239:	48 8b 7d e0          	mov    -0x20(%rbp),%rdi
+   2923d:	48 8b 75 d8          	mov    -0x28(%rbp),%rsi
+   29241:	e8 da 78 00 00       	call   30b20 <Java_com_linkhash_parloochecker_MainActivity_onCreat3@@Base+0x7500>
+   29246:	48 8b 7d b0          	mov    -0x50(%rbp),%rdi
+   2924a:	48 89 45 d0          	mov    %rax,-0x30(%rbp)
+   2924e:	48 8b 45 d0          	mov    -0x30(%rbp),%rax
+   29252:	48 89 45 b8          	mov    %rax,-0x48(%rbp)
+   29256:	e8 f5 65 00 00       	call   2f850 <Java_com_linkhash_parloochecker_MainActivity_onCreat3@@Base+0x6230>
+   2925b:	48 89 c1             	mov    %rax,%rcx
+   2925e:	48 8b 45 b8          	mov    -0x48(%rbp),%rax
+   29262:	48 39 c8             	cmp    %rcx,%rax
+   29265:	0f 87 c0 00 00 00    	ja     2932b <Java_com_linkhash_parloochecker_MainActivity_onCreat3@@Base-0x2f5>

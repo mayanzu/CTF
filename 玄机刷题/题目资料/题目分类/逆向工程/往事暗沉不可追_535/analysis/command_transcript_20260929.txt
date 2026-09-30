@@ -1,0 +1,644 @@
+COMMAND 1 — metadata and ZIP member inventory
+COMMAND TEXT:
+1) New-Item -ItemType Directory -Force -Path analysis
+2) Get-Item -LiteralPath <archive>
+3) Get-FileHash -LiteralPath <archive> -Algorithm SHA256
+4) [IO.Compression.ZipFile]::OpenRead(<archive>); enumerate FullName, Length, CompressedLength
+STDOUT:
+Archive: C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\批次12_20260929\535_往事暗沉不可追\originals\来日之路光明灿烂.zip
+Length: 5290473
+LastWriteTimeUtc: 2026-09-29T05:51:51.1818074Z
+SHA256: 3D83F586009E705F48172F59148A536F919F17994959ED863782AA629D079365
+Members:
+  来日之路光明灿烂.exe | Length=5465233 | CompressedLength=5290319
+
+STDERR:
+
+========================================================================
+
+COMMAND 2 — extract member for static analysis and discover tools
+COMMAND TEXT:
+Add-Type -AssemblyName System.IO.Compression.FileSystem
+OpenRead(<archive>) and copy the sole member to analysis\extracted\ without executing it
+Compute extracted-file SHA256 and enumerate available static-analysis commands
+STDOUT:
+Extracted for static analysis only: C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\批次12_20260929\535_往事暗沉不可追\analysis\extracted\来日之路光明灿烂.exe
+Length: 5465233
+SHA256: 70E0194F1914D6872F2D991475A2967905AD92D3A8DD2EE0810330A153E43B19
+Tool discovery:
+  python => C:\Users\mzj\AppData\Local\Programs\Python\Python312\python.exe
+  py => C:\WINDOWS\py.exe
+  rg => C:\Users\mzj\AppData\Local\OpenAI\Codex\bin\0ddb895c950eaeba\rg.exe
+  strings => C:\msys64\mingw64\bin\strings.exe
+  rabin2 => not found
+  objdump => C:\msys64\mingw64\bin\objdump.exe
+  dumpbin => not found
+  sigcheck => not found
+  7z => not found
+
+STDERR:
+
+========================================================================
+
+COMMAND 3 — static tool/module availability and Authenticode metadata
+COMMAND TEXT:
+python -c "import importlib.util; print availability of pefile, capstone, lief, dnfile, yara, cryptography"
+Get-Command ghidraRun, rizin, radare2, ilspycmd, monodis, ildasm, Detect-It-Easy -ErrorAction SilentlyContinue
+Get-AuthenticodeSignature -LiteralPath <exe>
+STDOUT:
+Python module availability:
+pefile: False
+capstone: True
+lief: False
+dnfile: False
+yara: False
+cryptography: True
+
+Static-analysis commands:
+  ghidraRun => not found
+  rizin => not found
+  radare2 => not found
+  ilspycmd => not found
+  monodis => not found
+  ildasm => not found
+  Detect-It-Easy => not found
+Authenticode status: NotSigned
+Signer: 
+Signature type: None
+
+STDERR:
+
+========================================================================
+
+COMMAND 4 — parse PE headers/imports and extract static strings
+COMMAND TEXT:
+Write analysis\static_triage.py (full source retained at that path), then invoke:
+python "C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\批次12_20260929\535_往事暗沉不可追\analysis\static_triage.py" "C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\批次12_20260929\535_往事暗沉不可追\analysis\extracted\来日之路光明灿烂.exe" "C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\批次12_20260929\535_往事暗沉不可追\analysis"
+The script only parses the PE file and emits string/import artifacts; it never loads or executes the target.
+STDOUT:
+Input: C:\Users\mzj\Desktop\CTF\����ˢ��\��Ŀ����\����12_20260929\535_���°�������׷\analysis\extracted\����֮·��������.exe
+File size: 5465233 bytes
+PE offset: 0xf8; machine: 0x8664; sections: 7; timestamp: 1744001110 (0x67f35856)
+Optional header: PE32+; image base: 0x140000000; entry RVA: 0xc380; entry VA: 0x14000c380
+Section/file alignment: 0x1000/0x200; image/header size: 0x5a000/0x400; subsystem: 3; DLL characteristics: 0xc160
+Data directories:
+  EXPORT         RVA/offset=0x00000000 size=0x0
+  IMPORT         RVA/offset=0x0003ed14 size=0x50
+  RESOURCE       RVA/offset=0x0004a000 size=0xef8c
+  EXCEPTION      RVA/offset=0x00046000 size=0x2310
+  SECURITY       RVA/offset=0x00000000 size=0x0
+  BASERELOC      RVA/offset=0x00059000 size=0x774
+  DEBUG          RVA/offset=0x0003c150 size=0x1c
+  ARCH           RVA/offset=0x00000000 size=0x0
+  GLOBALPTR      RVA/offset=0x00000000 size=0x0
+  TLS            RVA/offset=0x00000000 size=0x0
+  LOAD_CONFIG    RVA/offset=0x0003c010 size=0x140
+  BOUND_IMPORT   RVA/offset=0x00000000 size=0x0
+  IAT            RVA/offset=0x0002d000 size=0x410
+  DELAY_IMPORT   RVA/offset=0x00000000 size=0x0
+  CLR            RVA/offset=0x00000000 size=0x0
+  RESERVED       RVA/offset=0x00000000 size=0x0
+Sections:
+  .text    VA=0x00001000 VSize=0x2b900 Raw=0x00000400+0x2ba00 entropy=6.494 chars=0x60000020
+  .rdata   VA=0x0002d000 VSize=0x12b6a Raw=0x0002be00+0x12c00 entropy=5.782 chars=0x40000040
+  .data    VA=0x00040000 VSize=0x5350 Raw=0x0003ea00+0xe00 entropy=1.812 chars=0xc0000040
+  .pdata   VA=0x00046000 VSize=0x2310 Raw=0x0003f800+0x2400 entropy=5.355 chars=0x40000040
+  .fptable VA=0x00049000 VSize=0x100 Raw=0x00041c00+0x200 entropy=-0.000 chars=0xc0000040
+  .rsrc    VA=0x0004a000 VSize=0xef8c Raw=0x00041e00+0xf000 entropy=7.350 chars=0x40000040
+  .reloc   VA=0x00059000 VSize=0x774 Raw=0x00050e00+0x800 entropy=5.279 chars=0x42000040
+Overlay after last section raw byte 0x51600: 5131921 bytes
+Imports: 127 symbols across 3 DLL descriptors; details in C:\Users\mzj\Desktop\CTF\����ˢ��\��Ŀ����\����12_20260929\535_���°�������׷\analysis\pe_imports.txt
+ASCII strings: 63044 saved to C:\Users\mzj\Desktop\CTF\����ˢ��\��Ŀ����\����12_20260929\535_���°�������׷\analysis\strings_ascii.txt
+UTF-16LE strings: 422 saved to C:\Users\mzj\Desktop\CTF\����ˢ��\��Ŀ����\����12_20260929\535_���°�������׷\analysis\strings_utf16le.txt
+Keyword string matches:
+  [A] pyi-python-flag
+  [A] Py_DecodeLocale
+  [A] PyMarshal_ReadObjectFromString
+  [A] PyRun_SimpleStringFlags
+  [A] PyUnicode_Decode
+  [A] PyUnicode_DecodeFSDefault
+  [A] Failed to get _MEIPASS as PyObject.
+  [A] _MEIPASS
+  [A] unknown header flags set
+  [A]       <longPathAware xmlns="http://schemas.microsoft.com/SMI/2016/WindowsSettings">true</longPathAware>
+  [A]       <assemblyIdentity type="win32" name="Microsoft.Windows.Common-Controls" version="6.0.0.0" processorArchitecture="*" publicKeyToken="6595b64144ccf1df" language="*"/>
+  [A] YaES
+  [A] icTf
+  [A] base64)
+  [A] email.base64mime)
+  [A] blibcrypto-1_1.dll
+
+Script SHA256: F879B674FBE0CB0CF2D94CE20988319722F98C01A037A26D7F52C5669714DEBC
+
+STDERR:
+
+========================================================================
+
+COMMAND 5 — parse and extract PyInstaller CArchive members statically
+COMMAND TEXT:
+python "C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\批次12_20260929\535_往事暗沉不可追\analysis\pyi_extract.py" "C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\批次12_20260929\535_往事暗沉不可追\analysis\extracted\来日之路光明灿烂.exe" "C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\批次12_20260929\535_往事暗沉不可追\analysis\pyi_extracted"
+Script source and the detailed TOC/checksums are retained at static-analysis artifact paths; this only parses/decompresses archive members and never executes embedded content.
+STDOUT:
+Cookie magic hits: ['0x536439']
+Cookie offset: 0x536439; size=88; archive start=0x51600; package length=5131921
+TOC offset(relative)=0x4e4ac9, length=0x370, absolute=0x5360c9; Python version field=310
+Python library field: python310.dll
+TOC entries: 21
+Inventory written: pyinstaller_toc.txt; extracted entries: 21/21
+  0000 m compressed=1 205->271 ok struct
+  0001 m compressed=1 1812->3056 ok pyimod01_archive
+  0002 m compressed=1 9703->22924 ok pyimod02_importers
+  0003 m compressed=1 1775->3639 ok pyimod03_ctypes
+  0004 m compressed=1 647->1078 ok pyimod04_pywin32
+  0005 s compressed=1 606->857 ok pyiboot01_bootstrap
+  0006 s compressed=1 938->1592 ok pyi_rth_inspect
+  0007 s compressed=1 921->1771 ok \u6765\u65e5\u4e4b\u8def\u5149\u660e\u707f\u70c2
+  0008 b compressed=1 51300->97168 ok VCRUNTIME140.dll
+  0009 b compressed=1 41869->79824 ok _bz2.pyd
+  0010 b compressed=1 117824->248272 ok _decimal.pyd
+  0011 b compressed=1 26777->60880 ok _hashlib.pyd
+  0012 b compressed=1 85231->154064 ok _lzma.pyd
+  0013 b compressed=1 35068->75216 ok _socket.pyd
+  0014 b compressed=1 255928->879596 ok base_library.zip
+  0015 b compressed=1 1312114->3439512 ok libcrypto-1_1.dll
+  0016 b compressed=1 1967648->4445648 ok python310.dll
+  0017 b compressed=1 14435->26064 ok select.pyd
+  0018 b compressed=1 406086->1118672 ok unicodedata.pyd
+  0019 o compressed=0 0->0 ok pyi-contents-directory _internal
+  0020 z compressed=0 800066->800066 ok PYZ-00.pyz
+
+Extractor script SHA256: 0C55BC9D669CE99601D21500429F75D20D107C0D2513291D400465E1F4FF979E
+
+STDERR:
+
+========================================================================
+
+COMMAND 6 — inspect embedded Python script marshal payload and local runtimes
+COMMAND TEXT:
+python "C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\批次12_20260929\535_往事暗沉不可追\analysis\inspect_embedded.py" "C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\批次12_20260929\535_往事暗沉不可追\analysis\pyi_extracted\0007_来日之路光明灿烂"
+py -0p
+python --version
+All operations inspect the extracted marshaled script and installed interpreter list; no target binary is executed.
+STDOUT:
+file=0007_\u6765\u65e5\u4e4b\u8def\u5149\u660e\u707f\u70c2
+size=1771
+first 64 bytes=e3 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 06 00 00 00 40 00 00 00 73 50 00 00 00 47 00 64 00 64 01 84 00 64 01 83 02 5a 00 67 00 64 02 a2 01 5a 01 67 00 64 03 a2 01 5a 02 65 00 83 00
+marshal.loads(skip=0) failed: ValueError: bad marshal data (unknown type code)
+marshal.loads(skip=8) failed: ValueError: bad marshal data (unknown type code)
+marshal.loads(skip=12) failed: ValueError: bad marshal data (unknown type code)
+marshal.loads(skip=16) failed: ValueError: bad marshal data (unknown type code)
+
+Installed Python interpreters:
+ -V:3.14 *        C:\Users\mzj\AppData\Local\Python\pythoncore-3.14-64\python.exe
+ -V:3.13          C:\Users\mzj\AppData\Local\Programs\Python\Python313\python.exe
+ -V:3.12          C:\Users\mzj\AppData\Local\Programs\Python\Python312\python.exe
+
+Selected Python: Python 3.12.10
+
+STDERR:
+
+========================================================================
+
+COMMAND 7 — parse Python 3.10 marshal structure and print bytecode/constants
+COMMAND TEXT:
+python "C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\批次12_20260929\535_往事暗沉不可追\analysis\marshal310_inspect.py" "C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\批次12_20260929\535_往事暗沉不可追\analysis\pyi_extracted\0007_来日之路光明灿烂"
+The parser decodes CPython 3.10 marshal fields as data and prints constants/opcode bytes; it does not execute or import the embedded script.
+STDOUT:
+payload bytes=1771 parsed through=1771 trailing=0; marshal refs=51
+CODE name='<module>' filename='����֮·��������.py' line=1; args=0,locals=0,flags=0x40
+  names=('SimpleVM', 'bytecode', 'encrypted_data', 'vm', 'memory', 'len', 'execute', 'get_memory', 'final_memory')
+  varnames=(); freevars=(); cellvars=()
+  consts:
+    0:
+      CODE name='SimpleVM' filename='����֮·��������.py' line=1; args=0,locals=0,flags=0x40
+        names=('__name__', '__module__', '__qualname__', '__init__', 'load', 'store', 'xor', 'execute', 'get_memory')
+        varnames=(); freevars=(); cellvars=()
+        consts:
+          0: 'SimpleVM'
+          1:
+            CODE name='__init__' filename='����֮·��������.py' line=2; args=1,locals=1,flags=0x43
+              names=('memory', 'registers')
+              varnames=('self',); freevars=(); cellvars=()
+              consts:
+                0: None
+                1: 0
+                2: 256
+                3: 16
+              bytecode (28 bytes):
+                0000: op=100 arg=  1
+                0002: op=103 arg=  1
+                0004: op=100 arg=  2
+                0006: op= 20 arg=  0
+                0008: op=124 arg=  0
+                000a: op= 95 arg=  0
+                000c: op=100 arg=  1
+                000e: op=103 arg=  1
+                0010: op=100 arg=  3
+                0012: op= 20 arg=  0
+                0014: op=124 arg=  0
+                0016: op= 95 arg=  1
+                0018: op=100 arg=  0
+                001a: op= 83 arg=  0
+              lnotab=b'\x0c\x01\x10\x01'
+          2: 'SimpleVM.__init__'
+          3:
+            CODE name='load' filename='����֮·��������.py' line=6; args=3,locals=3,flags=0x43
+              names=('memory', 'registers')
+              varnames=('self', 'reg', 'addr'); freevars=(); cellvars=()
+              consts:
+                0: None
+              bytecode (20 bytes):
+                0000: op=124 arg=  0
+                0002: op=106 arg=  0
+                0004: op=124 arg=  2
+                0006: op= 25 arg=  0
+                0008: op=124 arg=  0
+                000a: op=106 arg=  1
+                000c: op=124 arg=  1
+                000e: op= 60 arg=  0
+                0010: op=100 arg=  0
+                0012: op= 83 arg=  0
+              lnotab=b'\x14\x01'
+          4: 'SimpleVM.load'
+          5:
+            CODE name='store' filename='����֮·��������.py' line=9; args=3,locals=3,flags=0x43
+              names=('registers', 'memory')
+              varnames=('self', 'reg', 'addr'); freevars=(); cellvars=()
+              consts:
+                0: None
+              bytecode (20 bytes):
+                0000: op=124 arg=  0
+                0002: op=106 arg=  0
+                0004: op=124 arg=  1
+                0006: op= 25 arg=  0
+                0008: op=124 arg=  0
+                000a: op=106 arg=  1
+                000c: op=124 arg=  2
+                000e: op= 60 arg=  0
+                0010: op=100 arg=  0
+                0012: op= 83 arg=  0
+              lnotab=b'\x14\x01'
+          6: 'SimpleVM.store'
+          7:
+            CODE name='xor' filename='����֮·��������.py' line=12; args=3,locals=3,flags=0x43
+              names=('registers',)
+              varnames=('self', 'reg', 'value'); freevars=(); cellvars=()
+              consts:
+                0: None
+              bytecode (22 bytes):
+                0000: op=124 arg=  0
+                0002: op=106 arg=  0
+                0004: op=124 arg=  1
+                0006: op=  5 arg=  0
+                0008: op= 25 arg=  0
+                000a: op=124 arg=  2
+                000c: op= 78 arg=  0
+                000e: op=  3 arg=  0
+                0010: op= 60 arg=  0
+                0012: op=100 arg=  0
+                0014: op= 83 arg=  0
+              lnotab=b'\x16\x01'
+          8: 'SimpleVM.xor'
+          9:
+            CODE name='execute' filename='����֮·��������.py' line=15; args=2,locals=7,flags=0x43
+              names=('len', 'load', 'store', 'xor', 'ValueError')
+              varnames=('self', 'bytecode', 'ip', 'op', 'reg', 'addr', 'value'); freevars=(); cellvars=()
+              consts:
+                0: None
+                1: 0
+                2: 'LOAD'
+                3: 1
+                4: 2
+                5: 3
+                6: 'STORE'
+                7: 'XOR'
+                8: 'Unknown opcode: '
+              bytecode (220 bytes):
+                0000: op=100 arg=  1
+                0002: op=125 arg=  2
+                0004: op=124 arg=  2
+                0006: op=116 arg=  0
+                0008: op=124 arg=  1
+                000a: op=131 arg=  1
+                000c: op=107 arg=  0
+                000e: op=114 arg=108
+                0010: op=124 arg=  1
+                0012: op=124 arg=  2
+                0014: op= 25 arg=  0
+                0016: op=125 arg=  3
+                0018: op=124 arg=  3
+                001a: op=100 arg=  2
+                001c: op=107 arg=  2
+                001e: op=114 arg= 39
+                0020: op=124 arg=  1
+                0022: op=124 arg=  2
+                0024: op=100 arg=  3
+                0026: op= 23 arg=  0
+                0028: op= 25 arg=  0
+                002a: op=125 arg=  4
+                002c: op=124 arg=  1
+                002e: op=124 arg=  2
+                0030: op=100 arg=  4
+                0032: op= 23 arg=  0
+                0034: op= 25 arg=  0
+                0036: op=125 arg=  5
+                0038: op=124 arg=  0
+                003a: op=160 arg=  1
+                003c: op=124 arg=  4
+                003e: op=124 arg=  5
+                0040: op=161 arg=  2
+                0042: op=  1 arg=  0
+                0044: op=124 arg=  2
+                0046: op=100 arg=  5
+                0048: op= 55 arg=  0
+                004a: op=125 arg=  2
+                004c: op=110 arg= 61
+                004e: op=124 arg=  3
+                0050: op=100 arg=  6
+                0052: op=107 arg=  2
+                0054: op=114 arg= 66
+                0056: op=124 arg=  1
+                0058: op=124 arg=  2
+                005a: op=100 arg=  3
+                005c: op= 23 arg=  0
+                005e: op= 25 arg=  0
+                0060: op=125 arg=  4
+                0062: op=124 arg=  1
+                0064: op=124 arg=  2
+                0066: op=100 arg=  4
+                0068: op= 23 arg=  0
+                006a: op= 25 arg=  0
+                006c: op=125 arg=  5
+                006e: op=124 arg=  0
+                0070: op=160 arg=  2
+                0072: op=124 arg=  4
+                0074: op=124 arg=  5
+                0076: op=161 arg=  2
+                0078: op=  1 arg=  0
+                007a: op=124 arg=  2
+                007c: op=100 arg=  5
+                007e: op= 55 arg=  0
+                0080: op=125 arg=  2
+                0082: op=110 arg= 34
+                0084: op=124 arg=  3
+                0086: op=100 arg=  7
+                0088: op=107 arg=  2
+                008a: op=114 arg= 93
+                008c: op=124 arg=  1
+                008e: op=124 arg=  2
+                0090: op=100 arg=  3
+                0092: op= 23 arg=  0
+                0094: op= 25 arg=  0
+                0096: op=125 arg=  4
+                0098: op=124 arg=  1
+                009a: op=124 arg=  2
+                009c: op=100 arg=  4
+                009e: op= 23 arg=  0
+                00a0: op= 25 arg=  0
+                00a2: op=125 arg=  6
+                00a4: op=124 arg=  0
+                00a6: op=160 arg=  3
+                00a8: op=124 arg=  4
+                00aa: op=124 arg=  6
+                00ac: op=161 arg=  2
+                00ae: op=  1 arg=  0
+                00b0: op=124 arg=  2
+                00b2: op=100 arg=  5
+                00b4: op= 55 arg=  0
+                00b6: op=125 arg=  2
+                00b8: op=110 arg=  7
+                00ba: op=116 arg=  4
+                00bc: op=100 arg=  8
+                00be: op=124 arg=  3
+                00c0: op=155 arg=  0
+                00c2: op=157 arg=  2
+                00c4: op=131 arg=  1
+                00c6: op=130 arg=  1
+                00c8: op=124 arg=  2
+                00ca: op=116 arg=  0
+                00cc: op=124 arg=  1
+                00ce: op=131 arg=  1
+                00d0: op=107 arg=  0
+                00d2: op=115 arg=  8
+                00d4: op=100 arg=  0
+                00d6: op= 83 arg=  0
+                00d8: op=100 arg=  0
+                00da: op= 83 arg=  0
+              lnotab=b'\x04\x01\x0c\x01\x08\x01\x08\x01\x0c\x01\x0c\x01\x0c\x01\n\x01\x08\x01\x0c\x01\x0c\x01\x0c\x01\n\x01\x08\x01\x0c\x01\x0c\x01\x0c\x01\n\x01\x0e\x02\x14\xee'
+          10: 'SimpleVM.execute'
+          11:
+            CODE name='get_memory' filename='����֮·��������.py' line=37; args=1,locals=1,flags=0x43
+              names=('memory',)
+              varnames=('self',); freevars=(); cellvars=()
+              consts:
+                0: None
+              bytecode (6 bytes):
+                0000: op=124 arg=  0
+                0002: op=106 arg=  0
+                0004: op= 83 arg=  0
+              lnotab=b'\x06\x01'
+          12: 'SimpleVM.get_memory'
+          13: None
+        bytecode (60 bytes):
+          0000: op=101 arg=  0
+          0002: op= 90 arg=  1
+          0004: op=100 arg=  0
+          0006: op= 90 arg=  2
+          0008: op=100 arg=  1
+          000a: op=100 arg=  2
+          000c: op=132 arg=  0
+          000e: op= 90 arg=  3
+          0010: op=100 arg=  3
+          0012: op=100 arg=  4
+          0014: op=132 arg=  0
+          0016: op= 90 arg=  4
+          0018: op=100 arg=  5
+          001a: op=100 arg=  6
+          001c: op=132 arg=  0
+          001e: op= 90 arg=  5
+          0020: op=100 arg=  7
+          0022: op=100 arg=  8
+          0024: op=132 arg=  0
+          0026: op= 90 arg=  6
+          0028: op=100 arg=  9
+          002a: op=100 arg= 10
+          002c: op=132 arg=  0
+          002e: op= 90 arg=  7
+          0030: op=100 arg= 11
+          0032: op=100 arg= 12
+          0034: op=132 arg=  0
+          0036: op= 90 arg=  8
+          0038: op=100 arg= 13
+          003a: op= 83 arg=  0
+        lnotab=b'\x08\x00\x08\x01\x08\x04\x08\x03\x08\x03\x08\x03\x0c\x16'
+    1: 'SimpleVM'
+    2: ('LOAD', 0, 16, 'XOR', 0, 85, 'STORE', 0, 32, 'LOAD', 1, 32, 'XOR', 1, 170, 'STORE', 1, 48)
+    3: (153, 147, 158, 152, 132, 200, 202, 203, 198, 154, 156, 156, 158, 210, 153, 130)
+    4: 16
+    5: None
+  bytecode (80 bytes):
+    0000: op= 71 arg=  0
+    0002: op=100 arg=  0
+    0004: op=100 arg=  1
+    0006: op=132 arg=  0
+    0008: op=100 arg=  1
+    000a: op=131 arg=  2
+    000c: op= 90 arg=  0
+    000e: op=103 arg=  0
+    0010: op=100 arg=  2
+    0012: op=162 arg=  1
+    0014: op= 90 arg=  1
+    0016: op=103 arg=  0
+    0018: op=100 arg=  3
+    001a: op=162 arg=  1
+    001c: op= 90 arg=  2
+    001e: op=101 arg=  0
+    0020: op=131 arg=  0
+    0022: op= 90 arg=  3
+    0024: op=101 arg=  2
+    0026: op=101 arg=  3
+    0028: op=106 arg=  4
+    002a: op=100 arg=  4
+    002c: op=100 arg=  4
+    002e: op=101 arg=  5
+    0030: op=101 arg=  2
+    0032: op=131 arg=  1
+    0034: op= 23 arg=  0
+    0036: op=133 arg=  2
+    0038: op= 60 arg=  0
+    003a: op=101 arg=  3
+    003c: op=160 arg=  6
+    003e: op=101 arg=  1
+    0040: op=161 arg=  1
+    0042: op=  1 arg=  0
+    0044: op=101 arg=  3
+    0046: op=160 arg=  7
+    0048: op=161 arg=  0
+    004a: op= 90 arg=  8
+    004c: op=100 arg=  5
+    004e: op= 83 arg=  0
+  lnotab=b'\x0e\x00\x08)\x08\n\x06\x03\x16\x03\n\x03\x0c\x03'
+
+Parser SHA256: 1AE055D11ABB723704D158C3D6365D5C1731AE0A37CD249BF22A2FE3DE84C3B5
+
+STDERR:
+
+========================================================================
+
+COMMAND 8 — reproduce the VM and independently verify candidate plaintext
+COMMAND TEXT:
+python "C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\批次12_20260929\535_往事暗沉不可追\analysis\decrypt_verify.py" "C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\批次12_20260929\535_往事暗沉不可追\analysis\pyi_extracted\0007_来日之路光明灿烂"
+The verifier parses the marshaled Python 3.10 object, reproduces the VM one-pass semantics, then applies the two extracted XOR immediates to the entire byte array and checks both plaintext and inverse transform. Target is read only and never executed.
+STDOUT:
+Embedded bytecode operations: [('LOAD', 0, 16), ('XOR', 0, 85), ('STORE', 0, 32), ('LOAD', 1, 32), ('XOR', 1, 170), ('STORE', 1, 48)]
+Encrypted byte values (16): [153, 147, 158, 152, 132, 200, 202, 203, 198, 154, 156, 156, 158, 210, 153, 130]
+XOR immediates: ['0x55', '0xaa']; combined key: 0xff
+Exact VM writes: memory[32]=204 (0xcc), memory[48]=102 (0x66)
+Exact VM leaves memory[16:32] unchanged: True
+Elementwise plaintext bytes: [102, 108, 97, 103, 123, 55, 53, 52, 57, 101, 99, 99, 97, 45, 102, 125]
+Elementwise plaintext text: flag{7549ecca-f}
+Comma-separated decimal candidate: 102,108,97,103,123,55,53,52,57,101,99,99,97,45,102,125
+
+marshal310.py SHA256: 61228B08330FFA9279ADCCBABC4979EF85E82D6DEFBD6E540A24EE083C9E97B1
+decrypt_verify.py SHA256: 31B0886AE3DD1CA67735D162D10316FC81BF0A42DAF73485766A632CAE77C77B
+
+STDERR:
+
+========================================================================
+
+COMMAND 9 — retrieve embedded script checksum and analysis artifact hashes
+COMMAND TEXT:
+Select-String "0007" in analysis\pyinstaller_toc.txt
+Get-FileHash on analysis scripts and extracted main frozen script
+STDOUT:
+CArchive entry 0007:
+
+STDERR:
+Select-String: 
+Line |
+  15 |  … ppendLine(((Select-String -LiteralPath $toc -Pattern '^0007 \|' | For …
+     |                ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+     | The file C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\批次12_20260929\535_往事暗沉不可追\analysis\pyinstaller_toc.txt cannot be read: Could not find file 'C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\批次12_20260929\535_往事暗沉不可追\analysis\pyinstaller_toc.txt'.
+
+========================================================================
+
+COMMAND 10 — retrieve embedded script checksum and analysis artifact hashes
+COMMAND TEXT:
+Select-String "0007" in analysis\pyi_extracted\pyinstaller_toc.txt
+Get-FileHash on analysis scripts and extracted main frozen script
+STDOUT:
+CArchive entry 0007:
+0007 | s | 1 | 0x3d46 | 921 | 1771 | ok | 来日之路光明灿烂 | 0007_来日之路光明灿烂 | bdaef0c93e7b31436cacfef6bda996372d3f48a70889bffd88c7d39675c8a334
+F879B674FBE0CB0CF2D94CE20988319722F98C01A037A26D7F52C5669714DEBC | static_triage.py
+0C55BC9D669CE99601D21500429F75D20D107C0D2513291D400465E1F4FF979E | pyi_extract.py
+1AE055D11ABB723704D158C3D6365D5C1731AE0A37CD249BF22A2FE3DE84C3B5 | marshal310_inspect.py
+61228B08330FFA9279ADCCBABC4979EF85E82D6DEFBD6E540A24EE083C9E97B1 | marshal310.py
+31B0886AE3DD1CA67735D162D10316FC81BF0A42DAF73485766A632CAE77C77B | decrypt_verify.py
+BDAEF0C93E7B31436CACFEF6BDA996372D3F48A70889BFFD88C7D39675C8A334 | 0007_来日之路光明灿烂
+
+STDERR:
+
+========================================================================
+
+COMMAND 11 — write task README and full Chinese WP
+COMMAND TEXT:
+Write README.md and wp.md in UTF-8 at the #535 task root; report their byte lengths and SHA-256 hashes. Documentation summarizes archived evidence and caveats; no target binary is executed and no platform submission is made.
+STDOUT:
+README.md | 3867 chars | C2E2F0FF5DEF646E9CF0A0EA995CB79B075F1A6906BE8F2A635FAA20A92A6871
+wp.md | 5077 chars | 67F835D45CCCAAEBB5FDFF3BA55F7E780A349298B1BD3B0BC85DA92AC1584720
+README.md and wp.md written as UTF-8 without BOM.
+
+STDERR:
+
+========================================================================
+
+COMMAND 12 — record platform validation evidence in README and WP
+COMMAND TEXT:
+Update README.md and wp.md with root-reported front-end evidence: accepted ASCII flag flag{7549ecca-f}, progress 1/1 complete, first blood. Record that comma-separated decimals are the same plaintext bytes, while the accepted submission was the ASCII flag. Preserve the exact VM one-byte execution limitation. Report updated document hashes.
+STDOUT:
+README.md | 4227 chars | 81BFE38FD502F717F4A6BE0F7A5FA5F993C1E2CC059AA6476E954AA2B711FEF8
+wp.md | 5665 chars | BC05457FADAB319A04A325ECA5456E1555E6D51B904926E943B7E3784FF40D42
+Recorded root-reported front-end submission success: flag{7549ecca-f}; accepted, 1/1 complete, first blood.
+
+STDERR:
+
+========================================================================
+
+COMMAND 13 — final documentation and transcript audit
+COMMAND TEXT:
+Count prior command records in analysis/command_transcript_20260929.txt; verify README.md and wp.md contain the accepted flag/progress/first-blood evidence and the VM single-byte limitation; check for stale unverified status text.
+STDOUT:
+Transcript records before this audit: 12
+Stale unverified-status lines: 0
+README.md key evidence lines:
+  - 状态：已求解并由题目平台前台核验通过；1/1 已完成，首血。
+  - 对应 ASCII：flag{7549ecca-f}
+  - 验证状态：root 通过前台 UI 提交 ASCII flag 文本后获平台接受。逗号十进制序列是相同明文字节的展开形式，本次被接受的提交为 flag{7549ecca-f}。
+  冻结主脚本中的 VM 程序只有 6 条三元组指令。严格按该程序执行时，它读取 encrypted_data[0]，经过 0x55 和 0xAA 两次 XOR，并把中间/最终值写入两个内存地址；它没有循环处理 16 个密文字节，也没有打印结果。候选全串是将脚本明确给出的两步 XOR 链逐字节应用于 16 字节 encrypted_data 得到的结果。全串呈现完整 flag{...} ASCII 形态，且逆变换通过。root 已通过题目平台前台 UI 验证该 ASCII flag 提交成功（1/1，首血）。原程序未实现全数组循环的局限仍需保留说明。
+  由 root 通过玄机前台 UI 提交：flag{7549ecca-f}。平台接受，题页显示 1/1 已完成、首血。十进制逗号字节串用于描述解密数据；本次成功提交的 flag 形式是 ASCII 文本。
+wp.md key evidence lines:
+  主脚本先把密文写到 memory[16:32]，再调用 VM。
+  flag{7549ecca-f}
+  ASCII 展示 flag{7549ecca-f} 是相同字节的另一种表示。每字节与 0xFF 再异或可还原原密文，完成逆变换核对。
+  它没有循环遍历 16 字节；执行后原密文所在 memory[16:32] 不变，只产生 memory[32]=204、memory[48]=102。随后主模块仅保存 get_memory() 的返回值，没有输出或继续解密。因此严格解释程序时，附件本身没有实际生成完整明文。全数组候选依据同一组明确 XOR 常数作用于嵌入的 16 字节密文，并由完整的 flag{...} ASCII 形式和逆变换支持。root 后续通过前台 UI 提交 flag{7549ecca-f}，平台接受，题页显示 1/1 已完成、首血。该结果确认本题被接受的提交形式是 ASCII flag 文本；逗号十进制序列是相同明文字节的逐字节展开表示，并非本次提交值。
+  由 root 通过玄机前台 UI 提交 ASCII 候选 flag{7549ecca-f}，平台接受并显示 1/1 已完成、首血。该前台结果确认提交值。题面中的逗号提示在本 WP 中对应解密字节的十进制展开；提交时使用了这些字节组成的 ASCII flag 文本。VM bytecode 只处理首字节的事实不受平台验证结果改变，完整候选仍由逐字节应用嵌入 XOR 链得到。
+Final docs retain accepted flag evidence and the VM one-byte limitation.
+
+STDERR:
+
+========================================================================
+
+COMMAND 14 — correct submission attribution and recheck final docs
+COMMAND TEXT:
+Correct historical wording in README.md and wp.md to state that root, not the local analysis agent, submitted the accepted candidate through the front-end UI. Verify no stale claim of no submission remains; confirm platform proof and VM limitation are retained.
+STDOUT:
+Corrected README/WP history: root performed the UI submission; local analysis did not submit.
+README platform proof present: True
+WP preserves VM limitation: True
+README.md SHA256 872CC04AED22E35BEE27CD6BF70A1C6C35292444F49F29A35E05955F536C0BC6
+wp.md SHA256 EC56DDBB9934EF43A38DD5E17C136220CF7018A77014644F6B4EA3687C188243
+
+STDERR:
+
+========================================================================
+

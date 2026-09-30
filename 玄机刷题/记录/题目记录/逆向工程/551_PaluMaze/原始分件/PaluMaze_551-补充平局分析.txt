@@ -1,0 +1,63 @@
+**********************
+PowerShell transcript start
+Start time: 20260928231710
+Username: DESKTOP-412KTAR\mzj
+RunAs User: DESKTOP-412KTAR\mzj
+Configuration Name: 
+Machine: DESKTOP-412KTAR (Microsoft Windows NT 10.0.26200.0)
+Host Application: C:\Users\mzj\.cache\codex-runtimes\codex-primary-runtime\dependencies\native\powershell\pwsh.dll -Command try { [Console]::OutputEncoding=[System.Text.Encoding]::UTF8 } catch {}
+$dir = 'C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\PaluMaze_551'; $script = Join-Path $dir 'enumerate_bfs_tie_orders.py'; $log = 'C:\Users\mzj\Desktop\CTF\玄机刷题\记录\PaluMaze_551-补充平局分析.txt'; $source = @'
+import contextlib, io, runpy, itertools, hashlib
+from collections import deque
+base = r'C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\PaluMaze_551\solve_maze.py'
+with contextlib.redirect_stdout(io.StringIO()): ns=runpy.run_path(base)
+maze, exits = ns['maze'], ns['exits']
+lookup={p:i for i,p in enumerate(exits)}
+steps=[(-1,0,'w'),(0,-1,'a'),(1,0,'s'),(0,1,'d')]
+rows=[]
+for perm in itertools.permutations(steps):
+    q=deque([((1,1),0)]); prev={((1,1),0):None}; incoming={}; goal=None
+    while q:
+        pos,mask=q.popleft()
+        if mask==31: goal=(pos,mask); break
+        for dx,dy,key in perm:
+            nxt=(pos[0]+dx,pos[1]+dy)
+            if not (0<=nxt[0]<32 and 0<=nxt[1]<32) or maze[nxt[0]][nxt[1]]==1: continue
+            newmask=mask|((1<<lookup[nxt]) if nxt in lookup else 0)
+            state=(nxt,newmask)
+            if state not in prev:
+                prev[state]=(pos,mask); incoming[state]=key; q.append(state)
+    route=[]; state=goal
+    while prev[state] is not None: route.append(incoming[state]); state=prev[state]
+    route=''.join(reversed(route))
+    rows.append((''.join(x[2] for x in perm),len(route),hashlib.md5(route.encode('ascii')).hexdigest(),route))
+print('permutation_count=',len(rows))
+print('unique_route_count=',len({r[3] for r in rows}))
+print('route_lengths=',sorted({r[1] for r in rows}))
+for order,length,digest,route in rows:
+    print(f'order={order} length={length} md5={digest} route={route}')
+'@; Set-Content -LiteralPath $script -Value $source -Encoding utf8; Start-Transcript -LiteralPath $log -Force; Write-Output "COMMAND> python -B '$script'"; python -B $script; Write-Output 'COMMAND> Get-FileHash -Algorithm SHA256 game_flag.exe'; Get-FileHash -LiteralPath 'D:\Downloads\game_flag.exe' -Algorithm SHA256 | Format-List; Stop-Transcript
+Process ID: 23192
+PSVersion: 7.6.5
+PSEdition: Core
+GitCommitId: 7.6.5
+OS: Microsoft Windows 10.0.26200
+Platform: Win32NT
+PSCompatibleVersions: 1.0, 2.0, 3.0, 4.0, 5.0, 5.1, 6.0, 7.0
+PSRemotingProtocolVersion: 2.4
+SerializationVersion: 1.1.0.1
+WSManStackVersion: 3.0
+**********************
+Transcript started, output file is C:\Users\mzj\Desktop\CTF\玄机刷题\记录\PaluMaze_551-补充平局分析.txt
+COMMAND> python -B 'C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\PaluMaze_551\enumerate_bfs_tie_orders.py'
+
+COMMAND> Get-FileHash -Algorithm SHA256 game_flag.exe
+
+Algorithm : SHA256
+Hash      : 319DE70C476CC7C2761A57D88B83A5529D06CFD0A909D0EC48EC9CD588F82556
+Path      : D:\Downloads\game_flag.exe
+
+**********************
+PowerShell transcript end
+End time: 20260928231710
+**********************

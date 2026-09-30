@@ -1,0 +1,33 @@
+**********************
+PowerShell transcript start
+Start time: 20260929181712
+Username: DESKTOP-412KTAR\mzj
+RunAs User: DESKTOP-412KTAR\mzj
+Configuration Name: 
+Machine: DESKTOP-412KTAR (Microsoft Windows NT 10.0.26200.0)
+Host Application: C:\Users\mzj\.cache\codex-runtimes\codex-primary-runtime\dependencies\native\powershell\pwsh.dll -Command try { [Console]::OutputEncoding=[System.Text.Encoding]::UTF8 } catch {}
+$ErrorActionPreference='Stop'; $project='C:\Users\mzj\Desktop\CTF\玄机刷题'; $guide=Join-Path $project '指南'; $log=Join-Path $project '记录\指南PDF更新构建_20260929.txt'; Start-Transcript -LiteralPath $log -Force | Out-Null; Push-Location -LiteralPath $guide; try { .\build.ps1; Get-Item -LiteralPath '.\玄机刷题指南.pdf' | Select-Object FullName,Length,LastWriteTime } finally { Pop-Location; Stop-Transcript | Out-Null }
+Process ID: 30092
+PSVersion: 7.6.5
+PSEdition: Core
+GitCommitId: 7.6.5
+OS: Microsoft Windows 10.0.26200
+Platform: Win32NT
+PSCompatibleVersions: 1.0, 2.0, 3.0, 4.0, 5.0, 5.1, 6.0, 7.0
+PSRemotingProtocolVersion: 2.4
+SerializationVersion: 1.1.0.1
+WSManStackVersion: 3.0
+**********************
+[1/3] pandoc 转换正文...
+
+[2/3] 正文后处理...
+      LTcaptype 修正 3 处；可断行行内代码 356 处；可断行裸哈希 31 处
+[3/3] xelatex 编译...
+      xelatex 第 1 遍...
+      xelatex 第 2 遍...
+完成：C:\Users\mzj\Desktop\CTF\玄机刷题\指南\玄机刷题指南.pdf  647,504 字节
+
+**********************
+PowerShell transcript end
+End time: 20260929181725
+**********************

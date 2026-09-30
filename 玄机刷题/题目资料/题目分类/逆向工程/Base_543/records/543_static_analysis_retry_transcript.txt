@@ -1,0 +1,55 @@
+Xuanji #543 static PE analysis retry transcript
+Reason: first objdump attempt against the Unicode path failed with 'No such file or directory'; original log/output preserved.
+Copy action: Python shutil.copyfile(SOURCE, TEMP), byte-for-byte hash checked.
+Source SHA256=EF7DEACF6594E9353E934564B38761E8AAF614EBF39DCB17EFED36263DF2C773
+ASCII-copy SHA256=EF7DEACF6594E9353E934564B38761E8AAF614EBF39DCB17EFED36263DF2C773
+All following commands are static parsers/readers. The executable was never launched.
+
+COMMAND> objdump -f -x C:\Users\mzj\Desktop\CTF\challenge543_static.exe
+EXIT_CODE> 0
+STDOUT_FILE> C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\批次10_20260929\543_Base\analysis\objdump_pe_header_ascii.txt
+STDOUT_BYTES> 10851
+STDERR_BEGIN
+
+STDERR_END
+
+COMMAND> objdump -h C:\Users\mzj\Desktop\CTF\challenge543_static.exe
+EXIT_CODE> 0
+STDOUT_FILE> C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\批次10_20260929\543_Base\analysis\objdump_sections_ascii.txt
+STDOUT_BYTES> 1503
+STDERR_BEGIN
+
+STDERR_END
+
+COMMAND> objdump -p C:\Users\mzj\Desktop\CTF\challenge543_static.exe
+EXIT_CODE> 0
+STDOUT_FILE> C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\批次10_20260929\543_Base\analysis\objdump_imports_ascii.txt
+STDOUT_BYTES> 9206
+STDERR_BEGIN
+
+STDERR_END
+
+COMMAND> strings -a -n 3 C:\Users\mzj\Desktop\CTF\challenge543_static.exe
+EXIT_CODE> 0
+STDOUT_FILE> C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\批次10_20260929\543_Base\analysis\strings_ascii_ascii.txt
+STDOUT_BYTES> 7782
+STDERR_BEGIN
+
+STDERR_END
+
+COMMAND> strings -a -el -n 3 C:\Users\mzj\Desktop\CTF\challenge543_static.exe
+EXIT_CODE> 0
+STDOUT_FILE> C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\批次10_20260929\543_Base\analysis\strings_utf16le_ascii.txt
+STDOUT_BYTES> 278
+STDERR_BEGIN
+
+STDERR_END
+
+COMMAND> objdump -d -M intel -w C:\Users\mzj\Desktop\CTF\challenge543_static.exe
+EXIT_CODE> 0
+STDOUT_FILE> C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\批次10_20260929\543_Base\analysis\objdump_disassembly_intel_ascii.txt
+STDOUT_BYTES> 1083898
+STDERR_BEGIN
+
+STDERR_END
+

@@ -1,0 +1,42 @@
+
+.\CatchPalu_flag.exe:     file format pei-i386
+
+
+Disassembly of section .text:
+
+0040171f <.text+0x71f>:
+  40171f:	68 ac 40 40 00       	push   0x4040ac
+  401724:	e8 27 f9 ff ff       	call   0x401050
+  401729:	83 c4 04             	add    esp,0x4
+  40172c:	6a 1a                	push   0x1a
+  40172e:	8d 55 e0             	lea    edx,[ebp-0x20]
+  401731:	52                   	push   edx
+  401732:	68 a4 40 40 00       	push   0x4040a4
+  401737:	e8 84 f9 ff ff       	call   0x4010c0
+  40173c:	83 c4 0c             	add    esp,0xc
+  40173f:	8d 45 e0             	lea    eax,[ebp-0x20]
+  401742:	50                   	push   eax
+  401743:	68 90 40 40 00       	push   0x404090
+  401748:	e8 03 f9 ff ff       	call   0x401050
+  40174d:	83 c4 08             	add    esp,0x8
+  401750:	c7 45 b4 78 40 40 00 	mov    DWORD PTR [ebp-0x4c],0x404078
+  401757:	8d 4d e0             	lea    ecx,[ebp-0x20]
+  40175a:	89 4d b8             	mov    DWORD PTR [ebp-0x48],ecx
+  40175d:	8b 55 b8             	mov    edx,DWORD PTR [ebp-0x48]
+  401760:	8a 02                	mov    al,BYTE PTR [edx]
+  401762:	88 45 d5             	mov    BYTE PTR [ebp-0x2b],al
+  401765:	8b 4d b4             	mov    ecx,DWORD PTR [ebp-0x4c]
+  401768:	3a 01                	cmp    al,BYTE PTR [ecx]
+  40176a:	75 2e                	jne    0x40179a
+  40176c:	80 7d d5 00          	cmp    BYTE PTR [ebp-0x2b],0x0
+  401770:	74 1f                	je     0x401791
+  401772:	8b 55 b8             	mov    edx,DWORD PTR [ebp-0x48]
+  401775:	8a 42 01             	mov    al,BYTE PTR [edx+0x1]
+  401778:	88 45 d4             	mov    BYTE PTR [ebp-0x2c],al
+  40177b:	8b 4d b4             	mov    ecx,DWORD PTR [ebp-0x4c]
+  40177e:	3a 41 01             	cmp    al,BYTE PTR [ecx+0x1]
+  401781:	75 17                	jne    0x40179a
+  401783:	83 45 b8 02          	add    DWORD PTR [ebp-0x48],0x2
+  401787:	83 45 b4 02          	add    DWORD PTR [ebp-0x4c],0x2
+  40178b:	80 7d d4 00          	cmp    BYTE PTR [ebp-0x2c],0x0
+  40178f:	75                   	.byte 0x75

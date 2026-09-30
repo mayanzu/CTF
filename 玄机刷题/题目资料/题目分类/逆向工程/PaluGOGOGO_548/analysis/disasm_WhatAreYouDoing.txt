@@ -1,0 +1,68 @@
+
+C:\Users\mzj\AppData\Local\Temp\palu548_static_a9f3.exe:     file format pei-x86-64
+
+
+Disassembly of section .text:
+
+0000000000494e80 <.text+0x93e80>:
+  494e80:	49 3b 66 10          	cmp    rsp,QWORD PTR [r14+0x10]
+  494e84:	0f 86 9b 00 00 00    	jbe    0x494f25
+  494e8a:	55                   	push   rbp
+  494e8b:	48 89 e5             	mov    rbp,rsp
+  494e8e:	48 83 ec 28          	sub    rsp,0x28
+  494e92:	90                   	nop
+  494e93:	48 8d 05 26 4e 01 00 	lea    rax,[rip+0x14e26]        # 0x4a9cc0
+  494e9a:	e8 e1 8f f7 ff       	call   0x40de80
+  494e9f:	48 c7 40 18 0c 00 00 	mov    QWORD PTR [rax+0x18],0xc
+  494ea6:	00 
+  494ea7:	83 3d a2 d4 14 00 00 	cmp    DWORD PTR [rip+0x14d4a2],0x0        # 0x5e2350
+  494eae:	74 0c                	je     0x494ebc
+  494eb0:	48 8b 48 10          	mov    rcx,QWORD PTR [rax+0x10]
+  494eb4:	e8 67 0e fd ff       	call   0x465d20
+  494eb9:	49 89 0b             	mov    QWORD PTR [r11],rcx
+  494ebc:	48 89 44 24 20       	mov    QWORD PTR [rsp+0x20],rax
+  494ec1:	48 8d 0d 50 1d 02 00 	lea    rcx,[rip+0x21d50]        # 0x4b6c18
+  494ec8:	48 89 48 10          	mov    QWORD PTR [rax+0x10],rcx
+  494ecc:	90                   	nop
+  494ecd:	48 8d 05 ec 7a 01 00 	lea    rax,[rip+0x17aec]        # 0x4ac9c0
+  494ed4:	e8 a7 8f f7 ff       	call   0x40de80
+  494ed9:	83 3d 70 d4 14 00 00 	cmp    DWORD PTR [rip+0x14d470],0x0        # 0x5e2350
+  494ee0:	75 07                	jne    0x494ee9
+  494ee2:	48 8b 54 24 20       	mov    rdx,QWORD PTR [rsp+0x20]
+  494ee7:	eb 0d                	jmp    0x494ef6
+  494ee9:	e8 32 0e fd ff       	call   0x465d20
+  494eee:	48 8b 54 24 20       	mov    rdx,QWORD PTR [rsp+0x20]
+  494ef3:	49 89 13             	mov    QWORD PTR [r11],rdx
+  494ef6:	48 89 50 18          	mov    QWORD PTR [rax+0x18],rdx
+  494efa:	48 c7 40 10 11 00 00 	mov    QWORD PTR [rax+0x10],0x11
+  494f01:	00 
+  494f02:	48 8d 15 7c 2e 02 00 	lea    rdx,[rip+0x22e7c]        # 0x4b7d85
+  494f09:	48 89 50 08          	mov    QWORD PTR [rax+0x8],rdx
+  494f0d:	31 db                	xor    ebx,ebx
+  494f0f:	31 c9                	xor    ecx,ecx
+  494f11:	48 89 cf             	mov    rdi,rcx
+  494f14:	e8 87 b8 fe ff       	call   0x4807a0
+  494f19:	48 85 c0             	test   rax,rax
+  494f1c:	0f 95 c0             	setne  al
+  494f1f:	48 83 c4 28          	add    rsp,0x28
+  494f23:	5d                   	pop    rbp
+  494f24:	c3                   	ret
+  494f25:	e8 d6 ee fc ff       	call   0x463e00
+  494f2a:	e9 51 ff ff ff       	jmp    0x494e80
+  494f2f:	cc                   	int3
+  494f30:	cc                   	int3
+  494f31:	cc                   	int3
+  494f32:	cc                   	int3
+  494f33:	cc                   	int3
+  494f34:	cc                   	int3
+  494f35:	cc                   	int3
+  494f36:	cc                   	int3
+  494f37:	cc                   	int3
+  494f38:	cc                   	int3
+  494f39:	cc                   	int3
+  494f3a:	cc                   	int3
+  494f3b:	cc                   	int3
+  494f3c:	cc                   	int3
+  494f3d:	cc                   	int3
+  494f3e:	cc                   	int3
+  494f3f:	cc                   	int3

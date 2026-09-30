@@ -1,0 +1,79 @@
+===== classes3.dex sha256=59E97C3D35CE2D9AD7148B65630048E4C7E193D1BCBE60CF4844AB0ADEB58DD8 class_defs=1 =====
+
+CLASS Lcom/example/hookme/databinding/ActivityMainBinding; access=0x11 source=ActivityMainBinding.java
+
+METHOD direct <init>(Landroidx/constraintlayout/widget/ConstraintLayout;Landroid/widget/EditText;Landroid/widget/TextView;Landroid/widget/Button;)V access=0x10002 code_off=0x414
+  registers=5 ins=5 outs=1 tries=0 insns=12
+  0000: invoke-direct            1070 [12, 0] method@12=('Ljava/lang/Object;', '()V', '<init>')
+  0003: iput-object              015b [6] field@6=('Lcom/example/hookme/databinding/ActivityMainBinding;', 'Landroidx/constraintlayout/widget/ConstraintLayout;', 'rootView')
+  0005: iput-object              025b [4] field@4=('Lcom/example/hookme/databinding/ActivityMainBinding;', 'Landroid/widget/EditText;', 'inputField')
+  0007: iput-object              035b [5] field@5=('Lcom/example/hookme/databinding/ActivityMainBinding;', 'Landroid/widget/TextView;', 'resultTextView')
+  0009: iput-object              045b [7] field@7=('Lcom/example/hookme/databinding/ActivityMainBinding;', 'Landroid/widget/Button;', 'submitButton')
+  000b: return-void              000e []
+
+METHOD direct bind(Landroid/view/View;)Lcom/example/hookme/databinding/ActivityMainBinding; access=0x9 code_off=0x334
+  registers=7 ins=1 outs=5 tries=0 insns=62
+  0000: sget                     0060 [0] field@0=('Lcom/example/hookme/R$id;', 'I', 'inputField')
+  0002: invoke-static            2071 [4, 6] method@4=('Landroidx/viewbinding/ViewBindings;', '(Landroid/view/View;I)Landroid/view/View;', 'findChildViewById')
+  0005: move-result-object       010c []
+  0006: check-cast               011f [6]
+  0008: if-eqz                   0138 [33] branch_delta=1 target=9
+  000a: sget                     0060 [1] field@1=('Lcom/example/hookme/R$id;', 'I', 'resultTextView')
+  000c: invoke-static            2071 [4, 6] method@4=('Landroidx/viewbinding/ViewBindings;', '(Landroid/view/View;I)Landroid/view/View;', 'findChildViewById')
+  000f: move-result-object       020c []
+  0010: check-cast               021f [7]
+  0012: if-eqz                   0238 [22] branch_delta=2 target=20
+  0014: sget                     0060 [2] field@2=('Lcom/example/hookme/R$id;', 'I', 'submitButton')
+  0016: invoke-static            2071 [4, 6] method@4=('Landroidx/viewbinding/ViewBindings;', '(Landroid/view/View;I)Landroid/view/View;', 'findChildViewById')
+  0019: move-result-object       030c []
+  001a: check-cast               031f [5]
+  001c: if-eqz                   0338 [11] branch_delta=3 target=31
+  001e: new-instance             0422 [13]
+  0020: move-object              6507 []
+  0021: check-cast               051f [8]
+  0023: invoke-direct            5370 [5, 8532] method@5=('Lcom/example/hookme/databinding/ActivityMainBinding;', '(Landroidx/constraintlayout/widget/ConstraintLayout;Landroid/widget/EditText;Landroid/widget/TextView;Landroid/widget/Button;)V', '<init>')
+  0026: return-object            0411 []
+  0027: goto                     0328 [] branch_delta=3 target=42
+  0028: goto                     0228 [] branch_delta=2 target=42
+  0029: nop                      0000 []
+  002a: invoke-virtual           106e [2, 6] method@2=('Landroid/view/View;', '()Landroid/content/res/Resources;', 'getResources')
+  002d: move-result-object       010c []
+  002e: invoke-virtual           206e [0, 1] method@0=('Landroid/content/res/Resources;', '(I)Ljava/lang/String;', 'getResourceName')
+  0031: move-result-object       010c []
+  0032: new-instance             0222 [14]
+  0034: const-string             031a [25] string@25='Missing required view with ID: '
+  0036: invoke-virtual           206e [13, 19] method@13=('Ljava/lang/String;', '(Ljava/lang/String;)Ljava/lang/String;', 'concat')
+  0039: move-result-object       030c []
+  003a: invoke-direct            2070 [11, 50] method@11=('Ljava/lang/NullPointerException;', '(Ljava/lang/String;)V', '<init>')
+  003d: throw                    0227 []
+
+METHOD direct inflate(Landroid/view/LayoutInflater;)Lcom/example/hookme/databinding/ActivityMainBinding; access=0x9 code_off=0x3c0
+  registers=3 ins=1 outs=3 tries=0 insns=7
+  0000: const/4                  0012 [] literal=0
+  0001: const/4                  0112 [] literal=0
+  0002: invoke-static            3071 [10, 258] method@10=('Lcom/example/hookme/databinding/ActivityMainBinding;', '(Landroid/view/LayoutInflater;Landroid/view/ViewGroup;Z)Lcom/example/hookme/databinding/ActivityMainBinding;', 'inflate')
+  0005: move-result-object       000c []
+  0006: return-object            0011 []
+
+METHOD direct inflate(Landroid/view/LayoutInflater;Landroid/view/ViewGroup;Z)Lcom/example/hookme/databinding/ActivityMainBinding; access=0x9 code_off=0x3e0
+  registers=5 ins=3 outs=4 tries=0 insns=17
+  0000: sget                     0060 [3] field@3=('Lcom/example/hookme/R$layout;', 'I', 'activity_main')
+  0002: const/4                  0112 [] literal=0
+  0003: invoke-virtual           406e [1, 4866] method@1=('Landroid/view/LayoutInflater;', '(ILandroid/view/ViewGroup;Z)Landroid/view/View;', 'inflate')
+  0006: move-result-object       000c []
+  0007: if-eqz                   0438 [5] branch_delta=4 target=11
+  0009: invoke-virtual           206e [3, 3] method@3=('Landroid/view/ViewGroup;', '(Landroid/view/View;)V', 'addView')
+  000c: invoke-static            1071 [6, 0] method@6=('Lcom/example/hookme/databinding/ActivityMainBinding;', '(Landroid/view/View;)Lcom/example/hookme/databinding/ActivityMainBinding;', 'bind')
+  000f: move-result-object       010c []
+  0010: return-object            0111 []
+
+METHOD virtual getRoot()Landroid/view/View; access=0x1041 code_off=0x300
+  registers=2 ins=1 outs=1 tries=0 insns=5
+  0000: invoke-virtual           106e [8, 1] method@8=('Lcom/example/hookme/databinding/ActivityMainBinding;', '()Landroidx/constraintlayout/widget/ConstraintLayout;', 'getRoot')
+  0003: move-result-object       000c []
+  0004: return-object            0011 []
+
+METHOD virtual getRoot()Landroidx/constraintlayout/widget/ConstraintLayout; access=0x1 code_off=0x31c
+  registers=2 ins=1 outs=0 tries=0 insns=3
+  0000: iget-object              1054 [6] field@6=('Lcom/example/hookme/databinding/ActivityMainBinding;', 'Landroidx/constraintlayout/widget/ConstraintLayout;', 'rootView')
+  0002: return-object            0011 []

@@ -1,0 +1,1419 @@
+**********************
+PowerShell transcript start
+Start time: 20260929154043
+Username: DESKTOP-412KTAR\mzj
+RunAs User: DESKTOP-412KTAR\mzj
+Configuration Name: 
+Machine: DESKTOP-412KTAR (Microsoft Windows NT 10.0.26200.0)
+Host Application: C:\Users\mzj\.cache\codex-runtimes\codex-primary-runtime\dependencies\native\powershell\pwsh.dll -Command try { [Console]::OutputEncoding=[System.Text.Encoding]::UTF8 } catch {}
+$ErrorActionPreference = 'Continue'
+Start-Transcript -Path 'C:\Users\mzj\Desktop\CTF\玄机刷题\记录\批次14_561_调查记录.txt' -Append
+Write-Output ('SESSION_START=' + (Get-Date -Format o))
+Write-Output ('PWD=' + (Get-Location).Path)
+$base = 'C:\Users\mzj\Desktop\CTF\玄机刷题'
+$dest = Join-Path $base '题目资料\批次14_20260929\561_OpenHarmony_secret'
+New-Item -ItemType Directory -Path $dest -Force | Out-Null
+Write-Output ('DEST=' + $dest)
+Write-Output 'PROJECT_561_FILES:'
+Get-ChildItem -LiteralPath $base -Recurse -File -ErrorAction SilentlyContinue | Where-Object { $_.FullName -match '561|OpenHarmony_secret' } | Select-Object FullName,Length,LastWriteTime
+Write-Output 'DOWNLOAD_CANDIDATES:'
+Get-ChildItem -LiteralPath 'D:\Downloads' -Recurse -File -ErrorAction SilentlyContinue | Where-Object { $_.FullName -match '561|OpenHarmony|Harmony|secret' } | Select-Object FullName,Length,LastWriteTime
+Write-Output 'PROJECT_TOP_LEVEL:'
+Get-ChildItem -LiteralPath $base -Force | Select-Object Name,Mode,Length,LastWriteTime
+Process ID: 22360
+PSVersion: 7.6.5
+PSEdition: Core
+GitCommitId: 7.6.5
+OS: Microsoft Windows 10.0.26200
+Platform: Win32NT
+PSCompatibleVersions: 1.0, 2.0, 3.0, 4.0, 5.0, 5.1, 6.0, 7.0
+PSRemotingProtocolVersion: 2.4
+SerializationVersion: 1.1.0.1
+WSManStackVersion: 3.0
+**********************
+Transcript started, output file is C:\Users\mzj\Desktop\CTF\玄机刷题\记录\批次14_561_调查记录.txt
+SESSION_START=2026-09-29T15:40:44.0138653+08:00
+PWD=C:\Users\mzj\Desktop\CTF
+DEST=C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\批次14_20260929\561_OpenHarmony_secret
+PROJECT_561_FILES:
+
+FullName
+--------                                                                                                               
+C:\Users\mzj\Desktop\CTF\玄机刷题\记录\批次14_561_调查记录.txt
+C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\OpenHarmony_secret_561\arkt561_analysis_transcript_20260929.txt
+C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\OpenHarmony_secret_561\secret_platform_20260929.zip
+C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\OpenHarmony_secret_561\secret.hap
+C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\OpenHarmony_secret_561\WP.md
+C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\OpenHarmony_secret_561\analysis\_decrypt_probe.bin
+C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\OpenHarmony_secret_561\analysis\agent_secret561_assets_20260929.txt
+C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\OpenHarmony_secret_561\analysis\agent_secret561_independent_audit_20260929.…
+C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\OpenHarmony_secret_561\analysis\brute_pattern_example_hash.py
+C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\OpenHarmony_secret_561\analysis\check_formula_variants.py
+C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\OpenHarmony_secret_561\analysis\decrypt_enc_custom_sm4.py
+C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\OpenHarmony_secret_561\analysis\disassemble_app_output.txt
+C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\OpenHarmony_secret_561\analysis\disassemble_indexed_methods.py
+C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\OpenHarmony_secret_561\analysis\disassemble_indexed_output.txt
+C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\OpenHarmony_secret_561\analysis\dump_literalarrays.py
+C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\OpenHarmony_secret_561\analysis\enc.base64-decoded.bin
+C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\OpenHarmony_secret_561\analysis\enc.custom-sm4-decrypted.bin
+C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\OpenHarmony_secret_561\analysis\enc.recovered.jpg
+C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\OpenHarmony_secret_561\analysis\hash_materials_561.py
+C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\OpenHarmony_secret_561\analysis\independent_rederive_secret561.py
+C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\OpenHarmony_secret_561\analysis\inspect_panda_abc_header.py
+C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\OpenHarmony_secret_561\analysis\invert_pattern_xxtea.py
+C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\OpenHarmony_secret_561\analysis\libsecret_callbacks_disassembly.txt
+C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\OpenHarmony_secret_561\analysis\libsecret_init_proc_disassembly.txt
+C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\OpenHarmony_secret_561\analysis\parse_panda_methods_output.txt
+C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\OpenHarmony_secret_561\analysis\probe_abc_parser_modules.py
+C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\OpenHarmony_secret_561\analysis\probe_resource_index_secret.py
+C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\OpenHarmony_secret_561\analysis\recover_pattern_561_output.txt
+C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\OpenHarmony_secret_561\analysis\recover_pattern_561.py
+C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\OpenHarmony_secret_561\analysis\resource_index_salted_ciphertext.b64
+C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\OpenHarmony_secret_561\analysis\revalidate_561_transcript_20260929.txt
+C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\OpenHarmony_secret_561\analysis\revalidate_native_pattern.py
+C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\OpenHarmony_secret_561\analysis\secret561_resource_flow_findings_20260929.md
+C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\OpenHarmony_secret_561\analysis\sha256_manifest_20260929.csv
+C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\OpenHarmony_secret_561\analysis\verify_roundtrip_and_decode_jpeg.py
+C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\OpenHarmony_secret_561\analysis\__pycache__\decrypt_enc_custom_sm4.cpython-…
+C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\OpenHarmony_secret_561\hap_contents\.pages.info
+C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\OpenHarmony_secret_561\hap_contents\module.json
+C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\OpenHarmony_secret_561\hap_contents\pack.info
+C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\OpenHarmony_secret_561\hap_contents\pkgContextInfo.json
+C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\OpenHarmony_secret_561\hap_contents\resources.index
+C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\OpenHarmony_secret_561\hap_contents\ets\modules.abc
+C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\OpenHarmony_secret_561\hap_contents\ets\sourceMaps.map
+C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\OpenHarmony_secret_561\hap_contents\libs\arm64-v8a\libc++_shared.so
+C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\OpenHarmony_secret_561\hap_contents\libs\arm64-v8a\libsecret.so
+C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\OpenHarmony_secret_561\hap_contents\libs\x86_64\libc++_shared.so
+C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\OpenHarmony_secret_561\hap_contents\libs\x86_64\libsecret.so
+C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\OpenHarmony_secret_561\hap_contents\resources\base\media\background.png
+C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\OpenHarmony_secret_561\hap_contents\resources\base\media\foreground.png
+C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\OpenHarmony_secret_561\hap_contents\resources\base\media\ic_back.png
+C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\OpenHarmony_secret_561\hap_contents\resources\base\media\icon.png
+C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\OpenHarmony_secret_561\hap_contents\resources\base\media\layered_image.json
+C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\OpenHarmony_secret_561\hap_contents\resources\base\media\startIcon.png
+C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\OpenHarmony_secret_561\hap_contents\resources\base\profile\backup_config.js…
+C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\OpenHarmony_secret_561\hap_contents\resources\base\profile\main_pages.json
+C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\OpenHarmony_secret_561\hap_contents\resources\rawfile\enc
+C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\OpenHarmony_secret_561\附件_20260929\secret.hap
+DOWNLOAD_CANDIDATES:
+D:\Downloads\secret (1).zip
+D:\Downloads\secret (2).zip
+D:\Downloads\secret.zip
+D:\Downloads\Compressed\Uninstall Tool v3.5.7 Build 5610.zip
+D:\Downloads\Pictures\1757925225613.jpg
+PROJECT_TOP_LEVEL:
+
+
+
+
+
+
+
+
+
+
+PS>$global:?
+True
+**********************
+PowerShell transcript end
+End time: 20260929154044
+**********************
+**********************
+PowerShell transcript start
+Start time: 20260929154107
+Username: DESKTOP-412KTAR\mzj
+RunAs User: DESKTOP-412KTAR\mzj
+Configuration Name: 
+Machine: DESKTOP-412KTAR (Microsoft Windows NT 10.0.26200.0)
+Host Application: C:\Users\mzj\.cache\codex-runtimes\codex-primary-runtime\dependencies\native\powershell\pwsh.dll -Command try { [Console]::OutputEncoding=[System.Text.Encoding]::UTF8 } catch {}
+$ErrorActionPreference = 'Continue'
+Start-Transcript -Path 'C:\Users\mzj\Desktop\CTF\玄机刷题\记录\批次14_561_调查记录.txt' -Append
+$base = 'C:\Users\mzj\Desktop\CTF\玄机刷题'
+$files = @(
+  'D:\Downloads\secret.zip',
+  'D:\Downloads\secret (1).zip',
+  'D:\Downloads\secret (2).zip',
+  (Join-Path $base '题目资料\OpenHarmony_secret_561\secret_platform_20260929.zip'),
+  (Join-Path $base '题目资料\OpenHarmony_secret_561\secret.hap'),
+  (Join-Path $base '题目资料\OpenHarmony_secret_561\附件_20260929\secret.hap')
+)
+foreach ($p in $files) { if (Test-Path -LiteralPath $p) { Get-Item -LiteralPath $p | Select-Object FullName,Length,LastWriteTime; Get-FileHash -LiteralPath $p -Algorithm SHA256 | Select-Object Path,Hash } else { Write-Output ("MISSING: " + $p) } }
+Write-Output 'PRIOR_TRANSCRIPTS_AND_WP:'
+Get-Content -LiteralPath (Join-Path $base '题目资料\OpenHarmony_secret_561\arkt561_analysis_transcript_20260929.txt') -ErrorAction SilentlyContinue
+Write-Output 'OLD_WP:'
+Get-Content -LiteralPath (Join-Path $base '题目资料\OpenHarmony_secret_561\WP.md') -ErrorAction SilentlyContinue
+Write-Output 'OLD_FINDINGS:'
+Get-Content -LiteralPath (Join-Path $base '题目资料\OpenHarmony_secret_561\analysis\secret561_resource_flow_findings_20260929.md') -ErrorAction SilentlyContinue
+Stop-Transcript
+Process ID: 5968
+PSVersion: 7.6.5
+PSEdition: Core
+GitCommitId: 7.6.5
+OS: Microsoft Windows 10.0.26200
+Platform: Win32NT
+PSCompatibleVersions: 1.0, 2.0, 3.0, 4.0, 5.0, 5.1, 6.0, 7.0
+PSRemotingProtocolVersion: 2.4
+SerializationVersion: 1.1.0.1
+WSManStackVersion: 3.0
+**********************
+Transcript started, output file is C:\Users\mzj\Desktop\CTF\玄机刷题\记录\批次14_561_调查记录.txt
+
+**********************
+PowerShell transcript end
+End time: 20260929154107
+**********************
+**********************
+PowerShell transcript start
+Start time: 20260929154132
+Username: DESKTOP-412KTAR\mzj
+RunAs User: DESKTOP-412KTAR\mzj
+Configuration Name: 
+Machine: DESKTOP-412KTAR (Microsoft Windows NT 10.0.26200.0)
+Host Application: C:\Users\mzj\.cache\codex-runtimes\codex-primary-runtime\dependencies\native\powershell\pwsh.dll -Command try { [Console]::OutputEncoding=[System.Text.Encoding]::UTF8 } catch {}
+$ErrorActionPreference = 'Continue'
+Start-Transcript -Path 'C:\Users\mzj\Desktop\CTF\玄机刷题\记录\批次14_561_调查记录.txt' -Append
+$paths = @('D:\Downloads\secret.zip','D:\Downloads\secret (1).zip','D:\Downloads\secret (2).zip','C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\OpenHarmony_secret_561\secret_platform_20260929.zip','C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\OpenHarmony_secret_561\附件_20260929\secret.hap','C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\批次14_20260929\561_OpenHarmony_secret')
+foreach ($p in $paths) { if (Test-Path -LiteralPath $p -PathType Leaf) { $i=Get-Item -LiteralPath $p; $h=(Get-FileHash -LiteralPath $p -Algorithm SHA256).Hash; Write-Output ("FILE|{0}|{1}|{2:o}|SHA256={3}" -f $i.FullName,$i.Length,$i.LastWriteTime,$h) } elseif (Test-Path -LiteralPath $p -PathType Container) { Write-Output ("DIR|"+$p) } else { Write-Output ("MISSING|"+$p) } }
+Add-Type -AssemblyName System.IO.Compression.FileSystem
+foreach ($p in @('D:\Downloads\secret.zip','D:\Downloads\secret (1).zip','D:\Downloads\secret (2).zip')) { if(Test-Path -LiteralPath $p){ Write-Output ('ZIP_ENTRIES|' + $p); [System.IO.Compression.ZipFile]::OpenRead($p).Entries | Select-Object -First 20 FullName,Length,CompressedLength | Format-Table -AutoSize } }
+Stop-Transcript
+Process ID: 32592
+PSVersion: 7.6.5
+PSEdition: Core
+GitCommitId: 7.6.5
+OS: Microsoft Windows 10.0.26200
+Platform: Win32NT
+PSCompatibleVersions: 1.0, 2.0, 3.0, 4.0, 5.0, 5.1, 6.0, 7.0
+PSRemotingProtocolVersion: 2.4
+SerializationVersion: 1.1.0.1
+WSManStackVersion: 3.0
+**********************
+Transcript started, output file is C:\Users\mzj\Desktop\CTF\玄机刷题\记录\批次14_561_调查记录.txt
+FILE|D:\Downloads\secret.zip|1170497|2026-09-27T19:27:50.1046813+08:00|SHA256=77177B600FEA6DA73C41935763ED555047F15CB7F17B7A707550BBD9E633080F
+FILE|D:\Downloads\secret (1).zip|1170497|2026-09-29T01:50:24.6875087+08:00|SHA256=77177B600FEA6DA73C41935763ED555047F15CB7F17B7A707550BBD9E633080F
+FILE|D:\Downloads\secret (2).zip|1170497|2026-09-29T15:38:07.5665368+08:00|SHA256=77177B600FEA6DA73C41935763ED555047F15CB7F17B7A707550BBD9E633080F
+FILE|C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\OpenHarmony_secret_561\secret_platform_20260929.zip|1170497|2026-09-29T01:50:24.6875087+08:00|SHA256=77177B600FEA6DA73C41935763ED555047F15CB7F17B7A707550BBD9E633080F
+FILE|C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\OpenHarmony_secret_561\附件_20260929\secret.hap|3252706|2025-05-15T13:44:46.0000000+08:00|SHA256=743EB75674EB2BBF8696D5414FD9E122236022E49FB2C30D19A1D24D76D07720
+DIR|C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\批次14_20260929\561_OpenHarmony_secret
+ZIP_ENTRIES|D:\Downloads\secret.zip
+
+FullName    Length CompressedLength
+--------    ------ ----------------
+secret.hap 3252706          1170379
+
+ZIP_ENTRIES|D:\Downloads\secret (1).zip
+
+FullName    Length CompressedLength
+--------    ------ ----------------
+secret.hap 3252706          1170379
+
+ZIP_ENTRIES|D:\Downloads\secret (2).zip
+
+FullName    Length CompressedLength
+--------    ------ ----------------
+secret.hap 3252706          1170379
+
+**********************
+PowerShell transcript end
+End time: 20260929154132
+**********************
+**********************
+PowerShell transcript start
+Start time: 20260929154314
+Username: DESKTOP-412KTAR\mzj
+RunAs User: DESKTOP-412KTAR\mzj
+Configuration Name: 
+Machine: DESKTOP-412KTAR (Microsoft Windows NT 10.0.26200.0)
+Host Application: C:\Users\mzj\.cache\codex-runtimes\codex-primary-runtime\dependencies\native\powershell\pwsh.dll -Command try { [Console]::OutputEncoding=[System.Text.Encoding]::UTF8 } catch {}
+$ErrorActionPreference = 'Continue'
+Start-Transcript -Path 'C:\Users\mzj\Desktop\CTF\玄机刷题\记录\批次14_561_调查记录.txt' -Append
+$dest = 'C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\批次14_20260929\561_OpenHarmony_secret'
+$old = 'C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\OpenHarmony_secret_561'
+New-Item -ItemType Directory -Path (Join-Path $dest '附件'),(Join-Path $dest 'analysis'),(Join-Path $dest '记录') -Force | Out-Null
+Copy-Item -LiteralPath 'D:\Downloads\secret (2).zip' -Destination (Join-Path $dest '附件\secret_玄机新下载.zip') -Force
+Add-Type -AssemblyName System.IO.Compression.FileSystem
+[System.IO.Compression.ZipFile]::ExtractToDirectory((Join-Path $dest '附件\secret_玄机新下载.zip'),(Join-Path $dest '附件\zip_contents'))
+$hap = Join-Path $dest '附件\zip_contents\secret.hap'
+[System.IO.Compression.ZipFile]::ExtractToDirectory($hap,(Join-Path $dest '附件\hap_contents'))
+$copyNames = @('WP.md','analysis\secret561_resource_flow_findings_20260929.md','analysis\decrypt_enc_custom_sm4.py','analysis\revalidate_native_pattern.py','analysis\check_formula_variants.py','analysis\brute_pattern_example_hash.py','analysis\verify_roundtrip_and_decode_jpeg.py','analysis\hash_materials_561.py','analysis\disassemble_app_output.txt','analysis\libsecret_callbacks_disassembly.txt','analysis\libsecret_init_proc_disassembly.txt','analysis\recover_pattern_561_output.txt','analysis\revalidate_561_transcript_20260929.txt','analysis\sha256_manifest_20260929.csv')
+foreach($n in $copyNames){$src=Join-Path $old $n;if(Test-Path -LiteralPath $src){$leaf=Split-Path $n -Leaf;$new=if($n -eq 'WP.md'){'analysis\WP_preexisting_20260929.md'}else{Join-Path 'analysis' $leaf};Copy-Item -LiteralPath $src -Destination (Join-Path $dest $new) -Force;Write-Output ("COPIED_PREEXISTING|"+$n+"|"+$new)}else{Write-Output ("MISSING_PREEXISTING|"+$n)}}
+Write-Output 'NEW_DOWNLOAD_HASHES:'
+Get-FileHash -LiteralPath (Join-Path $dest '附件\secret_玄机新下载.zip') -Algorithm SHA256 | Format-List Path,Hash
+Get-FileHash -LiteralPath $hap -Algorithm SHA256 | Format-List Path,Hash
+Write-Output 'NEW_HAP_ENTRIES:'
+Get-ChildItem -LiteralPath (Join-Path $dest '附件\hap_contents') -Recurse -File | Select-Object FullName,Length | Format-Table -AutoSize
+Write-Output 'REVALIDATION_SCRIPT_SOURCE:'
+Get-Content -LiteralPath (Join-Path $dest 'analysis\revalidate_native_pattern.py')
+Write-Output 'FORMULA_CHECK_SOURCE:'
+Get-Content -LiteralPath (Join-Path $dest 'analysis\check_formula_variants.py')
+Stop-Transcript
+Process ID: 40876
+PSVersion: 7.6.5
+PSEdition: Core
+GitCommitId: 7.6.5
+OS: Microsoft Windows 10.0.26200
+Platform: Win32NT
+PSCompatibleVersions: 1.0, 2.0, 3.0, 4.0, 5.0, 5.1, 6.0, 7.0
+PSRemotingProtocolVersion: 2.4
+SerializationVersion: 1.1.0.1
+WSManStackVersion: 3.0
+**********************
+Transcript started, output file is C:\Users\mzj\Desktop\CTF\玄机刷题\记录\批次14_561_调查记录.txt
+COPIED_PREEXISTING|WP.md|analysis\WP_preexisting_20260929.md
+COPIED_PREEXISTING|analysis\secret561_resource_flow_findings_20260929.md|analysis\secret561_resource_flow_findings_20260929.md
+COPIED_PREEXISTING|analysis\decrypt_enc_custom_sm4.py|analysis\decrypt_enc_custom_sm4.py
+COPIED_PREEXISTING|analysis\revalidate_native_pattern.py|analysis\revalidate_native_pattern.py
+COPIED_PREEXISTING|analysis\check_formula_variants.py|analysis\check_formula_variants.py
+COPIED_PREEXISTING|analysis\brute_pattern_example_hash.py|analysis\brute_pattern_example_hash.py
+COPIED_PREEXISTING|analysis\verify_roundtrip_and_decode_jpeg.py|analysis\verify_roundtrip_and_decode_jpeg.py
+COPIED_PREEXISTING|analysis\hash_materials_561.py|analysis\hash_materials_561.py
+COPIED_PREEXISTING|analysis\disassemble_app_output.txt|analysis\disassemble_app_output.txt
+COPIED_PREEXISTING|analysis\libsecret_callbacks_disassembly.txt|analysis\libsecret_callbacks_disassembly.txt
+COPIED_PREEXISTING|analysis\libsecret_init_proc_disassembly.txt|analysis\libsecret_init_proc_disassembly.txt
+COPIED_PREEXISTING|analysis\recover_pattern_561_output.txt|analysis\recover_pattern_561_output.txt
+COPIED_PREEXISTING|analysis\revalidate_561_transcript_20260929.txt|analysis\revalidate_561_transcript_20260929.txt
+COPIED_PREEXISTING|analysis\sha256_manifest_20260929.csv|analysis\sha256_manifest_20260929.csv
+NEW_DOWNLOAD_HASHES:
+
+Path : C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\批次14_20260929\561_OpenHarmony_secret\附件\secret_玄机新下载.zip
+Hash : 77177B600FEA6DA73C41935763ED555047F15CB7F17B7A707550BBD9E633080F
+
+
+Path : C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\批次14_20260929\561_OpenHarmony_secret\附件\zip_contents\secret.hap
+Hash : 743EB75674EB2BBF8696D5414FD9E122236022E49FB2C30D19A1D24D76D07720
+
+NEW_HAP_ENTRIES:
+
+FullName
+--------                                                                                                               
+C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\批次14_20260929\561_OpenHarmony_secret\附件\hap_contents\.pages.info
+C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\批次14_20260929\561_OpenHarmony_secret\附件\hap_contents\module.json
+C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\批次14_20260929\561_OpenHarmony_secret\附件\hap_contents\pack.info
+C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\批次14_20260929\561_OpenHarmony_secret\附件\hap_contents\pkgContextInfo.json
+C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\批次14_20260929\561_OpenHarmony_secret\附件\hap_contents\resources.index
+C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\批次14_20260929\561_OpenHarmony_secret\附件\hap_contents\ets\modules.abc
+C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\批次14_20260929\561_OpenHarmony_secret\附件\hap_contents\ets\sourceMaps.map
+C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\批次14_20260929\561_OpenHarmony_secret\附件\hap_contents\libs\arm64-v8a\lib…
+C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\批次14_20260929\561_OpenHarmony_secret\附件\hap_contents\libs\arm64-v8a\lib…
+C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\批次14_20260929\561_OpenHarmony_secret\附件\hap_contents\libs\x86_64\libc++…
+C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\批次14_20260929\561_OpenHarmony_secret\附件\hap_contents\libs\x86_64\libsec…
+C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\批次14_20260929\561_OpenHarmony_secret\附件\hap_contents\resources\base\med…
+C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\批次14_20260929\561_OpenHarmony_secret\附件\hap_contents\resources\base\med…
+C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\批次14_20260929\561_OpenHarmony_secret\附件\hap_contents\resources\base\med…
+C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\批次14_20260929\561_OpenHarmony_secret\附件\hap_contents\resources\base\med…
+C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\批次14_20260929\561_OpenHarmony_secret\附件\hap_contents\resources\base\med…
+C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\批次14_20260929\561_OpenHarmony_secret\附件\hap_contents\resources\base\med…
+C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\批次14_20260929\561_OpenHarmony_secret\附件\hap_contents\resources\base\pro…
+C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\批次14_20260929\561_OpenHarmony_secret\附件\hap_contents\resources\base\pro…
+C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\批次14_20260929\561_OpenHarmony_secret\附件\hap_contents\resources\rawfile\…
+
+REVALIDATION_SCRIPT_SOURCE:
+#!/usr/bin/env python3
+"""Independently re-derive #561's native pattern without executing the HAP.
+
+Only Python's standard library is used. The script reads ELF section metadata,
+extracts the key and encrypted target from .data, decrypts with XXTEA, then
+checks the answer by re-encrypting it. The final MD5 values are hypotheses from
+the resource hint, not proof of a platform-accepted flag.
+"""
+from __future__ import annotations
+
+import hashlib
+import struct
+import sys
+from pathlib import Path
+
+
+ROOT = Path(__file__).resolve().parents[1]
+ELF = ROOT / "hap_contents" / "libs" / "x86_64" / "libsecret.so"
+MASK = 0xFFFFFFFF
+DELTA = 0x9E3779B9
+KEY_REL = 0x10  # .data + 0x10: native object `what`, four uint32 words
+TARGET_REL = 0x20  # .data + 0x20: native object `is`, nine uint32 words
+SUFFIX = "Harmony5337"
+
+if hasattr(sys.stdout, "reconfigure"):
+    sys.stdout.reconfigure(encoding="utf-8", errors="backslashreplace")
+
+
+def get_data_section(blob: bytes) -> tuple[int, int, int, int]:
+    """Return ELF machine, .data file offset, size, and ELF class bits."""
+    if blob[:4] != b"\x7fELF":
+        raise ValueError("input is not an ELF file")
+    elf_class, endian = blob[4], blob[5]
+    if elf_class != 2 or endian != 1:
+        raise ValueError("expected little-endian ELF64")
+    fields = struct.unpack_from("<16sHHIQQQIHHHHHH", blob, 0)
+    _ident, _etype, machine, _version, _entry, _phoff, shoff, _flags, _ehsize, _phentsize, _phnum, shentsize, shnum, shstrndx = fields
+    if shentsize < 64 or shstrndx >= shnum:
+        raise ValueError("invalid ELF section table")
+
+    def section_header(index: int) -> tuple[int, ...]:
+        off = shoff + index * shentsize
+        if off + 64 > len(blob):
+            raise ValueError("section header extends beyond file")
+        return struct.unpack_from("<IIQQQQIIQQ", blob, off)
+
+    strings_header = section_header(shstrndx)
+    strings_off, strings_size = strings_header[4], strings_header[5]
+    strings = blob[strings_off:strings_off + strings_size]
+    for index in range(shnum):
+        header = section_header(index)
+        name_off = header[0]
+        if name_off >= len(strings):
+            continue
+        end = strings.find(b"\0", name_off)
+        name = strings[name_off:end if end >= 0 else len(strings)].decode("ascii", "replace")
+        if name == ".data":
+            return machine, header[4], header[5], elf_class * 32
+    raise ValueError("ELF has no .data section")
+
+
+def mx(z: int, y: int, total: int, key: tuple[int, ...], e: int, p: int) -> int:
+    a = ((z >> 5) ^ ((y << 2) & MASK))
+    b = ((y >> 3) ^ ((z << 4) & MASK))
+    c = ((total ^ y) + (key[(p & 3) ^ e] ^ z)) & MASK
+    return ((a + b) ^ c) & MASK
+
+
+def xxtea_encrypt(words: list[int], key: tuple[int, ...]) -> list[int]:
+    values = [value & MASK for value in words]
+    n = len(values)
+    rounds = 6 + 52 // n
+    total = 0
+    z = values[-1]
+    while rounds:
+        total = (total + DELTA) & MASK
+        e = (total >> 2) & 3
+        for p in range(n - 1):
+            y = values[p + 1]
+            values[p] = (values[p] + mx(z, y, total, key, e, p)) & MASK
+            z = values[p]
+        y = values[0]
+        values[-1] = (values[-1] + mx(z, y, total, key, e, n - 1)) & MASK
+        z = values[-1]
+        rounds -= 1
+    return values
+
+
+def xxtea_decrypt(words: list[int], key: tuple[int, ...]) -> list[int]:
+    values = [value & MASK for value in words]
+    n = len(values)
+    rounds = 6 + 52 // n
+    total = (rounds * DELTA) & MASK
+    y = values[0]
+    while total:
+        e = (total >> 2) & 3
+        for p in range(n - 1, 0, -1):
+            z = values[p - 1]
+            values[p] = (values[p] - mx(z, y, total, key, e, p)) & MASK
+            y = values[p]
+        z = values[-1]
+        values[0] = (values[0] - mx(z, y, total, key, e, 0)) & MASK
+        y = values[0]
+        total = (total - DELTA) & MASK
+    return values
+
+
+def md5(text: str) -> str:
+    return hashlib.md5(text.encode("ascii")).hexdigest()
+
+
+def words_hex(values: list[int] | tuple[int, ...]) -> list[str]:
+    return [f"0x{value:08x}" for value in values]
+
+
+def main() -> None:
+    blob = ELF.read_bytes()
+    machine, data_off, data_size, bits = get_data_section(blob)
+    if machine != 62:
+        raise ValueError(f"expected x86_64 ELF machine 62, found {machine}")
+    if data_size < TARGET_REL + 9 * 4:
+        raise ValueError(".data section is too short for expected native constants")
+    key = struct.unpack_from("<4I", blob, data_off + KEY_REL)
+    target = list(struct.unpack_from("<9I", blob, data_off + TARGET_REL))
+    pattern = xxtea_decrypt(target, key)
+    rebuilt = xxtea_encrypt(pattern, key)
+    compact = "".join(str(point) for point in pattern)
+    comma = ",".join(str(point) for point in pattern)
+    one_based = "".join(str(point + 1) for point in pattern)
+
+    print(f"ELF_PATH_REL={ELF.relative_to(ROOT).as_posix()}")
+    print(f"ELF_BITS={bits} MACHINE={machine} SIZE={len(blob)}")
+    print(f"ELF_SHA256={hashlib.sha256(blob).hexdigest().upper()}")
+    print(f"DATA_FILE_OFFSET=0x{data_off:x} DATA_SIZE=0x{data_size:x}")
+    print(f"KEY_OFFSET=0x{data_off + KEY_REL:x} KEY_WORDS={words_hex(key)}")
+    print(f"TARGET_OFFSET=0x{data_off + TARGET_REL:x} TARGET_WORDS={words_hex(target)}")
+    print(f"DECRYPTED_PATTERN={pattern}")
+    print(f"REENCRYPTED_WORDS={words_hex(rebuilt)}")
+    print(f"XXTEA_ROUNDTRIP={rebuilt == target}")
+    print(f"COMPACT_ZERO_BASED={compact!r}")
+    print(f"ARRAY_TOSTRING={comma!r}")
+    print(f"SHIFTED_ONE_BASED={one_based!r}")
+    for name, password in (
+        ("compact zero-based; hint says no comma", compact),
+        ("JavaScript array text; comma-separated", comma),
+        ("shifted one-based labels", one_based),
+        ("hint example input", "012345678"),
+    ):
+        full_input = password + SUFFIX
+        print(f"MD5_VARIANT={name!r} INPUT={full_input!r} DIGEST={md5(full_input)}")
+    stated_example = "871f72716d85a6374f438ea70c2fd62c"
+    computed_example = md5("012345678" + SUFFIX)
+    print(f"PROMPT_STATED_EXAMPLE={stated_example}")
+    print(f"PROMPT_EXAMPLE_RECOMPUTED={computed_example}")
+    print("FLAG_STATUS=locally_derived_candidates_only; platform acceptance is not established here")
+    assert rebuilt == target, "XXTEA encryption/decryption round-trip failed"
+    assert pattern == [1, 3, 7, 5, 2, 4, 8, 6, 0], "unexpected pattern; inspect disassembly and offsets"
+
+
+if __name__ == "__main__":
+    main()
+FORMULA_CHECK_SOURCE:
+import hashlib
+patterns=['137524860','1,3,7,5,2,4,8,6,0','012345678','0,1,2,3,4,5,6,7,8']
+suffix='Harmony5337'
+for pattern in patterns:
+    raw=pattern+suffix
+    print('password_repr=',repr(pattern),'md5_input=',repr(raw),'md5=',hashlib.md5(raw.encode()).hexdigest(),'flag=flag{'+hashlib.md5(raw.encode()).hexdigest()+'}')
+**********************
+PowerShell transcript end
+End time: 20260929154314
+**********************
+**********************
+PowerShell transcript start
+Start time: 20260929154405
+Username: DESKTOP-412KTAR\mzj
+RunAs User: DESKTOP-412KTAR\mzj
+Configuration Name: 
+Machine: DESKTOP-412KTAR (Microsoft Windows NT 10.0.26200.0)
+Host Application: C:\Users\mzj\.cache\codex-runtimes\codex-primary-runtime\dependencies\native\powershell\pwsh.dll -Command try { [Console]::OutputEncoding=[System.Text.Encoding]::UTF8 } catch {}
+$ErrorActionPreference = 'Continue'
+Start-Transcript -Path 'C:\Users\mzj\Desktop\CTF\玄机刷题\记录\批次14_561_调查记录.txt' -Append
+$dest='C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\批次14_20260929\561_OpenHarmony_secret'
+$script=Join-Path $dest 'analysis\revalidate_native_pattern.py'
+$src=Get-Content -LiteralPath $script -Raw
+$src=$src.Replace('ROOT / "hap_contents" / "libs"','ROOT / "附件" / "hap_contents" / "libs"')
+Set-Content -LiteralPath $script -Value $src -Encoding utf8
+Set-Location -LiteralPath $dest
+Write-Output 'RUN_NATIVE_PATTERN_REVALIDATION:'
+py -3 .\analysis\revalidate_native_pattern.py 2>&1 | Tee-Object -FilePath .\analysis\batch14_revalidate_native_stdout.txt
+Write-Output ("NATIVE_PY_EXIT="+$LASTEXITCODE)
+Write-Output 'RUN_FORMULA_VARIANTS:'
+py -3 .\analysis\check_formula_variants.py 2>&1 | Tee-Object -FilePath .\analysis\batch14_formula_stdout.txt
+Write-Output ("FORMULA_PY_EXIT="+$LASTEXITCODE)
+Write-Output 'BRUTE_PATTERN_CHECK_SCRIPT:'
+Get-Content -LiteralPath .\analysis\brute_pattern_example_hash.py
+Stop-Transcript
+Process ID: 11488
+PSVersion: 7.6.5
+PSEdition: Core
+GitCommitId: 7.6.5
+OS: Microsoft Windows 10.0.26200
+Platform: Win32NT
+PSCompatibleVersions: 1.0, 2.0, 3.0, 4.0, 5.0, 5.1, 6.0, 7.0
+PSRemotingProtocolVersion: 2.4
+SerializationVersion: 1.1.0.1
+WSManStackVersion: 3.0
+**********************
+Transcript started, output file is C:\Users\mzj\Desktop\CTF\玄机刷题\记录\批次14_561_调查记录.txt
+RUN_NATIVE_PATTERN_REVALIDATION:
+ELF_PATH_REL=附件/hap_contents/libs/x86_64/libsecret.so
+ELF_BITS=64 MACHINE=62 SIZE=61384
+ELF_SHA256=388EC90B343F5C74E70F2ECB5F83098F9C3A09F23B6222F59F33F2587967627A
+DATA_FILE_OFFSET=0xe720 DATA_SIZE=0x140
+KEY_OFFSET=0xe730 KEY_WORDS=['0x0000000b', '0x0000002d', '0x0000000e', '0x0001bf52']
+TARGET_OFFSET=0xe740 TARGET_WORDS=['0xe52bcc34', '0x344e3b05', '0xded45d41', '0x5f1ed75a', '0x97439820', '0x1f1b5b18', '0xf108fe7f', '0x93962769', '0xc4b198ca']
+DECRYPTED_PATTERN=[1, 3, 7, 5, 2, 4, 8, 6, 0]
+REENCRYPTED_WORDS=['0xe52bcc34', '0x344e3b05', '0xded45d41', '0x5f1ed75a', '0x97439820', '0x1f1b5b18', '0xf108fe7f', '0x93962769', '0xc4b198ca']
+XXTEA_ROUNDTRIP=True
+COMPACT_ZERO_BASED='137524860'
+ARRAY_TOSTRING='1,3,7,5,2,4,8,6,0'
+SHIFTED_ONE_BASED='248635971'
+MD5_VARIANT='compact zero-based; hint says no comma' INPUT='137524860Harmony5337' DIGEST=8b4ec604943712483bfca67cacf85f1a
+MD5_VARIANT='JavaScript array text; comma-separated' INPUT='1,3,7,5,2,4,8,6,0Harmony5337' DIGEST=429ebe492a801046d1a43c328db88e7f
+MD5_VARIANT='shifted one-based labels' INPUT='248635971Harmony5337' DIGEST=f6f4a6c7c16f27a4fd8b34e9b6b9b9e3
+MD5_VARIANT='hint example input' INPUT='012345678Harmony5337' DIGEST=a8f2f50ac7bcf159d3e017721542768b
+PROMPT_STATED_EXAMPLE=871f72716d85a6374f438ea70c2fd62c
+PROMPT_EXAMPLE_RECOMPUTED=a8f2f50ac7bcf159d3e017721542768b
+FLAG_STATUS=locally_derived_candidates_only; platform acceptance is not established here
+NATIVE_PY_EXIT=0
+RUN_FORMULA_VARIANTS:
+password_repr= '137524860' md5_input= '137524860Harmony5337' md5= 8b4ec604943712483bfca67cacf85f1a flag=flag{8b4ec604943712483bfca67cacf85f1a}
+password_repr= '1,3,7,5,2,4,8,6,0' md5_input= '1,3,7,5,2,4,8,6,0Harmony5337' md5= 429ebe492a801046d1a43c328db88e7f flag=flag{429ebe492a801046d1a43c328db88e7f}
+password_repr= '012345678' md5_input= '012345678Harmony5337' md5= a8f2f50ac7bcf159d3e017721542768b flag=flag{a8f2f50ac7bcf159d3e017721542768b}
+password_repr= '0,1,2,3,4,5,6,7,8' md5_input= '0,1,2,3,4,5,6,7,8Harmony5337' md5= ae1df859b780f8a48f988d57795a410d flag=flag{ae1df859b780f8a48f988d57795a410d}
+FORMULA_PY_EXIT=0
+BRUTE_PATTERN_CHECK_SCRIPT:
+import hashlib,itertools,time
+wanted='871f72716d85a6374f438ea70c2fd62c'
+suffix='Harmony5337'
+start=time.perf_counter(); count=0; found=[]
+for length in range(4,10):
+    for tup in itertools.permutations('012345678',length):
+        raw=''.join(tup)
+        count+=1
+        if hashlib.md5((raw+suffix).encode()).hexdigest()==wanted:
+            found.append(('joined',raw))
+        if hashlib.md5((',' .join(tup)+suffix).encode()).hexdigest()==wanted:
+            found.append(('comma',','.join(tup)))
+print('tested',count,'unique digit sequences lengths 4..9 in joined/comma format')
+print('matches',found)
+print('elapsed_seconds',round(time.perf_counter()-start,3))
+**********************
+PowerShell transcript end
+End time: 20260929154406
+**********************
+**********************
+PowerShell transcript start
+Start time: 20260929154438
+Username: DESKTOP-412KTAR\mzj
+RunAs User: DESKTOP-412KTAR\mzj
+Configuration Name: 
+Machine: DESKTOP-412KTAR (Microsoft Windows NT 10.0.26200.0)
+Host Application: C:\Users\mzj\.cache\codex-runtimes\codex-primary-runtime\dependencies\native\powershell\pwsh.dll -Command try { [Console]::OutputEncoding=[System.Text.Encoding]::UTF8 } catch {}
+$ErrorActionPreference = 'Continue'
+Start-Transcript -Path 'C:\Users\mzj\Desktop\CTF\玄机刷题\记录\批次14_561_调查记录.txt' -Append
+$dest='C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\批次14_20260929\561_OpenHarmony_secret'
+$old='C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\OpenHarmony_secret_561\analysis'
+foreach($n in @('decrypt_enc_custom_sm4.py','verify_roundtrip_and_decode_jpeg.py','probe_resource_index_secret.py','hash_materials_561.py')){ $p=Join-Path $old $n; if(Test-Path -LiteralPath $p){Write-Output ('SOURCE_FILE='+$n);Get-Content -LiteralPath $p | Select-Object -First 260} }
+Write-Output 'PATH_REFERENCES:'
+Select-String -LiteralPath (Join-Path $dest 'analysis\decrypt_enc_custom_sm4.py'),(Join-Path $dest 'analysis\verify_roundtrip_and_decode_jpeg.py') -Pattern 'ROOT|hap_contents|write_bytes|write_text|open\(' | Select-Object Path,LineNumber,Line
+Stop-Transcript
+Process ID: 42436
+PSVersion: 7.6.5
+PSEdition: Core
+GitCommitId: 7.6.5
+OS: Microsoft Windows 10.0.26200
+Platform: Win32NT
+PSCompatibleVersions: 1.0, 2.0, 3.0, 4.0, 5.0, 5.1, 6.0, 7.0
+PSRemotingProtocolVersion: 2.4
+SerializationVersion: 1.1.0.1
+WSManStackVersion: 3.0
+**********************
+Transcript started, output file is C:\Users\mzj\Desktop\CTF\玄机刷题\记录\批次14_561_调查记录.txt
+SOURCE_FILE=decrypt_enc_custom_sm4.py
+import base64
+import hashlib
+import pathlib
+import struct
+
+ROOT = pathlib.Path(__file__).resolve().parents[1]
+LIB = ROOT / 'hap_contents/libs/x86_64/libsecret.so'
+ENC = ROOT / 'hap_contents/resources/rawfile/enc'
+OUT = ROOT / 'analysis/enc.custom-sm4-decrypted.bin'
+MASK = 0xffffffff
+DELTA = 0x9e3779b9
+FK = [0xa3b1bac6, 0x56aa3350, 0x677d9197, 0xb27022dc]
+KEY = [0xe52bcc34, 0x1f1b5b18, 0x5f1ed75a, 0xf108fe7f]
+
+lib = LIB.read_bytes()
+sbox = list(lib[0x44e0:0x45e0])
+ck = [int.from_bytes(lib[0x45e0 + 8*i:0x45e0 + 8*i + 4], 'little') for i in range(32)]
+assert len(sbox) == 256 and len(ck) == 32
+
+def rol(x, n):
+    x &= MASK
+    return ((x << n) | (x >> (32 - n))) & MASK
+
+def tau(x):
+    return ((sbox[(x >> 24) & 255] << 24) |
+            (sbox[(x >> 16) & 255] << 16) |
+            (sbox[(x >> 8) & 255] << 8) |
+            sbox[x & 255])
+
+def l2(x):
+    return x ^ rol(x, 13) ^ rol(x, 23)
+
+def l1(x):
+    return x ^ rol(x, 2) ^ rol(x, 10) ^ rol(x, 18) ^ rol(x, 24)
+
+def make_rk(key):
+    state = [(key[i] ^ FK[i]) & MASK for i in range(4)]
+    rk = []
+    for i in range(32):
+        j = i & 3
+        mix = state[(i+2)&3] ^ state[(i+1)&3] ^ state[(i-1)&3] ^ ck[i]
+        nxt = state[j] ^ l2(tau(mix))
+        state[j] = nxt & MASK
+        rk.append(nxt & MASK)
+    return rk
+
+def round_f(a, b, c, rk):
+    return (l1(tau((a ^ b ^ c ^ rk) & MASK)) ^ DELTA) & MASK
+
+def encrypt_block(block, rk):
+    x = list(struct.unpack('>4I', block))
+    for i in range(32):
+        j = i & 3
+        x[j] = (x[j] ^ round_f(x[(i+1)&3], x[(i+2)&3], x[(i+3)&3], rk[i])) & MASK
+    return struct.pack('>4I', *reversed(x))
+
+def decrypt_block(block, rk):
+    x = list(reversed(struct.unpack('>4I', block)))
+    for i in range(31, -1, -1):
+        j = i & 3
+        x[j] = (x[j] ^ round_f(x[(i+1)&3], x[(i+2)&3], x[(i+3)&3], rk[i])) & MASK
+    return struct.pack('>4I', *x)
+
+rk = make_rk(KEY)
+test = bytes(range(16))
+test_enc = encrypt_block(test, rk)
+print('SM4-like custom schedule source: native .rodata S-box @0x44e0, CK @0x45e0')
+print('S-box head/tail:', bytes(sbox[:8]).hex(), bytes(sbox[-8:]).hex())
+print('CK head/tail:', [f'{x:08x}' for x in ck[:4]], [f'{x:08x}' for x in ck[-4:]])
+print('key words:', [f'{x:08x}' for x in KEY])
+print('round key first/last:', [f'{x:08x}' for x in rk[:4]], [f'{x:08x}' for x in rk[-4:]])
+print('internal block round-trip:', decrypt_block(test_enc, rk) == test)
+print('test block/cipher:', test.hex(), test_enc.hex())
+raw_b64 = ENC.read_bytes()
+cipher = base64.b64decode(raw_b64, validate=True)
+print('enc ASCII length/SHA256:', len(raw_b64), hashlib.sha256(raw_b64).hexdigest())
+print('decoded ciphertext length/SHA256:', len(cipher), hashlib.sha256(cipher).hexdigest())
+print('block aligned:', len(cipher) % 16 == 0)
+plain = b''.join(decrypt_block(cipher[i:i+16], rk) for i in range(0, len(cipher), 16))
+OUT.write_bytes(plain)
+print('decrypted length/SHA256:', len(plain), hashlib.sha256(plain).hexdigest())
+print('first 96 plaintext bytes:', plain[:96].hex())
+print('first 96 plaintext repr:', repr(plain[:96]))
+print('printable ASCII ratio:', sum(32 <= b < 127 or b in (9,10,13) for b in plain) / len(plain))
+print('first-block re-encryption matches input:', encrypt_block(plain[:16], rk) == cipher[:16])
+print('output path:', OUT)
+SOURCE_FILE=verify_roundtrip_and_decode_jpeg.py
+import base64
+import hashlib
+import pathlib
+import sys
+
+sys.path.insert(0, str(pathlib.Path(__file__).resolve().parent))
+import decrypt_enc_custom_sm4 as cipher_impl
+
+cipher = cipher_impl.cipher
+plain = cipher_impl.plain
+rk = cipher_impl.rk
+checks = [cipher_impl.encrypt_block(plain[i:i+16], rk) == cipher[i:i+16] for i in range(0, len(cipher), 16)]
+print('block count:', len(checks))
+print('all blocks re-encrypt exactly to decoded resource ciphertext:', all(checks))
+print('mismatch block indexes:', [i for i, ok in enumerate(checks) if not ok][:20])
+print('decrypted tail bytes/repr:', plain[-32:].hex(), repr(plain[-32:]))
+padding = plain[-1]
+assert 1 <= padding <= 16 and plain[-padding:] == bytes([padding]) * padding
+unpadded = plain[:-padding]
+print('PKCS#7 padding length and exact-byte validation:', padding, True)
+print('unpadded Base64 length:', len(unpadded), 'mod4:', len(unpadded) % 4)
+image = base64.b64decode(unpadded, validate=True)
+out = cipher_impl.ROOT / 'analysis/enc.recovered.jpg'
+out.write_bytes(image)
+print('decoded JPEG bytes:', len(image))
+print('decoded JPEG SHA256:', hashlib.sha256(image).hexdigest())
+print('JPEG magic:', image[:16].hex())
+print('JPEG output:', out)
+SOURCE_FILE=probe_resource_index_secret.py
+from pathlib import Path
+import base64, hashlib, subprocess, sys
+sys.stdout.reconfigure(encoding='utf-8', errors='backslashreplace')
+root=Path(r'C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\OpenHarmony_secret_561')
+analysis=root/'analysis'
+cipher_b64=(analysis/'resource_index_salted_ciphertext.b64').read_bytes()
+img=(analysis/'enc.recovered.jpg').read_bytes()
+full=(analysis/'enc.custom-sm4-decrypted.bin').read_bytes()
+img_b64=base64.b64encode(img)
+full_b64=base64.b64encode(full)
+candidates=[
+ ('md5.jpg.b64.lower',hashlib.md5(img_b64).hexdigest()),
+ ('md5.jpg.b64.upper',hashlib.md5(img_b64).hexdigest().upper()),
+ ('md5.jpg.bytes.lower',hashlib.md5(img).hexdigest()),
+ ('md5.jpg.bytes.upper',hashlib.md5(img).hexdigest().upper()),
+ ('md5.full.b64.lower',hashlib.md5(full_b64).hexdigest()),
+ ('md5.full.bytes.lower',hashlib.md5(full).hexdigest()),
+ ('33cr33','33cr33'),('53cr37','53cr37'),('secret','secret'),('Secret','Secret')]
+openssl=r'C:\msys64\mingw64\bin\openssl.exe'
+for label,password in candidates:
+    p=subprocess.run([openssl,'enc','-d','-aes-256-cbc','-md','md5','-a','-A','-pass','pass:'+password],input=cipher_b64,capture_output=True)
+    preview=p.stdout.decode('utf-8','replace')[:220]
+    print(f'{label}: exit={p.returncode} bytes={len(p.stdout)} plaintext={preview!r}')
+    if p.returncode==0:
+        print('  SUCCESS_TEXT_REPR='+repr(p.stdout.decode('utf-8')))
+        print('  SUCCESS_HEX='+p.stdout.hex())
+print('jpeg_bytes',len(img),'jpeg_md5',hashlib.md5(img).hexdigest(),'jpeg_base64_md5',hashlib.md5(img_b64).hexdigest())
+print('full_plain_bytes',len(full),'full_md5',hashlib.md5(full).hexdigest(),'full_base64_md5',hashlib.md5(full_b64).hexdigest())
+positions=[i for i in range(len(full)-1) if full[i:i+2]==b'\xff\xd9']
+print('jpeg_eoi_offsets',positions[-8:])
+if positions:
+    eoi=positions[-1]+2
+    tail=full[eoi:]
+    print('last_eoi_end',eoi,'tail_length',len(tail),'tail_head_hex',tail[:128].hex(),'tail_ascii',repr(tail[:128]))
+example_input='012345678'+'Harmony5337'
+print('example_flag_input',repr(example_input))
+print('example_flag_md5',hashlib.md5(example_input.encode()).hexdigest())
+
+SOURCE_FILE=hash_materials_561.py
+#!/usr/bin/env python3
+"""Write a reproducible SHA-256 manifest for #561's source materials."""
+from __future__ import annotations
+
+import csv
+import hashlib
+from pathlib import Path
+
+
+ROOT = Path(__file__).resolve().parents[1]
+OUTPUT = ROOT / "analysis" / "sha256_manifest_20260929.csv"
+SOURCE_FILES = (
+    ("secret_platform_20260929.zip", ROOT / "secret_platform_20260929.zip"),
+    ("secret.hap", ROOT / "secret.hap"),
+    ("附件_20260929/secret.hap", ROOT / "附件_20260929" / "secret.hap"),
+)
+
+
+def main() -> None:
+    files = list(SOURCE_FILES)
+    extracted = ROOT / "hap_contents"
+    files.extend(
+        (path.relative_to(ROOT).as_posix(), path)
+        for path in sorted(extracted.rglob("*"))
+        if path.is_file()
+    )
+    rows: list[tuple[str, int, str]] = []
+    for relative, path in files:
+        data = path.read_bytes()
+        rows.append((relative, len(data), hashlib.sha256(data).hexdigest().upper()))
+
+    with OUTPUT.open("w", newline="", encoding="utf-8") as stream:
+        writer = csv.writer(stream)
+        writer.writerow(("relative_path", "size_bytes", "sha256"))
+        writer.writerows(rows)
+
+    print(f"MANIFEST={OUTPUT.relative_to(ROOT).as_posix()}")
+    print(f"FILES_HASHED={len(rows)}")
+    for relative, size, digest in rows:
+        print(f"{digest}  {size:>10}  {relative}")
+
+
+if __name__ == "__main__":
+    main()
+PATH_REFERENCES:
+
+**********************
+PowerShell transcript end
+End time: 20260929154438
+**********************
+**********************
+PowerShell transcript start
+Start time: 20260929154635
+Username: DESKTOP-412KTAR\mzj
+RunAs User: DESKTOP-412KTAR\mzj
+Configuration Name: 
+Machine: DESKTOP-412KTAR (Microsoft Windows NT 10.0.26200.0)
+Host Application: C:\Users\mzj\.cache\codex-runtimes\codex-primary-runtime\dependencies\native\powershell\pwsh.dll -Command try { [Console]::OutputEncoding=[System.Text.Encoding]::UTF8 } catch {}
+$ErrorActionPreference = 'Continue'
+Start-Transcript -Path 'C:\Users\mzj\Desktop\CTF\玄机刷题\记录\批次14_561_调查记录.txt' -Append
+$dest='C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\批次14_20260929\561_OpenHarmony_secret'
+Set-Location -LiteralPath $dest
+$sm4=Get-Content -LiteralPath .\analysis\decrypt_enc_custom_sm4.py -Raw
+$sm4=$sm4.Replace("ROOT / 'hap_contents","ROOT / '附件/hap_contents")
+Set-Content -LiteralPath .\analysis\decrypt_enc_custom_sm4.py -Value $sm4 -Encoding utf8
+Write-Output 'RUN_CUSTOM_SM4_DECRYPTION:'
+py -3 .\analysis\decrypt_enc_custom_sm4.py 2>&1 | Tee-Object -FilePath .\analysis\batch14_custom_sm4_stdout.txt
+Write-Output ("SM4_PY_EXIT="+$LASTEXITCODE)
+$script = @'
+from pathlib import Path
+import base64, hashlib, subprocess, sys
+root=Path(__file__).resolve().parents[1]
+analysis=root/'analysis'
+assets=root/'附件'/'hap_contents'
+index=(assets/'resources.index').read_bytes()
+offset=index.find(b'Salted__')
+if offset < 0: raise SystemExit('Salted__ not found in resources.index')
+b64_start=offset
+while b64_start>0 and index[b64_start-1:b64_start] not in b'\x00\t\r\n ': b64_start-=1
+b64_end=offset
+while b64_end<len(index) and index[b64_end:b64_end+1] not in b'\x00\t\r\n ': b64_end+=1
+encoded=index[b64_start:b64_end]
+raw=base64.b64decode(encoded,validate=True)
+(analysis/'resource_index_salted_ciphertext.b64').write_bytes(encoded)
+print(f'INDEX_SIZE={len(index)}')
+print(f'SALTED_MARKER_OFFSET={offset} BASE64_RANGE=[{b64_start},{b64_end}) BASE64_LENGTH={len(encoded)}')
+print(f'SALTED_B64={encoded.decode("ascii")}')
+print(f'DECODED_LENGTH={len(raw)} HEADER={raw[:16].hex()} SALT={raw[8:16].hex()} CIPHERTEXT_BYTES={len(raw)-16}')
+assert raw[:8]==b'Salted__' and (len(raw)-16)%16==0
+img=(analysis/'enc.recovered.jpg').read_bytes()
+img64=base64.b64encode(img)
+password=hashlib.md5(img64).hexdigest()
+print(f'JPEG_SIZE={len(img)} JPEG_SHA256={hashlib.sha256(img).hexdigest()} JPEG_BASE64_SIZE={len(img64)}')
+print(f'MD5_OF_JPEG_BASE64={password}')
+exe=Path(r'C:\\msys64\\mingw64\\bin\\openssl.exe')
+if not exe.exists(): raise SystemExit(f'OpenSSL executable missing: {exe}')
+cmd=[str(exe),'enc','-d','-aes-256-cbc','-md','md5','-a','-A','-pass','pass:'+password]
+print('OPENSSL_COMMAND='+' '.join(cmd))
+proc=subprocess.run(cmd,input=encoded,capture_output=True)
+print(f'OPENSSL_EXIT={proc.returncode} PLAINTEXT_LENGTH={len(proc.stdout)} STDERR={proc.stderr.decode("utf-8","replace")!r}')
+print(f'PLAINTEXT_HEX={proc.stdout.hex()}')
+try: text=proc.stdout.decode('utf-8')
+except UnicodeDecodeError as e: raise SystemExit(f'plaintext UTF-8 decode failed: {e}')
+print(f'PLAINTEXT_REPR={text!r}')
+if proc.returncode: raise SystemExit(proc.returncode)
+(analysis/'hint_plaintext.txt').write_text(text,encoding='utf-8')
+example='012345678Harmony5337'
+print(f'EXAMPLE_INPUT={example!r} EXAMPLE_MD5={hashlib.md5(example.encode()).hexdigest()}')
+pattern='137524860'
+candidate=hashlib.md5((pattern+'Harmony5337').encode()).hexdigest()
+print(f'PATTERN={pattern} HINT_RULE_INPUT={(pattern+"Harmony5337")!r} CANDIDATE=flag{{{candidate}}}')
+print('PLATFORM_ACCEPTANCE=NOT_TESTED_BY_THIS_SUBTASK')
+'@
+Set-Content -LiteralPath .\analysis\recover_hint_batch14.py -Value $script -Encoding utf8
+Write-Output 'RUN_RESOURCE_HINT_DECRYPTION:'
+py -3 .\analysis\recover_hint_batch14.py 2>&1 | Tee-Object -FilePath .\analysis\batch14_recover_hint_stdout.txt
+Write-Output ("HINT_PY_EXIT="+$LASTEXITCODE)
+Write-Output 'RUN_FULL_SM4_ROUNDTRIP_JPEG_CHECK:'
+py -3 .\analysis\verify_roundtrip_and_decode_jpeg.py 2>&1 | Tee-Object -FilePath .\analysis\batch14_roundtrip_stdout.txt
+Write-Output ("ROUNDTRIP_PY_EXIT="+$LASTEXITCODE)
+Stop-Transcript
+Process ID: 29596
+PSVersion: 7.6.5
+PSEdition: Core
+GitCommitId: 7.6.5
+OS: Microsoft Windows 10.0.26200
+Platform: Win32NT
+PSCompatibleVersions: 1.0, 2.0, 3.0, 4.0, 5.0, 5.1, 6.0, 7.0
+PSRemotingProtocolVersion: 2.4
+SerializationVersion: 1.1.0.1
+WSManStackVersion: 3.0
+**********************
+Transcript started, output file is C:\Users\mzj\Desktop\CTF\玄机刷题\记录\批次14_561_调查记录.txt
+RUN_CUSTOM_SM4_DECRYPTION:
+SM4-like custom schedule source: native .rodata S-box @0x44e0, CK @0x45e0
+S-box head/tail: d690e9fecce13db7 79ee5f3ed7cb3948
+CK head/tail: ['00070e15', '1c232a31', '383f464d', '545b6269'] ['10171e25', '2c333a41', '484f565d', '646b7279']
+key words: ['e52bcc34', '1f1b5b18', '5f1ed75a', 'f108fe7f']
+round key first/last: ['f4b2ab3a', '85da239d', '53c0cf55', '6161c119'] ['7395efbd', 'd8bb3746', 'a9d6b03d', '0f205568']
+internal block round-trip: True
+test block/cipher: 000102030405060708090a0b0c0d0e0f d426f645577563f4b95a4421d64a7d39
+enc ASCII length/SHA256: 60352 2ba36e4deece0d74ef13765352af25f9063be11bdec3c582206fbad6556bdfcc
+decoded ciphertext length/SHA256: 45264 1fd44a44ef5ef4718110c7046513bc8f149c3a22b9cc27c6114ff1d03f03a27d
+block aligned: True
+decrypted length/SHA256: 45264 1ed54dcfb684aa6fd8583fef8ec874ab27b6d6ed2c68d0464fa88d5cd07e78ba
+first 96 plaintext bytes: 2f396a2f34414151536b5a4a5267414241514141415141424141442f3467485953554e445831425354305a4a544555414151454141414849414141414141517741414274626e5279556b64434946685a57694148344141424141454141414141
+first 96 plaintext repr: b'/9j/4AAQSkZJRgABAQAAAQABAAD/4gHYSUNDX1BST0ZJTEUAAQEAAAHIAAAAAAQwAABtbnRyUkdCIFhZWiAH4AABAAEAAAAA'
+printable ASCII ratio: 0.9997348886532343
+first-block re-encryption matches input: True
+output path: C:\Users\mzj\Desktop\CTF\����ˢ��\��Ŀ����\����14_20260929\561_OpenHarmony_secret\analysis\enc.custom-sm4-decrypted.bin
+SM4_PY_EXIT=0
+RUN_RESOURCE_HINT_DECRYPTION:
+Salted__ not found in resources.index
+HINT_PY_EXIT=1
+RUN_FULL_SM4_ROUNDTRIP_JPEG_CHECK:
+SM4-like custom schedule source: native .rodata S-box @0x44e0, CK @0x45e0
+S-box head/tail: d690e9fecce13db7 79ee5f3ed7cb3948
+CK head/tail: ['00070e15', '1c232a31', '383f464d', '545b6269'] ['10171e25', '2c333a41', '484f565d', '646b7279']
+key words: ['e52bcc34', '1f1b5b18', '5f1ed75a', 'f108fe7f']
+round key first/last: ['f4b2ab3a', '85da239d', '53c0cf55', '6161c119'] ['7395efbd', 'd8bb3746', 'a9d6b03d', '0f205568']
+internal block round-trip: True
+test block/cipher: 000102030405060708090a0b0c0d0e0f d426f645577563f4b95a4421d64a7d39
+enc ASCII length/SHA256: 60352 2ba36e4deece0d74ef13765352af25f9063be11bdec3c582206fbad6556bdfcc
+decoded ciphertext length/SHA256: 45264 1fd44a44ef5ef4718110c7046513bc8f149c3a22b9cc27c6114ff1d03f03a27d
+block aligned: True
+decrypted length/SHA256: 45264 1ed54dcfb684aa6fd8583fef8ec874ab27b6d6ed2c68d0464fa88d5cd07e78ba
+first 96 plaintext bytes: 2f396a2f34414151536b5a4a5267414241514141415141424141442f3467485953554e445831425354305a4a544555414151454141414849414141414141517741414274626e5279556b64434946685a57694148344141424141454141414141
+first 96 plaintext repr: b'/9j/4AAQSkZJRgABAQAAAQABAAD/4gHYSUNDX1BST0ZJTEUAAQEAAAHIAAAAAAQwAABtbnRyUkdCIFhZWiAH4AABAAEAAAAA'
+printable ASCII ratio: 0.9997348886532343
+first-block re-encryption matches input: True
+output path: C:\Users\mzj\Desktop\CTF\����ˢ��\��Ŀ����\����14_20260929\561_OpenHarmony_secret\analysis\enc.custom-sm4-decrypted.bin
+block count: 2829
+all blocks re-encrypt exactly to decoded resource ciphertext: True
+mismatch block indexes: []
+decrypted tail bytes/repr: 43496941496949416949674b65714969412f2f5a0c0c0c0c0c0c0c0c0c0c0c0c b'CIiAIiIAiIgKeqIiA//Z\x0c\x0c\x0c\x0c\x0c\x0c\x0c\x0c\x0c\x0c\x0c\x0c'
+PKCS#7 padding length and exact-byte validation: 12 True
+unpadded Base64 length: 45252 mod4: 0
+decoded JPEG bytes: 33939
+decoded JPEG SHA256: 71e5d289a949a642d8d139c4193894133110b327ee3379ccfe0af619360c772f
+JPEG magic: ffd8ffe000104a464946000101000001
+JPEG output: C:\Users\mzj\Desktop\CTF\����ˢ��\��Ŀ����\����14_20260929\561_OpenHarmony_secret\analysis\enc.recovered.jpg
+ROUNDTRIP_PY_EXIT=0
+**********************
+PowerShell transcript end
+End time: 20260929154638
+**********************
+**********************
+PowerShell transcript start
+Start time: 20260929154744
+Username: DESKTOP-412KTAR\mzj
+RunAs User: DESKTOP-412KTAR\mzj
+Configuration Name: 
+Machine: DESKTOP-412KTAR (Microsoft Windows NT 10.0.26200.0)
+Host Application: C:\Users\mzj\.cache\codex-runtimes\codex-primary-runtime\dependencies\native\powershell\pwsh.dll -Command try { [Console]::OutputEncoding=[System.Text.Encoding]::UTF8 } catch {}
+$ErrorActionPreference = 'Continue'
+Start-Transcript -Path 'C:\Users\mzj\Desktop\CTF\玄机刷题\记录\批次14_561_调查记录.txt' -Append
+$dest='C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\批次14_20260929\561_OpenHarmony_secret'
+Write-Output 'CURRENT_HINT_SCRIPT:'
+Get-Content -LiteralPath (Join-Path $dest 'analysis\recover_hint_batch14.py')
+Write-Output 'OPENSSL_PATH_CHECK:'
+Test-Path -LiteralPath 'C:\msys64\mingw64\bin\openssl.exe'
+Write-Output 'RESOURCES_INDEX_SIZE:'
+(Get-Item -LiteralPath (Join-Path $dest '附件\hap_contents\resources.index')).Length
+Stop-Transcript
+Process ID: 2028
+PSVersion: 7.6.5
+PSEdition: Core
+GitCommitId: 7.6.5
+OS: Microsoft Windows 10.0.26200
+Platform: Win32NT
+PSCompatibleVersions: 1.0, 2.0, 3.0, 4.0, 5.0, 5.1, 6.0, 7.0
+PSRemotingProtocolVersion: 2.4
+SerializationVersion: 1.1.0.1
+WSManStackVersion: 3.0
+**********************
+Transcript started, output file is C:\Users\mzj\Desktop\CTF\玄机刷题\记录\批次14_561_调查记录.txt
+CURRENT_HINT_SCRIPT:
+from pathlib import Path
+import base64, hashlib, subprocess, sys
+root=Path(__file__).resolve().parents[1]
+analysis=root/'analysis'
+assets=root/'附件'/'hap_contents'
+index=(assets/'resources.index').read_bytes()
+offset=index.find(b'Salted__')
+if offset < 0: raise SystemExit('Salted__ not found in resources.index')
+b64_start=offset
+while b64_start>0 and index[b64_start-1:b64_start] not in b'\x00\t\r\n ': b64_start-=1
+b64_end=offset
+while b64_end<len(index) and index[b64_end:b64_end+1] not in b'\x00\t\r\n ': b64_end+=1
+encoded=index[b64_start:b64_end]
+raw=base64.b64decode(encoded,validate=True)
+(analysis/'resource_index_salted_ciphertext.b64').write_bytes(encoded)
+print(f'INDEX_SIZE={len(index)}')
+print(f'SALTED_MARKER_OFFSET={offset} BASE64_RANGE=[{b64_start},{b64_end}) BASE64_LENGTH={len(encoded)}')
+print(f'SALTED_B64={encoded.decode("ascii")}')
+print(f'DECODED_LENGTH={len(raw)} HEADER={raw[:16].hex()} SALT={raw[8:16].hex()} CIPHERTEXT_BYTES={len(raw)-16}')
+assert raw[:8]==b'Salted__' and (len(raw)-16)%16==0
+img=(analysis/'enc.recovered.jpg').read_bytes()
+img64=base64.b64encode(img)
+password=hashlib.md5(img64).hexdigest()
+print(f'JPEG_SIZE={len(img)} JPEG_SHA256={hashlib.sha256(img).hexdigest()} JPEG_BASE64_SIZE={len(img64)}')
+print(f'MD5_OF_JPEG_BASE64={password}')
+exe=Path(r'C:\\msys64\\mingw64\\bin\\openssl.exe')
+if not exe.exists(): raise SystemExit(f'OpenSSL executable missing: {exe}')
+cmd=[str(exe),'enc','-d','-aes-256-cbc','-md','md5','-a','-A','-pass','pass:'+password]
+print('OPENSSL_COMMAND='+' '.join(cmd))
+proc=subprocess.run(cmd,input=encoded,capture_output=True)
+print(f'OPENSSL_EXIT={proc.returncode} PLAINTEXT_LENGTH={len(proc.stdout)} STDERR={proc.stderr.decode("utf-8","replace")!r}')
+print(f'PLAINTEXT_HEX={proc.stdout.hex()}')
+try: text=proc.stdout.decode('utf-8')
+except UnicodeDecodeError as e: raise SystemExit(f'plaintext UTF-8 decode failed: {e}')
+print(f'PLAINTEXT_REPR={text!r}')
+if proc.returncode: raise SystemExit(proc.returncode)
+(analysis/'hint_plaintext.txt').write_text(text,encoding='utf-8')
+example='012345678Harmony5337'
+print(f'EXAMPLE_INPUT={example!r} EXAMPLE_MD5={hashlib.md5(example.encode()).hexdigest()}')
+pattern='137524860'
+candidate=hashlib.md5((pattern+'Harmony5337').encode()).hexdigest()
+print(f'PATTERN={pattern} HINT_RULE_INPUT={(pattern+"Harmony5337")!r} CANDIDATE=flag{{{candidate}}}')
+print('PLATFORM_ACCEPTANCE=NOT_TESTED_BY_THIS_SUBTASK')
+OPENSSL_PATH_CHECK:
+True
+RESOURCES_INDEX_SIZE:
+4336
+**********************
+PowerShell transcript end
+End time: 20260929154744
+**********************
+**********************
+PowerShell transcript start
+Start time: 20260929154820
+Username: DESKTOP-412KTAR\mzj
+RunAs User: DESKTOP-412KTAR\mzj
+Configuration Name: 
+Machine: DESKTOP-412KTAR (Microsoft Windows NT 10.0.26200.0)
+Host Application: C:\Users\mzj\.cache\codex-runtimes\codex-primary-runtime\dependencies\native\powershell\pwsh.dll -Command try { [Console]::OutputEncoding=[System.Text.Encoding]::UTF8 } catch {}
+$ErrorActionPreference = 'Continue'
+Start-Transcript -Path 'C:\Users\mzj\Desktop\CTF\玄机刷题\记录\批次14_561_调查记录.txt' -Append
+$dest='C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\批次14_20260929\561_OpenHarmony_secret'
+Set-Location -LiteralPath $dest
+$script = @'
+from pathlib import Path
+import base64, hashlib, re, subprocess
+root=Path(__file__).resolve().parents[1]
+analysis=root/'analysis'
+index=(root/'附件'/'hap_contents'/'resources.index').read_bytes()
+hits=[]
+for m in re.finditer(rb'[A-Za-z0-9+/]{24,}={0,2}',index):
+    try: raw=base64.b64decode(m.group(),validate=True)
+    except Exception: continue
+    if raw.startswith(b'Salted__'): hits.append((m,raw))
+if len(hits)!=1: raise SystemExit(f'expected one OpenSSL Salted__ blob; found {len(hits)}')
+m,raw=hits[0]
+encoded=m.group()
+offset=m.start()
+(analysis/'resource_index_salted_ciphertext.b64').write_bytes(encoded)
+print(f'INDEX_SIZE={len(index)}')
+print(f'SALTED_B64_OFFSET={offset} BASE64_LENGTH={len(encoded)}')
+print(f'SALTED_B64={encoded.decode("ascii")}')
+print(f'DECODED_LENGTH={len(raw)} HEADER={raw[:16].hex()} SALT={raw[8:16].hex()} CIPHERTEXT_BYTES={len(raw)-16}')
+assert raw[:8]==b'Salted__' and (len(raw)-16)%16==0
+img=(analysis/'enc.recovered.jpg').read_bytes()
+img64=base64.b64encode(img)
+password=hashlib.md5(img64).hexdigest()
+print(f'JPEG_SIZE={len(img)} JPEG_SHA256={hashlib.sha256(img).hexdigest()} JPEG_BASE64_SIZE={len(img64)}')
+print(f'MD5_OF_JPEG_BASE64={password}')
+exe=Path(r'C:\msys64\mingw64\bin\openssl.exe')
+if not exe.exists(): raise SystemExit(f'OpenSSL executable missing: {exe}')
+cmd=[str(exe),'enc','-d','-aes-256-cbc','-md','md5','-a','-A','-pass','pass:'+password]
+print('OPENSSL_COMMAND='+' '.join(cmd))
+proc=subprocess.run(cmd,input=encoded,capture_output=True)
+print(f'OPENSSL_EXIT={proc.returncode} PLAINTEXT_LENGTH={len(proc.stdout)} STDERR={proc.stderr.decode("utf-8","replace")!r}')
+print(f'PLAINTEXT_HEX={proc.stdout.hex()}')
+text=proc.stdout.decode('utf-8')
+print(f'PLAINTEXT_REPR={text!r}')
+if proc.returncode: raise SystemExit(proc.returncode)
+(analysis/'hint_plaintext.txt').write_text(text,encoding='utf-8')
+example='012345678Harmony5337'
+print(f'EXAMPLE_INPUT={example!r} EXAMPLE_MD5={hashlib.md5(example.encode()).hexdigest()}')
+pattern='137524860'
+candidate=hashlib.md5((pattern+'Harmony5337').encode()).hexdigest()
+print(f'PATTERN={pattern} HINT_RULE_INPUT={(pattern+"Harmony5337")!r} CANDIDATE=flag{{{candidate}}}')
+print('PLATFORM_ACCEPTANCE=NOT_TESTED_BY_THIS_SUBTASK')
+'@
+Set-Content -LiteralPath .\analysis\recover_hint_batch14.py -Value $script -Encoding utf8
+Write-Output 'RUN_FIXED_RESOURCE_HINT_DECRYPTION:'
+py -3 .\analysis\recover_hint_batch14.py 2>&1 | Tee-Object -FilePath .\analysis\batch14_recover_hint_stdout.txt
+Write-Output ("HINT_PY_EXIT="+$LASTEXITCODE)
+Write-Output 'RUN_STATED_EXAMPLE_PATTERN_BRUTEFORCE:'
+py -3 .\analysis\brute_pattern_example_hash.py 2>&1 | Tee-Object -FilePath .\analysis\batch14_bruteforce_stdout.txt
+Write-Output ("BRUTE_PY_EXIT="+$LASTEXITCODE)
+Stop-Transcript
+Process ID: 23480
+PSVersion: 7.6.5
+PSEdition: Core
+GitCommitId: 7.6.5
+OS: Microsoft Windows 10.0.26200
+Platform: Win32NT
+PSCompatibleVersions: 1.0, 2.0, 3.0, 4.0, 5.0, 5.1, 6.0, 7.0
+PSRemotingProtocolVersion: 2.4
+SerializationVersion: 1.1.0.1
+WSManStackVersion: 3.0
+**********************
+Transcript started, output file is C:\Users\mzj\Desktop\CTF\玄机刷题\记录\批次14_561_调查记录.txt
+RUN_FIXED_RESOURCE_HINT_DECRYPTION:
+INDEX_SIZE=4336
+SALTED_B64_OFFSET=1060 BASE64_LENGTH=344
+SALTED_B64=U2FsdGVkX19e/Sr9P6d0xwCipraBJAnGp35LkH//SnOWGtxJTrhgsESprJZW8fixK1zE0f2hCN4z94LdrdNB6YOx992Q96IMv2icAXt2ppjSthtABg38C/A+R2GfXuHTiZHbRD0lgfucexcQAm2276oXmVuV4lJODJhN7AV+mu+0PmsLwbdl99z6xekWLXvt8J//3xF61cspD2GZx24dKbs+3/xFauHaXqlPpH6SS4GPSfEsy8mKC2qpLLjIgG6P5jWaihgplO1hoYbQsYaLhTGdbf/n077Ppwdu0TbQTXXgfjRvJMAOPKMPO4hu6WJCjcFDEphS1kj9MVNrXZ0k4Q==
+DECODED_LENGTH=256 HEADER=53616c7465645f5f5efd2afd3fa774c7 SALT=5efd2afd3fa774c7 CIPHERTEXT_BYTES=240
+JPEG_SIZE=33939 JPEG_SHA256=71e5d289a949a642d8d139c4193894133110b327ee3379ccfe0af619360c772f JPEG_BASE64_SIZE=45252
+MD5_OF_JPEG_BASE64=4ba9b421e88b4a70cff1b4300af97b74
+OPENSSL_COMMAND=C:\msys64\mingw64\bin\openssl.exe enc -d -aes-256-cbc -md md5 -a -A -pass pass:4ba9b421e88b4a70cff1b4300af97b74
+OPENSSL_EXIT=0 PLAINTEXT_LENGTH=233 STDERR='*** WARNING : deprecated key derivation used.\r\nUsing -iter or -pbkdf2 would be better.\r\n'
+PLAINTEXT_HEX=54686520666c6167206973204d4435206f663a20286c6f636b27732070617373776f7264202b20224861726d6f6e793533333722292e200a466f72206578616d706c653a20496620746865206c6f636b27732070617373776f726420697320303132333435363738200a5468656e2074686520666c616720697320666c61677b6d6435282230313233343536373822202b20224861726d6f6e793533333722297d20284e6f746521205468657265206973206e6f20272c27290a576869636820697320666c61677b38373166373237313664383561363337346634333865613730633266643632637d
+PLAINTEXT_REPR='The flag is MD5 of: (lock\'s password + "Harmony5337"). \nFor example: If the lock\'s password is 012345678 \nThen the flag is flag{md5("012345678" + "Harmony5337")} (Note! There is no \',\')\nWhich is flag{871f72716d85a6374f438ea70c2fd62c}'
+EXAMPLE_INPUT='012345678Harmony5337' EXAMPLE_MD5=a8f2f50ac7bcf159d3e017721542768b
+PATTERN=137524860 HINT_RULE_INPUT='137524860Harmony5337' CANDIDATE=flag{8b4ec604943712483bfca67cacf85f1a}
+PLATFORM_ACCEPTANCE=NOT_TESTED_BY_THIS_SUBTASK
+HINT_PY_EXIT=0
+RUN_STATED_EXAMPLE_PATTERN_BRUTEFORCE:
+tested 985824 unique digit sequences lengths 4..9 in joined/comma format
+matches []
+elapsed_seconds 2.956
+BRUTE_PY_EXIT=0
+**********************
+PowerShell transcript end
+End time: 20260929154825
+**********************
+**********************
+PowerShell transcript start
+Start time: 20260929155120
+Username: DESKTOP-412KTAR\mzj
+RunAs User: DESKTOP-412KTAR\mzj
+Configuration Name: 
+Machine: DESKTOP-412KTAR (Microsoft Windows NT 10.0.26200.0)
+Host Application: C:\Users\mzj\.cache\codex-runtimes\codex-primary-runtime\dependencies\native\powershell\pwsh.dll -Command try { [Console]::OutputEncoding=[System.Text.Encoding]::UTF8 } catch {}
+$ErrorActionPreference = 'Continue'
+Start-Transcript -Path 'C:\Users\mzj\Desktop\CTF\玄机刷题\记录\批次14_561_调查记录.txt' -Append
+$dest='C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\批次14_20260929\561_OpenHarmony_secret'
+Set-Location -LiteralPath $dest
+$wp = @'
+# 第一届 OpenHarmony secret（玄机 #561）完整 WP
+
+> **当前结论：未得到平台接受的 flag。** 本文区分了本批次新下载和复核步骤、早期目录留下的分析结论。新下载附件与早期资料附件 SHA-256 完全相同。本批次独立重跑了附件校验、native XXTEA 反解/正向重加密、照片资源解密/逐块重加密、提示提取，以及 MD5 示例矛盾复核。公式能导出理论候选，但历史平台记录显示它及逗号形式候选均未通过；不要把理论候选写成已解题 flag。
+
+## 1. 题目信息与资料边界
+
+- 题目：第一届 OpenHarmony secret
+- 平台 ID：561；类型 REVERSE，中等；页面标示免费。
+- 页面描述：`The smart box hiding a secret, can you find it?`
+- 本批次从下载目录取得 `D:\Downloads\secret (2).zip`，下载时间为 2026-09-29 15:38。原始副本保存在 `附件/secret_玄机新下载.zip`。
+- 新 ZIP 的 SHA-256：`77177B600FEA6DA73C41935763ED555047F15CB7F17B7A707550BBD9E633080F`；只含 `secret.hap`。
+- 新 HAP 的 SHA-256：`743EB75674EB2BBF8696D5414FD9E122236022E49FB2C30D19A1D24D76D07720`。
+- `D:\Downloads\secret.zip`、`secret (1).zip`、本批次新下载的 `secret (2).zip`，以及早期项目副本 `secret_platform_20260929.zip` 的 SHA-256 全部相同；因此本批次没有拿到内容更新的附件。旧目录中 `secret.hap` 与本次 HAP 也同 hash。
+- 本目录 `分析/WP_preexisting_20260929.md` 和 `分析/secret561_resource_flow_findings_20260929.md` 是已有工作副本，**不是本批次新产生的分析步骤**。本批次新增的命令、输出以及复核文件均列在 `README.md`。
+
+所有操作只针对静态附件，没有运行 HAP、没有启动靶场、没有访问公开 WP，也没有在本批次提交 flag。命令及完整 stdout/stderr 按顺序保存在 `记录/批次14_561_调查记录.txt`（项目总记录副本在 `记录/批次14_561_调查记录.txt`）。
+
+## 2. 从 HAP 建立附件结构
+
+对新 ZIP 解压得到单个 `secret.hap`，再按 ZIP/HAP 容器解出应用文件。主要文件：
+
+- `附件/hap_contents/ets/modules.abc`：OpenHarmony Panda 字节码。
+- `附件/hap_contents/ets/sourceMaps.map`：source map，但没有可直接还原的源码内容。
+- `附件/hap_contents/resources.index`：包含加密后的提示字符串。
+- `附件/hap_contents/resources/rawfile/enc`：照片数据的 Base64 密文。
+- `附件/hap_contents/libs/x86_64/libsecret.so`：x86_64 native 库，含 pattern verifier、SM4-like 资源解密常量。
+
+本目录中的 `analysis/disassemble_app_output.txt`、`analysis/libsecret_callbacks_disassembly.txt`、`analysis/libsecret_init_proc_disassembly.txt` 是旧工作树中保存的反汇编证据副本。已有调用链分析表明：应用将照片存入私有 `bb.txt`，native `ValidateCiphertext` 校验照片；锁页把 9 个节点编号数组传给 native `verifyPattern`；最终页面读取的是照片 Base64 并对其 MD5 后解密资源提示。页面没有把 pattern 数组传给最终页面或直接替用户生成 flag。
+
+## 3. 静态反解 pattern lock
+
+### 3.1 目标数组和密钥
+
+`analysis/revalidate_native_pattern.py` 读取附件中 x86_64 ELF 的 `.data` 节。脚本会先确认 ELF64、小端、`e_machine=62`，再按已保存反汇编确认的相对偏移读取常量：
+
+- XXTEA 四字密钥位于 `.data + 0x10`：`[0x0000000b, 0x0000002d, 0x0000000e, 0x0001bf52]`。
+- native 校验目标位于 `.data + 0x20` 的 9 个 uint32：`[0xe52bcc34, 0x344e3b05, 0xded45d41, 0x5f1ed75a, 0x97439820, 0x1f1b5b18, 0xf108fe7f, 0x93962769, 0xc4b198ca]`。
+- native 逻辑要求数组长度是 9；把输入经 `init_proc` 变换后逐项与该目标数组比较。
+
+### 3.2 XXTEA 逆运算与闭环
+
+对 9 个 word，标准 XXTEA 轮数为 `6 + floor(52/9) = 11`。按 XXTEA 逆序从 `sum = 11 × 0x9e3779b9` 开始，每轮以 32-bit 回绕倒序减去 `MX` 项，得到：
+
+```text
+[1, 3, 7, 5, 2, 4, 8, 6, 0]
+```
+
+再把这 9 个 word 用同一 key 正向加密，得到的九个 uint32 与 ELF 内目标逐项完全相同，`XXTEA_ROUNDTRIP=True`。本批次重新运行的完整值见 `analysis/batch14_revalidate_native_stdout.txt`。这个闭环确认了 native 数组逆解与附件常量相符。
+
+把节点按提示所说“没有逗号”紧凑拼接得到 `137524860`；`analysis/revalidate_native_pattern.py` 对理论输入 `137524860Harmony5337` 求标准 MD5，结果为：
+
+```text
+8b4ec604943712483bfca67cacf85f1a
+```
+
+因此这只是依据提示推导的理论候选 `flag{8b4ec604943712483bfca67cacf85f1a}`。JavaScript 数组的逗号表示 `1,3,7,5,2,4,8,6,0` 则算出另一候选 `flag{429ebe492a801046d1a43c328db88e7f}`。历史 WP 记录了这两种形式的平台尝试后题目仍为 `0/1`；本批次没有再次提交。
+
+## 4. 还原隐藏照片和提示
+
+### 4.1 `enc` 的自定义 SM4-like 解密
+
+`analysis/decrypt_enc_custom_sm4.py` 只读取附件 ELF 与 `resources/rawfile/enc`，不执行 HAP。它从 native 库 `.rodata` 的 `0x44e0` 读取 S-box、`0x45e0` 读取 32 个 CK，并使用脚本中恢复出的轮 key `[e52bcc34, 1f1b5b18, 5f1ed75a, f108fe7f]`。本批次重跑确认：
+
+1. `enc` 是 60,352 字节 ASCII Base64；解码成 45,264 字节，长度是 16 的倍数。
+2. 自定义分组算法处理 2,829 个 16 字节块。`analysis/verify_roundtrip_and_decode_jpeg.py` 把每个解密块重新加密，与输入密文逐块比较，2,829 块全部一致。
+3. 解密数据尾部有 12 个 `0x0c`，严格符合 PKCS#7 padding；去 padding 后 45,252 字节为 Base64。
+4. Base64 解码成 33,939 字节 JPEG，SHA-256：`71e5d289a949a642d8d139c4193894133110b327ee3379ccfe0af619360c772f`。JPEG magic 为 `ffd8ffe0...`，图片是 OpenHarmony logo。它用来通过应用照片校验/派生照片口令，不是直接含有 flag 的文本。
+
+本批次实际输出分别保存在 `analysis/batch14_custom_sm4_stdout.txt`、`analysis/batch14_roundtrip_stdout.txt`，生成的静态文件有 `analysis/enc.custom-sm4-decrypted.bin` 和 `analysis/enc.recovered.jpg`。
+
+### 4.2 从 `resources.index` 解密文字提示
+
+`analysis/recover_hint_batch14.py` 在附件 `resources.index` 中查找可解码为 `Salted__` 的 Base64 段，而不是对原始索引假定它直接含有 `Salted__` 字节：
+
+- `resources.index` 为 4,336 字节。
+- Base64 字符串位于偏移 1,060，长度 344；解码后 256 字节。
+- 解码数据以 `Salted__` 开头；salt 为 `5efd2afd3fa774c7`，后续 AES-CBC 密文 240 字节。
+- 将 JPEG 原始字节重新 Base64 编码得 45,252 字节，对这段 Base64 求 MD5，得到 OpenSSL 口令 `4ba9b421e88b4a70cff1b4300af97b74`。
+- 按附件应用的 OpenSSL 兼容格式执行 `openssl enc -d -aes-256-cbc -md md5 -a -A -pass pass:<口令>`，退出码 0，得到 233 字节 UTF-8 提示。完整输入命令、stdout、stderr、明文 hex 与 repr 保存在 `analysis/batch14_recover_hint_stdout.txt`。
+
+解出的提示原文：
+
+```text
+The flag is MD5 of: (lock's password + "Harmony5337").
+For example: If the lock's password is 012345678
+Then the flag is flag{md5("012345678" + "Harmony5337")} (Note! There is no ',')
+Which is flag{871f72716d85a6374f438ea70c2fd62c}
+```
+
+## 5. 题目提示存在可验证的内部矛盾
+
+按标准 MD5 计算提示自己的示例输入：
+
+```text
+MD5("012345678Harmony5337") = a8f2f50ac7bcf159d3e017721542768b
+```
+
+这不等于提示写出的 `871f72716d85a6374f438ea70c2fd62c`。本批次重新枚举所有由 `0` 到 `8` 组成、长度 4 到 9、节点不重复的序列；对每个序列都分别测紧凑连接和逗号连接两种输入格式，总共检查 985,824 个序列（两种格式各测一次），没有任何 digest 等于提示中的 `871f...`。复现脚本为 `analysis/brute_pattern_example_hash.py`，本批输出在 `analysis/batch14_bruteforce_stdout.txt`。
+
+所以提示中例子的 digest 错误不能用简单的逗号解释；题目可能存在错误提示，或最终 flag 公式/输入与题面说明不完整。尽管 native pattern 路径和资源提示都能独立复现，题面示例的自检却失败，而且历史上从实际路径推导的 compact/逗号两种 flag 形式均未获平台接受。当前证据不足以断言哪一个字符串是正确答案，不能将任一理论候选标记成“已解”。
+
+## 6. 复现命令、文件和最终状态
+
+在 PowerShell 执行这些命令会将命令与完整输出追加记录到本目录 `记录/批次14_561_调查记录.txt`。本批的实际完整 transcript 是判断每步先后和输出的主证据。
+
+```powershell
+Set-Location 'C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\批次14_20260929\561_OpenHarmony_secret'
+py -3 .\analysis\revalidate_native_pattern.py
+py -3 .\analysis\decrypt_enc_custom_sm4.py
+py -3 .\analysis\verify_roundtrip_and_decode_jpeg.py
+py -3 .\analysis\recover_hint_batch14.py
+py -3 .\analysis\brute_pattern_example_hash.py
+```
+
+`README.md` 是文件索引。`analysis/WP_preexisting_20260929.md` 保留早期资料的完整 WP 副本，以便核对历史分析/平台提交记录；`analysis/secret561_resource_flow_findings_20260929.md` 是早期资源链分析副本。两者没有被当成本批次新步骤。本批无靶场启动、无付费行为、无 flag 提交。
+
+**最终状态：#561 未解决 / 无已验证 flag。** 证据证明了 native pattern 路径、资源解密流程和两种常见 MD5 格式的值；同时证明题面示例 hash 与其公式冲突且 pattern 枚举没有复现该 hash。历史平台尝试不接受路径推导出的候选。本题只有理论候选，没有本批次平台接受回执。
+'@
+Set-Content -LiteralPath .\WP.md -Value $wp -Encoding utf8
+$readme = @'
+# #561 第一届 OpenHarmony secret（批次14）
+
+状态：**未解决，暂无平台确认的 flag。** 本批独立复核附件和关键静态逆向流程；提示样例存在错误 MD5，路径推导的候选没有平台接受证据。没有启动靶场、没有消费金币、没有提交 flag、没有访问公开 WP。
+
+## 目录
+
+- `附件/secret_玄机新下载.zip`：本批从 D:\Downloads 复制的原始下载件。
+- `附件/zip_contents/secret.hap`：ZIP 原样解出的 HAP。
+- `附件/hap_contents/`：HAP 解包文件，包含 ABC、native so、resource index 和 rawfile enc。
+- `WP.md`：完整中文解题过程、核心算法、独立复算结果和未解决证据。
+- `analysis/revalidate_native_pattern.py`：从新下载 HAP 的 ELF `.data` 逆解 XXTEA 并正向闭环校验。
+- `analysis/decrypt_enc_custom_sm4.py`、`analysis/verify_roundtrip_and_decode_jpeg.py`：解密 `enc`、逐块重加密并恢复 JPEG。
+- `analysis/recover_hint_batch14.py`：从当前 HAP 的资源索引提取 Salted Base64，运行 OpenSSL 解密提示并重算提示样例与路径候选。
+- `analysis/brute_pattern_example_hash.py`：枚举题面示例的 pattern 摘要，检验提示给出的 hash。
+- `analysis/batch14_*_stdout.txt`：本批各复核脚本的 stdout。
+- `analysis/WP_preexisting_20260929.md`、`analysis/secret561_resource_flow_findings_20260929.md`、`analysis/*disassembly*.txt`：从旧 `题目资料\OpenHarmony_secret_561` 复制的既有资料，仅用于出处/历史结论对照，不代表本批重新生成。
+- `记录/批次14_561_调查记录.txt`：本批 PowerShell transcript，按时间顺序记录命令和完整终端输出。项目根 `记录` 目录中也保存了一份。
+
+## 附件身份核对
+
+最新下载 ZIP SHA-256：`77177B600FEA6DA73C41935763ED555047F15CB7F17B7A707550BBD9E633080F`。它与 `secret.zip`、`secret (1).zip`、旧目录 `secret_platform_20260929.zip` 完全相同。HAP SHA-256：`743EB75674EB2BBF8696D5414FD9E122236022E49FB2C30D19A1D24D76D07720`。
+
+详情见 [WP.md](WP.md)。
+'@
+Set-Content -LiteralPath .\README.md -Value $readme -Encoding utf8
+Write-Output 'CREATED:'
+Get-Item -LiteralPath .\WP.md, .\README.md | Select-Object FullName,Length,LastWriteTime
+Write-Output 'KEY_RESULT_FILES:'
+Get-ChildItem -LiteralPath .\analysis -File | Where-Object Name -Like 'batch14_*' | Select-Object Name,Length,LastWriteTime
+Stop-Transcript
+Process ID: 16016
+PSVersion: 7.6.5
+PSEdition: Core
+GitCommitId: 7.6.5
+OS: Microsoft Windows 10.0.26200
+Platform: Win32NT
+PSCompatibleVersions: 1.0, 2.0, 3.0, 4.0, 5.0, 5.1, 6.0, 7.0
+PSRemotingProtocolVersion: 2.4
+SerializationVersion: 1.1.0.1
+WSManStackVersion: 3.0
+**********************
+Transcript started, output file is C:\Users\mzj\Desktop\CTF\玄机刷题\记录\批次14_561_调查记录.txt
+CREATED:
+
+**********************
+PowerShell transcript end
+End time: 20260929155120
+**********************
+**********************
+PowerShell transcript start
+Start time: 20260929155209
+Username: DESKTOP-412KTAR\mzj
+RunAs User: DESKTOP-412KTAR\mzj
+Configuration Name: 
+Machine: DESKTOP-412KTAR (Microsoft Windows NT 10.0.26200.0)
+Host Application: C:\Users\mzj\.cache\codex-runtimes\codex-primary-runtime\dependencies\native\powershell\pwsh.dll -Command try { [Console]::OutputEncoding=[System.Text.Encoding]::UTF8 } catch {}
+$ErrorActionPreference = 'Continue'
+Start-Transcript -Path 'C:\Users\mzj\Desktop\CTF\玄机刷题\记录\批次14_561_调查记录.txt' -Append
+$dest='C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\批次14_20260929\561_OpenHarmony_secret'
+Set-Location -LiteralPath $dest
+Write-Output 'WP_STATUS_AND_OUTPUT_MARKERS:'
+Select-String -LiteralPath .\WP.md -Pattern '当前结论|最终状态|未得到平台接受|985,824|8b4ec604|历史平台' | ForEach-Object { $_.Line }
+Write-Output 'HASHES:'
+Get-FileHash -LiteralPath .\附件\secret_玄机新下载.zip, .\附件\zip_contents\secret.hap, .\analysis\enc.recovered.jpg -Algorithm SHA256 | Select-Object Path,Hash | Format-List
+Write-Output 'BATCH14_OUTPUT_FILES:'
+Get-ChildItem -LiteralPath .\analysis -File | Where-Object Name -Like 'batch14_*' | Sort-Object Name | ForEach-Object { Write-Output ("{0}|{1}" -f $_.Name,$_.Length) }
+Write-Output 'TASK_FOLDER_FILES:'
+Get-ChildItem -LiteralPath . -Force -Recurse -File | Select-Object FullName,Length | Format-Table -AutoSize
+Write-Output 'VERIFICATION: required docs, HAP, key script outputs exist; no submission performed in this subtask.'
+Stop-Transcript
+Process ID: 39452
+PSVersion: 7.6.5
+PSEdition: Core
+GitCommitId: 7.6.5
+OS: Microsoft Windows 10.0.26200
+Platform: Win32NT
+PSCompatibleVersions: 1.0, 2.0, 3.0, 4.0, 5.0, 5.1, 6.0, 7.0
+PSRemotingProtocolVersion: 2.4
+SerializationVersion: 1.1.0.1
+WSManStackVersion: 3.0
+**********************
+Transcript started, output file is C:\Users\mzj\Desktop\CTF\玄机刷题\记录\批次14_561_调查记录.txt
+WP_STATUS_AND_OUTPUT_MARKERS:
+> **当前结论：未得到平台接受的 flag。** 本文区分了本批次新下载和复核步骤、早期目录留下的分析结论。新下载附件与早期资料附件 SHA-256 完全相同。本批次独立重跑了附件校验、native XXTEA 反解/正向重加密、照片资源解密/逐块重加密、提示提取，以及 MD5 示例矛盾复核。公式能导出理论候选，但历史平台记录显示它及逗号形式候选均未通过；不要把理论候选写成已解题 flag。
+8b4ec604943712483bfca67cacf85f1a
+因此这只是依据提示推导的理论候选 `flag{8b4ec604943712483bfca67cacf85f1a}`。JavaScript 数组的逗号表示 `1,3,7,5,2,4,8,6,0` 则算出另一候选 `flag{429ebe492a801046d1a43c328db88e7f}`。历史 WP 记录了这两种形式的平台尝试后题目仍为 `0/1`；本批次没有再次提交。
+这不等于提示写出的 `871f72716d85a6374f438ea70c2fd62c`。本批次重新枚举所有由 `0` 到 `8` 组成、长度 4 到 9、节点不重复的序列；对每个序列都分别测紧凑连接和逗号连接两种输入格式，总共检查 985,824 个序列（两种格式各测一次），没有任何 digest 等于提示中的 `871f...`。复现脚本为 `analysis/brute_pattern_example_hash.py`，本批输出在 `analysis/batch14_bruteforce_stdout.txt`。
+## 6. 复现命令、文件和最终状态
+**最终状态：#561 未解决 / 无已验证 flag。** 证据证明了 native pattern 路径、资源解密流程和两种常见 MD5 格式的值；同时证明题面示例 hash 与其公式冲突且 pattern 枚举没有复现该 hash。历史平台尝试不接受路径推导出的候选。本题只有理论候选，没有本批次平台接受回执。
+HASHES:
+
+Path : C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\批次14_20260929\561_OpenHarmony_secret\附件\secret_玄机新下载.zip
+Hash : 77177B600FEA6DA73C41935763ED555047F15CB7F17B7A707550BBD9E633080F
+
+Path : C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\批次14_20260929\561_OpenHarmony_secret\附件\zip_contents\secret.hap
+Hash : 743EB75674EB2BBF8696D5414FD9E122236022E49FB2C30D19A1D24D76D07720
+
+Path : C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\批次14_20260929\561_OpenHarmony_secret\analysis\enc.recovered.jpg
+Hash : 71E5D289A949A642D8D139C4193894133110B327EE3379CCFE0AF619360C772F
+
+BATCH14_OUTPUT_FILES:
+batch14_bruteforce_stdout.txt|109
+batch14_custom_sm4_stdout.txt|1464
+batch14_formula_stdout.txt|608
+batch14_recover_hint_stdout.txt|1936
+batch14_revalidate_native_stdout.txt|1446
+batch14_roundtrip_stdout.txt|2156
+TASK_FOLDER_FILES:
+
+FullName
+--------                                                                                                               
+C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\批次14_20260929\561_OpenHarmony_secret\README.md
+C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\批次14_20260929\561_OpenHarmony_secret\WP.md
+C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\批次14_20260929\561_OpenHarmony_secret\analysis\batch14_bruteforce_stdout.t…
+C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\批次14_20260929\561_OpenHarmony_secret\analysis\batch14_custom_sm4_stdout.t…
+C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\批次14_20260929\561_OpenHarmony_secret\analysis\batch14_formula_stdout.txt
+C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\批次14_20260929\561_OpenHarmony_secret\analysis\batch14_recover_hint_stdout…
+C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\批次14_20260929\561_OpenHarmony_secret\analysis\batch14_revalidate_native_s…
+C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\批次14_20260929\561_OpenHarmony_secret\analysis\batch14_roundtrip_stdout.txt
+C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\批次14_20260929\561_OpenHarmony_secret\analysis\brute_pattern_example_hash.…
+C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\批次14_20260929\561_OpenHarmony_secret\analysis\check_formula_variants.py
+C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\批次14_20260929\561_OpenHarmony_secret\analysis\decrypt_enc_custom_sm4.py
+C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\批次14_20260929\561_OpenHarmony_secret\analysis\disassemble_app_output.txt
+C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\批次14_20260929\561_OpenHarmony_secret\analysis\enc.custom-sm4-decrypted.bin
+C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\批次14_20260929\561_OpenHarmony_secret\analysis\enc.recovered.jpg
+C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\批次14_20260929\561_OpenHarmony_secret\analysis\hash_materials_561.py
+C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\批次14_20260929\561_OpenHarmony_secret\analysis\hint_plaintext.txt
+C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\批次14_20260929\561_OpenHarmony_secret\analysis\libsecret_callbacks_disasse…
+C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\批次14_20260929\561_OpenHarmony_secret\analysis\libsecret_init_proc_disasse…
+C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\批次14_20260929\561_OpenHarmony_secret\analysis\recover_hint_batch14.py
+C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\批次14_20260929\561_OpenHarmony_secret\analysis\recover_pattern_561_output.…
+C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\批次14_20260929\561_OpenHarmony_secret\analysis\resource_index_salted_ciphe…
+C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\批次14_20260929\561_OpenHarmony_secret\analysis\revalidate_561_transcript_2…
+C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\批次14_20260929\561_OpenHarmony_secret\analysis\revalidate_native_pattern.py
+C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\批次14_20260929\561_OpenHarmony_secret\analysis\secret561_resource_flow_fin…
+C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\批次14_20260929\561_OpenHarmony_secret\analysis\sha256_manifest_20260929.csv
+C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\批次14_20260929\561_OpenHarmony_secret\analysis\verify_roundtrip_and_decode…
+C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\批次14_20260929\561_OpenHarmony_secret\analysis\WP_preexisting_20260929.md
+C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\批次14_20260929\561_OpenHarmony_secret\analysis\__pycache__\decrypt_enc_cus…
+C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\批次14_20260929\561_OpenHarmony_secret\附件\secret_玄机新下载.zip
+C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\批次14_20260929\561_OpenHarmony_secret\附件\hap_contents\.pages.info
+C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\批次14_20260929\561_OpenHarmony_secret\附件\hap_contents\module.json
+C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\批次14_20260929\561_OpenHarmony_secret\附件\hap_contents\pack.info
+C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\批次14_20260929\561_OpenHarmony_secret\附件\hap_contents\pkgContextInfo.json
+C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\批次14_20260929\561_OpenHarmony_secret\附件\hap_contents\resources.index
+C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\批次14_20260929\561_OpenHarmony_secret\附件\hap_contents\ets\modules.abc
+C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\批次14_20260929\561_OpenHarmony_secret\附件\hap_contents\ets\sourceMaps.map
+C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\批次14_20260929\561_OpenHarmony_secret\附件\hap_contents\libs\arm64-v8a\lib…
+C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\批次14_20260929\561_OpenHarmony_secret\附件\hap_contents\libs\arm64-v8a\lib…
+C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\批次14_20260929\561_OpenHarmony_secret\附件\hap_contents\libs\x86_64\libc++…
+C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\批次14_20260929\561_OpenHarmony_secret\附件\hap_contents\libs\x86_64\libsec…
+C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\批次14_20260929\561_OpenHarmony_secret\附件\hap_contents\resources\base\med…
+C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\批次14_20260929\561_OpenHarmony_secret\附件\hap_contents\resources\base\med…
+C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\批次14_20260929\561_OpenHarmony_secret\附件\hap_contents\resources\base\med…
+C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\批次14_20260929\561_OpenHarmony_secret\附件\hap_contents\resources\base\med…
+C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\批次14_20260929\561_OpenHarmony_secret\附件\hap_contents\resources\base\med…
+C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\批次14_20260929\561_OpenHarmony_secret\附件\hap_contents\resources\base\med…
+C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\批次14_20260929\561_OpenHarmony_secret\附件\hap_contents\resources\base\pro…
+C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\批次14_20260929\561_OpenHarmony_secret\附件\hap_contents\resources\base\pro…
+C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\批次14_20260929\561_OpenHarmony_secret\附件\hap_contents\resources\rawfile\…
+C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\批次14_20260929\561_OpenHarmony_secret\附件\zip_contents\secret.hap
+
+VERIFICATION: required docs, HAP, key script outputs exist; no submission performed in this subtask.
+**********************
+PowerShell transcript end
+End time: 20260929155209
+**********************

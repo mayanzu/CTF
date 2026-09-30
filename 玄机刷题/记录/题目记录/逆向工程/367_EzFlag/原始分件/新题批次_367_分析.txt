@@ -1,0 +1,394 @@
+批次：新题独立解题 | #367 第三届“长城杯”初赛-EzFlag
+
+COMMAND> tar -tf 'D:\Downloads\EzFlag_248f149404428676e6aa45e6312d069c.zip'
+EzFlag
+
+COMMAND> New-Item -ItemType Directory -Path 'C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\EzFlag_367' -Force
+
+COMMAND> Expand-Archive -LiteralPath 'D:\Downloads\EzFlag_248f149404428676e6aa45e6312d069c.zip' -DestinationPath 'C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\EzFlag_367' -Force
+
+COMMAND> Get-ChildItem -LiteralPath 'C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\EzFlag_367' -Recurse -File | Select-Object Name,Length,FullName | Format-Table -AutoSize
+
+Name   Length FullName
+----   ------ --------
+EzFlag  20640 C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\EzFlag_367\EzFlag
+
+
+COMMAND> Get-FileHash -LiteralPath 'C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\EzFlag_367\EzFlag' -Algorithm SHA256
+
+Algorithm : SHA256
+Hash      : 7BBD540A5B7E688D57EFD7F1175368FA9F934F3C83A1E6262457B870BD0B5996
+Path      : C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\EzFlag_367\EzFlag
+
+
+COMMAND> Get-Command objdump,strings,readelf,file,python,py,7z -ErrorAction SilentlyContinue | Select-Object Name,Source | Format-Table -AutoSize
+
+Name        Source
+----        ------
+objdump.exe C:\msys64\mingw64\bin\objdump.exe
+strings.exe C:\msys64\mingw64\bin\strings.exe
+readelf.exe C:\msys64\mingw64\bin\readelf.exe
+python.exe  C:\Users\mzj\AppData\Local\Programs\Python\Python312\python.exe
+py.exe      C:\WINDOWS\py.exe
+
+
+COMMAND> objdump -f 'C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\EzFlag_367\EzFlag'
+C:\msys64\mingw64\bin\objdump.exe: C:\Users\mzj\Desktop\CTF\����ˢ��\��Ŀ����\EzFlag_367\EzFlag: No such file or directory
+
+COMMAND> readelf -h 'C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\EzFlag_367\EzFlag'
+ELF Header:
+  Magic:   7f 45 4c 46 02 01 01 00 00 00 00 00 00 00 00 00 
+  Class:                             ELF64
+  Data:                              2's complement, little endian
+  Version:                           1 (current)
+  OS/ABI:                            UNIX - System V
+  ABI Version:                       0
+  Type:                              DYN (Position-Independent Executable file)
+  Machine:                           Advanced Micro Devices X86-64
+  Version:                           0x1
+  Entry point address:               0x1140
+  Start of program headers:          64 (bytes into file)
+  Start of section headers:          18592 (bytes into file)
+  Flags:                             0x0
+  Size of this header:               64 (bytes)
+  Size of program headers:           56 (bytes)
+  Number of program headers:         14
+  Size of section headers:           64 (bytes)
+  Number of section headers:         32
+  Section header string table index: 31
+
+COMMAND> strings -a 'C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\EzFlag_367\EzFlag' | rg -i 'V3ry|012ab|flag|password'
+Enter password: 
+V3ryStr0ngp@ssw0rd
+Wrong password!
+flag{
+012ab9c3478d56ef
+
+COMMAND> Copy-Item -LiteralPath 'C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\EzFlag_367\EzFlag' -Destination 'C:\Users\mzj\AppData\Local\Temp\ezflag367\EzFlag' -Force
+
+COMMAND> Get-FileHash -LiteralPath 'C:\Users\mzj\AppData\Local\Temp\ezflag367\EzFlag' -Algorithm SHA256; objdump -f 'C:\Users\mzj\AppData\Local\Temp\ezflag367\EzFlag'
+
+Algorithm : SHA256
+Hash      : 7BBD540A5B7E688D57EFD7F1175368FA9F934F3C83A1E6262457B870BD0B5996
+Path      : C:\Users\mzj\AppData\Local\Temp\ezflag367\EzFlag
+
+
+C:\Users\mzj\AppData\Local\Temp\ezflag367\EzFlag:     file format elf64-x86-64
+architecture: i386:x86-64, flags 0x00000150:
+HAS_SYMS, DYNAMIC, D_PAGED
+start address 0x0000000000001140
+
+
+COMMAND> objdump -t -C 'C:\Users\mzj\AppData\Local\Temp\ezflag367\EzFlag' | rg ' f\(| main$'
+0000000000001229 g     F .text	0000000000000072              f(unsigned long long)
+
+COMMAND> objdump -d -C 'C:\Users\mzj\AppData\Local\Temp\ezflag367\EzFlag' | Select-String -Pattern '<f\(unsigned long long\)>:','<main>:' -Context 0,65
+
+> 0000000000001229 <f(unsigned long long)>:
+      1229:	55                   	push   %rbp
+      122a:	48 89 e5             	mov    %rsp,%rbp
+      122d:	48 83 ec 30          	sub    $0x30,%rsp
+      1231:	48 89 7d d8          	mov    %rdi,-0x28(%rbp)
+      1235:	48 c7 45 f8 00 00 00 	movq   $0x0,-0x8(%rbp)
+      123c:	00 
+      123d:	48 c7 45 f0 01 00 00 	movq   $0x1,-0x10(%rbp)
+      1244:	00 
+      1245:	48 c7 45 e8 00 00 00 	movq   $0x0,-0x18(%rbp)
+      124c:	00 
+      124d:	eb 27                	jmp    1276 <f(unsigned long long)+0x4d>
+      124f:	48 8b 45 f0          	mov    -0x10(%rbp),%rax
+      1253:	48 89 45 e0          	mov    %rax,-0x20(%rbp)
+      1257:	48 8b 55 f8          	mov    -0x8(%rbp),%rdx
+      125b:	48 8b 45 f0          	mov    -0x10(%rbp),%rax
+      125f:	48 01 d0             	add    %rdx,%rax
+      1262:	83 e0 0f             	and    $0xf,%eax
+      1265:	48 89 45 f0          	mov    %rax,-0x10(%rbp)
+      1269:	48 8b 45 e0          	mov    -0x20(%rbp),%rax
+      126d:	48 89 45 f8          	mov    %rax,-0x8(%rbp)
+      1271:	48 83 45 e8 01       	addq   $0x1,-0x18(%rbp)
+      1276:	48 8b 45 e8          	mov    -0x18(%rbp),%rax
+      127a:	48 3b 45 d8          	cmp    -0x28(%rbp),%rax
+      127e:	72 cf                	jb     124f <f(unsigned long long)+0x26>
+      1280:	48 8b 45 f8          	mov    -0x8(%rbp),%rax
+      1284:	48 89 c6             	mov    %rax,%rsi
+      1287:	48 8d 05 72 30 00 00 	lea    0x3072(%rip),%rax        # 4300 <K>
+      128e:	48 89 c7             	mov    %rax,%rdi
+      1291:	e8 3a fe ff ff       	call   10d0 <std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >::operator[](unsigned long) const@plt>
+      1296:	0f b6 00             	movzbl (%rax),%eax
+      1299:	c9                   	leave
+      129a:	c3                   	ret
+  
+> 000000000000129b <main>:
+      129b:	55                   	push   %rbp
+      129c:	48 89 e5             	mov    %rsp,%rbp
+      129f:	53                   	push   %rbx
+      12a0:	48 83 ec 48          	sub    $0x48,%rsp
+      12a4:	48 8d 45 b0          	lea    -0x50(%rbp),%rax
+      12a8:	48 89 c7             	mov    %rax,%rdi
+      12ab:	e8 60 fe ff ff       	call   1110 <std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >::basic_string()@plt>
+      12b0:	48 8d 05 50 0d 00 00 	lea    0xd50(%rip),%rax        # 2007 <std::ignore+0x1>
+      12b7:	48 89 c6             	mov    %rax,%rsi
+      12ba:	48 8d 05 ff 2d 00 00 	lea    0x2dff(%rip),%rax        # 40c0 <std::cout@GLIBCXX_3.4>
+      12c1:	48 89 c7             	mov    %rax,%rdi
+      12c4:	e8 e7 fd ff ff       	call   10b0 <std::basic_ostream<char, std::char_traits<char> >& std::operator<< <std::char_traits<char> >(std::basic_ostream<char, std::char_traits<char> >&, char const*)@plt>
+      12c9:	48 8d 45 b0          	lea    -0x50(%rbp),%rax
+      12cd:	48 89 c6             	mov    %rax,%rsi
+      12d0:	48 8d 05 09 2f 00 00 	lea    0x2f09(%rip),%rax        # 41e0 <std::cin@GLIBCXX_3.4>
+      12d7:	48 89 c7             	mov    %rax,%rdi
+      12da:	e8 61 fd ff ff       	call   1040 <std::basic_istream<char, std::char_traits<char> >& std::getline<char, std::char_traits<char>, std::allocator<char> >(std::basic_istream<char, std::char_traits<char> >&, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >&)@plt>
+      12df:	48 8d 45 b0          	lea    -0x50(%rbp),%rax
+      12e3:	48 8d 15 2e 0d 00 00 	lea    0xd2e(%rip),%rdx        # 2018 <std::ignore+0x12>
+      12ea:	48 89 d6             	mov    %rdx,%rsi
+      12ed:	48 89 c7             	mov    %rax,%rdi
+      12f0:	e8 de 02 00 00       	call   15d3 <bool std::operator!=<char, std::char_traits<char>, std::allocator<char> >(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > const&, char const*)>
+      12f5:	84 c0                	test   %al,%al
+      12f7:	74 35                	je     132e <main+0x93>
+      12f9:	48 8d 05 2b 0d 00 00 	lea    0xd2b(%rip),%rax        # 202b <std::ignore+0x25>
+      1300:	48 89 c6             	mov    %rax,%rsi
+      1303:	48 8d 05 b6 2d 00 00 	lea    0x2db6(%rip),%rax        # 40c0 <std::cout@GLIBCXX_3.4>
+      130a:	48 89 c7             	mov    %rax,%rdi
+      130d:	e8 9e fd ff ff       	call   10b0 <std::basic_ostream<char, std::char_traits<char> >& std::operator<< <std::char_traits<char> >(std::basic_ostream<char, std::char_traits<char> >&, char const*)@plt>
+      1312:	48 8b 15 9f 2c 00 00 	mov    0x2c9f(%rip),%rdx        # 3fb8 <std::basic_ostream<char, std::char_traits<char> >& std::endl<char, std::char_traits<char> >(std::basic_ostream<char, std::char_traits<char> >&)@GLIBCXX_3.4>
+      1319:	48 89 d6             	mov    %rdx,%rsi
+      131c:	48 89 c7             	mov    %rax,%rdi
+      131f:	e8 9c fd ff ff       	call   10c0 <std::ostream::operator<<(std::ostream& (*)(std::ostream&))@plt>
+      1324:	bb 00 00 00 00       	mov    $0x0,%ebx
+      1329:	e9 24 01 00 00       	jmp    1452 <main+0x1b7>
+      132e:	48 8d 05 06 0d 00 00 	lea    0xd06(%rip),%rax        # 203b <std::ignore+0x35>
+      1335:	48 89 c6             	mov    %rax,%rsi
+      1338:	48 8d 05 81 2d 00 00 	lea    0x2d81(%rip),%rax        # 40c0 <std::cout@GLIBCXX_3.4>
+      133f:	48 89 c7             	mov    %rax,%rdi
+      1342:	e8 69 fd ff ff       	call   10b0 <std::basic_ostream<char, std::char_traits<char> >& std::operator<< <std::char_traits<char> >(std::basic_ostream<char, std::char_traits<char> >&, char const*)@plt>
+      1347:	48 8d 05 72 2d 00 00 	lea    0x2d72(%rip),%rax        # 40c0 <std::cout@GLIBCXX_3.4>
+      134e:	48 89 c7             	mov    %rax,%rdi
+      1351:	e8 2a fd ff ff       	call   1080 <std::ostream::flush()@plt>
+      1356:	48 c7 45 e8 01 00 00 	movq   $0x1,-0x18(%rbp)
+      135d:	00 
+      135e:	c7 45 e4 00 00 00 00 	movl   $0x0,-0x1c(%rbp)
+      1365:	e9 ae 00 00 00       	jmp    1418 <main+0x17d>
+      136a:	48 8b 45 e8          	mov    -0x18(%rbp),%rax
+      136e:	48 89 c7             	mov    %rax,%rdi
+      1371:	e8 b3 fe ff ff       	call   1229 <f(unsigned long long)>
+      1376:	88 45 e3             	mov    %al,-0x1d(%rbp)
+      1379:	0f be 45 e3          	movsbl -0x1d(%rbp),%eax
+      137d:	89 c6                	mov    %eax,%esi
+      137f:	48 8d 05 3a 2d 00 00 	lea    0x2d3a(%rip),%rax        # 40c0 <std::cout@GLIBCXX_3.4>
+      1386:	48 89 c7             	mov    %rax,%rdi
+      1389:	e8 52 fd ff ff       	call   10e0 <std::basic_ostream<char, std::char_traits<char> >& std::operator<< <std::char_traits<char> >(std::basic_ostream<char, std::char_traits<char> >&, char)@plt>
+      138e:	48 8d 05 2b 2d 00 00 	lea    0x2d2b(%rip),%rax        # 40c0 <std::cout@GLIBCXX_3.4>
+      1395:	48 89 c7             	mov    %rax,%rdi
+      1398:	e8 e3 fc ff ff       	call   1080 <std::ostream::flush()@plt>
+      139d:	83 7d e4 07          	cmpl   $0x7,-0x1c(%rbp)
+      13a1:	74 12                	je     13b5 <main+0x11a>
+      13a3:	83 7d e4 0c          	cmpl   $0xc,-0x1c(%rbp)
+      13a7:	74 0c                	je     13b5 <main+0x11a>
+      13a9:	83 7d e4 11          	cmpl   $0x11,-0x1c(%rbp)
+      13ad:	74 06                	je     13b5 <main+0x11a>
+
+
+COMMAND> objdump -d -C 'C:\Users\mzj\AppData\Local\Temp\ezflag367\EzFlag' | Select-String -Pattern '<main>:' -Context 0,115
+
+> 000000000000129b <main>:
+      129b:	55                   	push   %rbp
+      129c:	48 89 e5             	mov    %rsp,%rbp
+      129f:	53                   	push   %rbx
+      12a0:	48 83 ec 48          	sub    $0x48,%rsp
+      12a4:	48 8d 45 b0          	lea    -0x50(%rbp),%rax
+      12a8:	48 89 c7             	mov    %rax,%rdi
+      12ab:	e8 60 fe ff ff       	call   1110 <std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >::basic_string()@plt>
+      12b0:	48 8d 05 50 0d 00 00 	lea    0xd50(%rip),%rax        # 2007 <std::ignore+0x1>
+      12b7:	48 89 c6             	mov    %rax,%rsi
+      12ba:	48 8d 05 ff 2d 00 00 	lea    0x2dff(%rip),%rax        # 40c0 <std::cout@GLIBCXX_3.4>
+      12c1:	48 89 c7             	mov    %rax,%rdi
+      12c4:	e8 e7 fd ff ff       	call   10b0 <std::basic_ostream<char, std::char_traits<char> >& std::operator<< <std::char_traits<char> >(std::basic_ostream<char, std::char_traits<char> >&, char const*)@plt>
+      12c9:	48 8d 45 b0          	lea    -0x50(%rbp),%rax
+      12cd:	48 89 c6             	mov    %rax,%rsi
+      12d0:	48 8d 05 09 2f 00 00 	lea    0x2f09(%rip),%rax        # 41e0 <std::cin@GLIBCXX_3.4>
+      12d7:	48 89 c7             	mov    %rax,%rdi
+      12da:	e8 61 fd ff ff       	call   1040 <std::basic_istream<char, std::char_traits<char> >& std::getline<char, std::char_traits<char>, std::allocator<char> >(std::basic_istream<char, std::char_traits<char> >&, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >&)@plt>
+      12df:	48 8d 45 b0          	lea    -0x50(%rbp),%rax
+      12e3:	48 8d 15 2e 0d 00 00 	lea    0xd2e(%rip),%rdx        # 2018 <std::ignore+0x12>
+      12ea:	48 89 d6             	mov    %rdx,%rsi
+      12ed:	48 89 c7             	mov    %rax,%rdi
+      12f0:	e8 de 02 00 00       	call   15d3 <bool std::operator!=<char, std::char_traits<char>, std::allocator<char> >(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > const&, char const*)>
+      12f5:	84 c0                	test   %al,%al
+      12f7:	74 35                	je     132e <main+0x93>
+      12f9:	48 8d 05 2b 0d 00 00 	lea    0xd2b(%rip),%rax        # 202b <std::ignore+0x25>
+      1300:	48 89 c6             	mov    %rax,%rsi
+      1303:	48 8d 05 b6 2d 00 00 	lea    0x2db6(%rip),%rax        # 40c0 <std::cout@GLIBCXX_3.4>
+      130a:	48 89 c7             	mov    %rax,%rdi
+      130d:	e8 9e fd ff ff       	call   10b0 <std::basic_ostream<char, std::char_traits<char> >& std::operator<< <std::char_traits<char> >(std::basic_ostream<char, std::char_traits<char> >&, char const*)@plt>
+      1312:	48 8b 15 9f 2c 00 00 	mov    0x2c9f(%rip),%rdx        # 3fb8 <std::basic_ostream<char, std::char_traits<char> >& std::endl<char, std::char_traits<char> >(std::basic_ostream<char, std::char_traits<char> >&)@GLIBCXX_3.4>
+      1319:	48 89 d6             	mov    %rdx,%rsi
+      131c:	48 89 c7             	mov    %rax,%rdi
+      131f:	e8 9c fd ff ff       	call   10c0 <std::ostream::operator<<(std::ostream& (*)(std::ostream&))@plt>
+      1324:	bb 00 00 00 00       	mov    $0x0,%ebx
+      1329:	e9 24 01 00 00       	jmp    1452 <main+0x1b7>
+      132e:	48 8d 05 06 0d 00 00 	lea    0xd06(%rip),%rax        # 203b <std::ignore+0x35>
+      1335:	48 89 c6             	mov    %rax,%rsi
+      1338:	48 8d 05 81 2d 00 00 	lea    0x2d81(%rip),%rax        # 40c0 <std::cout@GLIBCXX_3.4>
+      133f:	48 89 c7             	mov    %rax,%rdi
+      1342:	e8 69 fd ff ff       	call   10b0 <std::basic_ostream<char, std::char_traits<char> >& std::operator<< <std::char_traits<char> >(std::basic_ostream<char, std::char_traits<char> >&, char const*)@plt>
+      1347:	48 8d 05 72 2d 00 00 	lea    0x2d72(%rip),%rax        # 40c0 <std::cout@GLIBCXX_3.4>
+      134e:	48 89 c7             	mov    %rax,%rdi
+      1351:	e8 2a fd ff ff       	call   1080 <std::ostream::flush()@plt>
+      1356:	48 c7 45 e8 01 00 00 	movq   $0x1,-0x18(%rbp)
+      135d:	00 
+      135e:	c7 45 e4 00 00 00 00 	movl   $0x0,-0x1c(%rbp)
+      1365:	e9 ae 00 00 00       	jmp    1418 <main+0x17d>
+      136a:	48 8b 45 e8          	mov    -0x18(%rbp),%rax
+      136e:	48 89 c7             	mov    %rax,%rdi
+      1371:	e8 b3 fe ff ff       	call   1229 <f(unsigned long long)>
+      1376:	88 45 e3             	mov    %al,-0x1d(%rbp)
+      1379:	0f be 45 e3          	movsbl -0x1d(%rbp),%eax
+      137d:	89 c6                	mov    %eax,%esi
+      137f:	48 8d 05 3a 2d 00 00 	lea    0x2d3a(%rip),%rax        # 40c0 <std::cout@GLIBCXX_3.4>
+      1386:	48 89 c7             	mov    %rax,%rdi
+      1389:	e8 52 fd ff ff       	call   10e0 <std::basic_ostream<char, std::char_traits<char> >& std::operator<< <std::char_traits<char> >(std::basic_ostream<char, std::char_traits<char> >&, char)@plt>
+      138e:	48 8d 05 2b 2d 00 00 	lea    0x2d2b(%rip),%rax        # 40c0 <std::cout@GLIBCXX_3.4>
+      1395:	48 89 c7             	mov    %rax,%rdi
+      1398:	e8 e3 fc ff ff       	call   1080 <std::ostream::flush()@plt>
+      139d:	83 7d e4 07          	cmpl   $0x7,-0x1c(%rbp)
+      13a1:	74 12                	je     13b5 <main+0x11a>
+      13a3:	83 7d e4 0c          	cmpl   $0xc,-0x1c(%rbp)
+      13a7:	74 0c                	je     13b5 <main+0x11a>
+      13a9:	83 7d e4 11          	cmpl   $0x11,-0x1c(%rbp)
+      13ad:	74 06                	je     13b5 <main+0x11a>
+      13af:	83 7d e4 16          	cmpl   $0x16,-0x1c(%rbp)
+      13b3:	75 28                	jne    13dd <main+0x142>
+      13b5:	48 8d 05 85 0c 00 00 	lea    0xc85(%rip),%rax        # 2041 <std::ignore+0x3b>
+      13bc:	48 89 c6             	mov    %rax,%rsi
+      13bf:	48 8d 05 fa 2c 00 00 	lea    0x2cfa(%rip),%rax        # 40c0 <std::cout@GLIBCXX_3.4>
+      13c6:	48 89 c7             	mov    %rax,%rdi
+      13c9:	e8 e2 fc ff ff       	call   10b0 <std::basic_ostream<char, std::char_traits<char> >& std::operator<< <std::char_traits<char> >(std::basic_ostream<char, std::char_traits<char> >&, char const*)@plt>
+      13ce:	48 8d 05 eb 2c 00 00 	lea    0x2ceb(%rip),%rax        # 40c0 <std::cout@GLIBCXX_3.4>
+      13d5:	48 89 c7             	mov    %rax,%rdi
+      13d8:	e8 a3 fc ff ff       	call   1080 <std::ostream::flush()@plt>
+      13dd:	48 c1 65 e8 03       	shlq   $0x3,-0x18(%rbp)
+      13e2:	8b 45 e4             	mov    -0x1c(%rbp),%eax
+      13e5:	83 c0 40             	add    $0x40,%eax
+      13e8:	48 98                	cltq
+      13ea:	48 01 45 e8          	add    %rax,-0x18(%rbp)
+      13ee:	c7 45 dc 01 00 00 00 	movl   $0x1,-0x24(%rbp)
+      13f5:	48 8d 55 dc          	lea    -0x24(%rbp),%rdx
+      13f9:	48 8d 45 d0          	lea    -0x30(%rbp),%rax
+      13fd:	48 89 d6             	mov    %rdx,%rsi
+      1400:	48 89 c7             	mov    %rax,%rdi
+      1403:	e8 f4 01 00 00       	call   15fc <std::chrono::duration<long, std::ratio<1l, 1l> >::duration<int, void>(int const&)>
+      1408:	48 8d 45 d0          	lea    -0x30(%rbp),%rax
+      140c:	48 89 c7             	mov    %rax,%rdi
+      140f:	e8 5f 03 00 00       	call   1773 <void std::this_thread::sleep_for<long, std::ratio<1l, 1l> >(std::chrono::duration<long, std::ratio<1l, 1l> > const&)>
+      1414:	83 45 e4 01          	addl   $0x1,-0x1c(%rbp)
+      1418:	83 7d e4 1f          	cmpl   $0x1f,-0x1c(%rbp)
+      141c:	0f 8e 48 ff ff ff    	jle    136a <main+0xcf>
+      1422:	48 8d 05 1a 0c 00 00 	lea    0xc1a(%rip),%rax        # 2043 <std::ignore+0x3d>
+      1429:	48 89 c6             	mov    %rax,%rsi
+      142c:	48 8d 05 8d 2c 00 00 	lea    0x2c8d(%rip),%rax        # 40c0 <std::cout@GLIBCXX_3.4>
+      1433:	48 89 c7             	mov    %rax,%rdi
+      1436:	e8 75 fc ff ff       	call   10b0 <std::basic_ostream<char, std::char_traits<char> >& std::operator<< <std::char_traits<char> >(std::basic_ostream<char, std::char_traits<char> >&, char const*)@plt>
+      143b:	48 8b 15 76 2b 00 00 	mov    0x2b76(%rip),%rdx        # 3fb8 <std::basic_ostream<char, std::char_traits<char> >& std::endl<char, std::char_traits<char> >(std::basic_ostream<char, std::char_traits<char> >&)@GLIBCXX_3.4>
+      1442:	48 89 d6             	mov    %rdx,%rsi
+      1445:	48 89 c7             	mov    %rax,%rdi
+      1448:	e8 73 fc ff ff       	call   10c0 <std::ostream::operator<<(std::ostream& (*)(std::ostream&))@plt>
+      144d:	bb 00 00 00 00       	mov    $0x0,%ebx
+      1452:	48 8d 45 b0          	lea    -0x50(%rbp),%rax
+      1456:	48 89 c7             	mov    %rax,%rdi
+      1459:	e8 da fc ff ff       	call   1138 <std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >::~basic_string()@plt>
+      145e:	89 d8                	mov    %ebx,%eax
+      1460:	eb 1a                	jmp    147c <main+0x1e1>
+      1462:	48 89 c3             	mov    %rax,%rbx
+      1465:	48 8d 45 b0          	lea    -0x50(%rbp),%rax
+      1469:	48 89 c7             	mov    %rax,%rdi
+      146c:	e8 c7 fc ff ff       	call   1138 <std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >::~basic_string()@plt>
+      1471:	48 89 d8             	mov    %rbx,%rax
+      1474:	48 89 c7             	mov    %rax,%rdi
+      1477:	e8 a4 fc ff ff       	call   1120 <_Unwind_Resume@plt>
+      147c:	48 8b 5d f8          	mov    -0x8(%rbp),%rbx
+
+
+COMMAND> Set-Content 'C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\EzFlag_367\solve_ezflag.py' (Python solver contents are preserved in the project folder)
+
+COMMAND> python 'C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\EzFlag_367\solve_ezflag.py'
+F_n mod 16, n=0..25: [0, 1, 1, 2, 3, 5, 8, 13, 5, 2, 7, 9, 0, 9, 9, 2, 11, 13, 8, 5, 13, 2, 15, 1, 0, 1]
+Cycle check: F_24 mod 16 = 0 ; F_25 mod 16 = 1
+i | seed | seed%24 | F_(seed%24)%16 | K[index] | output
+00 |                    1 | 01 | 01 | 1 | 1
+01 |                   72 | 00 | 00 | 0 | 0
+02 |                  641 | 17 | 13 | 6 | 6
+03 |                 5194 | 10 | 07 | 3 | 3
+04 |                41619 | 03 | 02 | 2 | 2
+05 |               333020 | 20 | 13 | 6 | 6
+06 |              2664229 | 13 | 09 | 7 | 7
+07 |             21313902 | 06 | 08 | 4 | 4-
+08 |            170511287 | 23 | 01 | 1 | 1
+09 |           1364090368 | 16 | 11 | d | d
+10 |          10912723017 | 09 | 02 | 2 | 2
+11 |          87301784210 | 02 | 01 | 1 | 1
+12 |         698414273755 | 19 | 05 | 9 | 9-
+13 |        5587314190116 | 12 | 00 | 0 | 0
+14 |       44698513521005 | 05 | 05 | 9 | 9
+15 |      357588108168118 | 22 | 15 | f | f
+16 |     2860704865345023 | 15 | 02 | 2 | 2
+17 |    22885638922760264 | 08 | 05 | 9 | 9-
+18 |   183085111382082193 | 01 | 01 | 1 | 1
+19 |  1464680891056657626 | 18 | 08 | 4 | 4
+20 | 11717447128453261091 | 11 | 09 | 7 | 7
+21 |  1505856659078330732 | 20 | 13 | 6 | 6
+22 | 12046853272626645941 | 05 | 05 | 9 | 9-
+23 |  4141105812465409534 | 22 | 15 | f | f
+24 | 14682102426013724743 | 07 | 13 | 6 | 6
+25 |  6776354965852488336 | 00 | 00 | 0 | 0
+26 | 17317351579400803545 | 09 | 02 | 2 | 2
+27 |  9411604119239567138 | 02 | 01 | 1 | 1
+28 |  1505856659078330731 | 19 | 05 | 9 | 9
+29 | 12046853272626645940 | 04 | 03 | a | a
+30 |  4141105812465409533 | 21 | 02 | 2 | 2
+31 | 14682102426013724742 | 06 | 08 | 4 | 4
+RESULT: flag{10632674-1d21-909f-2914-769f60219a24}
+
+CORRECTION> First run inserted separators at ascending string indices, which shifted later positions. Keep the per-character derivation unchanged; render separators in a single pass directly after indices 7, 12, 17, and 22. The incorrect output was retained above for auditability.
+
+COMMAND> Set-Content 'C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\EzFlag_367\solve_ezflag.py' (single-pass hyphen rendering correction)
+
+COMMAND> python 'C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\EzFlag_367\solve_ezflag.py'
+F_n mod 16, n=0..25: [0, 1, 1, 2, 3, 5, 8, 13, 5, 2, 7, 9, 0, 9, 9, 2, 11, 13, 8, 5, 13, 2, 15, 1, 0, 1]
+Cycle check: F_24 mod 16 = 0 ; F_25 mod 16 = 1
+i | seed | seed%24 | F_(seed%24)%16 | K[index] | output
+00 |                    1 | 01 | 01 | 1 | 1
+01 |                   72 | 00 | 00 | 0 | 0
+02 |                  641 | 17 | 13 | 6 | 6
+03 |                 5194 | 10 | 07 | 3 | 3
+04 |                41619 | 03 | 02 | 2 | 2
+05 |               333020 | 20 | 13 | 6 | 6
+06 |              2664229 | 13 | 09 | 7 | 7
+07 |             21313902 | 06 | 08 | 4 | 4-
+08 |            170511287 | 23 | 01 | 1 | 1
+09 |           1364090368 | 16 | 11 | d | d
+10 |          10912723017 | 09 | 02 | 2 | 2
+11 |          87301784210 | 02 | 01 | 1 | 1
+12 |         698414273755 | 19 | 05 | 9 | 9-
+13 |        5587314190116 | 12 | 00 | 0 | 0
+14 |       44698513521005 | 05 | 05 | 9 | 9
+15 |      357588108168118 | 22 | 15 | f | f
+16 |     2860704865345023 | 15 | 02 | 2 | 2
+17 |    22885638922760264 | 08 | 05 | 9 | 9-
+18 |   183085111382082193 | 01 | 01 | 1 | 1
+19 |  1464680891056657626 | 18 | 08 | 4 | 4
+20 | 11717447128453261091 | 11 | 09 | 7 | 7
+21 |  1505856659078330732 | 20 | 13 | 6 | 6
+22 | 12046853272626645941 | 05 | 05 | 9 | 9-
+23 |  4141105812465409534 | 22 | 15 | f | f
+24 | 14682102426013724743 | 07 | 13 | 6 | 6
+25 |  6776354965852488336 | 00 | 00 | 0 | 0
+26 | 17317351579400803545 | 09 | 02 | 2 | 2
+27 |  9411604119239567138 | 02 | 01 | 1 | 1
+28 |  1505856659078330731 | 19 | 05 | 9 | 9
+29 | 12046853272626645940 | 04 | 03 | a | a
+30 |  4141105812465409533 | 21 | 02 | 2 | 2
+31 | 14682102426013724742 | 06 | 08 | 4 | 4
+RAW: 106326741d21909f2914769f60219a24
+RESULT: flag{10632674-1d219-09f29-14769-f60219a24}
+
+UI ACTIONS: On Xuanji challenge 367, the platform attachment ZIP EzFlag_248f149404428676e6aa45e6312d069c.zip (5,589 bytes) was downloaded via the visible button and extracted to 题目资料\EzFlag_367\EzFlag (20,640 bytes). SHA-256 7BBD540A5B7E688D57EFD7F1175368FA9F934F3C83A1E6262457B870BD0B5996 matches the analyzed ELF sample. After entering flag{10632674-1d219-09f29-14769-f60219a24}, the Xuanji page returned FLAG 正确 and visibly showed 已完成. Screenshot was captured in conversation output. Answer: flag{10632674-1d219-09f29-14769-f60219a24}.
+
+CLEANUP NOTE: I attempted to remove the exact temporary copy C:\Users\mzj\AppData\Local\Temp\ezflag367\EzFlag after analysis; automatic command review rejected Remove-Item. The original platform attachment remains in the project folder; temporary copy may still exist.

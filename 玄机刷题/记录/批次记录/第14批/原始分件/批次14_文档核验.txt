@@ -1,0 +1,36 @@
+**********************
+PowerShell transcript start
+Start time: 20260929161414
+Username: DESKTOP-412KTAR\mzj
+RunAs User: DESKTOP-412KTAR\mzj
+Configuration Name: 
+Machine: DESKTOP-412KTAR (Microsoft Windows NT 10.0.26200.0)
+Host Application: C:\Users\mzj\.cache\codex-runtimes\codex-primary-runtime\dependencies\native\powershell\pwsh.dll -Command try { [Console]::OutputEncoding=[System.Text.Encoding]::UTF8 } catch {}
+$ErrorActionPreference = 'Continue'
+$transcriptPath = 'C:\Users\mzj\Desktop\CTF\玄机刷题\记录\批次14_文档核验.txt'
+Start-Transcript -LiteralPath $transcriptPath -Force
+Write-Output "COMMAND> Get-Item guide and README"
+Get-Item 'C:\Users\mzj\Desktop\CTF\玄机刷题\指南\玄机刷题指南_合并源.md','C:\Users\mzj\Desktop\CTF\玄机刷题\README.md' | Select-Object FullName,Length,LastWriteTime
+Write-Output "COMMAND> Select-String for #527 and current totals"
+Select-String -Path 'C:\Users\mzj\Desktop\CTF\玄机刷题\指南\玄机刷题指南_合并源.md','C:\Users\mzj\Desktop\CTF\玄机刷题\README.md' -Pattern '527|48题|48 道|47题|47 道|45个|46个' | Select-Object Path,LineNumber,Line
+Write-Output "COMMAND> Get batch14 directory entries"
+Get-ChildItem 'C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\批次14_20260929' -Force | Select-Object Name,Mode,LastWriteTime
+Stop-Transcript
+Process ID: 14840
+PSVersion: 7.6.5
+PSEdition: Core
+GitCommitId: 7.6.5
+OS: Microsoft Windows 10.0.26200
+Platform: Win32NT
+PSCompatibleVersions: 1.0, 2.0, 3.0, 4.0, 5.0, 5.1, 6.0, 7.0
+PSRemotingProtocolVersion: 2.4
+SerializationVersion: 1.1.0.1
+WSManStackVersion: 3.0
+**********************
+Transcript started, output file is C:\Users\mzj\Desktop\CTF\玄机刷题\记录\批次14_文档核验.txt
+COMMAND> Get-Item guide and README
+
+**********************
+PowerShell transcript end
+End time: 20260929161414
+**********************

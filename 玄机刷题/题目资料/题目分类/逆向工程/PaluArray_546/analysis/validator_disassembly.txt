@@ -1,0 +1,262 @@
+--- RVA 0x1d80..0x1f60 ---
+0x140001d80: add      byte ptr [rax], al 
+0x140001d82: mov      byte ptr [rsi], r14b 
+0x140001d85: mov      rcx, qword ptr [rbp] 
+0x140001d89: xor      rcx, rsp 
+0x140001d8c: call     0x140003800 
+0x140001d91: lea      r11, [rsp + 0x110] 
+0x140001d99: mov      rbx, qword ptr [r11 + 0x28] 
+0x140001d9d: mov      rsi, qword ptr [r11 + 0x30] 
+0x140001da1: mov      rdi, qword ptr [r11 + 0x38] 
+0x140001da5: mov      rsp, r11 
+0x140001da8: pop      r14 
+0x140001daa: pop      r13 
+0x140001dac: pop      rbp 
+0x140001dad: ret       
+0x140001dae: call     qword ptr [rip + 0x34e4] ; -> '葺' VA=0x140005298
+0x140001db4: nop       
+0x140001db5: mov      ecx, 0x8007000e 
+0x140001dba: call     0x1400044c0 
+0x140001dbf: nop       
+0x140001dc0: mov      ecx, 0x8007000e 
+0x140001dc5: call     0x1400044c0 
+0x140001dca: nop       
+0x140001dcb: mov      ecx, 0x8007000e 
+0x140001dd0: call     0x1400044c0 
+0x140001dd5: int3      
+0x140001dd6: int3      
+0x140001dd7: int3      
+0x140001dd8: mov      qword ptr [rsp + 0x10], rbx 
+0x140001ddd: mov      qword ptr [rsp + 0x18], rdi 
+0x140001de2: push     rbp 
+0x140001de3: lea      rbp, [rsp - 0x20] 
+0x140001de8: sub      rsp, 0x120 
+0x140001def: mov      rax, qword ptr [rip + 0x724a] ; -> 'ꈲ\u2ddf⮙' VA=0x140009040
+0x140001df6: xor      rax, rsp 
+0x140001df9: mov      qword ptr [rbp + 0x10], rax 
+0x140001dfd: mov      rbx, rcx 
+0x140001e00: call     qword ptr [rip + 0x359a] 
+0x140001e06: mov      edx, 0x3e8 
+0x140001e0b: mov      rcx, rbx 
+0x140001e0e: call     qword ptr [rip + 0x3514] ; -> 'ᑸ' VA=0x140005328
+0x140001e14: mov      rdi, rax 
+0x140001e17: test     rax, rax 
+0x140001e1a: je       0x140001f2e 
+0x140001e20: lea      rcx, [rbp - 0x20] 
+0x140001e24: call     qword ptr [rip + 0x397e] ; -> 'Ĩ' VA=0x1400057a8
+0x140001e2a: nop       
+0x140001e2b: lea      rdx, [rbp - 0x20] 
+0x140001e2f: mov      rcx, rdi 
+0x140001e32: call     qword ptr [rip + 0x34e8] ; -> 'ᵿ' VA=0x140005320
+0x140001e38: lea      rdx, [rbp - 0x20] 
+0x140001e3c: lea      rcx, [rsp + 0x20] 
+0x140001e41: call     qword ptr [rip + 0x35d9] ; -> 'Ę' VA=0x140005420
+0x140001e47: mov      rdx, rax 
+0x140001e4a: lea      rcx, [rbp - 0x18] 
+0x140001e4e: call     0x140001994 
+0x140001e53: nop       
+0x140001e54: lea      rdx, [rip + 0x4045] 
+0x140001e5b: lea      rcx, [rbp - 0x18] 
+0x140001e5f: call     qword ptr [rip + 0x35ab] 
+0x140001e65: xor      r9d, r9d 
+0x140001e68: xor      r8d, r8d 
+0x140001e6b: mov      rcx, rbx 
+0x140001e6e: test     eax, eax 
+0x140001e70: jne      0x140001f0b 
+0x140001e76: lea      rdx, [rip + 0x4043] ; -> 'Success' VA=0x140005ec0
+0x140001e7d: call     qword ptr [rip + 0x3475] 
+0x140001e83: mov      rdx, qword ptr [rbp - 0x20] 
+0x140001e87: lea      rcx, [rsp + 0x50] 
+0x140001e8c: call     0x140001f6c 
+0x140001e91: nop       
+0x140001e92: mov      rdx, qword ptr [rax] 
+0x140001e95: lea      rcx, [rbp - 0x10] 
+0x140001e99: call     0x140002118 
+0x140001e9e: nop       
+0x140001e9f: lea      rax, [rsp + 0x58] 
+0x140001ea4: mov      rcx, qword ptr [rsp + 0x50] 
+0x140001ea9: cmp      rcx, rax 
+0x140001eac: je       0x140001eb4 
+0x140001eae: call     qword ptr [rip + 0x3324] ; -> '萢' VA=0x1400051d8
+0x140001eb4: lea      rdx, [rbp - 0x10] 
+0x140001eb8: lea      rcx, [rsp + 0x28] 
+0x140001ebd: call     0x140002244 
+0x140001ec2: mov      rcx, rax 
+0x140001ec5: call     0x140001a48 
+0x140001eca: nop       
+0x140001ecb: mov      rdx, qword ptr [rbp + 8] 
+0x140001ecf: cmp      rdx, 0xf 
+0x140001ed3: jbe      0x140001f19 
+0x140001ed5: inc      rdx 
+0x140001ed8: mov      rcx, qword ptr [rbp - 0x10] 
+0x140001edc: mov      rax, rcx 
+0x140001edf: cmp      rdx, 0x1000 
+0x140001ee6: jb       0x140001f04 
+0x140001ee8: add      rdx, 0x27 
+0x140001eec: mov      rcx, qword ptr [rcx - 8] 
+0x140001ef0: sub      rax, rcx 
+0x140001ef3: add      rax, -8 
+0x140001ef7: cmp      rax, 0x1f 
+0x140001efb: jbe      0x140001f04 
+0x140001efd: call     qword ptr [rip + 0x3395] ; -> '葺' VA=0x140005298
+0x140001f03: int3      
+0x140001f04: call     0x140003a60 
+0x140001f09: jmp      0x140001f19 
+0x140001f0b: lea      rdx, [rip + 0x3fbe] ; -> 'Failed' VA=0x140005ed0
+0x140001f12: call     qword ptr [rip + 0x33e0] 
+0x140001f18: nop       
+0x140001f19: lea      rcx, [rbp - 0x18] 
+0x140001f1d: call     qword ptr [rip + 0x387d] ; -> 'Љ' VA=0x1400057a0
+0x140001f23: nop       
+0x140001f24: lea      rcx, [rbp - 0x20] 
+0x140001f28: call     qword ptr [rip + 0x3872] ; -> 'Љ' VA=0x1400057a0
+0x140001f2e: mov      rcx, qword ptr [rbp + 0x10] 
+0x140001f32: xor      rcx, rsp 
+0x140001f35: call     0x140003800 
+0x140001f3a: lea      r11, [rsp + 0x120] 
+0x140001f42: mov      rbx, qword ptr [r11 + 0x18] 
+0x140001f46: mov      rdi, qword ptr [r11 + 0x20] 
+0x140001f4a: mov      rsp, r11 
+0x140001f4d: pop      rbp 
+0x140001f4e: ret       
+0x140001f4f: int3      
+0x140001f50: sub      rsp, 0x28 
+0x140001f54: lea      rax, [rcx + 8] 
+0x140001f58: cmp      qword ptr [rcx], rax 
+0x140001f5b: je       0x140001f66 
+0x140001f5d: mov      rcx, qword ptr [rcx] 
+--- RVA 0x1700..0x1900 ---
+0x140001700: sub      rsp, 0x48 
+0x140001704: lea      rcx, [rsp + 0x20] 
+0x140001709: call     0x1400016c4 
+0x14000170e: lea      rdx, [rip + 0x5f8b] 
+0x140001715: lea      rcx, [rsp + 0x20] 
+0x14000171a: call     0x140004812 
+0x14000171f: int3      
+0x140001720: push     rbx 
+0x140001722: sub      rsp, 0x20 
+0x140001726: mov      rbx, rcx 
+0x140001729: mov      rax, rdx 
+0x14000172c: lea      rcx, [rip + 0x4bb5] ; -> '\u1680䀀\x01' VA=0x1400062e8
+0x140001733: xorps    xmm0, xmm0 
+0x140001736: mov      qword ptr [rbx], rcx 
+0x140001739: lea      rdx, [rbx + 8] 
+0x14000173d: lea      rcx, [rax + 8] 
+0x140001741: movups   xmmword ptr [rdx], xmm0 
+0x140001744: call     qword ptr [rip + 0x3a46] ; -> '莂' VA=0x140005190
+0x14000174a: lea      rax, [rip + 0x4b67] ; -> '\u1680䀀\x01' VA=0x1400062b8
+0x140001751: mov      qword ptr [rbx], rax 
+0x140001754: mov      rax, rbx 
+0x140001757: add      rsp, 0x20 
+0x14000175b: pop      rbx 
+0x14000175c: ret       
+0x14000175d: int3      
+0x14000175e: int3      
+0x14000175f: int3      
+0x140001760: push     rbx 
+0x140001762: sub      rsp, 0x20 
+0x140001766: mov      rbx, rcx 
+0x140001769: mov      rax, rdx 
+0x14000176c: lea      rcx, [rip + 0x4b75] ; -> '\u1680䀀\x01' VA=0x1400062e8
+0x140001773: xorps    xmm0, xmm0 
+0x140001776: mov      qword ptr [rbx], rcx 
+0x140001779: lea      rdx, [rbx + 8] 
+0x14000177d: lea      rcx, [rax + 8] 
+0x140001781: movups   xmmword ptr [rdx], xmm0 
+0x140001784: call     qword ptr [rip + 0x3a06] ; -> '莂' VA=0x140005190
+0x14000178a: lea      rax, [rip + 0x4b3f] ; -> '\u1680䀀\x01' VA=0x1400062d0
+0x140001791: mov      qword ptr [rbx], rax 
+0x140001794: mov      rax, rbx 
+0x140001797: add      rsp, 0x20 
+0x14000179b: pop      rbx 
+0x14000179c: ret       
+0x14000179d: int3      
+0x14000179e: int3      
+0x14000179f: int3      
+0x1400017a0: sub      rsp, 0x28 
+0x1400017a4: lea      rcx, [rip + 0x46ad] ; -> '瑳楲杮琠潯氠湯gPalu_996!?' VA=0x140005e58
+0x1400017ab: call     qword ptr [rip + 0x391f] ; -> '苼' VA=0x1400050d0
+0x1400017b1: int3      
+0x1400017b2: int3      
+0x1400017b3: int3      
+0x1400017b4: mov      qword ptr [rsp + 8], rbx 
+0x1400017b9: push     rdi 
+0x1400017ba: sub      rsp, 0x20 
+0x1400017be: mov      rbx, rcx 
+0x1400017c1: mov      edi, edx 
+0x1400017c3: add      rcx, 0x158 
+0x1400017ca: call     qword ptr [rip + 0x3cc8] ; -> 'у' VA=0x140005498
+0x1400017d0: lea      rcx, [rbx + 0x140] 
+0x1400017d7: lea      rax, [rip + 0x45da] ; -> '㌪䀀\x01' VA=0x140005db8
+0x1400017de: mov      qword ptr [rcx], rax 
+0x1400017e1: call     0x140001188 
+0x1400017e6: mov      rcx, rbx 
+0x1400017e9: call     qword ptr [rip + 0x3cc9] ; -> 'с' VA=0x1400054b8
+0x1400017ef: test     dil, 1 
+0x1400017f3: je       0x140001810 
+0x1400017f5: mov      rcx, rbx 
+0x1400017f8: test     dil, 4 
+0x1400017fc: jne      0x140001806 
+0x1400017fe: call     qword ptr [rip + 0x4054] ; -> 'ד' VA=0x140005858
+0x140001804: jmp      0x140001810 
+0x140001806: mov      edx, 0x178 
+0x14000180b: call     0x1400010e4 
+0x140001810: mov      rax, rbx 
+0x140001813: mov      rbx, qword ptr [rsp + 0x30] 
+0x140001818: add      rsp, 0x20 
+0x14000181c: pop      rdi 
+0x14000181d: ret       
+0x14000181e: int3      
+0x14000181f: int3      
+0x140001820: lea      rax, [rip + 0x4ad1] ; -> '㎜䀀\x01' VA=0x1400062f8
+0x140001827: ret       
+0x140001828: push     rbx 
+0x14000182a: sub      rsp, 0x20 
+0x14000182e: mov      rbx, rcx 
+0x140001831: call     qword ptr [rip + 0x3b79] 
+0x140001837: mov      r9, qword ptr [rbx + 0x170] 
+0x14000183e: mov      edx, 0x80 
+0x140001843: mov      rcx, qword ptr [rbx + 0x40] 
+0x140001847: lea      r8d, [rdx - 0x7f] 
+0x14000184b: call     qword ptr [rip + 0x38d7] ; -> '芞' VA=0x140005128
+0x140001851: mov      r9, qword ptr [rbx + 0x170] 
+0x140001858: xor      r8d, r8d 
+0x14000185b: mov      rcx, qword ptr [rbx + 0x40] 
+0x14000185f: mov      edx, 0x80 
+0x140001864: call     qword ptr [rip + 0x38be] ; -> '芞' VA=0x140005128
+0x14000186a: mov      eax, 1 
+0x14000186f: add      rsp, 0x20 
+0x140001873: pop      rbx 
+0x140001874: ret       
+0x140001875: int3      
+0x140001876: int3      
+0x140001877: int3      
+0x140001878: mov      qword ptr [rsp + 0x10], rbx 
+0x14000187d: mov      qword ptr [rsp + 0x18], rsi 
+0x140001882: push     rdi 
+0x140001883: sub      rsp, 0xb0 
+0x14000188a: mov      rax, qword ptr [rip + 0x77af] ; -> 'ꈲ\u2ddf⮙' VA=0x140009040
+0x140001891: xor      rax, rsp 
+0x140001894: mov      qword ptr [rsp + 0xa0], rax 
+0x14000189c: mov      rsi, rcx 
+0x14000189f: mov      rcx, qword ptr [rcx + 0x40] 
+0x1400018a3: call     qword ptr [rip + 0x386f] ; -> '艖' VA=0x140005118
+0x1400018a9: test     eax, eax 
+0x1400018ab: je       0x14000195d 
+0x1400018b1: xor      edx, edx 
+0x1400018b3: lea      rcx, [rsp + 0x30] 
+0x1400018b8: lea      r8d, [rdx + 0x70] 
+0x1400018bc: call     0x1400047ee 
+0x1400018c1: mov      rdx, rsi 
+0x1400018c4: lea      rcx, [rsp + 0x30] 
+0x1400018c9: call     qword ptr [rip + 0x3b11] 
+0x1400018cf: mov      r8, qword ptr [rsp + 0x38] 
+0x1400018d4: xor      r9d, r9d 
+0x1400018d7: mov      rcx, qword ptr [rsi + 0x40] 
+0x1400018db: lea      edx, [r9 + 0x27] 
+0x1400018df: call     qword ptr [rip + 0x3843] ; -> '芞' VA=0x140005128
+0x1400018e5: mov      ecx, 0xb 
+0x1400018ea: call     qword ptr [rip + 0x3858] ; -> '芊' VA=0x140005148
+0x1400018f0: mov      ecx, 0xc 
+0x1400018f5: mov      edi, eax 
+0x1400018f7: call     qword ptr [rip + 0x384b] ; -> '芊' VA=0x140005148

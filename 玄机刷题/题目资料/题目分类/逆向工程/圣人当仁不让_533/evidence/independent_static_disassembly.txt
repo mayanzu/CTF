@@ -1,0 +1,614 @@
+C:\msys64\mingw64\bin\objdump.exe: C:\Users\mzj\Desktop\CTF\����ˢ��\��Ŀ����\����13_20260929\533_ʥ�˵��ʲ���\analysis\ez_vm.exe: No such file or directory
+
+C:\msys64\mingw64\bin\objdump.exe: C:\Users\mzj\Desktop\CTF\����ˢ��\��Ŀ����\����13_20260929\533_ʥ�˵��ʲ���\analysis\ez_vm.exe: No such file or directory
+
+C:\msys64\mingw64\bin\objdump.exe: C:\Users\mzj\Desktop\CTF\����ˢ��\��Ŀ����\����13_20260929\533_ʥ�˵��ʲ���\analysis\ez_vm.exe: No such file or directory
+
+
+.\analysis\ez_vm.exe:     file format pei-x86-64
+
+
+Disassembly of section .text:
+
+00000001400015e0 <_Z13base64_encodePKhy>:
+   1400015e0:	55                   	push   rbp
+   1400015e1:	48 89 e5             	mov    rbp,rsp
+   1400015e4:	48 83 ec 60          	sub    rsp,0x60
+   1400015e8:	48 89 4d 10          	mov    QWORD PTR [rbp+0x10],rcx
+   1400015ec:	48 89 55 18          	mov    QWORD PTR [rbp+0x18],rdx
+   1400015f0:	48 8b 45 18          	mov    rax,QWORD PTR [rbp+0x18]
+   1400015f4:	48 83 c0 02          	add    rax,0x2
+   1400015f8:	48 ba ab aa aa aa aa 	movabs rdx,0xaaaaaaaaaaaaaaab
+   1400015ff:	aa aa aa 
+   140001602:	48 f7 e2             	mul    rdx
+   140001605:	48 89 d0             	mov    rax,rdx
+   140001608:	48 d1 e8             	shr    rax,1
+   14000160b:	48 c1 e0 02          	shl    rax,0x2
+   14000160f:	48 89 45 e0          	mov    QWORD PTR [rbp-0x20],rax
+   140001613:	48 8b 45 e0          	mov    rax,QWORD PTR [rbp-0x20]
+   140001617:	48 83 c0 01          	add    rax,0x1
+   14000161b:	48 89 c1             	mov    rcx,rax
+   14000161e:	e8 1d 7d 00 00       	call   140009340 <malloc>
+   140001623:	48 89 45 d8          	mov    QWORD PTR [rbp-0x28],rax
+   140001627:	48 83 7d d8 00       	cmp    QWORD PTR [rbp-0x28],0x0
+   14000162c:	75 19                	jne    140001647 <_Z13base64_encodePKhy+0x67>
+   14000162e:	48 8d 05 0c 9a 00 00 	lea    rax,[rip+0x9a0c]        # 14000b041 <_ZL12base64_table+0x41>
+   140001635:	48 89 c1             	mov    rcx,rax
+   140001638:	e8 ab 7c 00 00       	call   1400092e8 <perror>
+   14000163d:	b9 01 00 00 00       	mov    ecx,0x1
+   140001642:	e8 c9 7c 00 00       	call   140009310 <exit>
+   140001647:	48 c7 45 f8 00 00 00 	mov    QWORD PTR [rbp-0x8],0x0
+   14000164e:	00 
+   14000164f:	48 c7 45 f0 00 00 00 	mov    QWORD PTR [rbp-0x10],0x0
+   140001656:	00 
+   140001657:	e9 46 01 00 00       	jmp    1400017a2 <_Z13base64_encodePKhy+0x1c2>
+   14000165c:	48 8b 45 f8          	mov    rax,QWORD PTR [rbp-0x8]
+   140001660:	48 3b 45 18          	cmp    rax,QWORD PTR [rbp+0x18]
+   140001664:	73 1b                	jae    140001681 <_Z13base64_encodePKhy+0xa1>
+   140001666:	48 8b 4d 10          	mov    rcx,QWORD PTR [rbp+0x10]
+   14000166a:	48 8b 45 f8          	mov    rax,QWORD PTR [rbp-0x8]
+   14000166e:	48 8d 50 01          	lea    rdx,[rax+0x1]
+   140001672:	48 89 55 f8          	mov    QWORD PTR [rbp-0x8],rdx
+   140001676:	48 01 c8             	add    rax,rcx
+   140001679:	0f b6 00             	movzx  eax,BYTE PTR [rax]
+   14000167c:	0f b6 c0             	movzx  eax,al
+   14000167f:	eb 05                	jmp    140001686 <_Z13base64_encodePKhy+0xa6>
+   140001681:	b8 00 00 00 00       	mov    eax,0x0
+   140001686:	89 45 d4             	mov    DWORD PTR [rbp-0x2c],eax
+   140001689:	48 8b 45 f8          	mov    rax,QWORD PTR [rbp-0x8]
+   14000168d:	48 3b 45 18          	cmp    rax,QWORD PTR [rbp+0x18]
+   140001691:	73 1b                	jae    1400016ae <_Z13base64_encodePKhy+0xce>
+   140001693:	48 8b 4d 10          	mov    rcx,QWORD PTR [rbp+0x10]
+   140001697:	48 8b 45 f8          	mov    rax,QWORD PTR [rbp-0x8]
+   14000169b:	48 8d 50 01          	lea    rdx,[rax+0x1]
+   14000169f:	48 89 55 f8          	mov    QWORD PTR [rbp-0x8],rdx
+   1400016a3:	48 01 c8             	add    rax,rcx
+   1400016a6:	0f b6 00             	movzx  eax,BYTE PTR [rax]
+   1400016a9:	0f b6 c0             	movzx  eax,al
+   1400016ac:	eb 05                	jmp    1400016b3 <_Z13base64_encodePKhy+0xd3>
+   1400016ae:	b8 00 00 00 00       	mov    eax,0x0
+   1400016b3:	89 45 d0             	mov    DWORD PTR [rbp-0x30],eax
+   1400016b6:	48 8b 45 f8          	mov    rax,QWORD PTR [rbp-0x8]
+   1400016ba:	48 3b 45 18          	cmp    rax,QWORD PTR [rbp+0x18]
+   1400016be:	73 1b                	jae    1400016db <_Z13base64_encodePKhy+0xfb>
+   1400016c0:	48 8b 4d 10          	mov    rcx,QWORD PTR [rbp+0x10]
+   1400016c4:	48 8b 45 f8          	mov    rax,QWORD PTR [rbp-0x8]
+   1400016c8:	48 8d 50 01          	lea    rdx,[rax+0x1]
+   1400016cc:	48 89 55 f8          	mov    QWORD PTR [rbp-0x8],rdx
+   1400016d0:	48 01 c8             	add    rax,rcx
+   1400016d3:	0f b6 00             	movzx  eax,BYTE PTR [rax]
+   1400016d6:	0f b6 c0             	movzx  eax,al
+   1400016d9:	eb 05                	jmp    1400016e0 <_Z13base64_encodePKhy+0x100>
+   1400016db:	b8 00 00 00 00       	mov    eax,0x0
+   1400016e0:	89 45 cc             	mov    DWORD PTR [rbp-0x34],eax
+   1400016e3:	8b 45 d4             	mov    eax,DWORD PTR [rbp-0x2c]
+   1400016e6:	c1 e0 10             	shl    eax,0x10
+   1400016e9:	89 c2                	mov    edx,eax
+   1400016eb:	8b 45 d0             	mov    eax,DWORD PTR [rbp-0x30]
+   1400016ee:	c1 e0 08             	shl    eax,0x8
+   1400016f1:	09 d0                	or     eax,edx
+   1400016f3:	0b 45 cc             	or     eax,DWORD PTR [rbp-0x34]
+   1400016f6:	89 45 c8             	mov    DWORD PTR [rbp-0x38],eax
+   1400016f9:	8b 45 c8             	mov    eax,DWORD PTR [rbp-0x38]
+   1400016fc:	c1 e8 12             	shr    eax,0x12
+   1400016ff:	83 e0 3f             	and    eax,0x3f
+   140001702:	89 c2                	mov    edx,eax
+   140001704:	48 8d 05 f5 98 00 00 	lea    rax,[rip+0x98f5]        # 14000b000 <_ZL12base64_table>
+   14000170b:	0f b6 14 02          	movzx  edx,BYTE PTR [rdx+rax*1]
+   14000170f:	4c 8b 45 d8          	mov    r8,QWORD PTR [rbp-0x28]
+   140001713:	48 8b 45 f0          	mov    rax,QWORD PTR [rbp-0x10]
+   140001717:	48 8d 48 01          	lea    rcx,[rax+0x1]
+   14000171b:	48 89 4d f0          	mov    QWORD PTR [rbp-0x10],rcx
+   14000171f:	4c 01 c0             	add    rax,r8
+   140001722:	88 10                	mov    BYTE PTR [rax],dl
+   140001724:	8b 45 c8             	mov    eax,DWORD PTR [rbp-0x38]
+   140001727:	c1 e8 0c             	shr    eax,0xc
+   14000172a:	83 e0 3f             	and    eax,0x3f
+   14000172d:	89 c2                	mov    edx,eax
+   14000172f:	48 8d 05 ca 98 00 00 	lea    rax,[rip+0x98ca]        # 14000b000 <_ZL12base64_table>
+   140001736:	0f b6 14 02          	movzx  edx,BYTE PTR [rdx+rax*1]
+   14000173a:	4c 8b 45 d8          	mov    r8,QWORD PTR [rbp-0x28]
+   14000173e:	48 8b 45 f0          	mov    rax,QWORD PTR [rbp-0x10]
+   140001742:	48 8d 48 01          	lea    rcx,[rax+0x1]
+   140001746:	48 89 4d f0          	mov    QWORD PTR [rbp-0x10],rcx
+   14000174a:	4c 01 c0             	add    rax,r8
+   14000174d:	88 10                	mov    BYTE PTR [rax],dl
+   14000174f:	8b 45 c8             	mov    eax,DWORD PTR [rbp-0x38]
+   140001752:	c1 e8 06             	shr    eax,0x6
+   140001755:	83 e0 3f             	and    eax,0x3f
+   140001758:	89 c2                	mov    edx,eax
+   14000175a:	48 8d 05 9f 98 00 00 	lea    rax,[rip+0x989f]        # 14000b000 <_ZL12base64_table>
+   140001761:	0f b6 14 02          	movzx  edx,BYTE PTR [rdx+rax*1]
+   140001765:	4c 8b 45 d8          	mov    r8,QWORD PTR [rbp-0x28]
+   140001769:	48 8b 45 f0          	mov    rax,QWORD PTR [rbp-0x10]
+   14000176d:	48 8d 48 01          	lea    rcx,[rax+0x1]
+   140001771:	48 89 4d f0          	mov    QWORD PTR [rbp-0x10],rcx
+   140001775:	4c 01 c0             	add    rax,r8
+   140001778:	88 10                	mov    BYTE PTR [rax],dl
+   14000177a:	8b 45 c8             	mov    eax,DWORD PTR [rbp-0x38]
+   14000177d:	83 e0 3f             	and    eax,0x3f
+   140001780:	89 c2                	mov    edx,eax
+   140001782:	48 8d 05 77 98 00 00 	lea    rax,[rip+0x9877]        # 14000b000 <_ZL12base64_table>
+   140001789:	0f b6 14 02          	movzx  edx,BYTE PTR [rdx+rax*1]
+   14000178d:	4c 8b 45 d8          	mov    r8,QWORD PTR [rbp-0x28]
+   140001791:	48 8b 45 f0          	mov    rax,QWORD PTR [rbp-0x10]
+   140001795:	48 8d 48 01          	lea    rcx,[rax+0x1]
+   140001799:	48 89 4d f0          	mov    QWORD PTR [rbp-0x10],rcx
+   14000179d:	4c 01 c0             	add    rax,r8
+   1400017a0:	88 10                	mov    BYTE PTR [rax],dl
+   1400017a2:	48 8b 45 f8          	mov    rax,QWORD PTR [rbp-0x8]
+   1400017a6:	48 3b 45 18          	cmp    rax,QWORD PTR [rbp+0x18]
+   1400017aa:	0f 82 ac fe ff ff    	jb     14000165c <_Z13base64_encodePKhy+0x7c>
+   1400017b0:	48 c7 45 e8 00 00 00 	mov    QWORD PTR [rbp-0x18],0x0
+   1400017b7:	00 
+   1400017b8:	eb 1b                	jmp    1400017d5 <_Z13base64_encodePKhy+0x1f5>
+   1400017ba:	48 8b 45 e0          	mov    rax,QWORD PTR [rbp-0x20]
+   1400017be:	48 2b 45 e8          	sub    rax,QWORD PTR [rbp-0x18]
+   1400017c2:	48 8d 50 ff          	lea    rdx,[rax-0x1]
+   1400017c6:	48 8b 45 d8          	mov    rax,QWORD PTR [rbp-0x28]
+   1400017ca:	48 01 d0             	add    rax,rdx
+   1400017cd:	c6 00 3d             	mov    BYTE PTR [rax],0x3d
+   1400017d0:	48 83 45 e8 01       	add    QWORD PTR [rbp-0x18],0x1
+   1400017d5:	48 8b 4d 18          	mov    rcx,QWORD PTR [rbp+0x18]
+   1400017d9:	48 ba ab aa aa aa aa 	movabs rdx,0xaaaaaaaaaaaaaaab
+   1400017e0:	aa aa aa 
+   1400017e3:	48 89 c8             	mov    rax,rcx
+   1400017e6:	48 f7 e2             	mul    rdx
+   1400017e9:	48 d1 ea             	shr    rdx,1
+   1400017ec:	48 89 d0             	mov    rax,rdx
+   1400017ef:	48 01 c0             	add    rax,rax
+   1400017f2:	48 01 d0             	add    rax,rdx
+   1400017f5:	48 29 c1             	sub    rcx,rax
+   1400017f8:	48 89 ca             	mov    rdx,rcx
+   1400017fb:	48 8b 45 e0          	mov    rax,QWORD PTR [rbp-0x20]
+   1400017ff:	48 29 d0             	sub    rax,rdx
+   140001802:	83 e0 03             	and    eax,0x3
+   140001805:	48 39 45 e8          	cmp    QWORD PTR [rbp-0x18],rax
+   140001809:	72 af                	jb     1400017ba <_Z13base64_encodePKhy+0x1da>
+   14000180b:	48 8b 55 d8          	mov    rdx,QWORD PTR [rbp-0x28]
+   14000180f:	48 8b 45 e0          	mov    rax,QWORD PTR [rbp-0x20]
+   140001813:	48 01 d0             	add    rax,rdx
+   140001816:	c6 00 00             	mov    BYTE PTR [rax],0x0
+   140001819:	48 8b 45 d8          	mov    rax,QWORD PTR [rbp-0x28]
+   14000181d:	48 83 c4 60          	add    rsp,0x60
+   140001821:	5d                   	pop    rbp
+   140001822:	c3                   	ret
+
+
+.\analysis\ez_vm.exe:     file format pei-x86-64
+
+
+Disassembly of section .text:
+
+0000000140001823 <_Z10vm_executePc>:
+   140001823:	55                   	push   rbp
+   140001824:	48 89 e5             	mov    rbp,rsp
+   140001827:	48 83 ec 10          	sub    rsp,0x10
+   14000182b:	48 89 4d 10          	mov    QWORD PTR [rbp+0x10],rcx
+   14000182f:	c7 45 fc 00 00 00 00 	mov    DWORD PTR [rbp-0x4],0x0
+   140001836:	eb 6e                	jmp    1400018a6 <_Z10vm_executePc+0x83>
+   140001838:	8b 45 fc             	mov    eax,DWORD PTR [rbp-0x4]
+   14000183b:	48 63 d0             	movsxd rdx,eax
+   14000183e:	48 8b 45 10          	mov    rax,QWORD PTR [rbp+0x10]
+   140001842:	48 01 d0             	add    rax,rdx
+   140001845:	0f b6 10             	movzx  edx,BYTE PTR [rax]
+   140001848:	8b 45 fc             	mov    eax,DWORD PTR [rbp-0x4]
+   14000184b:	48 63 c8             	movsxd rcx,eax
+   14000184e:	48 8b 45 10          	mov    rax,QWORD PTR [rbp+0x10]
+   140001852:	48 01 c8             	add    rax,rcx
+   140001855:	83 f2 aa             	xor    edx,0xffffffaa
+   140001858:	88 10                	mov    BYTE PTR [rax],dl
+   14000185a:	8b 45 fc             	mov    eax,DWORD PTR [rbp-0x4]
+   14000185d:	48 63 d0             	movsxd rdx,eax
+   140001860:	48 8b 45 10          	mov    rax,QWORD PTR [rbp+0x10]
+   140001864:	48 01 d0             	add    rax,rdx
+   140001867:	0f b6 00             	movzx  eax,BYTE PTR [rax]
+   14000186a:	8d 48 05             	lea    ecx,[rax+0x5]
+   14000186d:	8b 45 fc             	mov    eax,DWORD PTR [rbp-0x4]
+   140001870:	48 63 d0             	movsxd rdx,eax
+   140001873:	48 8b 45 10          	mov    rax,QWORD PTR [rbp+0x10]
+   140001877:	48 01 d0             	add    rax,rdx
+   14000187a:	89 ca                	mov    edx,ecx
+   14000187c:	88 10                	mov    BYTE PTR [rax],dl
+   14000187e:	8b 45 fc             	mov    eax,DWORD PTR [rbp-0x4]
+   140001881:	48 63 d0             	movsxd rdx,eax
+   140001884:	48 8b 45 10          	mov    rax,QWORD PTR [rbp+0x10]
+   140001888:	48 01 d0             	add    rax,rdx
+   14000188b:	0f b6 00             	movzx  eax,BYTE PTR [rax]
+   14000188e:	8d 48 fe             	lea    ecx,[rax-0x2]
+   140001891:	8b 45 fc             	mov    eax,DWORD PTR [rbp-0x4]
+   140001894:	48 63 d0             	movsxd rdx,eax
+   140001897:	48 8b 45 10          	mov    rax,QWORD PTR [rbp+0x10]
+   14000189b:	48 01 d0             	add    rax,rdx
+   14000189e:	89 ca                	mov    edx,ecx
+   1400018a0:	88 10                	mov    BYTE PTR [rax],dl
+   1400018a2:	83 45 fc 01          	add    DWORD PTR [rbp-0x4],0x1
+   1400018a6:	8b 45 fc             	mov    eax,DWORD PTR [rbp-0x4]
+   1400018a9:	48 98                	cdqe
+   1400018ab:	48 83 f8 10          	cmp    rax,0x10
+   1400018af:	76 87                	jbe    140001838 <_Z10vm_executePc+0x15>
+   1400018b1:	90                   	nop
+   1400018b2:	90                   	nop
+   1400018b3:	48 83 c4 10          	add    rsp,0x10
+   1400018b7:	5d                   	pop    rbp
+   1400018b8:	c3                   	ret
+
+
+.\analysis\ez_vm.exe:     file format pei-x86-64
+
+
+Disassembly of section .text:
+
+00000001400018b9 <main>:
+   1400018b9:	55                   	push   rbp
+   1400018ba:	48 89 e5             	mov    rbp,rsp
+   1400018bd:	48 83 ec 70          	sub    rsp,0x70
+   1400018c1:	e8 c1 01 00 00       	call   140001a87 <__main>
+   1400018c6:	48 8d 05 82 97 00 00 	lea    rax,[rip+0x9782]        # 14000b04f <_ZL12base64_table+0x4f>
+   1400018cd:	48 89 45 f8          	mov    QWORD PTR [rbp-0x8],rax
+   1400018d1:	48 8d 05 90 97 00 00 	lea    rax,[rip+0x9790]        # 14000b068 <_ZL12base64_table+0x68>
+   1400018d8:	48 89 c1             	mov    rcx,rax
+   1400018db:	e8 20 7b 00 00       	call   140009400 <_Z6printfPKcz>
+   1400018e0:	b9 00 00 00 00       	mov    ecx,0x0
+   1400018e5:	48 8b 05 f4 87 00 00 	mov    rax,QWORD PTR [rip+0x87f4]        # 14000a0e0 <__imp___acrt_iob_func>
+   1400018ec:	ff d0                	call   rax
+   1400018ee:	48 89 c2             	mov    rdx,rax
+   1400018f1:	48 8d 45 d0          	lea    rax,[rbp-0x30]
+   1400018f5:	49 89 d0             	mov    r8,rdx
+   1400018f8:	ba 12 00 00 00       	mov    edx,0x12
+   1400018fd:	48 89 c1             	mov    rcx,rax
+   140001900:	e8 13 7a 00 00       	call   140009318 <fgets>
+   140001905:	48 8d 45 d0          	lea    rax,[rbp-0x30]
+   140001909:	48 8d 15 66 97 00 00 	lea    rdx,[rip+0x9766]        # 14000b076 <_ZL12base64_table+0x76>
+   140001910:	48 89 c1             	mov    rcx,rax
+   140001913:	e8 40 7a 00 00       	call   140009358 <strcspn>
+   140001918:	c6 44 05 d0 00       	mov    BYTE PTR [rbp+rax*1-0x30],0x0
+   14000191d:	48 8d 45 d0          	lea    rax,[rbp-0x30]
+   140001921:	48 89 c1             	mov    rcx,rax
+   140001924:	e8 3f 7a 00 00       	call   140009368 <strlen>
+   140001929:	48 83 f8 11          	cmp    rax,0x11
+   14000192d:	74 19                	je     140001948 <main+0x8f>
+   14000192f:	48 8d 05 42 97 00 00 	lea    rax,[rip+0x9742]        # 14000b078 <_ZL12base64_table+0x78>
+   140001936:	48 89 c1             	mov    rcx,rax
+   140001939:	e8 c2 7a 00 00       	call   140009400 <_Z6printfPKcz>
+   14000193e:	b8 01 00 00 00       	mov    eax,0x1
+   140001943:	e9 80 00 00 00       	jmp    1400019c8 <main+0x10f>
+   140001948:	48 8d 55 d0          	lea    rdx,[rbp-0x30]
+   14000194c:	48 8d 45 b0          	lea    rax,[rbp-0x50]
+   140001950:	41 b8 11 00 00 00    	mov    r8d,0x11
+   140001956:	48 89 c1             	mov    rcx,rax
+   140001959:	e8 1a 7a 00 00       	call   140009378 <strncpy>
+   14000195e:	c6 45 c1 00          	mov    BYTE PTR [rbp-0x3f],0x0
+   140001962:	48 8d 45 b0          	lea    rax,[rbp-0x50]
+   140001966:	48 89 c1             	mov    rcx,rax
+   140001969:	e8 b5 fe ff ff       	call   140001823 <_Z10vm_executePc>
+   14000196e:	48 8d 45 b0          	lea    rax,[rbp-0x50]
+   140001972:	ba 11 00 00 00       	mov    edx,0x11
+   140001977:	48 89 c1             	mov    rcx,rax
+   14000197a:	e8 61 fc ff ff       	call   1400015e0 <_Z13base64_encodePKhy>
+   14000197f:	48 89 45 f0          	mov    QWORD PTR [rbp-0x10],rax
+   140001983:	48 8b 55 f8          	mov    rdx,QWORD PTR [rbp-0x8]
+   140001987:	48 8b 45 f0          	mov    rax,QWORD PTR [rbp-0x10]
+   14000198b:	48 89 c1             	mov    rcx,rax
+   14000198e:	e8 bd 79 00 00       	call   140009350 <strcmp>
+   140001993:	85 c0                	test   eax,eax
+   140001995:	75 11                	jne    1400019a8 <main+0xef>
+   140001997:	48 8d 05 fa 96 00 00 	lea    rax,[rip+0x96fa]        # 14000b098 <_ZL12base64_table+0x98>
+   14000199e:	48 89 c1             	mov    rcx,rax
+   1400019a1:	e8 5a 7a 00 00       	call   140009400 <_Z6printfPKcz>
+   1400019a6:	eb 0f                	jmp    1400019b7 <main+0xfe>
+   1400019a8:	48 8d 05 f7 96 00 00 	lea    rax,[rip+0x96f7]        # 14000b0a6 <_ZL12base64_table+0xa6>
+   1400019af:	48 89 c1             	mov    rcx,rax
+   1400019b2:	e8 49 7a 00 00       	call   140009400 <_Z6printfPKcz>
+   1400019b7:	48 8b 45 f0          	mov    rax,QWORD PTR [rbp-0x10]
+   1400019bb:	48 89 c1             	mov    rcx,rax
+   1400019be:	e8 0d 79 00 00       	call   1400092d0 <free>
+   1400019c3:	b8 00 00 00 00       	mov    eax,0x0
+   1400019c8:	48 83 c4 70          	add    rsp,0x70
+   1400019cc:	5d                   	pop    rbp
+   1400019cd:	c3                   	ret
+
+
+.\analysis\ez_vm.exe:     file format pei-x86-64
+
+
+Disassembly of section .text:
+
+00000001400015e0 <_Z13base64_encodePKhy>:
+   1400015e0:	55                   	push   rbp
+   1400015e1:	48 89 e5             	mov    rbp,rsp
+   1400015e4:	48 83 ec 60          	sub    rsp,0x60
+   1400015e8:	48 89 4d 10          	mov    QWORD PTR [rbp+0x10],rcx
+   1400015ec:	48 89 55 18          	mov    QWORD PTR [rbp+0x18],rdx
+   1400015f0:	48 8b 45 18          	mov    rax,QWORD PTR [rbp+0x18]
+   1400015f4:	48 83 c0 02          	add    rax,0x2
+   1400015f8:	48 ba ab aa aa aa aa 	movabs rdx,0xaaaaaaaaaaaaaaab
+   1400015ff:	aa aa aa 
+   140001602:	48 f7 e2             	mul    rdx
+   140001605:	48 89 d0             	mov    rax,rdx
+   140001608:	48 d1 e8             	shr    rax,1
+   14000160b:	48 c1 e0 02          	shl    rax,0x2
+   14000160f:	48 89 45 e0          	mov    QWORD PTR [rbp-0x20],rax
+   140001613:	48 8b 45 e0          	mov    rax,QWORD PTR [rbp-0x20]
+   140001617:	48 83 c0 01          	add    rax,0x1
+   14000161b:	48 89 c1             	mov    rcx,rax
+   14000161e:	e8 1d 7d 00 00       	call   140009340 <malloc>
+   140001623:	48 89 45 d8          	mov    QWORD PTR [rbp-0x28],rax
+   140001627:	48 83 7d d8 00       	cmp    QWORD PTR [rbp-0x28],0x0
+   14000162c:	75 19                	jne    140001647 <_Z13base64_encodePKhy+0x67>
+   14000162e:	48 8d 05 0c 9a 00 00 	lea    rax,[rip+0x9a0c]        # 14000b041 <_ZL12base64_table+0x41>
+   140001635:	48 89 c1             	mov    rcx,rax
+   140001638:	e8 ab 7c 00 00       	call   1400092e8 <perror>
+   14000163d:	b9 01 00 00 00       	mov    ecx,0x1
+   140001642:	e8 c9 7c 00 00       	call   140009310 <exit>
+   140001647:	48 c7 45 f8 00 00 00 	mov    QWORD PTR [rbp-0x8],0x0
+   14000164e:	00 
+   14000164f:	48 c7 45 f0 00 00 00 	mov    QWORD PTR [rbp-0x10],0x0
+   140001656:	00 
+   140001657:	e9 46 01 00 00       	jmp    1400017a2 <_Z13base64_encodePKhy+0x1c2>
+   14000165c:	48 8b 45 f8          	mov    rax,QWORD PTR [rbp-0x8]
+   140001660:	48 3b 45 18          	cmp    rax,QWORD PTR [rbp+0x18]
+   140001664:	73 1b                	jae    140001681 <_Z13base64_encodePKhy+0xa1>
+   140001666:	48 8b 4d 10          	mov    rcx,QWORD PTR [rbp+0x10]
+   14000166a:	48 8b 45 f8          	mov    rax,QWORD PTR [rbp-0x8]
+   14000166e:	48 8d 50 01          	lea    rdx,[rax+0x1]
+   140001672:	48 89 55 f8          	mov    QWORD PTR [rbp-0x8],rdx
+   140001676:	48 01 c8             	add    rax,rcx
+   140001679:	0f b6 00             	movzx  eax,BYTE PTR [rax]
+   14000167c:	0f b6 c0             	movzx  eax,al
+   14000167f:	eb 05                	jmp    140001686 <_Z13base64_encodePKhy+0xa6>
+   140001681:	b8 00 00 00 00       	mov    eax,0x0
+   140001686:	89 45 d4             	mov    DWORD PTR [rbp-0x2c],eax
+   140001689:	48 8b 45 f8          	mov    rax,QWORD PTR [rbp-0x8]
+   14000168d:	48 3b 45 18          	cmp    rax,QWORD PTR [rbp+0x18]
+   140001691:	73 1b                	jae    1400016ae <_Z13base64_encodePKhy+0xce>
+   140001693:	48 8b 4d 10          	mov    rcx,QWORD PTR [rbp+0x10]
+   140001697:	48 8b 45 f8          	mov    rax,QWORD PTR [rbp-0x8]
+   14000169b:	48 8d 50 01          	lea    rdx,[rax+0x1]
+   14000169f:	48 89 55 f8          	mov    QWORD PTR [rbp-0x8],rdx
+   1400016a3:	48 01 c8             	add    rax,rcx
+   1400016a6:	0f b6 00             	movzx  eax,BYTE PTR [rax]
+   1400016a9:	0f b6 c0             	movzx  eax,al
+   1400016ac:	eb 05                	jmp    1400016b3 <_Z13base64_encodePKhy+0xd3>
+   1400016ae:	b8 00 00 00 00       	mov    eax,0x0
+   1400016b3:	89 45 d0             	mov    DWORD PTR [rbp-0x30],eax
+   1400016b6:	48 8b 45 f8          	mov    rax,QWORD PTR [rbp-0x8]
+   1400016ba:	48 3b 45 18          	cmp    rax,QWORD PTR [rbp+0x18]
+   1400016be:	73 1b                	jae    1400016db <_Z13base64_encodePKhy+0xfb>
+   1400016c0:	48 8b 4d 10          	mov    rcx,QWORD PTR [rbp+0x10]
+   1400016c4:	48 8b 45 f8          	mov    rax,QWORD PTR [rbp-0x8]
+   1400016c8:	48 8d 50 01          	lea    rdx,[rax+0x1]
+   1400016cc:	48 89 55 f8          	mov    QWORD PTR [rbp-0x8],rdx
+   1400016d0:	48 01 c8             	add    rax,rcx
+   1400016d3:	0f b6 00             	movzx  eax,BYTE PTR [rax]
+   1400016d6:	0f b6 c0             	movzx  eax,al
+   1400016d9:	eb 05                	jmp    1400016e0 <_Z13base64_encodePKhy+0x100>
+   1400016db:	b8 00 00 00 00       	mov    eax,0x0
+   1400016e0:	89 45 cc             	mov    DWORD PTR [rbp-0x34],eax
+   1400016e3:	8b 45 d4             	mov    eax,DWORD PTR [rbp-0x2c]
+   1400016e6:	c1 e0 10             	shl    eax,0x10
+   1400016e9:	89 c2                	mov    edx,eax
+   1400016eb:	8b 45 d0             	mov    eax,DWORD PTR [rbp-0x30]
+   1400016ee:	c1 e0 08             	shl    eax,0x8
+   1400016f1:	09 d0                	or     eax,edx
+   1400016f3:	0b 45 cc             	or     eax,DWORD PTR [rbp-0x34]
+   1400016f6:	89 45 c8             	mov    DWORD PTR [rbp-0x38],eax
+   1400016f9:	8b 45 c8             	mov    eax,DWORD PTR [rbp-0x38]
+   1400016fc:	c1 e8 12             	shr    eax,0x12
+   1400016ff:	83 e0 3f             	and    eax,0x3f
+   140001702:	89 c2                	mov    edx,eax
+   140001704:	48 8d 05 f5 98 00 00 	lea    rax,[rip+0x98f5]        # 14000b000 <_ZL12base64_table>
+   14000170b:	0f b6 14 02          	movzx  edx,BYTE PTR [rdx+rax*1]
+   14000170f:	4c 8b 45 d8          	mov    r8,QWORD PTR [rbp-0x28]
+   140001713:	48 8b 45 f0          	mov    rax,QWORD PTR [rbp-0x10]
+   140001717:	48 8d 48 01          	lea    rcx,[rax+0x1]
+   14000171b:	48 89 4d f0          	mov    QWORD PTR [rbp-0x10],rcx
+   14000171f:	4c 01 c0             	add    rax,r8
+   140001722:	88 10                	mov    BYTE PTR [rax],dl
+   140001724:	8b 45 c8             	mov    eax,DWORD PTR [rbp-0x38]
+   140001727:	c1 e8 0c             	shr    eax,0xc
+   14000172a:	83 e0 3f             	and    eax,0x3f
+   14000172d:	89 c2                	mov    edx,eax
+   14000172f:	48 8d 05 ca 98 00 00 	lea    rax,[rip+0x98ca]        # 14000b000 <_ZL12base64_table>
+   140001736:	0f b6 14 02          	movzx  edx,BYTE PTR [rdx+rax*1]
+   14000173a:	4c 8b 45 d8          	mov    r8,QWORD PTR [rbp-0x28]
+   14000173e:	48 8b 45 f0          	mov    rax,QWORD PTR [rbp-0x10]
+   140001742:	48 8d 48 01          	lea    rcx,[rax+0x1]
+   140001746:	48 89 4d f0          	mov    QWORD PTR [rbp-0x10],rcx
+   14000174a:	4c 01 c0             	add    rax,r8
+   14000174d:	88 10                	mov    BYTE PTR [rax],dl
+   14000174f:	8b 45 c8             	mov    eax,DWORD PTR [rbp-0x38]
+   140001752:	c1 e8 06             	shr    eax,0x6
+   140001755:	83 e0 3f             	and    eax,0x3f
+   140001758:	89 c2                	mov    edx,eax
+   14000175a:	48 8d 05 9f 98 00 00 	lea    rax,[rip+0x989f]        # 14000b000 <_ZL12base64_table>
+   140001761:	0f b6 14 02          	movzx  edx,BYTE PTR [rdx+rax*1]
+   140001765:	4c 8b 45 d8          	mov    r8,QWORD PTR [rbp-0x28]
+   140001769:	48 8b 45 f0          	mov    rax,QWORD PTR [rbp-0x10]
+   14000176d:	48 8d 48 01          	lea    rcx,[rax+0x1]
+   140001771:	48 89 4d f0          	mov    QWORD PTR [rbp-0x10],rcx
+   140001775:	4c 01 c0             	add    rax,r8
+   140001778:	88 10                	mov    BYTE PTR [rax],dl
+   14000177a:	8b 45 c8             	mov    eax,DWORD PTR [rbp-0x38]
+   14000177d:	83 e0 3f             	and    eax,0x3f
+   140001780:	89 c2                	mov    edx,eax
+   140001782:	48 8d 05 77 98 00 00 	lea    rax,[rip+0x9877]        # 14000b000 <_ZL12base64_table>
+   140001789:	0f b6 14 02          	movzx  edx,BYTE PTR [rdx+rax*1]
+   14000178d:	4c 8b 45 d8          	mov    r8,QWORD PTR [rbp-0x28]
+   140001791:	48 8b 45 f0          	mov    rax,QWORD PTR [rbp-0x10]
+   140001795:	48 8d 48 01          	lea    rcx,[rax+0x1]
+   140001799:	48 89 4d f0          	mov    QWORD PTR [rbp-0x10],rcx
+   14000179d:	4c 01 c0             	add    rax,r8
+   1400017a0:	88 10                	mov    BYTE PTR [rax],dl
+   1400017a2:	48 8b 45 f8          	mov    rax,QWORD PTR [rbp-0x8]
+   1400017a6:	48 3b 45 18          	cmp    rax,QWORD PTR [rbp+0x18]
+   1400017aa:	0f 82 ac fe ff ff    	jb     14000165c <_Z13base64_encodePKhy+0x7c>
+   1400017b0:	48 c7 45 e8 00 00 00 	mov    QWORD PTR [rbp-0x18],0x0
+   1400017b7:	00 
+   1400017b8:	eb 1b                	jmp    1400017d5 <_Z13base64_encodePKhy+0x1f5>
+   1400017ba:	48 8b 45 e0          	mov    rax,QWORD PTR [rbp-0x20]
+   1400017be:	48 2b 45 e8          	sub    rax,QWORD PTR [rbp-0x18]
+   1400017c2:	48 8d 50 ff          	lea    rdx,[rax-0x1]
+   1400017c6:	48 8b 45 d8          	mov    rax,QWORD PTR [rbp-0x28]
+   1400017ca:	48 01 d0             	add    rax,rdx
+   1400017cd:	c6 00 3d             	mov    BYTE PTR [rax],0x3d
+   1400017d0:	48 83 45 e8 01       	add    QWORD PTR [rbp-0x18],0x1
+   1400017d5:	48 8b 4d 18          	mov    rcx,QWORD PTR [rbp+0x18]
+   1400017d9:	48 ba ab aa aa aa aa 	movabs rdx,0xaaaaaaaaaaaaaaab
+   1400017e0:	aa aa aa 
+   1400017e3:	48 89 c8             	mov    rax,rcx
+   1400017e6:	48 f7 e2             	mul    rdx
+   1400017e9:	48 d1 ea             	shr    rdx,1
+   1400017ec:	48 89 d0             	mov    rax,rdx
+   1400017ef:	48 01 c0             	add    rax,rax
+   1400017f2:	48 01 d0             	add    rax,rdx
+   1400017f5:	48 29 c1             	sub    rcx,rax
+   1400017f8:	48 89 ca             	mov    rdx,rcx
+   1400017fb:	48 8b 45 e0          	mov    rax,QWORD PTR [rbp-0x20]
+   1400017ff:	48 29 d0             	sub    rax,rdx
+   140001802:	83 e0 03             	and    eax,0x3
+   140001805:	48 39 45 e8          	cmp    QWORD PTR [rbp-0x18],rax
+   140001809:	72 af                	jb     1400017ba <_Z13base64_encodePKhy+0x1da>
+   14000180b:	48 8b 55 d8          	mov    rdx,QWORD PTR [rbp-0x28]
+   14000180f:	48 8b 45 e0          	mov    rax,QWORD PTR [rbp-0x20]
+   140001813:	48 01 d0             	add    rax,rdx
+   140001816:	c6 00 00             	mov    BYTE PTR [rax],0x0
+   140001819:	48 8b 45 d8          	mov    rax,QWORD PTR [rbp-0x28]
+   14000181d:	48 83 c4 60          	add    rsp,0x60
+   140001821:	5d                   	pop    rbp
+   140001822:	c3                   	ret
+
+
+.\analysis\ez_vm.exe:     file format pei-x86-64
+
+
+Disassembly of section .text:
+
+0000000140001823 <_Z10vm_executePc>:
+   140001823:	55                   	push   rbp
+   140001824:	48 89 e5             	mov    rbp,rsp
+   140001827:	48 83 ec 10          	sub    rsp,0x10
+   14000182b:	48 89 4d 10          	mov    QWORD PTR [rbp+0x10],rcx
+   14000182f:	c7 45 fc 00 00 00 00 	mov    DWORD PTR [rbp-0x4],0x0
+   140001836:	eb 6e                	jmp    1400018a6 <_Z10vm_executePc+0x83>
+   140001838:	8b 45 fc             	mov    eax,DWORD PTR [rbp-0x4]
+   14000183b:	48 63 d0             	movsxd rdx,eax
+   14000183e:	48 8b 45 10          	mov    rax,QWORD PTR [rbp+0x10]
+   140001842:	48 01 d0             	add    rax,rdx
+   140001845:	0f b6 10             	movzx  edx,BYTE PTR [rax]
+   140001848:	8b 45 fc             	mov    eax,DWORD PTR [rbp-0x4]
+   14000184b:	48 63 c8             	movsxd rcx,eax
+   14000184e:	48 8b 45 10          	mov    rax,QWORD PTR [rbp+0x10]
+   140001852:	48 01 c8             	add    rax,rcx
+   140001855:	83 f2 aa             	xor    edx,0xffffffaa
+   140001858:	88 10                	mov    BYTE PTR [rax],dl
+   14000185a:	8b 45 fc             	mov    eax,DWORD PTR [rbp-0x4]
+   14000185d:	48 63 d0             	movsxd rdx,eax
+   140001860:	48 8b 45 10          	mov    rax,QWORD PTR [rbp+0x10]
+   140001864:	48 01 d0             	add    rax,rdx
+   140001867:	0f b6 00             	movzx  eax,BYTE PTR [rax]
+   14000186a:	8d 48 05             	lea    ecx,[rax+0x5]
+   14000186d:	8b 45 fc             	mov    eax,DWORD PTR [rbp-0x4]
+   140001870:	48 63 d0             	movsxd rdx,eax
+   140001873:	48 8b 45 10          	mov    rax,QWORD PTR [rbp+0x10]
+   140001877:	48 01 d0             	add    rax,rdx
+   14000187a:	89 ca                	mov    edx,ecx
+   14000187c:	88 10                	mov    BYTE PTR [rax],dl
+   14000187e:	8b 45 fc             	mov    eax,DWORD PTR [rbp-0x4]
+   140001881:	48 63 d0             	movsxd rdx,eax
+   140001884:	48 8b 45 10          	mov    rax,QWORD PTR [rbp+0x10]
+   140001888:	48 01 d0             	add    rax,rdx
+   14000188b:	0f b6 00             	movzx  eax,BYTE PTR [rax]
+   14000188e:	8d 48 fe             	lea    ecx,[rax-0x2]
+   140001891:	8b 45 fc             	mov    eax,DWORD PTR [rbp-0x4]
+   140001894:	48 63 d0             	movsxd rdx,eax
+   140001897:	48 8b 45 10          	mov    rax,QWORD PTR [rbp+0x10]
+   14000189b:	48 01 d0             	add    rax,rdx
+   14000189e:	89 ca                	mov    edx,ecx
+   1400018a0:	88 10                	mov    BYTE PTR [rax],dl
+   1400018a2:	83 45 fc 01          	add    DWORD PTR [rbp-0x4],0x1
+   1400018a6:	8b 45 fc             	mov    eax,DWORD PTR [rbp-0x4]
+   1400018a9:	48 98                	cdqe
+   1400018ab:	48 83 f8 10          	cmp    rax,0x10
+   1400018af:	76 87                	jbe    140001838 <_Z10vm_executePc+0x15>
+   1400018b1:	90                   	nop
+   1400018b2:	90                   	nop
+   1400018b3:	48 83 c4 10          	add    rsp,0x10
+   1400018b7:	5d                   	pop    rbp
+   1400018b8:	c3                   	ret
+
+
+.\analysis\ez_vm.exe:     file format pei-x86-64
+
+
+Disassembly of section .text:
+
+00000001400018b9 <main>:
+   1400018b9:	55                   	push   rbp
+   1400018ba:	48 89 e5             	mov    rbp,rsp
+   1400018bd:	48 83 ec 70          	sub    rsp,0x70
+   1400018c1:	e8 c1 01 00 00       	call   140001a87 <__main>
+   1400018c6:	48 8d 05 82 97 00 00 	lea    rax,[rip+0x9782]        # 14000b04f <_ZL12base64_table+0x4f>
+   1400018cd:	48 89 45 f8          	mov    QWORD PTR [rbp-0x8],rax
+   1400018d1:	48 8d 05 90 97 00 00 	lea    rax,[rip+0x9790]        # 14000b068 <_ZL12base64_table+0x68>
+   1400018d8:	48 89 c1             	mov    rcx,rax
+   1400018db:	e8 20 7b 00 00       	call   140009400 <_Z6printfPKcz>
+   1400018e0:	b9 00 00 00 00       	mov    ecx,0x0
+   1400018e5:	48 8b 05 f4 87 00 00 	mov    rax,QWORD PTR [rip+0x87f4]        # 14000a0e0 <__imp___acrt_iob_func>
+   1400018ec:	ff d0                	call   rax
+   1400018ee:	48 89 c2             	mov    rdx,rax
+   1400018f1:	48 8d 45 d0          	lea    rax,[rbp-0x30]
+   1400018f5:	49 89 d0             	mov    r8,rdx
+   1400018f8:	ba 12 00 00 00       	mov    edx,0x12
+   1400018fd:	48 89 c1             	mov    rcx,rax
+   140001900:	e8 13 7a 00 00       	call   140009318 <fgets>
+   140001905:	48 8d 45 d0          	lea    rax,[rbp-0x30]
+   140001909:	48 8d 15 66 97 00 00 	lea    rdx,[rip+0x9766]        # 14000b076 <_ZL12base64_table+0x76>
+   140001910:	48 89 c1             	mov    rcx,rax
+   140001913:	e8 40 7a 00 00       	call   140009358 <strcspn>
+   140001918:	c6 44 05 d0 00       	mov    BYTE PTR [rbp+rax*1-0x30],0x0
+   14000191d:	48 8d 45 d0          	lea    rax,[rbp-0x30]
+   140001921:	48 89 c1             	mov    rcx,rax
+   140001924:	e8 3f 7a 00 00       	call   140009368 <strlen>
+   140001929:	48 83 f8 11          	cmp    rax,0x11
+   14000192d:	74 19                	je     140001948 <main+0x8f>
+   14000192f:	48 8d 05 42 97 00 00 	lea    rax,[rip+0x9742]        # 14000b078 <_ZL12base64_table+0x78>
+   140001936:	48 89 c1             	mov    rcx,rax
+   140001939:	e8 c2 7a 00 00       	call   140009400 <_Z6printfPKcz>
+   14000193e:	b8 01 00 00 00       	mov    eax,0x1
+   140001943:	e9 80 00 00 00       	jmp    1400019c8 <main+0x10f>
+   140001948:	48 8d 55 d0          	lea    rdx,[rbp-0x30]
+   14000194c:	48 8d 45 b0          	lea    rax,[rbp-0x50]
+   140001950:	41 b8 11 00 00 00    	mov    r8d,0x11
+   140001956:	48 89 c1             	mov    rcx,rax
+   140001959:	e8 1a 7a 00 00       	call   140009378 <strncpy>
+   14000195e:	c6 45 c1 00          	mov    BYTE PTR [rbp-0x3f],0x0
+   140001962:	48 8d 45 b0          	lea    rax,[rbp-0x50]
+   140001966:	48 89 c1             	mov    rcx,rax
+   140001969:	e8 b5 fe ff ff       	call   140001823 <_Z10vm_executePc>
+   14000196e:	48 8d 45 b0          	lea    rax,[rbp-0x50]
+   140001972:	ba 11 00 00 00       	mov    edx,0x11
+   140001977:	48 89 c1             	mov    rcx,rax
+   14000197a:	e8 61 fc ff ff       	call   1400015e0 <_Z13base64_encodePKhy>
+   14000197f:	48 89 45 f0          	mov    QWORD PTR [rbp-0x10],rax
+   140001983:	48 8b 55 f8          	mov    rdx,QWORD PTR [rbp-0x8]
+   140001987:	48 8b 45 f0          	mov    rax,QWORD PTR [rbp-0x10]
+   14000198b:	48 89 c1             	mov    rcx,rax
+   14000198e:	e8 bd 79 00 00       	call   140009350 <strcmp>
+   140001993:	85 c0                	test   eax,eax
+   140001995:	75 11                	jne    1400019a8 <main+0xef>
+   140001997:	48 8d 05 fa 96 00 00 	lea    rax,[rip+0x96fa]        # 14000b098 <_ZL12base64_table+0x98>
+   14000199e:	48 89 c1             	mov    rcx,rax
+   1400019a1:	e8 5a 7a 00 00       	call   140009400 <_Z6printfPKcz>
+   1400019a6:	eb 0f                	jmp    1400019b7 <main+0xfe>
+   1400019a8:	48 8d 05 f7 96 00 00 	lea    rax,[rip+0x96f7]        # 14000b0a6 <_ZL12base64_table+0xa6>
+   1400019af:	48 89 c1             	mov    rcx,rax
+   1400019b2:	e8 49 7a 00 00       	call   140009400 <_Z6printfPKcz>
+   1400019b7:	48 8b 45 f0          	mov    rax,QWORD PTR [rbp-0x10]
+   1400019bb:	48 89 c1             	mov    rcx,rax
+   1400019be:	e8 0d 79 00 00       	call   1400092d0 <free>
+   1400019c3:	b8 00 00 00 00       	mov    eax,0x0
+   1400019c8:	48 83 c4 70          	add    rsp,0x70
+   1400019cc:	5d                   	pop    rbp
+   1400019cd:	c3                   	ret
+

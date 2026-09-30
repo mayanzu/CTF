@@ -1,0 +1,135 @@
+--- main and encoder call: output offset 0x0 ---
+0000000140001000: 48 81 ec c8 01 00 00                     sub      rsp, 0x1c8
+0000000140001007: 48 8b 05 fa 3f 00 00                     mov      rax, qword ptr [rip + 0x3ffa]
+000000014000100e: 48 31 e0                                 xor      rax, rsp
+0000000140001011: 48 89 84 24 c0 01 00 00                  mov      qword ptr [rsp + 0x1c0], rax
+0000000140001019: c7 44 24 3c 00 00 00 00                  mov      dword ptr [rsp + 0x3c], 0
+0000000140001021: 48 8d 0d 59 30 00 00                     lea      rcx, [rip + 0x3059]
+0000000140001028: e8 c3 04 00 00                           call     0x1400014f0
+000000014000102d: 31 c9                                    xor      ecx, ecx
+000000014000102f: ff 15 e3 35 00 00                        call     qword ptr [rip + 0x35e3]
+0000000140001035: 49 89 c0                                 mov      r8, rax
+0000000140001038: 48 8d 8c 24 40 01 00 00                  lea      rcx, [rsp + 0x140]
+0000000140001040: ba 80 00 00 00                           mov      edx, 0x80
+0000000140001045: ff 15 ad 36 00 00                        call     qword ptr [rip + 0x36ad]
+000000014000104b: 48 83 f8 00                              cmp      rax, 0
+000000014000104f: 0f 85 0d 00 00 00                        jne      0x140001062
+0000000140001055: c7 44 24 3c 01 00 00 00                  mov      dword ptr [rsp + 0x3c], 1
+000000014000105d: e9 a5 00 00 00                           jmp      0x140001107
+0000000140001062: 48 8d 8c 24 40 01 00 00                  lea      rcx, [rsp + 0x140]
+000000014000106a: 48 8d 15 22 30 00 00                     lea      rdx, [rip + 0x3022]
+0000000140001071: ff 15 99 36 00 00                        call     qword ptr [rip + 0x3699]
+0000000140001077: 48 89 44 24 30                           mov      qword ptr [rsp + 0x30], rax
+000000014000107c: 48 8b 44 24 30                           mov      rax, qword ptr [rsp + 0x30]
+0000000140001081: c6 84 04 40 01 00 00 00                  mov      byte ptr [rsp + rax + 0x140], 0
+0000000140001089: 48 83 7c 24 30 24                        cmp      qword ptr [rsp + 0x30], 0x24
+000000014000108f: 0f 84 1a 00 00 00                        je       0x1400010af
+0000000140001095: 48 8d 0d f9 2f 00 00                     lea      rcx, [rip + 0x2ff9]
+000000014000109c: ff 15 5e 36 00 00                        call     qword ptr [rip + 0x365e]
+00000001400010a2: c7 44 24 3c 00 00 00 00                  mov      dword ptr [rsp + 0x3c], 0
+00000001400010aa: e9 58 00 00 00                           jmp      0x140001107
+00000001400010af: 4c 8d 44 24 40                           lea      r8, [rsp + 0x40]
+00000001400010b4: 48 8b 54 24 30                           mov      rdx, qword ptr [rsp + 0x30]
+00000001400010b9: 48 8d 8c 24 40 01 00 00                  lea      rcx, [rsp + 0x140]
+00000001400010c1: e8 6a 00 00 00                           call     0x140001130
+00000001400010c6: 48 8d 4c 24 40                           lea      rcx, [rsp + 0x40]
+00000001400010cb: 48 8d 15 2e 2f 00 00                     lea      rdx, [rip + 0x2f2e]
+00000001400010d2: e8 b9 28 00 00                           call     0x140003990
+00000001400010d7: 83 f8 00                                 cmp      eax, 0
+00000001400010da: 0f 85 12 00 00 00                        jne      0x1400010f2
+00000001400010e0: 48 8d 0d c8 2f 00 00                     lea      rcx, [rip + 0x2fc8]
+00000001400010e7: ff 15 13 36 00 00                        call     qword ptr [rip + 0x3613]
+00000001400010ed: e9 0d 00 00 00                           jmp      0x1400010ff
+00000001400010f2: 48 8d 0d c9 2f 00 00                     lea      rcx, [rip + 0x2fc9]
+00000001400010f9: ff 15 01 36 00 00                        call     qword ptr [rip + 0x3601]
+00000001400010ff: c7 44 24 3c 00 00 00 00                  mov      dword ptr [rsp + 0x3c], 0
+0000000140001107: 8b 44 24 3c                              mov      eax, dword ptr [rsp + 0x3c]
+000000014000110b: 89 44 24 2c                              mov      dword ptr [rsp + 0x2c], eax
+000000014000110f: 48 8b 8c 24 c0 01 00 00                  mov      rcx, qword ptr [rsp + 0x1c0]
+0000000140001117: 48 31 e1                                 xor      rcx, rsp
+000000014000111a: e8 11 06 00 00                           call     0x140001730
+000000014000111f: 8b 44 24 2c                              mov      eax, dword ptr [rsp + 0x2c]
+0000000140001123: 48 81 c4 c8 01 00 00                     add      rsp, 0x1c8
+000000014000112a: c3                                       ret      
+000000014000112b: 0f 1f 44 00 00                           nop      dword ptr [rax + rax]
+0000000140001130: 48 83 ec 40                              sub      rsp, 0x40
+0000000140001134: 4c 89 44 24 38                           mov      qword ptr [rsp + 0x38], r8
+0000000140001139: 48 89 54 24 30                           mov      qword ptr [rsp + 0x30], rdx
+000000014000113e: 48 89 4c 24 28                           mov      qword ptr [rsp + 0x28], rcx
+0000000140001143: 48 c7 44 24 20 00 00 00 00               mov      qword ptr [rsp + 0x20], 0
+--- post-encode conditional XOR: output offset 0x320 ---
+0000000140001320: 03 48 89                                 add      ecx, dword ptr [rax - 0x77]
+0000000140001323: 44 24 18                                 and      al, 0x18
+0000000140001326: e9 2a fe ff ff                           jmp      0x140001155
+000000014000132b: 48 8b 44 24 38                           mov      rax, qword ptr [rsp + 0x38]
+0000000140001330: 48 8b 4c 24 20                           mov      rcx, qword ptr [rsp + 0x20]
+0000000140001335: c6 04 08 00                              mov      byte ptr [rax + rcx], 0
+0000000140001339: 48 8b 44 24 38                           mov      rax, qword ptr [rsp + 0x38]
+000000014000133e: 48 89 44 24 08                           mov      qword ptr [rsp + 8], rax
+0000000140001343: 48 8b 44 24 08                           mov      rax, qword ptr [rsp + 8]
+0000000140001348: 80 38 00                                 cmp      byte ptr [rax], 0
+000000014000134b: 0f 84 36 00 00 00                        je       0x140001387
+0000000140001351: 48 8b 44 24 08                           mov      rax, qword ptr [rsp + 8]
+0000000140001356: 0f be 00                                 movsx    eax, byte ptr [rax]
+0000000140001359: 83 f8 3d                                 cmp      eax, 0x3d
+000000014000135c: 0f 84 0d 00 00 00                        je       0x14000136f
+0000000140001362: 48 8b 44 24 08                           mov      rax, qword ptr [rsp + 8]
+0000000140001367: 0f be 08                                 movsx    ecx, byte ptr [rax]
+000000014000136a: 83 f1 04                                 xor      ecx, 4
+000000014000136d: 88 08                                    mov      byte ptr [rax], cl
+000000014000136f: e9 00 00 00 00                           jmp      0x140001374
+0000000140001374: 48 8b 44 24 08                           mov      rax, qword ptr [rsp + 8]
+0000000140001379: 48 83 c0 01                              add      rax, 1
+000000014000137d: 48 89 44 24 08                           mov      qword ptr [rsp + 8], rax
+0000000140001382: e9 bc ff ff ff                           jmp      0x140001343
+0000000140001387: 48 83 c4 40                              add      rsp, 0x40
+000000014000138b: c3                                       ret      
+000000014000138c: cc                                       int3     
+000000014000138d: cc                                       int3     
+000000014000138e: cc                                       int3     
+000000014000138f: cc                                       int3     
+0000000140001390: 48 83 ec 48                              sub      rsp, 0x48
+0000000140001394: 4c 89 4c 24 68                           mov      qword ptr [rsp + 0x68], r9
+0000000140001399: 4c 89 44 24 60                           mov      qword ptr [rsp + 0x60], r8
+--- comparison routine entry: output offset 0x2990 ---
+0000000140003990: ff 25 72 0d 00 00                        jmp      qword ptr [rip + 0xd72]
+0000000140003996: cc                                       int3     
+0000000140003997: cc                                       int3     
+0000000140003998: cc                                       int3     
+0000000140003999: cc                                       int3     
+000000014000399a: cc                                       int3     
+000000014000399b: cc                                       int3     
+000000014000399c: cc                                       int3     
+000000014000399d: cc                                       int3     
+000000014000399e: cc                                       int3     
+000000014000399f: cc                                       int3     
+00000001400039a0: ff 25 72 0d 00 00                        jmp      qword ptr [rip + 0xd72]
+00000001400039a6: 00 00                                    add      byte ptr [rax], al
+00000001400039a8: 00 00                                    add      byte ptr [rax], al
+00000001400039aa: 00 00                                    add      byte ptr [rax], al
+00000001400039ac: 00 00                                    add      byte ptr [rax], al
+00000001400039ae: 00 00                                    add      byte ptr [rax], al
+00000001400039b0: 00 00                                    add      byte ptr [rax], al
+00000001400039b2: 00 00                                    add      byte ptr [rax], al
+00000001400039b4: 00 00                                    add      byte ptr [rax], al
+00000001400039b6: 00 00                                    add      byte ptr [rax], al
+00000001400039b8: 00 00                                    add      byte ptr [rax], al
+00000001400039ba: 00 00                                    add      byte ptr [rax], al
+00000001400039bc: 00 00                                    add      byte ptr [rax], al
+00000001400039be: 00 00                                    add      byte ptr [rax], al
+00000001400039c0: 00 00                                    add      byte ptr [rax], al
+00000001400039c2: 00 00                                    add      byte ptr [rax], al
+00000001400039c4: 00 00                                    add      byte ptr [rax], al
+00000001400039c6: 00 00                                    add      byte ptr [rax], al
+00000001400039c8: 00 00                                    add      byte ptr [rax], al
+00000001400039ca: 00 00                                    add      byte ptr [rax], al
+00000001400039cc: 00 00                                    add      byte ptr [rax], al
+00000001400039ce: 00 00                                    add      byte ptr [rax], al
+00000001400039d0: 00 00                                    add      byte ptr [rax], al
+00000001400039d2: 00 00                                    add      byte ptr [rax], al
+00000001400039d4: 00 00                                    add      byte ptr [rax], al
+00000001400039d6: 00 00                                    add      byte ptr [rax], al
+00000001400039d8: 00 00                                    add      byte ptr [rax], al
+00000001400039da: 00 00                                    add      byte ptr [rax], al
+00000001400039dc: 00 00                                    add      byte ptr [rax], al
+00000001400039de: 00 00                                    add      byte ptr [rax], al

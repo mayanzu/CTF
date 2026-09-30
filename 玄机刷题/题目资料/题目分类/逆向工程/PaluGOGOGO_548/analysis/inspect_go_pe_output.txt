@@ -1,0 +1,201 @@
+file=C:\Users\mzj\Desktop\CTF\����ˢ��\��Ŀ����\PaluGOGOGO_548\analysis\palugogogo_flag.exe size=1456640
+PE offset=0x80 sections=8 optional_magic=0x20b imagebase=0x400000
+section .text: RVA=0x1000 VSZ=0x94519 raw=0x600 size=0x94600
+section .rdata: RVA=0x96000 VSZ=0xb8780 raw=0x94c00 size=0xb8800
+section .data: RVA=0x14f000 VSZ=0x96d60 raw=0x14d400 size=0xe200
+section .pdata: RVA=0x1e6000 VSZ=0x4500 raw=0x15b600 size=0x4600
+section .xdata: RVA=0x1eb000 VSZ=0xb4 raw=0x15fc00 size=0x200
+section .idata: RVA=0x1ec000 VSZ=0x554 raw=0x15fe00 size=0x600
+section .reloc: RVA=0x1ed000 VSZ=0x3210 raw=0x160400 size=0x3400
+section .symtab: RVA=0x1f1000 VSZ=0x4 raw=0x163800 size=0x200
+
+--- interesting ASCII runs (length >= 4; excluding common Go runtime lines) ---
+off=0x94e85 va=       4809349 len=4 text='Flag'
+off=0x94fe7 va=       4809703 len=4 text='flag'
+off=0x950a1 va=       4809889 len=4 text='flag'
+off=0x95298 va=       4810392 len=5 text='Flags'
+off=0x954ba va=       4810938 len=5 text='flags'
+off=0x9553f va=       4811071 len=5 text='TFlag'
+off=0x95bb6 va=       4812726 len=7 text='*fmt.pp'
+off=0x960bf va=       4814015 len=8 text='*fmt.fmt'
+off=0x960dd va=       4814045 len=8 text='fmtFlags'
+off=0x9612d va=       4814125 len=8 text='*os.File'
+off=0x96137 va=       4814135 len=8 text='*os.file'
+off=0x96b59 va=       4816729 len=10 text='*fmt.State'
+off=0x96b65 va=       4816741 len=10 text='clearflags'
+off=0x9711d va=       4818205 len=10 text='*abi.TFlag'
+off=0x97173 va=       4818291 len=11 text='*fmt.buffer'
+off=0x971db va=       4818395 len=11 text='*os.dirInfo'
+off=0x97a23 va=       4820515 len=13 text='*fmt.fmtFlags'
+off=0x97a41 va=       4820545 len=13 text='*fmt.Stringer'
+off=0x97a8c va=       4820620 len=13 text='*reflect.flag'
+off=0x97d89 va=       4821385 len=13 text='inputOverflow'
+off=0x97e4c va=       4821580 len=13 text='*abi.FuncFlag'
+off=0x97ea8 va=       4821672 len=14 text='*fmt.Formatter'
+off=0x984e4 va=       4823268 len=15 text='*fmt.GoStringer'
+off=0x996e2 va=       4827874 len=21 text='*func(*os.file) error'
+off=0x999fc va=       4828668 len=23 text='*func(fmt.State, int32)'
+off=0xb4d5f va=       4940127 len=490 text='types : type avx512fos/execruntimeSuccess!GoStringno anodeCancelIoReadFileAcceptExWSAIoctlshutdown48828125nil PoolscavengepollDesctraceBufdeadlockraceFinipanicnilcgocheckrunnable procid rax     rbx     rcx     rdx     rdi     rsi     rbp     rsp     r8      r9      r10     r11     r12     r13     r14     r15     rip     rflags  cs      fs      gs       is not  pointer packed=BAD RANK status unknown(trigger= npages= nalloc= nfreed=[signal  newval= mcount= bytes,  stack=[ minLC=  maxpc= '
+off=0xb539d va=       4941725 len=1751 text=' runqueue= stopwait= runqsize= gfreecnt= throwing= spinning=atomicand8float64nanfloat32nanException  ptrSize=  targetpc= until pc=unknown pcruntime: ggoroutine execerrdothttp2debugcrypto/tls/dev/stdout/dev/stderrCloseHandleOpenProcessGetFileTypebroken pipebad messagefile existsbad addressRegCloseKeyCreateFileWDeleteFileWExitProcessFreeLibrarySetFileTimeVirtualLockWSARecvFromclosesocketgetpeernamegetsocknamecrypt32.dllmswsock.dllsecur32.dllshell32.dlluserenv.dllshort write30517578125bad argSizeme'
+off=0xb6975 va=       4947317 len=661 text='GODEBUG: value "IsDebuggerPresent0123456789ABCDEFX0123456789abcdefxreflect.Value.Intpermission deniedwrong medium typeno data availableexec format errorLookupAccountSidWDnsRecordListFreeGetCurrentProcessGetShortPathNameWWSAEnumProtocolsW1192092895507812559604644775390625unknown type kindreflect: call of reflect.Value.Lengoroutine profileAllThreadsSyscallGC assist markingselect (no cases)sync.RWMutex.Lockwait for GC cycletrace proc status: missing method notetsleepg on g0bad TinySizeClassruntime:'
+off=0xb6c0b va=       4947979 len=1012 text='runtime.newosprocruntime/internal/thread exhaustionlocked m0 woke upentersyscallblock spinningthreads=unknown caller pcstack: frame={sp:runtime: nameOff runtime: typeOff runtime: textOff multipartmaxpartsRegLoadMUIStringWbufio: buffer fullreflect.Value.UintGetExitCodeProcessoperation canceledno child processesconnection refusedRFS specific erroridentifier removedinput/output errormultihop attemptedfile name too longno locks availablestreams pipe errorLookupAccountNameWCreateFileMappingWGetFileAt'
+off=0xb7036 va=       4949046 len=983 text=', locked to threadruntime.semacreateruntime.semawakeupuse of closed filePlease Input Flag: reflect.Value.IsNilreflect.Value.FloatWaitForSingleObjectbad file descriptordisk quota exceededtoo many open filesdevice not a streamdirectory not emptyCryptReleaseContextGetTokenInformationCreateSymbolicLinkWGetCurrentProcessId14901161193847656257450580596923828125reflect.Value.Bytesreflect.Value.Fieldreflect.Value.IndexSetTokenInformationMultiByteToWideCharGC mark terminationpanicwrap: no ( in panicwrap:'
+off=0xb7441 va=       4950081 len=932 text='mstartm not found in allmstopm holding lockssemaRoot rotateLeftbad notifyList sizeruntime: preempt g0runtime: pcdata is bad ABI descriptiondodeltimer: wrong Padjusttimers: bad pfile already existsfile does not existfile already closedmultipartmaxheadersinvalid request codebad font file formatis a named type filekey has been revokedconnection timed outCreateProcessAsUserWCryptAcquireContextWCertOpenSystemStoreWGetCurrentDirectoryWGetFileAttributesExWSetCurrentDirectoryWSetHandleInformationGetAcce'
+off=0xb77e6 va=       4951014 len=2741 text='pacer: assist ratio=workbuf is not emptybad use of bucket.mpbad use of bucket.bpruntime: double waitws2_32.dll not foundpreempt off reason: forcegc: phase errorgopark: bad g statusgo of nil func valuesemaRoot rotateRightreflect.makeFuncStubdodeltimer0: wrong Ptrace: out of memorywirep: already in gohttplaxcontentlengthx509usefallbackrootsreflect.Value.Complexlink has been severedpackage not installedblock device requiredstate not recoverableread-only file systemstale NFS file handleReadDirectory'
+off=0xb829c va=       4953756 len=298 text='system huge page size (runtime: s.allocCount= s.allocCount > s.nelems/gc/heap/allocs:objectsmissing type in runfinqruntime: internal errorwork.nwait > work.nprocleft over markroot jobsgcDrain phase incorrectMB during sweep; swept bad profile stack countruntime: netpoll failedRtlGetNtVersionNumbers'
+off=0xb84f2 va=       4954354 len=718 text='pattern bits too long: invalid argument to Intnconnection reset by peerlevel 2 not synchronizedlink number out of rangeout of streams resourcesfunction not implementedstructure needs cleaningnot supported by windowsCertFreeCertificateChainCreateToolhelp32SnapshotGetUserProfileDirectoryW116415321826934814453125582076609134674072265625hash of unhashable type span has no free objectsruntime: found obj at *(runtime: VirtualFree of /cgo/go-to-c-calls:calls/gc/heap/objects:objects/sched/latencies:seco'
+off=0xb9597 va=       4958615 len=1707 text='runtime: casgstatus: oldval=gcstopm: negative nmspinningfindrunnable: netpoll with psave on system g not allowednewproc1: newg missing stacknewproc1: new g is not GdeadFixedStack is not power-of-2missing stack in shrinkstack args stack map entries for invalid runtime symbol tableruntime: no module data for traceRegion: alloc too large[originating from goroutine abi.NewName: name too long: Debugger detected! Exiting...operation already in progressno XENIX semaphores availabletoo many open files i'
+off=0xba1a0 va=       4961696 len=4335 text="unsafe.String: len out of rangebufio: tried to fill full bufferresource temporarily unavailablesoftware caused connection abortnumerical argument out of domainCertAddCertificateContextToStoreCertVerifyCertificateChainPolicy28421709430404007434844970703125MapIter.Value called before Nextslice bounds out of range [::%x]slice bounds out of range [:%x:]slice bounds out of range [%x::] (types from different packages)end outside usable address spaceGCProg for type that isn't largeruntime: failed to re"
+off=0xbb290 va=       4966032 len=1918 text='runtime: bad notifyList size - sync=accessed data from freed user arena runtime: wrong goroutine in newstackruntime: invalid pc-encoded table f=invalid pattern syntax (+ after -): cannot exec a shared library directlyvalue too large for defined data type2220446049250313080847263336181640625reflect: funcLayout of non-func type reflect.Value.Bytes of non-byte slicereflect.Value.Bytes of non-byte arraymethod ABI and value ABI do not aligngodebug: unexpected IncNonDefault of runtime: allocation size'
+off=0xbd621 va=       4975137 len=2282 text='internal error: polling on unsupported descriptor typereflect: internal error: invalid use of makeMethodValuemheap.freeSpanLocked - invalid free of user arena chunkcasfrom_Gscanstatus:top gp->status is not in scan state is currently not supported for use in system callbacksstrings: illegal use of non-zero Builder copied by valuenon-empty pointer map passed for non-pointer-size valuesfailed to allocate aligned heap memory; too many retriesprofilealloc called without a P or outside bootstrappingin'
+off=0xdac55 va=       5095509 len=10 text='palugogogo'
+off=0xdac64 va=       5095524 len=10 text='palugogogo'
+off=0xdaca6 va=       5095590 len=16 text='-ldflags="-s -w"'
+off=0xdacd1 va=       5095633 len=11 text='CGO_CFLAGS='
+off=0xdace3 va=       5095651 len=13 text='CGO_CPPFLAGS='
+off=0xdacf7 va=       5095671 len=13 text='CGO_CXXFLAGS='
+off=0xdad0b va=       5095691 len=12 text='CGO_LDFLAGS='
+off=0xe05b2 va=       5118386 len=33 text='runtime.(*scavChunkFlags).isEmpty'
+off=0xe06db va=       5118683 len=34 text='runtime.(*scavChunkFlags).setEmpty'
+off=0xe073b va=       5118779 len=37 text='runtime.(*scavChunkFlags).setNonEmpty'
+off=0xe325d va=       5129821 len=18 text='runtime.main.func2'
+off=0xe65bf va=       5142975 len=18 text='runtime.main.func1'
+off=0xe780d va=       5147661 len=4 text='gogo'
+off=0xe7935 va=       5147957 len=12 text='runtime.gogo'
+off=0xe9cb7 va=       5157047 len=19 text='reflect.flag.mustBe'
+off=0xe9ce3 va=       5157091 len=17 text='reflect.flag.kind'
+off=0xe9e68 va=       5157480 len=15 text='reflect.flag.ro'
+off=0xe9f97 va=       5157783 len=24 text='reflect.flag.panicNotMap'
+off=0xeb07e va=       5162110 len=7 text='os.init'
+off=0xeb086 va=       5162118 len=10 text='os.NewFile'
+off=0xeb091 va=       5162129 len=13 text='os.init.func1'
+off=0xeb09f va=       5162143 len=9 text='os.init.0'
+off=0xeb0a9 va=       5162153 len=14 text='os.readNextArg'
+off=0xeb0b8 va=       5162168 len=16 text='os.appendBSBytes'
+off=0xeb0c9 va=       5162185 len=20 text='os.commandLineToArgv'
+off=0xeb0de va=       5162206 len=13 text='os.Executable'
+off=0xeb0ec va=       5162220 len=13 text='os.executable'
+off=0xeb0fa va=       5162234 len=20 text='os.getModuleFileName'
+off=0xeb10f va=       5162255 len=15 text='os.(*File).Read'
+off=0xeb11f va=       5162271 len=21 text='os.(*File).checkValid'
+off=0xeb135 va=       5162293 len=15 text='os.(*File).read'
+off=0xeb145 va=       5162309 len=16 text='os.(*File).Write'
+off=0xeb156 va=       5162326 len=16 text='os.(*File).write'
+off=0xeb167 va=       5162343 len=18 text='os.(*File).wrapErr'
+off=0xeb17a va=       5162362 len=10 text='os.newFile'
+off=0xeb185 va=       5162373 len=16 text='os.(*file).close'
+off=0xeb196 va=       5162390 len=19 text='os.(*dirInfo).close'
+off=0xeb1aa va=       5162410 len=9 text='os.init.1'
+off=0xeb1b4 va=       5162420 len=19 text='type:.eq.os.dirInfo'
+off=0xeb1c8 va=       5162440 len=14 text='fmt.init.func1'
+off=0xeb1d7 va=       5162455 len=23 text='fmt.(*fmt).writePadding'
+off=0xeb1ef va=       5162479 len=14 text='fmt.(*fmt).pad'
+off=0xeb1fe va=       5162494 len=19 text='fmt.(*buffer).write'
+off=0xeb212 va=       5162514 len=20 text='fmt.(*fmt).padString'
+off=0xeb227 va=       5162535 len=25 text='fmt.(*buffer).writeString'
+off=0xeb241 va=       5162561 len=21 text='fmt.(*fmt).fmtBoolean'
+off=0xeb257 va=       5162583 len=21 text='fmt.(*fmt).fmtUnicode'
+off=0xeb282 va=       5162626 len=21 text='fmt.(*fmt).fmtInteger'
+off=0xeb298 va=       5162648 len=19 text='fmt.(*fmt).truncate'
+off=0xeb2ac va=       5162668 len=15 text='fmt.(*fmt).fmtS'
+off=0xeb2bc va=       5162684 len=25 text='fmt.(*fmt).truncateString'
+off=0xeb2d6 va=       5162710 len=16 text='fmt.(*fmt).fmtBs'
+off=0xeb2e7 va=       5162727 len=17 text='fmt.(*fmt).fmtSbx'
+off=0xeb2f9 va=       5162745 len=15 text='fmt.(*fmt).fmtQ'
+off=0xeb338 va=       5162808 len=15 text='fmt.(*fmt).fmtC'
+off=0xeb348 va=       5162824 len=16 text='fmt.(*fmt).fmtQc'
+off=0xeb390 va=       5162896 len=19 text='fmt.(*fmt).fmtFloat'
+off=0xeb3b8 va=       5162936 len=23 text='fmt.(*buffer).writeByte'
+off=0xeb3d0 va=       5162960 len=14 text='fmt.newPrinter'
+off=0xeb3df va=       5162975 len=15 text='fmt.(*fmt).init'
+off=0xeb3ef va=       5162991 len=21 text='fmt.(*fmt).clearflags'
+off=0xeb405 va=       5163013 len=14 text='fmt.(*pp).free'
+off=0xeb414 va=       5163028 len=15 text='fmt.(*pp).Write'
+off=0xeb424 va=       5163044 len=11 text='fmt.Sprintf'
+off=0xeb430 va=       5163056 len=10 text='fmt.Fprint'
+off=0xeb43b va=       5163067 len=12 text='fmt.Fprintln'
+off=0xeb448 va=       5163080 len=12 text='fmt.getField'
+off=0xeb455 va=       5163093 len=21 text='fmt.(*pp).unknownType'
+off=0xeb46b va=       5163115 len=17 text='fmt.(*pp).badVerb'
+off=0xeb47d va=       5163133 len=23 text='fmt.(*buffer).writeRune'
+off=0xeb4a4 va=       5163172 len=17 text='fmt.(*pp).fmtBool'
+off=0xeb4b6 va=       5163190 len=17 text='fmt.(*pp).fmt0x64'
+off=0xeb4c8 va=       5163208 len=20 text='fmt.(*pp).fmtInteger'
+off=0xeb4dd va=       5163229 len=18 text='fmt.(*pp).fmtFloat'
+off=0xeb4f0 va=       5163248 len=20 text='fmt.(*pp).fmtComplex'
+off=0xeb505 va=       5163269 len=19 text='fmt.(*pp).fmtString'
+off=0xeb519 va=       5163289 len=16 text='fmt.(*fmt).fmtSx'
+off=0xeb52a va=       5163306 len=18 text='fmt.(*pp).fmtBytes'
+off=0xeb53d va=       5163325 len=16 text='fmt.(*fmt).fmtBx'
+off=0xeb54e va=       5163342 len=20 text='fmt.(*pp).fmtPointer'
+off=0xeb563 va=       5163363 len=20 text='fmt.(*pp).catchPanic'
+off=0xeb578 va=       5163384 len=23 text='fmt.(*pp).handleMethods'
+off=0xeb590 va=       5163408 len=34 text='fmt.(*pp).handleMethods.deferwrap4'
+off=0xeb5b3 va=       5163443 len=34 text='fmt.(*pp).handleMethods.deferwrap3'
+off=0xeb5d6 va=       5163478 len=34 text='fmt.(*pp).handleMethods.deferwrap2'
+off=0xeb5f9 va=       5163513 len=34 text='fmt.(*pp).handleMethods.deferwrap1'
+off=0xeb61c va=       5163548 len=18 text='fmt.(*pp).printArg'
+off=0xeb662 va=       5163618 len=20 text='fmt.(*pp).printValue'
+off=0xeb68b va=       5163659 len=14 text='fmt.intFromArg'
+off=0xeb69a va=       5163674 len=12 text='fmt.tooLarge'
+off=0xeb6a7 va=       5163687 len=18 text='fmt.parseArgNumber'
+off=0xeb6ba va=       5163706 len=12 text='fmt.parsenum'
+off=0xeb6c7 va=       5163719 len=19 text='fmt.(*pp).argNumber'
+off=0xeb6db va=       5163739 len=19 text='fmt.(*pp).badArgNum'
+off=0xeb6ef va=       5163759 len=20 text='fmt.(*pp).missingArg'
+off=0xeb704 va=       5163780 len=18 text='fmt.(*pp).doPrintf'
+off=0xeb717 va=       5163799 len=17 text='fmt.(*pp).doPrint'
+off=0xeb729 va=       5163817 len=19 text='fmt.(*pp).doPrintln'
+off=0xeb73d va=       5163837 len=16 text='type:.eq.fmt.fmt'
+off=0xec128 va=       5166376 len=20 text='main.WhatAreYouDoing'
+off=0xec158 va=       5166424 len=19 text='main.complexEncrypt'
+off=0xec16c va=       5166444 len=13 text='main.GetValue'
+off=0xec17a va=       5166458 len=14 text='main.checkFlag'
+off=0xec1c3 va=       5166531 len=9 text='fmt.Print'
+off=0xec1cd va=       5166541 len=11 text='fmt.Println'
+off=0xec1d9 va=       5166553 len=9 text='main.main'
+off=0xed0d9 va=       5170393 len=49 text='C:/Program Files/Go/src/runtime/cpuflags_amd64.go'
+off=0xeee8e va=       5177998 len=38 text='F:/CTF/reverse/palu/PaluGOGOGO/main.go'
+off=0x14d440 va=       5566528 len=10 text='palugogogo'
+off=0x14d44f va=       5566543 len=10 text='palugogogo'
+off=0x14d491 va=       5566609 len=16 text='-ldflags="-s -w"'
+off=0x14d4bc va=       5566652 len=11 text='CGO_CFLAGS='
+off=0x14d4ce va=       5566670 len=13 text='CGO_CPPFLAGS='
+off=0x14d4e2 va=       5566690 len=13 text='CGO_CXXFLAGS='
+off=0x14d4f6 va=       5566710 len=12 text='CGO_LDFLAGS='
+off=0x15fe54 va=       6209620 len=11 text='WerSetFlags'
+off=0x15fe62 va=       6209634 len=11 text='WerGetFlags'
+
+--- Go pclntab magic candidates ---
+magic=0xfffffff0 off=0x4801c va=4491804 bytes=f0ffffff488d542415f0080a807c2414010f85c7010000807c2415f10f85bc010000807c2416010f85b1010000807c2417010f85a6010000c7442414ffffffffb901000000f0200a807c2414ff0f857a
+magic=0xfffffff0 off=0xc1b60 va=4992864 bytes=f0ffffff1000000010000000b03b04000100000000000000e8ffffff1000000010000000b03b04000400000020000000000000000200880800008808010000000100000000000000d0ffffff20000000
+magic=0xfffffff0 off=0xc1cc8 va=4993224 bytes=f0ffffff0800000008000000a83b04000100000000000000a0ffffff6000000040000000783c04000100000000000000f0ffffff1000000008000000a83b04000100000000000000e0ffffff20000000
+magic=0xfffffff0 off=0xc1cf8 va=4993272 bytes=f0ffffff1000000008000000a83b04000100000000000000e0ffffff2000000018000000d03b04000100000000000000e0ffffff1800000018000000083c04000100000000000000c0ffffff20000000
+magic=0xfffffff0 off=0xc20e8 va=4994280 bytes=f0ffffff1000000010000000c03b0400010000000000000068feffff9801000010000000b03b04002008fe000101010201030104010501060107010801fcfdff11000000030000000701010100010101
+magic=0xfffffff0 off=0xc3618 va=4999704 bytes=f0ffffff0800000008000000a83b0400f8ffffff0800000008000000a83b04000200000000000000e0ffffff1000000010000000b03b0400f0ffffff1000000010000000b03b04000200000000000000
+magic=0xfffffff0 off=0xc3650 va=4999760 bytes=f0ffffff1000000010000000b03b04000200000000000000b0ffffff1000000010000000b03b0400c0ffffff1000000010000000b03b0400020000000000000068ffffff4800000020000000c83b0400
+magic=0xfffffff0 off=0xc3768 va=5000040 bytes=f0ffffff1000000010000000b03b04000200000000000000d8ffffff1800000018000000083c0400f0ffffff1000000010000000b03b04000200000000000000d0ffffff1800000008000000a83b0400
+magic=0xfffffff0 off=0xc3790 va=5000080 bytes=f0ffffff1000000010000000b03b04000200000000000000d0ffffff1800000008000000a83b0400e8ffffff1800000008000000a83b04000200000000000000d8ffffff1000000008000000a83b0400
+magic=0xfffffff0 off=0xc3808 va=5000200 bytes=f0ffffff1000000010000000b03b04000200000000000000d8ffffff1800000010000000b03b0400f0ffffff1000000010000000b03b04000200000000000000c0ffffff1800000018000000083c0400
+magic=0xfffffff0 off=0xc3830 va=5000240 bytes=f0ffffff1000000010000000b03b04000200000000000000c0ffffff1800000018000000083c0400d8ffffff2800000028000000503c04000200000000000000d0ffffff2000000010000000b03b0400
+magic=0xfffffff0 off=0xc3880 va=5000320 bytes=f0ffffff1000000010000000b03b04000200000000000000e8ffffff0800000008000000a83b0400f0ffffff0800000008000000a83b0400020000000000000030ffffff9800000098000000303c0400
+magic=0xfffffff0 off=0xc38a8 va=5000360 bytes=f0ffffff0800000008000000a83b0400020000000000000030ffffff9800000098000000303c0400c8ffffff3000000030000000a03b04000200000000000000d0feffff9800000010000000b03b0400
+magic=0xfffffff0 off=0xc3960 va=5000544 bytes=f0ffffff1000000010000000b03b0400000000001800000008000000a83b04000200000000000000d8ffffff2800000028000000e0480400100000001000000008000000a83b04000200000000000000
+magic=0xfffffff0 off=0xc4be0 va=5005280 bytes=f0ffffff0800000008000000a83b0400f8ffffff0800000008000000a83b04000300000000000000d0ffffff1000000010000000b03b0400e0ffffff1000000010000000b03b0400f0ffffff10000000
+magic=0xfffffff0 off=0xc4c28 va=5005352 bytes=f0ffffff1000000010000000b03b0400030000000000000018ffffff1000000010000000c03b040028ffffffc8000000c0000000903c0400f0ffffff1000000010000000c03b04000300000000000000
+magic=0xfffffff0 off=0xc4c60 va=5005408 bytes=f0ffffff1000000010000000c03b0400030000000000000088fcffffb8000000b0000000983c040050fdffff1001000008010000e03c040078feffffb8000000b0000000983c04000300000000000000
+magic=0xfffffff0 off=0xc67f0 va=5012464 bytes=f0ffffff0800000008000000a83b0400f8ffffff0800000008000000a83b0400040000000000000010ffffff1000000010000000b03b040020ffffff1000000010000000b03b040030ffffff98000000
+magic=0xfffffff0 off=0xc79b8 va=5017016 bytes=f0ffffff1000000010000000b03b04000500000000000000d8ffffff0800000008000000a83b0400e0ffffff0800000008000000a83b0400e8ffffff0800000008000000a83b0400f0ffffff08000000
+magic=0xfffffff0 off=0xc7a00 va=5017088 bytes=f0ffffff0800000008000000a83b0400f8ffffff0800000008000000a83b0400080000005300000000000000000000000000000000000000000000000000020000000000000000000003000000000000
+magic=0xfffffff1 off=0x435cb va=4472779 bytes=f1ffffff5dc3e82afe0100ebe8cccccccccccccccc493b66100f8660010000554889e54883ec10895c24288918c740040300000048c780b80900000000000048c780c009000080000000488d88c80900
+magic=0xfffffff1 off=0xdc6a0 va=5102240 bytes=f1ffffff00000108d506000000000000cc000000000000000010400000000000600000000000000060fb0000000000002004010000000000202801000000000020a50400000000000000000000000000
+magic=0xfffffff4 off=0x32ced va=4404973 bytes=f4ffffffe80a110000450f57ff4c8b3537ec1a00654d8b364d8b36488b4424108b4c2468488b5c2460eb39488b0521bb11004889042448c7442408f5ffffffe8cf100000450f57ff4c8b35fceb1a0065
+magic=0xfffffff4 off=0x7e903 va=4715267 bytes=f4ffffffe8942700004889059d2e1600488b0d86de0d00833d2f301600007413e8186afeff49890b488b05c6850d004989430848890dbb850d00488b055cde0d00833d05301600007413e8ee69feff49
+magic=0xfffffffa off=0x26b5 va=4206773 bytes=faffffffff74c4c5f8774831c0c3c5f877660f1f840000000000904883fb08761b488b0e488b174883c6084883c7084883eb084839d174e34831c0c3488b4c1ef8488b541ff84839d10f94c0c34883fb
+magic=0xfffffffb off=0x93a75 va=4801653 bytes=fbffffff7f7f120f1f4000e8fbfeffff4863c04883c4105dc3e8edfdffff4883c4105dc3488d0500a70000488d1df9650400e8941efaff90488944240848895c2410e844f9fcff488b442408488b5c24
+
+--- Go build/version indicators ---
+b'go1.' ['0xd9600', '0x14d421']
+b'go1' ['0xb5baf', '0xd9600', '0x14d421']
+b'runtime.buildVersion' []
+b'go:buildid' ['0xdc700']

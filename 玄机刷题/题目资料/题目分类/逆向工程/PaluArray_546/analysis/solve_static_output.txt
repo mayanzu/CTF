@@ -1,0 +1,33 @@
+mode=static-analysis-only; challenge EXE was not executed
+archive_member=PaluArray_flag.exe size=89088
+archive_extracted_bytes_match=True
+original_sha256=CD8E2BE79AAA454F295132B7ECE6AE30D0CC05FF24DA7541639F05F76D482A4D
+patched_sha256=CDDE48AC7862A5753C11A52D5BAAF3CF677576DBC5108542F9094CB98E8282FA
+unpacked_reproduction_matches_saved=True
+unpacked_sha256=8B1263DE36EDA3E5E3F1183C2D08C520ECAE09649B1A04891F597033FDF842A5 size=105472
+pe_entry_rva=0x37d0 image_base=0x140000000
+sections=[('.text', '0x1000', '0x3e00', '0x400'), ('.rdata', '0x5000', '0x3800', '0x4200'), ('.data', '0x9000', '0x400', '0x7a00'), ('.pdata', '0xa000', '0x600', '0x7e00'), ('.rsrc', '0xb000', '0x11400', '0x8400'), ('.reloc', '0x1d000', '0x400', '0x19800')]
+alphabet_rva=0x5e66 alphabet='gPalu_996!?' length=11
+alphabet_positions=[(0, 'g'), (1, 'P'), (2, 'a'), (3, 'l'), (4, 'u'), (5, '_'), (6, '9'), (7, '9'), (8, '6'), (9, '!'), (10, '?')]
+target_rva=0x5ea0 target='1145141919810' length=13
+flag_prefix='palu{' flag_suffix='}' dialog_title='flag'
+mapping_position,target_digit,index,alphabet_char,first_find_index
+0,1,1,'P',1
+1,1,1,'P',1
+2,4,4,'u',4
+3,5,5,'_',5
+4,1,1,'P',1
+5,4,4,'u',4
+6,1,1,'P',1
+7,9,9,'!',9
+8,1,1,'P',1
+9,9,9,'!',9
+10,8,8,'6',8
+11,1,1,'P',1
+12,0,0,'g',0
+candidate_input='PPu_PuP!P!6Pg'
+candidate_input_ascii_hex=5050755f507550215021365067
+forward_find_transform=1145141919810
+forward_equals_target=True
+md5_ascii_candidate=c5302025cc6eab4bb4c17c67fe39e44d
+candidate_flag=palu{c5302025cc6eab4bb4c17c67fe39e44d}

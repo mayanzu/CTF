@@ -1,0 +1,34 @@
+EXE sha256: 1743BDDFE96BB079FEDF7BAC17557A5065810B4BDB8130C794C5D85D4FDF44F5
+1.enc sha256: AABF22FFE2D55E23FC65AFE8EC70AE6E7C0C57225B0F1540D6E070E3FB6B7E54 length 30
+2.enc sha256: 811A4C75495ADDDAD792921F525A0557AC31FE1EDC3B1A6013D6AB17249D0FB9 length 25
+decoy source bytes (30): 28 21 3c 38 37 20 26 0a 21 3a 3b 0a 3a 31 0a 32 34 39 33 0a 30 3e 34 33 2e 13 01 16 04 06
+decoy transform first 29 XOR 0x55 then reverse first 29: 51 43 54 46 7b 66 61 6b 65 5f 66 6c 61 67 5f 64 6f 5f 6e 6f 74 5f 73 75 62 6d 69 74 7d 06
+decoy transformed repr: b'QCTF{fake_flag_do_not_submit}\x06'
+state[0:16] ascii: b'expand 32-byte k'
+g_obf2 bytes: ef be ad de
+state[16:48] decoded bytes: fe ac be ca fa a8 ba c6 f6 a4 b6 c2 f2 a0 b2 fe ce 9c 8e fa ca 98 8a f6 c6 94 86 f2 c2 90 82 ee
+state[52:64]: 00 11 22 33 44 55 66 77 88 99 aa bb
+state words: 61707865 3320646e 79622d32 6b206574 cabeacfe c6baa8fa c2b6a4f6 feb2a0f2 fa8e9cce f68a98ca f28694c6 ee8290c2 00000000 33221100 77665544 bbaa9988
+ChaCha20-style block output: 21 50 1c 49 09 aa 98 67 e3 cf a8 c2 5d 15 dc 60 6b 2e f9 14 63 e0 26 ba c5 46 e5 5d 29 be 5e b0 15 2b a1 17 df be 8c 9f c4 50 d5 c2 33 a2 f3 9b 8a 9e d0 54 f9 29 e5 65 d0 f3 26 01 a5 38 bd ba
+2.enc XOR block -> candidate: b'\xc4\xcc*\xcdl\x13_\xa6\xfa\xc8\xd8\xf2h\xf2(>\x1b\xe29W}\xdd\x97\xc2\x1c'
+2.enc XOR block -> hex: c4 cc 2a cd 6c 13 5f a6 fa c8 d8 f2 68 f2 28 3e 1b e2 39 57 7d dd 97 c2 1c
+1.enc XOR block prefix ->: b'\t<z*:\xce\xae\x0b\x8f\xac\xcb\xa1<u\xb1\x01\x0c\x1e\x9fu\x0e\x8cF\xdf\xa8h\xd7i\x10\x8d'
+embedded target XOR block ->: b'\xf1\xf1\x08\xfeQP\x1d\xf6\xa2\x9c\xb3\xa2e\xbeybB\xe5$<-\x87\xc0\x88\x1c'
+embedded target transformed hex: f1 f1 08 fe 51 50 1d f6 a2 9c b3 a2 65 be 79 62 42 e5 24 3c 2d 87 c0 88 1c
+EXE sha256: 1743BDDFE96BB079FEDF7BAC17557A5065810B4BDB8130C794C5D85D4FDF44F5
+1.enc sha256: AABF22FFE2D55E23FC65AFE8EC70AE6E7C0C57225B0F1540D6E070E3FB6B7E54 length 30
+2.enc sha256: 811A4C75495ADDDAD792921F525A0557AC31FE1EDC3B1A6013D6AB17249D0FB9 length 25
+decoy source bytes (30): 28 21 3c 38 37 20 26 0a 21 3a 3b 0a 3a 31 0a 32 34 39 33 0a 30 3e 34 33 2e 13 01 16 04 06
+decoy transform first 29 XOR 0x55 then reverse first 29: 51 43 54 46 7b 66 61 6b 65 5f 66 6c 61 67 5f 64 6f 5f 6e 6f 74 5f 73 75 62 6d 69 74 7d 06
+decoy transformed repr: b'QCTF{fake_flag_do_not_submit}\x06'
+state[0:16] ascii: b'expand 32-byte k'
+g_obf2 bytes: de ad be ef
+state[16:48] decoded bytes: cf bf ad fb cb bb a9 f7 c7 b7 a5 f3 c3 b3 a1 cf ff 8f 9d cb fb 8b 99 c7 f7 87 95 c3 f3 83 91 df
+state[52:64]: 00 11 22 33 44 55 66 77 88 99 aa bb
+state words: 61707865 3320646e 79622d32 6b206574 fbadbfcf f7a9bbcb f3a5b7c7 cfa1b3c3 cb9d8fff c7998bfb c39587f7 df9183f3 00000000 33221100 77665544 bbaa9988
+ChaCha20-style block output: 83 f0 57 e3 1e 81 f7 f4 20 3f 44 03 50 ca c6 6a 48 f9 ed 77 28 0b 87 55 a4 2a 88 e3 f7 95 0c 8d 84 4b 5f a7 72 0c f7 76 b0 0a ed 44 07 86 9d 98 4f 22 f5 7e 9c ae 77 18 ac e4 d1 5f 59 b1 c5 c3
+2.enc XOR block -> candidate: b'flag{8059843e-2485-4666-}'
+2.enc XOR block -> hex: 66 6c 61 67 7b 38 30 35 39 38 34 33 65 2d 32 34 38 35 2d 34 36 36 36 2d 7d
+1.enc XOR block prefix ->: b"\xab\x9c1\x80-\xe5\xc1\x98L\\'`1\xaa\xab\x0b/\xc9\x8b\x16Eg\xe70\xc9\x04\xba\xd7\xce\xa6"
+embedded target XOR block ->: b'SQCTF{real_chacha20_flag}'
+embedded target transformed hex: 53 51 43 54 46 7b 72 65 61 6c 5f 63 68 61 63 68 61 32 30 5f 66 6c 61 67 7d

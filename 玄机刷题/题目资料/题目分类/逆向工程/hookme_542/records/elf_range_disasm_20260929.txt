@@ -1,0 +1,55 @@
+**********************
+PowerShell transcript start
+Start time: 20260929104239
+Username: DESKTOP-412KTAR\mzj
+RunAs User: DESKTOP-412KTAR\mzj
+Configuration Name: 
+Machine: DESKTOP-412KTAR (Microsoft Windows NT 10.0.26200.0)
+Host Application: C:\Users\mzj\.cache\codex-runtimes\codex-primary-runtime\dependencies\native\powershell\pwsh.dll -Command try { [Console]::OutputEncoding=[System.Text.Encoding]::UTF8 } catch {}
+$root = 'C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\批次10_20260929\542_hookme'
+$scriptPath = Join-Path $root 'analysis\elf_range_disasm.py'
+@'
+from pathlib import Path
+import struct
+from capstone import *
+root=Path(r"C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\批次10_20260929\542_hookme")
+path=root/"analysis"/"components"/"lib"/"arm64-v8a"/"libhookme.so"
+b=path.read_bytes(); shoff=struct.unpack_from("<Q",b,40)[0]; ents=struct.unpack_from("<H",b,58)[0]; n=struct.unpack_from("<H",b,60)[0]; si=struct.unpack_from("<H",b,62)[0]
+raw=[struct.unpack_from("<IIQQQQIIQQ",b,shoff+i*ents) for i in range(n)]
+strtab=b[raw[si][4]:raw[si][4]+raw[si][5]]
+text=None
+for s in raw:
+    e=strtab.find(b"\0",s[0]); name=strtab[s[0]:e].decode("ascii","ignore")
+    if name==".text": text={"addr":s[3],"off":s[4],"size":s[5]}
+md=Cs(CS_ARCH_ARM64,CS_MODE_ARM)
+ranges=[(0x2de20,0x2e100),(0x2ea40,0x2ec50),(0x2eaf0,0x2ed00),(0x2dd20,0x2de30)]
+lines=[]
+for lo,hi in ranges:
+    off=text['off']+lo-text['addr']; code=b[off:off+hi-lo]
+    lines.append(f"\n===== file {path} VA 0x{lo:x}-0x{hi:x} =====")
+    lines += [f"{i.address:08x}: {i.mnemonic:<10} {i.op_str}" for i in md.disasm(code,lo)]
+out=root/"analysis"/"native"/"arm64-v8a_selected_ranges.txt"
+out.write_text("\n".join(lines)+"\n",encoding="utf-8")
+print(out)
+'@ | Set-Content -LiteralPath $scriptPath -Encoding utf8
+$log = Join-Path $root 'records\elf_range_disasm_20260929.txt'
+Start-Transcript -LiteralPath $log -Force
+& 'C:\Users\mzj\AppData\Local\Programs\Python\Python312\python.exe' $scriptPath
+Stop-Transcript
+Process ID: 37484
+PSVersion: 7.6.5
+PSEdition: Core
+GitCommitId: 7.6.5
+OS: Microsoft Windows 10.0.26200
+Platform: Win32NT
+PSCompatibleVersions: 1.0, 2.0, 3.0, 4.0, 5.0, 5.1, 6.0, 7.0
+PSRemotingProtocolVersion: 2.4
+SerializationVersion: 1.1.0.1
+WSManStackVersion: 3.0
+**********************
+Transcript started, output file is C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\批次10_20260929\542_hookme\records\elf_range_disasm_20260929.txt
+
+**********************
+PowerShell transcript end
+End time: 20260929104240
+**********************

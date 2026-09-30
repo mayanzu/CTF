@@ -1,0 +1,72 @@
+
+C:\Users\mzj\AppData\Local\Temp\palu548_static_a9f3.exe:     file format pei-x86-64
+
+
+Disassembly of section .text:
+
+00000000004950a0 <.text+0x940a0>:
+  4950a0:	49 3b 66 10          	cmp    rsp,QWORD PTR [r14+0x10]
+  4950a4:	0f 86 a6 00 00 00    	jbe    0x495150
+  4950aa:	55                   	push   rbp
+  4950ab:	48 89 e5             	mov    rbp,rsp
+  4950ae:	48 83 ec 18          	sub    rsp,0x18
+  4950b2:	48 89 5c 24 30       	mov    QWORD PTR [rsp+0x30],rbx
+  4950b7:	48 89 44 24 28       	mov    QWORD PTR [rsp+0x28],rax
+  4950bc:	b8 e4 03 00 00       	mov    eax,0x3e4
+  4950c1:	e8 5a f6 ff ff       	call   0x494720
+  4950c6:	31 c0                	xor    eax,eax
+  4950c8:	eb 21                	jmp    0x4950eb
+  4950ca:	48 89 44 24 10       	mov    QWORD PTR [rsp+0x10],rax
+  4950cf:	b8 64 00 00 00       	mov    eax,0x64
+  4950d4:	e8 87 f7 ff ff       	call   0x494860
+  4950d9:	48 8b 4c 24 10       	mov    rcx,QWORD PTR [rsp+0x10]
+  4950de:	48 8b 54 24 28       	mov    rdx,QWORD PTR [rsp+0x28]
+  4950e3:	48 89 04 ca          	mov    QWORD PTR [rdx+rcx*8],rax
+  4950e7:	48 8d 41 01          	lea    rax,[rcx+0x1]
+  4950eb:	48 8b 4c 24 30       	mov    rcx,QWORD PTR [rsp+0x30]
+  4950f0:	48 39 c1             	cmp    rcx,rax
+  4950f3:	7f d5                	jg     0x4950ca
+  4950f5:	b8 02 00 00 00       	mov    eax,0x2
+  4950fa:	e8 61 f7 ff ff       	call   0x494860
+  4950ff:	90                   	nop
+  495100:	48 85 c0             	test   rax,rax
+  495103:	75 18                	jne    0x49511d
+  495105:	48 8b 54 24 30       	mov    rdx,QWORD PTR [rsp+0x30]
+  49510a:	48 85 d2             	test   rdx,rdx
+  49510d:	76 36                	jbe    0x495145
+  49510f:	48 8b 4c 24 28       	mov    rcx,QWORD PTR [rsp+0x28]
+  495114:	48 8b 01             	mov    rax,QWORD PTR [rcx]
+  495117:	48 83 c4 18          	add    rsp,0x18
+  49511b:	5d                   	pop    rbp
+  49511c:	c3                   	ret
+  49511d:	48 8b 4c 24 30       	mov    rcx,QWORD PTR [rsp+0x30]
+  495122:	48 83 f9 01          	cmp    rcx,0x1
+  495126:	76 0f                	jbe    0x495137
+  495128:	48 8b 4c 24 28       	mov    rcx,QWORD PTR [rsp+0x28]
+  49512d:	48 8b 41 08          	mov    rax,QWORD PTR [rcx+0x8]
+  495131:	48 83 c4 18          	add    rsp,0x18
+  495135:	5d                   	pop    rbp
+  495136:	c3                   	ret
+  495137:	b8 01 00 00 00       	mov    eax,0x1
+  49513c:	0f 1f 40 00          	nop    DWORD PTR [rax+0x0]
+  495140:	e8 9b 0f fd ff       	call   0x4660e0
+  495145:	31 c0                	xor    eax,eax
+  495147:	48 89 c1             	mov    rcx,rax
+  49514a:	e8 91 0f fd ff       	call   0x4660e0
+  49514f:	90                   	nop
+  495150:	48 89 44 24 08       	mov    QWORD PTR [rsp+0x8],rax
+  495155:	48 89 5c 24 10       	mov    QWORD PTR [rsp+0x10],rbx
+  49515a:	48 89 4c 24 18       	mov    QWORD PTR [rsp+0x18],rcx
+  49515f:	90                   	nop
+  495160:	e8 9b ec fc ff       	call   0x463e00
+  495165:	48 8b 44 24 08       	mov    rax,QWORD PTR [rsp+0x8]
+  49516a:	48 8b 5c 24 10       	mov    rbx,QWORD PTR [rsp+0x10]
+  49516f:	48 8b 4c 24 18       	mov    rcx,QWORD PTR [rsp+0x18]
+  495174:	e9 27 ff ff ff       	jmp    0x4950a0
+  495179:	cc                   	int3
+  49517a:	cc                   	int3
+  49517b:	cc                   	int3
+  49517c:	cc                   	int3
+  49517d:	cc                   	int3
+  49517e:	cc                   	int3
+  49517f:	cc                   	int3

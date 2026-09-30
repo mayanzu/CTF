@@ -1,0 +1,104 @@
+**********************
+PowerShell transcript start
+Start time: 20260929170133
+Username: DESKTOP-412KTAR\mzj
+RunAs User: DESKTOP-412KTAR\mzj
+Configuration Name: 
+Machine: DESKTOP-412KTAR (Microsoft Windows NT 10.0.26200.0)
+Host Application: C:\Users\mzj\.cache\codex-runtimes\codex-primary-runtime\dependencies\native\powershell\pwsh.dll -NoProfile -Command try { [Console]::OutputEncoding=[System.Text.Encoding]::UTF8 } catch {}
+$ErrorActionPreference='Continue';$project='C:\Users\mzj\Desktop\CTF\玄机刷题';$log=Join-Path $project '记录\易遗漏扩展名及WP全局盘点_20260929.txt';Start-Transcript -LiteralPath $log -Force|Out-Null
+Write-Output 'COMMAND> search project and D:\Downloads for attachment extensions commonly used by the completed attachment challenges'
+$roots=@($project,'D:\Downloads');$extensions=@('.evtx','.pcap','.pcapng','.cap','.sqlite','.db','.elf','.apk','.hap','.bin','.zip','.7z','.rar');foreach($r in $roots){if(Test-Path -LiteralPath $r){$fs=@(Get-ChildItem -LiteralPath $r -File -Recurse -Force -ErrorAction SilentlyContinue|Where-Object{$_.Extension -in $extensions});Write-Output "ROOT $r matches=$($fs.Count)";$fs|Where-Object{$_.Extension -in @('.evtx','.pcap','.pcapng','.cap','.sqlite','.db','.hap')}|ForEach-Object{'DATA '+$_.FullName+' ['+$_.Length+' B]'}}}
+Write-Output 'COMMAND> enumerate all WP/Writeup/题解 files anywhere in the project'
+$wps=@(Get-ChildItem -LiteralPath $project -File -Recurse -Force -ErrorAction SilentlyContinue|Where-Object{$_.Name -match '(?i)(wp|write.?up|题解|解题指南|解题记录)' -and $_.Extension -match '(?i)^\.(md|txt|tex|pdf|docx)$'});Write-Output "WPCOUNT=$($wps.Count)";foreach($f in $wps){$chars=0;if($f.Extension -match '(?i)^\.(md|txt|tex)$'){try{$chars=(Get-Content -LiteralPath $f.FullName -Raw -ErrorAction Stop).Length}catch{}};Write-Output ('WP '+$f.FullName+' ['+$f.Length+' B; '+$chars+' chars]')}
+Stop-Transcript|Out-Null;Write-Output "TRANSCRIPT=$log"
+Process ID: 41392
+PSVersion: 7.6.5
+PSEdition: Core
+GitCommitId: 7.6.5
+OS: Microsoft Windows 10.0.26200
+Platform: Win32NT
+PSCompatibleVersions: 1.0, 2.0, 3.0, 4.0, 5.0, 5.1, 6.0, 7.0
+PSRemotingProtocolVersion: 2.4
+SerializationVersion: 1.1.0.1
+WSManStackVersion: 3.0
+**********************
+COMMAND> search project and D:\Downloads for attachment extensions commonly used by the completed attachment challenges
+ROOT C:\Users\mzj\Desktop\CTF\玄机刷题 matches=168
+DATA C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\OpenHarmony_arkt_559\附件解包\task_5.hap [135682 B]
+DATA C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\OpenHarmony_easyre_560\entry-default-signed.hap [154037 B]
+DATA C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\OpenHarmony_easyre_560\附件_20260929\entry-default-signed.hap [154037 B]
+DATA C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\OpenHarmony_secret_561\secret.hap [3252706 B]
+DATA C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\OpenHarmony_secret_561\附件_20260929\secret.hap [3252706 B]
+DATA C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\Veiled Shell\附件\incident_traffic.pcap [23394 B]
+DATA C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\可疑流量分析\附件\challenge.pcap [693571 B]
+DATA C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\批次14_20260929\561_OpenHarmony_secret\附件\zip_contents\secret.hap [3252706 B]
+DATA C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\新题批次\DigitalKey_UWB_520\extracted\digital_key_trace.sqlite [28672 B]
+DATA C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\新题批次\DigitalKey_UWB_520\extracted\__MACOSX\._digital_key_trace.sqlite [319 B]
+ROOT D:\Downloads matches=233
+COMMAND> enumerate all WP/Writeup/题解 files anywhere in the project
+WPCOUNT=60
+WP C:\Users\mzj\Desktop\CTF\玄机刷题\记录\2024铁人三项决赛-CTFRE-crazyaes-解题记录.md [9467 B; 5295 chars]
+WP C:\Users\mzj\Desktop\CTF\玄机刷题\记录\2025鹏城杯-babyRSA-解题记录.md [4156 B; 2452 chars]
+WP C:\Users\mzj\Desktop\CTF\玄机刷题\记录\2026安网杯-班次邮戳-解题记录.md [6399 B; 3085 chars]
+WP C:\Users\mzj\Desktop\CTF\玄机刷题\记录\2026安网杯-可疑流量分析-解题记录.md [4116 B; 2465 chars]
+WP C:\Users\mzj\Desktop\CTF\玄机刷题\记录\2026安网杯-Prompt Trace-解题记录.md [5584 B; 3795 chars]
+WP C:\Users\mzj\Desktop\CTF\玄机刷题\记录\代理-ezflag-367-公开题解复算.txt [27852 B; 27463 chars]
+WP C:\Users\mzj\Desktop\CTF\玄机刷题\记录\代理-WP补全-子代理B.txt [9928 B; 9702 chars]
+WP C:\Users\mzj\Desktop\CTF\玄机刷题\记录\第九届XCTF-Tch3s-解题记录.md [5506 B; 2917 chars]
+WP C:\Users\mzj\Desktop\CTF\玄机刷题\记录\繁体资料目录_WP_附件盘点_20260929.txt [3678 B; 3478 chars]
+WP C:\Users\mzj\Desktop\CTF\玄机刷题\记录\附件_WP_本地盘点_20260929.txt [86040 B; 76184 chars]
+WP C:\Users\mzj\Desktop\CTF\玄机刷题\记录\附件_WP_补查_20260929.txt [17073 B; 12352 chars]
+WP C:\Users\mzj\Desktop\CTF\玄机刷题\记录\附件_WP_专项文件定位_20260929.txt [18714 B; 15926 chars]
+WP C:\Users\mzj\Desktop\CTF\玄机刷题\记录\即随本心-解题记录.md [7797 B; 5453 chars]
+WP C:\Users\mzj\Desktop\CTF\玄机刷题\记录\像素囚笼1-解题记录.md [39533 B; 20337 chars]
+WP C:\Users\mzj\Desktop\CTF\玄机刷题\记录\易遗漏扩展名及WP全局盘点_20260929.txt [3767 B; 4633 chars]
+WP C:\Users\mzj\Desktop\CTF\玄机刷题\记录\指南WP章节盘点_20260929.txt [11912 B; 7671 chars]
+WP C:\Users\mzj\Desktop\CTF\玄机刷题\记录\子代理B_WP草稿.md [12657 B; 7784 chars]
+WP C:\Users\mzj\Desktop\CTF\玄机刷题\记录\Digital Key UWB-520-WP草稿.md [9305 B; 6665 chars]
+WP C:\Users\mzj\Desktop\CTF\玄机刷题\记录\PaluMaze_551-WP.md [6991 B; 4324 chars]
+WP C:\Users\mzj\Desktop\CTF\玄机刷题\记录\PositionalXOR_550-WP.md [10056 B; 7402 chars]
+WP C:\Users\mzj\Desktop\CTF\玄机刷题\记录\Veiled Shell-解题记录.md [8621 B; 6095 chars]
+WP C:\Users\mzj\Desktop\CTF\玄机刷题\记录\Victory_Melody_555-WP.md [7336 B; 4658 chars]
+WP C:\Users\mzj\Desktop\CTF\玄机刷题\记录\WP补全-资料普查记录.txt [104397 B; 94203 chars]
+WP C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\Asymmetric_544\wp.md [7050 B; 4689 chars]
+WP C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\butterfly_552\wp.md [17473 B; 10111 chars]
+WP C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\CatchPalu_545\wp.md [8921 B; 5753 chars]
+WP C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\challenge_558\wp.md [8729 B; 6408 chars]
+WP C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\checker_562\analysis\agent_checker562_independent_WP_transcript_20260929.txt [44890 B; 37218 chars]
+WP C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\checker_562\analysis\checker_562_independent_reaudit_WP_20260929.md [9925 B; 6593 chars]
+WP C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\checker_562\analysis\checker_562_WP.md [12465 B; 7257 chars]
+WP C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\ezBase_541\WP.md [8668 B; 4956 chars]
+WP C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\Maybesignin_540\WP.md [9171 B; 5951 chars]
+WP C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\OpenHarmony_arkt_559\WP.md [13073 B; 8206 chars]
+WP C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\OpenHarmony_easyre_560\WP.md [5571 B; 3589 chars]
+WP C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\OpenHarmony_secret_561\WP.md [20100 B; 13539 chars]
+WP C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\PaluArray_546\wp.md [10279 B; 6357 chars]
+WP C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\PaluFlat_547\wp.md [17727 B; 10835 chars]
+WP C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\PaluGOGOGO_548\wp.md [12086 B; 7954 chars]
+WP C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\ParlooChecker_549\wp.md [10701 B; 7307 chars]
+WP C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\人生自古谁无死_532\wp.md [9701 B; 5815 chars]
+WP C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\你若安好便是晴_531\wp.md [7179 B; 4219 chars]
+WP C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\密钥生成审计_588\wp.md [5542 B; 3214 chars]
+WP C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\慕然回首_530\wp.md [7272 B; 4344 chars]
+WP C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\批次10_20260929\542_hookme\wp.md [14062 B; 9982 chars]
+WP C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\批次10_20260929\543_Base\wp.md [11827 B; 7509 chars]
+WP C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\批次10_20260929\552_butterfly\wp.md [8959 B; 5849 chars]
+WP C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\批次11_20260929\539_cryptor\wp.md [6079 B; 4079 chars]
+WP C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\批次11_20260929\540_maybesignin\wp.md [5976 B; 3768 chars]
+WP C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\批次11_20260929\541_ezBase\wp.md [8754 B; 4772 chars]
+WP C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\批次12_20260929\534_天下谁人不识君\wp.md [6663 B; 4011 chars]
+WP C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\批次12_20260929\535_往事暗沉不可追\wp.md [5773 B; 3389 chars]
+WP C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\批次12_20260929\536_遇事不决可问春风\wp.md [5261 B; 3489 chars]
+WP C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\批次13_20260929\533_圣人当仁不让\wp.md [3917 B; 2201 chars]
+WP C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\批次13_20260929\537_湘岚杯ezbase\wp.md [7849 B; 4939 chars]
+WP C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\批次13_20260929\538_湘岚杯1997\wp.md [8441 B; 5063 chars]
+WP C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\批次14_20260929\527_木兰当户织\WP_唧唧复唧唧木兰当户织.md [4745 B; 2385 chars]
+WP C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\批次14_20260929\561_OpenHarmony_secret\WP.md [9689 B; 6112 chars]
+WP C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\批次14_20260929\561_OpenHarmony_secret\analysis\WP_preexisting_20260929.md [20100 B; 13539 chars]
+WP C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\批次14_20260929\562_checker\WP_第一届启航杯checker.md [9246 B; 5505 chars]
+WP C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\第一届启航杯checker_562\wp.md [9586 B; 6064 chars]
+**********************
+PowerShell transcript end
+End time: 20260929170134
+**********************

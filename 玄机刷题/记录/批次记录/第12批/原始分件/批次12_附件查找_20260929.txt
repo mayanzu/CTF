@@ -1,0 +1,26 @@
+**********************
+PowerShell transcript start
+Start time: 20260929135100
+Username: DESKTOP-412KTAR\mzj
+RunAs User: DESKTOP-412KTAR\mzj
+Configuration Name: 
+Machine: DESKTOP-412KTAR (Microsoft Windows NT 10.0.26200.0)
+Host Application: C:\Users\mzj\.cache\codex-runtimes\codex-primary-runtime\dependencies\native\powershell\pwsh.dll -NoProfile -Command try { [Console]::OutputEncoding=[System.Text.Encoding]::UTF8 } catch {}
+$log = 'C:\Users\mzj\Desktop\CTF\玄机刷题\记录\批次12_附件查找_20260929.txt'; Start-Transcript -LiteralPath $log -Force; Get-ChildItem -LiteralPath 'D:\Downloads' -File | Sort-Object LastWriteTime -Descending | Select-Object -First 15 Name,Length,LastWriteTime,FullName; Stop-Transcript
+Process ID: 42332
+PSVersion: 7.6.5
+PSEdition: Core
+GitCommitId: 7.6.5
+OS: Microsoft Windows 10.0.26200
+Platform: Win32NT
+PSCompatibleVersions: 1.0, 2.0, 3.0, 4.0, 5.0, 5.1, 6.0, 7.0
+PSRemotingProtocolVersion: 2.4
+SerializationVersion: 1.1.0.1
+WSManStackVersion: 3.0
+**********************
+Transcript started, output file is C:\Users\mzj\Desktop\CTF\玄机刷题\记录\批次12_附件查找_20260929.txt
+
+**********************
+PowerShell transcript end
+End time: 20260929135100
+**********************

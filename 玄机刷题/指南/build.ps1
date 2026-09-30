@@ -13,6 +13,9 @@ $bodyMd  = '玄机刷题指南_合并源.md'
 $bodyTex = '玄机刷题指南_正文.tex'
 $mainTex = '玄机刷题指南.tex'
 $pdf     = '玄机刷题指南.pdf'
+$ctfRoot = [IO.Path]::GetFullPath((Join-Path $PSScriptRoot '..\..'))
+$buildDir = Join-Path $ctfRoot 'tmp\guide-build'
+New-Item -ItemType Directory -Path $buildDir -Force | Out-Null
 
 # ---------- 1. pandoc ----------
 if (-not $SkipPandoc) {
@@ -105,7 +108,7 @@ foreach ($m in [regex]::Matches($text, '\\hexwrap\{[^{}]*\}')) {
     $end = $m.Index + $m.Length
     $protect += ,@($m.Index, $end)
 }
-foreach ($m in [regex]::Matches($text, '\$[^$]+\$')) {
+foreach ($m in [regex]::Matches($text, '\$[^$\r\n]+\$')) {
     $end = $m.Index + $m.Length
     $protect += ,@($m.Index, $end)
 }
@@ -137,7 +140,7 @@ Write-Host ("      LTcaptype 修正 {0} 处；可断行行内代码 {1} 处；�
 function Invoke-XeLaTeX {
     param([int]$Pass)
     Write-Host ("      xelatex 第 {0} 遍..." -f $Pass)
-    $out = (& xelatex -interaction=nonstopmode $mainTex 2>&1 | Out-String)
+    $out = (& xelatex -interaction=nonstopmode "-output-directory=$buildDir" $mainTex 2>&1 | Out-String)
     $errs = @(($out -split "`r?`n") | Where-Object { $_ -match '^!' })
     if ($errs.Count -gt 0) {
         Write-Host ($errs | Select-Object -First 8)
@@ -150,5 +153,6 @@ Write-Host '[3/3] xelatex 编译...'
 Invoke-XeLaTeX -Pass 1
 Invoke-XeLaTeX -Pass 2
 
-$item = Get-Item $pdf
+Copy-Item -LiteralPath (Join-Path $buildDir $pdf) -Destination (Join-Path $PSScriptRoot $pdf) -Force
+$item = Get-Item (Join-Path $PSScriptRoot $pdf)
 Write-Host ("完成：{0}  {1:N0} 字节" -f $item.FullName, $item.Length)

@@ -1,0 +1,27 @@
+**********************
+PowerShell transcript start
+Start time: 20260929172432
+Username: DESKTOP-412KTAR\mzj
+RunAs User: DESKTOP-412KTAR\mzj
+Configuration Name: 
+Machine: DESKTOP-412KTAR (Microsoft Windows NT 10.0.26200.0)
+Host Application: C:\Users\mzj\.cache\codex-runtimes\codex-primary-runtime\dependencies\native\powershell\pwsh.dll -Command try { [Console]::OutputEncoding=[System.Text.Encoding]::UTF8 } catch {}
+$root='C:\Users\mzj\Desktop\CTF'; $log=Join-Path $root '记录\已完成51题附件WP核查_终端记录.txt'; if (-not (Test-Path -LiteralPath (Split-Path -Parent $log))) { New-Item -ItemType Directory -Path (Split-Path -Parent $log) | Out-Null }; Start-Transcript -LiteralPath $log -Force; Write-Output '=== project roots ==='; Get-ChildItem -LiteralPath $root -Directory -Force | Select-Object Name,FullName; Write-Output '=== challenge-material directories ==='; Get-ChildItem -LiteralPath (Join-Path $root '题目资料') -Directory -Force -ErrorAction SilentlyContinue | Select-Object Name,FullName; Write-Output '=== guide and record files ==='; Get-ChildItem -LiteralPath (Join-Path $root '玄机刷题') -Recurse -File -Force -ErrorAction SilentlyContinue | Where-Object { $_.Extension -in '.md','.tex','.pdf','.txt','.csv','.json' } | Select-Object FullName,Length; Stop-Transcript
+Process ID: 30212
+PSVersion: 7.6.5
+PSEdition: Core
+GitCommitId: 7.6.5
+OS: Microsoft Windows 10.0.26200
+Platform: Win32NT
+PSCompatibleVersions: 1.0, 2.0, 3.0, 4.0, 5.0, 5.1, 6.0, 7.0
+PSRemotingProtocolVersion: 2.4
+SerializationVersion: 1.1.0.1
+WSManStackVersion: 3.0
+**********************
+Transcript started, output file is C:\Users\mzj\Desktop\CTF\记录\已完成51题附件WP核查_终端记录.txt
+=== project roots ===
+
+**********************
+PowerShell transcript end
+End time: 20260929172432
+**********************

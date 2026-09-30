@@ -1,0 +1,1163 @@
+**********************
+PowerShell transcript start
+Start time: 20260929143935
+Username: DESKTOP-412KTAR\mzj
+RunAs User: DESKTOP-412KTAR\mzj
+Configuration Name: 
+Machine: DESKTOP-412KTAR (Microsoft Windows NT 10.0.26200.0)
+Host Application: C:\Users\mzj\.cache\codex-runtimes\codex-primary-runtime\dependencies\native\powershell\pwsh.dll -NoProfile -Command try { [Console]::OutputEncoding=[System.Text.Encoding]::UTF8 } catch {}
+$ErrorActionPreference='Continue'; $log='C:\Users\mzj\Desktop\CTF\玄机刷题\记录\批次13_提交准备检查_20260929.txt'; Start-Transcript -LiteralPath $log -Append; Write-Output '=== Challenge files and candidate markers ==='; Get-ChildItem -LiteralPath 'C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\批次13_20260929' -Recurse -File | Select-Object FullName,Length,LastWriteTime; Write-Output '=== Candidate/flag mentions in analysis notes ==='; Get-ChildItem -LiteralPath 'C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\批次13_20260929' -Recurse -File -Include *.md,*.txt,*.log | Select-String -Pattern 'flag\{|候选|提交|未找到|未恢复' -Context 0,1 | Select-Object -Last 60; Stop-Transcript
+Process ID: 40436
+PSVersion: 7.6.5
+PSEdition: Core
+GitCommitId: 7.6.5
+OS: Microsoft Windows 10.0.26200
+Platform: Win32NT
+PSCompatibleVersions: 1.0, 2.0, 3.0, 4.0, 5.0, 5.1, 6.0, 7.0
+PSRemotingProtocolVersion: 2.4
+SerializationVersion: 1.1.0.1
+WSManStackVersion: 3.0
+**********************
+Transcript started, output file is C:\Users\mzj\Desktop\CTF\玄机刷题\记录\批次13_提交准备检查_20260929.txt
+=== Challenge files and candidate markers ===
+
+**********************
+PowerShell transcript end
+End time: 20260929143935
+**********************
+**********************
+PowerShell transcript start
+Start time: 20260929143950
+Username: DESKTOP-412KTAR\mzj
+RunAs User: DESKTOP-412KTAR\mzj
+Configuration Name: 
+Machine: DESKTOP-412KTAR (Microsoft Windows NT 10.0.26200.0)
+Host Application: C:\Users\mzj\.cache\codex-runtimes\codex-primary-runtime\dependencies\native\powershell\pwsh.dll -NoProfile -Command try { [Console]::OutputEncoding=[System.Text.Encoding]::UTF8 } catch {}
+$ErrorActionPreference='Continue'; $log='C:\Users\mzj\Desktop\CTF\玄机刷题\记录\批次13_提交准备检查_20260929.txt'; Start-Transcript -LiteralPath $log -Append; $dirs=@('C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\批次13_20260929\533_圣人当仁不让','C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\批次13_20260929\537_湘岚杯ezbase','C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\批次13_20260929\538_湘岚杯1997'); foreach($d in $dirs){Write-Output ('=== '+$d+' ==='); Get-ChildItem -LiteralPath $d -Recurse -File -Include *transcript*.txt,*candidate*.py,*static*.py,*static*.ps1 | ForEach-Object {Write-Output ('--- '+$_.FullName+' ('+$_.Length+' bytes) ---'); Get-Content -LiteralPath $_.FullName -Tail 80}}; Stop-Transcript
+Process ID: 36776
+PSVersion: 7.6.5
+PSEdition: Core
+GitCommitId: 7.6.5
+OS: Microsoft Windows 10.0.26200
+Platform: Win32NT
+PSCompatibleVersions: 1.0, 2.0, 3.0, 4.0, 5.0, 5.1, 6.0, 7.0
+PSRemotingProtocolVersion: 2.4
+SerializationVersion: 1.1.0.1
+WSManStackVersion: 3.0
+**********************
+Transcript started, output file is C:\Users\mzj\Desktop\CTF\玄机刷题\记录\批次13_提交准备检查_20260929.txt
+=== C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\批次13_20260929\533_圣人当仁不让 ===
+--- C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\批次13_20260929\533_圣人当仁不让\analysis\derive_candidate.py (1697 bytes) ---
+import base64,string
+ct='z8nO0NTOntKdop6dloqh1Q=='
+t=base64.b64decode(ct)
+inv=lambda y: (((y-3)&255)^0xaa)
+known=bytes(inv(y) for y in t)
+alpha='ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/'
+print('target:',ct,'length',len(ct))
+print('decoded transformed bytes:',t.hex())
+print('input[0:16] inverse:',repr(known), 'hex',known.hex())
+# The binary writes 4*ceil(n/3) characters, then incorrectly overwrites (encoded_len-(n%3))%4 trailing characters with '='.
+# For n=17 it emits two pads. Thus target chars 20 and 21 encode transformed byte 15 and high nibble of transformed byte 16.
+q=alpha.index(ct[21])
+print('last meaningful Base64 sextet:',ct[21],q,bin(q))
+need_hi=q&15
+print('required high nibble of transformed input[16]:',hex(need_hi))
+def encode_bug(inp):
+    out=base64.b64encode(inp).decode()
+    pad=(len(out)-(len(inp)%3))&3
+    return out[:len(out)-pad]+'='*pad
+matches=[]
+for c in range(0x20,0x7f):
+    y=((c^0xaa)+3)&255
+    if (y>>4)==need_hi:
+        candidate=known+bytes([c])
+        transformed=bytes((((x^0xaa)+3)&255) for x in candidate)
+        enc=encode_bug(transformed)
+        if enc==ct:
+            matches.append((c,candidate,transformed))
+print('printable final-byte candidates that forward-encode exactly:')
+for c,candidate,transformed in matches:print(f'char={chr(c)!r} input={candidate!r} input_hex={candidate.hex()} transformed={transformed.hex()} forward={encode_bug(transformed)}')
+print('match_count',len(matches))
+print('strict flag syntax candidates:')
+for c,candidate,_ in matches:
+    s=candidate.decode('ascii')
+    print(repr(s),'opens flag{',s.startswith('flag{'),'closes }',s.endswith('}'),'brace count',s.count('{'),s.count('}'))
+--- C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\批次13_20260929\533_圣人当仁不让\analysis\static_pe.py (2523 bytes) ---
+import sys, struct, re, hashlib
+from pathlib import Path
+p=Path(sys.argv[1]); b=p.read_bytes()
+print(f"file={p} size={len(b)} sha256={hashlib.sha256(b).hexdigest()}")
+print(f"DOS_magic={b[:2]!r} e_lfanew=0x{struct.unpack_from('<I',b,0x3c)[0]:x}")
+o=struct.unpack_from('<I',b,0x3c)[0]
+print(f"PE_signature={b[o:o+4]!r}")
+machine,nsec,timestamp,ptrsym,nsym,opt_size,chars=struct.unpack_from('<HHIIIHH',b,o+4)
+print(f"machine=0x{machine:04x} sections={nsec} timestamp=0x{timestamp:08x} optional_size={opt_size} characteristics=0x{chars:04x}")
+opt=o+24; magic=struct.unpack_from('<H',b,opt)[0]
+print(f"optional_magic=0x{magic:04x}")
+if magic==0x10b: imagebase=struct.unpack_from('<I',b,opt+28)[0]; dd=opt+96
+elif magic==0x20b: imagebase=struct.unpack_from('<Q',b,opt+24)[0]; dd=opt+112
+else: imagebase=None; dd=None
+if imagebase is not None:
+    print(f"imagebase=0x{imagebase:x} entry_rva=0x{struct.unpack_from('<I',b,opt+16)[0]:x} image_size=0x{struct.unpack_from('<I',b,opt+56)[0]:x} subsystem={struct.unpack_from('<H',b,opt+68)[0]}")
+secs=[]; sh=opt+opt_size
+for i in range(nsec):
+    x=sh+i*40; name=b[x:x+8].split(b'\0')[0].decode('ascii','replace')
+    vs,va,rs,rp=struct.unpack_from('<IIII',b,x+8)
+    sc=struct.unpack_from('<I',b,x+36)[0]
+    secs.append((name,va,max(vs,rs),rp,rs))
+    print(f"section[{i}] name={name!r} rva=0x{va:x} vsize=0x{vs:x} raw=0x{rp:x}+0x{rs:x} flags=0x{sc:08x}")
+def rvaoff(r):
+    for name,va,span,rp,rs in secs:
+        if va<=r<va+span:
+            z=r-va
+            if z<rs:return rp+z
+    return None
+if dd is not None:
+    imp_rva,imp_sz=struct.unpack_from('<II',b,dd+8)
+    print(f"import_dir_rva=0x{imp_rva:x} size=0x{imp_sz:x}")
+    io=rvaoff(imp_rva) if imp_rva else None
+    if io is not None:
+        for n in range(128):
+            d=b[io+n*20:io+(n+1)*20]
+            if len(d)<20:break
+            ilt,stamp,forwarder,name_rva,ft=struct.unpack('<IIIII',d)
+            if not (ilt|name_rva|ft):break
+            no=rvaoff(name_rva)
+            nm=b[no:b.find(b'\0',no)].decode('ascii','replace') if no is not None else '?'
+            print(f"import_dll={nm}")
+# ASCII strings
+strings=[]
+for m in re.finditer(rb'[\x20-\x7e]{4,}',b): strings.append((m.start(),m.group().decode('ascii','replace')))
+print('--- ASCII STRINGS (>=4) ---')
+for off,s in strings: print(f"0x{off:06x}: {s}")
+print('--- UTF16LE STRINGS (>=4) ---')
+for m in re.finditer(rb'(?:[\x20-\x7e]\x00){4,}',b):
+    try:s=m.group().decode('utf-16le')
+    except:continue
+    print(f"0x{m.start():06x}: {s}")
+
+--- C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\批次13_20260929\533_圣人当仁不让\533_static_analysis_transcript.txt (25227 bytes) ---
+
+COMMAND> python inspect exact bytes around strings and decode target with length
+**********************
+PowerShell transcript end
+End time: 20260929143723
+**********************
+**********************
+PowerShell transcript start
+Start time: 20260929143906
+Username: DESKTOP-412KTAR\mzj
+RunAs User: DESKTOP-412KTAR\mzj
+Configuration Name:
+Machine: DESKTOP-412KTAR (Microsoft Windows NT 10.0.26200.0)
+Host Application: C:\Users\mzj\.cache\codex-runtimes\codex-primary-runtime\dependencies\native\powershell\pwsh.dll -Command try { [Console]::OutputEncoding=[System.Text.Encoding]::UTF8 } catch {}
+$ErrorActionPreference='Stop'
+$root='C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\批次13_20260929\533_圣人当仁不让'
+$log=Join-Path $root '533_static_analysis_transcript.txt'
+Start-Transcript -LiteralPath $log -Append
+try {
+$script=@'
+import base64,string
+ct='z8nO0NTOntKdop6dloqh1Q=='
+t=base64.b64decode(ct)
+inv=lambda y: (((y-3)&255)^0xaa)
+known=bytes(inv(y) for y in t)
+alpha='ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/'
+print('target:',ct,'length',len(ct))
+print('decoded transformed bytes:',t.hex())
+print('input[0:16] inverse:',repr(known), 'hex',known.hex())
+# The binary writes 4*ceil(n/3) characters, then incorrectly overwrites (encoded_len-(n%3))%4 trailing characters with '='.
+# For n=17 it emits two pads. Thus target chars 20 and 21 encode transformed byte 15 and high nibble of transformed byte 16.
+q=alpha.index(ct[21])
+print('last meaningful Base64 sextet:',ct[21],q,bin(q))
+need_hi=q&15
+print('required high nibble of transformed input[16]:',hex(need_hi))
+def encode_bug(inp):
+    out=base64.b64encode(inp).decode()
+    pad=(len(out)-(len(inp)%3))&3
+    return out[:len(out)-pad]+'='*pad
+matches=[]
+for c in range(0x20,0x7f):
+    y=((c^0xaa)+3)&255
+    if (y>>4)==need_hi:
+        candidate=known+bytes([c])
+        transformed=bytes((((x^0xaa)+3)&255) for x in candidate)
+        enc=encode_bug(transformed)
+        if enc==ct:
+            matches.append((c,candidate,transformed))
+print('printable final-byte candidates that forward-encode exactly:')
+for c,candidate,transformed in matches:print(f'char={chr(c)!r} input={candidate!r} input_hex={candidate.hex()} transformed={transformed.hex()} forward={encode_bug(transformed)}')
+print('match_count',len(matches))
+print('strict flag syntax candidates:')
+for c,candidate,_ in matches:
+    s=candidate.decode('ascii')
+    print(repr(s),'opens flag{',s.startswith('flag{'),'closes }',s.endswith('}'),'brace count',s.count('{'),s.count('}'))
+'@
+$verify=Join-Path $root 'analysis\derive_candidate.py'
+Set-Content -LiteralPath $verify -Value $script -Encoding UTF8
+Write-Output "COMMAND> python '$verify'"
+python $verify
+} finally {Stop-Transcript}
+
+Process ID: 16528
+PSVersion: 7.6.5
+PSEdition: Core
+GitCommitId: 7.6.5
+OS: Microsoft Windows 10.0.26200
+Platform: Win32NT
+PSCompatibleVersions: 1.0, 2.0, 3.0, 4.0, 5.0, 5.1, 6.0, 7.0
+PSRemotingProtocolVersion: 2.4
+SerializationVersion: 1.1.0.1
+WSManStackVersion: 3.0
+**********************
+Transcript started, output file is C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\批次13_20260929\533_圣人当仁不让\533_static_analysis_transcript.txt
+COMMAND> python 'C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\批次13_20260929\533_圣人当仁不让\analysis\derive_candidate.py'
+
+**********************
+PowerShell transcript end
+End time: 20260929143906
+**********************
+=== C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\批次13_20260929\537_湘岚杯ezbase ===
+--- C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\批次13_20260929\537_湘岚杯ezbase\analysis\537_static_analysis_transcript.txt (24973 bytes) ---
+Machine: DESKTOP-412KTAR (Microsoft Windows NT 10.0.26200.0)
+Host Application: C:\Users\mzj\.cache\codex-runtimes\codex-primary-runtime\dependencies\native\powershell\pwsh.dll -Command try { [Console]::OutputEncoding=[System.Text.Encoding]::UTF8 } catch {}
+$ErrorActionPreference='Continue'; $analysis='C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\批次13_20260929\537_湘岚杯ezbase\analysis'; $log=Join-Path $analysis '537_static_analysis_transcript.txt'; Start-Transcript -Path $log -Append; Write-Output 'COMMAND> python -c PE static header parser for Z:\ezbase.exe'; python -c 'import struct,pathlib; p=pathlib.Path(r"Z:\ezbase.exe"); b=p.read_bytes(); u32=lambda o:struct.unpack_from("<I",b,o)[0]; u16=lambda o:struct.unpack_from("<H",b,o)[0]; pe=u32(0x3c); n=u16(pe+6); oh=pe+24; osz=u16(pe+20); sh=oh+osz; print(f"file_size={len(b)} pe_offset={pe:#x} sections={n} optional_size={osz:#x} section_table={sh:#x} entry_rva={u32(oh+16):#x} image_base={u32(oh+28):#x}"); [print(f"section[{i}] name={b[o:o+8].split(bytes([0]))[0]!r} vsize={u32(o+8):#x} va={u32(o+12):#x} rawsize={u32(o+16):#x} rawptr={u32(o+20):#x} flags={u32(o+36):#x}") for i,o in enumerate(range(sh,sh+n*40,40))]; print("UPX! offsets:",[hex(i) for i in range(len(b)) if b.startswith(b"UPX!",i)]); print("MZ signatures:",[hex(i) for i in range(len(b)) if b.startswith(b"MZ",i)][:30])' 2>&1; Stop-Transcript
+Process ID: 5628
+PSVersion: 7.6.5
+PSEdition: Core
+GitCommitId: 7.6.5
+OS: Microsoft Windows 10.0.26200
+Platform: Win32NT
+PSCompatibleVersions: 1.0, 2.0, 3.0, 4.0, 5.0, 5.1, 6.0, 7.0
+PSRemotingProtocolVersion: 2.4
+SerializationVersion: 1.1.0.1
+WSManStackVersion: 3.0
+**********************
+Transcript started, output file is C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\批次13_20260929\537_湘岚杯ezbase\analysis\537_static_analysis_transcript.txt
+COMMAND> python -c PE static header parser for Z:\ezbase.exe
+**********************
+PowerShell transcript end
+End time: 20260929143900
+**********************
+**********************
+PowerShell transcript start
+Start time: 20260929143941
+Username: DESKTOP-412KTAR\mzj
+RunAs User: DESKTOP-412KTAR\mzj
+Configuration Name:
+Machine: DESKTOP-412KTAR (Microsoft Windows NT 10.0.26200.0)
+Host Application: C:\Users\mzj\.cache\codex-runtimes\codex-primary-runtime\dependencies\native\powershell\pwsh.dll -Command try { [Console]::OutputEncoding=[System.Text.Encoding]::UTF8 } catch {}
+$ErrorActionPreference='Stop'; $analysis='C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\批次13_20260929\537_湘岚杯ezbase\analysis'; $log=Join-Path $analysis '537_static_analysis_transcript.txt'; $src=@'
+from pathlib import Path
+import hashlib, struct
+src = Path(r'Z:\ezbase.exe')
+dst = Path(r'Z:\ezbase_names_restored.exe')
+b = bytearray(src.read_bytes())
+pe = struct.unpack_from('<I', b, 0x3c)[0]
+n = struct.unpack_from('<H', b, pe + 6)[0]
+opt_size = struct.unpack_from('<H', b, pe + 20)[0]
+sec = pe + 24 + opt_size
+expected = [b'PXU0', b'PXU1', b'UXP2']
+replacement = [b'UPX0', b'UPX1', b'UPX2']
+assert n == 3, f'unexpected section count: {n}'
+for i, (old, new) in enumerate(zip(expected, replacement)):
+    off = sec + i * 40
+    got = bytes(b[off:off+8]).split(b'\0', 1)[0]
+    assert got == old, (i, got, old)
+    b[off:off+8] = new.ljust(8, b'\0')
+dst.write_bytes(b)
+print(f'input={src} bytes={len(src.read_bytes())} sha256={hashlib.sha256(src.read_bytes()).hexdigest().upper()}')
+print(f'patched={dst} bytes={len(b)} sha256={hashlib.sha256(b).hexdigest().upper()}')
+print('section names:', [bytes(b[sec+i*40:sec+i*40+8]).split(b'\0',1)[0].decode() for i in range(n)])
+'@; Set-Content -LiteralPath (Join-Path $analysis 'restore_upx_section_names.py') -Value $src -Encoding utf8; Start-Transcript -Path $log -Append; Write-Output 'COMMAND> Save and run analysis-only Python script restore_upx_section_names.py'; python 'Z:\restore_upx_section_names.py' 2>&1; Write-Output 'COMMAND> upx -l Z:\ezbase_names_restored.exe'; & 'C:\Users\mzj\Desktop\CTF\tools\upx-5.2.0\upx-5.2.0-win64\upx.exe' -l 'Z:\ezbase_names_restored.exe' 2>&1; Write-Output 'COMMAND> upx -t Z:\ezbase_names_restored.exe'; & 'C:\Users\mzj\Desktop\CTF\tools\upx-5.2.0\upx-5.2.0-win64\upx.exe' -t 'Z:\ezbase_names_restored.exe' 2>&1; Write-Output 'COMMAND> upx -d -o Z:\ezbase_unpacked.exe Z:\ezbase_names_restored.exe'; & 'C:\Users\mzj\Desktop\CTF\tools\upx-5.2.0\upx-5.2.0-win64\upx.exe' -d -o 'Z:\ezbase_unpacked.exe' 'Z:\ezbase_names_restored.exe' 2>&1; if(Test-Path 'Z:\ezbase_unpacked.exe') { Get-Item 'Z:\ezbase_unpacked.exe' | Format-List FullName,Length; Get-FileHash 'Z:\ezbase_unpacked.exe' -Algorithm SHA256 | Format-List }; Stop-Transcript
+Process ID: 42064
+PSVersion: 7.6.5
+PSEdition: Core
+GitCommitId: 7.6.5
+OS: Microsoft Windows 10.0.26200
+Platform: Win32NT
+PSCompatibleVersions: 1.0, 2.0, 3.0, 4.0, 5.0, 5.1, 6.0, 7.0
+PSRemotingProtocolVersion: 2.4
+SerializationVersion: 1.1.0.1
+WSManStackVersion: 3.0
+**********************
+Transcript started, output file is C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\批次13_20260929\537_湘岚杯ezbase\analysis\537_static_analysis_transcript.txt
+COMMAND> Save and run analysis-only Python script restore_upx_section_names.py
+COMMAND> upx -l Z:\ezbase_names_restored.exe
+COMMAND> upx -t Z:\ezbase_names_restored.exe
+COMMAND> upx -d -o Z:\ezbase_unpacked.exe Z:\ezbase_names_restored.exe
+
+FullName : Z:\ezbase_unpacked.exe
+Length   : 82703
+
+
+Algorithm : SHA256
+Hash      : C1A01D1D1C1AA849DA7EDACC239853A4CF9FB3E846C6D6D9915EF460DD95913F
+Path      : Z:\ezbase_unpacked.exe
+
+**********************
+PowerShell transcript end
+End time: 20260929143941
+**********************
+=== C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\批次13_20260929\538_湘岚杯1997 ===
+--- C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\批次13_20260929\538_湘岚杯1997\analysis\538_static_analysis.ps1 (3615 bytes) ---
+$ErrorActionPreference = 'Stop'
+$analysis = $PSScriptRoot
+$root = Split-Path -Parent $analysis
+$transcript = Join-Path $analysis '538_static_transcript_20260929.txt'
+Start-Transcript -LiteralPath $transcript -Append | Out-Null
+try {
+    Write-Output 'COMMAND> Get-ChildItem -Force -Recurse -LiteralPath $root | Select-Object FullName,Length,Mode | Format-Table'
+    Get-ChildItem -Force -Recurse -LiteralPath $root | Select-Object FullName,Length,Mode | Format-Table -AutoSize
+
+    Write-Output 'COMMAND> Get-FileHash -Algorithm SHA256 on original ZIP and extracted EXE'
+    foreach ($path in @((Join-Path $root 'originals\1997.zip'), (Join-Path $analysis '123.exe'))) {
+        if (Test-Path -LiteralPath $path) { Get-FileHash -LiteralPath $path -Algorithm SHA256 | Format-List } else { Write-Output "MISSING: $path" }
+    }
+
+    Write-Output 'COMMAND> Read ZIP central directory metadata with System.IO.Compression.ZipFile; no extraction or execution'
+    Add-Type -AssemblyName System.IO.Compression.FileSystem
+    $zip = [System.IO.Compression.ZipFile]::OpenRead((Join-Path $root 'originals\1997.zip'))
+    try { $zip.Entries | Select-Object FullName,Length,CompressedLength,LastWriteTime | Format-Table -AutoSize } finally { $zip.Dispose() }
+
+    Write-Output 'COMMAND> Read EXE DOS/PE headers and section table as bytes'
+    $bytes = [System.IO.File]::ReadAllBytes((Join-Path $analysis '123.exe'))
+    Write-Output ("FILE_SIZE={0}" -f $bytes.Length)
+    Write-Output ("DOS_MAGIC={0:X2}{1:X2}" -f $bytes[0], $bytes[1])
+    $peOffset = [BitConverter]::ToInt32($bytes, 0x3c)
+    Write-Output ("PE_OFFSET=0x{0:X}" -f $peOffset)
+    Write-Output ("PE_SIGNATURE={0:X2}{1:X2}{2:X2}{3:X2}" -f $bytes[$peOffset],$bytes[$peOffset+1],$bytes[$peOffset+2],$bytes[$peOffset+3])
+    $machine = [BitConverter]::ToUInt16($bytes, $peOffset + 4)
+    $numSections = [BitConverter]::ToUInt16($bytes, $peOffset + 6)
+    $optionalSize = [BitConverter]::ToUInt16($bytes, $peOffset + 20)
+    Write-Output ("MACHINE=0x{0:X4} NUM_SECTIONS={1} OPTIONAL_HEADER_SIZE={2}" -f $machine,$numSections,$optionalSize)
+    $optional = $peOffset + 24
+    $magic = [BitConverter]::ToUInt16($bytes, $optional)
+    Write-Output ("OPTIONAL_MAGIC=0x{0:X4}" -f $magic)
+    if ($magic -eq 0x20b) { $imageBase = [BitConverter]::ToUInt64($bytes, $optional + 24) } else { $imageBase = [BitConverter]::ToUInt32($bytes, $optional + 28) }
+    Write-Output ("IMAGE_BASE=0x{0:X}" -f $imageBase)
+    $sectionTable = $optional + $optionalSize
+    for ($i=0; $i -lt $numSections; $i++) {
+        $o = $sectionTable + 40*$i
+        $name = [Text.Encoding]::ASCII.GetString($bytes, $o, 8).Trim([char]0)
+        $virtualSize = [BitConverter]::ToUInt32($bytes, $o+8)
+        $virtualAddress = [BitConverter]::ToUInt32($bytes, $o+12)
+        $rawSize = [BitConverter]::ToUInt32($bytes, $o+16)
+        $rawPointer = [BitConverter]::ToUInt32($bytes, $o+20)
+        Write-Output ("SECTION {0}: VA=0x{1:X8} VSZ=0x{2:X8} RAW=0x{3:X8} PTR=0x{4:X8}" -f $name,$virtualAddress,$virtualSize,$rawSize,$rawPointer)
+    }
+
+    Write-Output 'COMMAND> Extract printable ASCII strings with [ -~]{4,} from binary bytes; no execution'
+    $ascii = [Text.Encoding]::ASCII.GetString($bytes)
+    [regex]::Matches($ascii, '[ -~]{4,}') | ForEach-Object { $_.Value } | Select-Object -Unique
+
+    Write-Output 'COMMAND> Extract printable UTF-16LE strings with [ -~]{4,} from binary bytes; no execution'
+    $wide = [Text.Encoding]::Unicode.GetString($bytes)
+    [regex]::Matches($wide, '[ -~]{4,}') | ForEach-Object { $_.Value } | Select-Object -Unique
+}
+finally { Stop-Transcript | Out-Null }
+--- C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\批次13_20260929\538_湘岚杯1997\analysis\538_static_transcript_20260929.txt (32130 bytes) ---
+__imp_RtlCaptureContext
+__RUNTIME_PSEUDO_RELOC_LIST_END__
+__imp_GetCurrentProcess
+.refptr.__xc_z
+___crt_xt_end__
+COMMAND> Extract printable UTF-16LE strings with [ -~]{4,} from binary bytes; no execution
+**********************
+Windows PowerShell transcript end
+End time: 20260929143847
+**********************
+**********************
+PowerShell transcript start
+Start time: 20260929143920
+Username: DESKTOP-412KTAR\mzj
+RunAs User: DESKTOP-412KTAR\mzj
+Configuration Name:
+Machine: DESKTOP-412KTAR (Microsoft Windows NT 10.0.26200.0)
+Host Application: C:\Users\mzj\.cache\codex-runtimes\codex-primary-runtime\dependencies\native\powershell\pwsh.dll -Command try { [Console]::OutputEncoding=[System.Text.Encoding]::UTF8 } catch {}
+$path = 'C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\批次13_20260929\538_湘岚杯1997\analysis\538_static_transcript_20260929.txt'; Start-Transcript -LiteralPath $path -Append | Out-Null; try { Write-Output 'COMMAND> Get-Command objdump,llvm-objdump,python,py -ErrorAction SilentlyContinue'; Get-Command objdump,llvm-objdump,python,py -ErrorAction SilentlyContinue | Select-Object Name,Source | Format-Table -AutoSize; Write-Output 'COMMAND> python -c "import importlib.util; print({m:bool(importlib.util.find_spec(m)) for m in [\"pefile\",\"capstone\",\"lief\"]})"'; python -c "import importlib.util; print({m:bool(importlib.util.find_spec(m)) for m in ['pefile','capstone','lief']})" } finally { Stop-Transcript | Out-Null }
+Process ID: 19592
+PSVersion: 7.6.5
+PSEdition: Core
+GitCommitId: 7.6.5
+OS: Microsoft Windows 10.0.26200
+Platform: Win32NT
+PSCompatibleVersions: 1.0, 2.0, 3.0, 4.0, 5.0, 5.1, 6.0, 7.0
+PSRemotingProtocolVersion: 2.4
+SerializationVersion: 1.1.0.1
+WSManStackVersion: 3.0
+**********************
+COMMAND> Get-Command objdump,llvm-objdump,python,py -ErrorAction SilentlyContinue
+
+Name        Source
+----        ------
+objdump.exe C:\msys64\mingw64\bin\objdump.exe
+python.exe  C:\Users\mzj\AppData\Local\Programs\Python\Python312\python.exe
+py.exe      C:\WINDOWS\py.exe
+
+COMMAND> python -c "import importlib.util; print({m:bool(importlib.util.find_spec(m)) for m in [\"pefile\",\"capstone\",\"lief\"]})"
+
+**********************
+PowerShell transcript end
+End time: 20260929143920
+**********************
+**********************
+PowerShell transcript start
+Start time: 20260929143943
+Username: DESKTOP-412KTAR\mzj
+RunAs User: DESKTOP-412KTAR\mzj
+Configuration Name:
+Machine: DESKTOP-412KTAR (Microsoft Windows NT 10.0.26200.0)
+Host Application: C:\Users\mzj\.cache\codex-runtimes\codex-primary-runtime\dependencies\native\powershell\pwsh.dll -Command try { [Console]::OutputEncoding=[System.Text.Encoding]::UTF8 } catch {}
+$ErrorActionPreference='Stop'; $analysis='C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\批次13_20260929\538_湘岚杯1997\analysis'; $transcript=Join-Path $analysis '538_static_transcript_20260929.txt'; $exe=Join-Path $analysis '123.exe'; Start-Transcript -LiteralPath $transcript -Append | Out-Null; try { $outputs=@(@{args=@('-x',$exe); path=(Join-Path $analysis '538_objdump_headers.txt'); label='objdump -x'},@{args=@('-t',$exe); path=(Join-Path $analysis '538_objdump_symbols.txt'); label='objdump -t'},@{args=@('-d','-Mintel','--disassemble=main',$exe); path=(Join-Path $analysis '538_objdump_main.txt'); label='objdump -d -Mintel --disassemble=main'},@{args=@('-s','-j','.rdata',$exe); path=(Join-Path $analysis '538_objdump_rdata.txt'); label='objdump -s -j .rdata'}); foreach($item in $outputs){ Write-Output ("COMMAND> objdump {0} `"123.exe`"; full output -> {1}" -f $item.label,$item.path); & objdump @($item.args) 2>&1 | Out-File -LiteralPath $item.path -Encoding utf8; Write-Output ("EXIT_CODE={0}" -f $LASTEXITCODE); if($item.label -in @('objdump -t','objdump -d -Mintel --disassemble=main','objdump -s -j .rdata')) { Get-Content -LiteralPath $item.path | Select-Object -First 180 } } } finally { Stop-Transcript | Out-Null }
+Process ID: 34800
+PSVersion: 7.6.5
+PSEdition: Core
+GitCommitId: 7.6.5
+OS: Microsoft Windows 10.0.26200
+Platform: Win32NT
+PSCompatibleVersions: 1.0, 2.0, 3.0, 4.0, 5.0, 5.1, 6.0, 7.0
+PSRemotingProtocolVersion: 2.4
+SerializationVersion: 1.1.0.1
+WSManStackVersion: 3.0
+**********************
+COMMAND> objdump objdump -x "123.exe"; full output -> C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\批次13_20260929\538_湘岚杯1997\analysis\538_objdump_headers.txt
+EXIT_CODE=1
+COMMAND> objdump objdump -t "123.exe"; full output -> C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\批次13_20260929\538_湘岚杯1997\analysis\538_objdump_symbols.txt
+EXIT_CODE=1
+C:\msys64\mingw64\bin\objdump.exe: C:\Users\mzj\Desktop\CTF\����ˢ��\��Ŀ����\����13_20260929\538_��ᰱ�1997\analysis\123.exe: No such file or directory
+COMMAND> objdump objdump -d -Mintel --disassemble=main "123.exe"; full output -> C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\批次13_20260929\538_湘岚杯1997\analysis\538_objdump_main.txt
+EXIT_CODE=1
+C:\msys64\mingw64\bin\objdump.exe: C:\Users\mzj\Desktop\CTF\����ˢ��\��Ŀ����\����13_20260929\538_��ᰱ�1997\analysis\123.exe: No such file or directory
+COMMAND> objdump objdump -s -j .rdata "123.exe"; full output -> C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\批次13_20260929\538_湘岚杯1997\analysis\538_objdump_rdata.txt
+EXIT_CODE=1
+C:\msys64\mingw64\bin\objdump.exe: C:\Users\mzj\Desktop\CTF\����ˢ��\��Ŀ����\����13_20260929\538_��ᰱ�1997\analysis\123.exe: No such file or directory
+C:\msys64\mingw64\bin\objdump.exe: section '.rdata' mentioned in a -j option, but not found in any input file
+**********************
+PowerShell transcript end
+End time: 20260929143944
+**********************
+**********************
+PowerShell transcript end
+End time: 20260929143950
+**********************
+**********************
+PowerShell transcript start
+Start time: 20260929144400
+Username: DESKTOP-412KTAR\mzj
+RunAs User: DESKTOP-412KTAR\mzj
+Configuration Name: 
+Machine: DESKTOP-412KTAR (Microsoft Windows NT 10.0.26200.0)
+Host Application: C:\Users\mzj\.cache\codex-runtimes\codex-primary-runtime\dependencies\native\powershell\pwsh.dll -NoProfile -Command try { [Console]::OutputEncoding=[System.Text.Encoding]::UTF8 } catch {}
+$ErrorActionPreference='Continue'; $log='C:\Users\mzj\Desktop\CTF\玄机刷题\记录\批次13_提交准备检查_20260929.txt'; Start-Transcript -LiteralPath $log -Append; $base='C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\批次13_20260929'; foreach($name in @('533_圣人当仁不让','537_湘岚杯ezbase','538_湘岚杯1997')) { Write-Output ('=== '+$name+' latest files ==='); Get-ChildItem -LiteralPath (Join-Path $base $name) -Recurse -File | Sort-Object LastWriteTime -Descending | Select-Object -First 12 FullName,Length,LastWriteTime | Format-Table -AutoSize }; Write-Output '=== Candidate-related recent log lines ==='; Get-ChildItem -LiteralPath $base -Recurse -File -Include *.txt,*.log,*.md,*.py | Select-String -Pattern 'candidate|flag\{|candidate_count|唯一|PLAINTEXT|decoded|possible|matched' -Context 0,1 | Select-Object -Last 120; Stop-Transcript
+Process ID: 10740
+PSVersion: 7.6.5
+PSEdition: Core
+GitCommitId: 7.6.5
+OS: Microsoft Windows 10.0.26200
+Platform: Win32NT
+PSCompatibleVersions: 1.0, 2.0, 3.0, 4.0, 5.0, 5.1, 6.0, 7.0
+PSRemotingProtocolVersion: 2.4
+SerializationVersion: 1.1.0.1
+WSManStackVersion: 3.0
+**********************
+Transcript started, output file is C:\Users\mzj\Desktop\CTF\玄机刷题\记录\批次13_提交准备检查_20260929.txt
+=== 533_圣人当仁不让 latest files ===
+
+FullName                                                                                                       Length L
+                                                                                                                      a
+                                                                                                                      s
+                                                                                                                      t
+                                                                                                                      W
+                                                                                                                      r
+                                                                                                                      i
+                                                                                                                      t
+                                                                                                                      e
+                                                                                                                      T
+                                                                                                                      i
+                                                                                                                      m
+                                                                                                                      e
+--------                                                                                                       ------ -
+C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\批次13_20260929\533_圣人当仁不让\533_static_analysis_transcript.txt  28098 2
+C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\批次13_20260929\533_圣人当仁不让\analysis\inspect_tail.py              885 2
+C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\批次13_20260929\533_圣人当仁不让\analysis\derive_candidate.py         1697 2
+C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\批次13_20260929\533_圣人当仁不让\analysis\static_pe.py                2523 2
+C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\批次13_20260929\533_圣人当仁不让\originals\ez_vm.zip                 26778 2
+C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\批次13_20260929\533_圣人当仁不让\analysis\ez_vm.exe                  82661 2
+
+=== 537_湘岚杯ezbase latest files ===
+
+FullName
+--------                                                                                                               
+C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\批次13_20260929\537_湘岚杯ezbase\analysis\537_static_analysis_transcript.txt
+C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\批次13_20260929\537_湘岚杯ezbase\analysis\solve_537_from_static.py
+C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\批次13_20260929\537_湘岚杯ezbase\analysis\patch_solver_537.py
+C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\批次13_20260929\537_湘岚杯ezbase\analysis\537_base64_main_disassembly.txt
+C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\批次13_20260929\537_湘岚杯ezbase\analysis\ezbase_unpacked_strings.txt
+C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\批次13_20260929\537_湘岚杯ezbase\analysis\ezbase_unpacked_disassembly.txt
+C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\批次13_20260929\537_湘岚杯ezbase\analysis\ezbase_unpacked_headers_symbols.t…
+C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\批次13_20260929\537_湘岚杯ezbase\analysis\ezbase_names_restored.exe
+C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\批次13_20260929\537_湘岚杯ezbase\analysis\ezbase_unpacked.exe
+C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\批次13_20260929\537_湘岚杯ezbase\analysis\restore_upx_section_names.py
+C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\批次13_20260929\537_湘岚杯ezbase\originals\ezbase.zip
+C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\批次13_20260929\537_湘岚杯ezbase\analysis\ezbase_upx_work.exe
+
+=== 538_湘岚杯1997 latest files ===
+
+FullName                                                                                                              L
+                                                                                                                      e
+                                                                                                                      n
+                                                                                                                      g
+                                                                                                                      t
+                                                                                                                      h
+--------                                                                                                              -
+C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\批次13_20260929\538_湘岚杯1997\analysis\538_static_transcript_20260929.txt 5
+C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\批次13_20260929\538_湘岚杯1997\analysis\538_objdump_mul2.txt               9
+C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\批次13_20260929\538_湘岚杯1997\analysis\538_objdump_shift_rows.txt         5
+C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\批次13_20260929\538_湘岚杯1997\analysis\538_objdump_key_schedule.txt       7
+C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\批次13_20260929\538_湘岚杯1997\analysis\538_objdump_aes_encrypt.txt        1
+C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\批次13_20260929\538_湘岚杯1997\analysis\538_decrypt_verify.py              9
+C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\批次13_20260929\538_湘岚杯1997\analysis\538_objdump_rdata.txt              1
+C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\批次13_20260929\538_湘岚杯1997\analysis\538_objdump_main.txt               5
+C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\批次13_20260929\538_湘岚杯1997\analysis\538_objdump_symbols.txt            9
+C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\批次13_20260929\538_湘岚杯1997\analysis\538_objdump_headers.txt            1
+C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\批次13_20260929\538_湘岚杯1997\analysis\538_static_analysis.ps1            5
+C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\批次13_20260929\538_湘岚杯1997\originals\1997.zip                          2
+
+=== Candidate-related recent log lines ===
+
+**********************
+PowerShell transcript end
+End time: 20260929144400
+**********************
+**********************
+PowerShell transcript start
+Start time: 20260929144414
+Username: DESKTOP-412KTAR\mzj
+RunAs User: DESKTOP-412KTAR\mzj
+Configuration Name: 
+Machine: DESKTOP-412KTAR (Microsoft Windows NT 10.0.26200.0)
+Host Application: C:\Users\mzj\.cache\codex-runtimes\codex-primary-runtime\dependencies\native\powershell\pwsh.dll -NoProfile -Command try { [Console]::OutputEncoding=[System.Text.Encoding]::UTF8 } catch {}
+$ErrorActionPreference='Continue'; $log='C:\Users\mzj\Desktop\CTF\玄机刷题\记录\批次13_提交准备检查_20260929.txt'; Start-Transcript -LiteralPath $log -Append; $paths=@('C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\批次13_20260929\537_湘岚杯ezbase\analysis\537_static_analysis_transcript.txt','C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\批次13_20260929\538_湘岚杯1997\analysis\538_static_transcript_20260929.txt'); foreach($p in $paths){Write-Output ('=== '+$p+' ==='); Select-String -LiteralPath $p -Pattern 'plaintext_ascii|plaintext_repr|forward_reencode_match|match_count|PLAINTEXT_ASCII|FLAG_SHAPE|COMMAND> python.*solve' -Context 2,3 | Select-Object -Last 30}; Stop-Transcript
+Process ID: 18092
+PSVersion: 7.6.5
+PSEdition: Core
+GitCommitId: 7.6.5
+OS: Microsoft Windows 10.0.26200
+Platform: Win32NT
+PSCompatibleVersions: 1.0, 2.0, 3.0, 4.0, 5.0, 5.1, 6.0, 7.0
+PSRemotingProtocolVersion: 2.4
+SerializationVersion: 1.1.0.1
+WSManStackVersion: 3.0
+**********************
+Transcript started, output file is C:\Users\mzj\Desktop\CTF\玄机刷题\记录\批次13_提交准备检查_20260929.txt
+=== C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\批次13_20260929\537_湘岚杯ezbase\analysis\537_static_analysis_transcript.txt ===
+
+  玄机刷题\题目资料\批次13_20260929\537_湘岚杯ezbase\analysis\537_static_analysis_transcript.txt:1567:print(f'decoded_p
+re_xor_hex={raw.hex()} length={len(raw)}')
+  玄机刷题\题目资料\批次13_20260929\537_湘岚杯ezbase\analysis\537_static_analysis_transcript.txt:1568:print(f'plaintext
+_hex={plain.hex()} length={len(plain)}')
+> 玄机刷题\题目资料\批次13_20260929\537_湘岚杯ezbase\analysis\537_static_analysis_transcript.txt:1569:print(f'plaintext
+_repr={plain!r}')
+> 玄机刷题\题目资料\批次13_20260929\537_湘岚杯ezbase\analysis\537_static_analysis_transcript.txt:1570:print(f'plaintext
+_ascii={plain.decode("ascii")}')
+> 玄机刷题\题目资料\批次13_20260929\537_湘岚杯ezbase\analysis\537_static_analysis_transcript.txt:1571:print(f'forward_r
+eencode_match={bytes(reencoded)==expected}')
+> 玄机刷题\题目资料\批次13_20260929\537_湘岚杯ezbase\analysis\537_static_analysis_transcript.txt:1572:'@; Set-Content -
+LiteralPath (Join-Path $analysis 'solve_537_from_static.py') -Value $src -Encoding utf8; Start-Transcript -Path $log -A
+ppend; Write-Output 'COMMAND> python Z:\solve_537_from_static.py'; python 'Z:\solve_537_from_static.py' 2>&1; Stop-Tran
+script
+  玄机刷题\题目资料\批次13_20260929\537_湘岚杯ezbase\analysis\537_static_analysis_transcript.txt:1573:Process ID: 41812
+  玄机刷题\题目资料\批次13_20260929\537_湘岚杯ezbase\analysis\537_static_analysis_transcript.txt:1574:PSVersion: 7.6.5
+  玄机刷题\题目资料\批次13_20260929\537_湘岚杯ezbase\analysis\537_static_analysis_transcript.txt:1575:PSEdition: Core
+  玄机刷题\题目资料\批次13_20260929\537_湘岚杯ezbase\analysis\537_static_analysis_transcript.txt:1583:*****************
+*****
+  玄机刷题\题目资料\批次13_20260929\537_湘岚杯ezbase\analysis\537_static_analysis_transcript.txt:1584:Transcript starte
+d, output file is C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\批次13_20260929\537_湘岚杯ezbase\analysis\537_static_analy
+sis_transcript.txt
+> 玄机刷题\题目资料\批次13_20260929\537_湘岚杯ezbase\analysis\537_static_analysis_transcript.txt:1585:COMMAND> python Z
+:\solve_537_from_static.py
+  玄机刷题\题目资料\批次13_20260929\537_湘岚杯ezbase\analysis\537_static_analysis_transcript.txt:1586:Traceback (most r
+ecent call last):
+  玄机刷题\题目资料\批次13_20260929\537_湘岚杯ezbase\analysis\537_static_analysis_transcript.txt:1587:  File "Z:\solve_
+537_from_static.py", line 29, in <module>
+  玄机刷题\题目资料\批次13_20260929\537_湘岚杯ezbase\analysis\537_static_analysis_transcript.txt:1588:    assert len(al
+phabet)==64, (len(alphabet),alphabet)
+  玄机刷题\题目资料\批次13_20260929\537_湘岚杯ezbase\analysis\537_static_analysis_transcript.txt:1601:Machine: DESKTOP-
+412KTAR (Microsoft Windows NT 10.0.26200.0)
+  玄机刷题\题目资料\批次13_20260929\537_湘岚杯ezbase\analysis\537_static_analysis_transcript.txt:1602:Host Application:
+ C:\Users\mzj\.cache\codex-runtimes\codex-primary-runtime\dependencies\native\powershell\pwsh.dll -Command try { [Conso
+le]::OutputEncoding=[System.Text.Encoding]::UTF8 } catch {}
+> 玄机刷题\题目资料\批次13_20260929\537_湘岚杯ezbase\analysis\537_static_analysis_transcript.txt:1603:$ErrorActionPrefe
+rence='Stop'; $analysis='C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\批次13_20260929\537_湘岚杯ezbase\analysis'; $log=Jo
+in-Path $analysis '537_static_analysis_transcript.txt'; Start-Transcript -Path $log -Append; Write-Output 'COMMAND> Pat
+ch solver to take exactly 64 bytes: prompt starts 0x40 bytes after alphabet'; python -c 'from pathlib import Path; p=Pa
+th(r"Z:\solve_537_from_static.py"); s=p.read_text(encoding="utf-8-sig"); s=s.replace("alphabet=b[alphabet_off:b.index(b
+\'\\0\',alphabet_off)]", "alphabet=b[alphabet_off:alphabet_off+64]\nassert b[alphabet_off+64:alphabet_off+72] == b\'Fin
+d me!\', b[alphabet_off+64:alphabet_off+72]"); p.write_text(s,encoding="utf-8")' 2>&1; Write-Output 'COMMAND> python Z:
+\solve_537_from_static.py'; python 'Z:\solve_537_from_static.py' 2>&1; Stop-Transcript
+  玄机刷题\题目资料\批次13_20260929\537_湘岚杯ezbase\analysis\537_static_analysis_transcript.txt:1604:Process ID: 38836
+  玄机刷题\题目资料\批次13_20260929\537_湘岚杯ezbase\analysis\537_static_analysis_transcript.txt:1605:PSVersion: 7.6.5
+  玄机刷题\题目资料\批次13_20260929\537_湘岚杯ezbase\analysis\537_static_analysis_transcript.txt:1606:PSEdition: Core
+  玄机刷题\题目资料\批次13_20260929\537_湘岚杯ezbase\analysis\537_static_analysis_transcript.txt:1619:
+                                                                                                      ^
+  玄机刷题\题目资料\批次13_20260929\537_湘岚杯ezbase\analysis\537_static_analysis_transcript.txt:1620:SyntaxError: unte
+rminated string literal (detected at line 1)
+> 玄机刷题\题目资料\批次13_20260929\537_湘岚杯ezbase\analysis\537_static_analysis_transcript.txt:1621:COMMAND> python Z
+:\solve_537_from_static.py
+  玄机刷题\题目资料\批次13_20260929\537_湘岚杯ezbase\analysis\537_static_analysis_transcript.txt:1622:Traceback (most r
+ecent call last):
+  玄机刷题\题目资料\批次13_20260929\537_湘岚杯ezbase\analysis\537_static_analysis_transcript.txt:1623:  File "Z:\solve_
+537_from_static.py", line 29, in <module>
+  玄机刷题\题目资料\批次13_20260929\537_湘岚杯ezbase\analysis\537_static_analysis_transcript.txt:1624:    assert len(al
+phabet)==64, (len(alphabet),alphabet)
+  玄机刷题\题目资料\批次13_20260929\537_湘岚杯ezbase\analysis\537_static_analysis_transcript.txt:1646:p.write_text(s.re
+place(old,new),encoding='utf-8')
+  玄机刷题\题目资料\批次13_20260929\537_湘岚杯ezbase\analysis\537_static_analysis_transcript.txt:1647:print('updated al
+phabet extraction to exactly 64 bytes and asserted adjacent prompt')
+> 玄机刷题\题目资料\批次13_20260929\537_湘岚杯ezbase\analysis\537_static_analysis_transcript.txt:1648:'@; Set-Content -
+LiteralPath (Join-Path $analysis 'patch_solver_537.py') -Value $patch -Encoding utf8; Start-Transcript -Path $log -Appe
+nd; Write-Output 'COMMAND> python Z:\patch_solver_537.py'; python 'Z:\patch_solver_537.py' 2>&1; Write-Output 'COMMAND>
+ python Z:\solve_537_from_static.py'; python 'Z:\solve_537_from_static.py' 2>&1; Stop-Transcript
+  玄机刷题\题目资料\批次13_20260929\537_湘岚杯ezbase\analysis\537_static_analysis_transcript.txt:1649:Process ID: 14140
+  玄机刷题\题目资料\批次13_20260929\537_湘岚杯ezbase\analysis\537_static_analysis_transcript.txt:1650:PSVersion: 7.6.5
+  玄机刷题\题目资料\批次13_20260929\537_湘岚杯ezbase\analysis\537_static_analysis_transcript.txt:1651:PSEdition: Core
+  玄机刷题\题目资料\批次13_20260929\537_湘岚杯ezbase\analysis\537_static_analysis_transcript.txt:1659:*****************
+*****
+  玄机刷题\题目资料\批次13_20260929\537_湘岚杯ezbase\analysis\537_static_analysis_transcript.txt:1660:Transcript starte
+d, output file is C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\批次13_20260929\537_湘岚杯ezbase\analysis\537_static_analy
+sis_transcript.txt
+> 玄机刷题\题目资料\批次13_20260929\537_湘岚杯ezbase\analysis\537_static_analysis_transcript.txt:1661:COMMAND> python Z
+:\patch_solver_537.py
+> 玄机刷题\题目资料\批次13_20260929\537_湘岚杯ezbase\analysis\537_static_analysis_transcript.txt:1662:COMMAND> python Z
+:\solve_537_from_static.py
+  玄机刷题\题目资料\批次13_20260929\537_湘岚杯ezbase\analysis\537_static_analysis_transcript.txt:1663:Traceback (most r
+ecent call last):
+  玄机刷题\题目资料\批次13_20260929\537_湘岚杯ezbase\analysis\537_static_analysis_transcript.txt:1664:  File "Z:\solve_
+537_from_static.py", line 29, in <module>
+  玄机刷题\题目资料\批次13_20260929\537_湘岚杯ezbase\analysis\537_static_analysis_transcript.txt:1665:    assert b[alph
+abet_off+64:alphabet_off+72] == b'Find me!', b[alphabet_off+64:alphabet_off+72]
+=== C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\批次13_20260929\538_湘岚杯1997\analysis\538_static_transcript_20260929.txt ===
+  玄机刷题\题目资料\批次13_20260929\538_湘岚杯1997\analysis\538_static_transcript_20260929.txt:2078:print(f'CIPHERTEXT_
+HEX={ciphertext.hex()}')
+  玄机刷题\题目资料\批次13_20260929\538_湘岚杯1997\analysis\538_static_transcript_20260929.txt:2079:print(f'PLAINTEXT_H
+EX={plaintext.hex()}')
+> 玄机刷题\题目资料\批次13_20260929\538_湘岚杯1997\analysis\538_static_transcript_20260929.txt:2080:print(f'PLAINTEXT_A
+SCII={plaintext.decode("ascii")}')
+  玄机刷题\题目资料\批次13_20260929\538_湘岚杯1997\analysis\538_static_transcript_20260929.txt:2081:print(f'PLAINTEXT_L
+EN={len(plaintext)}')
+  玄机刷题\题目资料\批次13_20260929\538_湘岚杯1997\analysis\538_static_transcript_20260929.txt:2082:print(f'REENCRYPT_H
+EX={roundtrip.hex()}')
+  玄机刷题\题目资料\批次13_20260929\538_湘岚杯1997\analysis\538_static_transcript_20260929.txt:2083:print(f'ROUNDTRIP_M
+ATCH={roundtrip == ciphertext}')
+> 玄机刷题\题目资料\批次13_20260929\538_湘岚杯1997\analysis\538_static_transcript_20260929.txt:2084:print(f'FLAG_SHAPE=
+{plaintext.startswith(b"flag{") and plaintext.endswith(b"}")}')
+  玄机刷题\题目资料\批次13_20260929\538_湘岚杯1997\analysis\538_static_transcript_20260929.txt:2085:'@ | Set-Content -L
+iteralPath $scriptPath -Encoding UTF8; Start-Transcript -LiteralPath $transcript -Append | Out-Null; try { Write-Output
+ 'COMMAND> python analysis\538_decrypt_verify.py'; python $scriptPath } finally { Stop-Transcript | Out-Null }
+  玄机刷题\题目资料\批次13_20260929\538_湘岚杯1997\analysis\538_static_transcript_20260929.txt:2086:Process ID: 34984
+  玄机刷题\题目资料\批次13_20260929\538_湘岚杯1997\analysis\538_static_transcript_20260929.txt:2087:PSVersion: 7.6.5
+**********************
+PowerShell transcript end
+End time: 20260929144414
+**********************
+**********************
+PowerShell transcript start
+Start time: 20260929144430
+Username: DESKTOP-412KTAR\mzj
+RunAs User: DESKTOP-412KTAR\mzj
+Configuration Name: 
+Machine: DESKTOP-412KTAR (Microsoft Windows NT 10.0.26200.0)
+Host Application: C:\Users\mzj\.cache\codex-runtimes\codex-primary-runtime\dependencies\native\powershell\pwsh.dll -NoProfile -Command try { [Console]::OutputEncoding=[System.Text.Encoding]::UTF8 } catch {}
+$ErrorActionPreference='Continue'; $log='C:\Users\mzj\Desktop\CTF\玄机刷题\记录\批次13_提交准备检查_20260929.txt'; Start-Transcript -LiteralPath $log -Append; $a='C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\批次13_20260929\537_湘岚杯ezbase\analysis'; Write-Output '=== solver source ==='; Get-Content -LiteralPath (Join-Path $a 'solve_537_from_static.py') -TotalCount 120; Write-Output '=== disassembly context around alphabet ==='; Select-String -LiteralPath (Join-Path $a 'ezbase_unpacked_disassembly.txt') -Pattern '406060|Find me|base64|402|404|406' -Context 2,2 | Select-Object -Last 60; Stop-Transcript
+Process ID: 28016
+PSVersion: 7.6.5
+PSEdition: Core
+GitCommitId: 7.6.5
+OS: Microsoft Windows 10.0.26200
+Platform: Win32NT
+PSCompatibleVersions: 1.0, 2.0, 3.0, 4.0, 5.0, 5.1, 6.0, 7.0
+PSRemotingProtocolVersion: 2.4
+SerializationVersion: 1.1.0.1
+WSManStackVersion: 3.0
+**********************
+Transcript started, output file is C:\Users\mzj\Desktop\CTF\玄机刷题\记录\批次13_提交准备检查_20260929.txt
+=== solver source ===
+from pathlib import Path
+import hashlib, struct
+p = Path(r'Z:\ezbase_unpacked.exe')
+b = p.read_bytes()
+rd16 = lambda o: struct.unpack_from('<H', b, o)[0]
+rd32 = lambda o: struct.unpack_from('<I', b, o)[0]
+pe = rd32(0x3c)
+nsec = rd16(pe + 6)
+opt = pe + 24
+image_base = rd32(opt + 28)
+sec_table = opt + rd16(pe + 20)
+sections=[]
+for i in range(nsec):
+    o=sec_table+i*40
+    name=b[o:o+8].split(b'\0',1)[0]
+    vsize, va, rawsize, rawptr=struct.unpack_from('<IIII',b,o+8)
+    sections.append((name,vsize,va,rawsize,rawptr))
+def rva_file_offset(rva):
+    for name,vsize,va,rawsize,rawptr in sections:
+        if va <= rva < va + max(vsize,rawsize):
+            delta=rva-va
+            if delta >= rawsize:
+                raise ValueError(f'RVA {rva:#x} is virtual-only')
+            return rawptr+delta
+    raise ValueError(f'RVA {rva:#x} has no section')
+# The disassembly's alphabet address is VA 0x406060.
+alphabet_off=rva_file_offset(0x406060-image_base)
+alphabet=b[alphabet_off:alphabet_off+64]
+assert b[alphabet_off+64:alphabet_off+72] == b'You Find', b[alphabet_off+64:alphabet_off+72]
+assert len(alphabet)==64, (len(alphabet),alphabet)
+assert len(set(alphabet))==64, 'custom alphabet is not bijective'
+# Rebuild the 56-byte comparison constant from main's immediate stores at [esp+3e..75].
+main_va=0x4015d7
+main_off=rva_file_offset(main_va-image_base)
+expected=bytearray(56)
+seen=[]
+for disp in range(0x3e,0x76,4):
+    needle=b'\xc7\x44\x24'+bytes([disp])
+    pos=b.find(needle, main_off, main_off+0x100)
+    assert pos >= 0, f'missing immediate store for stack displacement {disp:#x}'
+    chunk=b[pos+4:pos+8]
+    expected[disp-0x3e:disp-0x3e+4]=chunk
+    seen.append((disp,chunk))
+expected=bytes(expected)
+assert len(expected)==56
+# main swaps encoded bytes at indices 0x0c and 0x12 before memcmp: undo it first.
+encoded=bytearray(expected)
+encoded[0x0c],encoded[0x12]=encoded[0x12],encoded[0x0c]
+inv={c:i for i,c in enumerate(alphabet)}
+raw=bytearray()
+for i in range(0,len(encoded),4):
+    a,c,d,e=(inv[x] for x in encoded[i:i+4])
+    raw.extend(((a<<2)|(c>>4),((c&15)<<4)|(d>>2),((d&3)<<6)|e))
+plain=bytes(x^0x10 for x in raw)
+def custom_b64(data):
+    out=bytearray()
+    for i in range(0,len(data),3):
+        x,y,z=data[i:i+3]
+        out.extend((alphabet[x>>2],alphabet[((x&3)<<4)|(y>>4)],alphabet[((y&15)<<2)|(z>>6)],alphabet[z&63]))
+    return bytes(out)
+reencoded=bytearray(custom_b64(bytes(x^0x10 for x in plain)))
+reencoded[0x0c],reencoded[0x12]=reencoded[0x12],reencoded[0x0c]
+assert bytes(reencoded)==expected, 'forward re-encoding does not match target'
+print('unpacked_sha256='+hashlib.sha256(b).hexdigest().upper())
+print('section_map='+repr(sections))
+print(f'alphabet_file_offset={alphabet_off:#x} alphabet_len={len(alphabet)} alphabet={alphabet.decode("ascii")}')
+print('target_store_bytes='+repr(seen))
+print(f'target_encoded={expected.decode("ascii")} length={len(expected)}')
+print(f'after_undo_swap={bytes(encoded).decode("ascii")}')
+print(f'decoded_pre_xor_hex={raw.hex()} length={len(raw)}')
+print(f'plaintext_hex={plain.hex()} length={len(plain)}')
+print(f'plaintext_repr={plain!r}')
+print(f'plaintext_ascii={plain.decode("ascii")}')
+print(f'forward_reencode_match={bytes(reencoded)==expected}')
+=== disassembly context around alphabet ===
+
+  玄机刷题\题目资料\批次13_20260929\537_湘岚杯ezbase\analysis\ezbase_unpacked_disassembly.txt:23:  401034:	00
+  玄机刷题\题目资料\批次13_20260929\537_湘岚杯ezbase\analysis\ezbase_unpacked_disassembly.txt:24:  401035:	c7 04 24 08
+00 00 00 	mov    DWORD PTR [esp],0x8
+> 玄机刷题\题目资料\批次13_20260929\537_湘岚杯ezbase\analysis\ezbase_unpacked_disassembly.txt:25:  40103c:	e8 63 31 00
+00       	call   4041a4 <_signal>
+  玄机刷题\题目资料\批次13_20260929\537_湘岚杯ezbase\analysis\ezbase_unpacked_disassembly.txt:26:  401041:	83 f8 01
+         	cmp    eax,0x1
+  玄机刷题\题目资料\批次13_20260929\537_湘岚杯ezbase\analysis\ezbase_unpacked_disassembly.txt:27:  401044:	0f 84 d6 00
+00 00    	je     401120 <.text+0x120>
+  玄机刷题\题目资料\批次13_20260929\537_湘岚杯ezbase\analysis\ezbase_unpacked_disassembly.txt:38:  40106e:	00
+  玄机刷题\题目资料\批次13_20260929\537_湘岚杯ezbase\analysis\ezbase_unpacked_disassembly.txt:39:  40106f:	c7 04 24 08
+00 00 00 	mov    DWORD PTR [esp],0x8
+> 玄机刷题\题目资料\批次13_20260929\537_湘岚杯ezbase\analysis\ezbase_unpacked_disassembly.txt:40:  401076:	e8 29 31 00
+00       	call   4041a4 <_signal>
+  玄机刷题\题目资料\批次13_20260929\537_湘岚杯ezbase\analysis\ezbase_unpacked_disassembly.txt:41:  40107b:	83 f8 01
+         	cmp    eax,0x1
+  玄机刷题\题目资料\批次13_20260929\537_湘岚杯ezbase\analysis\ezbase_unpacked_disassembly.txt:42:  40107e:	75 ca
+         	jne    40104a <.text+0x4a>
+  玄机刷题\题目资料\批次13_20260929\537_湘岚杯ezbase\analysis\ezbase_unpacked_disassembly.txt:44:  401087:	00
+  玄机刷题\题目资料\批次13_20260929\537_湘岚杯ezbase\analysis\ezbase_unpacked_disassembly.txt:45:  401088:	c7 04 24 08
+00 00 00 	mov    DWORD PTR [esp],0x8
+> 玄机刷题\题目资料\批次13_20260929\537_湘岚杯ezbase\analysis\ezbase_unpacked_disassembly.txt:46:  40108f:	e8 10 31 00
+00       	call   4041a4 <_signal>
+  玄机刷题\题目资料\批次13_20260929\537_湘岚杯ezbase\analysis\ezbase_unpacked_disassembly.txt:47:  401094:	ba ff ff ff
+ff       	mov    edx,0xffffffff
+  玄机刷题\题目资料\批次13_20260929\537_湘岚杯ezbase\analysis\ezbase_unpacked_disassembly.txt:48:  401099:	eb b9
+         	jmp    401054 <.text+0x54>
+  玄机刷题\题目资料\批次13_20260929\537_湘岚杯ezbase\analysis\ezbase_unpacked_disassembly.txt:54:  4010ae:	00
+  玄机刷题\题目资料\批次13_20260929\537_湘岚杯ezbase\analysis\ezbase_unpacked_disassembly.txt:55:  4010af:	c7 04 24 0b
+00 00 00 	mov    DWORD PTR [esp],0xb
+> 玄机刷题\题目资料\批次13_20260929\537_湘岚杯ezbase\analysis\ezbase_unpacked_disassembly.txt:56:  4010b6:	e8 e9 30 00
+00       	call   4041a4 <_signal>
+  玄机刷题\题目资料\批次13_20260929\537_湘岚杯ezbase\analysis\ezbase_unpacked_disassembly.txt:57:  4010bb:	83 f8 01
+         	cmp    eax,0x1
+  玄机刷题\题目资料\批次13_20260929\537_湘岚杯ezbase\analysis\ezbase_unpacked_disassembly.txt:58:  4010be:	0f 84 9f 00
+00 00    	je     401163 <.text+0x163>
+  玄机刷题\题目资料\批次13_20260929\537_湘岚杯ezbase\analysis\ezbase_unpacked_disassembly.txt:70:  4010f2:	00
+  玄机刷题\题目资料\批次13_20260929\537_湘岚杯ezbase\analysis\ezbase_unpacked_disassembly.txt:71:  4010f3:	c7 04 24 04
+00 00 00 	mov    DWORD PTR [esp],0x4
+> 玄机刷题\题目资料\批次13_20260929\537_湘岚杯ezbase\analysis\ezbase_unpacked_disassembly.txt:72:  4010fa:	e8 a5 30 00
+00       	call   4041a4 <_signal>
+  玄机刷题\题目资料\批次13_20260929\537_湘岚杯ezbase\analysis\ezbase_unpacked_disassembly.txt:73:  4010ff:	83 f8 01
+         	cmp    eax,0x1
+  玄机刷题\题目资料\批次13_20260929\537_湘岚杯ezbase\analysis\ezbase_unpacked_disassembly.txt:74:  401102:	74 7b
+         	je     40117f <.text+0x17f>
+  玄机刷题\题目资料\批次13_20260929\537_湘岚杯ezbase\analysis\ezbase_unpacked_disassembly.txt:83:  401127:	00
+  玄机刷题\题目资料\批次13_20260929\537_湘岚杯ezbase\analysis\ezbase_unpacked_disassembly.txt:84:  401128:	c7 04 24 08
+00 00 00 	mov    DWORD PTR [esp],0x8
+> 玄机刷题\题目资料\批次13_20260929\537_湘岚杯ezbase\analysis\ezbase_unpacked_disassembly.txt:85:  40112f:	e8 70 30 00
+00       	call   4041a4 <_signal>
+  玄机刷题\题目资料\批次13_20260929\537_湘岚杯ezbase\analysis\ezbase_unpacked_disassembly.txt:86:  401134:	c7 04 24 00
+00 00 00 	mov    DWORD PTR [esp],0x0
+> 玄机刷题\题目资料\批次13_20260929\537_湘岚杯ezbase\analysis\ezbase_unpacked_disassembly.txt:87:  40113b:	e8 b0 12 00
+00       	call   4023f0 <_fesetenv>
+  玄机刷题\题目资料\批次13_20260929\537_湘岚杯ezbase\analysis\ezbase_unpacked_disassembly.txt:88:  401140:	ba ff ff ff
+ff       	mov    edx,0xffffffff
+  玄机刷题\题目资料\批次13_20260929\537_湘岚杯ezbase\analysis\ezbase_unpacked_disassembly.txt:89:  401145:	e9 0a ff ff
+ff       	jmp    401054 <.text+0x54>
+  玄机刷题\题目资料\批次13_20260929\537_湘岚杯ezbase\analysis\ezbase_unpacked_disassembly.txt:96:  40116a:	00
+  玄机刷题\题目资料\批次13_20260929\537_湘岚杯ezbase\analysis\ezbase_unpacked_disassembly.txt:97:  40116b:	c7 04 24 0b
+00 00 00 	mov    DWORD PTR [esp],0xb
+> 玄机刷题\题目资料\批次13_20260929\537_湘岚杯ezbase\analysis\ezbase_unpacked_disassembly.txt:98:  401172:	e8 2d 30 00
+00       	call   4041a4 <_signal>
+  玄机刷题\题目资料\批次13_20260929\537_湘岚杯ezbase\analysis\ezbase_unpacked_disassembly.txt:99:  401177:	83 ca ff
+         	or     edx,0xffffffff
+  玄机刷题\题目资料\批次13_20260929\537_湘岚杯ezbase\analysis\ezbase_unpacked_disassembly.txt:100:  40117a:	e9 d5 fe ff
+ ff       	jmp    401054 <.text+0x54>
+  玄机刷题\题目资料\批次13_20260929\537_湘岚杯ezbase\analysis\ezbase_unpacked_disassembly.txt:102:  401186:	00
+  玄机刷题\题目资料\批次13_20260929\537_湘岚杯ezbase\analysis\ezbase_unpacked_disassembly.txt:103:  401187:	c7 04 24 04
+ 00 00 00 	mov    DWORD PTR [esp],0x4
+> 玄机刷题\题目资料\批次13_20260929\537_湘岚杯ezbase\analysis\ezbase_unpacked_disassembly.txt:104:  40118e:	e8 11 30 00
+ 00       	call   4041a4 <_signal>
+  玄机刷题\题目资料\批次13_20260929\537_湘岚杯ezbase\analysis\ezbase_unpacked_disassembly.txt:105:  401193:	83 ca ff
+          	or     edx,0xffffffff
+  玄机刷题\题目资料\批次13_20260929\537_湘岚杯ezbase\analysis\ezbase_unpacked_disassembly.txt:106:  401196:	e9 b9 fe ff
+ ff       	jmp    401054 <.text+0x54>
+  玄机刷题\题目资料\批次13_20260929\537_湘岚杯ezbase\analysis\ezbase_unpacked_disassembly.txt:109:  4011a0:	53
+          	push   ebx
+  玄机刷题\题目资料\批次13_20260929\537_湘岚杯ezbase\analysis\ezbase_unpacked_disassembly.txt:110:  4011a1:	83 ec 18
+          	sub    esp,0x18
+> 玄机刷题\题目资料\批次13_20260929\537_湘岚杯ezbase\analysis\ezbase_unpacked_disassembly.txt:111:  4011a4:	a1 ec 61 40
+ 00       	mov    eax,ds:0x4061ec
+  玄机刷题\题目资料\批次13_20260929\537_湘岚杯ezbase\analysis\ezbase_unpacked_disassembly.txt:112:  4011a9:	85 c0
+          	test   eax,eax
+  玄机刷题\题目资料\批次13_20260929\537_湘岚杯ezbase\analysis\ezbase_unpacked_disassembly.txt:113:  4011ab:	74 1c
+          	je     4011c9 <.text+0x1c9>
+  玄机刷题\题目资料\批次13_20260929\537_湘岚杯ezbase\analysis\ezbase_unpacked_disassembly.txt:120:  4011c6:	83 ec 0c
+          	sub    esp,0xc
+  玄机刷题\题目资料\批次13_20260929\537_湘岚杯ezbase\analysis\ezbase_unpacked_disassembly.txt:121:  4011c9:	c7 04 24 00
+ 10 40 00 	mov    DWORD PTR [esp],0x401000
+> 玄机刷题\题目资料\批次13_20260929\537_湘岚杯ezbase\analysis\ezbase_unpacked_disassembly.txt:122:  4011d0:	e8 8f 30 00
+ 00       	call   404264 <_SetUnhandledExceptionFilter@4>
+  玄机刷题\题目资料\批次13_20260929\537_湘岚杯ezbase\analysis\ezbase_unpacked_disassembly.txt:123:  4011d5:	83 ec 04
+          	sub    esp,0x4
+  玄机刷题\题目资料\批次13_20260929\537_湘岚杯ezbase\analysis\ezbase_unpacked_disassembly.txt:124:  4011d8:	e8 d3 09 00
+ 00       	call   401bb0 <___cpu_features_init>
+  玄机刷题\题目资料\批次13_20260929\537_湘岚杯ezbase\analysis\ezbase_unpacked_disassembly.txt:125:  4011dd:	a1 08 50 40
+ 00       	mov    eax,ds:0x405008
+  玄机刷题\题目资料\批次13_20260929\537_湘岚杯ezbase\analysis\ezbase_unpacked_disassembly.txt:126:  4011e2:	89 04 24
+          	mov    DWORD PTR [esp],eax
+> 玄机刷题\题目资料\批次13_20260929\537_湘岚杯ezbase\analysis\ezbase_unpacked_disassembly.txt:127:  4011e5:	e8 06 12 00
+ 00       	call   4023f0 <_fesetenv>
+  玄机刷题\题目资料\批次13_20260929\537_湘岚杯ezbase\analysis\ezbase_unpacked_disassembly.txt:128:  4011ea:	e8 21 06 00
+ 00       	call   401810 <__setargv>
+  玄机刷题\题目资料\批次13_20260929\537_湘岚杯ezbase\analysis\ezbase_unpacked_disassembly.txt:129:  4011ef:	a1 20 80 40
+ 00       	mov    eax,ds:0x408020
+  玄机刷题\题目资料\批次13_20260929\537_湘岚杯ezbase\analysis\ezbase_unpacked_disassembly.txt:130:  4011f4:	85 c0
+          	test   eax,eax
+  玄机刷题\题目资料\批次13_20260929\537_湘岚杯ezbase\analysis\ezbase_unpacked_disassembly.txt:131:  4011f6:	75 4a
+          	jne    401242 <.text+0x242>
+> 玄机刷题\题目资料\批次13_20260929\537_湘岚杯ezbase\analysis\ezbase_unpacked_disassembly.txt:132:  4011f8:	e8 37 30 00
+ 00       	call   404234 <___p__fmode>
+  玄机刷题\题目资料\批次13_20260929\537_湘岚杯ezbase\analysis\ezbase_unpacked_disassembly.txt:133:  4011fd:	8b 15 0c 50
+ 40 00    	mov    edx,DWORD PTR ds:0x40500c
+  玄机刷题\题目资料\批次13_20260929\537_湘岚杯ezbase\analysis\ezbase_unpacked_disassembly.txt:134:  401203:	89 10
+          	mov    DWORD PTR [eax],edx
+> 玄机刷题\题目资料\批次13_20260929\537_湘岚杯ezbase\analysis\ezbase_unpacked_disassembly.txt:135:  401205:	e8 f6 0f 00
+ 00       	call   402200 <__pei386_runtime_relocator>
+  玄机刷题\题目资料\批次13_20260929\537_湘岚杯ezbase\analysis\ezbase_unpacked_disassembly.txt:136:  40120a:	83 e4 f0
+          	and    esp,0xfffffff0
+  玄机刷题\题目资料\批次13_20260929\537_湘岚杯ezbase\analysis\ezbase_unpacked_disassembly.txt:137:  40120d:	e8 4e 0b 00
+ 00       	call   401d60 <___main>
+> 玄机刷题\题目资料\批次13_20260929\537_湘岚杯ezbase\analysis\ezbase_unpacked_disassembly.txt:138:  401212:	e8 25 30 00
+ 00       	call   40423c <___p__environ>
+  玄机刷题\题目资料\批次13_20260929\537_湘岚杯ezbase\analysis\ezbase_unpacked_disassembly.txt:139:  401217:	8b 00
+          	mov    eax,DWORD PTR [eax]
+  玄机刷题\题目资料\批次13_20260929\537_湘岚杯ezbase\analysis\ezbase_unpacked_disassembly.txt:140:  401219:	89 44 24 08
+          	mov    DWORD PTR [esp+0x8],eax
+  玄机刷题\题目资料\批次13_20260929\537_湘岚杯ezbase\analysis\ezbase_unpacked_disassembly.txt:145:  40122e:	e8 a4 03 00
+ 00       	call   4015d7 <_main>
+  玄机刷题\题目资料\批次13_20260929\537_湘岚杯ezbase\analysis\ezbase_unpacked_disassembly.txt:146:  401233:	89 c3
+          	mov    ebx,eax
+> 玄机刷题\题目资料\批次13_20260929\537_湘岚杯ezbase\analysis\ezbase_unpacked_disassembly.txt:147:  401235:	e8 f2 2f 00
+ 00       	call   40422c <__cexit>
+  玄机刷题\题目资料\批次13_20260929\537_湘岚杯ezbase\analysis\ezbase_unpacked_disassembly.txt:148:  40123a:	89 1c 24
+          	mov    DWORD PTR [esp],ebx
+> 玄机刷题\题目资料\批次13_20260929\537_湘岚杯ezbase\analysis\ezbase_unpacked_disassembly.txt:149:  40123d:	e8 82 30 00
+ 00       	call   4042c4 <_ExitProcess@4>
+  玄机刷题\题目资料\批次13_20260929\537_湘岚杯ezbase\analysis\ezbase_unpacked_disassembly.txt:150:  401242:	8b 1d b4 91
+ 40 00    	mov    ebx,DWORD PTR ds:0x4091b4
+  玄机刷题\题目资料\批次13_20260929\537_湘岚杯ezbase\analysis\ezbase_unpacked_disassembly.txt:151:  401248:	89 44 24 04
+          	mov    DWORD PTR [esp+0x4],eax
+  玄机刷题\题目资料\批次13_20260929\537_湘岚杯ezbase\analysis\ezbase_unpacked_disassembly.txt:153:  401251:	8b 43 10
+          	mov    eax,DWORD PTR [ebx+0x10]
+  玄机刷题\题目资料\批次13_20260929\537_湘岚杯ezbase\analysis\ezbase_unpacked_disassembly.txt:154:  401254:	89 04 24
+          	mov    DWORD PTR [esp],eax
+> 玄机刷题\题目资料\批次13_20260929\537_湘岚杯ezbase\analysis\ezbase_unpacked_disassembly.txt:155:  401257:	e8 a8 2f 00
+ 00       	call   404204 <__setmode>
+  玄机刷题\题目资料\批次13_20260929\537_湘岚杯ezbase\analysis\ezbase_unpacked_disassembly.txt:156:  40125c:	a1 20 80 40
+ 00       	mov    eax,ds:0x408020
+  玄机刷题\题目资料\批次13_20260929\537_湘岚杯ezbase\analysis\ezbase_unpacked_disassembly.txt:157:  401261:	89 44 24 04
+          	mov    DWORD PTR [esp+0x4],eax
+  玄机刷题\题目资料\批次13_20260929\537_湘岚杯ezbase\analysis\ezbase_unpacked_disassembly.txt:158:  401265:	8b 43 30
+          	mov    eax,DWORD PTR [ebx+0x30]
+  玄机刷题\题目资料\批次13_20260929\537_湘岚杯ezbase\analysis\ezbase_unpacked_disassembly.txt:159:  401268:	89 04 24
+          	mov    DWORD PTR [esp],eax
+> 玄机刷题\题目资料\批次13_20260929\537_湘岚杯ezbase\analysis\ezbase_unpacked_disassembly.txt:160:  40126b:	e8 94 2f 00
+ 00       	call   404204 <__setmode>
+  玄机刷题\题目资料\批次13_20260929\537_湘岚杯ezbase\analysis\ezbase_unpacked_disassembly.txt:161:  401270:	a1 20 80 40
+ 00       	mov    eax,ds:0x408020
+  玄机刷题\题目资料\批次13_20260929\537_湘岚杯ezbase\analysis\ezbase_unpacked_disassembly.txt:162:  401275:	89 44 24 04
+          	mov    DWORD PTR [esp+0x4],eax
+  玄机刷题\题目资料\批次13_20260929\537_湘岚杯ezbase\analysis\ezbase_unpacked_disassembly.txt:163:  401279:	8b 43 50
+          	mov    eax,DWORD PTR [ebx+0x50]
+  玄机刷题\题目资料\批次13_20260929\537_湘岚杯ezbase\analysis\ezbase_unpacked_disassembly.txt:164:  40127c:	89 04 24
+          	mov    DWORD PTR [esp],eax
+> 玄机刷题\题目资料\批次13_20260929\537_湘岚杯ezbase\analysis\ezbase_unpacked_disassembly.txt:165:  40127f:	e8 80 2f 00
+ 00       	call   404204 <__setmode>
+  玄机刷题\题目资料\批次13_20260929\537_湘岚杯ezbase\analysis\ezbase_unpacked_disassembly.txt:166:  401284:	e9 6f ff ff
+ ff       	jmp    4011f8 <.text+0x1f8>
+  玄机刷题\题目资料\批次13_20260929\537_湘岚杯ezbase\analysis\ezbase_unpacked_disassembly.txt:167:  401289:	8d b4 26 00
+ 00 00 00 	lea    esi,[esi+eiz*1+0x0]
+  玄机刷题\题目资料\批次13_20260929\537_湘岚杯ezbase\analysis\ezbase_unpacked_disassembly.txt:181:  4012be:	8d 44 24 28
+          	lea    eax,[esp+0x28]
+  玄机刷题\题目资料\批次13_20260929\537_湘岚杯ezbase\analysis\ezbase_unpacked_disassembly.txt:182:  4012c2:	89 44 24 08
+          	mov    DWORD PTR [esp+0x8],eax
+> 玄机刷题\题目资料\批次13_20260929\537_湘岚杯ezbase\analysis\ezbase_unpacked_disassembly.txt:183:  4012c6:	e8 79 2f 00
+ 00       	call   404244 <___getmainargs>
+  玄机刷题\题目资料\批次13_20260929\537_湘岚杯ezbase\analysis\ezbase_unpacked_disassembly.txt:184:  4012cb:	83 c4 3c
+          	add    esp,0x3c
+  玄机刷题\题目资料\批次13_20260929\537_湘岚杯ezbase\analysis\ezbase_unpacked_disassembly.txt:185:  4012ce:	c3
+          	ret
+  玄机刷题\题目资料\批次13_20260929\537_湘岚杯ezbase\analysis\ezbase_unpacked_disassembly.txt:226:  401334:	53
+          	push   ebx
+  玄机刷题\题目资料\批次13_20260929\537_湘岚杯ezbase\analysis\ezbase_unpacked_disassembly.txt:227:  401335:	83 ec 10
+          	sub    esp,0x10
+> 玄机刷题\题目资料\批次13_20260929\537_湘岚杯ezbase\analysis\ezbase_unpacked_disassembly.txt:228:  401338:	c7 04 24 00
+ 60 40 00 	mov    DWORD PTR [esp],0x406000
+> 玄机刷题\题目资料\批次13_20260929\537_湘岚杯ezbase\analysis\ezbase_unpacked_disassembly.txt:229:  40133f:	e8 48 2f 00
+ 00       	call   40428c <_GetModuleHandleA@4>
+  玄机刷题\题目资料\批次13_20260929\537_湘岚杯ezbase\analysis\ezbase_unpacked_disassembly.txt:230:  401344:	83 ec 04
+          	sub    esp,0x4
+  玄机刷题\题目资料\批次13_20260929\537_湘岚杯ezbase\analysis\ezbase_unpacked_disassembly.txt:231:  401347:	85 c0
+          	test   eax,eax
+  玄机刷题\题目资料\批次13_20260929\537_湘岚杯ezbase\analysis\ezbase_unpacked_disassembly.txt:232:  401349:	74 75
+          	je     4013c0 <___gcc_register_frame+0x90>
+> 玄机刷题\题目资料\批次13_20260929\537_湘岚杯ezbase\analysis\ezbase_unpacked_disassembly.txt:233:  40134b:	c7 04 24 00
+ 60 40 00 	mov    DWORD PTR [esp],0x406000
+  玄机刷题\题目资料\批次13_20260929\537_湘岚杯ezbase\analysis\ezbase_unpacked_disassembly.txt:234:  401352:	89 c3
+          	mov    ebx,eax
+> 玄机刷题\题目资料\批次13_20260929\537_湘岚杯ezbase\analysis\ezbase_unpacked_disassembly.txt:235:  401354:	e8 13 2f 00
+ 00       	call   40426c <_LoadLibraryA@4>
+  玄机刷题\题目资料\批次13_20260929\537_湘岚杯ezbase\analysis\ezbase_unpacked_disassembly.txt:236:  401359:	83 ec 04
+          	sub    esp,0x4
+  玄机刷题\题目资料\批次13_20260929\537_湘岚杯ezbase\analysis\ezbase_unpacked_disassembly.txt:237:  40135c:	a3 70 80 40
+ 00       	mov    ds:0x408070,eax
+> 玄机刷题\题目资料\批次13_20260929\537_湘岚杯ezbase\analysis\ezbase_unpacked_disassembly.txt:238:  401361:	c7 44 24 04
+ 13 60 40 	mov    DWORD PTR [esp+0x4],0x406013
+  玄机刷题\题目资料\批次13_20260929\537_湘岚杯ezbase\analysis\ezbase_unpacked_disassembly.txt:239:  401368:	00
+  玄机刷题\题目资料\批次13_20260929\537_湘岚杯ezbase\analysis\ezbase_unpacked_disassembly.txt:240:  401369:	89 1c 24
+          	mov    DWORD PTR [esp],ebx
+> 玄机刷题\题目资料\批次13_20260929\537_湘岚杯ezbase\analysis\ezbase_unpacked_disassembly.txt:241:  40136c:	e8 13 2f 00
+ 00       	call   404284 <_GetProcAddress@8>
+  玄机刷题\题目资料\批次13_20260929\537_湘岚杯ezbase\analysis\ezbase_unpacked_disassembly.txt:242:  401371:	83 ec 08
+          	sub    esp,0x8
+  玄机刷题\题目资料\批次13_20260929\537_湘岚杯ezbase\analysis\ezbase_unpacked_disassembly.txt:243:  401374:	89 c6
+          	mov    esi,eax
+> 玄机刷题\题目资料\批次13_20260929\537_湘岚杯ezbase\analysis\ezbase_unpacked_disassembly.txt:244:  401376:	c7 44 24 04
+ 29 60 40 	mov    DWORD PTR [esp+0x4],0x406029
+  玄机刷题\题目资料\批次13_20260929\537_湘岚杯ezbase\analysis\ezbase_unpacked_disassembly.txt:245:  40137d:	00
+  玄机刷题\题目资料\批次13_20260929\537_湘岚杯ezbase\analysis\ezbase_unpacked_disassembly.txt:246:  40137e:	89 1c 24
+          	mov    DWORD PTR [esp],ebx
+> 玄机刷题\题目资料\批次13_20260929\537_湘岚杯ezbase\analysis\ezbase_unpacked_disassembly.txt:247:  401381:	e8 fe 2e 00
+ 00       	call   404284 <_GetProcAddress@8>
+  玄机刷题\题目资料\批次13_20260929\537_湘岚杯ezbase\analysis\ezbase_unpacked_disassembly.txt:248:  401386:	a3 00 50 40
+ 00       	mov    ds:0x405000,eax
+  玄机刷题\题目资料\批次13_20260929\537_湘岚杯ezbase\analysis\ezbase_unpacked_disassembly.txt:249:  40138b:	83 ec 08
+          	sub    esp,0x8
+**********************
+PowerShell transcript end
+End time: 20260929144430
+**********************
+**********************
+PowerShell transcript start
+Start time: 20260929144457
+Username: DESKTOP-412KTAR\mzj
+RunAs User: DESKTOP-412KTAR\mzj
+Configuration Name: 
+Machine: DESKTOP-412KTAR (Microsoft Windows NT 10.0.26200.0)
+Host Application: C:\Users\mzj\.cache\codex-runtimes\codex-primary-runtime\dependencies\native\powershell\pwsh.dll -NoProfile -Command try { [Console]::OutputEncoding=[System.Text.Encoding]::UTF8 } catch {}
+$ErrorActionPreference='Continue'; $log='C:\Users\mzj\Desktop\CTF\玄机刷题\记录\批次13_提交准备检查_20260929.txt'; Start-Transcript -LiteralPath $log -Append; $p='C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\批次13_20260929\537_湘岚杯ezbase\analysis\537_static_analysis_transcript.txt'; Write-Output '=== latest solver verification output ==='; Get-Content -LiteralPath $p -Tail 100; Write-Output '=== solver source integrity / current alphabet assertion ==='; Select-String -LiteralPath 'C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\批次13_20260929\537_湘岚杯ezbase\analysis\solve_537_from_static.py' -Pattern 'alphabet_off|assert b\[alphabet_off|target_encoded|plaintext_ascii|forward_reencode' ; Stop-Transcript
+Process ID: 38260
+PSVersion: 7.6.5
+PSEdition: Core
+GitCommitId: 7.6.5
+OS: Microsoft Windows 10.0.26200
+Platform: Win32NT
+PSCompatibleVersions: 1.0, 2.0, 3.0, 4.0, 5.0, 5.1, 6.0, 7.0
+PSRemotingProtocolVersion: 2.4
+SerializationVersion: 1.1.0.1
+WSManStackVersion: 3.0
+**********************
+Transcript started, output file is C:\Users\mzj\Desktop\CTF\玄机刷题\记录\批次13_提交准备检查_20260929.txt
+=== latest solver verification output ===
+OS: Microsoft Windows 10.0.26200
+Platform: Win32NT
+PSCompatibleVersions: 1.0, 2.0, 3.0, 4.0, 5.0, 5.1, 6.0, 7.0
+PSRemotingProtocolVersion: 2.4
+SerializationVersion: 1.1.0.1
+WSManStackVersion: 3.0
+**********************
+Transcript started, output file is C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\批次13_20260929\537_湘岚杯ezbase\analysis\537_static_analysis_transcript.txt
+COMMAND> Patch solver to take exactly 64 bytes: prompt starts 0x40 bytes after alphabet
+  File "<string>", line 1
+    from pathlib import Path; p=Path(r"Z:\solve_537_from_static.py"); s=p.read_text(encoding="utf-8-sig"); s=s.replace("alphabet=b[alphabet_off:b.index(b\
+                                                                                                                       ^
+SyntaxError: unterminated string literal (detected at line 1)
+COMMAND> python Z:\solve_537_from_static.py
+Traceback (most recent call last):
+  File "Z:\solve_537_from_static.py", line 29, in <module>
+    assert len(alphabet)==64, (len(alphabet),alphabet)
+           ^^^^^^^^^^^^^^^^^
+AssertionError: (76, b'Fvm/RkQucZNVyYABpS2w6enjdtGPO8UalxrbD45Ci07MT9KLEJo1h3zHgfX+WqsIYou Find me!')
+**********************
+PowerShell transcript end
+End time: 20260929144256
+**********************
+**********************
+PowerShell transcript start
+Start time: 20260929144321
+Username: DESKTOP-412KTAR\mzj
+RunAs User: DESKTOP-412KTAR\mzj
+Configuration Name:
+Machine: DESKTOP-412KTAR (Microsoft Windows NT 10.0.26200.0)
+Host Application: C:\Users\mzj\.cache\codex-runtimes\codex-primary-runtime\dependencies\native\powershell\pwsh.dll -Command try { [Console]::OutputEncoding=[System.Text.Encoding]::UTF8 } catch {}
+$ErrorActionPreference='Stop'; $analysis='C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\批次13_20260929\537_湘岚杯ezbase\analysis'; $log=Join-Path $analysis '537_static_analysis_transcript.txt'; $patch=@'
+from pathlib import Path
+p=Path(r'Z:\solve_537_from_static.py')
+s=p.read_text(encoding='utf-8')
+old=r"alphabet=b[alphabet_off:b.index(b'\0',alphabet_off)]"
+new="alphabet=b[alphabet_off:alphabet_off+64]\nassert b[alphabet_off+64:alphabet_off+72] == b'Find me!', b[alphabet_off+64:alphabet_off+72]"
+assert old in s, 'old alphabet extraction line not found'
+p.write_text(s.replace(old,new),encoding='utf-8')
+print('updated alphabet extraction to exactly 64 bytes and asserted adjacent prompt')
+'@; Set-Content -LiteralPath (Join-Path $analysis 'patch_solver_537.py') -Value $patch -Encoding utf8; Start-Transcript -Path $log -Append; Write-Output 'COMMAND> python Z:\patch_solver_537.py'; python 'Z:\patch_solver_537.py' 2>&1; Write-Output 'COMMAND> python Z:\solve_537_from_static.py'; python 'Z:\solve_537_from_static.py' 2>&1; Stop-Transcript
+Process ID: 14140
+PSVersion: 7.6.5
+PSEdition: Core
+GitCommitId: 7.6.5
+OS: Microsoft Windows 10.0.26200
+Platform: Win32NT
+PSCompatibleVersions: 1.0, 2.0, 3.0, 4.0, 5.0, 5.1, 6.0, 7.0
+PSRemotingProtocolVersion: 2.4
+SerializationVersion: 1.1.0.1
+WSManStackVersion: 3.0
+**********************
+Transcript started, output file is C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\批次13_20260929\537_湘岚杯ezbase\analysis\537_static_analysis_transcript.txt
+COMMAND> python Z:\patch_solver_537.py
+COMMAND> python Z:\solve_537_from_static.py
+Traceback (most recent call last):
+  File "Z:\solve_537_from_static.py", line 29, in <module>
+    assert b[alphabet_off+64:alphabet_off+72] == b'Find me!', b[alphabet_off+64:alphabet_off+72]
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: b'You Find'
+**********************
+PowerShell transcript end
+End time: 20260929144323
+**********************
+**********************
+PowerShell transcript start
+Start time: 20260929144421
+Username: DESKTOP-412KTAR\mzj
+RunAs User: DESKTOP-412KTAR\mzj
+Configuration Name:
+Machine: DESKTOP-412KTAR (Microsoft Windows NT 10.0.26200.0)
+Host Application: C:\Users\mzj\.cache\codex-runtimes\codex-primary-runtime\dependencies\native\powershell\pwsh.dll -Command try { [Console]::OutputEncoding=[System.Text.Encoding]::UTF8 } catch {}
+$ErrorActionPreference='Stop'; $analysis='C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\批次13_20260929\537_湘岚杯ezbase\analysis'; $log=Join-Path $analysis '537_static_analysis_transcript.txt'; $patch=@'
+from pathlib import Path
+p=Path(r'Z:\solve_537_from_static.py')
+s=p.read_text(encoding='utf-8')
+old="== b'Find me!'"
+new="== b'You Find'"
+assert old in s
+p.write_text(s.replace(old,new),encoding='utf-8')
+print('corrected adjacent bytes: alphabet + 0x40 begins prompt text You Find me!')
+'@; Set-Content -LiteralPath (Join-Path $analysis 'patch_prompt_assertion_537.py') -Value $patch -Encoding utf8; Start-Transcript -Path $log -Append; Write-Output 'COMMAND> python Z:\patch_prompt_assertion_537.py'; python 'Z:\patch_prompt_assertion_537.py' 2>&1; Write-Output 'COMMAND> python Z:\solve_537_from_static.py'; python 'Z:\solve_537_from_static.py' 2>&1; Stop-Transcript
+Process ID: 39516
+PSVersion: 7.6.5
+PSEdition: Core
+GitCommitId: 7.6.5
+OS: Microsoft Windows 10.0.26200
+Platform: Win32NT
+PSCompatibleVersions: 1.0, 2.0, 3.0, 4.0, 5.0, 5.1, 6.0, 7.0
+PSRemotingProtocolVersion: 2.4
+SerializationVersion: 1.1.0.1
+WSManStackVersion: 3.0
+**********************
+Transcript started, output file is C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\批次13_20260929\537_湘岚杯ezbase\analysis\537_static_analysis_transcript.txt
+COMMAND> python Z:\patch_prompt_assertion_537.py
+COMMAND> python Z:\solve_537_from_static.py
+**********************
+PowerShell transcript end
+End time: 20260929144423
+**********************
+=== solver source integrity / current alphabet assertion ===
+
+玄机刷题\题目资料\批次13_20260929\537_湘岚杯ezbase\analysis\solve_537_from_static.py:27:alphabet_off=rva_file_offset(0x
+406060-image_base)
+玄机刷题\题目资料\批次13_20260929\537_湘岚杯ezbase\analysis\solve_537_from_static.py:28:alphabet=b[alphabet_off:alphabe
+t_off+64]
+玄机刷题\题目资料\批次13_20260929\537_湘岚杯ezbase\analysis\solve_537_from_static.py:29:assert b[alphabet_off+64:alphab
+et_off+72] == b'You Find', b[alphabet_off+64:alphabet_off+72]
+玄机刷题\题目资料\批次13_20260929\537_湘岚杯ezbase\analysis\solve_537_from_static.py:66:print(f'alphabet_file_offset={a
+lphabet_off:#x} alphabet_len={len(alphabet)} alphabet={alphabet.decode("ascii")}')
+玄机刷题\题目资料\批次13_20260929\537_湘岚杯ezbase\analysis\solve_537_from_static.py:68:print(f'target_encoded={expecte
+d.decode("ascii")} length={len(expected)}')
+玄机刷题\题目资料\批次13_20260929\537_湘岚杯ezbase\analysis\solve_537_from_static.py:73:print(f'plaintext_ascii={plain.
+decode("ascii")}')
+玄机刷题\题目资料\批次13_20260929\537_湘岚杯ezbase\analysis\solve_537_from_static.py:74:print(f'forward_reencode_match=
+{bytes(reencoded)==expected}')
+**********************
+PowerShell transcript end
+End time: 20260929144457
+**********************
+**********************
+PowerShell transcript start
+Start time: 20260929144522
+Username: DESKTOP-412KTAR\mzj
+RunAs User: DESKTOP-412KTAR\mzj
+Configuration Name: 
+Machine: DESKTOP-412KTAR (Microsoft Windows NT 10.0.26200.0)
+Host Application: C:\Users\mzj\.cache\codex-runtimes\codex-primary-runtime\dependencies\native\powershell\pwsh.dll -NoProfile -Command try { [Console]::OutputEncoding=[System.Text.Encoding]::UTF8 } catch {}
+$ErrorActionPreference='Continue'; $log='C:\Users\mzj\Desktop\CTF\玄机刷题\记录\批次13_提交准备检查_20260929.txt'; Start-Transcript -LiteralPath $log -Append; Write-Output 'COMMAND> python C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\批次13_20260929\537_湘岚杯ezbase\analysis\solve_537_from_static.py'; python 'C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\批次13_20260929\537_湘岚杯ezbase\analysis\solve_537_from_static.py' 2>&1; Write-Output ('EXIT_CODE='+$LASTEXITCODE); Stop-Transcript
+Process ID: 43704
+PSVersion: 7.6.5
+PSEdition: Core
+GitCommitId: 7.6.5
+OS: Microsoft Windows 10.0.26200
+Platform: Win32NT
+PSCompatibleVersions: 1.0, 2.0, 3.0, 4.0, 5.0, 5.1, 6.0, 7.0
+PSRemotingProtocolVersion: 2.4
+SerializationVersion: 1.1.0.1
+WSManStackVersion: 3.0
+**********************
+Transcript started, output file is C:\Users\mzj\Desktop\CTF\玄机刷题\记录\批次13_提交准备检查_20260929.txt
+COMMAND> python C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\批次13_20260929\537_湘岚杯ezbase\analysis\solve_537_from_static.py
+EXIT_CODE=0
+**********************
+PowerShell transcript end
+End time: 20260929144522
+**********************

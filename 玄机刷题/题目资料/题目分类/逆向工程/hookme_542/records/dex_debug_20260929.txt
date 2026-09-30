@@ -1,0 +1,61 @@
+**********************
+PowerShell transcript start
+Start time: 20260929105607
+Username: DESKTOP-412KTAR\mzj
+RunAs User: DESKTOP-412KTAR\mzj
+Configuration Name: 
+Machine: DESKTOP-412KTAR (Microsoft Windows NT 10.0.26200.0)
+Host Application: C:\Users\mzj\.cache\codex-runtimes\codex-primary-runtime\dependencies\native\powershell\pwsh.dll -Command try { [Console]::OutputEncoding=[System.Text.Encoding]::UTF8 } catch {}
+$root = 'C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\批次10_20260929\542_hookme'
+$scriptPath = Join-Path $root 'analysis\dex_debug.py'
+@'
+from pathlib import Path
+import struct
+b=(Path(r"C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\批次10_20260929\542_hookme\analysis\components\classes4.dex")).read_bytes()
+def u(p):
+ v=s=0
+ while 1:
+  x=b[p];p+=1;v|=(x&127)<<s
+  if x<128:return v,p
+  s+=7
+sc,so=struct.unpack_from("<II",b,0x38); strings=[]
+for i in range(sc):
+ p=struct.unpack_from("<I",b,so+4*i)[0];_,p=u(p);e=b.index(b"\0",p);strings.append(b[p:e].decode("utf8","replace"))
+tc,to=struct.unpack_from("<II",b,0x40); tid=[struct.unpack_from("<I",b,to+4*i)[0] for i in range(tc)]; types=[strings[x] for x in tid]
+mc,mo=struct.unpack_from("<II",b,0x58); methods=[]
+for i in range(mc): c,pr,n=struct.unpack_from("<HHI",b,mo+8*i);methods.append((types[c],strings[n]))
+cc,co=struct.unpack_from("<II",b,0x60);print("cc",cc,"mc",mc)
+for i in range(cc):
+ ci,ac,su,io,sr,an,cd,sv=struct.unpack_from("<IIIIIIII",b,co+32*i); d=types[ci]
+ if not d.startswith("Lcom/example/hookme/"):continue
+ p=cd;sf,p=u(p);inf,p=u(p);dc,p=u(p);vc,p=u(p);print("CLASS",d,"cd",hex(cd),"sf/inf/direct/virt",sf,inf,dc,vc)
+ for n in (sf,inf):
+  idx=0
+  for _ in range(n):di,p=u(p);fl,p=u(p);idx+=di
+ for group,n in (("direct",dc),("virtual",vc)):
+  idx=0
+  for _ in range(n):
+   di,p=u(p);fl,p=u(p);code,p=u(p);idx+=di
+   print(group,idx,methods[idx],hex(fl),hex(code),"native?",bool(fl&0x100))
+'@ | Set-Content -LiteralPath $scriptPath -Encoding utf8
+$log = Join-Path $root 'records\dex_debug_20260929.txt'
+Start-Transcript -LiteralPath $log -Force
+& 'C:\Users\mzj\AppData\Local\Programs\Python\Python312\python.exe' $scriptPath
+Stop-Transcript
+Process ID: 25772
+PSVersion: 7.6.5
+PSEdition: Core
+GitCommitId: 7.6.5
+OS: Microsoft Windows 10.0.26200
+Platform: Win32NT
+PSCompatibleVersions: 1.0, 2.0, 3.0, 4.0, 5.0, 5.1, 6.0, 7.0
+PSRemotingProtocolVersion: 2.4
+SerializationVersion: 1.1.0.1
+WSManStackVersion: 3.0
+**********************
+Transcript started, output file is C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\批次10_20260929\542_hookme\records\dex_debug_20260929.txt
+
+**********************
+PowerShell transcript end
+End time: 20260929105607
+**********************

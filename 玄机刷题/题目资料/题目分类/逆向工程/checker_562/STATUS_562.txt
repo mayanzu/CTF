@@ -1,0 +1,9 @@
+# 562 checker status — 2026-09-29
+
+**Status: unresolved; no new candidate proven.** A fresh static derivation directly from the preserved original ZIP confirms that its checker has one hardcoded accepted input. That input is the same local-only value already reported rejected by the platform, so it is not a new candidate and was not submitted again. The attachment cannot establish the server-side expected value; no supported alternative is present in the binary evidence.
+
+- Original ZIP: `附件_原始\checker_20260929.zip`
+- ZIP SHA-256: `598E457DCDFFCB89F4A1B5CF56133E1D8A194E737B8C25C6C0EA722854426D36`
+- ZIP member `checker.exe` SHA-256: `449D9F4569A0ED70FCB9BC8B96737719B62CFD8AE7C1E99D2864A3999887FDF5`
+- Reproduce: `python .\independent_rederive_from_original_zip.py`
+- Outputs: `independent_rederive_output.txt`, `rederive_562_transcript_20260929.txt`

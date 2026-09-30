@@ -1,0 +1,3423 @@
+PRIOR COMMAND> Get-ChildItem -Force -LiteralPath "C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\批次13_20260929\538_湘岚杯1997"; Get-ChildItem ... | Format-List FullName,Length,Mode,LastWriteTime
+PRIOR OUTPUT: challenge contains analysis\ and originals\; no top-level files were listed.
+PRIOR COMMAND> powershell -NoProfile -ExecutionPolicy Bypass -File "...\analysis\538_static_analysis.ps1"
+PRIOR OUTPUT: parser error at lines 54/58 around regex quantifier {4,}; script did not execute, so no file content was processed. Exact diagnostic included “Missing expression after ','”, “The string is missing the terminator: '.”, and “The Try statement is missing its Catch or Finally block.”
+PRIOR COMMAND> Get-Content -LiteralPath "...\analysis\538_static_analysis.ps1" | Select-Object -Skip 46 -First 15
+PRIOR OUTPUT: confirmed the offending patterns were '[\x20-\x7E]{4,}' for ASCII and UTF16 string scans.
+PRIOR COMMAND> [regex]::Matches("abc def", "[ -~]{4,}") | ForEach-Object Value
+PRIOR OUTPUT:
+abc def
+NOTE: regex revised to printable ASCII class [ -~]; all following work remains static file parsing only.
+**********************
+Windows PowerShell transcript start
+Start time: 20260929143846
+Username: DESKTOP-412KTAR\mzj
+RunAs User: DESKTOP-412KTAR\mzj
+Configuration Name: 
+Machine: DESKTOP-412KTAR (Microsoft Windows NT 10.0.26200.0)
+Host Application: C:\WINDOWS\System32\WindowsPowerShell\v1.0\powershell.exe -NoProfile -ExecutionPolicy Bypass -File C:\Users\mzj\Desktop\CTF\????\????\??13_20260929\538_???1997\analysis\538_static_analysis.ps1
+Process ID: 34540
+PSVersion: 5.1.26100.9444
+PSEdition: Desktop
+PSCompatibleVersions: 1.0, 2.0, 3.0, 4.0, 5.0, 5.1.26100.9444
+BuildVersion: 10.0.26100.9444
+CLRVersion: 4.0.30319.42000
+WSManStackVersion: 3.0
+PSRemotingProtocolVersion: 2.3
+SerializationVersion: 1.1.0.1
+**********************
+COMMAND> Get-ChildItem -Force -Recurse -LiteralPath $root | Select-Object FullName,Length,Mode | Format-Table
+
+FullName                                                                                                 Length Mode
+--------                                                                                                 ------ ----
+C:\Users\mzj\Desktop\CTF\????\????\??13_20260929\538_???1997\analysis                                           d-----
+C:\Users\mzj\Desktop\CTF\????\????\??13_20260929\538_???1997\originals                                          d-----
+C:\Users\mzj\Desktop\CTF\????\????\??13_20260929\538_???1997\analysis\123.exe                            63228  -a----
+C:\Users\mzj\Desktop\CTF\????\????\??13_20260929\538_???1997\analysis\538_static_analysis.ps1            3615   -a----
+C:\Users\mzj\Desktop\CTF\????\????\??13_20260929\538_???1997\analysis\538_static_transcript_20260929.txt 1135   -a----
+C:\Users\mzj\Desktop\CTF\????\????\??13_20260929\538_???1997\originals\1997.zip                          20292  -a----
+
+
+COMMAND> Get-FileHash -Algorithm SHA256 on original ZIP and extracted EXE
+
+
+Algorithm : SHA256
+Hash      : 832F1BA75D90A93FF2B8D867483CE8612CF42157685976C4FD665ED4AC07193B
+Path      : C:\Users\mzj\Desktop\CTF\????\????\??13_20260929\538_???1997\originals\1997.zip
+
+
+
+
+
+Algorithm : SHA256
+Hash      : 5046A87DE6DAC33CE11CD139D06A4A0797E63BE3A70757AEB1224A3ACC151078
+Path      : C:\Users\mzj\Desktop\CTF\????\????\??13_20260929\538_???1997\analysis\123.exe
+
+
+
+COMMAND> Read ZIP central directory metadata with System.IO.Compression.ZipFile; no extraction or execution
+
+FullName Length CompressedLength LastWriteTime
+-------- ------ ---------------- -------------
+123.exe   63228            20144 2026/7/24 13:19:54 +08:00
+
+
+COMMAND> Read EXE DOS/PE headers and section table as bytes
+FILE_SIZE=63228
+DOS_MAGIC=4D5A
+PE_OFFSET=0x80
+PE_SIGNATURE=50450000
+MACHINE=0x8664 NUM_SECTIONS=15 OPTIONAL_HEADER_SIZE=240
+OPTIONAL_MAGIC=0x020B
+IMAGE_BASE=0x400000
+SECTION .text: VA=0x00001000 VSZ=0x00002798 RAW=0x00002800 PTR=0x00000400
+SECTION .data: VA=0x00004000 VSZ=0x00000300 RAW=0x00000400 PTR=0x00002C00
+SECTION .rdata: VA=0x00005000 VSZ=0x00000570 RAW=0x00000600 PTR=0x00003000
+SECTION .pdata: VA=0x00006000 VSZ=0x000002A0 RAW=0x00000400 PTR=0x00003600
+SECTION .xdata: VA=0x00007000 VSZ=0x00000220 RAW=0x00000400 PTR=0x00003A00
+SECTION .bss: VA=0x00008000 VSZ=0x00000980 RAW=0x00000000 PTR=0x00000000
+SECTION .idata: VA=0x00009000 VSZ=0x00000788 RAW=0x00000800 PTR=0x00003E00
+SECTION .CRT: VA=0x0000A000 VSZ=0x00000068 RAW=0x00000200 PTR=0x00004600
+SECTION .tls: VA=0x0000B000 VSZ=0x00000010 RAW=0x00000200 PTR=0x00004800
+SECTION /4: VA=0x0000C000 VSZ=0x000000B0 RAW=0x00000200 PTR=0x00004A00
+SECTION /19: VA=0x0000D000 VSZ=0x000026E7 RAW=0x00002800 PTR=0x00004C00
+SECTION /31: VA=0x00010000 VSZ=0x000002EE RAW=0x00000400 PTR=0x00007400
+SECTION /45: VA=0x00011000 VSZ=0x00000A46 RAW=0x00000C00 PTR=0x00007800
+SECTION /57: VA=0x00012000 VSZ=0x00000148 RAW=0x00000200 PTR=0x00008400
+SECTION /70: VA=0x00013000 VSZ=0x000000A5 RAW=0x00000200 PTR=0x00008600
+COMMAND> Extract printable ASCII strings with [ -~]{4,} from binary bytes; no execution
+L?!This program cannot be run in DOS mode.
+]??a
+.text
+P`.data
+`?.rdata
+`@.pdata
+0@.xdata
+0@.bss
+`?.idata
+0?.CRT
+@?.tls
+@?/4
+PB/19
+B/31
+B/45
+B/57
+@B/70
+H??(H?
+f?8MZtXH?
+??t5?
+tZ1?H??(?
+HcH<H
+??8PE
+t9f??
+u????
+?z??????
+1???
+???h???H?
+1?H??(??xt
+?K???D???
+1?E??
+???7???
+H??8H?
+H?D$ H?
+?H??8?
+AUATUWVSH???
+H?T$ H???H?H?=?B
+1?H?p
+L?%??
+A??H???H
+?3H??u?H?5
+H??t
+E1??
+1?????
+?????|#
+1?H?
+H??u
+??t,??
+?? ~?A??A??
+??"A
+D???f
+??u?H?
+E??t
+?D$\
+Mc?I??
+L???
+??H?=?l
+H??~K?C?1?L?,?
+H????!
+I??H?D
+H??H??
+I9?u?J?D%?H?
+H?-?l
+H???
+[^_]A\A]?
+?D$`?
+???f
+H?5??
+??????
+?????H?
+?????1?H?
+?????f
+?6???f?H?
+?{???????
+???????H??(?
+H??(?W
+????H??(????????H?
+?????
+????????????????UH?????E
+?]?UH??H??
+?E?H?E
+?E??
+?H??
+]?UH??H?? H?M
+?!H?U
+v?H?E
+H?E??E?
+H?E?H?P
+H?U?
+??H?H?
+?E?H?E?H?P
+?E?H?H?
+1??E?H?E
+H?E?D
+D??1??
+H?U?D
+?P????H?? ]?UH??H??@H?M
+L?E ?E?
+?E?H?U
+?E?H?U H
+?D??1??
+v??E?
+?U?H?M?H
+?H?H?
+v?H?E?H???Q????E?
+?E?H?
+?E???
+?1??E?
+???????????
+???1?
+???2E??
+?????v?????
+?E?H?P
+H?E H
+?????$?????
+?y????E?
+?4H?E
+??????E?
+?U?H?M H
+v?H?E H???,????E?
+v??H??@]??UH??`
+H??$?
+W???
+e???
+l???
+c???
+o???
+m???
+_???
+t???
+f???
+!???
+$???
+????
+d???
+:???
+,???
+N???
+\???
+?H?Ep
+H?Ex
+H?EpH??H?
+H?EpH????
+H?? t
+H?U?H???
+H???????H?MPH?UpH?E?I??H???????H?UPH??
+H?EpH??
+H?M?I??H??????????
+v?H?
+H??`
+]?????????????H??(H?
+??H?
+H??u?H??(??f.
+VSH??(H?
+?????t9??t ????
+?H)?H?t??
+H9?u?H?
+~???H??([^?C???
+??D?@
+J?<?
+L??u???f.
+?q????H?%?q
+?????????1???????????????ATUWVSH??0H?
+H?2??-?+
+H9?H?D$
+H??H?
+H??0[^_]A\?f?H?L$ ?
+H?t$ ?
+A???
+H?L$(???
+H3t$(D??H???????
+H1???H1???H1?H!?H9?t%H??H??H?
+H??0[^_]A\?f
+H??] ?f???H?3??-?+
+??f.
+UVSH??H??pH??H?
+H?U?E1?H???
+H?U?I??I??H?D$8
+H?T$0H?U?H?L$ 1?H?T$(H?U??
+1?H?5M^
+H?E?H?
+H?E??
+?H???
+?{???????????H??(??
+H??(?f
+H??(??VSH??(H?
+H??([^?f?H?
+H?5?|
+H9?t?H?
+??H??
+H9?u??
+H??([^??Y
+H??([^?
+1???????????????H??XH?
+H??t,?
+?L$ H?L$ H?T$(?
+T$0?
+\$8?
+D$@???H??X?
+VSH??x
+)t$@
+)|$PD
+)D$`?9
+???H?
+D$0I??I???
+|$(H?
+t$ ??
+(t$@1?
+(|$PD
+(D$`H??x[^?
+?|???
+?l???
+?\???
+?L???
+?<???????????????????????H???f?f.
+H???????????????ATUWVSH??PHc5?`
+??H??H??L??
+1?H??
+H9?r
+?H9?
+H??(9?u?H???A
+H??I??
+H?4?H??
+?L?` ?
+A?L$
+H?T$ A?0
+H?L0
+?D$D?P????t
+??@???ub?
+s)@??
+H??P[^_]A\?????
+?r????1?????
+9?H?
+r???H
+H?L$ H?T$8I??H?N
+?n????
+?D=??D;??p???1????????
+?D=?f?D;??X???H?
+A?T$
+L?D0
+H????
+UAWAVAUATWVSH??8H??$?
+H?e?[^_A\A]A^A_]??
+H?H?
+H????7
+L?%?+
+H?5?+
+H)?H?D$ H?
+L??H)?H??
+~?H??
+?y???L?v
+L?-?+
+H?}?M)?I??
+N?d?
+L??L
+?E??>???M9?u??
+1?L?%Nj
+???f?H?
+I??H?H
+A????
+H??(;
+|???????N
+?Q????V
+?8????F
+?-????V
+L?-?*
+????L?u?L9?rH?????
+L??H)?L
+?H?U?L???X???H??
+????N
+L??L??M??I??
+??fE??M
+H?I)?M
+?L?E?A?
+???????
+L??I??L
+?E??I
+I?A?
+H)?L
+?H?U?L????????y??????
+???E??M
+??????>???H?
+H?E?
+??????H??(?
+?wc=?
+?s{=
+??1?H??(?
+w7=?
+?uo1??
+toH??tX?
+??1?H??(?=?
+?ti=?
+?u<1??
+??1?H??(??=
+?t?=?
+?t&?
+H??(?
+???1?H??(?
+?[????
+1??????f.
+1???????
+?????ATUWVSH?? ??
+??u%H??t H?
+H?? [^_]A\?
+H???H?L?%?????
+H???H?I)?H???.?
+H)??C??K?H?? t2H???u
+H??u?H????
+?q???
+I???
+?W????
+SH?? H?
+H????????? ??CCG
+?wh=?
+?s|=
+H??H?? [H??
+wX=?
+?tF=?
+?u?1??
+H??t??
+???????H?? [?
+?7????????H?? [?=?
+?j???1??
+?K????
+?????????=
+?+?????
+??????S?????
+????????A???1??:???
+??????1????
+?????????????????UWVSH??(H?
+H??t3H?-?c
+H?=ec
+??H??????u
+H????H?[
+H??u?H?
+H??([^_]H?%Rc
+UWVSH??(?
+1?????H??u
+??H??([^_]??
+H??H??t=?(H?
+??H??([^_]?????????SH?? ?
+????u
+1?H?? [?
+9?t)H??H?H
+??SH?? ??
+r0??
+?G????
+H?? [??
+u?H?
+H??H??u?H?
+H?? [??H?
+?????????t?????????HcA<H
+?1??9PE
+?1?f?y
+???f?f?9MZt
+1??f
+HcA<H
+??t)??
+?L?L?(D?@
+I9?L??w
+H9?w
+H??(L9?u?1??f?f.
+WVSH?? H????
+wkH?
+f?:MZu]H???E?????tQHcJ<H
+??t9??
+?H?|?(?
+H??(H9?t"A?
+H??H???)
+??u?H??H?? [^_?f?1?H??H?? [^_?
+H??(L?
+fA?8MZH??uWL?????????tKIc@<H??L)?I
+??I?D
+t+??
+?L?L?(f?D?@
+L9?L??r
+H??(L9?u?1?H??(?f?f.
+E1?f?:MZt
+D??H??(?
+H???8?????t?HcB<D
+D??H??(?f?H??(L?
+fA?8MZH??uRL???
+?????tFIcH<L
+??t.??
+?H?L?(f.
+?@' t
+H??(H9?u?1?H??(??H??(H?
+f?:MZu
+H??????????
+E?H??(?f
+1?H??(?f
+1?fA?8MZH??t
+L???H?????t?Ic@<H??L)?I
+t1??
+?L?L?(
+H??(L9?u?1?H??(??@$????
+fA?;MZA??uXL?????????tLIcC<L
+??t;
+??t*??
+?H?D?(D?Q
+L9?M??r
+L9?r
+H??(H9?u?1?H??(?L
+??t?E??
+?H??(???????????QPH=
+H?L$
+w?H)?H?
+XY????????????????%f^
+???%V^
+???%F^
+???%6^
+???%&^
+???%
+???%?]
+???%v]
+???%^]
+???%N]
+???%6]
+???%&]
+???%?\
+SH?? ???T
+IH??
+?H?? [??H?
+??????H?
+???????%?\
+?%V\
+???%F\
+???%6\
+???%&\
+???%?[
+???%v[
+???%f[
+???%V[
+???%F[
+???%6[
+???%&[
+???%?Z
+VSH??8H?D$XH???
+H?T$XL?D$`L?L$hH?D$(?????A?
+???H?t$(?
+?{???H??H??I????????
+???????????????????????????????????`7@
+????????
+c|w{?ko?0
+g+???v???}?YG???????r????&6???4???q?1
+???'?u
+nZ?R;??)?/?S?
+? ??[j??9JLX?????CM3?E?
+P<??Q?@???8????!
+?_?D
+??~=d]
+s`?O?"*??F??
+??2:
+$\???b???y??7m??N?lV??ez?
+?x%.
+?????t
+K???p>?fH
+a5W???
+i????
+???U(????
+??BhA?-
+j?06?8?@??????|?9??/??4?CD????T{?2??#=?L?
+B??N
+.?f(?$?v[?Im??%r??d?h?
+??\?]e??lpHP????^
+FW???????
+?k:?
+AOg?????????s??t"??5???7?
+u?nG?
+)??o?b
+?V>K??y ????x?Z?
+??3?
+Y'??_`Q
+-?z???????;M?*?????<?S?a
+~?w?&?i
+}?7@
+2??-?+
+?] ?f???
+please input your flag:
+sorry, you flag is wrong.
+sorry, your flag is wrong.
+success!!!
+Argument domain error (DOMAIN)
+Argument singularity (SIGN)
+Overflow range error (OVERFLOW)
+Partial loss of significance (PLOSS)
+Total loss of significance (TLOSS)
+The result is too small to be represented (UNDERFLOW)
+Unknown error
+_matherr(): %s in %s(%g, %g)  (retval=%g)
+???]???????????????????
+???Mingw-w64 runtime failure:
+Address %p has no image-section
+  VirtualQuery failed for %d bytes at address %p
+  VirtualProtect failed with code 0x%x
+  Unknown pseudo relocation protocol version %d.
+  Unknown pseudo relocation bit size %d.
+.pdata
+GCC: (x86_64-posix-seh-rev0, Built by MinGW-W64 project) 8.1.0
+DeleteCriticalSection
+EnterCriticalSection
+GetCurrentProcess
+GetCurrentProcessId
+GetCurrentThreadId
+GetLastError
+GetStartupInfoA
+GetSystemTimeAsFileTime
+GetTickCount
+InitializeCriticalSection
+LeaveCriticalSection
+QueryPerformanceCounter
+RtlAddFunctionTable
+RtlCaptureContext
+RtlLookupFunctionEntry
+RtlVirtualUnwind
+SetUnhandledExceptionFilter
+Sleep
+TerminateProcess
+TlsGetValue
+UnhandledExceptionFilter
+VirtualProtect
+VirtualQuery
+__C_specific_handler
+__getmainargs
+__initenv
+__iob_func
+__lconv_init
+__set_app_type
+__setusermatherr
+_acmdln
+_amsg_exit
+_cexit
+_fmode
+_initterm
+_onexit
+abort
+calloc
+exit
+fprintf
+free
+fwrite
+malloc
+memcpy
+puts
+scanf
+signal
+strlen
+strncmp
+vfprintf
+KERNEL32.dll
+msvcrt.dll
+GNU C17 8.1.0 -mtune=core2 -march=nocona -g
+D:\CodeSource\2021Nu1l????????-????AES\aes.c
+D:\CodeSource\2021Nu1l????????-????AES
+char
+long long unsigned int
+long long int
+short unsigned int
+long int
+unsigned int
+long unsigned int
+unsigned char
+long double
+signed char
+uint8_t
+short int
+SBOX
+INV_SBOX
+aes_encrypt_128
+plaintext
+ciphertext
+aes_key_schedule_128
+temp
+last4bytes
+lastround
+shift_rows
+state
+mul2
+D:\CodeSource\2021Nu1l????????-????AES\main.c
+wchar_t
+double
+float
+__imp___mb_cur_max
+_sys_errlist
+_sys_nerr
+__imp___argc
+__imp___argv
+__imp___wargv
+__imp__environ
+__imp__wenviron
+__imp__pgmptr
+__imp__wpgmptr
+__imp__osplatform
+__imp__osver
+__imp__winver
+__imp__winmajor
+__imp__winminor
+_amblksiz
+main
+argc
+argv
+roundkeys
+GNU C17 8.1.0 -mtune=core2 -march=nocona -g -g -g -O2 -O2 -O2 -fno-ident -fbuilding-libgcc -fno-stack-protector
+../../../../../src/gcc-8.1.0/libgcc/libgcc2.c
+C:\mingw810\x86_64-810-posix-seh-rt_v6-rev0\build\gcc-8.1.0\x86_64-w64-mingw32\libgcc
+uintptr_t
+__security_cookie
+optarg
+optind
+opterr
+optopt
+_daylight
+_dstbias
+_timezone
+_tzname
+daylight
+timezone
+tzname
+hashval_t
+htab_hash
+htab_eq
+htab_hash_pointer
+htab_eq_pointer
+stringop_alg
+no_stringop
+libcall
+rep_prefix_1_byte
+rep_prefix_4_byte
+rep_prefix_8_byte
+loop_1_byte
+loop
+unrolled_loop
+vector_loop
+last_alg
+unspec_strings
+unspecv_strings
+stringop_strategy
+noalign
+stringop_algs
+unknown_size
+size
+processor_costs
+shift_var
+shift_const
+mult_init
+mult_bit
+divide
+movsx
+movzx
+large_insn
+move_ratio
+movzbl_load
+int_load
+int_store
+fp_move
+fp_load
+fp_store
+mmx_move
+mmx_load
+mmx_store
+xmm_move
+ymm_move
+zmm_move
+sse_load
+sse_unaligned_load
+sse_store
+sse_unaligned_store
+mmxsse_to_integer
+ssemmx_to_integer
+gather_static
+gather_per_elt
+scatter_static
+scatter_per_elt
+l1_cache_size
+l2_cache_size
+prefetch_block
+simultaneous_prefetches
+branch_cost
+fadd
+fmul
+fdiv
+fabs
+fchs
+fsqrt
+sse_op
+addss
+mulss
+mulsd
+fmass
+fmasd
+divss
+divsd
+sqrtss
+sqrtsd
+reassoc_int
+reassoc_fp
+reassoc_vec_int
+reassoc_vec_fp
+memset
+cond_taken_branch_cost
+cond_not_taken_branch_cost
+ix86_cost
+ix86_size_cost
+ix86_tune_indices
+X86_TUNE_SCHEDULE
+X86_TUNE_PARTIAL_REG_DEPENDENCY
+X86_TUNE_SSE_PARTIAL_REG_DEPENDENCY
+X86_TUNE_SSE_SPLIT_REGS
+X86_TUNE_PARTIAL_FLAG_REG_STALL
+X86_TUNE_MOVX
+X86_TUNE_MEMORY_MISMATCH_STALL
+X86_TUNE_FUSE_CMP_AND_BRANCH_32
+X86_TUNE_FUSE_CMP_AND_BRANCH_64
+X86_TUNE_FUSE_CMP_AND_BRANCH_SOFLAGS
+X86_TUNE_FUSE_ALU_AND_BRANCH
+X86_TUNE_ACCUMULATE_OUTGOING_ARGS
+X86_TUNE_PROLOGUE_USING_MOVE
+X86_TUNE_EPILOGUE_USING_MOVE
+X86_TUNE_USE_LEAVE
+X86_TUNE_PUSH_MEMORY
+X86_TUNE_SINGLE_PUSH
+X86_TUNE_DOUBLE_PUSH
+X86_TUNE_SINGLE_POP
+X86_TUNE_DOUBLE_POP
+X86_TUNE_PAD_SHORT_FUNCTION
+X86_TUNE_PAD_RETURNS
+X86_TUNE_FOUR_JUMP_LIMIT
+X86_TUNE_SOFTWARE_PREFETCHING_BENEFICIAL
+X86_TUNE_LCP_STALL
+X86_TUNE_READ_MODIFY
+X86_TUNE_USE_INCDEC
+X86_TUNE_INTEGER_DFMODE_MOVES
+X86_TUNE_OPT_AGU
+X86_TUNE_AVOID_LEA_FOR_ADDR
+X86_TUNE_SLOW_IMUL_IMM32_MEM
+X86_TUNE_SLOW_IMUL_IMM8
+X86_TUNE_AVOID_MEM_OPND_FOR_CMOVE
+X86_TUNE_SINGLE_STRINGOP
+X86_TUNE_MISALIGNED_MOVE_STRING_PRO_EPILOGUES
+X86_TUNE_USE_SAHF
+X86_TUNE_USE_CLTD
+X86_TUNE_USE_BT
+X86_TUNE_AVOID_FALSE_DEP_FOR_BMI
+X86_TUNE_ADJUST_UNROLL
+X86_TUNE_ONE_IF_CONV_INSN
+X86_TUNE_USE_HIMODE_FIOP
+X86_TUNE_USE_SIMODE_FIOP
+X86_TUNE_USE_FFREEP
+X86_TUNE_EXT_80387_CONSTANTS
+X86_TUNE_GENERAL_REGS_SSE_SPILL
+X86_TUNE_SSE_UNALIGNED_LOAD_OPTIMAL
+X86_TUNE_SSE_UNALIGNED_STORE_OPTIMAL
+X86_TUNE_SSE_PACKED_SINGLE_INSN_OPTIMAL
+X86_TUNE_SSE_TYPELESS_STORES
+X86_TUNE_SSE_LOAD0_BY_PXOR
+X86_TUNE_INTER_UNIT_MOVES_TO_VEC
+X86_TUNE_INTER_UNIT_MOVES_FROM_VEC
+X86_TUNE_INTER_UNIT_CONVERSIONS
+X86_TUNE_SPLIT_MEM_OPND_FOR_FP_CONVERTS
+X86_TUNE_USE_VECTOR_FP_CONVERTS
+X86_TUNE_USE_VECTOR_CONVERTS
+X86_TUNE_SLOW_PSHUFB
+X86_TUNE_AVOID_4BYTE_PREFIXES
+X86_TUNE_USE_GATHER
+X86_TUNE_AVOID_128FMA_CHAINS
+X86_TUNE_AVX256_UNALIGNED_LOAD_OPTIMAL
+X86_TUNE_AVX256_UNALIGNED_STORE_OPTIMAL
+X86_TUNE_AVX128_OPTIMAL
+X86_TUNE_AVX256_OPTIMAL
+X86_TUNE_DOUBLE_WITH_ADD
+X86_TUNE_ALWAYS_FANCY_MATH_387
+X86_TUNE_UNROLL_STRLEN
+X86_TUNE_SHIFT1
+X86_TUNE_ZERO_EXTEND_WITH_AND
+X86_TUNE_PROMOTE_HIMODE_IMUL
+X86_TUNE_FAST_PREFIX
+X86_TUNE_READ_MODIFY_WRITE
+X86_TUNE_MOVE_M1_VIA_OR
+X86_TUNE_NOT_UNPAIRABLE
+X86_TUNE_PARTIAL_REG_STALL
+X86_TUNE_PROMOTE_QIMODE
+X86_TUNE_PROMOTE_HI_REGS
+X86_TUNE_HIMODE_MATH
+X86_TUNE_SPLIT_LONG_MOVES
+X86_TUNE_USE_XCHGB
+X86_TUNE_USE_MOV0
+X86_TUNE_NOT_VECTORMODE
+X86_TUNE_AVOID_VECTOR_DECODE
+X86_TUNE_BRANCH_PREDICTION_HINTS
+X86_TUNE_QIMODE_MATH
+X86_TUNE_PROMOTE_QI_REGS
+X86_TUNE_EMIT_VZEROUPPER
+X86_TUNE_LAST
+ix86_tune_features
+ix86_arch_indices
+X86_ARCH_CMOV
+X86_ARCH_CMPXCHG
+X86_ARCH_CMPXCHG8B
+X86_ARCH_XADD
+X86_ARCH_BSWAP
+X86_ARCH_LAST
+ix86_arch_features
+x86_prefetch_sse
+_dont_use_tree_here_
+x86_mfence
+reg_class
+NO_REGS
+AREG
+DREG
+CREG
+BREG
+SIREG
+DIREG
+AD_REGS
+CLOBBERED_REGS
+Q_REGS
+NON_Q_REGS
+TLS_GOTBASE_REGS
+INDEX_REGS
+LEGACY_REGS
+GENERAL_REGS
+FP_TOP_REG
+FP_SECOND_REG
+FLOAT_REGS
+SSE_FIRST_REG
+NO_REX_SSE_REGS
+SSE_REGS
+EVEX_SSE_REGS
+BND_REGS
+ALL_SSE_REGS
+MMX_REGS
+FP_TOP_SSE_REGS
+FP_SECOND_SSE_REGS
+FLOAT_SSE_REGS
+FLOAT_INT_REGS
+INT_SSE_REGS
+FLOAT_INT_SSE_REGS
+MASK_EVEX_REGS
+MASK_REGS
+MOD4_SSE_REGS
+ALL_REGS
+LIM_REG_CLASSES
+dbx_register_map
+dbx64_register_map
+svr4_dbx_register_map
+processor_type
+PROCESSOR_GENERIC
+PROCESSOR_I386
+PROCESSOR_I486
+PROCESSOR_PENTIUM
+PROCESSOR_LAKEMONT
+PROCESSOR_PENTIUMPRO
+PROCESSOR_PENTIUM4
+PROCESSOR_NOCONA
+PROCESSOR_CORE2
+PROCESSOR_NEHALEM
+PROCESSOR_SANDYBRIDGE
+PROCESSOR_HASWELL
+PROCESSOR_BONNELL
+PROCESSOR_SILVERMONT
+PROCESSOR_KNL
+PROCESSOR_KNM
+PROCESSOR_SKYLAKE
+PROCESSOR_SKYLAKE_AVX512
+PROCESSOR_CANNONLAKE
+PROCESSOR_ICELAKE_CLIENT
+PROCESSOR_ICELAKE_SERVER
+PROCESSOR_INTEL
+PROCESSOR_GEODE
+PROCESSOR_K6
+PROCESSOR_ATHLON
+PROCESSOR_K8
+PROCESSOR_AMDFAM10
+PROCESSOR_BDVER1
+PROCESSOR_BDVER2
+PROCESSOR_BDVER3
+PROCESSOR_BDVER4
+PROCESSOR_BTVER1
+PROCESSOR_BTVER2
+PROCESSOR_ZNVER1
+PROCESSOR_max
+ix86_tune
+ix86_arch
+ix86_preferred_stack_boundary
+ix86_incoming_stack_boundary
+regclass_map
+UQItype
+__int128
+__int128 unsigned
+complex float
+complex double
+complex long double
+_Float128
+complex _Float128
+__popcount_tab
+__clz_tab
+func_ptr
+__CTOR_LIST__
+__DTOR_LIST__
+D:/CodeSource/2021Nu1l????????-????AES
+C:/Tool/codeblocks/MinGW/x86_64-w64-mingw32/include
+aes.c
+stdint.h
+main.c
+stdlib.h
+malloc.h
+crtdefs.h
+../../../../../src/gcc-8.1.0/libgcc/config/i386
+cygwin.S
+""gY0uKgg0=L""
+C:/mingw810/x86_64-810-posix-seh-rt_v6-rev0/mingw64/mingw/include
+C:/mingw810/src/gcc-8.1.0/include
+../.././gcc
+C:/mingw810/src/gcc-8.1.0/gcc/config/i386
+C:/mingw810/src/gcc-8.1.0/libgcc
+../../../../../src/gcc-8.1.0/libgcc
+process.h
+getopt.h
+time.h
+hashtab.h
+insn-constants.h
+i386.h
+i386-opts.h
+libgcc2.h
+gbl-ctors.h
+libgcc2.c
+../../../../../src/gcc-8.1.0/libgcc/config/i386/cygwin.S
+GNU AS 2.30
+.file
+crtexe.c
+envp
+mainret
+.l_endw
+.l_start?
+.l_end
+atexit
+.data
+.bss
+.xdata
+cygming-crtbegin.c
+INV_SBOX@
+.rdata
+gccmain.c
+p.93846
+__main
+natstart.c
+wildcard.c
+charmax.c
+.CRT$XIC(
+dllargv.c
+_setargv
+gs_support.c
+_newmode.c
+tlssup.c
+__xd_a
+__xd_z
+.CRT$XLDH
+.CRT$XLC@
+.CRT$XDZ`
+.CRT$XDAX
+.CRT$XLZP
+.CRT$XLA8
+.tls$ZZZ
+.tls
+cinitexe.c
+.CRT$XCZ
+.CRT$XCA
+.CRT$XIZ0
+.CRT$XIA
+merr.c
+_matherr0
+CRT_fp10.c
+_fpreset0
+fpreset
+mingw_helpers.c
+pseudo-reloc.c
+the_secs(
+xtxtmode.c
+crt_handler.c
+tlsthrd.c
+tlsmcrt.c
+pesect.c
+fake
+mingw_matherr.c
+.idata$7x
+.idata$5l
+.idata$4?
+.idata$6?
+.idata$7t
+.idata$5d
+.idata$7p
+.idata$5\
+.idata$7l
+.idata$5T
+.idata$6x
+.idata$7h
+.idata$5L
+.idata$6p
+.idata$7d
+.idata$5D
+.idata$6h
+.idata$7`
+.idata$5<
+.idata$6^
+.idata$7\
+.idata$54
+.idata$6T
+.idata$7X
+.idata$5,
+.idata$6J
+.idata$7T
+.idata$5$
+.idata$6B
+.idata$7P
+.idata$5
+.idata$4|
+.idata$68
+.idata$7L
+.idata$4t
+.idata$60
+.idata$7H
+.idata$4l
+.idata$6&
+.idata$7D
+.idata$4d
+.idata$6
+.idata$7@
+.idata$5?
+.idata$4\
+.idata$7<
+.idata$4T
+.idata$74
+.idata$4D
+.idata$70
+.idata$4<
+.idata$7(
+.idata$4,
+.idata$7$
+.idata$4$
+.idata$7
+.idata$4
+.idata$7
+.idata$6|
+.idata$6d
+acrt_iob_func.c
+handler
+__p__acmdln.c
+__p__fmode.c
+hname
+fthunk
+.idata$2
+.idata$7,
+.idata$44
+.idata$5t
+.idata$7|
+.idata$7?
+.idata$5|
+.idata$6l
+.idata$6(
+.idata$4L
+.idata$78
+cygming-crtend.c
+__xc_z
+__xl_a
+__xl_d
+_tls_end
+_CRT_MT
+__dll__
+__xi_z
+__xl_z
+__end__
+__xi_a
+__xc_a
+__xl_c
+_newmode?
+_charmaxp
+.debug_aranges
+.debug_info
+.debug_abbrev
+.debug_line
+.debug_frame
+.debug_str
+__mingw_invalidParameterHandler
+pre_c_init
+.rdata$.refptr.mingw_initltsdrot_force
+.rdata$.refptr.mingw_initltsdyn_force
+.rdata$.refptr.mingw_initltssuo_force
+.rdata$.refptr.mingw_initcharmax
+.rdata$.refptr.__image_base__
+.rdata$.refptr.mingw_app_type
+managedapp
+.rdata$.refptr._fmode
+.rdata$.refptr._MINGW_INSTALL_DEBUG_MATHERR
+pre_cpp_init
+.rdata$.refptr._newmode
+startinfo
+.rdata$.refptr._dowildcard
+__tmainCRTStartup
+.rdata$.refptr.__native_startup_lock
+.rdata$.refptr.__native_startup_state
+has_cctor
+.rdata$.refptr.__dyn_tls_init_callback
+.rdata$.refptr.__mingw_oldexcpt_handler
+.rdata$.refptr.__imp___initenv
+.rdata$.refptr.__xc_z
+.rdata$.refptr.__xc_a
+.rdata$.refptr.__xi_z
+.rdata$.refptr.__xi_a
+WinMainCRTStartup
+.l_startw
+mainCRTStartup
+.rdata$.refptr._gnu_exception_handler
+.rdata$.refptr._matherr
+.CRT$XCAA
+.CRT$XIAA
+__gcc_register_frame
+__gcc_deregister_frame
+.rdata$zzz
+__do_global_dtors
+__do_global_ctors
+.rdata$.refptr.__CTOR_LIST__
+initialized
+my_lconv_init
+__security_init_cookie
+.data$__security_cookie
+.data$__security_cookie_complement
+__report_gsfailure
+GS_ContextRecord
+GS_ExceptionRecord
+GS_ExceptionPointers
+__dyn_tls_dtor
+__dyn_tls_init
+.rdata$.refptr._CRT_MT
+__tlregdtor
+__mingw_raise_matherr
+stUserMathErr
+__mingw_setusermatherr
+_decode_pointer
+_encode_pointer
+__report_error
+__write_memory.part.0
+maxSections
+_pei386_runtime_relocator
+was_init.95174
+.rdata$.refptr.__RUNTIME_PSEUDO_RELOC_LIST_END__
+.rdata$.refptr.__RUNTIME_PSEUDO_RELOC_LIST__
+.text.unlikely
+.xdata.unlikely
+.pdata.unlikely
+__mingw_SEH_error_handler
+__mingw_init_ehandler
+was_here.95013
+emu_pdata
+emu_xdata
+_gnu_exception_handler
+__mingwthr_run_key_dtors.part.0
+__mingwthr_cs
+key_dtor_list
+___w64_mingwthr_add_key_dtor
+__mingwthr_cs_init
+___w64_mingwthr_remove_key_dtor
+__mingw_TLScallback
+pseudo-reloc-list.c
+_ValidateImageBase.part.0
+_ValidateImageBase
+_FindPESection
+_FindPESectionByName
+__mingw_GetSectionForAddress
+__mingw_GetSectionCount
+_FindPESectionExec
+_GetPEImageBase
+_IsNonwritableInCurrentImage
+__mingw_enum_import_library_names
+__acrt_iob_func
+mingw_get_invalid_parameter_handler
+_get_invalid_parameter_handler
+mingw_set_invalid_parameter_handler
+_set_invalid_parameter_handler
+invalid_parameter_handler.c
+__p__acmdln
+.rdata$.refptr.__imp__acmdln
+__p__fmode
+.rdata$.refptr.__imp__fmode
+register_frame_ctor
+.text.startup
+.xdata.startup
+.pdata.startup
+.ctors.65535
+___RUNTIME_PSEUDO_RELOC_LIST__
+__imp_GetStartupInfoA
+__imp_abort
+__lib64_libkernel32_a_iname
+__data_start__
+___DTOR_LIST__
+__imp__fmode
+__imp_RtlVirtualUnwind
+__imp_calloc
+__imp___p__fmode
+__imp_scanf
+___tls_start__
+.refptr.__native_startup_state
+__ImageBase
+mingw_initltssuo_force
+__rt_psrelocs_start
+.refptr.mingw_initltsdyn_force
+__dll_characteristics__
+__size_of_stack_commit__
+__imp__acmdln
+__size_of_stack_reserve__
+__major_subsystem_version__
+___crt_xl_start__
+__imp_DeleteCriticalSection
+__imp__set_invalid_parameter_handler
+.refptr.__CTOR_LIST__
+___crt_xi_start__
+.refptr.__imp__fmode
+__imp__amsg_exit
+___crt_xi_end__
+.refptr.__imp___initenv
+_tls_start
+__mingw_winmain_lpCmdLine
+.refptr._matherr
+.refptr.__RUNTIME_PSEUDO_RELOC_LIST__
+__mingw_oldexcpt_handler
+__imp_GetCurrentThreadId
+.refptr.mingw_initltssuo_force
+__bss_start__
+__imp___C_specific_handler
+___RUNTIME_PSEUDO_RELOC_LIST_END__
+__size_of_heap_commit__
+__imp_GetLastError
+.refptr._dowildcard
+__imp_free
+__imp_RtlLookupFunctionEntry
+mingw_app_type
+___crt_xp_start__
+__imp_LeaveCriticalSection
+__mingw_pinit
+.refptr.mingw_initcharmax
+__imp_GetTickCount
+.refptr.__mingw_oldexcpt_handler
+.refptr.__RUNTIME_PSEUDO_RELOC_LIST_END__
+___crt_xp_end__
+__minor_os_version__
+__imp_GetSystemTimeAsFileTime
+_MINGW_INSTALL_DEBUG_MATHERR
+__imp_puts
+.refptr.__xi_a
+__image_base__
+.refptr._CRT_MT
+__section_alignment__
+__native_dllmain_reason
+_tls_used
+mingw_initcharmax
+__IAT_end__
+__imp_memcpy
+__RUNTIME_PSEUDO_RELOC_LIST__
+__imp_RtlAddFunctionTable
+.refptr._newmode
+mingw_pcppinit
+__data_end__
+__imp_fwrite
+__imp___getmainargs
+_head_lib64_libkernel32_a
+__bss_end__
+.refptr.mingw_initltsdrot_force
+__native_vcclrit_reason
+___crt_xc_end__
+.refptr.__native_startup_lock
+__imp_EnterCriticalSection
+_tls_index
+__native_startup_state
+___crt_xc_start__
+__imp_GetCurrentProcessId
+__imp___lconv_init
+__imp_TerminateProcess
+__lib64_libmsvcrt_os_a_iname
+___CTOR_LIST__
+.refptr.__dyn_tls_init_callback
+__imp_signal
+__rt_psrelocs_size
+__imp_QueryPerformanceCounter
+__imp_strlen
+__imp_malloc
+__mingw_winmain_nShowCmd
+mingw_pcinit
+.refptr._gnu_exception_handler
+__file_alignment__
+__imp_InitializeCriticalSection
+__imp_exit
+__imp_vfprintf
+__major_os_version__
+__imp___initenv
+__IAT_start__
+__imp__cexit
+__imp_UnhandledExceptionFilter
+__imp_SetUnhandledExceptionFilter
+.refptr.mingw_app_type
+__imp__onexit
+.refptr.__imp__acmdln
+__imp_Sleep
+__imp___p__acmdln
+__imp___setusermatherr
+__size_of_heap_reserve__
+___crt_xt_start__
+__subsystem__
+__security_cookie_complement
+__imp_TlsGetValue
+__imp_fprintf
+__imp_VirtualProtect
+___tls_end__
+__imp_VirtualQuery
+__imp__initterm
+mingw_initltsdyn_force
+_dowildcard
+__imp___iob_func
+__dyn_tls_init_callback
+.refptr.__image_base__
+__imp_strncmp
+_head_lib64_libmsvcrt_os_a
+.refptr._fmode
+__imp___acrt_iob_func
+__major_image_version__
+__loader_flags__
+___chkstk_ms
+__native_startup_lock
+__mingw_winmain_hInstance
+__rt_psrelocs_end
+__imp__get_invalid_parameter_handler
+__minor_subsystem_version__
+__minor_image_version__
+__imp___set_app_type
+mingw_initltsdrot_force
+.refptr.__xc_a
+.refptr.__xi_z
+.refptr._MINGW_INSTALL_DEBUG_MATHERR
+__imp_RtlCaptureContext
+__RUNTIME_PSEUDO_RELOC_LIST_END__
+__imp_GetCurrentProcess
+.refptr.__xc_z
+___crt_xt_end__
+COMMAND> Extract printable UTF-16LE strings with [ -~]{4,} from binary bytes; no execution
+**********************
+Windows PowerShell transcript end
+End time: 20260929143847
+**********************
+**********************
+PowerShell transcript start
+Start time: 20260929143920
+Username: DESKTOP-412KTAR\mzj
+RunAs User: DESKTOP-412KTAR\mzj
+Configuration Name: 
+Machine: DESKTOP-412KTAR (Microsoft Windows NT 10.0.26200.0)
+Host Application: C:\Users\mzj\.cache\codex-runtimes\codex-primary-runtime\dependencies\native\powershell\pwsh.dll -Command try { [Console]::OutputEncoding=[System.Text.Encoding]::UTF8 } catch {}
+$path = 'C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\批次13_20260929\538_湘岚杯1997\analysis\538_static_transcript_20260929.txt'; Start-Transcript -LiteralPath $path -Append | Out-Null; try { Write-Output 'COMMAND> Get-Command objdump,llvm-objdump,python,py -ErrorAction SilentlyContinue'; Get-Command objdump,llvm-objdump,python,py -ErrorAction SilentlyContinue | Select-Object Name,Source | Format-Table -AutoSize; Write-Output 'COMMAND> python -c "import importlib.util; print({m:bool(importlib.util.find_spec(m)) for m in [\"pefile\",\"capstone\",\"lief\"]})"'; python -c "import importlib.util; print({m:bool(importlib.util.find_spec(m)) for m in ['pefile','capstone','lief']})" } finally { Stop-Transcript | Out-Null }
+Process ID: 19592
+PSVersion: 7.6.5
+PSEdition: Core
+GitCommitId: 7.6.5
+OS: Microsoft Windows 10.0.26200
+Platform: Win32NT
+PSCompatibleVersions: 1.0, 2.0, 3.0, 4.0, 5.0, 5.1, 6.0, 7.0
+PSRemotingProtocolVersion: 2.4
+SerializationVersion: 1.1.0.1
+WSManStackVersion: 3.0
+**********************
+COMMAND> Get-Command objdump,llvm-objdump,python,py -ErrorAction SilentlyContinue
+
+Name        Source
+----        ------
+objdump.exe C:\msys64\mingw64\bin\objdump.exe
+python.exe  C:\Users\mzj\AppData\Local\Programs\Python\Python312\python.exe
+py.exe      C:\WINDOWS\py.exe
+
+COMMAND> python -c "import importlib.util; print({m:bool(importlib.util.find_spec(m)) for m in [\"pefile\",\"capstone\",\"lief\"]})"
+
+**********************
+PowerShell transcript end
+End time: 20260929143920
+**********************
+**********************
+PowerShell transcript start
+Start time: 20260929143943
+Username: DESKTOP-412KTAR\mzj
+RunAs User: DESKTOP-412KTAR\mzj
+Configuration Name: 
+Machine: DESKTOP-412KTAR (Microsoft Windows NT 10.0.26200.0)
+Host Application: C:\Users\mzj\.cache\codex-runtimes\codex-primary-runtime\dependencies\native\powershell\pwsh.dll -Command try { [Console]::OutputEncoding=[System.Text.Encoding]::UTF8 } catch {}
+$ErrorActionPreference='Stop'; $analysis='C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\批次13_20260929\538_湘岚杯1997\analysis'; $transcript=Join-Path $analysis '538_static_transcript_20260929.txt'; $exe=Join-Path $analysis '123.exe'; Start-Transcript -LiteralPath $transcript -Append | Out-Null; try { $outputs=@(@{args=@('-x',$exe); path=(Join-Path $analysis '538_objdump_headers.txt'); label='objdump -x'},@{args=@('-t',$exe); path=(Join-Path $analysis '538_objdump_symbols.txt'); label='objdump -t'},@{args=@('-d','-Mintel','--disassemble=main',$exe); path=(Join-Path $analysis '538_objdump_main.txt'); label='objdump -d -Mintel --disassemble=main'},@{args=@('-s','-j','.rdata',$exe); path=(Join-Path $analysis '538_objdump_rdata.txt'); label='objdump -s -j .rdata'}); foreach($item in $outputs){ Write-Output ("COMMAND> objdump {0} `"123.exe`"; full output -> {1}" -f $item.label,$item.path); & objdump @($item.args) 2>&1 | Out-File -LiteralPath $item.path -Encoding utf8; Write-Output ("EXIT_CODE={0}" -f $LASTEXITCODE); if($item.label -in @('objdump -t','objdump -d -Mintel --disassemble=main','objdump -s -j .rdata')) { Get-Content -LiteralPath $item.path | Select-Object -First 180 } } } finally { Stop-Transcript | Out-Null }
+Process ID: 34800
+PSVersion: 7.6.5
+PSEdition: Core
+GitCommitId: 7.6.5
+OS: Microsoft Windows 10.0.26200
+Platform: Win32NT
+PSCompatibleVersions: 1.0, 2.0, 3.0, 4.0, 5.0, 5.1, 6.0, 7.0
+PSRemotingProtocolVersion: 2.4
+SerializationVersion: 1.1.0.1
+WSManStackVersion: 3.0
+**********************
+COMMAND> objdump objdump -x "123.exe"; full output -> C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\批次13_20260929\538_湘岚杯1997\analysis\538_objdump_headers.txt
+EXIT_CODE=1
+COMMAND> objdump objdump -t "123.exe"; full output -> C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\批次13_20260929\538_湘岚杯1997\analysis\538_objdump_symbols.txt
+EXIT_CODE=1
+C:\msys64\mingw64\bin\objdump.exe: C:\Users\mzj\Desktop\CTF\����ˢ��\��Ŀ����\����13_20260929\538_��ᰱ�1997\analysis\123.exe: No such file or directory
+COMMAND> objdump objdump -d -Mintel --disassemble=main "123.exe"; full output -> C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\批次13_20260929\538_湘岚杯1997\analysis\538_objdump_main.txt
+EXIT_CODE=1
+C:\msys64\mingw64\bin\objdump.exe: C:\Users\mzj\Desktop\CTF\����ˢ��\��Ŀ����\����13_20260929\538_��ᰱ�1997\analysis\123.exe: No such file or directory
+COMMAND> objdump objdump -s -j .rdata "123.exe"; full output -> C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\批次13_20260929\538_湘岚杯1997\analysis\538_objdump_rdata.txt
+EXIT_CODE=1
+C:\msys64\mingw64\bin\objdump.exe: C:\Users\mzj\Desktop\CTF\����ˢ��\��Ŀ����\����13_20260929\538_��ᰱ�1997\analysis\123.exe: No such file or directory
+C:\msys64\mingw64\bin\objdump.exe: section '.rdata' mentioned in a -j option, but not found in any input file
+**********************
+PowerShell transcript end
+End time: 20260929143944
+**********************
+**********************
+PowerShell transcript start
+Start time: 20260929144003
+Username: DESKTOP-412KTAR\mzj
+RunAs User: DESKTOP-412KTAR\mzj
+Configuration Name: 
+Machine: DESKTOP-412KTAR (Microsoft Windows NT 10.0.26200.0)
+Host Application: C:\Users\mzj\.cache\codex-runtimes\codex-primary-runtime\dependencies\native\powershell\pwsh.dll -Command try { [Console]::OutputEncoding=[System.Text.Encoding]::UTF8 } catch {}
+$ErrorActionPreference='Stop'; $analysis='C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\批次13_20260929\538_湘岚杯1997\analysis'; $transcript=Join-Path $analysis '538_static_transcript_20260929.txt'; Start-Transcript -LiteralPath $transcript -Append | Out-Null; try { Push-Location $analysis; try { foreach($item in @(@{args=@('-x','123.exe'); name='538_objdump_headers.txt'; label='objdump -x 123.exe'},@{args=@('-t','123.exe'); name='538_objdump_symbols.txt'; label='objdump -t 123.exe'},@{args=@('-d','-Mintel','--disassemble=main','123.exe'); name='538_objdump_main.txt'; label='objdump -d -Mintel --disassemble=main 123.exe'},@{args=@('-s','-j','.rdata','123.exe'); name='538_objdump_rdata.txt'; label='objdump -s -j .rdata 123.exe'})){ Write-Output ("COMMAND> {0}; full output -> analysis\{1}" -f $item.label,$item.name); & objdump @($item.args) 2>&1 | Out-File -LiteralPath $item.name -Encoding utf8; Write-Output ("EXIT_CODE={0}" -f $LASTEXITCODE); if($item.name -ne '538_objdump_headers.txt'){ Get-Content -LiteralPath $item.name | Select-Object -First 220 } } } finally { Pop-Location } } finally { Stop-Transcript | Out-Null }
+Process ID: 31268
+PSVersion: 7.6.5
+PSEdition: Core
+GitCommitId: 7.6.5
+OS: Microsoft Windows 10.0.26200
+Platform: Win32NT
+PSCompatibleVersions: 1.0, 2.0, 3.0, 4.0, 5.0, 5.1, 6.0, 7.0
+PSRemotingProtocolVersion: 2.4
+SerializationVersion: 1.1.0.1
+WSManStackVersion: 3.0
+**********************
+COMMAND> objdump -x 123.exe; full output -> analysis\538_objdump_headers.txt
+EXIT_CODE=0
+COMMAND> objdump -t 123.exe; full output -> analysis\538_objdump_symbols.txt
+EXIT_CODE=0
+
+123.exe:     file format pei-x86-64
+
+SYMBOL TABLE:
+[  0](sec -2)(fl 0x00)(ty    0)(scl 103) (nx 1) 0x000000000000004d crtexe.c
+File
+[  2](sec  1)(fl 0x00)(ty   20)(scl   3) (nx 1) 0x0000000000000000 __mingw_invalidParameterHandler
+AUX tagndx 0 ttlsiz 0x0 lnnos 0 next 0
+[  4](sec  1)(fl 0x00)(ty   20)(scl   3) (nx 0) 0x0000000000000010 pre_c_init
+[  5](sec  3)(fl 0x00)(ty    0)(scl   3) (nx 1) 0x00000000000004c0 .rdata$.refptr.mingw_initltsdrot_force
+AUX scnlen 0x8 nreloc 1 nlnno 0 checksum 0x0 assoc 0 comdat 2
+[  7](sec  3)(fl 0x00)(ty    0)(scl   3) (nx 1) 0x00000000000004d0 .rdata$.refptr.mingw_initltsdyn_force
+AUX scnlen 0x8 nreloc 1 nlnno 0 checksum 0x0 assoc 0 comdat 2
+[  9](sec  3)(fl 0x00)(ty    0)(scl   3) (nx 1) 0x00000000000004e0 .rdata$.refptr.mingw_initltssuo_force
+AUX scnlen 0x8 nreloc 1 nlnno 0 checksum 0x0 assoc 0 comdat 2
+[ 11](sec  3)(fl 0x00)(ty    0)(scl   3) (nx 1) 0x00000000000004b0 .rdata$.refptr.mingw_initcharmax
+AUX scnlen 0x8 nreloc 1 nlnno 0 checksum 0x0 assoc 0 comdat 2
+[ 13](sec  3)(fl 0x00)(ty    0)(scl   3) (nx 1) 0x00000000000003a0 .rdata$.refptr.__image_base__
+AUX scnlen 0x8 nreloc 1 nlnno 0 checksum 0x0 assoc 0 comdat 2
+[ 15](sec  3)(fl 0x00)(ty    0)(scl   3) (nx 1) 0x00000000000004a0 .rdata$.refptr.mingw_app_type
+AUX scnlen 0x8 nreloc 1 nlnno 0 checksum 0x0 assoc 0 comdat 2
+[ 17](sec  6)(fl 0x00)(ty    0)(scl   3) (nx 0) 0x0000000000000008 managedapp
+[ 18](sec  3)(fl 0x00)(ty    0)(scl   3) (nx 1) 0x0000000000000460 .rdata$.refptr._fmode
+AUX scnlen 0x8 nreloc 1 nlnno 0 checksum 0x0 assoc 0 comdat 2
+[ 20](sec  3)(fl 0x00)(ty    0)(scl   3) (nx 1) 0x0000000000000350 .rdata$.refptr._MINGW_INSTALL_DEBUG_MATHERR
+AUX scnlen 0x8 nreloc 1 nlnno 0 checksum 0x0 assoc 0 comdat 2
+[ 22](sec  1)(fl 0x00)(ty   20)(scl   3) (nx 0) 0x0000000000000130 pre_cpp_init
+[ 23](sec  3)(fl 0x00)(ty    0)(scl   3) (nx 1) 0x0000000000000490 .rdata$.refptr._newmode
+AUX scnlen 0x8 nreloc 1 nlnno 0 checksum 0x0 assoc 0 comdat 2
+[ 25](sec  6)(fl 0x00)(ty    0)(scl   3) (nx 0) 0x0000000000000010 envp
+[ 26](sec  6)(fl 0x00)(ty    0)(scl   3) (nx 0) 0x0000000000000018 argv
+[ 27](sec  6)(fl 0x00)(ty    0)(scl   3) (nx 0) 0x0000000000000020 argc
+[ 28](sec  6)(fl 0x00)(ty    0)(scl   3) (nx 0) 0x0000000000000000 startinfo
+[ 29](sec  3)(fl 0x00)(ty    0)(scl   3) (nx 1) 0x0000000000000450 .rdata$.refptr._dowildcard
+AUX scnlen 0x8 nreloc 1 nlnno 0 checksum 0x0 assoc 0 comdat 2
+[ 31](sec  1)(fl 0x00)(ty   20)(scl   3) (nx 0) 0x0000000000000180 __tmainCRTStartup
+[ 32](sec  3)(fl 0x00)(ty    0)(scl   3) (nx 1) 0x00000000000003f0 .rdata$.refptr.__native_startup_lock
+AUX scnlen 0x8 nreloc 1 nlnno 0 checksum 0x0 assoc 0 comdat 2
+[ 34](sec  3)(fl 0x00)(ty    0)(scl   3) (nx 1) 0x0000000000000400 .rdata$.refptr.__native_startup_state
+AUX scnlen 0x8 nreloc 1 nlnno 0 checksum 0x0 assoc 0 comdat 2
+[ 36](sec  6)(fl 0x00)(ty    0)(scl   3) (nx 0) 0x0000000000000004 has_cctor
+[ 37](sec  3)(fl 0x00)(ty    0)(scl   3) (nx 1) 0x0000000000000390 .rdata$.refptr.__dyn_tls_init_callback
+AUX scnlen 0x8 nreloc 1 nlnno 0 checksum 0x0 assoc 0 comdat 2
+[ 39](sec  3)(fl 0x00)(ty    0)(scl   3) (nx 1) 0x00000000000003e0 .rdata$.refptr.__mingw_oldexcpt_handler
+AUX scnlen 0x8 nreloc 1 nlnno 0 checksum 0x0 assoc 0 comdat 2
+[ 41](sec  3)(fl 0x00)(ty    0)(scl   3) (nx 1) 0x00000000000003b0 .rdata$.refptr.__imp___initenv
+AUX scnlen 0x8 nreloc 1 nlnno 0 checksum 0x0 assoc 0 comdat 2
+[ 43](sec  6)(fl 0x00)(ty    0)(scl   3) (nx 0) 0x000000000000000c mainret
+[ 44](sec  3)(fl 0x00)(ty    0)(scl   3) (nx 1) 0x0000000000000420 .rdata$.refptr.__xc_z
+AUX scnlen 0x8 nreloc 1 nlnno 0 checksum 0x0 assoc 0 comdat 2
+[ 46](sec  3)(fl 0x00)(ty    0)(scl   3) (nx 1) 0x0000000000000410 .rdata$.refptr.__xc_a
+AUX scnlen 0x8 nreloc 1 nlnno 0 checksum 0x0 assoc 0 comdat 2
+[ 48](sec  3)(fl 0x00)(ty    0)(scl   3) (nx 1) 0x0000000000000440 .rdata$.refptr.__xi_z
+AUX scnlen 0x8 nreloc 1 nlnno 0 checksum 0x0 assoc 0 comdat 2
+[ 50](sec  3)(fl 0x00)(ty    0)(scl   3) (nx 1) 0x0000000000000430 .rdata$.refptr.__xi_a
+AUX scnlen 0x8 nreloc 1 nlnno 0 checksum 0x0 assoc 0 comdat 2
+[ 52](sec  1)(fl 0x00)(ty   20)(scl   2) (nx 0) 0x00000000000004b0 WinMainCRTStartup
+[ 53](sec  1)(fl 0x00)(ty    0)(scl   6) (nx 0) 0x00000000000004b4 .l_startw
+[ 54](sec  1)(fl 0x00)(ty    0)(scl   6) (nx 0) 0x00000000000004cc .l_endw
+[ 55](sec  1)(fl 0x00)(ty   20)(scl   2) (nx 0) 0x00000000000004e0 mainCRTStartup
+[ 56](sec  1)(fl 0x00)(ty    0)(scl   6) (nx 0) 0x00000000000004e4 .l_start
+[ 57](sec  1)(fl 0x00)(ty    0)(scl   6) (nx 0) 0x00000000000004fc .l_end
+[ 58](sec  1)(fl 0x00)(ty   20)(scl   2) (nx 0) 0x0000000000000510 atexit
+[ 59](sec  3)(fl 0x00)(ty    0)(scl   3) (nx 1) 0x0000000000000470 .rdata$.refptr._gnu_exception_handler
+AUX scnlen 0x8 nreloc 1 nlnno 0 checksum 0x0 assoc 0 comdat 2
+[ 61](sec  3)(fl 0x00)(ty    0)(scl   3) (nx 1) 0x0000000000000480 .rdata$.refptr._matherr
+AUX scnlen 0x8 nreloc 1 nlnno 0 checksum 0x0 assoc 0 comdat 2
+[ 63](sec  1)(fl 0x00)(ty    0)(scl   3) (nx 1) 0x0000000000000000 .text
+AUX scnlen 0x529 nreloc 75 nlnno 0
+[ 65](sec  2)(fl 0x00)(ty    0)(scl   3) (nx 1) 0x0000000000000000 .data
+AUX scnlen 0x4 nreloc 0 nlnno 0
+[ 67](sec  6)(fl 0x00)(ty    0)(scl   3) (nx 1) 0x0000000000000000 .bss
+AUX scnlen 0x24 nreloc 0 nlnno 0
+[ 69](sec  5)(fl 0x00)(ty    0)(scl   3) (nx 1) 0x0000000000000000 .xdata
+AUX scnlen 0x70 nreloc 10 nlnno 0
+[ 71](sec  4)(fl 0x00)(ty    0)(scl   3) (nx 1) 0x0000000000000000 .pdata
+AUX scnlen 0x54 nreloc 21 nlnno 0
+[ 73](sec  8)(fl 0x00)(ty    0)(scl   3) (nx 1) 0x0000000000000008 .CRT$XCAA
+AUX scnlen 0x8 nreloc 1 nlnno 0
+[ 75](sec  8)(fl 0x00)(ty    0)(scl   3) (nx 1) 0x0000000000000020 .CRT$XIAA
+AUX scnlen 0x8 nreloc 1 nlnno 0
+[ 77](sec -2)(fl 0x00)(ty    0)(scl 103) (nx 1) 0x000000000000005c cygming-crtbegin.c
+File
+[ 79](sec  1)(fl 0x00)(ty   20)(scl   2) (nx 1) 0x0000000000000530 __gcc_register_frame
+AUX tagndx 0 ttlsiz 0x0 lnnos 0 next 0
+[ 81](sec  1)(fl 0x00)(ty   20)(scl   2) (nx 0) 0x0000000000000540 __gcc_deregister_frame
+[ 82](sec  1)(fl 0x00)(ty    0)(scl   3) (nx 1) 0x0000000000000530 .text
+AUX scnlen 0x11 nreloc 1 nlnno 0
+[ 84](sec  2)(fl 0x00)(ty    0)(scl   3) (nx 1) 0x0000000000000010 .data
+AUX scnlen 0x0 nreloc 0 nlnno 0
+[ 86](sec  6)(fl 0x00)(ty    0)(scl   3) (nx 1) 0x0000000000000030 .bss
+AUX scnlen 0x0 nreloc 0 nlnno 0
+[ 88](sec  5)(fl 0x00)(ty    0)(scl   3) (nx 1) 0x0000000000000070 .xdata
+AUX scnlen 0x8 nreloc 0 nlnno 0
+[ 90](sec  4)(fl 0x00)(ty    0)(scl   3) (nx 1) 0x0000000000000054 .pdata
+AUX scnlen 0x18 nreloc 6 nlnno 0
+[ 92](sec -2)(fl 0x00)(ty    0)(scl 103) (nx 1) 0x000000000000007e aes.c
+File
+[ 94](sec  2)(fl 0x00)(ty    0)(scl   3) (nx 0) 0x0000000000000020 RC
+[ 95](sec  2)(fl 0x00)(ty    0)(scl   3) (nx 0) 0x0000000000000040 SBOX
+[ 96](sec  2)(fl 0x00)(ty    0)(scl   3) (nx 0) 0x0000000000000140 INV_SBOX
+[ 97](sec  1)(fl 0x00)(ty   20)(scl   3) (nx 1) 0x0000000000000550 mul2
+AUX tagndx 0 ttlsiz 0x0 lnnos 0 next 0
+[ 99](sec  1)(fl 0x00)(ty   20)(scl   3) (nx 0) 0x0000000000000574 shift_rows
+[100](sec  1)(fl 0x00)(ty   20)(scl   2) (nx 0) 0x0000000000000676 aes_key_schedule_128
+[101](sec  1)(fl 0x00)(ty   20)(scl   2) (nx 0) 0x0000000000000a7f aes_encrypt_128
+[102](sec  1)(fl 0x00)(ty    0)(scl   3) (nx 1) 0x0000000000000550 .text
+AUX scnlen 0x83f nreloc 7 nlnno 0
+[104](sec  2)(fl 0x00)(ty    0)(scl   3) (nx 1) 0x0000000000000020 .data
+AUX scnlen 0x220 nreloc 0 nlnno 0
+[106](sec  6)(fl 0x00)(ty    0)(scl   3) (nx 1) 0x0000000000000030 .bss
+AUX scnlen 0x0 nreloc 0 nlnno 0
+[108](sec  5)(fl 0x00)(ty    0)(scl   3) (nx 1) 0x0000000000000078 .xdata
+AUX scnlen 0x2c nreloc 0 nlnno 0
+[110](sec  4)(fl 0x00)(ty    0)(scl   3) (nx 1) 0x000000000000006c .pdata
+AUX scnlen 0x30 nreloc 12 nlnno 0
+[112](sec 11)(fl 0x00)(ty    0)(scl   3) (nx 1) 0x0000000000000000 .debug_info
+AUX scnlen 0x3ac nreloc 12 nlnno 0
+[114](sec 12)(fl 0x00)(ty    0)(scl   3) (nx 1) 0x0000000000000000 .debug_abbrev
+AUX scnlen 0xef nreloc 0 nlnno 0
+[116](sec 10)(fl 0x00)(ty    0)(scl   3) (nx 1) 0x0000000000000000 .debug_aranges
+AUX scnlen 0x30 nreloc 2 nlnno 0
+[118](sec 13)(fl 0x00)(ty    0)(scl   3) (nx 1) 0x0000000000000000 .debug_line
+AUX scnlen 0x708 nreloc 1 nlnno 0
+[120](sec 15)(fl 0x00)(ty    0)(scl   3) (nx 1) 0x0000000000000000 .debug_str
+AUX scnlen 0xa nreloc 0 nlnno 0
+[122](sec  3)(fl 0x00)(ty    0)(scl   3) (nx 1) 0x00000000000004f0 .rdata$zzz
+AUX scnlen 0x3f nreloc 0 nlnno 0
+[124](sec 14)(fl 0x00)(ty    0)(scl   3) (nx 1) 0x0000000000000000 .debug_frame
+AUX scnlen 0xb8 nreloc 8 nlnno 0
+[126](sec -2)(fl 0x00)(ty    0)(scl 103) (nx 1) 0x000000000000009a main.c
+File
+[128](sec  1)(fl 0x00)(ty   20)(scl   2) (nx 1) 0x0000000000000d90 main
+AUX tagndx 0 ttlsiz 0x0 lnnos 0 next 0
+[130](sec  1)(fl 0x00)(ty    0)(scl   3) (nx 1) 0x0000000000000d90 .text
+AUX scnlen 0x2a4 nreloc 17 nlnno 0
+[132](sec  2)(fl 0x00)(ty    0)(scl   3) (nx 1) 0x0000000000000240 .data
+AUX scnlen 0x0 nreloc 0 nlnno 0
+[134](sec  6)(fl 0x00)(ty    0)(scl   3) (nx 1) 0x0000000000000030 .bss
+AUX scnlen 0x0 nreloc 0 nlnno 0
+[136](sec  3)(fl 0x00)(ty    0)(scl   3) (nx 1) 0x0000000000000000 .rdata
+AUX scnlen 0x5c nreloc 0 nlnno 0
+[138](sec  5)(fl 0x00)(ty    0)(scl   3) (nx 1) 0x00000000000000a4 .xdata
+AUX scnlen 0xc nreloc 0 nlnno 0
+[140](sec  4)(fl 0x00)(ty    0)(scl   3) (nx 1) 0x000000000000009c .pdata
+AUX scnlen 0xc nreloc 3 nlnno 0
+[142](sec 11)(fl 0x00)(ty    0)(scl   3) (nx 1) 0x00000000000003ac .debug_info
+AUX scnlen 0x433 nreloc 4 nlnno 0
+[144](sec 12)(fl 0x00)(ty    0)(scl   3) (nx 1) 0x00000000000000ef .debug_abbrev
+AUX scnlen 0xb6 nreloc 0 nlnno 0
+[146](sec 10)(fl 0x00)(ty    0)(scl   3) (nx 1) 0x0000000000000030 .debug_aranges
+AUX scnlen 0x30 nreloc 2 nlnno 0
+[148](sec 13)(fl 0x00)(ty    0)(scl   3) (nx 1) 0x0000000000000708 .debug_line
+AUX scnlen 0x11c nreloc 1 nlnno 0
+[150](sec  3)(fl 0x00)(ty    0)(scl   3) (nx 1) 0x0000000000000530 .rdata$zzz
+AUX scnlen 0x3f nreloc 0 nlnno 0
+[152](sec 14)(fl 0x00)(ty    0)(scl   3) (nx 1) 0x00000000000000b8 .debug_frame
+AUX scnlen 0x48 nreloc 2 nlnno 0
+[154](sec -2)(fl 0x00)(ty    0)(scl 103) (nx 1) 0x00000000000000ae gccmain.c
+File
+[156](sec  1)(fl 0x00)(ty   20)(scl   2) (nx 1) 0x0000000000001040 __do_global_dtors
+AUX tagndx 0 ttlsiz 0x0 lnnos 0 next 0
+[158](sec  2)(fl 0x00)(ty    0)(scl   3) (nx 0) 0x0000000000000240 p.93846
+[159](sec  1)(fl 0x00)(ty   20)(scl   2) (nx 0) 0x0000000000001080 __do_global_ctors
+[160](sec  3)(fl 0x00)(ty    0)(scl   3) (nx 1) 0x0000000000000360 .rdata$.refptr.__CTOR_LIST__
+AUX scnlen 0x8 nreloc 1 nlnno 0 checksum 0x0 assoc 0 comdat 2
+[162](sec  1)(fl 0x00)(ty   20)(scl   2) (nx 0) 0x00000000000010f0 __main
+[163](sec  6)(fl 0x00)(ty    0)(scl   3) (nx 0) 0x0000000000000030 initialized
+[164](sec  1)(fl 0x00)(ty    0)(scl   3) (nx 1) 0x0000000000001040 .text
+AUX scnlen 0xcf nreloc 7 nlnno 0
+[166](sec  2)(fl 0x00)(ty    0)(scl   3) (nx 1) 0x0000000000000240 .data
+AUX scnlen 0x8 nreloc 1 nlnno 0
+[168](sec  6)(fl 0x00)(ty    0)(scl   3) (nx 1) 0x0000000000000030 .bss
+AUX scnlen 0x4 nreloc 0 nlnno 0
+[170](sec  5)(fl 0x00)(ty    0)(scl   3) (nx 1) 0x00000000000000b0 .xdata
+AUX scnlen 0x18 nreloc 0 nlnno 0
+[172](sec  4)(fl 0x00)(ty    0)(scl   3) (nx 1) 0x00000000000000a8 .pdata
+AUX scnlen 0x24 nreloc 9 nlnno 0
+[174](sec -2)(fl 0x00)(ty    0)(scl 103) (nx 1) 0x00000000000000b6 natstart.c
+File
+[176](sec  1)(fl 0x00)(ty    0)(scl   3) (nx 1) 0x0000000000001110 .text
+AUX scnlen 0x0 nreloc 0 nlnno 0
+[178](sec  2)(fl 0x00)(ty    0)(scl   3) (nx 1) 0x0000000000000250 .data
+AUX scnlen 0x8 nreloc 0 nlnno 0
+[180](sec  6)(fl 0x00)(ty    0)(scl   3) (nx 1) 0x0000000000000040 .bss
+AUX scnlen 0x0 nreloc 0 nlnno 0
+[182](sec -2)(fl 0x00)(ty    0)(scl 103) (nx 1) 0x00000000000000be wildcard.c
+File
+[184](sec  1)(fl 0x00)(ty    0)(scl   3) (nx 1) 0x0000000000001110 .text
+AUX scnlen 0x0 nreloc 0 nlnno 0
+[186](sec  2)(fl 0x00)(ty    0)(scl   3) (nx 1) 0x0000000000000260 .data
+AUX scnlen 0x4 nreloc 0 nlnno 0
+[188](sec  6)(fl 0x00)(ty    0)(scl   3) (nx 1) 0x0000000000000040 .bss
+AUX scnlen 0x0 nreloc 0 nlnno 0
+[190](sec -2)(fl 0x00)(ty    0)(scl 103) (nx 1) 0x00000000000000ce charmax.c
+File
+[192](sec  1)(fl 0x00)(ty   20)(scl   3) (nx 1) 0x0000000000001110 my_lconv_init
+AUX tagndx 0 ttlsiz 0x0 lnnos 0 next 0
+[194](sec  1)(fl 0x00)(ty    0)(scl   3) (nx 1) 0x0000000000001110 .text
+AUX scnlen 0x7 nreloc 1 nlnno 0
+[196](sec  2)(fl 0x00)(ty    0)(scl   3) (nx 1) 0x0000000000000270 .data
+AUX scnlen 0x4 nreloc 0 nlnno 0
+[198](sec  6)(fl 0x00)(ty    0)(scl   3) (nx 1) 0x0000000000000040 .bss
+AUX scnlen 0x4 nreloc 0 nlnno 0
+[200](sec  5)(fl 0x00)(ty    0)(scl   3) (nx 1) 0x00000000000000c8 .xdata
+AUX scnlen 0x4 nreloc 0 nlnno 0
+[202](sec  4)(fl 0x00)(ty    0)(scl   3) (nx 1) 0x00000000000000cc .pdata
+AUX scnlen 0xc nreloc 3 nlnno 0
+[204](sec  8)(fl 0x00)(ty    0)(scl   3) (nx 1) 0x0000000000000028 .CRT$XIC
+AUX scnlen 0x8 nreloc 1 nlnno 0
+[206](sec -2)(fl 0x00)(ty    0)(scl 103) (nx 1) 0x00000000000000dc dllargv.c
+File
+[208](sec  1)(fl 0x00)(ty   20)(scl   2) (nx 1) 0x0000000000001120 _setargv
+AUX tagndx 0 ttlsiz 0x0 lnnos 0 next 0
+[210](sec  1)(fl 0x00)(ty    0)(scl   3) (nx 1) 0x0000000000001120 .text
+AUX scnlen 0x3 nreloc 0 nlnno 0
+[212](sec  2)(fl 0x00)(ty    0)(scl   3) (nx 1) 0x0000000000000280 .data
+AUX scnlen 0x0 nreloc 0 nlnno 0
+[214](sec  6)(fl 0x00)(ty    0)(scl   3) (nx 1) 0x0000000000000050 .bss
+AUX scnlen 0x0 nreloc 0 nlnno 0
+COMMAND> objdump -d -Mintel --disassemble=main 123.exe; full output -> analysis\538_objdump_main.txt
+EXIT_CODE=0
+
+123.exe:     file format pei-x86-64
+
+
+Disassembly of section .text:
+
+0000000000401d90 <main>:
+  401d90:	55                   	push   rbp
+  401d91:	48 81 ec 60 01 00 00 	sub    rsp,0x160
+  401d98:	48 8d ac 24 80 00 00 	lea    rbp,[rsp+0x80]
+  401d9f:	00
+  401da0:	89 8d f0 00 00 00    	mov    DWORD PTR [rbp+0xf0],ecx
+  401da6:	48 89 95 f8 00 00 00 	mov    QWORD PTR [rbp+0xf8],rdx
+  401dad:	e8 3e 03 00 00       	call   4020f0 <__main>
+  401db2:	c6 85 c0 00 00 00 57 	mov    BYTE PTR [rbp+0xc0],0x57
+  401db9:	c6 85 c1 00 00 00 65 	mov    BYTE PTR [rbp+0xc1],0x65
+  401dc0:	c6 85 c2 00 00 00 6c 	mov    BYTE PTR [rbp+0xc2],0x6c
+  401dc7:	c6 85 c3 00 00 00 63 	mov    BYTE PTR [rbp+0xc3],0x63
+  401dce:	c6 85 c4 00 00 00 6f 	mov    BYTE PTR [rbp+0xc4],0x6f
+  401dd5:	c6 85 c5 00 00 00 6d 	mov    BYTE PTR [rbp+0xc5],0x6d
+  401ddc:	c6 85 c6 00 00 00 65 	mov    BYTE PTR [rbp+0xc6],0x65
+  401de3:	c6 85 c7 00 00 00 5f 	mov    BYTE PTR [rbp+0xc7],0x5f
+  401dea:	c6 85 c8 00 00 00 74 	mov    BYTE PTR [rbp+0xc8],0x74
+  401df1:	c6 85 c9 00 00 00 6f 	mov    BYTE PTR [rbp+0xc9],0x6f
+  401df8:	c6 85 ca 00 00 00 5f 	mov    BYTE PTR [rbp+0xca],0x5f
+  401dff:	c6 85 cb 00 00 00 63 	mov    BYTE PTR [rbp+0xcb],0x63
+  401e06:	c6 85 cc 00 00 00 74 	mov    BYTE PTR [rbp+0xcc],0x74
+  401e0d:	c6 85 cd 00 00 00 66 	mov    BYTE PTR [rbp+0xcd],0x66
+  401e14:	c6 85 ce 00 00 00 21 	mov    BYTE PTR [rbp+0xce],0x21
+  401e1b:	c6 85 cf 00 00 00 21 	mov    BYTE PTR [rbp+0xcf],0x21
+  401e22:	c6 85 a0 00 00 00 24 	mov    BYTE PTR [rbp+0xa0],0x24
+  401e29:	c6 85 a1 00 00 00 f9 	mov    BYTE PTR [rbp+0xa1],0xf9
+  401e30:	c6 85 a2 00 00 00 64 	mov    BYTE PTR [rbp+0xa2],0x64
+  401e37:	c6 85 a3 00 00 00 b9 	mov    BYTE PTR [rbp+0xa3],0xb9
+  401e3e:	c6 85 a4 00 00 00 90 	mov    BYTE PTR [rbp+0xa4],0x90
+  401e45:	c6 85 a5 00 00 00 b4 	mov    BYTE PTR [rbp+0xa5],0xb4
+  401e4c:	c6 85 a6 00 00 00 90 	mov    BYTE PTR [rbp+0xa6],0x90
+  401e53:	c6 85 a7 00 00 00 b5 	mov    BYTE PTR [rbp+0xa7],0xb5
+  401e5a:	c6 85 a8 00 00 00 3a 	mov    BYTE PTR [rbp+0xa8],0x3a
+  401e61:	c6 85 a9 00 00 00 1f 	mov    BYTE PTR [rbp+0xa9],0x1f
+  401e68:	c6 85 aa 00 00 00 2c 	mov    BYTE PTR [rbp+0xaa],0x2c
+  401e6f:	c6 85 ab 00 00 00 87 	mov    BYTE PTR [rbp+0xab],0x87
+  401e76:	c6 85 ac 00 00 00 19 	mov    BYTE PTR [rbp+0xac],0x19
+  401e7d:	c6 85 ad 00 00 00 9b 	mov    BYTE PTR [rbp+0xad],0x9b
+  401e84:	c6 85 ae 00 00 00 02 	mov    BYTE PTR [rbp+0xae],0x2
+  401e8b:	c6 85 af 00 00 00 84 	mov    BYTE PTR [rbp+0xaf],0x84
+  401e92:	c6 85 b0 00 00 00 6d 	mov    BYTE PTR [rbp+0xb0],0x6d
+  401e99:	c6 85 b1 00 00 00 65 	mov    BYTE PTR [rbp+0xb1],0x65
+  401ea0:	c6 85 b2 00 00 00 ad 	mov    BYTE PTR [rbp+0xb2],0xad
+  401ea7:	c6 85 b3 00 00 00 1c 	mov    BYTE PTR [rbp+0xb3],0x1c
+  401eae:	c6 85 b4 00 00 00 65 	mov    BYTE PTR [rbp+0xb4],0x65
+  401eb5:	c6 85 b5 00 00 00 4e 	mov    BYTE PTR [rbp+0xb5],0x4e
+  401ebc:	c6 85 b6 00 00 00 01 	mov    BYTE PTR [rbp+0xb6],0x1
+  401ec3:	c6 85 b7 00 00 00 5c 	mov    BYTE PTR [rbp+0xb7],0x5c
+  401eca:	c6 85 b8 00 00 00 06 	mov    BYTE PTR [rbp+0xb8],0x6
+  401ed1:	c6 85 b9 00 00 00 18 	mov    BYTE PTR [rbp+0xb9],0x18
+  401ed8:	c6 85 ba 00 00 00 a3 	mov    BYTE PTR [rbp+0xba],0xa3
+  401edf:	c6 85 bb 00 00 00 fd 	mov    BYTE PTR [rbp+0xbb],0xfd
+  401ee6:	c6 85 bc 00 00 00 b4 	mov    BYTE PTR [rbp+0xbc],0xb4
+  401eed:	c6 85 bd 00 00 00 6c 	mov    BYTE PTR [rbp+0xbd],0x6c
+  401ef4:	c6 85 be 00 00 00 83 	mov    BYTE PTR [rbp+0xbe],0x83
+  401efb:	c6 85 bf 00 00 00 eb 	mov    BYTE PTR [rbp+0xbf],0xeb
+  401f02:	48 c7 45 70 00 00 00 	mov    QWORD PTR [rbp+0x70],0x0
+  401f09:	00
+  401f0a:	48 c7 45 78 00 00 00 	mov    QWORD PTR [rbp+0x78],0x0
+  401f11:	00
+  401f12:	48 c7 85 80 00 00 00 	mov    QWORD PTR [rbp+0x80],0x0
+  401f19:	00 00 00 00
+  401f1d:	48 c7 85 88 00 00 00 	mov    QWORD PTR [rbp+0x88],0x0
+  401f24:	00 00 00 00
+  401f28:	c6 85 90 00 00 00 00 	mov    BYTE PTR [rbp+0x90],0x0
+  401f2f:	48 8d 0d ca 30 00 00 	lea    rcx,[rip+0x30ca]        # 405000 <.rdata>
+  401f36:	e8 ed 15 00 00       	call   403528 <puts>
+  401f3b:	48 8d 45 70          	lea    rax,[rbp+0x70]
+  401f3f:	48 89 c2             	mov    rdx,rax
+  401f42:	48 8d 0d d0 30 00 00 	lea    rcx,[rip+0x30d0]        # 405019 <.rdata+0x19>
+  401f49:	e8 d2 15 00 00       	call   403520 <scanf>
+  401f4e:	48 8d 45 70          	lea    rax,[rbp+0x70]
+  401f52:	48 89 c1             	mov    rcx,rax
+  401f55:	e8 b6 15 00 00       	call   403510 <strlen>
+  401f5a:	48 83 f8 20          	cmp    rax,0x20
+  401f5e:	74 16                	je     401f76 <main+0x1e6>
+  401f60:	48 8d 0d b5 30 00 00 	lea    rcx,[rip+0x30b5]        # 40501c <.rdata+0x1c>
+  401f67:	e8 bc 15 00 00       	call   403528 <puts>
+  401f6c:	b9 00 00 00 00       	mov    ecx,0x0
+  401f71:	e8 e2 15 00 00       	call   403558 <exit>
+  401f76:	48 8d 55 a0          	lea    rdx,[rbp-0x60]
+  401f7a:	48 8d 85 c0 00 00 00 	lea    rax,[rbp+0xc0]
+  401f81:	48 89 c1             	mov    rcx,rax
+  401f84:	e8 ed f6 ff ff       	call   401676 <aes_key_schedule_128>
+  401f89:	48 8d 4d 50          	lea    rcx,[rbp+0x50]
+  401f8d:	48 8d 55 70          	lea    rdx,[rbp+0x70]
+  401f91:	48 8d 45 a0          	lea    rax,[rbp-0x60]
+  401f95:	49 89 c8             	mov    r8,rcx
+  401f98:	48 89 c1             	mov    rcx,rax
+  401f9b:	e8 df fa ff ff       	call   401a7f <aes_encrypt_128>
+  401fa0:	48 8d 55 50          	lea    rdx,[rbp+0x50]
+  401fa4:	48 83 c2 10          	add    rdx,0x10
+  401fa8:	48 8d 45 70          	lea    rax,[rbp+0x70]
+  401fac:	48 83 c0 10          	add    rax,0x10
+  401fb0:	48 8d 4d a0          	lea    rcx,[rbp-0x60]
+  401fb4:	49 89 d0             	mov    r8,rdx
+  401fb7:	48 89 c2             	mov    rdx,rax
+  401fba:	e8 c0 fa ff ff       	call   401a7f <aes_encrypt_128>
+  401fbf:	c6 85 df 00 00 00 00 	mov    BYTE PTR [rbp+0xdf],0x0
+  401fc6:	eb 49                	jmp    402011 <main+0x281>
+  401fc8:	0f b6 85 df 00 00 00 	movzx  eax,BYTE PTR [rbp+0xdf]
+  401fcf:	48 98                	cdqe
+  401fd1:	0f b6 54 05 50       	movzx  edx,BYTE PTR [rbp+rax*1+0x50]
+  401fd6:	0f b6 85 df 00 00 00 	movzx  eax,BYTE PTR [rbp+0xdf]
+  401fdd:	48 98                	cdqe
+  401fdf:	0f b6 84 05 a0 00 00 	movzx  eax,BYTE PTR [rbp+rax*1+0xa0]
+  401fe6:	00
+  401fe7:	38 c2                	cmp    dl,al
+  401fe9:	74 16                	je     402001 <main+0x271>
+  401feb:	48 8d 0d 44 30 00 00 	lea    rcx,[rip+0x3044]        # 405036 <.rdata+0x36>
+  401ff2:	e8 31 15 00 00       	call   403528 <puts>
+  401ff7:	b9 00 00 00 00       	mov    ecx,0x0
+  401ffc:	e8 57 15 00 00       	call   403558 <exit>
+  402001:	0f b6 85 df 00 00 00 	movzx  eax,BYTE PTR [rbp+0xdf]
+  402008:	83 c0 01             	add    eax,0x1
+  40200b:	88 85 df 00 00 00    	mov    BYTE PTR [rbp+0xdf],al
+  402011:	80 bd df 00 00 00 1f 	cmp    BYTE PTR [rbp+0xdf],0x1f
+  402018:	76 ae                	jbe    401fc8 <main+0x238>
+  40201a:	48 8d 0d 30 30 00 00 	lea    rcx,[rip+0x3030]        # 405051 <.rdata+0x51>
+  402021:	e8 02 15 00 00       	call   403528 <puts>
+  402026:	b8 00 00 00 00       	mov    eax,0x0
+  40202b:	48 81 c4 60 01 00 00 	add    rsp,0x160
+  402032:	5d                   	pop    rbp
+  402033:	c3                   	ret
+  402034:	90                   	nop
+  402035:	90                   	nop
+  402036:	90                   	nop
+  402037:	90                   	nop
+  402038:	90                   	nop
+  402039:	90                   	nop
+  40203a:	90                   	nop
+  40203b:	90                   	nop
+  40203c:	90                   	nop
+  40203d:	90                   	nop
+  40203e:	90                   	nop
+  40203f:	90                   	nop
+COMMAND> objdump -s -j .rdata 123.exe; full output -> analysis\538_objdump_rdata.txt
+EXIT_CODE=0
+
+123.exe:     file format pei-x86-64
+
+Contents of section .rdata:
+ 405000 706c6561 73652069 6e707574 20796f75  please input you
+ 405010 7220666c 61673a20 00257300 736f7272  r flag: .%s.sorr
+ 405020 792c2079 6f752066 6c616720 69732077  y, you flag is w
+ 405030 726f6e67 2e00736f 7272792c 20796f75  rong..sorry, you
+ 405040 7220666c 61672069 73207772 6f6e672e  r flag is wrong.
+ 405050 00737563 63657373 21212100 00000000  .success!!!.....
+ 405060 40854000 00000000 60804000 00000000  @.@.....`.@.....
+ 405070 00000000 00000000 00000000 00000000  ................
+ 405080 40234000 00000000 00000000 00000000  @#@.............
+ 405090 00000000 00000000 00000000 00000000  ................
+ 4050a0 00b04000 00000000 08b04000 00000000  ..@.......@.....
+ 4050b0 fc854000 00000000 40a04000 00000000  ..@.....@.@.....
+ 4050c0 00000000 00000000 00000000 00000000  ................
+ 4050d0 00000000 00000000 00000000 00000000  ................
+ 4050e0 41726775 6d656e74 20646f6d 61696e20  Argument domain
+ 4050f0 6572726f 72202844 4f4d4149 4e290041  error (DOMAIN).A
+ 405100 7267756d 656e7420 73696e67 756c6172  rgument singular
+ 405110 69747920 28534947 4e290000 00000000  ity (SIGN)......
+ 405120 4f766572 666c6f77 2072616e 67652065  Overflow range e
+ 405130 72726f72 20284f56 4552464c 4f572900  rror (OVERFLOW).
+ 405140 50617274 69616c20 6c6f7373 206f6620  Partial loss of
+ 405150 7369676e 69666963 616e6365 2028504c  significance (PL
+ 405160 4f535329 00000000 546f7461 6c206c6f  OSS)....Total lo
+ 405170 7373206f 66207369 676e6966 6963616e  ss of significan
+ 405180 63652028 544c4f53 53290000 00000000  ce (TLOSS)......
+ 405190 54686520 72657375 6c742069 7320746f  The result is to
+ 4051a0 6f20736d 616c6c20 746f2062 65207265  o small to be re
+ 4051b0 70726573 656e7465 64202855 4e444552  presented (UNDER
+ 4051c0 464c4f57 2900556e 6b6e6f77 6e206572  FLOW).Unknown er
+ 4051d0 726f7200 00000000 5f6d6174 68657272  ror....._matherr
+ 4051e0 28293a20 25732069 6e202573 2825672c  (): %s in %s(%g,
+ 4051f0 20256729 20202872 65747661 6c3d2567   %g)  (retval=%g
+ 405200 290a0000 1cd3ffff 5dd2ffff ccd2ffff  ).......].......
+ 405210 dcd2ffff ecd2ffff fcd2ffff 0cd3ffff  ................
+ 405220 4d696e67 772d7736 34207275 6e74696d  Mingw-w64 runtim
+ 405230 65206661 696c7572 653a0a00 00000000  e failure:......
+ 405240 41646472 65737320 25702068 6173206e  Address %p has n
+ 405250 6f20696d 6167652d 73656374 696f6e00  o image-section.
+ 405260 20205669 72747561 6c517565 72792066    VirtualQuery f
+ 405270 61696c65 6420666f 72202564 20627974  ailed for %d byt
+ 405280 65732061 74206164 64726573 73202570  es at address %p
+ 405290 00000000 00000000 20205669 72747561  ........  Virtua
+ 4052a0 6c50726f 74656374 20666169 6c656420  lProtect failed
+ 4052b0 77697468 20636f64 65203078 25780000  with code 0x%x..
+ 4052c0 2020556e 6b6e6f77 6e207073 6575646f    Unknown pseudo
+ 4052d0 2072656c 6f636174 696f6e20 70726f74   relocation prot
+ 4052e0 6f636f6c 20766572 73696f6e 2025642e  ocol version %d.
+ 4052f0 0a000000 00000000 2020556e 6b6e6f77  ........  Unknow
+ 405300 6e207073 6575646f 2072656c 6f636174  n pseudo relocat
+ 405310 696f6e20 62697420 73697a65 2025642e  ion bit size %d.
+ 405320 0a000000 00000000 00000000 00000000  ................
+ 405330 2e706461 74610000 00000000 00000000  .pdata..........
+ 405340 80424000 00000000 00000000 00000000  .B@.............
+ 405350 90424000 00000000 00000000 00000000  .B@.............
+ 405360 70374000 00000000 00000000 00000000  p7@.............
+ 405370 70554000 00000000 00000000 00000000  pU@.............
+ 405380 70554000 00000000 00000000 00000000  pU@.............
+ 405390 80504000 00000000 00000000 00000000  .P@.............
+ 4053a0 00004000 00000000 00000000 00000000  ..@.............
+ 4053b0 ac924000 00000000 00000000 00000000  ..@.............
+ 4053c0 d4924000 00000000 00000000 00000000  ..@.............
+ 4053d0 ec924000 00000000 00000000 00000000  ..@.............
+ 4053e0 40864000 00000000 00000000 00000000  @.@.............
+ 4053f0 78894000 00000000 00000000 00000000  x.@.............
+ 405400 70894000 00000000 00000000 00000000  p.@.............
+ 405410 00a04000 00000000 00000000 00000000  ..@.............
+ 405420 10a04000 00000000 00000000 00000000  ..@.............
+ 405430 18a04000 00000000 00000000 00000000  ..@.............
+ 405440 30a04000 00000000 00000000 00000000  0.@.............
+ 405450 60424000 00000000 00000000 00000000  `B@.............
+ 405460 30864000 00000000 00000000 00000000  0.@.............
+ 405470 802c4000 00000000 00000000 00000000  .,@.............
+ 405480 30244000 00000000 00000000 00000000  0$@.............
+ 405490 e0854000 00000000 00000000 00000000  ..@.............
+ 4054a0 10864000 00000000 00000000 00000000  ..@.............
+ 4054b0 40804000 00000000 00000000 00000000  @.@.............
+ 4054c0 f8854000 00000000 00000000 00000000  ..@.............
+ 4054d0 f4854000 00000000 00000000 00000000  ..@.............
+ 4054e0 f0854000 00000000 00000000 00000000  ..@.............
+ 4054f0 4743433a 20287838 365f3634 2d706f73  GCC: (x86_64-pos
+ 405500 69782d73 65682d72 6576302c 20427569  ix-seh-rev0, Bui
+ 405510 6c742062 79204d69 6e47572d 57363420  lt by MinGW-W64
+ 405520 70726f6a 65637429 20382e31 2e300000  project) 8.1.0..
+ 405530 4743433a 20287838 365f3634 2d706f73  GCC: (x86_64-pos
+ 405540 69782d73 65682d72 6576302c 20427569  ix-seh-rev0, Bui
+ 405550 6c742062 79204d69 6e47572d 57363420  lt by MinGW-W64
+ 405560 70726f6a 65637429 20382e31 2e300000  project) 8.1.0..
+**********************
+PowerShell transcript end
+End time: 20260929144003
+**********************
+**********************
+PowerShell transcript start
+Start time: 20260929144039
+Username: DESKTOP-412KTAR\mzj
+RunAs User: DESKTOP-412KTAR\mzj
+Configuration Name: 
+Machine: DESKTOP-412KTAR (Microsoft Windows NT 10.0.26200.0)
+Host Application: C:\Users\mzj\.cache\codex-runtimes\codex-primary-runtime\dependencies\native\powershell\pwsh.dll -Command try { [Console]::OutputEncoding=[System.Text.Encoding]::UTF8 } catch {}
+$analysis='C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\批次13_20260929\538_湘岚杯1997\analysis'; $transcript=Join-Path $analysis '538_static_transcript_20260929.txt'; Start-Transcript -LiteralPath $transcript -Append | Out-Null; try { Write-Output 'COMMAND> python -c "import importlib.util; print availability of Crypto and cryptography"'; python -c "import importlib.util; print({m:bool(importlib.util.find_spec(m)) for m in ['Crypto','cryptography']})"; Write-Output 'COMMAND> Get-Command openssl -ErrorAction SilentlyContinue'; Get-Command openssl -ErrorAction SilentlyContinue | Select-Object Name,Source | Format-List; Write-Output 'COMMAND> Inspect objdump main disassembly around 401f76..402033'; Get-Content -LiteralPath (Join-Path $analysis '538_objdump_main.txt') | Select-Object -Skip 116 -First 80 } finally { Stop-Transcript | Out-Null }
+Process ID: 27988
+PSVersion: 7.6.5
+PSEdition: Core
+GitCommitId: 7.6.5
+OS: Microsoft Windows 10.0.26200
+Platform: Win32NT
+PSCompatibleVersions: 1.0, 2.0, 3.0, 4.0, 5.0, 5.1, 6.0, 7.0
+PSRemotingProtocolVersion: 2.4
+SerializationVersion: 1.1.0.1
+WSManStackVersion: 3.0
+**********************
+COMMAND> python -c "import importlib.util; print availability of Crypto and cryptography"
+
+COMMAND> Get-Command openssl -ErrorAction SilentlyContinue
+
+Name   : openssl.exe
+Source : C:\msys64\mingw64\bin\openssl.exe
+
+COMMAND> Inspect objdump main disassembly around 401f76..402033
+  401ff2:	e8 31 15 00 00       	call   403528 <puts>
+  401ff7:	b9 00 00 00 00       	mov    ecx,0x0
+  401ffc:	e8 57 15 00 00       	call   403558 <exit>
+  402001:	0f b6 85 df 00 00 00 	movzx  eax,BYTE PTR [rbp+0xdf]
+  402008:	83 c0 01             	add    eax,0x1
+  40200b:	88 85 df 00 00 00    	mov    BYTE PTR [rbp+0xdf],al
+  402011:	80 bd df 00 00 00 1f 	cmp    BYTE PTR [rbp+0xdf],0x1f
+  402018:	76 ae                	jbe    401fc8 <main+0x238>
+  40201a:	48 8d 0d 30 30 00 00 	lea    rcx,[rip+0x3030]        # 405051 <.rdata+0x51>
+  402021:	e8 02 15 00 00       	call   403528 <puts>
+  402026:	b8 00 00 00 00       	mov    eax,0x0
+  40202b:	48 81 c4 60 01 00 00 	add    rsp,0x160
+  402032:	5d                   	pop    rbp
+  402033:	c3                   	ret
+  402034:	90                   	nop
+  402035:	90                   	nop
+  402036:	90                   	nop
+  402037:	90                   	nop
+  402038:	90                   	nop
+  402039:	90                   	nop
+  40203a:	90                   	nop
+  40203b:	90                   	nop
+  40203c:	90                   	nop
+  40203d:	90                   	nop
+  40203e:	90                   	nop
+  40203f:	90                   	nop
+**********************
+PowerShell transcript end
+End time: 20260929144039
+**********************
+**********************
+PowerShell transcript start
+Start time: 20260929144111
+Username: DESKTOP-412KTAR\mzj
+RunAs User: DESKTOP-412KTAR\mzj
+Configuration Name: 
+Machine: DESKTOP-412KTAR (Microsoft Windows NT 10.0.26200.0)
+Host Application: C:\Users\mzj\.cache\codex-runtimes\codex-primary-runtime\dependencies\native\powershell\pwsh.dll -Command try { [Console]::OutputEncoding=[System.Text.Encoding]::UTF8 } catch {}
+$analysis='C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\批次13_20260929\538_湘岚杯1997\analysis'; $scriptPath=Join-Path $analysis '538_decrypt_verify.py'; $transcript=Join-Path $analysis '538_static_transcript_20260929.txt'; @'
+from pathlib import Path
+import re
+from cryptography.hazmat.primitives.ciphers import Cipher, algorithms, modes
+
+analysis = Path(__file__).resolve().parent
+listing = (analysis / '538_objdump_main.txt').read_text(encoding='utf-8-sig', errors='replace')
+values = {}
+for line in listing.splitlines():
+    m = re.search(r'\[rbp\+0x([0-9a-fA-F]+)\],0x([0-9a-fA-F]+)', line)
+    if m:
+        offset, value = (int(m.group(1), 16), int(m.group(2), 16))
+        values[offset] = value
+ciphertext = bytes(values[offset] for offset in range(0xA0, 0xC0))
+key = bytes(values[offset] for offset in range(0xC0, 0xD0))
+assert len(ciphertext) == 32 and len(key) == 16, (len(ciphertext), len(key))
+decryptor = Cipher(algorithms.AES(key), modes.ECB()).decryptor()
+plaintext = decryptor.update(ciphertext) + decryptor.finalize()
+encryptor = Cipher(algorithms.AES(key), modes.ECB()).encryptor()
+roundtrip = encryptor.update(plaintext) + encryptor.finalize()
+print(f'KEY_HEX={key.hex()}')
+print(f'KEY_ASCII={key.decode("ascii")}')
+print(f'CIPHERTEXT_HEX={ciphertext.hex()}')
+print(f'PLAINTEXT_HEX={plaintext.hex()}')
+print(f'PLAINTEXT_ASCII={plaintext.decode("ascii")}')
+print(f'PLAINTEXT_LEN={len(plaintext)}')
+print(f'REENCRYPT_HEX={roundtrip.hex()}')
+print(f'ROUNDTRIP_MATCH={roundtrip == ciphertext}')
+print(f'FLAG_SHAPE={plaintext.startswith(b"flag{") and plaintext.endswith(b"}")}')
+'@ | Set-Content -LiteralPath $scriptPath -Encoding UTF8; Start-Transcript -LiteralPath $transcript -Append | Out-Null; try { Write-Output 'COMMAND> python analysis\538_decrypt_verify.py'; python $scriptPath } finally { Stop-Transcript | Out-Null }
+Process ID: 34984
+PSVersion: 7.6.5
+PSEdition: Core
+GitCommitId: 7.6.5
+OS: Microsoft Windows 10.0.26200
+Platform: Win32NT
+PSCompatibleVersions: 1.0, 2.0, 3.0, 4.0, 5.0, 5.1, 6.0, 7.0
+PSRemotingProtocolVersion: 2.4
+SerializationVersion: 1.1.0.1
+WSManStackVersion: 3.0
+**********************
+COMMAND> python analysis\538_decrypt_verify.py
+
+**********************
+PowerShell transcript end
+End time: 20260929144111
+**********************
+**********************
+PowerShell transcript start
+Start time: 20260929144221
+Username: DESKTOP-412KTAR\mzj
+RunAs User: DESKTOP-412KTAR\mzj
+Configuration Name: 
+Machine: DESKTOP-412KTAR (Microsoft Windows NT 10.0.26200.0)
+Host Application: C:\Users\mzj\.cache\codex-runtimes\codex-primary-runtime\dependencies\native\powershell\pwsh.dll -Command try { [Console]::OutputEncoding=[System.Text.Encoding]::UTF8 } catch {}
+$ErrorActionPreference='Stop'; $analysis='C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\批次13_20260929\538_湘岚杯1997\analysis'; $transcript=Join-Path $analysis '538_static_transcript_20260929.txt'; $source=Join-Path $analysis '123.exe'; New-Item -ItemType Directory -Force -Path 'C:\CTFwork' | Out-Null; Copy-Item -LiteralPath $source -Destination 'C:\CTFwork\xj538.exe' -Force; Start-Transcript -LiteralPath $transcript -Append | Out-Null; try { Write-Output 'COMMAND> Copy-Item analysis\123.exe C:\CTFwork\xj538.exe -Force; Get-FileHash both files'; Get-FileHash -LiteralPath $source,'C:\CTFwork\xj538.exe' -Algorithm SHA256 | Format-Table Path,Hash -AutoSize; Push-Location 'C:\CTFwork'; try { foreach($spec in @(@{args=@('-d','-Mintel','--disassemble=aes_encrypt_128','xj538.exe');name='538_objdump_aes_encrypt.txt';label='aes_encrypt_128'},@{args=@('-d','-Mintel','--disassemble=aes_key_schedule_128','xj538.exe');name='538_objdump_key_schedule.txt';label='aes_key_schedule_128'},@{args=@('-d','-Mintel','--disassemble=shift_rows','xj538.exe');name='538_objdump_shift_rows.txt';label='shift_rows'},@{args=@('-d','-Mintel','--disassemble=mul2','xj538.exe');name='538_objdump_mul2.txt';label='mul2'})){ Write-Output ("COMMAND> objdump -d -Mintel --disassemble={0} C:\CTFwork\xj538.exe; output -> project analysis\{1}" -f $spec.label,$spec.name); & objdump @($spec.args) 2>&1 | Out-File -LiteralPath (Join-Path $analysis $spec.name) -Encoding utf8; Write-Output ("EXIT_CODE={0}" -f $LASTEXITCODE); Get-Content -LiteralPath (Join-Path $analysis $spec.name) | Select-Object -First 260 } } finally { Pop-Location } } finally { Stop-Transcript | Out-Null }
+Process ID: 13400
+PSVersion: 7.6.5
+PSEdition: Core
+GitCommitId: 7.6.5
+OS: Microsoft Windows 10.0.26200
+Platform: Win32NT
+PSCompatibleVersions: 1.0, 2.0, 3.0, 4.0, 5.0, 5.1, 6.0, 7.0
+PSRemotingProtocolVersion: 2.4
+SerializationVersion: 1.1.0.1
+WSManStackVersion: 3.0
+**********************
+COMMAND> Copy-Item analysis\123.exe C:\CTFwork\xj538.exe -Force; Get-FileHash both files
+
+Path                                                                                       Hash
+----                                                                                       ----
+C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\批次13_20260929\538_湘岚杯1997\analysis\123.exe 5046A87DE6DAC33CE11CD139D06…
+C:\CTFwork\xj538.exe                                                                       5046A87DE6DAC33CE11CD139D06…
+
+COMMAND> objdump -d -Mintel --disassemble=aes_encrypt_128 C:\CTFwork\xj538.exe; output -> project analysis\538_objdump_aes_encrypt.txt
+EXIT_CODE=0
+
+xj538.exe:     file format pei-x86-64
+
+
+Disassembly of section .text:
+
+0000000000401a7f <aes_encrypt_128>:
+  401a7f:	55                   	push   rbp
+  401a80:	48 89 e5             	mov    rbp,rsp
+  401a83:	48 83 ec 40          	sub    rsp,0x40
+  401a87:	48 89 4d 10          	mov    QWORD PTR [rbp+0x10],rcx
+  401a8b:	48 89 55 18          	mov    QWORD PTR [rbp+0x18],rdx
+  401a8f:	4c 89 45 20          	mov    QWORD PTR [rbp+0x20],r8
+  401a93:	c6 45 ff 00          	mov    BYTE PTR [rbp-0x1],0x0
+  401a97:	eb 34                	jmp    401acd <aes_encrypt_128+0x4e>
+  401a99:	0f b6 45 ff          	movzx  eax,BYTE PTR [rbp-0x1]
+  401a9d:	48 8b 55 18          	mov    rdx,QWORD PTR [rbp+0x18]
+  401aa1:	48 01 d0             	add    rax,rdx
+  401aa4:	44 0f b6 00          	movzx  r8d,BYTE PTR [rax]
+  401aa8:	48 8b 45 10          	mov    rax,QWORD PTR [rbp+0x10]
+  401aac:	48 8d 50 01          	lea    rdx,[rax+0x1]
+  401ab0:	48 89 55 10          	mov    QWORD PTR [rbp+0x10],rdx
+  401ab4:	0f b6 08             	movzx  ecx,BYTE PTR [rax]
+  401ab7:	0f b6 45 ff          	movzx  eax,BYTE PTR [rbp-0x1]
+  401abb:	48 8b 55 20          	mov    rdx,QWORD PTR [rbp+0x20]
+  401abf:	48 01 d0             	add    rax,rdx
+  401ac2:	44 89 c2             	mov    edx,r8d
+  401ac5:	31 ca                	xor    edx,ecx
+  401ac7:	88 10                	mov    BYTE PTR [rax],dl
+  401ac9:	80 45 ff 01          	add    BYTE PTR [rbp-0x1],0x1
+  401acd:	80 7d ff 0f          	cmp    BYTE PTR [rbp-0x1],0xf
+  401ad1:	76 c6                	jbe    401a99 <aes_encrypt_128+0x1a>
+  401ad3:	c6 45 fe 01          	mov    BYTE PTR [rbp-0x2],0x1
+  401ad7:	e9 1b 02 00 00       	jmp    401cf7 <aes_encrypt_128+0x278>
+  401adc:	c6 45 ff 00          	mov    BYTE PTR [rbp-0x1],0x0
+  401ae0:	eb 2f                	jmp    401b11 <aes_encrypt_128+0x92>
+  401ae2:	0f b6 45 ff          	movzx  eax,BYTE PTR [rbp-0x1]
+  401ae6:	48 8b 55 20          	mov    rdx,QWORD PTR [rbp+0x20]
+  401aea:	48 01 d0             	add    rax,rdx
+  401aed:	0f b6 00             	movzx  eax,BYTE PTR [rax]
+  401af0:	0f b6 c0             	movzx  eax,al
+  401af3:	0f b6 55 ff          	movzx  edx,BYTE PTR [rbp-0x1]
+  401af7:	48 8d 4d e0          	lea    rcx,[rbp-0x20]
+  401afb:	48 01 ca             	add    rdx,rcx
+  401afe:	48 98                	cdqe
+  401b00:	48 8d 0d 39 26 00 00 	lea    rcx,[rip+0x2639]        # 404140 <INV_SBOX>
+  401b07:	0f b6 04 08          	movzx  eax,BYTE PTR [rax+rcx*1]
+  401b0b:	88 02                	mov    BYTE PTR [rdx],al
+  401b0d:	80 45 ff 01          	add    BYTE PTR [rbp-0x1],0x1
+  401b11:	80 7d ff 0f          	cmp    BYTE PTR [rbp-0x1],0xf
+  401b15:	76 cb                	jbe    401ae2 <aes_encrypt_128+0x63>
+  401b17:	48 8d 45 e0          	lea    rax,[rbp-0x20]
+  401b1b:	48 89 c1             	mov    rcx,rax
+  401b1e:	e8 51 fa ff ff       	call   401574 <shift_rows>
+  401b23:	c6 45 ff 00          	mov    BYTE PTR [rbp-0x1],0x0
+  401b27:	e9 7d 01 00 00       	jmp    401ca9 <aes_encrypt_128+0x22a>
+  401b2c:	0f b6 45 ff          	movzx  eax,BYTE PTR [rbp-0x1]
+  401b30:	48 98                	cdqe
+  401b32:	0f b6 54 05 e0       	movzx  edx,BYTE PTR [rbp+rax*1-0x20]
+  401b37:	0f b6 45 ff          	movzx  eax,BYTE PTR [rbp-0x1]
+  401b3b:	83 c0 01             	add    eax,0x1
+  401b3e:	48 98                	cdqe
+  401b40:	0f b6 44 05 e0       	movzx  eax,BYTE PTR [rbp+rax*1-0x20]
+  401b45:	31 c2                	xor    edx,eax
+  401b47:	0f b6 45 ff          	movzx  eax,BYTE PTR [rbp-0x1]
+  401b4b:	83 c0 02             	add    eax,0x2
+  401b4e:	48 98                	cdqe
+  401b50:	0f b6 44 05 e0       	movzx  eax,BYTE PTR [rbp+rax*1-0x20]
+  401b55:	31 c2                	xor    edx,eax
+  401b57:	0f b6 45 ff          	movzx  eax,BYTE PTR [rbp-0x1]
+  401b5b:	83 c0 03             	add    eax,0x3
+  401b5e:	48 98                	cdqe
+  401b60:	0f b6 44 05 e0       	movzx  eax,BYTE PTR [rbp+rax*1-0x20]
+  401b65:	31 d0                	xor    eax,edx
+  401b67:	88 45 fd             	mov    BYTE PTR [rbp-0x3],al
+  401b6a:	0f b6 45 ff          	movzx  eax,BYTE PTR [rbp-0x1]
+  401b6e:	48 98                	cdqe
+  401b70:	0f b6 54 05 e0       	movzx  edx,BYTE PTR [rbp+rax*1-0x20]
+  401b75:	0f b6 45 ff          	movzx  eax,BYTE PTR [rbp-0x1]
+  401b79:	83 c0 01             	add    eax,0x1
+  401b7c:	48 98                	cdqe
+  401b7e:	0f b6 44 05 e0       	movzx  eax,BYTE PTR [rbp+rax*1-0x20]
+  401b83:	31 d0                	xor    eax,edx
+  401b85:	0f b6 c0             	movzx  eax,al
+  401b88:	89 c1                	mov    ecx,eax
+  401b8a:	e8 c1 f9 ff ff       	call   401550 <mul2>
+  401b8f:	89 c2                	mov    edx,eax
+  401b91:	0f b6 45 ff          	movzx  eax,BYTE PTR [rbp-0x1]
+  401b95:	48 98                	cdqe
+  401b97:	0f b6 44 05 e0       	movzx  eax,BYTE PTR [rbp+rax*1-0x20]
+  401b9c:	89 d1                	mov    ecx,edx
+  401b9e:	31 c1                	xor    ecx,eax
+  401ba0:	0f b6 45 ff          	movzx  eax,BYTE PTR [rbp-0x1]
+  401ba4:	48 8b 55 20          	mov    rdx,QWORD PTR [rbp+0x20]
+  401ba8:	48 01 c2             	add    rdx,rax
+  401bab:	89 c8                	mov    eax,ecx
+  401bad:	32 45 fd             	xor    al,BYTE PTR [rbp-0x3]
+  401bb0:	88 02                	mov    BYTE PTR [rdx],al
+  401bb2:	0f b6 45 ff          	movzx  eax,BYTE PTR [rbp-0x1]
+  401bb6:	83 c0 01             	add    eax,0x1
+  401bb9:	48 98                	cdqe
+  401bbb:	0f b6 54 05 e0       	movzx  edx,BYTE PTR [rbp+rax*1-0x20]
+  401bc0:	0f b6 45 ff          	movzx  eax,BYTE PTR [rbp-0x1]
+  401bc4:	83 c0 02             	add    eax,0x2
+  401bc7:	48 98                	cdqe
+  401bc9:	0f b6 44 05 e0       	movzx  eax,BYTE PTR [rbp+rax*1-0x20]
+  401bce:	31 d0                	xor    eax,edx
+  401bd0:	0f b6 c0             	movzx  eax,al
+  401bd3:	89 c1                	mov    ecx,eax
+  401bd5:	e8 76 f9 ff ff       	call   401550 <mul2>
+  401bda:	89 c2                	mov    edx,eax
+  401bdc:	0f b6 45 ff          	movzx  eax,BYTE PTR [rbp-0x1]
+  401be0:	83 c0 01             	add    eax,0x1
+  401be3:	48 98                	cdqe
+  401be5:	0f b6 44 05 e0       	movzx  eax,BYTE PTR [rbp+rax*1-0x20]
+  401bea:	89 d1                	mov    ecx,edx
+  401bec:	31 c1                	xor    ecx,eax
+  401bee:	0f b6 45 ff          	movzx  eax,BYTE PTR [rbp-0x1]
+  401bf2:	48 8d 50 01          	lea    rdx,[rax+0x1]
+  401bf6:	48 8b 45 20          	mov    rax,QWORD PTR [rbp+0x20]
+  401bfa:	48 01 c2             	add    rdx,rax
+  401bfd:	89 c8                	mov    eax,ecx
+  401bff:	32 45 fd             	xor    al,BYTE PTR [rbp-0x3]
+  401c02:	88 02                	mov    BYTE PTR [rdx],al
+  401c04:	0f b6 45 ff          	movzx  eax,BYTE PTR [rbp-0x1]
+  401c08:	83 c0 02             	add    eax,0x2
+  401c0b:	48 98                	cdqe
+  401c0d:	0f b6 54 05 e0       	movzx  edx,BYTE PTR [rbp+rax*1-0x20]
+  401c12:	0f b6 45 ff          	movzx  eax,BYTE PTR [rbp-0x1]
+  401c16:	83 c0 03             	add    eax,0x3
+  401c19:	48 98                	cdqe
+  401c1b:	0f b6 44 05 e0       	movzx  eax,BYTE PTR [rbp+rax*1-0x20]
+  401c20:	31 d0                	xor    eax,edx
+  401c22:	0f b6 c0             	movzx  eax,al
+  401c25:	89 c1                	mov    ecx,eax
+  401c27:	e8 24 f9 ff ff       	call   401550 <mul2>
+  401c2c:	89 c2                	mov    edx,eax
+  401c2e:	0f b6 45 ff          	movzx  eax,BYTE PTR [rbp-0x1]
+  401c32:	83 c0 02             	add    eax,0x2
+  401c35:	48 98                	cdqe
+  401c37:	0f b6 44 05 e0       	movzx  eax,BYTE PTR [rbp+rax*1-0x20]
+  401c3c:	89 d1                	mov    ecx,edx
+  401c3e:	31 c1                	xor    ecx,eax
+  401c40:	0f b6 45 ff          	movzx  eax,BYTE PTR [rbp-0x1]
+  401c44:	48 8d 50 02          	lea    rdx,[rax+0x2]
+  401c48:	48 8b 45 20          	mov    rax,QWORD PTR [rbp+0x20]
+  401c4c:	48 01 c2             	add    rdx,rax
+  401c4f:	89 c8                	mov    eax,ecx
+  401c51:	32 45 fd             	xor    al,BYTE PTR [rbp-0x3]
+  401c54:	88 02                	mov    BYTE PTR [rdx],al
+  401c56:	0f b6 45 ff          	movzx  eax,BYTE PTR [rbp-0x1]
+  401c5a:	83 c0 03             	add    eax,0x3
+  401c5d:	48 98                	cdqe
+  401c5f:	0f b6 54 05 e0       	movzx  edx,BYTE PTR [rbp+rax*1-0x20]
+  401c64:	0f b6 45 ff          	movzx  eax,BYTE PTR [rbp-0x1]
+  401c68:	48 98                	cdqe
+  401c6a:	0f b6 44 05 e0       	movzx  eax,BYTE PTR [rbp+rax*1-0x20]
+  401c6f:	31 d0                	xor    eax,edx
+  401c71:	0f b6 c0             	movzx  eax,al
+  401c74:	89 c1                	mov    ecx,eax
+  401c76:	e8 d5 f8 ff ff       	call   401550 <mul2>
+  401c7b:	89 c2                	mov    edx,eax
+  401c7d:	0f b6 45 ff          	movzx  eax,BYTE PTR [rbp-0x1]
+  401c81:	83 c0 03             	add    eax,0x3
+  401c84:	48 98                	cdqe
+  401c86:	0f b6 44 05 e0       	movzx  eax,BYTE PTR [rbp+rax*1-0x20]
+  401c8b:	89 d1                	mov    ecx,edx
+  401c8d:	31 c1                	xor    ecx,eax
+  401c8f:	0f b6 45 ff          	movzx  eax,BYTE PTR [rbp-0x1]
+  401c93:	48 8d 50 03          	lea    rdx,[rax+0x3]
+  401c97:	48 8b 45 20          	mov    rax,QWORD PTR [rbp+0x20]
+  401c9b:	48 01 c2             	add    rdx,rax
+  401c9e:	89 c8                	mov    eax,ecx
+  401ca0:	32 45 fd             	xor    al,BYTE PTR [rbp-0x3]
+  401ca3:	88 02                	mov    BYTE PTR [rdx],al
+  401ca5:	80 45 ff 04          	add    BYTE PTR [rbp-0x1],0x4
+  401ca9:	80 7d ff 0f          	cmp    BYTE PTR [rbp-0x1],0xf
+  401cad:	0f 86 79 fe ff ff    	jbe    401b2c <aes_encrypt_128+0xad>
+  401cb3:	c6 45 ff 00          	mov    BYTE PTR [rbp-0x1],0x0
+  401cb7:	eb 34                	jmp    401ced <aes_encrypt_128+0x26e>
+  401cb9:	48 8b 45 10          	mov    rax,QWORD PTR [rbp+0x10]
+  401cbd:	48 8d 50 01          	lea    rdx,[rax+0x1]
+  401cc1:	48 89 55 10          	mov    QWORD PTR [rbp+0x10],rdx
+  401cc5:	44 0f b6 00          	movzx  r8d,BYTE PTR [rax]
+  401cc9:	0f b6 45 ff          	movzx  eax,BYTE PTR [rbp-0x1]
+  401ccd:	48 8b 55 20          	mov    rdx,QWORD PTR [rbp+0x20]
+  401cd1:	48 01 d0             	add    rax,rdx
+  401cd4:	0f b6 08             	movzx  ecx,BYTE PTR [rax]
+  401cd7:	0f b6 45 ff          	movzx  eax,BYTE PTR [rbp-0x1]
+  401cdb:	48 8b 55 20          	mov    rdx,QWORD PTR [rbp+0x20]
+  401cdf:	48 01 d0             	add    rax,rdx
+  401ce2:	44 89 c2             	mov    edx,r8d
+  401ce5:	31 ca                	xor    edx,ecx
+  401ce7:	88 10                	mov    BYTE PTR [rax],dl
+  401ce9:	80 45 ff 01          	add    BYTE PTR [rbp-0x1],0x1
+  401ced:	80 7d ff 0f          	cmp    BYTE PTR [rbp-0x1],0xf
+  401cf1:	76 c6                	jbe    401cb9 <aes_encrypt_128+0x23a>
+  401cf3:	80 45 fe 01          	add    BYTE PTR [rbp-0x2],0x1
+  401cf7:	80 7d fe 09          	cmp    BYTE PTR [rbp-0x2],0x9
+  401cfb:	0f 86 db fd ff ff    	jbe    401adc <aes_encrypt_128+0x5d>
+  401d01:	c6 45 ff 00          	mov    BYTE PTR [rbp-0x1],0x0
+  401d05:	eb 2f                	jmp    401d36 <aes_encrypt_128+0x2b7>
+  401d07:	0f b6 45 ff          	movzx  eax,BYTE PTR [rbp-0x1]
+  401d0b:	48 8b 55 20          	mov    rdx,QWORD PTR [rbp+0x20]
+  401d0f:	48 01 d0             	add    rax,rdx
+  401d12:	0f b6 00             	movzx  eax,BYTE PTR [rax]
+  401d15:	0f b6 c0             	movzx  eax,al
+  401d18:	0f b6 55 ff          	movzx  edx,BYTE PTR [rbp-0x1]
+  401d1c:	48 8b 4d 20          	mov    rcx,QWORD PTR [rbp+0x20]
+  401d20:	48 01 ca             	add    rdx,rcx
+  401d23:	48 98                	cdqe
+  401d25:	48 8d 0d 14 24 00 00 	lea    rcx,[rip+0x2414]        # 404140 <INV_SBOX>
+  401d2c:	0f b6 04 08          	movzx  eax,BYTE PTR [rax+rcx*1]
+  401d30:	88 02                	mov    BYTE PTR [rdx],al
+  401d32:	80 45 ff 01          	add    BYTE PTR [rbp-0x1],0x1
+  401d36:	80 7d ff 0f          	cmp    BYTE PTR [rbp-0x1],0xf
+  401d3a:	76 cb                	jbe    401d07 <aes_encrypt_128+0x288>
+  401d3c:	48 8b 45 20          	mov    rax,QWORD PTR [rbp+0x20]
+  401d40:	48 89 c1             	mov    rcx,rax
+  401d43:	e8 2c f8 ff ff       	call   401574 <shift_rows>
+  401d48:	c6 45 ff 00          	mov    BYTE PTR [rbp-0x1],0x0
+  401d4c:	eb 34                	jmp    401d82 <aes_encrypt_128+0x303>
+  401d4e:	48 8b 45 10          	mov    rax,QWORD PTR [rbp+0x10]
+  401d52:	48 8d 50 01          	lea    rdx,[rax+0x1]
+  401d56:	48 89 55 10          	mov    QWORD PTR [rbp+0x10],rdx
+  401d5a:	44 0f b6 00          	movzx  r8d,BYTE PTR [rax]
+  401d5e:	0f b6 45 ff          	movzx  eax,BYTE PTR [rbp-0x1]
+  401d62:	48 8b 55 20          	mov    rdx,QWORD PTR [rbp+0x20]
+  401d66:	48 01 d0             	add    rax,rdx
+  401d69:	0f b6 08             	movzx  ecx,BYTE PTR [rax]
+  401d6c:	0f b6 45 ff          	movzx  eax,BYTE PTR [rbp-0x1]
+  401d70:	48 8b 55 20          	mov    rdx,QWORD PTR [rbp+0x20]
+  401d74:	48 01 d0             	add    rax,rdx
+  401d77:	44 89 c2             	mov    edx,r8d
+  401d7a:	31 ca                	xor    edx,ecx
+  401d7c:	88 10                	mov    BYTE PTR [rax],dl
+  401d7e:	80 45 ff 01          	add    BYTE PTR [rbp-0x1],0x1
+  401d82:	80 7d ff 0f          	cmp    BYTE PTR [rbp-0x1],0xf
+  401d86:	76 c6                	jbe    401d4e <aes_encrypt_128+0x2cf>
+  401d88:	90                   	nop
+  401d89:	48 83 c4 40          	add    rsp,0x40
+  401d8d:	5d                   	pop    rbp
+  401d8e:	c3                   	ret
+  401d8f:	90                   	nop
+COMMAND> objdump -d -Mintel --disassemble=aes_key_schedule_128 C:\CTFwork\xj538.exe; output -> project analysis\538_objdump_key_schedule.txt
+EXIT_CODE=0
+
+xj538.exe:     file format pei-x86-64
+
+
+Disassembly of section .text:
+
+0000000000401676 <aes_key_schedule_128>:
+  401676:	55                   	push   rbp
+  401677:	48 89 e5             	mov    rbp,rsp
+  40167a:	48 83 ec 20          	sub    rsp,0x20
+  40167e:	48 89 4d 10          	mov    QWORD PTR [rbp+0x10],rcx
+  401682:	48 89 55 18          	mov    QWORD PTR [rbp+0x18],rdx
+  401686:	c6 45 f7 00          	mov    BYTE PTR [rbp-0x9],0x0
+  40168a:	eb 21                	jmp    4016ad <aes_key_schedule_128+0x37>
+  40168c:	48 8b 55 10          	mov    rdx,QWORD PTR [rbp+0x10]
+  401690:	48 8d 42 01          	lea    rax,[rdx+0x1]
+  401694:	48 89 45 10          	mov    QWORD PTR [rbp+0x10],rax
+  401698:	48 8b 45 18          	mov    rax,QWORD PTR [rbp+0x18]
+  40169c:	48 8d 48 01          	lea    rcx,[rax+0x1]
+  4016a0:	48 89 4d 18          	mov    QWORD PTR [rbp+0x18],rcx
+  4016a4:	0f b6 12             	movzx  edx,BYTE PTR [rdx]
+  4016a7:	88 10                	mov    BYTE PTR [rax],dl
+  4016a9:	80 45 f7 01          	add    BYTE PTR [rbp-0x9],0x1
+  4016ad:	80 7d f7 0f          	cmp    BYTE PTR [rbp-0x9],0xf
+  4016b1:	76 d9                	jbe    40168c <aes_key_schedule_128+0x16>
+  4016b3:	48 8b 45 18          	mov    rax,QWORD PTR [rbp+0x18]
+  4016b7:	48 83 e8 04          	sub    rax,0x4
+  4016bb:	48 89 45 f8          	mov    QWORD PTR [rbp-0x8],rax
+  4016bf:	c6 45 f7 00          	mov    BYTE PTR [rbp-0x9],0x0
+  4016c3:	e9 a6 03 00 00       	jmp    401a6e <aes_key_schedule_128+0x3f8>
+  4016c8:	48 8b 45 f8          	mov    rax,QWORD PTR [rbp-0x8]
+  4016cc:	48 8d 50 01          	lea    rdx,[rax+0x1]
+  4016d0:	48 89 55 f8          	mov    QWORD PTR [rbp-0x8],rdx
+  4016d4:	0f b6 00             	movzx  eax,BYTE PTR [rax]
+  4016d7:	0f b6 c0             	movzx  eax,al
+  4016da:	48 98                	cdqe
+  4016dc:	48 8d 15 5d 29 00 00 	lea    rdx,[rip+0x295d]        # 404040 <SBOX>
+  4016e3:	0f b6 04 10          	movzx  eax,BYTE PTR [rax+rdx*1]
+  4016e7:	88 45 e7             	mov    BYTE PTR [rbp-0x19],al
+  4016ea:	48 8b 45 f8          	mov    rax,QWORD PTR [rbp-0x8]
+  4016ee:	48 8d 50 01          	lea    rdx,[rax+0x1]
+  4016f2:	48 89 55 f8          	mov    QWORD PTR [rbp-0x8],rdx
+  4016f6:	0f b6 00             	movzx  eax,BYTE PTR [rax]
+  4016f9:	0f b6 c0             	movzx  eax,al
+  4016fc:	48 98                	cdqe
+  4016fe:	48 8d 15 3b 29 00 00 	lea    rdx,[rip+0x293b]        # 404040 <SBOX>
+  401705:	0f b6 04 10          	movzx  eax,BYTE PTR [rax+rdx*1]
+  401709:	88 45 e4             	mov    BYTE PTR [rbp-0x1c],al
+  40170c:	48 8b 45 f8          	mov    rax,QWORD PTR [rbp-0x8]
+  401710:	48 8d 50 01          	lea    rdx,[rax+0x1]
+  401714:	48 89 55 f8          	mov    QWORD PTR [rbp-0x8],rdx
+  401718:	0f b6 00             	movzx  eax,BYTE PTR [rax]
+  40171b:	0f b6 c0             	movzx  eax,al
+  40171e:	48 98                	cdqe
+  401720:	48 8d 15 19 29 00 00 	lea    rdx,[rip+0x2919]        # 404040 <SBOX>
+  401727:	0f b6 04 10          	movzx  eax,BYTE PTR [rax+rdx*1]
+  40172b:	88 45 e5             	mov    BYTE PTR [rbp-0x1b],al
+  40172e:	48 8b 45 f8          	mov    rax,QWORD PTR [rbp-0x8]
+  401732:	48 8d 50 01          	lea    rdx,[rax+0x1]
+  401736:	48 89 55 f8          	mov    QWORD PTR [rbp-0x8],rdx
+  40173a:	0f b6 00             	movzx  eax,BYTE PTR [rax]
+  40173d:	0f b6 c0             	movzx  eax,al
+  401740:	48 98                	cdqe
+  401742:	48 8d 15 f7 28 00 00 	lea    rdx,[rip+0x28f7]        # 404040 <SBOX>
+  401749:	0f b6 04 10          	movzx  eax,BYTE PTR [rax+rdx*1]
+  40174d:	88 45 e6             	mov    BYTE PTR [rbp-0x1a],al
+  401750:	0f b6 4d e4          	movzx  ecx,BYTE PTR [rbp-0x1c]
+  401754:	0f b6 45 f7          	movzx  eax,BYTE PTR [rbp-0x9]
+  401758:	48 98                	cdqe
+  40175a:	48 8d 15 bf 28 00 00 	lea    rdx,[rip+0x28bf]        # 404020 <RC>
+  401761:	0f b6 04 10          	movzx  eax,BYTE PTR [rax+rdx*1]
+  401765:	31 c8                	xor    eax,ecx
+  401767:	88 45 e4             	mov    BYTE PTR [rbp-0x1c],al
+  40176a:	48 8b 45 18          	mov    rax,QWORD PTR [rbp+0x18]
+  40176e:	48 83 e8 10          	sub    rax,0x10
+  401772:	48 89 45 e8          	mov    QWORD PTR [rbp-0x18],rax
+  401776:	44 0f b6 45 e4       	movzx  r8d,BYTE PTR [rbp-0x1c]
+  40177b:	48 8b 45 e8          	mov    rax,QWORD PTR [rbp-0x18]
+  40177f:	48 8d 50 01          	lea    rdx,[rax+0x1]
+  401783:	48 89 55 e8          	mov    QWORD PTR [rbp-0x18],rdx
+  401787:	0f b6 08             	movzx  ecx,BYTE PTR [rax]
+  40178a:	48 8b 45 18          	mov    rax,QWORD PTR [rbp+0x18]
+  40178e:	48 8d 50 01          	lea    rdx,[rax+0x1]
+  401792:	48 89 55 18          	mov    QWORD PTR [rbp+0x18],rdx
+  401796:	44 89 c2             	mov    edx,r8d
+  401799:	31 ca                	xor    edx,ecx
+  40179b:	88 10                	mov    BYTE PTR [rax],dl
+  40179d:	44 0f b6 45 e5       	movzx  r8d,BYTE PTR [rbp-0x1b]
+  4017a2:	48 8b 45 e8          	mov    rax,QWORD PTR [rbp-0x18]
+  4017a6:	48 8d 50 01          	lea    rdx,[rax+0x1]
+  4017aa:	48 89 55 e8          	mov    QWORD PTR [rbp-0x18],rdx
+  4017ae:	0f b6 08             	movzx  ecx,BYTE PTR [rax]
+  4017b1:	48 8b 45 18          	mov    rax,QWORD PTR [rbp+0x18]
+  4017b5:	48 8d 50 01          	lea    rdx,[rax+0x1]
+  4017b9:	48 89 55 18          	mov    QWORD PTR [rbp+0x18],rdx
+  4017bd:	44 89 c2             	mov    edx,r8d
+  4017c0:	31 ca                	xor    edx,ecx
+  4017c2:	88 10                	mov    BYTE PTR [rax],dl
+  4017c4:	44 0f b6 45 e6       	movzx  r8d,BYTE PTR [rbp-0x1a]
+  4017c9:	48 8b 45 e8          	mov    rax,QWORD PTR [rbp-0x18]
+  4017cd:	48 8d 50 01          	lea    rdx,[rax+0x1]
+  4017d1:	48 89 55 e8          	mov    QWORD PTR [rbp-0x18],rdx
+  4017d5:	0f b6 08             	movzx  ecx,BYTE PTR [rax]
+  4017d8:	48 8b 45 18          	mov    rax,QWORD PTR [rbp+0x18]
+  4017dc:	48 8d 50 01          	lea    rdx,[rax+0x1]
+  4017e0:	48 89 55 18          	mov    QWORD PTR [rbp+0x18],rdx
+  4017e4:	44 89 c2             	mov    edx,r8d
+  4017e7:	31 ca                	xor    edx,ecx
+  4017e9:	88 10                	mov    BYTE PTR [rax],dl
+  4017eb:	44 0f b6 45 e7       	movzx  r8d,BYTE PTR [rbp-0x19]
+  4017f0:	48 8b 45 e8          	mov    rax,QWORD PTR [rbp-0x18]
+  4017f4:	48 8d 50 01          	lea    rdx,[rax+0x1]
+  4017f8:	48 89 55 e8          	mov    QWORD PTR [rbp-0x18],rdx
+  4017fc:	0f b6 08             	movzx  ecx,BYTE PTR [rax]
+  4017ff:	48 8b 45 18          	mov    rax,QWORD PTR [rbp+0x18]
+  401803:	48 8d 50 01          	lea    rdx,[rax+0x1]
+  401807:	48 89 55 18          	mov    QWORD PTR [rbp+0x18],rdx
+  40180b:	44 89 c2             	mov    edx,r8d
+  40180e:	31 ca                	xor    edx,ecx
+  401810:	88 10                	mov    BYTE PTR [rax],dl
+  401812:	48 8b 45 f8          	mov    rax,QWORD PTR [rbp-0x8]
+  401816:	48 8d 50 01          	lea    rdx,[rax+0x1]
+  40181a:	48 89 55 f8          	mov    QWORD PTR [rbp-0x8],rdx
+  40181e:	44 0f b6 00          	movzx  r8d,BYTE PTR [rax]
+  401822:	48 8b 45 e8          	mov    rax,QWORD PTR [rbp-0x18]
+  401826:	48 8d 50 01          	lea    rdx,[rax+0x1]
+  40182a:	48 89 55 e8          	mov    QWORD PTR [rbp-0x18],rdx
+  40182e:	0f b6 08             	movzx  ecx,BYTE PTR [rax]
+  401831:	48 8b 45 18          	mov    rax,QWORD PTR [rbp+0x18]
+  401835:	48 8d 50 01          	lea    rdx,[rax+0x1]
+  401839:	48 89 55 18          	mov    QWORD PTR [rbp+0x18],rdx
+  40183d:	44 89 c2             	mov    edx,r8d
+  401840:	31 ca                	xor    edx,ecx
+  401842:	88 10                	mov    BYTE PTR [rax],dl
+  401844:	48 8b 45 f8          	mov    rax,QWORD PTR [rbp-0x8]
+  401848:	48 8d 50 01          	lea    rdx,[rax+0x1]
+  40184c:	48 89 55 f8          	mov    QWORD PTR [rbp-0x8],rdx
+  401850:	44 0f b6 00          	movzx  r8d,BYTE PTR [rax]
+  401854:	48 8b 45 e8          	mov    rax,QWORD PTR [rbp-0x18]
+  401858:	48 8d 50 01          	lea    rdx,[rax+0x1]
+  40185c:	48 89 55 e8          	mov    QWORD PTR [rbp-0x18],rdx
+  401860:	0f b6 08             	movzx  ecx,BYTE PTR [rax]
+  401863:	48 8b 45 18          	mov    rax,QWORD PTR [rbp+0x18]
+  401867:	48 8d 50 01          	lea    rdx,[rax+0x1]
+  40186b:	48 89 55 18          	mov    QWORD PTR [rbp+0x18],rdx
+  40186f:	44 89 c2             	mov    edx,r8d
+  401872:	31 ca                	xor    edx,ecx
+  401874:	88 10                	mov    BYTE PTR [rax],dl
+  401876:	48 8b 45 f8          	mov    rax,QWORD PTR [rbp-0x8]
+  40187a:	48 8d 50 01          	lea    rdx,[rax+0x1]
+  40187e:	48 89 55 f8          	mov    QWORD PTR [rbp-0x8],rdx
+  401882:	44 0f b6 00          	movzx  r8d,BYTE PTR [rax]
+  401886:	48 8b 45 e8          	mov    rax,QWORD PTR [rbp-0x18]
+  40188a:	48 8d 50 01          	lea    rdx,[rax+0x1]
+  40188e:	48 89 55 e8          	mov    QWORD PTR [rbp-0x18],rdx
+  401892:	0f b6 08             	movzx  ecx,BYTE PTR [rax]
+  401895:	48 8b 45 18          	mov    rax,QWORD PTR [rbp+0x18]
+  401899:	48 8d 50 01          	lea    rdx,[rax+0x1]
+  40189d:	48 89 55 18          	mov    QWORD PTR [rbp+0x18],rdx
+  4018a1:	44 89 c2             	mov    edx,r8d
+  4018a4:	31 ca                	xor    edx,ecx
+  4018a6:	88 10                	mov    BYTE PTR [rax],dl
+  4018a8:	48 8b 45 f8          	mov    rax,QWORD PTR [rbp-0x8]
+  4018ac:	48 8d 50 01          	lea    rdx,[rax+0x1]
+  4018b0:	48 89 55 f8          	mov    QWORD PTR [rbp-0x8],rdx
+  4018b4:	44 0f b6 00          	movzx  r8d,BYTE PTR [rax]
+  4018b8:	48 8b 45 e8          	mov    rax,QWORD PTR [rbp-0x18]
+  4018bc:	48 8d 50 01          	lea    rdx,[rax+0x1]
+  4018c0:	48 89 55 e8          	mov    QWORD PTR [rbp-0x18],rdx
+  4018c4:	0f b6 08             	movzx  ecx,BYTE PTR [rax]
+  4018c7:	48 8b 45 18          	mov    rax,QWORD PTR [rbp+0x18]
+  4018cb:	48 8d 50 01          	lea    rdx,[rax+0x1]
+  4018cf:	48 89 55 18          	mov    QWORD PTR [rbp+0x18],rdx
+  4018d3:	44 89 c2             	mov    edx,r8d
+  4018d6:	31 ca                	xor    edx,ecx
+  4018d8:	88 10                	mov    BYTE PTR [rax],dl
+  4018da:	48 8b 45 f8          	mov    rax,QWORD PTR [rbp-0x8]
+  4018de:	48 8d 50 01          	lea    rdx,[rax+0x1]
+  4018e2:	48 89 55 f8          	mov    QWORD PTR [rbp-0x8],rdx
+  4018e6:	44 0f b6 00          	movzx  r8d,BYTE PTR [rax]
+  4018ea:	48 8b 45 e8          	mov    rax,QWORD PTR [rbp-0x18]
+  4018ee:	48 8d 50 01          	lea    rdx,[rax+0x1]
+  4018f2:	48 89 55 e8          	mov    QWORD PTR [rbp-0x18],rdx
+  4018f6:	0f b6 08             	movzx  ecx,BYTE PTR [rax]
+  4018f9:	48 8b 45 18          	mov    rax,QWORD PTR [rbp+0x18]
+  4018fd:	48 8d 50 01          	lea    rdx,[rax+0x1]
+  401901:	48 89 55 18          	mov    QWORD PTR [rbp+0x18],rdx
+  401905:	44 89 c2             	mov    edx,r8d
+  401908:	31 ca                	xor    edx,ecx
+  40190a:	88 10                	mov    BYTE PTR [rax],dl
+  40190c:	48 8b 45 f8          	mov    rax,QWORD PTR [rbp-0x8]
+  401910:	48 8d 50 01          	lea    rdx,[rax+0x1]
+  401914:	48 89 55 f8          	mov    QWORD PTR [rbp-0x8],rdx
+  401918:	44 0f b6 00          	movzx  r8d,BYTE PTR [rax]
+  40191c:	48 8b 45 e8          	mov    rax,QWORD PTR [rbp-0x18]
+  401920:	48 8d 50 01          	lea    rdx,[rax+0x1]
+  401924:	48 89 55 e8          	mov    QWORD PTR [rbp-0x18],rdx
+  401928:	0f b6 08             	movzx  ecx,BYTE PTR [rax]
+  40192b:	48 8b 45 18          	mov    rax,QWORD PTR [rbp+0x18]
+  40192f:	48 8d 50 01          	lea    rdx,[rax+0x1]
+  401933:	48 89 55 18          	mov    QWORD PTR [rbp+0x18],rdx
+  401937:	44 89 c2             	mov    edx,r8d
+  40193a:	31 ca                	xor    edx,ecx
+  40193c:	88 10                	mov    BYTE PTR [rax],dl
+  40193e:	48 8b 45 f8          	mov    rax,QWORD PTR [rbp-0x8]
+  401942:	48 8d 50 01          	lea    rdx,[rax+0x1]
+  401946:	48 89 55 f8          	mov    QWORD PTR [rbp-0x8],rdx
+  40194a:	44 0f b6 00          	movzx  r8d,BYTE PTR [rax]
+  40194e:	48 8b 45 e8          	mov    rax,QWORD PTR [rbp-0x18]
+  401952:	48 8d 50 01          	lea    rdx,[rax+0x1]
+  401956:	48 89 55 e8          	mov    QWORD PTR [rbp-0x18],rdx
+  40195a:	0f b6 08             	movzx  ecx,BYTE PTR [rax]
+  40195d:	48 8b 45 18          	mov    rax,QWORD PTR [rbp+0x18]
+  401961:	48 8d 50 01          	lea    rdx,[rax+0x1]
+  401965:	48 89 55 18          	mov    QWORD PTR [rbp+0x18],rdx
+  401969:	44 89 c2             	mov    edx,r8d
+  40196c:	31 ca                	xor    edx,ecx
+  40196e:	88 10                	mov    BYTE PTR [rax],dl
+  401970:	48 8b 45 f8          	mov    rax,QWORD PTR [rbp-0x8]
+  401974:	48 8d 50 01          	lea    rdx,[rax+0x1]
+  401978:	48 89 55 f8          	mov    QWORD PTR [rbp-0x8],rdx
+  40197c:	44 0f b6 00          	movzx  r8d,BYTE PTR [rax]
+  401980:	48 8b 45 e8          	mov    rax,QWORD PTR [rbp-0x18]
+  401984:	48 8d 50 01          	lea    rdx,[rax+0x1]
+  401988:	48 89 55 e8          	mov    QWORD PTR [rbp-0x18],rdx
+  40198c:	0f b6 08             	movzx  ecx,BYTE PTR [rax]
+  40198f:	48 8b 45 18          	mov    rax,QWORD PTR [rbp+0x18]
+  401993:	48 8d 50 01          	lea    rdx,[rax+0x1]
+  401997:	48 89 55 18          	mov    QWORD PTR [rbp+0x18],rdx
+  40199b:	44 89 c2             	mov    edx,r8d
+  40199e:	31 ca                	xor    edx,ecx
+  4019a0:	88 10                	mov    BYTE PTR [rax],dl
+  4019a2:	48 8b 45 f8          	mov    rax,QWORD PTR [rbp-0x8]
+  4019a6:	48 8d 50 01          	lea    rdx,[rax+0x1]
+  4019aa:	48 89 55 f8          	mov    QWORD PTR [rbp-0x8],rdx
+  4019ae:	44 0f b6 00          	movzx  r8d,BYTE PTR [rax]
+  4019b2:	48 8b 45 e8          	mov    rax,QWORD PTR [rbp-0x18]
+  4019b6:	48 8d 50 01          	lea    rdx,[rax+0x1]
+  4019ba:	48 89 55 e8          	mov    QWORD PTR [rbp-0x18],rdx
+  4019be:	0f b6 08             	movzx  ecx,BYTE PTR [rax]
+  4019c1:	48 8b 45 18          	mov    rax,QWORD PTR [rbp+0x18]
+  4019c5:	48 8d 50 01          	lea    rdx,[rax+0x1]
+  4019c9:	48 89 55 18          	mov    QWORD PTR [rbp+0x18],rdx
+  4019cd:	44 89 c2             	mov    edx,r8d
+  4019d0:	31 ca                	xor    edx,ecx
+  4019d2:	88 10                	mov    BYTE PTR [rax],dl
+  4019d4:	48 8b 45 f8          	mov    rax,QWORD PTR [rbp-0x8]
+  4019d8:	48 8d 50 01          	lea    rdx,[rax+0x1]
+  4019dc:	48 89 55 f8          	mov    QWORD PTR [rbp-0x8],rdx
+  4019e0:	44 0f b6 00          	movzx  r8d,BYTE PTR [rax]
+  4019e4:	48 8b 45 e8          	mov    rax,QWORD PTR [rbp-0x18]
+  4019e8:	48 8d 50 01          	lea    rdx,[rax+0x1]
+  4019ec:	48 89 55 e8          	mov    QWORD PTR [rbp-0x18],rdx
+  4019f0:	0f b6 08             	movzx  ecx,BYTE PTR [rax]
+  4019f3:	48 8b 45 18          	mov    rax,QWORD PTR [rbp+0x18]
+  4019f7:	48 8d 50 01          	lea    rdx,[rax+0x1]
+  4019fb:	48 89 55 18          	mov    QWORD PTR [rbp+0x18],rdx
+  4019ff:	44 89 c2             	mov    edx,r8d
+  401a02:	31 ca                	xor    edx,ecx
+  401a04:	88 10                	mov    BYTE PTR [rax],dl
+COMMAND> objdump -d -Mintel --disassemble=shift_rows C:\CTFwork\xj538.exe; output -> project analysis\538_objdump_shift_rows.txt
+EXIT_CODE=0
+
+xj538.exe:     file format pei-x86-64
+
+
+Disassembly of section .text:
+
+0000000000401574 <shift_rows>:
+  401574:	55                   	push   rbp
+  401575:	48 89 e5             	mov    rbp,rsp
+  401578:	48 83 ec 10          	sub    rsp,0x10
+  40157c:	48 89 4d 10          	mov    QWORD PTR [rbp+0x10],rcx
+  401580:	48 8b 45 10          	mov    rax,QWORD PTR [rbp+0x10]
+  401584:	0f b6 40 0c          	movzx  eax,BYTE PTR [rax+0xc]
+  401588:	88 45 ff             	mov    BYTE PTR [rbp-0x1],al
+  40158b:	48 8b 45 10          	mov    rax,QWORD PTR [rbp+0x10]
+  40158f:	48 8d 50 0c          	lea    rdx,[rax+0xc]
+  401593:	48 8b 45 10          	mov    rax,QWORD PTR [rbp+0x10]
+  401597:	0f b6 40 08          	movzx  eax,BYTE PTR [rax+0x8]
+  40159b:	88 02                	mov    BYTE PTR [rdx],al
+  40159d:	48 8b 45 10          	mov    rax,QWORD PTR [rbp+0x10]
+  4015a1:	48 8d 50 08          	lea    rdx,[rax+0x8]
+  4015a5:	48 8b 45 10          	mov    rax,QWORD PTR [rbp+0x10]
+  4015a9:	0f b6 40 04          	movzx  eax,BYTE PTR [rax+0x4]
+  4015ad:	88 02                	mov    BYTE PTR [rdx],al
+  4015af:	48 8b 45 10          	mov    rax,QWORD PTR [rbp+0x10]
+  4015b3:	48 8d 50 04          	lea    rdx,[rax+0x4]
+  4015b7:	48 8b 45 10          	mov    rax,QWORD PTR [rbp+0x10]
+  4015bb:	0f b6 00             	movzx  eax,BYTE PTR [rax]
+  4015be:	88 02                	mov    BYTE PTR [rdx],al
+  4015c0:	48 8b 55 10          	mov    rdx,QWORD PTR [rbp+0x10]
+  4015c4:	0f b6 45 ff          	movzx  eax,BYTE PTR [rbp-0x1]
+  4015c8:	88 02                	mov    BYTE PTR [rdx],al
+  4015ca:	48 8b 45 10          	mov    rax,QWORD PTR [rbp+0x10]
+  4015ce:	0f b6 40 01          	movzx  eax,BYTE PTR [rax+0x1]
+  4015d2:	88 45 ff             	mov    BYTE PTR [rbp-0x1],al
+  4015d5:	48 8b 45 10          	mov    rax,QWORD PTR [rbp+0x10]
+  4015d9:	48 8d 50 01          	lea    rdx,[rax+0x1]
+  4015dd:	48 8b 45 10          	mov    rax,QWORD PTR [rbp+0x10]
+  4015e1:	0f b6 40 09          	movzx  eax,BYTE PTR [rax+0x9]
+  4015e5:	88 02                	mov    BYTE PTR [rdx],al
+  4015e7:	48 8b 45 10          	mov    rax,QWORD PTR [rbp+0x10]
+  4015eb:	48 8d 50 09          	lea    rdx,[rax+0x9]
+  4015ef:	0f b6 45 ff          	movzx  eax,BYTE PTR [rbp-0x1]
+  4015f3:	88 02                	mov    BYTE PTR [rdx],al
+  4015f5:	48 8b 45 10          	mov    rax,QWORD PTR [rbp+0x10]
+  4015f9:	0f b6 40 05          	movzx  eax,BYTE PTR [rax+0x5]
+  4015fd:	88 45 ff             	mov    BYTE PTR [rbp-0x1],al
+  401600:	48 8b 45 10          	mov    rax,QWORD PTR [rbp+0x10]
+  401604:	48 8d 50 05          	lea    rdx,[rax+0x5]
+  401608:	48 8b 45 10          	mov    rax,QWORD PTR [rbp+0x10]
+  40160c:	0f b6 40 0d          	movzx  eax,BYTE PTR [rax+0xd]
+  401610:	88 02                	mov    BYTE PTR [rdx],al
+  401612:	48 8b 45 10          	mov    rax,QWORD PTR [rbp+0x10]
+  401616:	48 8d 50 0d          	lea    rdx,[rax+0xd]
+  40161a:	0f b6 45 ff          	movzx  eax,BYTE PTR [rbp-0x1]
+  40161e:	88 02                	mov    BYTE PTR [rdx],al
+  401620:	48 8b 45 10          	mov    rax,QWORD PTR [rbp+0x10]
+  401624:	0f b6 40 02          	movzx  eax,BYTE PTR [rax+0x2]
+  401628:	88 45 ff             	mov    BYTE PTR [rbp-0x1],al
+  40162b:	48 8b 45 10          	mov    rax,QWORD PTR [rbp+0x10]
+  40162f:	48 8d 50 02          	lea    rdx,[rax+0x2]
+  401633:	48 8b 45 10          	mov    rax,QWORD PTR [rbp+0x10]
+  401637:	0f b6 40 06          	movzx  eax,BYTE PTR [rax+0x6]
+  40163b:	88 02                	mov    BYTE PTR [rdx],al
+  40163d:	48 8b 45 10          	mov    rax,QWORD PTR [rbp+0x10]
+  401641:	48 8d 50 06          	lea    rdx,[rax+0x6]
+  401645:	48 8b 45 10          	mov    rax,QWORD PTR [rbp+0x10]
+  401649:	0f b6 40 0a          	movzx  eax,BYTE PTR [rax+0xa]
+  40164d:	88 02                	mov    BYTE PTR [rdx],al
+  40164f:	48 8b 45 10          	mov    rax,QWORD PTR [rbp+0x10]
+  401653:	48 8d 50 0a          	lea    rdx,[rax+0xa]
+  401657:	48 8b 45 10          	mov    rax,QWORD PTR [rbp+0x10]
+  40165b:	0f b6 40 0e          	movzx  eax,BYTE PTR [rax+0xe]
+  40165f:	88 02                	mov    BYTE PTR [rdx],al
+  401661:	48 8b 45 10          	mov    rax,QWORD PTR [rbp+0x10]
+  401665:	48 8d 50 0e          	lea    rdx,[rax+0xe]
+  401669:	0f b6 45 ff          	movzx  eax,BYTE PTR [rbp-0x1]
+  40166d:	88 02                	mov    BYTE PTR [rdx],al
+  40166f:	90                   	nop
+  401670:	48 83 c4 10          	add    rsp,0x10
+  401674:	5d                   	pop    rbp
+  401675:	c3                   	ret
+COMMAND> objdump -d -Mintel --disassemble=mul2 C:\CTFwork\xj538.exe; output -> project analysis\538_objdump_mul2.txt
+EXIT_CODE=0
+
+xj538.exe:     file format pei-x86-64
+
+
+Disassembly of section .text:
+
+0000000000401550 <mul2>:
+  401550:	55                   	push   rbp
+  401551:	48 89 e5             	mov    rbp,rsp
+  401554:	89 c8                	mov    eax,ecx
+  401556:	88 45 10             	mov    BYTE PTR [rbp+0x10],al
+  401559:	0f b6 45 10          	movzx  eax,BYTE PTR [rbp+0x10]
+  40155d:	84 c0                	test   al,al
+  40155f:	79 0b                	jns    40156c <mul2+0x1c>
+  401561:	0f b6 45 10          	movzx  eax,BYTE PTR [rbp+0x10]
+  401565:	01 c0                	add    eax,eax
+  401567:	83 f0 1b             	xor    eax,0x1b
+  40156a:	eb 06                	jmp    401572 <mul2+0x22>
+  40156c:	0f b6 45 10          	movzx  eax,BYTE PTR [rbp+0x10]
+  401570:	01 c0                	add    eax,eax
+  401572:	5d                   	pop    rbp
+  401573:	c3                   	ret
+**********************
+PowerShell transcript end
+End time: 20260929144222
+**********************
+**********************
+PowerShell transcript start
+Start time: 20260929144456
+Username: DESKTOP-412KTAR\mzj
+RunAs User: DESKTOP-412KTAR\mzj
+Configuration Name: 
+Machine: DESKTOP-412KTAR (Microsoft Windows NT 10.0.26200.0)
+Host Application: C:\Users\mzj\.cache\codex-runtimes\codex-primary-runtime\dependencies\native\powershell\pwsh.dll -Command try { [Console]::OutputEncoding=[System.Text.Encoding]::UTF8 } catch {}
+$analysis='C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\批次13_20260929\538_湘岚杯1997\analysis'; $transcript=Join-Path $analysis '538_static_transcript_20260929.txt'; Start-Transcript -LiteralPath $transcript -Append | Out-Null; try { Write-Output 'COMMAND> objdump -s -j .data C:\CTFwork\xj538.exe; save result in project analysis\538_objdump_data.txt'; & objdump -s -j '.data' 'C:\CTFwork\xj538.exe' 2>&1 | Out-File -LiteralPath (Join-Path $analysis '538_objdump_data.txt') -Encoding utf8; Write-Output ("EXIT_CODE={0}" -f $LASTEXITCODE); Get-Content -LiteralPath (Join-Path $analysis '538_objdump_data.txt') | Select-Object -First 50 } finally { Stop-Transcript | Out-Null }
+Process ID: 35020
+PSVersion: 7.6.5
+PSEdition: Core
+GitCommitId: 7.6.5
+OS: Microsoft Windows 10.0.26200
+Platform: Win32NT
+PSCompatibleVersions: 1.0, 2.0, 3.0, 4.0, 5.0, 5.1, 6.0, 7.0
+PSRemotingProtocolVersion: 2.4
+SerializationVersion: 1.1.0.1
+WSManStackVersion: 3.0
+**********************
+COMMAND> objdump -s -j .data C:\CTFwork\xj538.exe; save result in project analysis\538_objdump_data.txt
+EXIT_CODE=0
+
+C:\CTFwork\xj538.exe:     file format pei-x86-64
+
+Contents of section .data:
+ 404000 0a000000 00000000 00000000 00000000  ................
+ 404010 00000000 00000000 00000000 00000000  ................
+ 404020 01020408 10204080 1b360000 00000000  ..... @..6......
+ 404030 00000000 00000000 00000000 00000000  ................
+ 404040 637c777b f26b6fc5 3001672b fed7ab76  c|w{.ko.0.g+...v
+ 404050 ca82c97d fa5947f0 add4a2af 9ca472c0  ...}.YG.......r.
+ 404060 b7fd9326 363ff7cc 34a5e5f1 71d83115  ...&6?..4...q.1.
+ 404070 04c723c3 1896059a 071280e2 eb27b275  ..#..........'.u
+ 404080 09832c1a 1b6e5aa0 523bd6b3 29e32f84  ..,..nZ.R;..)./.
+ 404090 53d100ed 20fcb15b 6acbbe39 4a4c58cf  S... ..[j..9JLX.
+ 4040a0 d0efaafb 434d3385 45f9027f 503c9fa8  ....CM3.E...P<..
+ 4040b0 51a3408f 929d38f5 bcb6da21 10fff3d2  Q.@...8....!....
+ 4040c0 cd0c13ec 5f974417 c4a77e3d 645d1973  ...._.D...~=d].s
+ 4040d0 60814fdc 222a9088 46eeb814 de5e0bdb  `.O."*..F....^..
+ 4040e0 e0323a0a 4906245c c2d3ac62 9195e479  .2:.I.$\...b...y
+ 4040f0 e7c8376d 8dd54ea9 6c56f4ea 657aae08  ..7m..N.lV..ez..
+ 404100 ba78252e 1ca6b4c6 e8dd741f 4bbd8b8a  .x%.......t.K...
+ 404110 703eb566 4803f60e 613557b9 86c11d9e  p>.fH...a5W.....
+ 404120 e1f89811 69d98e94 9b1e87e9 ce5528df  ....i........U(.
+ 404130 8ca1890d bfe64268 41992d0f b054bb16  ......BhA.-..T..
+ 404140 52096ad5 3036a538 bf40a39e 81f3d7fb  R.j.06.8.@......
+ 404150 7ce33982 9b2fff87 348e4344 c4dee9cb  |.9../..4.CD....
+ 404160 547b9432 a6c2233d ee4c950b 42fac34e  T{.2..#=.L..B..N
+ 404170 082ea166 28d924b2 765ba249 6d8bd125  ...f(.$.v[.Im..%
+ 404180 72f8f664 86689816 d4a45ccc 5d65b692  r..d.h....\.]e..
+ 404190 6c704850 fdedb9da 5e154657 a78d9d84  lpHP....^.FW....
+ 4041a0 90d8ab00 8cbcd30a f7e45805 b8b34506  ..........X...E.
+ 4041b0 d02c1e8f ca3f0f02 c1afbd03 01138a6b  .,...?.........k
+ 4041c0 3a911141 4f67dcea 97f2cfce f0b4e673  :..AOg.........s
+ 4041d0 96ac7422 e7ad3585 e2f937e8 1c75df6e  ..t"..5...7..u.n
+ 4041e0 47f11a71 1d29c589 6fb7620e aa18be1b  G..q.)..o.b.....
+ 4041f0 fc563e4b c6d27920 9adbc0fe 78cd5af4  .V>K..y ....x.Z.
+ 404200 1fdda833 8807c731 b1121059 2780ec5f  ...3...1...Y'.._
+ 404210 60517fa9 19b54a0d 2de57a9f 93c99cef  `Q....J.-.z.....
+ 404220 a0e03b4d ae2af5b0 c8ebbb3c 83539961  ..;M.*.....<.S.a
+ 404230 172b047e ba77d626 e1691463 55210c7d  .+.~.w.&.i.cU!.}
+ 404240 90374000 00000000 00000000 00000000  .7@.............
+ 404250 ffffffff ffffffff 00000000 00000000  ................
+ 404260 ffffffff 00000000 00000000 00000000  ................
+ 404270 ff000000 00000000 00000000 00000000  ................
+ 404280 02000000 00000000 00000000 00000000  ................
+ 404290 ffffffff 00000000 00000000 00000000  ................
+ 4042a0 c0354000 00000000 00000000 00000000  .5@.............
+ 4042b0 e0354000 00000000 f0354000 00000000  .5@......5@.....
+ 4042c0 00364000 00000000 00000000 00000000  .6@.............
+ 4042d0 10364000 00000000 00000000 00000000  .6@.............
+**********************
+PowerShell transcript end
+End time: 20260929144456
+**********************
+**********************
+PowerShell transcript start
+Start time: 20260929144552
+Username: DESKTOP-412KTAR\mzj
+RunAs User: DESKTOP-412KTAR\mzj
+Configuration Name: 
+Machine: DESKTOP-412KTAR (Microsoft Windows NT 10.0.26200.0)
+Host Application: C:\Users\mzj\.cache\codex-runtimes\codex-primary-runtime\dependencies\native\powershell\pwsh.dll -Command try { [Console]::OutputEncoding=[System.Text.Encoding]::UTF8 } catch {}
+$analysis='C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\批次13_20260929\538_湘岚杯1997\analysis'; $scriptPath=Join-Path $analysis '538_custom_aes_verify.py'; $transcript=Join-Path $analysis '538_static_transcript_20260929.txt'; @'
+from pathlib import Path
+import re
+import struct
+
+analysis = Path(__file__).resolve().parent
+exe = analysis / '123.exe'
+data = exe.read_bytes()
+pe = struct.unpack_from('<I', data, 0x3c)[0]
+sections_count = struct.unpack_from('<H', data, pe + 6)[0]
+optional_size = struct.unpack_from('<H', data, pe + 20)[0]
+section_table = pe + 24 + optional_size
+section = None
+for i in range(sections_count):
+    o = section_table + 40 * i
+    name = data[o:o+8].split(b'\0', 1)[0].decode('ascii')
+    if name == '.data':
+        section = (struct.unpack_from('<I', data, o + 12)[0], struct.unpack_from('<I', data, o + 20)[0])
+        break
+assert section is not None
+# objdump symbol table locates RC, SBOX and INV_SBOX at .data+0x20/+0x40/+0x140.
+data_rva, data_raw = section
+rcon = data[data_raw+0x20:data_raw+0x2c]
+sbox = data[data_raw+0x40:data_raw+0x140]
+inv_sbox = data[data_raw+0x140:data_raw+0x240]
+assert len(sbox) == len(inv_sbox) == 256
+assert sbox[:4] == bytes.fromhex('637c777b') and inv_sbox[:4] == bytes.fromhex('52096ad5')
+listing = (analysis / '538_objdump_main.txt').read_text(encoding='utf-8-sig', errors='replace')
+stack = {}
+for line in listing.splitlines():
+    m = re.search(r'\[rbp\+0x([0-9a-fA-F]+)\],0x([0-9a-fA-F]+)', line)
+    if m:
+        stack[int(m.group(1), 16)] = int(m.group(2), 16)
+ciphertext = bytes(stack[i] for i in range(0xA0, 0xC0))
+key = bytes(stack[i] for i in range(0xC0, 0xD0))
+assert len(ciphertext) == 32 and len(key) == 16
+
+def expand_key(key):
+    words = [list(key[i:i+4]) for i in range(0, 16, 4)]
+    for i in range(4, 44):
+        temp = words[i-1][:]
+        if i % 4 == 0:
+            temp = temp[1:] + temp[:1]
+            temp = [sbox[x] for x in temp]
+            temp[0] ^= rcon[i//4-1]
+        words.append([words[i-4][j] ^ temp[j] for j in range(4)])
+    return [bytes(sum(words[4*r:4*r+4], [])) for r in range(11)]
+
+def gf_mul(a, b):
+    out = 0
+    while b:
+        if b & 1:
+            out ^= a
+        a = ((a << 1) ^ (0x11b if a & 0x80 else 0)) & 0xff
+        b >>= 1
+    return out
+
+def shift_rows(state):
+    s = state[:]
+    # Exact byte moves from shift_rows disassembly at 0x401574.
+    for inds in ([0, 4, 8, 12], [2, 6, 10, 14]):
+        old = [s[i] for i in inds]
+        new = old[-1:] + old[:-1]
+        for i, x in zip(inds, new): s[i] = x
+    s[1], s[9] = s[9], s[1]
+    s[5], s[13] = s[13], s[5]
+    return s
+
+def inv_shift_rows(state):
+    s = state[:]
+    for inds in ([2, 6, 10, 14], [0, 4, 8, 12]):
+        old = [s[i] for i in inds]
+        new = old[1:] + old[:1]
+        for i, x in zip(inds, new): s[i] = x
+    s[1], s[9] = s[9], s[1]
+    s[5], s[13] = s[13], s[5]
+    return s
+
+def mix_columns(state):
+    out = state[:]
+    for base in range(0, 16, 4):
+        a = state[base:base+4]
+        total = a[0] ^ a[1] ^ a[2] ^ a[3]
+        for j in range(4):
+            out[base+j] = a[j] ^ total ^ gf_mul(a[j] ^ a[(j+1)%4], 2)
+    return out
+
+def inv_mix_columns(state):
+    out = state[:]
+    for base in range(0, 16, 4):
+        a = state[base:base+4]
+        for j, coeffs in enumerate(((14,11,13,9),(9,14,11,13),(13,9,14,11),(11,13,9,14))):
+            out[base+j] = gf_mul(a[0], coeffs[0]) ^ gf_mul(a[1], coeffs[1]) ^ gf_mul(a[2], coeffs[2]) ^ gf_mul(a[3], coeffs[3])
+    return out
+
+def encrypt_custom(block, keys):
+    s = [a ^ b for a,b in zip(block, keys[0])]
+    for rnd in range(1, 10):
+        s = [inv_sbox[x] for x in s]
+        s = shift_rows(s)
+        s = mix_columns(s)
+        s = [a ^ b for a,b in zip(s, keys[rnd])]
+    s = [inv_sbox[x] for x in s]
+    s = shift_rows(s)
+    s = [a ^ b for a,b in zip(s, keys[10])]
+    return bytes(s)
+
+def decrypt_custom(block, keys):
+    s = [a ^ b for a,b in zip(block, keys[10])]
+    s = inv_shift_rows(s)
+    s = [sbox[x] for x in s]
+    for rnd in range(9, 0, -1):
+        s = [a ^ b for a,b in zip(s, keys[rnd])]
+        s = inv_mix_columns(s)
+        s = inv_shift_rows(s)
+        s = [sbox[x] for x in s]
+    s = [a ^ b for a,b in zip(s, keys[0])]
+    return bytes(s)
+
+keys = expand_key(key)
+blocks = [ciphertext[i:i+16] for i in (0,16)]
+plain_blocks = [decrypt_custom(block, keys) for block in blocks]
+plaintext = b''.join(plain_blocks)
+roundtrip = b''.join(encrypt_custom(p, keys) for p in plain_blocks)
+print(f'KEY_ASCII={key.decode("ascii")}')
+print(f'KEY_HEX={key.hex()}')
+print(f'RC_BYTES={rcon.hex()}')
+print(f'CIPHERTEXT={ciphertext.hex()}')
+print(f'PLAINTEXT_HEX={plaintext.hex()}')
+print(f'PLAINTEXT_REPR={plaintext!r}')
+print(f'PLAINTEXT_ASCII={plaintext.decode("ascii", errors="backslashreplace")}')
+print(f'PLAINTEXT_LEN={len(plaintext)}')
+print(f'CUSTOM_REENCRYPT={roundtrip.hex()}')
+print(f'ROUNDTRIP_MATCH={roundtrip == ciphertext}')
+print(f'FLAG_SHAPE={plaintext.startswith(b"flag{") and plaintext.endswith(b"}")}')
+'@ | Set-Content -LiteralPath $scriptPath -Encoding UTF8; Start-Transcript -LiteralPath $transcript -Append | Out-Null; try { Write-Output 'COMMAND> python analysis\538_custom_aes_verify.py'; python $scriptPath } finally { Stop-Transcript | Out-Null }
+Process ID: 43152
+PSVersion: 7.6.5
+PSEdition: Core
+GitCommitId: 7.6.5
+OS: Microsoft Windows 10.0.26200
+Platform: Win32NT
+PSCompatibleVersions: 1.0, 2.0, 3.0, 4.0, 5.0, 5.1, 6.0, 7.0
+PSRemotingProtocolVersion: 2.4
+SerializationVersion: 1.1.0.1
+WSManStackVersion: 3.0
+**********************
+COMMAND> python analysis\538_custom_aes_verify.py
+
+**********************
+PowerShell transcript end
+End time: 20260929144552
+**********************
+**********************
+PowerShell transcript start
+Start time: 20260929144746
+Username: DESKTOP-412KTAR\mzj
+RunAs User: DESKTOP-412KTAR\mzj
+Configuration Name: 
+Machine: DESKTOP-412KTAR (Microsoft Windows NT 10.0.26200.0)
+Host Application: C:\Users\mzj\.cache\codex-runtimes\codex-primary-runtime\dependencies\native\powershell\pwsh.dll -Command try { [Console]::OutputEncoding=[System.Text.Encoding]::UTF8 } catch {}
+$analysis='C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\批次13_20260929\538_湘岚杯1997\analysis'; $transcript=Join-Path $analysis '538_static_transcript_20260929.txt'; Start-Transcript -LiteralPath $transcript -Append | Out-Null; try { Write-Output 'COMMAND> Extract key schedule instructions at 0x401800..0x401a80 from saved static disassembly'; Get-Content -LiteralPath (Join-Path $analysis '538_objdump_key_schedule.txt') | Where-Object { $_ -match '^\s+401[89a][0-9a-f]{2}:' } } finally { Stop-Transcript | Out-Null }
+Process ID: 33836
+PSVersion: 7.6.5
+PSEdition: Core
+GitCommitId: 7.6.5
+OS: Microsoft Windows 10.0.26200
+Platform: Win32NT
+PSCompatibleVersions: 1.0, 2.0, 3.0, 4.0, 5.0, 5.1, 6.0, 7.0
+PSRemotingProtocolVersion: 2.4
+SerializationVersion: 1.1.0.1
+WSManStackVersion: 3.0
+**********************
+COMMAND> Extract key schedule instructions at 0x401800..0x401a80 from saved static disassembly
+  401803:	48 8d 50 01          	lea    rdx,[rax+0x1]
+  401807:	48 89 55 18          	mov    QWORD PTR [rbp+0x18],rdx
+  40180b:	44 89 c2             	mov    edx,r8d
+  40180e:	31 ca                	xor    edx,ecx
+  401810:	88 10                	mov    BYTE PTR [rax],dl
+  401812:	48 8b 45 f8          	mov    rax,QWORD PTR [rbp-0x8]
+  401816:	48 8d 50 01          	lea    rdx,[rax+0x1]
+  40181a:	48 89 55 f8          	mov    QWORD PTR [rbp-0x8],rdx
+  40181e:	44 0f b6 00          	movzx  r8d,BYTE PTR [rax]
+  401822:	48 8b 45 e8          	mov    rax,QWORD PTR [rbp-0x18]
+  401826:	48 8d 50 01          	lea    rdx,[rax+0x1]
+  40182a:	48 89 55 e8          	mov    QWORD PTR [rbp-0x18],rdx
+  40182e:	0f b6 08             	movzx  ecx,BYTE PTR [rax]
+  401831:	48 8b 45 18          	mov    rax,QWORD PTR [rbp+0x18]
+  401835:	48 8d 50 01          	lea    rdx,[rax+0x1]
+  401839:	48 89 55 18          	mov    QWORD PTR [rbp+0x18],rdx
+  40183d:	44 89 c2             	mov    edx,r8d
+  401840:	31 ca                	xor    edx,ecx
+  401842:	88 10                	mov    BYTE PTR [rax],dl
+  401844:	48 8b 45 f8          	mov    rax,QWORD PTR [rbp-0x8]
+  401848:	48 8d 50 01          	lea    rdx,[rax+0x1]
+  40184c:	48 89 55 f8          	mov    QWORD PTR [rbp-0x8],rdx
+  401850:	44 0f b6 00          	movzx  r8d,BYTE PTR [rax]
+  401854:	48 8b 45 e8          	mov    rax,QWORD PTR [rbp-0x18]
+  401858:	48 8d 50 01          	lea    rdx,[rax+0x1]
+  40185c:	48 89 55 e8          	mov    QWORD PTR [rbp-0x18],rdx
+  401860:	0f b6 08             	movzx  ecx,BYTE PTR [rax]
+  401863:	48 8b 45 18          	mov    rax,QWORD PTR [rbp+0x18]
+  401867:	48 8d 50 01          	lea    rdx,[rax+0x1]
+  40186b:	48 89 55 18          	mov    QWORD PTR [rbp+0x18],rdx
+  40186f:	44 89 c2             	mov    edx,r8d
+  401872:	31 ca                	xor    edx,ecx
+  401874:	88 10                	mov    BYTE PTR [rax],dl
+  401876:	48 8b 45 f8          	mov    rax,QWORD PTR [rbp-0x8]
+  40187a:	48 8d 50 01          	lea    rdx,[rax+0x1]
+  40187e:	48 89 55 f8          	mov    QWORD PTR [rbp-0x8],rdx
+  401882:	44 0f b6 00          	movzx  r8d,BYTE PTR [rax]
+  401886:	48 8b 45 e8          	mov    rax,QWORD PTR [rbp-0x18]
+  40188a:	48 8d 50 01          	lea    rdx,[rax+0x1]
+  40188e:	48 89 55 e8          	mov    QWORD PTR [rbp-0x18],rdx
+  401892:	0f b6 08             	movzx  ecx,BYTE PTR [rax]
+  401895:	48 8b 45 18          	mov    rax,QWORD PTR [rbp+0x18]
+  401899:	48 8d 50 01          	lea    rdx,[rax+0x1]
+  40189d:	48 89 55 18          	mov    QWORD PTR [rbp+0x18],rdx
+  4018a1:	44 89 c2             	mov    edx,r8d
+  4018a4:	31 ca                	xor    edx,ecx
+  4018a6:	88 10                	mov    BYTE PTR [rax],dl
+  4018a8:	48 8b 45 f8          	mov    rax,QWORD PTR [rbp-0x8]
+  4018ac:	48 8d 50 01          	lea    rdx,[rax+0x1]
+  4018b0:	48 89 55 f8          	mov    QWORD PTR [rbp-0x8],rdx
+  4018b4:	44 0f b6 00          	movzx  r8d,BYTE PTR [rax]
+  4018b8:	48 8b 45 e8          	mov    rax,QWORD PTR [rbp-0x18]
+  4018bc:	48 8d 50 01          	lea    rdx,[rax+0x1]
+  4018c0:	48 89 55 e8          	mov    QWORD PTR [rbp-0x18],rdx
+  4018c4:	0f b6 08             	movzx  ecx,BYTE PTR [rax]
+  4018c7:	48 8b 45 18          	mov    rax,QWORD PTR [rbp+0x18]
+  4018cb:	48 8d 50 01          	lea    rdx,[rax+0x1]
+  4018cf:	48 89 55 18          	mov    QWORD PTR [rbp+0x18],rdx
+  4018d3:	44 89 c2             	mov    edx,r8d
+  4018d6:	31 ca                	xor    edx,ecx
+  4018d8:	88 10                	mov    BYTE PTR [rax],dl
+  4018da:	48 8b 45 f8          	mov    rax,QWORD PTR [rbp-0x8]
+  4018de:	48 8d 50 01          	lea    rdx,[rax+0x1]
+  4018e2:	48 89 55 f8          	mov    QWORD PTR [rbp-0x8],rdx
+  4018e6:	44 0f b6 00          	movzx  r8d,BYTE PTR [rax]
+  4018ea:	48 8b 45 e8          	mov    rax,QWORD PTR [rbp-0x18]
+  4018ee:	48 8d 50 01          	lea    rdx,[rax+0x1]
+  4018f2:	48 89 55 e8          	mov    QWORD PTR [rbp-0x18],rdx
+  4018f6:	0f b6 08             	movzx  ecx,BYTE PTR [rax]
+  4018f9:	48 8b 45 18          	mov    rax,QWORD PTR [rbp+0x18]
+  4018fd:	48 8d 50 01          	lea    rdx,[rax+0x1]
+  401901:	48 89 55 18          	mov    QWORD PTR [rbp+0x18],rdx
+  401905:	44 89 c2             	mov    edx,r8d
+  401908:	31 ca                	xor    edx,ecx
+  40190a:	88 10                	mov    BYTE PTR [rax],dl
+  40190c:	48 8b 45 f8          	mov    rax,QWORD PTR [rbp-0x8]
+  401910:	48 8d 50 01          	lea    rdx,[rax+0x1]
+  401914:	48 89 55 f8          	mov    QWORD PTR [rbp-0x8],rdx
+  401918:	44 0f b6 00          	movzx  r8d,BYTE PTR [rax]
+  40191c:	48 8b 45 e8          	mov    rax,QWORD PTR [rbp-0x18]
+  401920:	48 8d 50 01          	lea    rdx,[rax+0x1]
+  401924:	48 89 55 e8          	mov    QWORD PTR [rbp-0x18],rdx
+  401928:	0f b6 08             	movzx  ecx,BYTE PTR [rax]
+  40192b:	48 8b 45 18          	mov    rax,QWORD PTR [rbp+0x18]
+  40192f:	48 8d 50 01          	lea    rdx,[rax+0x1]
+  401933:	48 89 55 18          	mov    QWORD PTR [rbp+0x18],rdx
+  401937:	44 89 c2             	mov    edx,r8d
+  40193a:	31 ca                	xor    edx,ecx
+  40193c:	88 10                	mov    BYTE PTR [rax],dl
+  40193e:	48 8b 45 f8          	mov    rax,QWORD PTR [rbp-0x8]
+  401942:	48 8d 50 01          	lea    rdx,[rax+0x1]
+  401946:	48 89 55 f8          	mov    QWORD PTR [rbp-0x8],rdx
+  40194a:	44 0f b6 00          	movzx  r8d,BYTE PTR [rax]
+  40194e:	48 8b 45 e8          	mov    rax,QWORD PTR [rbp-0x18]
+  401952:	48 8d 50 01          	lea    rdx,[rax+0x1]
+  401956:	48 89 55 e8          	mov    QWORD PTR [rbp-0x18],rdx
+  40195a:	0f b6 08             	movzx  ecx,BYTE PTR [rax]
+  40195d:	48 8b 45 18          	mov    rax,QWORD PTR [rbp+0x18]
+  401961:	48 8d 50 01          	lea    rdx,[rax+0x1]
+  401965:	48 89 55 18          	mov    QWORD PTR [rbp+0x18],rdx
+  401969:	44 89 c2             	mov    edx,r8d
+  40196c:	31 ca                	xor    edx,ecx
+  40196e:	88 10                	mov    BYTE PTR [rax],dl
+  401970:	48 8b 45 f8          	mov    rax,QWORD PTR [rbp-0x8]
+  401974:	48 8d 50 01          	lea    rdx,[rax+0x1]
+  401978:	48 89 55 f8          	mov    QWORD PTR [rbp-0x8],rdx
+  40197c:	44 0f b6 00          	movzx  r8d,BYTE PTR [rax]
+  401980:	48 8b 45 e8          	mov    rax,QWORD PTR [rbp-0x18]
+  401984:	48 8d 50 01          	lea    rdx,[rax+0x1]
+  401988:	48 89 55 e8          	mov    QWORD PTR [rbp-0x18],rdx
+  40198c:	0f b6 08             	movzx  ecx,BYTE PTR [rax]
+  40198f:	48 8b 45 18          	mov    rax,QWORD PTR [rbp+0x18]
+  401993:	48 8d 50 01          	lea    rdx,[rax+0x1]
+  401997:	48 89 55 18          	mov    QWORD PTR [rbp+0x18],rdx
+  40199b:	44 89 c2             	mov    edx,r8d
+  40199e:	31 ca                	xor    edx,ecx
+  4019a0:	88 10                	mov    BYTE PTR [rax],dl
+  4019a2:	48 8b 45 f8          	mov    rax,QWORD PTR [rbp-0x8]
+  4019a6:	48 8d 50 01          	lea    rdx,[rax+0x1]
+  4019aa:	48 89 55 f8          	mov    QWORD PTR [rbp-0x8],rdx
+  4019ae:	44 0f b6 00          	movzx  r8d,BYTE PTR [rax]
+  4019b2:	48 8b 45 e8          	mov    rax,QWORD PTR [rbp-0x18]
+  4019b6:	48 8d 50 01          	lea    rdx,[rax+0x1]
+  4019ba:	48 89 55 e8          	mov    QWORD PTR [rbp-0x18],rdx
+  4019be:	0f b6 08             	movzx  ecx,BYTE PTR [rax]
+  4019c1:	48 8b 45 18          	mov    rax,QWORD PTR [rbp+0x18]
+  4019c5:	48 8d 50 01          	lea    rdx,[rax+0x1]
+  4019c9:	48 89 55 18          	mov    QWORD PTR [rbp+0x18],rdx
+  4019cd:	44 89 c2             	mov    edx,r8d
+  4019d0:	31 ca                	xor    edx,ecx
+  4019d2:	88 10                	mov    BYTE PTR [rax],dl
+  4019d4:	48 8b 45 f8          	mov    rax,QWORD PTR [rbp-0x8]
+  4019d8:	48 8d 50 01          	lea    rdx,[rax+0x1]
+  4019dc:	48 89 55 f8          	mov    QWORD PTR [rbp-0x8],rdx
+  4019e0:	44 0f b6 00          	movzx  r8d,BYTE PTR [rax]
+  4019e4:	48 8b 45 e8          	mov    rax,QWORD PTR [rbp-0x18]
+  4019e8:	48 8d 50 01          	lea    rdx,[rax+0x1]
+  4019ec:	48 89 55 e8          	mov    QWORD PTR [rbp-0x18],rdx
+  4019f0:	0f b6 08             	movzx  ecx,BYTE PTR [rax]
+  4019f3:	48 8b 45 18          	mov    rax,QWORD PTR [rbp+0x18]
+  4019f7:	48 8d 50 01          	lea    rdx,[rax+0x1]
+  4019fb:	48 89 55 18          	mov    QWORD PTR [rbp+0x18],rdx
+  4019ff:	44 89 c2             	mov    edx,r8d
+  401a02:	31 ca                	xor    edx,ecx
+  401a04:	88 10                	mov    BYTE PTR [rax],dl
+  401a06:	48 8b 45 f8          	mov    rax,QWORD PTR [rbp-0x8]
+  401a0a:	48 8d 50 01          	lea    rdx,[rax+0x1]
+  401a0e:	48 89 55 f8          	mov    QWORD PTR [rbp-0x8],rdx
+  401a12:	44 0f b6 00          	movzx  r8d,BYTE PTR [rax]
+  401a16:	48 8b 45 e8          	mov    rax,QWORD PTR [rbp-0x18]
+  401a1a:	48 8d 50 01          	lea    rdx,[rax+0x1]
+  401a1e:	48 89 55 e8          	mov    QWORD PTR [rbp-0x18],rdx
+  401a22:	0f b6 08             	movzx  ecx,BYTE PTR [rax]
+  401a25:	48 8b 45 18          	mov    rax,QWORD PTR [rbp+0x18]
+  401a29:	48 8d 50 01          	lea    rdx,[rax+0x1]
+  401a2d:	48 89 55 18          	mov    QWORD PTR [rbp+0x18],rdx
+  401a31:	44 89 c2             	mov    edx,r8d
+  401a34:	31 ca                	xor    edx,ecx
+  401a36:	88 10                	mov    BYTE PTR [rax],dl
+  401a38:	48 8b 45 f8          	mov    rax,QWORD PTR [rbp-0x8]
+  401a3c:	48 8d 50 01          	lea    rdx,[rax+0x1]
+  401a40:	48 89 55 f8          	mov    QWORD PTR [rbp-0x8],rdx
+  401a44:	44 0f b6 00          	movzx  r8d,BYTE PTR [rax]
+  401a48:	48 8b 45 e8          	mov    rax,QWORD PTR [rbp-0x18]
+  401a4c:	48 8d 50 01          	lea    rdx,[rax+0x1]
+  401a50:	48 89 55 e8          	mov    QWORD PTR [rbp-0x18],rdx
+  401a54:	0f b6 08             	movzx  ecx,BYTE PTR [rax]
+  401a57:	48 8b 45 18          	mov    rax,QWORD PTR [rbp+0x18]
+  401a5b:	48 8d 50 01          	lea    rdx,[rax+0x1]
+  401a5f:	48 89 55 18          	mov    QWORD PTR [rbp+0x18],rdx
+  401a63:	44 89 c2             	mov    edx,r8d
+  401a66:	31 ca                	xor    edx,ecx
+  401a68:	88 10                	mov    BYTE PTR [rax],dl
+  401a6a:	80 45 f7 01          	add    BYTE PTR [rbp-0x9],0x1
+  401a6e:	80 7d f7 09          	cmp    BYTE PTR [rbp-0x9],0x9
+  401a72:	0f 86 50 fc ff ff    	jbe    4016c8 <aes_key_schedule_128+0x52>
+  401a78:	90                   	nop
+  401a79:	48 83 c4 20          	add    rsp,0x20
+  401a7d:	5d                   	pop    rbp
+  401a7e:	c3                   	ret
+**********************
+PowerShell transcript end
+End time: 20260929144746
+**********************
+**********************
+PowerShell transcript start
+Start time: 20260929145730
+Username: DESKTOP-412KTAR\mzj
+RunAs User: DESKTOP-412KTAR\mzj
+Configuration Name: 
+Machine: DESKTOP-412KTAR (Microsoft Windows NT 10.0.26200.0)
+Host Application: C:\Users\mzj\.cache\codex-runtimes\codex-primary-runtime\dependencies\native\powershell\pwsh.dll -Command try { [Console]::OutputEncoding=[System.Text.Encoding]::UTF8 } catch {}
+$ErrorActionPreference='Stop'; $root='C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\批次13_20260929\538_湘岚杯1997'; $analysis=Join-Path $root 'analysis'; $transcript=Join-Path $analysis '538_static_transcript_20260929.txt'; Start-Transcript -LiteralPath $transcript -Append | Out-Null; try { Write-Output 'COMMAND> Get-FileHash original ZIP, extracted EXE, and ASCII analysis copy'; Get-FileHash -LiteralPath (Join-Path $root 'originals\1997.zip'),(Join-Path $analysis '123.exe'),'C:\CTFwork\xj538.exe' -Algorithm SHA256 | Format-List; Write-Output 'COMMAND> Get-Item wp.md, README.md, analysis evidence files'; Get-Item -LiteralPath (Join-Path $root 'wp.md'),(Join-Path $root 'README.md') | Select-Object FullName,Length,LastWriteTime | Format-Table -AutoSize; Get-ChildItem -LiteralPath $analysis -File | Select-Object Name,Length | Sort-Object Name | Format-Table -AutoSize; Write-Output 'COMMAND> Get-Content wp.md -First 18'; Get-Content -LiteralPath (Join-Path $root 'wp.md') -First 18; Write-Output 'COMMAND> Get-Content transcript initial lines and last lines'; Get-Content -LiteralPath $transcript -First 28; Get-Content -LiteralPath $transcript -Tail 24 } finally { Stop-Transcript | Out-Null }
+Process ID: 37796
+PSVersion: 7.6.5
+PSEdition: Core
+GitCommitId: 7.6.5
+OS: Microsoft Windows 10.0.26200
+Platform: Win32NT
+PSCompatibleVersions: 1.0, 2.0, 3.0, 4.0, 5.0, 5.1, 6.0, 7.0
+PSRemotingProtocolVersion: 2.4
+SerializationVersion: 1.1.0.1
+WSManStackVersion: 3.0
+**********************
+COMMAND> Get-FileHash original ZIP, extracted EXE, and ASCII analysis copy
+
+Algorithm : SHA256
+Hash      : 832F1BA75D90A93FF2B8D867483CE8612CF42157685976C4FD665ED4AC07193B
+Path      : C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\批次13_20260929\538_湘岚杯1997\originals\1997.zip
+
+Algorithm : SHA256
+Hash      : 5046A87DE6DAC33CE11CD139D06A4A0797E63BE3A70757AEB1224A3ACC151078
+Path      : C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\批次13_20260929\538_湘岚杯1997\analysis\123.exe
+
+Algorithm : SHA256
+Hash      : 5046A87DE6DAC33CE11CD139D06A4A0797E63BE3A70757AEB1224A3ACC151078
+Path      : C:\CTFwork\xj538.exe
+
+COMMAND> Get-Item wp.md, README.md, analysis evidence files
+
+FullName                                                                            Length LastWriteTime
+--------                                                                            ------ -------------
+C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\批次13_20260929\538_湘岚杯1997\wp.md       8464 2026/9/29 14:57:03
+C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\批次13_20260929\538_湘岚杯1997\README.md   1041 2026/9/29 14:57:03
+
+
+Name                               Length
+----                               ------
+123.exe                             63228
+538_custom_aes_verify.py             4769
+538_decrypt_verify.py                1369
+538_objdump_aes_encrypt.txt         13541
+538_objdump_data.txt                 3106
+538_objdump_headers.txt            108731
+538_objdump_key_schedule.txt        17077
+538_objdump_main.txt                 7735
+538_objdump_mul2.txt                  889
+538_objdump_rdata.txt                5551
+538_objdump_shift_rows.txt           4585
+538_objdump_symbols.txt             84679
+538_static_analysis.ps1              3615
+538_static_transcript_20260929.txt 130828
+
+COMMAND> Get-Content wp.md -First 18
+# 湘岚杯 1997（玄机题目 #538）静态分析记录
+
+## 结论与状态
+
+**状态：未解出可提交的文本 flag；没有向平台提交。**
+
+附件中的程序要求输入恰好 32 字节。静态反汇编表明，它使用一个非标准 AES 变换加密输入，再与硬编码的 32 字节常量比较。按反汇编逐步还原该变换并求逆后，唯一匹配的 32 字节输入是：
+
+- 十六进制：f0f1a0e7b57ebbf87ca9111468ca5971ed5fa6aef9802f8990c8ec1720d644bb
+- repr：b'\\xf0\\xf1\\xa0\\xe7\\xb5~\\xbb\\xf8|\\xa9\\x11\\x14h\\xcaYq\\xed_\\xa6\\xae\\xf9\\x80/\\x89\\x90\\xc8\\xec\\x17 \\xd6D\\xbb'
+
+该结果含大量非 ASCII 字节，并在偏移 28（从 0 开始）包含 0x20 空格。程序通过 scanf("%s") 读入，空格会终止输入，因此该字节串不可能作为一个完整的 32 字节 token 被程序读入。它也不是平台可用的常规文本 flag。故结论是附件本身的检查逻辑与可提交文本输入存在矛盾；在找到与题目说明相符的另一份附件或官方格式证据前，不继续猜测包装格式，也不把这题记为已完成。
+
+## 附件与证据
+
+- 原始附件：originals/1997.zip
+- ZIP 内唯一成员：123.exe，63228 字节
+- SHA256（ZIP）：832F1BA75D90A93FF2B8D867483CE8612CF42157685976C4FD665ED4AC07193B
+COMMAND> Get-Content transcript initial lines and last lines
+PRIOR COMMAND> Get-ChildItem -Force -LiteralPath "C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\批次13_20260929\538_湘岚杯1997"; Get-ChildItem ... | Format-List FullName,Length,Mode,LastWriteTime
+PRIOR OUTPUT: challenge contains analysis\ and originals\; no top-level files were listed.
+PRIOR COMMAND> powershell -NoProfile -ExecutionPolicy Bypass -File "...\analysis\538_static_analysis.ps1"
+PRIOR OUTPUT: parser error at lines 54/58 around regex quantifier {4,}; script did not execute, so no file content was processed. Exact diagnostic included “Missing expression after ','”, “The string is missing the terminator: '.”, and “The Try statement is missing its Catch or Finally block.”
+PRIOR COMMAND> Get-Content -LiteralPath "...\analysis\538_static_analysis.ps1" | Select-Object -Skip 46 -First 15
+PRIOR OUTPUT: confirmed the offending patterns were '[\x20-\x7E]{4,}' for ASCII and UTF16 string scans.
+PRIOR COMMAND> [regex]::Matches("abc def", "[ -~]{4,}") | ForEach-Object Value
+PRIOR OUTPUT:
+abc def
+NOTE: regex revised to printable ASCII class [ -~]; all following work remains static file parsing only.
+**********************
+Windows PowerShell transcript start
+Start time: 20260929143846
+Username: DESKTOP-412KTAR\mzj
+RunAs User: DESKTOP-412KTAR\mzj
+Configuration Name:
+Machine: DESKTOP-412KTAR (Microsoft Windows NT 10.0.26200.0)
+Host Application: C:\WINDOWS\System32\WindowsPowerShell\v1.0\powershell.exe -NoProfile -ExecutionPolicy Bypass -File C:\Users\mzj\Desktop\CTF\????\????\??13_20260929\538_???1997\analysis\538_static_analysis.ps1
+Process ID: 34540
+PSVersion: 5.1.26100.9444
+PSEdition: Desktop
+PSCompatibleVersions: 1.0, 2.0, 3.0, 4.0, 5.0, 5.1.26100.9444
+BuildVersion: 10.0.26100.9444
+CLRVersion: 4.0.30319.42000
+WSManStackVersion: 3.0
+PSRemotingProtocolVersion: 2.3
+SerializationVersion: 1.1.0.1
+**********************
+PRIOR COMMAND> Get-Content -LiteralPath "...\analysis\538_static_analysis.ps1" | Select-Object -Skip 46 -First 15
+PRIOR OUTPUT: confirmed the offending patterns were '[\x20-\x7E]{4,}' for ASCII and UTF16 string scans.
+PRIOR COMMAND> [regex]::Matches("abc def", "[ -~]{4,}") | ForEach-Object Value
+PRIOR OUTPUT:
+abc def
+NOTE: regex revised to printable ASCII class [ -~]; all following work remains static file parsing only.
+**********************
+Windows PowerShell transcript start
+Start time: 20260929143846
+Username: DESKTOP-412KTAR\mzj
+RunAs User: DESKTOP-412KTAR\mzj
+Configuration Name:
+Machine: DESKTOP-412KTAR (Microsoft Windows NT 10.0.26200.0)
+Host Application: C:\WINDOWS\System32\WindowsPowerShell\v1.0\powershell.exe -NoProfile -ExecutionPolicy Bypass -File C:\Users\mzj\Desktop\CTF\????\????\??13_20260929\538_???1997\analysis\538_static_analysis.ps1
+Process ID: 34540
+PSVersion: 5.1.26100.9444
+PSEdition: Desktop
+PSCompatibleVersions: 1.0, 2.0, 3.0, 4.0, 5.0, 5.1.26100.9444
+BuildVersion: 10.0.26100.9444
+CLRVersion: 4.0.30319.42000
+WSManStackVersion: 3.0
+PSRemotingProtocolVersion: 2.3
+SerializationVersion: 1.1.0.1
+**********************
+**********************
+PowerShell transcript end
+End time: 20260929145730
+**********************
+**********************
+PowerShell transcript start
+Start time: 20260929145906
+Username: DESKTOP-412KTAR\mzj
+RunAs User: DESKTOP-412KTAR\mzj
+Configuration Name: 
+Machine: DESKTOP-412KTAR (Microsoft Windows NT 10.0.26200.0)
+Host Application: C:\Users\mzj\.cache\codex-runtimes\codex-primary-runtime\dependencies\native\powershell\pwsh.dll -Command try { [Console]::OutputEncoding=[System.Text.Encoding]::UTF8 } catch {}
+$analysis='C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\批次13_20260929\538_湘岚杯1997\analysis'; $transcript=Join-Path $analysis '538_static_transcript_20260929.txt'; Start-Transcript -LiteralPath $transcript -Append | Out-Null; try { Write-Output 'COMMAND> python analysis\538_custom_aes_verify.py'; python (Join-Path $analysis '538_custom_aes_verify.py'); Write-Output 'COMMAND> Get-FileHash source EXE and C:\CTFwork copy -Algorithm SHA256 | Format-List'; Get-FileHash -LiteralPath (Join-Path $analysis '123.exe'),'C:\CTFwork\xj538.exe' -Algorithm SHA256 | Format-List } finally { Stop-Transcript | Out-Null }
+Process ID: 36240
+PSVersion: 7.6.5
+PSEdition: Core
+GitCommitId: 7.6.5
+OS: Microsoft Windows 10.0.26200
+Platform: Win32NT
+PSCompatibleVersions: 1.0, 2.0, 3.0, 4.0, 5.0, 5.1, 6.0, 7.0
+PSRemotingProtocolVersion: 2.4
+SerializationVersion: 1.1.0.1
+WSManStackVersion: 3.0
+**********************
+COMMAND> python analysis\538_custom_aes_verify.py
+
+COMMAND> Get-FileHash source EXE and C:\CTFwork copy -Algorithm SHA256 | Format-List
+
+Algorithm : SHA256
+Hash      : 5046A87DE6DAC33CE11CD139D06A4A0797E63BE3A70757AEB1224A3ACC151078
+Path      : C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\批次13_20260929\538_湘岚杯1997\analysis\123.exe
+
+Algorithm : SHA256
+Hash      : 5046A87DE6DAC33CE11CD139D06A4A0797E63BE3A70757AEB1224A3ACC151078
+Path      : C:\CTFwork\xj538.exe
+
+**********************
+PowerShell transcript end
+End time: 20260929145907
+**********************
+**********************
+PowerShell transcript start
+Start time: 20260929145939
+Username: DESKTOP-412KTAR\mzj
+RunAs User: DESKTOP-412KTAR\mzj
+Configuration Name: 
+Machine: DESKTOP-412KTAR (Microsoft Windows NT 10.0.26200.0)
+Host Application: C:\Users\mzj\.cache\codex-runtimes\codex-primary-runtime\dependencies\native\powershell\pwsh.dll -Command try { [Console]::OutputEncoding=[System.Text.Encoding]::UTF8 } catch {}
+$root='C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\批次13_20260929\538_湘岚杯1997'; $analysis=Join-Path $root 'analysis'; $transcript=Join-Path $analysis '538_static_transcript_20260929.txt'; Start-Transcript -LiteralPath $transcript -Append | Out-Null; try { Write-Output 'COMMAND> Get-Content wp.md -First 12'; Get-Content -LiteralPath (Join-Path $root 'wp.md') -First 12; Write-Output 'COMMAND> Get-Content README.md -First 14'; Get-Content -LiteralPath (Join-Path $root 'README.md') -First 14; Write-Output 'COMMAND> Get-Item wp.md, README.md, analysis\538_custom_aes_verify.py, analysis\538_static_transcript_20260929.txt | Select Name,Length'; Get-Item -LiteralPath (Join-Path $root 'wp.md'),(Join-Path $root 'README.md'),(Join-Path $analysis '538_custom_aes_verify.py'),$transcript | Select-Object Name,Length | Format-Table -AutoSize } finally { Stop-Transcript | Out-Null }
+Process ID: 33600
+PSVersion: 7.6.5
+PSEdition: Core
+GitCommitId: 7.6.5
+OS: Microsoft Windows 10.0.26200
+Platform: Win32NT
+PSCompatibleVersions: 1.0, 2.0, 3.0, 4.0, 5.0, 5.1, 6.0, 7.0
+PSRemotingProtocolVersion: 2.4
+SerializationVersion: 1.1.0.1
+WSManStackVersion: 3.0
+**********************
+COMMAND> Get-Content wp.md -First 12
+# 湘岚杯 1997（玄机题目 #538）静态分析记录
+
+## 结论与状态
+
+**状态：未解出可提交的文本 flag；没有向平台提交。**
+
+附件中的程序要求输入恰好 32 字节。静态反汇编表明，它使用一个非标准 AES 变换加密输入，再与硬编码的 32 字节常量比较。按反汇编逐步还原该变换并求逆后，唯一匹配的 32 字节输入是：
+
+- 十六进制：f0f1a0e7b57ebbf87ca9111468ca5971ed5fa6aef9802f8990c8ec1720d644bb
+- repr：b'\xf0\xf1\xa0\xe7\xb5~\xbb\xf8|\xa9\x11\x14h\xcaYq\xed_\xa6\xae\xf9\x80/\x89\x90\xc8\xec\x17 \xd6D\xbb'
+
+该结果含大量非 ASCII 字节，并在偏移 28（从 0 开始）包含 0x20 空格。程序通过 scanf("%s") 读入，空格会终止输入，因此该字节串不可能作为一个完整的 32 字节 token 被程序读入。它也不是平台可用的常规文本 flag。故结论是附件本身的检查逻辑与可提交文本输入存在矛盾；在找到与题目说明相符的另一份附件或官方格式证据前，不继续猜测包装格式，也不把这题记为已完成。
+COMMAND> Get-Content README.md -First 14
+# 湘岚杯 1997（玄机 #538）
+
+**状态：未完成 / 未提交。** 该附件程序的 32-byte expected 值在按其实际非标准 AES 轮函数求逆后，只对应一个非 ASCII 输入；输入中含 scanf("%s") 会终止读取的空格字节 0x20，因此无法作为完整 32-byte token 输入。没有生成或提交文本 flag，也没有把本题列入已完成清单。
+
+## 文件
+
+- originals/1997.zip：平台原始附件，SHA256 832F1BA75D90A93FF2B8D867483CE8612CF42157685976C4FD665ED4AC07193B
+- analysis/123.exe：题目程序，63228 bytes，SHA256 5046A87DE6DAC33CE11CD139D06A4A0797E63BE3A70757AEB1224A3ACC151078
+- wp.md：完整静态分析、轮函数求逆过程与所有失败假设
+- analysis/538_static_transcript_20260929.txt：命令输入/输出记录
+- analysis/538_custom_aes_verify.py：按反汇编还原的自定义轮函数和正反向复核
+- analysis/538_objdump_*.txt：静态反汇编和 PE 数据证据
+
+所有分析均未执行附件、未联网、未看公开 Writeup、未向平台提交 flag。
+COMMAND> Get-Item wp.md, README.md, analysis\538_custom_aes_verify.py, analysis\538_static_transcript_20260929.txt | Select Name,Length
+
+Name                               Length
+----                               ------
+wp.md                                8441
+README.md                            1041
+538_custom_aes_verify.py             5021
+538_static_transcript_20260929.txt 142068
+
+**********************
+PowerShell transcript end
+End time: 20260929145939
+**********************

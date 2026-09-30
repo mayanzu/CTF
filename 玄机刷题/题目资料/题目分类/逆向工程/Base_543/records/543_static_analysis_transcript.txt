@@ -1,0 +1,52 @@
+Xuanji #543 static PE analysis transcript
+Scope: static parsing only. The challenge executable was never launched.
+Input: C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\批次10_20260929\543_Base\analysis\unpacked\你知道Base么\你知道Base么.exe
+
+COMMAND> objdump -f -x C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\批次10_20260929\543_Base\analysis\unpacked\你知道Base么\你知道Base么.exe
+EXIT_CODE> 1
+STDOUT_FILE> C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\批次10_20260929\543_Base\analysis\objdump_pe_header.txt
+STDOUT_BYTES> 0
+STDERR_BEGIN
+objdump: C:\Users\mzj\Desktop\CTF\����ˢ��\��Ŀ����\����10_20260929\543_Base\analysis\unpacked\��֪��Baseô\��֪��Baseô.exe: No such file or directory
+STDERR_END
+
+COMMAND> objdump -h C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\批次10_20260929\543_Base\analysis\unpacked\你知道Base么\你知道Base么.exe
+EXIT_CODE> 1
+STDOUT_FILE> C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\批次10_20260929\543_Base\analysis\objdump_sections.txt
+STDOUT_BYTES> 0
+STDERR_BEGIN
+objdump: C:\Users\mzj\Desktop\CTF\����ˢ��\��Ŀ����\����10_20260929\543_Base\analysis\unpacked\��֪��Baseô\��֪��Baseô.exe: No such file or directory
+STDERR_END
+
+COMMAND> objdump -p C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\批次10_20260929\543_Base\analysis\unpacked\你知道Base么\你知道Base么.exe
+EXIT_CODE> 1
+STDOUT_FILE> C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\批次10_20260929\543_Base\analysis\objdump_imports.txt
+STDOUT_BYTES> 0
+STDERR_BEGIN
+objdump: C:\Users\mzj\Desktop\CTF\����ˢ��\��Ŀ����\����10_20260929\543_Base\analysis\unpacked\��֪��Baseô\��֪��Baseô.exe: No such file or directory
+STDERR_END
+
+COMMAND> strings -a -n 3 C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\批次10_20260929\543_Base\analysis\unpacked\你知道Base么\你知道Base么.exe
+EXIT_CODE> 0
+STDOUT_FILE> C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\批次10_20260929\543_Base\analysis\strings_ascii.txt
+STDOUT_BYTES> 7782
+STDERR_BEGIN
+
+STDERR_END
+
+COMMAND> strings -a -el -n 3 C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\批次10_20260929\543_Base\analysis\unpacked\你知道Base么\你知道Base么.exe
+EXIT_CODE> 0
+STDOUT_FILE> C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\批次10_20260929\543_Base\analysis\strings_utf16le.txt
+STDOUT_BYTES> 278
+STDERR_BEGIN
+
+STDERR_END
+
+COMMAND> objdump -d -M intel -w C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\批次10_20260929\543_Base\analysis\unpacked\你知道Base么\你知道Base么.exe
+EXIT_CODE> 1
+STDOUT_FILE> C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\批次10_20260929\543_Base\analysis\objdump_disassembly_intel.txt
+STDOUT_BYTES> 0
+STDERR_BEGIN
+objdump: C:\Users\mzj\Desktop\CTF\����ˢ��\��Ŀ����\����10_20260929\543_Base\analysis\unpacked\��֪��Baseô\��֪��Baseô.exe: No such file or directory
+STDERR_END
+

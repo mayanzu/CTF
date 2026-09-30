@@ -1,0 +1,3205 @@
+﻿**********************
+Windows PowerShell transcript start
+Start time: 20260929045717
+Username: DESKTOP-412KTAR\mzj
+RunAs User: DESKTOP-412KTAR\mzj
+Configuration Name: 
+Machine: DESKTOP-412KTAR (Microsoft Windows NT 10.0.26200.0)
+Host Application: C:\WINDOWS\System32\WindowsPowerShell\v1.0\powershell.exe -NoLogo -NoProfile -NoExit
+Process ID: 28296
+PSVersion: 5.1.26100.9444
+PSEdition: Desktop
+PSCompatibleVersions: 1.0, 2.0, 3.0, 4.0, 5.0, 5.1.26100.9444
+BuildVersion: 10.0.26100.9444
+CLRVersion: 4.0.30319.42000
+WSManStackVersion: 3.0
+PSRemotingProtocolVersion: 2.3
+SerializationVersion: 1.1.0.1
+**********************
+Transcript started, output file is C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\challenge_558\analysis\powershell_transcript_20260929.txt
+PS C:\Users\mzj\Desktop\CTF> Write-Output '=== Challenge #558 local attachment inventory ==='
+=== Challenge #558 local attachment inventory ===
+PS C:\Users\mzj\Desktop\CTF> Write-Output 'COMMAND> Get-ChildItem -LiteralPath C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料 -Directory'
+COMMAND> Get-ChildItem -LiteralPath C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料 -Directory
+PS C:\Users\mzj\Desktop\CTF> Get-ChildItem -LiteralPath 'C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料' -Directory | Select-Object Name,FullName
+
+Name                   FullName
+----                   --------
+babyRSA                C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\babyRSA
+Base_543               C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\Base_543
+challenge_558          C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\challenge_558
+checker_562            C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\checker_562
+crazyaes               C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\crazyaes
+ezBase_541             C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\ezBase_541
+EzFlag_367             C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\EzFlag_367
+ezRe                   C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\ezRe
+go_for_it_556          C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\go_for_it_556
+hookme_542             C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\hookme_542
+Maybesignin_540        C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\Maybesignin_540
+OpenHarmony_arkt_559   C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\OpenHarmony_arkt_559
+OpenHarmony_easyre_560 C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\OpenHarmony_easyre...
+OpenHarmony_secret_561 C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\OpenHarmony_secret...
+PaluArray_546          C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\PaluArray_546
+PaluMaze_551           C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\PaluMaze_551
+PaluMaze_551_fresh     C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\PaluMaze_551_fresh
+PositionalXOR_550      C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\PositionalXOR_550
+Prompt Trace           C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\Prompt Trace
+rainbow                C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\rainbow
+Sql注入的应急排查_450         C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\Sql注入的应急排查_450
+Tch3s                  C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\Tch3s
+tradre                 C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\tradre
+Veiled Shell           C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\Veiled Shell
+Victory_Melody_555     C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\Victory_Melody_555
+WSL平台归档                C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\WSL平台归档
+不劳春风解我忧                C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\不劳春风解我忧
+像素囚笼1                  C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\像素囚笼1
+即随本心                   C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\即随本心
+原始下载附件                 C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\原始下载附件
+可疑流量分析                 C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\可疑流量分析
+新题批次                   C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\新题批次
+班次邮戳                   C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\班次邮戳
+被入侵的数据库_451            C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\被入侵的数据库_451
+
+
+PS C:\Users\mzj\Desktop\CTF> Write-Output 'COMMAND> Get-ChildItem -LiteralPath C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\新题批次 -Recurse -File'
+COMMAND> Get-ChildItem -LiteralPath C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\新题批次 -Recurse -File
+PS C:\Users\mzj\Desktop\CTF> Get-ChildItem -LiteralPath 'C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\新题批次' -Recurse -File -ErrorAction SilentlyContinue | Select-Object FullName,Length,LastWriteTime
+
+FullName
+--------
+C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\新题批次\DigitalKey_UWB_520\digital_key_trace...
+C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\新题批次\DigitalKey_UWB_520\inspect_sqlite.py
+C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\新题批次\DigitalKey_UWB_520\solve_uwb_520.py
+C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\新题批次\DigitalKey_UWB_520\extracted\digital...
+C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\新题批次\DigitalKey_UWB_520\extracted\__MACOS...
+C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\新题批次\PaluMaze_551\compact_dis.py
+C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\新题批次\PaluMaze_551\compact_dis.txt
+C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\新题批次\PaluMaze_551\compute_candidates.py
+C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\新题批次\PaluMaze_551\compute_candidates.txt
+C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\新题批次\PaluMaze_551\dis311.py
+C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\新题批次\PaluMaze_551\disassemble_game.py
+C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\新题批次\PaluMaze_551\disassemble_static.py
+C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\新题批次\PaluMaze_551\disassembly.txt
+C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\新题批次\PaluMaze_551\enumerate_optimal.py
+C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\新题批次\PaluMaze_551\extract_static.py
+C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\新题批次\PaluMaze_551\game.bin
+C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\新题批次\PaluMaze_551\game.marshal
+C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\新题批次\PaluMaze_551\game_311.pyc
+C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\新题批次\PaluMaze_551\game_disassembly.txt
+C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\新题批次\PaluMaze_551\game_flag.exe
+C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\新题批次\PaluMaze_551\game_py311.pyc
+C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\新题批次\PaluMaze_551\inspect_archive.py
+C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\新题批次\PaluMaze_551\optimal_summary.txt
+C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\新题批次\PaluMaze_551\order_check.py
+C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\新题批次\PaluMaze_551\pydisasm_focus.txt
+C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\新题批次\PaluMaze_551\PYZ-00.pyz.bin
+C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\新题批次\PaluMaze_551\recreate_maze.py
+C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\新题批次\PaluMaze_551\xdis311.txt
+
+
+PS C:\Users\mzj\Desktop\CTF> Write-Output 'COMMAND> rg --files C:\Users\mzj\Desktop\CTF\玄机刷题 | rg (558|qgd|R)' 
+COMMAND> rg --files C:\Users\mzj\Desktop\CTF\玄机刷题 | rg (558|qgd|R)
+PS C:\Users\mzj\Desktop\CTF> rg --files 'C:\Users\mzj\Desktop\CTF\玄机刷题' | rg '(558|qgd|黄河|公安院校)' 
+
+PS C:\Users\mzj\Desktop\CTF> Write-Output 'COMMAND> Get-ChildItem -LiteralPath C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\原始下载附件 -Recurse -File'
+COMMAND> Get-ChildItem -LiteralPath C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\原始下载附件 -Recurse -File
+PS C:\Users\mzj\Desktop\CTF> Get-ChildItem -LiteralPath 'C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\原始下载附件' -Recurse -File -ErrorAction SilentlyContinue | Select-Object FullName,Length
+
+FullName                                                                      L
+                                                                              e
+                                                                              n
+                                                                              g
+                                                                              t
+                                                                              h
+--------                                                                      -
+C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\原始下载附件\arkt.zip                            7
+C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\原始下载附件\attachments.zip                     1
+C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\原始下载附件\babyRe.zip                          6
+C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\原始下载附件\babyrsa.zip                         1
+C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\原始下载附件\checker.zip                         8
+C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\原始下载附件\crazyaes-20240524094418-p72tac5.zip 7
+C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\原始下载附件\easyre.zip                          3
+C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\原始下载附件\encrypted_flag.zip                  8
+C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\原始下载附件\ezBase-20250521104055-dq14shk.rar   3
+C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\原始下载附件\go_for_it.zip                       9
+C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\原始下载附件\hookme.rar                          7
+C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\原始下载附件\manifest.csv                        9
+C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\原始下载附件\note.zip                            2
+C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\原始下载附件\PaluArray_flag.zip                  2
+C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\原始下载附件\Prompt+Trace附件.zip                  9
+C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\原始下载附件\rainbow.zip                         8
+C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\原始下载附件\README.md                           6
+C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\原始下载附件\secret.zip                          7
+C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\原始下载附件\spring.zip                          4
+C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\原始下载附件\Sql注入的应急排查.zip                      5
+C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\原始下载附件\tradre.zip                          3
+C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\原始下载附件\Veiled+Shell附件.zip                  4
+C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\原始下载附件\Victory_Melody.zip                  6
+C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\原始下载附件\你知道Base么-20250521104202-am92t17.rar 3
+C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\原始下载附件\即随本心.zip                            0
+C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\原始下载附件\可疑流量分析附件.zip                        0
+C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\原始下载附件\班次邮戳附件.zip                          5
+C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\原始下载附件\被入侵的数据库.zip                         5
+
+
+PS C:\Users\mzj\Desktop\CTF> Write-Output 'BROWSER PAGE (foreground Chrome): https://xj.edisec.net/challenges/558'
+BROWSER PAGE (foreground Chrome): https://xj.edisec.net/challenges/558
+PS C:\Users\mzj\Desktop\CTF> Write-Output 'PAGE TITLE: 第三届黄河流域公安院校网络安全技能挑战赛R - 玄机'
+PAGE TITLE: 第三届黄河流域公安院校网络安全技能挑战赛R - 玄机
+PS C:\Users\mzj\Desktop\CTF> Write-Output 'VISIBLE PAGE FACTS: 免费；中等；300分；REVERSE；简介：暂无简介；步骤：尝试读取文件/flag获得本题flag。0/1。'
+VISIBLE PAGE FACTS: 免费；中等；300分；REVERSE；简介：暂无简介；步骤：尝试读取文件/flag获得本题flag。0/1。
+PS C:\Users\mzj\Desktop\CTF> Write-Output 'CONTROL: 按钮“下载附件”；按钮“提交FLAG”可见但未点击。用户明确要求不得提交。'
+CONTROL: 按钮“下载附件”；按钮“提交FLAG”可见但未点击。用户明确要求不得提交。
+PS C:\Users\mzj\Desktop\CTF> Write-Output 'DOM SNAPSHOT:'
+DOM SNAPSHOT:
+PS C:\Users\mzj\Desktop\CTF> Write-Output '- button "download 下载附件"'
+- button "download 下载附件"
+PS C:\Users\mzj\Desktop\CTF> Write-Output '- button "flag 提交FLAG"'
+- button "flag 提交FLAG"
+PS C:\Users\mzj\Desktop\CTF> Write-Output '- paragraph: 尝试读取文件/flag获得本题flag。'
+- paragraph: 尝试读取文件/flag获得本题flag。
+PS C:\Users\mzj\Desktop\CTF> Write-Output 'NEXT BROWSER ACTION: click only the observed 下载附件 button; no flag form will be opened.'
+NEXT BROWSER ACTION: click only the observed 下载附件 button; no flag form will be opened.
+PS C:\Users\mzj\Desktop\CTF> Write-Output 'COMMAND> Get-ChildItem -LiteralPath $env:USERPROFILE\Downloads -File | Sort-Object LastWriteTime -Descending | Select-Object -First 12 Name,Length,LastWriteTime,FullName'
+COMMAND> Get-ChildItem -LiteralPath $env:USERPROFILE\Downloads -File | Sort-Object LastWriteTime -Descending | Select-Object -First 12 Name,Length,LastWriteTime,FullName
+PS C:\Users\mzj\Desktop\CTF> Get-ChildItem -LiteralPath (Join-Path $env:USERPROFILE 'Downloads') -File | Sort-Object LastWriteTime -Descending | Select-Object -First 12 Name,Length,LastWriteTime,FullName
+PS C:\Users\mzj\Desktop\CTF> Write-Output 'COMMAND> Get-ChildItem -LiteralPath D:\Downloads -Recurse -File | Sort-Object LastWriteTime -Descending | Select-Object -First 20 Name,Length,LastWriteTime,FullName'
+COMMAND> Get-ChildItem -LiteralPath D:\Downloads -Recurse -File | Sort-Object LastWriteTime -Descending | Select-Object -First 20 Name,Length,LastWriteTime,FullName
+PS C:\Users\mzj\Desktop\CTF> Get-ChildItem -LiteralPath 'D:\Downloads' -Recurse -File -ErrorAction SilentlyContinue | Sort-Object LastWriteTime -Descending | Select-Object -First 20 Name,Length,LastWriteTime,FullName
+
+Name                                           Length LastWriteTime      FullNa
+                                                                         me
+----                                           ------ -------------      ------
+R.zip                                           87569 2026/9/29 4:59:50  D:\...
+ezBase-20250521104055-dq14shk (1).rar            7833 2026/9/29 3:48:43  D:\...
+MaybeSignin.zip                                  6305 2026/9/29 3:45:38  D:\...
+arkt (1).zip                                   109627 2026/9/29 3:36:41  D:\...
+secret (1).zip                                1170497 2026/9/29 1:50:24  D:\...
+checker (2).zip                                 17498 2026/9/29 1:50:11  D:\...
+easyre (1).zip                                 117343 2026/9/29 1:49:28  D:\...
+checker (1).zip                                 17498 2026/9/29 1:45:45  D:\...
+digital_key_trace.sqlite.zip                     2560 2026/9/29 0:08:29  D:\...
+game_flag (1).exe                             6731652 2026/9/28 23:55:55 D:\...
+EzFlag_248f149404428676e6aa45e6312d069c.zip      5589 2026/9/28 23:48:07 D:\...
+被入侵的数据库.zip                                     29595 2026/9/28 23:45:15 D:\...
+2025-CCB-CISCN-Quals-attachments.zip         81641704 2026/9/28 23:28:31 D:\...
+Sql注入的应急排查.zip                                 315805 2026/9/28 23:26:30 D:\...
+WPS_Setup_x64_28488.exe                     342602512 2026/9/28 22:07:25 D:\...
+game_flag.exe                                 6731652 2026/9/28 20:20:13 D:\...
+Victory_Melody.zip                              13676 2026/9/28 20:19:32 D:\...
+encrypted_flag.zip                                198 2026/9/28 20:15:57 D:\...
+hookme.rar                                    5125397 2026/9/27 20:08:39 D:\...
+你知道Base么-20250521104202-am92t17.rar             14603 2026/9/27 20:08:25 D:\...
+
+
+PS C:\Users\mzj\Desktop\CTF> Write-Output 'COMMAND> Get-ChildItem -LiteralPath C:\Users\mzj\Downloads -Recurse -File | Sort-Object LastWriteTime -Descending | Select-Object -First 20 Name,Length,LastWriteTime,FullName'
+COMMAND> Get-ChildItem -LiteralPath C:\Users\mzj\Downloads -Recurse -File | Sort-Object LastWriteTime -Descending | Select-Object -First 20 Name,Length,LastWriteTime,FullName
+PS C:\Users\mzj\Desktop\CTF> Get-ChildItem -LiteralPath 'C:\Users\mzj\Downloads' -Recurse -File -ErrorAction SilentlyContinue | Sort-Object LastWriteTime -Descending | Select-Object -First 20 Name,Length,LastWriteTime,FullName
+
+Name                        Length LastWriteTime      FullName
+----                        ------ -------------      --------
+water-ocean.md               18687 2026/5/13 12:16:32 C:\Users\mzj\Downloads...
+webgl-pitfalls.md             5688 2026/5/13 12:16:32 C:\Users\mzj\Downloads...
+SKILL.md                      5601 2026/5/13 12:16:32 C:\Users\mzj\Downloads...
+voxel-rendering.md           47241 2026/5/13 12:16:32 C:\Users\mzj\Downloads...
+volumetric-rendering.md      13009 2026/5/13 12:16:32 C:\Users\mzj\Downloads...
+voronoi-cellular-noise.md    13735 2026/5/13 12:16:32 C:\Users\mzj\Downloads...
+texture-mapping-advanced.md   4499 2026/5/13 12:16:32 C:\Users\mzj\Downloads...
+texture-sampling.md          13681 2026/5/13 12:16:32 C:\Users\mzj\Downloads...
+sound-synthesis.md           18077 2026/5/13 12:16:32 C:\Users\mzj\Downloads...
+terrain-rendering.md         15058 2026/5/13 12:16:32 C:\Users\mzj\Downloads...
+simulation-physics.md        59068 2026/5/13 12:16:32 C:\Users\mzj\Downloads...
+sdf-3d.md                    22752 2026/5/13 12:16:32 C:\Users\mzj\Downloads...
+sdf-tricks.md                 3620 2026/5/13 12:16:32 C:\Users\mzj\Downloads...
+shadow-techniques.md         26136 2026/5/13 12:16:32 C:\Users\mzj\Downloads...
+procedural-2d-pattern.md     11278 2026/5/13 12:16:32 C:\Users\mzj\Downloads...
+post-processing.md           31785 2026/5/13 12:16:32 C:\Users\mzj\Downloads...
+procedural-noise.md          17864 2026/5/13 12:16:32 C:\Users\mzj\Downloads...
+sdf-2d.md                    22350 2026/5/13 12:16:32 C:\Users\mzj\Downloads...
+ray-marching.md              14455 2026/5/13 12:16:32 C:\Users\mzj\Downloads...
+path-tracing-gi.md           22680 2026/5/13 12:16:32 C:\Users\mzj\Downloads...
+
+
+PS C:\Users\mzj\Desktop\CTF> $sourceZip = 'D:\Downloads\R.zip'
+PS C:\Users\mzj\Desktop\CTF> $destZip = 'C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\challenge_558\R.zip'
+PS C:\Users\mzj\Desktop\CTF> Write-Output 'COMMAND> Test-Path $sourceZip; Get-Item $sourceZip | Select-Object FullName,Length,LastWriteTime; Get-FileHash $sourceZip -Algorithm SHA256'
+COMMAND> Test-Path $sourceZip; Get-Item $sourceZip | Select-Object FullName,Length,LastWriteTime; Get-FileHash $sourceZip -Algorithm SHA256
+PS C:\Users\mzj\Desktop\CTF> Test-Path -LiteralPath $sourceZip
+True
+PS C:\Users\mzj\Desktop\CTF> Get-Item -LiteralPath $sourceZip | Select-Object FullName,Length,LastWriteTime
+
+FullName           Length LastWriteTime
+--------           ------ -------------
+D:\Downloads\R.zip  87569 2026/9/29 4:59:50
+
+
+PS C:\Users\mzj\Desktop\CTF> Get-FileHash -LiteralPath $sourceZip -Algorithm SHA256
+
+Algorithm       Hash
+---------       ----
+SHA256          CD7967ECD4DA09A57F544E14C28CEAF016272D8B7EC095B949D141D096C4...
+
+
+PS C:\Users\mzj\Desktop\CTF> if (-not (Test-Path -LiteralPath $destZip)) { Copy-Item -LiteralPath $sourceZip -Destination $destZip }
+PS C:\Users\mzj\Desktop\CTF> Write-Output 'COMMAND> Get-FileHash project copy; ZipFile::OpenRead + list entries (no extraction)'
+COMMAND> Get-FileHash project copy; ZipFile::OpenRead + list entries (no extraction)
+PS C:\Users\mzj\Desktop\CTF> Get-FileHash -LiteralPath $destZip -Algorithm SHA256
+
+Algorithm       Hash
+---------       ----
+SHA256          CD7967ECD4DA09A57F544E14C28CEAF016272D8B7EC095B949D141D096C4...
+
+
+PS C:\Users\mzj\Desktop\CTF> Add-Type -AssemblyName System.IO.Compression.FileSystem
+PS C:\Users\mzj\Desktop\CTF> $archive = [System.IO.Compression.ZipFile]::OpenRead($destZip)
+PS C:\Users\mzj\Desktop\CTF> $archive.Entries | Select-Object FullName,Length,CompressedLength
+
+FullName Length CompressedLength
+-------- ------ ----------------
+R.exe    186880            87461
+
+
+PS C:\Users\mzj\Desktop\CTF> $archive.Dispose()
+PS C:\Users\mzj\Desktop\CTF> Write-Output 'COMMAND> (Get-FileHash -LiteralPath $sourceZip -Algorithm SHA256).Hash'
+COMMAND> (Get-FileHash -LiteralPath $sourceZip -Algorithm SHA256).Hash
+PS C:\Users\mzj\Desktop\CTF> (Get-FileHash -LiteralPath $sourceZip -Algorithm SHA256).Hash
+CD7967ECD4DA09A57F544E14C28CEAF016272D8B7EC095B949D141D096C408DB
+PS C:\Users\mzj\Desktop\CTF> Write-Output 'COMMAND> Expand-Archive -LiteralPath $destZip -DestinationPath C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\challenge_558\attachment -Force'
+COMMAND> Expand-Archive -LiteralPath $destZip -DestinationPath C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\challenge_558\attachment -Force
+PS C:\Users\mzj\Desktop\CTF> $unpackDir = 'C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\challenge_558\attachment'
+PS C:\Users\mzj\Desktop\CTF> Expand-Archive -LiteralPath $destZip -DestinationPath $unpackDir -Force
+PS C:\Users\mzj\Desktop\CTF> Write-Output 'COMMAND> Get-ChildItem -LiteralPath $unpackDir -Recurse -File | Select-Object FullName,Length; Get-FileHash each file'
+COMMAND> Get-ChildItem -LiteralPath $unpackDir -Recurse -File | Select-Object FullName,Length; Get-FileHash each file
+PS C:\Users\mzj\Desktop\CTF> Get-ChildItem -LiteralPath $unpackDir -Recurse -File | Select-Object FullName,Length
+
+FullName                                                          Length
+--------                                                          ------
+C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\challenge_558\attachment\R.exe 186880
+
+
+PS C:\Users\mzj\Desktop\CTF> Get-ChildItem -LiteralPath $unpackDir -Recurse -File | Get-FileHash -Algorithm SHA256 | Select-Object Path,Hash
+
+Path                                                              Hash
+----                                                              ----
+C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\challenge_558\attachment\R.exe E2B0CA7ED7...
+
+
+PS C:\Users\mzj\Desktop\CTF> Write-Output 'COMMAND> Get-ChildItem -LiteralPath C:\Users\mzj\Desktop\CTF\玄机刷题\labs\tools -Recurse -File; Get-ChildItem -LiteralPath C:\Users\mzj\Desktop\CTF\玄机刷题\labs\platform -Recurse -File'
+COMMAND> Get-ChildItem -LiteralPath C:\Users\mzj\Desktop\CTF\玄机刷题\labs\tools -Recurse -File; Get-ChildItem -LiteralPath C:\Users\mzj\Desktop\CTF\玄机刷题\labs\platform -Recurse -File
+PS C:\Users\mzj\Desktop\CTF> Get-ChildItem -LiteralPath 'C:\Users\mzj\Desktop\CTF\玄机刷题\labs\tools' -Recurse -File -ErrorAction SilentlyContinue | Select-Object FullName,Length
+PS C:\Users\mzj\Desktop\CTF> Get-ChildItem -LiteralPath 'C:\Users\mzj\Desktop\CTF\玄机刷题\labs\platform' -Recurse -File -ErrorAction SilentlyContinue | Select-Object FullName,Length
+
+FullName
+--------
+C:\Users\mzj\Desktop\CTF\玄机刷题\labs\platform\solve_520_digital_key_uwb.py
+C:\Users\mzj\Desktop\CTF\玄机刷题\labs\platform\solve_581_network_forensics.py
+C:\Users\mzj\Desktop\CTF\玄机刷题\labs\platform\solve_589_gate_ticket.py
+C:\Users\mzj\Desktop\CTF\玄机刷题\labs\platform\solve_591_poisoned_samples.py
+C:\Users\mzj\Desktop\CTF\玄机刷题\labs\platform\solve_cifar_trigger.py
+C:\Users\mzj\Desktop\CTF\玄机刷题\labs\platform\solve_five_grid.py
+C:\Users\mzj\Desktop\CTF\玄机刷题\labs\platform\solve_pwn_ezpwn.py
+C:\Users\mzj\Desktop\CTF\玄机刷题\labs\platform\solve_qgd.py
+C:\Users\mzj\Desktop\CTF\玄机刷题\labs\platform\solve_receipt.py
+C:\Users\mzj\Desktop\CTF\玄机刷题\labs\platform\verify_520_digital_key_uwb.py
+C:\Users\mzj\Desktop\CTF\玄机刷题\labs\platform\attachments\296-pwn-ezpwn.zip
+C:\Users\mzj\Desktop\CTF\玄机刷题\labs\platform\attachments\557-qgd.zip
+C:\Users\mzj\Desktop\CTF\玄机刷题\labs\platform\attachments\573-cifar10.zip
+C:\Users\mzj\Desktop\CTF\玄机刷题\labs\platform\attachments\581-network-forensic...
+C:\Users\mzj\Desktop\CTF\玄机刷题\labs\platform\attachments\583-pixel-cage.zip
+C:\Users\mzj\Desktop\CTF\玄机刷题\labs\platform\attachments\586-five-grid.zip
+C:\Users\mzj\Desktop\CTF\玄机刷题\labs\platform\attachments\587-linked-receipts.zip
+C:\Users\mzj\Desktop\CTF\玄机刷题\labs\platform\attachments\589-gate-ticket.zip
+C:\Users\mzj\Desktop\CTF\玄机刷题\labs\platform\attachments\591-poisoned-samples...
+C:\Users\mzj\Desktop\CTF\玄机刷题\labs\platform\attachments\367-ezflag\EzFlag
+C:\Users\mzj\Desktop\CTF\玄机刷题\labs\platform\attachments\367-ezflag\EzFlag.zip
+C:\Users\mzj\Desktop\CTF\玄机刷题\labs\platform\attachments\573-cifar10\trigger-...
+C:\Users\mzj\Desktop\CTF\玄机刷题\labs\platform\attachments\573-cifar10\trigger.png
+C:\Users\mzj\Desktop\CTF\玄机刷题\labs\platform\attachments\581-network-forensic...
+C:\Users\mzj\Desktop\CTF\玄机刷题\labs\platform\attachments\583-pixel-cage\chall...
+C:\Users\mzj\Desktop\CTF\玄机刷题\labs\platform\attachments\589-gate-ticket\gate...
+C:\Users\mzj\Desktop\CTF\玄机刷题\labs\platform\attachments\591-poisoned-samples...
+C:\Users\mzj\Desktop\CTF\玄机刷题\labs\platform\attachments\591-poisoned-samples...
+C:\Users\mzj\Desktop\CTF\玄机刷题\labs\platform\attachments\591-poisoned-samples...
+
+
+PS C:\Users\mzj\Desktop\CTF> Write-Output 'Observed browser download attempt: Playwright waitForEvent("download") before clicking the visible, unique button "download 下载附件"; click was issued; tool wait timed out at 30s before returning a download path. This was not a flag submission.'
+Observed browser download attempt: Playwright waitForEvent("download") before clicking the visible, unique button "download 下载附件"; click was issued; tool wait timed out at 30s before returning a download path. This was not a flag submission.
+PS C:\Users\mzj\Desktop\CTF> Write-Output 'Follow-up check: no recent files in C:\Users\mzj\Downloads; D:\Downloads contains R.zip, 87,569 bytes, LastWriteTime 2026/9/29 04:59:50.'
+Follow-up check: no recent files in C:\Users\mzj\Downloads; D:\Downloads contains R.zip, 87,569 bytes, LastWriteTime 2026/9/29 04:59:50.
+PS C:\Users\mzj\Desktop\CTF> Write-Output 'COMMAND> (Get-FileHash -LiteralPath attachment\R.exe -Algorithm SHA256).Hash'
+COMMAND> (Get-FileHash -LiteralPath attachment\R.exe -Algorithm SHA256).Hash
+PS C:\Users\mzj\Desktop\CTF> (Get-FileHash -LiteralPath (Join-Path $unpackDir 'R.exe') -Algorithm SHA256).Hash
+E2B0CA7ED72159F82649C33F373E3B38C0E9C9283AA1DAEC627018A328F08651
+PS C:\Users\mzj\Desktop\CTF> Write-Output 'COMMAND> Get-Command python,py,dotnet,ilspycmd,ildasm,r2,rizin,strings,objdump,7z,7za,sigcheck,dumpbin -ErrorAction SilentlyContinue'
+COMMAND> Get-Command python,py,dotnet,ilspycmd,ildasm,r2,rizin,strings,objdump,7z,7za,sigcheck,dumpbin -ErrorAction SilentlyContinue
+PS C:\Users\mzj\Desktop\CTF> 'python','py','dotnet','ilspycmd','ildasm','r2','rizin','strings','objdump','7z','7za','sigcheck','dumpbin' | ForEach-Object { Get-Command $_ -ErrorAction SilentlyContinue | Select-Object Name,Source }
+
+Name        Source
+----        ------
+python.exe  C:\Users\mzj\AppData\Local\Programs\Python\Python312\python.exe
+py.exe      C:\WINDOWS\py.exe
+dotnet.exe  C:\Program Files\dotnet\dotnet.exe
+strings.exe C:\msys64\mingw64\bin\strings.exe
+objdump.exe C:\msys64\mingw64\bin\objdump.exe
+
+
+PS C:\Users\mzj\Desktop\CTF> Write-Output 'COMMAND> Get-ChildItem -LiteralPath C:\Users\mzj\Desktop\CTF\玄机刷题\tools -Recurse -File'
+COMMAND> Get-ChildItem -LiteralPath C:\Users\mzj\Desktop\CTF\玄机刷题\tools -Recurse -File
+PS C:\Users\mzj\Desktop\CTF> Get-ChildItem -LiteralPath 'C:\Users\mzj\Desktop\CTF\玄机刷题\tools' -Recurse -File -ErrorAction SilentlyContinue | Select-Object FullName,Length
+
+FullName                                                                   Leng
+                                                                             th
+--------                                                                   ----
+C:\Users\mzj\Desktop\CTF\玄机刷题\tools\term2png.py                            4909
+C:\Users\mzj\Desktop\CTF\玄机刷题\tools\termcap.py                             5289
+C:\Users\mzj\Desktop\CTF\玄机刷题\tools\upx-5.2.0\upx-5.2.0-win64.zip          ...9
+C:\Users\mzj\Desktop\CTF\玄机刷题\tools\upx-5.2.0\upx-5.2.0-win64\COPYING      ...2
+C:\Users\mzj\Desktop\CTF\玄机刷题\tools\upx-5.2.0\upx-5.2.0-win64\LICENSE      5448
+C:\Users\mzj\Desktop\CTF\玄机刷题\tools\upx-5.2.0\upx-5.2.0-win64\NEWS         ...2
+C:\Users\mzj\Desktop\CTF\玄机刷题\tools\upx-5.2.0\upx-5.2.0-win64\README       3755
+C:\Users\mzj\Desktop\CTF\玄机刷题\tools\upx-5.2.0\upx-5.2.0-win64\THANKS.txt   2368
+C:\Users\mzj\Desktop\CTF\玄机刷题\tools\upx-5.2.0\upx-5.2.0-win64\upx-doc.html ...7
+C:\Users\mzj\Desktop\CTF\玄机刷题\tools\upx-5.2.0\upx-5.2.0-win64\upx-doc.txt  ...8
+C:\Users\mzj\Desktop\CTF\玄机刷题\tools\upx-5.2.0\upx-5.2.0-win64\upx.1        ...7
+C:\Users\mzj\Desktop\CTF\玄机刷题\tools\upx-5.2.0\upx-5.2.0-win64\upx.exe      ...8
+
+
+PS C:\Users\mzj\Desktop\CTF> $exePath = Join-Path $unpackDir 'R.exe'
+PS C:\Users\mzj\Desktop\CTF> Write-Output 'COMMAND> objdump -x R.exe | Select-String for PE/CLR/entry/section metadata'
+COMMAND> objdump -x R.exe | Select-String for PE/CLR/entry/section metadata
+PS C:\Users\mzj\Desktop\CTF> & 'C:\msys64\mingw64\bin\objdump.exe' -x $exePath | Select-String -Pattern 'file format|architecture:|start address|ImageBase|Magic|Subsystem|Entry|CLR|COM Descriptor|Dll Characteristics|SizeOfImage|Sections:' -Context 0,1
+PS C:\Users\mzj\Desktop\CTF> Write-Output 'COMMAND> objdump -h R.exe'
+COMMAND> objdump -h R.exe
+PS C:\Users\mzj\Desktop\CTF> & 'C:\msys64\mingw64\bin\objdump.exe' -h $exePath
+
+PS C:\Users\mzj\Desktop\CTF> Write-Output 'COMMAND> strings -a -n 4 R.exe | Select-String -Pattern flag|ctf|password|secret|R\{|http|file|read|input|wrong|correct|success'
+COMMAND> strings -a -n 4 R.exe | Select-String -Pattern flag|ctf|password|secret|R\{|http|file|read|input|wrong|correct|success
+PS C:\Users\mzj\Desktop\CTF> & 'C:\msys64\mingw64\bin\strings.exe' -a -n 4 $exePath | Select-String -Pattern '(?i)flag|ctf|password|secret|R\{|http|file|read|input|wrong|correct|success|system32|mscoree'
+
+input your flag:
+wrong...
+unsafe precondition(s) violated: ptr::copy_nonoverlapping requires that both po
+inter arguments are aligned and non-null and the specified memory ranges do not
+ overlapunsafe precondition(s) violated: ptr::copy requires that both pointer a
+rguments are aligned and non-nullunsafe precondition(s) violated: ptr::read_vol
+atile requires that the pointer argument is aligned and non-null
+AccessErrorcannot access a Thread Local Storage value during or after destructi
+onstd\src\thread\local.rs1(
+fatal runtime error: thread::set_current should only be called once per thread
+use of std::thread::current() is not possible after the thread's local data has
+ been destroyedstd\src\thread\mod.rs
+failed to generate unique thread ID: bitspace exhausted
+entity not foundpermission deniedconnection refusedconnection resethost unreach
+ablenetwork unreachableconnection abortednot connectedaddress in useaddress not
+ availablenetwork downbroken pipeentity already existsoperation would blocknot
+a directoryis a directorydirectory not emptyread-only filesystem or storage med
+iumfilesystem loop or indirection limit (e.g. symlink loop)stale network file h
+andleinvalid input parameterinvalid datatimed outwrite zerono storage spaceseek
+ on unseekable filefilesystem quota exceededfile too largeresource busyexecutab
+le file busydeadlockcross-device link or renametoo many linksinvalid filenamear
+gument list too longoperation interruptedunsupportedunexpected end of fileout o
+f memoryother erroruncategorized error (os error )
+thread '' panicked at
+thread panicked while processing panic. aborting.
+thread caused non-unwinding panic. aborting.
+Windows stdin in console mode does not support non-UTF-16 input; encountered un
+paired surrogate
+SetThreadDescription
+thread '' has overflowed its stack
+too many active read locks on RwLock
+std\src\sys\thread_local\destructors\list.rs
+)..0123456789abcdefBorrowMutErroralready borrowed:
+SetThreadStackGuarantee
+GetCurrentThread
+ReadConsoleW
+NtReadFile
+NtWriteFile
+_register_thread_local_exe_atexit_callback
+_configthreadlocale
+GetCurrentThreadId
+GetSystemTimeAsFileTime
+
+
+PS C:\Users\mzj\Desktop\CTF> Write-Output 'COMMAND> strings -e l -n 4 R.exe | Select-String -Pattern flag|ctf|password|secret|R\{|file|read|input|wrong|correct|success'
+COMMAND> strings -e l -n 4 R.exe | Select-String -Pattern flag|ctf|password|secret|R\{|file|read|input|wrong|correct|success
+PS C:\Users\mzj\Desktop\CTF> & 'C:\msys64\mingw64\bin\strings.exe' -e l -n 4 $exePath | Select-String -Pattern '(?i)flag|ctf|password|secret|R\{|http|file|read|input|wrong|correct|success'
+PS C:\Users\mzj\Desktop\CTF> Write-Output 'COMMAND> python -c importlib.util.find_spec for pefile,capstone,dnfile,lief'
+COMMAND> python -c importlib.util.find_spec for pefile,capstone,dnfile,lief
+PS C:\Users\mzj\Desktop\CTF> python -c "import importlib.util; print({m: bool(importlib.util.find_spec(m)) for m in ['pefile','capstone','dnfile','lief','dncil']})"
+
+PS C:\Users\mzj\Desktop\CTF> $asciiExe = Join-Path $env:TEMP 'R558.exe'
+PS C:\Users\mzj\Desktop\CTF> Copy-Item -LiteralPath $exePath -Destination $asciiExe -Force
+PS C:\Users\mzj\Desktop\CTF> Write-Output 'Prior output: objdump failed because its MinGW argument parser misread non-ASCII Chinese directory characters, so it reported the existing R.exe path as missing. Temporary byte-identical analysis copy uses ASCII-only path.'
+Prior output: objdump failed because its MinGW argument parser misread non-ASCII Chinese directory characters, so it reported the existing R.exe path as missing. Temporary byte-identical analysis copy uses ASCII-only path.
+PS C:\Users\mzj\Desktop\CTF> Write-Output 'COMMAND> Copy-Item project R.exe $env:TEMP\R558.exe; Get-FileHash temp copy'
+COMMAND> Copy-Item project R.exe $env:TEMP\R558.exe; Get-FileHash temp copy
+PS C:\Users\mzj\Desktop\CTF> Get-FileHash -LiteralPath $asciiExe -Algorithm SHA256 | Format-List Algorithm,Hash,Path
+
+
+Algorithm : SHA256
+Hash      : E2B0CA7ED72159F82649C33F373E3B38C0E9C9283AA1DAEC627018A328F08651
+Path      : C:\Users\mzj\AppData\Local\Temp\R558.exe
+
+
+
+PS C:\Users\mzj\Desktop\CTF> Write-Output 'COMMAND> objdump -f R558.exe; objdump -h R558.exe; objdump -x R558.exe filtered headers'
+COMMAND> objdump -f R558.exe; objdump -h R558.exe; objdump -x R558.exe filtered headers
+PS C:\Users\mzj\Desktop\CTF> & 'C:\msys64\mingw64\bin\objdump.exe' -f $asciiExe
+
+PS C:\Users\mzj\Desktop\CTF> & 'C:\msys64\mingw64\bin\objdump.exe' -h $asciiExe
+
+PS C:\Users\mzj\Desktop\CTF> & 'C:\msys64\mingw64\bin\objdump.exe' -x $asciiExe | Select-String -Pattern 'file format|architecture:|start address|ImageBase|Magic|Subsystem|AddressOfEntryPoint|CLR|COM Descriptor|Dll Characteristics|SizeOfImage|Sections:' -Context 0,1
+
+> C:\Users\mzj\AppData\Local\Temp\R558.exe:     file format pei-x86-64
+  C:\Users\mzj\AppData\Local\Temp\R558.exe
+> architecture: i386:x86-64, flags 0x0000012f:
+  HAS_RELOC, EXEC_P, HAS_LINENO, HAS_DEBUG, HAS_LOCALS, D_PAGED
+> start address 0x000000014001ea70
+
+> Magic			020b	(PE32+)
+  MajorLinkerVersion	14
+> AddressOfEntryPoint	000000000001ea70
+  BaseOfCode		0000000000001000
+> ImageBase		0000000140000000
+  SectionAlignment	00001000
+> MajorSubsystemVersion	6
+> MinorSubsystemVersion	0
+  Win32Version		00000000
+> SizeOfImage		00031000
+  SizeOfHeaders		00000400
+> Subsystem		00000003	(Windows CUI)
+  DllCharacteristics	00008160
+> Entry e 0000000000000000 00000000 CLR Runtime Header
+  Entry f 0000000000000000 00000000 Reserved
+> Sections:
+  Idx Name          Size      VMA               LMA               File off  Alg
+n
+
+
+PS C:\Users\mzj\Desktop\CTF> Write-Output 'COMMAND> strings -a -n 4 R558.exe | Select-String -Pattern flag|ctf|input|wrong|correct|success'
+COMMAND> strings -a -n 4 R558.exe | Select-String -Pattern flag|ctf|input|wrong|correct|success
+PS C:\Users\mzj\Desktop\CTF> & 'C:\msys64\mingw64\bin\strings.exe' -a -n 4 $asciiExe | Select-String -Pattern '(?i)flag|ctf|input|wrong|correct|success|R\{'
+
+input your flag:
+wrong...
+entity not foundpermission deniedconnection refusedconnection resethost unreach
+ablenetwork unreachableconnection abortednot connectedaddress in useaddress not
+ availablenetwork downbroken pipeentity already existsoperation would blocknot
+a directoryis a directorydirectory not emptyread-only filesystem or storage med
+iumfilesystem loop or indirection limit (e.g. symlink loop)stale network file h
+andleinvalid input parameterinvalid datatimed outwrite zerono storage spaceseek
+ on unseekable filefilesystem quota exceededfile too largeresource busyexecutab
+le file busydeadlockcross-device link or renametoo many linksinvalid filenamear
+gument list too longoperation interruptedunsupportedunexpected end of fileout o
+f memoryother erroruncategorized error (os error )
+Windows stdin in console mode does not support non-UTF-16 input; encountered un
+paired surrogate
+
+
+PS C:\Users\mzj\Desktop\CTF> Write-Output 'COMMAND> strings -a -t x -n 4 R558.exe | Select-String for prompt/result/error strings'
+COMMAND> strings -a -t x -n 4 R558.exe | Select-String for prompt/result/error strings
+PS C:\Users\mzj\Desktop\CTF> & 'C:\msys64\mingw64\bin\strings.exe' -a -t x -n 4 $asciiExe | Select-String -Pattern '(?i)input|flag|wrong|correct|success|right|error|key|pass|read|open|file|path|win|congrat'
+
+  201d8 internal error: entered unreachable code/rustc/f6e511eec7342f59a25f7c05
+34f1dbea00d01b14\library\std\src\io\error\repr_bitpacked.rs
+  20aa8 input your flag:
+  20ad0 wrong...
+  20af0 right!!!
+  20d00 unsafe precondition(s) violated: ptr::copy_nonoverlapping requires that
+ both pointer arguments are aligned and non-null and the specified memory range
+s do not overlapunsafe precondition(s) violated: ptr::copy requires that both p
+ointer arguments are aligned and non-nullunsafe precondition(s) violated: ptr::
+read_volatile requires that the pointer argument is aligned and non-null
+  21260 internal error: entered unreachable code/rustc/f6e511eec7342f59a25f7c05
+34f1dbea00d01b14\library\alloc\src\vec\mod.rs
+  213c8 Utf8Errorvalid_up_toerror_lenNoneSome
+  21410 TryFromIntError:
+  21550 fatal runtime error: drop of the panic payload panicked
+  21598 fatal runtime error: initialization or cleanup bug
+  215e0 AccessErrorcannot access a Thread Local Storage value during or after d
+estructionstd\src\thread\local.rs1(
+  21660 fatal runtime error: thread::set_current should only be called once per
+ thread
+  216c0 use of std::thread::current() is not possible after the thread's local
+data has been destroyedstd\src\thread\mod.rs
+  21750 failed to generate unique thread ID: bitspace exhausted
+  21890 entity not foundpermission deniedconnection refusedconnection resethost
+ unreachablenetwork unreachableconnection abortednot connectedaddress in useadd
+ress not availablenetwork downbroken pipeentity already existsoperation would b
+locknot a directoryis a directorydirectory not emptyread-only filesystem or sto
+rage mediumfilesystem loop or indirection limit (e.g. symlink loop)stale networ
+k file handleinvalid input parameterinvalid datatimed outwrite zerono storage s
+paceseek on unseekable filefilesystem quota exceededfile too largeresource busy
+executable file busydeadlockcross-device link or renametoo many linksinvalid fi
+lenameargument list too longoperation interruptedunsupportedunexpected end of f
+ileout of memoryother erroruncategorized error (os error )
+  21d10 std\src\sys\pal\windows\io.rs
+  21d98 a formatting trait implementation returned an error when the underlying
+ stream did not
+  21e3e std\src\path.rs
+  22308 fatal runtime error: Rust panics must be rethrown
+  22350 fatal runtime error: Rust cannot catch foreign exceptions
+  22450 thread '' panicked at
+  22611 thread panicked while processing panic. aborting.
+  22678 thread caused non-unwinding panic. aborting.
+  226b8 fatal runtime error: failed to initiate panic, error
+  228b0 fatal runtime error: I/O error: operation failed to complete synchronou
+sly
+  22924 OS Error  (FormatMessageW() returned error
+  22980 std\src\sys\pal\windows\os.rs
+  22a08 std\src\sys\pal\windows\stdio.rs
+  22b40 Windows stdio in console mode does not support writing non-UTF-8 byte s
+equences
+  22ca0 Unexpected error in MultiByteToWideChar
+  22db0 Windows stdin in console mode does not support non-UTF-16 input; encoun
+tered unpaired surrogate
+  22e32 std\src\sys\pal\windows\mod.rsstrings passed to WinAPI cannot contain N
+ULs
+  22ed1 SetThreadDescription
+  22ee7 thread '' has overflowed its stack
+  22f30 std\src\sys\path\windows.rs
+  22fc0 too many active read locks on RwLock
+  23070 fatal runtime error: the global allocator may not use TLS with destruct
+ors
+  230d0 std\src\sys\thread_local\destructors\list.rs
+  2314f SymGetSearchPathW
+  23161 SymSetSearchPathW
+  23b34 panic_unwind\src\seh.rs
+  23d98 ErrorEmptyInvalidDigitPosOverflowNegOverflowZero
+  23de8 ParseIntErrorkind
+  24108 `fmt::Error`s should be impossible without a `fmt::Formatter`
+  241b8 internal error: entered unreachable code
+  24210 internal error: entered unreachable code: str::from_utf8() =  was expec
+ted to have 1 char, but  chars were found
+  244c8 {size limit reached}`fmt::Error` from `SizeLimitedFmtAdapter` was disca
+rded
+  249a0 called `Result::unwrap()` on an `Err` valueErrorLayoutError
+  24a68 a formatting trait implementation returned an error when the underlying
+ stream did notalloc\src\fmt.rs
+  24c00 )..0123456789abcdefBorrowMutErroralready borrowed:
+  24d10 panic in a function that cannot unwind==!=matchesassertion `left  right
+` failed
+  24d69  right:
+  24da8  right` failed:
+  2adda api-ms-win-core-synch-l1-2-0.dll
+  2ae0c GetLastError
+  2ae3a SetThreadStackGuarantee
+  2ae54 GetCurrentThread
+  2aec6 RtlVirtualUnwind
+  2aeda SetLastError
+  2b000 ReadConsoleW
+  2b09a RtlNtStatusToDosError
+  2b0b2 NtReadFile
+  2b0c0 NtWriteFile
+  2b286 _register_thread_local_exe_atexit_callback
+  2b2b4 _configthreadlocale
+  2b342 api-ms-win-crt-runtime-l1-1-0.dll
+  2b364 api-ms-win-crt-math-l1-1-0.dll
+  2b384 api-ms-win-crt-stdio-l1-1-0.dll
+  2b3a4 api-ms-win-crt-locale-l1-1-0.dll
+  2b3c6 api-ms-win-crt-heap-l1-1-0.dll
+  2b3e8 GetCurrentThreadId
+  2b3fe GetSystemTimeAsFileTime
+
+
+PS C:\Users\mzj\Desktop\CTF> Write-Output 'COMMAND> objdump -p R558.exe | Select-String for imports and debug metadata'
+COMMAND> objdump -p R558.exe | Select-String for imports and debug metadata
+PS C:\Users\mzj\Desktop\CTF> & 'C:\msys64\mingw64\bin\objdump.exe' -p $asciiExe | Select-String -Pattern 'DLL Name|Entry|Debug Directory|Time/Date|Name|Address|Version|KERNEL|VCRUNTIME|ucrt|msvcrt|WS2_32|ADVAPI|COM Descriptor' -Context 0,2
+
+> 	large address aware
+
+> Time/Date		Wed Apr 30 16:16:53 2025
+  Magic			020b	(PE32+)
+> MajorLinkerVersion	14
+> MinorLinkerVersion	41
+  SizeOfCode		000000000001fa00
+  SizeOfInitializedData	000000000000de00
+> AddressOfEntryPoint	000000000001ea70
+  BaseOfCode		0000000000001000
+  ImageBase		0000000140000000
+> MajorOSystemVersion	6
+> MinorOSystemVersion	0
+> MajorImageVersion	0
+> MinorImageVersion	0
+> MajorSubsystemVersion	6
+> MinorSubsystemVersion	0
+> Win32Version		00000000
+  SizeOfImage		00031000
+  SizeOfHeaders		00000400
+> Entry 0 0000000000000000 00000000 Export Directory [.edata (or where ever we
+found it)]
+> Entry 1 000000000002bbe4 000000c8 Import Directory [parts of .idata]
+> Entry 2 0000000000000000 00000000 Resource Directory [.rsrc]
+> Entry 3 000000000002e000 00001cf8 Exception Directory [.pdata]
+> Entry 4 0000000000000000 00000000 Security Directory
+> Entry 5 0000000000030000 000003cc Base Relocation Directory [.reloc]
+> Entry 6 00000000000273a0 00000054 Debug Directory
+> Entry 7 0000000000000000 00000000 Description Directory
+> Entry 8 0000000000000000 00000000 Special Directory
+> Entry 9 0000000000027400 00000028 Thread Storage Directory [.tls]
+> Entry a 0000000000027260 00000140 Load Configuration Directory
+> Entry b 0000000000000000 00000000 Bound Import Directory
+> Entry c 0000000000021000 000002c8 Import Address Table Directory
+> Entry d 0000000000000000 00000000 Delay Import Directory
+> Entry e 0000000000000000 00000000 CLR Runtime Header
+> Entry f 0000000000000000 00000000 Reserved
+
+  There is an import table in .rdata at 0x4002bbe4
+>                  Table   Stamp     Chain    Name      Thunk
+   0002bbe4	0002be78 00000000 00000000 0002bfda 000211a0
+
+> 	DLL Name: api-ms-win-core-synch-l1-2-0.dll
+> 	vma:     Ordinal  Hint  Member-Name  Bound-To
+> 	000211a0  <none>  0000  WaitOnAddress
+> 	000211a8  <none>  0000  WakeByAddressAll
+> 	000211b0  <none>  0000  WakeByAddressSingle
+
+   0002bbf8	0002bcd8 00000000 00000000 0002c28a 00021000
+> 	DLL Name: KERNEL32.dll
+> 	vma:     Ordinal  Hint  Member-Name  Bound-To
+  	00021000  <none>  0597  SetUnhandledExceptionFilter
+  	00021008  <none>  05d8  UnhandledExceptionFilter
+> 	00021060  <none>  04f1  RtlLookupFunctionEntry
+  	00021068  <none>  04f8  RtlVirtualUnwind
+  	00021070  <none>  0557  SetLastError
+> 	00021100  <none>  02c4  GetProcAddress
+  	00021108  <none>  039e  IsProcessorFeaturePresent
+  	00021110  <none>  02cb  GetProcessHeap
+> 	DLL Name: ntdll.dll
+> 	vma:     Ordinal  Hint  Member-Name  Bound-To
+  	000212a8  <none>  0515  RtlNtStatusToDosError
+  	000212b0  <none>  029d  NtWriteFile
+> 	DLL Name: VCRUNTIME140.dll
+> 	vma:     Ordinal  Hint  Member-Name  Bound-To
+  	00021150  <none>  001b  __current_exception
+  	00021158  <none>  001c  __current_exception_context
+> 	DLL Name: api-ms-win-crt-runtime-l1-1-0.dll
+> 	vma:     Ordinal  Hint  Member-Name  Bound-To
+  	000211f8  <none>  0037  _initterm_e
+  	00021200  <none>  0055  exit
+> 	DLL Name: api-ms-win-crt-math-l1-1-0.dll
+> 	vma:     Ordinal  Hint  Member-Name  Bound-To
+  	000211e8  <none>  0009  __setusermatherr
+
+> 	DLL Name: api-ms-win-crt-stdio-l1-1-0.dll
+> 	vma:     Ordinal  Hint  Member-Name  Bound-To
+  	00021290  <none>  0054  _set_fmode
+  	00021298  <none>  0001  __p__commode
+> 	DLL Name: api-ms-win-crt-locale-l1-1-0.dll
+> 	vma:     Ordinal  Hint  Member-Name  Bound-To
+  	000211d8  <none>  0008  _configthreadlocale
+
+> 	DLL Name: api-ms-win-crt-heap-l1-1-0.dll
+> 	vma:     Ordinal  Hint  Member-Name  Bound-To
+  	000211c0  <none>  0018  free
+  	000211c8  <none>  0016  _set_new_mode
+> vma:			BeginAddress	 EndAddress	  UnwindData
+   000000014002e000:	0000000140001000 0000000140001133 00000001400278f0
+   000000014002e00c:	0000000140001140 00000001400011d9 00000001400278f8
+> 	Version: 1, Flags: none
+  	Nbr codes: 2, Prologue size: 0x07, Frame offset: 0x0, Frame reg: none
+  	  pc+0x07: alloc large area: rsp = rsp - 0x98
+> 	Version: 1, Flags: none
+  	Nbr codes: 1, Prologue size: 0x04, Frame offset: 0x0, Frame reg: none
+  	  pc+0x04: alloc small area: rsp = rsp - 0x68
+> 	Version: 1, Flags: UNW_FLAG_EHANDLER | UNW_FLAG_UHANDLER
+  	Nbr codes: 3, Prologue size: 0x0a, Frame offset: 0x7, Frame reg: rbp
+  	  pc+0x0a: FPReg: rbp = rsp + 0x70 (info = 0x0)
+> 	Version: 1, Flags: none
+  	Nbr codes: 2, Prologue size: 0x0e, Frame offset: 0x0, Frame reg: none
+  	  pc+0x0a: alloc small area: rsp = rsp - 0x20
+> 	Version: 1, Flags: none
+  	Nbr codes: 1, Prologue size: 0x01, Frame offset: 0x0, Frame reg: none
+  	  pc+0x01: alloc small area: rsp = rsp - 0x8
+> 	Version: 1, Flags: none
+  	Nbr codes: 1, Prologue size: 0x04, Frame offset: 0x0, Frame reg: none
+  	  pc+0x04: alloc small area: rsp = rsp - 0x38
+> 	Version: 1, Flags: none
+  	Nbr codes: 1, Prologue size: 0x04, Frame offset: 0x0, Frame reg: none
+  	  pc+0x04: alloc small area: rsp = rsp - 0x28
+> 	Version: 1, Flags: none
+  	Nbr codes: 1, Prologue size: 0x04, Frame offset: 0x0, Frame reg: none
+  	  pc+0x04: alloc small area: rsp = rsp - 0x28
+> 	Version: 1, Flags: none
+  	Nbr codes: 1, Prologue size: 0x04, Frame offset: 0x0, Frame reg: none
+  	  pc+0x04: alloc small area: rsp = rsp - 0x18
+> 	Version: 1, Flags: none
+  	Nbr codes: 1, Prologue size: 0x04, Frame offset: 0x0, Frame reg: none
+  	  pc+0x04: alloc small area: rsp = rsp - 0x28
+> 	Version: 1, Flags: none
+  	Nbr codes: 1, Prologue size: 0x04, Frame offset: 0x0, Frame reg: none
+  	  pc+0x04: alloc small area: rsp = rsp - 0x58
+> 	Version: 1, Flags: none
+  	Nbr codes: 1, Prologue size: 0x04, Frame offset: 0x0, Frame reg: none
+  	  pc+0x04: alloc small area: rsp = rsp - 0x38
+> 	Version: 1, Flags: UNW_FLAG_EHANDLER | UNW_FLAG_UHANDLER
+  	Nbr codes: 3, Prologue size: 0x0a, Frame offset: 0x5, Frame reg: rbp
+  	  pc+0x0a: FPReg: rbp = rsp + 0x50 (info = 0x0)
+> 	Version: 1, Flags: none
+  	Nbr codes: 2, Prologue size: 0x0e, Frame offset: 0x0, Frame reg: none
+  	  pc+0x0a: alloc small area: rsp = rsp - 0x20
+> 	Version: 1, Flags: none
+  	Nbr codes: 2, Prologue size: 0x0e, Frame offset: 0x0, Frame reg: none
+  	  pc+0x0a: alloc small area: rsp = rsp - 0x20
+> 	Version: 1, Flags: none
+  	Nbr codes: 1, Prologue size: 0x04, Frame offset: 0x0, Frame reg: none
+  	  pc+0x04: alloc small area: rsp = rsp - 0x28
+> 	Version: 1, Flags: none
+  	Nbr codes: 1, Prologue size: 0x04, Frame offset: 0x0, Frame reg: none
+  	  pc+0x04: alloc small area: rsp = rsp - 0x28
+> 	Version: 1, Flags: none
+  	Nbr codes: 1, Prologue size: 0x04, Frame offset: 0x0, Frame reg: none
+  	  pc+0x04: alloc small area: rsp = rsp - 0x28
+> 	Version: 1, Flags: none
+  	Nbr codes: 1, Prologue size: 0x04, Frame offset: 0x0, Frame reg: none
+  	  pc+0x04: alloc small area: rsp = rsp - 0x28
+> 	Version: 1, Flags: none
+  	Nbr codes: 1, Prologue size: 0x04, Frame offset: 0x0, Frame reg: none
+  	  pc+0x04: alloc small area: rsp = rsp - 0x28
+> 	Version: 1, Flags: none
+  	Nbr codes: 1, Prologue size: 0x04, Frame offset: 0x0, Frame reg: none
+  	  pc+0x04: alloc small area: rsp = rsp - 0x38
+> 	Version: 1, Flags: none
+  	Nbr codes: 1, Prologue size: 0x04, Frame offset: 0x0, Frame reg: none
+  	  pc+0x04: alloc small area: rsp = rsp - 0x28
+> 	Version: 1, Flags: UNW_FLAG_EHANDLER | UNW_FLAG_UHANDLER
+  	Nbr codes: 3, Prologue size: 0x0a, Frame offset: 0x4, Frame reg: rbp
+  	  pc+0x0a: FPReg: rbp = rsp + 0x40 (info = 0x0)
+> 	Version: 1, Flags: none
+  	Nbr codes: 2, Prologue size: 0x0e, Frame offset: 0x0, Frame reg: none
+  	  pc+0x0a: alloc small area: rsp = rsp - 0x20
+> 	Version: 1, Flags: none
+  	Nbr codes: 1, Prologue size: 0x04, Frame offset: 0x0, Frame reg: none
+  	  pc+0x04: alloc small area: rsp = rsp - 0x28
+> 	Version: 1, Flags: UNW_FLAG_EHANDLER | UNW_FLAG_UHANDLER
+  	Nbr codes: 3, Prologue size: 0x0a, Frame offset: 0x4, Frame reg: rbp
+  	  pc+0x0a: FPReg: rbp = rsp + 0x40 (info = 0x0)
+> 	Version: 1, Flags: none
+  	Nbr codes: 2, Prologue size: 0x0e, Frame offset: 0x0, Frame reg: none
+  	  pc+0x0a: alloc small area: rsp = rsp - 0x20
+> 	Version: 1, Flags: none
+  	Nbr codes: 1, Prologue size: 0x04, Frame offset: 0x0, Frame reg: none
+  	  pc+0x04: alloc small area: rsp = rsp - 0x28
+> 	Version: 1, Flags: none
+  	Nbr codes: 1, Prologue size: 0x04, Frame offset: 0x0, Frame reg: none
+  	  pc+0x04: alloc small area: rsp = rsp - 0x28
+> 	Version: 1, Flags: none
+  	Nbr codes: 1, Prologue size: 0x04, Frame offset: 0x0, Frame reg: none
+  	  pc+0x04: alloc small area: rsp = rsp - 0x28
+> 	Version: 1, Flags: none
+  	Nbr codes: 1, Prologue size: 0x04, Frame offset: 0x0, Frame reg: none
+  	  pc+0x04: alloc small area: rsp = rsp - 0x28
+> 	Version: 1, Flags: none
+  	Nbr codes: 1, Prologue size: 0x04, Frame offset: 0x0, Frame reg: none
+  	  pc+0x04: alloc small area: rsp = rsp - 0x28
+> 	Version: 1, Flags: none
+  	Nbr codes: 1, Prologue size: 0x04, Frame offset: 0x0, Frame reg: none
+  	  pc+0x04: alloc small area: rsp = rsp - 0x28
+> 	Version: 1, Flags: none
+  	Nbr codes: 1, Prologue size: 0x04, Frame offset: 0x0, Frame reg: none
+  	  pc+0x04: alloc small area: rsp = rsp - 0x28
+> 	Version: 1, Flags: none
+  	Nbr codes: 1, Prologue size: 0x04, Frame offset: 0x0, Frame reg: none
+  	  pc+0x04: alloc small area: rsp = rsp - 0x28
+> 	Version: 1, Flags: none
+  	Nbr codes: 1, Prologue size: 0x04, Frame offset: 0x0, Frame reg: none
+  	  pc+0x04: alloc small area: rsp = rsp - 0x28
+> 	Version: 1, Flags: UNW_FLAG_EHANDLER | UNW_FLAG_UHANDLER
+  	Nbr codes: 3, Prologue size: 0x0a, Frame offset: 0x3, Frame reg: rbp
+  	  pc+0x0a: FPReg: rbp = rsp + 0x30 (info = 0x0)
+> 	Version: 1, Flags: none
+  	Nbr codes: 2, Prologue size: 0x0e, Frame offset: 0x0, Frame reg: none
+  	  pc+0x0a: alloc small area: rsp = rsp - 0x20
+> 	Version: 1, Flags: none
+  	Nbr codes: 1, Prologue size: 0x04, Frame offset: 0x0, Frame reg: none
+  	  pc+0x04: alloc small area: rsp = rsp - 0x28
+> 	Version: 1, Flags: none
+  	Nbr codes: 1, Prologue size: 0x04, Frame offset: 0x0, Frame reg: none
+  	  pc+0x04: alloc small area: rsp = rsp - 0x28
+> 	Version: 1, Flags: none
+  	Nbr codes: 1, Prologue size: 0x04, Frame offset: 0x0, Frame reg: none
+  	  pc+0x04: alloc small area: rsp = rsp - 0x28
+> 	Version: 1, Flags: UNW_FLAG_EHANDLER | UNW_FLAG_UHANDLER
+  	Nbr codes: 3, Prologue size: 0x0a, Frame offset: 0x3, Frame reg: rbp
+  	  pc+0x0a: FPReg: rbp = rsp + 0x30 (info = 0x0)
+> 	Version: 1, Flags: none
+  	Nbr codes: 2, Prologue size: 0x0e, Frame offset: 0x0, Frame reg: none
+  	  pc+0x0a: alloc small area: rsp = rsp - 0x20
+> 	Version: 1, Flags: none
+  	Nbr codes: 1, Prologue size: 0x04, Frame offset: 0x0, Frame reg: none
+  	  pc+0x04: alloc small area: rsp = rsp - 0x28
+> 	Version: 1, Flags: none
+  	Nbr codes: 1, Prologue size: 0x04, Frame offset: 0x0, Frame reg: none
+  	  pc+0x04: alloc small area: rsp = rsp - 0x28
+> 	Version: 1, Flags: none
+  	Nbr codes: 1, Prologue size: 0x04, Frame offset: 0x0, Frame reg: none
+  	  pc+0x04: alloc small area: rsp = rsp - 0x28
+> 	Version: 1, Flags: none
+  	Nbr codes: 1, Prologue size: 0x04, Frame offset: 0x0, Frame reg: none
+  	  pc+0x04: alloc small area: rsp = rsp - 0x78
+> 	Version: 1, Flags: none
+  	Nbr codes: 1, Prologue size: 0x04, Frame offset: 0x0, Frame reg: none
+  	  pc+0x04: alloc small area: rsp = rsp - 0x68
+> 	Version: 1, Flags: UNW_FLAG_EHANDLER | UNW_FLAG_UHANDLER
+  	Nbr codes: 4, Prologue size: 0x10, Frame offset: 0x8, Frame reg: rbp
+  	  pc+0x10: FPReg: rbp = rsp + 0x80 (info = 0x0)
+> 	Version: 1, Flags: none
+  	Nbr codes: 2, Prologue size: 0x11, Frame offset: 0x0, Frame reg: none
+  	  pc+0x0a: alloc small area: rsp = rsp - 0x20
+> 	Version: 1, Flags: none
+  	Nbr codes: 1, Prologue size: 0x04, Frame offset: 0x0, Frame reg: none
+  	  pc+0x04: alloc small area: rsp = rsp - 0x28
+> 	Version: 1, Flags: none
+  	Nbr codes: 1, Prologue size: 0x04, Frame offset: 0x0, Frame reg: none
+  	  pc+0x04: alloc small area: rsp = rsp - 0x28
+> 	Version: 1, Flags: none
+  	Nbr codes: 1, Prologue size: 0x01, Frame offset: 0x0, Frame reg: none
+  	  pc+0x01: alloc small area: rsp = rsp - 0x8
+> 	Version: 1, Flags: none
+  	Nbr codes: 1, Prologue size: 0x04, Frame offset: 0x0, Frame reg: none
+  	  pc+0x04: alloc small area: rsp = rsp - 0x38
+> 	Version: 1, Flags: none
+  	Nbr codes: 1, Prologue size: 0x04, Frame offset: 0x0, Frame reg: none
+  	  pc+0x04: alloc small area: rsp = rsp - 0x28
+> 	Version: 1, Flags: none
+  	Nbr codes: 1, Prologue size: 0x04, Frame offset: 0x0, Frame reg: none
+  	  pc+0x04: alloc small area: rsp = rsp - 0x28
+> 	Version: 1, Flags: none
+  	Nbr codes: 1, Prologue size: 0x04, Frame offset: 0x0, Frame reg: none
+  	  pc+0x04: alloc small area: rsp = rsp - 0x28
+> 	Version: 1, Flags: UNW_FLAG_EHANDLER | UNW_FLAG_UHANDLER
+  	Nbr codes: 3, Prologue size: 0x0a, Frame offset: 0x3, Frame reg: rbp
+  	  pc+0x0a: FPReg: rbp = rsp + 0x30 (info = 0x0)
+> 	Version: 1, Flags: UNW_FLAG_EHANDLER | UNW_FLAG_UHANDLER
+  	Nbr codes: 2, Prologue size: 0x0e, Frame offset: 0x0, Frame reg: none
+  	  pc+0x0a: alloc small area: rsp = rsp - 0x20
+> 	Version: 1, Flags: none
+  	Nbr codes: 2, Prologue size: 0x07, Frame offset: 0x0, Frame reg: none
+  	  pc+0x07: alloc large area: rsp = rsp - 0xb0
+> 	Version: 1, Flags: UNW_FLAG_EHANDLER | UNW_FLAG_UHANDLER
+  	Nbr codes: 4, Prologue size: 0x10, Frame offset: 0x8, Frame reg: rbp
+  	  pc+0x10: FPReg: rbp = rsp + 0x80 (info = 0x0)
+> 	Version: 1, Flags: UNW_FLAG_EHANDLER | UNW_FLAG_UHANDLER
+  	Nbr codes: 2, Prologue size: 0x11, Frame offset: 0x0, Frame reg: none
+  	  pc+0x0a: alloc small area: rsp = rsp - 0x20
+> 	Version: 1, Flags: UNW_FLAG_EHANDLER | UNW_FLAG_UHANDLER
+  	Nbr codes: 4, Prologue size: 0x10, Frame offset: 0x8, Frame reg: rbp
+  	  pc+0x10: FPReg: rbp = rsp + 0x80 (info = 0x0)
+> 	Version: 1, Flags: UNW_FLAG_EHANDLER | UNW_FLAG_UHANDLER
+  	Nbr codes: 2, Prologue size: 0x11, Frame offset: 0x0, Frame reg: none
+  	  pc+0x0a: alloc small area: rsp = rsp - 0x20
+> 	Version: 1, Flags: none
+  	Nbr codes: 1, Prologue size: 0x04, Frame offset: 0x0, Frame reg: none
+  	  pc+0x04: alloc small area: rsp = rsp - 0x18
+> 	Version: 1, Flags: none
+  	Nbr codes: 1, Prologue size: 0x04, Frame offset: 0x0, Frame reg: none
+  	  pc+0x04: alloc small area: rsp = rsp - 0x48
+> 	Version: 1, Flags: none
+  	Nbr codes: 1, Prologue size: 0x04, Frame offset: 0x0, Frame reg: none
+  	  pc+0x04: alloc small area: rsp = rsp - 0x68
+> 	Version: 1, Flags: none
+  	Nbr codes: 1, Prologue size: 0x04, Frame offset: 0x0, Frame reg: none
+  	  pc+0x04: alloc small area: rsp = rsp - 0x28
+> 	Version: 1, Flags: none
+  	Nbr codes: 1, Prologue size: 0x04, Frame offset: 0x0, Frame reg: none
+  	  pc+0x04: alloc small area: rsp = rsp - 0x68
+> 	Version: 1, Flags: none
+  	Nbr codes: 1, Prologue size: 0x04, Frame offset: 0x0, Frame reg: none
+  	  pc+0x04: alloc small area: rsp = rsp - 0x18
+> 	Version: 1, Flags: none
+  	Nbr codes: 2, Prologue size: 0x07, Frame offset: 0x0, Frame reg: none
+  	  pc+0x07: alloc large area: rsp = rsp - 0xc8
+> 	Version: 1, Flags: none
+  	Nbr codes: 1, Prologue size: 0x04, Frame offset: 0x0, Frame reg: none
+  	  pc+0x04: alloc small area: rsp = rsp - 0x48
+> 	Version: 1, Flags: none
+  	Nbr codes: 2, Prologue size: 0x07, Frame offset: 0x0, Frame reg: none
+  	  pc+0x07: alloc large area: rsp = rsp - 0xb8
+> 	Version: 1, Flags: none
+  	Nbr codes: 2, Prologue size: 0x07, Frame offset: 0x0, Frame reg: none
+  	  pc+0x07: alloc large area: rsp = rsp - 0x1d8
+> 	Version: 1, Flags: UNW_FLAG_EHANDLER | UNW_FLAG_UHANDLER
+  	Nbr codes: 4, Prologue size: 0x10, Frame offset: 0x8, Frame reg: rbp
+  	  pc+0x10: FPReg: rbp = rsp + 0x80 (info = 0x0)
+> 	Version: 1, Flags: none
+  	Nbr codes: 2, Prologue size: 0x11, Frame offset: 0x0, Frame reg: none
+  	  pc+0x0a: alloc small area: rsp = rsp - 0x20
+> 	Version: 1, Flags: none
+  	Nbr codes: 2, Prologue size: 0x07, Frame offset: 0x0, Frame reg: none
+  	  pc+0x07: alloc large area: rsp = rsp - 0x88
+> 	Version: 1, Flags: none
+  	Nbr codes: 1, Prologue size: 0x04, Frame offset: 0x0, Frame reg: none
+  	  pc+0x04: alloc small area: rsp = rsp - 0x38
+> 	Version: 1, Flags: none
+  	Nbr codes: 1, Prologue size: 0x04, Frame offset: 0x0, Frame reg: none
+  	  pc+0x04: alloc small area: rsp = rsp - 0x38
+> 	Version: 1, Flags: none
+  	Nbr codes: 1, Prologue size: 0x04, Frame offset: 0x0, Frame reg: none
+  	  pc+0x04: alloc small area: rsp = rsp - 0x68
+> 	Version: 1, Flags: none
+  	Nbr codes: 1, Prologue size: 0x04, Frame offset: 0x0, Frame reg: none
+  	  pc+0x04: alloc small area: rsp = rsp - 0x68
+> 	Version: 1, Flags: none
+  	Nbr codes: 1, Prologue size: 0x04, Frame offset: 0x0, Frame reg: none
+  	  pc+0x04: alloc small area: rsp = rsp - 0x48
+> 	Version: 1, Flags: none
+  	Nbr codes: 1, Prologue size: 0x04, Frame offset: 0x0, Frame reg: none
+  	  pc+0x04: alloc small area: rsp = rsp - 0x48
+> 	Version: 1, Flags: none
+  	Nbr codes: 1, Prologue size: 0x04, Frame offset: 0x0, Frame reg: none
+  	  pc+0x04: alloc small area: rsp = rsp - 0x28
+> 	Version: 1, Flags: none
+  	Nbr codes: 1, Prologue size: 0x04, Frame offset: 0x0, Frame reg: none
+  	  pc+0x04: alloc small area: rsp = rsp - 0x38
+> 	Version: 1, Flags: none
+  	Nbr codes: 1, Prologue size: 0x04, Frame offset: 0x0, Frame reg: none
+  	  pc+0x04: alloc small area: rsp = rsp - 0x28
+> 	Version: 1, Flags: none
+  	Nbr codes: 2, Prologue size: 0x07, Frame offset: 0x0, Frame reg: none
+  	  pc+0x07: alloc large area: rsp = rsp - 0x98
+> 	Version: 1, Flags: UNW_FLAG_EHANDLER | UNW_FLAG_UHANDLER
+  	Nbr codes: 3, Prologue size: 0x10, Frame offset: 0x8, Frame reg: rbp
+  	  pc+0x10: FPReg: rbp = rsp + 0x80 (info = 0x0)
+> 	Version: 1, Flags: none
+  	Nbr codes: 2, Prologue size: 0x11, Frame offset: 0x0, Frame reg: none
+  	  pc+0x0a: alloc small area: rsp = rsp - 0x20
+> 	Version: 1, Flags: none
+  	Nbr codes: 2, Prologue size: 0x11, Frame offset: 0x0, Frame reg: none
+  	  pc+0x0a: alloc small area: rsp = rsp - 0x20
+> 	Version: 1, Flags: none
+  	Nbr codes: 1, Prologue size: 0x04, Frame offset: 0x0, Frame reg: none
+  	  pc+0x04: alloc small area: rsp = rsp - 0x28
+> 	Version: 1, Flags: none
+  	Nbr codes: 1, Prologue size: 0x04, Frame offset: 0x0, Frame reg: none
+  	  pc+0x04: alloc small area: rsp = rsp - 0x68
+> 	Version: 1, Flags: UNW_FLAG_EHANDLER | UNW_FLAG_UHANDLER
+  	Nbr codes: 4, Prologue size: 0x10, Frame offset: 0x8, Frame reg: rbp
+  	  pc+0x10: FPReg: rbp = rsp + 0x80 (info = 0x0)
+> 	Version: 1, Flags: none
+  	Nbr codes: 2, Prologue size: 0x11, Frame offset: 0x0, Frame reg: none
+  	  pc+0x0a: alloc small area: rsp = rsp - 0x30
+> 	Version: 1, Flags: none
+  	Nbr codes: 1, Prologue size: 0x04, Frame offset: 0x0, Frame reg: none
+  	  pc+0x04: alloc small area: rsp = rsp - 0x48
+> 	Version: 1, Flags: UNW_FLAG_EHANDLER | UNW_FLAG_UHANDLER
+  	Nbr codes: 4, Prologue size: 0x10, Frame offset: 0x8, Frame reg: rbp
+  	  pc+0x10: FPReg: rbp = rsp + 0x80 (info = 0x0)
+> 	Version: 1, Flags: none
+  	Nbr codes: 2, Prologue size: 0x11, Frame offset: 0x0, Frame reg: none
+  	  pc+0x0a: alloc small area: rsp = rsp - 0x30
+> 	Version: 1, Flags: none
+  	Nbr codes: 2, Prologue size: 0x11, Frame offset: 0x0, Frame reg: none
+  	  pc+0x0a: alloc small area: rsp = rsp - 0x30
+> 	Version: 1, Flags: none
+  	Nbr codes: 2, Prologue size: 0x11, Frame offset: 0x0, Frame reg: none
+  	  pc+0x0a: alloc small area: rsp = rsp - 0x30
+> 	Version: 1, Flags: none
+  	Nbr codes: 2, Prologue size: 0x11, Frame offset: 0x0, Frame reg: none
+  	  pc+0x0a: alloc small area: rsp = rsp - 0x30
+> 	Version: 1, Flags: none
+  	Nbr codes: 1, Prologue size: 0x04, Frame offset: 0x0, Frame reg: none
+  	  pc+0x04: alloc small area: rsp = rsp - 0x28
+> 	Version: 1, Flags: none
+  	Nbr codes: 1, Prologue size: 0x04, Frame offset: 0x0, Frame reg: none
+  	  pc+0x04: alloc small area: rsp = rsp - 0x68
+> 	Version: 1, Flags: none
+  	Nbr codes: 1, Prologue size: 0x04, Frame offset: 0x0, Frame reg: none
+  	  pc+0x04: alloc small area: rsp = rsp - 0x28
+> 	Version: 1, Flags: none
+  	Nbr codes: 2, Prologue size: 0x07, Frame offset: 0x0, Frame reg: none
+  	  pc+0x07: alloc large area: rsp = rsp - 0xa8
+> 	Version: 1, Flags: none
+  	Nbr codes: 1, Prologue size: 0x04, Frame offset: 0x0, Frame reg: none
+  	  pc+0x04: alloc small area: rsp = rsp - 0x28
+> 	Version: 1, Flags: UNW_FLAG_EHANDLER | UNW_FLAG_UHANDLER
+  	Nbr codes: 3, Prologue size: 0x0a, Frame offset: 0x5, Frame reg: rbp
+  	  pc+0x0a: FPReg: rbp = rsp + 0x50 (info = 0x0)
+> 	Version: 1, Flags: none
+  	Nbr codes: 2, Prologue size: 0x0e, Frame offset: 0x0, Frame reg: none
+  	  pc+0x0a: alloc small area: rsp = rsp - 0x20
+> 	Version: 1, Flags: none
+  	Nbr codes: 2, Prologue size: 0x0e, Frame offset: 0x0, Frame reg: none
+  	  pc+0x0a: alloc small area: rsp = rsp - 0x20
+> 	Version: 1, Flags: none
+  	Nbr codes: 2, Prologue size: 0x0e, Frame offset: 0x0, Frame reg: none
+  	  pc+0x0a: alloc small area: rsp = rsp - 0x20
+> 	Version: 1, Flags: UNW_FLAG_EHANDLER | UNW_FLAG_UHANDLER
+  	Nbr codes: 4, Prologue size: 0x10, Frame offset: 0x8, Frame reg: rbp
+  	  pc+0x10: FPReg: rbp = rsp + 0x80 (info = 0x0)
+> 	Version: 1, Flags: none
+  	Nbr codes: 2, Prologue size: 0x11, Frame offset: 0x0, Frame reg: none
+  	  pc+0x0a: alloc small area: rsp = rsp - 0x20
+> 	Version: 1, Flags: none
+  	Nbr codes: 2, Prologue size: 0x11, Frame offset: 0x0, Frame reg: none
+  	  pc+0x0a: alloc small area: rsp = rsp - 0x20
+> 	Version: 1, Flags: UNW_FLAG_EHANDLER | UNW_FLAG_UHANDLER
+  	Nbr codes: 4, Prologue size: 0x10, Frame offset: 0x8, Frame reg: rbp
+  	  pc+0x10: FPReg: rbp = rsp + 0x80 (info = 0x0)
+> 	Version: 1, Flags: none
+  	Nbr codes: 2, Prologue size: 0x11, Frame offset: 0x0, Frame reg: none
+  	  pc+0x0a: alloc small area: rsp = rsp - 0x20
+> 	Version: 1, Flags: none
+  	Nbr codes: 2, Prologue size: 0x11, Frame offset: 0x0, Frame reg: none
+  	  pc+0x0a: alloc small area: rsp = rsp - 0x20
+> 	Version: 1, Flags: UNW_FLAG_EHANDLER | UNW_FLAG_UHANDLER
+  	Nbr codes: 3, Prologue size: 0x0a, Frame offset: 0x7, Frame reg: rbp
+  	  pc+0x0a: FPReg: rbp = rsp + 0x70 (info = 0x0)
+> 	Version: 1, Flags: UNW_FLAG_EHANDLER | UNW_FLAG_UHANDLER
+  	Nbr codes: 2, Prologue size: 0x0e, Frame offset: 0x0, Frame reg: none
+  	  pc+0x0a: alloc small area: rsp = rsp - 0x20
+> 	Version: 1, Flags: UNW_FLAG_EHANDLER | UNW_FLAG_UHANDLER
+  	Nbr codes: 4, Prologue size: 0x10, Frame offset: 0x8, Frame reg: rbp
+  	  pc+0x10: FPReg: rbp = rsp + 0x80 (info = 0x0)
+> 	Version: 1, Flags: UNW_FLAG_EHANDLER | UNW_FLAG_UHANDLER
+  	Nbr codes: 2, Prologue size: 0x11, Frame offset: 0x0, Frame reg: none
+  	  pc+0x0a: alloc small area: rsp = rsp - 0x20
+> 	Version: 1, Flags: UNW_FLAG_EHANDLER | UNW_FLAG_UHANDLER
+  	Nbr codes: 4, Prologue size: 0x10, Frame offset: 0x8, Frame reg: rbp
+  	  pc+0x10: FPReg: rbp = rsp + 0x80 (info = 0x0)
+> 	Version: 1, Flags: UNW_FLAG_EHANDLER | UNW_FLAG_UHANDLER
+  	Nbr codes: 2, Prologue size: 0x11, Frame offset: 0x0, Frame reg: none
+  	  pc+0x0a: alloc small area: rsp = rsp - 0x20
+> 	Version: 1, Flags: none
+  	Nbr codes: 1, Prologue size: 0x01, Frame offset: 0x0, Frame reg: none
+  	  pc+0x01: alloc small area: rsp = rsp - 0x8
+> 	Version: 1, Flags: none
+  	Nbr codes: 1, Prologue size: 0x04, Frame offset: 0x0, Frame reg: none
+  	  pc+0x04: alloc small area: rsp = rsp - 0x28
+> 	Version: 1, Flags: UNW_FLAG_EHANDLER | UNW_FLAG_UHANDLER
+  	Nbr codes: 3, Prologue size: 0x0a, Frame offset: 0x7, Frame reg: rbp
+  	  pc+0x0a: FPReg: rbp = rsp + 0x70 (info = 0x0)
+> 	Version: 1, Flags: UNW_FLAG_EHANDLER | UNW_FLAG_UHANDLER
+  	Nbr codes: 2, Prologue size: 0x0e, Frame offset: 0x0, Frame reg: none
+  	  pc+0x0a: alloc small area: rsp = rsp - 0x20
+> 	Version: 1, Flags: none
+  	Nbr codes: 1, Prologue size: 0x04, Frame offset: 0x0, Frame reg: none
+  	  pc+0x04: alloc small area: rsp = rsp - 0x78
+> 	Version: 1, Flags: none
+  	Nbr codes: 1, Prologue size: 0x04, Frame offset: 0x0, Frame reg: none
+  	  pc+0x04: alloc small area: rsp = rsp - 0x58
+> 	Version: 1, Flags: none
+  	Nbr codes: 1, Prologue size: 0x04, Frame offset: 0x0, Frame reg: none
+  	  pc+0x04: alloc small area: rsp = rsp - 0x58
+> 	Version: 1, Flags: none
+  	Nbr codes: 1, Prologue size: 0x04, Frame offset: 0x0, Frame reg: none
+  	  pc+0x04: alloc small area: rsp = rsp - 0x28
+> 	Version: 1, Flags: UNW_FLAG_EHANDLER | UNW_FLAG_UHANDLER
+  	Nbr codes: 3, Prologue size: 0x0a, Frame offset: 0x5, Frame reg: rbp
+  	  pc+0x0a: FPReg: rbp = rsp + 0x50 (info = 0x0)
+> 	Version: 1, Flags: none
+  	Nbr codes: 2, Prologue size: 0x0e, Frame offset: 0x0, Frame reg: none
+  	  pc+0x0a: alloc small area: rsp = rsp - 0x20
+> 	Version: 1, Flags: none
+  	Nbr codes: 1, Prologue size: 0x04, Frame offset: 0x0, Frame reg: none
+  	  pc+0x04: alloc small area: rsp = rsp - 0x78
+> 	Version: 1, Flags: none
+  	Nbr codes: 1, Prologue size: 0x04, Frame offset: 0x0, Frame reg: none
+  	  pc+0x04: alloc small area: rsp = rsp - 0x38
+> 	Version: 1, Flags: none
+  	Nbr codes: 1, Prologue size: 0x04, Frame offset: 0x0, Frame reg: none
+  	  pc+0x04: alloc small area: rsp = rsp - 0x28
+> 	Version: 1, Flags: none
+  	Nbr codes: 1, Prologue size: 0x04, Frame offset: 0x0, Frame reg: none
+  	  pc+0x04: alloc small area: rsp = rsp - 0x38
+> 	Version: 1, Flags: none
+  	Nbr codes: 1, Prologue size: 0x04, Frame offset: 0x0, Frame reg: none
+  	  pc+0x04: alloc small area: rsp = rsp - 0x58
+> 	Version: 1, Flags: none
+  	Nbr codes: 1, Prologue size: 0x04, Frame offset: 0x0, Frame reg: none
+  	  pc+0x04: alloc small area: rsp = rsp - 0x28
+> 	Version: 1, Flags: none
+  	Nbr codes: 1, Prologue size: 0x04, Frame offset: 0x0, Frame reg: none
+  	  pc+0x04: alloc small area: rsp = rsp - 0x28
+> 	Version: 1, Flags: UNW_FLAG_EHANDLER | UNW_FLAG_UHANDLER
+  	Nbr codes: 3, Prologue size: 0x0a, Frame offset: 0x4, Frame reg: rbp
+  	  pc+0x0a: FPReg: rbp = rsp + 0x40 (info = 0x0)
+> 	Version: 1, Flags: none
+  	Nbr codes: 2, Prologue size: 0x0e, Frame offset: 0x0, Frame reg: none
+  	  pc+0x0a: alloc small area: rsp = rsp - 0x20
+> 	Version: 1, Flags: none
+  	Nbr codes: 1, Prologue size: 0x04, Frame offset: 0x0, Frame reg: none
+  	  pc+0x04: alloc small area: rsp = rsp - 0x28
+> 	Version: 1, Flags: none
+  	Nbr codes: 1, Prologue size: 0x04, Frame offset: 0x0, Frame reg: none
+  	  pc+0x04: alloc small area: rsp = rsp - 0x58
+> 	Version: 1, Flags: none
+  	Nbr codes: 1, Prologue size: 0x04, Frame offset: 0x0, Frame reg: none
+  	  pc+0x04: alloc small area: rsp = rsp - 0x38
+> 	Version: 1, Flags: UNW_FLAG_EHANDLER | UNW_FLAG_UHANDLER
+  	Nbr codes: 4, Prologue size: 0x10, Frame offset: 0x8, Frame reg: rbp
+  	  pc+0x10: FPReg: rbp = rsp + 0x80 (info = 0x0)
+> 	Version: 1, Flags: none
+  	Nbr codes: 2, Prologue size: 0x11, Frame offset: 0x0, Frame reg: none
+  	  pc+0x0a: alloc small area: rsp = rsp - 0x20
+> 	Version: 1, Flags: UNW_FLAG_EHANDLER | UNW_FLAG_UHANDLER
+  	Nbr codes: 4, Prologue size: 0x10, Frame offset: 0x8, Frame reg: rbp
+  	  pc+0x10: FPReg: rbp = rsp + 0x80 (info = 0x0)
+> 	Version: 1, Flags: none
+  	Nbr codes: 2, Prologue size: 0x11, Frame offset: 0x0, Frame reg: none
+  	  pc+0x0a: alloc small area: rsp = rsp - 0x20
+> 	Version: 1, Flags: none
+  	Nbr codes: 1, Prologue size: 0x04, Frame offset: 0x0, Frame reg: none
+  	  pc+0x04: alloc small area: rsp = rsp - 0x58
+> 	Version: 1, Flags: none
+  	Nbr codes: 1, Prologue size: 0x04, Frame offset: 0x0, Frame reg: none
+  	  pc+0x04: alloc small area: rsp = rsp - 0x48
+> 	Version: 1, Flags: none
+  	Nbr codes: 1, Prologue size: 0x04, Frame offset: 0x0, Frame reg: none
+  	  pc+0x04: alloc small area: rsp = rsp - 0x48
+> 	Version: 1, Flags: none
+  	Nbr codes: 2, Prologue size: 0x07, Frame offset: 0x0, Frame reg: none
+  	  pc+0x07: alloc large area: rsp = rsp - 0xd8
+> 	Version: 1, Flags: none
+  	Nbr codes: 2, Prologue size: 0x07, Frame offset: 0x0, Frame reg: none
+  	  pc+0x07: alloc large area: rsp = rsp - 0x1c8
+> 	Version: 1, Flags: none
+  	Nbr codes: 1, Prologue size: 0x04, Frame offset: 0x0, Frame reg: none
+  	  pc+0x04: alloc small area: rsp = rsp - 0x28
+> 	Version: 1, Flags: none
+  	Nbr codes: 1, Prologue size: 0x04, Frame offset: 0x0, Frame reg: none
+  	  pc+0x04: alloc small area: rsp = rsp - 0x10
+> 	Version: 1, Flags: none
+  	Nbr codes: 1, Prologue size: 0x04, Frame offset: 0x0, Frame reg: none
+  	  pc+0x04: alloc small area: rsp = rsp - 0x28
+> 	Version: 1, Flags: none
+  	Nbr codes: 1, Prologue size: 0x04, Frame offset: 0x0, Frame reg: none
+  	  pc+0x04: alloc small area: rsp = rsp - 0x58
+> 	Version: 1, Flags: none
+  	Nbr codes: 1, Prologue size: 0x04, Frame offset: 0x0, Frame reg: none
+  	  pc+0x04: alloc small area: rsp = rsp - 0x28
+> 	Version: 1, Flags: none
+  	Nbr codes: 1, Prologue size: 0x04, Frame offset: 0x0, Frame reg: none
+  	  pc+0x04: alloc small area: rsp = rsp - 0x38
+> 	Version: 1, Flags: none
+  	Nbr codes: 1, Prologue size: 0x04, Frame offset: 0x0, Frame reg: none
+  	  pc+0x04: alloc small area: rsp = rsp - 0x28
+> 	Version: 1, Flags: none
+  	Nbr codes: 1, Prologue size: 0x04, Frame offset: 0x0, Frame reg: none
+  	  pc+0x04: alloc small area: rsp = rsp - 0x38
+> 	Version: 1, Flags: none
+  	Nbr codes: 1, Prologue size: 0x04, Frame offset: 0x0, Frame reg: none
+  	  pc+0x04: alloc small area: rsp = rsp - 0x58
+> 	Version: 1, Flags: none
+  	Nbr codes: 1, Prologue size: 0x04, Frame offset: 0x0, Frame reg: none
+  	  pc+0x04: alloc small area: rsp = rsp - 0x38
+> 	Version: 1, Flags: none
+  	Nbr codes: 1, Prologue size: 0x04, Frame offset: 0x0, Frame reg: none
+  	  pc+0x04: alloc small area: rsp = rsp - 0x48
+> 	Version: 1, Flags: none
+  	Nbr codes: 1, Prologue size: 0x04, Frame offset: 0x0, Frame reg: none
+  	  pc+0x04: alloc small area: rsp = rsp - 0x38
+> 	Version: 1, Flags: none
+  	Nbr codes: 1, Prologue size: 0x04, Frame offset: 0x0, Frame reg: none
+  	  pc+0x04: alloc small area: rsp = rsp - 0x48
+> 	Version: 1, Flags: none
+  	Nbr codes: 1, Prologue size: 0x04, Frame offset: 0x0, Frame reg: none
+  	  pc+0x04: alloc small area: rsp = rsp - 0x48
+> 	Version: 1, Flags: none
+  	Nbr codes: 1, Prologue size: 0x01, Frame offset: 0x0, Frame reg: none
+  	  pc+0x01: alloc small area: rsp = rsp - 0x8
+> 	Version: 1, Flags: none
+  	Nbr codes: 1, Prologue size: 0x04, Frame offset: 0x0, Frame reg: none
+  	  pc+0x04: alloc small area: rsp = rsp - 0x58
+> 	Version: 1, Flags: none
+  	Nbr codes: 1, Prologue size: 0x04, Frame offset: 0x0, Frame reg: none
+  	  pc+0x04: alloc small area: rsp = rsp - 0x48
+> 	Version: 1, Flags: UNW_FLAG_EHANDLER | UNW_FLAG_UHANDLER
+  	Nbr codes: 3, Prologue size: 0x0a, Frame offset: 0x7, Frame reg: rbp
+  	  pc+0x0a: FPReg: rbp = rsp + 0x70 (info = 0x0)
+> 	Version: 1, Flags: none
+  	Nbr codes: 2, Prologue size: 0x0e, Frame offset: 0x0, Frame reg: none
+  	  pc+0x0a: alloc small area: rsp = rsp - 0x20
+> 	Version: 1, Flags: none
+  	Nbr codes: 1, Prologue size: 0x04, Frame offset: 0x0, Frame reg: none
+  	  pc+0x04: alloc small area: rsp = rsp - 0x38
+> 	Version: 1, Flags: none
+  	Nbr codes: 1, Prologue size: 0x04, Frame offset: 0x0, Frame reg: none
+  	  pc+0x04: alloc small area: rsp = rsp - 0x28
+> 	Version: 1, Flags: none
+  	Nbr codes: 2, Prologue size: 0x07, Frame offset: 0x0, Frame reg: none
+  	  pc+0x07: alloc large area: rsp = rsp - 0xa8
+> 	Version: 1, Flags: none
+  	Nbr codes: 1, Prologue size: 0x04, Frame offset: 0x0, Frame reg: none
+  	  pc+0x04: alloc small area: rsp = rsp - 0x38
+> 	Version: 1, Flags: none
+  	Nbr codes: 1, Prologue size: 0x04, Frame offset: 0x0, Frame reg: none
+  	  pc+0x04: alloc small area: rsp = rsp - 0x28
+> 	Version: 1, Flags: none
+  	Nbr codes: 1, Prologue size: 0x04, Frame offset: 0x0, Frame reg: none
+  	  pc+0x04: alloc small area: rsp = rsp - 0x28
+> 	Version: 1, Flags: none
+  	Nbr codes: 2, Prologue size: 0x04, Frame offset: 0x0, Frame reg: rbp
+  	  pc+0x04: FPReg: rbp = rsp + 0x0 (info = 0x0)
+> 	Version: 1, Flags: none
+  	Nbr codes: 2, Prologue size: 0x04, Frame offset: 0x0, Frame reg: rbp
+  	  pc+0x04: FPReg: rbp = rsp + 0x0 (info = 0x0)
+> 	Version: 1, Flags: none
+  	Nbr codes: 2, Prologue size: 0x04, Frame offset: 0x0, Frame reg: rbp
+  	  pc+0x04: FPReg: rbp = rsp + 0x0 (info = 0x0)
+> 	Version: 1, Flags: none
+  	Nbr codes: 2, Prologue size: 0x04, Frame offset: 0x0, Frame reg: rbp
+  	  pc+0x04: FPReg: rbp = rsp + 0x0 (info = 0x0)
+> 	Version: 1, Flags: none
+  	Nbr codes: 3, Prologue size: 0x0a, Frame offset: 0x3, Frame reg: rbp
+  	  pc+0x0a: FPReg: rbp = rsp + 0x30 (info = 0x0)
+> 	Version: 1, Flags: none
+  	Nbr codes: 2, Prologue size: 0x04, Frame offset: 0x0, Frame reg: rbp
+  	  pc+0x04: FPReg: rbp = rsp + 0x0 (info = 0x0)
+> 	Version: 1, Flags: none
+  	Nbr codes: 2, Prologue size: 0x04, Frame offset: 0x0, Frame reg: rbp
+  	  pc+0x04: FPReg: rbp = rsp + 0x0 (info = 0x0)
+> 	Version: 1, Flags: none
+  	Nbr codes: 3, Prologue size: 0x10, Frame offset: 0x8, Frame reg: rbp
+  	  pc+0x10: FPReg: rbp = rsp + 0x80 (info = 0x0)
+> 	Version: 1, Flags: none
+  	Nbr codes: 2, Prologue size: 0x04, Frame offset: 0x0, Frame reg: rbp
+  	  pc+0x04: FPReg: rbp = rsp + 0x0 (info = 0x0)
+> 	Version: 1, Flags: UNW_FLAG_EHANDLER | UNW_FLAG_UHANDLER
+  	Nbr codes: 4, Prologue size: 0x0b, Frame offset: 0x4, Frame reg: rbp
+  	  pc+0x0b: FPReg: rbp = rsp + 0x40 (info = 0x0)
+> 	Version: 1, Flags: none
+  	Nbr codes: 3, Prologue size: 0x0f, Frame offset: 0x0, Frame reg: none
+  	  pc+0x0b: alloc small area: rsp = rsp - 0x28
+> 	Version: 1, Flags: none
+  	Nbr codes: 6, Prologue size: 0x0d, Frame offset: 0x3, Frame reg: rbp
+  	  pc+0x0d: FPReg: rbp = rsp + 0x30 (info = 0x0)
+> 	Version: 1, Flags: UNW_FLAG_EHANDLER | UNW_FLAG_UHANDLER
+  	Nbr codes: 4, Prologue size: 0x0b, Frame offset: 0x4, Frame reg: rbp
+  	  pc+0x0b: FPReg: rbp = rsp + 0x40 (info = 0x0)
+> 	Version: 1, Flags: none
+  	Nbr codes: 3, Prologue size: 0x0f, Frame offset: 0x0, Frame reg: none
+  	  pc+0x0b: alloc small area: rsp = rsp - 0x28
+> 	Version: 1, Flags: none
+  	Nbr codes: 2, Prologue size: 0x04, Frame offset: 0x0, Frame reg: rbp
+  	  pc+0x04: FPReg: rbp = rsp + 0x0 (info = 0x0)
+> 	Version: 1, Flags: none
+  	Nbr codes: 2, Prologue size: 0x04, Frame offset: 0x0, Frame reg: rbp
+  	  pc+0x04: FPReg: rbp = rsp + 0x0 (info = 0x0)
+> 	Version: 1, Flags: none
+  	Nbr codes: 2, Prologue size: 0x04, Frame offset: 0x0, Frame reg: rbp
+  	  pc+0x04: FPReg: rbp = rsp + 0x0 (info = 0x0)
+> 	Version: 1, Flags: none
+  	Nbr codes: 2, Prologue size: 0x04, Frame offset: 0x0, Frame reg: rbp
+  	  pc+0x04: FPReg: rbp = rsp + 0x0 (info = 0x0)
+> 	Version: 1, Flags: none
+  	Nbr codes: 3, Prologue size: 0x0a, Frame offset: 0x4, Frame reg: rbp
+  	  pc+0x0a: FPReg: rbp = rsp + 0x40 (info = 0x0)
+> 	Version: 1, Flags: UNW_FLAG_EHANDLER | UNW_FLAG_UHANDLER
+  	Nbr codes: 5, Prologue size: 0x0c, Frame offset: 0x5, Frame reg: rbp
+  	  pc+0x0c: FPReg: rbp = rsp + 0x50 (info = 0x0)
+> 	Version: 1, Flags: none
+  	Nbr codes: 4, Prologue size: 0x10, Frame offset: 0x0, Frame reg: none
+  	  pc+0x0c: alloc small area: rsp = rsp - 0x20
+> 	Version: 1, Flags: none
+  	Nbr codes: 2, Prologue size: 0x04, Frame offset: 0x0, Frame reg: rbp
+  	  pc+0x04: FPReg: rbp = rsp + 0x0 (info = 0x0)
+> 	Version: 1, Flags: none
+  	Nbr codes: 4, Prologue size: 0x0b, Frame offset: 0x2, Frame reg: rbp
+  	  pc+0x0b: FPReg: rbp = rsp + 0x20 (info = 0x0)
+> 	Version: 1, Flags: none
+  	Nbr codes: 4, Prologue size: 0x0b, Frame offset: 0x2, Frame reg: rbp
+  	  pc+0x0b: FPReg: rbp = rsp + 0x20 (info = 0x0)
+> 	Version: 1, Flags: none
+  	Nbr codes: 3, Prologue size: 0x0a, Frame offset: 0x3, Frame reg: rbp
+  	  pc+0x0a: FPReg: rbp = rsp + 0x30 (info = 0x0)
+> 	Version: 1, Flags: none
+  	Nbr codes: 3, Prologue size: 0x0a, Frame offset: 0x2, Frame reg: rbp
+  	  pc+0x0a: FPReg: rbp = rsp + 0x20 (info = 0x0)
+> 	Version: 1, Flags: none
+  	Nbr codes: 2, Prologue size: 0x04, Frame offset: 0x0, Frame reg: rbp
+  	  pc+0x04: FPReg: rbp = rsp + 0x0 (info = 0x0)
+> 	Version: 1, Flags: none
+  	Nbr codes: 2, Prologue size: 0x04, Frame offset: 0x0, Frame reg: rbp
+  	  pc+0x04: FPReg: rbp = rsp + 0x0 (info = 0x0)
+> 	Version: 1, Flags: none
+  	Nbr codes: 2, Prologue size: 0x04, Frame offset: 0x0, Frame reg: rbp
+  	  pc+0x04: FPReg: rbp = rsp + 0x0 (info = 0x0)
+> 	Version: 1, Flags: none
+  	Nbr codes: 2, Prologue size: 0x04, Frame offset: 0x0, Frame reg: rbp
+  	  pc+0x04: FPReg: rbp = rsp + 0x0 (info = 0x0)
+> 	Version: 1, Flags: UNW_FLAG_EHANDLER | UNW_FLAG_UHANDLER
+  	Nbr codes: 3, Prologue size: 0x0a, Frame offset: 0x4, Frame reg: rbp
+  	  pc+0x0a: FPReg: rbp = rsp + 0x40 (info = 0x0)
+> 	Version: 1, Flags: none
+  	Nbr codes: 2, Prologue size: 0x0e, Frame offset: 0x0, Frame reg: none
+  	  pc+0x0a: alloc small area: rsp = rsp - 0x20
+> 	Version: 1, Flags: none
+  	Nbr codes: 2, Prologue size: 0x04, Frame offset: 0x0, Frame reg: rbp
+  	  pc+0x04: FPReg: rbp = rsp + 0x0 (info = 0x0)
+> 	Version: 1, Flags: none
+  	Nbr codes: 2, Prologue size: 0x04, Frame offset: 0x0, Frame reg: rbp
+  	  pc+0x04: FPReg: rbp = rsp + 0x0 (info = 0x0)
+> 	Version: 1, Flags: none
+  	Nbr codes: 4, Prologue size: 0x0b, Frame offset: 0x2, Frame reg: rbp
+  	  pc+0x0b: FPReg: rbp = rsp + 0x20 (info = 0x0)
+> 	Version: 1, Flags: none
+  	Nbr codes: 2, Prologue size: 0x04, Frame offset: 0x0, Frame reg: rbp
+  	  pc+0x04: FPReg: rbp = rsp + 0x0 (info = 0x0)
+> 	Version: 1, Flags: none
+  	Nbr codes: 2, Prologue size: 0x04, Frame offset: 0x0, Frame reg: rbp
+  	  pc+0x04: FPReg: rbp = rsp + 0x0 (info = 0x0)
+> 	Version: 1, Flags: none
+  	Nbr codes: 2, Prologue size: 0x04, Frame offset: 0x0, Frame reg: rbp
+  	  pc+0x04: FPReg: rbp = rsp + 0x0 (info = 0x0)
+> 	Version: 1, Flags: none
+  	Nbr codes: 5, Prologue size: 0x0c, Frame offset: 0x2, Frame reg: rbp
+  	  pc+0x0c: FPReg: rbp = rsp + 0x20 (info = 0x0)
+> 	Version: 1, Flags: UNW_FLAG_EHANDLER | UNW_FLAG_UHANDLER
+  	Nbr codes: 3, Prologue size: 0x0a, Frame offset: 0x5, Frame reg: rbp
+  	  pc+0x0a: FPReg: rbp = rsp + 0x50 (info = 0x0)
+> 	Version: 1, Flags: none
+  	Nbr codes: 2, Prologue size: 0x0e, Frame offset: 0x0, Frame reg: none
+  	  pc+0x0a: alloc small area: rsp = rsp - 0x20
+> 	Version: 1, Flags: none
+  	Nbr codes: 2, Prologue size: 0x0e, Frame offset: 0x0, Frame reg: none
+  	  pc+0x0a: alloc small area: rsp = rsp - 0x20
+> 	Version: 1, Flags: none
+  	Nbr codes: 2, Prologue size: 0x04, Frame offset: 0x0, Frame reg: rbp
+  	  pc+0x04: FPReg: rbp = rsp + 0x0 (info = 0x0)
+> 	Version: 1, Flags: none
+  	Nbr codes: 2, Prologue size: 0x04, Frame offset: 0x0, Frame reg: rbp
+  	  pc+0x04: FPReg: rbp = rsp + 0x0 (info = 0x0)
+> 	Version: 1, Flags: none
+  	Nbr codes: 2, Prologue size: 0x04, Frame offset: 0x0, Frame reg: rbp
+  	  pc+0x04: FPReg: rbp = rsp + 0x0 (info = 0x0)
+> 	Version: 1, Flags: none
+  	Nbr codes: 27, Prologue size: 0x52, Frame offset: 0x8, Frame reg: rbp
+  	  pc+0x52: save xmm6 at rsp + 0xb0
+> 	Version: 1, Flags: none
+  	Nbr codes: 3, Prologue size: 0x0a, Frame offset: 0x2, Frame reg: rbp
+  	  pc+0x0a: FPReg: rbp = rsp + 0x20 (info = 0x0)
+> 	Version: 1, Flags: none
+  	Nbr codes: 7, Prologue size: 0x0f, Frame offset: 0x3, Frame reg: rbp
+  	  pc+0x0f: FPReg: rbp = rsp + 0x30 (info = 0x0)
+> 	Version: 1, Flags: none
+  	Nbr codes: 2, Prologue size: 0x04, Frame offset: 0x0, Frame reg: rbp
+  	  pc+0x04: FPReg: rbp = rsp + 0x0 (info = 0x0)
+> 	Version: 1, Flags: none
+  	Nbr codes: 4, Prologue size: 0x0b, Frame offset: 0x2, Frame reg: rbp
+  	  pc+0x0b: FPReg: rbp = rsp + 0x20 (info = 0x0)
+> 	Version: 1, Flags: none
+  	Nbr codes: 4, Prologue size: 0x0b, Frame offset: 0x2, Frame reg: rbp
+  	  pc+0x0b: FPReg: rbp = rsp + 0x20 (info = 0x0)
+> 	Version: 1, Flags: none
+  	Nbr codes: 6, Prologue size: 0x0d, Frame offset: 0x3, Frame reg: rbp
+  	  pc+0x0d: FPReg: rbp = rsp + 0x30 (info = 0x0)
+> 	Version: 1, Flags: none
+  	Nbr codes: 6, Prologue size: 0x0d, Frame offset: 0x2, Frame reg: rbp
+  	  pc+0x0d: FPReg: rbp = rsp + 0x20 (info = 0x0)
+> 	Version: 1, Flags: none
+  	Nbr codes: 5, Prologue size: 0x0c, Frame offset: 0x5, Frame reg: rbp
+  	  pc+0x0c: FPReg: rbp = rsp + 0x50 (info = 0x0)
+> 	Version: 1, Flags: none
+  	Nbr codes: 5, Prologue size: 0x0c, Frame offset: 0x5, Frame reg: rbp
+  	  pc+0x0c: FPReg: rbp = rsp + 0x50 (info = 0x0)
+> 	Version: 1, Flags: none
+  	Nbr codes: 5, Prologue size: 0x0c, Frame offset: 0x5, Frame reg: rbp
+  	  pc+0x0c: FPReg: rbp = rsp + 0x50 (info = 0x0)
+> 	Version: 1, Flags: none
+  	Nbr codes: 2, Prologue size: 0x04, Frame offset: 0x0, Frame reg: rbp
+  	  pc+0x04: FPReg: rbp = rsp + 0x0 (info = 0x0)
+> 	Version: 1, Flags: none
+  	Nbr codes: 3, Prologue size: 0x0a, Frame offset: 0x6, Frame reg: rbp
+  	  pc+0x0a: FPReg: rbp = rsp + 0x60 (info = 0x0)
+> 	Version: 1, Flags: none
+  	Nbr codes: 3, Prologue size: 0x0a, Frame offset: 0x3, Frame reg: rbp
+  	  pc+0x0a: FPReg: rbp = rsp + 0x30 (info = 0x0)
+> 	Version: 1, Flags: none
+  	Nbr codes: 10, Prologue size: 0x15, Frame offset: 0x2, Frame reg: rbp
+  	  pc+0x15: FPReg: rbp = rsp + 0x20 (info = 0x0)
+> 	Version: 1, Flags: UNW_FLAG_EHANDLER | UNW_FLAG_UHANDLER
+  	Nbr codes: 6, Prologue size: 0x12, Frame offset: 0x8, Frame reg: rbp
+  	  pc+0x12: FPReg: rbp = rsp + 0x80 (info = 0x0)
+> 	Version: 1, Flags: UNW_FLAG_EHANDLER | UNW_FLAG_UHANDLER
+  	Nbr codes: 4, Prologue size: 0x13, Frame offset: 0x0, Frame reg: none
+  	  pc+0x0c: alloc small area: rsp = rsp - 0x30
+> 	Version: 1, Flags: UNW_FLAG_EHANDLER | UNW_FLAG_UHANDLER
+  	Nbr codes: 4, Prologue size: 0x13, Frame offset: 0x0, Frame reg: none
+  	  pc+0x0c: alloc small area: rsp = rsp - 0x30
+> 	Version: 1, Flags: UNW_FLAG_EHANDLER | UNW_FLAG_UHANDLER
+  	Nbr codes: 4, Prologue size: 0x13, Frame offset: 0x0, Frame reg: none
+  	  pc+0x0c: alloc small area: rsp = rsp - 0x30
+> 	Version: 1, Flags: UNW_FLAG_EHANDLER | UNW_FLAG_UHANDLER
+  	Nbr codes: 4, Prologue size: 0x13, Frame offset: 0x0, Frame reg: none
+  	  pc+0x0c: alloc small area: rsp = rsp - 0x30
+> 	Version: 1, Flags: none
+  	Nbr codes: 4, Prologue size: 0x13, Frame offset: 0x0, Frame reg: none
+  	  pc+0x0c: alloc small area: rsp = rsp - 0x30
+> 	Version: 1, Flags: UNW_FLAG_EHANDLER | UNW_FLAG_UHANDLER
+  	Nbr codes: 4, Prologue size: 0x13, Frame offset: 0x0, Frame reg: none
+  	  pc+0x0c: alloc small area: rsp = rsp - 0x30
+> 	Version: 1, Flags: UNW_FLAG_EHANDLER | UNW_FLAG_UHANDLER
+  	Nbr codes: 4, Prologue size: 0x13, Frame offset: 0x0, Frame reg: none
+  	  pc+0x0c: alloc small area: rsp = rsp - 0x30
+> 	Version: 1, Flags: UNW_FLAG_EHANDLER | UNW_FLAG_UHANDLER
+  	Nbr codes: 4, Prologue size: 0x13, Frame offset: 0x0, Frame reg: none
+  	  pc+0x0c: alloc small area: rsp = rsp - 0x30
+> 	Version: 1, Flags: UNW_FLAG_EHANDLER | UNW_FLAG_UHANDLER
+  	Nbr codes: 4, Prologue size: 0x13, Frame offset: 0x0, Frame reg: none
+  	  pc+0x0c: alloc small area: rsp = rsp - 0x30
+> 	Version: 1, Flags: none
+  	Nbr codes: 3, Prologue size: 0x0a, Frame offset: 0x7, Frame reg: rbp
+  	  pc+0x0a: FPReg: rbp = rsp + 0x70 (info = 0x0)
+> 	Version: 1, Flags: none
+  	Nbr codes: 4, Prologue size: 0x0b, Frame offset: 0x3, Frame reg: rbp
+  	  pc+0x0b: FPReg: rbp = rsp + 0x30 (info = 0x0)
+> 	Version: 1, Flags: UNW_FLAG_EHANDLER | UNW_FLAG_UHANDLER
+  	Nbr codes: 5, Prologue size: 0x11, Frame offset: 0x8, Frame reg: rbp
+  	  pc+0x11: FPReg: rbp = rsp + 0x80 (info = 0x0)
+> 	Version: 1, Flags: none
+  	Nbr codes: 3, Prologue size: 0x12, Frame offset: 0x0, Frame reg: none
+  	  pc+0x0b: alloc small area: rsp = rsp - 0x28
+> 	Version: 1, Flags: none
+  	Nbr codes: 3, Prologue size: 0x12, Frame offset: 0x0, Frame reg: none
+  	  pc+0x0b: alloc small area: rsp = rsp - 0x28
+> 	Version: 1, Flags: UNW_FLAG_EHANDLER | UNW_FLAG_UHANDLER
+  	Nbr codes: 5, Prologue size: 0x0c, Frame offset: 0x5, Frame reg: rbp
+  	  pc+0x0c: FPReg: rbp = rsp + 0x50 (info = 0x0)
+> 	Version: 1, Flags: none
+  	Nbr codes: 4, Prologue size: 0x10, Frame offset: 0x0, Frame reg: none
+  	  pc+0x0c: alloc small area: rsp = rsp - 0x20
+> 	Version: 1, Flags: none
+  	Nbr codes: 4, Prologue size: 0x10, Frame offset: 0x0, Frame reg: none
+  	  pc+0x0c: alloc small area: rsp = rsp - 0x20
+> 	Version: 1, Flags: UNW_FLAG_EHANDLER | UNW_FLAG_UHANDLER
+  	Nbr codes: 11, Prologue size: 0x1b, Frame offset: 0x8, Frame reg: rbp
+  	  pc+0x1b: FPReg: rbp = rsp + 0x80 (info = 0x0)
+> 	Version: 1, Flags: none
+  	Nbr codes: 9, Prologue size: 0x1c, Frame offset: 0x0, Frame reg: none
+  	  pc+0x15: alloc small area: rsp = rsp - 0x28
+> 	Version: 1, Flags: UNW_FLAG_EHANDLER | UNW_FLAG_UHANDLER
+  	Nbr codes: 11, Prologue size: 0x1b, Frame offset: 0x8, Frame reg: rbp
+  	  pc+0x1b: FPReg: rbp = rsp + 0x80 (info = 0x0)
+> 	Version: 1, Flags: none
+  	Nbr codes: 9, Prologue size: 0x1c, Frame offset: 0x0, Frame reg: none
+  	  pc+0x15: alloc small area: rsp = rsp - 0x28
+> 	Version: 1, Flags: none
+  	Nbr codes: 9, Prologue size: 0x1c, Frame offset: 0x0, Frame reg: none
+  	  pc+0x15: alloc small area: rsp = rsp - 0x28
+> 	Version: 1, Flags: none
+  	Nbr codes: 9, Prologue size: 0x1c, Frame offset: 0x0, Frame reg: none
+  	  pc+0x15: alloc small area: rsp = rsp - 0x28
+> 	Version: 1, Flags: none
+  	Nbr codes: 9, Prologue size: 0x1c, Frame offset: 0x0, Frame reg: none
+  	  pc+0x15: alloc small area: rsp = rsp - 0x28
+> 	Version: 1, Flags: UNW_FLAG_EHANDLER | UNW_FLAG_UHANDLER
+  	Nbr codes: 10, Prologue size: 0x15, Frame offset: 0x5, Frame reg: rbp
+  	  pc+0x15: FPReg: rbp = rsp + 0x50 (info = 0x0)
+> 	Version: 1, Flags: none
+  	Nbr codes: 9, Prologue size: 0x19, Frame offset: 0x0, Frame reg: none
+  	  pc+0x15: alloc small area: rsp = rsp - 0x28
+> 	Version: 1, Flags: none
+  	Nbr codes: 9, Prologue size: 0x19, Frame offset: 0x0, Frame reg: none
+  	  pc+0x15: alloc small area: rsp = rsp - 0x28
+> 	Version: 1, Flags: UNW_FLAG_EHANDLER | UNW_FLAG_UHANDLER
+  	Nbr codes: 7, Prologue size: 0x13, Frame offset: 0x8, Frame reg: rbp
+  	  pc+0x13: FPReg: rbp = rsp + 0x80 (info = 0x0)
+> 	Version: 1, Flags: none
+  	Nbr codes: 5, Prologue size: 0x14, Frame offset: 0x0, Frame reg: none
+  	  pc+0x0d: alloc small area: rsp = rsp - 0x28
+> 	Version: 1, Flags: none
+  	Nbr codes: 7, Prologue size: 0x0f, Frame offset: 0x3, Frame reg: rbp
+  	  pc+0x0f: FPReg: rbp = rsp + 0x30 (info = 0x0)
+> 	Version: 1, Flags: none
+  	Nbr codes: 10, Prologue size: 0x15, Frame offset: 0x3, Frame reg: rbp
+  	  pc+0x15: FPReg: rbp = rsp + 0x30 (info = 0x0)
+> 	Version: 1, Flags: none
+  	Nbr codes: 2, Prologue size: 0x04, Frame offset: 0x0, Frame reg: rbp
+  	  pc+0x04: FPReg: rbp = rsp + 0x0 (info = 0x0)
+> 	Version: 1, Flags: none
+  	Nbr codes: 7, Prologue size: 0x0f, Frame offset: 0x3, Frame reg: rbp
+  	  pc+0x0f: FPReg: rbp = rsp + 0x30 (info = 0x0)
+> 	Version: 1, Flags: none
+  	Nbr codes: 2, Prologue size: 0x04, Frame offset: 0x0, Frame reg: rbp
+  	  pc+0x04: FPReg: rbp = rsp + 0x0 (info = 0x0)
+> 	Version: 1, Flags: none
+  	Nbr codes: 3, Prologue size: 0x0a, Frame offset: 0x2, Frame reg: rbp
+  	  pc+0x0a: FPReg: rbp = rsp + 0x20 (info = 0x0)
+> 	Version: 1, Flags: UNW_FLAG_EHANDLER | UNW_FLAG_UHANDLER
+  	Nbr codes: 6, Prologue size: 0x0d, Frame offset: 0x7, Frame reg: rbp
+  	  pc+0x0d: FPReg: rbp = rsp + 0x70 (info = 0x0)
+> 	Version: 1, Flags: none
+  	Nbr codes: 5, Prologue size: 0x11, Frame offset: 0x0, Frame reg: none
+  	  pc+0x0d: alloc small area: rsp = rsp - 0x28
+> 	Version: 1, Flags: none
+  	Nbr codes: 5, Prologue size: 0x11, Frame offset: 0x0, Frame reg: none
+  	  pc+0x0d: alloc small area: rsp = rsp - 0x28
+> 	Version: 1, Flags: UNW_FLAG_EHANDLER | UNW_FLAG_UHANDLER
+  	Nbr codes: 5, Prologue size: 0x11, Frame offset: 0x8, Frame reg: rbp
+  	  pc+0x11: FPReg: rbp = rsp + 0x80 (info = 0x0)
+> 	Version: 1, Flags: none
+  	Nbr codes: 3, Prologue size: 0x12, Frame offset: 0x0, Frame reg: none
+  	  pc+0x0b: alloc small area: rsp = rsp - 0x28
+> 	Version: 1, Flags: none
+  	Nbr codes: 3, Prologue size: 0x12, Frame offset: 0x0, Frame reg: none
+  	  pc+0x0b: alloc small area: rsp = rsp - 0x28
+> 	Version: 1, Flags: none
+  	Nbr codes: 3, Prologue size: 0x12, Frame offset: 0x0, Frame reg: none
+  	  pc+0x0b: alloc small area: rsp = rsp - 0x28
+> 	Version: 1, Flags: UNW_FLAG_EHANDLER | UNW_FLAG_UHANDLER
+  	Nbr codes: 9, Prologue size: 0x13, Frame offset: 0x6, Frame reg: rbp
+  	  pc+0x13: FPReg: rbp = rsp + 0x60 (info = 0x0)
+> 	Version: 1, Flags: none
+  	Nbr codes: 8, Prologue size: 0x17, Frame offset: 0x0, Frame reg: none
+  	  pc+0x13: alloc small area: rsp = rsp - 0x20
+> 	Version: 1, Flags: none
+  	Nbr codes: 5, Prologue size: 0x0c, Frame offset: 0x3, Frame reg: rbp
+  	  pc+0x0c: FPReg: rbp = rsp + 0x30 (info = 0x0)
+> 	Version: 1, Flags: UNW_FLAG_EHANDLER | UNW_FLAG_UHANDLER
+  	Nbr codes: 6, Prologue size: 0x0d, Frame offset: 0x6, Frame reg: rbp
+  	  pc+0x0d: FPReg: rbp = rsp + 0x60 (info = 0x0)
+> 	Version: 1, Flags: none
+  	Nbr codes: 5, Prologue size: 0x11, Frame offset: 0x0, Frame reg: none
+  	  pc+0x0d: alloc small area: rsp = rsp - 0x28
+> 	Version: 1, Flags: none
+  	Nbr codes: 5, Prologue size: 0x11, Frame offset: 0x0, Frame reg: none
+  	  pc+0x0d: alloc small area: rsp = rsp - 0x28
+> 	Version: 1, Flags: UNW_FLAG_EHANDLER | UNW_FLAG_UHANDLER
+  	Nbr codes: 5, Prologue size: 0x11, Frame offset: 0x8, Frame reg: rbp
+  	  pc+0x11: FPReg: rbp = rsp + 0x80 (info = 0x0)
+> 	Version: 1, Flags: none
+  	Nbr codes: 3, Prologue size: 0x12, Frame offset: 0x0, Frame reg: none
+  	  pc+0x0b: alloc small area: rsp = rsp - 0x28
+> 	Version: 1, Flags: none
+  	Nbr codes: 2, Prologue size: 0x04, Frame offset: 0x0, Frame reg: rbp
+  	  pc+0x04: FPReg: rbp = rsp + 0x0 (info = 0x0)
+> 	Version: 1, Flags: none
+  	Nbr codes: 2, Prologue size: 0x04, Frame offset: 0x0, Frame reg: rbp
+  	  pc+0x04: FPReg: rbp = rsp + 0x0 (info = 0x0)
+> 	Version: 1, Flags: UNW_FLAG_EHANDLER | UNW_FLAG_UHANDLER
+  	Nbr codes: 8, Prologue size: 0x11, Frame offset: 0x4, Frame reg: rbp
+  	  pc+0x11: FPReg: rbp = rsp + 0x40 (info = 0x0)
+> 	Version: 1, Flags: none
+  	Nbr codes: 7, Prologue size: 0x15, Frame offset: 0x0, Frame reg: none
+  	  pc+0x11: alloc small area: rsp = rsp - 0x28
+> 	Version: 1, Flags: UNW_FLAG_EHANDLER | UNW_FLAG_UHANDLER
+  	Nbr codes: 8, Prologue size: 0x11, Frame offset: 0x4, Frame reg: rbp
+  	  pc+0x11: FPReg: rbp = rsp + 0x40 (info = 0x0)
+> 	Version: 1, Flags: none
+  	Nbr codes: 7, Prologue size: 0x15, Frame offset: 0x0, Frame reg: none
+  	  pc+0x11: alloc small area: rsp = rsp - 0x28
+> 	Version: 1, Flags: none
+  	Nbr codes: 10, Prologue size: 0x15, Frame offset: 0x6, Frame reg: rbp
+  	  pc+0x15: FPReg: rbp = rsp + 0x60 (info = 0x0)
+> 	Version: 1, Flags: UNW_FLAG_EHANDLER | UNW_FLAG_UHANDLER
+  	Nbr codes: 9, Prologue size: 0x13, Frame offset: 0x7, Frame reg: rbp
+  	  pc+0x13: FPReg: rbp = rsp + 0x70 (info = 0x0)
+> 	Version: 1, Flags: none
+  	Nbr codes: 8, Prologue size: 0x17, Frame offset: 0x0, Frame reg: none
+  	  pc+0x13: alloc small area: rsp = rsp - 0x20
+> 	Version: 1, Flags: UNW_FLAG_EHANDLER | UNW_FLAG_UHANDLER
+  	Nbr codes: 3, Prologue size: 0x10, Frame offset: 0x8, Frame reg: rbp
+  	  pc+0x10: FPReg: rbp = rsp + 0x80 (info = 0x0)
+> 	Version: 1, Flags: none
+  	Nbr codes: 2, Prologue size: 0x11, Frame offset: 0x0, Frame reg: none
+  	  pc+0x0a: alloc small area: rsp = rsp - 0x20
+> 	Version: 1, Flags: none
+  	Nbr codes: 2, Prologue size: 0x11, Frame offset: 0x0, Frame reg: none
+  	  pc+0x0a: alloc small area: rsp = rsp - 0x20
+> 	Version: 1, Flags: UNW_FLAG_EHANDLER | UNW_FLAG_UHANDLER
+  	Nbr codes: 3, Prologue size: 0x10, Frame offset: 0x8, Frame reg: rbp
+  	  pc+0x10: FPReg: rbp = rsp + 0x80 (info = 0x0)
+> 	Version: 1, Flags: none
+  	Nbr codes: 2, Prologue size: 0x11, Frame offset: 0x0, Frame reg: none
+  	  pc+0x0a: alloc small area: rsp = rsp - 0x20
+> 	Version: 1, Flags: none
+  	Nbr codes: 2, Prologue size: 0x11, Frame offset: 0x0, Frame reg: none
+  	  pc+0x0a: alloc small area: rsp = rsp - 0x20
+> 	Version: 1, Flags: UNW_FLAG_EHANDLER | UNW_FLAG_UHANDLER
+  	Nbr codes: 4, Prologue size: 0x0b, Frame offset: 0x3, Frame reg: rbp
+  	  pc+0x0b: FPReg: rbp = rsp + 0x30 (info = 0x0)
+> 	Version: 1, Flags: none
+  	Nbr codes: 3, Prologue size: 0x0f, Frame offset: 0x0, Frame reg: none
+  	  pc+0x0b: alloc small area: rsp = rsp - 0x28
+> 	Version: 1, Flags: none
+  	Nbr codes: 7, Prologue size: 0x0f, Frame offset: 0x3, Frame reg: rbp
+  	  pc+0x0f: FPReg: rbp = rsp + 0x30 (info = 0x0)
+> 	Version: 1, Flags: UNW_FLAG_EHANDLER | UNW_FLAG_UHANDLER
+  	Nbr codes: 4, Prologue size: 0x0b, Frame offset: 0x3, Frame reg: rbp
+  	  pc+0x0b: FPReg: rbp = rsp + 0x30 (info = 0x0)
+> 	Version: 1, Flags: none
+  	Nbr codes: 3, Prologue size: 0x0f, Frame offset: 0x0, Frame reg: none
+  	  pc+0x0b: alloc small area: rsp = rsp - 0x28
+> 	Version: 1, Flags: UNW_FLAG_EHANDLER | UNW_FLAG_UHANDLER
+  	Nbr codes: 10, Prologue size: 0x15, Frame offset: 0x5, Frame reg: rbp
+  	  pc+0x15: FPReg: rbp = rsp + 0x50 (info = 0x0)
+> 	Version: 1, Flags: none
+  	Nbr codes: 9, Prologue size: 0x19, Frame offset: 0x0, Frame reg: none
+  	  pc+0x15: alloc small area: rsp = rsp - 0x28
+> 	Version: 1, Flags: UNW_FLAG_EHANDLER | UNW_FLAG_UHANDLER
+  	Nbr codes: 10, Prologue size: 0x15, Frame offset: 0x4, Frame reg: rbp
+  	  pc+0x15: FPReg: rbp = rsp + 0x40 (info = 0x0)
+> 	Version: 1, Flags: none
+  	Nbr codes: 9, Prologue size: 0x19, Frame offset: 0x0, Frame reg: none
+  	  pc+0x15: alloc small area: rsp = rsp - 0x28
+> 	Version: 1, Flags: none
+  	Nbr codes: 3, Prologue size: 0x0a, Frame offset: 0x4, Frame reg: rbp
+  	  pc+0x0a: FPReg: rbp = rsp + 0x40 (info = 0x0)
+> 	Version: 1, Flags: none
+  	Nbr codes: 3, Prologue size: 0x0a, Frame offset: 0x2, Frame reg: rbp
+  	  pc+0x0a: FPReg: rbp = rsp + 0x20 (info = 0x0)
+> 	Version: 1, Flags: none
+  	Nbr codes: 11, Prologue size: 0x1b, Frame offset: 0x8, Frame reg: rbp
+  	  pc+0x1b: FPReg: rbp = rsp + 0x80 (info = 0x0)
+> 	Version: 1, Flags: none
+  	Nbr codes: 6, Prologue size: 0x0d, Frame offset: 0x2, Frame reg: rbp
+  	  pc+0x0d: FPReg: rbp = rsp + 0x20 (info = 0x0)
+> 	Version: 1, Flags: none
+  	Nbr codes: 10, Prologue size: 0x15, Frame offset: 0x3, Frame reg: rbp
+  	  pc+0x15: FPReg: rbp = rsp + 0x30 (info = 0x0)
+> 	Version: 1, Flags: none
+  	Nbr codes: 5, Prologue size: 0x0c, Frame offset: 0x5, Frame reg: rbp
+  	  pc+0x0c: FPReg: rbp = rsp + 0x50 (info = 0x0)
+> 	Version: 1, Flags: none
+  	Nbr codes: 11, Prologue size: 0x1b, Frame offset: 0x8, Frame reg: rbp
+  	  pc+0x1b: FPReg: rbp = rsp + 0x80 (info = 0x0)
+> 	Version: 1, Flags: UNW_FLAG_EHANDLER | UNW_FLAG_UHANDLER
+  	Nbr codes: 4, Prologue size: 0x0b, Frame offset: 0x5, Frame reg: rbp
+  	  pc+0x0b: FPReg: rbp = rsp + 0x50 (info = 0x0)
+> 	Version: 1, Flags: none
+  	Nbr codes: 3, Prologue size: 0x0f, Frame offset: 0x0, Frame reg: none
+  	  pc+0x0b: alloc small area: rsp = rsp - 0x28
+> 	Version: 1, Flags: none
+  	Nbr codes: 3, Prologue size: 0x0f, Frame offset: 0x0, Frame reg: none
+  	  pc+0x0b: alloc small area: rsp = rsp - 0x28
+> 	Version: 1, Flags: none
+  	Nbr codes: 3, Prologue size: 0x0f, Frame offset: 0x0, Frame reg: none
+  	  pc+0x0b: alloc small area: rsp = rsp - 0x28
+> 	Version: 1, Flags: none
+  	Nbr codes: 4, Prologue size: 0x0b, Frame offset: 0x2, Frame reg: rbp
+  	  pc+0x0b: FPReg: rbp = rsp + 0x20 (info = 0x0)
+> 	Version: 1, Flags: none
+  	Nbr codes: 4, Prologue size: 0x0b, Frame offset: 0x2, Frame reg: rbp
+  	  pc+0x0b: FPReg: rbp = rsp + 0x20 (info = 0x0)
+> 	Version: 1, Flags: none
+  	Nbr codes: 3, Prologue size: 0x0a, Frame offset: 0x4, Frame reg: rbp
+  	  pc+0x0a: FPReg: rbp = rsp + 0x40 (info = 0x0)
+> 	Version: 1, Flags: UNW_FLAG_EHANDLER | UNW_FLAG_UHANDLER
+  	Nbr codes: 11, Prologue size: 0x1b, Frame offset: 0x8, Frame reg: rbp
+  	  pc+0x1b: FPReg: rbp = rsp + 0x80 (info = 0x0)
+> 	Version: 1, Flags: none
+  	Nbr codes: 9, Prologue size: 0x1c, Frame offset: 0x0, Frame reg: none
+  	  pc+0x15: alloc small area: rsp = rsp - 0x48
+> 	Version: 1, Flags: none
+  	Nbr codes: 9, Prologue size: 0x1c, Frame offset: 0x0, Frame reg: none
+  	  pc+0x15: alloc small area: rsp = rsp - 0x48
+> 	Version: 1, Flags: none
+  	Nbr codes: 9, Prologue size: 0x1c, Frame offset: 0x0, Frame reg: none
+  	  pc+0x15: alloc small area: rsp = rsp - 0x48
+> 	Version: 1, Flags: none
+  	Nbr codes: 2, Prologue size: 0x04, Frame offset: 0x0, Frame reg: rbp
+  	  pc+0x04: FPReg: rbp = rsp + 0x0 (info = 0x0)
+> 	Version: 1, Flags: UNW_FLAG_EHANDLER | UNW_FLAG_UHANDLER
+  	Nbr codes: 10, Prologue size: 0x19, Frame offset: 0x8, Frame reg: rbp
+  	  pc+0x19: FPReg: rbp = rsp + 0x80 (info = 0x0)
+> 	Version: 1, Flags: none
+  	Nbr codes: 8, Prologue size: 0x1a, Frame offset: 0x0, Frame reg: none
+  	  pc+0x13: alloc small area: rsp = rsp - 0x40
+> 	Version: 1, Flags: none
+  	Nbr codes: 3, Prologue size: 0x0a, Frame offset: 0x2, Frame reg: rbp
+  	  pc+0x0a: FPReg: rbp = rsp + 0x20 (info = 0x0)
+> 	Version: 1, Flags: UNW_FLAG_EHANDLER | UNW_FLAG_UHANDLER
+  	Nbr codes: 10, Prologue size: 0x19, Frame offset: 0x8, Frame reg: rbp
+  	  pc+0x19: FPReg: rbp = rsp + 0x80 (info = 0x0)
+> 	Version: 1, Flags: none
+  	Nbr codes: 8, Prologue size: 0x1a, Frame offset: 0x0, Frame reg: none
+  	  pc+0x13: alloc small area: rsp = rsp - 0x20
+> 	Version: 1, Flags: none
+  	Nbr codes: 6, Prologue size: 0x0d, Frame offset: 0x3, Frame reg: rbp
+  	  pc+0x0d: FPReg: rbp = rsp + 0x30 (info = 0x0)
+> 	Version: 1, Flags: none
+  	Nbr codes: 9, Prologue size: 0x13, Frame offset: 0x2, Frame reg: rbp
+  	  pc+0x13: FPReg: rbp = rsp + 0x20 (info = 0x0)
+> 	Version: 1, Flags: UNW_FLAG_EHANDLER | UNW_FLAG_UHANDLER
+  	Nbr codes: 4, Prologue size: 0x10, Frame offset: 0x8, Frame reg: rbp
+  	  pc+0x10: FPReg: rbp = rsp + 0x80 (info = 0x0)
+> 	Version: 1, Flags: none
+  	Nbr codes: 2, Prologue size: 0x11, Frame offset: 0x0, Frame reg: none
+  	  pc+0x0a: alloc small area: rsp = rsp - 0x20
+> 	Version: 1, Flags: none
+  	Nbr codes: 5, Prologue size: 0x0c, Frame offset: 0x2, Frame reg: rbp
+  	  pc+0x0c: FPReg: rbp = rsp + 0x20 (info = 0x0)
+> 	Version: 1, Flags: none
+  	Nbr codes: 2, Prologue size: 0x04, Frame offset: 0x0, Frame reg: rbp
+  	  pc+0x04: FPReg: rbp = rsp + 0x0 (info = 0x0)
+> 	Version: 1, Flags: none
+  	Nbr codes: 8, Prologue size: 0x11, Frame offset: 0x2, Frame reg: rbp
+  	  pc+0x11: FPReg: rbp = rsp + 0x20 (info = 0x0)
+> 	Version: 1, Flags: none
+  	Nbr codes: 4, Prologue size: 0x0b, Frame offset: 0x2, Frame reg: rbp
+  	  pc+0x0b: FPReg: rbp = rsp + 0x20 (info = 0x0)
+> 	Version: 1, Flags: UNW_FLAG_EHANDLER | UNW_FLAG_UHANDLER
+  	Nbr codes: 3, Prologue size: 0x0a, Frame offset: 0x7, Frame reg: rbp
+  	  pc+0x0a: FPReg: rbp = rsp + 0x70 (info = 0x0)
+> 	Version: 1, Flags: UNW_FLAG_EHANDLER | UNW_FLAG_UHANDLER
+  	Nbr codes: 2, Prologue size: 0x0e, Frame offset: 0x0, Frame reg: none
+  	  pc+0x0a: alloc small area: rsp = rsp - 0x20
+> 	Version: 1, Flags: UNW_FLAG_EHANDLER | UNW_FLAG_UHANDLER
+  	Nbr codes: 3, Prologue size: 0x0a, Frame offset: 0x7, Frame reg: rbp
+  	  pc+0x0a: FPReg: rbp = rsp + 0x70 (info = 0x0)
+> 	Version: 1, Flags: UNW_FLAG_EHANDLER | UNW_FLAG_UHANDLER
+  	Nbr codes: 2, Prologue size: 0x0e, Frame offset: 0x0, Frame reg: none
+  	  pc+0x0a: alloc small area: rsp = rsp - 0x20
+> 	Version: 1, Flags: UNW_FLAG_EHANDLER | UNW_FLAG_UHANDLER
+  	Nbr codes: 7, Prologue size: 0x13, Frame offset: 0x8, Frame reg: rbp
+  	  pc+0x13: FPReg: rbp = rsp + 0x80 (info = 0x0)
+> 	Version: 1, Flags: none
+  	Nbr codes: 5, Prologue size: 0x14, Frame offset: 0x0, Frame reg: none
+  	  pc+0x0d: alloc small area: rsp = rsp - 0x28
+> 	Version: 1, Flags: none
+  	Nbr codes: 5, Prologue size: 0x14, Frame offset: 0x0, Frame reg: none
+  	  pc+0x0d: alloc small area: rsp = rsp - 0x28
+> 	Version: 1, Flags: none
+  	Nbr codes: 5, Prologue size: 0x14, Frame offset: 0x0, Frame reg: none
+  	  pc+0x0d: alloc small area: rsp = rsp - 0x28
+> 	Version: 1, Flags: none
+  	Nbr codes: 5, Prologue size: 0x14, Frame offset: 0x0, Frame reg: none
+  	  pc+0x0d: alloc small area: rsp = rsp - 0x28
+> 	Version: 1, Flags: none
+  	Nbr codes: 5, Prologue size: 0x14, Frame offset: 0x0, Frame reg: none
+  	  pc+0x0d: alloc small area: rsp = rsp - 0x28
+> 	Version: 1, Flags: UNW_FLAG_EHANDLER | UNW_FLAG_UHANDLER
+  	Nbr codes: 8, Prologue size: 0x15, Frame offset: 0x8, Frame reg: rbp
+  	  pc+0x15: FPReg: rbp = rsp + 0x80 (info = 0x0)
+> 	Version: 1, Flags: none
+  	Nbr codes: 6, Prologue size: 0x16, Frame offset: 0x0, Frame reg: none
+  	  pc+0x0f: alloc small area: rsp = rsp - 0x20
+> 	Version: 1, Flags: none
+  	Nbr codes: 6, Prologue size: 0x16, Frame offset: 0x0, Frame reg: none
+  	  pc+0x0f: alloc small area: rsp = rsp - 0x20
+> 	Version: 1, Flags: none
+  	Nbr codes: 6, Prologue size: 0x16, Frame offset: 0x0, Frame reg: none
+  	  pc+0x0f: alloc small area: rsp = rsp - 0x20
+> 	Version: 1, Flags: none
+  	Nbr codes: 6, Prologue size: 0x16, Frame offset: 0x0, Frame reg: none
+  	  pc+0x0f: alloc small area: rsp = rsp - 0x20
+> 	Version: 1, Flags: none
+  	Nbr codes: 6, Prologue size: 0x16, Frame offset: 0x0, Frame reg: none
+  	  pc+0x0f: alloc small area: rsp = rsp - 0x20
+> 	Version: 1, Flags: none
+  	Nbr codes: 3, Prologue size: 0x0a, Frame offset: 0x6, Frame reg: rbp
+  	  pc+0x0a: FPReg: rbp = rsp + 0x60 (info = 0x0)
+> 	Version: 1, Flags: UNW_FLAG_EHANDLER | UNW_FLAG_UHANDLER
+  	Nbr codes: 7, Prologue size: 0x15, Frame offset: 0x8, Frame reg: rbp
+  	  pc+0x15: FPReg: rbp = rsp + 0x80 (info = 0x0)
+> 	Version: 1, Flags: none
+  	Nbr codes: 6, Prologue size: 0x16, Frame offset: 0x0, Frame reg: none
+  	  pc+0x0f: alloc small area: rsp = rsp - 0x20
+> 	Version: 1, Flags: none
+  	Nbr codes: 6, Prologue size: 0x16, Frame offset: 0x0, Frame reg: none
+  	  pc+0x0f: alloc small area: rsp = rsp - 0x20
+> 	Version: 1, Flags: UNW_FLAG_EHANDLER | UNW_FLAG_UHANDLER
+  	Nbr codes: 4, Prologue size: 0x0b, Frame offset: 0x7, Frame reg: rbp
+  	  pc+0x0b: FPReg: rbp = rsp + 0x70 (info = 0x0)
+> 	Version: 1, Flags: none
+  	Nbr codes: 3, Prologue size: 0x0f, Frame offset: 0x0, Frame reg: none
+  	  pc+0x0b: alloc small area: rsp = rsp - 0x28
+> 	Version: 1, Flags: none
+  	Nbr codes: 3, Prologue size: 0x0a, Frame offset: 0x5, Frame reg: rbp
+  	  pc+0x0a: FPReg: rbp = rsp + 0x50 (info = 0x0)
+> 	Version: 1, Flags: none
+  	Nbr codes: 5, Prologue size: 0x0c, Frame offset: 0x2, Frame reg: rbp
+  	  pc+0x0c: FPReg: rbp = rsp + 0x20 (info = 0x0)
+> 	Version: 1, Flags: none
+  	Nbr codes: 2, Prologue size: 0x04, Frame offset: 0x0, Frame reg: rbp
+  	  pc+0x04: FPReg: rbp = rsp + 0x0 (info = 0x0)
+> 	Version: 1, Flags: none
+  	Nbr codes: 2, Prologue size: 0x04, Frame offset: 0x0, Frame reg: rbp
+  	  pc+0x04: FPReg: rbp = rsp + 0x0 (info = 0x0)
+> 	Version: 1, Flags: none
+  	Nbr codes: 2, Prologue size: 0x04, Frame offset: 0x0, Frame reg: rbp
+  	  pc+0x04: FPReg: rbp = rsp + 0x0 (info = 0x0)
+> 	Version: 1, Flags: UNW_FLAG_EHANDLER | UNW_FLAG_UHANDLER
+  	Nbr codes: 3, Prologue size: 0x0a, Frame offset: 0x5, Frame reg: rbp
+  	  pc+0x0a: FPReg: rbp = rsp + 0x50 (info = 0x0)
+> 	Version: 1, Flags: none
+  	Nbr codes: 2, Prologue size: 0x0e, Frame offset: 0x0, Frame reg: none
+  	  pc+0x0a: alloc small area: rsp = rsp - 0x30
+> 	Version: 1, Flags: UNW_FLAG_EHANDLER | UNW_FLAG_UHANDLER
+  	Nbr codes: 7, Prologue size: 0x13, Frame offset: 0x8, Frame reg: rbp
+  	  pc+0x13: FPReg: rbp = rsp + 0x80 (info = 0x0)
+> 	Version: 1, Flags: none
+  	Nbr codes: 5, Prologue size: 0x14, Frame offset: 0x0, Frame reg: none
+  	  pc+0x0d: alloc small area: rsp = rsp - 0x28
+> 	Version: 1, Flags: none
+  	Nbr codes: 3, Prologue size: 0x10, Frame offset: 0x8, Frame reg: rbp
+  	  pc+0x10: FPReg: rbp = rsp + 0x80 (info = 0x0)
+> 	Version: 1, Flags: none
+  	Nbr codes: 10, Prologue size: 0x15, Frame offset: 0x3, Frame reg: rbp
+  	  pc+0x15: FPReg: rbp = rsp + 0x30 (info = 0x0)
+> 	Version: 1, Flags: none
+  	Nbr codes: 11, Prologue size: 0x1b, Frame offset: 0x8, Frame reg: rbp
+  	  pc+0x1b: FPReg: rbp = rsp + 0x80 (info = 0x0)
+> 	Version: 1, Flags: UNW_FLAG_EHANDLER | UNW_FLAG_UHANDLER
+  	Nbr codes: 10, Prologue size: 0x15, Frame offset: 0x4, Frame reg: rbp
+  	  pc+0x15: FPReg: rbp = rsp + 0x40 (info = 0x0)
+> 	Version: 1, Flags: UNW_FLAG_EHANDLER | UNW_FLAG_UHANDLER
+  	Nbr codes: 9, Prologue size: 0x19, Frame offset: 0x0, Frame reg: none
+  	  pc+0x15: alloc small area: rsp = rsp - 0x28
+> 	Version: 1, Flags: none
+  	Nbr codes: 5, Prologue size: 0x0c, Frame offset: 0x2, Frame reg: rbp
+  	  pc+0x0c: FPReg: rbp = rsp + 0x20 (info = 0x0)
+> 	Version: 1, Flags: UNW_FLAG_EHANDLER | UNW_FLAG_UHANDLER
+  	Nbr codes: 7, Prologue size: 0x0f, Frame offset: 0x5, Frame reg: rbp
+  	  pc+0x0f: FPReg: rbp = rsp + 0x50 (info = 0x0)
+> 	Version: 1, Flags: none
+  	Nbr codes: 6, Prologue size: 0x13, Frame offset: 0x0, Frame reg: none
+  	  pc+0x0f: alloc small area: rsp = rsp - 0x30
+> 	Version: 1, Flags: none
+  	Nbr codes: 5, Prologue size: 0x11, Frame offset: 0x8, Frame reg: rbp
+  	  pc+0x11: FPReg: rbp = rsp + 0x80 (info = 0x0)
+> 	Version: 1, Flags: none
+  	Nbr codes: 5, Prologue size: 0x11, Frame offset: 0x8, Frame reg: rbp
+  	  pc+0x11: FPReg: rbp = rsp + 0x80 (info = 0x0)
+> 	Version: 1, Flags: UNW_FLAG_EHANDLER | UNW_FLAG_UHANDLER
+  	Nbr codes: 8, Prologue size: 0x1b, Frame offset: 0x8, Frame reg: rbp
+  	  pc+0x1b: FPReg: rbp = rsp + 0x80 (info = 0x0)
+> 	Version: 1, Flags: none
+  	Nbr codes: 6, Prologue size: 0x16, Frame offset: 0x0, Frame reg: none
+  	  pc+0x0f: alloc small area: rsp = rsp - 0x40
+> 	Version: 1, Flags: none
+  	Nbr codes: 7, Prologue size: 0x0f, Frame offset: 0x2, Frame reg: rbp
+  	  pc+0x0f: FPReg: rbp = rsp + 0x20 (info = 0x0)
+> 	Version: 1, Flags: UNW_FLAG_EHANDLER | UNW_FLAG_UHANDLER
+  	Nbr codes: 8, Prologue size: 0x15, Frame offset: 0x8, Frame reg: rbp
+  	  pc+0x15: FPReg: rbp = rsp + 0x80 (info = 0x0)
+> 	Version: 1, Flags: none
+  	Nbr codes: 6, Prologue size: 0x16, Frame offset: 0x0, Frame reg: none
+  	  pc+0x0f: alloc small area: rsp = rsp - 0x30
+> 	Version: 1, Flags: none
+  	Nbr codes: 8, Prologue size: 0x1b, Frame offset: 0x8, Frame reg: rbp
+  	  pc+0x1b: FPReg: rbp = rsp + 0x80 (info = 0x0)
+> 	Version: 1, Flags: UNW_FLAG_EHANDLER | UNW_FLAG_UHANDLER
+  	Nbr codes: 11, Prologue size: 0x21, Frame offset: 0x8, Frame reg: rbp
+  	  pc+0x21: FPReg: rbp = rsp + 0x80 (info = 0x0)
+> 	Version: 1, Flags: none
+  	Nbr codes: 9, Prologue size: 0x1c, Frame offset: 0x0, Frame reg: none
+  	  pc+0x15: alloc small area: rsp = rsp - 0x48
+> 	Version: 1, Flags: none
+  	Nbr codes: 10, Prologue size: 0x15, Frame offset: 0x6, Frame reg: rbp
+  	  pc+0x15: FPReg: rbp = rsp + 0x60 (info = 0x0)
+> 	Version: 1, Flags: none
+  	Nbr codes: 2, Prologue size: 0x04, Frame offset: 0x0, Frame reg: rbp
+  	  pc+0x04: FPReg: rbp = rsp + 0x0 (info = 0x0)
+> 	Version: 1, Flags: none
+  	Nbr codes: 2, Prologue size: 0x04, Frame offset: 0x0, Frame reg: rbp
+  	  pc+0x04: FPReg: rbp = rsp + 0x0 (info = 0x0)
+> 	Version: 1, Flags: none
+  	Nbr codes: 2, Prologue size: 0x04, Frame offset: 0x0, Frame reg: rbp
+  	  pc+0x04: FPReg: rbp = rsp + 0x0 (info = 0x0)
+> 	Version: 1, Flags: UNW_FLAG_EHANDLER | UNW_FLAG_UHANDLER
+  	Nbr codes: 9, Prologue size: 0x13, Frame offset: 0x6, Frame reg: rbp
+  	  pc+0x13: FPReg: rbp = rsp + 0x60 (info = 0x0)
+> 	Version: 1, Flags: none
+  	Nbr codes: 8, Prologue size: 0x17, Frame offset: 0x0, Frame reg: none
+  	  pc+0x13: alloc small area: rsp = rsp - 0x20
+> 	Version: 1, Flags: none
+  	Nbr codes: 5, Prologue size: 0x0c, Frame offset: 0x2, Frame reg: rbp
+  	  pc+0x0c: FPReg: rbp = rsp + 0x20 (info = 0x0)
+> 	Version: 1, Flags: none
+  	Nbr codes: 3, Prologue size: 0x0a, Frame offset: 0x2, Frame reg: rbp
+  	  pc+0x0a: FPReg: rbp = rsp + 0x20 (info = 0x0)
+> 	Version: 1, Flags: UNW_FLAG_EHANDLER | UNW_FLAG_UHANDLER
+  	Nbr codes: 5, Prologue size: 0x11, Frame offset: 0x8, Frame reg: rbp
+  	  pc+0x11: FPReg: rbp = rsp + 0x80 (info = 0x0)
+> 	Version: 1, Flags: UNW_FLAG_EHANDLER | UNW_FLAG_UHANDLER
+  	Nbr codes: 3, Prologue size: 0x12, Frame offset: 0x0, Frame reg: none
+  	  pc+0x0b: alloc small area: rsp = rsp - 0x28
+> 	Version: 1, Flags: none
+  	Nbr codes: 3, Prologue size: 0x12, Frame offset: 0x0, Frame reg: none
+  	  pc+0x0b: alloc small area: rsp = rsp - 0x28
+> 	Version: 1, Flags: none
+  	Nbr codes: 2, Prologue size: 0x04, Frame offset: 0x0, Frame reg: rbp
+  	  pc+0x04: FPReg: rbp = rsp + 0x0 (info = 0x0)
+> 	Version: 1, Flags: none
+  	Nbr codes: 8, Prologue size: 0x11, Frame offset: 0x2, Frame reg: rbp
+  	  pc+0x11: FPReg: rbp = rsp + 0x20 (info = 0x0)
+> 	Version: 1, Flags: none
+  	Nbr codes: 2, Prologue size: 0x04, Frame offset: 0x0, Frame reg: rbp
+  	  pc+0x04: FPReg: rbp = rsp + 0x0 (info = 0x0)
+> 	Version: 1, Flags: none
+  	Nbr codes: 3, Prologue size: 0x0a, Frame offset: 0x3, Frame reg: rbp
+  	  pc+0x0a: FPReg: rbp = rsp + 0x30 (info = 0x0)
+> 	Version: 1, Flags: UNW_FLAG_EHANDLER | UNW_FLAG_UHANDLER
+  	Nbr codes: 6, Prologue size: 0x0d, Frame offset: 0x7, Frame reg: rbp
+  	  pc+0x0d: FPReg: rbp = rsp + 0x70 (info = 0x0)
+> 	Version: 1, Flags: none
+  	Nbr codes: 5, Prologue size: 0x11, Frame offset: 0x0, Frame reg: none
+  	  pc+0x0d: alloc small area: rsp = rsp - 0x28
+> 	Version: 1, Flags: UNW_FLAG_EHANDLER | UNW_FLAG_UHANDLER
+  	Nbr codes: 4, Prologue size: 0x0b, Frame offset: 0x2, Frame reg: rbp
+  	  pc+0x0b: FPReg: rbp = rsp + 0x20 (info = 0x0)
+> 	Version: 1, Flags: UNW_FLAG_EHANDLER | UNW_FLAG_UHANDLER
+  	Nbr codes: 3, Prologue size: 0x0f, Frame offset: 0x0, Frame reg: none
+  	  pc+0x0b: alloc small area: rsp = rsp - 0x28
+> 	Version: 1, Flags: none
+  	Nbr codes: 3, Prologue size: 0x0a, Frame offset: 0x2, Frame reg: rbp
+  	  pc+0x0a: FPReg: rbp = rsp + 0x20 (info = 0x0)
+> 	Version: 1, Flags: none
+  	Nbr codes: 3, Prologue size: 0x0a, Frame offset: 0x2, Frame reg: rbp
+  	  pc+0x0a: FPReg: rbp = rsp + 0x20 (info = 0x0)
+> 	Version: 1, Flags: UNW_FLAG_EHANDLER | UNW_FLAG_UHANDLER
+  	Nbr codes: 11, Prologue size: 0x1b, Frame offset: 0x8, Frame reg: rbp
+  	  pc+0x1b: FPReg: rbp = rsp + 0x80 (info = 0x0)
+> 	Version: 1, Flags: none
+  	Nbr codes: 9, Prologue size: 0x1c, Frame offset: 0x0, Frame reg: none
+  	  pc+0x15: alloc small area: rsp = rsp - 0x28
+> 	Version: 1, Flags: none
+  	Nbr codes: 9, Prologue size: 0x1c, Frame offset: 0x0, Frame reg: none
+  	  pc+0x15: alloc small area: rsp = rsp - 0x28
+> 	Version: 1, Flags: none
+  	Nbr codes: 9, Prologue size: 0x1c, Frame offset: 0x0, Frame reg: none
+  	  pc+0x15: alloc small area: rsp = rsp - 0x28
+> 	Version: 1, Flags: none
+  	Nbr codes: 13, Prologue size: 0x28, Frame offset: 0x8, Frame reg: rbp
+  	  pc+0x28: save xmm6 at rsp + 0x11c0
+> 	Version: 1, Flags: UNW_FLAG_EHANDLER | UNW_FLAG_UHANDLER
+  	Nbr codes: 3, Prologue size: 0x0a, Frame offset: 0x4, Frame reg: rbp
+  	  pc+0x0a: FPReg: rbp = rsp + 0x40 (info = 0x0)
+> 	Version: 1, Flags: none
+  	Nbr codes: 2, Prologue size: 0x0e, Frame offset: 0x0, Frame reg: none
+  	  pc+0x0a: alloc small area: rsp = rsp - 0x20
+> 	Version: 1, Flags: UNW_FLAG_EHANDLER | UNW_FLAG_UHANDLER
+  	Nbr codes: 3, Prologue size: 0x0a, Frame offset: 0x3, Frame reg: rbp
+  	  pc+0x0a: FPReg: rbp = rsp + 0x30 (info = 0x0)
+> 	Version: 1, Flags: UNW_FLAG_EHANDLER | UNW_FLAG_UHANDLER
+  	Nbr codes: 2, Prologue size: 0x0e, Frame offset: 0x0, Frame reg: none
+  	  pc+0x0a: alloc small area: rsp = rsp - 0x20
+> 	Version: 1, Flags: none
+  	Nbr codes: 3, Prologue size: 0x0a, Frame offset: 0x4, Frame reg: rbp
+  	  pc+0x0a: FPReg: rbp = rsp + 0x40 (info = 0x0)
+> 	Version: 1, Flags: UNW_FLAG_EHANDLER | UNW_FLAG_UHANDLER
+  	Nbr codes: 3, Prologue size: 0x0a, Frame offset: 0x3, Frame reg: rbp
+  	  pc+0x0a: FPReg: rbp = rsp + 0x30 (info = 0x0)
+> 	Version: 1, Flags: UNW_FLAG_EHANDLER | UNW_FLAG_UHANDLER
+  	Nbr codes: 2, Prologue size: 0x0e, Frame offset: 0x0, Frame reg: none
+  	  pc+0x0a: alloc small area: rsp = rsp - 0x20
+> 	Version: 1, Flags: none
+  	Nbr codes: 3, Prologue size: 0x0a, Frame offset: 0x5, Frame reg: rbp
+  	  pc+0x0a: FPReg: rbp = rsp + 0x50 (info = 0x0)
+> 	Version: 1, Flags: none
+  	Nbr codes: 7, Prologue size: 0x13, Frame offset: 0x8, Frame reg: rbp
+  	  pc+0x13: FPReg: rbp = rsp + 0x80 (info = 0x0)
+> 	Version: 1, Flags: none
+  	Nbr codes: 2, Prologue size: 0x04, Frame offset: 0x0, Frame reg: rbp
+  	  pc+0x04: FPReg: rbp = rsp + 0x0 (info = 0x0)
+> 	Version: 1, Flags: none
+  	Nbr codes: 2, Prologue size: 0x04, Frame offset: 0x0, Frame reg: rbp
+  	  pc+0x04: FPReg: rbp = rsp + 0x0 (info = 0x0)
+> 	Version: 1, Flags: none
+  	Nbr codes: 2, Prologue size: 0x04, Frame offset: 0x0, Frame reg: rbp
+  	  pc+0x04: FPReg: rbp = rsp + 0x0 (info = 0x0)
+> 	Version: 1, Flags: none
+  	Nbr codes: 3, Prologue size: 0x0a, Frame offset: 0x5, Frame reg: rbp
+  	  pc+0x0a: FPReg: rbp = rsp + 0x50 (info = 0x0)
+> 	Version: 1, Flags: none
+  	Nbr codes: 2, Prologue size: 0x04, Frame offset: 0x0, Frame reg: rbp
+  	  pc+0x04: FPReg: rbp = rsp + 0x0 (info = 0x0)
+> 	Version: 1, Flags: none
+  	Nbr codes: 3, Prologue size: 0x0a, Frame offset: 0x3, Frame reg: rbp
+  	  pc+0x0a: FPReg: rbp = rsp + 0x30 (info = 0x0)
+> 	Version: 1, Flags: none
+  	Nbr codes: 2, Prologue size: 0x04, Frame offset: 0x0, Frame reg: rbp
+  	  pc+0x04: FPReg: rbp = rsp + 0x0 (info = 0x0)
+> 	Version: 1, Flags: none
+  	Nbr codes: 5, Prologue size: 0x0c, Frame offset: 0x4, Frame reg: rbp
+  	  pc+0x0c: FPReg: rbp = rsp + 0x40 (info = 0x0)
+> 	Version: 1, Flags: none
+  	Nbr codes: 8, Prologue size: 0x11, Frame offset: 0x3, Frame reg: rbp
+  	  pc+0x11: FPReg: rbp = rsp + 0x30 (info = 0x0)
+> 	Version: 1, Flags: none
+  	Nbr codes: 2, Prologue size: 0x04, Frame offset: 0x0, Frame reg: rbp
+  	  pc+0x04: FPReg: rbp = rsp + 0x0 (info = 0x0)
+> 	Version: 1, Flags: none
+  	Nbr codes: 3, Prologue size: 0x0a, Frame offset: 0x4, Frame reg: rbp
+  	  pc+0x0a: FPReg: rbp = rsp + 0x40 (info = 0x0)
+> 	Version: 1, Flags: none
+  	Nbr codes: 10, Prologue size: 0x15, Frame offset: 0x6, Frame reg: rbp
+  	  pc+0x15: FPReg: rbp = rsp + 0x60 (info = 0x0)
+> 	Version: 1, Flags: none
+  	Nbr codes: 2, Prologue size: 0x04, Frame offset: 0x0, Frame reg: rbp
+  	  pc+0x04: FPReg: rbp = rsp + 0x0 (info = 0x0)
+> 	Version: 1, Flags: none
+  	Nbr codes: 10, Prologue size: 0x15, Frame offset: 0x3, Frame reg: rbp
+  	  pc+0x15: FPReg: rbp = rsp + 0x30 (info = 0x0)
+> 	Version: 1, Flags: none
+  	Nbr codes: 11, Prologue size: 0x1b, Frame offset: 0x8, Frame reg: rbp
+  	  pc+0x1b: FPReg: rbp = rsp + 0x80 (info = 0x0)
+> 	Version: 1, Flags: none
+  	Nbr codes: 11, Prologue size: 0x1b, Frame offset: 0x8, Frame reg: rbp
+  	  pc+0x1b: FPReg: rbp = rsp + 0x80 (info = 0x0)
+> 	Version: 1, Flags: none
+  	Nbr codes: 8, Prologue size: 0x15, Frame offset: 0x8, Frame reg: rbp
+  	  pc+0x15: FPReg: rbp = rsp + 0x80 (info = 0x0)
+> 	Version: 1, Flags: none
+  	Nbr codes: 6, Prologue size: 0x0d, Frame offset: 0x2, Frame reg: rbp
+  	  pc+0x0d: FPReg: rbp = rsp + 0x20 (info = 0x0)
+> 	Version: 1, Flags: none
+  	Nbr codes: 4, Prologue size: 0x06, Frame offset: 0x0, Frame reg: rbp
+  	  pc+0x06: FPReg: rbp = rsp + 0x0 (info = 0x0)
+> 	Version: 1, Flags: none
+  	Nbr codes: 4, Prologue size: 0x06, Frame offset: 0x0, Frame reg: rbp
+  	  pc+0x06: FPReg: rbp = rsp + 0x0 (info = 0x0)
+> 	Version: 1, Flags: none
+  	Nbr codes: 2, Prologue size: 0x04, Frame offset: 0x0, Frame reg: rbp
+  	  pc+0x04: FPReg: rbp = rsp + 0x0 (info = 0x0)
+> 	Version: 1, Flags: none
+  	Nbr codes: 6, Prologue size: 0x0d, Frame offset: 0x2, Frame reg: rbp
+  	  pc+0x0d: FPReg: rbp = rsp + 0x20 (info = 0x0)
+> 	Version: 1, Flags: none
+  	Nbr codes: 5, Prologue size: 0x0c, Frame offset: 0x3, Frame reg: rbp
+  	  pc+0x0c: FPReg: rbp = rsp + 0x30 (info = 0x0)
+> 	Version: 1, Flags: none
+  	Nbr codes: 6, Prologue size: 0x0d, Frame offset: 0x4, Frame reg: rbp
+  	  pc+0x0d: FPReg: rbp = rsp + 0x40 (info = 0x0)
+> 	Version: 1, Flags: none
+  	Nbr codes: 5, Prologue size: 0x0c, Frame offset: 0x4, Frame reg: rbp
+  	  pc+0x0c: FPReg: rbp = rsp + 0x40 (info = 0x0)
+> 	Version: 1, Flags: none
+  	Nbr codes: 6, Prologue size: 0x0d, Frame offset: 0x4, Frame reg: rbp
+  	  pc+0x0d: FPReg: rbp = rsp + 0x40 (info = 0x0)
+> 	Version: 1, Flags: none
+  	Nbr codes: 9, Prologue size: 0x13, Frame offset: 0x3, Frame reg: rbp
+  	  pc+0x13: FPReg: rbp = rsp + 0x30 (info = 0x0)
+> 	Version: 1, Flags: none
+  	Nbr codes: 8, Prologue size: 0x11, Frame offset: 0x3, Frame reg: rbp
+  	  pc+0x11: FPReg: rbp = rsp + 0x30 (info = 0x0)
+> 	Version: 1, Flags: none
+  	Nbr codes: 8, Prologue size: 0x11, Frame offset: 0x2, Frame reg: rbp
+  	  pc+0x11: FPReg: rbp = rsp + 0x20 (info = 0x0)
+> 	Version: 1, Flags: none
+  	Nbr codes: 8, Prologue size: 0x11, Frame offset: 0x2, Frame reg: rbp
+  	  pc+0x11: FPReg: rbp = rsp + 0x20 (info = 0x0)
+> 	Version: 1, Flags: none
+  	Nbr codes: 7, Prologue size: 0x0f, Frame offset: 0x2, Frame reg: rbp
+  	  pc+0x0f: FPReg: rbp = rsp + 0x20 (info = 0x0)
+> 	Version: 1, Flags: none
+  	Nbr codes: 7, Prologue size: 0x0f, Frame offset: 0x2, Frame reg: rbp
+  	  pc+0x0f: FPReg: rbp = rsp + 0x20 (info = 0x0)
+> 	Version: 1, Flags: none
+  	Nbr codes: 10, Prologue size: 0x15, Frame offset: 0x6, Frame reg: rbp
+  	  pc+0x15: FPReg: rbp = rsp + 0x60 (info = 0x0)
+> 	Version: 1, Flags: none
+  	Nbr codes: 7, Prologue size: 0x0f, Frame offset: 0x2, Frame reg: rbp
+  	  pc+0x0f: FPReg: rbp = rsp + 0x20 (info = 0x0)
+> 	Version: 1, Flags: none
+  	Nbr codes: 7, Prologue size: 0x0f, Frame offset: 0x2, Frame reg: rbp
+  	  pc+0x0f: FPReg: rbp = rsp + 0x20 (info = 0x0)
+> 	Version: 1, Flags: none
+  	Nbr codes: 8, Prologue size: 0x15, Frame offset: 0x8, Frame reg: rbp
+  	  pc+0x15: FPReg: rbp = rsp + 0x80 (info = 0x0)
+> 	Version: 1, Flags: none
+  	Nbr codes: 4, Prologue size: 0x0b, Frame offset: 0x2, Frame reg: rbp
+  	  pc+0x0b: FPReg: rbp = rsp + 0x20 (info = 0x0)
+> 	Version: 1, Flags: none
+  	Nbr codes: 6, Prologue size: 0x0d, Frame offset: 0x3, Frame reg: rbp
+  	  pc+0x0d: FPReg: rbp = rsp + 0x30 (info = 0x0)
+> 	Version: 1, Flags: none
+  	Nbr codes: 11, Prologue size: 0x1b, Frame offset: 0x8, Frame reg: rbp
+  	  pc+0x1b: FPReg: rbp = rsp + 0x80 (info = 0x0)
+> 	Version: 1, Flags: none
+  	Nbr codes: 7, Prologue size: 0x0f, Frame offset: 0x4, Frame reg: rbp
+  	  pc+0x0f: FPReg: rbp = rsp + 0x40 (info = 0x0)
+> 	Version: 1, Flags: none
+  	Nbr codes: 10, Prologue size: 0x15, Frame offset: 0x6, Frame reg: rbp
+  	  pc+0x15: FPReg: rbp = rsp + 0x60 (info = 0x0)
+> 	Version: 1, Flags: none
+  	Nbr codes: 6, Prologue size: 0x0d, Frame offset: 0x3, Frame reg: rbp
+  	  pc+0x0d: FPReg: rbp = rsp + 0x30 (info = 0x0)
+> 	Version: 1, Flags: none
+  	Nbr codes: 8, Prologue size: 0x11, Frame offset: 0x3, Frame reg: rbp
+  	  pc+0x11: FPReg: rbp = rsp + 0x30 (info = 0x0)
+> 	Version: 1, Flags: none
+  	Nbr codes: 10, Prologue size: 0x15, Frame offset: 0x6, Frame reg: rbp
+  	  pc+0x15: FPReg: rbp = rsp + 0x60 (info = 0x0)
+> 	Version: 1, Flags: none
+  	Nbr codes: 11, Prologue size: 0x1b, Frame offset: 0x8, Frame reg: rbp
+  	  pc+0x1b: FPReg: rbp = rsp + 0x80 (info = 0x0)
+> 	Version: 1, Flags: none
+  	Nbr codes: 4, Prologue size: 0x0b, Frame offset: 0x6, Frame reg: rbp
+  	  pc+0x0b: FPReg: rbp = rsp + 0x60 (info = 0x0)
+> 	Version: 1, Flags: none
+  	Nbr codes: 2, Prologue size: 0x04, Frame offset: 0x0, Frame reg: rbp
+  	  pc+0x04: FPReg: rbp = rsp + 0x0 (info = 0x0)
+> 	Version: 1, Flags: none
+  	Nbr codes: 6, Prologue size: 0x12, Frame offset: 0x8, Frame reg: rbp
+  	  pc+0x12: FPReg: rbp = rsp + 0x80 (info = 0x0)
+> 	Version: 1, Flags: none
+  	Nbr codes: 2, Prologue size: 0x04, Frame offset: 0x0, Frame reg: rbp
+  	  pc+0x04: FPReg: rbp = rsp + 0x0 (info = 0x0)
+> 	Version: 1, Flags: none
+  	Nbr codes: 2, Prologue size: 0x04, Frame offset: 0x0, Frame reg: rbp
+  	  pc+0x04: FPReg: rbp = rsp + 0x0 (info = 0x0)
+> 	Version: 1, Flags: none
+  	Nbr codes: 2, Prologue size: 0x04, Frame offset: 0x0, Frame reg: rbp
+  	  pc+0x04: FPReg: rbp = rsp + 0x0 (info = 0x0)
+> 	Version: 1, Flags: none
+  	Nbr codes: 2, Prologue size: 0x04, Frame offset: 0x0, Frame reg: rbp
+  	  pc+0x04: FPReg: rbp = rsp + 0x0 (info = 0x0)
+> 	Version: 1, Flags: none
+  	Nbr codes: 2, Prologue size: 0x04, Frame offset: 0x0, Frame reg: rbp
+  	  pc+0x04: FPReg: rbp = rsp + 0x0 (info = 0x0)
+> 	Version: 1, Flags: none
+  	Nbr codes: 3, Prologue size: 0x0a, Frame offset: 0x5, Frame reg: rbp
+  	  pc+0x0a: FPReg: rbp = rsp + 0x50 (info = 0x0)
+> 	Version: 1, Flags: none
+  	Nbr codes: 5, Prologue size: 0x0c, Frame offset: 0x5, Frame reg: rbp
+  	  pc+0x0c: FPReg: rbp = rsp + 0x50 (info = 0x0)
+> 	Version: 1, Flags: none
+  	Nbr codes: 6, Prologue size: 0x0d, Frame offset: 0x2, Frame reg: rbp
+  	  pc+0x0d: FPReg: rbp = rsp + 0x20 (info = 0x0)
+> 	Version: 1, Flags: UNW_FLAG_EHANDLER | UNW_FLAG_UHANDLER
+  	Nbr codes: 7, Prologue size: 0x0f, Frame offset: 0x5, Frame reg: rbp
+  	  pc+0x0f: FPReg: rbp = rsp + 0x50 (info = 0x0)
+> 	Version: 1, Flags: none
+  	Nbr codes: 6, Prologue size: 0x13, Frame offset: 0x0, Frame reg: none
+  	  pc+0x0f: alloc small area: rsp = rsp - 0x30
+> 	Version: 1, Flags: UNW_FLAG_EHANDLER | UNW_FLAG_UHANDLER
+  	Nbr codes: 8, Prologue size: 0x11, Frame offset: 0x4, Frame reg: rbp
+  	  pc+0x11: FPReg: rbp = rsp + 0x40 (info = 0x0)
+> 	Version: 1, Flags: none
+  	Nbr codes: 7, Prologue size: 0x15, Frame offset: 0x0, Frame reg: none
+  	  pc+0x11: alloc small area: rsp = rsp - 0x28
+> 	Version: 1, Flags: none
+  	Nbr codes: 6, Prologue size: 0x0d, Frame offset: 0x2, Frame reg: rbp
+  	  pc+0x0d: FPReg: rbp = rsp + 0x20 (info = 0x0)
+> 	Version: 1, Flags: none
+  	Nbr codes: 7, Prologue size: 0x0f, Frame offset: 0x2, Frame reg: rbp
+  	  pc+0x0f: FPReg: rbp = rsp + 0x20 (info = 0x0)
+> 	Version: 1, Flags: none
+  	Nbr codes: 3, Prologue size: 0x0a, Frame offset: 0x2, Frame reg: rbp
+  	  pc+0x0a: FPReg: rbp = rsp + 0x20 (info = 0x0)
+> 	Version: 1, Flags: none
+  	Nbr codes: 3, Prologue size: 0x0a, Frame offset: 0x3, Frame reg: rbp
+  	  pc+0x0a: FPReg: rbp = rsp + 0x30 (info = 0x0)
+> 	Version: 1, Flags: none
+  	Nbr codes: 3, Prologue size: 0x0a, Frame offset: 0x7, Frame reg: rbp
+  	  pc+0x0a: FPReg: rbp = rsp + 0x70 (info = 0x0)
+> 	Version: 1, Flags: none
+  	Nbr codes: 5, Prologue size: 0x0c, Frame offset: 0x2, Frame reg: rbp
+  	  pc+0x0c: FPReg: rbp = rsp + 0x20 (info = 0x0)
+> 	Version: 1, Flags: none
+  	Nbr codes: 2, Prologue size: 0x04, Frame offset: 0x0, Frame reg: rbp
+  	  pc+0x04: FPReg: rbp = rsp + 0x0 (info = 0x0)
+> 	Version: 1, Flags: none
+  	Nbr codes: 5, Prologue size: 0x0c, Frame offset: 0x4, Frame reg: rbp
+  	  pc+0x0c: FPReg: rbp = rsp + 0x40 (info = 0x0)
+> 	Version: 1, Flags: none
+  	Nbr codes: 10, Prologue size: 0x15, Frame offset: 0x4, Frame reg: rbp
+  	  pc+0x15: FPReg: rbp = rsp + 0x40 (info = 0x0)
+> 	Version: 1, Flags: none
+  	Nbr codes: 7, Prologue size: 0x0f, Frame offset: 0x2, Frame reg: rbp
+  	  pc+0x0f: FPReg: rbp = rsp + 0x20 (info = 0x0)
+> 	Version: 1, Flags: none
+  	Nbr codes: 11, Prologue size: 0x1b, Frame offset: 0x8, Frame reg: rbp
+  	  pc+0x1b: FPReg: rbp = rsp + 0x80 (info = 0x0)
+> 	Version: 1, Flags: none
+  	Nbr codes: 4, Prologue size: 0x0b, Frame offset: 0x2, Frame reg: rbp
+  	  pc+0x0b: FPReg: rbp = rsp + 0x20 (info = 0x0)
+> 	Version: 1, Flags: none
+  	Nbr codes: 9, Prologue size: 0x17, Frame offset: 0x8, Frame reg: rbp
+  	  pc+0x17: FPReg: rbp = rsp + 0x80 (info = 0x0)
+> 	Version: 1, Flags: none
+  	Nbr codes: 8, Prologue size: 0x15, Frame offset: 0x8, Frame reg: rbp
+  	  pc+0x15: FPReg: rbp = rsp + 0x80 (info = 0x0)
+> 	Version: 1, Flags: none
+  	Nbr codes: 4, Prologue size: 0x0b, Frame offset: 0x2, Frame reg: rbp
+  	  pc+0x0b: FPReg: rbp = rsp + 0x20 (info = 0x0)
+> 	Version: 1, Flags: none
+  	Nbr codes: 2, Prologue size: 0x04, Frame offset: 0x0, Frame reg: rbp
+  	  pc+0x04: FPReg: rbp = rsp + 0x0 (info = 0x0)
+> 	Version: 1, Flags: none
+  	Nbr codes: 2, Prologue size: 0x04, Frame offset: 0x0, Frame reg: rbp
+  	  pc+0x04: FPReg: rbp = rsp + 0x0 (info = 0x0)
+> 	Version: 1, Flags: none
+  	Nbr codes: 10, Prologue size: 0x15, Frame offset: 0x6, Frame reg: rbp
+  	  pc+0x15: FPReg: rbp = rsp + 0x60 (info = 0x0)
+> 	Version: 1, Flags: none
+  	Nbr codes: 10, Prologue size: 0x15, Frame offset: 0x4, Frame reg: rbp
+  	  pc+0x15: FPReg: rbp = rsp + 0x40 (info = 0x0)
+> 	Version: 1, Flags: none
+  	Nbr codes: 7, Prologue size: 0x0f, Frame offset: 0x2, Frame reg: rbp
+  	  pc+0x0f: FPReg: rbp = rsp + 0x20 (info = 0x0)
+> 	Version: 1, Flags: none
+  	Nbr codes: 10, Prologue size: 0x15, Frame offset: 0x2, Frame reg: rbp
+  	  pc+0x15: FPReg: rbp = rsp + 0x20 (info = 0x0)
+> 	Version: 1, Flags: none
+  	Nbr codes: 2, Prologue size: 0x04, Frame offset: 0x0, Frame reg: rbp
+  	  pc+0x04: FPReg: rbp = rsp + 0x0 (info = 0x0)
+> 	Version: 1, Flags: none
+  	Nbr codes: 5, Prologue size: 0x0c, Frame offset: 0x2, Frame reg: rbp
+  	  pc+0x0c: FPReg: rbp = rsp + 0x20 (info = 0x0)
+> 	Version: 1, Flags: none
+  	Nbr codes: 8, Prologue size: 0x11, Frame offset: 0x3, Frame reg: rbp
+  	  pc+0x11: FPReg: rbp = rsp + 0x30 (info = 0x0)
+> 	Version: 1, Flags: none
+  	Nbr codes: 10, Prologue size: 0x15, Frame offset: 0x3, Frame reg: rbp
+  	  pc+0x15: FPReg: rbp = rsp + 0x30 (info = 0x0)
+> 	Version: 1, Flags: none
+  	Nbr codes: 7, Prologue size: 0x0f, Frame offset: 0x4, Frame reg: rbp
+  	  pc+0x0f: FPReg: rbp = rsp + 0x40 (info = 0x0)
+> 	Version: 1, Flags: none
+  	Nbr codes: 5, Prologue size: 0x0c, Frame offset: 0x2, Frame reg: rbp
+  	  pc+0x0c: FPReg: rbp = rsp + 0x20 (info = 0x0)
+> 	Version: 1, Flags: none
+  	Nbr codes: 2, Prologue size: 0x04, Frame offset: 0x0, Frame reg: rbp
+  	  pc+0x04: FPReg: rbp = rsp + 0x0 (info = 0x0)
+> 	Version: 1, Flags: none
+  	Nbr codes: 10, Prologue size: 0x15, Frame offset: 0x7, Frame reg: rbp
+  	  pc+0x15: FPReg: rbp = rsp + 0x70 (info = 0x0)
+> 	Version: 1, Flags: none
+  	Nbr codes: 2, Prologue size: 0x04, Frame offset: 0x0, Frame reg: rbp
+  	  pc+0x04: FPReg: rbp = rsp + 0x0 (info = 0x0)
+> 	Version: 1, Flags: none
+  	Nbr codes: 7, Prologue size: 0x0f, Frame offset: 0x3, Frame reg: rbp
+  	  pc+0x0f: FPReg: rbp = rsp + 0x30 (info = 0x0)
+> 	Version: 1, Flags: none
+  	Nbr codes: 3, Prologue size: 0x0a, Frame offset: 0x3, Frame reg: rbp
+  	  pc+0x0a: FPReg: rbp = rsp + 0x30 (info = 0x0)
+> 	Version: 1, Flags: none
+  	Nbr codes: 8, Prologue size: 0x16, Frame offset: 0x8, Frame reg: rbp
+  	  pc+0x16: save xmm6 at rsp + 0xc0
+> 	Version: 1, Flags: none
+  	Nbr codes: 6, Prologue size: 0x09, Frame offset: 0x0, Frame reg: rbp
+  	  pc+0x09: FPReg: rbp = rsp + 0x0 (info = 0x0)
+> 	Version: 1, Flags: none
+  	Nbr codes: 8, Prologue size: 0x11, Frame offset: 0x2, Frame reg: rbp
+  	  pc+0x11: FPReg: rbp = rsp + 0x20 (info = 0x0)
+> 	Version: 1, Flags: none
+  	Nbr codes: 7, Prologue size: 0x0b, Frame offset: 0x0, Frame reg: rbp
+  	  pc+0x0b: FPReg: rbp = rsp + 0x0 (info = 0x0)
+> 	Version: 1, Flags: none
+  	Nbr codes: 23, Prologue size: 0x3b, Frame offset: 0x7, Frame reg: rbp
+  	  pc+0x3b: save xmm6 at rsp + 0x0
+> 	Version: 1, Flags: none
+  	Nbr codes: 2, Prologue size: 0x04, Frame offset: 0x0, Frame reg: rbp
+  	  pc+0x04: FPReg: rbp = rsp + 0x0 (info = 0x0)
+> 	Version: 1, Flags: none
+  	Nbr codes: 10, Prologue size: 0x15, Frame offset: 0x3, Frame reg: rbp
+  	  pc+0x15: FPReg: rbp = rsp + 0x30 (info = 0x0)
+> 	Version: 1, Flags: none
+  	Nbr codes: 5, Prologue size: 0x11, Frame offset: 0x8, Frame reg: rbp
+  	  pc+0x11: FPReg: rbp = rsp + 0x80 (info = 0x0)
+> 	Version: 1, Flags: none
+  	Nbr codes: 7, Prologue size: 0x0f, Frame offset: 0x2, Frame reg: rbp
+  	  pc+0x0f: FPReg: rbp = rsp + 0x20 (info = 0x0)
+> 	Version: 1, Flags: none
+  	Nbr codes: 3, Prologue size: 0x0a, Frame offset: 0x4, Frame reg: rbp
+  	  pc+0x0a: FPReg: rbp = rsp + 0x40 (info = 0x0)
+> 	Version: 1, Flags: none
+  	Nbr codes: 2, Prologue size: 0x04, Frame offset: 0x0, Frame reg: rbp
+  	  pc+0x04: FPReg: rbp = rsp + 0x0 (info = 0x0)
+> 	Version: 1, Flags: none
+  	Nbr codes: 4, Prologue size: 0x06, Frame offset: 0x0, Frame reg: rbp
+  	  pc+0x06: FPReg: rbp = rsp + 0x0 (info = 0x0)
+> 	Version: 1, Flags: none
+  	Nbr codes: 6, Prologue size: 0x0d, Frame offset: 0x2, Frame reg: rbp
+  	  pc+0x0d: FPReg: rbp = rsp + 0x20 (info = 0x0)
+> 	Version: 1, Flags: none
+  	Nbr codes: 5, Prologue size: 0x11, Frame offset: 0x8, Frame reg: rbp
+  	  pc+0x11: FPReg: rbp = rsp + 0x80 (info = 0x0)
+> 	Version: 1, Flags: none
+  	Nbr codes: 5, Prologue size: 0x11, Frame offset: 0x8, Frame reg: rbp
+  	  pc+0x11: FPReg: rbp = rsp + 0x80 (info = 0x0)
+> 	Version: 1, Flags: none
+  	Nbr codes: 5, Prologue size: 0x11, Frame offset: 0x8, Frame reg: rbp
+  	  pc+0x11: FPReg: rbp = rsp + 0x80 (info = 0x0)
+> 	Version: 1, Flags: none
+  	Nbr codes: 5, Prologue size: 0x11, Frame offset: 0x8, Frame reg: rbp
+  	  pc+0x11: FPReg: rbp = rsp + 0x80 (info = 0x0)
+> 	Version: 1, Flags: none
+  	Nbr codes: 6, Prologue size: 0x12, Frame offset: 0x8, Frame reg: rbp
+  	  pc+0x12: FPReg: rbp = rsp + 0x80 (info = 0x0)
+> 	Version: 1, Flags: none
+  	Nbr codes: 3, Prologue size: 0x0a, Frame offset: 0x6, Frame reg: rbp
+  	  pc+0x0a: FPReg: rbp = rsp + 0x60 (info = 0x0)
+> 	Version: 1, Flags: none
+  	Nbr codes: 6, Prologue size: 0x0d, Frame offset: 0x5, Frame reg: rbp
+  	  pc+0x0d: FPReg: rbp = rsp + 0x50 (info = 0x0)
+> 	Version: 1, Flags: none
+  	Nbr codes: 5, Prologue size: 0x0c, Frame offset: 0x6, Frame reg: rbp
+  	  pc+0x0c: FPReg: rbp = rsp + 0x60 (info = 0x0)
+> 	Version: 1, Flags: none
+  	Nbr codes: 5, Prologue size: 0x0c, Frame offset: 0x6, Frame reg: rbp
+  	  pc+0x0c: FPReg: rbp = rsp + 0x60 (info = 0x0)
+> 	Version: 1, Flags: none
+  	Nbr codes: 2, Prologue size: 0x04, Frame offset: 0x0, Frame reg: rbp
+  	  pc+0x04: FPReg: rbp = rsp + 0x0 (info = 0x0)
+> 	Version: 1, Flags: none
+  	Nbr codes: 2, Prologue size: 0x04, Frame offset: 0x0, Frame reg: rbp
+  	  pc+0x04: FPReg: rbp = rsp + 0x0 (info = 0x0)
+> 	Version: 1, Flags: none
+  	Nbr codes: 2, Prologue size: 0x04, Frame offset: 0x0, Frame reg: rbp
+  	  pc+0x04: FPReg: rbp = rsp + 0x0 (info = 0x0)
+> 	Version: 1, Flags: none
+  	Nbr codes: 3, Prologue size: 0x0a, Frame offset: 0x2, Frame reg: rbp
+  	  pc+0x0a: FPReg: rbp = rsp + 0x20 (info = 0x0)
+> 	Version: 1, Flags: none
+  	Nbr codes: 2, Prologue size: 0x06, Frame offset: 0x0, Frame reg: none
+  	  pc+0x06: alloc small area: rsp = rsp - 0x20
+> 	Version: 1, Flags: none
+  	Nbr codes: 1, Prologue size: 0x04, Frame offset: 0x0, Frame reg: none
+  	  pc+0x04: alloc small area: rsp = rsp - 0x28
+> 	Version: 1, Flags: none
+  	Nbr codes: 1, Prologue size: 0x04, Frame offset: 0x0, Frame reg: none
+  	  pc+0x04: alloc small area: rsp = rsp - 0x28
+> 	Version: 1, Flags: UNW_FLAG_EHANDLER
+  	Nbr codes: 6, Prologue size: 0x0f, Frame offset: 0x0, Frame reg: none
+  	  pc+0x0f: save rsi at rsp + 0x48
+> 	Version: 1, Flags: none
+  	Nbr codes: 1, Prologue size: 0x04, Frame offset: 0x0, Frame reg: none
+  	  pc+0x04: alloc small area: rsp = rsp - 0x28
+> 	Version: 1, Flags: none
+  	Nbr codes: 1, Prologue size: 0x04, Frame offset: 0x0, Frame reg: none
+  	  pc+0x04: alloc small area: rsp = rsp - 0x10
+> 	Version: 1, Flags: none
+  	Nbr codes: 2, Prologue size: 0x06, Frame offset: 0x0, Frame reg: none
+  	  pc+0x06: alloc small area: rsp = rsp - 0x20
+> 	Version: 1, Flags: none
+  	Nbr codes: 1, Prologue size: 0x04, Frame offset: 0x0, Frame reg: none
+  	  pc+0x04: alloc small area: rsp = rsp - 0x28
+> 	Version: 1, Flags: none
+  	Nbr codes: 1, Prologue size: 0x04, Frame offset: 0x0, Frame reg: none
+  	  pc+0x04: alloc small area: rsp = rsp - 0x28
+> 	Version: 1, Flags: none
+  	Nbr codes: 2, Prologue size: 0x06, Frame offset: 0x0, Frame reg: none
+  	  pc+0x06: alloc small area: rsp = rsp - 0x20
+> 	Version: 1, Flags: UNW_FLAG_EHANDLER
+  	Nbr codes: 1, Prologue size: 0x04, Frame offset: 0x0, Frame reg: none
+  	  pc+0x04: alloc small area: rsp = rsp - 0x18
+> 	Version: 1, Flags: none
+  	Nbr codes: 2, Prologue size: 0x06, Frame offset: 0x0, Frame reg: none
+  	  pc+0x06: alloc small area: rsp = rsp - 0x20
+> 	Version: 1, Flags: none
+  	Nbr codes: 2, Prologue size: 0x06, Frame offset: 0x0, Frame reg: none
+  	  pc+0x06: alloc small area: rsp = rsp - 0x20
+> 	Version: 1, Flags: none
+  	Nbr codes: 2, Prologue size: 0x06, Frame offset: 0x0, Frame reg: none
+  	  pc+0x06: alloc small area: rsp = rsp - 0x20
+> 	Version: 1, Flags: none
+  	Nbr codes: 1, Prologue size: 0x04, Frame offset: 0x0, Frame reg: none
+  	  pc+0x04: alloc small area: rsp = rsp - 0x28
+> 	Version: 1, Flags: none
+  	Nbr codes: 4, Prologue size: 0x0d, Frame offset: 0x0, Frame reg: none
+  	  pc+0x0d: save rbx at rsp + 0x50
+> 	Version: 1, Flags: none
+  	Nbr codes: 1, Prologue size: 0x04, Frame offset: 0x0, Frame reg: none
+  	  pc+0x04: alloc small area: rsp = rsp - 0x28
+> 	Version: 1, Flags: none
+  	Nbr codes: 5, Prologue size: 0x15, Frame offset: 0x0, Frame reg: none
+  	  pc+0x15: save rbx at rsp + 0x5d0
+> 	Version: 1, Flags: none
+  	Nbr codes: 1, Prologue size: 0x04, Frame offset: 0x0, Frame reg: none
+  	  pc+0x04: alloc small area: rsp = rsp - 0x28
+> 	Version: 1, Flags: none
+  	Nbr codes: 4, Prologue size: 0x0a, Frame offset: 0x0, Frame reg: none
+  	  pc+0x0a: save rbx at rsp + 0x30
+> 	Version: 1, Flags: none
+  	Nbr codes: 4, Prologue size: 0x0a, Frame offset: 0x0, Frame reg: none
+  	  pc+0x0a: save rbx at rsp + 0x30
+> 	Version: 1, Flags: none
+  	Nbr codes: 4, Prologue size: 0x0a, Frame offset: 0x0, Frame reg: none
+  	  pc+0x0a: save rbx at rsp + 0x30
+> 	Version: 1, Flags: none
+  	Nbr codes: 8, Prologue size: 0x15, Frame offset: 0x0, Frame reg: none
+  	  pc+0x15: save rsi at rsp + 0x40
+> 	Version: 1, Flags: none
+  	Nbr codes: 0, Prologue size: 0x00, Frame offset: 0x0, Frame reg: none
+  	User data:
+> 	Version: 1, Flags: none
+  	Nbr codes: 0, Prologue size: 0x00, Frame offset: 0x0, Frame reg: none
+  	User data:
+> 	Version: 1, Flags: none
+  	Nbr codes: 5, Prologue size: 0x07, Frame offset: 0x0, Frame reg: rbp
+  	  pc+0x07: FPReg: rbp = rsp + 0x0 (info = 0x0)
+> 	Version: 1, Flags: UNW_FLAG_EHANDLER | UNW_FLAG_UHANDLER
+  	Nbr codes: 4, Prologue size: 0x0b, Frame offset: 0x7, Frame reg: rbp
+  	  pc+0x0b: FPReg: rbp = rsp + 0x70 (info = 0x0)
+> 	Version: 1, Flags: none
+  	Nbr codes: 3, Prologue size: 0x0f, Frame offset: 0x0, Frame reg: none
+  	  pc+0x0b: alloc small area: rsp = rsp - 0x28
+> 	Version: 1, Flags: none
+  	Nbr codes: 3, Prologue size: 0x0a, Frame offset: 0x5, Frame reg: rbp
+  	  pc+0x0a: FPReg: rbp = rsp + 0x50 (info = 0x0)
+> 	Version: 1, Flags: none
+  	Nbr codes: 5, Prologue size: 0x0c, Frame offset: 0x5, Frame reg: rbp
+  	  pc+0x0c: FPReg: rbp = rsp + 0x50 (info = 0x0)
+> 	Version: 1, Flags: none
+  	Nbr codes: 3, Prologue size: 0x0a, Frame offset: 0x5, Frame reg: rbp
+  	  pc+0x0a: FPReg: rbp = rsp + 0x50 (info = 0x0)
+> 	Version: 1, Flags: none
+  	Nbr codes: 6, Prologue size: 0x0d, Frame offset: 0x2, Frame reg: rbp
+  	  pc+0x0d: FPReg: rbp = rsp + 0x20 (info = 0x0)
+> 	Version: 1, Flags: none
+  	Nbr codes: 3, Prologue size: 0x0a, Frame offset: 0x5, Frame reg: rbp
+  	  pc+0x0a: FPReg: rbp = rsp + 0x50 (info = 0x0)
+> 	Version: 1, Flags: none
+  	Nbr codes: 3, Prologue size: 0x0a, Frame offset: 0x5, Frame reg: rbp
+  	  pc+0x0a: FPReg: rbp = rsp + 0x50 (info = 0x0)
+> 	Version: 1, Flags: none
+  	Nbr codes: 3, Prologue size: 0x0a, Frame offset: 0x5, Frame reg: rbp
+  	  pc+0x0a: FPReg: rbp = rsp + 0x50 (info = 0x0)
+> 	Version: 1, Flags: none
+  	Nbr codes: 2, Prologue size: 0x04, Frame offset: 0x0, Frame reg: rbp
+  	  pc+0x04: FPReg: rbp = rsp + 0x0 (info = 0x0)
+> 	Version: 1, Flags: none
+  	Nbr codes: 3, Prologue size: 0x0a, Frame offset: 0x3, Frame reg: rbp
+  	  pc+0x0a: FPReg: rbp = rsp + 0x30 (info = 0x0)
+> 	Version: 1, Flags: none
+  	Nbr codes: 5, Prologue size: 0x0c, Frame offset: 0x2, Frame reg: rbp
+  	  pc+0x0c: FPReg: rbp = rsp + 0x20 (info = 0x0)
+> 	Version: 1, Flags: none
+  	Nbr codes: 7, Prologue size: 0x0f, Frame offset: 0x3, Frame reg: rbp
+  	  pc+0x0f: FPReg: rbp = rsp + 0x30 (info = 0x0)
+> 	Version: 1, Flags: UNW_FLAG_EHANDLER | UNW_FLAG_UHANDLER
+  	Nbr codes: 10, Prologue size: 0x15, Frame offset: 0x6, Frame reg: rbp
+  	  pc+0x15: FPReg: rbp = rsp + 0x60 (info = 0x0)
+> 	Version: 1, Flags: none
+  	Nbr codes: 9, Prologue size: 0x19, Frame offset: 0x0, Frame reg: none
+  	  pc+0x15: alloc small area: rsp = rsp - 0x28
+> 	Version: 1, Flags: none
+  	Nbr codes: 7, Prologue size: 0x0f, Frame offset: 0x5, Frame reg: rbp
+  	  pc+0x0f: FPReg: rbp = rsp + 0x50 (info = 0x0)
+> 	Version: 1, Flags: none
+  	Nbr codes: 4, Prologue size: 0x0b, Frame offset: 0x2, Frame reg: rbp
+  	  pc+0x0b: FPReg: rbp = rsp + 0x20 (info = 0x0)
+> 	Version: 1, Flags: UNW_FLAG_EHANDLER | UNW_FLAG_UHANDLER
+  	Nbr codes: 3, Prologue size: 0x0a, Frame offset: 0x5, Frame reg: rbp
+  	  pc+0x0a: FPReg: rbp = rsp + 0x50 (info = 0x0)
+> 	Version: 1, Flags: none
+  	Nbr codes: 2, Prologue size: 0x0e, Frame offset: 0x0, Frame reg: none
+  	  pc+0x0a: alloc small area: rsp = rsp - 0x20
+> 	Version: 1, Flags: none
+  	Nbr codes: 5, Prologue size: 0x0c, Frame offset: 0x5, Frame reg: rbp
+  	  pc+0x0c: FPReg: rbp = rsp + 0x50 (info = 0x0)
+> 	Version: 1, Flags: none
+  	Nbr codes: 3, Prologue size: 0x0a, Frame offset: 0x2, Frame reg: rbp
+  	  pc+0x0a: FPReg: rbp = rsp + 0x20 (info = 0x0)
+> 	Version: 1, Flags: none
+  	Nbr codes: 3, Prologue size: 0x0a, Frame offset: 0x2, Frame reg: rbp
+  	  pc+0x0a: FPReg: rbp = rsp + 0x20 (info = 0x0)
+> 	Version: 1, Flags: none
+  	Nbr codes: 3, Prologue size: 0x0a, Frame offset: 0x2, Frame reg: rbp
+  	  pc+0x0a: FPReg: rbp = rsp + 0x20 (info = 0x0)
+> 	Version: 1, Flags: none
+  	Nbr codes: 3, Prologue size: 0x0a, Frame offset: 0x7, Frame reg: rbp
+  	  pc+0x0a: FPReg: rbp = rsp + 0x70 (info = 0x0)
+> 	Version: 1, Flags: none
+  	Nbr codes: 3, Prologue size: 0x0a, Frame offset: 0x2, Frame reg: rbp
+  	  pc+0x0a: FPReg: rbp = rsp + 0x20 (info = 0x0)
+> 	Version: 1, Flags: none
+  	Nbr codes: 3, Prologue size: 0x0a, Frame offset: 0x7, Frame reg: rbp
+  	  pc+0x0a: FPReg: rbp = rsp + 0x70 (info = 0x0)
+> 	Version: 1, Flags: none
+  	Nbr codes: 3, Prologue size: 0x0a, Frame offset: 0x6, Frame reg: rbp
+  	  pc+0x0a: FPReg: rbp = rsp + 0x60 (info = 0x0)
+> 	Version: 1, Flags: UNW_FLAG_EHANDLER | UNW_FLAG_UHANDLER
+  	Nbr codes: 3, Prologue size: 0x0a, Frame offset: 0x7, Frame reg: rbp
+  	  pc+0x0a: FPReg: rbp = rsp + 0x70 (info = 0x0)
+> 	Version: 1, Flags: UNW_FLAG_EHANDLER | UNW_FLAG_UHANDLER
+  	Nbr codes: 2, Prologue size: 0x0e, Frame offset: 0x0, Frame reg: none
+  	  pc+0x0a: alloc small area: rsp = rsp - 0x20
+> 	Version: 1, Flags: none
+  	Nbr codes: 3, Prologue size: 0x0a, Frame offset: 0x6, Frame reg: rbp
+  	  pc+0x0a: FPReg: rbp = rsp + 0x60 (info = 0x0)
+> 	Version: 1, Flags: none
+  	Nbr codes: 3, Prologue size: 0x0a, Frame offset: 0x6, Frame reg: rbp
+  	  pc+0x0a: FPReg: rbp = rsp + 0x60 (info = 0x0)
+> 	Version: 1, Flags: none
+  	Nbr codes: 3, Prologue size: 0x10, Frame offset: 0x8, Frame reg: rbp
+  	  pc+0x10: FPReg: rbp = rsp + 0x80 (info = 0x0)
+> 	Version: 1, Flags: none
+  	Nbr codes: 3, Prologue size: 0x0a, Frame offset: 0x2, Frame reg: rbp
+  	  pc+0x0a: FPReg: rbp = rsp + 0x20 (info = 0x0)
+> 	Version: 1, Flags: none
+  	Nbr codes: 4, Prologue size: 0x10, Frame offset: 0x8, Frame reg: rbp
+  	  pc+0x10: FPReg: rbp = rsp + 0x80 (info = 0x0)
+> 	Version: 1, Flags: none
+  	Nbr codes: 4, Prologue size: 0x10, Frame offset: 0x8, Frame reg: rbp
+  	  pc+0x10: FPReg: rbp = rsp + 0x80 (info = 0x0)
+> 	Version: 1, Flags: none
+  	Nbr codes: 3, Prologue size: 0x10, Frame offset: 0x8, Frame reg: rbp
+  	  pc+0x10: FPReg: rbp = rsp + 0x80 (info = 0x0)
+> 	Version: 1, Flags: none
+  	Nbr codes: 3, Prologue size: 0x10, Frame offset: 0x8, Frame reg: rbp
+  	  pc+0x10: FPReg: rbp = rsp + 0x80 (info = 0x0)
+> 	Version: 1, Flags: none
+  	Nbr codes: 3, Prologue size: 0x10, Frame offset: 0x8, Frame reg: rbp
+  	  pc+0x10: FPReg: rbp = rsp + 0x80 (info = 0x0)
+> 	Version: 1, Flags: none
+  	Nbr codes: 3, Prologue size: 0x0a, Frame offset: 0x5, Frame reg: rbp
+  	  pc+0x0a: FPReg: rbp = rsp + 0x50 (info = 0x0)
+> 	Version: 1, Flags: none
+  	Nbr codes: 3, Prologue size: 0x0a, Frame offset: 0x5, Frame reg: rbp
+  	  pc+0x0a: FPReg: rbp = rsp + 0x50 (info = 0x0)
+> 	Version: 1, Flags: none
+  	Nbr codes: 3, Prologue size: 0x0a, Frame offset: 0x3, Frame reg: rbp
+  	  pc+0x0a: FPReg: rbp = rsp + 0x30 (info = 0x0)
+> 	Version: 1, Flags: none
+  	Nbr codes: 3, Prologue size: 0x0a, Frame offset: 0x5, Frame reg: rbp
+  	  pc+0x0a: FPReg: rbp = rsp + 0x50 (info = 0x0)
+> 	Version: 1, Flags: none
+  	Nbr codes: 3, Prologue size: 0x0a, Frame offset: 0x5, Frame reg: rbp
+  	  pc+0x0a: FPReg: rbp = rsp + 0x50 (info = 0x0)
+> 	Version: 1, Flags: none
+  	Nbr codes: 3, Prologue size: 0x0a, Frame offset: 0x5, Frame reg: rbp
+  	  pc+0x0a: FPReg: rbp = rsp + 0x50 (info = 0x0)
+> 	Version: 1, Flags: none
+  	Nbr codes: 2, Prologue size: 0x06, Frame offset: 0x0, Frame reg: none
+  	  pc+0x06: alloc small area: rsp = rsp - 0x20
+> 	Version: 1, Flags: none
+  	Nbr codes: 1, Prologue size: 0x02, Frame offset: 0x0, Frame reg: none
+  	  pc+0x02: push rbp
+> Virtual Address: 00021000 Chunk size 88 (0x58) Number of fixups 40
+  	reloc    0 offset  2c8 [212c8] DIR64
+  	reloc    1 offset  2d0 [212d0] DIR64
+> Virtual Address: 00022000 Chunk size 140 (0x8c) Number of fixups 66
+  	reloc    0 offset   e8 [220e8] DIR64
+  	reloc    1 offset  150 [22150] DIR64
+> Virtual Address: 00023000 Chunk size 244 (0xf4) Number of fixups 118
+  	reloc    0 offset    0 [23000] DIR64
+  	reloc    1 offset   18 [23018] DIR64
+> Virtual Address: 00024000 Chunk size 144 (0x90) Number of fixups 68
+  	reloc    0 offset   10 [24010] DIR64
+  	reloc    1 offset   80 [24080] DIR64
+> Virtual Address: 00025000 Chunk size 204 (0xcc) Number of fixups 98
+  	reloc    0 offset   18 [25018] DIR64
+  	reloc    1 offset   20 [25020] DIR64
+> Virtual Address: 00026000 Chunk size 92 (0x5c) Number of fixups 42
+  	reloc    0 offset   20 [26020] DIR64
+  	reloc    1 offset   48 [26048] DIR64
+> Virtual Address: 00027000 Chunk size 40 (0x28) Number of fixups 16
+  	reloc    0 offset  240 [27240] DIR64
+  	reloc    1 offset  248 [27248] DIR64
+> Virtual Address: 0002d000 Chunk size 20 (0x14) Number of fixups 6
+  	reloc    0 offset    0 [2d000] DIR64
+  	reloc    1 offset   28 [2d028] DIR64
+> There is a debug directory in .rdata at 0x400273a0
+
+  Type                Size     Rva      Offset
+
+
+PS C:\Users\mzj\Desktop\CTF> Write-Output 'COMMAND> Get-Command gdb,llvm-objdump,llvm-readobj,ghidra,radare2,rizin,windbgx,WinDbg -ErrorAction SilentlyContinue'
+COMMAND> Get-Command gdb,llvm-objdump,llvm-readobj,ghidra,radare2,rizin,windbgx,WinDbg -ErrorAction SilentlyContinue
+PS C:\Users\mzj\Desktop\CTF> 'gdb','llvm-objdump','llvm-readobj','ghidra','radare2','rizin','windbgx','WinDbg' | ForEach-Object { Get-Command $_ -ErrorAction SilentlyContinue | Select-Object Name,Source }
+
+Name        Source
+----        ------
+gdb.exe     C:\msys64\mingw64\bin\gdb.exe
+WinDbgX.exe C:\Users\mzj\AppData\Local\Microsoft\WindowsApps\WinDbgX.exe
+
+
+PS C:\Users\mzj\Desktop\CTF> Write-Output 'COMMAND> objdump -d -Mintel R558.exe | Select-String 0x140021cca/0x140021cd0/0x140021cf0 -Context 10,18'
+COMMAND> objdump -d -Mintel R558.exe | Select-String 0x140021cca/0x140021cd0/0x140021cf0 -Context 10,18
+PS C:\Users\mzj\Desktop\CTF> & 'C:\msys64\mingw64\bin\objdump.exe' -d -Mintel $asciiExe | Select-String -Pattern '140021cca|140021cd0|140021cf0' -Context 10,18
+PS C:\Users\mzj\Desktop\CTF> Write-Output 'Correction: .rdata file offset is 0x1fe00 / RVA 0x21000. String offsets map as input=0x140021ca8, wrong=0x140021cd0, right=0x140021cf0.'
+Correction: .rdata file offset is 0x1fe00 / RVA 0x21000. String offsets map as input=0x140021ca8, wrong=0x140021cd0, right=0x140021cf0.
+PS C:\Users\mzj\Desktop\CTF> Write-Output 'COMMAND> objdump -d -Mintel R558.exe | Select-String 140021ca8|140021cd0|140021cf0 -Context 10,18'
+COMMAND> objdump -d -Mintel R558.exe | Select-String 140021ca8|140021cd0|140021cf0 -Context 10,18
+PS C:\Users\mzj\Desktop\CTF> & 'C:\msys64\mingw64\bin\objdump.exe' -d -Mintel $asciiExe | Select-String -Pattern '140021ca8|140021cd0|140021cf0' -Context 10,18
+PS C:\Users\mzj\Desktop\CTF> Write-Output 'COMMAND> objdump -d -Mintel --start-address=0x14001e900 --stop-address=0x14001eb30 R558.exe'
+COMMAND> objdump -d -Mintel --start-address=0x14001e900 --stop-address=0x14001eb30 R558.exe
+PS C:\Users\mzj\Desktop\CTF> & 'C:\msys64\mingw64\bin\objdump.exe' -d -Mintel '--start-address=0x14001e900' '--stop-address=0x14001eb30' $asciiExe
+
+PS C:\Users\mzj\Desktop\CTF> Write-Output 'COMMAND> python -c find little-endian absolute VA references to prompt/result strings in R558.exe'
+COMMAND> python -c find little-endian absolute VA references to prompt/result strings in R558.exe
+PS C:\Users\mzj\Desktop\CTF> python -c "import struct; b=open(r'$asciiExe','rb').read(); targets=[0x140021ca8,0x140021cd0,0x140021cf0]; print({hex(x):[hex(i) for i in range(len(b)) if b.startswith(struct.pack('<Q',x),i)] for x in targets})"
+
+PS C:\Users\mzj\Desktop\CTF> Write-Output 'COMMAND> objdump -s --start-address=0x140021300 --stop-address=0x140021360 R558.exe'
+COMMAND> objdump -s --start-address=0x140021300 --stop-address=0x140021360 R558.exe
+PS C:\Users\mzj\Desktop\CTF> & 'C:\msys64\mingw64\bin\objdump.exe' -s '--start-address=0x140021300' '--stop-address=0x140021360' $asciiExe
+
+PS C:\Users\mzj\Desktop\CTF> Write-Output 'Derived UTF-8 &str static records: prompt object file 0x20ac0 -> VA 0x140021cc0; wrong object 0x140021ce0; right object 0x140021d00. Search direct code references.'
+Derived UTF-8 &str static records: prompt object file 0x20ac0 -> VA 0x140021cc0; wrong object 0x140021ce0; right object 0x140021d00. Search direct code references.
+PS C:\Users\mzj\Desktop\CTF> Write-Output 'COMMAND> objdump -d -Mintel R558.exe | Select-String 140021cc0|140021ce0|140021d00 -Context 8,14'
+COMMAND> objdump -d -Mintel R558.exe | Select-String 140021cc0|140021ce0|140021d00 -Context 8,14
+PS C:\Users\mzj\Desktop\CTF> & 'C:\msys64\mingw64\bin\objdump.exe' -d -Mintel $asciiExe | Select-String -Pattern '140021cc0|140021ce0|140021d00' -Context 8,14
+
+     1400040de:	cc                   	int3
+     1400040df:	cc                   	int3
+     1400040e0:	55                   	push   rbp
+     1400040e1:	48 81 ec 10 02 00 00 	sub    rsp,0x210
+     1400040e8:	48 8d ac 24 80 00 00 	lea    rbp,[rsp+0x80]
+     1400040ef:	00
+     1400040f0:	48 c7 85 88 01 00 00 	mov    QWORD PTR [rbp+0x188],0xffffffffff
+fffffe
+     1400040f7:	fe ff ff ff
+>    1400040fb:	48 8d 15 be db 01 00 	lea    rdx,[rip+0x1dbbe]        # 0x14002
+1cc0
+     140004102:	48 8d 4d 60          	lea    rcx,[rbp+0x60]
+     140004106:	48 89 4d 50          	mov    QWORD PTR [rbp+0x50],rcx
+     14000410a:	e8 b1 d6 ff ff       	call   0x1400017c0
+     14000410f:	48 8b 4d 50          	mov    rcx,QWORD PTR [rbp+0x50]
+     140004113:	e8 38 68 00 00       	call   0x14000a950
+     140004118:	48 8d 8d 90 00 00 00 	lea    rcx,[rbp+0x90]
+     14000411f:	e8 ec e8 ff ff       	call   0x140002a10
+     140004124:	e8 37 5e 00 00       	call   0x140009f60
+     140004129:	48 89 45 58          	mov    QWORD PTR [rbp+0x58],rax
+     14000412d:	eb 00                	jmp    0x14000412f
+     14000412f:	48 8b 45 58          	mov    rax,QWORD PTR [rbp+0x58]
+     140004133:	48 89 85 b8 00 00 00 	mov    QWORD PTR [rbp+0xb8],rax
+     14000413a:	48 8d 8d b8 00 00 00 	lea    rcx,[rbp+0xb8]
+     140004141:	48 8d 95 90 00 00 00 	lea    rdx,[rbp+0x90]
+     14000435b:	48 8d 95 10 01 00 00 	lea    rdx,[rbp+0x110]
+     140004362:	e8 09 15 00 00       	call   0x140005870
+     140004367:	88 45 b7             	mov    BYTE PTR [rbp-0x49],al
+     14000436a:	eb 00                	jmp    0x14000436c
+     14000436c:	8a 45 b7             	mov    al,BYTE PTR [rbp-0x49]
+     14000436f:	a8 01                	test   al,0x1
+     140004371:	75 17                	jne    0x14000438a
+     140004373:	eb 00                	jmp    0x140004375
+>    140004375:	48 8d 15 64 d9 01 00 	lea    rdx,[rip+0x1d964]        # 0x14002
+1ce0
+     14000437c:	48 8d 8d 58 01 00 00 	lea    rcx,[rbp+0x158]
+     140004383:	e8 38 d4 ff ff       	call   0x1400017c0
+     140004388:	eb 15                	jmp    0x14000439f
+>    14000438a:	48 8d 15 6f d9 01 00 	lea    rdx,[rip+0x1d96f]        # 0x14002
+1d00
+     140004391:	48 8d 8d 28 01 00 00 	lea    rcx,[rbp+0x128]
+     140004398:	e8 23 d4 ff ff       	call   0x1400017c0
+     14000439d:	eb 1e                	jmp    0x1400043bd
+     14000439f:	48 8d 8d 58 01 00 00 	lea    rcx,[rbp+0x158]
+     1400043a6:	e8 a5 65 00 00       	call   0x14000a950
+     1400043ab:	eb 00                	jmp    0x1400043ad
+     1400043ad:	eb 00                	jmp    0x1400043af
+     1400043af:	48 8d 8d 10 01 00 00 	lea    rcx,[rbp+0x110]
+     1400043b6:	e8 f5 d6 ff ff       	call   0x140001ab0
+     1400043bb:	eb 10                	jmp    0x1400043cd
+     1400043bd:	48 8d 8d 28 01 00 00 	lea    rcx,[rbp+0x128]
+     1400043c4:	e8 87 65 00 00       	call   0x14000a950
+     1400043c9:	eb 00                	jmp    0x1400043cb
+     1400043cb:	eb e2                	jmp    0x1400043af
+
+
+PS C:\Users\mzj\Desktop\CTF> Write-Output 'COMMAND> objdump -d -Mintel --start-address=0x1400040e0 --stop-address=0x1400043e0 R558.exe'
+COMMAND> objdump -d -Mintel --start-address=0x1400040e0 --stop-address=0x1400043e0 R558.exe
+PS C:\Users\mzj\Desktop\CTF> & 'C:\msys64\mingw64\bin\objdump.exe' -d -Mintel '--start-address=0x1400040e0' '--stop-address=0x1400043e0' $asciiExe
+
+PS C:\Users\mzj\Desktop\CTF> Write-Output 'COMMAND> objdump -d -Mintel --start-address=0x140005870 --stop-address=0x140005b70 R558.exe'
+COMMAND> objdump -d -Mintel --start-address=0x140005870 --stop-address=0x140005b70 R558.exe
+PS C:\Users\mzj\Desktop\CTF> & 'C:\msys64\mingw64\bin\objdump.exe' -d -Mintel '--start-address=0x140005870' '--stop-address=0x140005b70' $asciiExe
+
+PS C:\Users\mzj\Desktop\CTF> Write-Output 'COMMAND> objdump -d -Mintel --start-address=0x140005b70 --stop-address=0x140005c80 R558.exe'
+COMMAND> objdump -d -Mintel --start-address=0x140005b70 --stop-address=0x140005c80 R558.exe
+PS C:\Users\mzj\Desktop\CTF> & 'C:\msys64\mingw64\bin\objdump.exe' -d -Mintel '--start-address=0x140005b70' '--stop-address=0x140005c80' $asciiExe
+
+PS C:\Users\mzj\Desktop\CTF> Write-Output 'COMMAND> objdump -d -Mintel --start-address=0x140006420 --stop-address=0x140006820 R558.exe'
+COMMAND> objdump -d -Mintel --start-address=0x140006420 --stop-address=0x140006820 R558.exe
+PS C:\Users\mzj\Desktop\CTF> & 'C:\msys64\mingw64\bin\objdump.exe' -d -Mintel '--start-address=0x140006420' '--stop-address=0x140006820' $asciiExe
+
+PS C:\Users\mzj\Desktop\CTF> Write-Output 'COMMAND> objdump -d -Mintel --start-address=0x140006620 --stop-address=0x140006a20 R558.exe'
+COMMAND> objdump -d -Mintel --start-address=0x140006620 --stop-address=0x140006a20 R558.exe
+PS C:\Users\mzj\Desktop\CTF> & 'C:\msys64\mingw64\bin\objdump.exe' -d -Mintel '--start-address=0x140006620' '--stop-address=0x140006a20' $asciiExe
+
+PS C:\Users\mzj\Desktop\CTF> Write-Output 'COMMAND> objdump -d -Mintel --start-address=0x140003c00 --stop-address=0x140003e90 R558.exe (input transform constructor)'
+COMMAND> objdump -d -Mintel --start-address=0x140003c00 --stop-address=0x140003e90 R558.exe (input transform constructor)
+PS C:\Users\mzj\Desktop\CTF> & 'C:\msys64\mingw64\bin\objdump.exe' -d -Mintel '--start-address=0x140003c00' '--stop-address=0x140003e90' $asciiExe
+
+PS C:\Users\mzj\Desktop\CTF> Write-Output 'COMMAND> objdump -d -Mintel --start-address=0x140002400 --stop-address=0x140002680 R558.exe (slice/map helpers)'
+COMMAND> objdump -d -Mintel --start-address=0x140002400 --stop-address=0x140002680 R558.exe (slice/map helpers)
+PS C:\Users\mzj\Desktop\CTF> & 'C:\msys64\mingw64\bin\objdump.exe' -d -Mintel '--start-address=0x140002400' '--stop-address=0x140002680' $asciiExe
+
+PS C:\Users\mzj\Desktop\CTF> Write-Output 'COMMAND> objdump -d -Mintel --start-address=0x1400037e0 --stop-address=0x1400039a0 R558.exe'
+COMMAND> objdump -d -Mintel --start-address=0x1400037e0 --stop-address=0x1400039a0 R558.exe
+PS C:\Users\mzj\Desktop\CTF> & 'C:\msys64\mingw64\bin\objdump.exe' -d -Mintel '--start-address=0x1400037e0' '--stop-address=0x1400039a0' $asciiExe
+
+PS C:\Users\mzj\Desktop\CTF> Write-Output 'COMMAND> objdump -d -Mintel --start-address=0x140003e80 --stop-address=0x1400040e0 R558.exe (remaining transformation loop)'
+COMMAND> objdump -d -Mintel --start-address=0x140003e80 --stop-address=0x1400040e0 R558.exe (remaining transformation loop)
+PS C:\Users\mzj\Desktop\CTF> & 'C:\msys64\mingw64\bin\objdump.exe' -d -Mintel '--start-address=0x140003e80' '--stop-address=0x1400040e0' $asciiExe
+
+PS C:\Users\mzj\Desktop\CTF> Write-Output 'COMMAND> objdump -s --start-address=0x140021b60 --stop-address=0x140021bb0 R558.exe (lookup constants)'
+COMMAND> objdump -s --start-address=0x140021b60 --stop-address=0x140021bb0 R558.exe (lookup constants)
+PS C:\Users\mzj\Desktop\CTF> & 'C:\msys64\mingw64\bin\objdump.exe' -s '--start-address=0x140021b60' '--stop-address=0x140021bb0' $asciiExe
+
+PS C:\Users\mzj\Desktop\CTF> Write-Output 'COMMAND> objdump -d -Mintel --start-address=0x1400057d0 --stop-address=0x140005870 R558.exe (iterator/callback helper)'
+COMMAND> objdump -d -Mintel --start-address=0x1400057d0 --stop-address=0x140005870 R558.exe (iterator/callback helper)
+PS C:\Users\mzj\Desktop\CTF> & 'C:\msys64\mingw64\bin\objdump.exe' -d -Mintel '--start-address=0x1400057d0' '--stop-address=0x140005870' $asciiExe
+
+PS C:\Users\mzj\Desktop\CTF> Write-Output 'COMMAND> objdump -d -Mintel R558.exe | Select-String call 0x140003f40 -Context 2,2'
+COMMAND> objdump -d -Mintel R558.exe | Select-String call 0x140003f40 -Context 2,2
+PS C:\Users\mzj\Desktop\CTF> & 'C:\msys64\mingw64\bin\objdump.exe' -d -Mintel $asciiExe | Select-String -Pattern 'call\s+0x140003f40|# 0x140003f40|140003f40' -Context 2,2
+
+     140003f3e:	cc                   	int3
+     140003f3f:	cc                   	int3
+>    140003f40:	48 83 ec 48          	sub    rsp,0x48
+     140003f44:	48 89 4c 24 38       	mov    QWORD PTR [rsp+0x38],rcx
+     140003f49:	8a 02                	mov    al,BYTE PTR [rdx]
+     140005776:	c6 45 f7 01          	mov    BYTE PTR [rbp-0x9],0x1
+     14000577a:	48 83 c1 18          	add    rcx,0x18
+>    14000577e:	e8 bd e7 ff ff       	call   0x140003f40
+     140005783:	88 45 f6             	mov    BYTE PTR [rbp-0xa],al
+     140005786:	eb 00                	jmp    0x140005788
+
+
+PS C:\Users\mzj\Desktop\CTF> Write-Output 'COMMAND> objdump -p R558.exe | Select-String debug directory -Context 0,12'
+COMMAND> objdump -p R558.exe | Select-String debug directory -Context 0,12
+PS C:\Users\mzj\Desktop\CTF> & 'C:\msys64\mingw64\bin\objdump.exe' -p $asciiExe | Select-String -Pattern 'There is a debug directory|CodeView|PDB|RSDS|NB10|Type\s+Size|\.pdb' -Context 0,12
+
+> There is a debug directory in .rdata at 0x400273a0
+
+> Type                Size     Rva      Offset
+>   2        CodeView 00000021 000274fc 000262fc
+> (format RSDS signature f0ed348b28c343a5af64a5bfb9f86e55 age 7 pdb rust.pdb)
+   12         Feature 00000014 00027520 00026320
+   13         CoffGrp 00000330 00027534 00026334
+
+
+
+PS C:\Users\mzj\Desktop\CTF> Write-Output 'COMMAND> objdump -d -Mintel --start-address=0x140005700 --stop-address=0x1400057d0 R558.exe (closure wrapper)'
+COMMAND> objdump -d -Mintel --start-address=0x140005700 --stop-address=0x1400057d0 R558.exe (closure wrapper)
+PS C:\Users\mzj\Desktop\CTF> & 'C:\msys64\mingw64\bin\objdump.exe' -d -Mintel '--start-address=0x140005700' '--stop-address=0x1400057d0' $asciiExe
+
+PS C:\Users\mzj\Desktop\CTF> Write-Output 'COMMAND> Get-ChildItem D:\Downloads -Recurse -Filter rust.pdb -File; Get-ChildItem analysis dirs for *.pdb'
+COMMAND> Get-ChildItem D:\Downloads -Recurse -Filter rust.pdb -File; Get-ChildItem analysis dirs for *.pdb
+PS C:\Users\mzj\Desktop\CTF> Get-ChildItem -LiteralPath 'D:\Downloads' -Recurse -Filter 'rust.pdb' -File -ErrorAction SilentlyContinue | Select-Object FullName,Length
+PS C:\Users\mzj\Desktop\CTF> Get-ChildItem -LiteralPath 'C:\Users\mzj\Desktop\CTF\玄机刷题' -Recurse -Filter '*.pdb' -File -ErrorAction SilentlyContinue | Select-Object -First 20 FullName,Length
+PS C:\Users\mzj\Desktop\CTF> Write-Output 'COMMAND> objdump -d -Mintel --start-address=0x140005200 --stop-address=0x140005390 R558.exe'
+COMMAND> objdump -d -Mintel --start-address=0x140005200 --stop-address=0x140005390 R558.exe
+PS C:\Users\mzj\Desktop\CTF> & 'C:\msys64\mingw64\bin\objdump.exe' -d -Mintel '--start-address=0x140005200' '--stop-address=0x140005390' $asciiExe
+
+PS C:\Users\mzj\Desktop\CTF> Write-Output 'COMMAND> objdump -d -Mintel --start-address=0x1400053f0 --stop-address=0x140005700 R558.exe'
+COMMAND> objdump -d -Mintel --start-address=0x1400053f0 --stop-address=0x140005700 R558.exe
+PS C:\Users\mzj\Desktop\CTF> & 'C:\msys64\mingw64\bin\objdump.exe' -d -Mintel '--start-address=0x1400053f0' '--stop-address=0x140005700' $asciiExe
+
+PS C:\Users\mzj\Desktop\CTF> objdump -d -Mintel $asciiExe --start-address=0x140003c80 --stop-address=0x140003f48
+
+PS C:\Users\mzj\Desktop\CTF> objdump -d -Mintel $asciiExe --start-address=0x140005100 --stop-address=0x1400058b0
+
+PS C:\Users\mzj\Desktop\CTF> objdump -d -Mintel $asciiExe --start-address=0x140006470 --stop-address=0x1400069c0
+
+PS C:\Users\mzj\Desktop\CTF> objdump -d -Mintel $asciiExe --start-address=0x140006a80 --stop-address=0x140006d20
+
+PS C:\Users\mzj\Desktop\CTF> objdump -d -Mintel $asciiExe --start-address=0x140003f40 --stop-address=0x1400040d0
+
+PS C:\Users\mzj\Desktop\CTF> $analysisDir = 'C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\challenge_558\analysis'
+PS C:\Users\mzj\Desktop\CTF> $solver = @'
+#!/usr/bin/env python3
+"""Static reconstruction of challenge 558 Rust byte transform."""
+KEY = b"lntfvpus"
+TARGET = bytes.fromhex("18 59 07 28 f4 ad c8 c3 b6 3f 2d 39 ca 34 d1 8e f5 03 b0")
+
+def ksa(key):
+    s = list(range(256))
+    j = 0
+    trace = []
+    for i in range(256):
+        kb = key[i % len(key)] ^ 0x66
+        j = (j + s[i] + kb) & 0xff
+        s[i], s[j] = s[j], s[i]
+        if i < 8:
+            trace.append((i, kb, j, s[i], s[j]))
+    return s, trace
+
+def keystream_for_ciphertext(ciphertext, s):
+    i = j = 0
+    plain = bytearray()
+    trace = []
+    for pos, c in enumerate(ciphertext):
+        i = (i + 1) & 0xff
+        j = (j + s[i]) & 0xff
+        s[i], s[j] = s[j], s[i]
+        t = (s[i] + s[j]) & 0xff
+        v = s[t]
+        mask = ((((v << 4) | (v >> 4)) & 0xff) + 1) & 0xff
+        p = ((c - 1) & 0xff) ^ mask
+        plain.append(p)
+        if pos < 8:
+            trace.append((pos, i, j, s[i], s[j], t, v, mask, c, p))
+    return bytes(plain), trace
+
+def encrypt(plain, s):
+    i = j = 0
+    out = bytearray()
+    for p in plain:
+        i = (i + 1) & 0xff
+        j = (j + s[i]) & 0xff
+        s[i], s[j] = s[j], s[i]
+        t = (s[i] + s[j]) & 0xff
+        v = s[t]
+        mask = ((((v << 4) | (v >> 4)) & 0xff) + 1) & 0xff
+        out.append((((p ^ mask) + 1) & 0xff))
+    return bytes(out)
+
+s, ksa_trace = ksa(KEY)
+plain, stream_trace = keystream_for_ciphertext(TARGET, s.copy())
+roundtrip = encrypt(plain, ksa(KEY)[0])
+print("key_ascii=", KEY.decode())
+print("target_len=", len(TARGET))
+print("target_hex=", TARGET.hex())
+print("ksa_first8 (i,key^66,j,S[i],S[j])=", ksa_trace)
+print("prga_first8 (pos,i,j,S[i],S[j],t,S[t],mask,cipher,plain)=", stream_trace)
+print("candidate_hex=", plain.hex())
+print("candidate_repr=", repr(plain))
+print("roundtrip_hex=", roundtrip.hex())
+print("roundtrip_match=", roundtrip == TARGET)
+'@
+PS C:\Users\mzj\Desktop\CTF> $solver | Set-Content -LiteralPath (Join-Path $analysisDir 'solve_558.py') -Encoding UTF8
+PS C:\Users\mzj\Desktop\CTF> python (Join-Path $analysisDir 'solve_558.py')
+
+PS C:\Users\mzj\Desktop\CTF> objdump -d -Mintel $asciiExe --start-address=0x1400040e0 --stop-address=0x1400043e5
+
+PS C:\Users\mzj\Desktop\CTF> objdump -d -Mintel $asciiExe --start-address=0x140005b50 --stop-address=0x140005c30; objdump -d -Mintel $asciiExe --start-address=0x140006450 --stop-address=0x140006474
+
+
+PS C:\Users\mzj\Desktop\CTF> objdump -d -Mintel $asciiExe --start-address=0x140005270 --stop-address=0x14000533a; objdump -d -Mintel $asciiExe --start-address=0x140004cc0 --stop-address=0x140004fa0
+
+
+PS C:\Users\mzj\Desktop\CTF> objdump -d -Mintel $asciiExe --start-address=0x1400016b0 --stop-address=0x140001700
+
+PS C:\Users\mzj\Desktop\CTF> objdump -d -Mintel $asciiExe --start-address=0x1400016d0 --stop-address=0x140001730
+
+PS C:\Users\mzj\Desktop\CTF> objdump -d -Mintel $asciiExe --start-address=0x140002980 --stop-address=0x140002a70; objdump -d -Mintel $asciiExe --start-address=0x140001870 --stop-address=0x1400018c0
+
+
+PS C:\Users\mzj\Desktop\CTF> objdump -d -Mintel $asciiExe --start-address=0x140001b80 --stop-address=0x140001c20
+
+PS C:\Users\mzj\Desktop\CTF> objdump -d -Mintel $asciiExe --start-address=0x1400048a0 --stop-address=0x140004930; objdump -d -Mintel $asciiExe --start-address=0x140006c00 --stop-address=0x140006c60
+
+
+PS C:\Users\mzj\Desktop\CTF> objdump -d -Mintel $asciiExe --start-address=0x1400043e0 --stop-address=0x140004590
+
+PS C:\Users\mzj\Desktop\CTF> (Get-Content -LiteralPath (Join-Path $analysisDir 'solve_558.py') -Raw).Replace('KEY = b"lntfvpus"', 'KEY = b"loverust"') | Set-Content -LiteralPath (Join-Path $analysisDir 'solve_558.py') -Encoding UTF8
+PS C:\Users\mzj\Desktop\CTF> python (Join-Path $analysisDir 'solve_558.py')
+
+PS C:\Users\mzj\Desktop\CTF> $solver = @'
+#!/usr/bin/env python3
+"""Reproduce challenge #558 transform using static PE findings only."""
+RAW_KEY = b"lntfvpus"
+KEY = bytes(b ^ i for i, b in enumerate(RAW_KEY))
+TARGET = bytes.fromhex("18 59 07 28 f4 ad c8 c3 b6 3f 2d 39 ca 34 d1 8e f5 03 b0")
+MASK8 = 0xff
+
+def ksa(key):
+    # Rust 0..=255 table, j = low byte(j + S[i] + (key[i % 8] XOR 0x66)), swap.
+    s = list(range(256))
+    j = 0
+    trace = []
+    for i in range(256):
+        key_term = key[i % len(key)] ^ 0x66
+        j = (j + s[i] + key_term) & MASK8
+        before_i, before_j = s[i], s[j]
+        s[i], s[j] = s[j], s[i]
+        trace.append((i, key[i % len(key)], key_term, before_i, j, before_j, s[i], s[j]))
+    return s, trace
+
+def stream_state(s, ciphertext):
+    i = j = 0  # Rust clears the two u16 PRGA counters after KSA.
+    plaintext = bytearray()
+    trace = []
+    for pos, c in enumerate(ciphertext):
+        i = (i + 1) & MASK8
+        si_before_j = s[i]
+        j = (j + si_before_j) & MASK8
+        s[i], s[j] = s[j], s[i]
+        t = (s[i] + s[j]) & MASK8
+        table_byte = s[t]
+        nibble_swapped = ((table_byte << 4) | (table_byte >> 4)) & MASK8
+        mask = (nibble_swapped + 1) & MASK8
+        p = ((c - 1) & MASK8) ^ mask
+        plaintext.append(p)
+        trace.append((pos, i, j, si_before_j, s[i], s[j], t, table_byte, nibble_swapped, mask, c, p))
+    return bytes(plaintext), trace
+
+def encrypt(plaintext, s):
+    i = j = 0
+    out = bytearray()
+    for p in plaintext:
+        i = (i + 1) & MASK8
+        j = (j + s[i]) & MASK8
+        s[i], s[j] = s[j], s[i]
+        t = (s[i] + s[j]) & MASK8
+        table_byte = s[t]
+        nibble_swapped = ((table_byte << 4) | (table_byte >> 4)) & MASK8
+        mask = (nibble_swapped + 1) & MASK8
+        out.append(((p ^ mask) + 1) & MASK8)
+    return bytes(out)
+
+s, ksa_trace = ksa(KEY)
+plain, stream_trace = stream_state(s.copy(), TARGET)
+roundtrip = encrypt(plain, ksa(KEY)[0])
+print("raw_key_ascii=", RAW_KEY.decode())
+print("key_index_xor_i_hex=", KEY.hex())
+print("effective_key_ascii=", KEY.decode())
+print("target_len=", len(TARGET))
+print("target_hex=", TARGET.hex())
+print("ksa_rounds=", len(ksa_trace))
+print("ksa_first8 (i,key,key^66,S_i_before,j,S_j_before,S_i_after,S_j_after)=", ksa_trace[:8])
+print("prga_trace_columns=(pos,i,j,S_i_before_j,S_i_after_swap,S_j_after_swap,t,S[t],nibble_swap,mask,cipher,plain)")
+for row in stream_trace:
+    print("prga=", row)
+print("candidate_hex=", plain.hex())
+print("candidate_ascii=", plain.decode("ascii"))
+print("roundtrip_hex=", roundtrip.hex())
+print("roundtrip_match=", roundtrip == TARGET)
+'@
+PS C:\Users\mzj\Desktop\CTF> $solver | Set-Content -LiteralPath (Join-Path $analysisDir 'solve_558.py') -Encoding UTF8
+PS C:\Users\mzj\Desktop\CTF> python (Join-Path $analysisDir 'solve_558.py')
+
+PS C:\Users\mzj\Desktop\CTF> Get-FileHash -Algorithm SHA256 -LiteralPath (Join-Path $PWD '玄机刷题\题目资料\challenge_558\R.zip') | Format-List Path,Hash
+
+
+Path : C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\challenge_558\R.zip
+Hash : CD7967ECD4DA09A57F544E14C28CEAF016272D8B7EC095B949D141D096C408DB
+
+
+
+PS C:\Users\mzj\Desktop\CTF> Get-FileHash -Algorithm SHA256 -LiteralPath (Join-Path $PWD '玄机刷题\题目资料\challenge_558\attachment\R.exe') | Format-List Path,Hash
+
+
+Path : C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\challenge_558\attachment\R.exe
+Hash : E2B0CA7ED72159F82649C33F373E3B38C0E9C9283AA1DAEC627018A328F08651
+
+
+
+PS C:\Users\mzj\Desktop\CTF> Get-Item -LiteralPath (Join-Path $analysisDir 'solve_558.py'), (Join-Path $PWD '玄机刷题\题目资料\challenge_558\R.zip'), (Join-Path $PWD '玄机刷题\题目资料\challenge_558\attachment\R.exe') | Select-Object FullName,Length,LastWriteTime
+
+FullName                                                               Length L
+                                                                              a
+                                                                              s
+                                                                              t
+                                                                              W
+                                                                              r
+                                                                              i
+                                                                              t
+                                                                              e
+                                                                              T
+                                                                              i
+                                                                              m
+                                                                              e
+--------                                                               ------ -
+C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\challenge_558\analysis\solve_558.py   2603 2
+C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\challenge_558\R.zip                  87569 2
+C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\challenge_558\attachment\R.exe      186880 2
+
+
+PS C:\Users\mzj\Desktop\CTF> $wp = @'
+# #558：第三届黄河流域公安院校网络安全技能挑战赛 R
+
+## 结论与状态
+
+- 本地静态逆向得到候选：`flag{8a1c2a73c29b2}`。
+- 按恢复出的加密流程正向处理候选，得到程序硬编码的 19 字节目标，逐字节完全一致。
+- **未运行 `R.exe`，未向玄机平台提交 flag**。因此本报告证明的是静态重建及本地往返一致，尚无平台接受记录。
+
+## 题目信息与文件
+
+玄机页面显示题目 #558「第三届黄河流域公安院校网络安全技能挑战赛 R」，类别 REVERSE，难度中等，附件名 `R.zip`。本地副本与分析资料位于：
+
+- 原始压缩包：`题目资料/challenge_558/R.zip`，87,569 bytes，SHA-256 `CD7967ECD4DA09A57F544E14C28CEAF016272D8B7EC095B949D141D096C408DB`
+- 解压程序：`题目资料/challenge_558/attachment/R.exe`，186,880 bytes，SHA-256 `E2B0CA7ED72159F82649C33F373E3B38C0E9C9283AA1DAEC627018A328F08651`
+- 可复现分析脚本：`题目资料/challenge_558/analysis/solve_558.py`
+- PowerShell 命令与输出记录：`题目资料/challenge_558/analysis/powershell_transcript_20260929.txt`
+
+ZIP 内只有 `R.exe`。附件按 PE 静态检查是 Windows x86-64 控制台程序；检查未发现 CLR 头，代码呈 Rust 编译特征。整个分析仅检查 PE 头、字符串与反汇编，没有执行目标程序，也没有下载/运行新工具。
+
+## 分析思路
+
+### 1. 从主逻辑确定比较目标
+
+主逻辑位于 `0x1400040e0` 附近。
+
+- `0x1400040fb–0x140004106` 传入静态字符串记录，程序提示为 `input your flag:`。
+- `0x1400041b8–0x1400041ec` 创建并填充 8 字节初始 key：`6c 6e 74 66 76 70 75 73`，ASCII 为 `lntfvpus`。
+- `0x1400042b7–0x1400042d5` 调用变换函数 `0x140003c80`。
+- `0x1400042dc–0x14000433c` 逐字节构造 19 字节比较常量：
+
+  ```text
+  18 59 07 28 f4 ad c8 c3 b6 3f 2d 39 ca 34 d1 8e f5 03 b0
+  ```
+
+- `0x140004354–0x140004362` 调用比较辅助函数 `0x140005870`。其下游 `0x140006620` 先比较长度，长度相同后调用字节切片相等比较；主逻辑据此输出 `wrong...` 或 `right!!!`。
+
+所以需要反推的目标是变换输出的 19 个原始字节，输入长度也必须为 19。
+
+### 2. 还原实际使用的 key
+
+主函数中的字面量 `lntfvpus` 不是直接使用的 key。主逻辑在变换前遍历下标 `i=0..7`，在 `0x1400043ff–0x14000440a` 对 key 向量原位执行：
+
+```text
+key[i] = key[i] XOR i
+```
+
+逐项结果：
+
+| i | 原始字节 | XOR i | 有效字节 |
+|---:|---:|---:|---:|
+| 0 | 0x6c (`l`) | 0x00 | 0x6c (`l`) |
+| 1 | 0x6e (`n`) | 0x01 | 0x6f (`o`) |
+| 2 | 0x74 (`t`) | 0x02 | 0x76 (`v`) |
+| 3 | 0x66 (`f`) | 0x03 | 0x65 (`e`) |
+| 4 | 0x76 (`v`) | 0x04 | 0x72 (`r`) |
+| 5 | 0x70 (`p`) | 0x05 | 0x75 (`u`) |
+| 6 | 0x75 (`u`) | 0x06 | 0x73 (`s`) |
+| 7 | 0x73 (`s`) | 0x07 | 0x74 (`t`) |
+
+因此有效 key 是 ASCII `loverust`，hex `6c6f766572757374`。若忽略这段预处理，会得到非打印的错误逆解。
+
+### 3. 还原状态表初始化和 KSA
+
+`0x140003c80` 的初始化路径通过 `0x140005120` 构造 `0x00ff0000` 范围描述，并经 `0x140005620`、`0x1400068b0`、`0x140006c00`、`0x1400048a0` 进入 inclusive range 迭代器。其低 16 位起点为 0，高 8 位终点为 255，表示 `0..=255`。随后另一段 `0..0x100` 范围用于遍历 256 个 KSA 下标。因此状态表初始长度为 256，内容为：
+
+```text
+S = [0, 1, 2, ..., 255]
+```
+
+循环在 `0x140003d71–0x140003eff`。每轮以 16 位寄存器做加法，并在溢出时进入 panic 路径；对实际字节值不会超过 16 位。结果随后截为低 8 位：`0x140003eac` 将 `ax` 移入 `cx`，`0x140003eaf` 零扩展 `al`，`0x140003eb2` 将低字节状态写回。`0x1400057d0` 对 i、j 和切片长度做边界检查，再由 `0x140005270` 交换两项；这里没有隐藏的 `% len`，下标已经由显式低字节截断限制在 0–255。
+
+逐轮公式：
+
+```text
+j = (j + S[i] + (K[i mod 8] XOR 0x66)) mod 256
+swap(S[i], S[j])
+```
+
+其中 `K = b"loverust"`，i 从 0 到 255，j 初始为 0。前八轮的复算结果：
+
+| i | K[i] | K[i] XOR 0x66 | S[i]（交换前） | j | S[j]（交换前） |
+|---:|---:|---:|---:|---:|---:|
+| 0 | 108 | 10 | 0 | 10 | 10 |
+| 1 | 111 | 9 | 1 | 20 | 20 |
+| 2 | 118 | 16 | 2 | 38 | 38 |
+| 3 | 101 | 3 | 3 | 44 | 44 |
+| 4 | 114 | 20 | 4 | 68 | 68 |
+| 5 | 117 | 19 | 5 | 92 | 92 |
+| 6 | 115 | 21 | 6 | 119 | 119 |
+| 7 | 116 | 18 | 7 | 144 | 144 |
+
+### 4. 还原逐字节 PRGA 及输出变换
+
+KSA 结束后，`0x140003d78–0x140003d8c` 把 i、j 两个 16 位状态清零。`0x140003f40` 是每个输入字节执行的闭包：
+
+1. `0x140003f49–0x140003f77`：`i = (i + 1) & 0xff`。
+2. `0x140003f7a–0x140003fb1`：读取 `S[i]`，令 `j = (j + S[i]) & 0xff`。
+3. `0x140003fe0–0x140004012`：经 `0x1400057d0` 交换 `S[i]` 与 `S[j]`。
+4. `0x140004021–0x1400040a9`：读取 `z = S[(S[i] + S[j]) & 0xff]`。加法结果显式截成低 8 位后用作索引。
+5. `0x1400040ac–0x1400040c1`：高低 nibble 对换得到 `r = ROL4(z)`，再加一；将其与输入字节 XOR 后再加一，均按 u8 回绕。
+
+完整加密式：
+
+```text
+r = ((z << 4) | (z >> 4)) & 0xff
+mask = (r + 1) & 0xff
+cipher = ((plain XOR mask) + 1) & 0xff
+```
+
+逆变换式：
+
+```text
+plain = ((cipher - 1) & 0xff) XOR mask
+```
+
+### 5. 对 19 字节目标逆推
+
+脚本 `analysis/solve_558.py` 从硬编码目标逐字节计算 PRGA 状态和 mask，并执行逆式。下表每一行由脚本打印的完整记录整理，列为 `pos, i, j, S[i]（更新 j 前）, S[i]（交换后）, S[j]（交换后）, t, S[t], nibbleSwap, mask, target byte, plaintext byte`。
+
+| pos | i | j | S[i]前 | S[i]后 | S[j]后 | t | S[t] | nibbleSwap | mask | target | plain |
+|---:|---:|---:|---:|---:|---:|---:|---:|---:|---:|---:|---:|
+| 0 | 1 | 20 | 20 | 203 | 20 | 223 | 7 | 112 | 113 | 24 | 102 (`f`) |
+| 1 | 2 | 160 | 140 | 182 | 140 | 66 | 51 | 51 | 52 | 89 | 108 (`l`) |
+| 2 | 3 | 204 | 44 | 244 | 44 | 32 | 102 | 102 | 103 | 7 | 97 (`a`) |
+| 3 | 4 | 234 | 30 | 29 | 30 | 59 | 243 | 63 | 64 | 40 | 103 (`g`) |
+| 4 | 5 | 132 | 154 | 144 | 154 | 42 | 120 | 135 | 136 | 244 | 123 (`{`) |
+| 5 | 6 | 199 | 67 | 199 | 67 | 10 | 57 | 147 | 148 | 173 | 56 (`8`) |
+| 6 | 7 | 128 | 185 | 100 | 185 | 29 | 90 | 165 | 166 | 200 | 97 (`a`) |
+| 7 | 8 | 239 | 111 | 58 | 111 | 169 | 47 | 242 | 243 | 195 | 49 (`1`) |
+| 8 | 9 | 39 | 56 | 241 | 56 | 41 | 93 | 213 | 214 | 182 | 99 (`c`) |
+| 9 | 10 | 96 | 57 | 255 | 57 | 56 | 176 | 11 | 12 | 63 | 50 (`2`) |
+| 10 | 11 | 200 | 104 | 180 | 104 | 28 | 196 | 76 | 77 | 45 | 97 (`a`) |
+| 11 | 12 | 7 | 63 | 100 | 63 | 163 | 224 | 14 | 15 | 57 | 55 (`7`) |
+| 12 | 13 | 25 | 18 | 133 | 18 | 151 | 159 | 249 | 250 | 202 | 51 (`3`) |
+| 13 | 14 | 79 | 54 | 205 | 54 | 3 | 244 | 79 | 80 | 52 | 99 (`c`) |
+| 14 | 15 | 165 | 86 | 148 | 86 | 234 | 30 | 225 | 226 | 209 | 50 (`2`) |
+| 15 | 16 | 21 | 112 | 96 | 112 | 208 | 59 | 179 | 180 | 142 | 57 (`9`) |
+| 16 | 17 | 70 | 49 | 91 | 49 | 140 | 89 | 149 | 150 | 245 | 98 (`b`) |
+| 17 | 18 | 42 | 228 | 120 | 228 | 92 | 242 | 47 | 48 | 3 | 50 (`2`) |
+| 18 | 19 | 102 | 60 | 200 | 60 | 4 | 29 | 209 | 210 | 176 | 125 (`}`) |
+
+拼接明文字节得到：
+
+```text
+hex:   66 6c 61 67 7b 38 61 31 63 32 61 37 33 63 32 39 62 32 7d
+ASCII: flag{8a1c2a73c29b2}
+```
+
+### 6. 独立正向复现
+
+`analysis/solve_558.py` 不导入外部包，也不启动附件程序。脚本从 raw key 开始重新执行 `key[i] ^= i`、完整 256 轮 KSA、19 轮 PRGA，再按正向公式加密候选。脚本输出：
+
+```text
+raw_key_ascii= lntfvpus
+key_index_xor_i_hex= 6c6f766572757374
+effective_key_ascii= loverust
+target_len= 19
+target_hex= 18590728f4adc8c3b63f2d39ca34d18ef503b0
+ksa_rounds= 256
+candidate_hex= 666c61677b386131633261373363323962327d
+candidate_ascii= flag{8a1c2a73c29b2}
+roundtrip_hex= 18590728f4adc8c3b63f2d39ca34d18ef503b0
+roundtrip_match= True
+```
+
+这同时确认目标常量长度、密钥预处理、状态更新顺序与输出逆式彼此一致。脚本运行命令和逐字节 trace 已记在 PowerShell transcript 中。
+
+## 文件与复现
+
+在项目根目录 `C:\Users\mzj\Desktop\CTF` 下：
+
+```powershell
+python .\玄机刷题\题目资料\challenge_558\analysis\solve_558.py
+Get-FileHash -Algorithm SHA256 .\玄机刷题\题目资料\challenge_558\R.zip
+Get-FileHash -Algorithm SHA256 .\玄机刷题\题目资料\challenge_558\attachment\R.exe
+```
+
+命令及其输出记录：`题目资料/challenge_558/analysis/powershell_transcript_20260929.txt`。本地静态逆向与往返验证完成；玄机平台验证刻意未执行，因为本批要求禁止提交。
+'@
+PS C:\Users\mzj\Desktop\CTF> $wp | Set-Content -LiteralPath (Join-Path $PWD '玄机刷题\题目资料\challenge_558\wp.md') -Encoding UTF8
+PS C:\Users\mzj\Desktop\CTF> @'
+CD7967ECD4DA09A57F544E14C28CEAF016272D8B7EC095B949D141D096C408DB  R.zip
+E2B0CA7ED72159F82649C33F373E3B38C0E9C9283AA1DAEC627018A328F08651  attachment/R.exe
+'@ | Set-Content -LiteralPath (Join-Path $analysisDir 'SHA256SUMS.txt') -Encoding ASCII
+PS C:\Users\mzj\Desktop\CTF> Remove-Item -LiteralPath (Join-Path $env:TEMP 'R558.exe') -Force
+PS C:\Users\mzj\Desktop\CTF> Stop-Transcript
+**********************
+Windows PowerShell transcript end
+End time: 20260929053718
+**********************
+**********************
+Windows PowerShell transcript start
+Start time: 20260929053735
+Username: DESKTOP-412KTAR\mzj
+RunAs User: DESKTOP-412KTAR\mzj
+Configuration Name: 
+Machine: DESKTOP-412KTAR (Microsoft Windows NT 10.0.26200.0)
+Host Application: C:\WINDOWS\System32\WindowsPowerShell\v1.0\powershell.exe -NoLogo -NoProfile -NoExit
+Process ID: 28296
+PSVersion: 5.1.26100.9444
+PSEdition: Desktop
+PSCompatibleVersions: 1.0, 2.0, 3.0, 4.0, 5.0, 5.1.26100.9444
+BuildVersion: 10.0.26100.9444
+CLRVersion: 4.0.30319.42000
+WSManStackVersion: 3.0
+PSRemotingProtocolVersion: 2.3
+SerializationVersion: 1.1.0.1
+**********************
+Transcript started, output file is C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\challenge_558\analysis\powershell_transcript_20260929.txt
+PS C:\Users\mzj\Desktop\CTF> Get-Item -LiteralPath (Join-Path $PWD '玄机刷题\题目资料\challenge_558\wp.md'), (Join-Path $analysisDir 'solve_558.py'), (Join-Path $analysisDir 'powershell_transcript_20260929.txt'), (Join-Path $analysisDir 'SHA256SUMS.txt') | ForEach-Object { '{0} | {1} bytes' -f $_.FullName,$_.Length }
+C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\challenge_558\wp.md | 8651 bytes
+C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\challenge_558\analysis\solve_558.py | 2603 bytes
+C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\challenge_558\analysis\powershell_transcript_20260929.txt | 182163 bytes
+C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\challenge_558\analysis\SHA256SUMS.txt | 156 bytes
+PS C:\Users\mzj\Desktop\CTF> Get-Content -LiteralPath (Join-Path $PWD '玄机刷题\题目资料\challenge_558\wp.md') -TotalCount 8
+# #558：第三届黄河流域公安院校网络安全技能挑战赛 R
+
+## 结论与状态
+
+- 本地静态逆向得到候选：`flag{8a1c2a73c29b2}`。
+- 按恢复出的加密流程正向处理候选，得到程序硬编码的 19 字节目标，逐字节完全一致。
+- **未运行 `R.exe`，未向玄机平台提交 flag**。因此本报告证明的是静态重建及本地往返一致，尚无平台接受记录。
+
+PS C:\Users\mzj\Desktop\CTF> python (Join-Path $analysisDir 'solve_558.py')
+
+PS C:\Users\mzj\Desktop\CTF> Stop-Transcript
+**********************
+Windows PowerShell transcript end
+End time: 20260929053735
+**********************

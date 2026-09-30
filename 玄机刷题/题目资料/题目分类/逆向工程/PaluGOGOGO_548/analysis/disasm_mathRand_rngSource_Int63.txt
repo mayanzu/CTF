@@ -1,0 +1,59 @@
+
+Z:\palu548_static_copy.exe:     file format pei-x86-64
+
+
+Disassembly of section .text:
+
+0000000000494d20 <.text+0x93d20>:
+  494d20:	55                   	push   rbp
+  494d21:	48 89 e5             	mov    rbp,rsp
+  494d24:	48 83 ec 10          	sub    rsp,0x10
+  494d28:	48 8b 10             	mov    rdx,QWORD PTR [rax]
+  494d2b:	48 8d 5a ff          	lea    rbx,[rdx-0x1]
+  494d2f:	48 89 18             	mov    QWORD PTR [rax],rbx
+  494d32:	48 85 db             	test   rbx,rbx
+  494d35:	7d 0a                	jge    0x494d41
+  494d37:	48 81 c2 5e 02 00 00 	add    rdx,0x25e
+  494d3e:	48 89 10             	mov    QWORD PTR [rax],rdx
+  494d41:	48 8b 50 08          	mov    rdx,QWORD PTR [rax+0x8]
+  494d45:	48 8d 5a ff          	lea    rbx,[rdx-0x1]
+  494d49:	48 89 58 08          	mov    QWORD PTR [rax+0x8],rbx
+  494d4d:	48 85 db             	test   rbx,rbx
+  494d50:	7d 0b                	jge    0x494d5d
+  494d52:	48 81 c2 5e 02 00 00 	add    rdx,0x25e
+  494d59:	48 89 50 08          	mov    QWORD PTR [rax+0x8],rdx
+  494d5d:	48 8b 50 08          	mov    rdx,QWORD PTR [rax+0x8]
+  494d61:	48 81 fa 5f 02 00 00 	cmp    rdx,0x25f
+  494d68:	73 3b                	jae    0x494da5
+  494d6a:	48 8b 18             	mov    rbx,QWORD PTR [rax]
+  494d6d:	48 8b 74 d0 10       	mov    rsi,QWORD PTR [rax+rdx*8+0x10]
+  494d72:	48 81 fb 5f 02 00 00 	cmp    rbx,0x25f
+  494d79:	73 18                	jae    0x494d93
+  494d7b:	48 03 74 d8 10       	add    rsi,QWORD PTR [rax+rbx*8+0x10]
+  494d80:	48 89 74 d0 10       	mov    QWORD PTR [rax+rdx*8+0x10],rsi
+  494d85:	48 0f ba f6 3f       	btr    rsi,0x3f
+  494d8a:	48 89 f0             	mov    rax,rsi
+  494d8d:	48 83 c4 10          	add    rsp,0x10
+  494d91:	5d                   	pop    rbp
+  494d92:	c3                   	ret
+  494d93:	48 89 d8             	mov    rax,rbx
+  494d96:	b9 5f 02 00 00       	mov    ecx,0x25f
+  494d9b:	0f 1f 44 00 00       	nop    DWORD PTR [rax+rax*1+0x0]
+  494da0:	e8 3b 13 fd ff       	call   0x4660e0
+  494da5:	48 89 d0             	mov    rax,rdx
+  494da8:	b9 5f 02 00 00       	mov    ecx,0x25f
+  494dad:	e8 2e 13 fd ff       	call   0x4660e0
+  494db2:	90                   	nop
+  494db3:	cc                   	int3
+  494db4:	cc                   	int3
+  494db5:	cc                   	int3
+  494db6:	cc                   	int3
+  494db7:	cc                   	int3
+  494db8:	cc                   	int3
+  494db9:	cc                   	int3
+  494dba:	cc                   	int3
+  494dbb:	cc                   	int3
+  494dbc:	cc                   	int3
+  494dbd:	cc                   	int3
+  494dbe:	cc                   	int3
+  494dbf:	cc                   	int3

@@ -1,0 +1,16 @@
+
+C:\Users\mzj\AppData\Local\Temp\palu548_static_a9f3.exe:     file format pei-x86-64
+
+
+Disassembly of section .text:
+
+0000000000495500 <.text+0x94500>:
+  495500:	49 3b 66 10          	cmp    rsp,QWORD PTR [r14+0x10]
+  495504:	76 0b                	jbe    0x495511
+  495506:	55                   	push   rbp
+  495507:	48 89 e5             	mov    rbp,rsp
+  49550a:	e8 71 fc ff ff       	call   0x495180
+  49550f:	5d                   	pop    rbp
+  495510:	c3                   	ret
+  495511:	e8 ea e8 fc ff       	call   0x463e00
+  495516:	eb e8                	jmp    0x495500

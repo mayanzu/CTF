@@ -1,0 +1,260 @@
+**********************
+PowerShell transcript start
+Start time: 20260929013349
+Username: DESKTOP-412KTAR\mzj
+RunAs User: DESKTOP-412KTAR\mzj
+Configuration Name: 
+Machine: DESKTOP-412KTAR (Microsoft Windows NT 10.0.26200.0)
+Host Application: C:\Users\mzj\.cache\codex-runtimes\codex-primary-runtime\dependencies\native\powershell\pwsh.dll -Command try { [Console]::OutputEncoding=[System.Text.Encoding]::UTF8 } catch {}
+$ErrorActionPreference='Stop'
+$root='C:\Users\mzj\Desktop\CTF\玄机刷题'
+$base='C:\Users\mzj\Desktop\CTF'
+$log=Join-Path $root '记录\项目资料归档终端记录.txt'
+Start-Transcript -LiteralPath $log -Append | Out-Null
+Write-Output '=== 项目资料归档：复制外部题目材料，不删除原件 ==='
+foreach($name in @('figures','tools')) { $src=Join-Path $base $name; $dst=Join-Path $root $name; Write-Output "COMMAND> Copy-Item -LiteralPath '$src' -Destination '$root' -Recurse"; if(!(Test-Path -LiteralPath $dst)){ Copy-Item -LiteralPath $src -Destination $root -Recurse; Write-Output "COPIED $src -> $dst" } else { Write-Output "SKIP existing destination: $dst" } }
+$src=Join-Path $base 'labs\platform'; $dst=Join-Path $root 'labs\platform'; Write-Output "COMMAND> Copy-Item -LiteralPath '$src' -Destination '$(Join-Path $root 'labs')' -Recurse"; if(!(Test-Path -LiteralPath (Join-Path $root 'labs'))){ New-Item -ItemType Directory -Path (Join-Path $root 'labs') | Out-Null }; if(!(Test-Path -LiteralPath $dst)){ Copy-Item -LiteralPath $src -Destination (Join-Path $root 'labs') -Recurse; Write-Output "COPIED $src -> $dst" } else { Write-Output "SKIP existing destination: $dst" }
+$records=@('代理-ezflag-367-公开题解复算.txt','续攻-Base-终端记录.txt'); foreach($name in $records){ $src=Join-Path (Join-Path $base '记录') $name; if(Test-Path -LiteralPath $src){ $dst=Join-Path (Join-Path $root '记录') $name; $srcHash=(Get-FileHash -LiteralPath $src -Algorithm SHA256).Hash; if(Test-Path -LiteralPath $dst){ $dstHash=(Get-FileHash -LiteralPath $dst -Algorithm SHA256).Hash; if($srcHash -eq $dstHash){ Write-Output "SKIP identical record already in project: $name SHA256=$srcHash" } else { $alt=Join-Path (Join-Path $root '记录') ($name -replace '\.txt$','_CTF根目录副本.txt'); Write-Output "COMMAND> Copy-Item -LiteralPath '$src' -Destination '$alt'"; Copy-Item -LiteralPath $src -Destination $alt; Write-Output "COPIED distinct record -> $alt SHA256=$srcHash" } } else { Write-Output "COMMAND> Copy-Item -LiteralPath '$src' -Destination '$dst'"; Copy-Item -LiteralPath $src -Destination $dst; Write-Output "COPIED record -> $dst SHA256=$srcHash" } } }
+$wslDest=Join-Path $root '题目资料\WSL平台归档\pwn-lab\platform'; if(!(Test-Path -LiteralPath $wslDest)){ New-Item -ItemType Directory -Path $wslDest -Force | Out-Null; $wslCmd='src="$HOME/pwn-lab/platform"; dest="/mnt/c/Users/mzj/Desktop/CTF/玄机刷题/题目资料/WSL平台归档/pwn-lab/platform"; cp -a "$src"/. "$dest"/; find "$dest" -maxdepth 4 -type f -printf "%P\t%s bytes\n"'; Write-Output "COMMAND> wsl --exec sh -lc '$wslCmd'"; wsl --exec sh -lc $wslCmd; if($LASTEXITCODE -ne 0){ throw "WSL copy failed with exit code $LASTEXITCODE" } } else { Write-Output "SKIP existing WSL archive: $wslDest" }
+$downloadNames=@('班次邮戳附件.zip','被入侵的数据库.zip','附件.zip','即随本心.zip','可疑流量分析附件.zip','联号回执附件.zip','题目附件.zip','外泄流量取证附件.zip','五格电文附件.zip','像素囚笼附件.zip','闸机票根附件.zip','attachments.zip','crazyaes-20240524094418-p72tac5.zip','digital_key_trace.sqlite.zip','easyre.zip','encrypted_flag.zip','ezBase-20250521104055-dq14shk.rar','EzFlag_248f149404428676e6aa45e6312d069c.zip','game_flag.exe','game_flag (1).exe','go_for_it.zip','hookme.rar','mqtt.zip','note.zip','PaluArray_flag.zip','Poisoned+Samples附件.zip','Prompt+Trace附件.zip','qgd.zip','rainbow.zip','ROP2.zip','secret.zip','spring.zip','Sql注入的应急排查.zip','tradre.zip','Veiled+Shell附件.zip','Victory_Melody.zip','VM555.exe','abs.zip','babyRe.zip','babyrsa.zip','arkt.zip','你知道Base么-20250521104202-am92t17.rar','checker.zip')
+$downloads='D:\Downloads'; $archive=Join-Path $root '题目资料\原始下载附件'; if(!(Test-Path -LiteralPath $archive)){ New-Item -ItemType Directory -Path $archive -Force | Out-Null }
+$inventory=@(); $projectFiles=Get-ChildItem -LiteralPath $root -Recurse -File -ErrorAction SilentlyContinue
+foreach($name in $downloadNames){ $src=Join-Path $downloads $name; if(!(Test-Path -LiteralPath $src)){ $inventory+=,[pscustomobject]@{Source=$name;ProjectCopy='MISSING_SOURCE';SHA256='';Action='not copied'}; Write-Output "SOURCE MISSING: $src"; continue }; $item=Get-Item -LiteralPath $src; $sha=(Get-FileHash -LiteralPath $src -Algorithm SHA256).Hash; $same=$projectFiles | Where-Object Length -eq $item.Length | Where-Object { (Get-FileHash -LiteralPath $_.FullName -Algorithm SHA256).Hash -eq $sha } | Select-Object -First 1; if($same){ $rel=$same.FullName.Substring($root.Length+1); $inventory+=,[pscustomobject]@{Source=$name;ProjectCopy=$rel;SHA256=$sha;Action='identical copy already in project'}; Write-Output "SKIP identical attachment: $name -> $rel SHA256=$sha" } else { $dst=Join-Path $archive $name; Write-Output "COMMAND> Copy-Item -LiteralPath '$src' -Destination '$dst'"; Copy-Item -LiteralPath $src -Destination $dst; $projectFiles+=Get-Item -LiteralPath $dst; $rel=$dst.Substring($root.Length+1); $inventory+=,[pscustomobject]@{Source=$name;ProjectCopy=$rel;SHA256=$sha;Action='copied'}; Write-Output "COPIED attachment: $name -> $rel ($($item.Length) bytes) SHA256=$sha" } }
+$index=Join-Path $archive 'README.md'; $lines=@('# 原始下载附件归档','','本目录集中保存 Downloads 中与玄机刷题项目相关的原始题包。与题目目录或 `labs/platform` 内相同 SHA-256 的文件不重复复制；完整来源到项目路径映射见 `manifest.csv`。原始 Downloads 文件未移动或删除。','','| 下载文件名 | 项目内保存位置 | 动作 | SHA-256 |','|---|---|---|---|'); foreach($row in $inventory){ $lines+=('| `{0}` | `{1}` | {2} | `{3}` |' -f $row.Source,$row.ProjectCopy,$row.Action,$row.SHA256) }; Set-Content -LiteralPath $index -Value $lines -Encoding UTF8; $inventory | Export-Csv -LiteralPath (Join-Path $archive 'manifest.csv') -NoTypeInformation -Encoding UTF8; Write-Output "INDEX written: $index"; Write-Output "MANIFEST written: $(Join-Path $archive 'manifest.csv')"
+Stop-Transcript | Out-Null
+Get-ChildItem -LiteralPath (Join-Path $root 'labs\platform') -Recurse -File | Measure-Object | ForEach-Object { "LAB_PLATFORM_FILES=$($_.Count)" }
+Get-ChildItem -LiteralPath (Join-Path $root 'figures') -Recurse -File | Measure-Object | ForEach-Object { "FIGURES_FILES=$($_.Count)" }
+Get-ChildItem -LiteralPath (Join-Path $root 'tools') -Recurse -File | Measure-Object | ForEach-Object { "TOOLS_FILES=$($_.Count)" }
+Get-ChildItem -LiteralPath $archive -File | ForEach-Object { '{0}`t{1} bytes' -f $_.Name,$_.Length }
+Get-ChildItem -LiteralPath $wslDest -Recurse -File | Measure-Object Length -Sum | ForEach-Object { "WSL_ARCHIVE_FILES=$($_.Count) BYTES=$($_.Sum)" }
+
+Process ID: 29176
+PSVersion: 7.6.5
+PSEdition: Core
+GitCommitId: 7.6.5
+OS: Microsoft Windows 10.0.26200
+Platform: Win32NT
+PSCompatibleVersions: 1.0, 2.0, 3.0, 4.0, 5.0, 5.1, 6.0, 7.0
+PSRemotingProtocolVersion: 2.4
+SerializationVersion: 1.1.0.1
+WSManStackVersion: 3.0
+**********************
+=== 项目资料归档：复制外部题目材料，不删除原件 ===
+COMMAND> Copy-Item -LiteralPath 'C:\Users\mzj\Desktop\CTF\figures' -Destination 'C:\Users\mzj\Desktop\CTF\玄机刷题' -Recurse
+COPIED C:\Users\mzj\Desktop\CTF\figures -> C:\Users\mzj\Desktop\CTF\玄机刷题\figures
+COMMAND> Copy-Item -LiteralPath 'C:\Users\mzj\Desktop\CTF\tools' -Destination 'C:\Users\mzj\Desktop\CTF\玄机刷题' -Recurse
+COPIED C:\Users\mzj\Desktop\CTF\tools -> C:\Users\mzj\Desktop\CTF\玄机刷题\tools
+COMMAND> Copy-Item -LiteralPath 'C:\Users\mzj\Desktop\CTF\labs\platform' -Destination 'C:\Users\mzj\Desktop\CTF\玄机刷题\labs' -Recurse
+COPIED C:\Users\mzj\Desktop\CTF\labs\platform -> C:\Users\mzj\Desktop\CTF\玄机刷题\labs\platform
+COMMAND> Copy-Item -LiteralPath 'C:\Users\mzj\Desktop\CTF\记录\代理-ezflag-367-公开题解复算.txt' -Destination 'C:\Users\mzj\Desktop\CTF\玄机刷题\记录\代理-ezflag-367-公开题解复算.txt'
+COPIED record -> C:\Users\mzj\Desktop\CTF\玄机刷题\记录\代理-ezflag-367-公开题解复算.txt SHA256=181D5CF13B14F6E87AF2F5DCB19CE63AD927FC0DAACF6EE240F4831C3FB6AB95
+COMMAND> Copy-Item -LiteralPath 'C:\Users\mzj\Desktop\CTF\记录\续攻-Base-终端记录.txt' -Destination 'C:\Users\mzj\Desktop\CTF\玄机刷题\记录\续攻-Base-终端记录_CTF根目录副本.txt'
+COPIED distinct record -> C:\Users\mzj\Desktop\CTF\玄机刷题\记录\续攻-Base-终端记录_CTF根目录副本.txt SHA256=D7458911BF5D0496D1CC4EBEC44529F78C95196F2E9CA9BC9318E9654EC7C1BC
+COMMAND> wsl --exec sh -lc 'src="$HOME/pwn-lab/platform"; dest="/mnt/c/Users/mzj/Desktop/CTF/玄机刷题/题目资料/WSL平台归档/pwn-lab/platform"; cp -a "$src"/. "$dest"/; find "$dest" -maxdepth 4 -type f -printf "%P\t%s bytes\n"'
+
+COMMAND> Copy-Item -LiteralPath 'D:\Downloads\班次邮戳附件.zip' -Destination 'C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\原始下载附件\班次邮戳附件.zip'
+COPIED attachment: 班次邮戳附件.zip -> 题目资料\原始下载附件\班次邮戳附件.zip (160365 bytes) SHA256=651F3AD412CED6FDF09D664BE51FA19FC016C60641CE2FBEFC71F8F249382CAB
+COMMAND> Copy-Item -LiteralPath 'D:\Downloads\被入侵的数据库.zip' -Destination 'C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\原始下载附件\被入侵的数据库.zip'
+COPIED attachment: 被入侵的数据库.zip -> 题目资料\原始下载附件\被入侵的数据库.zip (29595 bytes) SHA256=B4AEEED35FA4BEBFAF07A57418ADE000B40557CF526BE70AEE9E4C4C0D80939E
+SKIP identical attachment: 附件.zip -> labs\platform\attachments\296-pwn-ezpwn.zip SHA256=FF4C0D75AF198996A67A3ABA90351FD4042949D99B31B6EA2846BBE3BA42C640
+COMMAND> Copy-Item -LiteralPath 'D:\Downloads\即随本心.zip' -Destination 'C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\原始下载附件\即随本心.zip'
+COPIED attachment: 即随本心.zip -> 题目资料\原始下载附件\即随本心.zip (12817910 bytes) SHA256=42970559976D203681A666531B00BCB9DEE61E3C3BAF8B1100120CDA3CD3CAAB
+COMMAND> Copy-Item -LiteralPath 'D:\Downloads\可疑流量分析附件.zip' -Destination 'C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\原始下载附件\可疑流量分析附件.zip'
+COPIED attachment: 可疑流量分析附件.zip -> 题目资料\原始下载附件\可疑流量分析附件.zip (266740 bytes) SHA256=1DA68FF7021F1A3294C2D6BFEC355564A2DBF5BCC96C33451D9D9422AE1B5AFA
+SKIP identical attachment: 联号回执附件.zip -> labs\platform\attachments\587-linked-receipts.zip SHA256=986CB14C6EE777339F29F8406B73943C093DE07B76E1EE35810B651D35CD02FF
+SKIP identical attachment: 题目附件.zip -> labs\platform\attachments\573-cifar10.zip SHA256=9B3BE7234E7369BB89E1F36D49D3EE562B04AEABA4FF6C40C56B7BC128BDF05B
+SKIP identical attachment: 外泄流量取证附件.zip -> labs\platform\attachments\581-network-forensics.zip SHA256=CBF1DDC1890E9A52552CCC1071D4310E40B1B58F01D5AB38FBBA0A0206929140
+SKIP identical attachment: 五格电文附件.zip -> labs\platform\attachments\586-five-grid.zip SHA256=A6F281CE48857C914F6AA5E717189311E01991A10AE25CB29A14FBDB0F875F68
+SKIP identical attachment: 像素囚笼附件.zip -> labs\platform\attachments\583-pixel-cage.zip SHA256=91ADAF6FBB46D68BF5192AFDD802078C1F46A9F1EDD60D1EEC50D3D84CDF203E
+SKIP identical attachment: 闸机票根附件.zip -> labs\platform\attachments\589-gate-ticket.zip SHA256=637B9EDBFBC409B717751D900154B6A137017A5E74A7C5826652A5FCAE58EDF0
+COMMAND> Copy-Item -LiteralPath 'D:\Downloads\attachments.zip' -Destination 'C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\原始下载附件\attachments.zip'
+COPIED attachment: attachments.zip -> 题目资料\原始下载附件\attachments.zip (6049341 bytes) SHA256=33298161377449297E9B96230960511CF4732C9F50815941D643902AC948B339
+COMMAND> Copy-Item -LiteralPath 'D:\Downloads\crazyaes-20240524094418-p72tac5.zip' -Destination 'C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\原始下载附件\crazyaes-20240524094418-p72tac5.zip'
+COPIED attachment: crazyaes-20240524094418-p72tac5.zip -> 题目资料\原始下载附件\crazyaes-20240524094418-p72tac5.zip (155757 bytes) SHA256=73A995ED5992DD4E31C16CB008B8EAE945286E1A2F8F63175AA2F36993DAB5D5
+SKIP identical attachment: digital_key_trace.sqlite.zip -> 题目资料\新题批次\DigitalKey_UWB_520\digital_key_trace.sqlite.zip SHA256=9CF7B9FD309CE62947F0136AE2E55147EF3CB9C82AC889BBB61D674EAADD73A6
+COMMAND> Copy-Item -LiteralPath 'D:\Downloads\easyre.zip' -Destination 'C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\原始下载附件\easyre.zip'
+COPIED attachment: easyre.zip -> 题目资料\原始下载附件\easyre.zip (117343 bytes) SHA256=7401DF22E0BEEA48C439938B622931414F3EC89D383B5AA4CD72E138C42805EA
+COMMAND> Copy-Item -LiteralPath 'D:\Downloads\encrypted_flag.zip' -Destination 'C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\原始下载附件\encrypted_flag.zip'
+COPIED attachment: encrypted_flag.zip -> 题目资料\原始下载附件\encrypted_flag.zip (198 bytes) SHA256=0C563421AE63279233377EEEDFAA34DD85DEFA23A663C46CF1F9DC18FFB0F834
+COMMAND> Copy-Item -LiteralPath 'D:\Downloads\ezBase-20250521104055-dq14shk.rar' -Destination 'C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\原始下载附件\ezBase-20250521104055-dq14shk.rar'
+COPIED attachment: ezBase-20250521104055-dq14shk.rar -> 题目资料\原始下载附件\ezBase-20250521104055-dq14shk.rar (7833 bytes) SHA256=0A7420F1D2D832474AD09EA55825900AF75EBA30DEA46DFB63F9A1AD17F0AF18
+SKIP identical attachment: EzFlag_248f149404428676e6aa45e6312d069c.zip -> labs\platform\attachments\367-ezflag\EzFlag.zip SHA256=6D75C39BF4AF49D2C609844C7A754DEA3251D5D67039E128706B6541964F58FC
+SKIP identical attachment: game_flag.exe -> 题目资料\新题批次\PaluMaze_551\game_flag.exe SHA256=319DE70C476CC7C2761A57D88B83A5529D06CFD0A909D0EC48EC9CD588F82556
+SKIP identical attachment: game_flag (1).exe -> 题目资料\新题批次\PaluMaze_551\game_flag.exe SHA256=319DE70C476CC7C2761A57D88B83A5529D06CFD0A909D0EC48EC9CD588F82556
+COMMAND> Copy-Item -LiteralPath 'D:\Downloads\go_for_it.zip' -Destination 'C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\原始下载附件\go_for_it.zip'
+COPIED attachment: go_for_it.zip -> 题目资料\原始下载附件\go_for_it.zip (636919 bytes) SHA256=68B5FED390B6DEF2E3095AF77DA6DD3047128E91AD77A87BEDE19065878AFB4A
+COMMAND> Copy-Item -LiteralPath 'D:\Downloads\hookme.rar' -Destination 'C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\原始下载附件\hookme.rar'
+COPIED attachment: hookme.rar -> 题目资料\原始下载附件\hookme.rar (5125397 bytes) SHA256=1DC981B273CB80A32863B9A89A09CFA82B731F6D4BC8E37D72C445DEB29E993F
+SKIP identical attachment: mqtt.zip -> 题目资料\WSL平台归档\pwn-lab\platform\mqtt.zip SHA256=DD0E862D33CE025FB56E60515E8B39B02FF11CF382149CD2FA2AA64D38D53A06
+COMMAND> Copy-Item -LiteralPath 'D:\Downloads\note.zip' -Destination 'C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\原始下载附件\note.zip'
+COPIED attachment: note.zip -> 题目资料\原始下载附件\note.zip (5832 bytes) SHA256=E9C657065D4AEB1E128C90A2E5A6A42ACA03DB75D7493DABDBE12CA5A6938AD9
+COMMAND> Copy-Item -LiteralPath 'D:\Downloads\PaluArray_flag.zip' -Destination 'C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\原始下载附件\PaluArray_flag.zip'
+COPIED attachment: PaluArray_flag.zip -> 题目资料\原始下载附件\PaluArray_flag.zip (73952 bytes) SHA256=106CF19A6967105AEA4ACAEAA3B10E8DB169293E3057C9109845D324FF85779A
+SKIP identical attachment: Poisoned+Samples附件.zip -> labs\platform\attachments\591-poisoned-samples.zip SHA256=FBA0CE8E25F620AF659EBE7051A4FC0D4A3F271FF1BEAC3351A2C0164AE83A7F
+COMMAND> Copy-Item -LiteralPath 'D:\Downloads\Prompt+Trace附件.zip' -Destination 'C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\原始下载附件\Prompt+Trace附件.zip'
+COPIED attachment: Prompt+Trace附件.zip -> 题目资料\原始下载附件\Prompt+Trace附件.zip (2579 bytes) SHA256=93DEAA4BA1FB60DCE3550F447F6035FBC029478F51EDA61D611FFFE27FCD3CDD
+SKIP identical attachment: qgd.zip -> labs\platform\attachments\557-qgd.zip SHA256=58E431863B858A26A7491457B5F30B54262D7859B525AB21E30D393CD64CECF7
+COMMAND> Copy-Item -LiteralPath 'D:\Downloads\rainbow.zip' -Destination 'C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\原始下载附件\rainbow.zip'
+COPIED attachment: rainbow.zip -> 题目资料\原始下载附件\rainbow.zip (4038 bytes) SHA256=D8D5AA578D7AD1856A9CD2EA375B8D68399BCDF92E40791915EE22C762B9F852
+SKIP identical attachment: ROP2.zip -> 题目资料\WSL平台归档\pwn-lab\platform\krop2.zip SHA256=3EC658480DEAC2914BD2F11588B97037DCA9829C556F407413BA49C9DCF53206
+COMMAND> Copy-Item -LiteralPath 'D:\Downloads\secret.zip' -Destination 'C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\原始下载附件\secret.zip'
+COPIED attachment: secret.zip -> 题目资料\原始下载附件\secret.zip (1170497 bytes) SHA256=77177B600FEA6DA73C41935763ED555047F15CB7F17B7A707550BBD9E633080F
+COMMAND> Copy-Item -LiteralPath 'D:\Downloads\spring.zip' -Destination 'C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\原始下载附件\spring.zip'
+COPIED attachment: spring.zip -> 题目资料\原始下载附件\spring.zip (30014 bytes) SHA256=0B55AE0DBCA33E366EA2E7A2AB04837D67CE669C3A1A7FDD81FB5586FDE24058
+COMMAND> Copy-Item -LiteralPath 'D:\Downloads\Sql注入的应急排查.zip' -Destination 'C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\原始下载附件\Sql注入的应急排查.zip'
+COPIED attachment: Sql注入的应急排查.zip -> 题目资料\原始下载附件\Sql注入的应急排查.zip (315805 bytes) SHA256=62E3BCFC987E7461B111EE8E5E91409AB830FF286D50DA31DB34DA48E94DA79E
+COMMAND> Copy-Item -LiteralPath 'D:\Downloads\tradre.zip' -Destination 'C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\原始下载附件\tradre.zip'
+COPIED attachment: tradre.zip -> 题目资料\原始下载附件\tradre.zip (11073 bytes) SHA256=71BE666F73FF9214BEF7211C8F413FED628B9AB42ABD10EE1E2F8AB9D1995FB0
+COMMAND> Copy-Item -LiteralPath 'D:\Downloads\Veiled+Shell附件.zip' -Destination 'C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\原始下载附件\Veiled+Shell附件.zip'
+COPIED attachment: Veiled+Shell附件.zip -> 题目资料\原始下载附件\Veiled+Shell附件.zip (7404 bytes) SHA256=402954C3AFE63A36482472141CEE24BDCE40C935F58AEE6F2986131C9523D23E
+COMMAND> Copy-Item -LiteralPath 'D:\Downloads\Victory_Melody.zip' -Destination 'C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\原始下载附件\Victory_Melody.zip'
+COPIED attachment: Victory_Melody.zip -> 题目资料\原始下载附件\Victory_Melody.zip (13676 bytes) SHA256=4556D1E81570878B8AB4A86A01B034D9C523B411059AB47419BFC01E43C2102B
+SKIP identical attachment: VM555.exe -> 题目资料\Victory_Melody_555\Victory_Melody.exe SHA256=9909D359461E16E1CA1D55521A187302799C781C718BE3B6613E5A8FB2D3D87B
+SKIP identical attachment: abs.zip -> 题目资料\WSL平台归档\pwn-lab\platform\abs.zip SHA256=6E64874876C33B22E82A2EF4C014036AACAA3662DB61B08E714989E9D9C3B91D
+COMMAND> Copy-Item -LiteralPath 'D:\Downloads\babyRe.zip' -Destination 'C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\原始下载附件\babyRe.zip'
+COPIED attachment: babyRe.zip -> 题目资料\原始下载附件\babyRe.zip (5883266 bytes) SHA256=DD4BA411EA15DF78CC7BEE2959090FAC9081D824FB41FE452EF02FC6B7B034F9
+COMMAND> Copy-Item -LiteralPath 'D:\Downloads\babyrsa.zip' -Destination 'C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\原始下载附件\babyrsa.zip'
+COPIED attachment: babyrsa.zip -> 题目资料\原始下载附件\babyrsa.zip (1661 bytes) SHA256=ECDA4109A4DFA064C7F9CE6BED03777A760EC99BC934131D5F7ECD739A0295E0
+COMMAND> Copy-Item -LiteralPath 'D:\Downloads\arkt.zip' -Destination 'C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\原始下载附件\arkt.zip'
+COPIED attachment: arkt.zip -> 题目资料\原始下载附件\arkt.zip (109627 bytes) SHA256=81D7F3225DC36345A968A2F498E00AAD570C08B8DCAD89E13405BD3195A4263B
+COMMAND> Copy-Item -LiteralPath 'D:\Downloads\你知道Base么-20250521104202-am92t17.rar' -Destination 'C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\原始下载附件\你知道Base么-20250521104202-am92t17.rar'
+COPIED attachment: 你知道Base么-20250521104202-am92t17.rar -> 题目资料\原始下载附件\你知道Base么-20250521104202-am92t17.rar (14603 bytes) SHA256=3FEC5E1930230660DCABDF0F31F4D97F8BB980D67306242D48A4377B74590801
+COMMAND> Copy-Item -LiteralPath 'D:\Downloads\checker.zip' -Destination 'C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\原始下载附件\checker.zip'
+COPIED attachment: checker.zip -> 题目资料\原始下载附件\checker.zip (17498 bytes) SHA256=598E457DCDFFCB89F4A1B5CF56133E1D8A194E737B8C25C6C0EA722854426D36
+INDEX written: C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\原始下载附件\README.md
+MANIFEST written: C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\原始下载附件\manifest.csv
+**********************
+PowerShell transcript end
+End time: 20260929013417
+**********************
+**********************
+PowerShell transcript start
+Start time: 20260929013634
+Username: DESKTOP-412KTAR\mzj
+RunAs User: DESKTOP-412KTAR\mzj
+Configuration Name: 
+Machine: DESKTOP-412KTAR (Microsoft Windows NT 10.0.26200.0)
+Host Application: C:\Users\mzj\.cache\codex-runtimes\codex-primary-runtime\dependencies\native\powershell\pwsh.dll -Command try { [Console]::OutputEncoding=[System.Text.Encoding]::UTF8 } catch {}
+$ErrorActionPreference='Stop'
+$root='C:\Users\mzj\Desktop\CTF\玄机刷题'
+$log=Join-Path $root '记录\项目资料归档终端记录.txt'
+Start-Transcript -LiteralPath $log -Append | Out-Null
+Write-Output '=== 归档完整性复核 ==='
+$manifestPath=Join-Path $root '题目资料\原始下载附件\manifest.csv'
+$rows=Import-Csv -LiteralPath $manifestPath
+$bad=@(); foreach($row in $rows){ if($row.Action -eq 'not copied'){ $bad+=$row.Source; continue }; $p=Join-Path $root $row.ProjectCopy; if(!(Test-Path -LiteralPath $p)){ $bad+=$row.Source; Write-Output "MISSING PROJECT COPY: $($row.Source) -> $p"; continue }; $h=(Get-FileHash -LiteralPath $p -Algorithm SHA256).Hash; if($h -ne $row.SHA256){ $bad+=$row.Source; Write-Output "HASH MISMATCH: $($row.Source) -> $p expected=$($row.SHA256) actual=$h" } }
+Write-Output "ATTACHMENT_MANIFEST_ROWS=$($rows.Count) INTEGRITY_ERRORS=$($bad.Count)"
+$wpFiles=Get-ChildItem -LiteralPath (Join-Path $root '记录') -File | Where-Object Name -Match 'WP.*\.md$|\.md$' | Sort-Object Name | ForEach-Object { $_.Name }
+$indexPath=Join-Path $root '题目资料\资料归档索引.md'
+$index=@('# 玄机刷题项目资料索引','','本索引用于在项目内定位逐题 WP、附件、复现脚本、命令记录和历史证据。已归档的文件均为副本；Downloads、父目录和 WSL 原始来源均未移动或删除。','','## 手册与逐题 WP','','- 主手册：`指南/玄机刷题指南_合并源.md`，包含题目总表、解题过程、证据边界及本批已收录题目的完整章节。','- 独立 WP 与分析记录位于 `记录/`：'); foreach($n in $wpFiles){ $index+=('  - `{0}`' -f $n) }; $index+=@('','## 复现资料与附件','','- `题目资料/<题目>/`：逐题附件、分析脚本、输出、反编译结果和过程证据。','- `labs/platform/`：原平台附件与本地复现求解器的项目内副本。','- `题目资料/WSL平台归档/pwn-lab/platform/`：WSL 中的平台题工作目录副本，包括 #514、MQTT、KROP2、abs 的原始分析文件；其中 KROP2/abs 只作未完成题目的资料归档，不代表已解或有完整 WP。','- `figures/`：截图与原始终端输出素材；`tools/`：相关工具及其说明。','- `题目资料/原始下载附件/`：Downloads 中与 CTF 有关的原始题包；`README.md` 与 `manifest.csv` 记录来源、项目内路径、SHA-256 和去重情况。','- `记录/项目资料归档终端记录.txt`：本次复制操作和完整性复核输出。','','## 归档规则','','历史命令/转录保留当时实际使用的原始路径，以免改写过程证据；同一附件若在项目内已有相同 SHA-256，则不再复制一份，并在 `manifest.csv` 中指向现有副本。手册中的已解状态以平台证据为准，未完成题目的附件归档不等于补写成功 WP。'); Set-Content -LiteralPath $indexPath -Value $index -Encoding UTF8; Write-Output "INDEX written: $indexPath"
+$readmePath=Join-Path $root 'README.md'; $readme=@'
+# 玄机平台刷题资料
+
+本项目归档玄机平台刷题指南、逐题记录、原始附件和用于复核的分析资料。归档动作只复制文件，原始 Downloads、WSL 目录和 CTF 父目录的文件未移动或删除。
+
+## 目录结构
+
+- `指南/`：状态总览、合并 Markdown 源稿、LaTeX 源文件及 PDF。
+- `记录/`：逐题 WP、分析补充、完整命令/输出记录和归档操作记录。
+- `题目资料/<题目>/`：题目附件、分析脚本、反编译结果、输出和过程证据。
+- `题目资料/原始下载附件/`：按 SHA-256 去重归档的下载题包；`README.md` 和 `manifest.csv` 给出来源、保存位置及校验值。
+- `题目资料/WSL平台归档/pwn-lab/platform/`：WSL 平台题工作目录的本地副本。
+- `labs/platform/`：平台题附件和复现求解器的本地副本。
+- `figures/`：图片证据和 `raw/` 原始终端输出素材。
+- `tools/`：相关工具及工具包。
+- `工作区/`：仍有复现价值的题目专用工作区。
+
+## 刷题状态与 WP
+
+《指南/玄机刷题指南_合并源.md》是当前状态与逐题 WP 的主索引，记录 33 道题目及其证据边界。旧版 README 的 10 题统计已废止；请以合并源手册中的题目总表为准。独立 WP 和过程补充保存在 `记录/`。
+
+KROP2（ID 270）和 abs（ID 271）的原始资料现已归档在 WSL 平台副本中，但尚未作为已解题目补写到主手册；附件归档不代表题目完成或 flag 已验证。
+
+## 证据与去重
+
+历史终端记录保留当时实际输入的原始路径，避免改写操作证据；所引用的外部来源文件已在本项目相应目录留存副本。附件若在项目内已有相同 SHA-256，则不重复占用空间，映射记录在 `题目资料/原始下载附件/manifest.csv`。账户凭据不写入项目记录。
+'@; Set-Content -LiteralPath $readmePath -Value $readme -Encoding UTF8; Write-Output "README updated: $readmePath"
+if($bad.Count -gt 0){ Write-Output ('INTEGRITY_ERRORS=' + ($bad -join ', ')) }
+Stop-Transcript | Out-Null
+'--- final inventory ---'
+Get-ChildItem -LiteralPath (Join-Path $root '题目资料\原始下载附件') -File | ForEach-Object { '{0}`t{1} bytes' -f $_.Name,$_.Length }
+Get-ChildItem -LiteralPath (Join-Path $root '记录') -File -Filter '*WP*.md' | ForEach-Object Name
+Write-Output "GUIDE_EXISTS=$((Test-Path -LiteralPath (Join-Path $root '指南\玄机刷题指南_合并源.md'))); README_EXISTS=$((Test-Path -LiteralPath $readmePath)); ARCHIVE_INDEX_EXISTS=$((Test-Path -LiteralPath $indexPath))"
+Write-Output "INTEGRITY_ERRORS=$($bad.Count)"
+
+Process ID: 25320
+PSVersion: 7.6.5
+PSEdition: Core
+GitCommitId: 7.6.5
+OS: Microsoft Windows 10.0.26200
+Platform: Win32NT
+PSCompatibleVersions: 1.0, 2.0, 3.0, 4.0, 5.0, 5.1, 6.0, 7.0
+PSRemotingProtocolVersion: 2.4
+SerializationVersion: 1.1.0.1
+WSManStackVersion: 3.0
+**********************
+=== 归档完整性复核 ===
+ATTACHMENT_MANIFEST_ROWS=43 INTEGRITY_ERRORS=0
+INDEX written: C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\资料归档索引.md
+README updated: C:\Users\mzj\Desktop\CTF\玄机刷题\README.md
+**********************
+PowerShell transcript end
+End time: 20260929013634
+**********************
+**********************
+PowerShell transcript start
+Start time: 20260929013903
+Username: DESKTOP-412KTAR\mzj
+RunAs User: DESKTOP-412KTAR\mzj
+Configuration Name: 
+Machine: DESKTOP-412KTAR (Microsoft Windows NT 10.0.26200.0)
+Host Application: C:\Users\mzj\.cache\codex-runtimes\codex-primary-runtime\dependencies\native\powershell\pwsh.dll -Command try { [Console]::OutputEncoding=[System.Text.Encoding]::UTF8 } catch {}
+$ErrorActionPreference='Stop'
+$root='C:\Users\mzj\Desktop\CTF\玄机刷题'; $log=Join-Path $root '记录\项目资料归档终端记录.txt'; Start-Transcript -LiteralPath $log -Append | Out-Null
+Write-Output '=== 最终项目内路径与完整性核验 ==='
+Write-Output "COMMAND> Import-Csv '$root\题目资料\原始下载附件\manifest.csv' and compare saved-file SHA256"
+$manifest=Import-Csv -LiteralPath (Join-Path $root '题目资料\原始下载附件\manifest.csv'); $errors=0; foreach($r in $manifest){ if($r.Action -eq 'not copied'){ $errors++; continue }; $p=Join-Path $root $r.ProjectCopy; if(!(Test-Path -LiteralPath $p)){ Write-Output "MISSING $($r.ProjectCopy)"; $errors++; continue }; $actual=(Get-FileHash -LiteralPath $p -Algorithm SHA256).Hash; if($actual -ne $r.SHA256){ Write-Output "HASH MISMATCH $($r.ProjectCopy)"; $errors++ } }; Write-Output "MANIFEST_ROWS=$($manifest.Count); HASH_OR_PATH_ERRORS=$errors"
+Write-Output "COMMAND> Get-ChildItem project mirrors recursively and Measure-Object"
+foreach($rel in @('labs\platform','figures','tools','题目资料\WSL平台归档\pwn-lab\platform','题目资料\原始下载附件')){ $p=Join-Path $root $rel; $items=Get-ChildItem -LiteralPath $p -Recurse -File; $sum=($items | Measure-Object Length -Sum).Sum; Write-Output "$rel : FILES=$($items.Count); BYTES=$sum" }
+Write-Output "COMMAND> Test-Path guide, archive index, WPs, logs, and independent #520 scripts"
+$paths=@('指南\玄机刷题指南_合并源.md','题目资料\资料归档索引.md','记录\Digital Key UWB-520-WP草稿.md','记录\PaluMaze_551-WP.md','记录\PositionalXOR_550-WP.md','记录\Victory_Melody_555-WP.md','记录\tradre-分析过程记录.md','记录\项目资料归档终端记录.txt','记录\代理-ezflag-367-公开题解复算.txt','labs\platform\solve_520_digital_key_uwb.py','labs\platform\verify_520_digital_key_uwb.py'); foreach($rel in $paths){ Write-Output ("{0} : {1}" -f $rel,(Test-Path -LiteralPath (Join-Path $root $rel))) }
+$all=Get-ChildItem -LiteralPath $root -Recurse -File; $total=($all | Measure-Object Length -Sum).Sum; Write-Output "PROJECT_FILES=$($all.Count); PROJECT_BYTES=$total"
+Stop-Transcript | Out-Null
+Write-Output "TRANSCRIPT_SAVED=$log"
+Process ID: 22624
+PSVersion: 7.6.5
+PSEdition: Core
+GitCommitId: 7.6.5
+OS: Microsoft Windows 10.0.26200
+Platform: Win32NT
+PSCompatibleVersions: 1.0, 2.0, 3.0, 4.0, 5.0, 5.1, 6.0, 7.0
+PSRemotingProtocolVersion: 2.4
+SerializationVersion: 1.1.0.1
+WSManStackVersion: 3.0
+**********************
+=== 最终项目内路径与完整性核验 ===
+COMMAND> Import-Csv 'C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\原始下载附件\manifest.csv' and compare saved-file SHA256
+MANIFEST_ROWS=43; HASH_OR_PATH_ERRORS=0
+COMMAND> Get-ChildItem project mirrors recursively and Measure-Object
+labs\platform : FILES=29; BYTES=1095557
+figures : FILES=241; BYTES=8670951
+tools : FILES=12; BYTES=1486922
+题目资料\WSL平台归档\pwn-lab\platform : FILES=47; BYTES=7026923
+题目资料\原始下载附件 : FILES=28; BYTES=33043558
+COMMAND> Test-Path guide, archive index, WPs, logs, and independent #520 scripts
+指南\玄机刷题指南_合并源.md : True
+题目资料\资料归档索引.md : True
+记录\Digital Key UWB-520-WP草稿.md : True
+记录\PaluMaze_551-WP.md : True
+记录\PositionalXOR_550-WP.md : True
+记录\Victory_Melody_555-WP.md : True
+记录\tradre-分析过程记录.md : True
+记录\项目资料归档终端记录.txt : True
+记录\代理-ezflag-367-公开题解复算.txt : True
+labs\platform\solve_520_digital_key_uwb.py : True
+labs\platform\verify_520_digital_key_uwb.py : True
+PROJECT_FILES=1151; PROJECT_BYTES=171871600
+**********************
+PowerShell transcript end
+End time: 20260929013903
+**********************

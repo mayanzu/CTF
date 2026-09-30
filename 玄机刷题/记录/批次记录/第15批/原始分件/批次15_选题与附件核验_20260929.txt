@@ -1,0 +1,246 @@
+**********************
+PowerShell transcript start
+Start time: 20260929171619
+Username: DESKTOP-412KTAR\mzj
+RunAs User: DESKTOP-412KTAR\mzj
+Configuration Name: 
+Machine: DESKTOP-412KTAR (Microsoft Windows NT 10.0.26200.0)
+Host Application: C:\Users\mzj\.cache\codex-runtimes\codex-primary-runtime\dependencies\native\powershell\pwsh.dll -NoProfile -Command try { [Console]::OutputEncoding=[System.Text.Encoding]::UTF8 } catch {}
+$ErrorActionPreference='Continue'
+$project='C:\Users\mzj\Desktop\CTF\玄机刷题'
+$recordDir=Join-Path $project '记录'
+$log=Join-Path $recordDir '批次15_选题与附件核验_20260929.txt'
+Start-Transcript -LiteralPath $log -Force | Out-Null
+Write-Output 'COMMAND> inspect local source attachment and WP files for selected free/uncompleted challenges #541, #562, #533'
+$targets=@(
+  @{id='541';dirs=@('题目资料\批次11_20260929\541_ezBase','题目资料\ezBase_541','题目资料\原始下载附件')},
+  @{id='562';dirs=@('题目资料\批次14_20260929\562_checker','题目资料\checker_562','题目资料\第一届启航杯checker_562')},
+  @{id='533';dirs=@('题目资料\批次13_20260929\533_圣人当仁不让','题目资料\第一届启航杯checker_562')}
+)
+foreach($t in $targets){Write-Output "=== CHALLENGE #$($t.id) ===";foreach($rel in $t.dirs){$p=Join-Path $project $rel;if(Test-Path -LiteralPath $p){Write-Output "DIR $rel";Get-ChildItem -LiteralPath $p -File -Recurse -Force -ErrorAction SilentlyContinue|Where-Object{$_.Extension -match '(?i)^\.(zip|rar|7z|exe|elf|apk|hap|bin|py|c|md|txt)$'}|Select-Object -First 40|ForEach-Object{'FILE '+$_.FullName.Substring($project.Length+1)+' ['+$_.Length+' B]'}}else{Write-Output "MISSING_DIR $rel"}}}
+Write-Output 'COMMAND> write batch selection note with user-visible fee/status checks'
+$note=Join-Path $recordDir '批次15_选题核验_20260929.md'
+@'
+# 第十五批选题核验（2026-09-29）
+
+| ID | 题目 | 玄机详情页状态 | 费用 | 分工 |
+|---:|---|---|---|---|
+| 541 | 轩辕杯 ezBase | 未完成 | 免费 | 子代理独立静态逆向 |
+| 562 | 第一届启航杯 checker | 未完成 | 免费 | 子代理独立复核并追查旧候选被拒原因 |
+| 533 | 圣人当仁不让 | 未完成 | 免费 | 子代理独立逆向 |
+
+核验依据：已登录账号 slu_mzj 下各题详情页均显示“免费”、下载附件按钮和提交 FLAG 按钮，且详情中没有“已完成”标记。此前列表的卡片徽标与详情状态存在不一致，因此以逐题详情页为本批开题依据。
+
+子代理当前只做本地附件分析与记录，不操作浏览器、不提交答案。由主会话在收到独立复核结果后逐题检查解题依据并通过前台玄机页面提交验证。每题资料、复现脚本、WP 和终端 transcript 保存在各自既有题目目录，不清理原始证据。
+'@ | Set-Content -LiteralPath $note -Encoding utf8
+Write-Output "NOTE=$note"
+Stop-Transcript | Out-Null
+Write-Output "TRANSCRIPT=$log"
+Write-Output "NOTE_BYTES=$((Get-Item -LiteralPath $note).Length)"
+Process ID: 31076
+PSVersion: 7.6.5
+PSEdition: Core
+GitCommitId: 7.6.5
+OS: Microsoft Windows 10.0.26200
+Platform: Win32NT
+PSCompatibleVersions: 1.0, 2.0, 3.0, 4.0, 5.0, 5.1, 6.0, 7.0
+PSRemotingProtocolVersion: 2.4
+SerializationVersion: 1.1.0.1
+WSManStackVersion: 3.0
+**********************
+COMMAND> inspect local source attachment and WP files for selected free/uncompleted challenges #541, #562, #533
+=== CHALLENGE #541 ===
+DIR 题目资料\批次11_20260929\541_ezBase
+FILE 题目资料\批次11_20260929\541_ezBase\README.md [1297 B]
+FILE 题目资料\批次11_20260929\541_ezBase\wp.md [8754 B]
+FILE 题目资料\批次11_20260929\541_ezBase\analysis\command_transcript_20260929.txt [288508 B]
+FILE 题目资料\批次11_20260929\541_ezBase\analysis\disassemble_stub.py [627 B]
+FILE 题目资料\批次11_20260929\541_ezBase\analysis\disassemble_unpacked.py [545 B]
+FILE 题目资料\批次11_20260929\541_ezBase\analysis\find_xrefs.py [972 B]
+FILE 题目资料\批次11_20260929\541_ezBase\analysis\independent_forward.py [2163 B]
+FILE 题目资料\批次11_20260929\541_ezBase\analysis\inspect_pe.py [3883 B]
+FILE 题目资料\批次11_20260929\541_ezBase\analysis\parse_upx_imports.py [1646 B]
+FILE 题目资料\批次11_20260929\541_ezBase\analysis\patch_e8e9.py [1465 B]
+FILE 题目资料\批次11_20260929\541_ezBase\analysis\root_review_transcript_20260929.txt [42946 B]
+FILE 题目资料\批次11_20260929\541_ezBase\analysis\solve_flag.py [2523 B]
+FILE 题目资料\批次11_20260929\541_ezBase\analysis\unpack_nrv2b.py [2810 B]
+FILE 题目资料\批次11_20260929\541_ezBase\analysis\upx0_patched.bin [46757 B]
+FILE 题目资料\批次11_20260929\541_ezBase\analysis\upx0_unpacked.bin [46757 B]
+FILE 题目资料\批次11_20260929\541_ezBase\extracted\ezBase\ezre.exe [9216 B]
+FILE 题目资料\批次11_20260929\541_ezBase\originals\ezBase-20250521104055-dq14shk (2).rar [7833 B]
+DIR 题目资料\ezBase_541
+FILE 题目资料\ezBase_541\candidate_35byte_prefix.txt [36 B]
+FILE 题目资料\ezBase_541\candidate_36byte_flag.txt [37 B]
+FILE 题目资料\ezBase_541\check_exports.py [2172 B]
+FILE 题目资料\ezBase_541\debug_dump.c [3053 B]
+FILE 题目资料\ezBase_541\debug_entry.c [5160 B]
+FILE 题目资料\ezBase_541\debug_importdump.c [2847 B]
+FILE 题目资料\ezBase_541\debug_mem.c [2885 B]
+FILE 题目资料\ezBase_541\debug_patch.c [4030 B]
+FILE 题目资料\ezBase_541\debug_stack.c [4142 B]
+FILE 题目资料\ezBase_541\decode_upx.py [2971 B]
+FILE 题目资料\ezBase_541\parse_exports.py [1941 B]
+FILE 题目资料\ezBase_541\runtime_import_tail.bin [12288 B]
+FILE 题目资料\ezBase_541\shim_ucrt_min.c [245 B]
+FILE 题目资料\ezBase_541\shim_ucrt.c [113 B]
+FILE 题目资料\ezBase_541\shim_vcr_min.c [250 B]
+FILE 题目资料\ezBase_541\shim_vcr.c [98 B]
+FILE 题目资料\ezBase_541\solve_ez541_final.py [1826 B]
+FILE 题目资料\ezBase_541\unpacked_runtime.bin [45056 B]
+FILE 题目资料\ezBase_541\WP.md [8668 B]
+FILE 题目资料\ezBase_541\analysis\derive_flag_from_memory_dump_output.txt [1099 B]
+FILE 题目资料\ezBase_541\analysis\derive_flag_from_memory_dump.py [4298 B]
+FILE 题目资料\ezBase_541\analysis\ezbase541_reaudit_transcript_20260929.txt [126811 B]
+FILE 题目资料\ezBase_541\ezBase\ezre.exe [9216 B]
+FILE 题目资料\ezBase_541\runshim\ezre.exe [9216 B]
+FILE 题目资料\ezBase_541\分析产物\README.md [216 B]
+FILE 题目资料\ezBase_541\分析产物\2026-09-27\_ezcode_oep.txt [8671 B]
+FILE 题目资料\ezBase_541\分析产物\2026-09-27\_ezdecode_func.txt [7746 B]
+FILE 题目资料\ezBase_541\分析产物\2026-09-27\_ezdecode_output.txt [761 B]
+FILE 题目资料\ezBase_541\分析产物\2026-09-27\_ezdisasm_all.txt [197774 B]
+FILE 题目资料\ezBase_541\分析产物\2026-09-27\_ezexports.txt [3629 B]
+FILE 题目资料\ezBase_541\分析产物\2026-09-27\_kernelbase_exports.txt [1196 B]
+FILE 题目资料\ezBase_541\工作区\README.md [286 B]
+FILE 题目资料\ezBase_541\工作区\2026-09-27\_dumpmain.c [3955 B]
+FILE 题目资料\ezBase_541\工作区\2026-09-27\_dumpmain.exe [271809 B]
+FILE 题目资料\ezBase_541\工作区\2026-09-27\_dumpmain2.c [3554 B]
+FILE 题目资料\ezBase_541\工作区\2026-09-27\_dumpmain2.exe [272213 B]
+FILE 题目资料\ezBase_541\工作区\2026-09-27\_dumpmain3.c [3765 B]
+FILE 题目资料\ezBase_541\工作区\2026-09-27\_dumpmain3.exe [272725 B]
+FILE 题目资料\ezBase_541\工作区\2026-09-27\_ezdebug.exe [276238 B]
+FILE 题目资料\ezBase_541\工作区\2026-09-27\_ezdump.exe [269975 B]
+DIR 题目资料\原始下载附件
+FILE 题目资料\原始下载附件\班次邮戳附件.zip [160365 B]
+FILE 题目资料\原始下载附件\被入侵的数据库.zip [29595 B]
+FILE 题目资料\原始下载附件\即随本心.zip [12817910 B]
+FILE 题目资料\原始下载附件\可疑流量分析附件.zip [266740 B]
+FILE 题目资料\原始下载附件\你知道Base么-20250521104202-am92t17.rar [14603 B]
+FILE 题目资料\原始下载附件\arkt.zip [109627 B]
+FILE 题目资料\原始下载附件\attachments.zip [6049341 B]
+FILE 题目资料\原始下载附件\babyRe.zip [5883266 B]
+FILE 题目资料\原始下载附件\babyrsa.zip [1661 B]
+FILE 题目资料\原始下载附件\checker.zip [17498 B]
+FILE 题目资料\原始下载附件\crazyaes-20240524094418-p72tac5.zip [155757 B]
+FILE 题目资料\原始下载附件\easyre.zip [117343 B]
+FILE 题目资料\原始下载附件\encrypted_flag.zip [198 B]
+FILE 题目资料\原始下载附件\ezBase-20250521104055-dq14shk.rar [7833 B]
+FILE 题目资料\原始下载附件\go_for_it.zip [636919 B]
+FILE 题目资料\原始下载附件\hookme.rar [5125397 B]
+FILE 题目资料\原始下载附件\note.zip [5832 B]
+FILE 题目资料\原始下载附件\PaluArray_flag.zip [73952 B]
+FILE 题目资料\原始下载附件\Prompt+Trace附件.zip [2579 B]
+FILE 题目资料\原始下载附件\rainbow.zip [4038 B]
+FILE 题目资料\原始下载附件\README.md [7656 B]
+FILE 题目资料\原始下载附件\secret.zip [1170497 B]
+FILE 题目资料\原始下载附件\spring.zip [30014 B]
+FILE 题目资料\原始下载附件\Sql注入的应急排查.zip [315805 B]
+FILE 题目资料\原始下载附件\tradre.zip [11073 B]
+FILE 题目资料\原始下载附件\Veiled+Shell附件.zip [7404 B]
+FILE 题目资料\原始下载附件\Victory_Melody.zip [13676 B]
+=== CHALLENGE #562 ===
+DIR 题目资料\批次14_20260929\562_checker
+FILE 题目资料\批次14_20260929\562_checker\独立执行复核输出.txt [1342 B]
+FILE 题目资料\批次14_20260929\562_checker\关键函数反汇编.txt [14712 B]
+FILE 题目资料\批次14_20260929\562_checker\命令与输出记录.txt [125210 B]
+FILE 题目资料\批次14_20260929\562_checker\正向复算输出.txt [1052 B]
+FILE 题目资料\批次14_20260929\562_checker\data_区段.txt [1218 B]
+FILE 题目资料\批次14_20260929\562_checker\independent_forward_check.py [3160 B]
+FILE 题目资料\批次14_20260929\562_checker\README.md [2940 B]
+FILE 题目资料\批次14_20260929\562_checker\sections.txt [3240 B]
+FILE 题目资料\批次14_20260929\562_checker\SHA256SUMS.txt [2348 B]
+FILE 题目资料\批次14_20260929\562_checker\solve_checker.py [2454 B]
+FILE 题目资料\批次14_20260929\562_checker\strings_ascii.txt [28150 B]
+FILE 题目资料\批次14_20260929\562_checker\symbols_full.txt [65772 B]
+FILE 题目资料\批次14_20260929\562_checker\WP_第一届启航杯checker.md [9246 B]
+FILE 题目资料\批次14_20260929\562_checker\复核_独立\checker.exe [42857 B]
+FILE 题目资料\批次14_20260929\562_checker\提取_分析\checker.exe [42857 B]
+FILE 题目资料\批次14_20260929\562_checker\附件_原始\checker_20260929.zip [17498 B]
+DIR 题目资料\checker_562
+FILE 题目资料\checker_562\checker_platform_20260929.zip [17498 B]
+FILE 题目资料\checker_562\checker.exe [42857 B]
+FILE 题目资料\checker_562\solve_checker.py [557 B]
+FILE 题目资料\checker_562\analysis\agent_checker562_independent_reaudit_transcript_20260929.txt [262661 B]
+FILE 题目资料\checker_562\analysis\agent_checker562_independent_rederive.py [3630 B]
+FILE 题目资料\checker_562\analysis\agent_checker562_independent_WP_transcript_20260929.txt [44890 B]
+FILE 题目资料\checker_562\analysis\agent_checker562_platform_attachment_evidence_20260929.txt [543168 B]
+FILE 题目资料\checker_562\analysis\checker_562_independent_reaudit_WP_20260929.md [9925 B]
+FILE 题目资料\checker_562\analysis\checker_562_reaudit_transcript_20260929.txt [104394 B]
+FILE 题目资料\checker_562\analysis\checker_562_WP.md [12465 B]
+FILE 题目资料\checker_562\analysis\checker_audit_terminal_20260929.txt [16508 B]
+FILE 题目资料\checker_562\analysis\checker_disassembly.txt [196844 B]
+FILE 题目资料\checker_562\analysis\checker_rejection_audit_20260929.md [2456 B]
+FILE 题目资料\checker_562\analysis\checker_rejection_audit_static.py [3858 B]
+FILE 题目资料\checker_562\analysis\checker_rejection_audit_transcript_20260929.txt [24426 B]
+FILE 题目资料\checker_562\analysis\checker_strings_ascii.txt [14914 B]
+FILE 题目资料\checker_562\analysis\solve_checker_from_pe.py [4131 B]
+FILE 题目资料\checker_562\originals\checker_platform_download_20260929_051349.zip [17498 B]
+FILE 题目资料\checker_562\附件_20260929\checker.exe [42857 B]
+DIR 题目资料\第一届启航杯checker_562
+FILE 题目资料\第一届启航杯checker_562\wp.md [9586 B]
+FILE 题目资料\第一届启航杯checker_562\analysis\byte_table_562_output.txt [1506 B]
+FILE 题目资料\第一届启航杯checker_562\analysis\byte_table_562.py [542 B]
+FILE 题目资料\第一届启航杯checker_562\analysis\checker_disassembly.txt [196806 B]
+FILE 题目资料\第一届启航杯checker_562\analysis\dwarf_info.txt [68507 B]
+FILE 题目资料\第一届启航杯checker_562\analysis\independent_audit_562_candidate_output.txt [581 B]
+FILE 题目资料\第一届启航杯checker_562\analysis\independent_audit_562_candidate.py [1175 B]
+FILE 题目资料\第一届启航杯checker_562\analysis\independent_audit_562_disasm.py [821 B]
+FILE 题目资料\第一届启航杯checker_562\analysis\independent_audit_562_disasm.txt [26901 B]
+FILE 题目资料\第一届启航杯checker_562\analysis\independent_audit_562_import_wrappers.py [1480 B]
+FILE 题目资料\第一届启航杯checker_562\analysis\independent_audit_562_import_wrappers.txt [4369 B]
+FILE 题目资料\第一届启航杯checker_562\analysis\independent_audit_562_main.py [546 B]
+FILE 题目资料\第一届启航杯checker_562\analysis\independent_audit_562_main.txt [9029 B]
+FILE 题目资料\第一届启航杯checker_562\analysis\independent_audit_562_output.txt [81245 B]
+FILE 题目资料\第一届启航杯checker_562\analysis\independent_audit_562_xrefs.py [1296 B]
+FILE 题目资料\第一届启航杯checker_562\analysis\independent_audit_562_xrefs.txt [4936 B]
+FILE 题目资料\第一届启航杯checker_562\analysis\independent_audit_562.md [2248 B]
+FILE 题目资料\第一届启航杯checker_562\analysis\independent_audit_562.py [3301 B]
+FILE 题目资料\第一届启航杯checker_562\analysis\inspect_pe.py [2082 B]
+FILE 题目资料\第一届启航杯checker_562\analysis\root_verify_562_output.txt [661 B]
+FILE 题目资料\第一届启航杯checker_562\analysis\root_verify_562.py [2055 B]
+FILE 题目资料\第一届启航杯checker_562\analysis\solve_static.py [3323 B]
+FILE 题目资料\第一届启航杯checker_562\analysis\verify_forward.py [1429 B]
+FILE 题目资料\第一届启航杯checker_562\analysis\extracted\checker.exe [42857 B]
+FILE 题目资料\第一届启航杯checker_562\originals\checker.zip [17498 B]
+=== CHALLENGE #533 ===
+DIR 题目资料\批次13_20260929\533_圣人当仁不让
+FILE 题目资料\批次13_20260929\533_圣人当仁不让\533_static_analysis_transcript.txt [39163 B]
+FILE 题目资料\批次13_20260929\533_圣人当仁不让\README.md [638 B]
+FILE 题目资料\批次13_20260929\533_圣人当仁不让\wp.md [3917 B]
+FILE 题目资料\批次13_20260929\533_圣人当仁不让\analysis\derive_candidate.py [1697 B]
+FILE 题目资料\批次13_20260929\533_圣人当仁不让\analysis\ez_vm.exe [82661 B]
+FILE 题目资料\批次13_20260929\533_圣人当仁不让\analysis\inspect_tail.py [885 B]
+FILE 题目资料\批次13_20260929\533_圣人当仁不让\analysis\static_pe.py [2523 B]
+FILE 题目资料\批次13_20260929\533_圣人当仁不让\evidence\533_static_evidence.md [2972 B]
+FILE 题目资料\批次13_20260929\533_圣人当仁不让\originals\ez_vm.zip [26778 B]
+DIR 题目资料\第一届启航杯checker_562
+FILE 题目资料\第一届启航杯checker_562\wp.md [9586 B]
+FILE 题目资料\第一届启航杯checker_562\analysis\byte_table_562_output.txt [1506 B]
+FILE 题目资料\第一届启航杯checker_562\analysis\byte_table_562.py [542 B]
+FILE 题目资料\第一届启航杯checker_562\analysis\checker_disassembly.txt [196806 B]
+FILE 题目资料\第一届启航杯checker_562\analysis\dwarf_info.txt [68507 B]
+FILE 题目资料\第一届启航杯checker_562\analysis\independent_audit_562_candidate_output.txt [581 B]
+FILE 题目资料\第一届启航杯checker_562\analysis\independent_audit_562_candidate.py [1175 B]
+FILE 题目资料\第一届启航杯checker_562\analysis\independent_audit_562_disasm.py [821 B]
+FILE 题目资料\第一届启航杯checker_562\analysis\independent_audit_562_disasm.txt [26901 B]
+FILE 题目资料\第一届启航杯checker_562\analysis\independent_audit_562_import_wrappers.py [1480 B]
+FILE 题目资料\第一届启航杯checker_562\analysis\independent_audit_562_import_wrappers.txt [4369 B]
+FILE 题目资料\第一届启航杯checker_562\analysis\independent_audit_562_main.py [546 B]
+FILE 题目资料\第一届启航杯checker_562\analysis\independent_audit_562_main.txt [9029 B]
+FILE 题目资料\第一届启航杯checker_562\analysis\independent_audit_562_output.txt [81245 B]
+FILE 题目资料\第一届启航杯checker_562\analysis\independent_audit_562_xrefs.py [1296 B]
+FILE 题目资料\第一届启航杯checker_562\analysis\independent_audit_562_xrefs.txt [4936 B]
+FILE 题目资料\第一届启航杯checker_562\analysis\independent_audit_562.md [2248 B]
+FILE 题目资料\第一届启航杯checker_562\analysis\independent_audit_562.py [3301 B]
+FILE 题目资料\第一届启航杯checker_562\analysis\inspect_pe.py [2082 B]
+FILE 题目资料\第一届启航杯checker_562\analysis\root_verify_562_output.txt [661 B]
+FILE 题目资料\第一届启航杯checker_562\analysis\root_verify_562.py [2055 B]
+FILE 题目资料\第一届启航杯checker_562\analysis\solve_static.py [3323 B]
+FILE 题目资料\第一届启航杯checker_562\analysis\verify_forward.py [1429 B]
+FILE 题目资料\第一届启航杯checker_562\analysis\extracted\checker.exe [42857 B]
+FILE 题目资料\第一届启航杯checker_562\originals\checker.zip [17498 B]
+COMMAND> write batch selection note with user-visible fee/status checks
+NOTE=C:\Users\mzj\Desktop\CTF\玄机刷题\记录\批次15_选题核验_20260929.md
+**********************
+PowerShell transcript end
+End time: 20260929171620
+**********************

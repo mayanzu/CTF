@@ -1,0 +1,166 @@
+===== classes4.dex sha256=C3CB9DB6ECF2DBBFA9B1C49476B9EE1EDC3085AA6808B5CFF98190EE3FABF0CA class_defs=3 =====
+
+CLASS Lcom/example/hookme/MainActivity$$ExternalSyntheticLambda0; access=0x1011 source=D8$$SyntheticClass
+
+METHOD direct <init>(Landroid/widget/EditText;Lcom/example/hookme/MainActivity;Landroid/widget/TextView;)V access=0x11001 code_off=0x5bc
+  registers=4 ins=4 outs=1 tries=0 insns=10
+  0000: invoke-direct            1070 [23, 0] method@23=('Ljava/lang/Object;', '()V', '<init>')
+  0003: iput-object              015b [0] field@0=('Lcom/example/hookme/MainActivity$$ExternalSyntheticLambda0;', 'Landroid/widget/EditText;', 'f$0')
+  0005: iput-object              025b [1] field@1=('Lcom/example/hookme/MainActivity$$ExternalSyntheticLambda0;', 'Lcom/example/hookme/MainActivity;', 'f$1')
+  0007: iput-object              035b [2] field@2=('Lcom/example/hookme/MainActivity$$ExternalSyntheticLambda0;', 'Landroid/widget/TextView;', 'f$2')
+  0009: return-void              000e []
+
+METHOD virtual onClick(Landroid/view/View;)V access=0x11 code_off=0x5e0
+  registers=5 ins=2 outs=4 tries=0 insns=10
+  0000: iget-object              3054 [0] field@0=('Lcom/example/hookme/MainActivity$$ExternalSyntheticLambda0;', 'Landroid/widget/EditText;', 'f$0')
+  0002: iget-object              3154 [1] field@1=('Lcom/example/hookme/MainActivity$$ExternalSyntheticLambda0;', 'Lcom/example/hookme/MainActivity;', 'f$1')
+  0004: iget-object              3254 [2] field@2=('Lcom/example/hookme/MainActivity$$ExternalSyntheticLambda0;', 'Landroid/widget/TextView;', 'f$2')
+  0006: invoke-static            4071 [9, 16912] method@9=('Lcom/example/hookme/MainActivity;', '(Landroid/widget/EditText;Lcom/example/hookme/MainActivity;Landroid/widget/TextView;Landroid/view/View;)V', '$r8$lambda$Sr6sQXzvEjgJBU6OLiC0M3Wd7xs')
+  0009: return-void              000e []
+
+CLASS Lcom/example/hookme/MainActivity$Companion; access=0x11 source=MainActivity.kt
+
+METHOD direct <init>()V access=0x10002 code_off=0x604
+  registers=1 ins=1 outs=1 tries=0 insns=4
+  0000: invoke-direct            1070 [23, 0] method@23=('Ljava/lang/Object;', '()V', '<init>')
+  0003: return-void              000e []
+
+METHOD direct <init>(Lkotlin/jvm/internal/DefaultConstructorMarker;)V access=0x11001 code_off=0x61c
+  registers=2 ins=2 outs=1 tries=0 insns=4
+  0000: invoke-direct            1070 [7, 0] method@7=('Lcom/example/hookme/MainActivity$Companion;', '()V', '<init>')
+  0003: return-void              000e []
+
+CLASS Lcom/example/hookme/MainActivity; access=0x11 source=MainActivity.kt
+
+METHOD direct $r8$lambda$Sr6sQXzvEjgJBU6OLiC0M3Wd7xs(Landroid/widget/EditText;Lcom/example/hookme/MainActivity;Landroid/widget/TextView;Landroid/view/View;)V access=0x1009 code_off=0x6d8
+  registers=4 ins=4 outs=4 tries=0 insns=4
+  0000: invoke-static            4071 [17, 12816] method@17=('Lcom/example/hookme/MainActivity;', '(Landroid/widget/EditText;Lcom/example/hookme/MainActivity;Landroid/widget/TextView;Landroid/view/View;)V', 'onCreate$lambda$0')
+  0003: return-void              000e []
+
+METHOD direct <clinit>()V access=0x10008 code_off=0x6f0
+  registers=2 ins=0 outs=2 tries=0 insns=15
+  0000: new-instance             0022 [10]
+  0002: const/4                  0112 [] literal=0
+  0003: invoke-direct            2070 [8, 16] method@8=('Lcom/example/hookme/MainActivity$Companion;', '(Lkotlin/jvm/internal/DefaultConstructorMarker;)V', '<init>')
+  0006: sput-object              0069 [3] field@3=('Lcom/example/hookme/MainActivity;', 'Lcom/example/hookme/MainActivity$Companion;', 'Companion')
+  0008: nop                      0000 []
+  0009: const-string             001a [84] string@84='hookme'
+  000b: invoke-static            1071 [27, 0] method@27=('Ljava/lang/System;', '(Ljava/lang/String;)V', 'loadLibrary')
+  000e: return-void              000e []
+
+METHOD direct <init>()V access=0x10001 code_off=0x720
+  registers=1 ins=1 outs=1 tries=0 insns=4
+  0000: invoke-direct            1070 [3, 0] method@3=('Landroidx/appcompat/app/AppCompatActivity;', '()V', '<init>')
+  0003: return-void              000e []
+
+METHOD direct hexStringToByteArray(Ljava/lang/String;)[B access=0x12 code_off=0x634
+  registers=9 ins=2 outs=3 tries=0 insns=74
+  0000: invoke-virtual           106e [25, 8] method@25=('Ljava/lang/String;', '()I', 'length')
+  0003: move-result              000a []
+  0004: const/4                  2112 [] literal=2
+  0005: op_b3                    10b3 []
+  0006: new-array                0023 [33]
+  0008: const/4                  0212 [] literal=0
+  0009: invoke-virtual           106e [25, 8] method@25=('Ljava/lang/String;', '()I', 'length')
+  000c: move-result              030a []
+  000d: invoke-static            2071 [34, 50] method@34=('Lkotlin/ranges/RangesKt;', '(II)Lkotlin/ranges/IntRange;', 'until')
+  0010: move-result-object       020c []
+  0011: check-cast               021f [27]
+  0013: invoke-static            2071 [33, 18] method@33=('Lkotlin/ranges/RangesKt;', '(Lkotlin/ranges/IntProgression;I)Lkotlin/ranges/IntProgression;', 'step')
+  0016: move-result-object       010c []
+  0017: invoke-virtual           106e [30, 1] method@30=('Lkotlin/ranges/IntProgression;', '()I', 'getFirst')
+  001a: move-result              020a []
+  001b: invoke-virtual           106e [31, 1] method@31=('Lkotlin/ranges/IntProgression;', '()I', 'getLast')
+  001e: move-result              030a []
+  001f: invoke-virtual           106e [32, 1] method@32=('Lkotlin/ranges/IntProgression;', '()I', 'getStep')
+  0022: move-result              010a []
+  0023: if-lez                   013d [4] branch_delta=1 target=36
+  0025: if-le                    3237 [6] branch_delta=50 target=87
+  0027: if-gez                   013b [34] branch_delta=1 target=40
+  0029: if-gt                    2336 [32] branch_delta=35 target=76
+  002b: op_db                    04db [514]
+  002d: op_d8                    05d8 [514]
+  002f: invoke-virtual           306e [26, 1320] method@26=('Ljava/lang/String;', '(II)Ljava/lang/String;', 'substring')
+  0032: move-result-object       050c []
+  0033: const-string             061a [109] string@109='substring(...)'
+  0035: invoke-static            2071 [29, 101] method@29=('Lkotlin/jvm/internal/Intrinsics;', '(Ljava/lang/Object;Ljava/lang/String;)V', 'checkNotNullExpressionValue')
+  0038: const/16                 0613 [16] literal/signed=16
+  003a: invoke-static            1071 [35, 6] method@35=('Lkotlin/text/CharsKt;', '(I)I', 'checkRadix')
+  003d: move-result              060a []
+  003e: invoke-static            2071 [22, 101] method@22=('Ljava/lang/Integer;', '(Ljava/lang/String;I)I', 'parseInt')
+  0041: move-result              050a []
+  0042: int-to-byte              558d []
+  0043: aput-byte                054f [1024]
+  0045: if-eq                    3232 [4] branch_delta=50 target=119
+  0047: op_b0                    12b0 []
+  0048: goto                     e328 [] branch_delta=-29 target=43
+  0049: return-object            0011 []
+
+METHOD direct onCreate$lambda$0(Landroid/widget/EditText;Lcom/example/hookme/MainActivity;Landroid/widget/TextView;Landroid/view/View;)V access=0x1a code_off=0x738
+  registers=9 ins=4 outs=2 tries=0 insns=71
+  0000: invoke-virtual           106e [1, 5] method@1=('Landroid/widget/EditText;', '()Landroid/text/Editable;', 'getText')
+  0003: move-result-object       000c []
+  0004: invoke-virtual           106e [24, 0] method@24=('Ljava/lang/Object;', '()Ljava/lang/String;', 'toString')
+  0007: move-result-object       000c []
+  0008: move-object              0107 []
+  0009: check-cast               011f [18]
+  000b: invoke-interface         1072 [21, 1] method@21=('Ljava/lang/CharSequence;', '()I', 'length')
+  000e: move-result              010a []
+  000f: if-nez                   0139 [4] branch_delta=1 target=16
+  0011: const/4                  1112 [] literal=1
+  0012: goto                     0228 [] branch_delta=2 target=20
+  0013: const/4                  0112 [] literal=0
+  0014: if-nez                   0139 [43] branch_delta=1 target=21
+  0016: invoke-virtual           206e [18, 6] method@18=('Lcom/example/hookme/MainActivity;', '(Ljava/lang/String;)[B', 'rc4Encrypt')
+  0019: move-result-object       010c []
+  001a: sget                     0260 [8] field@8=('Lcom/example/hookme/R$string;', 'I', 'correct_ciphertext')
+  001c: invoke-virtual           206e [14, 38] method@14=('Lcom/example/hookme/MainActivity;', '(I)Ljava/lang/String;', 'getString')
+  001f: move-result-object       020c []
+  0020: const-string             031a [80] string@80='getString(...)'
+  0022: invoke-static            2071 [29, 50] method@29=('Lkotlin/jvm/internal/Intrinsics;', '(Ljava/lang/Object;Ljava/lang/String;)V', 'checkNotNullExpressionValue')
+  0025: invoke-direct            2070 [15, 38] method@15=('Lcom/example/hookme/MainActivity;', '(Ljava/lang/String;)[B', 'hexStringToByteArray')
+  0028: move-result-object       030c []
+  0029: invoke-static            2071 [28, 49] method@28=('Ljava/util/Arrays;', '([B[B)Z', 'equals')
+  002c: move-result              040a []
+  002d: if-eqz                   0438 [10] branch_delta=4 target=49
+  002f: const-string             041a [110] string@110='success'
+  0031: check-cast               041f [18]
+  0033: invoke-virtual           206e [2, 71] method@2=('Landroid/widget/TextView;', '(Ljava/lang/CharSequence;)V', 'setText')
+  0036: goto                     1028 [] branch_delta=16 target=70
+  0037: const-string             041a [117] string@117='wrong'
+  0039: check-cast               041f [18]
+  003b: invoke-virtual           206e [2, 71] method@2=('Landroid/widget/TextView;', '(Ljava/lang/CharSequence;)V', 'setText')
+  003e: goto                     0828 [] branch_delta=8 target=70
+  003f: const-string             011a [121] string@121='请输入flag！'
+  0041: check-cast               011f [18]
+  0043: invoke-virtual           206e [2, 23] method@2=('Landroid/widget/TextView;', '(Ljava/lang/CharSequence;)V', 'setText')
+  0046: return-void              000e []
+
+METHOD virtual onCreate(Landroid/os/Bundle;)V access=0x4 code_off=0x7d8
+  registers=7 ins=2 outs=4 tries=0 insns=48
+  0000: invoke-super             206f [4, 101] method@4=('Landroidx/appcompat/app/AppCompatActivity;', '(Landroid/os/Bundle;)V', 'onCreate')
+  0003: sget                     0060 [7] field@7=('Lcom/example/hookme/R$layout;', 'I', 'activity_main')
+  0005: invoke-virtual           206e [19, 5] method@19=('Lcom/example/hookme/MainActivity;', '(I)V', 'setContentView')
+  0008: invoke-virtual           106e [13, 5] method@13=('Lcom/example/hookme/MainActivity;', '()Ljava/lang/String;', 'getPackageName')
+  000b: move-result-object       000c []
+  000c: invoke-virtual           206e [20, 5] method@20=('Lcom/example/hookme/MainActivity;', '(Ljava/lang/String;)V', 'setPackageNameToNative')
+  000f: sget                     0160 [4] field@4=('Lcom/example/hookme/R$id;', 'I', 'inputField')
+  0011: invoke-virtual           206e [12, 21] method@12=('Lcom/example/hookme/MainActivity;', '(I)Landroid/view/View;', 'findViewById')
+  0014: move-result-object       010c []
+  0015: check-cast               011f [6]
+  0017: sget                     0260 [6] field@6=('Lcom/example/hookme/R$id;', 'I', 'submitButton')
+  0019: invoke-virtual           206e [12, 37] method@12=('Lcom/example/hookme/MainActivity;', '(I)Landroid/view/View;', 'findViewById')
+  001c: move-result-object       020c []
+  001d: check-cast               021f [5]
+  001f: sget                     0360 [5] field@5=('Lcom/example/hookme/R$id;', 'I', 'resultTextView')
+  0021: invoke-virtual           206e [12, 53] method@12=('Lcom/example/hookme/MainActivity;', '(I)Landroid/view/View;', 'findViewById')
+  0024: move-result-object       030c []
+  0025: check-cast               031f [7]
+  0027: new-instance             0422 [9]
+  0029: invoke-direct            4070 [5, 13588] method@5=('Lcom/example/hookme/MainActivity$$ExternalSyntheticLambda0;', '(Landroid/widget/EditText;Lcom/example/hookme/MainActivity;Landroid/widget/TextView;)V', '<init>')
+  002c: invoke-virtual           206e [0, 66] method@0=('Landroid/widget/Button;', '(Landroid/view/View$OnClickListener;)V', 'setOnClickListener')
+  002f: return-void              000e []
+
+METHOD virtual rc4Encrypt(Ljava/lang/String;)[B access=0x111 code_off=0x0
+
+METHOD virtual setPackageNameToNative(Ljava/lang/String;)V access=0x111 code_off=0x0

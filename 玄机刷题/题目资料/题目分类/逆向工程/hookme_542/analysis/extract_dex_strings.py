@@ -1,0 +1,53 @@
+from pathlib import Path
+from zipfile import ZipFile
+import re, struct
+root = Path(r"C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\题目分类\逆向工程\hookme_542")
+apk = root / "附件解包" / "hookme" / "HookMe.apk"
+out = root / "analysis" / "components"
+out.mkdir(parents=True, exist_ok=True)
+pattern = re.compile(r"(?i)hook|flag|native|check|verify|correct|wrong|success|fail|input|secret|sha|md5|xor|key|jni|token|auth|password|passcode|MainActivity|\.Main")
+def uleb(buf, p):
+    value = shift = 0
+    while True:
+        b = buf[p]; p += 1
+        value |= (b & 0x7f) << shift
+        if not b & 0x80: return value, p
+        shift += 7
+with ZipFile(apk) as zf:
+    selected = [n for n in zf.namelist() if n == "AndroidManifest.xml" or re.fullmatch(r"classes\d*\.dex", n) or (n.startswith("lib/") and n.endswith(".so"))]
+    print("SELECTED APK COMPONENTS:")
+    for name in selected:
+        dest = out / name
+        dest.parent.mkdir(parents=True, exist_ok=True)
+        data = zf.read(name)
+        dest.write_bytes(data)
+        print(f"{name}\t{len(data)}\t{dest}")
+for dex in sorted(out.glob("classes*.dex")):
+    data = dex.read_bytes()
+    if data[:4] != b"dex\n":
+        print(f"BAD DEX MAGIC: {dex}"); continue
+    count, off = struct.unpack_from("<II", data, 0x38)
+    strings=[]
+    for i in range(count):
+        (item_off,) = struct.unpack_from("<I", data, off + i*4)
+        _, p = uleb(data, item_off)
+        end = data.index(b"\0", p)
+        raw = data[p:end]
+        value = raw.decode("utf-8", "replace")
+        strings.append(value)
+    textpath = dex.with_suffix(".strings.txt")
+    textpath.write_text("".join(f"{i:06d}\t{s}\n" for i,s in enumerate(strings)), encoding="utf-8")
+    print(f"\n{dex.name}: strings={count}, file={textpath}")
+    print("MATCHING STRINGS:")
+    for i,s in enumerate(strings):
+        if pattern.search(s): print(f"{i:06d}\t{s}")
+    # list class descriptors to distinguish app code from bundled AndroidX/Kotlin libraries
+    class_count, class_off = struct.unpack_from("<II", data, 0x60)
+    type_count, type_off = struct.unpack_from("<II", data, 0x40)
+    type_ids = [struct.unpack_from("<I", data, type_off+i*4)[0] for i in range(type_count)]
+    print(f"CLASS_DEFS={class_count}")
+    for i in range(class_count):
+        class_idx = struct.unpack_from("<I", data, class_off+i*32)[0]
+        desc = strings[type_ids[class_idx]] if class_idx < len(type_ids) else "?"
+        if any(x in desc.lower() for x in ("hook", "challenge", "main", "native", "activity")):
+            print(f"CLASS[{i}]={desc}")

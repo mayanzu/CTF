@@ -1,0 +1,30 @@
+AUDIT_SCOPE=static ZIP/PE bytes only; no PE load/execute; no platform access
+ZIP_SHA256=420820830348B3791655E6912DE1DBF84C066F876F9AAC0859F19E91A6A92FF1
+ZIP_ENTRIES=1; entry=palugogogo_flag.exe; uncompressed=1456640; compressed=702384
+INNER_PE_SHA256=5DEF2E11E28DB1899B8F5808FBFD6F874CCA7E517D8DC5913D88BE332B17301D; extracted_SHA256=5DEF2E11E28DB1899B8F5808FBFD6F874CCA7E517D8DC5913D88BE332B17301D; byte_identical=True
+PE_MACHINE=0x8664; PE32+=True; imagebase=0x400000; sections=8
+PE_SECTIONS=.text:RVA=0x1000,raw=0x600,size=0x94600; .rdata:RVA=0x96000,raw=0x94c00,size=0xb8800; .data:RVA=0x14f000,raw=0x14d400,size=0xe200; .pdata:RVA=0x1e6000,raw=0x15b600,size=0x4600; .xdata:RVA=0x1eb000,raw=0x15fc00,size=0x200; .idata:RVA=0x1ec000,raw=0x15fe00,size=0x600; .reloc:RVA=0x1ed000,raw=0x160400,size=0x3400; .symtab:RVA=0x1f1000,raw=0x163800,size=0x200
+RNG_COOKED_VA=0x551de0; file_offset=0x1501e0; entries=607; SHA256=1928503B93A563E491119A5889BABA73D1605B90B63634C14A408805797A7C7B
+RNG_COOKED_FIRST4=c5f74a33eb98ffea,c07b4a41ba965f5b,135ec513cb81af0f,4a04fb5ca74395eb
+TARGET_VA=0x4bf204; file_offset=0xbde04; byte_length=84; token_count=17
+TARGET=0xb5,0xbc,0xb2,0xb9,0xce,0xb1,0xb7,0x8a,0x84,0xa2,0xb4,0xba,0xc1,0xb8,0xba,0xbb,0xcd
+GO_SEED=996; seedrand_multiplier=48271; modulus=2147483647; warmup=20; tap=0; feed=334
+Intn(100)[0]: raw31=[1041354279]; cutoff=2147483599; result=79
+Intn(100)[1]: raw31=[1580091581]; cutoff=2147483599; result=81
+Intn(100)[2]: raw31=[1115091]; cutoff=2147483599; result=91
+Intn(100)[3]: raw31=[1911897105]; cutoff=2147483599; result=5
+Intn(100)[4]: raw31=[1910595394]; cutoff=2147483599; result=94
+Intn(100)[5]: raw31=[38800791]; cutoff=2147483599; result=91
+Intn(100)[6]: raw31=[1346999449]; cutoff=2147483599; result=49
+Intn(100)[7]: raw31=[2046900565]; cutoff=2147483599; result=65
+Intn(100)[8]: raw31=[138952940]; cutoff=2147483599; result=40
+Intn(100)[9]: raw31=[600454308]; cutoff=2147483599; result=8
+Intn(2): raw31=[1175819234]; cutoff=None; result=0
+INTN100_VALUES=[79, 81, 91, 5, 94, 91, 49, 65, 40, 8]
+NEXT_INTN2_INDEX=0; GETVALUE_KEY=79
+DECODED_CODEPOINTS=U+0066 U+006C U+0061 U+0067 U+007B U+0062 U+0067 U+0039 U+0032 U+004F U+0065 U+006A U+0070 U+0066 U+0067 U+006C U+007D
+CANDIDATE=flag{bg92Oejpfgl}
+FORWARD=0xb5,0xbc,0xb2,0xb9,0xce,0xb1,0xb7,0x8a,0x84,0xa2,0xb4,0xba,0xc1,0xb8,0xba,0xbb,0xcd
+FORWARD_MATCHES_ALL_84_BYTES=True
+PREFIX_CROSSCHECK_KEYS=[79, 79, 79, 79, 79]
+PLATFORM_ACCESS=none (not checked by this offline audit)

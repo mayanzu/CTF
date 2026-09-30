@@ -1,0 +1,244 @@
+
+xj538.exe:     file format pei-x86-64
+
+
+Disassembly of section .text:
+
+0000000000401a7f <aes_encrypt_128>:
+  401a7f:	55                   	push   rbp
+  401a80:	48 89 e5             	mov    rbp,rsp
+  401a83:	48 83 ec 40          	sub    rsp,0x40
+  401a87:	48 89 4d 10          	mov    QWORD PTR [rbp+0x10],rcx
+  401a8b:	48 89 55 18          	mov    QWORD PTR [rbp+0x18],rdx
+  401a8f:	4c 89 45 20          	mov    QWORD PTR [rbp+0x20],r8
+  401a93:	c6 45 ff 00          	mov    BYTE PTR [rbp-0x1],0x0
+  401a97:	eb 34                	jmp    401acd <aes_encrypt_128+0x4e>
+  401a99:	0f b6 45 ff          	movzx  eax,BYTE PTR [rbp-0x1]
+  401a9d:	48 8b 55 18          	mov    rdx,QWORD PTR [rbp+0x18]
+  401aa1:	48 01 d0             	add    rax,rdx
+  401aa4:	44 0f b6 00          	movzx  r8d,BYTE PTR [rax]
+  401aa8:	48 8b 45 10          	mov    rax,QWORD PTR [rbp+0x10]
+  401aac:	48 8d 50 01          	lea    rdx,[rax+0x1]
+  401ab0:	48 89 55 10          	mov    QWORD PTR [rbp+0x10],rdx
+  401ab4:	0f b6 08             	movzx  ecx,BYTE PTR [rax]
+  401ab7:	0f b6 45 ff          	movzx  eax,BYTE PTR [rbp-0x1]
+  401abb:	48 8b 55 20          	mov    rdx,QWORD PTR [rbp+0x20]
+  401abf:	48 01 d0             	add    rax,rdx
+  401ac2:	44 89 c2             	mov    edx,r8d
+  401ac5:	31 ca                	xor    edx,ecx
+  401ac7:	88 10                	mov    BYTE PTR [rax],dl
+  401ac9:	80 45 ff 01          	add    BYTE PTR [rbp-0x1],0x1
+  401acd:	80 7d ff 0f          	cmp    BYTE PTR [rbp-0x1],0xf
+  401ad1:	76 c6                	jbe    401a99 <aes_encrypt_128+0x1a>
+  401ad3:	c6 45 fe 01          	mov    BYTE PTR [rbp-0x2],0x1
+  401ad7:	e9 1b 02 00 00       	jmp    401cf7 <aes_encrypt_128+0x278>
+  401adc:	c6 45 ff 00          	mov    BYTE PTR [rbp-0x1],0x0
+  401ae0:	eb 2f                	jmp    401b11 <aes_encrypt_128+0x92>
+  401ae2:	0f b6 45 ff          	movzx  eax,BYTE PTR [rbp-0x1]
+  401ae6:	48 8b 55 20          	mov    rdx,QWORD PTR [rbp+0x20]
+  401aea:	48 01 d0             	add    rax,rdx
+  401aed:	0f b6 00             	movzx  eax,BYTE PTR [rax]
+  401af0:	0f b6 c0             	movzx  eax,al
+  401af3:	0f b6 55 ff          	movzx  edx,BYTE PTR [rbp-0x1]
+  401af7:	48 8d 4d e0          	lea    rcx,[rbp-0x20]
+  401afb:	48 01 ca             	add    rdx,rcx
+  401afe:	48 98                	cdqe
+  401b00:	48 8d 0d 39 26 00 00 	lea    rcx,[rip+0x2639]        # 404140 <INV_SBOX>
+  401b07:	0f b6 04 08          	movzx  eax,BYTE PTR [rax+rcx*1]
+  401b0b:	88 02                	mov    BYTE PTR [rdx],al
+  401b0d:	80 45 ff 01          	add    BYTE PTR [rbp-0x1],0x1
+  401b11:	80 7d ff 0f          	cmp    BYTE PTR [rbp-0x1],0xf
+  401b15:	76 cb                	jbe    401ae2 <aes_encrypt_128+0x63>
+  401b17:	48 8d 45 e0          	lea    rax,[rbp-0x20]
+  401b1b:	48 89 c1             	mov    rcx,rax
+  401b1e:	e8 51 fa ff ff       	call   401574 <shift_rows>
+  401b23:	c6 45 ff 00          	mov    BYTE PTR [rbp-0x1],0x0
+  401b27:	e9 7d 01 00 00       	jmp    401ca9 <aes_encrypt_128+0x22a>
+  401b2c:	0f b6 45 ff          	movzx  eax,BYTE PTR [rbp-0x1]
+  401b30:	48 98                	cdqe
+  401b32:	0f b6 54 05 e0       	movzx  edx,BYTE PTR [rbp+rax*1-0x20]
+  401b37:	0f b6 45 ff          	movzx  eax,BYTE PTR [rbp-0x1]
+  401b3b:	83 c0 01             	add    eax,0x1
+  401b3e:	48 98                	cdqe
+  401b40:	0f b6 44 05 e0       	movzx  eax,BYTE PTR [rbp+rax*1-0x20]
+  401b45:	31 c2                	xor    edx,eax
+  401b47:	0f b6 45 ff          	movzx  eax,BYTE PTR [rbp-0x1]
+  401b4b:	83 c0 02             	add    eax,0x2
+  401b4e:	48 98                	cdqe
+  401b50:	0f b6 44 05 e0       	movzx  eax,BYTE PTR [rbp+rax*1-0x20]
+  401b55:	31 c2                	xor    edx,eax
+  401b57:	0f b6 45 ff          	movzx  eax,BYTE PTR [rbp-0x1]
+  401b5b:	83 c0 03             	add    eax,0x3
+  401b5e:	48 98                	cdqe
+  401b60:	0f b6 44 05 e0       	movzx  eax,BYTE PTR [rbp+rax*1-0x20]
+  401b65:	31 d0                	xor    eax,edx
+  401b67:	88 45 fd             	mov    BYTE PTR [rbp-0x3],al
+  401b6a:	0f b6 45 ff          	movzx  eax,BYTE PTR [rbp-0x1]
+  401b6e:	48 98                	cdqe
+  401b70:	0f b6 54 05 e0       	movzx  edx,BYTE PTR [rbp+rax*1-0x20]
+  401b75:	0f b6 45 ff          	movzx  eax,BYTE PTR [rbp-0x1]
+  401b79:	83 c0 01             	add    eax,0x1
+  401b7c:	48 98                	cdqe
+  401b7e:	0f b6 44 05 e0       	movzx  eax,BYTE PTR [rbp+rax*1-0x20]
+  401b83:	31 d0                	xor    eax,edx
+  401b85:	0f b6 c0             	movzx  eax,al
+  401b88:	89 c1                	mov    ecx,eax
+  401b8a:	e8 c1 f9 ff ff       	call   401550 <mul2>
+  401b8f:	89 c2                	mov    edx,eax
+  401b91:	0f b6 45 ff          	movzx  eax,BYTE PTR [rbp-0x1]
+  401b95:	48 98                	cdqe
+  401b97:	0f b6 44 05 e0       	movzx  eax,BYTE PTR [rbp+rax*1-0x20]
+  401b9c:	89 d1                	mov    ecx,edx
+  401b9e:	31 c1                	xor    ecx,eax
+  401ba0:	0f b6 45 ff          	movzx  eax,BYTE PTR [rbp-0x1]
+  401ba4:	48 8b 55 20          	mov    rdx,QWORD PTR [rbp+0x20]
+  401ba8:	48 01 c2             	add    rdx,rax
+  401bab:	89 c8                	mov    eax,ecx
+  401bad:	32 45 fd             	xor    al,BYTE PTR [rbp-0x3]
+  401bb0:	88 02                	mov    BYTE PTR [rdx],al
+  401bb2:	0f b6 45 ff          	movzx  eax,BYTE PTR [rbp-0x1]
+  401bb6:	83 c0 01             	add    eax,0x1
+  401bb9:	48 98                	cdqe
+  401bbb:	0f b6 54 05 e0       	movzx  edx,BYTE PTR [rbp+rax*1-0x20]
+  401bc0:	0f b6 45 ff          	movzx  eax,BYTE PTR [rbp-0x1]
+  401bc4:	83 c0 02             	add    eax,0x2
+  401bc7:	48 98                	cdqe
+  401bc9:	0f b6 44 05 e0       	movzx  eax,BYTE PTR [rbp+rax*1-0x20]
+  401bce:	31 d0                	xor    eax,edx
+  401bd0:	0f b6 c0             	movzx  eax,al
+  401bd3:	89 c1                	mov    ecx,eax
+  401bd5:	e8 76 f9 ff ff       	call   401550 <mul2>
+  401bda:	89 c2                	mov    edx,eax
+  401bdc:	0f b6 45 ff          	movzx  eax,BYTE PTR [rbp-0x1]
+  401be0:	83 c0 01             	add    eax,0x1
+  401be3:	48 98                	cdqe
+  401be5:	0f b6 44 05 e0       	movzx  eax,BYTE PTR [rbp+rax*1-0x20]
+  401bea:	89 d1                	mov    ecx,edx
+  401bec:	31 c1                	xor    ecx,eax
+  401bee:	0f b6 45 ff          	movzx  eax,BYTE PTR [rbp-0x1]
+  401bf2:	48 8d 50 01          	lea    rdx,[rax+0x1]
+  401bf6:	48 8b 45 20          	mov    rax,QWORD PTR [rbp+0x20]
+  401bfa:	48 01 c2             	add    rdx,rax
+  401bfd:	89 c8                	mov    eax,ecx
+  401bff:	32 45 fd             	xor    al,BYTE PTR [rbp-0x3]
+  401c02:	88 02                	mov    BYTE PTR [rdx],al
+  401c04:	0f b6 45 ff          	movzx  eax,BYTE PTR [rbp-0x1]
+  401c08:	83 c0 02             	add    eax,0x2
+  401c0b:	48 98                	cdqe
+  401c0d:	0f b6 54 05 e0       	movzx  edx,BYTE PTR [rbp+rax*1-0x20]
+  401c12:	0f b6 45 ff          	movzx  eax,BYTE PTR [rbp-0x1]
+  401c16:	83 c0 03             	add    eax,0x3
+  401c19:	48 98                	cdqe
+  401c1b:	0f b6 44 05 e0       	movzx  eax,BYTE PTR [rbp+rax*1-0x20]
+  401c20:	31 d0                	xor    eax,edx
+  401c22:	0f b6 c0             	movzx  eax,al
+  401c25:	89 c1                	mov    ecx,eax
+  401c27:	e8 24 f9 ff ff       	call   401550 <mul2>
+  401c2c:	89 c2                	mov    edx,eax
+  401c2e:	0f b6 45 ff          	movzx  eax,BYTE PTR [rbp-0x1]
+  401c32:	83 c0 02             	add    eax,0x2
+  401c35:	48 98                	cdqe
+  401c37:	0f b6 44 05 e0       	movzx  eax,BYTE PTR [rbp+rax*1-0x20]
+  401c3c:	89 d1                	mov    ecx,edx
+  401c3e:	31 c1                	xor    ecx,eax
+  401c40:	0f b6 45 ff          	movzx  eax,BYTE PTR [rbp-0x1]
+  401c44:	48 8d 50 02          	lea    rdx,[rax+0x2]
+  401c48:	48 8b 45 20          	mov    rax,QWORD PTR [rbp+0x20]
+  401c4c:	48 01 c2             	add    rdx,rax
+  401c4f:	89 c8                	mov    eax,ecx
+  401c51:	32 45 fd             	xor    al,BYTE PTR [rbp-0x3]
+  401c54:	88 02                	mov    BYTE PTR [rdx],al
+  401c56:	0f b6 45 ff          	movzx  eax,BYTE PTR [rbp-0x1]
+  401c5a:	83 c0 03             	add    eax,0x3
+  401c5d:	48 98                	cdqe
+  401c5f:	0f b6 54 05 e0       	movzx  edx,BYTE PTR [rbp+rax*1-0x20]
+  401c64:	0f b6 45 ff          	movzx  eax,BYTE PTR [rbp-0x1]
+  401c68:	48 98                	cdqe
+  401c6a:	0f b6 44 05 e0       	movzx  eax,BYTE PTR [rbp+rax*1-0x20]
+  401c6f:	31 d0                	xor    eax,edx
+  401c71:	0f b6 c0             	movzx  eax,al
+  401c74:	89 c1                	mov    ecx,eax
+  401c76:	e8 d5 f8 ff ff       	call   401550 <mul2>
+  401c7b:	89 c2                	mov    edx,eax
+  401c7d:	0f b6 45 ff          	movzx  eax,BYTE PTR [rbp-0x1]
+  401c81:	83 c0 03             	add    eax,0x3
+  401c84:	48 98                	cdqe
+  401c86:	0f b6 44 05 e0       	movzx  eax,BYTE PTR [rbp+rax*1-0x20]
+  401c8b:	89 d1                	mov    ecx,edx
+  401c8d:	31 c1                	xor    ecx,eax
+  401c8f:	0f b6 45 ff          	movzx  eax,BYTE PTR [rbp-0x1]
+  401c93:	48 8d 50 03          	lea    rdx,[rax+0x3]
+  401c97:	48 8b 45 20          	mov    rax,QWORD PTR [rbp+0x20]
+  401c9b:	48 01 c2             	add    rdx,rax
+  401c9e:	89 c8                	mov    eax,ecx
+  401ca0:	32 45 fd             	xor    al,BYTE PTR [rbp-0x3]
+  401ca3:	88 02                	mov    BYTE PTR [rdx],al
+  401ca5:	80 45 ff 04          	add    BYTE PTR [rbp-0x1],0x4
+  401ca9:	80 7d ff 0f          	cmp    BYTE PTR [rbp-0x1],0xf
+  401cad:	0f 86 79 fe ff ff    	jbe    401b2c <aes_encrypt_128+0xad>
+  401cb3:	c6 45 ff 00          	mov    BYTE PTR [rbp-0x1],0x0
+  401cb7:	eb 34                	jmp    401ced <aes_encrypt_128+0x26e>
+  401cb9:	48 8b 45 10          	mov    rax,QWORD PTR [rbp+0x10]
+  401cbd:	48 8d 50 01          	lea    rdx,[rax+0x1]
+  401cc1:	48 89 55 10          	mov    QWORD PTR [rbp+0x10],rdx
+  401cc5:	44 0f b6 00          	movzx  r8d,BYTE PTR [rax]
+  401cc9:	0f b6 45 ff          	movzx  eax,BYTE PTR [rbp-0x1]
+  401ccd:	48 8b 55 20          	mov    rdx,QWORD PTR [rbp+0x20]
+  401cd1:	48 01 d0             	add    rax,rdx
+  401cd4:	0f b6 08             	movzx  ecx,BYTE PTR [rax]
+  401cd7:	0f b6 45 ff          	movzx  eax,BYTE PTR [rbp-0x1]
+  401cdb:	48 8b 55 20          	mov    rdx,QWORD PTR [rbp+0x20]
+  401cdf:	48 01 d0             	add    rax,rdx
+  401ce2:	44 89 c2             	mov    edx,r8d
+  401ce5:	31 ca                	xor    edx,ecx
+  401ce7:	88 10                	mov    BYTE PTR [rax],dl
+  401ce9:	80 45 ff 01          	add    BYTE PTR [rbp-0x1],0x1
+  401ced:	80 7d ff 0f          	cmp    BYTE PTR [rbp-0x1],0xf
+  401cf1:	76 c6                	jbe    401cb9 <aes_encrypt_128+0x23a>
+  401cf3:	80 45 fe 01          	add    BYTE PTR [rbp-0x2],0x1
+  401cf7:	80 7d fe 09          	cmp    BYTE PTR [rbp-0x2],0x9
+  401cfb:	0f 86 db fd ff ff    	jbe    401adc <aes_encrypt_128+0x5d>
+  401d01:	c6 45 ff 00          	mov    BYTE PTR [rbp-0x1],0x0
+  401d05:	eb 2f                	jmp    401d36 <aes_encrypt_128+0x2b7>
+  401d07:	0f b6 45 ff          	movzx  eax,BYTE PTR [rbp-0x1]
+  401d0b:	48 8b 55 20          	mov    rdx,QWORD PTR [rbp+0x20]
+  401d0f:	48 01 d0             	add    rax,rdx
+  401d12:	0f b6 00             	movzx  eax,BYTE PTR [rax]
+  401d15:	0f b6 c0             	movzx  eax,al
+  401d18:	0f b6 55 ff          	movzx  edx,BYTE PTR [rbp-0x1]
+  401d1c:	48 8b 4d 20          	mov    rcx,QWORD PTR [rbp+0x20]
+  401d20:	48 01 ca             	add    rdx,rcx
+  401d23:	48 98                	cdqe
+  401d25:	48 8d 0d 14 24 00 00 	lea    rcx,[rip+0x2414]        # 404140 <INV_SBOX>
+  401d2c:	0f b6 04 08          	movzx  eax,BYTE PTR [rax+rcx*1]
+  401d30:	88 02                	mov    BYTE PTR [rdx],al
+  401d32:	80 45 ff 01          	add    BYTE PTR [rbp-0x1],0x1
+  401d36:	80 7d ff 0f          	cmp    BYTE PTR [rbp-0x1],0xf
+  401d3a:	76 cb                	jbe    401d07 <aes_encrypt_128+0x288>
+  401d3c:	48 8b 45 20          	mov    rax,QWORD PTR [rbp+0x20]
+  401d40:	48 89 c1             	mov    rcx,rax
+  401d43:	e8 2c f8 ff ff       	call   401574 <shift_rows>
+  401d48:	c6 45 ff 00          	mov    BYTE PTR [rbp-0x1],0x0
+  401d4c:	eb 34                	jmp    401d82 <aes_encrypt_128+0x303>
+  401d4e:	48 8b 45 10          	mov    rax,QWORD PTR [rbp+0x10]
+  401d52:	48 8d 50 01          	lea    rdx,[rax+0x1]
+  401d56:	48 89 55 10          	mov    QWORD PTR [rbp+0x10],rdx
+  401d5a:	44 0f b6 00          	movzx  r8d,BYTE PTR [rax]
+  401d5e:	0f b6 45 ff          	movzx  eax,BYTE PTR [rbp-0x1]
+  401d62:	48 8b 55 20          	mov    rdx,QWORD PTR [rbp+0x20]
+  401d66:	48 01 d0             	add    rax,rdx
+  401d69:	0f b6 08             	movzx  ecx,BYTE PTR [rax]
+  401d6c:	0f b6 45 ff          	movzx  eax,BYTE PTR [rbp-0x1]
+  401d70:	48 8b 55 20          	mov    rdx,QWORD PTR [rbp+0x20]
+  401d74:	48 01 d0             	add    rax,rdx
+  401d77:	44 89 c2             	mov    edx,r8d
+  401d7a:	31 ca                	xor    edx,ecx
+  401d7c:	88 10                	mov    BYTE PTR [rax],dl
+  401d7e:	80 45 ff 01          	add    BYTE PTR [rbp-0x1],0x1
+  401d82:	80 7d ff 0f          	cmp    BYTE PTR [rbp-0x1],0xf
+  401d86:	76 c6                	jbe    401d4e <aes_encrypt_128+0x2cf>
+  401d88:	90                   	nop
+  401d89:	48 83 c4 40          	add    rsp,0x40
+  401d8d:	5d                   	pop    rbp
+  401d8e:	c3                   	ret
+  401d8f:	90                   	nop

@@ -1,0 +1,1654 @@
+**********************
+PowerShell transcript start
+Start time: 20260929034949
+Username: DESKTOP-412KTAR\mzj
+RunAs User: DESKTOP-412KTAR\mzj
+Configuration Name: 
+Machine: DESKTOP-412KTAR (Microsoft Windows NT 10.0.26200.0)
+Host Application: C:\Users\mzj\.cache\codex-runtimes\codex-primary-runtime\dependencies\native\powershell\pwsh.dll -Command try { [Console]::OutputEncoding=[System.Text.Encoding]::UTF8 } catch {}
+$ErrorActionPreference='Stop'; $root='C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\ezBase_541'; $analysis=Join-Path $root 'analysis'; if (!(Test-Path -LiteralPath $analysis)) { New-Item -ItemType Directory -Path $analysis | Out-Null }; $log=Join-Path $analysis 'ezbase541_reaudit_transcript_20260929.txt'; Start-Transcript -LiteralPath $log -Append; Write-Output "COMMAND> Get-ChildItem -Force '$root' -Recurse | Select-Object FullName,Length,LastWriteTime"; Get-ChildItem -Force -LiteralPath $root -Recurse | Select-Object FullName,Length,LastWriteTime | Format-Table -AutoSize; Write-Output "COMMAND> Get-FileHash -Algorithm SHA256 'C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\ezBase_541\附件_平台原件\ezBase_platform_20260929.rar'"; Get-FileHash -Algorithm SHA256 -LiteralPath (Join-Path $root '附件_平台原件\ezBase_platform_20260929.rar') | Format-List; Write-Output 'COMMAND> Get-Command 7z,7za,unar,unrar -ErrorAction SilentlyContinue'; Get-Command 7z,7za,unar,unrar -ErrorAction SilentlyContinue | Select-Object Name,Source,CommandType | Format-Table -AutoSize; Stop-Transcript
+Process ID: 29344
+PSVersion: 7.6.5
+PSEdition: Core
+GitCommitId: 7.6.5
+OS: Microsoft Windows 10.0.26200
+Platform: Win32NT
+PSCompatibleVersions: 1.0, 2.0, 3.0, 4.0, 5.0, 5.1, 6.0, 7.0
+PSRemotingProtocolVersion: 2.4
+SerializationVersion: 1.1.0.1
+WSManStackVersion: 3.0
+**********************
+Transcript started, output file is C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\ezBase_541\analysis\ezbase541_reaudit_transcript_20260929.txt
+COMMAND> Get-ChildItem -Force 'C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\ezBase_541' -Recurse | Select-Object FullName,Length,LastWriteTime
+
+FullName                                                                                                  Length LastWr
+                                                                                                                 iteTim
+                                                                                                                 e
+--------                                                                                                  ------ ------
+C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\ezBase_541\分析产物                                                   2026/…
+C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\ezBase_541\附件_平台原件                                              2026/…
+C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\ezBase_541\工作区                                                     2026/…
+C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\ezBase_541\analysis                                                   2026/…
+C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\ezBase_541\ezBase                                                     2025/…
+C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\ezBase_541\runshim                                                    2026/…
+C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\ezBase_541\candidate_35byte_prefix.txt                         36     2026/…
+C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\ezBase_541\candidate_36byte_flag.txt                           37     2026/…
+C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\ezBase_541\check_exports.py                                    2172   2026/…
+C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\ezBase_541\debug_dump.c                                        3053   2026/…
+C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\ezBase_541\debug_entry.c                                       5160   2026/…
+C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\ezBase_541\debug_importdump.c                                  2847   2026/…
+C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\ezBase_541\debug_mem.c                                         2885   2026/…
+C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\ezBase_541\debug_patch.c                                       4030   2026/…
+C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\ezBase_541\debug_stack.c                                       4142   2026/…
+C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\ezBase_541\decode_upx.py                                       2971   2026/…
+C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\ezBase_541\parse_exports.py                                    1941   2026/…
+C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\ezBase_541\runtime_import_tail.bin                             12288  2026/…
+C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\ezBase_541\shim_ucrt_min.c                                     245    2026/…
+C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\ezBase_541\shim_ucrt.c                                         113    2026/…
+C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\ezBase_541\shim_vcr_min.c                                      250    2026/…
+C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\ezBase_541\shim_vcr.c                                          98     2026/…
+C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\ezBase_541\solve_ez541_final.py                                1826   2026/…
+C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\ezBase_541\ucrtbased_forward.def                               1410   2026/…
+C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\ezBase_541\unpacked_runtime.bin                                45056  2026/…
+C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\ezBase_541\vcruntime140d_forward.def                           288    2026/…
+C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\ezBase_541\analysis\ezbase541_reaudit_transcript_20260929.txt  2135   2026/…
+C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\ezBase_541\ezBase\ezre.exe                                     9216   2025/…
+C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\ezBase_541\runshim\ezre.exe                                    9216   2025/…
+C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\ezBase_541\runshim\ucrtbased.dll                               90469  2026/…
+C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\ezBase_541\runshim\VCRUNTIME140D.dll                           90297  2026/…
+C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\ezBase_541\分析产物\2026-09-27                                        2026/…
+C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\ezBase_541\分析产物\README.md                                  216    2026/…
+C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\ezBase_541\分析产物\2026-09-27\_ezcode_oep.txt                 8671   2026/…
+C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\ezBase_541\分析产物\2026-09-27\_ezdecode_func.txt              7746   2026/…
+C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\ezBase_541\分析产物\2026-09-27\_ezdecode_output.txt            761    2026/…
+C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\ezBase_541\分析产物\2026-09-27\_ezdisasm_all.txt               197774 2026/…
+C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\ezBase_541\分析产物\2026-09-27\_ezexports.txt                  3629   2026/…
+C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\ezBase_541\分析产物\2026-09-27\_kernelbase_exports.txt         1196   2026/…
+C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\ezBase_541\工作区\2026-09-27                                          2026/…
+C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\ezBase_541\工作区\README.md                                    286    2026/…
+C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\ezBase_541\工作区\2026-09-27\minimal-runtime                          2026/…
+C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\ezBase_541\工作区\2026-09-27\_dumpmain.c                       3955   2026/…
+C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\ezBase_541\工作区\2026-09-27\_dumpmain.exe                     271809 2026/…
+C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\ezBase_541\工作区\2026-09-27\_dumpmain2.c                      3554   2026/…
+C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\ezBase_541\工作区\2026-09-27\_dumpmain2.exe                    272213 2026/…
+C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\ezBase_541\工作区\2026-09-27\_dumpmain3.c                      3765   2026/…
+C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\ezBase_541\工作区\2026-09-27\_dumpmain3.exe                    272725 2026/…
+C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\ezBase_541\工作区\2026-09-27\_ezdebug.exe                      276238 2026/…
+C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\ezBase_541\工作区\2026-09-27\_ezdump.exe                       269975 2026/…
+C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\ezBase_541\工作区\2026-09-27\_ezimportdump.exe                 269975 2026/…
+C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\ezBase_541\工作区\2026-09-27\_ezinput.txt                      37     2026/…
+C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\ezBase_541\工作区\2026-09-27\_ezmem.exe                        270712 2026/…
+C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\ezBase_541\工作区\2026-09-27\_ezpatch.exe                      272119 2026/…
+C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\ezBase_541\工作区\2026-09-27\_ezstack.exe                      272361 2026/…
+C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\ezBase_541\工作区\2026-09-27\solve_ez541_early.py              2019   2026/…
+C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\ezBase_541\工作区\2026-09-27\solve_ez541_final_snapshot.py     1425   2026/…
+C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\ezBase_541\工作区\2026-09-27\minimal-runtime\ucrtbased.dll     7387   2026/…
+C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\ezBase_541\工作区\2026-09-27\minimal-runtime\VCRUNTIME140D.dll 4658   2026/…
+C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\ezBase_541\附件_平台原件\ezBase_platform_20260929.rar          7833   2026/…
+
+COMMAND> Get-FileHash -Algorithm SHA256 'C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\ezBase_541\附件_平台原件\ezBase_platform_20260929.rar'
+
+Algorithm : SHA256
+Hash      : 0A7420F1D2D832474AD09EA55825900AF75EBA30DEA46DFB63F9A1AD17F0AF18
+Path      : C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\ezBase_541\附件_平台原件\ezBase_platform_20260929.rar
+
+COMMAND> Get-Command 7z,7za,unar,unrar -ErrorAction SilentlyContinue
+**********************
+PowerShell transcript end
+End time: 20260929034949
+**********************
+**********************
+PowerShell transcript start
+Start time: 20260929035022
+Username: DESKTOP-412KTAR\mzj
+RunAs User: DESKTOP-412KTAR\mzj
+Configuration Name: 
+Machine: DESKTOP-412KTAR (Microsoft Windows NT 10.0.26200.0)
+Host Application: C:\Users\mzj\.cache\codex-runtimes\codex-primary-runtime\dependencies\native\powershell\pwsh.dll -Command try { [Console]::OutputEncoding=[System.Text.Encoding]::UTF8 } catch {}
+$ErrorActionPreference='Stop'; $root='C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\ezBase_541'; $log=Join-Path $root 'analysis\ezbase541_reaudit_transcript_20260929.txt'; Start-Transcript -LiteralPath $log -Append; Write-Output "COMMAND> Get-Content candidate files, previous solver, tool README, old decode result"; foreach($rel in @('candidate_35byte_prefix.txt','candidate_36byte_flag.txt','solve_ez541_final.py','分析产物\README.md','工作区\README.md','分析产物\2026-09-27\_ezdecode_output.txt','分析产物\2026-09-27\_ezdecode_func.txt','工作区\2026-09-27\solve_ez541_final_snapshot.py','工作区\2026-09-27\_ezinput.txt')) { Write-Output ("--- " + $rel + " ---"); Get-Content -LiteralPath (Join-Path $root $rel) }; Write-Output 'COMMAND> rg -n --hidden -g *.md -g *.py -g *.txt -g *.c "flag\{|candidate|失败|拒绝" challenge folder'; rg -n --hidden -g '*.md' -g '*.py' -g '*.txt' -g '*.c' 'flag\{|candidate|失败|拒绝' $root; Write-Output 'COMMAND> Search known RAR extractors and Python packages'; $paths=@('C:\Program Files\7-Zip\7z.exe','C:\Program Files\WinRAR\WinRAR.exe','C:\Program Files\WinRAR\UnRAR.exe','C:\Program Files (x86)\7-Zip\7z.exe','C:\Program Files (x86)\WinRAR\UnRAR.exe'); foreach($p in $paths) { Write-Output ("{0} exists={1}" -f $p,(Test-Path -LiteralPath $p)) }; python -c "import importlib.util; print('rarfile:',bool(importlib.util.find_spec('rarfile'))); print('patool:',bool(importlib.util.find_spec('patool'))); print('py7zr:',bool(importlib.util.find_spec('py7zr')))"; Stop-Transcript
+Process ID: 18768
+PSVersion: 7.6.5
+PSEdition: Core
+GitCommitId: 7.6.5
+OS: Microsoft Windows 10.0.26200
+Platform: Win32NT
+PSCompatibleVersions: 1.0, 2.0, 3.0, 4.0, 5.0, 5.1, 6.0, 7.0
+PSRemotingProtocolVersion: 2.4
+SerializationVersion: 1.1.0.1
+WSManStackVersion: 3.0
+**********************
+Transcript started, output file is C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\ezBase_541\analysis\ezbase541_reaudit_transcript_20260929.txt
+COMMAND> Get-Content candidate files, previous solver, tool README, old decode result
+--- candidate_35byte_prefix.txt ---
+flag{Y0u_@R3_Upx_4nd_b45364_m4st3r!
+--- candidate_36byte_flag.txt ---
+flag{Y0u_@R3_Upx_4nd_b45364_m4st3r!}
+--- solve_ez541_final.py ---
+import base64
+import hashlib
+from pathlib import Path
+
+TARGET = b"iP}ui7siC`otMgA~h5o]Tg<4jPmtIvM5C~I4h644K7M~KVg="
+CUSTOM = b"AaBbCcDdEeFfGgHhIiJjKkLlMmNnOoPpQqRrSsTtUuVvWwXxYyZz0123456789+/"
+STANDARD = b"ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/"
+
+# The binary XORs each encoded byte except a real Base64 padding byte.
+# Therefore reverse XOR on every ciphertext byte first: the last '=' becomes '9'.
+pre_xor = bytes(byte ^ 0x04 for byte in TARGET)
+assert all(byte in CUSTOM for byte in pre_xor), "reversed bytes are outside the custom alphabet"
+canonical = bytes(STANDARD[CUSTOM.index(byte)] for byte in pre_xor)
+flag = base64.b64decode(canonical, validate=True)
+
+# Reproduce the target program: standard Base64, custom alphabet substitution,
+# then XOR 0x04 on every output byte except actual '=' padding.
+standard_encoded = base64.b64encode(flag)
+custom_encoded = bytes(
+    byte if byte == ord("=") else CUSTOM[STANDARD.index(byte)]
+    for byte in standard_encoded
+)
+program_output = bytes(
+    byte if byte == ord("=") else byte ^ 0x04
+    for byte in custom_encoded
+)
+
+print(f"target_len={len(TARGET)} target={TARGET.decode('ascii')}")
+print(f"xor4_reversed={pre_xor.decode('ascii')}")
+print(f"custom_alphabet_mapped_to_standard={canonical.decode('ascii')}")
+print(f"decoded_len={len(flag)} decoded_flag={flag.decode('ascii')}")
+print(f"standard_base64={standard_encoded.decode('ascii')}")
+print(f"custom_base64={custom_encoded.decode('ascii')}")
+print(f"program_output={program_output.decode('ascii')}")
+print(f"roundtrip_exact={program_output == TARGET}")
+print(f"flag_sha256={hashlib.sha256(flag).hexdigest()}")
+print(f"binary_sha256={hashlib.sha256(Path(__file__).with_name('ezBase').joinpath('ezre.exe').read_bytes()).hexdigest()}")
+assert len(flag) == 36
+assert program_output == TARGET
+--- 分析产物\README.md ---
+# ezBase_541 分析产物
+
+按日期归档反汇编、导出表、解码输出等复核材料。`2026-09-27/` 中的文件来自本轮根目录清理；已有最终候选和运行时镜像仍保留在题目目录。
+--- 工作区\README.md ---
+# ezBase_541 工作区
+
+`2026-09-27/` 收纳从项目根目录归位的调试器源码和程序、早期求解脚本快照及临时输入。`minimal-runtime/` 保存对应的最小运行库与备份。正式附件、可复核脚本和已确认结果仍位于本题目录原有位置。
+--- 分析产物\2026-09-27\_ezdecode_output.txt ---
+decoder_exception: ValueError bad back-reference off=705 outlen=65 at command=48
+source_sha256: 607bd3e8e5d7e715f7a9b819c8d5cc235c8dcc22f06a4ae77d0383e46bbddace
+source_size: 9216 src_off: 0x21d compressed_pos: 0x257 refills: 3 commands: 48
+output_len: 65 output_head_hex: 4881ecc8010000488b05fa3f000031e048898424c0c801c744b53cc801c73f8d84593006e80204b53cc801c73f8d8415cd6dfedbe335264901c73f8d8415cd6d
+output_head_ascii: b'H\x81\xec\xc8\x01\x00\x00H\x8b\x05\xfa?\x00\x001\xe0H\x89\x84$\xc0\xc8\x01\xc7D\xb5<\xc8\x01\xc7?\x8d\x84Y0\x06\xe8\x02\x04\xb5<\xc8\x01\xc7?\x8d\x84\x15\xcdm\xfe\xdb\xe35&I\x01\xc7?\x8d\x84\x15\xcdm\x89'
+contains_input_prompt: False
+visible_strings:
+output_sha256: 9c1c74fcd510bca1e23c27fd8d70e56f4d3995f5cdf370d4d2449654b4657807
+--- 分析产物\2026-09-27\_ezdecode_func.txt ---
+
+C:\Users\mzj\Desktop\CTF\_ezunpacked.bin:     file format binary
+
+
+Disassembly of section .data:
+
+0000000140001130 <.data+0x130>:
+   140001130:	48 83 ec 40          	sub    rsp,0x40
+   140001134:	4c 89 44 24 38       	mov    QWORD PTR [rsp+0x38],r8
+   140001139:	48 89 54 24 30       	mov    QWORD PTR [rsp+0x30],rdx
+   14000113e:	48 89 4c 24 28       	mov    QWORD PTR [rsp+0x28],rcx
+   140001143:	48 c7 44 24 20 00 00 	mov    QWORD PTR [rsp+0x20],0x0
+   14000114a:	00 00
+   14000114c:	48 c7 44 24 18 00 00 	mov    QWORD PTR [rsp+0x18],0x0
+   140001153:	00 00
+   140001155:	48 8b 44 24 18       	mov    rax,QWORD PTR [rsp+0x18]
+   14000115a:	48 3b 44 24 30       	cmp    rax,QWORD PTR [rsp+0x30]
+   14000115f:	0f 83 c6 01 00 00    	jae    0x14000132b
+   140001165:	c7 44 24 14 00 00 00 	mov    DWORD PTR [rsp+0x14],0x0
+   14000116c:	00
+   14000116d:	48 8b 44 24 18       	mov    rax,QWORD PTR [rsp+0x18]
+   140001172:	48 83 c0 02          	add    rax,0x2
+   140001176:	48 3b 44 24 30       	cmp    rax,QWORD PTR [rsp+0x30]
+   14000117b:	0f 93 c0             	setae  al
+   14000117e:	24 01                	and    al,0x1
+   140001180:	0f b6 c0             	movzx  eax,al
+   140001183:	48 8b 4c 24 18       	mov    rcx,QWORD PTR [rsp+0x18]
+   140001188:	48 83 c1 01          	add    rcx,0x1
+   14000118c:	48 3b 4c 24 30       	cmp    rcx,QWORD PTR [rsp+0x30]
+   140001191:	0f 93 c1             	setae  cl
+   140001194:	80 e1 01             	and    cl,0x1
+   140001197:	0f b6 c9             	movzx  ecx,cl
+   14000119a:	01 c8                	add    eax,ecx
+   14000119c:	89 44 24 10          	mov    DWORD PTR [rsp+0x10],eax
+   1400011a0:	48 8b 44 24 28       	mov    rax,QWORD PTR [rsp+0x28]
+   1400011a5:	48 8b 4c 24 18       	mov    rcx,QWORD PTR [rsp+0x18]
+   1400011aa:	0f b6 04 08          	movzx  eax,BYTE PTR [rax+rcx*1]
+   1400011ae:	c1 e0 10             	shl    eax,0x10
+   1400011b1:	0b 44 24 14          	or     eax,DWORD PTR [rsp+0x14]
+   1400011b5:	89 44 24 14          	mov    DWORD PTR [rsp+0x14],eax
+   1400011b9:	48 8b 44 24 18       	mov    rax,QWORD PTR [rsp+0x18]
+   1400011be:	48 83 c0 01          	add    rax,0x1
+   1400011c2:	48 3b 44 24 30       	cmp    rax,QWORD PTR [rsp+0x30]
+   1400011c7:	0f 83 1a 00 00 00    	jae    0x1400011e7
+   1400011cd:	48 8b 44 24 28       	mov    rax,QWORD PTR [rsp+0x28]
+   1400011d2:	48 8b 4c 24 18       	mov    rcx,QWORD PTR [rsp+0x18]
+   1400011d7:	0f b6 44 08 01       	movzx  eax,BYTE PTR [rax+rcx*1+0x1]
+   1400011dc:	c1 e0 08             	shl    eax,0x8
+   1400011df:	0b 44 24 14          	or     eax,DWORD PTR [rsp+0x14]
+   1400011e3:	89 44 24 14          	mov    DWORD PTR [rsp+0x14],eax
+   1400011e7:	48 8b 44 24 18       	mov    rax,QWORD PTR [rsp+0x18]
+   1400011ec:	48 83 c0 02          	add    rax,0x2
+   1400011f0:	48 3b 44 24 30       	cmp    rax,QWORD PTR [rsp+0x30]
+   1400011f5:	0f 83 17 00 00 00    	jae    0x140001212
+   1400011fb:	48 8b 44 24 28       	mov    rax,QWORD PTR [rsp+0x28]
+   140001200:	48 8b 4c 24 18       	mov    rcx,QWORD PTR [rsp+0x18]
+   140001205:	0f b6 44 08 02       	movzx  eax,BYTE PTR [rax+rcx*1+0x2]
+   14000120a:	0b 44 24 14          	or     eax,DWORD PTR [rsp+0x14]
+   14000120e:	89 44 24 14          	mov    DWORD PTR [rsp+0x14],eax
+   140001212:	8b 44 24 14          	mov    eax,DWORD PTR [rsp+0x14]
+   140001216:	c1 e8 12             	shr    eax,0x12
+   140001219:	83 e0 3f             	and    eax,0x3f
+   14000121c:	89 c0                	mov    eax,eax
+   14000121e:	89 c1                	mov    ecx,eax
+   140001220:	48 8d 05 19 2e 00 00 	lea    rax,[rip+0x2e19]        # 0x140004040
+   140001227:	8a 14 08             	mov    dl,BYTE PTR [rax+rcx*1]
+   14000122a:	48 8b 44 24 38       	mov    rax,QWORD PTR [rsp+0x38]
+   14000122f:	48 8b 4c 24 20       	mov    rcx,QWORD PTR [rsp+0x20]
+   140001234:	49 89 c8             	mov    r8,rcx
+   140001237:	49 83 c0 01          	add    r8,0x1
+   14000123b:	4c 89 44 24 20       	mov    QWORD PTR [rsp+0x20],r8
+   140001240:	88 14 08             	mov    BYTE PTR [rax+rcx*1],dl
+   140001243:	8b 44 24 14          	mov    eax,DWORD PTR [rsp+0x14]
+   140001247:	c1 e8 0c             	shr    eax,0xc
+   14000124a:	83 e0 3f             	and    eax,0x3f
+   14000124d:	89 c0                	mov    eax,eax
+   14000124f:	89 c1                	mov    ecx,eax
+   140001251:	48 8d 05 e8 2d 00 00 	lea    rax,[rip+0x2de8]        # 0x140004040
+   140001258:	8a 14 08             	mov    dl,BYTE PTR [rax+rcx*1]
+   14000125b:	48 8b 44 24 38       	mov    rax,QWORD PTR [rsp+0x38]
+   140001260:	48 8b 4c 24 20       	mov    rcx,QWORD PTR [rsp+0x20]
+   140001265:	49 89 c8             	mov    r8,rcx
+   140001268:	49 83 c0 01          	add    r8,0x1
+   14000126c:	4c 89 44 24 20       	mov    QWORD PTR [rsp+0x20],r8
+   140001271:	88 14 08             	mov    BYTE PTR [rax+rcx*1],dl
+   140001274:	83 7c 24 10 02       	cmp    DWORD PTR [rsp+0x10],0x2
+   140001279:	0f 85 0e 00 00 00    	jne    0x14000128d
+   14000127f:	b8 3d 00 00 00       	mov    eax,0x3d
+   140001284:	89 44 24 04          	mov    DWORD PTR [rsp+0x4],eax
+   140001288:	e9 1d 00 00 00       	jmp    0x1400012aa
+   14000128d:	8b 44 24 14          	mov    eax,DWORD PTR [rsp+0x14]
+   140001291:	c1 e8 06             	shr    eax,0x6
+   140001294:	83 e0 3f             	and    eax,0x3f
+   140001297:	89 c0                	mov    eax,eax
+   140001299:	89 c1                	mov    ecx,eax
+   14000129b:	48 8d 05 9e 2d 00 00 	lea    rax,[rip+0x2d9e]        # 0x140004040
+   1400012a2:	0f be 04 08          	movsx  eax,BYTE PTR [rax+rcx*1]
+   1400012a6:	89 44 24 04          	mov    DWORD PTR [rsp+0x4],eax
+   1400012aa:	8b 44 24 04          	mov    eax,DWORD PTR [rsp+0x4]
+   1400012ae:	88 c2                	mov    dl,al
+   1400012b0:	48 8b 44 24 38       	mov    rax,QWORD PTR [rsp+0x38]
+   1400012b5:	48 8b 4c 24 20       	mov    rcx,QWORD PTR [rsp+0x20]
+   1400012ba:	49 89 c8             	mov    r8,rcx
+   1400012bd:	49 83 c0 01          	add    r8,0x1
+   1400012c1:	4c 89 44 24 20       	mov    QWORD PTR [rsp+0x20],r8
+   1400012c6:	88 14 08             	mov    BYTE PTR [rax+rcx*1],dl
+   1400012c9:	83 7c 24 10 01       	cmp    DWORD PTR [rsp+0x10],0x1
+   1400012ce:	0f 8c 0d 00 00 00    	jl     0x1400012e1
+   1400012d4:	b8 3d 00 00 00       	mov    eax,0x3d
+   1400012d9:	89 04 24             	mov    DWORD PTR [rsp],eax
+   1400012dc:	e9 19 00 00 00       	jmp    0x1400012fa
+   1400012e1:	8b 44 24 14          	mov    eax,DWORD PTR [rsp+0x14]
+   1400012e5:	83 e0 3f             	and    eax,0x3f
+   1400012e8:	89 c0                	mov    eax,eax
+   1400012ea:	89 c1                	mov    ecx,eax
+   1400012ec:	48 8d 05 4d 2d 00 00 	lea    rax,[rip+0x2d4d]        # 0x140004040
+   1400012f3:	0f be 04 08          	movsx  eax,BYTE PTR [rax+rcx*1]
+   1400012f7:	89 04 24             	mov    DWORD PTR [rsp],eax
+   1400012fa:	8b 04 24             	mov    eax,DWORD PTR [rsp]
+   1400012fd:	88 c2                	mov    dl,al
+   1400012ff:	48 8b 44 24 38       	mov    rax,QWORD PTR [rsp+0x38]
+   140001304:	48 8b 4c 24 20       	mov    rcx,QWORD PTR [rsp+0x20]
+   140001309:	49 89 c8             	mov    r8,rcx
+   14000130c:	49 83 c0 01          	add    r8,0x1
+   140001310:	4c 89 44 24 20       	mov    QWORD PTR [rsp+0x20],r8
+   140001315:	88 14 08             	mov    BYTE PTR [rax+rcx*1],dl
+   140001318:	48 8b 44 24 18       	mov    rax,QWORD PTR [rsp+0x18]
+   14000131d:	48 83 c0 03          	add    rax,0x3
+   140001321:	48 89 44 24 18       	mov    QWORD PTR [rsp+0x18],rax
+   140001326:	e9 2a fe ff ff       	jmp    0x140001155
+   14000132b:	48 8b 44 24 38       	mov    rax,QWORD PTR [rsp+0x38]
+--- 工作区\2026-09-27\solve_ez541_final_snapshot.py ---
+import base64, hashlib
+from pathlib import Path
+
+target = b"iP}ui7siC`otMgA~h5o]Tg<4jPmtIvM5C~I4h644K7M~KVg="
+alphabet = b"AaBbCcDdEeFfGgHhIiJjKkLlMmNnOoPpQqRrSsTtUuVvWwXxYyZz0123456789+/"
+canonical_alphabet = b"ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/"
+plain_b64 = bytes((ch ^ 4) if ch != ord('=') else ch for ch in target)
+canonical = bytes(ord('=') if ch == ord('=') else canonical_alphabet[alphabet.index(ch)] for ch in plain_b64)
+candidate = base64.b64decode(canonical, validate=True)
+roundtrip = base64.b64encode(candidate)
+custom = bytes(ord('=') if ch == ord('=') else alphabet[canonical_alphabet.index(ch)] for ch in roundtrip)
+reproduced = bytes((ch ^ 4) if ch != ord('=') else ch for ch in custom)
+print(f"target_len={len(target)} target={target.decode()}")
+print(f"xor4_reversed={plain_b64.decode()}")
+print(f"canonical_b64={canonical.decode()}")
+print(f"decoded_len={len(candidate)} decoded_ascii={candidate.decode()}")
+print(f"encoder_roundtrip_b64={roundtrip.decode()}")
+print(f"target_roundtrip_match={reproduced == target}")
+print(f"roundtrip_diff_indices={[i for i,(x,y) in enumerate(zip(reproduced,target)) if x!=y]}")
+print(f"candidate_sha256={hashlib.sha256(candidate).hexdigest()}")
+output_dir = Path(__file__).resolve().parent
+(output_dir / "candidate_35byte_prefix.txt").write_bytes(candidate+b"\n")
+(output_dir / "candidate_36byte_flag.txt").write_bytes(candidate+b"}"+b"\n")
+--- 工作区\2026-09-27\_ezinput.txt ---
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+COMMAND> rg -n --hidden -g *.md -g *.py -g *.txt -g *.c "flag\{|candidate|失败|拒绝" challenge folder
+
+COMMAND> Search known RAR extractors and Python packages
+C:\Program Files\7-Zip\7z.exe exists=False
+C:\Program Files\WinRAR\WinRAR.exe exists=False
+C:\Program Files\WinRAR\UnRAR.exe exists=False
+C:\Program Files (x86)\7-Zip\7z.exe exists=False
+C:\Program Files (x86)\WinRAR\UnRAR.exe exists=False
+
+**********************
+PowerShell transcript end
+End time: 20260929035022
+**********************
+**********************
+PowerShell transcript start
+Start time: 20260929035105
+Username: DESKTOP-412KTAR\mzj
+RunAs User: DESKTOP-412KTAR\mzj
+Configuration Name: 
+Machine: DESKTOP-412KTAR (Microsoft Windows NT 10.0.26200.0)
+Host Application: C:\Users\mzj\.cache\codex-runtimes\codex-primary-runtime\dependencies\native\powershell\pwsh.dll -Command try { [Console]::OutputEncoding=[System.Text.Encoding]::UTF8 } catch {}
+$ErrorActionPreference='Continue'; $root='C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\ezBase_541'; $log=Join-Path $root 'analysis\ezbase541_reaudit_transcript_20260929.txt'; Start-Transcript -LiteralPath $log -Append; $rar=Join-Path $root '附件_平台原件\ezBase_platform_20260929.rar'; Write-Output "COMMAND> Get-Command tar.exe,bsdtar.exe,unrar.exe,7z.exe,rar.exe -ErrorAction SilentlyContinue"; Get-Command tar.exe,bsdtar.exe,unrar.exe,7z.exe,rar.exe -ErrorAction SilentlyContinue | Select-Object Name,Source | Format-Table -AutoSize; Write-Output 'COMMAND> where.exe tar.exe bsdtar.exe unrar.exe 7z.exe rar.exe'; where.exe tar.exe bsdtar.exe unrar.exe 7z.exe rar.exe 2>&1; Write-Output 'COMMAND> Format-Hex -LiteralPath RAR -Count 64'; Format-Hex -LiteralPath $rar | Select-Object -First 5; Write-Output 'COMMAND> tar.exe -tf <original RAR>'; & tar.exe -tf $rar 2>&1; Write-Output ("tar exit code: " + $LASTEXITCODE); Stop-Transcript
+Process ID: 26032
+PSVersion: 7.6.5
+PSEdition: Core
+GitCommitId: 7.6.5
+OS: Microsoft Windows 10.0.26200
+Platform: Win32NT
+PSCompatibleVersions: 1.0, 2.0, 3.0, 4.0, 5.0, 5.1, 6.0, 7.0
+PSRemotingProtocolVersion: 2.4
+SerializationVersion: 1.1.0.1
+WSManStackVersion: 3.0
+**********************
+Transcript started, output file is C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\ezBase_541\analysis\ezbase541_reaudit_transcript_20260929.txt
+COMMAND> Get-Command tar.exe,bsdtar.exe,unrar.exe,7z.exe,rar.exe -ErrorAction SilentlyContinue
+
+Name    Source
+----    ------
+tar.exe C:\WINDOWS\system32\tar.exe
+
+COMMAND> where.exe tar.exe bsdtar.exe unrar.exe 7z.exe rar.exe
+INFO: Could not find "bsdtar.exe".
+INFO: Could not find "unrar.exe".
+INFO: Could not find "7z.exe".
+INFO: Could not find "rar.exe".
+COMMAND> Format-Hex -LiteralPath RAR -Count 64
+
+**********************
+PowerShell transcript end
+End time: 20260929035105
+**********************
+**********************
+PowerShell transcript start
+Start time: 20260929035227
+Username: DESKTOP-412KTAR\mzj
+RunAs User: DESKTOP-412KTAR\mzj
+Configuration Name: 
+Machine: DESKTOP-412KTAR (Microsoft Windows NT 10.0.26200.0)
+Host Application: C:\Users\mzj\.cache\codex-runtimes\codex-primary-runtime\dependencies\native\powershell\pwsh.dll -Command try { [Console]::OutputEncoding=[System.Text.Encoding]::UTF8 } catch {}
+$ErrorActionPreference='Stop'; $root='C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\ezBase_541'; $log=Join-Path $root 'analysis\ezbase541_reaudit_transcript_20260929.txt'; Start-Transcript -LiteralPath $log -Append; $rar=Join-Path $root '附件_平台原件\ezBase_platform_20260929.rar'; $stage=Join-Path $root '附件_平台原件\解压复核_20260929'; if (!(Test-Path -LiteralPath $stage)) { New-Item -ItemType Directory -Path $stage | Out-Null }; Write-Output "COMMAND> tar.exe -xf '$rar' -C '$stage'"; & tar.exe -xf $rar -C $stage; Write-Output ("tar exit code: " + $LASTEXITCODE); Write-Output "COMMAND> Get-ChildItem '$stage' -Recurse | Select-Object FullName,Length"; Get-ChildItem -LiteralPath $stage -Recurse | Select-Object FullName,Length | Format-Table -AutoSize; $fresh=Join-Path $stage 'ezBase\ezre.exe'; $old=Join-Path $root 'ezBase\ezre.exe'; Write-Output 'COMMAND> Get-FileHash -Algorithm SHA256 for original-extracted, legacy, and shim executables'; Get-FileHash -Algorithm SHA256 -LiteralPath $fresh,$old,(Join-Path $root 'runshim\ezre.exe') | Format-List; Write-Output 'COMMAND> Get-Item details and compare original extraction to legacy copies'; foreach($p in @($fresh,$old,(Join-Path $root 'runshim\ezre.exe'))) { $f=Get-Item -LiteralPath $p; Write-Output ("{0} size={1} SHA256={2}" -f $f.FullName,$f.Length,(Get-FileHash -Algorithm SHA256 -LiteralPath $p).Hash) }; Stop-Transcript
+Process ID: 18736
+PSVersion: 7.6.5
+PSEdition: Core
+GitCommitId: 7.6.5
+OS: Microsoft Windows 10.0.26200
+Platform: Win32NT
+PSCompatibleVersions: 1.0, 2.0, 3.0, 4.0, 5.0, 5.1, 6.0, 7.0
+PSRemotingProtocolVersion: 2.4
+SerializationVersion: 1.1.0.1
+WSManStackVersion: 3.0
+**********************
+Transcript started, output file is C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\ezBase_541\analysis\ezbase541_reaudit_transcript_20260929.txt
+COMMAND> tar.exe -xf 'C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\ezBase_541\附件_平台原件\ezBase_platform_20260929.rar' -C 'C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\ezBase_541\附件_平台原件\解压复核_20260929'
+
+tar exit code: 0
+COMMAND> Get-ChildItem 'C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\ezBase_541\附件_平台原件\解压复核_20260929' -Recurse | Select-Object FullName,Length
+
+FullName                                                                                              Length
+--------                                                                                              ------
+C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\ezBase_541\附件_平台原件\解压复核_20260929\ezBase
+C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\ezBase_541\附件_平台原件\解压复核_20260929\ezBase\ezre.exe 9216
+
+COMMAND> Get-FileHash -Algorithm SHA256 for original-extracted, legacy, and shim executables
+
+Algorithm : SHA256
+Hash      : 607BD3E8E5D7E715F7A9B819C8D5CC235C8DCC22F06A4AE77D0383E46BBDDACE
+Path      : C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\ezBase_541\附件_平台原件\解压复核_20260929\ezBase\ezre.exe
+
+Algorithm : SHA256
+Hash      : 607BD3E8E5D7E715F7A9B819C8D5CC235C8DCC22F06A4AE77D0383E46BBDDACE
+Path      : C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\ezBase_541\ezBase\ezre.exe
+
+Algorithm : SHA256
+Hash      : 607BD3E8E5D7E715F7A9B819C8D5CC235C8DCC22F06A4AE77D0383E46BBDDACE
+Path      : C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\ezBase_541\runshim\ezre.exe
+
+COMMAND> Get-Item details and compare original extraction to legacy copies
+C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\ezBase_541\附件_平台原件\解压复核_20260929\ezBase\ezre.exe size=9216 SHA256=607BD3E8E5D7E715F7A9B819C8D5CC235C8DCC22F06A4AE77D0383E46BBDDACE
+C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\ezBase_541\ezBase\ezre.exe size=9216 SHA256=607BD3E8E5D7E715F7A9B819C8D5CC235C8DCC22F06A4AE77D0383E46BBDDACE
+C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\ezBase_541\runshim\ezre.exe size=9216 SHA256=607BD3E8E5D7E715F7A9B819C8D5CC235C8DCC22F06A4AE77D0383E46BBDDACE
+**********************
+PowerShell transcript end
+End time: 20260929035227
+**********************
+**********************
+PowerShell transcript start
+Start time: 20260929035249
+Username: DESKTOP-412KTAR\mzj
+RunAs User: DESKTOP-412KTAR\mzj
+Configuration Name: 
+Machine: DESKTOP-412KTAR (Microsoft Windows NT 10.0.26200.0)
+Host Application: C:\Users\mzj\.cache\codex-runtimes\codex-primary-runtime\dependencies\native\powershell\pwsh.dll -Command try { [Console]::OutputEncoding=[System.Text.Encoding]::UTF8 } catch {}
+$ErrorActionPreference='Stop'; $root='C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\ezBase_541'; $log=Join-Path $root 'analysis\ezbase541_reaudit_transcript_20260929.txt'; Start-Transcript -LiteralPath $log -Append; Write-Output '--- decode_upx.py ---'; Get-Content -LiteralPath (Join-Path $root 'decode_upx.py'); Write-Output '--- parse_exports.py ---'; Get-Content -LiteralPath (Join-Path $root 'parse_exports.py'); Write-Output '--- check_exports.py ---'; Get-Content -LiteralPath (Join-Path $root 'check_exports.py'); Write-Output '--- unpacked entry code ---'; Get-Content -LiteralPath (Join-Path $root '分析产物\2026-09-27\_ezcode_oep.txt') -TotalCount 200; Write-Output '--- saved target string occurrences ---'; rg -a -n 'iP\}ui7siC|AaBbCcDd|Y0u_@R3_Upx|ezcode|decode' $root; Write-Output '--- tool availability ---'; Get-Command objdump.exe,strings.exe,python.exe,gcc.exe -ErrorAction SilentlyContinue | Select-Object Name,Source | Format-Table -AutoSize; python -c "import importlib.util; print('pefile:',bool(importlib.util.find_spec('pefile'))); print('capstone:',bool(importlib.util.find_spec('capstone'))); print('lief:',bool(importlib.util.find_spec('lief')))"; Stop-Transcript
+Process ID: 1836
+PSVersion: 7.6.5
+PSEdition: Core
+GitCommitId: 7.6.5
+OS: Microsoft Windows 10.0.26200
+Platform: Win32NT
+PSCompatibleVersions: 1.0, 2.0, 3.0, 4.0, 5.0, 5.1, 6.0, 7.0
+PSRemotingProtocolVersion: 2.4
+SerializationVersion: 1.1.0.1
+WSManStackVersion: 3.0
+**********************
+Transcript started, output file is C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\ezBase_541\analysis\ezbase541_reaudit_transcript_20260929.txt
+--- decode_upx.py ---
+import pathlib, struct, hashlib, re
+path=pathlib.Path(__file__).resolve().parent/"ezBase"/"ezre.exe"
+data=path.read_bytes()
+src_off=0x21d
+max_output=0xb000
+class Reader:
+    def __init__(self, raw, pos): self.raw=raw; self.pos=pos; self.bb=0; self.refills=0
+    def bit(self):
+        carry=(self.bb>>31)&1
+        self.bb=(self.bb<<1)&0xffffffff
+        if self.bb==0:
+            if self.pos+4>len(self.raw): raise EOFError("bit buffer ran past file")
+            word=struct.unpack_from("<I",self.raw,self.pos)[0]
+            self.pos+=4; self.refills+=1
+            self.bb=((word<<1)|carry)&0xffffffff
+            return (word>>31)&1
+        return carry
+    def byte(self):
+        if self.pos>=len(self.raw): raise EOFError("literal ran past file")
+        b=self.raw[self.pos]; self.pos+=1; return b
+r=Reader(data,src_off); out=bytearray(); last_off=1; commands=0
+try:
+    while len(out)<max_output:
+        commands+=1
+        if r.bit():
+            out.append(r.byte())
+        else:
+            m_off=1
+            while True:
+                m_off=(m_off<<1)|r.bit()
+                if r.bit(): break
+                if m_off>0x10000000: raise ValueError("offset code exploded")
+            if m_off==2:
+                off=last_off
+            else:
+                code=((m_off-3)<<8)|r.byte()
+                if code==0xffffffff:
+                    print("END marker at compressed_pos=",hex(r.pos),"output_len=",len(out))
+                    break
+                off=code+1; last_off=off
+            m_len=(r.bit()<<1)|r.bit()
+            if m_len==0:
+                m_len=1
+                while True:
+                    m_len=(m_len<<1)|r.bit()
+                    if r.bit(): break
+                    if m_len>0x10000000: raise ValueError("length code exploded")
+                m_len+=2
+            if off>0xd00: m_len+=1
+            if off<=0 or off>len(out): raise ValueError(f"bad back-reference off={off} outlen={len(out)} at command={commands}")
+            for _ in range(m_len): out.append(out[-off])
+except Exception as e:
+    print("decoder_exception:",type(e).__name__,str(e))
+print("source_sha256:",hashlib.sha256(data).hexdigest())
+print("source_size:",len(data),"src_off:",hex(src_off),"compressed_pos:",hex(r.pos),"refills:",r.refills,"commands:",commands)
+print("output_len:",len(out),"output_head_hex:",out[:64].hex())
+print("output_head_ascii:",repr(bytes(out[:128])))
+print("contains_input_prompt:",b"input your flag:" in out)
+print("visible_strings:")
+for m in re.finditer(rb"[ -~]{4,}",out):
+    s=m.group().decode("ascii","replace")
+    if any(x.lower() in s.lower() for x in ["flag","length","right","wrong","try","input","base","yes","must"]): print(hex(m.start()),repr(s))
+print("output_sha256:",hashlib.sha256(out).hexdigest())
+if len(out)>0x1000 and (out[:2]==b"MZ" or b"input your flag:" in out):
+    outpath=pathlib.Path(__file__).resolve().parent/"unpacked.bin"
+    outpath.write_bytes(out); print("wrote:",outpath)
+--- parse_exports.py ---
+import struct
+path=r"C:\Windows\System32\KERNELBASE.dll"
+target=0x77724
+data=open(path,"rb").read()
+e_lfanew=struct.unpack_from("<I",data,0x3c)[0]
+assert data[e_lfanew:e_lfanew+4]==b"PE\0\0"
+coff=e_lfanew+4
+nsec=struct.unpack_from("<H",data,coff+2)[0]
+optsz=struct.unpack_from("<H",data,coff+16)[0]
+opt=coff+20
+magic=struct.unpack_from("<H",data,opt)[0]
+assert magic==0x20b
+export_rva,export_size=struct.unpack_from("<II",data,opt+112)
+sectab=opt+optsz
+sections=[]
+for i in range(nsec):
+    off=sectab+40*i
+    name=data[off:off+8].split(b"\0")[0].decode("ascii","replace")
+    vsize,va,rawsize,raw=struct.unpack_from("<IIII",data,off+8)
+    sections.append((name,va,max(vsize,rawsize),raw,vsize,rawsize))
+def rvaoff(rva):
+    for name,va,size,raw,vsize,rawsize in sections:
+        if va<=rva<va+size:
+            return raw+(rva-va)
+    raise ValueError(hex(rva))
+print("path:",path,"size:",len(data),"imagebase:",hex(struct.unpack_from("<Q",data,opt+24)[0]))
+print("export_rva_size:",hex(export_rva),hex(export_size),"target_rva:",hex(target))
+print("sections:",sections)
+off=rvaoff(export_rva)
+fields=struct.unpack_from("<IIHHIIIIIII",data,off)
+(_,_,_,_,name_rva,base,nfunc,nnames,func_rva,names_rva,ords_rva)=fields
+print("export_dir:","base",base,"functions",nfunc,"names",nnames)
+funcs=struct.unpack_from("<"+"I"*nfunc,data,rvaoff(func_rva))
+names=struct.unpack_from("<"+"I"*nnames,data,rvaoff(names_rva))
+ords=struct.unpack_from("<"+"H"*nnames,data,rvaoff(ords_rva))
+byfunc={}
+for nr,oi in zip(names,ords):
+    end=data.find(b"\0",rvaoff(nr))
+    nm=data[rvaoff(nr):end].decode("ascii","replace")
+    fr=funcs[oi]
+    byfunc.setdefault(fr,[]).append(nm)
+near=sorted((rva,nms) for rva,nms in byfunc.items() if rva<=target)[-12:]
+for rva,nms in near: print("export",hex(rva),",".join(nms))
+print("next exports:")
+for rva,nms in sorted((rva,nms) for rva,nms in byfunc.items() if rva>target)[:5]: print("export",hex(rva),",".join(nms))
+--- check_exports.py ---
+import struct, pathlib
+wanted='''__acrt_iob_func __p___argc __p___argv __p__commode __setusermatherr __stdio_common_vfprintf __stdio_common_vsprintf _c_exit _cexit _configthreadlocale _configure_narrow_argv _crt_at_quick_exit _crt_atexit _execute_onexit_table _exit _get_initial_narrow_environment _initialize_narrow_environment _initialize_onexit_table _initterm _initterm_e _register_onexit_function _register_thread_local_exe_atexit_callback _seh_filter_dll _seh_filter_exe _set_app_type _set_fmode _set_new_mode exit fgets puts strcmp strcspn terminate __C_specific_handler __current_exception __current_exception_context __std_type_info_destroy_list'''.split()
+def exports(path):
+    b=pathlib.Path(path).read_bytes(); pe=struct.unpack_from('<I',b,0x3c)[0]; coff=pe+4; nsec=struct.unpack_from('<H',b,coff+2)[0]; osz=struct.unpack_from('<H',b,coff+16)[0]; opt=coff+20
+    if struct.unpack_from('<H',b,opt)[0]!=0x20b: raise ValueError('not PE32+')
+    erva,esz=struct.unpack_from('<II',b,opt+112); st=opt+osz; ss=[]
+    for i in range(nsec):
+        q=st+40*i; name=b[q:q+8].split(b'\0')[0].decode('ascii','replace'); vs,va,rs,rp=struct.unpack_from('<IIII',b,q+8); ss.append((va,max(vs,rs),rp))
+    def off(r):
+        for va,size,rp in ss:
+            if va<=r<va+size:return rp+r-va
+        raise ValueError(hex(r))
+    q=off(erva); f=struct.unpack_from('<IIHHIIIIIII',b,q); base,nfunc,nnames,fr,nr,orr=f[5:]
+    fs=struct.unpack_from('<'+'I'*nfunc,b,off(fr)); ns=struct.unpack_from('<'+'I'*nnames,b,off(nr)); oo=struct.unpack_from('<'+'H'*nnames,b,off(orr)); result={}
+    for r,o in zip(ns,oo):
+        p=off(r); e=b.find(b'\0',p); name=b[p:e].decode('ascii','replace'); result[name]=fs[o]
+    return result
+for name in ['ucrtbase.dll','msvcrt.dll','vcruntime140.dll','kernelbase.dll']:
+    p=pathlib.Path(r'C:\Windows\System32')/name
+    print('\nDLL',p,'exists',p.exists())
+    if not p.exists():continue
+    try:
+        ex=exports(p); print('export_count',len(ex))
+        for n in wanted:
+            if n in ex:print(n,hex(ex[n]))
+        print('missing=',[n for n in wanted if n not in ex])
+    except Exception as e: print('ERROR',type(e).__name__,str(e))
+--- unpacked entry code ---
+
+C:\Users\mzj\Desktop\CTF\_ezunpacked.bin:     file format binary
+
+
+Disassembly of section .data:
+
+0000000140002f00 <.data+0x1f00>:
+   140002f00:	8b 4c 24 30          	mov    ecx,DWORD PTR [rsp+0x30]
+   140002f04:	48 2b c8             	sub    rcx,rax
+   140002f07:	48 8b c1             	mov    rax,rcx
+   140002f0a:	48 3b 44 24 40       	cmp    rax,QWORD PTR [rsp+0x40]
+   140002f0f:	76 09                	jbe    0x140002f1a
+   140002f11:	c7 04 24 01 00 00 00 	mov    DWORD PTR [rsp],0x1
+   140002f18:	eb 07                	jmp    0x140002f21
+   140002f1a:	c7 04 24 00 00 00 00 	mov    DWORD PTR [rsp],0x0
+   140002f21:	8b 04 24             	mov    eax,DWORD PTR [rsp]
+   140002f24:	48 83 c4 28          	add    rsp,0x28
+   140002f28:	c3                   	ret
+   140002f29:	cc                   	int3
+   140002f2a:	cc                   	int3
+   140002f2b:	cc                   	int3
+   140002f2c:	cc                   	int3
+   140002f2d:	cc                   	int3
+   140002f2e:	cc                   	int3
+   140002f2f:	cc                   	int3
+   140002f30:	4c 89 44 24 18       	mov    QWORD PTR [rsp+0x18],r8
+   140002f35:	48 89 54 24 10       	mov    QWORD PTR [rsp+0x10],rdx
+   140002f3a:	48 89 4c 24 08       	mov    QWORD PTR [rsp+0x8],rcx
+   140002f3f:	48 83 ec 28          	sub    rsp,0x28
+   140002f43:	4c 8b 44 24 40       	mov    r8,QWORD PTR [rsp+0x40]
+   140002f48:	48 8b 54 24 38       	mov    rdx,QWORD PTR [rsp+0x38]
+   140002f4d:	48 8b 4c 24 30       	mov    rcx,QWORD PTR [rsp+0x30]
+   140002f52:	e8 69 ff ff ff       	call   0x140002ec0
+   140002f57:	85 c0                	test   eax,eax
+   140002f59:	74 0f                	je     0x140002f6a
+   140002f5b:	48 8b 4c 24 30       	mov    rcx,QWORD PTR [rsp+0x30]
+   140002f60:	e8 3b fe ff ff       	call   0x140002da0
+   140002f65:	85 c0                	test   eax,eax
+   140002f67:	74 01                	je     0x140002f6a
+   140002f69:	cc                   	int3
+   140002f6a:	48 83 c4 28          	add    rsp,0x28
+   140002f6e:	c3                   	ret
+   140002f6f:	cc                   	int3
+   140002f70:	4c 89 44 24 18       	mov    QWORD PTR [rsp+0x18],r8
+   140002f75:	48 89 54 24 10       	mov    QWORD PTR [rsp+0x10],rdx
+   140002f7a:	48 89 4c 24 08       	mov    QWORD PTR [rsp+0x8],rcx
+   140002f7f:	48 83 ec 28          	sub    rsp,0x28
+   140002f83:	4c 8b 44 24 40       	mov    r8,QWORD PTR [rsp+0x40]
+   140002f88:	48 8b 54 24 38       	mov    rdx,QWORD PTR [rsp+0x38]
+   140002f8d:	48 8b 4c 24 30       	mov    rcx,QWORD PTR [rsp+0x30]
+   140002f92:	e8 29 ff ff ff       	call   0x140002ec0
+   140002f97:	85 c0                	test   eax,eax
+   140002f99:	74 15                	je     0x140002fb0
+   140002f9b:	48 8b 4c 24 30       	mov    rcx,QWORD PTR [rsp+0x30]
+   140002fa0:	e8 fb fd ff ff       	call   0x140002da0
+   140002fa5:	85 c0                	test   eax,eax
+   140002fa7:	74 07                	je     0x140002fb0
+   140002fa9:	b9 41 00 00 00       	mov    ecx,0x41
+   140002fae:	cd 29                	int    0x29
+   140002fb0:	48 83 c4 28          	add    rsp,0x28
+   140002fb4:	c3                   	ret
+   140002fb5:	cc                   	int3
+   140002fb6:	cc                   	int3
+   140002fb7:	cc                   	int3
+   140002fb8:	cc                   	int3
+   140002fb9:	cc                   	int3
+   140002fba:	cc                   	int3
+   140002fbb:	cc                   	int3
+   140002fbc:	cc                   	int3
+   140002fbd:	cc                   	int3
+   140002fbe:	cc                   	int3
+   140002fbf:	cc                   	int3
+   140002fc0:	4c 89 44 24 18       	mov    QWORD PTR [rsp+0x18],r8
+   140002fc5:	48 89 54 24 10       	mov    QWORD PTR [rsp+0x10],rdx
+   140002fca:	48 89 4c 24 08       	mov    QWORD PTR [rsp+0x8],rcx
+   140002fcf:	c3                   	ret
+   140002fd0:	4c 89 44 24 18       	mov    QWORD PTR [rsp+0x18],r8
+   140002fd5:	48 89 54 24 10       	mov    QWORD PTR [rsp+0x10],rdx
+   140002fda:	48 89 4c 24 08       	mov    QWORD PTR [rsp+0x8],rcx
+   140002fdf:	48 83 ec 38          	sub    rsp,0x38
+   140002fe3:	4c 8b 44 24 50       	mov    r8,QWORD PTR [rsp+0x50]
+   140002fe8:	48 8b 54 24 48       	mov    rdx,QWORD PTR [rsp+0x48]
+   140002fed:	48 8b 4c 24 40       	mov    rcx,QWORD PTR [rsp+0x40]
+   140002ff2:	e8 c9 fe ff ff       	call   0x140002ec0
+   140002ff7:	85 c0                	test   eax,eax
+   140002ff9:	74 36                	je     0x140003031
+   140002ffb:	48 8b 4c 24 40       	mov    rcx,QWORD PTR [rsp+0x40]
+   140003000:	e8 9b fd ff ff       	call   0x140002da0
+   140003005:	85 c0                	test   eax,eax
+   140003007:	74 28                	je     0x140003031
+   140003009:	48 8b 05 30 26 00 00 	mov    rax,QWORD PTR [rip+0x2630]        # 0x140005640
+   140003010:	48 85 c0             	test   rax,rax
+   140003013:	74 1c                	je     0x140003031
+   140003015:	48 8b 05 24 26 00 00 	mov    rax,QWORD PTR [rip+0x2624]        # 0x140005640
+   14000301c:	48 89 44 24 20       	mov    QWORD PTR [rsp+0x20],rax
+   140003021:	48 8b 4c 24 40       	mov    rcx,QWORD PTR [rsp+0x40]
+   140003026:	48 8b 44 24 20       	mov    rax,QWORD PTR [rsp+0x20]
+   14000302b:	ff 15 df 3f 00 00    	call   QWORD PTR [rip+0x3fdf]        # 0x140007010
+   140003031:	48 83 c4 38          	add    rsp,0x38
+   140003035:	c3                   	ret
+   140003036:	cc                   	int3
+   140003037:	cc                   	int3
+   140003038:	cc                   	int3
+   140003039:	cc                   	int3
+   14000303a:	cc                   	int3
+   14000303b:	cc                   	int3
+   14000303c:	cc                   	int3
+   14000303d:	cc                   	int3
+   14000303e:	cc                   	int3
+   14000303f:	cc                   	int3
+   140003040:	40 53                	rex push rbx
+   140003042:	48 83 ec 50          	sub    rsp,0x50
+   140003046:	48 8b 05 bb 1f 00 00 	mov    rax,QWORD PTR [rip+0x1fbb]        # 0x140005008
+   14000304d:	48 33 c4             	xor    rax,rsp
+   140003050:	48 89 44 24 40       	mov    QWORD PTR [rsp+0x40],rax
+   140003055:	c7 44 24 30 00 00 00 	mov    DWORD PTR [rsp+0x30],0x0
+   14000305c:	00
+   14000305d:	c7 44 24 34 00 00 00 	mov    DWORD PTR [rsp+0x34],0x0
+   140003064:	00
+   140003065:	c7 44 24 38 00 00 00 	mov    DWORD PTR [rsp+0x38],0x0
+   14000306c:	00
+   14000306d:	33 c0                	xor    eax,eax
+   14000306f:	33 c9                	xor    ecx,ecx
+   140003071:	0f a2                	cpuid
+   140003073:	4c 8d 44 24 20       	lea    r8,[rsp+0x20]
+   140003078:	41 89 00             	mov    DWORD PTR [r8],eax
+   14000307b:	41 89 58 04          	mov    DWORD PTR [r8+0x4],ebx
+   14000307f:	41 89 48 08          	mov    DWORD PTR [r8+0x8],ecx
+   140003083:	41 89 50 0c          	mov    DWORD PTR [r8+0xc],edx
+   140003087:	b8 04 00 00 00       	mov    eax,0x4
+   14000308c:	48 6b c0 00          	imul   rax,rax,0x0
+   140003090:	8b 44 04 20          	mov    eax,DWORD PTR [rsp+rax*1+0x20]
+   140003094:	89 44 24 14          	mov    DWORD PTR [rsp+0x14],eax
+   140003098:	b8 04 00 00 00       	mov    eax,0x4
+   14000309d:	48 6b c0 01          	imul   rax,rax,0x1
+   1400030a1:	8b 44 04 20          	mov    eax,DWORD PTR [rsp+rax*1+0x20]
+   1400030a5:	35 47 65 6e 75       	xor    eax,0x756e6547
+   1400030aa:	b9 04 00 00 00       	mov    ecx,0x4
+   1400030af:	48 6b c9 03          	imul   rcx,rcx,0x3
+   1400030b3:	8b 4c 0c 20          	mov    ecx,DWORD PTR [rsp+rcx*1+0x20]
+   1400030b7:	81 f1 69 6e 65 49    	xor    ecx,0x49656e69
+   1400030bd:	0b c1                	or     eax,ecx
+   1400030bf:	b9 04 00 00 00       	mov    ecx,0x4
+   1400030c4:	48 6b c9 02          	imul   rcx,rcx,0x2
+   1400030c8:	8b 4c 0c 20          	mov    ecx,DWORD PTR [rsp+rcx*1+0x20]
+   1400030cc:	81 f1 6e 74 65 6c    	xor    ecx,0x6c65746e
+   1400030d2:	0b c1                	or     eax,ecx
+   1400030d4:	85 c0                	test   eax,eax
+   1400030d6:	75 0a                	jne    0x1400030e2
+   1400030d8:	c7 44 24 0c 01 00 00 	mov    DWORD PTR [rsp+0xc],0x1
+   1400030df:	00
+   1400030e0:	eb 08                	jmp    0x1400030ea
+   1400030e2:	c7 44 24 0c 00 00 00 	mov    DWORD PTR [rsp+0xc],0x0
+   1400030e9:	00
+   1400030ea:	0f b6 44 24 0c       	movzx  eax,BYTE PTR [rsp+0xc]
+   1400030ef:	88 04 24             	mov    BYTE PTR [rsp],al
+   1400030f2:	b8 04 00 00 00       	mov    eax,0x4
+   1400030f7:	48 6b c0 01          	imul   rax,rax,0x1
+   1400030fb:	8b 44 04 20          	mov    eax,DWORD PTR [rsp+rax*1+0x20]
+   1400030ff:	35           	xor    eax,0x68747541
+--- saved target string occurrences ---
+
+--- tool availability ---
+
+Name        Source
+----        ------
+objdump.exe C:\msys64\mingw64\bin\objdump.exe
+strings.exe C:\msys64\mingw64\bin\strings.exe
+python.exe  C:\Users\mzj\AppData\Local\Programs\Python\Python312\python.exe
+gcc.exe     C:\msys64\mingw64\bin\gcc.exe
+
+
+**********************
+PowerShell transcript end
+End time: 20260929035250
+**********************
+**********************
+PowerShell transcript start
+Start time: 20260929035356
+Username: DESKTOP-412KTAR\mzj
+RunAs User: DESKTOP-412KTAR\mzj
+Configuration Name: 
+Machine: DESKTOP-412KTAR (Microsoft Windows NT 10.0.26200.0)
+Host Application: C:\Users\mzj\.cache\codex-runtimes\codex-primary-runtime\dependencies\native\powershell\pwsh.dll -Command try { [Console]::OutputEncoding=[System.Text.Encoding]::UTF8 } catch {}
+$ErrorActionPreference='Stop'; $root='C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\ezBase_541'; $log=Join-Path $root 'analysis\ezbase541_reaudit_transcript_20260929.txt'; Start-Transcript -LiteralPath $log -Append; $exe=Join-Path $root '附件_平台原件\解压复核_20260929\ezBase\ezre.exe'; $unpacked=Join-Path $root 'unpacked_runtime.bin'; $tail=Join-Path $root 'runtime_import_tail.bin'; Write-Output 'COMMAND> strings.exe -a -t x on platform-original sample, filter target/alphabet/prompt'; & 'C:\msys64\mingw64\bin\strings.exe' -a -t x $exe | Select-String 'iP\}|AaBb|input your flag'; Write-Output 'COMMAND> Python print exact raw byte windows and offsets for target prefix in original, unpacked image, runtime tail'; python -c "import pathlib,sys; needle=b'iP}ui7siC';\nfor name in sys.argv[1:]:\n p=pathlib.Path(name); b=p.read_bytes(); pos=0; print('FILE',p.name,'size',len(b));\n while True:\n  i=b.find(needle,pos);\n  if i<0: break\n  s=b[i:i+96]; print('offset',hex(i),'len',len(s),'hex',s.hex(' ')); print('repr',repr(s)); pos=i+1" $exe $unpacked $tail; Write-Output 'COMMAND> objdump -x executable headers and sections'; & 'C:\msys64\mingw64\bin\objdump.exe' -x $exe | Select-Object -First 130; Stop-Transcript
+Process ID: 10276
+PSVersion: 7.6.5
+PSEdition: Core
+GitCommitId: 7.6.5
+OS: Microsoft Windows 10.0.26200
+Platform: Win32NT
+PSCompatibleVersions: 1.0, 2.0, 3.0, 4.0, 5.0, 5.1, 6.0, 7.0
+PSRemotingProtocolVersion: 2.4
+SerializationVersion: 1.1.0.1
+WSManStackVersion: 3.0
+**********************
+Transcript started, output file is C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\ezBase_541\analysis\ezbase541_reaudit_transcript_20260929.txt
+COMMAND> strings.exe -a -t x on platform-original sample, filter target/alphabet/prompt
+
+   129b iP}ui7siC`otMgA~h5o]Tg<4jPmtIvM5
+   12d0 AaBb
+   131c input your flag:B
+COMMAND> Python print exact raw byte windows and offsets for target prefix in original, unpacked image, runtime tail
+
+COMMAND> objdump -x executable headers and sections
+**********************
+PowerShell transcript end
+End time: 20260929035357
+**********************
+**********************
+PowerShell transcript start
+Start time: 20260929035459
+Username: DESKTOP-412KTAR\mzj
+RunAs User: DESKTOP-412KTAR\mzj
+Configuration Name: 
+Machine: DESKTOP-412KTAR (Microsoft Windows NT 10.0.26200.0)
+Host Application: C:\Users\mzj\.cache\codex-runtimes\codex-primary-runtime\dependencies\native\powershell\pwsh.dll -Command try { [Console]::OutputEncoding=[System.Text.Encoding]::UTF8 } catch {}
+$ErrorActionPreference='Stop'; $root='C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\ezBase_541'; $log=Join-Path $root 'analysis\ezbase541_reaudit_transcript_20260929.txt'; Start-Transcript -LiteralPath $log -Append; $exe=Join-Path $root '附件_平台原件\解压复核_20260929\ezBase\ezre.exe'; $raw=[System.IO.File]::ReadAllBytes($exe); Write-Output 'COMMAND> Read exact file bytes around string table offsets from strings.exe'; foreach($pair in @(@(0x1290,0x12d0),@(0x12b0,0x12d0),@(0x12d0,0x1324))) { $start=$pair[0]; $end=$pair[1]; $b=$raw[$start..$end]; Write-Output ("OFFSET {0:x4}-{1:x4}" -f $start,$end); Write-Output ('HEX: ' + [BitConverter]::ToString($b).Replace('-',' ')); Write-Output ('ASCII: ' + [System.Text.Encoding]::ASCII.GetString($b)) }; Write-Output 'COMMAND> Run previous local pure Python candidate derivation (does not submit platform)'; python (Join-Path $root 'solve_ez541_final.py'); Stop-Transcript
+Process ID: 19528
+PSVersion: 7.6.5
+PSEdition: Core
+GitCommitId: 7.6.5
+OS: Microsoft Windows 10.0.26200
+Platform: Win32NT
+PSCompatibleVersions: 1.0, 2.0, 3.0, 4.0, 5.0, 5.1, 6.0, 7.0
+PSRemotingProtocolVersion: 2.4
+SerializationVersion: 1.1.0.1
+WSManStackVersion: 3.0
+**********************
+Transcript started, output file is C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\ezBase_541\analysis\ezbase541_reaudit_transcript_20260929.txt
+COMMAND> Read exact file bytes around string table offsets from strings.exe
+OFFSET 1290-12d0
+HEX: 6A 81 22 C8 5C 0F 00 FF FF FF FF 69 50 7D 75 69 37 73 69 43 60 6F 74 4D 67 41 7E 68 35 6F 5D 54 67 3C 34 6A 50 6D 74 49 76 4D 35 1F 92 FF FF 43 7E 49 34 68 36 34 34 4B 37 4D 7E 4B 56 67 3D 00 41
+ASCII: j?"?\ ????iP}ui7siC`otMgA~h5o]Tg<4jPmtIvM5???C~I4h644K7M~KVg= A
+OFFSET 12b0-12d0
+HEX: 67 3C 34 6A 50 6D 74 49 76 4D 35 1F 92 FF FF 43 7E 49 34 68 36 34 34 4B 37 4D 7E 4B 56 67 3D 00 41
+ASCII: g<4jPmtIvM5???C~I4h644K7M~KVg= A
+OFFSET 12d0-1324
+HEX: 41 61 42 62 FF FF 7F A9 43 CE 64 45 65 46 66 47 67 48 68 49 69 4A 6A 4B 6B 4C 6C 4D 6D 4E 6E 4F FF FF FF FF 6F 50 70 51 71 52 72 53 73 54 74 55 75 56 76 57 77 58 78 59 79 5A 7A 30 31 32 33 34 35 36 37 38 6D F4 FF FF 39 2B 2F 00 69 6E 70 75 74 20 79 6F 75
+ASCII: AaBb???C?dEeFfGgHhIiJjKkLlMmNnO????oPpQqRrSsTtUuVvWwXxYyZz012345678m???9+/ input you
+COMMAND> Run previous local pure Python candidate derivation (does not submit platform)
+
+**********************
+PowerShell transcript end
+End time: 20260929035459
+**********************
+**********************
+PowerShell transcript start
+Start time: 20260929035634
+Username: DESKTOP-412KTAR\mzj
+RunAs User: DESKTOP-412KTAR\mzj
+Configuration Name: 
+Machine: DESKTOP-412KTAR (Microsoft Windows NT 10.0.26200.0)
+Host Application: C:\Users\mzj\.cache\codex-runtimes\codex-primary-runtime\dependencies\native\powershell\pwsh.dll -Command try { [Console]::OutputEncoding=[System.Text.Encoding]::UTF8 } catch {}
+$ErrorActionPreference='Stop'; $root='C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\ezBase_541'; $log=Join-Path $root 'analysis\ezbase541_reaudit_transcript_20260929.txt'; Start-Transcript -LiteralPath $log -Append; $exe=Join-Path $root '附件_平台原件\解压复核_20260929\ezBase\ezre.exe'; $raw=[System.IO.File]::ReadAllBytes($exe); $pe=[BitConverter]::ToInt32($raw,0x3c); $secCount=[BitConverter]::ToUInt16($raw,$pe+6); $optSize=[BitConverter]::ToUInt16($raw,$pe+20); $opt=$pe+24; $imageBase=[BitConverter]::ToUInt64($raw,$opt+24); $sectionTable=$opt+$optSize; Write-Output ("COMMAND> Parse PE headers in PowerShell: e_lfanew={0:x}; sections={1}; imagebase={2:x}; data offset=0x129b" -f $pe,$secCount,$imageBase); for($i=0;$i -lt $secCount;$i++){ $o=$sectionTable+40*$i; $name=[System.Text.Encoding]::ASCII.GetString($raw,$o,8).Trim([char]0); $vsize=[BitConverter]::ToUInt32($raw,$o+8); $va=[BitConverter]::ToUInt32($raw,$o+12); $rsize=[BitConverter]::ToUInt32($raw,$o+16); $rptr=[BitConverter]::ToUInt32($raw,$o+20); Write-Output ("SECTION {0}: VA=0x{1:x} VirtualSize=0x{2:x} RawPtr=0x{3:x} RawSize=0x{4:x}" -f $name,$va,$vsize,$rptr,$rsize); if(0x129b -ge $rptr -and 0x129b -lt ($rptr+$rsize)){ $rva=$va+(0x129b-$rptr); Write-Output ("target prefix maps to VA=0x{0:x}" -f ($imageBase+$rva)) } }; Write-Output 'COMMAND> Print exact context at all target occurrences in executable/dump/runtime-tail'; python -c "import pathlib,sys; needle=b'iP}ui7siC'; [print('FILE',pathlib.Path(n).name,'SIZE',len(b),'OFFSET',hex(i),'HEX',b[i:i+80].hex(' '),'REPR',repr(b[i:i+80])) for n in sys.argv[1:] for p in [pathlib.Path(n)] for b in [p.read_bytes()] for i in [b.find(needle)] if i>=0]" $exe (Join-Path $root 'unpacked_runtime.bin') (Join-Path $root 'runtime_import_tail.bin'); Stop-Transcript
+Process ID: 20344
+PSVersion: 7.6.5
+PSEdition: Core
+GitCommitId: 7.6.5
+OS: Microsoft Windows 10.0.26200
+Platform: Win32NT
+PSCompatibleVersions: 1.0, 2.0, 3.0, 4.0, 5.0, 5.1, 6.0, 7.0
+PSRemotingProtocolVersion: 2.4
+SerializationVersion: 1.1.0.1
+WSManStackVersion: 3.0
+**********************
+Transcript started, output file is C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\ezBase_541\analysis\ezbase541_reaudit_transcript_20260929.txt
+COMMAND> Parse PE headers in PowerShell: e_lfanew=78; sections=3; imagebase=140000000; data offset=0x129b
+SECTION upx0: VA=0x1000 VirtualSize=0xb000 RawPtr=0x200 RawSize=0x0
+SECTION upx1: VA=0xc000 VirtualSize=0x2000 RawPtr=0x200 RawSize=0x1e00
+target prefix maps to VA=0x14000d09b
+SECTION .rsrc: VA=0xe000 VirtualSize=0x1000 RawPtr=0x2000 RawSize=0x400
+COMMAND> Print exact context at all target occurrences in executable/dump/runtime-tail
+
+**********************
+PowerShell transcript end
+End time: 20260929035634
+**********************
+**********************
+PowerShell transcript start
+Start time: 20260929035746
+Username: DESKTOP-412KTAR\mzj
+RunAs User: DESKTOP-412KTAR\mzj
+Configuration Name: 
+Machine: DESKTOP-412KTAR (Microsoft Windows NT 10.0.26200.0)
+Host Application: C:\Users\mzj\.cache\codex-runtimes\codex-primary-runtime\dependencies\native\powershell\pwsh.dll -Command try { [Console]::OutputEncoding=[System.Text.Encoding]::UTF8 } catch {}
+$ErrorActionPreference='Continue'; $root='C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\ezBase_541'; $log=Join-Path $root 'analysis\ezbase541_reaudit_transcript_20260929.txt'; Start-Transcript -LiteralPath $log -Append; Write-Output 'COMMAND> Check prior ASCII temporary unpacked image and file identity'; $ascii='C:\Users\mzj\Desktop\CTF\_ezunpacked.bin'; if(Test-Path -LiteralPath $ascii){ Get-FileHash -Algorithm SHA256 -LiteralPath $ascii,(Join-Path $root 'unpacked_runtime.bin') | Format-List } else { Write-Output 'C:\Users\mzj\Desktop\CTF\_ezunpacked.bin not found' }; Write-Output 'COMMAND> Select-String on prior full disassembly for comparison-data references and entry strings'; $dis=Join-Path $root '分析产物\2026-09-27\_ezdisasm_all.txt'; Select-String -LiteralPath $dis -Pattern '140004000|140004040|input your flag|call.*strcmp|call.*fgets|call.*memcmp' -Context 3,4 | ForEach-Object { $_.ToString(); $_.Context.PostContext }; Write-Output 'COMMAND> Read existing debugger/dumper source files'; foreach($rel in @('debug_dump.c','debug_entry.c','debug_importdump.c','debug_mem.c','debug_patch.c','debug_stack.c')) { Write-Output ("--- " + $rel + " ---"); Get-Content -LiteralPath (Join-Path $root $rel) }; Stop-Transcript
+Process ID: 10740
+PSVersion: 7.6.5
+PSEdition: Core
+GitCommitId: 7.6.5
+OS: Microsoft Windows 10.0.26200
+Platform: Win32NT
+PSCompatibleVersions: 1.0, 2.0, 3.0, 4.0, 5.0, 5.1, 6.0, 7.0
+PSRemotingProtocolVersion: 2.4
+SerializationVersion: 1.1.0.1
+WSManStackVersion: 3.0
+**********************
+Transcript started, output file is C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\ezBase_541\analysis\ezbase541_reaudit_transcript_20260929.txt
+COMMAND> Check prior ASCII temporary unpacked image and file identity
+C:\Users\mzj\Desktop\CTF\_ezunpacked.bin not found
+COMMAND> Select-String on prior full disassembly for comparison-data references and entry strings
+  C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\ezBase_541\分析产物\2026-09-27\_ezdisasm_all.txt:47:   1400010c0:	00 
+  C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\ezBase_541\分析产物\2026-09-27\_ezdisasm_all.txt:48:   1400010c1:	e8 6a 00 00 00       	call   0x140001130
+  C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\ezBase_541\分析产物\2026-09-27\_ezdisasm_all.txt:49:   1400010c6:	48 8d 4c 24 40       	lea    rcx,[rsp+0x40]
+> C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\ezBase_541\分析产物\2026-09-27\_ezdisasm_all.txt:50:   1400010cb:	48 8d 15 2e 2f 00 00 	lea    rdx,[rip+0x2f2e]        # 0x140004000
+  C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\ezBase_541\分析产物\2026-09-27\_ezdisasm_all.txt:51:   1400010d2:	e8 b9 28 00 00       	call   0x140003990
+  C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\ezBase_541\分析产物\2026-09-27\_ezdisasm_all.txt:52:   1400010d7:	83 f8 00             	cmp    eax,0x0
+  C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\ezBase_541\分析产物\2026-09-27\_ezdisasm_all.txt:53:   1400010da:	0f 85 12 00 00 00    	jne    0x1400010f2
+  C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\ezBase_541\分析产物\2026-09-27\_ezdisasm_all.txt:54:   1400010e0:	48 8d 0d c8 2f 00 00 	lea    rcx,[rip+0x2fc8]        # 0x1400040af
+   1400010d2:	e8 b9 28 00 00       	call   0x140003990
+   1400010d7:	83 f8 00             	cmp    eax,0x0
+   1400010da:	0f 85 12 00 00 00    	jne    0x1400010f2
+   1400010e0:	48 8d 0d c8 2f 00 00 	lea    rcx,[rip+0x2fc8]        # 0x1400040af
+  C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\ezBase_541\分析产物\2026-09-27\_ezdisasm_all.txt:125:   140001219:	83 e0 3f             	and    eax,0x3f
+  C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\ezBase_541\分析产物\2026-09-27\_ezdisasm_all.txt:126:   14000121c:	89 c0                	mov    eax,eax
+  C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\ezBase_541\分析产物\2026-09-27\_ezdisasm_all.txt:127:   14000121e:	89 c1                	mov    ecx,eax
+> C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\ezBase_541\分析产物\2026-09-27\_ezdisasm_all.txt:128:   140001220:	48 8d 05 19 2e 00 00 	lea    rax,[rip+0x2e19]        # 0x140004040
+  C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\ezBase_541\分析产物\2026-09-27\_ezdisasm_all.txt:129:   140001227:	8a 14 08             	mov    dl,BYTE PTR [rax+rcx*1]
+  C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\ezBase_541\分析产物\2026-09-27\_ezdisasm_all.txt:130:   14000122a:	48 8b 44 24 38       	mov    rax,QWORD PTR [rsp+0x38]
+  C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\ezBase_541\分析产物\2026-09-27\_ezdisasm_all.txt:131:   14000122f:	48 8b 4c 24 20       	mov    rcx,QWORD PTR [rsp+0x20]
+  C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\ezBase_541\分析产物\2026-09-27\_ezdisasm_all.txt:132:   140001234:	49 89 c8             	mov    r8,rcx
+   140001227:	8a 14 08             	mov    dl,BYTE PTR [rax+rcx*1]
+   14000122a:	48 8b 44 24 38       	mov    rax,QWORD PTR [rsp+0x38]
+   14000122f:	48 8b 4c 24 20       	mov    rcx,QWORD PTR [rsp+0x20]
+   140001234:	49 89 c8             	mov    r8,rcx
+  C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\ezBase_541\分析产物\2026-09-27\_ezdisasm_all.txt:138:   14000124a:	83 e0 3f             	and    eax,0x3f
+  C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\ezBase_541\分析产物\2026-09-27\_ezdisasm_all.txt:139:   14000124d:	89 c0                	mov    eax,eax
+  C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\ezBase_541\分析产物\2026-09-27\_ezdisasm_all.txt:140:   14000124f:	89 c1                	mov    ecx,eax
+> C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\ezBase_541\分析产物\2026-09-27\_ezdisasm_all.txt:141:   140001251:	48 8d 05 e8 2d 00 00 	lea    rax,[rip+0x2de8]        # 0x140004040
+  C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\ezBase_541\分析产物\2026-09-27\_ezdisasm_all.txt:142:   140001258:	8a 14 08             	mov    dl,BYTE PTR [rax+rcx*1]
+  C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\ezBase_541\分析产物\2026-09-27\_ezdisasm_all.txt:143:   14000125b:	48 8b 44 24 38       	mov    rax,QWORD PTR [rsp+0x38]
+  C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\ezBase_541\分析产物\2026-09-27\_ezdisasm_all.txt:144:   140001260:	48 8b 4c 24 20       	mov    rcx,QWORD PTR [rsp+0x20]
+  C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\ezBase_541\分析产物\2026-09-27\_ezdisasm_all.txt:145:   140001265:	49 89 c8             	mov    r8,rcx
+   140001258:	8a 14 08             	mov    dl,BYTE PTR [rax+rcx*1]
+   14000125b:	48 8b 44 24 38       	mov    rax,QWORD PTR [rsp+0x38]
+   140001260:	48 8b 4c 24 20       	mov    rcx,QWORD PTR [rsp+0x20]
+   140001265:	49 89 c8             	mov    r8,rcx
+  C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\ezBase_541\分析产物\2026-09-27\_ezdisasm_all.txt:156:   140001294:	83 e0 3f             	and    eax,0x3f
+  C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\ezBase_541\分析产物\2026-09-27\_ezdisasm_all.txt:157:   140001297:	89 c0                	mov    eax,eax
+  C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\ezBase_541\分析产物\2026-09-27\_ezdisasm_all.txt:158:   140001299:	89 c1                	mov    ecx,eax
+> C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\ezBase_541\分析产物\2026-09-27\_ezdisasm_all.txt:159:   14000129b:	48 8d 05 9e 2d 00 00 	lea    rax,[rip+0x2d9e]        # 0x140004040
+  C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\ezBase_541\分析产物\2026-09-27\_ezdisasm_all.txt:160:   1400012a2:	0f be 04 08          	movsx  eax,BYTE PTR [rax+rcx*1]
+  C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\ezBase_541\分析产物\2026-09-27\_ezdisasm_all.txt:161:   1400012a6:	89 44 24 04          	mov    DWORD PTR [rsp+0x4],eax
+  C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\ezBase_541\分析产物\2026-09-27\_ezdisasm_all.txt:162:   1400012aa:	8b 44 24 04          	mov    eax,DWORD PTR [rsp+0x4]
+  C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\ezBase_541\分析产物\2026-09-27\_ezdisasm_all.txt:163:   1400012ae:	88 c2                	mov    dl,al
+   1400012a2:	0f be 04 08          	movsx  eax,BYTE PTR [rax+rcx*1]
+   1400012a6:	89 44 24 04          	mov    DWORD PTR [rsp+0x4],eax
+   1400012aa:	8b 44 24 04          	mov    eax,DWORD PTR [rsp+0x4]
+   1400012ae:	88 c2                	mov    dl,al
+  C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\ezBase_541\分析产物\2026-09-27\_ezdisasm_all.txt:176:   1400012e5:	83 e0 3f             	and    eax,0x3f
+  C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\ezBase_541\分析产物\2026-09-27\_ezdisasm_all.txt:177:   1400012e8:	89 c0                	mov    eax,eax
+  C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\ezBase_541\分析产物\2026-09-27\_ezdisasm_all.txt:178:   1400012ea:	89 c1                	mov    ecx,eax
+> C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\ezBase_541\分析产物\2026-09-27\_ezdisasm_all.txt:179:   1400012ec:	48 8d 05 4d 2d 00 00 	lea    rax,[rip+0x2d4d]        # 0x140004040
+  C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\ezBase_541\分析产物\2026-09-27\_ezdisasm_all.txt:180:   1400012f3:	0f be 04 08          	movsx  eax,BYTE PTR [rax+rcx*1]
+  C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\ezBase_541\分析产物\2026-09-27\_ezdisasm_all.txt:181:   1400012f7:	89 04 24             	mov    DWORD PTR [rsp],eax
+  C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\ezBase_541\分析产物\2026-09-27\_ezdisasm_all.txt:182:   1400012fa:	8b 04 24             	mov    eax,DWORD PTR [rsp]
+  C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\ezBase_541\分析产物\2026-09-27\_ezdisasm_all.txt:183:   1400012fd:	88 c2                	mov    dl,al
+   1400012f3:	0f be 04 08          	movsx  eax,BYTE PTR [rax+rcx*1]
+   1400012f7:	89 04 24             	mov    DWORD PTR [rsp],eax
+   1400012fa:	8b 04 24             	mov    eax,DWORD PTR [rsp]
+   1400012fd:	88 c2                	mov    dl,al
+COMMAND> Read existing debugger/dumper source files
+--- debug_dump.c ---
+#include <windows.h>
+#include <stdio.h>
+#include <stdint.h>
+#include <stdlib.h>
+int main(int argc,char**argv){
+ if(argc<4){printf("usage: ezdump.exe <exe> <input> <dump>\n");return 2;}
+ SECURITY_ATTRIBUTES sa={sizeof(sa),NULL,TRUE};HANDLE hin=CreateFileA(argv[2],GENERIC_READ,FILE_SHARE_READ,&sa,OPEN_EXISTING,FILE_ATTRIBUTE_NORMAL,NULL);if(hin==INVALID_HANDLE_VALUE){printf("stdin open error=%lu\n",GetLastError());return 3;}
+ STARTUPINFOA si;PROCESS_INFORMATION pi;ZeroMemory(&si,sizeof(si));ZeroMemory(&pi,sizeof(pi));si.cb=sizeof(si);si.dwFlags=STARTF_USESTDHANDLES;si.hStdInput=hin;si.hStdOutput=GetStdHandle(STD_OUTPUT_HANDLE);si.hStdError=GetStdHandle(STD_ERROR_HANDLE);
+ char cmd[4096];snprintf(cmd,sizeof(cmd),"\"%s\"",argv[1]);printf("COMMAND: CreateProcessA %s DEBUG_ONLY_THIS_PROCESS\n",argv[1]);if(!CreateProcessA(argv[1],cmd,NULL,NULL,TRUE,DEBUG_ONLY_THIS_PROCESS|CREATE_NO_WINDOW,NULL,NULL,&si,&pi)){printf("CreateProcess error=%lu\n",GetLastError());return 4;}CloseHandle(hin);
+ ULONG_PTR base=0;int dumped=0,done=0,n=0;while(!done&&n++<10000){DEBUG_EVENT e;if(!WaitForDebugEvent(&e,5000)){printf("wait_error=%lu\n",GetLastError());break;}DWORD c=DBG_CONTINUE;
+ if(e.dwDebugEventCode==CREATE_PROCESS_DEBUG_EVENT){base=(ULONG_PTR)e.u.CreateProcessInfo.lpBaseOfImage;printf("CREATE_PROCESS base=%p start=%p\n",(void*)base,e.u.CreateProcessInfo.lpStartAddress);if(e.u.CreateProcessInfo.hFile)CloseHandle(e.u.CreateProcessInfo.hFile);}
+ else if(e.dwDebugEventCode==LOAD_DLL_DEBUG_EVENT){if(e.u.LoadDll.hFile)CloseHandle(e.u.LoadDll.hFile);}
+ else if(e.dwDebugEventCode==EXCEPTION_DEBUG_EVENT){DWORD code=e.u.Exception.ExceptionRecord.ExceptionCode;printf("EXCEPTION code=0x%08lx addr=%p chance=%lu\n",code,e.u.Exception.ExceptionRecord.ExceptionAddress,e.u.Exception.dwFirstChance);if(code==EXCEPTION_BREAKPOINT||code==EXCEPTION_SINGLE_STEP)c=DBG_CONTINUE;else{if(!dumped&&code==0xc0000005){dumped=1;const DWORD want=0xb000;unsigned char*buf=(unsigned char*)malloc(want);SIZE_T got=0;LPCVOID from=(LPCVOID)(base+0x1000);if(ReadProcessMemory(pi.hProcess,from,buf,want,&got)){HANDLE hf=CreateFileA(argv[3],GENERIC_WRITE,0,NULL,CREATE_ALWAYS,FILE_ATTRIBUTE_NORMAL,NULL);if(hf!=INVALID_HANDLE_VALUE){DWORD written=0;BOOL ok=WriteFile(hf,buf,(DWORD)got,&written,NULL);CloseHandle(hf);printf("DUMP path=%s source=%p requested=%lu read=%llu written=%lu ok=%u\n",argv[3],from,want,(unsigned long long)got,written,ok);}else printf("CreateFile dump error=%lu\n",GetLastError());}else printf("ReadProcessMemory dump error=%lu read=%llu\n",GetLastError(),(unsigned long long)got);free(buf);}c=DBG_EXCEPTION_NOT_HANDLED;}}
+ else if(e.dwDebugEventCode==EXIT_PROCESS_DEBUG_EVENT){printf("EXIT_PROCESS code=0x%08lx\n",e.u.ExitProcess.dwExitCode);done=1;}
+ if(!ContinueDebugEvent(e.dwProcessId,e.dwThreadId,c)){printf("ContinueDebugEvent error=%lu\n",GetLastError());break;}}
+ DWORD ec=0;GetExitCodeProcess(pi.hProcess,&ec);printf("debug_exit=%lu events=%d done=%d dumped=%d\n",ec,n,done,dumped);CloseHandle(pi.hThread);CloseHandle(pi.hProcess);return 0;
+}
+--- debug_entry.c ---
+#include <windows.h>
+#include <psapi.h>
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+static void module_for(HANDLE process, ULONG_PTR address) {
+    HMODULE mods[512]; DWORD needed=0;
+    if(!EnumProcessModules(process,mods,sizeof(mods),&needed)) { printf("EnumProcessModules failed=%lu\n",GetLastError()); return; }
+    unsigned n=needed/sizeof(HMODULE); if(n>512)n=512;
+    for(unsigned i=0;i<n;i++) {
+        MODULEINFO mi; char path[MAX_PATH];
+        if(GetModuleInformation(process,mods[i],&mi,sizeof(mi)) && address >= (ULONG_PTR)mi.lpBaseOfDll && address < (ULONG_PTR)mi.lpBaseOfDll+mi.SizeOfImage) {
+            GetModuleFileNameExA(process,mods[i],path,sizeof(path));
+            printf("FAULT_MODULE path=%s base=%p rva=0x%Ix size=0x%lx\n",path,mi.lpBaseOfDll,address-(ULONG_PTR)mi.lpBaseOfDll,mi.SizeOfImage); return;
+        }
+    }
+    printf("FAULT_MODULE not-found address=%p module_count=%u\n",(void*)address,n);
+}
+int main(int argc, char **argv) {
+    if (argc < 3) { fprintf(stderr,"usage: ezdebug.exe <program.exe> <stdin-file>\n"); return 2; }
+    SECURITY_ATTRIBUTES sa = {sizeof(sa), NULL, TRUE};
+    HANDLE hin = CreateFileA(argv[2], GENERIC_READ, FILE_SHARE_READ, &sa, OPEN_EXISTING, FILE_ATTRIBUTE_NORMAL, NULL);
+    if (hin == INVALID_HANDLE_VALUE) { fprintf(stderr,"CreateFileA stdin failed: %lu\n",GetLastError()); return 3; }
+    STARTUPINFOA si; PROCESS_INFORMATION pi; ZeroMemory(&si,sizeof(si)); ZeroMemory(&pi,sizeof(pi));
+    si.cb=sizeof(si); si.dwFlags=STARTF_USESTDHANDLES; si.hStdInput=hin; si.hStdOutput=GetStdHandle(STD_OUTPUT_HANDLE); si.hStdError=GetStdHandle(STD_ERROR_HANDLE);
+    char command[4096]; snprintf(command,sizeof(command),"\"%s\"",argv[1]);
+    printf("COMMAND: CreateProcessA(application=%s, command=%s, DEBUG_ONLY_THIS_PROCESS)\n",argv[1],command);
+    if (!CreateProcessA(argv[1],command,NULL,NULL,TRUE,DEBUG_ONLY_THIS_PROCESS|CREATE_NO_WINDOW,NULL,NULL,&si,&pi)) { fprintf(stderr,"CreateProcessA failed: %lu\n",GetLastError()); CloseHandle(hin); return 4; }
+    CloseHandle(hin);
+    int done=0, events=0; DWORD exitcode=0;
+    while (!done && events++ < 10000) {
+        DEBUG_EVENT ev;
+        if (!WaitForDebugEvent(&ev,5000)) { fprintf(stderr,"WaitForDebugEvent timeout/error=%lu\n",GetLastError()); break; }
+        DWORD status=DBG_CONTINUE;
+        switch(ev.dwDebugEventCode) {
+          case CREATE_PROCESS_DEBUG_EVENT:
+            printf("CREATE_PROCESS base=%p start=%p thread=%lu\n",ev.u.CreateProcessInfo.lpBaseOfImage,ev.u.CreateProcessInfo.lpStartAddress,ev.dwThreadId);
+            if(ev.u.CreateProcessInfo.hFile) CloseHandle(ev.u.CreateProcessInfo.hFile); break;
+          case LOAD_DLL_DEBUG_EVENT: {
+            char path[MAX_PATH]=""; GetModuleFileNameExA(pi.hProcess,(HMODULE)ev.u.LoadDll.lpBaseOfDll,path,sizeof(path));
+            printf("LOAD_DLL base=%p path=%s thread=%lu\n",ev.u.LoadDll.lpBaseOfDll,path,ev.dwThreadId);
+            if(ev.u.LoadDll.hFile) CloseHandle(ev.u.LoadDll.hFile); break;
+          }
+          case EXCEPTION_DEBUG_EVENT: {
+            DWORD code=ev.u.Exception.ExceptionRecord.ExceptionCode; ULONG_PTR address=(ULONG_PTR)ev.u.Exception.ExceptionRecord.ExceptionAddress;
+            printf("EXCEPTION code=0x%08lx address=%p first_chance=%lu thread=%lu\n",code,(void*)address,ev.u.Exception.dwFirstChance,ev.dwThreadId);
+            if(code==EXCEPTION_BREAKPOINT || code==EXCEPTION_SINGLE_STEP) status=DBG_CONTINUE;
+            else {
+              HANDLE th=OpenThread(THREAD_GET_CONTEXT|THREAD_QUERY_INFORMATION,FALSE,ev.dwThreadId);
+              if(th) { CONTEXT c; ZeroMemory(&c,sizeof(c)); c.ContextFlags=CONTEXT_FULL; if(GetThreadContext(th,&c)) { printf("CONTEXT RIP=%p RAX=%p RBX=%p RCX=%p RDX=%p RSI=%p RDI=%p RSP=%p RBP=%p\n",(void*)c.Rip,(void*)c.Rax,(void*)c.Rbx,(void*)c.Rcx,(void*)c.Rdx,(void*)c.Rsi,(void*)c.Rdi,(void*)c.Rsp,(void*)c.Rbp); module_for(pi.hProcess,c.Rip); unsigned char buf[32]; SIZE_T got=0; if(ReadProcessMemory(pi.hProcess,(LPCVOID)(c.Rip-8),buf,sizeof(buf),&got)) { printf("FAULT_BYTES address=%p length=%llu hex=",(void*)(c.Rip-8),(unsigned long long)got); for(SIZE_T j=0;j<got;j++)printf("%02x",buf[j]); printf("\n"); } } else printf("GetThreadContext failed=%lu\n",GetLastError()); CloseHandle(th); }
+              status=DBG_EXCEPTION_NOT_HANDLED;
+            } break;
+          }
+          case EXIT_PROCESS_DEBUG_EVENT: exitcode=ev.u.ExitProcess.dwExitCode; printf("EXIT_PROCESS code=0x%08lx (%lu)\n",exitcode,exitcode); done=1; break;
+          case OUTPUT_DEBUG_STRING_EVENT: printf("OUTPUT_DEBUG_STRING unicode=%u length=%u\n",ev.u.DebugString.fUnicode,ev.u.DebugString.nDebugStringLength); break;
+          default: break;
+        }
+        fflush(stdout);
+        if(!ContinueDebugEvent(ev.dwProcessId,ev.dwThreadId,status)){fprintf(stderr,"ContinueDebugEvent failed=%lu\n",GetLastError());break;}
+    }
+    if(!done){TerminateProcess(pi.hProcess,0xEE);WaitForSingleObject(pi.hProcess,2000);}
+    GetExitCodeProcess(pi.hProcess,&exitcode); printf("debugger_exit_code=%lu events=%d done=%d\n",exitcode,events,done);
+    CloseHandle(pi.hThread);CloseHandle(pi.hProcess);return done?0:5;
+}
+--- debug_importdump.c ---
+#include <windows.h>
+#include <stdio.h>
+#include <stdint.h>
+#include <stdlib.h>
+int main(int argc,char**argv){if(argc<4){printf("usage: importdump <exe> <input> <dump>\n");return 2;}SECURITY_ATTRIBUTES sa={sizeof(sa),NULL,TRUE};HANDLE hin=CreateFileA(argv[2],GENERIC_READ,FILE_SHARE_READ,&sa,OPEN_EXISTING,FILE_ATTRIBUTE_NORMAL,NULL);STARTUPINFOA si;PROCESS_INFORMATION pi;ZeroMemory(&si,sizeof(si));ZeroMemory(&pi,sizeof(pi));si.cb=sizeof(si);si.dwFlags=STARTF_USESTDHANDLES;si.hStdInput=hin;si.hStdOutput=GetStdHandle(STD_OUTPUT_HANDLE);si.hStdError=GetStdHandle(STD_ERROR_HANDLE);char cmd[4096];snprintf(cmd,sizeof(cmd),"\"%s\"",argv[1]);printf("COMMAND: CreateProcessA %s DEBUG_ONLY_THIS_PROCESS\n",argv[1]);if(!CreateProcessA(argv[1],cmd,NULL,NULL,TRUE,DEBUG_ONLY_THIS_PROCESS|CREATE_NO_WINDOW,NULL,NULL,&si,&pi)){printf("CreateProcess error=%lu\n",GetLastError());return 4;}CloseHandle(hin);ULONG_PTR base=0;int dumped=0,done=0,n=0;while(!done&&n++<10000){DEBUG_EVENT e;if(!WaitForDebugEvent(&e,5000)){printf("WaitForDebugEvent error=%lu\n",GetLastError());break;}DWORD c=DBG_CONTINUE;if(e.dwDebugEventCode==CREATE_PROCESS_DEBUG_EVENT){base=(ULONG_PTR)e.u.CreateProcessInfo.lpBaseOfImage;printf("CREATE_PROCESS base=%p start=%p\n",(void*)base,e.u.CreateProcessInfo.lpStartAddress);if(e.u.CreateProcessInfo.hFile)CloseHandle(e.u.CreateProcessInfo.hFile);}else if(e.dwDebugEventCode==LOAD_DLL_DEBUG_EVENT){if(e.u.LoadDll.hFile)CloseHandle(e.u.LoadDll.hFile);}else if(e.dwDebugEventCode==EXCEPTION_DEBUG_EVENT){DWORD code=e.u.Exception.ExceptionRecord.ExceptionCode;printf("EXCEPTION code=0x%08lx addr=%p chance=%lu\n",code,e.u.Exception.ExceptionRecord.ExceptionAddress,e.u.Exception.dwFirstChance);if(code==EXCEPTION_BREAKPOINT||code==EXCEPTION_SINGLE_STEP)c=DBG_CONTINUE;else{if(!dumped&&code==0xc0000005){dumped=1;DWORD size=0x3000;unsigned char*b=(unsigned char*)malloc(size);SIZE_T got=0;if(ReadProcessMemory(pi.hProcess,(LPCVOID)(base+0xc000),b,size,&got)){HANDLE h=CreateFileA(argv[3],GENERIC_WRITE,0,NULL,CREATE_ALWAYS,FILE_ATTRIBUTE_NORMAL,NULL);DWORD wr=0;BOOL ok=h!=INVALID_HANDLE_VALUE&&WriteFile(h,b,(DWORD)got,&wr,NULL);if(h!=INVALID_HANDLE_VALUE)CloseHandle(h);printf("DUMP rva=0xc000 path=%s requested=%lu read=%llu written=%lu ok=%u\n",argv[3],size,(unsigned long long)got,wr,ok);}else printf("ReadProcessMemory error=%lu read=%llu\n",GetLastError(),(unsigned long long)got);free(b);}c=DBG_EXCEPTION_NOT_HANDLED;}}else if(e.dwDebugEventCode==EXIT_PROCESS_DEBUG_EVENT){printf("EXIT_PROCESS code=0x%08lx\n",e.u.ExitProcess.dwExitCode);done=1;}if(!ContinueDebugEvent(e.dwProcessId,e.dwThreadId,c)){printf("ContinueDebugEvent error=%lu\n",GetLastError());break;}}DWORD ec=0;GetExitCodeProcess(pi.hProcess,&ec);printf("debug_exit=%lu events=%d dumped=%d\n",ec,n,dumped);CloseHandle(pi.hThread);CloseHandle(pi.hProcess);return 0;}
+--- debug_mem.c ---
+#include <windows.h>
+#include <stdio.h>
+#include <stdint.h>
+static ULONG_PTR base=0;
+int main(int argc,char**argv){
+ if(argc<3)return 2; SECURITY_ATTRIBUTES sa={sizeof(sa),NULL,TRUE};HANDLE hin=CreateFileA(argv[2],GENERIC_READ,FILE_SHARE_READ,&sa,OPEN_EXISTING,FILE_ATTRIBUTE_NORMAL,NULL);if(hin==INVALID_HANDLE_VALUE)return 3;
+ STARTUPINFOA si;PROCESS_INFORMATION pi;ZeroMemory(&si,sizeof(si));ZeroMemory(&pi,sizeof(pi));si.cb=sizeof(si);si.dwFlags=STARTF_USESTDHANDLES;si.hStdInput=hin;si.hStdOutput=GetStdHandle(STD_OUTPUT_HANDLE);si.hStdError=GetStdHandle(STD_ERROR_HANDLE);
+ char cmd[4096];snprintf(cmd,sizeof(cmd),"\"%s\"",argv[1]);printf("COMMAND: CreateProcessA %s DEBUG_ONLY_THIS_PROCESS\n",argv[1]);if(!CreateProcessA(argv[1],cmd,NULL,NULL,TRUE,DEBUG_ONLY_THIS_PROCESS|CREATE_NO_WINDOW,NULL,NULL,&si,&pi)){printf("CreateProcess error=%lu\n",GetLastError());return 4;}CloseHandle(hin);
+ int done=0,n=0;while(!done&&n++<10000){DEBUG_EVENT e;if(!WaitForDebugEvent(&e,5000)){printf("wait_error=%lu\n",GetLastError());break;}DWORD c=DBG_CONTINUE;
+ if(e.dwDebugEventCode==CREATE_PROCESS_DEBUG_EVENT){base=(ULONG_PTR)e.u.CreateProcessInfo.lpBaseOfImage;printf("CREATE_PROCESS base=%p start=%p\n",(void*)base,e.u.CreateProcessInfo.lpStartAddress);if(e.u.CreateProcessInfo.hFile)CloseHandle(e.u.CreateProcessInfo.hFile);}
+ else if(e.dwDebugEventCode==LOAD_DLL_DEBUG_EVENT){if(e.u.LoadDll.hFile)CloseHandle(e.u.LoadDll.hFile);}
+ else if(e.dwDebugEventCode==EXCEPTION_DEBUG_EVENT){DWORD code=e.u.Exception.ExceptionRecord.ExceptionCode;printf("EXCEPTION code=0x%08lx addr=%p chance=%lu\n",code,e.u.Exception.ExceptionRecord.ExceptionAddress,e.u.Exception.dwFirstChance);if(code==EXCEPTION_BREAKPOINT||code==EXCEPTION_SINGLE_STEP)c=DBG_CONTINUE;else{HANDLE th=OpenThread(THREAD_GET_CONTEXT|THREAD_QUERY_INFORMATION,FALSE,e.dwThreadId);if(th){CONTEXT t;ZeroMemory(&t,sizeof(t));t.ContextFlags=CONTEXT_FULL;if(GetThreadContext(th,&t)){printf("CONTEXT RIP=%p RSP=%p RBP=%p RAX=%p RCX=%p RDX=%p RSI=%p RDI=%p\n",(void*)t.Rip,(void*)t.Rsp,(void*)t.Rbp,(void*)t.Rax,(void*)t.Rcx,(void*)t.Rdx,(void*)t.Rsi,(void*)t.Rdi);unsigned char b[256];SIZE_T got=0;LPCVOID p=(LPCVOID)(base+0x1000);if(ReadProcessMemory(pi.hProcess,p,b,sizeof(b),&got)){printf("UNPACKED_AT_RVA1000 length=%llu hex=",(unsigned long long)got);for(SIZE_T j=0;j<got;j++)printf("%02x",b[j]);printf("\n");}else printf("ReadProcessMemory unpacked failed=%lu\n",GetLastError());}CloseHandle(th);}c=DBG_EXCEPTION_NOT_HANDLED;}}
+ else if(e.dwDebugEventCode==EXIT_PROCESS_DEBUG_EVENT){printf("EXIT_PROCESS code=0x%08lx\n",e.u.ExitProcess.dwExitCode);done=1;}
+ if(!ContinueDebugEvent(e.dwProcessId,e.dwThreadId,c)){printf("continue_error=%lu\n",GetLastError());break;}}
+ DWORD ec=0;GetExitCodeProcess(pi.hProcess,&ec);printf("debug_exit=%lu events=%d done=%d\n",ec,n,done);CloseHandle(pi.hThread);CloseHandle(pi.hProcess);return 0;
+}
+--- debug_patch.c ---
+#include <windows.h>
+#include <stdio.h>
+#include <stdint.h>
+static int patch_alignment_fault(HANDLE p, ULONG_PTR a) {
+    unsigned char old[8], replacement[8]; SIZE_T got=0,wrote=0; int index=-1; unsigned char value=0;
+    if(!ReadProcessMemory(p,(LPCVOID)a,old,sizeof(old),&got)||got<5){printf("ReadProcessMemory instruction failed=%lu bytes=%llu\n",GetLastError(),(unsigned long long)got);return 0;}
+    printf("FAULT_INSTRUCTION address=%p bytes=",(void*)a);for(int j=0;j<5;j++)printf("%02x",old[j]);printf("\n");
+    if(old[0]==0x66&&old[1]==0x0f&&(old[2]==0x6f||old[2]==0x7f)){index=0;value=0xf3;}
+    else if(old[0]==0x0f&&old[1]==0x28){index=1;value=0x10;}
+    else if(old[0]==0x0f&&old[1]==0x29){index=1;value=0x11;}
+    else if(old[0]==0x66&&old[1]==0x0f&&(old[2]==0x6e||old[2]==0x7e)){index=0;value=0xf3;}
+    if(index<0){printf("No known aligned-SIMD instruction patch matches.\n");return 0;}
+    DWORD protect=0,back=0;BOOL p1=VirtualProtectEx(p,(LPVOID)a,5,PAGE_EXECUTE_READWRITE,&protect);replacement[index]=value;BOOL p2=p1&&WriteProcessMemory(p,(LPVOID)(a+index),&replacement[index],1,&wrote);if(p2)FlushInstructionCache(p,(LPCVOID)a,5);BOOL p3=p1&&VirtualProtectEx(p,(LPVOID)a,5,protect,&back);
+    printf("PATCH aligned-SIMD-to-unaligned address=%p index=%d byte=0x%02x protect_ok=%d oldprotect=0x%lx write_ok=%d bytes=%llu restore_ok=%d restored_protect=0x%lx\n",(void*)a,index,value,p1,protect,p2,(unsigned long long)wrote,p3,back);
+    return p2&&wrote==1;
+}
+int main(int argc,char**argv){
+ if(argc<3){printf("usage: ezpatch.exe <exe> <stdin-file>\n");return 2;} SECURITY_ATTRIBUTES sa={sizeof(sa),NULL,TRUE};HANDLE hin=CreateFileA(argv[2],GENERIC_READ,FILE_SHARE_READ,&sa,OPEN_EXISTING,FILE_ATTRIBUTE_NORMAL,NULL);if(hin==INVALID_HANDLE_VALUE){printf("stdin open error=%lu\n",GetLastError());return 3;}
+ STARTUPINFOA si;PROCESS_INFORMATION pi;ZeroMemory(&si,sizeof(si));ZeroMemory(&pi,sizeof(pi));si.cb=sizeof(si);si.dwFlags=STARTF_USESTDHANDLES;si.hStdInput=hin;si.hStdOutput=GetStdHandle(STD_OUTPUT_HANDLE);si.hStdError=GetStdHandle(STD_ERROR_HANDLE);char cmd[4096];snprintf(cmd,sizeof(cmd),"\"%s\"",argv[1]);printf("COMMAND: CreateProcessA %s DEBUG_ONLY_THIS_PROCESS\n",argv[1]);
+ if(!CreateProcessA(argv[1],cmd,NULL,NULL,TRUE,DEBUG_ONLY_THIS_PROCESS|CREATE_NO_WINDOW,NULL,NULL,&si,&pi)){printf("CreateProcess error=%lu\n",GetLastError());CloseHandle(hin);return 4;}CloseHandle(hin);int done=0,n=0,patched=0;while(!done&&n++<10000){DEBUG_EVENT e;if(!WaitForDebugEvent(&e,5000)){printf("WaitForDebugEvent error=%lu\n",GetLastError());break;}DWORD c=DBG_CONTINUE;
+ if(e.dwDebugEventCode==CREATE_PROCESS_DEBUG_EVENT){printf("CREATE_PROCESS base=%p start=%p\n",e.u.CreateProcessInfo.lpBaseOfImage,e.u.CreateProcessInfo.lpStartAddress);if(e.u.CreateProcessInfo.hFile)CloseHandle(e.u.CreateProcessInfo.hFile);}
+ else if(e.dwDebugEventCode==LOAD_DLL_DEBUG_EVENT){if(e.u.LoadDll.hFile)CloseHandle(e.u.LoadDll.hFile);}
+ else if(e.dwDebugEventCode==EXCEPTION_DEBUG_EVENT){DWORD code=e.u.Exception.ExceptionRecord.ExceptionCode;ULONG_PTR a=(ULONG_PTR)e.u.Exception.ExceptionRecord.ExceptionAddress;printf("EXCEPTION code=0x%08lx address=%p chance=%lu info0=0x%llx info1=0x%llx\n",code,(void*)a,e.u.Exception.dwFirstChance,(unsigned long long)e.u.Exception.ExceptionRecord.ExceptionInformation[0],(unsigned long long)e.u.Exception.ExceptionRecord.ExceptionInformation[1]);if(code==EXCEPTION_BREAKPOINT||code==EXCEPTION_SINGLE_STEP)c=DBG_CONTINUE;else if(code==0xc0000005&&patched<64&&patch_alignment_fault(pi.hProcess,a)){patched++;c=DBG_CONTINUE;}else c=DBG_EXCEPTION_NOT_HANDLED;}
+ else if(e.dwDebugEventCode==EXIT_PROCESS_DEBUG_EVENT){printf("EXIT_PROCESS code=0x%08lx\n",e.u.ExitProcess.dwExitCode);done=1;}
+ if(!ContinueDebugEvent(e.dwProcessId,e.dwThreadId,c)){printf("ContinueDebugEvent failed=%lu\n",GetLastError());break;}}
+ DWORD ec=0;GetExitCodeProcess(pi.hProcess,&ec);printf("debug_exit=%lu events=%d done=%d patched=%d\n",ec,n,done,patched);CloseHandle(pi.hThread);CloseHandle(pi.hProcess);return 0;
+}
+--- debug_stack.c ---
+#include <windows.h>
+#include <psapi.h>
+#include <stdio.h>
+#include <stdint.h>
+#include <string.h>
+static void dump_stack(HANDLE p, ULONG_PTR sp) {
+    uint64_t words[32]; SIZE_T got=0;
+    if(!ReadProcessMemory(p,(LPCVOID)sp,words,sizeof(words),&got)){printf("ReadProcessMemory stack failed=%lu\n",GetLastError());return;}
+    printf("STACK rsp=%p read=%llu\n",(void*)sp,(unsigned long long)got);
+    for(size_t i=0;i<got/8;i++) printf("  +0x%02zx: 0x%016llx\n",i*8,(unsigned long long)words[i]);
+}
+static void module_for(HANDLE p, ULONG_PTR a) {
+    HMODULE m[512]; DWORD cb=0; if(!EnumProcessModules(p,m,sizeof(m),&cb)){printf("EnumProcessModules error=%lu\n",GetLastError());return;}
+    unsigned n=cb/sizeof(HMODULE);if(n>512)n=512;
+    for(unsigned i=0;i<n;i++){MODULEINFO mi;char path[MAX_PATH]="";if(GetModuleInformation(p,m[i],&mi,sizeof(mi))&&a>=(ULONG_PTR)mi.lpBaseOfDll&&a<(ULONG_PTR)mi.lpBaseOfDll+mi.SizeOfImage){DWORD k=GetModuleFileNameExA(p,m[i],path,sizeof(path));printf("MODULE path=%s path_chars=%lu base=%p rva=0x%llx\n",path,k,mi.lpBaseOfDll,(unsigned long long)(a-(ULONG_PTR)mi.lpBaseOfDll));return;}}
+    printf("MODULE unknown address=%p module_count=%u\n",(void*)a,n);
+}
+int main(int argc,char**argv){
+    if(argc<3){fprintf(stderr,"usage: ezstack.exe <program.exe> <stdin-file>\n");return 2;}
+    SECURITY_ATTRIBUTES sa={sizeof(sa),NULL,TRUE};HANDLE hin=CreateFileA(argv[2],GENERIC_READ,FILE_SHARE_READ,&sa,OPEN_EXISTING,FILE_ATTRIBUTE_NORMAL,NULL);if(hin==INVALID_HANDLE_VALUE){printf("input open error=%lu\n",GetLastError());return 3;}
+    STARTUPINFOA si;PROCESS_INFORMATION pi;ZeroMemory(&si,sizeof(si));ZeroMemory(&pi,sizeof(pi));si.cb=sizeof(si);si.dwFlags=STARTF_USESTDHANDLES;si.hStdInput=hin;si.hStdOutput=GetStdHandle(STD_OUTPUT_HANDLE);si.hStdError=GetStdHandle(STD_ERROR_HANDLE);
+    char cmd[4096];snprintf(cmd,sizeof(cmd),"\"%s\"",argv[1]);printf("COMMAND: CreateProcessA %s DEBUG_ONLY_THIS_PROCESS\n",argv[1]);
+    if(!CreateProcessA(argv[1],cmd,NULL,NULL,TRUE,DEBUG_ONLY_THIS_PROCESS|CREATE_NO_WINDOW,NULL,NULL,&si,&pi)){printf("CreateProcess error=%lu\n",GetLastError());return 4;}CloseHandle(hin);
+    int done=0,events=0;while(!done&&events++<10000){DEBUG_EVENT e;if(!WaitForDebugEvent(&e,5000)){printf("WaitForDebugEvent error=%lu\n",GetLastError());break;}DWORD c=DBG_CONTINUE;
+      if(e.dwDebugEventCode==CREATE_PROCESS_DEBUG_EVENT){printf("CREATE_PROCESS base=%p start=%p\n",e.u.CreateProcessInfo.lpBaseOfImage,e.u.CreateProcessInfo.lpStartAddress);if(e.u.CreateProcessInfo.hFile)CloseHandle(e.u.CreateProcessInfo.hFile);}
+      else if(e.dwDebugEventCode==LOAD_DLL_DEBUG_EVENT){if(e.u.LoadDll.hFile)CloseHandle(e.u.LoadDll.hFile);}
+      else if(e.dwDebugEventCode==EXCEPTION_DEBUG_EVENT){DWORD x=e.u.Exception.ExceptionRecord.ExceptionCode;ULONG_PTR a=(ULONG_PTR)e.u.Exception.ExceptionRecord.ExceptionAddress;printf("EXCEPTION code=0x%08lx addr=%p chance=%lu info0=0x%llx info1=0x%llx\n",x,(void*)a,e.u.Exception.dwFirstChance,(unsigned long long)e.u.Exception.ExceptionRecord.ExceptionInformation[0],(unsigned long long)e.u.Exception.ExceptionRecord.ExceptionInformation[1]);
+        if(x==EXCEPTION_BREAKPOINT||x==EXCEPTION_SINGLE_STEP)c=DBG_CONTINUE;else{HANDLE th=OpenThread(THREAD_GET_CONTEXT|THREAD_QUERY_INFORMATION,FALSE,e.dwThreadId);if(th){CONTEXT t;ZeroMemory(&t,sizeof(t));t.ContextFlags=CONTEXT_FULL;if(GetThreadContext(th,&t)){printf("CONTEXT RIP=%p RSP=%p RBP=%p RAX=%p RBX=%p RCX=%p RDX=%p RSI=%p RDI=%p\n",(void*)t.Rip,(void*)t.Rsp,(void*)t.Rbp,(void*)t.Rax,(void*)t.Rbx,(void*)t.Rcx,(void*)t.Rdx,(void*)t.Rsi,(void*)t.Rdi);module_for(pi.hProcess,t.Rip);dump_stack(pi.hProcess,t.Rsp);}CloseHandle(th);}c=DBG_EXCEPTION_NOT_HANDLED;}}
+      else if(e.dwDebugEventCode==EXIT_PROCESS_DEBUG_EVENT){printf("EXIT_PROCESS code=0x%08lx\n",e.u.ExitProcess.dwExitCode);done=1;}
+      if(!ContinueDebugEvent(e.dwProcessId,e.dwThreadId,c)){printf("ContinueDebugEvent error=%lu\n",GetLastError());break;}}
+    DWORD code=0;GetExitCodeProcess(pi.hProcess,&code);printf("debug_exit=%lu events=%d done=%d\n",code,events,done);CloseHandle(pi.hThread);CloseHandle(pi.hProcess);return 0;
+}
+**********************
+PowerShell transcript end
+End time: 20260929035746
+**********************
+**********************
+PowerShell transcript start
+Start time: 20260929035838
+Username: DESKTOP-412KTAR\mzj
+RunAs User: DESKTOP-412KTAR\mzj
+Configuration Name: 
+Machine: DESKTOP-412KTAR (Microsoft Windows NT 10.0.26200.0)
+Host Application: C:\Users\mzj\.cache\codex-runtimes\codex-primary-runtime\dependencies\native\powershell\pwsh.dll -Command try { [Console]::OutputEncoding=[System.Text.Encoding]::UTF8 } catch {}
+$ErrorActionPreference='Stop'; $root='C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\ezBase_541'; $log=Join-Path $root 'analysis\ezbase541_reaudit_transcript_20260929.txt'; Start-Transcript -LiteralPath $log -Append; $dis=Join-Path $root '分析产物\2026-09-27\_ezdisasm_all.txt'; Write-Output 'COMMAND> Read OEP/main region lines 1-75 of saved disassembly'; Get-Content -LiteralPath $dis | Select-Object -First 75; Write-Output 'COMMAND> Find comparator routine at VA 0x140003990 with preceding and following instructions'; $lines=Get-Content -LiteralPath $dis; $ix=for($j=0;$j -lt $lines.Count;$j++){if($lines[$j] -match '^\s*140003990:'){ $j }}; foreach($n in $ix){ $start=[Math]::Max(0,$n-10); $end=[Math]::Min($lines.Count-1,$n+100); $lines[$start..$end] }; Write-Output 'COMMAND> Inspect caller around input and target reference lines 30-90'; $lines | Select-Object -Skip 30 -First 65; Stop-Transcript
+Process ID: 26344
+PSVersion: 7.6.5
+PSEdition: Core
+GitCommitId: 7.6.5
+OS: Microsoft Windows 10.0.26200
+Platform: Win32NT
+PSCompatibleVersions: 1.0, 2.0, 3.0, 4.0, 5.0, 5.1, 6.0, 7.0
+PSRemotingProtocolVersion: 2.4
+SerializationVersion: 1.1.0.1
+WSManStackVersion: 3.0
+**********************
+Transcript started, output file is C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\ezBase_541\analysis\ezbase541_reaudit_transcript_20260929.txt
+COMMAND> Read OEP/main region lines 1-75 of saved disassembly
+
+C:\Users\mzj\Desktop\CTF\_ezunpacked.bin:     file format binary
+
+
+Disassembly of section .data:
+
+0000000140001000 <.data>:
+   140001000:	48 81 ec c8 01 00 00 	sub    rsp,0x1c8
+   140001007:	48 8b 05 fa 3f 00 00 	mov    rax,QWORD PTR [rip+0x3ffa]        # 0x140005008
+   14000100e:	48 31 e0             	xor    rax,rsp
+   140001011:	48 89 84 24 c0 01 00 	mov    QWORD PTR [rsp+0x1c0],rax
+   140001018:	00
+   140001019:	c7 44 24 3c 00 00 00 	mov    DWORD PTR [rsp+0x3c],0x0
+   140001020:	00
+   140001021:	48 8d 0d 59 30 00 00 	lea    rcx,[rip+0x3059]        # 0x140004081
+   140001028:	e8 c3 04 00 00       	call   0x1400014f0
+   14000102d:	31 c9                	xor    ecx,ecx
+   14000102f:	ff 15 e3 35 00 00    	call   QWORD PTR [rip+0x35e3]        # 0x140004618
+   140001035:	49 89 c0             	mov    r8,rax
+   140001038:	48 8d 8c 24 40 01 00 	lea    rcx,[rsp+0x140]
+   14000103f:	00
+   140001040:	ba 80 00 00 00       	mov    edx,0x80
+   140001045:	ff 15 ad 36 00 00    	call   QWORD PTR [rip+0x36ad]        # 0x1400046f8
+   14000104b:	48 83 f8 00          	cmp    rax,0x0
+   14000104f:	0f 85 0d 00 00 00    	jne    0x140001062
+   140001055:	c7 44 24 3c 01 00 00 	mov    DWORD PTR [rsp+0x3c],0x1
+   14000105c:	00
+   14000105d:	e9 a5 00 00 00       	jmp    0x140001107
+   140001062:	48 8d 8c 24 40 01 00 	lea    rcx,[rsp+0x140]
+   140001069:	00
+   14000106a:	48 8d 15 22 30 00 00 	lea    rdx,[rip+0x3022]        # 0x140004093
+   140001071:	ff 15 99 36 00 00    	call   QWORD PTR [rip+0x3699]        # 0x140004710
+   140001077:	48 89 44 24 30       	mov    QWORD PTR [rsp+0x30],rax
+   14000107c:	48 8b 44 24 30       	mov    rax,QWORD PTR [rsp+0x30]
+   140001081:	c6 84 04 40 01 00 00 	mov    BYTE PTR [rsp+rax*1+0x140],0x0
+   140001088:	00
+   140001089:	48 83 7c 24 30 24    	cmp    QWORD PTR [rsp+0x30],0x24
+   14000108f:	0f 84 1a 00 00 00    	je     0x1400010af
+   140001095:	48 8d 0d f9 2f 00 00 	lea    rcx,[rip+0x2ff9]        # 0x140004095
+   14000109c:	ff 15 5e 36 00 00    	call   QWORD PTR [rip+0x365e]        # 0x140004700
+   1400010a2:	c7 44 24 3c 00 00 00 	mov    DWORD PTR [rsp+0x3c],0x0
+   1400010a9:	00
+   1400010aa:	e9 58 00 00 00       	jmp    0x140001107
+   1400010af:	4c 8d 44 24 40       	lea    r8,[rsp+0x40]
+   1400010b4:	48 8b 54 24 30       	mov    rdx,QWORD PTR [rsp+0x30]
+   1400010b9:	48 8d 8c 24 40 01 00 	lea    rcx,[rsp+0x140]
+   1400010c0:	00
+   1400010c1:	e8 6a 00 00 00       	call   0x140001130
+   1400010c6:	48 8d 4c 24 40       	lea    rcx,[rsp+0x40]
+   1400010cb:	48 8d 15 2e 2f 00 00 	lea    rdx,[rip+0x2f2e]        # 0x140004000
+   1400010d2:	e8 b9 28 00 00       	call   0x140003990
+   1400010d7:	83 f8 00             	cmp    eax,0x0
+   1400010da:	0f 85 12 00 00 00    	jne    0x1400010f2
+   1400010e0:	48 8d 0d c8 2f 00 00 	lea    rcx,[rip+0x2fc8]        # 0x1400040af
+   1400010e7:	ff 15 13 36 00 00    	call   QWORD PTR [rip+0x3613]        # 0x140004700
+   1400010ed:	e9 0d 00 00 00       	jmp    0x1400010ff
+   1400010f2:	48 8d 0d c9 2f 00 00 	lea    rcx,[rip+0x2fc9]        # 0x1400040c2
+   1400010f9:	ff 15 01 36 00 00    	call   QWORD PTR [rip+0x3601]        # 0x140004700
+   1400010ff:	c7 44 24 3c 00 00 00 	mov    DWORD PTR [rsp+0x3c],0x0
+   140001106:	00
+   140001107:	8b 44 24 3c          	mov    eax,DWORD PTR [rsp+0x3c]
+   14000110b:	89 44 24 2c          	mov    DWORD PTR [rsp+0x2c],eax
+   14000110f:	48 8b 8c 24 c0 01 00 	mov    rcx,QWORD PTR [rsp+0x1c0]
+   140001116:	00
+   140001117:	48 31 e1             	xor    rcx,rsp
+   14000111a:	e8 11 06 00 00       	call   0x140001730
+   14000111f:	8b 44 24 2c          	mov    eax,DWORD PTR [rsp+0x2c]
+   140001123:	48 81 c4 c8 01 00 00 	add    rsp,0x1c8
+   14000112a:	c3                   	ret
+   14000112b:	0f 1f 44 00 00       	nop    DWORD PTR [rax+rax*1+0x0]
+   140001130:	48 83 ec 40          	sub    rsp,0x40
+   140001134:	4c 89 44 24 38       	mov    QWORD PTR [rsp+0x38],r8
+   140001139:	48 89 54 24 30       	mov    QWORD PTR [rsp+0x30],rdx
+   14000113e:	48 89 4c 24 28       	mov    QWORD PTR [rsp+0x28],rcx
+   140001143:	48 c7 44 24 20 00 00 	mov    QWORD PTR [rsp+0x20],0x0
+COMMAND> Find comparator routine at VA 0x140003990 with preceding and following instructions
+   140003986:	cc                   	int3
+   140003987:	cc                   	int3
+   140003988:	cc                   	int3
+   140003989:	cc                   	int3
+   14000398a:	cc                   	int3
+   14000398b:	cc                   	int3
+   14000398c:	cc                   	int3
+   14000398d:	cc                   	int3
+   14000398e:	cc                   	int3
+   14000398f:	cc                   	int3
+   140003990:	ff 25 72 0d 00 00    	jmp    QWORD PTR [rip+0xd72]        # 0x140004708
+   140003996:	cc                   	int3
+   140003997:	cc                   	int3
+   140003998:	cc                   	int3
+   140003999:	cc                   	int3
+   14000399a:	cc                   	int3
+   14000399b:	cc                   	int3
+   14000399c:	cc                   	int3
+   14000399d:	cc                   	int3
+   14000399e:	cc                   	int3
+   14000399f:	cc                   	int3
+   1400039a0:	ff 25 72 0d 00 00    	jmp    QWORD PTR [rip+0xd72]        # 0x140004718
+	...
+COMMAND> Inspect caller around input and target reference lines 30-90
+   14000106a:	48 8d 15 22 30 00 00 	lea    rdx,[rip+0x3022]        # 0x140004093
+   140001071:	ff 15 99 36 00 00    	call   QWORD PTR [rip+0x3699]        # 0x140004710
+   140001077:	48 89 44 24 30       	mov    QWORD PTR [rsp+0x30],rax
+   14000107c:	48 8b 44 24 30       	mov    rax,QWORD PTR [rsp+0x30]
+   140001081:	c6 84 04 40 01 00 00 	mov    BYTE PTR [rsp+rax*1+0x140],0x0
+   140001088:	00
+   140001089:	48 83 7c 24 30 24    	cmp    QWORD PTR [rsp+0x30],0x24
+   14000108f:	0f 84 1a 00 00 00    	je     0x1400010af
+   140001095:	48 8d 0d f9 2f 00 00 	lea    rcx,[rip+0x2ff9]        # 0x140004095
+   14000109c:	ff 15 5e 36 00 00    	call   QWORD PTR [rip+0x365e]        # 0x140004700
+   1400010a2:	c7 44 24 3c 00 00 00 	mov    DWORD PTR [rsp+0x3c],0x0
+   1400010a9:	00
+   1400010aa:	e9 58 00 00 00       	jmp    0x140001107
+   1400010af:	4c 8d 44 24 40       	lea    r8,[rsp+0x40]
+   1400010b4:	48 8b 54 24 30       	mov    rdx,QWORD PTR [rsp+0x30]
+   1400010b9:	48 8d 8c 24 40 01 00 	lea    rcx,[rsp+0x140]
+   1400010c0:	00
+   1400010c1:	e8 6a 00 00 00       	call   0x140001130
+   1400010c6:	48 8d 4c 24 40       	lea    rcx,[rsp+0x40]
+   1400010cb:	48 8d 15 2e 2f 00 00 	lea    rdx,[rip+0x2f2e]        # 0x140004000
+   1400010d2:	e8 b9 28 00 00       	call   0x140003990
+   1400010d7:	83 f8 00             	cmp    eax,0x0
+   1400010da:	0f 85 12 00 00 00    	jne    0x1400010f2
+   1400010e0:	48 8d 0d c8 2f 00 00 	lea    rcx,[rip+0x2fc8]        # 0x1400040af
+   1400010e7:	ff 15 13 36 00 00    	call   QWORD PTR [rip+0x3613]        # 0x140004700
+   1400010ed:	e9 0d 00 00 00       	jmp    0x1400010ff
+   1400010f2:	48 8d 0d c9 2f 00 00 	lea    rcx,[rip+0x2fc9]        # 0x1400040c2
+   1400010f9:	ff 15 01 36 00 00    	call   QWORD PTR [rip+0x3601]        # 0x140004700
+   1400010ff:	c7 44 24 3c 00 00 00 	mov    DWORD PTR [rsp+0x3c],0x0
+   140001106:	00
+   140001107:	8b 44 24 3c          	mov    eax,DWORD PTR [rsp+0x3c]
+   14000110b:	89 44 24 2c          	mov    DWORD PTR [rsp+0x2c],eax
+   14000110f:	48 8b 8c 24 c0 01 00 	mov    rcx,QWORD PTR [rsp+0x1c0]
+   140001116:	00
+   140001117:	48 31 e1             	xor    rcx,rsp
+   14000111a:	e8 11 06 00 00       	call   0x140001730
+   14000111f:	8b 44 24 2c          	mov    eax,DWORD PTR [rsp+0x2c]
+   140001123:	48 81 c4 c8 01 00 00 	add    rsp,0x1c8
+   14000112a:	c3                   	ret
+   14000112b:	0f 1f 44 00 00       	nop    DWORD PTR [rax+rax*1+0x0]
+   140001130:	48 83 ec 40          	sub    rsp,0x40
+   140001134:	4c 89 44 24 38       	mov    QWORD PTR [rsp+0x38],r8
+   140001139:	48 89 54 24 30       	mov    QWORD PTR [rsp+0x30],rdx
+   14000113e:	48 89 4c 24 28       	mov    QWORD PTR [rsp+0x28],rcx
+   140001143:	48 c7 44 24 20 00 00 	mov    QWORD PTR [rsp+0x20],0x0
+   14000114a:	00 00
+   14000114c:	48 c7 44 24 18 00 00 	mov    QWORD PTR [rsp+0x18],0x0
+   140001153:	00 00
+   140001155:	48 8b 44 24 18       	mov    rax,QWORD PTR [rsp+0x18]
+   14000115a:	48 3b 44 24 30       	cmp    rax,QWORD PTR [rsp+0x30]
+   14000115f:	0f 83 c6 01 00 00    	jae    0x14000132b
+   140001165:	c7 44 24 14 00 00 00 	mov    DWORD PTR [rsp+0x14],0x0
+   14000116c:	00
+   14000116d:	48 8b 44 24 18       	mov    rax,QWORD PTR [rsp+0x18]
+   140001172:	48 83 c0 02          	add    rax,0x2
+   140001176:	48 3b 44 24 30       	cmp    rax,QWORD PTR [rsp+0x30]
+   14000117b:	0f 93 c0             	setae  al
+   14000117e:	24 01                	and    al,0x1
+   140001180:	0f b6 c0             	movzx  eax,al
+   140001183:	48 8b 4c 24 18       	mov    rcx,QWORD PTR [rsp+0x18]
+   140001188:	48 83 c1 01          	add    rcx,0x1
+   14000118c:	48 3b 4c 24 30       	cmp    rcx,QWORD PTR [rsp+0x30]
+   140001191:	0f 93 c1             	setae  cl
+   140001194:	80 e1 01             	and    cl,0x1
+   140001197:	0f b6 c9             	movzx  ecx,cl
+**********************
+PowerShell transcript end
+End time: 20260929035839
+**********************
+**********************
+PowerShell transcript start
+Start time: 20260929035949
+Username: DESKTOP-412KTAR\mzj
+RunAs User: DESKTOP-412KTAR\mzj
+Configuration Name: 
+Machine: DESKTOP-412KTAR (Microsoft Windows NT 10.0.26200.0)
+Host Application: C:\Users\mzj\.cache\codex-runtimes\codex-primary-runtime\dependencies\native\powershell\pwsh.dll -Command try { [Console]::OutputEncoding=[System.Text.Encoding]::UTF8 } catch {}
+$ErrorActionPreference='Stop'; $root='C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\ezBase_541'; $log=Join-Path $root 'analysis\ezbase541_reaudit_transcript_20260929.txt'; Start-Transcript -LiteralPath $log -Append; $dis=Join-Path $root '分析产物\2026-09-27\_ezdisasm_all.txt'; Write-Output 'COMMAND> Extract saved disassembly lines 110-280 (Base64 encoder and adjacent code)'; Get-Content -LiteralPath $dis | Select-Object -Skip 110 -First 170; Write-Output 'COMMAND> Print decoded target and custom alphabet from original-debug unpacked memory dump'; python -c "import pathlib,hashlib; p=pathlib.Path(r'C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\ezBase_541\unpacked_runtime.bin'); b=p.read_bytes(); target=b[0x3000:b.index(0,0x3000)]; alphabet=b[0x3040:b.index(0,0x3040)]; print('dump_size',len(b),'dump_sha256',hashlib.sha256(b).hexdigest()); print('target_offset=0x3000 target_len',len(target),'target_hex',target.hex(' '),'target_ascii',target.decode('ascii')); print('alphabet_offset=0x3040 alphabet_len',len(alphabet),'alphabet_ascii',alphabet.decode('ascii')); print('prompt',repr(b[0x3080:0x3090]))"; Stop-Transcript
+Process ID: 30408
+PSVersion: 7.6.5
+PSEdition: Core
+GitCommitId: 7.6.5
+OS: Microsoft Windows 10.0.26200
+Platform: Win32NT
+PSCompatibleVersions: 1.0, 2.0, 3.0, 4.0, 5.0, 5.1, 6.0, 7.0
+PSRemotingProtocolVersion: 2.4
+SerializationVersion: 1.1.0.1
+WSManStackVersion: 3.0
+**********************
+Transcript started, output file is C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\ezBase_541\analysis\ezbase541_reaudit_transcript_20260929.txt
+COMMAND> Extract saved disassembly lines 110-280 (Base64 encoder and adjacent code)
+   1400011dc:	c1 e0 08             	shl    eax,0x8
+   1400011df:	0b 44 24 14          	or     eax,DWORD PTR [rsp+0x14]
+   1400011e3:	89 44 24 14          	mov    DWORD PTR [rsp+0x14],eax
+   1400011e7:	48 8b 44 24 18       	mov    rax,QWORD PTR [rsp+0x18]
+   1400011ec:	48 83 c0 02          	add    rax,0x2
+   1400011f0:	48 3b 44 24 30       	cmp    rax,QWORD PTR [rsp+0x30]
+   1400011f5:	0f 83 17 00 00 00    	jae    0x140001212
+   1400011fb:	48 8b 44 24 28       	mov    rax,QWORD PTR [rsp+0x28]
+   140001200:	48 8b 4c 24 18       	mov    rcx,QWORD PTR [rsp+0x18]
+   140001205:	0f b6 44 08 02       	movzx  eax,BYTE PTR [rax+rcx*1+0x2]
+   14000120a:	0b 44 24 14          	or     eax,DWORD PTR [rsp+0x14]
+   14000120e:	89 44 24 14          	mov    DWORD PTR [rsp+0x14],eax
+   140001212:	8b 44 24 14          	mov    eax,DWORD PTR [rsp+0x14]
+   140001216:	c1 e8 12             	shr    eax,0x12
+   140001219:	83 e0 3f             	and    eax,0x3f
+   14000121c:	89 c0                	mov    eax,eax
+   14000121e:	89 c1                	mov    ecx,eax
+   140001220:	48 8d 05 19 2e 00 00 	lea    rax,[rip+0x2e19]        # 0x140004040
+   140001227:	8a 14 08             	mov    dl,BYTE PTR [rax+rcx*1]
+   14000122a:	48 8b 44 24 38       	mov    rax,QWORD PTR [rsp+0x38]
+   14000122f:	48 8b 4c 24 20       	mov    rcx,QWORD PTR [rsp+0x20]
+   140001234:	49 89 c8             	mov    r8,rcx
+   140001237:	49 83 c0 01          	add    r8,0x1
+   14000123b:	4c 89 44 24 20       	mov    QWORD PTR [rsp+0x20],r8
+   140001240:	88 14 08             	mov    BYTE PTR [rax+rcx*1],dl
+   140001243:	8b 44 24 14          	mov    eax,DWORD PTR [rsp+0x14]
+   140001247:	c1 e8 0c             	shr    eax,0xc
+   14000124a:	83 e0 3f             	and    eax,0x3f
+   14000124d:	89 c0                	mov    eax,eax
+   14000124f:	89 c1                	mov    ecx,eax
+   140001251:	48 8d 05 e8 2d 00 00 	lea    rax,[rip+0x2de8]        # 0x140004040
+   140001258:	8a 14 08             	mov    dl,BYTE PTR [rax+rcx*1]
+   14000125b:	48 8b 44 24 38       	mov    rax,QWORD PTR [rsp+0x38]
+   140001260:	48 8b 4c 24 20       	mov    rcx,QWORD PTR [rsp+0x20]
+   140001265:	49 89 c8             	mov    r8,rcx
+   140001268:	49 83 c0 01          	add    r8,0x1
+   14000126c:	4c 89 44 24 20       	mov    QWORD PTR [rsp+0x20],r8
+   140001271:	88 14 08             	mov    BYTE PTR [rax+rcx*1],dl
+   140001274:	83 7c 24 10 02       	cmp    DWORD PTR [rsp+0x10],0x2
+   140001279:	0f 85 0e 00 00 00    	jne    0x14000128d
+   14000127f:	b8 3d 00 00 00       	mov    eax,0x3d
+   140001284:	89 44 24 04          	mov    DWORD PTR [rsp+0x4],eax
+   140001288:	e9 1d 00 00 00       	jmp    0x1400012aa
+   14000128d:	8b 44 24 14          	mov    eax,DWORD PTR [rsp+0x14]
+   140001291:	c1 e8 06             	shr    eax,0x6
+   140001294:	83 e0 3f             	and    eax,0x3f
+   140001297:	89 c0                	mov    eax,eax
+   140001299:	89 c1                	mov    ecx,eax
+   14000129b:	48 8d 05 9e 2d 00 00 	lea    rax,[rip+0x2d9e]        # 0x140004040
+   1400012a2:	0f be 04 08          	movsx  eax,BYTE PTR [rax+rcx*1]
+   1400012a6:	89 44 24 04          	mov    DWORD PTR [rsp+0x4],eax
+   1400012aa:	8b 44 24 04          	mov    eax,DWORD PTR [rsp+0x4]
+   1400012ae:	88 c2                	mov    dl,al
+   1400012b0:	48 8b 44 24 38       	mov    rax,QWORD PTR [rsp+0x38]
+   1400012b5:	48 8b 4c 24 20       	mov    rcx,QWORD PTR [rsp+0x20]
+   1400012ba:	49 89 c8             	mov    r8,rcx
+   1400012bd:	49 83 c0 01          	add    r8,0x1
+   1400012c1:	4c 89 44 24 20       	mov    QWORD PTR [rsp+0x20],r8
+   1400012c6:	88 14 08             	mov    BYTE PTR [rax+rcx*1],dl
+   1400012c9:	83 7c 24 10 01       	cmp    DWORD PTR [rsp+0x10],0x1
+   1400012ce:	0f 8c 0d 00 00 00    	jl     0x1400012e1
+   1400012d4:	b8 3d 00 00 00       	mov    eax,0x3d
+   1400012d9:	89 04 24             	mov    DWORD PTR [rsp],eax
+   1400012dc:	e9 19 00 00 00       	jmp    0x1400012fa
+   1400012e1:	8b 44 24 14          	mov    eax,DWORD PTR [rsp+0x14]
+   1400012e5:	83 e0 3f             	and    eax,0x3f
+   1400012e8:	89 c0                	mov    eax,eax
+   1400012ea:	89 c1                	mov    ecx,eax
+   1400012ec:	48 8d 05 4d 2d 00 00 	lea    rax,[rip+0x2d4d]        # 0x140004040
+   1400012f3:	0f be 04 08          	movsx  eax,BYTE PTR [rax+rcx*1]
+   1400012f7:	89 04 24             	mov    DWORD PTR [rsp],eax
+   1400012fa:	8b 04 24             	mov    eax,DWORD PTR [rsp]
+   1400012fd:	88 c2                	mov    dl,al
+   1400012ff:	48 8b 44 24 38       	mov    rax,QWORD PTR [rsp+0x38]
+   140001304:	48 8b 4c 24 20       	mov    rcx,QWORD PTR [rsp+0x20]
+   140001309:	49 89 c8             	mov    r8,rcx
+   14000130c:	49 83 c0 01          	add    r8,0x1
+   140001310:	4c 89 44 24 20       	mov    QWORD PTR [rsp+0x20],r8
+   140001315:	88 14 08             	mov    BYTE PTR [rax+rcx*1],dl
+   140001318:	48 8b 44 24 18       	mov    rax,QWORD PTR [rsp+0x18]
+   14000131d:	48 83 c0 03          	add    rax,0x3
+   140001321:	48 89 44 24 18       	mov    QWORD PTR [rsp+0x18],rax
+   140001326:	e9 2a fe ff ff       	jmp    0x140001155
+   14000132b:	48 8b 44 24 38       	mov    rax,QWORD PTR [rsp+0x38]
+   140001330:	48 8b 4c 24 20       	mov    rcx,QWORD PTR [rsp+0x20]
+   140001335:	c6 04 08 00          	mov    BYTE PTR [rax+rcx*1],0x0
+   140001339:	48 8b 44 24 38       	mov    rax,QWORD PTR [rsp+0x38]
+   14000133e:	48 89 44 24 08       	mov    QWORD PTR [rsp+0x8],rax
+   140001343:	48 8b 44 24 08       	mov    rax,QWORD PTR [rsp+0x8]
+   140001348:	80 38 00             	cmp    BYTE PTR [rax],0x0
+   14000134b:	0f 84 36 00 00 00    	je     0x140001387
+   140001351:	48 8b 44 24 08       	mov    rax,QWORD PTR [rsp+0x8]
+   140001356:	0f be 00             	movsx  eax,BYTE PTR [rax]
+   140001359:	83 f8 3d             	cmp    eax,0x3d
+   14000135c:	0f 84 0d 00 00 00    	je     0x14000136f
+   140001362:	48 8b 44 24 08       	mov    rax,QWORD PTR [rsp+0x8]
+   140001367:	0f be 08             	movsx  ecx,BYTE PTR [rax]
+   14000136a:	83 f1 04             	xor    ecx,0x4
+   14000136d:	88 08                	mov    BYTE PTR [rax],cl
+   14000136f:	e9 00 00 00 00       	jmp    0x140001374
+   140001374:	48 8b 44 24 08       	mov    rax,QWORD PTR [rsp+0x8]
+   140001379:	48 83 c0 01          	add    rax,0x1
+   14000137d:	48 89 44 24 08       	mov    QWORD PTR [rsp+0x8],rax
+   140001382:	e9 bc ff ff ff       	jmp    0x140001343
+   140001387:	48 83 c4 40          	add    rsp,0x40
+   14000138b:	c3                   	ret
+   14000138c:	cc                   	int3
+   14000138d:	cc                   	int3
+   14000138e:	cc                   	int3
+   14000138f:	cc                   	int3
+   140001390:	48 83 ec 48          	sub    rsp,0x48
+   140001394:	4c 89 4c 24 68       	mov    QWORD PTR [rsp+0x68],r9
+   140001399:	4c 89 44 24 60       	mov    QWORD PTR [rsp+0x60],r8
+   14000139e:	48 8b 05 63 3c 00 00 	mov    rax,QWORD PTR [rip+0x3c63]        # 0x140005008
+   1400013a5:	48 31 e0             	xor    rax,rsp
+   1400013a8:	48 89 44 24 40       	mov    QWORD PTR [rsp+0x40],rax
+   1400013ad:	48 89 54 24 30       	mov    QWORD PTR [rsp+0x30],rdx
+   1400013b2:	48 89 4c 24 28       	mov    QWORD PTR [rsp+0x28],rcx
+   1400013b7:	48 8d 44 24 60       	lea    rax,[rsp+0x60]
+   1400013bc:	48 89 44 24 38       	mov    QWORD PTR [rsp+0x38],rax
+   1400013c1:	4c 8b 4c 24 38       	mov    r9,QWORD PTR [rsp+0x38]
+   1400013c6:	48 8b 54 24 30       	mov    rdx,QWORD PTR [rsp+0x30]
+   1400013cb:	48 8b 4c 24 28       	mov    rcx,QWORD PTR [rsp+0x28]
+   1400013d0:	31 c0                	xor    eax,eax
+   1400013d2:	41 89 c0             	mov    r8d,eax
+   1400013d5:	e8 a6 01 00 00       	call   0x140001580
+   1400013da:	89 44 24 24          	mov    DWORD PTR [rsp+0x24],eax
+   1400013de:	8b 44 24 24          	mov    eax,DWORD PTR [rsp+0x24]
+   1400013e2:	89 44 24 20          	mov    DWORD PTR [rsp+0x20],eax
+   1400013e6:	48 8b 4c 24 40       	mov    rcx,QWORD PTR [rsp+0x40]
+   1400013eb:	48 31 e1             	xor    rcx,rsp
+   1400013ee:	e8 3d 03 00 00       	call   0x140001730
+   1400013f3:	8b 44 24 20          	mov    eax,DWORD PTR [rsp+0x20]
+   1400013f7:	48 83 c4 48          	add    rsp,0x48
+   1400013fb:	c3                   	ret
+   1400013fc:	cc                   	int3
+   1400013fd:	cc                   	int3
+   1400013fe:	cc                   	int3
+   1400013ff:	cc                   	int3
+   140001400:	48 83 ec 48          	sub    rsp,0x48
+   140001404:	4c 89 44 24 40       	mov    QWORD PTR [rsp+0x40],r8
+   140001409:	48 89 54 24 38       	mov    QWORD PTR [rsp+0x38],rdx
+   14000140e:	48 89 4c 24 30       	mov    QWORD PTR [rsp+0x30],rcx
+   140001413:	48 8b 44 24 40       	mov    rax,QWORD PTR [rsp+0x40]
+   140001418:	4c 8b 44 24 38       	mov    r8,QWORD PTR [rsp+0x38]
+   14000141d:	48 8b 4c 24 30       	mov    rcx,QWORD PTR [rsp+0x30]
+   140001422:	48 c7 c2 ff ff ff ff 	mov    rdx,0xffffffffffffffff
+   140001429:	45 31 c9             	xor    r9d,r9d
+   14000142c:	48 89 44 24 20       	mov    QWORD PTR [rsp+0x20],rax
+   140001431:	e8 9a 01 00 00       	call   0x1400015d0
+   140001436:	90                   	nop
+   140001437:	48 83 c4 48          	add    rsp,0x48
+   14000143b:	c3                   	ret
+   14000143c:	cc                   	int3
+   14000143d:	cc                   	int3
+   14000143e:	cc                   	int3
+   14000143f:	cc                   	int3
+   140001440:	48 83 ec 58          	sub    rsp,0x58
+   140001444:	4c 89 4c 24 78       	mov    QWORD PTR [rsp+0x78],r9
+   140001449:	48 8b 05 b8 3b 00 00 	mov    rax,QWORD PTR [rip+0x3bb8]        # 0x140005008
+   140001450:	48 31 e0             	xor    rax,rsp
+   140001453:	48 89 44 24 50       	mov    QWORD PTR [rsp+0x50],rax
+   140001458:	4c 89 44 24 40       	mov    QWORD PTR [rsp+0x40],r8
+   14000145d:	48 89 54 24 38       	mov    QWORD PTR [rsp+0x38],rdx
+   140001462:	48 89 4c 24 30       	mov    QWORD PTR [rsp+0x30],rcx
+   140001467:	48 8d 44 24 78       	lea    rax,[rsp+0x78]
+   14000146c:	48 89 44 24 48       	mov    QWORD PTR [rsp+0x48],rax
+   140001471:	4c 8b 4c 24 48       	mov    r9,QWORD PTR [rsp+0x48]
+   140001476:	4c 8b 44 24 40       	mov    r8,QWORD PTR [rsp+0x40]
+   14000147b:	48 8b 54 24 38       	mov    rdx,QWORD PTR [rsp+0x38]
+COMMAND> Print decoded target and custom alphabet from original-debug unpacked memory dump
+
+**********************
+PowerShell transcript end
+End time: 20260929035949
+**********************
+**********************
+PowerShell transcript start
+Start time: 20260929040322
+Username: DESKTOP-412KTAR\mzj
+RunAs User: DESKTOP-412KTAR\mzj
+Configuration Name: 
+Machine: DESKTOP-412KTAR (Microsoft Windows NT 10.0.26200.0)
+Host Application: C:\Users\mzj\.cache\codex-runtimes\codex-primary-runtime\dependencies\native\powershell\pwsh.dll -Command try { [Console]::OutputEncoding=[System.Text.Encoding]::UTF8 } catch {}
+$ErrorActionPreference='Stop'; $root='C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\ezBase_541'; $log=Join-Path $root 'analysis\ezbase541_reaudit_transcript_20260929.txt'; Start-Transcript -LiteralPath $log -Append; Write-Output "COMMAND> python .\analysis\derive_flag_from_memory_dump.py (working directory: $root)"; Push-Location $root; try { python '.\analysis\derive_flag_from_memory_dump.py' } finally { Pop-Location }; Write-Output 'COMMAND> Inspect exact old candidate artifact lengths/content and final line ending'; python -c "from pathlib import Path; import hashlib; r=Path(r'C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\ezBase_541'); [(lambda b,n: print(n,'file_bytes',len(b),'sha256',hashlib.sha256(b).hexdigest().upper(),'content_repr',repr(b),'payload_len_without_lf',len(b[:-1]) if b.endswith(b'\n') else len(b)))( (r/name).read_bytes(),name) for name in ['candidate_35byte_prefix.txt','candidate_36byte_flag.txt']]"; Stop-Transcript
+Process ID: 33972
+PSVersion: 7.6.5
+PSEdition: Core
+GitCommitId: 7.6.5
+OS: Microsoft Windows 10.0.26200
+Platform: Win32NT
+PSCompatibleVersions: 1.0, 2.0, 3.0, 4.0, 5.0, 5.1, 6.0, 7.0
+PSRemotingProtocolVersion: 2.4
+SerializationVersion: 1.1.0.1
+WSManStackVersion: 3.0
+**********************
+Transcript started, output file is C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\ezBase_541\analysis\ezbase541_reaudit_transcript_20260929.txt
+COMMAND> python .\analysis\derive_flag_from_memory_dump.py (working directory: C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\ezBase_541)
+
+COMMAND> Inspect exact old candidate artifact lengths/content and final line ending
+
+**********************
+PowerShell transcript end
+End time: 20260929040324
+**********************
+**********************
+PowerShell transcript start
+Start time: 20260929040848
+Username: DESKTOP-412KTAR\mzj
+RunAs User: DESKTOP-412KTAR\mzj
+Configuration Name: 
+Machine: DESKTOP-412KTAR (Microsoft Windows NT 10.0.26200.0)
+Host Application: C:\Users\mzj\.cache\codex-runtimes\codex-primary-runtime\dependencies\native\powershell\pwsh.dll -Command try { [Console]::OutputEncoding=[System.Text.Encoding]::UTF8 } catch {}
+$ErrorActionPreference='Stop'; $root='C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\ezBase_541'; $log=Join-Path $root 'analysis\ezbase541_reaudit_transcript_20260929.txt'; Start-Transcript -LiteralPath $log -Append; $output=Join-Path $root 'analysis\derive_flag_from_memory_dump_output.txt'; Write-Output "COMMAND> Push-Location '$root'; python .\analysis\derive_flag_from_memory_dump.py | Tee-Object -FilePath '$output'; Pop-Location"; Push-Location $root; try { python '.\analysis\derive_flag_from_memory_dump.py' | Tee-Object -FilePath $output } finally { Pop-Location }; Write-Output 'COMMAND> Hash the saved derivation output'; Get-FileHash -Algorithm SHA256 -LiteralPath $output | Format-List; Stop-Transcript
+Process ID: 20508
+PSVersion: 7.6.5
+PSEdition: Core
+GitCommitId: 7.6.5
+OS: Microsoft Windows 10.0.26200
+Platform: Win32NT
+PSCompatibleVersions: 1.0, 2.0, 3.0, 4.0, 5.0, 5.1, 6.0, 7.0
+PSRemotingProtocolVersion: 2.4
+SerializationVersion: 1.1.0.1
+WSManStackVersion: 3.0
+**********************
+Transcript started, output file is C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\ezBase_541\analysis\ezbase541_reaudit_transcript_20260929.txt
+COMMAND> Push-Location 'C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\ezBase_541'; python .\analysis\derive_flag_from_memory_dump.py | Tee-Object -FilePath 'C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\ezBase_541\analysis\derive_flag_from_memory_dump_output.txt'; Pop-Location
+platform_rar_sha256=0A7420F1D2D832474AD09EA55825900AF75EBA30DEA46DFB63F9A1AD17F0AF18 matches_expected=True
+extracted_sample_sha256=607BD3E8E5D7E715F7A9B819C8D5CC235C8DCC22F06A4AE77D0383E46BBDDACE matches_expected=True
+dump_size=45056 dump_sha256=16A11C873808BB3FDB2EA94C134FC3EA1E9E26624FD837E803AA112D23C12C80
+target_va=0x140004000 target_len=48 target=iP}ui7siC`otMgA~h5o]Tg<4jPmtIvM5C~I4h644K7M~KVg=
+alphabet_va=0x140004040 alphabet_len=64 alphabet=AaBbCcDdEeFfGgHhIiJjKkLlMmNnOoPpQqRrSsTtUuVvWwXxYyZz0123456789+/
+xor_key=0x04
+xor_reversed=mTyqm3wmGdkpIcEzl1kYPc80nTipMrI1GzM0l200O3IzORc9
+canonical_base64=ZmxhZ3tZMHVfQFIzX1VweF80bmRfYjQ1MzY0X200c3QzciF9
+candidate_len=36 candidate=flag{Y0u_@R3_Upx_4nd_b45364_m4st3r!}
+expected_input_len=0x24 (36) length_matches=True
+standard_base64=ZmxhZ3tZMHVfQFIzX1VweF80bmRfYjQ1MzY0X200c3QzciF9
+custom_base64=mTyqm3wmGdkpIcEzl1kYPc80nTipMrI1GzM0l200O3IzORc9
+reencoded=iP}ui7siC`otMgA~h5o]Tg<4jPmtIvM5C~I4h644K7M~KVg=
+roundtrip_exact=True
+candidate_sha256=699D2808153396B5F578F850CB185ECF51089D53BF9E21C8E4512E74C9A4E283
+valid_flag_shape=True
+COMMAND> Hash the saved derivation output
+
+Algorithm : SHA256
+Hash      : 27324A5B9C1B2DCC636F5D5834DC21FD33EB8E84F767987565FA47333A877777
+Path      : C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\ezBase_541\analysis\derive_flag_from_memory_dump_output.txt
+
+**********************
+PowerShell transcript end
+End time: 20260929040848
+**********************
+**********************
+PowerShell transcript start
+Start time: 20260929040945
+Username: DESKTOP-412KTAR\mzj
+RunAs User: DESKTOP-412KTAR\mzj
+Configuration Name: 
+Machine: DESKTOP-412KTAR (Microsoft Windows NT 10.0.26200.0)
+Host Application: C:\Users\mzj\.cache\codex-runtimes\codex-primary-runtime\dependencies\native\powershell\pwsh.dll -Command try { [Console]::OutputEncoding=[System.Text.Encoding]::UTF8 } catch {}
+$ErrorActionPreference='Stop'; $root='C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\ezBase_541'; $log=Join-Path $root 'analysis\ezbase541_reaudit_transcript_20260929.txt'; Start-Transcript -LiteralPath $log -Append; $dump=[System.IO.File]::ReadAllBytes((Join-Path $root 'unpacked_runtime.bin')); Write-Output 'COMMAND> Read NUL-terminated runtime strings at VAs referenced by main'; foreach($va in @(0x140004081,0x140004093,0x140004095,0x1400040af,0x1400040c2)){ $off=$va-0x140001000; $end=$off; while($end -lt $dump.Length -and $dump[$end] -ne 0){$end++}; $s=[System.Text.Encoding]::ASCII.GetString($dump,$off,$end-$off); Write-Output ("VA=0x{0:x} dump_offset=0x{1:x} text=[{2}]" -f $va,$off,$s) }; Write-Output 'COMMAND> Print section and entry metadata already recorded from raw PE'; Write-Output 'PE ImageBase=0x140000000; UPX0 VA=0x140001000 raw_size=0; virtual_size=0xb000; UPX1 VA=0x14000c000 raw_file_offset=0x200 raw_size=0x1e00; .rsrc VA=0x14000e000 raw_file_offset=0x2000'; Write-Output 'COMMAND> Hash original extracted executable and memory dump'; Get-FileHash -Algorithm SHA256 -LiteralPath (Join-Path $root '附件_平台原件\解压复核_20260929\ezBase\ezre.exe'),(Join-Path $root 'unpacked_runtime.bin') | Format-List; Stop-Transcript
+Process ID: 35328
+PSVersion: 7.6.5
+PSEdition: Core
+GitCommitId: 7.6.5
+OS: Microsoft Windows 10.0.26200
+Platform: Win32NT
+PSCompatibleVersions: 1.0, 2.0, 3.0, 4.0, 5.0, 5.1, 6.0, 7.0
+PSRemotingProtocolVersion: 2.4
+SerializationVersion: 1.1.0.1
+WSManStackVersion: 3.0
+**********************
+Transcript started, output file is C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\ezBase_541\analysis\ezbase541_reaudit_transcript_20260929.txt
+COMMAND> Read NUL-terminated runtime strings at VAs referenced by main
+VA=0x140004081 dump_offset=0x3081 text=[input your flag: ]
+VA=0x140004093 dump_offset=0x3093 text=[
+]
+VA=0x140004095 dump_offset=0x3095 text=[
+Length wrong. Must be 36]
+VA=0x1400040af dump_offset=0x30af text=[
+Yes you are right]
+VA=0x1400040c2 dump_offset=0x30c2 text=[
+Wrong! Try again!]
+COMMAND> Print section and entry metadata already recorded from raw PE
+PE ImageBase=0x140000000; UPX0 VA=0x140001000 raw_size=0; virtual_size=0xb000; UPX1 VA=0x14000c000 raw_file_offset=0x200 raw_size=0x1e00; .rsrc VA=0x14000e000 raw_file_offset=0x2000
+COMMAND> Hash original extracted executable and memory dump
+
+Algorithm : SHA256
+Hash      : 607BD3E8E5D7E715F7A9B819C8D5CC235C8DCC22F06A4AE77D0383E46BBDDACE
+Path      : C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\ezBase_541\附件_平台原件\解压复核_20260929\ezBase\ezre.exe
+
+Algorithm : SHA256
+Hash      : 16A11C873808BB3FDB2EA94C134FC3EA1E9E26624FD837E803AA112D23C12C80
+Path      : C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\ezBase_541\unpacked_runtime.bin
+
+**********************
+PowerShell transcript end
+End time: 20260929040946
+**********************

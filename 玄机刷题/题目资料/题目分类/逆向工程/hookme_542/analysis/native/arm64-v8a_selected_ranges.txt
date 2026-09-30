@@ -1,0 +1,366 @@
+
+===== file C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\批次10_20260929\542_hookme\analysis\components\lib\arm64-v8a\libhookme.so VA 0x2ed00-0x2ef80 =====
+0002ed00: str        xzr, [x8, #8]
+0002ed04: str        xzr, [x8, #0x10]
+0002ed08: add        sp, sp, #0x10
+0002ed0c: ret        
+0002ed10: sub        sp, sp, #0x20
+0002ed14: stp        x29, x30, [sp, #0x10]
+0002ed18: add        x29, sp, #0x10
+0002ed1c: str        x0, [sp, #8]
+0002ed20: ldr        x0, [sp, #8]
+0002ed24: bl         #0x2ed9c
+0002ed28: ldrb       w8, [x0]
+0002ed2c: ands       w8, w8, #1
+0002ed30: cset       w0, ne
+0002ed34: ldp        x29, x30, [sp, #0x10]
+0002ed38: add        sp, sp, #0x20
+0002ed3c: ret        
+0002ed40: sub        sp, sp, #0x20
+0002ed44: stp        x29, x30, [sp, #0x10]
+0002ed48: add        x29, sp, #0x10
+0002ed4c: str        x0, [sp, #8]
+0002ed50: ldr        x0, [sp, #8]
+0002ed54: bl         #0x2ed9c
+0002ed58: ldr        x0, [x0, #8]
+0002ed5c: ldp        x29, x30, [sp, #0x10]
+0002ed60: add        sp, sp, #0x20
+0002ed64: ret        
+0002ed68: sub        sp, sp, #0x20
+0002ed6c: stp        x29, x30, [sp, #0x10]
+0002ed70: add        x29, sp, #0x10
+0002ed74: str        x0, [sp, #8]
+0002ed78: ldr        x0, [sp, #8]
+0002ed7c: bl         #0x2ed9c
+0002ed80: ldrb       w8, [x0]
+0002ed84: lsr        w9, w8, #1
+0002ed88: mov        w8, w9
+0002ed8c: and        x0, x8, #0xff
+0002ed90: ldp        x29, x30, [sp, #0x10]
+0002ed94: add        sp, sp, #0x20
+0002ed98: ret        
+0002ed9c: sub        sp, sp, #0x20
+0002eda0: stp        x29, x30, [sp, #0x10]
+0002eda4: add        x29, sp, #0x10
+0002eda8: str        x0, [sp, #8]
+0002edac: ldr        x0, [sp, #8]
+0002edb0: bl         #0x2edc0
+0002edb4: ldp        x29, x30, [sp, #0x10]
+0002edb8: add        sp, sp, #0x20
+0002edbc: ret        
+0002edc0: sub        sp, sp, #0x10
+0002edc4: str        x0, [sp, #8]
+0002edc8: ldr        x0, [sp, #8]
+0002edcc: add        sp, sp, #0x10
+0002edd0: ret        
+0002edd4: sub        sp, sp, #0x10
+0002edd8: str        x0, [sp, #8]
+0002eddc: ldr        x8, [sp, #8]
+0002ede0: subs       x8, x8, #0x17
+0002ede4: cset       w0, lo
+0002ede8: add        sp, sp, #0x10
+0002edec: ret        
+0002edf0: sub        sp, sp, #0x20
+0002edf4: stp        x29, x30, [sp, #0x10]
+0002edf8: add        x29, sp, #0x10
+0002edfc: str        x0, [sp, #8]
+0002ee00: ldr        x0, [sp, #8]
+0002ee04: bl         #0x2ed9c
+0002ee08: ldr        x0, [x0, #0x10]
+0002ee0c: ldp        x29, x30, [sp, #0x10]
+0002ee10: add        sp, sp, #0x20
+0002ee14: ret        
+0002ee18: sub        sp, sp, #0x20
+0002ee1c: stp        x29, x30, [sp, #0x10]
+0002ee20: add        x29, sp, #0x10
+0002ee24: str        x0, [sp, #8]
+0002ee28: ldr        x0, [sp, #8]
+0002ee2c: bl         #0x2ee54
+0002ee30: bl         #0x2ee40
+0002ee34: ldp        x29, x30, [sp, #0x10]
+0002ee38: add        sp, sp, #0x20
+0002ee3c: ret        
+0002ee40: sub        sp, sp, #0x10
+0002ee44: str        x0, [sp, #8]
+0002ee48: ldr        x0, [sp, #8]
+0002ee4c: add        sp, sp, #0x10
+0002ee50: ret        
+0002ee54: sub        sp, sp, #0x30
+0002ee58: stp        x29, x30, [sp, #0x20]
+0002ee5c: add        x29, sp, #0x20
+0002ee60: stur       x0, [x29, #-8]
+0002ee64: ldur       x0, [x29, #-8]
+0002ee68: str        x0, [sp, #0x10]
+0002ee6c: bl         #0x2ed10
+0002ee70: tbz        w0, #0, #0x2ee88
+0002ee74: b          #0x2ee78
+0002ee78: ldr        x0, [sp, #0x10]
+0002ee7c: bl         #0x2edf0
+0002ee80: str        x0, [sp, #8]
+0002ee84: b          #0x2ee98
+0002ee88: ldr        x0, [sp, #0x10]
+0002ee8c: bl         #0x2eea8
+0002ee90: str        x0, [sp, #8]
+0002ee94: b          #0x2ee98
+0002ee98: ldr        x0, [sp, #8]
+0002ee9c: ldp        x29, x30, [sp, #0x20]
+0002eea0: add        sp, sp, #0x30
+0002eea4: ret        
+0002eea8: sub        sp, sp, #0x20
+0002eeac: stp        x29, x30, [sp, #0x10]
+0002eeb0: add        x29, sp, #0x10
+0002eeb4: str        x0, [sp, #8]
+0002eeb8: ldr        x0, [sp, #8]
+0002eebc: bl         #0x2ed9c
+0002eec0: add        x0, x0, #1
+0002eec4: bl         #0x2eed4
+0002eec8: ldp        x29, x30, [sp, #0x10]
+0002eecc: add        sp, sp, #0x20
+0002eed0: ret        
+0002eed4: sub        sp, sp, #0x10
+0002eed8: str        x0, [sp, #8]
+0002eedc: ldr        x0, [sp, #8]
+0002eee0: add        sp, sp, #0x10
+0002eee4: ret        
+0002eee8: sub        sp, sp, #0x40
+0002eeec: stp        x29, x30, [sp, #0x30]
+0002eef0: add        x29, sp, #0x30
+0002eef4: stur       x0, [x29, #-8]
+0002eef8: stur       x1, [x29, #-0x10]
+0002eefc: ldur       x9, [x29, #-8]
+0002ef00: str        x9, [sp, #0x10]
+0002ef04: ldur       w8, [x29, #-0x10]
+0002ef08: str        x8, [x9]
+0002ef0c: mov        x8, #1
+0002ef10: str        x8, [sp, #0x18]
+0002ef14: b          #0x2ef18
+0002ef18: ldr        x8, [sp, #0x18]
+0002ef1c: subs       x8, x8, #0x270
+0002ef20: b.hs       #0x2ef8c
+0002ef24: b          #0x2ef28
+0002ef28: ldr        x8, [sp, #0x10]
+0002ef2c: ldr        x9, [sp, #0x18]
+0002ef30: subs       x9, x9, #1
+0002ef34: ldr        x9, [x8, x9, lsl #3]
+0002ef38: str        x9, [sp, #8]
+0002ef3c: ldr        x9, [sp, #0x18]
+0002ef40: subs       x9, x9, #1
+0002ef44: ldr        x0, [x8, x9, lsl #3]
+0002ef48: bl         #0x66130
+0002ef4c: ldr        x8, [sp, #8]
+0002ef50: ldr        x9, [sp, #0x10]
+0002ef54: eor        x10, x8, x0
+0002ef58: mov        x8, #0x8965
+0002ef5c: movk       x8, #0x6c07, lsl #16
+0002ef60: mul        x8, x8, x10
+0002ef64: ldr        x10, [sp, #0x18]
+0002ef68: add        x8, x8, x10
+0002ef6c: and        x8, x8, #0xffffffff
+0002ef70: ldr        x10, [sp, #0x18]
+0002ef74: str        x8, [x9, x10, lsl #3]
+0002ef78: b          #0x2ef7c
+0002ef7c: ldr        x8, [sp, #0x18]
+
+===== file C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\批次10_20260929\542_hookme\analysis\components\lib\arm64-v8a\libhookme.so VA 0x2ef80-0x2f160 =====
+0002ef80: add        x8, x8, #1
+0002ef84: str        x8, [sp, #0x18]
+0002ef88: b          #0x2ef18
+0002ef8c: ldr        x8, [sp, #0x10]
+0002ef90: str        xzr, [x8, #0x1380]
+0002ef94: ldp        x29, x30, [sp, #0x30]
+0002ef98: add        sp, sp, #0x40
+0002ef9c: ret        
+0002efa0: sub        sp, sp, #0x10
+0002efa4: str        x0, [sp, #8]
+0002efa8: ldr        x8, [sp, #8]
+0002efac: lsr        x0, x8, #0x1e
+0002efb0: add        sp, sp, #0x10
+0002efb4: ret        
+0002efb8: sub        sp, sp, #0x10
+0002efbc: str        x0, [sp, #8]
+0002efc0: ldr        x8, [sp, #8]
+0002efc4: lsr        x0, x8, #1
+0002efc8: add        sp, sp, #0x10
+0002efcc: ret        
+0002efd0: sub        sp, sp, #0x10
+0002efd4: str        x0, [sp, #8]
+0002efd8: ldr        x8, [sp, #8]
+0002efdc: lsr        x0, x8, #0xb
+0002efe0: add        sp, sp, #0x10
+0002efe4: ret        
+0002efe8: sub        sp, sp, #0x10
+0002efec: str        x0, [sp, #8]
+0002eff0: ldr        x8, [sp, #8]
+0002eff4: lsl        x8, x8, #7
+0002eff8: and        x0, x8, #0xffffffff
+0002effc: add        sp, sp, #0x10
+0002f000: ret        
+0002f004: sub        sp, sp, #0x10
+0002f008: str        x0, [sp, #8]
+0002f00c: ldr        x8, [sp, #8]
+0002f010: lsl        x8, x8, #0xf
+0002f014: and        x0, x8, #0xffffffff
+0002f018: add        sp, sp, #0x10
+0002f01c: ret        
+0002f020: sub        sp, sp, #0x10
+0002f024: str        x0, [sp, #8]
+0002f028: ldr        x8, [sp, #8]
+0002f02c: lsr        x0, x8, #0x12
+0002f030: add        sp, sp, #0x10
+0002f034: ret        
+0002f038: sub        sp, sp, #0x40
+0002f03c: stp        x29, x30, [sp, #0x30]
+0002f040: add        x29, sp, #0x30
+0002f044: mrs        x8, tpidr_el0
+0002f048: str        x8, [sp]
+0002f04c: ldr        x8, [x8, #0x28]
+0002f050: stur       x8, [x29, #-8]
+0002f054: str        x0, [sp, #0x18]
+0002f058: str        x1, [sp, #0x10]
+0002f05c: ldr        x1, [sp, #0x10]
+0002f060: sub        x0, x29, #0x10
+0002f064: bl         #0x2f09c
+0002f068: ldr        x8, [sp]
+0002f06c: ldur       x0, [x29, #-0x10]
+0002f070: str        x0, [sp, #8]
+0002f074: ldr        x8, [x8, #0x28]
+0002f078: ldur       x9, [x29, #-8]
+0002f07c: subs       x8, x8, x9
+0002f080: b.ne       #0x2f098
+0002f084: b          #0x2f088
+0002f088: ldr        x0, [sp, #8]
+0002f08c: ldp        x29, x30, [sp, #0x30]
+0002f090: add        sp, sp, #0x40
+0002f094: ret        
+0002f098: bl         #0x65fa0
+0002f09c: sub        sp, sp, #0x10
+0002f0a0: str        x0, [sp, #8]
+0002f0a4: str        x1, [sp]
+0002f0a8: ldr        x9, [sp, #8]
+0002f0ac: ldr        x8, [sp]
+0002f0b0: str        x8, [x9]
+0002f0b4: add        sp, sp, #0x10
+0002f0b8: ret        
+0002f0bc: sub        sp, sp, #0x70
+0002f0c0: stp        x29, x30, [sp, #0x60]
+0002f0c4: add        x29, sp, #0x60
+0002f0c8: mrs        x8, tpidr_el0
+0002f0cc: ldr        x8, [x8, #0x28]
+0002f0d0: stur       x8, [x29, #-8]
+0002f0d4: sturb      w2, [x29, #-0xa]
+0002f0d8: stur       x0, [x29, #-0x18]
+0002f0dc: stur       x1, [x29, #-0x20]
+0002f0e0: ldur       x0, [x29, #-0x18]
+0002f0e4: str        x0, [sp, #0x28]
+0002f0e8: mov        x8, x0
+0002f0ec: str        x8, [sp, #0x20]
+0002f0f0: bl         #0x2f264
+0002f0f4: ldr        x0, [sp, #0x28]
+0002f0f8: bl         #0x2ed10
+0002f0fc: tbz        w0, #0, #0x2f140
+0002f100: b          #0x2f104
+0002f104: ldr        x0, [sp, #0x20]
+0002f108: bl         #0x2f2a8
+0002f10c: mov        x1, x0
+0002f110: ldr        x0, [sp, #0x20]
+0002f114: str        x1, [sp, #0x18]
+0002f118: bl         #0x2f2cc
+0002f11c: mov        x1, x0
+0002f120: ldr        x0, [sp, #0x20]
+0002f124: str        x1, [sp, #0x10]
+0002f128: bl         #0x2f2f4
+0002f12c: ldr        x1, [sp, #0x10]
+0002f130: mov        x2, x0
+0002f134: ldr        x0, [sp, #0x18]
+0002f138: bl         #0x2f274
+0002f13c: b          #0x2f140
+0002f140: ldur       x0, [x29, #-0x20]
+0002f144: bl         #0x2de24
+0002f148: stur       x0, [x29, #-0x28]
+0002f14c: ldur       x0, [x29, #-0x20]
+0002f150: bl         #0x2ed10
+0002f154: mov        w9, w0
+0002f158: ldr        x0, [sp, #0x20]
+0002f15c: mov        w8, #1
+
+===== file C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\批次10_20260929\542_hookme\analysis\components\lib\arm64-v8a\libhookme.so VA 0x2f600-0x2f740 =====
+0002f600: ldr        x0, [sp, #8]
+0002f604: bl         #0x2f2a8
+0002f608: ldr        x0, [sp]
+0002f60c: bl         #0x2f2a8
+0002f610: ldp        x29, x30, [sp, #0x20]
+0002f614: add        sp, sp, #0x30
+0002f618: ret        
+0002f61c: sub        sp, sp, #0x10
+0002f620: str        x0, [sp, #8]
+0002f624: ldr        x0, [sp, #8]
+0002f628: add        sp, sp, #0x10
+0002f62c: ret        
+0002f630: sub        sp, sp, #0x10
+0002f634: str        x0, [sp, #8]
+0002f638: ldr        x0, [sp, #8]
+0002f63c: add        sp, sp, #0x10
+0002f640: ret        
+0002f644: sub        sp, sp, #0x10
+0002f648: str        x0, [sp, #8]
+0002f64c: ldr        x0, [sp, #8]
+0002f650: add        sp, sp, #0x10
+0002f654: ret        
+0002f658: sub        sp, sp, #0x30
+0002f65c: stp        x29, x30, [sp, #0x20]
+0002f660: add        x29, sp, #0x20
+0002f664: stur       x0, [x29, #-8]
+0002f668: ldur       x0, [x29, #-8]
+0002f66c: str        x0, [sp, #0x10]
+0002f670: bl         #0x2ed10
+0002f674: tbz        w0, #0, #0x2f68c
+0002f678: b          #0x2f67c
+0002f67c: ldr        x0, [sp, #0x10]
+0002f680: bl         #0x2f2cc
+0002f684: str        x0, [sp, #8]
+0002f688: b          #0x2f69c
+0002f68c: ldr        x0, [sp, #0x10]
+0002f690: bl         #0x2f404
+0002f694: str        x0, [sp, #8]
+0002f698: b          #0x2f69c
+0002f69c: ldr        x0, [sp, #8]
+0002f6a0: ldp        x29, x30, [sp, #0x20]
+0002f6a4: add        sp, sp, #0x30
+0002f6a8: ret        
+0002f6ac: paciasp    
+0002f6b0: sub        sp, sp, #0x70
+0002f6b4: stp        x29, x30, [sp, #0x10]
+0002f6b8: stp        x28, x27, [sp, #0x20]
+0002f6bc: stp        x26, x25, [sp, #0x30]
+0002f6c0: stp        x24, x23, [sp, #0x40]
+0002f6c4: stp        x22, x21, [sp, #0x50]
+0002f6c8: stp        x20, x19, [sp, #0x60]
+0002f6cc: add        x29, sp, #0x10
+0002f6d0: ldrb       w24, [x0]
+0002f6d4: ldr        x8, [x0, #8]
+0002f6d8: mov        x19, x0
+0002f6dc: lsr        x9, x24, #1
+0002f6e0: tst        w24, #1
+0002f6e4: csel       x28, x9, x8, eq
+0002f6e8: subs       x8, x28, x1
+0002f6ec: b.lo       #0x2f974
+0002f6f0: ldr        x10, [x19]
+0002f6f4: cmp        x8, x2
+0002f6f8: mov        w11, #0x16
+0002f6fc: csel       x23, x8, x2, lo
+0002f700: tst        w24, #1
+0002f704: mov        x20, x4
+0002f708: and        x9, x10, #0xfffffffffffffffe
+0002f70c: mov        x21, x1
+0002f710: and        w10, w10, #0xff
+0002f714: sub        x9, x9, #1
+0002f718: csel       x9, x11, x9, eq
+0002f71c: sub        x11, x23, x28
+0002f720: add        x11, x11, x9
+0002f724: cmp        x11, x4
+0002f728: b.hs       #0x2f7a0
+0002f72c: add        x8, x28, x20
+0002f730: mov        x11, #-0x12
+0002f734: sub        x8, x8, x9
+0002f738: sub        x11, x11, x9
+0002f73c: sub        x8, x8, x23

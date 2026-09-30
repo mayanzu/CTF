@@ -1,0 +1,23 @@
+ELF SHA256       = B8D977D9540F8AF606F0CB0604C932BBEFA5D2FF202422616B06C7FA32DFDB75
+encode.dat size  = 36
+encode.dat hex   = 8fa39cb7188d7116a99d521b10792916479d46bf16130f12a5359e177015171438697d0a
+key-file size    = 32
+key-file hex     = 4d4d58456e636f64653230323400456e636f64696e672066696c653a2025730a
+rodata[0x825b6:] = 4d4d58456e636f64653230323400456e636f64696e672066696c653a2025730a
+keyfile == rodata first 32 = True
+working key (8B)= 4d4d58456e636f64 (b'MMXEncod')
+block[00] C=8fa39cb7188d7116 P=666c61677b363665
+block[08] C=a99d521b10792916 P=6563333865323639
+block[16] C=479d46bf16130f12 P=6530653236373834
+block[24] C=a5359e1770151714 P=3961316637623730
+plaintext hex    = 666c61677b36366565633338653236396530653236373834396131663762373038697d0a
+plaintext repr   = b'flag{66eec38e269e0e267849a1f7b708i}\n'
+plaintext utf8   = flag{66eec38e269e0e267849a1f7b708i}
+
+untouched tail   = 38697d0a (length 4)
+forward closure  = True
+forward hex      = 8fa39cb7188d7116a99d521b10792916479d46bf16130f12a5359e177015171438697d0a
+candidate flag    = flag{66eec38e269e0e267849a1f7b708i}
+candidate length  = 35 bytes (trailing data LF excluded)
+plaintext final LF= True; final bytes=38697d0a
+candidate tokens  = ['flag{66eec38e269e0e267849a1f7b708i}']

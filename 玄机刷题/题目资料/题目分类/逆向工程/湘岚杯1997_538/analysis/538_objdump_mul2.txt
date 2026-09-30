@@ -1,0 +1,22 @@
+
+xj538.exe:     file format pei-x86-64
+
+
+Disassembly of section .text:
+
+0000000000401550 <mul2>:
+  401550:	55                   	push   rbp
+  401551:	48 89 e5             	mov    rbp,rsp
+  401554:	89 c8                	mov    eax,ecx
+  401556:	88 45 10             	mov    BYTE PTR [rbp+0x10],al
+  401559:	0f b6 45 10          	movzx  eax,BYTE PTR [rbp+0x10]
+  40155d:	84 c0                	test   al,al
+  40155f:	79 0b                	jns    40156c <mul2+0x1c>
+  401561:	0f b6 45 10          	movzx  eax,BYTE PTR [rbp+0x10]
+  401565:	01 c0                	add    eax,eax
+  401567:	83 f0 1b             	xor    eax,0x1b
+  40156a:	eb 06                	jmp    401572 <mul2+0x22>
+  40156c:	0f b6 45 10          	movzx  eax,BYTE PTR [rbp+0x10]
+  401570:	01 c0                	add    eax,eax
+  401572:	5d                   	pop    rbp
+  401573:	c3                   	ret

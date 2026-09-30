@@ -1,0 +1,824 @@
+**********************
+PowerShell transcript start
+Start time: 20260929110824
+Username: DESKTOP-412KTAR\mzj
+RunAs User: DESKTOP-412KTAR\mzj
+Configuration Name: 
+Machine: DESKTOP-412KTAR (Microsoft Windows NT 10.0.26200.0)
+Host Application: C:\Users\mzj\.cache\codex-runtimes\codex-primary-runtime\dependencies\native\powershell\pwsh.dll -Command try { [Console]::OutputEncoding=[System.Text.Encoding]::UTF8 } catch {}
+$root='C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\批次10_20260929\542_hookme'
+$log=Join-Path $root 'records\final_evidence_review_20260929.txt'
+Start-Transcript -LiteralPath $log -Force
+$files=@(
+ (Join-Path $root 'originals\hookme.rar'),
+ (Join-Path $root 'extracted\hookme\HookMe.apk'),
+ (Join-Path $root 'analysis\components\AndroidManifest.xml'),
+ (Join-Path $root 'analysis\components\classes.dex'),
+ (Join-Path $root 'analysis\components\classes2.dex'),
+ (Join-Path $root 'analysis\components\classes3.dex'),
+ (Join-Path $root 'analysis\components\classes4.dex'),
+ (Join-Path $root 'analysis\components\lib\arm64-v8a\libhookme.so'),
+ (Join-Path $root 'analysis\components\lib\armeabi-v7a\libhookme.so'),
+ (Join-Path $root 'analysis\components\lib\x86\libhookme.so'),
+ (Join-Path $root 'analysis\components\lib\x86_64\libhookme.so'),
+ (Join-Path $root 'analysis\resources\arsc_parse.txt'),
+ (Join-Path $root 'analysis\solve_static.py'),
+ (Join-Path $root 'README.md'),
+ (Join-Path $root 'wp.md')
+)
+Get-FileHash -Algorithm SHA256 -LiteralPath $files | Select-Object Path,Hash | Format-Table -AutoSize
+Write-Output 'CORRECTED DEX NATIVE METHOD REPORT'
+Get-Content -LiteralPath (Join-Path $root 'analysis\dex\classes4.dex.corrected_report.txt') -Encoding utf8
+Write-Output 'COMPILED RESOURCE VALUE'
+Get-Content -LiteralPath (Join-Path $root 'analysis\resources\arsc_parse.txt') -Encoding utf8
+Write-Output 'CORRECTED AARCH64 PLT MAP'
+Get-Content -LiteralPath (Join-Path $root 'analysis\native\plt_map_corrected.txt') -Encoding utf8 | Select-String -Pattern 'PLT=0x65fc0|PLT=0x66020|PLT=0x66030|PLT=0x66050|PLT=0x66060|PLT=0x66080|PLT=0x66090|PLT=0x660e0|PLT=0x660f0'
+Write-Output 'SOLVER REPLAY'
+& 'C:\Users\mzj\AppData\Local\Programs\Python\Python312\python.exe' (Join-Path $root 'analysis\solve_static.py')
+Write-Output 'PROJECT FILE INVENTORY'
+Get-ChildItem -LiteralPath $root -Recurse -File | ForEach-Object { [PSCustomObject]@{RelativePath=$_.FullName.Substring($root.Length+1); Length=$_.Length} } | Sort-Object RelativePath | Format-Table -AutoSize
+Stop-Transcript
+Process ID: 30504
+PSVersion: 7.6.5
+PSEdition: Core
+GitCommitId: 7.6.5
+OS: Microsoft Windows 10.0.26200
+Platform: Win32NT
+PSCompatibleVersions: 1.0, 2.0, 3.0, 4.0, 5.0, 5.1, 6.0, 7.0
+PSRemotingProtocolVersion: 2.4
+SerializationVersion: 1.1.0.1
+WSManStackVersion: 3.0
+**********************
+Transcript started, output file is C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\批次10_20260929\542_hookme\records\final_evidence_review_20260929.txt
+
+Path
+----                                                                                                                  
+C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\批次10_20260929\542_hookme\originals\hookme.rar
+C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\批次10_20260929\542_hookme\extracted\hookme\HookMe.apk
+C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\批次10_20260929\542_hookme\analysis\components\AndroidManifest.xml
+C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\批次10_20260929\542_hookme\analysis\components\classes.dex
+C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\批次10_20260929\542_hookme\analysis\components\classes2.dex
+C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\批次10_20260929\542_hookme\analysis\components\classes3.dex
+C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\批次10_20260929\542_hookme\analysis\components\classes4.dex
+C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\批次10_20260929\542_hookme\analysis\components\lib\arm64-v8a\libhookme.so
+C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\批次10_20260929\542_hookme\analysis\components\lib\armeabi-v7a\libhookme.so
+C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\批次10_20260929\542_hookme\analysis\components\lib\x86\libhookme.so
+C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\批次10_20260929\542_hookme\analysis\components\lib\x86_64\libhookme.so
+C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\批次10_20260929\542_hookme\analysis\resources\arsc_parse.txt
+C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\批次10_20260929\542_hookme\analysis\solve_static.py
+C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\批次10_20260929\542_hookme\README.md
+C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\批次10_20260929\542_hookme\wp.md
+
+CORRECTED DEX NATIVE METHOD REPORT
+DEX=classes4.dex SHA256=C3CB9DB6ECF2DBBFA9B1C49476B9EE1EDC3085AA6808B5CFF98190EE3FABF0CA class_defs=3 methods=36
+CLASS Lcom/example/hookme/MainActivity$$ExternalSyntheticLambda0; class_data=0x12a5
+  direct <init> flags=0x11001 code_off=0x5bc
+  virtual onClick flags=0x11 code_off=0x5e0
+CLASS Lcom/example/hookme/MainActivity$Companion; class_data=0x12bc
+  direct <init> flags=0x10002 code_off=0x604
+  direct <init> flags=0x11001 code_off=0x61c
+CLASS Lcom/example/hookme/MainActivity; class_data=0x12cc
+  direct $r8$lambda$Sr6sQXzvEjgJBU6OLiC0M3Wd7xs flags=0x1009 code_off=0x6d8
+  direct <clinit> flags=0x10008 code_off=0x6f0
+  direct <init> flags=0x10001 code_off=0x720
+  direct hexStringToByteArray flags=0x12 code_off=0x634
+  direct onCreate$lambda$0 flags=0x1a code_off=0x738
+  virtual onCreate flags=0x4 code_off=0x7d8
+  virtual rc4Encrypt flags=0x111 code_off=0x0
+  virtual setPackageNameToNative flags=0x111 code_off=0x0
+NATIVE classes4.dex Lcom/example/hookme/MainActivity;->rc4Encrypt flags=0x111 code_off=0x0
+NATIVE classes4.dex Lcom/example/hookme/MainActivity;->setPackageNameToNative flags=0x111 code_off=0x0
+COMPILED RESOURCE VALUE
+ARSC bytes=1013392 sha256=EA931FC8C84136C30E96356FA3B906D4B160A36B9C1C85F68787E48280B4021E
+TABLE type=0x0002 header_size=0xc size=0xf7690 package_count=1
+CHUNK off=0xc type=0x0001 header=0x1c size=0x46344
+GLOBAL_STRING_POOL count=7483
+CHUNK off=0x46350 type=0x0200 header=0x120 size=0xb1340
+PACKAGE id=127 name=com.example.hookme header=0x120 type_pool=18 key_pool=5049 typeIdOffset=0
+RESOURCE 0x7f030070 attr/behavior_saveFlags = complex flags=0x1
+RESOURCE 0x7f030172 attr/defaultScrollFlagsEnabled = complex flags=0x1
+RESOURCE 0x7f0302af attr/layout_scrollFlags = complex flags=0x1
+RESOURCE 0x7f03034e attr/nestedScrollFlags = complex flags=0x1
+RESOURCE 0x7f0304af attr/transitionFlags = complex flags=0x1
+RESOURCE 0x7f0f002f string/correct_ciphertext = 'f235b888b3f4e08bff17e7e29bc3bf67d0f9a1b7b6581bb4a1eb299684e99923a8d193caf91d'
+RESOURCE 0x7f100227 style/Theme.HookMe = complex flags=0x1
+RESOURCE 0x7f100227 style/Theme.HookMe = complex flags=0x1
+CORRECTED AARCH64 PLT MAP
+
+
+rel[007] PLT=0x65fc0 GOT=0x6bdf8 symbol=_Z14initializeSBoxPhRKNSt6__ndk112basic_stringIcNS0_11char_traitsIcEENS0_9alloc
+atorIcEEEE
+rel[013] PLT=0x66020 GOT=0x6be28 symbol=_Z3ksaPhRKNSt6__ndk112basic_stringIcNS0_11char_traitsIcEENS0_9allocatorIcEEEE
+rel[014] PLT=0x66030 GOT=0x6be30 symbol=_Z4prgaPhRKNSt6__ndk112basic_stringIcNS0_11char_traitsIcEENS0_9allocatorIcEEEE
+rel[016] PLT=0x66050 GOT=0x6be40 symbol=_Z10rc4EncryptRKNSt6__ndk112basic_stringIcNS_11char_traitsIcEENS_9allocatorIcEE
+EES7_
+rel[017] PLT=0x66060 GOT=0x6be48 symbol=_ZN7_JNIEnv17GetStringUTFCharsEP8_jstringPh
+rel[019] PLT=0x66080 GOT=0x6be58 symbol=_ZNSt6__ndk112basic_stringIcNS_11char_traitsIcEENS_9allocatorIcEEEC2B8ne180000I
+Li0EEEPKc
+rel[020] PLT=0x66090 GOT=0x6be60 symbol=_ZN7_JNIEnv21ReleaseStringUTFCharsEP8_jstringPKc
+rel[025] PLT=0x660e0 GOT=0x6be88 symbol=_ZN7_JNIEnv12NewByteArrayEi
+rel[026] PLT=0x660f0 GOT=0x6be90 symbol=_ZN7_JNIEnv18SetByteArrayRegionEP11_jbyteArrayiiPKa
+SOLVER REPLAY
+PROJECT FILE INVENTORY
+
+
+RelativePath                                                                    Length
+------------                                                                    ------
+analysis\apk_inventory.py                                                          772
+analysis\arsc_parse.py                                                            4160
+analysis\components\AndroidManifest.xml                                           5328
+analysis\components\classes.dex                                                9916936
+analysis\components\classes.strings.txt                                        3620034
+analysis\components\classes2.dex                                                512592
+analysis\components\classes3.dex                                                  2464
+analysis\components\classes4.dex                                                  5112
+analysis\components\lib\arm64-v8a\libhookme.so                                  442072
+analysis\components\lib\armeabi-v7a\libhookme.so                                265360
+analysis\components\lib\x86_64\libhookme.so                                     418600
+analysis\components\lib\x86\libhookme.so                                        413936
+analysis\dex_debug.py                                                             1336
+analysis\dex_disasm.py                                                            8329
+analysis\dex_static_before_debug.py                                               3803
+analysis\dex_static_corrected.py                                                  2079
+analysis\dex_static_initial_false_negative.py                                     3803
+analysis\dex\classes.dex.corrected_report.txt                                      119
+analysis\dex\classes.dex.disasm.txt                                                113
+analysis\dex\classes.dex.report.txt                                             601923
+analysis\dex\classes.dex.strings.txt                                           3620034
+analysis\dex\classes2.dex.corrected_report.txt                                    1039
+analysis\dex\classes2.dex.disasm.txt                                              2835
+analysis\dex\classes2.dex.report.txt                                             32193
+analysis\dex\classes2.dex.strings.txt                                           299571
+analysis\dex\classes3.dex.corrected_report.txt                                     454
+analysis\dex\classes3.dex.disasm.txt                                              6447
+analysis\dex\classes3.dex.report.txt                                               592
+analysis\dex\classes3.dex.strings.txt                                             1362
+analysis\dex\classes4.dex.corrected_report.txt                                    1139
+analysis\dex\classes4.dex.disasm.txt                                             12563
+analysis\dex\classes4.dex.report.initial_parser_bug.txt                           1188
+analysis\dex\classes4.dex.report.txt                                              1066
+analysis\dex\classes4.dex.strings.txt                                             3187
+analysis\elf_disasm.py                                                            3214
+analysis\elf_range_disasm.py                                                      1168
+analysis\elf_static.py                                                            3702
+analysis\extract_dex_strings.py                                                   2569
+analysis\failed_seed_little_endian.py                                             3794
+analysis\native\arm64-v8a_libhookme.so.disasm.txt                                19103
+analysis\native\arm64-v8a_libhookme.so.txt                                       49272
+analysis\native\arm64-v8a_selected_ranges.txt                                    13056
+analysis\native\armeabi-v7a_libhookme.so.disasm.txt                               2530
+analysis\native\armeabi-v7a_libhookme.so.txt                                     49310
+analysis\native\plt_map_corrected.txt                                            15510
+analysis\native\x86_64_libhookme.so.disasm.txt                                   19579
+analysis\native\x86_64_libhookme.so.txt                                          49221
+analysis\native\x86_libhookme.so.disasm.txt                                      28017
+analysis\native\x86_libhookme.so.txt                                             49255
+analysis\plt_map_corrected.py                                                     1972
+analysis\plt_map.py                                                               1953
+analysis\resource_strings.py                                                      1614
+analysis\resources\$avd_hide_password__0.xml                                      1176
+analysis\resources\$avd_hide_password__1.xml                                       592
+analysis\resources\$avd_hide_password__2.xml                                       556
+analysis\resources\$avd_show_password__0.xml                                      1136
+analysis\resources\$avd_show_password__1.xml                                       592
+analysis\resources\$avd_show_password__2.xml                                       556
+analysis\resources\$ic_launcher_foreground__0.xml                                  788
+analysis\resources\$m3_avd_hide_password__0.xml                                   1176
+analysis\resources\$m3_avd_hide_password__1.xml                                    592
+analysis\resources\$m3_avd_hide_password__2.xml                                    556
+analysis\resources\$m3_avd_show_password__0.xml                                   1136
+analysis\resources\$m3_avd_show_password__1.xml                                    592
+analysis\resources\$m3_avd_show_password__2.xml                                    556
+analysis\resources\$mtrl_checkbox_button_checked_unchecked__0.xml                  592
+analysis\resources\$mtrl_checkbox_button_checked_unchecked__1.xml                  592
+analysis\resources\$mtrl_checkbox_button_checked_unchecked__2.xml                  592
+analysis\resources\$mtrl_checkbox_button_icon_checked_indeterminate__0.xml         592
+analysis\resources\$mtrl_checkbox_button_icon_checked_unchecked__0.xml             592
+analysis\resources\$mtrl_checkbox_button_icon_checked_unchecked__1.xml             592
+analysis\resources\$mtrl_checkbox_button_icon_checked_unchecked__2.xml             592
+analysis\resources\$mtrl_checkbox_button_icon_indeterminate_checked__0.xml         592
+analysis\resources\$mtrl_checkbox_button_icon_indeterminate_unchecked__0.xml       592
+analysis\resources\$mtrl_checkbox_button_icon_indeterminate_unchecked__1.xml       592
+analysis\resources\$mtrl_checkbox_button_icon_indeterminate_unchecked__2.xml       592
+analysis\resources\$mtrl_checkbox_button_icon_unchecked_checked__0.xml             592
+analysis\resources\$mtrl_checkbox_button_icon_unchecked_checked__1.xml             592
+analysis\resources\$mtrl_checkbox_button_icon_unchecked_checked__2.xml             596
+analysis\resources\$mtrl_checkbox_button_icon_unchecked_indeterminate__0.xml       592
+analysis\resources\$mtrl_checkbox_button_icon_unchecked_indeterminate__1.xml       592
+analysis\resources\$mtrl_checkbox_button_icon_unchecked_indeterminate__2.xml       592
+analysis\resources\$mtrl_checkbox_button_unchecked_checked__0.xml                  592
+analysis\resources\$mtrl_checkbox_button_unchecked_checked__1.xml                  592
+analysis\resources\$mtrl_checkbox_button_unchecked_checked__2.xml                  592
+analysis\resources\$mtrl_switch_thumb_checked_pressed__0.xml                       592
+analysis\resources\$mtrl_switch_thumb_checked_unchecked__0.xml                     548
+analysis\resources\$mtrl_switch_thumb_checked_unchecked__1.xml                     592
+analysis\resources\$mtrl_switch_thumb_pressed_checked__0.xml                       592
+analysis\resources\$mtrl_switch_thumb_pressed_unchecked__0.xml                     592
+analysis\resources\$mtrl_switch_thumb_unchecked_checked__0.xml                     548
+analysis\resources\$mtrl_switch_thumb_unchecked_checked__1.xml                     592
+analysis\resources\$mtrl_switch_thumb_unchecked_pressed__0.xml                     592
+analysis\resources\abc_action_bar_item_background_material.xml                     264
+analysis\resources\abc_action_bar_title_item.xml                                   872
+analysis\resources\abc_action_bar_up_container.xml                                 440
+analysis\resources\abc_action_menu_item_layout.xml                                 768
+analysis\resources\abc_action_menu_layout.xml                                      576
+analysis\resources\abc_action_mode_bar.xml                                         464
+analysis\resources\abc_action_mode_close_item_material.xml                         840
+analysis\resources\abc_activity_chooser_view_list_item.xml                        1304
+analysis\resources\abc_activity_chooser_view.xml                                  1684
+analysis\resources\abc_alert_dialog_button_bar_material.xml                       1208
+analysis\resources\abc_alert_dialog_material.xml                                  2648
+analysis\resources\abc_alert_dialog_title_material.xml                            1352
+analysis\resources\abc_background_cache_hint_selector_material_dark.xml            468
+analysis\resources\abc_background_cache_hint_selector_material_light.xml           468
+analysis\resources\abc_btn_borderless_material.xml                                 588
+analysis\resources\abc_btn_check_material_anim.xml                                 816
+analysis\resources\abc_btn_check_material.xml                                      464
+analysis\resources\abc_btn_colored_borderless_text_material.xml                    500
+analysis\resources\abc_btn_colored_material.xml                                   1716
+analysis\resources\abc_btn_colored_text_material.xml                               500
+analysis\resources\abc_btn_default_mtrl_shape.xml                                  932
+analysis\resources\abc_btn_radio_material_anim.xml                                 816
+analysis\resources\abc_btn_radio_material.xml                                      464
+analysis\resources\abc_cab_background_internal_bg.xml                              372
+analysis\resources\abc_cab_background_top_material.xml                             336
+analysis\resources\abc_cascading_menu_item_layout.xml                             1868
+analysis\resources\abc_color_highlight_material.xml                                544
+analysis\resources\abc_control_background_material.xml                             304
+analysis\resources\abc_dialog_material_background.xml                              372
+analysis\resources\abc_dialog_title_material.xml                                  1116
+analysis\resources\abc_edit_text_material.xml                                     1172
+analysis\resources\abc_expanded_menu_layout.xml                                    388
+analysis\resources\abc_fade_in.xml                                                 388
+analysis\resources\abc_fade_out.xml                                                388
+analysis\resources\abc_grow_fade_in_from_bottom.xml                                852
+analysis\resources\abc_hint_foreground_material_dark.xml                           564
+analysis\resources\abc_hint_foreground_material_light.xml                          564
+analysis\resources\abc_ic_ab_back_material.xml                                     692
+analysis\resources\abc_ic_arrow_drop_right_black_24dp.xml                         1000
+analysis\resources\abc_ic_clear_material.xml                                       684
+analysis\resources\abc_ic_go_search_api_material.xml                               640
+analysis\resources\abc_ic_menu_copy_mtrl_am_alpha.xml                              756
+analysis\resources\abc_ic_menu_cut_mtrl_alpha.xml                                 1096
+analysis\resources\abc_ic_menu_overflow_material.xml                               792
+analysis\resources\abc_ic_menu_paste_mtrl_am_alpha.xml                             796
+analysis\resources\abc_ic_menu_selectall_mtrl_alpha.xml                            920
+analysis\resources\abc_ic_menu_share_mtrl_alpha.xml                                980
+analysis\resources\abc_ic_search_api_material.xml                                  812
+analysis\resources\abc_ic_voice_search_api_material.xml                            828
+analysis\resources\abc_item_background_holo_dark.xml                              1012
+analysis\resources\abc_item_background_holo_light.xml                             1012
+analysis\resources\abc_list_divider_material.xml                                   516
+analysis\resources\abc_list_menu_item_checkbox.xml                                 528
+analysis\resources\abc_list_menu_item_icon.xml                                     780
+analysis\resources\abc_list_menu_item_layout.xml                                  1396
+analysis\resources\abc_list_menu_item_radio.xml                                    532
+analysis\resources\abc_list_selector_background_transition_holo_dark.xml           424
+analysis\resources\abc_list_selector_background_transition_holo_light.xml          424
+analysis\resources\abc_list_selector_holo_dark.xml                                1064
+analysis\resources\abc_list_selector_holo_light.xml                               1064
+analysis\resources\abc_popup_enter.xml                                             508
+analysis\resources\abc_popup_exit.xml                                              508
+analysis\resources\abc_popup_menu_header_item_layout.xml                           848
+analysis\resources\abc_popup_menu_item_layout.xml                                 2072
+analysis\resources\abc_primary_text_disable_only_material_dark.xml                 464
+analysis\resources\abc_primary_text_disable_only_material_light.xml                464
+analysis\resources\abc_primary_text_material_dark.xml                              464
+analysis\resources\abc_primary_text_material_light.xml                             464
+analysis\resources\abc_ratingbar_indicator_material.xml                            124
+analysis\resources\abc_ratingbar_material.xml                                      124
+analysis\resources\abc_ratingbar_small_material.xml                                124
+analysis\resources\abc_screen_content_include.xml                                  548
+analysis\resources\abc_screen_simple_overlay_action_mode.xml                       792
+analysis\resources\abc_screen_simple.xml                                           832
+analysis\resources\abc_screen_toolbar.xml                                         1560
+analysis\resources\abc_search_dropdown_item_icons_2line.xml                       1916
+analysis\resources\abc_search_url_text.xml                                         588
+analysis\resources\abc_search_view.xml                                            3472
+analysis\resources\abc_secondary_text_material_dark.xml                            464
+analysis\resources\abc_secondary_text_material_light.xml                           464
+analysis\resources\abc_seekbar_thumb_material.xml                                 1100
+analysis\resources\abc_seekbar_tick_mark_material.xml                              516
+analysis\resources\abc_seekbar_track_material.xml                                 1408
+analysis\resources\abc_select_dialog_material.xml                                 1020
+analysis\resources\abc_shrink_fade_out_from_bottom.xml                             852
+analysis\resources\abc_slide_in_bottom.xml                                         396
+analysis\resources\abc_slide_in_top.xml                                            396
+analysis\resources\abc_slide_out_bottom.xml                                        396
+analysis\resources\abc_slide_out_top.xml                                           396
+analysis\resources\abc_spinner_textfield_background_material.xml                  1160
+analysis\resources\abc_star_black_48dp.xml                                         640
+analysis\resources\abc_star_half_black_48dp.xml                                    600
+analysis\resources\abc_switch_thumb_material.xml                                   464
+analysis\resources\abc_tab_indicator_material.xml                                  468
+analysis\resources\abc_text_cursor_material.xml                                    516
+analysis\resources\abc_textfield_search_material.xml                               756
+analysis\resources\abc_tint_btn_checkable.xml                                      624
+analysis\resources\abc_tint_default.xml                                           1120
+analysis\resources\abc_tint_edittext.xml                                           668
+analysis\resources\abc_tint_seek_thumb.xml                                         500
+analysis\resources\abc_tint_spinner.xml                                            668
+analysis\resources\abc_tint_switch_track.xml                                       664
+analysis\resources\abc_tooltip_enter.xml                                           388
+analysis\resources\abc_tooltip_exit.xml                                            388
+analysis\resources\abc_tooltip.xml                                                1056
+analysis\resources\abc_vector_test.xml                                             612
+analysis\resources\activity_main.xml                                              1672
+analysis\resources\AndroidManifest.xml                                            5328
+analysis\resources\arsc_parse.txt                                                  967
+analysis\resources\avd_hide_password.xml                                           660
+analysis\resources\avd_show_password.xml                                           660
+analysis\resources\backup_rules.xml                                                132
+analysis\resources\btn_checkbox_checked_mtrl_animation_interpolator_0.xml          316
+analysis\resources\btn_checkbox_checked_mtrl_animation_interpolator_1.xml          328
+analysis\resources\btn_checkbox_checked_mtrl.xml                                  2688
+analysis\resources\btn_checkbox_checked_to_unchecked_mtrl_animation.xml            688
+analysis\resources\btn_checkbox_to_checked_box_inner_merged_animation.xml         2124
+analysis\resources\btn_checkbox_to_checked_box_outer_merged_animation.xml         2780
+analysis\resources\btn_checkbox_to_checked_icon_null_animation.xml                1196
+analysis\resources\btn_checkbox_to_unchecked_box_inner_merged_animation.xml       2360
+analysis\resources\btn_checkbox_to_unchecked_check_path_merged_animation.xml      2520
+analysis\resources\btn_checkbox_to_unchecked_icon_null_animation.xml              1196
+analysis\resources\btn_checkbox_unchecked_mtrl_animation_interpolator_0.xml        316
+analysis\resources\btn_checkbox_unchecked_mtrl_animation_interpolator_1.xml        328
+analysis\resources\btn_checkbox_unchecked_mtrl.xml                                2660
+analysis\resources\btn_checkbox_unchecked_to_checked_mtrl_animation.xml            688
+analysis\resources\btn_radio_off_mtrl.xml                                         1728
+analysis\resources\btn_radio_off_to_on_mtrl_animation.xml                          680
+analysis\resources\btn_radio_on_mtrl.xml                                          1656
+analysis\resources\btn_radio_on_to_off_mtrl_animation.xml                          680
+analysis\resources\btn_radio_to_off_mtrl_animation_interpolator_0.xml              320
+analysis\resources\btn_radio_to_off_mtrl_dot_group_animation.xml                  1656
+analysis\resources\btn_radio_to_off_mtrl_ring_outer_animation.xml                 1656
+analysis\resources\btn_radio_to_off_mtrl_ring_outer_path_animation.xml            1028
+analysis\resources\btn_radio_to_on_mtrl_animation_interpolator_0.xml               320
+analysis\resources\btn_radio_to_on_mtrl_dot_group_animation.xml                   1656
+analysis\resources\btn_radio_to_on_mtrl_ring_outer_animation.xml                  1656
+analysis\resources\btn_radio_to_on_mtrl_ring_outer_path_animation.xml             1028
+analysis\resources\compiled_resource_strings.txt                                717339
+analysis\resources\custom_dialog.xml                                               612
+analysis\resources\data_extraction_rules.xml                                       212
+analysis\resources\design_appbar_state_list_animator.xml                          1216
+analysis\resources\design_bottom_navigation_item.xml                              1860
+analysis\resources\design_bottom_sheet_dialog.xml                                 1224
+analysis\resources\design_bottom_sheet_slide_in.xml                                616
+analysis\resources\design_bottom_sheet_slide_out.xml                               616
+analysis\resources\design_box_stroke_color.xml                                     712
+analysis\resources\design_error.xml                                                464
+analysis\resources\design_fab_background.xml                                       372
+analysis\resources\design_fab_hide_motion_spec.xml                                 796
+analysis\resources\design_fab_show_motion_spec.xml                                 796
+analysis\resources\design_ic_visibility_off.xml                                   1144
+analysis\resources\design_ic_visibility.xml                                        540
+analysis\resources\design_icon_tint.xml                                            376
+analysis\resources\design_layout_snackbar_include.xml                             1444
+analysis\resources\design_layout_snackbar.xml                                      528
+analysis\resources\design_layout_tab_icon.xml                                      408
+analysis\resources\design_layout_tab_text.xml                                      436
+analysis\resources\design_menu_item_action_area.xml                                320
+analysis\resources\design_navigation_item_header.xml                               440
+analysis\resources\design_navigation_item_separator.xml                            472
+analysis\resources\design_navigation_item_subheader.xml                            564
+analysis\resources\design_navigation_item.xml                                      636
+analysis\resources\design_navigation_menu_item.xml                                 856
+analysis\resources\design_navigation_menu.xml                                      528
+analysis\resources\design_password_eye.xml                                         816
+analysis\resources\design_snackbar_background.xml                                  484
+analysis\resources\design_snackbar_in.xml                                          312
+analysis\resources\design_snackbar_out.xml                                         312
+analysis\resources\design_text_input_end_icon.xml                                  656
+analysis\resources\design_text_input_start_icon.xml                                652
+analysis\resources\fast_out_slow_in.xml                                            400
+analysis\resources\fragment_close_enter.xml                                       1128
+analysis\resources\fragment_close_exit.xml                                        1128
+analysis\resources\fragment_fade_enter.xml                                         452
+analysis\resources\fragment_fade_exit.xml                                          452
+analysis\resources\fragment_fast_out_extra_slow_in.xml                             364
+analysis\resources\fragment_open_enter.xml                                        1128
+analysis\resources\fragment_open_exit.xml                                         1128
+analysis\resources\ic_arrow_back_black_24.xml                                      612
+analysis\resources\ic_call_answer_low.xml                                         1320
+analysis\resources\ic_call_answer_video_low.xml                                    736
+analysis\resources\ic_call_answer_video.xml                                        772
+analysis\resources\ic_call_answer.xml                                             1356
+analysis\resources\ic_call_decline_low.xml                                        1492
+analysis\resources\ic_call_decline.xml                                            1528
+analysis\resources\ic_clear_black_24.xml                                           684
+analysis\resources\ic_clock_black_24dp.xml                                         752
+analysis\resources\ic_keyboard_black_24dp.xml                                      852
+analysis\resources\ic_launcher_background.xml                                     5696
+analysis\resources\ic_launcher_foreground.xml                                     1572
+analysis\resources\ic_launcher_round.xml                                           548
+analysis\resources\ic_launcher.xml                                                 548
+analysis\resources\ic_m3_chip_check.xml                                            704
+analysis\resources\ic_m3_chip_checked_circle.xml                                   900
+analysis\resources\ic_m3_chip_close.xml                                            648
+analysis\resources\ic_mtrl_checked_circle.xml                                      672
+analysis\resources\ic_mtrl_chip_checked_black.xml                                  600
+analysis\resources\ic_mtrl_chip_checked_circle.xml                                 940
+analysis\resources\ic_mtrl_chip_close_circle.xml                                   808
+analysis\resources\ic_search_black_24.xml                                          800
+analysis\resources\linear_indeterminate_line1_head_interpolator.xml                400
+analysis\resources\linear_indeterminate_line1_tail_interpolator.xml                400
+analysis\resources\linear_indeterminate_line2_head_interpolator.xml                400
+analysis\resources\linear_indeterminate_line2_tail_interpolator.xml                400
+analysis\resources\m3_alert_dialog_actions.xml                                    1584
+analysis\resources\m3_alert_dialog_title.xml                                       956
+analysis\resources\m3_alert_dialog.xml                                            2720
+analysis\resources\m3_appbar_background.xml                                        684
+analysis\resources\m3_appbar_overlay_color.xml                                     376
+analysis\resources\m3_appbar_state_list_animator.xml                              1216
+analysis\resources\m3_assist_chip_icon_tint_color.xml                              500
+analysis\resources\m3_assist_chip_stroke_color.xml                                 872
+analysis\resources\m3_auto_complete_simple_item.xml                                612
+analysis\resources\m3_avd_hide_password.xml                                        660
+analysis\resources\m3_avd_show_password.xml                                        660
+analysis\resources\m3_bottom_sheet_drag_handle_color.xml                           340
+analysis\resources\m3_bottom_sheet_drag_handle.xml                                 628
+analysis\resources\m3_bottom_sheet_slide_in.xml                                    616
+analysis\resources\m3_bottom_sheet_slide_out.xml                                   656
+analysis\resources\m3_btn_elevated_btn_state_list_anim.xml                        1796
+analysis\resources\m3_btn_state_list_anim.xml                                     1796
+analysis\resources\m3_button_background_color_selector.xml                         500
+analysis\resources\m3_button_foreground_color_selector.xml                         500
+analysis\resources\m3_button_outline_color_selector.xml                            500
+analysis\resources\m3_button_ripple_color_selector.xml                             808
+analysis\resources\m3_button_ripple_color.xml                                      808
+analysis\resources\m3_calendar_item_disabled_text.xml                              376
+analysis\resources\m3_calendar_item_stroke_color.xml                               712
+analysis\resources\m3_card_elevated_state_list_anim.xml                           1632
+analysis\resources\m3_card_foreground_color.xml                                    768
+analysis\resources\m3_card_ripple_color.xml                                       1556
+analysis\resources\m3_card_state_list_anim.xml                                    1584
+analysis\resources\m3_card_stroke_color.xml                                       1224
+analysis\resources\m3_checkbox_button_icon_tint.xml                                964
+analysis\resources\m3_checkbox_button_tint.xml                                    1000
+analysis\resources\m3_chip_assist_text_color.xml                                   500
+analysis\resources\m3_chip_background_color.xml                                    712
+analysis\resources\m3_chip_ripple_color.xml                                       1556
+analysis\resources\m3_chip_state_list_anim.xml                                    1180
+analysis\resources\m3_chip_stroke_color.xml                                        872
+analysis\resources\m3_chip_text_color.xml                                          624
+analysis\resources\m3_dark_default_color_primary_text.xml                          500
+analysis\resources\m3_dark_default_color_secondary_text.xml                        500
+analysis\resources\m3_dark_highlighted_text.xml                                    376
+analysis\resources\m3_dark_hint_foreground.xml                                     564
+analysis\resources\m3_dark_primary_text_disable_only.xml                           500
+analysis\resources\m3_default_color_primary_text.xml                               500
+analysis\resources\m3_default_color_secondary_text.xml                             500
+analysis\resources\m3_dynamic_dark_default_color_primary_text.xml                  500
+analysis\resources\m3_dynamic_dark_default_color_secondary_text.xml                500
+analysis\resources\m3_dynamic_dark_highlighted_text.xml                            376
+analysis\resources\m3_dynamic_dark_hint_foreground.xml                             564
+analysis\resources\m3_dynamic_dark_primary_text_disable_only.xml                   500
+analysis\resources\m3_dynamic_default_color_primary_text.xml                       500
+analysis\resources\m3_dynamic_default_color_secondary_text.xml                     500
+analysis\resources\m3_dynamic_highlighted_text.xml                                 376
+analysis\resources\m3_dynamic_hint_foreground.xml                                  564
+analysis\resources\m3_dynamic_primary_text_disable_only.xml                        500
+analysis\resources\m3_efab_ripple_color_selector.xml                               808
+analysis\resources\m3_elevated_chip_background_color.xml                           748
+analysis\resources\m3_elevated_chip_state_list_anim.xml                           1072
+analysis\resources\m3_extended_fab_change_size_collapse_motion_spec.xml           1116
+analysis\resources\m3_extended_fab_change_size_expand_motion_spec.xml             1116
+analysis\resources\m3_extended_fab_hide_motion_spec.xml                            820
+analysis\resources\m3_extended_fab_show_motion_spec.xml                            820
+analysis\resources\m3_extended_fab_state_list_animator.xml                        2724
+analysis\resources\m3_fab_efab_background_color_selector.xml                       500
+analysis\resources\m3_fab_efab_foreground_color_selector.xml                       500
+analysis\resources\m3_fab_ripple_color_selector.xml                                808
+analysis\resources\m3_filled_icon_button_container_color_selector.xml              668
+analysis\resources\m3_highlighted_text.xml                                         376
+analysis\resources\m3_hint_foreground.xml                                          564
+analysis\resources\m3_icon_button_icon_color_selector.xml                          668
+analysis\resources\m3_motion_fade_enter.xml                                        812
+analysis\resources\m3_motion_fade_exit.xml                                         508
+analysis\resources\m3_navigation_bar_item_with_indicator_icon_tint.xml            1196
+analysis\resources\m3_navigation_bar_item_with_indicator_label_tint.xml           1196
+analysis\resources\m3_navigation_bar_ripple_color_selector.xml                    1232
+analysis\resources\m3_navigation_item_background_color.xml                         588
+analysis\resources\m3_navigation_item_icon_tint.xml                               1356
+analysis\resources\m3_navigation_item_ripple_color.xml                            1372
+analysis\resources\m3_navigation_item_text_color.xml                              1356
+analysis\resources\m3_navigation_rail_item_with_indicator_icon_tint.xml            464
+analysis\resources\m3_navigation_rail_item_with_indicator_label_tint.xml           464
+analysis\resources\m3_navigation_rail_ripple_color_selector.xml                   1232
+analysis\resources\m3_password_eye.xml                                             816
+analysis\resources\m3_popupmenu_background_overlay.xml                            1228
+analysis\resources\m3_popupmenu_overlay_color.xml                                  376
+analysis\resources\m3_primary_text_disable_only.xml                                500
+analysis\resources\m3_radiobutton_button_tint.xml                                 1576
+analysis\resources\m3_radiobutton_ripple_tint.xml                                 1372
+analysis\resources\m3_radiobutton_ripple.xml                                       304
+analysis\resources\m3_ref_palette_dynamic_neutral12.xml                            376
+analysis\resources\m3_ref_palette_dynamic_neutral17.xml                            376
+analysis\resources\m3_ref_palette_dynamic_neutral22.xml                            376
+analysis\resources\m3_ref_palette_dynamic_neutral24.xml                            376
+analysis\resources\m3_ref_palette_dynamic_neutral4.xml                             376
+analysis\resources\m3_ref_palette_dynamic_neutral6.xml                             376
+analysis\resources\m3_ref_palette_dynamic_neutral87.xml                            376
+analysis\resources\m3_ref_palette_dynamic_neutral92.xml                            376
+analysis\resources\m3_ref_palette_dynamic_neutral94.xml                            376
+analysis\resources\m3_ref_palette_dynamic_neutral96.xml                            376
+analysis\resources\m3_ref_palette_dynamic_neutral98.xml                            376
+analysis\resources\m3_selection_control_ripple_color_selector.xml                 1372
+analysis\resources\m3_selection_control_ripple.xml                                 304
+analysis\resources\m3_side_sheet_dialog.xml                                       1180
+analysis\resources\m3_side_sheet_enter_from_left.xml                               464
+analysis\resources\m3_side_sheet_enter_from_right.xml                              464
+analysis\resources\m3_side_sheet_exit_to_left.xml                                  464
+analysis\resources\m3_side_sheet_exit_to_right.xml                                 464
+analysis\resources\m3_simple_item_ripple_color.xml                                 748
+analysis\resources\m3_slider_active_track_color.xml                                500
+analysis\resources\m3_slider_halo_color.xml                                        500
+analysis\resources\m3_slider_inactive_track_color.xml                              500
+analysis\resources\m3_slider_thumb_color.xml                                       500
+analysis\resources\m3_switch_thumb_tint.xml                                        588
+analysis\resources\m3_switch_track_tint.xml                                        624
+analysis\resources\m3_sys_motion_easing_emphasized_accelerate.xml                  400
+analysis\resources\m3_sys_motion_easing_emphasized_decelerate.xml                  400
+analysis\resources\m3_sys_motion_easing_emphasized.xml                             280
+analysis\resources\m3_sys_motion_easing_linear.xml                                 400
+analysis\resources\m3_sys_motion_easing_standard_accelerate.xml                    400
+analysis\resources\m3_sys_motion_easing_standard_decelerate.xml                    400
+analysis\resources\m3_sys_motion_easing_standard.xml                               400
+analysis\resources\m3_tabs_background.xml                                          868
+analysis\resources\m3_tabs_icon_color_secondary.xml                                624
+analysis\resources\m3_tabs_icon_color.xml                                          624
+analysis\resources\m3_tabs_line_indicator.xml                                      480
+analysis\resources\m3_tabs_ripple_color_secondary.xml                             1372
+analysis\resources\m3_tabs_ripple_color.xml                                       1372
+analysis\resources\m3_tabs_rounded_line_indicator.xml                              956
+analysis\resources\m3_tabs_text_color_secondary.xml                                624
+analysis\resources\m3_tabs_text_color.xml                                          624
+analysis\resources\m3_tabs_transparent_background.xml                              632
+analysis\resources\m3_text_button_background_color_selector.xml                    508
+analysis\resources\m3_text_button_foreground_color_selector.xml                    748
+analysis\resources\m3_text_button_ripple_color_selector.xml                       1936
+analysis\resources\m3_textfield_filled_background_color.xml                        500
+analysis\resources\m3_textfield_indicator_text_color.xml                           872
+analysis\resources\m3_textfield_input_text_color.xml                               748
+analysis\resources\m3_textfield_label_color.xml                                    624
+analysis\resources\m3_textfield_stroke_color.xml                                   748
+analysis\resources\m3_timepicker_button_background_color.xml                       528
+analysis\resources\m3_timepicker_button_ripple_color.xml                          1536
+analysis\resources\m3_timepicker_button_text_color.xml                             768
+analysis\resources\m3_timepicker_clock_text_color.xml                              464
+analysis\resources\m3_timepicker_display_background_color.xml                      464
+analysis\resources\m3_timepicker_display_ripple_color.xml                         1372
+analysis\resources\m3_timepicker_display_text_color.xml                            624
+analysis\resources\m3_timepicker_secondary_text_button_ripple_color.xml            808
+analysis\resources\m3_timepicker_secondary_text_button_text_color.xml              500
+analysis\resources\m3_timepicker_time_input_stroke_color.xml                       464
+analysis\resources\m3_tonal_button_ripple_color_selector.xml                       808
+analysis\resources\material_chip_input_combo.xml                                   372
+analysis\resources\material_clock_display_divider.xml                              444
+analysis\resources\material_clock_display.xml                                      796
+analysis\resources\material_clock_period_toggle_land.xml                          1232
+analysis\resources\material_clock_period_toggle.xml                               1220
+analysis\resources\material_clockface_textview.xml                                 476
+analysis\resources\material_clockface_view.xml                                    1012
+analysis\resources\material_cursor_color.xml                                       340
+analysis\resources\material_cursor_drawable.xml                                    588
+analysis\resources\material_divider_color.xml                                      376
+analysis\resources\material_ic_calendar_black_24dp.xml                             696
+analysis\resources\material_ic_clear_black_24dp.xml                                752
+analysis\resources\material_ic_edit_black_24dp.xml                                 716
+analysis\resources\material_ic_keyboard_arrow_left_black_24dp.xml                  712
+analysis\resources\material_ic_keyboard_arrow_right_black_24dp.xml                 700
+analysis\resources\material_ic_menu_arrow_down_black_24dp.xml                      648
+analysis\resources\material_ic_menu_arrow_up_black_24dp.xml                        648
+analysis\resources\material_on_background_disabled.xml                             376
+analysis\resources\material_on_background_emphasis_high_type.xml                   376
+analysis\resources\material_on_background_emphasis_medium.xml                      376
+analysis\resources\material_on_primary_disabled.xml                                376
+analysis\resources\material_on_primary_emphasis_high_type.xml                      376
+analysis\resources\material_on_primary_emphasis_medium.xml                         376
+analysis\resources\material_on_surface_disabled.xml                                376
+analysis\resources\material_on_surface_emphasis_high_type.xml                      376
+analysis\resources\material_on_surface_emphasis_medium.xml                         376
+analysis\resources\material_on_surface_stroke.xml                                  376
+analysis\resources\material_personalized__highlighted_text_inverse.xml             376
+analysis\resources\material_personalized__highlighted_text.xml                     376
+analysis\resources\material_personalized_color_primary_text_inverse.xml            500
+analysis\resources\material_personalized_color_primary_text.xml                    500
+analysis\resources\material_personalized_color_secondary_text_inverse.xml          500
+analysis\resources\material_personalized_color_secondary_text.xml                  500
+analysis\resources\material_personalized_hint_foreground_inverse.xml               564
+analysis\resources\material_personalized_hint_foreground.xml                       564
+analysis\resources\material_personalized_primary_inverse_text_disable_only.xml     500
+analysis\resources\material_personalized_primary_text_disable_only.xml             500
+analysis\resources\material_radial_view_group.xml                                  768
+analysis\resources\material_slider_active_tick_marks_color.xml                     520
+analysis\resources\material_slider_active_track_color.xml                          500
+analysis\resources\material_slider_halo_color.xml                                  500
+analysis\resources\material_slider_inactive_tick_marks_color.xml                   520
+analysis\resources\material_slider_inactive_track_color.xml                        520
+analysis\resources\material_slider_thumb_color.xml                                 500
+analysis\resources\material_textinput_timepicker.xml                               720
+analysis\resources\material_time_chip.xml                                          380
+analysis\resources\material_time_input.xml                                         956
+analysis\resources\material_timepicker_button_background.xml                       500
+analysis\resources\material_timepicker_button_stroke.xml                           376
+analysis\resources\material_timepicker_clock_text_color.xml                        464
+analysis\resources\material_timepicker_clockface.xml                               376
+analysis\resources\material_timepicker_dialog.xml                                 3184
+analysis\resources\material_timepicker_modebutton_tint.xml                         340
+analysis\resources\material_timepicker_textinput_display.xml                       728
+analysis\resources\material_timepicker.xml                                        1676
+analysis\resources\mtrl_alert_dialog_actions.xml                                  1764
+analysis\resources\mtrl_alert_dialog_title.xml                                     956
+analysis\resources\mtrl_alert_dialog.xml                                          2476
+analysis\resources\mtrl_alert_select_dialog_item.xml                               588
+analysis\resources\mtrl_alert_select_dialog_multichoice.xml                        940
+analysis\resources\mtrl_alert_select_dialog_singlechoice.xml                       940
+analysis\resources\mtrl_auto_complete_simple_item.xml                              612
+analysis\resources\mtrl_bottom_sheet_slide_in.xml                                  616
+analysis\resources\mtrl_bottom_sheet_slide_out.xml                                 616
+analysis\resources\mtrl_bottomsheet_drag_handle.xml                                628
+analysis\resources\mtrl_btn_bg_color_selector.xml                                  500
+analysis\resources\mtrl_btn_ripple_color.xml                                       948
+analysis\resources\mtrl_btn_state_list_anim.xml                                   2664
+analysis\resources\mtrl_btn_stroke_color_selector.xml                              520
+analysis\resources\mtrl_btn_text_btn_bg_color_selector.xml                         520
+analysis\resources\mtrl_btn_text_btn_ripple_color.xml                              948
+analysis\resources\mtrl_btn_text_color_selector.xml                                500
+analysis\resources\mtrl_btn_unelevated_state_list_anim.xml                         120
+analysis\resources\mtrl_calendar_day_of_week.xml                                   352
+analysis\resources\mtrl_calendar_day.xml                                           352
+analysis\resources\mtrl_calendar_days_of_week.xml                                  436
+analysis\resources\mtrl_calendar_horizontal.xml                                   1176
+analysis\resources\mtrl_calendar_item_stroke_color.xml                             808
+analysis\resources\mtrl_calendar_month_labeled.xml                                 728
+analysis\resources\mtrl_calendar_month_navigation.xml                             1748
+analysis\resources\mtrl_calendar_month.xml                                         744
+analysis\resources\mtrl_calendar_months.xml                                        428
+analysis\resources\mtrl_calendar_selected_range.xml                                376
+analysis\resources\mtrl_calendar_vertical.xml                                      740
+analysis\resources\mtrl_calendar_year.xml                                          352
+analysis\resources\mtrl_card_lowers_interpolator.xml                               400
+analysis\resources\mtrl_card_state_list_anim.xml                                  1208
+analysis\resources\mtrl_card_view_foreground.xml                                   788
+analysis\resources\mtrl_card_view_ripple.xml                                       768
+analysis\resources\mtrl_checkbox_button_checked_unchecked.xml                      724
+analysis\resources\mtrl_checkbox_button_icon_checked_indeterminate.xml             524
+analysis\resources\mtrl_checkbox_button_icon_checked_unchecked.xml                 724
+analysis\resources\mtrl_checkbox_button_icon_indeterminate_checked.xml             524
+analysis\resources\mtrl_checkbox_button_icon_indeterminate_unchecked.xml           724
+analysis\resources\mtrl_checkbox_button_icon_unchecked_checked.xml                 724
+analysis\resources\mtrl_checkbox_button_icon_unchecked_indeterminate.xml           724
+analysis\resources\mtrl_checkbox_button_icon.xml                                  1572
+analysis\resources\mtrl_checkbox_button_unchecked_checked.xml                      724
+analysis\resources\mtrl_checkbox_button.xml                                       1332
+analysis\resources\mtrl_chip_background_color.xml                                  848
+analysis\resources\mtrl_chip_close_icon_tint.xml                                  1092
+analysis\resources\mtrl_chip_state_list_anim.xml                                  1072
+analysis\resources\mtrl_chip_surface_color.xml                                     340
+analysis\resources\mtrl_chip_text_color.xml                                        520
+analysis\resources\mtrl_choice_chip_background_color.xml                           848
+analysis\resources\mtrl_choice_chip_ripple_color.xml                               948
+analysis\resources\mtrl_choice_chip_text_color.xml                                 808
+analysis\resources\mtrl_dialog_background.xml                                      716
+analysis\resources\mtrl_dropdown_arrow.xml                                         464
+analysis\resources\mtrl_error.xml                                                  464
+analysis\resources\mtrl_extended_fab_change_size_collapse_motion_spec.xml         1116
+analysis\resources\mtrl_extended_fab_change_size_expand_motion_spec.xml           1116
+analysis\resources\mtrl_extended_fab_hide_motion_spec.xml                          608
+analysis\resources\mtrl_extended_fab_show_motion_spec.xml                          820
+analysis\resources\mtrl_extended_fab_state_list_animator.xml                      2724
+analysis\resources\mtrl_fab_bg_color_selector.xml                                  500
+analysis\resources\mtrl_fab_hide_motion_spec.xml                                   796
+analysis\resources\mtrl_fab_icon_text_color_selector.xml                           500
+analysis\resources\mtrl_fab_ripple_color.xml                                       948
+analysis\resources\mtrl_fab_show_motion_spec.xml                                   796
+analysis\resources\mtrl_fab_transformation_sheet_collapse_spec.xml                1888
+analysis\resources\mtrl_fab_transformation_sheet_expand_spec.xml                  1888
+analysis\resources\mtrl_fast_out_linear_in.xml                                     400
+analysis\resources\mtrl_fast_out_slow_in.xml                                       400
+analysis\resources\mtrl_filled_background_color.xml                                808
+analysis\resources\mtrl_filled_icon_tint.xml                                       644
+analysis\resources\mtrl_filled_stroke_color.xml                                    788
+analysis\resources\mtrl_ic_arrow_drop_down.xml                                     564
+analysis\resources\mtrl_ic_arrow_drop_up.xml                                       564
+analysis\resources\mtrl_ic_cancel.xml                                              724
+analysis\resources\mtrl_ic_check_mark.xml                                          744
+analysis\resources\mtrl_ic_checkbox_checked.xml                                    904
+analysis\resources\mtrl_ic_checkbox_unchecked.xml                                  612
+analysis\resources\mtrl_ic_error.xml                                               644
+analysis\resources\mtrl_ic_indeterminate.xml                                       744
+analysis\resources\mtrl_indicator_text_color.xml                                   520
+analysis\resources\mtrl_layout_snackbar_include.xml                                952
+analysis\resources\mtrl_layout_snackbar.xml                                        492
+analysis\resources\mtrl_linear_out_slow_in.xml                                     400
+analysis\resources\mtrl_linear.xml                                                 132
+analysis\resources\mtrl_navigation_bar_colored_item_tint.xml                       520
+analysis\resources\mtrl_navigation_bar_colored_ripple_color.xml                    948
+analysis\resources\mtrl_navigation_bar_item_background.xml                         264
+analysis\resources\mtrl_navigation_bar_item_tint.xml                               520
+analysis\resources\mtrl_navigation_bar_ripple_color.xml                           1672
+analysis\resources\mtrl_navigation_item_background_color.xml                       644
+analysis\resources\mtrl_navigation_item_icon_tint.xml                              624
+analysis\resources\mtrl_navigation_item_text_color.xml                             624
+analysis\resources\mtrl_navigation_rail_item.xml                                  1860
+analysis\resources\mtrl_on_primary_text_btn_text_color_selector.xml                500
+analysis\resources\mtrl_on_surface_ripple_color.xml                                808
+analysis\resources\mtrl_outlined_icon_tint.xml                                     644
+analysis\resources\mtrl_outlined_stroke_color.xml                                  788
+analysis\resources\mtrl_picker_actions.xml                                         984
+analysis\resources\mtrl_picker_dialog.xml                                         1172
+analysis\resources\mtrl_picker_fullscreen.xml                                      880
+analysis\resources\mtrl_picker_header_dialog.xml                                  1532
+analysis\resources\mtrl_picker_header_fullscreen.xml                              2800
+analysis\resources\mtrl_picker_header_selection_text.xml                           712
+analysis\resources\mtrl_picker_header_title_text.xml                               624
+analysis\resources\mtrl_picker_header_toggle.xml                                   528
+analysis\resources\mtrl_picker_text_input_date_range.xml                          1580
+analysis\resources\mtrl_picker_text_input_date.xml                                 984
+analysis\resources\mtrl_popupmenu_background_overlay.xml                          1228
+analysis\resources\mtrl_popupmenu_background.xml                                   740
+analysis\resources\mtrl_popupmenu_overlay_color.xml                                376
+analysis\resources\mtrl_search_bar.xml                                             488
+analysis\resources\mtrl_search_view.xml                                           3424
+analysis\resources\mtrl_switch_thumb_checked_pressed.xml                           524
+analysis\resources\mtrl_switch_thumb_checked_unchecked.xml                         784
+analysis\resources\mtrl_switch_thumb_checked.xml                                   744
+analysis\resources\mtrl_switch_thumb_icon_tint.xml                                 784
+analysis\resources\mtrl_switch_thumb_pressed_checked.xml                           524
+analysis\resources\mtrl_switch_thumb_pressed_unchecked.xml                         524
+analysis\resources\mtrl_switch_thumb_pressed.xml                                   744
+analysis\resources\mtrl_switch_thumb_tint.xml                                     1028
+analysis\resources\mtrl_switch_thumb_unchecked_checked.xml                         784
+analysis\resources\mtrl_switch_thumb_unchecked_pressed.xml                         524
+analysis\resources\mtrl_switch_thumb_unchecked.xml                                 744
+analysis\resources\mtrl_switch_thumb.xml                                          2004
+analysis\resources\mtrl_switch_track_decoration_tint.xml                           624
+analysis\resources\mtrl_switch_track_decoration.xml                                636
+analysis\resources\mtrl_switch_track_tint.xml                                      784
+analysis\resources\mtrl_switch_track.xml                                           588
+analysis\resources\mtrl_tabs_colored_ripple_color.xml                              948
+analysis\resources\mtrl_tabs_default_indicator.xml                                 628
+analysis\resources\mtrl_tabs_icon_color_selector_colored.xml                       500
+analysis\resources\mtrl_tabs_icon_color_selector.xml                               500
+analysis\resources\mtrl_tabs_legacy_text_color_selector.xml                        464
+analysis\resources\mtrl_tabs_ripple_color.xml                                     1672
+analysis\resources\mtrl_text_btn_text_color_selector.xml                           888
+analysis\resources\navigation_empty_icon.xml                                       516
+analysis\resources\notification_action_background.xml                             1180
+analysis\resources\notification_action_tombstone.xml                              1228
+analysis\resources\notification_action.xml                                        1052
+analysis\resources\notification_bg_low.xml                                         532
+analysis\resources\notification_bg.xml                                             532
+analysis\resources\notification_icon_background.xml                                372
+analysis\resources\notification_template_custom_big.xml                           2456
+analysis\resources\notification_template_icon_group.xml                            988
+analysis\resources\notification_template_part_chronometer.xml                      440
+analysis\resources\notification_template_part_time.xml                             440
+analysis\resources\notification_tile_bg.xml                                        304
+analysis\resources\resources.arsc                                              1013392
+analysis\resources\select_dialog_item_material.xml                                 640
+analysis\resources\select_dialog_multichoice_material.xml                          864
+analysis\resources\select_dialog_singlechoice_material.xml                         864
+analysis\resources\support_simple_spinner_dropdown_item.xml                        464
+analysis\resources\switch_thumb_material_dark.xml                                  464
+analysis\resources\switch_thumb_material_light.xml                                 464
+analysis\resources\test_level_drawable.xml                                         448
+analysis\resources\tooltip_frame_dark.xml                                          484
+analysis\resources\tooltip_frame_light.xml                                         484
+analysis\solve_static.py                                                          3790
+extracted\hookme\HookMe.apk                                                    7329635
+originals\hookme.rar                                                           5125397
+README.md                                                                          906
+records\apk_inventory_20260929.txt                                                2254
+records\arsc_parse_20260929_retry.txt                                             1774
+records\arsc_parse_20260929.txt                                                   5449
+records\dex_debug_20260929.txt                                                    2709
+records\dex_disasm_20260929.txt                                                   9737
+records\dex_static_20260929.txt                                                   5211
+records\dex_static_corrected_20260929.txt                                         3665
+records\dex_static_debugrerun_20260929.txt                                        2407
+records\dex_static_offsets_20260929.txt                                           1902
+records\dex_static_rerun_20260929.txt                                             1335
+records\dex_string_extract_20260929.txt                                           3969
+records\elf_disasm_20260929_retry.txt                                             1560
+records\elf_disasm_20260929.txt                                                   4578
+records\elf_disasm_all_20260929.txt                                               1556
+records\elf_range_disasm_20260929_round2.txt                                      1623
+records\elf_range_disasm_20260929_round3.txt                                      1605
+records\elf_range_disasm_20260929.txt                                             2559
+records\elf_static_20260929.txt                                                   5108
+records\final_evidence_review_20260929.txt                                        6988
+records\final_solver_replay_20260929.txt                                          1979
+records\initial_inspection_20260929.md                                            2593
+records\plt_map_20260929.txt                                                      3320
+records\plt_map_corrected_20260929.txt                                            3369
+records\rar_extract_20260929.txt                                                  2569
+records\resources_scan_20260929.txt                                               3034
+records\solve_static_20260929.txt                                                 5099
+records\solve_static_seedfix_20260929.txt                                         1609
+records\tool_inventory_20260929.txt                                               1695
+wp.md                                                                            12960
+
+**********************
+PowerShell transcript end
+End time: 20260929110825
+**********************

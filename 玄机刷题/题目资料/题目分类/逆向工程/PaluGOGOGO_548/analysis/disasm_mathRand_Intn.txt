@@ -1,0 +1,60 @@
+
+Z:\palu548_static_copy.exe:     file format pei-x86-64
+
+
+Disassembly of section .text:
+
+0000000000494460 <.text+0x93460>:
+  494460:	49 3b 66 10          	cmp    rsp,QWORD PTR [r14+0x10]
+  494464:	76 47                	jbe    0x4944ad
+  494466:	55                   	push   rbp
+  494467:	48 89 e5             	mov    rbp,rsp
+  49446a:	48 83 ec 10          	sub    rsp,0x10
+  49446e:	48 85 db             	test   rbx,rbx
+  494471:	7e 26                	jle    0x494499
+  494473:	48 81 fb ff ff ff 7f 	cmp    rbx,0x7fffffff
+  49447a:	7f 12                	jg     0x49448e
+  49447c:	0f 1f 40 00          	nop    DWORD PTR [rax+0x0]
+  494480:	e8 fb fe ff ff       	call   0x494380
+  494485:	48 63 c0             	movsxd rax,eax
+  494488:	48 83 c4 10          	add    rsp,0x10
+  49448c:	5d                   	pop    rbp
+  49448d:	c3                   	ret
+  49448e:	e8 ed fd ff ff       	call   0x494280
+  494493:	48 83 c4 10          	add    rsp,0x10
+  494497:	5d                   	pop    rbp
+  494498:	c3                   	ret
+  494499:	48 8d 05 00 a7 00 00 	lea    rax,[rip+0xa700]        # 0x49eba0
+  4944a0:	48 8d 1d f9 65 04 00 	lea    rbx,[rip+0x465f9]        # 0x4daaa0
+  4944a7:	e8 94 1e fa ff       	call   0x436340
+  4944ac:	90                   	nop
+  4944ad:	48 89 44 24 08       	mov    QWORD PTR [rsp+0x8],rax
+  4944b2:	48 89 5c 24 10       	mov    QWORD PTR [rsp+0x10],rbx
+  4944b7:	e8 44 f9 fc ff       	call   0x463e00
+  4944bc:	48 8b 44 24 08       	mov    rax,QWORD PTR [rsp+0x8]
+  4944c1:	48 8b 5c 24 10       	mov    rbx,QWORD PTR [rsp+0x10]
+  4944c6:	eb 98                	jmp    0x494460
+  4944c8:	cc                   	int3
+  4944c9:	cc                   	int3
+  4944ca:	cc                   	int3
+  4944cb:	cc                   	int3
+  4944cc:	cc                   	int3
+  4944cd:	cc                   	int3
+  4944ce:	cc                   	int3
+  4944cf:	cc                   	int3
+  4944d0:	cc                   	int3
+  4944d1:	cc                   	int3
+  4944d2:	cc                   	int3
+  4944d3:	cc                   	int3
+  4944d4:	cc                   	int3
+  4944d5:	cc                   	int3
+  4944d6:	cc                   	int3
+  4944d7:	cc                   	int3
+  4944d8:	cc                   	int3
+  4944d9:	cc                   	int3
+  4944da:	cc                   	int3
+  4944db:	cc                   	int3
+  4944dc:	cc                   	int3
+  4944dd:	cc                   	int3
+  4944de:	cc                   	int3
+  4944df:	cc                   	int3

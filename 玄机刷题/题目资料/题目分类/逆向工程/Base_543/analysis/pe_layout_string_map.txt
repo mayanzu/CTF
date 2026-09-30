@@ -1,0 +1,72 @@
+file_size=70144
+machine=0x8664 sections=10 timestamp=0x6814c116
+PE32+ imagebase=0x140000000 entry_rva=0x11299 entry_va=0x140011299
+sections:
+.textbss RVA=0x001000 VA=0x000140001000 vsize=0x10000 raw=0x0+0x0
+.text    RVA=0x011000 VA=0x000140011000 vsize=0x943f raw=0x400+0x9600
+.rdata   RVA=0x01b000 VA=0x00014001b000 vsize=0x3486 raw=0x9a00+0x3600
+.data    RVA=0x01f000 VA=0x00014001f000 vsize=0x960 raw=0xd000+0x200
+.pdata   RVA=0x020000 VA=0x000140020000 vsize=0x21f0 raw=0xd200+0x2200
+.idata   RVA=0x023000 VA=0x000140023000 vsize=0xf60 raw=0xf400+0x1000
+.msvcjmc RVA=0x024000 VA=0x000140024000 vsize=0x1c4 raw=0x10400+0x200
+.00cfg   RVA=0x025000 VA=0x000140025000 vsize=0x175 raw=0x10600+0x200
+.rsrc    RVA=0x026000 VA=0x000140026000 vsize=0x43c raw=0x10800+0x600
+.reloc   RVA=0x027000 VA=0x000140027000 vsize=0x2a8 raw=0x10e00+0x400
+
+ASCII strings in .rdata containing task-relevant terms:
+file=0x00a7b0 VA=0x00014001bdb0 len=6 input1
+file=0x00a7d0 VA=0x00014001bdd0 len=6 input3
+file=0x00aac8 VA=0x00014001c0c8 len=6 error!
+file=0x00aad8 VA=0x00014001c0d8 len=11 Successful!
+file=0x00aae8 VA=0x00014001c0e8 len=17 You are failed!!!
+file=0x00ab00 VA=0x00014001c100 len=34 You have passed the second level!!
+file=0x00ab30 VA=0x00014001c130 len=12 Hello CTFer!
+file=0x00ab48 VA=0x00014001c148 len=16 give me your key
+file=0x00ab60 VA=0x00014001c160 len=3 %8s
+file=0x00ab68 VA=0x00014001c168 len=13 you failed!!!
+file=0x00ab80 VA=0x00014001c180 len=34 You have passed the first level!!!
+file=0x00abb0 VA=0x00014001c1b0 len=25 Where is my Base_Table???
+file=0x00abd0 VA=0x00014001c1d0 len=27 Plz input your found Table:
+file=0x00abf4 VA=0x00014001c1f4 len=4 %64s
+file=0x00ac00 VA=0x00014001c200 len=21 Plz input Your flag: 
+file=0x00ac1c VA=0x00014001c21c len=4 %29s
+file=0x00b018 VA=0x00014001c618 len=27 Unknown Runtime Check Error
+file=0x00b538 VA=0x00014001cb38 len=13 RegOpenKeyExW
+file=0x00b560 VA=0x00014001cb60 len=11 RegCloseKey
+
+Direct disassembly references to those string addresses:
+0x14001bdb0 'input1': 0 refs
+0x14001bdd0 'input3': 0 refs
+0x14001c0c8 'error!': 1 refs
+  14001245d:	48 8d 0d 64 9c 00 00 	lea    rcx,[rip+0x9c64]        # 0x14001c0c8
+0x14001c0d8 'Successful!': 1 refs
+  140012476:	48 8d 0d 5b 9c 00 00 	lea    rcx,[rip+0x9c5b]        # 0x14001c0d8
+0x14001c0e8 'You are failed!!!': 1 refs
+  14001254d:	48 8d 0d 94 9b 00 00 	lea    rcx,[rip+0x9b94]        # 0x14001c0e8
+0x14001c100 'You have passed the second level!!': 1 refs
+  140012566:	48 8d 0d 93 9b 00 00 	lea    rcx,[rip+0x9b93]        # 0x14001c100
+0x14001c130 'Hello CTFer!': 1 refs
+  140016fcd:	48 8d 0d 5c 51 00 00 	lea    rcx,[rip+0x515c]        # 0x14001c130
+0x14001c148 'give me your key': 1 refs
+  14001702f:	48 8d 0d 12 51 00 00 	lea    rcx,[rip+0x5112]        # 0x14001c148
+0x14001c160 '%8s': 1 refs
+  140017042:	48 8d 0d 17 51 00 00 	lea    rcx,[rip+0x5117]        # 0x14001c160
+0x14001c168 'you failed!!!': 1 refs
+  140017112:	48 8d 0d 4f 50 00 00 	lea    rcx,[rip+0x504f]        # 0x14001c168
+0x14001c180 'You have passed the first level!!!': 1 refs
+  14001712b:	48 8d 0d 4e 50 00 00 	lea    rcx,[rip+0x504e]        # 0x14001c180
+0x14001c1b0 'Where is my Base_Table???': 1 refs
+  140017141:	48 8d 0d 68 50 00 00 	lea    rcx,[rip+0x5068]        # 0x14001c1b0
+0x14001c1d0 'Plz input your found Table:': 1 refs
+  14001714d:	48 8d 0d 7c 50 00 00 	lea    rcx,[rip+0x507c]        # 0x14001c1d0
+0x14001c1f4 '%64s': 1 refs
+  14001715d:	48 8d 0d 90 50 00 00 	lea    rcx,[rip+0x5090]        # 0x14001c1f4
+0x14001c200 'Plz input Your flag: ': 1 refs
+  1400173ca:	48 8d 0d 2f 4e 00 00 	lea    rcx,[rip+0x4e2f]        # 0x14001c200
+0x14001c21c '%29s': 1 refs
+  1400173dd:	48 8d 0d 38 4e 00 00 	lea    rcx,[rip+0x4e38]        # 0x14001c21c
+0x14001c618 'Unknown Runtime Check Error': 0 refs
+0x14001cb38 'RegOpenKeyExW': 1 refs
+  140015fd5:	48 8d 15 5c 6b 00 00 	lea    rdx,[rip+0x6b5c]        # 0x14001cb38
+0x14001cb60 'RegCloseKey': 1 refs
+  140016005:	48 8d 15 54 6b 00 00 	lea    rdx,[rip+0x6b54]        # 0x14001cb60

@@ -1,0 +1,1496 @@
+**********************
+PowerShell transcript start
+Start time: 20260929033823
+Username: DESKTOP-412KTAR\mzj
+RunAs User: DESKTOP-412KTAR\mzj
+Configuration Name: 
+Machine: DESKTOP-412KTAR (Microsoft Windows NT 10.0.26200.0)
+Host Application: C:\Users\mzj\.cache\codex-runtimes\codex-primary-runtime\dependencies\native\powershell\pwsh.dll -Command try { [Console]::OutputEncoding=[System.Text.Encoding]::UTF8 } catch {}
+$ErrorActionPreference='Stop'; $log='C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\checker_562\analysis\checker_562_reaudit_transcript_20260929.txt'; Start-Transcript -LiteralPath $log -Append; Write-Output "COMMAND> Get-Location; Get-ChildItem -Force 'C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\checker_562' -Recurse | Select-Object FullName,Length,LastWriteTime"; Get-Location; Get-ChildItem -Force 'C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\checker_562' -Recurse | Select-Object FullName,Length,LastWriteTime | Format-Table -AutoSize; Stop-Transcript
+Process ID: 29428
+PSVersion: 7.6.5
+PSEdition: Core
+GitCommitId: 7.6.5
+OS: Microsoft Windows 10.0.26200
+Platform: Win32NT
+PSCompatibleVersions: 1.0, 2.0, 3.0, 4.0, 5.0, 5.1, 6.0, 7.0
+PSRemotingProtocolVersion: 2.4
+SerializationVersion: 1.1.0.1
+WSManStackVersion: 3.0
+**********************
+Transcript started, output file is C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\checker_562\analysis\checker_562_reaudit_transcript_20260929.txt
+COMMAND> Get-Location; Get-ChildItem -Force 'C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\checker_562' -Recurse | Select-Object FullName,Length,LastWriteTime
+
+Path
+----
+C:\Users\mzj\Desktop\CTF
+
+
+FullName                                                                                                    Length Last
+                                                                                                                   Writ
+                                                                                                                   eTim
+                                                                                                                   e
+--------                                                                                                    ------ ----
+C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\checker_562\附件_20260929                                               202…
+C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\checker_562\analysis                                                    202…
+C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\checker_562\checker_platform_20260929.zip                        17498  202…
+C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\checker_562\checker.exe                                          42857  202…
+C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\checker_562\solve_checker.py                                     557    202…
+C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\checker_562\analysis\checker_562_reaudit_transcript_20260929.txt 1621   202…
+C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\checker_562\analysis\checker_562_WP.md                           6734   202…
+C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\checker_562\analysis\checker_audit_terminal_20260929.txt         16508  202…
+C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\checker_562\analysis\checker_disassembly.txt                     196844 202…
+C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\checker_562\analysis\checker_strings_ascii.txt                   14914  202…
+C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\checker_562\analysis\solve_checker_from_pe.py                    4131   202…
+C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\checker_562\附件_20260929\checker.exe                            42857  202…
+
+**********************
+PowerShell transcript end
+End time: 20260929033823
+**********************
+**********************
+PowerShell transcript start
+Start time: 20260929033841
+Username: DESKTOP-412KTAR\mzj
+RunAs User: DESKTOP-412KTAR\mzj
+Configuration Name: 
+Machine: DESKTOP-412KTAR (Microsoft Windows NT 10.0.26200.0)
+Host Application: C:\Users\mzj\.cache\codex-runtimes\codex-primary-runtime\dependencies\native\powershell\pwsh.dll -Command try { [Console]::OutputEncoding=[System.Text.Encoding]::UTF8 } catch {}
+$ErrorActionPreference='Stop'; $log='C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\checker_562\analysis\checker_562_reaudit_transcript_20260929.txt'; Start-Transcript -LiteralPath $log -Append; Write-Output "COMMAND> Get-FileHash ...; Get-Content ..."; Get-FileHash -Algorithm SHA256 'C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\checker_562\checker_platform_20260929.zip','C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\checker_562\checker.exe','C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\checker_562\附件_20260929\checker.exe' | Format-List; Write-Output '--- SOLVER SCRIPT ---'; Get-Content -LiteralPath 'C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\checker_562\analysis\solve_checker_from_pe.py'; Write-Output '--- CURRENT WP ---'; Get-Content -LiteralPath 'C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\checker_562\analysis\checker_562_WP.md'; Write-Output '--- AUDIT TRANSCRIPT TAIL ---'; Get-Content -LiteralPath 'C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\checker_562\analysis\checker_audit_terminal_20260929.txt' -Tail 100; Stop-Transcript
+Process ID: 18220
+PSVersion: 7.6.5
+PSEdition: Core
+GitCommitId: 7.6.5
+OS: Microsoft Windows 10.0.26200
+Platform: Win32NT
+PSCompatibleVersions: 1.0, 2.0, 3.0, 4.0, 5.0, 5.1, 6.0, 7.0
+PSRemotingProtocolVersion: 2.4
+SerializationVersion: 1.1.0.1
+WSManStackVersion: 3.0
+**********************
+Transcript started, output file is C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\checker_562\analysis\checker_562_reaudit_transcript_20260929.txt
+COMMAND> Get-FileHash ...; Get-Content ...
+
+Algorithm : SHA256
+Hash      : 598E457DCDFFCB89F4A1B5CF56133E1D8A194E737B8C25C6C0EA722854426D36
+Path      : C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\checker_562\checker_platform_20260929.zip
+
+Algorithm : SHA256
+Hash      : 449D9F4569A0ED70FCB9BC8B96737719B62CFD8AE7C1E99D2864A3999887FDF5
+Path      : C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\checker_562\checker.exe
+
+Algorithm : SHA256
+Hash      : 449D9F4569A0ED70FCB9BC8B96737719B62CFD8AE7C1E99D2864A3999887FDF5
+Path      : C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\checker_562\附件_20260929\checker.exe
+
+--- SOLVER SCRIPT ---
+#!/usr/bin/env python3
+"""Recover the checker challenge flag directly from the PE attachment.
+
+Only Python's standard library is used. The XOR key 0x23 is taken from the
+immediate constant assigned in _encrypt_flag (checker_disassembly.txt).
+"""
+
+from __future__ import annotations
+
+import hashlib
+import re
+import struct
+import sys
+from pathlib import Path
+
+
+DEFAULT_EXE = Path(__file__).resolve().parents[1] / "附件_20260929" / "checker.exe"
+TARGET_VA = 0x404020
+XOR_KEY = 0x23
+
+
+def u16(data: bytes, off: int) -> int:
+    return struct.unpack_from("<H", data, off)[0]
+
+
+def u32(data: bytes, off: int) -> int:
+    return struct.unpack_from("<I", data, off)[0]
+
+
+def parse_pe_sections(data: bytes):
+    if data[:2] != b"MZ":
+        raise ValueError("missing DOS MZ signature")
+    pe_off = u32(data, 0x3C)
+    if data[pe_off : pe_off + 4] != b"PE\0\0":
+        raise ValueError("missing PE signature")
+    coff = pe_off + 4
+    machine = u16(data, coff)
+    section_count = u16(data, coff + 2)
+    optional_size = u16(data, coff + 16)
+    optional = coff + 20
+    magic = u16(data, optional)
+    if magic != 0x10B:
+        raise ValueError(f"expected PE32 optional header, got 0x{magic:04x}")
+    image_base = u32(data, optional + 28)
+    section_table = optional + optional_size
+    sections = []
+    for index in range(section_count):
+        off = section_table + index * 40
+        name = data[off : off + 8].split(b"\0", 1)[0].decode("ascii", "replace")
+        virtual_size, virtual_address, raw_size, raw_ptr = struct.unpack_from(
+            "<IIII", data, off + 8
+        )
+        sections.append(
+            (name, virtual_size, virtual_address, raw_size, raw_ptr)
+        )
+    return machine, image_base, sections
+
+
+def va_to_file_offset(va: int, image_base: int, sections) -> tuple[int, str]:
+    rva = va - image_base
+    for name, virtual_size, virtual_address, raw_size, raw_ptr in sections:
+        span = max(virtual_size, raw_size)
+        if virtual_address <= rva < virtual_address + span:
+            delta = rva - virtual_address
+            if delta >= raw_size:
+                raise ValueError(f"VA 0x{va:x} has no raw file byte in {name}")
+            return raw_ptr + delta, name
+    raise ValueError(f"VA 0x{va:x} is not mapped by a PE section")
+
+
+def main() -> int:
+    exe = Path(sys.argv[1]).resolve() if len(sys.argv) > 1 else DEFAULT_EXE
+    data = exe.read_bytes()
+    digest = hashlib.sha256(data).hexdigest().upper()
+    machine, image_base, sections = parse_pe_sections(data)
+    file_off, section_name = va_to_file_offset(TARGET_VA, image_base, sections)
+    end = data.find(b"\0", file_off)
+    if end < 0:
+        raise ValueError("encrypted target has no terminating NUL")
+    cipher = data[file_off:end]
+    plain = bytes(value ^ XOR_KEY for value in cipher)
+    round_trip = bytes(value ^ XOR_KEY for value in plain)
+
+    print(f"input file: {exe}")
+    print(f"file size: {len(data)} bytes")
+    print(f"SHA-256: {digest}")
+    print(f"PE machine: 0x{machine:04x} (i386 expected 0x014c)")
+    print(f"image base: 0x{image_base:08x}")
+    print(f"target VA: 0x{TARGET_VA:08x}")
+    print(f"mapped section: {section_name}")
+    print(f"target file offset: 0x{file_off:x}")
+    print(f"cipher length: {len(cipher)} bytes")
+    print(f"cipher hex: {cipher.hex(' ').upper()}")
+    print(f"XOR key: 0x{XOR_KEY:02x}")
+    print(f"plaintext hex: {plain.hex(' ').upper()}")
+    print(f"plaintext ASCII: {plain.decode('ascii')}")
+    print(f"re-XOR matches embedded bytes: {round_trip == cipher}")
+    print(f"flag format valid: {bool(re.fullmatch(rb'flag\{[A-Za-z0-9_]+\}', plain))}")
+    print(f"candidate length: {len(plain)} characters")
+
+    if machine != 0x014C:
+        raise ValueError("attachment is not PE i386")
+    if not re.fullmatch(rb"flag\{[A-Za-z0-9_]+\}", plain):
+        raise ValueError("decoded bytes do not match the observed flag format")
+    if round_trip != cipher:
+        raise ValueError("XOR round-trip did not reproduce target bytes")
+    print(f"candidate flag: {plain.decode('ascii')}")
+    return 0
+
+
+if __name__ == "__main__":
+    raise SystemExit(main())
+--- CURRENT WP ---
+# Xuanji #562 `checker` 逆向 WP（平台验证待核）
+
+## 结论与当前状态
+
+本地附件中的校验逻辑可以直接逆出候选 flag：
+
+```text
+flag{enp17I4p8TZmAriao2lq5tAArZ2P1wxBUwXU2}
+```
+
+候选共有 43 个 ASCII 字符。它是从 ZIP 内原始 `checker.exe` 的比较目标字节逐字节异或 `0x23` 得到的；用相同附件运行候选时，程序明确输出 `Correct! You have the flag.`。本批此前在玄机页面提交该候选时被拒绝，因此此题的平台得分状态仍待核实，不能仅凭本地程序输出声称已在平台完成。优先核对页面 ID、题目标题和页面当前关联附件是否确为同一份 `checker.exe`；不要通过改大小写、删除 `flag{}` 或尝试其他格式来掩盖这个矛盾。
+
+## 附件与复核范围
+
+- 挑战页面：<https://xj.edisec.net/challenges/562>
+- 原始附件 ZIP：`checker_platform_20260929.zip`
+- ZIP 内唯一文件：`checker.exe`，42,857 字节
+- ZIP SHA-256：`598E457DCDFFCB89F4A1B5CF56133E1D8A194E737B8C25C6C0EA722854426D36`
+- ZIP 成员 SHA-256：`449D9F4569A0ED70FCB9BC8B96737719B62CFD8AE7C1E99D2864A3999887FDF5`
+- 解压附件和用于本机运行的 ASCII 临时副本 SHA-256 均为 `449D9F4569A0ED70FCB9BC8B96737719B62CFD8AE7C1E99D2864A3999887FDF5`。
+- 文件格式：PE32 i386，ImageBase `0x00400000`。
+
+原 ZIP 成员哈希与解压文件哈希逐字节一致，故下面的分析针对题目附件本身，而不是旧目录里名称相同但来源不明的文件。
+
+## 解题步骤
+
+### 1. 确认程序入口和 flag 比较流程
+
+`checker_strings_ascii.txt` 中可见提示 `Enter the flag:`、成功提示 `Correct! You have the flag.`、失败提示 `Incorrect flag.`。反汇编中的 `_main`（`0x40152a`）先读取输入，再调用 `_check_flag`；根据返回值打印成功或失败信息。
+
+`_check_flag`（`0x4014f0`）调用 `_encrypt_flag`，并将结果与地址 `0x404020` 指向的全局字节串传给 `strcmp`。因此该地址的 NUL 结尾字符串就是程序要求的密文。
+
+反汇编的关键调用关系：
+
+```text
+_main -> _check_flag -> _encrypt_flag -> strcmp(encrypted_input, 0x404020)
+```
+
+`_fake_check` 只打印“Performing initial checks...”和“Checks completed.”，中间调用 `Sleep(1000)`；这是延时干扰，不参与 flag 判定。
+
+### 2. 从汇编确认加密方式与 key
+
+`_encrypt_flag` 在 `0x401496` 执行：
+
+```asm
+c7 45 f0 23 00 00 00    mov DWORD PTR [ebp-0x10],0x23
+```
+
+也就是固定 key 为 `0x23`。主循环读取输入第 `i` 个字节，执行 `byte ^ 0x23` 后写到输出第 `i` 个字节；循环长度由 `strlen(input)` 控制。循环结束后在输出尾部写 NUL。它是单字节、固定 key 的 XOR，没有索引递增 key，也没有额外哈希或字符变换。
+
+对应伪代码：
+
+```c
+for (i = 0; i < strlen(input); i++)
+    encrypted[i] = input[i] ^ 0x23;
+encrypted[strlen(input)] = '\0';
+```
+
+`_check_flag` 通过 `strcmp(encrypted, (char *)0x404020) == 0` 判定，比较区分大小写。
+
+### 3. 从 PE section 定位密文字节
+
+`objdump -h` 显示 `.data` 的虚拟地址为 `0x404000`，文件偏移为 `0x3200`。目标地址 `0x404020` 相对 `.data` 起始地址偏移 `0x20`，所以对应文件偏移是：
+
+```text
+0x3200 + (0x404020 - 0x404000) = 0x3220
+```
+
+`.data` 从 `0x404020` 开始的字节为：
+
+```text
+45 4F 42 44 58 46 4D 53 12 14 6A 17 53 1B 77 79
+4E 62 51 4A 42 4C 11 4F 52 16 57 62 62 51 79 11
+73 12 54 5B 61 76 54 7B 76 11 5E 00
+```
+
+末尾 `00` 是字符串终止符，不参与解密。有效密文长度为 43 字节。
+
+### 4. XOR 解密并核对 flag 格式
+
+对密文每个有效字节执行 `cipher[i] ^ 0x23`，得到：
+
+```text
+plaintext hex:
+66 6C 61 67 7B 65 6E 70 31 37 49 34 70 38 54 5A 6D 41 72 69 61 6F
+32 6C 71 35 74 41 41 72 5A 32 50 31 77 78 42 55 77 58 55 32 7D
+
+ASCII:
+flag{enp17I4p8TZmAriao2lq5tAArZ2P1wxBUwXU2}
+```
+
+解密结果 43 字节，包含 `flag{` 前缀和 `}` 后缀。再对解密结果逐字节 XOR `0x23`，完整得到原 43 字节密文，往返校验为真。
+
+### 5. 检查长度与输入处理
+
+`_main` 调用 `fgets(input, 0x32, stdin)`。`0x32` 是十进制 50，`fgets` 最多读取 49 个输入字符再补 NUL。候选长度为 43，连同输入换行共 44 个字符，能完整读入。
+
+随后 `_main` 用 `strcspn(input, "\n")` 把换行改为 NUL。因此通过终端输入或 PowerShell 管道提交完整 43 字符候选均不会被截断。`_check_flag` 的栈输出区也足以容纳 43 字节结果和终止符。长度及换行处理不能解释平台拒绝。
+
+### 6. 用原始附件本机验证
+
+从 ZIP 成员复核的脚本 `solve_checker_from_pe.py` 只依赖 Python 标准库：解析 PE section 表，将 VA `0x404020` 映射到文件偏移 `0x3220`，读出 NUL 终止字节串并逐字节 XOR `0x23`。完整命令和输出保存在 `checker_audit_terminal_20260929.txt`。
+
+将候选通过管道交给与 ZIP 成员 SHA-256 完全相同的 Windows PE 程序，得到：
+
+```text
+Enter the flag:
+Performing initial checks...
+Checks completed.
+Correct! You have the flag.
+```
+
+## 可复现命令
+
+在 PowerShell 中从题目目录执行：
+
+```powershell
+python .\analysis\solve_checker_from_pe.py .\附件_20260929\checker.exe
+$flag = 'flag{enp17I4p8TZmAriao2lq5tAArZ2P1wxBUwXU2}'
+$flag | & 'C:\Users\mzj\Desktop\CTF\checker_static_20260929.exe'
+```
+
+如需从原始 ZIP 本身复核成员哈希，完整 PowerShell 操作已保存在终端记录；ZIP 列出的唯一成员为 `checker.exe`，大小 42,857 字节，成员 SHA-256 与附件相同。
+
+## 为什么还不能记为“平台已完成”
+
+本地证据闭环支持该候选是这份二进制的正确输入：附件哈希可复核、密文位置由 PE 节表和比较调用确认、XOR 结果符合格式、往返还原匹配、原程序打印 `Correct!`。但此前 Xuanji #562 页面拒绝过这一候选。本复核没有再次向平台提交，也没有把本地成功误写成平台成功。
+
+后续应先复核浏览器页面的挑战 ID/标题和平台当前下载附件是否与 `checker_platform_20260929.zip` 对应；若页面确是 #562 且附件 SHA 一致，则保留拒绝截图/提示并将此题标记为“本地解出，平台验证异常待核”。
+
+## 附件与分析记录清单
+
+- 原始附件：`../checker_platform_20260929.zip`
+- 解压附件：`../附件_20260929/checker.exe`
+- 旧脚本（硬编码 XOR 字节）：`../solve_checker.py`
+- 新脚本（直接解析 PE，便于从附件复现）：`solve_checker_from_pe.py`
+- 完整反汇编：`checker_disassembly.txt`
+- ASCII 字符串：`checker_strings_ascii.txt`
+- 本轮命令、哈希、解密输出和本地运行结果：`checker_audit_terminal_20260929.txt`
+--- AUDIT TRANSCRIPT TAIL ---
+  401515:	8d 45 c6             	lea    eax,[ebp-0x3a]
+  401518:	89 04 24             	mov    DWORD PTR [esp],eax
+  40151b:	e8 50 26 00 00       	call   403b70 <_strcmp>
+  401520:	85 c0                	test   eax,eax
+  401522:	0f 94 c0             	sete   al
+  401525:	0f b6 c0             	movzx  eax,al
+  401528:	c9                   	leave
+  401529:	c3                   	ret
+
+0040152a <_main>:
+  40152a:	55                   	push   ebp
+  40152b:	89 e5                	mov    ebp,esp
+  40152d:	83 e4 f0             	and    esp,0xfffffff0
+  401530:	83 ec 50             	sub    esp,0x50
+  401533:	e8 a8 05 00 00       	call   401ae0 <___main>
+  401538:	c7 04 24 93 50 40 00 	mov    DWORD PTR [esp],0x405093
+  40153f:	e8 54 26 00 00       	call   403b98 <_printf>
+  401544:	a1 bc 81 40 00       	mov    eax,ds:0x4081bc
+  401549:	89 44 24 08          	mov    DWORD PTR [esp+0x8],eax
+  40154d:	c7 44 24 04 32 00 00 	mov    DWORD PTR [esp+0x4],0x32
+  401554:	00
+  401555:	8d 44 24 1e          	lea    eax,[esp+0x1e]
+  401559:	89 04 24             	mov    DWORD PTR [esp],eax
+  40155c:	e8 67 26 00 00       	call   403bc8 <_fgets>
+  401561:	c7 44 24 04 a4 50 40 	mov    DWORD PTR [esp+0x4],0x4050a4
+  401568:	00
+  401569:	8d 44 24 1e          	lea    eax,[esp+0x1e]
+  40156d:	89 04 24             	mov    DWORD PTR [esp],eax
+  401570:	e8 eb 25 00 00       	call   403b60 <_strcspn>
+  401575:	c6 44 04 1e 00       	mov    BYTE PTR [esp+eax*1+0x1e],0x0
+  40157a:	8d 44 24 1e          	lea    eax,[esp+0x1e]
+  40157e:	89 04 24             	mov    DWORD PTR [esp],eax
+  401581:	e8 6a ff ff ff       	call   4014f0 <_check_flag>
+  401586:	85 c0                	test   eax,eax
+  401588:	74 0e                	je     401598 <_main+0x6e>
+  40158a:	c7 04 24 a6 50 40 00 	mov    DWORD PTR [esp],0x4050a6
+  401591:	e8 fa 25 00 00       	call   403b90 <_puts>
+  401596:	eb 0c                	jmp    4015a4 <_main+0x7a>
+  401598:	c7 04 24 c2 50 40 00 	mov    DWORD PTR [esp],0x4050c2
+  40159f:	e8 ec 25 00 00       	call   403b90 <_puts>
+  4015a4:	b8 00 00 00 00       	mov    eax,0x0
+---
+0040152a <_main>:
+  40152a:	55                   	push   ebp
+  40152b:	89 e5                	mov    ebp,esp
+  40152d:	83 e4 f0             	and    esp,0xfffffff0
+  401530:	83 ec 50             	sub    esp,0x50
+  401533:	e8 a8 05 00 00       	call   401ae0 <___main>
+  401538:	c7 04 24 93 50 40 00 	mov    DWORD PTR [esp],0x405093
+  40153f:	e8 54 26 00 00       	call   403b98 <_printf>
+  401544:	a1 bc 81 40 00       	mov    eax,ds:0x4081bc
+  401549:	89 44 24 08          	mov    DWORD PTR [esp+0x8],eax
+  40154d:	c7 44 24 04 32 00 00 	mov    DWORD PTR [esp+0x4],0x32
+  401554:	00
+  401555:	8d 44 24 1e          	lea    eax,[esp+0x1e]
+  401559:	89 04 24             	mov    DWORD PTR [esp],eax
+  40155c:	e8 67 26 00 00       	call   403bc8 <_fgets>
+  401561:	c7 44 24 04 a4 50 40 	mov    DWORD PTR [esp+0x4],0x4050a4
+  401568:	00
+  401569:	8d 44 24 1e          	lea    eax,[esp+0x1e]
+  40156d:	89 04 24             	mov    DWORD PTR [esp],eax
+  401570:	e8 eb 25 00 00       	call   403b60 <_strcspn>
+  401575:	c6 44 04 1e 00       	mov    BYTE PTR [esp+eax*1+0x1e],0x0
+  40157a:	8d 44 24 1e          	lea    eax,[esp+0x1e]
+  40157e:	89 04 24             	mov    DWORD PTR [esp],eax
+  401581:	e8 6a ff ff ff       	call   4014f0 <_check_flag>
+  401586:	85 c0                	test   eax,eax
+  401588:	74 0e                	je     401598 <_main+0x6e>
+  40158a:	c7 04 24 a6 50 40 00 	mov    DWORD PTR [esp],0x4050a6
+  401591:	e8 fa 25 00 00       	call   403b90 <_puts>
+  401596:	eb 0c                	jmp    4015a4 <_main+0x7a>
+  401598:	c7 04 24 c2 50 40 00 	mov    DWORD PTR [esp],0x4050c2
+  40159f:	e8 ec 25 00 00       	call   403b90 <_puts>
+  4015a4:	b8 00 00 00 00       	mov    eax,0x0
+  4015a9:	c9                   	leave
+  4015aa:	c3                   	ret
+  4015ab:	90                   	nop
+  4015ac:	66 90                	xchg   ax,ax
+  4015ae:	66 90                	xchg   ax,ax
+
+004015b0 <__setargv>:
+  4015b0:	55                   	push   ebp
+  4015b1:	89 e5                	mov    ebp,esp
+  4015b3:	57                   	push   edi
+  4015b4:	56                   	push   esi
+  4015b5:	53                   	push   ebx
+  4015b6:	83 ec 4c             	sub    esp,0x4c
+  4015b9:	f6 05 60 40 40 00 02 	test   BYTE PTR ds:0x404060,0x2
+  4015c0:	0f 84 ea 02 00 00    	je     4018b0 <__setargv+0x300>
+  4015c6:	e8 ad 26 00 00       	call   403c78 <_GetCommandLineA@0>
+  4015cb:	89 65 c4             	mov    DWORD PTR [ebp-0x3c],esp
+  4015ce:	89 04 24             	mov    DWORD PTR [esp],eax
+  4015d1:	89 c6                	mov    esi,eax
+  4015d3:	e8 80 25 00 00       	call   403b58 <_strlen>
+  4015d8:	8d 44 00 11          	lea    eax,[eax+eax*1+0x11]
+---
+**********************
+PowerShell transcript end
+End time: 20260929031710
+**********************
+**********************
+PowerShell transcript end
+End time: 20260929033841
+**********************
+**********************
+PowerShell transcript start
+Start time: 20260929033905
+Username: DESKTOP-412KTAR\mzj
+RunAs User: DESKTOP-412KTAR\mzj
+Configuration Name: 
+Machine: DESKTOP-412KTAR (Microsoft Windows NT 10.0.26200.0)
+Host Application: C:\Users\mzj\.cache\codex-runtimes\codex-primary-runtime\dependencies\native\powershell\pwsh.dll -Command try { [Console]::OutputEncoding=[System.Text.Encoding]::UTF8 } catch {}
+$ErrorActionPreference='Stop'; $log='C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\checker_562\analysis\checker_562_reaudit_transcript_20260929.txt'; Start-Transcript -LiteralPath $log -Append; $asm='C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\checker_562\analysis\checker_disassembly.txt'; Write-Output "COMMAND> Select-String -Path '$asm' -Pattern '<_fake_check>|<_encrypt_flag>|<_check_flag>|<_main>|404020' -Context 0,65"; Select-String -Path $asm -Pattern '<_fake_check>|<_encrypt_flag>|<_check_flag>|<_main>|404020' -Context 0,65 | ForEach-Object { $_.ToString(); $_.Context.PostContext }; Write-Output '--- PYTHON PE READER OUTPUT ---'; Write-Output 'COMMAND> python .\题目资料\checker_562\analysis\solve_checker_from_pe.py .\题目资料\checker_562\附件_20260929\checker.exe'; python '.\玄机刷题\题目资料\checker_562\analysis\solve_checker_from_pe.py' '.\玄机刷题\题目资料\checker_562\附件_20260929\checker.exe'; Stop-Transcript
+Process ID: 20072
+PSVersion: 7.6.5
+PSEdition: Core
+GitCommitId: 7.6.5
+OS: Microsoft Windows 10.0.26200
+Platform: Win32NT
+PSCompatibleVersions: 1.0, 2.0, 3.0, 4.0, 5.0, 5.1, 6.0, 7.0
+PSRemotingProtocolVersion: 2.4
+SerializationVersion: 1.1.0.1
+WSManStackVersion: 3.0
+**********************
+Transcript started, output file is C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\checker_562\analysis\checker_562_reaudit_transcript_20260929.txt
+COMMAND> Select-String -Path 'C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\checker_562\analysis\checker_disassembly.txt' -Pattern '<_fake_check>|<_encrypt_flag>|<_check_flag>|<_main>|404020' -Context 0,65
+> C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\checker_562\analysis\checker_disassembly.txt:160:  401283:	e8 a2 02 00 00       	call   40152a <_main>
+  C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\checker_562\analysis\checker_disassembly.txt:161:  401288:	89 c3                	mov    ebx,eax
+  C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\checker_562\analysis\checker_disassembly.txt:162:  40128a:	e8 71 29 00 00       	call   403c00 <__cexit>
+  C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\checker_562\analysis\checker_disassembly.txt:163:  40128f:	89 1c 24             	mov    DWORD PTR [esp],ebx
+  C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\checker_562\analysis\checker_disassembly.txt:164:  401292:	e8 09 2a 00 00       	call   403ca0 <_ExitProcess@4>
+  C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\checker_562\analysis\checker_disassembly.txt:165:  401297:	89 f6                	mov    esi,esi
+  C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\checker_562\analysis\checker_disassembly.txt:166:  401299:	8d bc 27 00 00 00 00 	lea    edi,[edi+eiz*1+0x0]
+  C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\checker_562\analysis\checker_disassembly.txt:167:
+  C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\checker_562\analysis\checker_disassembly.txt:168:004012a0 <__mingw32_init_mainargs>:
+  C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\checker_562\analysis\checker_disassembly.txt:169:  4012a0:	83 ec 3c             	sub    esp,0x3c
+  C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\checker_562\analysis\checker_disassembly.txt:170:  4012a3:	8d 44 24 2c          	lea    eax,[esp+0x2c]
+  C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\checker_562\analysis\checker_disassembly.txt:171:  4012a7:	c7 44 24 04 00 70 40 	mov    DWORD PTR [esp+0x4],0x407000
+  C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\checker_562\analysis\checker_disassembly.txt:172:  4012ae:	00 
+  C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\checker_562\analysis\checker_disassembly.txt:173:  4012af:	c7 04 24 04 70 40 00 	mov    DWORD PTR [esp],0x407004
+  C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\checker_562\analysis\checker_disassembly.txt:174:  4012b6:	c7 44 24 2c 00 00 00 	mov    DWORD PTR [esp+0x2c],0x0
+  C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\checker_562\analysis\checker_disassembly.txt:175:  4012bd:	00 
+  C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\checker_562\analysis\checker_disassembly.txt:176:  4012be:	89 44 24 10          	mov    DWORD PTR [esp+0x10],eax
+  C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\checker_562\analysis\checker_disassembly.txt:177:  4012c2:	a1 60 40 40 00       	mov    eax,ds:0x404060
+  C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\checker_562\analysis\checker_disassembly.txt:178:  4012c7:	83 e0 01             	and    eax,0x1
+  C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\checker_562\analysis\checker_disassembly.txt:179:  4012ca:	89 44 24 0c          	mov    DWORD PTR [esp+0xc],eax
+  C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\checker_562\analysis\checker_disassembly.txt:180:  4012ce:	8d 44 24 28          	lea    eax,[esp+0x28]
+  C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\checker_562\analysis\checker_disassembly.txt:181:  4012d2:	89 44 24 08          	mov    DWORD PTR [esp+0x8],eax
+  C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\checker_562\analysis\checker_disassembly.txt:182:  4012d6:	e8 3d 29 00 00       	call   403c18 <___getmainargs>
+  C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\checker_562\analysis\checker_disassembly.txt:183:  4012db:	83 c4 3c             	add    esp,0x3c
+  C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\checker_562\analysis\checker_disassembly.txt:184:  4012de:	c3                   	ret
+  C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\checker_562\analysis\checker_disassembly.txt:185:  4012df:	90                   	nop
+  C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\checker_562\analysis\checker_disassembly.txt:186:
+  C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\checker_562\analysis\checker_disassembly.txt:187:004012e0 <_mainCRTStartup>:
+  C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\checker_562\analysis\checker_disassembly.txt:188:  4012e0:	83 ec 1c             	sub    esp,0x1c
+  C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\checker_562\analysis\checker_disassembly.txt:189:  4012e3:	c7 04 24 01 00 00 00 	mov    DWORD PTR [esp],0x1
+  C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\checker_562\analysis\checker_disassembly.txt:190:  4012ea:	ff 15 a8 81 40 00    	call   DWORD PTR ds:0x4081a8
+  C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\checker_562\analysis\checker_disassembly.txt:191:  4012f0:	e8 bb fe ff ff       	call   4011b0 <.text+0x1b0>
+  C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\checker_562\analysis\checker_disassembly.txt:192:  4012f5:	8d 74 26 00          	lea    esi,[esi+eiz*1+0x0]
+  C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\checker_562\analysis\checker_disassembly.txt:193:  4012f9:	8d bc 27 00 00 00 00 	lea    edi,[edi+eiz*1+0x0]
+  C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\checker_562\analysis\checker_disassembly.txt:194:
+  C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\checker_562\analysis\checker_disassembly.txt:195:00401300 <_WinMainCRTStartup>:
+  C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\checker_562\analysis\checker_disassembly.txt:196:  401300:	83 ec 1c             	sub    esp,0x1c
+  C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\checker_562\analysis\checker_disassembly.txt:197:  401303:	c7 04 24 02 00 00 00 	mov    DWORD PTR [esp],0x2
+  C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\checker_562\analysis\checker_disassembly.txt:198:  40130a:	ff 15 a8 81 40 00    	call   DWORD PTR ds:0x4081a8
+  C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\checker_562\analysis\checker_disassembly.txt:199:  401310:	e8 9b fe ff ff       	call   4011b0 <.text+0x1b0>
+  C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\checker_562\analysis\checker_disassembly.txt:200:  401315:	8d 74 26 00          	lea    esi,[esi+eiz*1+0x0]
+  C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\checker_562\analysis\checker_disassembly.txt:201:  401319:	8d bc 27 00 00 00 00 	lea    edi,[edi+eiz*1+0x0]
+  C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\checker_562\analysis\checker_disassembly.txt:202:
+  C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\checker_562\analysis\checker_disassembly.txt:203:00401320 <_atexit>:
+  C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\checker_562\analysis\checker_disassembly.txt:204:  401320:	ff 25 d4 81 40 00    	jmp    DWORD PTR ds:0x4081d4
+  C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\checker_562\analysis\checker_disassembly.txt:205:  401326:	8d 76 00             	lea    esi,[esi+0x0]
+  C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\checker_562\analysis\checker_disassembly.txt:206:  401329:	8d bc 27 00 00 00 00 	lea    edi,[edi+eiz*1+0x0]
+  C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\checker_562\analysis\checker_disassembly.txt:207:
+  C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\checker_562\analysis\checker_disassembly.txt:208:00401330 <__onexit>:
+  C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\checker_562\analysis\checker_disassembly.txt:209:  401330:	ff 25 c4 81 40 00    	jmp    DWORD PTR ds:0x4081c4
+  C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\checker_562\analysis\checker_disassembly.txt:210:  401336:	90                   	nop
+  C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\checker_562\analysis\checker_disassembly.txt:211:  401337:	90                   	nop
+  C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\checker_562\analysis\checker_disassembly.txt:212:  401338:	90                   	nop
+  C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\checker_562\analysis\checker_disassembly.txt:213:  401339:	90                   	nop
+  C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\checker_562\analysis\checker_disassembly.txt:214:  40133a:	90                   	nop
+  C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\checker_562\analysis\checker_disassembly.txt:215:  40133b:	90                   	nop
+  C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\checker_562\analysis\checker_disassembly.txt:216:  40133c:	90                   	nop
+  C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\checker_562\analysis\checker_disassembly.txt:217:  40133d:	90                   	nop
+  C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\checker_562\analysis\checker_disassembly.txt:218:  40133e:	90                   	nop
+  C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\checker_562\analysis\checker_disassembly.txt:219:  40133f:	90                   	nop
+  C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\checker_562\analysis\checker_disassembly.txt:220:
+  C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\checker_562\analysis\checker_disassembly.txt:221:00401340 <___gcc_register_frame>:
+  C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\checker_562\analysis\checker_disassembly.txt:222:  401340:	55                   	push   ebp
+  C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\checker_562\analysis\checker_disassembly.txt:223:  401341:	89 e5                	mov    ebp,esp
+  C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\checker_562\analysis\checker_disassembly.txt:224:  401343:	56                   	push   esi
+  C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\checker_562\analysis\checker_disassembly.txt:225:  401344:	53                   	push   ebx
+  401288:	89 c3                	mov    ebx,eax
+  40128a:	e8 71 29 00 00       	call   403c00 <__cexit>
+  40128f:	89 1c 24             	mov    DWORD PTR [esp],ebx
+  401292:	e8 09 2a 00 00       	call   403ca0 <_ExitProcess@4>
+  401297:	89 f6                	mov    esi,esi
+  401299:	8d bc 27 00 00 00 00 	lea    edi,[edi+eiz*1+0x0]
+
+004012a0 <__mingw32_init_mainargs>:
+  4012a0:	83 ec 3c             	sub    esp,0x3c
+  4012a3:	8d 44 24 2c          	lea    eax,[esp+0x2c]
+  4012a7:	c7 44 24 04 00 70 40 	mov    DWORD PTR [esp+0x4],0x407000
+  4012ae:	00
+  4012af:	c7 04 24 04 70 40 00 	mov    DWORD PTR [esp],0x407004
+  4012b6:	c7 44 24 2c 00 00 00 	mov    DWORD PTR [esp+0x2c],0x0
+  4012bd:	00
+  4012be:	89 44 24 10          	mov    DWORD PTR [esp+0x10],eax
+  4012c2:	a1 60 40 40 00       	mov    eax,ds:0x404060
+  4012c7:	83 e0 01             	and    eax,0x1
+  4012ca:	89 44 24 0c          	mov    DWORD PTR [esp+0xc],eax
+  4012ce:	8d 44 24 28          	lea    eax,[esp+0x28]
+  4012d2:	89 44 24 08          	mov    DWORD PTR [esp+0x8],eax
+  4012d6:	e8 3d 29 00 00       	call   403c18 <___getmainargs>
+  4012db:	83 c4 3c             	add    esp,0x3c
+  4012de:	c3                   	ret
+  4012df:	90                   	nop
+
+004012e0 <_mainCRTStartup>:
+  4012e0:	83 ec 1c             	sub    esp,0x1c
+  4012e3:	c7 04 24 01 00 00 00 	mov    DWORD PTR [esp],0x1
+  4012ea:	ff 15 a8 81 40 00    	call   DWORD PTR ds:0x4081a8
+  4012f0:	e8 bb fe ff ff       	call   4011b0 <.text+0x1b0>
+  4012f5:	8d 74 26 00          	lea    esi,[esi+eiz*1+0x0]
+  4012f9:	8d bc 27 00 00 00 00 	lea    edi,[edi+eiz*1+0x0]
+
+00401300 <_WinMainCRTStartup>:
+  401300:	83 ec 1c             	sub    esp,0x1c
+  401303:	c7 04 24 02 00 00 00 	mov    DWORD PTR [esp],0x2
+  40130a:	ff 15 a8 81 40 00    	call   DWORD PTR ds:0x4081a8
+  401310:	e8 9b fe ff ff       	call   4011b0 <.text+0x1b0>
+  401315:	8d 74 26 00          	lea    esi,[esi+eiz*1+0x0]
+  401319:	8d bc 27 00 00 00 00 	lea    edi,[edi+eiz*1+0x0]
+
+00401320 <_atexit>:
+  401320:	ff 25 d4 81 40 00    	jmp    DWORD PTR ds:0x4081d4
+  401326:	8d 76 00             	lea    esi,[esi+0x0]
+  401329:	8d bc 27 00 00 00 00 	lea    edi,[edi+eiz*1+0x0]
+
+00401330 <__onexit>:
+  401330:	ff 25 c4 81 40 00    	jmp    DWORD PTR ds:0x4081c4
+  401336:	90                   	nop
+  401337:	90                   	nop
+  401338:	90                   	nop
+  401339:	90                   	nop
+  40133a:	90                   	nop
+  40133b:	90                   	nop
+  40133c:	90                   	nop
+  40133d:	90                   	nop
+  40133e:	90                   	nop
+  40133f:	90                   	nop
+
+00401340 <___gcc_register_frame>:
+  401340:	55                   	push   ebp
+  401341:	89 e5                	mov    ebp,esp
+  401343:	56                   	push   esi
+  401344:	53                   	push   ebx
+> C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\checker_562\analysis\checker_disassembly.txt:321:00401460 <_fake_check>:
+  C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\checker_562\analysis\checker_disassembly.txt:322:  401460:	55                   	push   ebp
+  C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\checker_562\analysis\checker_disassembly.txt:323:  401461:	89 e5                	mov    ebp,esp
+  C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\checker_562\analysis\checker_disassembly.txt:324:  401463:	83 ec 18             	sub    esp,0x18
+  C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\checker_562\analysis\checker_disassembly.txt:325:  401466:	c7 04 24 64 50 40 00 	mov    DWORD PTR [esp],0x405064
+  C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\checker_562\analysis\checker_disassembly.txt:326:  40146d:	e8 1e 27 00 00       	call   403b90 <_puts>
+  C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\checker_562\analysis\checker_disassembly.txt:327:  401472:	c7 04 24 e8 03 00 00 	mov    DWORD PTR [esp],0x3e8
+  C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\checker_562\analysis\checker_disassembly.txt:328:  401479:	e8 ba 27 00 00       	call   403c38 <_Sleep@4>
+  C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\checker_562\analysis\checker_disassembly.txt:329:  40147e:	83 ec 04             	sub    esp,0x4
+  C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\checker_562\analysis\checker_disassembly.txt:330:  401481:	c7 04 24 81 50 40 00 	mov    DWORD PTR [esp],0x405081
+  C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\checker_562\analysis\checker_disassembly.txt:331:  401488:	e8 03 27 00 00       	call   403b90 <_puts>
+  C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\checker_562\analysis\checker_disassembly.txt:332:  40148d:	90                   	nop
+  C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\checker_562\analysis\checker_disassembly.txt:333:  40148e:	c9                   	leave
+  C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\checker_562\analysis\checker_disassembly.txt:334:  40148f:	c3                   	ret
+  C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\checker_562\analysis\checker_disassembly.txt:335:
+  401460:	55                   	push   ebp
+  401461:	89 e5                	mov    ebp,esp
+  401463:	83 ec 18             	sub    esp,0x18
+  401466:	c7 04 24 64 50 40 00 	mov    DWORD PTR [esp],0x405064
+  40146d:	e8 1e 27 00 00       	call   403b90 <_puts>
+  401472:	c7 04 24 e8 03 00 00 	mov    DWORD PTR [esp],0x3e8
+  401479:	e8 ba 27 00 00       	call   403c38 <_Sleep@4>
+  40147e:	83 ec 04             	sub    esp,0x4
+  401481:	c7 04 24 81 50 40 00 	mov    DWORD PTR [esp],0x405081
+  401488:	e8 03 27 00 00       	call   403b90 <_puts>
+  40148d:	90                   	nop
+  40148e:	c9                   	leave
+  40148f:	c3                   	ret
+
+00401490 <_encrypt_flag>:
+  401490:	55                   	push   ebp
+  401491:	89 e5                	mov    ebp,esp
+  401493:	83 ec 28             	sub    esp,0x28
+  401496:	c7 45 f0 23 00 00 00 	mov    DWORD PTR [ebp-0x10],0x23
+  40149d:	c7 45 f4 00 00 00 00 	mov    DWORD PTR [ebp-0xc],0x0
+  4014a4:	eb 1e                	jmp    4014c4 <_encrypt_flag+0x34>
+  4014a6:	8b 55 f4             	mov    edx,DWORD PTR [ebp-0xc]
+  4014a9:	8b 45 0c             	mov    eax,DWORD PTR [ebp+0xc]
+  4014ac:	01 d0                	add    eax,edx
+  4014ae:	8b 4d f4             	mov    ecx,DWORD PTR [ebp-0xc]
+  4014b1:	8b 55 08             	mov    edx,DWORD PTR [ebp+0x8]
+  4014b4:	01 ca                	add    edx,ecx
+  4014b6:	0f b6 0a             	movzx  ecx,BYTE PTR [edx]
+  4014b9:	8b 55 f0             	mov    edx,DWORD PTR [ebp-0x10]
+  4014bc:	31 ca                	xor    edx,ecx
+  4014be:	88 10                	mov    BYTE PTR [eax],dl
+  4014c0:	83 45 f4 01          	add    DWORD PTR [ebp-0xc],0x1
+  4014c4:	8b 45 08             	mov    eax,DWORD PTR [ebp+0x8]
+  4014c7:	89 04 24             	mov    DWORD PTR [esp],eax
+  4014ca:	e8 89 26 00 00       	call   403b58 <_strlen>
+  4014cf:	89 c2                	mov    edx,eax
+  4014d1:	8b 45 f4             	mov    eax,DWORD PTR [ebp-0xc]
+  4014d4:	39 c2                	cmp    edx,eax
+  4014d6:	77 ce                	ja     4014a6 <_encrypt_flag+0x16>
+  4014d8:	8b 45 08             	mov    eax,DWORD PTR [ebp+0x8]
+  4014db:	89 04 24             	mov    DWORD PTR [esp],eax
+  4014de:	e8 75 26 00 00       	call   403b58 <_strlen>
+  4014e3:	89 c2                	mov    edx,eax
+  4014e5:	8b 45 0c             	mov    eax,DWORD PTR [ebp+0xc]
+  4014e8:	01 d0                	add    eax,edx
+  4014ea:	c6 00 00             	mov    BYTE PTR [eax],0x0
+  4014ed:	90                   	nop
+  4014ee:	c9                   	leave
+  4014ef:	c3                   	ret
+
+004014f0 <_check_flag>:
+  4014f0:	55                   	push   ebp
+  4014f1:	89 e5                	mov    ebp,esp
+  4014f3:	83 ec 58             	sub    esp,0x58
+  4014f6:	e8 65 ff ff ff       	call   401460 <_fake_check>
+  4014fb:	8d 45 c6             	lea    eax,[ebp-0x3a]
+  4014fe:	89 44 24 04          	mov    DWORD PTR [esp+0x4],eax
+  401502:	8b 45 08             	mov    eax,DWORD PTR [ebp+0x8]
+  401505:	89 04 24             	mov    DWORD PTR [esp],eax
+  401508:	e8 83 ff ff ff       	call   401490 <_encrypt_flag>
+  40150d:	c7 44 24 04 20 40 40 	mov    DWORD PTR [esp+0x4],0x404020
+  401514:	00
+  401515:	8d 45 c6             	lea    eax,[ebp-0x3a]
+  401518:	89 04 24             	mov    DWORD PTR [esp],eax
+  40151b:	e8 50 26 00 00       	call   403b70 <_strcmp>
+> C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\checker_562\analysis\checker_disassembly.txt:336:00401490 <_encrypt_flag>:
+  C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\checker_562\analysis\checker_disassembly.txt:337:  401490:	55                   	push   ebp
+  C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\checker_562\analysis\checker_disassembly.txt:338:  401491:	89 e5                	mov    ebp,esp
+  C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\checker_562\analysis\checker_disassembly.txt:339:  401493:	83 ec 28             	sub    esp,0x28
+  C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\checker_562\analysis\checker_disassembly.txt:340:  401496:	c7 45 f0 23 00 00 00 	mov    DWORD PTR [ebp-0x10],0x23
+  C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\checker_562\analysis\checker_disassembly.txt:341:  40149d:	c7 45 f4 00 00 00 00 	mov    DWORD PTR [ebp-0xc],0x0
+  C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\checker_562\analysis\checker_disassembly.txt:342:  4014a4:	eb 1e                	jmp    4014c4 <_encrypt_flag+0x34>
+  C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\checker_562\analysis\checker_disassembly.txt:343:  4014a6:	8b 55 f4             	mov    edx,DWORD PTR [ebp-0xc]
+  C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\checker_562\analysis\checker_disassembly.txt:344:  4014a9:	8b 45 0c             	mov    eax,DWORD PTR [ebp+0xc]
+  C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\checker_562\analysis\checker_disassembly.txt:345:  4014ac:	01 d0                	add    eax,edx
+  C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\checker_562\analysis\checker_disassembly.txt:346:  4014ae:	8b 4d f4             	mov    ecx,DWORD PTR [ebp-0xc]
+  C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\checker_562\analysis\checker_disassembly.txt:347:  4014b1:	8b 55 08             	mov    edx,DWORD PTR [ebp+0x8]
+  C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\checker_562\analysis\checker_disassembly.txt:348:  4014b4:	01 ca                	add    edx,ecx
+  C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\checker_562\analysis\checker_disassembly.txt:349:  4014b6:	0f b6 0a             	movzx  ecx,BYTE PTR [edx]
+  C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\checker_562\analysis\checker_disassembly.txt:350:  4014b9:	8b 55 f0             	mov    edx,DWORD PTR [ebp-0x10]
+  C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\checker_562\analysis\checker_disassembly.txt:351:  4014bc:	31 ca                	xor    edx,ecx
+  C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\checker_562\analysis\checker_disassembly.txt:352:  4014be:	88 10                	mov    BYTE PTR [eax],dl
+  C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\checker_562\analysis\checker_disassembly.txt:353:  4014c0:	83 45 f4 01          	add    DWORD PTR [ebp-0xc],0x1
+  C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\checker_562\analysis\checker_disassembly.txt:354:  4014c4:	8b 45 08             	mov    eax,DWORD PTR [ebp+0x8]
+  C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\checker_562\analysis\checker_disassembly.txt:355:  4014c7:	89 04 24             	mov    DWORD PTR [esp],eax
+  C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\checker_562\analysis\checker_disassembly.txt:356:  4014ca:	e8 89 26 00 00       	call   403b58 <_strlen>
+  C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\checker_562\analysis\checker_disassembly.txt:357:  4014cf:	89 c2                	mov    edx,eax
+  C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\checker_562\analysis\checker_disassembly.txt:358:  4014d1:	8b 45 f4             	mov    eax,DWORD PTR [ebp-0xc]
+  C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\checker_562\analysis\checker_disassembly.txt:359:  4014d4:	39 c2                	cmp    edx,eax
+  C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\checker_562\analysis\checker_disassembly.txt:360:  4014d6:	77 ce                	ja     4014a6 <_encrypt_flag+0x16>
+  C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\checker_562\analysis\checker_disassembly.txt:361:  4014d8:	8b 45 08             	mov    eax,DWORD PTR [ebp+0x8]
+  C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\checker_562\analysis\checker_disassembly.txt:362:  4014db:	89 04 24             	mov    DWORD PTR [esp],eax
+  C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\checker_562\analysis\checker_disassembly.txt:363:  4014de:	e8 75 26 00 00       	call   403b58 <_strlen>
+  C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\checker_562\analysis\checker_disassembly.txt:364:  4014e3:	89 c2                	mov    edx,eax
+  C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\checker_562\analysis\checker_disassembly.txt:365:  4014e5:	8b 45 0c             	mov    eax,DWORD PTR [ebp+0xc]
+  C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\checker_562\analysis\checker_disassembly.txt:366:  4014e8:	01 d0                	add    eax,edx
+  C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\checker_562\analysis\checker_disassembly.txt:367:  4014ea:	c6 00 00             	mov    BYTE PTR [eax],0x0
+  C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\checker_562\analysis\checker_disassembly.txt:368:  4014ed:	90                   	nop
+  C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\checker_562\analysis\checker_disassembly.txt:369:  4014ee:	c9                   	leave
+  C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\checker_562\analysis\checker_disassembly.txt:370:  4014ef:	c3                   	ret
+  C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\checker_562\analysis\checker_disassembly.txt:371:
+  401490:	55                   	push   ebp
+  401491:	89 e5                	mov    ebp,esp
+  401493:	83 ec 28             	sub    esp,0x28
+  401496:	c7 45 f0 23 00 00 00 	mov    DWORD PTR [ebp-0x10],0x23
+  40149d:	c7 45 f4 00 00 00 00 	mov    DWORD PTR [ebp-0xc],0x0
+  4014a4:	eb 1e                	jmp    4014c4 <_encrypt_flag+0x34>
+  4014a6:	8b 55 f4             	mov    edx,DWORD PTR [ebp-0xc]
+  4014a9:	8b 45 0c             	mov    eax,DWORD PTR [ebp+0xc]
+  4014ac:	01 d0                	add    eax,edx
+  4014ae:	8b 4d f4             	mov    ecx,DWORD PTR [ebp-0xc]
+  4014b1:	8b 55 08             	mov    edx,DWORD PTR [ebp+0x8]
+  4014b4:	01 ca                	add    edx,ecx
+  4014b6:	0f b6 0a             	movzx  ecx,BYTE PTR [edx]
+  4014b9:	8b 55 f0             	mov    edx,DWORD PTR [ebp-0x10]
+  4014bc:	31 ca                	xor    edx,ecx
+  4014be:	88 10                	mov    BYTE PTR [eax],dl
+  4014c0:	83 45 f4 01          	add    DWORD PTR [ebp-0xc],0x1
+  4014c4:	8b 45 08             	mov    eax,DWORD PTR [ebp+0x8]
+  4014c7:	89 04 24             	mov    DWORD PTR [esp],eax
+  4014ca:	e8 89 26 00 00       	call   403b58 <_strlen>
+  4014cf:	89 c2                	mov    edx,eax
+  4014d1:	8b 45 f4             	mov    eax,DWORD PTR [ebp-0xc]
+  4014d4:	39 c2                	cmp    edx,eax
+  4014d6:	77 ce                	ja     4014a6 <_encrypt_flag+0x16>
+  4014d8:	8b 45 08             	mov    eax,DWORD PTR [ebp+0x8]
+  4014db:	89 04 24             	mov    DWORD PTR [esp],eax
+  4014de:	e8 75 26 00 00       	call   403b58 <_strlen>
+  4014e3:	89 c2                	mov    edx,eax
+  4014e5:	8b 45 0c             	mov    eax,DWORD PTR [ebp+0xc]
+  4014e8:	01 d0                	add    eax,edx
+  4014ea:	c6 00 00             	mov    BYTE PTR [eax],0x0
+  4014ed:	90                   	nop
+  4014ee:	c9                   	leave
+  4014ef:	c3                   	ret
+
+004014f0 <_check_flag>:
+  4014f0:	55                   	push   ebp
+  4014f1:	89 e5                	mov    ebp,esp
+  4014f3:	83 ec 58             	sub    esp,0x58
+  4014f6:	e8 65 ff ff ff       	call   401460 <_fake_check>
+  4014fb:	8d 45 c6             	lea    eax,[ebp-0x3a]
+  4014fe:	89 44 24 04          	mov    DWORD PTR [esp+0x4],eax
+  401502:	8b 45 08             	mov    eax,DWORD PTR [ebp+0x8]
+  401505:	89 04 24             	mov    DWORD PTR [esp],eax
+  401508:	e8 83 ff ff ff       	call   401490 <_encrypt_flag>
+  40150d:	c7 44 24 04 20 40 40 	mov    DWORD PTR [esp+0x4],0x404020
+  401514:	00
+  401515:	8d 45 c6             	lea    eax,[ebp-0x3a]
+  401518:	89 04 24             	mov    DWORD PTR [esp],eax
+  40151b:	e8 50 26 00 00       	call   403b70 <_strcmp>
+  401520:	85 c0                	test   eax,eax
+  401522:	0f 94 c0             	sete   al
+  401525:	0f b6 c0             	movzx  eax,al
+  401528:	c9                   	leave
+  401529:	c3                   	ret
+
+0040152a <_main>:
+  40152a:	55                   	push   ebp
+  40152b:	89 e5                	mov    ebp,esp
+  40152d:	83 e4 f0             	and    esp,0xfffffff0
+  401530:	83 ec 50             	sub    esp,0x50
+  401533:	e8 a8 05 00 00       	call   401ae0 <___main>
+  401538:	c7 04 24 93 50 40 00 	mov    DWORD PTR [esp],0x405093
+  40153f:	e8 54 26 00 00       	call   403b98 <_printf>
+  401544:	a1 bc 81 40 00       	mov    eax,ds:0x4081bc
+> C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\checker_562\analysis\checker_disassembly.txt:372:004014f0 <_check_flag>:
+  C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\checker_562\analysis\checker_disassembly.txt:373:  4014f0:	55                   	push   ebp
+  C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\checker_562\analysis\checker_disassembly.txt:374:  4014f1:	89 e5                	mov    ebp,esp
+  C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\checker_562\analysis\checker_disassembly.txt:375:  4014f3:	83 ec 58             	sub    esp,0x58
+  4014f0:	55                   	push   ebp
+  4014f1:	89 e5                	mov    ebp,esp
+  4014f3:	83 ec 58             	sub    esp,0x58
+  4014f6:	e8 65 ff ff ff       	call   401460 <_fake_check>
+  4014fb:	8d 45 c6             	lea    eax,[ebp-0x3a]
+  4014fe:	89 44 24 04          	mov    DWORD PTR [esp+0x4],eax
+  401502:	8b 45 08             	mov    eax,DWORD PTR [ebp+0x8]
+  401505:	89 04 24             	mov    DWORD PTR [esp],eax
+  401508:	e8 83 ff ff ff       	call   401490 <_encrypt_flag>
+  40150d:	c7 44 24 04 20 40 40 	mov    DWORD PTR [esp+0x4],0x404020
+  401514:	00
+  401515:	8d 45 c6             	lea    eax,[ebp-0x3a]
+  401518:	89 04 24             	mov    DWORD PTR [esp],eax
+  40151b:	e8 50 26 00 00       	call   403b70 <_strcmp>
+  401520:	85 c0                	test   eax,eax
+  401522:	0f 94 c0             	sete   al
+  401525:	0f b6 c0             	movzx  eax,al
+  401528:	c9                   	leave
+  401529:	c3                   	ret
+
+0040152a <_main>:
+  40152a:	55                   	push   ebp
+  40152b:	89 e5                	mov    ebp,esp
+  40152d:	83 e4 f0             	and    esp,0xfffffff0
+  401530:	83 ec 50             	sub    esp,0x50
+  401533:	e8 a8 05 00 00       	call   401ae0 <___main>
+  401538:	c7 04 24 93 50 40 00 	mov    DWORD PTR [esp],0x405093
+  40153f:	e8 54 26 00 00       	call   403b98 <_printf>
+  401544:	a1 bc 81 40 00       	mov    eax,ds:0x4081bc
+  401549:	89 44 24 08          	mov    DWORD PTR [esp+0x8],eax
+  40154d:	c7 44 24 04 32 00 00 	mov    DWORD PTR [esp+0x4],0x32
+  401554:	00
+  401555:	8d 44 24 1e          	lea    eax,[esp+0x1e]
+  401559:	89 04 24             	mov    DWORD PTR [esp],eax
+  40155c:	e8 67 26 00 00       	call   403bc8 <_fgets>
+  401561:	c7 44 24 04 a4 50 40 	mov    DWORD PTR [esp+0x4],0x4050a4
+  401568:	00
+  401569:	8d 44 24 1e          	lea    eax,[esp+0x1e]
+  40156d:	89 04 24             	mov    DWORD PTR [esp],eax
+  401570:	e8 eb 25 00 00       	call   403b60 <_strcspn>
+  401575:	c6 44 04 1e 00       	mov    BYTE PTR [esp+eax*1+0x1e],0x0
+  40157a:	8d 44 24 1e          	lea    eax,[esp+0x1e]
+  40157e:	89 04 24             	mov    DWORD PTR [esp],eax
+  401581:	e8 6a ff ff ff       	call   4014f0 <_check_flag>
+  401586:	85 c0                	test   eax,eax
+  401588:	74 0e                	je     401598 <_main+0x6e>
+  40158a:	c7 04 24 a6 50 40 00 	mov    DWORD PTR [esp],0x4050a6
+  401591:	e8 fa 25 00 00       	call   403b90 <_puts>
+  401596:	eb 0c                	jmp    4015a4 <_main+0x7a>
+  401598:	c7 04 24 c2 50 40 00 	mov    DWORD PTR [esp],0x4050c2
+  40159f:	e8 ec 25 00 00       	call   403b90 <_puts>
+  4015a4:	b8 00 00 00 00       	mov    eax,0x0
+  4015a9:	c9                   	leave
+  4015aa:	c3                   	ret
+  4015ab:	90                   	nop
+  4015ac:	66 90                	xchg   ax,ax
+  4015ae:	66 90                	xchg   ax,ax
+
+004015b0 <__setargv>:
+  4015b0:	55                   	push   ebp
+  4015b1:	89 e5                	mov    ebp,esp
+  4015b3:	57                   	push   edi
+  4015b4:	56                   	push   esi
+  4015b5:	53                   	push   ebx
+  4015b6:	83 ec 4c             	sub    esp,0x4c
+> C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\checker_562\analysis\checker_disassembly.txt:376:  4014f6:	e8 65 ff ff ff       	call   401460 <_fake_check>
+  C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\checker_562\analysis\checker_disassembly.txt:377:  4014fb:	8d 45 c6             	lea    eax,[ebp-0x3a]
+  C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\checker_562\analysis\checker_disassembly.txt:378:  4014fe:	89 44 24 04          	mov    DWORD PTR [esp+0x4],eax
+  C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\checker_562\analysis\checker_disassembly.txt:379:  401502:	8b 45 08             	mov    eax,DWORD PTR [ebp+0x8]
+  C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\checker_562\analysis\checker_disassembly.txt:380:  401505:	89 04 24             	mov    DWORD PTR [esp],eax
+  4014fb:	8d 45 c6             	lea    eax,[ebp-0x3a]
+  4014fe:	89 44 24 04          	mov    DWORD PTR [esp+0x4],eax
+  401502:	8b 45 08             	mov    eax,DWORD PTR [ebp+0x8]
+  401505:	89 04 24             	mov    DWORD PTR [esp],eax
+  401508:	e8 83 ff ff ff       	call   401490 <_encrypt_flag>
+  40150d:	c7 44 24 04 20 40 40 	mov    DWORD PTR [esp+0x4],0x404020
+  401514:	00
+  401515:	8d 45 c6             	lea    eax,[ebp-0x3a]
+  401518:	89 04 24             	mov    DWORD PTR [esp],eax
+  40151b:	e8 50 26 00 00       	call   403b70 <_strcmp>
+  401520:	85 c0                	test   eax,eax
+  401522:	0f 94 c0             	sete   al
+  401525:	0f b6 c0             	movzx  eax,al
+  401528:	c9                   	leave
+  401529:	c3                   	ret
+
+0040152a <_main>:
+  40152a:	55                   	push   ebp
+  40152b:	89 e5                	mov    ebp,esp
+  40152d:	83 e4 f0             	and    esp,0xfffffff0
+  401530:	83 ec 50             	sub    esp,0x50
+  401533:	e8 a8 05 00 00       	call   401ae0 <___main>
+  401538:	c7 04 24 93 50 40 00 	mov    DWORD PTR [esp],0x405093
+  40153f:	e8 54 26 00 00       	call   403b98 <_printf>
+  401544:	a1 bc 81 40 00       	mov    eax,ds:0x4081bc
+  401549:	89 44 24 08          	mov    DWORD PTR [esp+0x8],eax
+  40154d:	c7 44 24 04 32 00 00 	mov    DWORD PTR [esp+0x4],0x32
+  401554:	00
+  401555:	8d 44 24 1e          	lea    eax,[esp+0x1e]
+  401559:	89 04 24             	mov    DWORD PTR [esp],eax
+  40155c:	e8 67 26 00 00       	call   403bc8 <_fgets>
+  401561:	c7 44 24 04 a4 50 40 	mov    DWORD PTR [esp+0x4],0x4050a4
+  401568:	00
+  401569:	8d 44 24 1e          	lea    eax,[esp+0x1e]
+  40156d:	89 04 24             	mov    DWORD PTR [esp],eax
+  401570:	e8 eb 25 00 00       	call   403b60 <_strcspn>
+  401575:	c6 44 04 1e 00       	mov    BYTE PTR [esp+eax*1+0x1e],0x0
+  40157a:	8d 44 24 1e          	lea    eax,[esp+0x1e]
+  40157e:	89 04 24             	mov    DWORD PTR [esp],eax
+  401581:	e8 6a ff ff ff       	call   4014f0 <_check_flag>
+  401586:	85 c0                	test   eax,eax
+  401588:	74 0e                	je     401598 <_main+0x6e>
+  40158a:	c7 04 24 a6 50 40 00 	mov    DWORD PTR [esp],0x4050a6
+  401591:	e8 fa 25 00 00       	call   403b90 <_puts>
+  401596:	eb 0c                	jmp    4015a4 <_main+0x7a>
+  401598:	c7 04 24 c2 50 40 00 	mov    DWORD PTR [esp],0x4050c2
+  40159f:	e8 ec 25 00 00       	call   403b90 <_puts>
+  4015a4:	b8 00 00 00 00       	mov    eax,0x0
+  4015a9:	c9                   	leave
+  4015aa:	c3                   	ret
+  4015ab:	90                   	nop
+  4015ac:	66 90                	xchg   ax,ax
+  4015ae:	66 90                	xchg   ax,ax
+
+004015b0 <__setargv>:
+  4015b0:	55                   	push   ebp
+  4015b1:	89 e5                	mov    ebp,esp
+  4015b3:	57                   	push   edi
+  4015b4:	56                   	push   esi
+  4015b5:	53                   	push   ebx
+  4015b6:	83 ec 4c             	sub    esp,0x4c
+  4015b9:	f6 05 60 40 40 00 02 	test   BYTE PTR ds:0x404060,0x2
+  4015c0:	0f 84 ea 02 00 00    	je     4018b0 <__setargv+0x300>
+  4015c6:	e8 ad 26 00 00       	call   403c78 <_GetCommandLineA@0>
+  4015cb:	89 65 c4             	mov    DWORD PTR [ebp-0x3c],esp
+> C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\checker_562\analysis\checker_disassembly.txt:381:  401508:	e8 83 ff ff ff       	call   401490 <_encrypt_flag>
+  40150d:	c7 44 24 04 20 40 40 	mov    DWORD PTR [esp+0x4],0x404020
+  401514:	00
+  401515:	8d 45 c6             	lea    eax,[ebp-0x3a]
+  401518:	89 04 24             	mov    DWORD PTR [esp],eax
+  40151b:	e8 50 26 00 00       	call   403b70 <_strcmp>
+  401520:	85 c0                	test   eax,eax
+  401522:	0f 94 c0             	sete   al
+  401525:	0f b6 c0             	movzx  eax,al
+  401528:	c9                   	leave
+  401529:	c3                   	ret
+
+0040152a <_main>:
+  40152a:	55                   	push   ebp
+  40152b:	89 e5                	mov    ebp,esp
+  40152d:	83 e4 f0             	and    esp,0xfffffff0
+  401530:	83 ec 50             	sub    esp,0x50
+  401533:	e8 a8 05 00 00       	call   401ae0 <___main>
+  401538:	c7 04 24 93 50 40 00 	mov    DWORD PTR [esp],0x405093
+  40153f:	e8 54 26 00 00       	call   403b98 <_printf>
+  401544:	a1 bc 81 40 00       	mov    eax,ds:0x4081bc
+  401549:	89 44 24 08          	mov    DWORD PTR [esp+0x8],eax
+  40154d:	c7 44 24 04 32 00 00 	mov    DWORD PTR [esp+0x4],0x32
+  401554:	00
+  401555:	8d 44 24 1e          	lea    eax,[esp+0x1e]
+  401559:	89 04 24             	mov    DWORD PTR [esp],eax
+  40155c:	e8 67 26 00 00       	call   403bc8 <_fgets>
+  401561:	c7 44 24 04 a4 50 40 	mov    DWORD PTR [esp+0x4],0x4050a4
+  401568:	00
+  401569:	8d 44 24 1e          	lea    eax,[esp+0x1e]
+  40156d:	89 04 24             	mov    DWORD PTR [esp],eax
+  401570:	e8 eb 25 00 00       	call   403b60 <_strcspn>
+  401575:	c6 44 04 1e 00       	mov    BYTE PTR [esp+eax*1+0x1e],0x0
+  40157a:	8d 44 24 1e          	lea    eax,[esp+0x1e]
+  40157e:	89 04 24             	mov    DWORD PTR [esp],eax
+  401581:	e8 6a ff ff ff       	call   4014f0 <_check_flag>
+  401586:	85 c0                	test   eax,eax
+  401588:	74 0e                	je     401598 <_main+0x6e>
+  40158a:	c7 04 24 a6 50 40 00 	mov    DWORD PTR [esp],0x4050a6
+  401591:	e8 fa 25 00 00       	call   403b90 <_puts>
+  401596:	eb 0c                	jmp    4015a4 <_main+0x7a>
+  401598:	c7 04 24 c2 50 40 00 	mov    DWORD PTR [esp],0x4050c2
+  40159f:	e8 ec 25 00 00       	call   403b90 <_puts>
+  4015a4:	b8 00 00 00 00       	mov    eax,0x0
+  4015a9:	c9                   	leave
+  4015aa:	c3                   	ret
+  4015ab:	90                   	nop
+  4015ac:	66 90                	xchg   ax,ax
+  4015ae:	66 90                	xchg   ax,ax
+
+004015b0 <__setargv>:
+  4015b0:	55                   	push   ebp
+  4015b1:	89 e5                	mov    ebp,esp
+  4015b3:	57                   	push   edi
+  4015b4:	56                   	push   esi
+  4015b5:	53                   	push   ebx
+  4015b6:	83 ec 4c             	sub    esp,0x4c
+  4015b9:	f6 05 60 40 40 00 02 	test   BYTE PTR ds:0x404060,0x2
+  4015c0:	0f 84 ea 02 00 00    	je     4018b0 <__setargv+0x300>
+  4015c6:	e8 ad 26 00 00       	call   403c78 <_GetCommandLineA@0>
+  4015cb:	89 65 c4             	mov    DWORD PTR [ebp-0x3c],esp
+  4015ce:	89 04 24             	mov    DWORD PTR [esp],eax
+  4015d1:	89 c6                	mov    esi,eax
+  4015d3:	e8 80 25 00 00       	call   403b58 <_strlen>
+  4015d8:	8d 44 00 11          	lea    eax,[eax+eax*1+0x11]
+  4015dc:	c1 e8 04             	shr    eax,0x4
+> C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\checker_562\analysis\checker_disassembly.txt:382:  40150d:	c7 44 24 04 20 40 40 	mov    DWORD PTR [esp+0x4],0x404020
+  C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\checker_562\analysis\checker_disassembly.txt:383:  401514:	00 
+  C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\checker_562\analysis\checker_disassembly.txt:384:  401515:	8d 45 c6             	lea    eax,[ebp-0x3a]
+  C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\checker_562\analysis\checker_disassembly.txt:385:  401518:	89 04 24             	mov    DWORD PTR [esp],eax
+  C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\checker_562\analysis\checker_disassembly.txt:386:  40151b:	e8 50 26 00 00       	call   403b70 <_strcmp>
+  C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\checker_562\analysis\checker_disassembly.txt:387:  401520:	85 c0                	test   eax,eax
+  C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\checker_562\analysis\checker_disassembly.txt:388:  401522:	0f 94 c0             	sete   al
+  C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\checker_562\analysis\checker_disassembly.txt:389:  401525:	0f b6 c0             	movzx  eax,al
+  C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\checker_562\analysis\checker_disassembly.txt:390:  401528:	c9                   	leave
+  C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\checker_562\analysis\checker_disassembly.txt:391:  401529:	c3                   	ret
+  C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\checker_562\analysis\checker_disassembly.txt:392:
+  401514:	00
+  401515:	8d 45 c6             	lea    eax,[ebp-0x3a]
+  401518:	89 04 24             	mov    DWORD PTR [esp],eax
+  40151b:	e8 50 26 00 00       	call   403b70 <_strcmp>
+  401520:	85 c0                	test   eax,eax
+  401522:	0f 94 c0             	sete   al
+  401525:	0f b6 c0             	movzx  eax,al
+  401528:	c9                   	leave
+  401529:	c3                   	ret
+
+0040152a <_main>:
+  40152a:	55                   	push   ebp
+  40152b:	89 e5                	mov    ebp,esp
+  40152d:	83 e4 f0             	and    esp,0xfffffff0
+  401530:	83 ec 50             	sub    esp,0x50
+  401533:	e8 a8 05 00 00       	call   401ae0 <___main>
+  401538:	c7 04 24 93 50 40 00 	mov    DWORD PTR [esp],0x405093
+  40153f:	e8 54 26 00 00       	call   403b98 <_printf>
+  401544:	a1 bc 81 40 00       	mov    eax,ds:0x4081bc
+  401549:	89 44 24 08          	mov    DWORD PTR [esp+0x8],eax
+  40154d:	c7 44 24 04 32 00 00 	mov    DWORD PTR [esp+0x4],0x32
+  401554:	00
+  401555:	8d 44 24 1e          	lea    eax,[esp+0x1e]
+  401559:	89 04 24             	mov    DWORD PTR [esp],eax
+  40155c:	e8 67 26 00 00       	call   403bc8 <_fgets>
+  401561:	c7 44 24 04 a4 50 40 	mov    DWORD PTR [esp+0x4],0x4050a4
+  401568:	00
+  401569:	8d 44 24 1e          	lea    eax,[esp+0x1e]
+  40156d:	89 04 24             	mov    DWORD PTR [esp],eax
+  401570:	e8 eb 25 00 00       	call   403b60 <_strcspn>
+  401575:	c6 44 04 1e 00       	mov    BYTE PTR [esp+eax*1+0x1e],0x0
+  40157a:	8d 44 24 1e          	lea    eax,[esp+0x1e]
+  40157e:	89 04 24             	mov    DWORD PTR [esp],eax
+  401581:	e8 6a ff ff ff       	call   4014f0 <_check_flag>
+  401586:	85 c0                	test   eax,eax
+  401588:	74 0e                	je     401598 <_main+0x6e>
+  40158a:	c7 04 24 a6 50 40 00 	mov    DWORD PTR [esp],0x4050a6
+  401591:	e8 fa 25 00 00       	call   403b90 <_puts>
+  401596:	eb 0c                	jmp    4015a4 <_main+0x7a>
+  401598:	c7 04 24 c2 50 40 00 	mov    DWORD PTR [esp],0x4050c2
+  40159f:	e8 ec 25 00 00       	call   403b90 <_puts>
+  4015a4:	b8 00 00 00 00       	mov    eax,0x0
+  4015a9:	c9                   	leave
+  4015aa:	c3                   	ret
+  4015ab:	90                   	nop
+  4015ac:	66 90                	xchg   ax,ax
+  4015ae:	66 90                	xchg   ax,ax
+
+004015b0 <__setargv>:
+  4015b0:	55                   	push   ebp
+  4015b1:	89 e5                	mov    ebp,esp
+  4015b3:	57                   	push   edi
+  4015b4:	56                   	push   esi
+  4015b5:	53                   	push   ebx
+  4015b6:	83 ec 4c             	sub    esp,0x4c
+  4015b9:	f6 05 60 40 40 00 02 	test   BYTE PTR ds:0x404060,0x2
+  4015c0:	0f 84 ea 02 00 00    	je     4018b0 <__setargv+0x300>
+  4015c6:	e8 ad 26 00 00       	call   403c78 <_GetCommandLineA@0>
+  4015cb:	89 65 c4             	mov    DWORD PTR [ebp-0x3c],esp
+  4015ce:	89 04 24             	mov    DWORD PTR [esp],eax
+  4015d1:	89 c6                	mov    esi,eax
+  4015d3:	e8 80 25 00 00       	call   403b58 <_strlen>
+  4015d8:	8d 44 00 11          	lea    eax,[eax+eax*1+0x11]
+  4015dc:	c1 e8 04             	shr    eax,0x4
+  4015df:	c1 e0 04             	shl    eax,0x4
+> C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\checker_562\analysis\checker_disassembly.txt:393:0040152a <_main>:
+  C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\checker_562\analysis\checker_disassembly.txt:394:  40152a:	55                   	push   ebp
+  C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\checker_562\analysis\checker_disassembly.txt:395:  40152b:	89 e5                	mov    ebp,esp
+  C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\checker_562\analysis\checker_disassembly.txt:396:  40152d:	83 e4 f0             	and    esp,0xfffffff0
+  C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\checker_562\analysis\checker_disassembly.txt:397:  401530:	83 ec 50             	sub    esp,0x50
+  C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\checker_562\analysis\checker_disassembly.txt:398:  401533:	e8 a8 05 00 00       	call   401ae0 <___main>
+  C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\checker_562\analysis\checker_disassembly.txt:399:  401538:	c7 04 24 93 50 40 00 	mov    DWORD PTR [esp],0x405093
+  C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\checker_562\analysis\checker_disassembly.txt:400:  40153f:	e8 54 26 00 00       	call   403b98 <_printf>
+  C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\checker_562\analysis\checker_disassembly.txt:401:  401544:	a1 bc 81 40 00       	mov    eax,ds:0x4081bc
+  C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\checker_562\analysis\checker_disassembly.txt:402:  401549:	89 44 24 08          	mov    DWORD PTR [esp+0x8],eax
+  C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\checker_562\analysis\checker_disassembly.txt:403:  40154d:	c7 44 24 04 32 00 00 	mov    DWORD PTR [esp+0x4],0x32
+  C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\checker_562\analysis\checker_disassembly.txt:404:  401554:	00 
+  C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\checker_562\analysis\checker_disassembly.txt:405:  401555:	8d 44 24 1e          	lea    eax,[esp+0x1e]
+  C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\checker_562\analysis\checker_disassembly.txt:406:  401559:	89 04 24             	mov    DWORD PTR [esp],eax
+  C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\checker_562\analysis\checker_disassembly.txt:407:  40155c:	e8 67 26 00 00       	call   403bc8 <_fgets>
+  C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\checker_562\analysis\checker_disassembly.txt:408:  401561:	c7 44 24 04 a4 50 40 	mov    DWORD PTR [esp+0x4],0x4050a4
+  C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\checker_562\analysis\checker_disassembly.txt:409:  401568:	00 
+  C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\checker_562\analysis\checker_disassembly.txt:410:  401569:	8d 44 24 1e          	lea    eax,[esp+0x1e]
+  C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\checker_562\analysis\checker_disassembly.txt:411:  40156d:	89 04 24             	mov    DWORD PTR [esp],eax
+  C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\checker_562\analysis\checker_disassembly.txt:412:  401570:	e8 eb 25 00 00       	call   403b60 <_strcspn>
+  C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\checker_562\analysis\checker_disassembly.txt:413:  401575:	c6 44 04 1e 00       	mov    BYTE PTR [esp+eax*1+0x1e],0x0
+  C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\checker_562\analysis\checker_disassembly.txt:414:  40157a:	8d 44 24 1e          	lea    eax,[esp+0x1e]
+  C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\checker_562\analysis\checker_disassembly.txt:415:  40157e:	89 04 24             	mov    DWORD PTR [esp],eax
+  40152a:	55                   	push   ebp
+  40152b:	89 e5                	mov    ebp,esp
+  40152d:	83 e4 f0             	and    esp,0xfffffff0
+  401530:	83 ec 50             	sub    esp,0x50
+  401533:	e8 a8 05 00 00       	call   401ae0 <___main>
+  401538:	c7 04 24 93 50 40 00 	mov    DWORD PTR [esp],0x405093
+  40153f:	e8 54 26 00 00       	call   403b98 <_printf>
+  401544:	a1 bc 81 40 00       	mov    eax,ds:0x4081bc
+  401549:	89 44 24 08          	mov    DWORD PTR [esp+0x8],eax
+  40154d:	c7 44 24 04 32 00 00 	mov    DWORD PTR [esp+0x4],0x32
+  401554:	00
+  401555:	8d 44 24 1e          	lea    eax,[esp+0x1e]
+  401559:	89 04 24             	mov    DWORD PTR [esp],eax
+  40155c:	e8 67 26 00 00       	call   403bc8 <_fgets>
+  401561:	c7 44 24 04 a4 50 40 	mov    DWORD PTR [esp+0x4],0x4050a4
+  401568:	00
+  401569:	8d 44 24 1e          	lea    eax,[esp+0x1e]
+  40156d:	89 04 24             	mov    DWORD PTR [esp],eax
+  401570:	e8 eb 25 00 00       	call   403b60 <_strcspn>
+  401575:	c6 44 04 1e 00       	mov    BYTE PTR [esp+eax*1+0x1e],0x0
+  40157a:	8d 44 24 1e          	lea    eax,[esp+0x1e]
+  40157e:	89 04 24             	mov    DWORD PTR [esp],eax
+  401581:	e8 6a ff ff ff       	call   4014f0 <_check_flag>
+  401586:	85 c0                	test   eax,eax
+  401588:	74 0e                	je     401598 <_main+0x6e>
+  40158a:	c7 04 24 a6 50 40 00 	mov    DWORD PTR [esp],0x4050a6
+  401591:	e8 fa 25 00 00       	call   403b90 <_puts>
+  401596:	eb 0c                	jmp    4015a4 <_main+0x7a>
+  401598:	c7 04 24 c2 50 40 00 	mov    DWORD PTR [esp],0x4050c2
+  40159f:	e8 ec 25 00 00       	call   403b90 <_puts>
+  4015a4:	b8 00 00 00 00       	mov    eax,0x0
+  4015a9:	c9                   	leave
+  4015aa:	c3                   	ret
+  4015ab:	90                   	nop
+  4015ac:	66 90                	xchg   ax,ax
+  4015ae:	66 90                	xchg   ax,ax
+
+004015b0 <__setargv>:
+  4015b0:	55                   	push   ebp
+  4015b1:	89 e5                	mov    ebp,esp
+  4015b3:	57                   	push   edi
+  4015b4:	56                   	push   esi
+  4015b5:	53                   	push   ebx
+  4015b6:	83 ec 4c             	sub    esp,0x4c
+  4015b9:	f6 05 60 40 40 00 02 	test   BYTE PTR ds:0x404060,0x2
+  4015c0:	0f 84 ea 02 00 00    	je     4018b0 <__setargv+0x300>
+  4015c6:	e8 ad 26 00 00       	call   403c78 <_GetCommandLineA@0>
+  4015cb:	89 65 c4             	mov    DWORD PTR [ebp-0x3c],esp
+  4015ce:	89 04 24             	mov    DWORD PTR [esp],eax
+  4015d1:	89 c6                	mov    esi,eax
+  4015d3:	e8 80 25 00 00       	call   403b58 <_strlen>
+  4015d8:	8d 44 00 11          	lea    eax,[eax+eax*1+0x11]
+  4015dc:	c1 e8 04             	shr    eax,0x4
+  4015df:	c1 e0 04             	shl    eax,0x4
+  4015e2:	e8 49 0b 00 00       	call   402130 <___chkstk_ms>
+  4015e7:	29 c4                	sub    esp,eax
+  4015e9:	c7 45 e4 00 00 00 00 	mov    DWORD PTR [ebp-0x1c],0x0
+  4015f0:	c7 45 d4 00 00 00 00 	mov    DWORD PTR [ebp-0x2c],0x0
+  4015f7:	8d 44 24 10          	lea    eax,[esp+0x10]
+  4015fb:	c7 45 d0 00 00 00 00 	mov    DWORD PTR [ebp-0x30],0x0
+  401602:	89 c2                	mov    edx,eax
+  401604:	89 45 cc             	mov    DWORD PTR [ebp-0x34],eax
+  401607:	a1 60 40 40 00       	mov    eax,ds:0x404060
+  40160c:	25 00 44 00 00       	and    eax,0x4400
+  401611:	83 c8 10             	or     eax,0x10
+> C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\checker_562\analysis\checker_disassembly.txt:416:  401581:	e8 6a ff ff ff       	call   4014f0 <_check_flag>
+  C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\checker_562\analysis\checker_disassembly.txt:417:  401586:	85 c0                	test   eax,eax
+  C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\checker_562\analysis\checker_disassembly.txt:418:  401588:	74 0e                	je     401598 <_main+0x6e>
+  C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\checker_562\analysis\checker_disassembly.txt:419:  40158a:	c7 04 24 a6 50 40 00 	mov    DWORD PTR [esp],0x4050a6
+  C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\checker_562\analysis\checker_disassembly.txt:420:  401591:	e8 fa 25 00 00       	call   403b90 <_puts>
+  C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\checker_562\analysis\checker_disassembly.txt:421:  401596:	eb 0c                	jmp    4015a4 <_main+0x7a>
+  C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\checker_562\analysis\checker_disassembly.txt:422:  401598:	c7 04 24 c2 50 40 00 	mov    DWORD PTR [esp],0x4050c2
+  C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\checker_562\analysis\checker_disassembly.txt:423:  40159f:	e8 ec 25 00 00       	call   403b90 <_puts>
+  C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\checker_562\analysis\checker_disassembly.txt:424:  4015a4:	b8 00 00 00 00       	mov    eax,0x0
+  C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\checker_562\analysis\checker_disassembly.txt:425:  4015a9:	c9                   	leave
+  C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\checker_562\analysis\checker_disassembly.txt:426:  4015aa:	c3                   	ret
+  C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\checker_562\analysis\checker_disassembly.txt:427:  4015ab:	90                   	nop
+  C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\checker_562\analysis\checker_disassembly.txt:428:  4015ac:	66 90                	xchg   ax,ax
+  C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\checker_562\analysis\checker_disassembly.txt:429:  4015ae:	66 90                	xchg   ax,ax
+  C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\checker_562\analysis\checker_disassembly.txt:430:
+  C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\checker_562\analysis\checker_disassembly.txt:431:004015b0 <__setargv>:
+  C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\checker_562\analysis\checker_disassembly.txt:432:  4015b0:	55                   	push   ebp
+  C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\checker_562\analysis\checker_disassembly.txt:433:  4015b1:	89 e5                	mov    ebp,esp
+  C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\checker_562\analysis\checker_disassembly.txt:434:  4015b3:	57                   	push   edi
+  C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\checker_562\analysis\checker_disassembly.txt:435:  4015b4:	56                   	push   esi
+  C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\checker_562\analysis\checker_disassembly.txt:436:  4015b5:	53                   	push   ebx
+  C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\checker_562\analysis\checker_disassembly.txt:437:  4015b6:	83 ec 4c             	sub    esp,0x4c
+  C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\checker_562\analysis\checker_disassembly.txt:438:  4015b9:	f6 05 60 40 40 00 02 	test   BYTE PTR ds:0x404060,0x2
+  C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\checker_562\analysis\checker_disassembly.txt:439:  4015c0:	0f 84 ea 02 00 00    	je     4018b0 <__setargv+0x300>
+  C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\checker_562\analysis\checker_disassembly.txt:440:  4015c6:	e8 ad 26 00 00       	call   403c78 <_GetCommandLineA@0>
+  C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\checker_562\analysis\checker_disassembly.txt:441:  4015cb:	89 65 c4             	mov    DWORD PTR [ebp-0x3c],esp
+  C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\checker_562\analysis\checker_disassembly.txt:442:  4015ce:	89 04 24             	mov    DWORD PTR [esp],eax
+  C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\checker_562\analysis\checker_disassembly.txt:443:  4015d1:	89 c6                	mov    esi,eax
+  C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\checker_562\analysis\checker_disassembly.txt:444:  4015d3:	e8 80 25 00 00       	call   403b58 <_strlen>
+  C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\checker_562\analysis\checker_disassembly.txt:445:  4015d8:	8d 44 00 11          	lea    eax,[eax+eax*1+0x11]
+  C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\checker_562\analysis\checker_disassembly.txt:446:  4015dc:	c1 e8 04             	shr    eax,0x4
+  C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\checker_562\analysis\checker_disassembly.txt:447:  4015df:	c1 e0 04             	shl    eax,0x4
+  C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\checker_562\analysis\checker_disassembly.txt:448:  4015e2:	e8 49 0b 00 00       	call   402130 <___chkstk_ms>
+  C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\checker_562\analysis\checker_disassembly.txt:449:  4015e7:	29 c4                	sub    esp,eax
+  C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\checker_562\analysis\checker_disassembly.txt:450:  4015e9:	c7 45 e4 00 00 00 00 	mov    DWORD PTR [ebp-0x1c],0x0
+  C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\checker_562\analysis\checker_disassembly.txt:451:  4015f0:	c7 45 d4 00 00 00 00 	mov    DWORD PTR [ebp-0x2c],0x0
+  C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\checker_562\analysis\checker_disassembly.txt:452:  4015f7:	8d 44 24 10          	lea    eax,[esp+0x10]
+  C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\checker_562\analysis\checker_disassembly.txt:453:  4015fb:	c7 45 d0 00 00 00 00 	mov    DWORD PTR [ebp-0x30],0x0
+  C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\checker_562\analysis\checker_disassembly.txt:454:  401602:	89 c2                	mov    edx,eax
+  C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\checker_562\analysis\checker_disassembly.txt:455:  401604:	89 45 cc             	mov    DWORD PTR [ebp-0x34],eax
+  C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\checker_562\analysis\checker_disassembly.txt:456:  401607:	a1 60 40 40 00       	mov    eax,ds:0x404060
+  C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\checker_562\analysis\checker_disassembly.txt:457:  40160c:	25 00 44 00 00       	and    eax,0x4400
+  C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\checker_562\analysis\checker_disassembly.txt:458:  401611:	83 c8 10             	or     eax,0x10
+  C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\checker_562\analysis\checker_disassembly.txt:459:  401614:	89 45 c8             	mov    DWORD PTR [ebp-0x38],eax
+  C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\checker_562\analysis\checker_disassembly.txt:460:  401617:	31 c0                	xor    eax,eax
+  C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\checker_562\analysis\checker_disassembly.txt:461:  401619:	8d b4 26 00 00 00 00 	lea    esi,[esi+eiz*1+0x0]
+  C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\checker_562\analysis\checker_disassembly.txt:462:  401620:	83 c6 01             	add    esi,0x1
+  C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\checker_562\analysis\checker_disassembly.txt:463:  401623:	0f be 4e ff          	movsx  ecx,BYTE PTR [esi-0x1]
+  C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\checker_562\analysis\checker_disassembly.txt:464:  401627:	85 c9                	test   ecx,ecx
+  C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\checker_562\analysis\checker_disassembly.txt:465:  401629:	89 cb                	mov    ebx,ecx
+  C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\checker_562\analysis\checker_disassembly.txt:466:  40162b:	74 73                	je     4016a0 <__setargv+0xf0>
+  C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\checker_562\analysis\checker_disassembly.txt:467:  40162d:	80 fb 3f             	cmp    bl,0x3f
+  C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\checker_562\analysis\checker_disassembly.txt:468:  401630:	0f 84 8d 01 00 00    	je     4017c3 <__setargv+0x213>
+  C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\checker_562\analysis\checker_disassembly.txt:469:  401636:	0f 8f b4 00 00 00    	jg     4016f0 <__setargv+0x140>
+  C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\checker_562\analysis\checker_disassembly.txt:470:  40163c:	80 fb 27             	cmp    bl,0x27
+  C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\checker_562\analysis\checker_disassembly.txt:471:  40163f:	0f 84 b0 01 00 00    	je     4017f5 <__setargv+0x245>
+  C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\checker_562\analysis\checker_disassembly.txt:472:  401645:	80 fb 2a             	cmp    bl,0x2a
+  C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\checker_562\analysis\checker_disassembly.txt:473:  401648:	0f 84 75 01 00 00    	je     4017c3 <__setargv+0x213>
+  C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\checker_562\analysis\checker_disassembly.txt:474:  40164e:	80 fb 22             	cmp    bl,0x22
+  C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\checker_562\analysis\checker_disassembly.txt:475:  401651:	0f 85 09 01 00 00    	jne    401760 <__setargv+0x1b0>
+  C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\checker_562\analysis\checker_disassembly.txt:476:  401657:	89 c1                	mov    ecx,eax
+  C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\checker_562\analysis\checker_disassembly.txt:477:  401659:	d1 f9                	sar    ecx,1
+  C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\checker_562\analysis\checker_disassembly.txt:478:  40165b:	0f 84 d9 02 00 00    	je     40193a <__setargv+0x38a>
+  C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\checker_562\analysis\checker_disassembly.txt:479:  401661:	01 d1                	add    ecx,edx
+  C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\checker_562\analysis\checker_disassembly.txt:480:  401663:	83 c2 01             	add    edx,0x1
+  C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\checker_562\analysis\checker_disassembly.txt:481:  401666:	c6 42 ff 5c          	mov    BYTE PTR [edx-0x1],0x5c
+  401586:	85 c0                	test   eax,eax
+  401588:	74 0e                	je     401598 <_main+0x6e>
+  40158a:	c7 04 24 a6 50 40 00 	mov    DWORD PTR [esp],0x4050a6
+  401591:	e8 fa 25 00 00       	call   403b90 <_puts>
+  401596:	eb 0c                	jmp    4015a4 <_main+0x7a>
+  401598:	c7 04 24 c2 50 40 00 	mov    DWORD PTR [esp],0x4050c2
+  40159f:	e8 ec 25 00 00       	call   403b90 <_puts>
+  4015a4:	b8 00 00 00 00       	mov    eax,0x0
+  4015a9:	c9                   	leave
+  4015aa:	c3                   	ret
+  4015ab:	90                   	nop
+  4015ac:	66 90                	xchg   ax,ax
+  4015ae:	66 90                	xchg   ax,ax
+
+004015b0 <__setargv>:
+  4015b0:	55                   	push   ebp
+  4015b1:	89 e5                	mov    ebp,esp
+  4015b3:	57                   	push   edi
+  4015b4:	56                   	push   esi
+  4015b5:	53                   	push   ebx
+  4015b6:	83 ec 4c             	sub    esp,0x4c
+  4015b9:	f6 05 60 40 40 00 02 	test   BYTE PTR ds:0x404060,0x2
+  4015c0:	0f 84 ea 02 00 00    	je     4018b0 <__setargv+0x300>
+  4015c6:	e8 ad 26 00 00       	call   403c78 <_GetCommandLineA@0>
+  4015cb:	89 65 c4             	mov    DWORD PTR [ebp-0x3c],esp
+  4015ce:	89 04 24             	mov    DWORD PTR [esp],eax
+  4015d1:	89 c6                	mov    esi,eax
+  4015d3:	e8 80 25 00 00       	call   403b58 <_strlen>
+  4015d8:	8d 44 00 11          	lea    eax,[eax+eax*1+0x11]
+  4015dc:	c1 e8 04             	shr    eax,0x4
+  4015df:	c1 e0 04             	shl    eax,0x4
+  4015e2:	e8 49 0b 00 00       	call   402130 <___chkstk_ms>
+  4015e7:	29 c4                	sub    esp,eax
+  4015e9:	c7 45 e4 00 00 00 00 	mov    DWORD PTR [ebp-0x1c],0x0
+  4015f0:	c7 45 d4 00 00 00 00 	mov    DWORD PTR [ebp-0x2c],0x0
+  4015f7:	8d 44 24 10          	lea    eax,[esp+0x10]
+  4015fb:	c7 45 d0 00 00 00 00 	mov    DWORD PTR [ebp-0x30],0x0
+  401602:	89 c2                	mov    edx,eax
+  401604:	89 45 cc             	mov    DWORD PTR [ebp-0x34],eax
+  401607:	a1 60 40 40 00       	mov    eax,ds:0x404060
+  40160c:	25 00 44 00 00       	and    eax,0x4400
+  401611:	83 c8 10             	or     eax,0x10
+  401614:	89 45 c8             	mov    DWORD PTR [ebp-0x38],eax
+  401617:	31 c0                	xor    eax,eax
+  401619:	8d b4 26 00 00 00 00 	lea    esi,[esi+eiz*1+0x0]
+  401620:	83 c6 01             	add    esi,0x1
+  401623:	0f be 4e ff          	movsx  ecx,BYTE PTR [esi-0x1]
+  401627:	85 c9                	test   ecx,ecx
+  401629:	89 cb                	mov    ebx,ecx
+  40162b:	74 73                	je     4016a0 <__setargv+0xf0>
+  40162d:	80 fb 3f             	cmp    bl,0x3f
+  401630:	0f 84 8d 01 00 00    	je     4017c3 <__setargv+0x213>
+  401636:	0f 8f b4 00 00 00    	jg     4016f0 <__setargv+0x140>
+  40163c:	80 fb 27             	cmp    bl,0x27
+  40163f:	0f 84 b0 01 00 00    	je     4017f5 <__setargv+0x245>
+  401645:	80 fb 2a             	cmp    bl,0x2a
+  401648:	0f 84 75 01 00 00    	je     4017c3 <__setargv+0x213>
+  40164e:	80 fb 22             	cmp    bl,0x22
+  401651:	0f 85 09 01 00 00    	jne    401760 <__setargv+0x1b0>
+  401657:	89 c1                	mov    ecx,eax
+  401659:	d1 f9                	sar    ecx,1
+  40165b:	0f 84 d9 02 00 00    	je     40193a <__setargv+0x38a>
+  401661:	01 d1                	add    ecx,edx
+  401663:	83 c2 01             	add    edx,0x1
+  401666:	c6 42 ff 5c          	mov    BYTE PTR [edx-0x1],0x5c
+--- PYTHON PE READER OUTPUT ---
+COMMAND> python .\题目资料\checker_562\analysis\solve_checker_from_pe.py .\题目资料\checker_562\附件_20260929\checker.exe
+
+**********************
+PowerShell transcript end
+End time: 20260929033905
+**********************
+**********************
+PowerShell transcript start
+Start time: 20260929034002
+Username: DESKTOP-412KTAR\mzj
+RunAs User: DESKTOP-412KTAR\mzj
+Configuration Name: 
+Machine: DESKTOP-412KTAR (Microsoft Windows NT 10.0.26200.0)
+Host Application: C:\Users\mzj\.cache\codex-runtimes\codex-primary-runtime\dependencies\native\powershell\pwsh.dll -Command try { [Console]::OutputEncoding=[System.Text.Encoding]::UTF8 } catch {}
+$ErrorActionPreference='Stop'; $log='C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\checker_562\analysis\checker_562_reaudit_transcript_20260929.txt'; Start-Transcript -LiteralPath $log -Append; $zipPath='C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\checker_562\checker_platform_20260929.zip'; $exePath='C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\checker_562\附件_20260929\checker.exe'; $asmPath='C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\checker_562\analysis\checker_disassembly.txt'; Write-Output "COMMAND> Read ZIP central directory and SHA256 each member; compare extracted EXE SHA256"; Add-Type -AssemblyName System.IO.Compression.FileSystem; $archive=[System.IO.Compression.ZipFile]::OpenRead($zipPath); try { foreach($entry in $archive.Entries) { $stream=$entry.Open(); try { $sha=[System.Security.Cryptography.SHA256]::Create(); try { $digest=[Convert]::ToHexString($sha.ComputeHash($stream)) } finally { $sha.Dispose() }; Write-Output ("ZIP MEMBER: {0}; LENGTH: {1}; SHA256: {2}" -f $entry.FullName,$entry.Length,$digest) } finally { $stream.Dispose() } } } finally { $archive.Dispose() }; Write-Output 'EXTRACTED FILE:'; Get-FileHash -Algorithm SHA256 -LiteralPath $exePath | Format-List; Write-Output '--- RELEVANT DISASSEMBLY, LINES 321-425 ---'; Write-Output "COMMAND> Get-Content '$asmPath' | Select-Object -Skip 320 -First 105"; Get-Content -LiteralPath $asmPath | Select-Object -Skip 320 -First 105; $flag='flag{enp17I4p8TZmAriao2lq5tAArZ2P1wxBUwXU2}'; $chars=$flag.ToCharArray(); Write-Output ("LENGTH CHECK: chars={0}; charsIncludingCRLF={1}; fgets maximum chars before NUL=49" -f $chars.Length,($chars.Length+2)); Write-Output '--- RUN EXACT CANDIDATE AGAINST EXTRACTED ORIGINAL ---'; Write-Output ('$flag | & ' + $exePath); $flag | & $exePath; Stop-Transcript
+Process ID: 20916
+PSVersion: 7.6.5
+PSEdition: Core
+GitCommitId: 7.6.5
+OS: Microsoft Windows 10.0.26200
+Platform: Win32NT
+PSCompatibleVersions: 1.0, 2.0, 3.0, 4.0, 5.0, 5.1, 6.0, 7.0
+PSRemotingProtocolVersion: 2.4
+SerializationVersion: 1.1.0.1
+WSManStackVersion: 3.0
+**********************
+Transcript started, output file is C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\checker_562\analysis\checker_562_reaudit_transcript_20260929.txt
+COMMAND> Read ZIP central directory and SHA256 each member; compare extracted EXE SHA256
+ZIP MEMBER: checker.exe; LENGTH: 42857; SHA256: 449D9F4569A0ED70FCB9BC8B96737719B62CFD8AE7C1E99D2864A3999887FDF5
+EXTRACTED FILE:
+
+Algorithm : SHA256
+Hash      : 449D9F4569A0ED70FCB9BC8B96737719B62CFD8AE7C1E99D2864A3999887FDF5
+Path      : C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\checker_562\附件_20260929\checker.exe
+
+--- RELEVANT DISASSEMBLY, LINES 321-425 ---
+COMMAND> Get-Content 'C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\checker_562\analysis\checker_disassembly.txt' | Select-Object -Skip 320 -First 105
+00401460 <_fake_check>:
+  401460:	55                   	push   ebp
+  401461:	89 e5                	mov    ebp,esp
+  401463:	83 ec 18             	sub    esp,0x18
+  401466:	c7 04 24 64 50 40 00 	mov    DWORD PTR [esp],0x405064
+  40146d:	e8 1e 27 00 00       	call   403b90 <_puts>
+  401472:	c7 04 24 e8 03 00 00 	mov    DWORD PTR [esp],0x3e8
+  401479:	e8 ba 27 00 00       	call   403c38 <_Sleep@4>
+  40147e:	83 ec 04             	sub    esp,0x4
+  401481:	c7 04 24 81 50 40 00 	mov    DWORD PTR [esp],0x405081
+  401488:	e8 03 27 00 00       	call   403b90 <_puts>
+  40148d:	90                   	nop
+  40148e:	c9                   	leave
+  40148f:	c3                   	ret
+
+00401490 <_encrypt_flag>:
+  401490:	55                   	push   ebp
+  401491:	89 e5                	mov    ebp,esp
+  401493:	83 ec 28             	sub    esp,0x28
+  401496:	c7 45 f0 23 00 00 00 	mov    DWORD PTR [ebp-0x10],0x23
+  40149d:	c7 45 f4 00 00 00 00 	mov    DWORD PTR [ebp-0xc],0x0
+  4014a4:	eb 1e                	jmp    4014c4 <_encrypt_flag+0x34>
+  4014a6:	8b 55 f4             	mov    edx,DWORD PTR [ebp-0xc]
+  4014a9:	8b 45 0c             	mov    eax,DWORD PTR [ebp+0xc]
+  4014ac:	01 d0                	add    eax,edx
+  4014ae:	8b 4d f4             	mov    ecx,DWORD PTR [ebp-0xc]
+  4014b1:	8b 55 08             	mov    edx,DWORD PTR [ebp+0x8]
+  4014b4:	01 ca                	add    edx,ecx
+  4014b6:	0f b6 0a             	movzx  ecx,BYTE PTR [edx]
+  4014b9:	8b 55 f0             	mov    edx,DWORD PTR [ebp-0x10]
+  4014bc:	31 ca                	xor    edx,ecx
+  4014be:	88 10                	mov    BYTE PTR [eax],dl
+  4014c0:	83 45 f4 01          	add    DWORD PTR [ebp-0xc],0x1
+  4014c4:	8b 45 08             	mov    eax,DWORD PTR [ebp+0x8]
+  4014c7:	89 04 24             	mov    DWORD PTR [esp],eax
+  4014ca:	e8 89 26 00 00       	call   403b58 <_strlen>
+  4014cf:	89 c2                	mov    edx,eax
+  4014d1:	8b 45 f4             	mov    eax,DWORD PTR [ebp-0xc]
+  4014d4:	39 c2                	cmp    edx,eax
+  4014d6:	77 ce                	ja     4014a6 <_encrypt_flag+0x16>
+  4014d8:	8b 45 08             	mov    eax,DWORD PTR [ebp+0x8]
+  4014db:	89 04 24             	mov    DWORD PTR [esp],eax
+  4014de:	e8 75 26 00 00       	call   403b58 <_strlen>
+  4014e3:	89 c2                	mov    edx,eax
+  4014e5:	8b 45 0c             	mov    eax,DWORD PTR [ebp+0xc]
+  4014e8:	01 d0                	add    eax,edx
+  4014ea:	c6 00 00             	mov    BYTE PTR [eax],0x0
+  4014ed:	90                   	nop
+  4014ee:	c9                   	leave
+  4014ef:	c3                   	ret
+
+004014f0 <_check_flag>:
+  4014f0:	55                   	push   ebp
+  4014f1:	89 e5                	mov    ebp,esp
+  4014f3:	83 ec 58             	sub    esp,0x58
+  4014f6:	e8 65 ff ff ff       	call   401460 <_fake_check>
+  4014fb:	8d 45 c6             	lea    eax,[ebp-0x3a]
+  4014fe:	89 44 24 04          	mov    DWORD PTR [esp+0x4],eax
+  401502:	8b 45 08             	mov    eax,DWORD PTR [ebp+0x8]
+  401505:	89 04 24             	mov    DWORD PTR [esp],eax
+  401508:	e8 83 ff ff ff       	call   401490 <_encrypt_flag>
+  40150d:	c7 44 24 04 20 40 40 	mov    DWORD PTR [esp+0x4],0x404020
+  401514:	00
+  401515:	8d 45 c6             	lea    eax,[ebp-0x3a]
+  401518:	89 04 24             	mov    DWORD PTR [esp],eax
+  40151b:	e8 50 26 00 00       	call   403b70 <_strcmp>
+  401520:	85 c0                	test   eax,eax
+  401522:	0f 94 c0             	sete   al
+  401525:	0f b6 c0             	movzx  eax,al
+  401528:	c9                   	leave
+  401529:	c3                   	ret
+
+0040152a <_main>:
+  40152a:	55                   	push   ebp
+  40152b:	89 e5                	mov    ebp,esp
+  40152d:	83 e4 f0             	and    esp,0xfffffff0
+  401530:	83 ec 50             	sub    esp,0x50
+  401533:	e8 a8 05 00 00       	call   401ae0 <___main>
+  401538:	c7 04 24 93 50 40 00 	mov    DWORD PTR [esp],0x405093
+  40153f:	e8 54 26 00 00       	call   403b98 <_printf>
+  401544:	a1 bc 81 40 00       	mov    eax,ds:0x4081bc
+  401549:	89 44 24 08          	mov    DWORD PTR [esp+0x8],eax
+  40154d:	c7 44 24 04 32 00 00 	mov    DWORD PTR [esp+0x4],0x32
+  401554:	00
+  401555:	8d 44 24 1e          	lea    eax,[esp+0x1e]
+  401559:	89 04 24             	mov    DWORD PTR [esp],eax
+  40155c:	e8 67 26 00 00       	call   403bc8 <_fgets>
+  401561:	c7 44 24 04 a4 50 40 	mov    DWORD PTR [esp+0x4],0x4050a4
+  401568:	00
+  401569:	8d 44 24 1e          	lea    eax,[esp+0x1e]
+  40156d:	89 04 24             	mov    DWORD PTR [esp],eax
+  401570:	e8 eb 25 00 00       	call   403b60 <_strcspn>
+  401575:	c6 44 04 1e 00       	mov    BYTE PTR [esp+eax*1+0x1e],0x0
+  40157a:	8d 44 24 1e          	lea    eax,[esp+0x1e]
+  40157e:	89 04 24             	mov    DWORD PTR [esp],eax
+  401581:	e8 6a ff ff ff       	call   4014f0 <_check_flag>
+  401586:	85 c0                	test   eax,eax
+  401588:	74 0e                	je     401598 <_main+0x6e>
+  40158a:	c7 04 24 a6 50 40 00 	mov    DWORD PTR [esp],0x4050a6
+  401591:	e8 fa 25 00 00       	call   403b90 <_puts>
+  401596:	eb 0c                	jmp    4015a4 <_main+0x7a>
+  401598:	c7 04 24 c2 50 40 00 	mov    DWORD PTR [esp],0x4050c2
+  40159f:	e8 ec 25 00 00       	call   403b90 <_puts>
+  4015a4:	b8 00 00 00 00       	mov    eax,0x0
+  4015a9:	c9                   	leave
+LENGTH CHECK: chars=43; charsIncludingCRLF=45; fgets maximum chars before NUL=49
+--- RUN EXACT CANDIDATE AGAINST EXTRACTED ORIGINAL ---
+$flag | & C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\checker_562\附件_20260929\checker.exe
+**********************
+PowerShell transcript end
+End time: 20260929034003
+**********************
+**********************
+PowerShell transcript start
+Start time: 20260929034126
+Username: DESKTOP-412KTAR\mzj
+RunAs User: DESKTOP-412KTAR\mzj
+Configuration Name: 
+Machine: DESKTOP-412KTAR (Microsoft Windows NT 10.0.26200.0)
+Host Application: C:\Users\mzj\.cache\codex-runtimes\codex-primary-runtime\dependencies\native\powershell\pwsh.dll -Command try { [Console]::OutputEncoding=[System.Text.Encoding]::UTF8 } catch {}
+$ErrorActionPreference='Stop'; $log='C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\checker_562\analysis\checker_562_reaudit_transcript_20260929.txt'; Start-Transcript -LiteralPath $log -Append; $wp='C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\checker_562\analysis\checker_562_WP.md'; Write-Output "COMMAND> Select-String -Path '$wp' -Pattern '二次核对|平台拒绝|checker_562_reaudit_transcript|容量' -Context 1,2"; Select-String -LiteralPath $wp -Pattern '二次核对|平台拒绝|checker_562_reaudit_transcript|容量' -Context 1,2; Write-Output 'COMMAND> Get-Item WP and transcript, print lengths'; Get-Item -LiteralPath $wp,$log | Select-Object FullName,Length,LastWriteTime | Format-Table -AutoSize; Stop-Transcript
+Process ID: 19428
+PSVersion: 7.6.5
+PSEdition: Core
+GitCommitId: 7.6.5
+OS: Microsoft Windows 10.0.26200
+Platform: Win32NT
+PSCompatibleVersions: 1.0, 2.0, 3.0, 4.0, 5.0, 5.1, 6.0, 7.0
+PSRemotingProtocolVersion: 2.4
+SerializationVersion: 1.1.0.1
+WSManStackVersion: 3.0
+**********************
+Transcript started, output file is C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\checker_562\analysis\checker_562_reaudit_transcript_20260929.txt
+COMMAND> Select-String -Path 'C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\checker_562\analysis\checker_562_WP.md' -Pattern '二次核对|平台拒绝|checker_562_reaudit_transcript|容量' -Context 1,2
+
+  玄机刷题\题目资料\checker_562\analysis\checker_562_WP.md:97:
+> 玄机刷题\题目资料\checker_562\analysis\checker_562_WP.md:98:随后 `_main` 用 `strcspn(input, "\n")` 把换行改为 NUL。因
+此通过终端输入或 PowerShell 管道提交完整 43 字符候选均不会被截断。`_check_flag` 的栈输出区也足以容纳 43 字节结果和终止
+符。长度及换行处理不能解释平台拒绝。
+  玄机刷题\题目资料\checker_562\analysis\checker_562_WP.md:99:
+  玄机刷题\题目资料\checker_562\analysis\checker_562_WP.md:100:### 6. 用原始附件本机验证
+  玄机刷题\题目资料\checker_562\analysis\checker_562_WP.md:112:
+> 玄机刷题\题目资料\checker_562\analysis\checker_562_WP.md:113:## 二次核对：输入边界、编码与隐藏校验
+  玄机刷题\题目资料\checker_562\analysis\checker_562_WP.md:114:
+  玄机刷题\题目资料\checker_562\analysis\checker_562_WP.md:115:这次复核针对“是否因为输入格式/终端编码/缓冲区边界，导致
+已逆出的字符串不能通过 checker”逐条检查：
+  玄机刷题\题目资料\checker_562\analysis\checker_562_WP.md:118:2. **比较逻辑。** `_check_flag` 的唯一真假分支是 `_encry
+pt_flag` 的结果与 `0x404020` 处密文执行 `strcmp`。`_encrypt_flag` 对输入字符串逐字节 XOR 固定 `0x23`，不识别或剥除前缀
+，也不做哈希、Base64、UTF-8 转码或其他归一化。`strcmp` 区分大小写；花括号与 `flag` 前缀都是比较数据的一部分。
+> 玄机刷题\题目资料\checker_562\analysis\checker_562_WP.md:119:3. **容量。** `_check_flag` 将输出区地址设为 `[ebp-0x3a]
+`，局部缓冲区容量足以保存最长 49 字节输入及 NUL。候选长 43 字节，输入、变换结果及密文长度均为 43，没有截断或缓冲区边界
+问题。
+  玄机刷题\题目资料\checker_562\analysis\checker_562_WP.md:120:4. **实机复核。** 复核原 ZIP 的唯一成员 `checker.exe` 与
+提取文件 SHA-256 均为 `449D9F4569A0ED70FCB9BC8B96737719B62CFD8AE7C1E99D2864A3999887FDF5`。将同一候选直接管道给这份提取
+文件，输出 `Correct! You have the flag.`。因此目前证据排除了 checker 本地端的输入格式、编码与长度问题；它不能证明玄机服
+务端采用相同附件或相同 flag。
+  玄机刷题\题目资料\checker_562\analysis\checker_562_WP.md:121:
+> 玄机刷题\题目资料\checker_562\analysis\checker_562_WP.md:122:本轮没有尝试大小写变形、去掉 `flag{}` 或猜测其他格式，也
+没有再次向平台提交。唯一可由附件证明的本地答案仍是前述候选。平台拒绝与本地成功相互矛盾，单凭本地二进制无法判断是题面附
+件与平台校验值不同、平台题目版本不同，还是别的服务端数据问题；需要对照平台当前下载附件哈希和题目后台校验数据才能定因。
+  玄机刷题\题目资料\checker_562\analysis\checker_562_WP.md:123:
+  玄机刷题\题目资料\checker_562\analysis\checker_562_WP.md:124:## 可复现命令
+  玄机刷题\题目资料\checker_562\analysis\checker_562_WP.md:150:- 初始命令、哈希、解密输出和本地运行记录：`checker_audit
+_terminal_20260929.txt`
+> 玄机刷题\题目资料\checker_562\analysis\checker_562_WP.md:151:- 本轮独立复核 transcript（附件哈希、相关反汇编、长度边
+界、原附件执行结果）：`checker_562_reaudit_transcript_20260929.txt`
+COMMAND> Get-Item WP and transcript, print lengths
+
+
+FullName                                                                                                    Length Last
+                                                                                                                   Writ
+                                                                                                                   eTim
+                                                                                                                   e
+--------                                                                                                    ------ ----
+C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\checker_562\analysis\checker_562_WP.md                             9006 202…
+C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\checker_562\analysis\checker_562_reaudit_transcript_20260929.txt 103423 202…
+
+**********************
+PowerShell transcript end
+End time: 20260929034126
+**********************

@@ -1,0 +1,237 @@
+**********************
+PowerShell transcript start
+Start time: 20260929164357
+Username: DESKTOP-412KTAR\mzj
+RunAs User: DESKTOP-412KTAR\mzj
+Configuration Name: 
+Machine: DESKTOP-412KTAR (Microsoft Windows NT 10.0.26200.0)
+Host Application: C:\Users\mzj\.cache\codex-runtimes\codex-primary-runtime\dependencies\native\powershell\pwsh.dll -NoProfile -Command try { [Console]::OutputEncoding=[System.Text.Encoding]::UTF8 } catch {}
+$ErrorActionPreference='Continue'
+$project='C:\Users\mzj\Desktop\CTF\玄机刷题';$recordDir=Join-Path $project '记录';$log=Join-Path $recordDir '附件_WP_补查_20260929.txt';Start-Transcript -LiteralPath $log -Force | Out-Null
+Write-Output '--- PROJECT ROOT ---';Get-ChildItem -LiteralPath $project -Directory -Force | Sort-Object Name | ForEach-Object { $_.Name }
+$roots=@((Join-Path $project '题目资料\原始下载附件'),(Join-Path $project '题目资料\新题批次'),(Join-Path $project '题目资料\WSL平台归档'),(Join-Path $project 'figures\raw'),(Join-Path (Split-Path $project -Parent) 'labs\platform\attachments'),'D:\Downloads')
+foreach($r in $roots){if(Test-Path -LiteralPath $r){$files=@(Get-ChildItem -LiteralPath $r -File -Recurse -Force -ErrorAction SilentlyContinue);$dirs=@(Get-ChildItem -LiteralPath $r -Directory -Force -ErrorAction SilentlyContinue);Write-Output "--- ROOT $r files=$($files.Count) immediateDirs=$($dirs.Count) ---";if($dirs.Count){$dirs|Select-Object -First 70|ForEach-Object{$_.Name}}else{$files|Select-Object -First 70|ForEach-Object{$_.Name+' ['+$_.Length+' B]'}}}else{Write-Output "--- MISSING ROOT $r ---"}}
+$guide=Join-Path $project '指南\玄机刷题指南_合并源.md';if(Test-Path -LiteralPath $guide){$lines=Get-Content -LiteralPath $guide;Write-Output "--- GUIDE STRUCTURE h1=$(@($lines|Where-Object{$_ -match '^# '}).Count) h2=$(@($lines|Where-Object{$_ -match '^## '}).Count) ---";Select-String -LiteralPath $guide -Pattern '^# ' | ForEach-Object { '{0}: {1}' -f $_.LineNumber,$_.Line.Trim() };Write-Output '--- WP/DETAIL MARKERS ---';Select-String -LiteralPath $guide -Pattern '详细WP|完整WP|完整解题|完整逐步|原始记录|命令记录|平台回执|Flag：|flag：' | Select-Object -First 100 | ForEach-Object { '{0}: {1}' -f $_.LineNumber,$_.Line.Trim() }}
+Stop-Transcript|Out-Null;Write-Output "TRANSCRIPT=$log"
+Process ID: 42576
+PSVersion: 7.6.5
+PSEdition: Core
+GitCommitId: 7.6.5
+OS: Microsoft Windows 10.0.26200
+Platform: Win32NT
+PSCompatibleVersions: 1.0, 2.0, 3.0, 4.0, 5.0, 5.1, 6.0, 7.0
+PSRemotingProtocolVersion: 2.4
+SerializationVersion: 1.1.0.1
+WSManStackVersion: 3.0
+**********************
+--- PROJECT ROOT ---
+工作区
+记录
+题目资料
+题目資料
+指南
+figures
+labs
+tools
+--- ROOT C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\原始下载附件 files=28 immediateDirs=0 ---
+班次邮戳附件.zip [160365 B]
+被入侵的数据库.zip [29595 B]
+即随本心.zip [12817910 B]
+可疑流量分析附件.zip [266740 B]
+你知道Base么-20250521104202-am92t17.rar [14603 B]
+arkt.zip [109627 B]
+attachments.zip [6049341 B]
+babyRe.zip [5883266 B]
+babyrsa.zip [1661 B]
+checker.zip [17498 B]
+crazyaes-20240524094418-p72tac5.zip [155757 B]
+easyre.zip [117343 B]
+encrypted_flag.zip [198 B]
+ezBase-20250521104055-dq14shk.rar [7833 B]
+go_for_it.zip [636919 B]
+hookme.rar [5125397 B]
+manifest.csv [6979 B]
+note.zip [5832 B]
+PaluArray_flag.zip [73952 B]
+Prompt+Trace附件.zip [2579 B]
+rainbow.zip [4038 B]
+README.md [7656 B]
+secret.zip [1170497 B]
+spring.zip [30014 B]
+Sql注入的应急排查.zip [315805 B]
+tradre.zip [11073 B]
+Veiled+Shell附件.zip [7404 B]
+Victory_Melody.zip [13676 B]
+--- ROOT C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\新题批次 files=28 immediateDirs=2 ---
+DigitalKey_UWB_520
+PaluMaze_551
+--- ROOT C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\WSL平台归档 files=47 immediateDirs=1 ---
+pwn-lab
+--- ROOT C:\Users\mzj\Desktop\CTF\玄机刷题\figures\raw files=111 immediateDirs=0 ---
+fig-crypto-01-env-check.txt [517 B]
+fig-crypto-02-env-check-wsl.txt [515 B]
+fig-crypto-03-ascii-hex-demo.txt [567 B]
+fig-crypto-05-mod-demo.txt [693 B]
+fig-crypto-08-tool-python.txt [539 B]
+fig-crypto-09-tool-xxd.txt [888 B]
+fig-crypto-10-tool-invmod.txt [610 B]
+fig-crypto-11-c0-hex-bytes.txt [758 B]
+fig-crypto-12-c1-xor-hex.txt [664 B]
+fig-crypto-13-c1-brute.txt [1015 B]
+fig-crypto-14-c1-verify.txt [702 B]
+fig-crypto-15-c2-zip-contents.txt [1148 B]
+fig-crypto-16-c2-sample-check.txt [1138 B]
+fig-crypto-17-c2-five-grid-run.txt [596 B]
+fig-crypto-18-c3-rsa-txt.txt [786 B]
+fig-crypto-19-c3-pow-trialdiv.txt [819 B]
+fig-crypto-20-c3-decrypt.txt [637 B]
+fig-crypto-21-c4-receipt-fields.txt [914 B]
+fig-crypto-22-c4-bezout.txt [779 B]
+fig-crypto-23-c4-receipt-run.txt [617 B]
+fig-crypto-24-eea-demo.py [1362 B]
+fig-crypto-24-eea-demo.txt [938 B]
+fig-crypto-25-b64-vs-hex.py [786 B]
+fig-crypto-25-b64-vs-hex.txt [626 B]
+fig-misc-01-file-magic.txt [396 B]
+fig-misc-02-strings-pixel.txt [714 B]
+fig-misc-03-png-chunks.txt [947 B]
+fig-misc-04-textt-flag.txt [672 B]
+fig-misc-05-file-pcap.txt [479 B]
+fig-misc-06-pcap-packets.txt [1184 B]
+fig-misc-07-udp-reassemble.txt [814 B]
+fig-misc-08-583-tail-pk.txt [1655 B]
+fig-misc-09-583-zip-list.txt [1112 B]
+fig-misc-10-581-solve.txt [523 B]
+fig-misc-11-581-lsb-recheck.txt [719 B]
+fig-misc-12-591-csv-head.txt [1074 B]
+fig-misc-13-591-solve.txt [293 B]
+fig-misc-14-env-check.txt [693 B]
+fig-misc-19-hash-demo.txt [377 B]
+fig-misc-20-endian-struct.py [1498 B]
+fig-misc-20-endian-struct.txt [585 B]
+fig-pwn-01-env-check.txt [456 B]
+fig-pwn-02-build.txt [1551 B]
+fig-pwn-03-overflow-src.txt [640 B]
+fig-pwn-04-normal-run.txt [193 B]
+fig-pwn-05-struct-layout.txt [459 B]
+fig-pwn-06-readelf-nm.txt [904 B]
+fig-pwn-07-objdump-main.txt [1637 B]
+fig-pwn-08-payload-xxd.txt [736 B]
+fig-pwn-09-overflow-win.txt [363 B]
+fig-pwn-10-endian-pack.txt [584 B]
+fig-pwn-11-format-src.txt [395 B]
+fig-pwn-12-format-leak.txt [420 B]
+fig-pwn-13-strings.txt [495 B]
+fig-pwn-14-fixed-format.txt [604 B]
+fig-pwn-15-protect-check.txt [2125 B]
+fig-pwn-16-toolbox-file-xxd.txt [924 B]
+fig-pwn-17-py-struct.txt [320 B]
+fig-pwn-18-xuanji-usage.txt [786 B]
+fig-pwn-22-length-experiment.txt [953 B]
+fig-pwn-23-byte-count.txt [282 B]
+fig-pwn-24-format-args.txt [435 B]
+fig-pwn-25-pie-blocked.txt [489 B]
+fig-pwn-26-source-grep.txt [720 B]
+fig-pwn-27-mqtt-triage.txt [1743 B]
+fig-pwn-28-mqtt-local.txt [2304 B]
+fig-pwn-29-mqtt-remote.txt [2010 B]
+fig-pwn-30-diagram.py [6214 B]
+fig-pwn-31-ancient-recall.txt [533 B]
+fig-pwn-32-catfile-disasm.txt [1171 B]
+--- ROOT C:\Users\mzj\Desktop\CTF\labs\platform\attachments files=19 immediateDirs=6 ---
+367-ezflag
+573-cifar10
+581-network-forensics
+583-pixel-cage
+589-gate-ticket
+591-poisoned-samples
+--- ROOT D:\Downloads files=876 immediateDirs=9 ---
+像素囚笼附件 (1)
+Compressed
+Documents
+Music
+Others
+Pictures
+Programs
+Telegram Desktop
+Video
+--- GUIDE STRUCTURE h1=23 h2=136 ---
+13: # 阅读说明与证据口径
+21: # 进度总览
+90: # 刷题次序与复盘方法
+102: # 已有完整逐步记录的 12 题思路总览
+202: # 费用筛选记录
+206: # 已验证题目的详细原始记录
+210: # 玄机免费题解：2026安网杯-Veiled Shell
+375: # 玄机免费题解：商丘师范学院第四届网络安全及信息对抗大赛「即随本心」
+514: # 将结果按题目程序的方式重新加密，确认完全等于内置期望密文。
+536: # 2026安网杯-Prompt Trace 解题记录
+628: # 2026安网杯-班次邮戳 解题指南
+753: # 2026安网杯-可疑流量分析 解题指南
+841: # 2025鹏城杯-babyRSA 解题记录
+918: # 第九届 XCTF 总决赛 Tch3s（ID 286）解题记录
+972: # 2024铁人三项决赛 CTFRE-crazyaes（ID 81）解题记录
+1114: # 玄机平台刷题指南：2026安网杯—像素囚笼1（解题过程记录）
+1392: # 第九届“强网杯”tradre 分析记录
+1478: # 2026-09-28 新增题解：第二届 Parloo 杯 PositionalXOR（ID 550）
+1508: # 2026-09-28 新增题解：Victory_Melody（ID 555）
+1541: # 找回的 16 道历史题：逐题 WP 与证据
+1815: # 本批新增已验证题解（ID 367、450、451、520、551）
+2014: # 第六至第八批：平台已验证题目
+2197: # 终端记录与复现文件
+--- WP/DETAIL MARKERS ---
+15: 本指南原记录了玄机平台“已完成”筛选中的 28 道题。此后 #367、#450、#451、#520、#551、#530、#531、#559、#588、#549、#558、#547、#548、#552、#539、#540、#535、#536、#537、#527 共 20 道新题均取得平台接受回执，手册现收录 48 道已完成题。解题状态、flag 与过程分别以平台回执、附件分析和命令输出为证；不把完成徽标扩写成没有证据的步骤细节。
+19: 各题攻关、Pixel 补查以及手册整理过程均按现有文件保留命令记录，路径见末尾“终端记录与复现文件”。命令记录按实际执行顺序保存；未进入 transcript 的早期交互会在逐题记录中标注为回溯补录。为保护账户，记录内用户名和密码以占位符脱敏，其余解题命令与输出保留。页面状态按前台实际可见文字记录；只有明确存在的截图文件才列出路径，未保存到文件的会话截图不声称为本地图片。
+42: | — | 商丘师范学院第四届网络安全及信息对抗大赛（校外赛）不劳春风解我忧 | REVERSE / 中等 | 样本、XXTEA 解密/重加密脚本和候选输出齐全；无原平台回执 |
+43: | — | 商丘师范学院第四届网络安全及信息对抗大赛 ezRe | REVERSE / 中等 | PyInstaller 样本和 marshal 字节码齐全；有 Base64 候选，无独立程序验证/平台回执 |
+52: | 552 | 第九届“强网杯”全国网络安全挑战赛 Butterfly | REVERSE / 中等 | 平台已接受；8 字节块变换逆算、36 字节正向闭环与完整命令记录齐全 |
+59: | 539 | 湘岚杯cryptor | REVERSE / 中等 | 平台已接受；Cython 扩展静态分析、AES-CBC 双实现复核及完整命令记录齐全 |
+66: | 527 | 商丘师范学院第四届网络安全及信息对抗大赛 唧唧复唧唧，木兰当户织 | REVERSE / 中等 | 平台已接受、一血；Base64 还原并由程序输出闭环验证；flag：`flag{08174158-ccb5-4d03-93aa-9ef1}`；详见第十四批及 `题目资料/批次14_20260929/527_木兰当户织/` |
+100: 6. 结果能否由命令记录和文件哈希复现？
+102: # 已有完整逐步记录的 12 题思路总览
+104: 本章先给每题的核心思路、关键判据与最终 flag，方便快速回忆；每题的完整推理、命令、输出、失败分支与平台回执在正文对应章节展开。阅读顺序建议按本章从上到下，再进入正文核对细节。
+112: **Flag：** `flag{bcb5e1538d12162510d5297a43fa8fcf}`
+120: **Flag：** `flag{316d168f-e854-43a6-9996-5eb10c7efdec}`
+128: **Flag：** `flag{c4d82a6fd755593832df032275355be0}`
+132: **思路：** PNG 的 iTXt 注释写着“邮戳是冷色油墨，字在戳面上”，这是一条元数据线索而不是 flag：先选区域，再选通道。实测圆区内印泥色以 RGB (36,58,196) 为主，蓝分量远高于红分量，于是用 `B - R > 80` 做掩码（命中 15,597 像素），按行优先遍历命中像素，只读**蓝色通道最低位**，每 8 位 MSB-first 打包成字节，直接得到 flag。
+136: **Flag：** `flag{2b250f5b7fcbfba8ce5da68f26aa5483}`
+144: **Flag：** `flag{242bdddd09b6769d2e48404f6e70d38d}`
+152: **Flag：** `flag{th1s_1s_4_ture_fl4g}`
+160: **Flag：** `flag{tim1ng_a7t@ck_1s_dangerous}`
+168: **Flag：** `flag{Re_1ts_f0n}`
+176: **Flag：** `flag{157692930ce5585ff3f3a67455a03443}`
+184: **Flag：** `flag{4a31cac9a66a8e399693f543a8c66fb8}`
+192: **Flag：** `flag{fScUaEYmeAGSXVgZd5pV}`
+200: **Flag：** `flag{f972007e0d3d9cb5f7d03661019eaf6e}`
+206: # 已验证题目的详细原始记录
+357: **待平台验证的 Flag：**
+545: - Flag：flag{c4d82a6fd755593832df032275355be0}
+637: - Flag：flag{2b250f5b7fcbfba8ce5da68f26aa5483}
+762: - Flag：flag{242bdddd09b6769d2e48404f6e70d38d}
+980: - Flag：flag{Re_1ts_f0n}
+1116: > 状态：已完成。平台步骤 #1 显示 1/1；最终 Flag：`flag{4a31cac9a66a8e399693f543a8c66fb8}`。
+1118: > **阅读提示：** 本章按时间顺序保留完整的攻关过程：先按肉眼观察猜编码，再发现 PNG 尾部附加的 ZIP，随后误信“已加密”标志而走上口令穷举的弯路，最后识破伪造标志直接解压取回明文。第一至二十二节是过程记录，其中多处“仍未解出 / 0/1”是当时的阶段性结论，不代表最终状态；**最终的可复现解法见本章第二十三节“最终 Writeup”**，快速回顾见本指南开头的“已有完整逐步记录的 12 题思路总览”。
+1387: **Flag：** `flag{4a31cac9a66a8e399693f543a8c66fb8}`。平台提交后返回“FLAG 正确”提示，题目状态“已完成”，步骤 #1 为 `1/1`。
+1470: ### 原始命令记录与复现文件
+1476: **Flag：** `flag{157692930ce5585ff3f3a67455a03443}`。
+1589: 命令：`python -B labs/platform/solve_receipt.py`，退出码 0。附件：labs/platform/attachments/587-linked-receipts.zip。字段、Bézout 系数、运行结果见 figures/raw/fig-crypto-21-c4-receipt-fields.txt、fig-crypto-22-c4-bezout.txt、fig-crypto-23-c4-receipt-run.txt。双重重加密核验通过；无独立平台回执。
+1660: 解码命令输出 flag{4b14a257-4336-4152-9f06-48c7b1}，共 36 bytes。本轮未执行未知 PE；只对从 marshal 常量还原出的 Base64 做了独立解码。样本、提取脚本及 marshal 位于 题目资料/ezRe/。精确 Python 输入输出在 记录/代理-WP补全-子代理B.txt。尚缺题目 ID、独立程序验收和提交回执，所以这是静态候选，不冒称历史平台回执。
+1729: 远程命令记录为 timeout 100 python3 solve_mqtt.py env.xj.edisec.net 30953。响应摘录：
+1753: 公开 Writeup 给出的 flag：flag{Redis_RCE_PrivEsc_Success}。来源页：[玄机平台公开 Writeup](https://xj.edisec.net/challenges/442/writeup)。项目本地没有该题附件、历史利用 transcript 或该串 flag 的提交回执。本节明确是公开 Writeup 的步骤整理，并非本机实操记录。
+1915: - 详细 WP：记录/Digital Key UWB-520-WP草稿.md；原始附件分析及平台回执：记录/DigitalKey_UWB_520-分析.txt。
+1948: - 逐步日志、关键 HTTP 请求、hex 解码和平台回执：记录/新题批次_451_附件分析.txt
+1967: 最终 flag：
+1973: ### 命令记录与附件
+1975: - 原始过滤命令、唯一命中请求、URL 解码结果、附件下载和平台回执：记录/新题批次_450_附件分析.txt
+2041: - 完整分析、每一步推理、38 项输出、哈希与平台回执：题目资料\OpenHarmony_arkt_559\WP.md；脚本与逐条 transcript 位于该目录的 analysis 子目录。
+2119: ELF 为静态链接 x86-64。反汇编还原每个 8 字节块的加密流程：按字节 XOR `MMXEncod`，每个 16 位字交换高低字节，把小端 64 位值循环左移一位，最后逐字节加 key 并模 256。逆变换完整恢复 32 字节主体；`encode.dat` 尾部四字节没有经过块变换，其中 `i}` 属于 flag，末尾 LF 是文件换行。候选为 `flag{66eec38e269e0e267849a1f7b708i}`。重新正向处理后 36 字节与附件完全一致，平台显示“已完成”、步骤 `1/1`。注意候选本体不包含换行。完整逐步 WP、反汇编、块级 trace 与终端记录在 `题目资料/批次10_20260929/552_butterfly/`。
+2130: - 首轮尝试 ECB / PKCS#7 未得到有效明文；缺少 PyCryptodome、PowerShell/.NET API 差异和中文路径工具调用问题均保留在命令记录中。完整常量定位、错误分支、命令输出和复现代码见 题目资料/批次11_20260929/539_cryptor/wp.md 及其 analysis 子目录。
+2141: #541 ezBase 的本地候选仅是分析分支，平台明确拒绝；不把它作为答案。候选输入、拒绝回执、解包修正、分支检查和逐命令记录见 题目资料/批次11_20260929/541_ezBase/ 与 记录/提交核验_20260929_第十一批.md。
+2191: - 平台 ID：527；REVERSE / 中等。提交后页面显示“已完成”1/1，并记录账号 slu_mzj 一血。最终 flag：`flag{08174158-ccb5-4d03-93aa-9ef1}`。
+2199: 指南正文逐题保留解题推理、关键命令、关键输出、错误分支和平台状态；补充命令记录与复核材料按题目保存在 `记录/` 和 `题目资料/`：
+2208: - 本批 #520 的主分析与平台回执：记录/DigitalKey_UWB_520-分析.txt；代理复核：记录/代理-520-附件普查及公式验证.txt。
+2209: - 本批 #551 的完整静态分析、路径复放及平台回执：记录/PaluMaze_551-fresh-static.txt、记录/PaluMaze_551-终端记录.txt；最终路线脚本和输出在题目资料/PaluMaze_551/。
+**********************
+PowerShell transcript end
+End time: 20260929164357
+**********************

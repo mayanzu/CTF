@@ -1,0 +1,3267 @@
+# 玄机 CTF #527 分析命令和输出记录
+# 记录原则：保留实际执行的命令、执行顺序和完整标准输出/错误输出。
+
+[此前文件核对]
+COMMAND> Get-Location; Get-ChildItem -LiteralPath 'D:\Downloads' -Force | Sort-Object LastWriteTime -Descending | Select-Object -First 30 FullName,Length,LastWriteTime,Mode
+OUTPUT>
+Path
+----
+C:\Users\mzj\Desktop\CTF
+
+FullName      : D:\Downloads\secret (2).zip
+Length        : 1170497
+LastWriteTime : 2026/9/29 15:38:07
+Mode          : -a---
+
+FullName      : D:\Downloads\checker (5).zip
+Length        : 17498
+LastWriteTime : 2026/9/29 15:37:48
+Mode          : -a---
+
+FullName      : D:\Downloads\唧唧复唧唧，木兰当户织.zip
+Length        : 7602
+LastWriteTime : 2026/9/29 15:37:09
+Mode          : -a---
+
+结论：目标附件按精确文件名定位，大小 7602 字节，下载时间 2026/9/29 15:37:09。
+**********************
+PowerShell transcript start
+Start time: 20260929154009
+Username: DESKTOP-412KTAR\mzj
+RunAs User: DESKTOP-412KTAR\mzj
+Configuration Name: 
+Machine: DESKTOP-412KTAR (Microsoft Windows NT 10.0.26200.0)
+Host Application: C:\Users\mzj\.cache\codex-runtimes\codex-primary-runtime\dependencies\native\powershell\pwsh.dll -Command try { [Console]::OutputEncoding=[System.Text.Encoding]::UTF8 } catch {}
+$ErrorActionPreference = 'Stop'
+$task = 'C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\批次14_20260929\527_木兰当户织'
+$download = 'D:\Downloads\唧唧复唧唧，木兰当户织.zip'
+New-Item -ItemType Directory -Path $task -Force | Out-Null
+$log = Join-Path $task '记录_命令与输出.txt'
+@'
+# 玄机 CTF #527 分析命令和输出记录
+# 记录原则：保留实际执行的命令、执行顺序和完整标准输出/错误输出。
+
+[此前文件核对]
+COMMAND> Get-Location; Get-ChildItem -LiteralPath 'D:\Downloads' -Force | Sort-Object LastWriteTime -Descending | Select-Object -First 30 FullName,Length,LastWriteTime,Mode
+OUTPUT>
+Path
+----
+C:\Users\mzj\Desktop\CTF
+
+FullName      : D:\Downloads\secret (2).zip
+Length        : 1170497
+LastWriteTime : 2026/9/29 15:38:07
+Mode          : -a---
+
+FullName      : D:\Downloads\checker (5).zip
+Length        : 17498
+LastWriteTime : 2026/9/29 15:37:48
+Mode          : -a---
+
+FullName      : D:\Downloads\唧唧复唧唧，木兰当户织.zip
+Length        : 7602
+LastWriteTime : 2026/9/29 15:37:09
+Mode          : -a---
+
+结论：目标附件按精确文件名定位，大小 7602 字节，下载时间 2026/9/29 15:37:09。
+'@ | Set-Content -LiteralPath $log -Encoding UTF8
+Start-Transcript -LiteralPath $log -Append | Out-Null
+Write-Output "COMMAND> Get-FileHash -LiteralPath '$download' -Algorithm SHA256 | Format-List Algorithm,Hash,Path"
+Get-FileHash -LiteralPath $download -Algorithm SHA256 | Format-List Algorithm,Hash,Path
+Write-Output "COMMAND> Copy-Item -LiteralPath '$download' -Destination (Join-Path '$task' '唧唧复唧唧，木兰当户织.zip')"
+Copy-Item -LiteralPath $download -Destination (Join-Path $task '唧唧复唧唧，木兰当户织.zip')
+Write-Output "COMMAND> Get-ChildItem -LiteralPath '$task' -Force | Select-Object FullName,Length,LastWriteTime"
+Get-ChildItem -LiteralPath $task -Force | Select-Object FullName,Length,LastWriteTime
+Write-Output "COMMAND> [System.IO.Compression.ZipFile]::OpenRead('$download').Entries | Select-Object FullName,Length,CompressedLength"
+$zip = [System.IO.Compression.ZipFile]::OpenRead($download)
+$zip.Entries | Select-Object FullName,Length,CompressedLength
+$zip.Dispose()
+Stop-Transcript | Out-Null
+Process ID: 35376
+PSVersion: 7.6.5
+PSEdition: Core
+GitCommitId: 7.6.5
+OS: Microsoft Windows 10.0.26200
+Platform: Win32NT
+PSCompatibleVersions: 1.0, 2.0, 3.0, 4.0, 5.0, 5.1, 6.0, 7.0
+PSRemotingProtocolVersion: 2.4
+SerializationVersion: 1.1.0.1
+WSManStackVersion: 3.0
+**********************
+COMMAND> Get-FileHash -LiteralPath 'D:\Downloads\唧唧复唧唧，木兰当户织.zip' -Algorithm SHA256 | Format-List Algorithm,Hash,Path
+
+Algorithm : SHA256
+Hash      : 8E267FD489F7AF515B59C738ADC4940537BBE9D5732E507AA939FD3E9B33E60E
+Path      : D:\Downloads\唧唧复唧唧，木兰当户织.zip
+
+COMMAND> Copy-Item -LiteralPath 'D:\Downloads\唧唧复唧唧，木兰当户织.zip' -Destination (Join-Path 'C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\批次14_20260929\527_木兰当户织' '唧唧复唧唧，木兰当户织.zip')
+COMMAND> Get-ChildItem -LiteralPath 'C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\批次14_20260929\527_木兰当户织' -Force | Select-Object FullName,Length,LastWriteTime
+
+**********************
+PowerShell transcript end
+End time: 20260929154009
+**********************
+**********************
+PowerShell transcript start
+Start time: 20260929154033
+Username: DESKTOP-412KTAR\mzj
+RunAs User: DESKTOP-412KTAR\mzj
+Configuration Name: 
+Machine: DESKTOP-412KTAR (Microsoft Windows NT 10.0.26200.0)
+Host Application: C:\Users\mzj\.cache\codex-runtimes\codex-primary-runtime\dependencies\native\powershell\pwsh.dll -Command try { [Console]::OutputEncoding=[System.Text.Encoding]::UTF8 } catch {}
+$ErrorActionPreference = 'Stop'
+$task = 'C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\批次14_20260929\527_木兰当户织'
+$zipPath = Join-Path $task '唧唧复唧唧，木兰当户织.zip'
+$extractDir = Join-Path $task '附件'
+$log = Join-Path $task '记录_命令与输出.txt'
+Start-Transcript -LiteralPath $log -Append | Out-Null
+Write-Output "COMMAND> Expand-Archive -LiteralPath '$zipPath' -DestinationPath '$extractDir' -Force"
+Expand-Archive -LiteralPath $zipPath -DestinationPath $extractDir -Force
+Write-Output "COMMAND> Get-ChildItem -LiteralPath '$extractDir' -Recurse -File | Select-Object FullName,Length,LastWriteTime"
+Get-ChildItem -LiteralPath $extractDir -Recurse -File | Select-Object FullName,Length,LastWriteTime
+$exe = Join-Path $extractDir '唧唧复唧唧，木兰当户织.exe'
+Write-Output "COMMAND> Get-FileHash -LiteralPath '$exe' -Algorithm SHA256 | Format-List Algorithm,Hash,Path"
+Get-FileHash -LiteralPath $exe -Algorithm SHA256 | Format-List Algorithm,Hash,Path
+Write-Output "COMMAND> Get-Command strings,llvm-objdump,objdump,dumpbin,7z,python,py -ErrorAction SilentlyContinue | Select-Object Name,Source"
+Get-Command strings,llvm-objdump,objdump,dumpbin,7z,python,py -ErrorAction SilentlyContinue | Select-Object Name,Source
+Stop-Transcript | Out-Null
+Process ID: 43404
+PSVersion: 7.6.5
+PSEdition: Core
+GitCommitId: 7.6.5
+OS: Microsoft Windows 10.0.26200
+Platform: Win32NT
+PSCompatibleVersions: 1.0, 2.0, 3.0, 4.0, 5.0, 5.1, 6.0, 7.0
+PSRemotingProtocolVersion: 2.4
+SerializationVersion: 1.1.0.1
+WSManStackVersion: 3.0
+**********************
+COMMAND> Expand-Archive -LiteralPath 'C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\批次14_20260929\527_木兰当户织\唧唧复唧唧，木兰当户织.zip' -DestinationPath 'C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\批次14_20260929\527_木兰当户织\附件' -Force
+COMMAND> Get-ChildItem -LiteralPath 'C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\批次14_20260929\527_木兰当户织\附件' -Recurse -File | Select-Object FullName,Length,LastWriteTime
+
+FullName                                                                                                  Length LastWr
+                                                                                                                 iteTim
+                                                                                                                 e
+--------                                                                                                  ------ ------
+C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\批次14_20260929\527_木兰当户织\附件\唧唧复唧唧，木兰当户织.exe  18944 2026/…
+COMMAND> Get-FileHash -LiteralPath 'C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\批次14_20260929\527_木兰当户织\附件\唧唧复唧唧，木兰当户织.exe' -Algorithm SHA256 | Format-List Algorithm,Hash,Path
+
+
+Algorithm : SHA256
+Hash      : 16CF6169A5DE34A17F2A4C4EC3F6654B15475FE6E63746F23645A71DA5EA85F8
+Path      : C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\批次14_20260929\527_木兰当户织\附件\唧唧复唧唧，木兰当户织.exe
+
+COMMAND> Get-Command strings,llvm-objdump,objdump,dumpbin,7z,python,py -ErrorAction SilentlyContinue | Select-Object Name,Source
+
+**********************
+PowerShell transcript end
+End time: 20260929154034
+**********************
+**********************
+PowerShell transcript start
+Start time: 20260929154100
+Username: DESKTOP-412KTAR\mzj
+RunAs User: DESKTOP-412KTAR\mzj
+Configuration Name: 
+Machine: DESKTOP-412KTAR (Microsoft Windows NT 10.0.26200.0)
+Host Application: C:\Users\mzj\.cache\codex-runtimes\codex-primary-runtime\dependencies\native\powershell\pwsh.dll -Command try { [Console]::OutputEncoding=[System.Text.Encoding]::UTF8 } catch {}
+$ErrorActionPreference = 'Stop'
+$exe = 'C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\批次14_20260929\527_木兰当户织\附件\唧唧复唧唧，木兰当户织.exe'
+$log = 'C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\批次14_20260929\527_木兰当户织\记录_命令与输出.txt'
+Start-Transcript -LiteralPath $log -Append | Out-Null
+Write-Output "COMMAND> strings.exe -a -n 4 '$exe'"
+& 'C:\msys64\mingw64\bin\strings.exe' -a -n 4 $exe
+Write-Output "COMMAND> objdump.exe -f -h -p '$exe'"
+& 'C:\msys64\mingw64\bin\objdump.exe' -f -h -p $exe
+Stop-Transcript | Out-Null
+Process ID: 37020
+PSVersion: 7.6.5
+PSEdition: Core
+GitCommitId: 7.6.5
+OS: Microsoft Windows 10.0.26200
+Platform: Win32NT
+PSCompatibleVersions: 1.0, 2.0, 3.0, 4.0, 5.0, 5.1, 6.0, 7.0
+PSRemotingProtocolVersion: 2.4
+SerializationVersion: 1.1.0.1
+WSManStackVersion: 3.0
+**********************
+COMMAND> strings.exe -a -n 4 'C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\批次14_20260929\527_木兰当户织\附件\唧唧复唧唧，木兰当户织.exe'
+
+COMMAND> objdump.exe -f -h -p 'C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\批次14_20260929\527_木兰当户织\附件\唧唧复唧唧，木兰当户织.exe'
+
+**********************
+PowerShell transcript end
+End time: 20260929154100
+**********************
+**********************
+PowerShell transcript start
+Start time: 20260929154146
+Username: DESKTOP-412KTAR\mzj
+RunAs User: DESKTOP-412KTAR\mzj
+Configuration Name: 
+Machine: DESKTOP-412KTAR (Microsoft Windows NT 10.0.26200.0)
+Host Application: C:\Users\mzj\.cache\codex-runtimes\codex-primary-runtime\dependencies\native\powershell\pwsh.dll -Command try { [Console]::OutputEncoding=[System.Text.Encoding]::UTF8 } catch {}
+$ErrorActionPreference = 'Stop'
+$dir = 'C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\批次14_20260929\527_木兰当户织\附件'
+$exeName = '唧唧复唧唧，木兰当户织.exe'
+$log = 'C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\批次14_20260929\527_木兰当户织\记录_命令与输出.txt'
+Start-Transcript -LiteralPath $log -Append | Out-Null
+Set-Location -LiteralPath $dir
+Write-Output "COMMAND> objdump.exe -f -h -p '.\$exeName' (在附件目录中使用相对文件名，规避 objdump 的非 ASCII 路径问题)"
+& 'C:\msys64\mingw64\bin\objdump.exe' -f -h -p ('.\' + $exeName)
+Stop-Transcript | Out-Null
+Process ID: 19576
+PSVersion: 7.6.5
+PSEdition: Core
+GitCommitId: 7.6.5
+OS: Microsoft Windows 10.0.26200
+Platform: Win32NT
+PSCompatibleVersions: 1.0, 2.0, 3.0, 4.0, 5.0, 5.1, 6.0, 7.0
+PSRemotingProtocolVersion: 2.4
+SerializationVersion: 1.1.0.1
+WSManStackVersion: 3.0
+**********************
+COMMAND> objdump.exe -f -h -p '.\唧唧复唧唧，木兰当户织.exe' (在附件目录中使用相对文件名，规避 objdump 的非 ASCII 路径问题)
+
+**********************
+PowerShell transcript end
+End time: 20260929154146
+**********************
+**********************
+PowerShell transcript start
+Start time: 20260929154202
+Username: DESKTOP-412KTAR\mzj
+RunAs User: DESKTOP-412KTAR\mzj
+Configuration Name: 
+Machine: DESKTOP-412KTAR (Microsoft Windows NT 10.0.26200.0)
+Host Application: C:\Users\mzj\.cache\codex-runtimes\codex-primary-runtime\dependencies\native\powershell\pwsh.dll -Command try { [Console]::OutputEncoding=[System.Text.Encoding]::UTF8 } catch {}
+$ErrorActionPreference = 'Stop'
+$source = 'C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\批次14_20260929\527_木兰当户织\附件\唧唧复唧唧，木兰当户织.exe'
+$ascii = 'C:\Users\mzj\Desktop\CTF\challenge527.exe'
+$log = 'C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\批次14_20260929\527_木兰当户织\记录_命令与输出.txt'
+Start-Transcript -LiteralPath $log -Append | Out-Null
+Write-Output "COMMAND> Copy-Item -LiteralPath '$source' -Destination '$ascii' -Force"
+Copy-Item -LiteralPath $source -Destination $ascii -Force
+Write-Output "COMMAND> objdump.exe -f -h -p '$ascii'"
+& 'C:\msys64\mingw64\bin\objdump.exe' -f -h -p $ascii
+Stop-Transcript | Out-Null
+Process ID: 33572
+PSVersion: 7.6.5
+PSEdition: Core
+GitCommitId: 7.6.5
+OS: Microsoft Windows 10.0.26200
+Platform: Win32NT
+PSCompatibleVersions: 1.0, 2.0, 3.0, 4.0, 5.0, 5.1, 6.0, 7.0
+PSRemotingProtocolVersion: 2.4
+SerializationVersion: 1.1.0.1
+WSManStackVersion: 3.0
+**********************
+COMMAND> Copy-Item -LiteralPath 'C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\批次14_20260929\527_木兰当户织\附件\唧唧复唧唧，木兰当户织.exe' -Destination 'C:\Users\mzj\Desktop\CTF\challenge527.exe' -Force
+COMMAND> objdump.exe -f -h -p 'C:\Users\mzj\Desktop\CTF\challenge527.exe'
+
+**********************
+PowerShell transcript end
+End time: 20260929154202
+**********************
+**********************
+PowerShell transcript start
+Start time: 20260929154256
+Username: DESKTOP-412KTAR\mzj
+RunAs User: DESKTOP-412KTAR\mzj
+Configuration Name: 
+Machine: DESKTOP-412KTAR (Microsoft Windows NT 10.0.26200.0)
+Host Application: C:\Users\mzj\.cache\codex-runtimes\codex-primary-runtime\dependencies\native\powershell\pwsh.dll -Command try { [Console]::OutputEncoding=[System.Text.Encoding]::UTF8 } catch {}
+$ErrorActionPreference = 'Stop'
+$ascii = 'C:\Users\mzj\Desktop\CTF\challenge527.exe'
+$log = 'C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\批次14_20260929\527_木兰当户织\记录_命令与输出.txt'
+Start-Transcript -LiteralPath $log -Append | Out-Null
+Write-Output "COMMAND> objdump.exe -d -Mintel --start-address=0x1400029f0 --stop-address=0x140002dc7 '$ascii'"
+& 'C:\msys64\mingw64\bin\objdump.exe' -d -Mintel --start-address=0x1400029f0 --stop-address=0x140002dc7 $ascii
+Stop-Transcript | Out-Null
+Process ID: 15528
+PSVersion: 7.6.5
+PSEdition: Core
+GitCommitId: 7.6.5
+OS: Microsoft Windows 10.0.26200
+Platform: Win32NT
+PSCompatibleVersions: 1.0, 2.0, 3.0, 4.0, 5.0, 5.1, 6.0, 7.0
+PSRemotingProtocolVersion: 2.4
+SerializationVersion: 1.1.0.1
+WSManStackVersion: 3.0
+**********************
+COMMAND> objdump.exe -d -Mintel --start-address=0x1400029f0 --stop-address=0x140002dc7 'C:\Users\mzj\Desktop\CTF\challenge527.exe'
+
+**********************
+PowerShell transcript end
+End time: 20260929154256
+**********************
+**********************
+PowerShell transcript start
+Start time: 20260929154319
+Username: DESKTOP-412KTAR\mzj
+RunAs User: DESKTOP-412KTAR\mzj
+Configuration Name: 
+Machine: DESKTOP-412KTAR (Microsoft Windows NT 10.0.26200.0)
+Host Application: C:\Users\mzj\.cache\codex-runtimes\codex-primary-runtime\dependencies\native\powershell\pwsh.dll -Command try { [Console]::OutputEncoding=[System.Text.Encoding]::UTF8 } catch {}
+$ErrorActionPreference = 'Stop'
+$ascii = 'C:\Users\mzj\Desktop\CTF\challenge527.exe'
+$log = 'C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\批次14_20260929\527_木兰当户织\记录_命令与输出.txt'
+Start-Transcript -LiteralPath $log -Append | Out-Null
+Write-Output "COMMAND> objdump.exe -d -Mintel --start-address=0x140001910 --stop-address=0x140001ca0 '$ascii'"
+& 'C:\msys64\mingw64\bin\objdump.exe' -d -Mintel --start-address=0x140001910 --stop-address=0x140001ca0 $ascii
+Stop-Transcript | Out-Null
+Process ID: 20832
+PSVersion: 7.6.5
+PSEdition: Core
+GitCommitId: 7.6.5
+OS: Microsoft Windows 10.0.26200
+Platform: Win32NT
+PSCompatibleVersions: 1.0, 2.0, 3.0, 4.0, 5.0, 5.1, 6.0, 7.0
+PSRemotingProtocolVersion: 2.4
+SerializationVersion: 1.1.0.1
+WSManStackVersion: 3.0
+**********************
+COMMAND> objdump.exe -d -Mintel --start-address=0x140001910 --stop-address=0x140001ca0 'C:\Users\mzj\Desktop\CTF\challenge527.exe'
+
+**********************
+PowerShell transcript end
+End time: 20260929154319
+**********************
+**********************
+PowerShell transcript start
+Start time: 20260929154417
+Username: DESKTOP-412KTAR\mzj
+RunAs User: DESKTOP-412KTAR\mzj
+Configuration Name: 
+Machine: DESKTOP-412KTAR (Microsoft Windows NT 10.0.26200.0)
+Host Application: C:\Users\mzj\.cache\codex-runtimes\codex-primary-runtime\dependencies\native\powershell\pwsh.dll -Command try { [Console]::OutputEncoding=[System.Text.Encoding]::UTF8 } catch {}
+$ErrorActionPreference = 'Stop'
+$ascii = 'C:\Users\mzj\Desktop\CTF\challenge527.exe'
+$task = 'C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\批次14_20260929\527_木兰当户织'
+$log = Join-Path $task '记录_命令与输出.txt'
+$disFile = Join-Path $task '反汇编_objdump_disassembly.txt'
+Start-Transcript -LiteralPath $log -Append | Out-Null
+Write-Output "COMMAND> objdump.exe -d -Mintel '$ascii' (完整 stdout 同步保存到 '$disFile' 并写入本 transcript)"
+$dis = & 'C:\msys64\mingw64\bin\objdump.exe' -d -Mintel $ascii
+$dis | Set-Content -LiteralPath $disFile -Encoding UTF8
+Write-Output $dis
+Write-Output "COMMAND> Select-String -LiteralPath '$disFile' -Pattern '1400083c8|1400083e0|1400083e8|1400083b8' -Context 5,5"
+Select-String -LiteralPath $disFile -Pattern '1400083c8|1400083e0|1400083e8|1400083b8' -Context 5,5
+Stop-Transcript | Out-Null
+Process ID: 27924
+PSVersion: 7.6.5
+PSEdition: Core
+GitCommitId: 7.6.5
+OS: Microsoft Windows 10.0.26200
+Platform: Win32NT
+PSCompatibleVersions: 1.0, 2.0, 3.0, 4.0, 5.0, 5.1, 6.0, 7.0
+PSRemotingProtocolVersion: 2.4
+SerializationVersion: 1.1.0.1
+WSManStackVersion: 3.0
+**********************
+COMMAND> objdump.exe -d -Mintel 'C:\Users\mzj\Desktop\CTF\challenge527.exe' (完整 stdout 同步保存到 'C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\批次14_20260929\527_木兰当户织\反汇编_objdump_disassembly.txt' 并写入本 transcript)
+
+C:\Users\mzj\Desktop\CTF\challenge527.exe:     file format pei-x86-64
+
+
+Disassembly of section .text:
+
+0000000140001000 <.text>:
+   140001000:	c3                   	ret
+   140001001:	0f 1f 40 00          	nop    DWORD PTR [rax+0x0]
+   140001005:	66 66 2e 0f 1f 84 00 	data16 cs nop WORD PTR [rax+rax*1+0x0]
+   14000100c:	00 00 00 00
+   140001010:	31 c9                	xor    ecx,ecx
+   140001012:	e9 99 18 00 00       	jmp    0x1400028b0
+   140001017:	66 0f 1f 84 00 00 00 	nop    WORD PTR [rax+rax*1+0x0]
+   14000101e:	00 00
+   140001020:	41 57                	push   r15
+   140001022:	41 56                	push   r14
+   140001024:	41 55                	push   r13
+   140001026:	41 54                	push   r12
+   140001028:	55                   	push   rbp
+   140001029:	57                   	push   rdi
+   14000102a:	56                   	push   rsi
+   14000102b:	53                   	push   rbx
+   14000102c:	48 83 ec 58          	sub    rsp,0x58
+   140001030:	65 48 8b 04 25 30 00 	mov    rax,QWORD PTR gs:0x30
+   140001037:	00 00
+   140001039:	48 8b 70 08          	mov    rsi,QWORD PTR [rax+0x8]
+   14000103d:	48 8b 1d 4c 34 00 00 	mov    rbx,QWORD PTR [rip+0x344c]        # 0x140004490
+   140001044:	48 8b 3d 45 72 00 00 	mov    rdi,QWORD PTR [rip+0x7245]        # 0x140008290
+   14000104b:	eb 13                	jmp    0x140001060
+   14000104d:	0f 1f 00             	nop    DWORD PTR [rax]
+   140001050:	48 39 c6             	cmp    rsi,rax
+   140001053:	0f 84 af 00 00 00    	je     0x140001108
+   140001059:	b9 e8 03 00 00       	mov    ecx,0x3e8
+   14000105e:	ff d7                	call   rdi
+   140001060:	31 c0                	xor    eax,eax
+   140001062:	f0 48 0f b1 33       	lock cmpxchg QWORD PTR [rbx],rsi
+   140001067:	75 e7                	jne    0x140001050
+   140001069:	45 31 ed             	xor    r13d,r13d
+   14000106c:	48 8b 2d 2d 34 00 00 	mov    rbp,QWORD PTR [rip+0x342d]        # 0x1400044a0
+   140001073:	8b 45 00             	mov    eax,DWORD PTR [rbp+0x0]
+   140001076:	83 f8 01             	cmp    eax,0x1
+   140001079:	0f 84 8f 03 00 00    	je     0x14000140e
+   14000107f:	8b 45 00             	mov    eax,DWORD PTR [rbp+0x0]
+   140001082:	85 c0                	test   eax,eax
+   140001084:	0f 84 b6 00 00 00    	je     0x140001140
+   14000108a:	c7 05 70 5f 00 00 01 	mov    DWORD PTR [rip+0x5f70],0x1        # 0x140007004
+   140001091:	00 00 00
+   140001094:	45 85 ed             	test   r13d,r13d
+   140001097:	0f 84 93 00 00 00    	je     0x140001130
+   14000109d:	48 8b 05 6c 33 00 00 	mov    rax,QWORD PTR [rip+0x336c]        # 0x140004410
+   1400010a4:	48 8b 00             	mov    rax,QWORD PTR [rax]
+   1400010a7:	48 85 c0             	test   rax,rax
+   1400010aa:	74 0c                	je     0x1400010b8
+   1400010ac:	45 31 c0             	xor    r8d,r8d
+   1400010af:	ba 02 00 00 00       	mov    edx,0x2
+   1400010b4:	31 c9                	xor    ecx,ecx
+   1400010b6:	ff d0                	call   rax
+   1400010b8:	e8 23 17 00 00       	call   0x1400027e0
+   1400010bd:	4c 8b 05 4c 5f 00 00 	mov    r8,QWORD PTR [rip+0x5f4c]        # 0x140007010
+   1400010c4:	8b 0d 56 5f 00 00    	mov    ecx,DWORD PTR [rip+0x5f56]        # 0x140007020
+   1400010ca:	4c 89 00             	mov    QWORD PTR [rax],r8
+   1400010cd:	48 8b 15 44 5f 00 00 	mov    rdx,QWORD PTR [rip+0x5f44]        # 0x140007018
+   1400010d4:	e8 17 19 00 00       	call   0x1400029f0
+   1400010d9:	8b 0d 29 5f 00 00    	mov    ecx,DWORD PTR [rip+0x5f29]        # 0x140007008
+   1400010df:	85 c9                	test   ecx,ecx
+   1400010e1:	0f 84 20 03 00 00    	je     0x140001407
+   1400010e7:	8b 15 17 5f 00 00    	mov    edx,DWORD PTR [rip+0x5f17]        # 0x140007004
+   1400010ed:	85 d2                	test   edx,edx
+   1400010ef:	74 27                	je     0x140001118
+   1400010f1:	48 83 c4 58          	add    rsp,0x58
+   1400010f5:	5b                   	pop    rbx
+   1400010f6:	5e                   	pop    rsi
+   1400010f7:	5f                   	pop    rdi
+   1400010f8:	5d                   	pop    rbp
+   1400010f9:	41 5c                	pop    r12
+   1400010fb:	41 5d                	pop    r13
+   1400010fd:	41 5e                	pop    r14
+   1400010ff:	41 5f                	pop    r15
+   140001101:	c3                   	ret
+   140001102:	66 0f 1f 44 00 00    	nop    WORD PTR [rax+rax*1+0x0]
+   140001108:	41 bd 01 00 00 00    	mov    r13d,0x1
+   14000110e:	e9 59 ff ff ff       	jmp    0x14000106c
+   140001113:	0f 1f 44 00 00       	nop    DWORD PTR [rax+rax*1+0x0]
+   140001118:	89 44 24 3c          	mov    DWORD PTR [rsp+0x3c],eax
+   14000111c:	e8 bf 17 00 00       	call   0x1400028e0
+   140001121:	8b 44 24 3c          	mov    eax,DWORD PTR [rsp+0x3c]
+   140001125:	eb ca                	jmp    0x1400010f1
+   140001127:	66 0f 1f 84 00 00 00 	nop    WORD PTR [rax+rax*1+0x0]
+   14000112e:	00 00
+   140001130:	31 c0                	xor    eax,eax
+   140001132:	48 87 03             	xchg   QWORD PTR [rbx],rax
+   140001135:	e9 63 ff ff ff       	jmp    0x14000109d
+   14000113a:	66 0f 1f 44 00 00    	nop    WORD PTR [rax+rax*1+0x0]
+   140001140:	b9 02 00 00 00       	mov    ecx,0x2
+   140001145:	c7 45 00 01 00 00 00 	mov    DWORD PTR [rbp+0x0],0x1
+   14000114c:	e8 3f 17 00 00       	call   0x140002890
+   140001151:	45 31 c9             	xor    r9d,r9d
+   140001154:	41 b8 04 00 00 00    	mov    r8d,0x4
+   14000115a:	31 d2                	xor    edx,edx
+   14000115c:	48 89 c1             	mov    rcx,rax
+   14000115f:	e8 5c 17 00 00       	call   0x1400028c0
+   140001164:	48 8d 0d a5 fe ff ff 	lea    rcx,[rip+0xfffffffffffffea5]        # 0x140001010
+   14000116b:	e8 80 17 00 00       	call   0x1400028f0
+   140001170:	89 c6                	mov    esi,eax
+   140001172:	85 c0                	test   eax,eax
+   140001174:	0f 85 7e 02 00 00    	jne    0x1400013f8
+   14000117a:	e8 91 07 00 00       	call   0x140001910
+   14000117f:	48 8d 0d 0a 0d 00 00 	lea    rcx,[rip+0xd0a]        # 0x140001e90
+   140001186:	ff 15 fc 70 00 00    	call   QWORD PTR [rip+0x70fc]        # 0x140008288
+   14000118c:	48 8b 15 ed 32 00 00 	mov    rdx,QWORD PTR [rip+0x32ed]        # 0x140004480
+   140001193:	48 8d 0d 66 fe ff ff 	lea    rcx,[rip+0xfffffffffffffe66]        # 0x140001000
+   14000119a:	48 89 02             	mov    QWORD PTR [rdx],rax
+   14000119d:	e8 7e 17 00 00       	call   0x140002920
+   1400011a2:	e8 59 11 00 00       	call   0x140002300
+   1400011a7:	48 8b 05 a2 32 00 00 	mov    rax,QWORD PTR [rip+0x32a2]        # 0x140004450
+   1400011ae:	c7 00 01 00 00 00    	mov    DWORD PTR [rax],0x1
+   1400011b4:	48 8b 05 a5 32 00 00 	mov    rax,QWORD PTR [rip+0x32a5]        # 0x140004460
+   1400011bb:	c7 00 01 00 00 00    	mov    DWORD PTR [rax],0x1
+   1400011c1:	48 8b 05 a8 32 00 00 	mov    rax,QWORD PTR [rip+0x32a8]        # 0x140004470
+   1400011c8:	c7 00 01 00 00 00    	mov    DWORD PTR [rax],0x1
+   1400011ce:	48 8b 05 0b 32 00 00 	mov    rax,QWORD PTR [rip+0x320b]        # 0x1400043e0
+   1400011d5:	66 81 38 4d 5a       	cmp    WORD PTR [rax],0x5a4d
+   1400011da:	75 44                	jne    0x140001220
+   1400011dc:	48 63 50 3c          	movsxd rdx,DWORD PTR [rax+0x3c]
+   1400011e0:	48 01 d0             	add    rax,rdx
+   1400011e3:	81 38 50 45 00 00    	cmp    DWORD PTR [rax],0x4550
+   1400011e9:	75 35                	jne    0x140001220
+   1400011eb:	0f b7 50 18          	movzx  edx,WORD PTR [rax+0x18]
+   1400011ef:	66 81 fa 0b 01       	cmp    dx,0x10b
+   1400011f4:	0f 84 df 01 00 00    	je     0x1400013d9
+   1400011fa:	66 81 fa 0b 02       	cmp    dx,0x20b
+   1400011ff:	75 1f                	jne    0x140001220
+   140001201:	83 b8 84 00 00 00 0e 	cmp    DWORD PTR [rax+0x84],0xe
+   140001208:	76 16                	jbe    0x140001220
+   14000120a:	44 8b 88 f8 00 00 00 	mov    r9d,DWORD PTR [rax+0xf8]
+   140001211:	31 f6                	xor    esi,esi
+   140001213:	45 85 c9             	test   r9d,r9d
+   140001216:	40 0f 95 c6          	setne  sil
+   14000121a:	66 0f 1f 44 00 00    	nop    WORD PTR [rax+rax*1+0x0]
+   140001220:	48 8b 05 19 32 00 00 	mov    rax,QWORD PTR [rip+0x3219]        # 0x140004440
+   140001227:	89 35 db 5d 00 00    	mov    DWORD PTR [rip+0x5ddb],esi        # 0x140007008
+   14000122d:	44 8b 00             	mov    r8d,DWORD PTR [rax]
+   140001230:	45 85 c0             	test   r8d,r8d
+   140001233:	0f 85 2f 01 00 00    	jne    0x140001368
+   140001239:	b9 01 00 00 00       	mov    ecx,0x1
+   14000123e:	e8 c5 16 00 00       	call   0x140002908
+   140001243:	e8 58 16 00 00       	call   0x1400028a0
+   140001248:	48 8b 15 c1 32 00 00 	mov    rdx,QWORD PTR [rip+0x32c1]        # 0x140004510
+   14000124f:	8b 12                	mov    edx,DWORD PTR [rdx]
+   140001251:	89 10                	mov    DWORD PTR [rax],edx
+   140001253:	e8 40 16 00 00       	call   0x140002898
+   140001258:	48 8b 15 91 32 00 00 	mov    rdx,QWORD PTR [rip+0x3291]        # 0x1400044f0
+   14000125f:	8b 12                	mov    edx,DWORD PTR [rdx]
+   140001261:	89 10                	mov    DWORD PTR [rax],edx
+   140001263:	e8 18 03 00 00       	call   0x140001580
+   140001268:	85 c0                	test   eax,eax
+   14000126a:	0f 88 e9 00 00 00    	js     0x140001359
+   140001270:	48 8b 05 49 31 00 00 	mov    rax,QWORD PTR [rip+0x3149]        # 0x1400043c0
+   140001277:	83 38 01             	cmp    DWORD PTR [rax],0x1
+   14000127a:	0f 84 48 01 00 00    	je     0x1400013c8
+   140001280:	48 8b 05 99 31 00 00 	mov    rax,QWORD PTR [rip+0x3199]        # 0x140004420
+   140001287:	83 38 ff             	cmp    DWORD PTR [rax],0xffffffff
+   14000128a:	0f 84 29 01 00 00    	je     0x1400013b9
+   140001290:	48 8b 15 49 32 00 00 	mov    rdx,QWORD PTR [rip+0x3249]        # 0x1400044e0
+   140001297:	48 8b 0d 32 32 00 00 	mov    rcx,QWORD PTR [rip+0x3232]        # 0x1400044d0
+   14000129e:	e8 75 16 00 00       	call   0x140002918
+   1400012a3:	85 c0                	test   eax,eax
+   1400012a5:	0f 85 52 01 00 00    	jne    0x1400013fd
+   1400012ab:	48 8b 05 8e 32 00 00 	mov    rax,QWORD PTR [rip+0x328e]        # 0x140004540
+   1400012b2:	4c 8d 05 57 5d 00 00 	lea    r8,[rip+0x5d57]        # 0x140007010
+   1400012b9:	48 8d 15 58 5d 00 00 	lea    rdx,[rip+0x5d58]        # 0x140007018
+   1400012c0:	48 8d 0d 59 5d 00 00 	lea    rcx,[rip+0x5d59]        # 0x140007020
+   1400012c7:	8b 00                	mov    eax,DWORD PTR [rax]
+   1400012c9:	89 44 24 4c          	mov    DWORD PTR [rsp+0x4c],eax
+   1400012cd:	48 8b 05 2c 32 00 00 	mov    rax,QWORD PTR [rip+0x322c]        # 0x140004500
+   1400012d4:	44 8b 08             	mov    r9d,DWORD PTR [rax]
+   1400012d7:	48 8d 44 24 4c       	lea    rax,[rsp+0x4c]
+   1400012dc:	48 89 44 24 20       	mov    QWORD PTR [rsp+0x20],rax
+   1400012e1:	e8 3a 15 00 00       	call   0x140002820
+   1400012e6:	85 c0                	test   eax,eax
+   1400012e8:	78 6f                	js     0x140001359
+   1400012ea:	4c 63 35 2f 5d 00 00 	movsxd r14,DWORD PTR [rip+0x5d2f]        # 0x140007020
+   1400012f1:	41 8d 4e 01          	lea    ecx,[r14+0x1]
+   1400012f5:	48 63 c9             	movsxd rcx,ecx
+   1400012f8:	48 c1 e1 03          	shl    rcx,0x3
+   1400012fc:	e8 87 16 00 00       	call   0x140002988
+   140001301:	49 89 c4             	mov    r12,rax
+   140001304:	48 85 c0             	test   rax,rax
+   140001307:	74 50                	je     0x140001359
+   140001309:	45 85 f6             	test   r14d,r14d
+   14000130c:	7e 79                	jle    0x140001387
+   14000130e:	4c 8b 3d 03 5d 00 00 	mov    r15,QWORD PTR [rip+0x5d03]        # 0x140007018
+   140001315:	be 01 00 00 00       	mov    esi,0x1
+   14000131a:	eb 1d                	jmp    0x140001339
+   14000131c:	0f 1f 40 00          	nop    DWORD PTR [rax+0x0]
+   140001320:	49 8b 54 f7 f8       	mov    rdx,QWORD PTR [r15+rsi*8-0x8]
+   140001325:	49 89 f8             	mov    r8,rdi
+   140001328:	48 89 c1             	mov    rcx,rax
+   14000132b:	e8 18 16 00 00       	call   0x140002948
+   140001330:	4c 39 f6             	cmp    rsi,r14
+   140001333:	74 4b                	je     0x140001380
+   140001335:	48 83 c6 01          	add    rsi,0x1
+   140001339:	49 8b 4c f7 f8       	mov    rcx,QWORD PTR [r15+rsi*8-0x8]
+   14000133e:	e8 3d 15 00 00       	call   0x140002880
+   140001343:	48 8d 78 01          	lea    rdi,[rax+0x1]
+   140001347:	48 89 f9             	mov    rcx,rdi
+   14000134a:	e8 39 16 00 00       	call   0x140002988
+   14000134f:	49 89 44 f4 f8       	mov    QWORD PTR [r12+rsi*8-0x8],rax
+   140001354:	48 85 c0             	test   rax,rax
+   140001357:	75 c7                	jne    0x140001320
+   140001359:	b9 08 00 00 00       	mov    ecx,0x8
+   14000135e:	e8 8d 14 00 00       	call   0x1400027f0
+   140001363:	0f 1f 44 00 00       	nop    DWORD PTR [rax+rax*1+0x0]
+   140001368:	b9 02 00 00 00       	mov    ecx,0x2
+   14000136d:	e8 96 15 00 00       	call   0x140002908
+   140001372:	e9 cc fe ff ff       	jmp    0x140001243
+   140001377:	66 0f 1f 84 00 00 00 	nop    WORD PTR [rax+rax*1+0x0]
+   14000137e:	00 00
+   140001380:	48 63 f6             	movsxd rsi,esi
+   140001383:	49 8d 04 f4          	lea    rax,[r12+rsi*8]
+   140001387:	48 c7 00 00 00 00 00 	mov    QWORD PTR [rax],0x0
+   14000138e:	48 8b 15 2b 31 00 00 	mov    rdx,QWORD PTR [rip+0x312b]        # 0x1400044c0
+   140001395:	48 8b 0d 14 31 00 00 	mov    rcx,QWORD PTR [rip+0x3114]        # 0x1400044b0
+   14000139c:	4c 89 25 75 5c 00 00 	mov    QWORD PTR [rip+0x5c75],r12        # 0x140007018
+   1400013a3:	e8 68 15 00 00       	call   0x140002910
+   1400013a8:	e8 b3 01 00 00       	call   0x140001560
+   1400013ad:	c7 45 00 02 00 00 00 	mov    DWORD PTR [rbp+0x0],0x2
+   1400013b4:	e9 db fc ff ff       	jmp    0x140001094
+   1400013b9:	b9 ff ff ff ff       	mov    ecx,0xffffffff
+   1400013be:	e8 9d 15 00 00       	call   0x140002960
+   1400013c3:	e9 c8 fe ff ff       	jmp    0x140001290
+   1400013c8:	48 8d 0d 71 02 00 00 	lea    rcx,[rip+0x271]        # 0x140001640
+   1400013cf:	e8 0c 09 00 00       	call   0x140001ce0
+   1400013d4:	e9 a7 fe ff ff       	jmp    0x140001280
+   1400013d9:	83 78 74 0e          	cmp    DWORD PTR [rax+0x74],0xe
+   1400013dd:	0f 86 3d fe ff ff    	jbe    0x140001220
+   1400013e3:	44 8b 90 e8 00 00 00 	mov    r10d,DWORD PTR [rax+0xe8]
+   1400013ea:	31 f6                	xor    esi,esi
+   1400013ec:	45 85 d2             	test   r10d,r10d
+   1400013ef:	40 0f 95 c6          	setne  sil
+   1400013f3:	e9 28 fe ff ff       	jmp    0x140001220
+   1400013f8:	e8 2b 15 00 00       	call   0x140002928
+   1400013fd:	b9 0a 00 00 00       	mov    ecx,0xa
+   140001402:	e8 e9 13 00 00       	call   0x1400027f0
+   140001407:	89 c1                	mov    ecx,eax
+   140001409:	e8 22 15 00 00       	call   0x140002930
+   14000140e:	b9 1f 00 00 00       	mov    ecx,0x1f
+   140001413:	e8 d8 13 00 00       	call   0x1400027f0
+   140001418:	90                   	nop
+   140001419:	0f 1f 80 00 00 00 00 	nop    DWORD PTR [rax+0x0]
+   140001420:	48 83 ec 28          	sub    rsp,0x28
+   140001424:	48 8b 05 15 30 00 00 	mov    rax,QWORD PTR [rip+0x3015]        # 0x140004440
+   14000142b:	c7 00 01 00 00 00    	mov    DWORD PTR [rax],0x1
+   140001431:	e8 ea fb ff ff       	call   0x140001020
+   140001436:	90                   	nop
+   140001437:	90                   	nop
+   140001438:	48 83 c4 28          	add    rsp,0x28
+   14000143c:	c3                   	ret
+   14000143d:	0f 1f 00             	nop    DWORD PTR [rax]
+   140001440:	48 83 ec 28          	sub    rsp,0x28
+   140001444:	48 8b 05 f5 2f 00 00 	mov    rax,QWORD PTR [rip+0x2ff5]        # 0x140004440
+   14000144b:	c7 00 00 00 00 00    	mov    DWORD PTR [rax],0x0
+   140001451:	e8 ca fb ff ff       	call   0x140001020
+   140001456:	90                   	nop
+   140001457:	90                   	nop
+   140001458:	48 83 c4 28          	add    rsp,0x28
+   14000145c:	c3                   	ret
+   14000145d:	0f 1f 00             	nop    DWORD PTR [rax]
+   140001460:	e9 8b 14 00 00       	jmp    0x1400028f0
+   140001465:	90                   	nop
+   140001466:	90                   	nop
+   140001467:	90                   	nop
+   140001468:	90                   	nop
+   140001469:	90                   	nop
+   14000146a:	90                   	nop
+   14000146b:	90                   	nop
+   14000146c:	90                   	nop
+   14000146d:	90                   	nop
+   14000146e:	90                   	nop
+   14000146f:	90                   	nop
+   140001470:	48 8d 0d 09 00 00 00 	lea    rcx,[rip+0x9]        # 0x140001480
+   140001477:	e9 e4 ff ff ff       	jmp    0x140001460
+   14000147c:	0f 1f 40 00          	nop    DWORD PTR [rax+0x0]
+   140001480:	c3                   	ret
+   140001481:	90                   	nop
+   140001482:	90                   	nop
+   140001483:	90                   	nop
+   140001484:	90                   	nop
+   140001485:	90                   	nop
+   140001486:	90                   	nop
+   140001487:	90                   	nop
+   140001488:	90                   	nop
+   140001489:	90                   	nop
+   14000148a:	90                   	nop
+   14000148b:	90                   	nop
+   14000148c:	90                   	nop
+   14000148d:	90                   	nop
+   14000148e:	90                   	nop
+   14000148f:	90                   	nop
+   140001490:	48 83 ec 28          	sub    rsp,0x28
+   140001494:	48 8b 05 65 1b 00 00 	mov    rax,QWORD PTR [rip+0x1b65]        # 0x140003000
+   14000149b:	48 8b 00             	mov    rax,QWORD PTR [rax]
+   14000149e:	48 85 c0             	test   rax,rax
+   1400014a1:	74 2a                	je     0x1400014cd
+   1400014a3:	66 90                	xchg   ax,ax
+   1400014a5:	66 66 2e 0f 1f 84 00 	data16 cs nop WORD PTR [rax+rax*1+0x0]
+   1400014ac:	00 00 00 00
+   1400014b0:	ff d0                	call   rax
+   1400014b2:	48 8b 05 47 1b 00 00 	mov    rax,QWORD PTR [rip+0x1b47]        # 0x140003000
+   1400014b9:	48 8d 50 08          	lea    rdx,[rax+0x8]
+   1400014bd:	48 8b 40 08          	mov    rax,QWORD PTR [rax+0x8]
+   1400014c1:	48 89 15 38 1b 00 00 	mov    QWORD PTR [rip+0x1b38],rdx        # 0x140003000
+   1400014c8:	48 85 c0             	test   rax,rax
+   1400014cb:	75 e3                	jne    0x1400014b0
+   1400014cd:	48 83 c4 28          	add    rsp,0x28
+   1400014d1:	c3                   	ret
+   1400014d2:	0f 1f 00             	nop    DWORD PTR [rax]
+   1400014d5:	66 66 2e 0f 1f 84 00 	data16 cs nop WORD PTR [rax+rax*1+0x0]
+   1400014dc:	00 00 00 00
+   1400014e0:	56                   	push   rsi
+   1400014e1:	53                   	push   rbx
+   1400014e2:	48 83 ec 28          	sub    rsp,0x28
+   1400014e6:	48 8b 15 e3 2e 00 00 	mov    rdx,QWORD PTR [rip+0x2ee3]        # 0x1400043d0
+   1400014ed:	48 8b 02             	mov    rax,QWORD PTR [rdx]
+   1400014f0:	89 c1                	mov    ecx,eax
+   1400014f2:	83 f8 ff             	cmp    eax,0xffffffff
+   1400014f5:	74 39                	je     0x140001530
+   1400014f7:	85 c9                	test   ecx,ecx
+   1400014f9:	74 20                	je     0x14000151b
+   1400014fb:	89 c8                	mov    eax,ecx
+   1400014fd:	83 e9 01             	sub    ecx,0x1
+   140001500:	48 8d 1c c2          	lea    rbx,[rdx+rax*8]
+   140001504:	48 29 c8             	sub    rax,rcx
+   140001507:	48 8d 74 c2 f8       	lea    rsi,[rdx+rax*8-0x8]
+   14000150c:	0f 1f 40 00          	nop    DWORD PTR [rax+0x0]
+   140001510:	ff 13                	call   QWORD PTR [rbx]
+   140001512:	48 83 eb 08          	sub    rbx,0x8
+   140001516:	48 39 f3             	cmp    rbx,rsi
+   140001519:	75 f5                	jne    0x140001510
+   14000151b:	48 8d 0d 6e ff ff ff 	lea    rcx,[rip+0xffffffffffffff6e]        # 0x140001490
+   140001522:	48 83 c4 28          	add    rsp,0x28
+   140001526:	5b                   	pop    rbx
+   140001527:	5e                   	pop    rsi
+   140001528:	e9 33 ff ff ff       	jmp    0x140001460
+   14000152d:	0f 1f 00             	nop    DWORD PTR [rax]
+   140001530:	31 c0                	xor    eax,eax
+   140001532:	0f 1f 00             	nop    DWORD PTR [rax]
+   140001535:	66 66 2e 0f 1f 84 00 	data16 cs nop WORD PTR [rax+rax*1+0x0]
+   14000153c:	00 00 00 00
+   140001540:	44 8d 40 01          	lea    r8d,[rax+0x1]
+   140001544:	89 c1                	mov    ecx,eax
+   140001546:	4c 89 c0             	mov    rax,r8
+   140001549:	4a 83 3c c2 00       	cmp    QWORD PTR [rdx+r8*8],0x0
+   14000154e:	75 f0                	jne    0x140001540
+   140001550:	eb a5                	jmp    0x1400014f7
+   140001552:	0f 1f 00             	nop    DWORD PTR [rax]
+   140001555:	66 66 2e 0f 1f 84 00 	data16 cs nop WORD PTR [rax+rax*1+0x0]
+   14000155c:	00 00 00 00
+   140001560:	8b 05 ca 5a 00 00    	mov    eax,DWORD PTR [rip+0x5aca]        # 0x140007030
+   140001566:	85 c0                	test   eax,eax
+   140001568:	74 06                	je     0x140001570
+   14000156a:	c3                   	ret
+   14000156b:	0f 1f 44 00 00       	nop    DWORD PTR [rax+rax*1+0x0]
+   140001570:	c7 05 b6 5a 00 00 01 	mov    DWORD PTR [rip+0x5ab6],0x1        # 0x140007030
+   140001577:	00 00 00
+   14000157a:	e9 61 ff ff ff       	jmp    0x1400014e0
+   14000157f:	90                   	nop
+   140001580:	31 c0                	xor    eax,eax
+   140001582:	c3                   	ret
+   140001583:	90                   	nop
+   140001584:	90                   	nop
+   140001585:	90                   	nop
+   140001586:	90                   	nop
+   140001587:	90                   	nop
+   140001588:	90                   	nop
+   140001589:	90                   	nop
+   14000158a:	90                   	nop
+   14000158b:	90                   	nop
+   14000158c:	90                   	nop
+   14000158d:	90                   	nop
+   14000158e:	90                   	nop
+   14000158f:	90                   	nop
+   140001590:	83 fa 03             	cmp    edx,0x3
+   140001593:	74 0b                	je     0x1400015a0
+   140001595:	85 d2                	test   edx,edx
+   140001597:	74 07                	je     0x1400015a0
+   140001599:	c3                   	ret
+   14000159a:	66 0f 1f 44 00 00    	nop    WORD PTR [rax+rax*1+0x0]
+   1400015a0:	e9 4b 0c 00 00       	jmp    0x1400021f0
+   1400015a5:	66 66 2e 0f 1f 84 00 	data16 cs nop WORD PTR [rax+rax*1+0x0]
+   1400015ac:	00 00 00 00
+   1400015b0:	56                   	push   rsi
+   1400015b1:	53                   	push   rbx
+   1400015b2:	48 83 ec 28          	sub    rsp,0x28
+   1400015b6:	48 8b 05 f3 2d 00 00 	mov    rax,QWORD PTR [rip+0x2df3]        # 0x1400043b0
+   1400015bd:	83 38 02             	cmp    DWORD PTR [rax],0x2
+   1400015c0:	74 06                	je     0x1400015c8
+   1400015c2:	c7 00 02 00 00 00    	mov    DWORD PTR [rax],0x2
+   1400015c8:	83 fa 02             	cmp    edx,0x2
+   1400015cb:	74 13                	je     0x1400015e0
+   1400015cd:	83 fa 01             	cmp    edx,0x1
+   1400015d0:	74 4e                	je     0x140001620
+   1400015d2:	48 83 c4 28          	add    rsp,0x28
+   1400015d6:	5b                   	pop    rbx
+   1400015d7:	5e                   	pop    rsi
+   1400015d8:	c3                   	ret
+   1400015d9:	0f 1f 80 00 00 00 00 	nop    DWORD PTR [rax+0x0]
+   1400015e0:	48 8d 1d 09 36 00 00 	lea    rbx,[rip+0x3609]        # 0x140004bf0
+   1400015e7:	48 8d 35 02 36 00 00 	lea    rsi,[rip+0x3602]        # 0x140004bf0
+   1400015ee:	48 39 f3             	cmp    rbx,rsi
+   1400015f1:	74 df                	je     0x1400015d2
+   1400015f3:	66 90                	xchg   ax,ax
+   1400015f5:	66 66 2e 0f 1f 84 00 	data16 cs nop WORD PTR [rax+rax*1+0x0]
+   1400015fc:	00 00 00 00
+   140001600:	48 8b 03             	mov    rax,QWORD PTR [rbx]
+   140001603:	48 85 c0             	test   rax,rax
+   140001606:	74 02                	je     0x14000160a
+   140001608:	ff d0                	call   rax
+   14000160a:	48 83 c3 08          	add    rbx,0x8
+   14000160e:	48 39 f3             	cmp    rbx,rsi
+   140001611:	75 ed                	jne    0x140001600
+   140001613:	48 83 c4 28          	add    rsp,0x28
+   140001617:	5b                   	pop    rbx
+   140001618:	5e                   	pop    rsi
+   140001619:	c3                   	ret
+   14000161a:	66 0f 1f 44 00 00    	nop    WORD PTR [rax+rax*1+0x0]
+   140001620:	48 83 c4 28          	add    rsp,0x28
+   140001624:	5b                   	pop    rbx
+   140001625:	5e                   	pop    rsi
+   140001626:	e9 c5 0b 00 00       	jmp    0x1400021f0
+   14000162b:	0f 1f 44 00 00       	nop    DWORD PTR [rax+rax*1+0x0]
+   140001630:	31 c0                	xor    eax,eax
+   140001632:	c3                   	ret
+   140001633:	90                   	nop
+   140001634:	90                   	nop
+   140001635:	90                   	nop
+   140001636:	90                   	nop
+   140001637:	90                   	nop
+   140001638:	90                   	nop
+   140001639:	90                   	nop
+   14000163a:	90                   	nop
+   14000163b:	90                   	nop
+   14000163c:	90                   	nop
+   14000163d:	90                   	nop
+   14000163e:	90                   	nop
+   14000163f:	90                   	nop
+   140001640:	56                   	push   rsi
+   140001641:	53                   	push   rbx
+   140001642:	48 83 ec 78          	sub    rsp,0x78
+   140001646:	0f 11 74 24 40       	movups XMMWORD PTR [rsp+0x40],xmm6
+   14000164b:	0f 11 7c 24 50       	movups XMMWORD PTR [rsp+0x50],xmm7
+   140001650:	44 0f 11 44 24 60    	movups XMMWORD PTR [rsp+0x60],xmm8
+   140001656:	83 39 06             	cmp    DWORD PTR [rcx],0x6
+   140001659:	0f 87 cd 00 00 00    	ja     0x14000172c
+   14000165f:	8b 01                	mov    eax,DWORD PTR [rcx]
+   140001661:	48 8d 15 5c 2b 00 00 	lea    rdx,[rip+0x2b5c]        # 0x1400041c4
+   140001668:	48 63 04 82          	movsxd rax,DWORD PTR [rdx+rax*4]
+   14000166c:	48 01 d0             	add    rax,rdx
+   14000166f:	ff e0                	jmp    rax
+   140001671:	0f 1f 80 00 00 00 00 	nop    DWORD PTR [rax+0x0]
+   140001678:	48 8d 1d 40 2a 00 00 	lea    rbx,[rip+0x2a40]        # 0x1400040bf
+   14000167f:	f2 44 0f 10 41 20    	movsd  xmm8,QWORD PTR [rcx+0x20]
+   140001685:	f2 0f 10 79 18       	movsd  xmm7,QWORD PTR [rcx+0x18]
+   14000168a:	f2 0f 10 71 10       	movsd  xmm6,QWORD PTR [rcx+0x10]
+   14000168f:	48 8b 71 08          	mov    rsi,QWORD PTR [rcx+0x8]
+   140001693:	b9 02 00 00 00       	mov    ecx,0x2
+   140001698:	e8 f3 11 00 00       	call   0x140002890
+   14000169d:	f2 44 0f 11 44 24 30 	movsd  QWORD PTR [rsp+0x30],xmm8
+   1400016a4:	49 89 d8             	mov    r8,rbx
+   1400016a7:	48 8d 15 ea 2a 00 00 	lea    rdx,[rip+0x2aea]        # 0x140004198
+   1400016ae:	f2 0f 11 7c 24 28    	movsd  QWORD PTR [rsp+0x28],xmm7
+   1400016b4:	49 89 f1             	mov    r9,rsi
+   1400016b7:	48 89 c1             	mov    rcx,rax
+   1400016ba:	f2 0f 11 74 24 20    	movsd  QWORD PTR [rsp+0x20],xmm6
+   1400016c0:	e8 bb 10 00 00       	call   0x140002780
+   1400016c5:	90                   	nop
+   1400016c6:	0f 10 74 24 40       	movups xmm6,XMMWORD PTR [rsp+0x40]
+   1400016cb:	0f 10 7c 24 50       	movups xmm7,XMMWORD PTR [rsp+0x50]
+   1400016d0:	31 c0                	xor    eax,eax
+   1400016d2:	44 0f 10 44 24 60    	movups xmm8,XMMWORD PTR [rsp+0x60]
+   1400016d8:	48 83 c4 78          	add    rsp,0x78
+   1400016dc:	5b                   	pop    rbx
+   1400016dd:	5e                   	pop    rsi
+   1400016de:	c3                   	ret
+   1400016df:	90                   	nop
+   1400016e0:	48 8d 1d b9 29 00 00 	lea    rbx,[rip+0x29b9]        # 0x1400040a0
+   1400016e7:	eb 96                	jmp    0x14000167f
+   1400016e9:	0f 1f 80 00 00 00 00 	nop    DWORD PTR [rax+0x0]
+   1400016f0:	48 8d 1d 09 2a 00 00 	lea    rbx,[rip+0x2a09]        # 0x140004100
+   1400016f7:	eb 86                	jmp    0x14000167f
+   1400016f9:	0f 1f 80 00 00 00 00 	nop    DWORD PTR [rax+0x0]
+   140001700:	48 8d 1d d9 29 00 00 	lea    rbx,[rip+0x29d9]        # 0x1400040e0
+   140001707:	e9 73 ff ff ff       	jmp    0x14000167f
+   14000170c:	0f 1f 40 00          	nop    DWORD PTR [rax+0x0]
+   140001710:	48 8d 1d 39 2a 00 00 	lea    rbx,[rip+0x2a39]        # 0x140004150
+   140001717:	e9 63 ff ff ff       	jmp    0x14000167f
+   14000171c:	0f 1f 40 00          	nop    DWORD PTR [rax+0x0]
+   140001720:	48 8d 1d 01 2a 00 00 	lea    rbx,[rip+0x2a01]        # 0x140004128
+   140001727:	e9 53 ff ff ff       	jmp    0x14000167f
+   14000172c:	48 8d 1d 53 2a 00 00 	lea    rbx,[rip+0x2a53]        # 0x140004186
+   140001733:	e9 47 ff ff ff       	jmp    0x14000167f
+   140001738:	90                   	nop
+   140001739:	90                   	nop
+   14000173a:	90                   	nop
+   14000173b:	90                   	nop
+   14000173c:	90                   	nop
+   14000173d:	90                   	nop
+   14000173e:	90                   	nop
+   14000173f:	90                   	nop
+   140001740:	56                   	push   rsi
+   140001741:	53                   	push   rbx
+   140001742:	48 83 ec 38          	sub    rsp,0x38
+   140001746:	48 89 cb             	mov    rbx,rcx
+   140001749:	48 8d 44 24 58       	lea    rax,[rsp+0x58]
+   14000174e:	b9 02 00 00 00       	mov    ecx,0x2
+   140001753:	4c 89 44 24 60       	mov    QWORD PTR [rsp+0x60],r8
+   140001758:	4c 89 4c 24 68       	mov    QWORD PTR [rsp+0x68],r9
+   14000175d:	48 89 54 24 58       	mov    QWORD PTR [rsp+0x58],rdx
+   140001762:	48 89 44 24 28       	mov    QWORD PTR [rsp+0x28],rax
+   140001767:	e8 24 11 00 00       	call   0x140002890
+   14000176c:	48 8d 15 6d 2a 00 00 	lea    rdx,[rip+0x2a6d]        # 0x1400041e0
+   140001773:	48 89 c1             	mov    rcx,rax
+   140001776:	e8 05 10 00 00       	call   0x140002780
+   14000177b:	48 8b 74 24 28       	mov    rsi,QWORD PTR [rsp+0x28]
+   140001780:	b9 02 00 00 00       	mov    ecx,0x2
+   140001785:	e8 06 11 00 00       	call   0x140002890
+   14000178a:	48 89 da             	mov    rdx,rbx
+   14000178d:	49 89 f0             	mov    r8,rsi
+   140001790:	48 89 c1             	mov    rcx,rax
+   140001793:	e8 a8 0f 00 00       	call   0x140002740
+   140001798:	e8 8b 11 00 00       	call   0x140002928
+   14000179d:	90                   	nop
+   14000179e:	66 90                	xchg   ax,ax
+   1400017a0:	57                   	push   rdi
+   1400017a1:	56                   	push   rsi
+   1400017a2:	53                   	push   rbx
+   1400017a3:	48 83 ec 50          	sub    rsp,0x50
+   1400017a7:	48 63 35 f6 58 00 00 	movsxd rsi,DWORD PTR [rip+0x58f6]        # 0x1400070a4
+   1400017ae:	48 89 cb             	mov    rbx,rcx
+   1400017b1:	85 f6                	test   esi,esi
+   1400017b3:	0f 8e 17 01 00 00    	jle    0x1400018d0
+   1400017b9:	48 8b 05 e8 58 00 00 	mov    rax,QWORD PTR [rip+0x58e8]        # 0x1400070a8
+   1400017c0:	45 31 c9             	xor    r9d,r9d
+   1400017c3:	48 83 c0 18          	add    rax,0x18
+   1400017c7:	66 0f 1f 84 00 00 00 	nop    WORD PTR [rax+rax*1+0x0]
+   1400017ce:	00 00
+   1400017d0:	4c 8b 00             	mov    r8,QWORD PTR [rax]
+   1400017d3:	4c 39 c3             	cmp    rbx,r8
+   1400017d6:	72 13                	jb     0x1400017eb
+   1400017d8:	48 8b 50 08          	mov    rdx,QWORD PTR [rax+0x8]
+   1400017dc:	8b 52 08             	mov    edx,DWORD PTR [rdx+0x8]
+   1400017df:	49 01 d0             	add    r8,rdx
+   1400017e2:	4c 39 c3             	cmp    rbx,r8
+   1400017e5:	0f 82 8a 00 00 00    	jb     0x140001875
+   1400017eb:	41 83 c1 01          	add    r9d,0x1
+   1400017ef:	48 83 c0 28          	add    rax,0x28
+   1400017f3:	41 39 f1             	cmp    r9d,esi
+   1400017f6:	75 d8                	jne    0x1400017d0
+   1400017f8:	48 89 d9             	mov    rcx,rbx
+   1400017fb:	e8 30 0c 00 00       	call   0x140002430
+   140001800:	48 89 c7             	mov    rdi,rax
+   140001803:	48 85 c0             	test   rax,rax
+   140001806:	0f 84 e6 00 00 00    	je     0x1400018f2
+   14000180c:	48 8b 05 95 58 00 00 	mov    rax,QWORD PTR [rip+0x5895]        # 0x1400070a8
+   140001813:	48 8d 1c b6          	lea    rbx,[rsi+rsi*4]
+   140001817:	48 c1 e3 03          	shl    rbx,0x3
+   14000181b:	48 01 d8             	add    rax,rbx
+   14000181e:	48 89 78 20          	mov    QWORD PTR [rax+0x20],rdi
+   140001822:	c7 00 00 00 00 00    	mov    DWORD PTR [rax],0x0
+   140001828:	e8 43 0d 00 00       	call   0x140002570
+   14000182d:	8b 57 0c             	mov    edx,DWORD PTR [rdi+0xc]
+   140001830:	41 b8 30 00 00 00    	mov    r8d,0x30
+   140001836:	48 8d 0c 10          	lea    rcx,[rax+rdx*1]
+   14000183a:	48 8b 05 67 58 00 00 	mov    rax,QWORD PTR [rip+0x5867]        # 0x1400070a8
+   140001841:	48 8d 54 24 20       	lea    rdx,[rsp+0x20]
+   140001846:	48 89 4c 18 18       	mov    QWORD PTR [rax+rbx*1+0x18],rcx
+   14000184b:	ff 15 57 6a 00 00    	call   QWORD PTR [rip+0x6a57]        # 0x1400082a8
+   140001851:	48 85 c0             	test   rax,rax
+   140001854:	0f 84 7d 00 00 00    	je     0x1400018d7
+   14000185a:	8b 44 24 44          	mov    eax,DWORD PTR [rsp+0x44]
+   14000185e:	8d 50 fc             	lea    edx,[rax-0x4]
+   140001861:	83 e2 fb             	and    edx,0xfffffffb
+   140001864:	74 08                	je     0x14000186e
+   140001866:	8d 50 c0             	lea    edx,[rax-0x40]
+   140001869:	83 e2 bf             	and    edx,0xffffffbf
+   14000186c:	75 12                	jne    0x140001880
+   14000186e:	83 05 2f 58 00 00 01 	add    DWORD PTR [rip+0x582f],0x1        # 0x1400070a4
+   140001875:	48 83 c4 50          	add    rsp,0x50
+   140001879:	5b                   	pop    rbx
+   14000187a:	5e                   	pop    rsi
+   14000187b:	5f                   	pop    rdi
+   14000187c:	c3                   	ret
+   14000187d:	0f 1f 00             	nop    DWORD PTR [rax]
+   140001880:	83 f8 02             	cmp    eax,0x2
+   140001883:	48 8b 4c 24 20       	mov    rcx,QWORD PTR [rsp+0x20]
+   140001888:	48 8b 54 24 38       	mov    rdx,QWORD PTR [rsp+0x38]
+   14000188d:	41 b8 40 00 00 00    	mov    r8d,0x40
+   140001893:	b8 04 00 00 00       	mov    eax,0x4
+   140001898:	44 0f 44 c0          	cmove  r8d,eax
+   14000189c:	48 03 1d 05 58 00 00 	add    rbx,QWORD PTR [rip+0x5805]        # 0x1400070a8
+   1400018a3:	48 89 4b 08          	mov    QWORD PTR [rbx+0x8],rcx
+   1400018a7:	49 89 d9             	mov    r9,rbx
+   1400018aa:	48 89 53 10          	mov    QWORD PTR [rbx+0x10],rdx
+   1400018ae:	ff 15 ec 69 00 00    	call   QWORD PTR [rip+0x69ec]        # 0x1400082a0
+   1400018b4:	85 c0                	test   eax,eax
+   1400018b6:	75 b6                	jne    0x14000186e
+   1400018b8:	ff 15 b2 69 00 00    	call   QWORD PTR [rip+0x69b2]        # 0x140008270
+   1400018be:	48 8d 0d 93 29 00 00 	lea    rcx,[rip+0x2993]        # 0x140004258
+   1400018c5:	89 c2                	mov    edx,eax
+   1400018c7:	e8 74 fe ff ff       	call   0x140001740
+   1400018cc:	0f 1f 40 00          	nop    DWORD PTR [rax+0x0]
+   1400018d0:	31 f6                	xor    esi,esi
+   1400018d2:	e9 21 ff ff ff       	jmp    0x1400017f8
+   1400018d7:	48 8b 05 ca 57 00 00 	mov    rax,QWORD PTR [rip+0x57ca]        # 0x1400070a8
+   1400018de:	8b 57 08             	mov    edx,DWORD PTR [rdi+0x8]
+   1400018e1:	48 8d 0d 38 29 00 00 	lea    rcx,[rip+0x2938]        # 0x140004220
+   1400018e8:	4c 8b 44 18 18       	mov    r8,QWORD PTR [rax+rbx*1+0x18]
+   1400018ed:	e8 4e fe ff ff       	call   0x140001740
+   1400018f2:	48 89 da             	mov    rdx,rbx
+   1400018f5:	48 8d 0d 04 29 00 00 	lea    rcx,[rip+0x2904]        # 0x140004200
+   1400018fc:	e8 3f fe ff ff       	call   0x140001740
+   140001901:	90                   	nop
+   140001902:	0f 1f 00             	nop    DWORD PTR [rax]
+   140001905:	66 66 2e 0f 1f 84 00 	data16 cs nop WORD PTR [rax+rax*1+0x0]
+   14000190c:	00 00 00 00
+   140001910:	55                   	push   rbp
+   140001911:	41 57                	push   r15
+   140001913:	41 56                	push   r14
+   140001915:	41 55                	push   r13
+   140001917:	41 54                	push   r12
+   140001919:	57                   	push   rdi
+   14000191a:	56                   	push   rsi
+   14000191b:	53                   	push   rbx
+   14000191c:	48 83 ec 48          	sub    rsp,0x48
+   140001920:	48 8d 6c 24 40       	lea    rbp,[rsp+0x40]
+   140001925:	8b 35 75 57 00 00    	mov    esi,DWORD PTR [rip+0x5775]        # 0x1400070a0
+   14000192b:	85 f6                	test   esi,esi
+   14000192d:	74 11                	je     0x140001940
+   14000192f:	48 8d 65 08          	lea    rsp,[rbp+0x8]
+   140001933:	5b                   	pop    rbx
+   140001934:	5e                   	pop    rsi
+   140001935:	5f                   	pop    rdi
+   140001936:	41 5c                	pop    r12
+   140001938:	41 5d                	pop    r13
+   14000193a:	41 5e                	pop    r14
+   14000193c:	41 5f                	pop    r15
+   14000193e:	5d                   	pop    rbp
+   14000193f:	c3                   	ret
+   140001940:	c7 05 56 57 00 00 01 	mov    DWORD PTR [rip+0x5756],0x1        # 0x1400070a0
+   140001947:	00 00 00
+   14000194a:	e8 61 0b 00 00       	call   0x1400024b0
+   14000194f:	48 98                	cdqe
+   140001951:	48 8d 04 80          	lea    rax,[rax+rax*4]
+   140001955:	48 8d 04 c5 0f 00 00 	lea    rax,[rax*8+0xf]
+   14000195c:	00
+   14000195d:	48 83 e0 f0          	and    rax,0xfffffffffffffff0
+   140001961:	e8 9a 0d 00 00       	call   0x140002700
+   140001966:	48 8b 3d 83 2a 00 00 	mov    rdi,QWORD PTR [rip+0x2a83]        # 0x1400043f0
+   14000196d:	48 8b 1d 8c 2a 00 00 	mov    rbx,QWORD PTR [rip+0x2a8c]        # 0x140004400
+   140001974:	48 29 c4             	sub    rsp,rax
+   140001977:	c7 05 23 57 00 00 00 	mov    DWORD PTR [rip+0x5723],0x0        # 0x1400070a4
+   14000197e:	00 00 00
+   140001981:	48 8d 44 24 30       	lea    rax,[rsp+0x30]
+   140001986:	48 89 05 1b 57 00 00 	mov    QWORD PTR [rip+0x571b],rax        # 0x1400070a8
+   14000198d:	48 89 f8             	mov    rax,rdi
+   140001990:	48 29 d8             	sub    rax,rbx
+   140001993:	48 83 f8 07          	cmp    rax,0x7
+   140001997:	7e 96                	jle    0x14000192f
+   140001999:	48 83 f8 0b          	cmp    rax,0xb
+   14000199d:	0f 8f 85 01 00 00    	jg     0x140001b28
+   1400019a3:	8b 13                	mov    edx,DWORD PTR [rbx]
+   1400019a5:	85 d2                	test   edx,edx
+   1400019a7:	0f 85 90 01 00 00    	jne    0x140001b3d
+   1400019ad:	8b 43 04             	mov    eax,DWORD PTR [rbx+0x4]
+   1400019b0:	85 c0                	test   eax,eax
+   1400019b2:	0f 85 85 01 00 00    	jne    0x140001b3d
+   1400019b8:	8b 53 08             	mov    edx,DWORD PTR [rbx+0x8]
+   1400019bb:	83 fa 01             	cmp    edx,0x1
+   1400019be:	0f 85 cf 02 00 00    	jne    0x140001c93
+   1400019c4:	48 83 c3 0c          	add    rbx,0xc
+   1400019c8:	4c 8b 35 11 2a 00 00 	mov    r14,QWORD PTR [rip+0x2a11]        # 0x1400043e0
+   1400019cf:	4c 8d 65 f8          	lea    r12,[rbp-0x8]
+   1400019d3:	48 39 fb             	cmp    rbx,rdi
+   1400019d6:	72 7c                	jb     0x140001a54
+   1400019d8:	e9 52 ff ff ff       	jmp    0x14000192f
+   1400019dd:	0f 1f 00             	nop    DWORD PTR [rax]
+   1400019e0:	83 fa 08             	cmp    edx,0x8
+   1400019e3:	0f 84 1f 02 00 00    	je     0x140001c08
+   1400019e9:	83 fa 10             	cmp    edx,0x10
+   1400019ec:	0f 85 79 02 00 00    	jne    0x140001c6b
+   1400019f2:	41 0f b7 07          	movzx  eax,WORD PTR [r15]
+   1400019f6:	66 85 c0             	test   ax,ax
+   1400019f9:	79 06                	jns    0x140001a01
+   1400019fb:	48 0d 00 00 ff ff    	or     rax,0xffffffffffff0000
+   140001a01:	4c 29 c0             	sub    rax,r8
+   140001a04:	4c 01 c8             	add    rax,r9
+   140001a07:	81 e1 c0 00 00 00    	and    ecx,0xc0
+   140001a0d:	48 89 45 f8          	mov    QWORD PTR [rbp-0x8],rax
+   140001a11:	75 18                	jne    0x140001a2b
+   140001a13:	48 3d ff ff 00 00    	cmp    rax,0xffff
+   140001a19:	0f 8f 60 02 00 00    	jg     0x140001c7f
+   140001a1f:	48 3d 00 80 ff ff    	cmp    rax,0xffffffffffff8000
+   140001a25:	0f 8c 54 02 00 00    	jl     0x140001c7f
+   140001a2b:	4c 89 f9             	mov    rcx,r15
+   140001a2e:	4d 89 e5             	mov    r13,r12
+   140001a31:	e8 6a fd ff ff       	call   0x1400017a0
+   140001a36:	41 b8 02 00 00 00    	mov    r8d,0x2
+   140001a3c:	4c 89 e2             	mov    rdx,r12
+   140001a3f:	4c 89 f9             	mov    rcx,r15
+   140001a42:	e8 01 0f 00 00       	call   0x140002948
+   140001a47:	48 83 c3 0c          	add    rbx,0xc
+   140001a4b:	48 39 fb             	cmp    rbx,rdi
+   140001a4e:	0f 83 7c 00 00 00    	jae    0x140001ad0
+   140001a54:	44 8b 03             	mov    r8d,DWORD PTR [rbx]
+   140001a57:	8b 4b 08             	mov    ecx,DWORD PTR [rbx+0x8]
+   140001a5a:	44 8b 7b 04          	mov    r15d,DWORD PTR [rbx+0x4]
+   140001a5e:	4d 01 f0             	add    r8,r14
+   140001a61:	0f b6 d1             	movzx  edx,cl
+   140001a64:	4d 8b 08             	mov    r9,QWORD PTR [r8]
+   140001a67:	4d 01 f7             	add    r15,r14
+   140001a6a:	83 fa 20             	cmp    edx,0x20
+   140001a6d:	0f 84 2d 01 00 00    	je     0x140001ba0
+   140001a73:	0f 86 67 ff ff ff    	jbe    0x1400019e0
+   140001a79:	83 fa 40             	cmp    edx,0x40
+   140001a7c:	0f 85 e9 01 00 00    	jne    0x140001c6b
+   140001a82:	49 8b 07             	mov    rax,QWORD PTR [r15]
+   140001a85:	4c 29 c0             	sub    rax,r8
+   140001a88:	4c 01 c8             	add    rax,r9
+   140001a8b:	81 e1 c0 00 00 00    	and    ecx,0xc0
+   140001a91:	48 89 45 f8          	mov    QWORD PTR [rbp-0x8],rax
+   140001a95:	75 09                	jne    0x140001aa0
+   140001a97:	48 85 c0             	test   rax,rax
+   140001a9a:	0f 89 df 01 00 00    	jns    0x140001c7f
+   140001aa0:	4c 89 f9             	mov    rcx,r15
+   140001aa3:	48 83 c3 0c          	add    rbx,0xc
+   140001aa7:	4d 89 e5             	mov    r13,r12
+   140001aaa:	e8 f1 fc ff ff       	call   0x1400017a0
+   140001aaf:	41 b8 08 00 00 00    	mov    r8d,0x8
+   140001ab5:	4c 89 e2             	mov    rdx,r12
+   140001ab8:	4c 89 f9             	mov    rcx,r15
+   140001abb:	e8 88 0e 00 00       	call   0x140002948
+   140001ac0:	48 39 fb             	cmp    rbx,rdi
+   140001ac3:	72 8f                	jb     0x140001a54
+   140001ac5:	66 66 2e 0f 1f 84 00 	data16 cs nop WORD PTR [rax+rax*1+0x0]
+   140001acc:	00 00 00 00
+   140001ad0:	8b 05 ce 55 00 00    	mov    eax,DWORD PTR [rip+0x55ce]        # 0x1400070a4
+   140001ad6:	85 c0                	test   eax,eax
+   140001ad8:	0f 8e 51 fe ff ff    	jle    0x14000192f
+   140001ade:	48 8b 3d bb 67 00 00 	mov    rdi,QWORD PTR [rip+0x67bb]        # 0x1400082a0
+   140001ae5:	31 db                	xor    ebx,ebx
+   140001ae7:	66 0f 1f 84 00 00 00 	nop    WORD PTR [rax+rax*1+0x0]
+   140001aee:	00 00
+   140001af0:	48 8b 05 b1 55 00 00 	mov    rax,QWORD PTR [rip+0x55b1]        # 0x1400070a8
+   140001af7:	48 01 d8             	add    rax,rbx
+   140001afa:	44 8b 00             	mov    r8d,DWORD PTR [rax]
+   140001afd:	45 85 c0             	test   r8d,r8d
+   140001b00:	74 0d                	je     0x140001b0f
+   140001b02:	48 8b 50 10          	mov    rdx,QWORD PTR [rax+0x10]
+   140001b06:	48 8b 48 08          	mov    rcx,QWORD PTR [rax+0x8]
+   140001b0a:	4d 89 e9             	mov    r9,r13
+   140001b0d:	ff d7                	call   rdi
+   140001b0f:	83 c6 01             	add    esi,0x1
+   140001b12:	48 83 c3 28          	add    rbx,0x28
+   140001b16:	3b 35 88 55 00 00    	cmp    esi,DWORD PTR [rip+0x5588]        # 0x1400070a4
+   140001b1c:	7c d2                	jl     0x140001af0
+   140001b1e:	e9 0c fe ff ff       	jmp    0x14000192f
+   140001b23:	0f 1f 44 00 00       	nop    DWORD PTR [rax+rax*1+0x0]
+   140001b28:	44 8b 0b             	mov    r9d,DWORD PTR [rbx]
+   140001b2b:	45 85 c9             	test   r9d,r9d
+   140001b2e:	75 0d                	jne    0x140001b3d
+   140001b30:	44 8b 43 04          	mov    r8d,DWORD PTR [rbx+0x4]
+   140001b34:	45 85 c0             	test   r8d,r8d
+   140001b37:	0f 84 1a 01 00 00    	je     0x140001c57
+   140001b3d:	48 39 fb             	cmp    rbx,rdi
+   140001b40:	0f 83 e9 fd ff ff    	jae    0x14000192f
+   140001b46:	4c 8b 35 93 28 00 00 	mov    r14,QWORD PTR [rip+0x2893]        # 0x1400043e0
+   140001b4d:	4c 8d 6d f8          	lea    r13,[rbp-0x8]
+   140001b51:	0f 1f 40 00          	nop    DWORD PTR [rax+0x0]
+   140001b55:	66 66 2e 0f 1f 84 00 	data16 cs nop WORD PTR [rax+rax*1+0x0]
+   140001b5c:	00 00 00 00
+   140001b60:	44 8b 63 04          	mov    r12d,DWORD PTR [rbx+0x4]
+   140001b64:	8b 03                	mov    eax,DWORD PTR [rbx]
+   140001b66:	48 83 c3 08          	add    rbx,0x8
+   140001b6a:	43 03 04 26          	add    eax,DWORD PTR [r14+r12*1]
+   140001b6e:	4b 8d 0c 34          	lea    rcx,[r12+r14*1]
+   140001b72:	89 45 f8             	mov    DWORD PTR [rbp-0x8],eax
+   140001b75:	e8 26 fc ff ff       	call   0x1400017a0
+   140001b7a:	41 b8 04 00 00 00    	mov    r8d,0x4
+   140001b80:	4c 89 ea             	mov    rdx,r13
+   140001b83:	4b 8d 0c 34          	lea    rcx,[r12+r14*1]
+   140001b87:	e8 bc 0d 00 00       	call   0x140002948
+   140001b8c:	48 39 fb             	cmp    rbx,rdi
+   140001b8f:	72 cf                	jb     0x140001b60
+   140001b91:	e9 3a ff ff ff       	jmp    0x140001ad0
+   140001b96:	66 2e 0f 1f 84 00 00 	cs nop WORD PTR [rax+rax*1+0x0]
+   140001b9d:	00 00 00
+   140001ba0:	41 8b 07             	mov    eax,DWORD PTR [r15]
+   140001ba3:	85 c0                	test   eax,eax
+   140001ba5:	79 0d                	jns    0x140001bb4
+   140001ba7:	49 bb 00 00 00 00 ff 	movabs r11,0xffffffff00000000
+   140001bae:	ff ff ff
+   140001bb1:	4c 09 d8             	or     rax,r11
+   140001bb4:	4c 29 c0             	sub    rax,r8
+   140001bb7:	4c 01 c8             	add    rax,r9
+   140001bba:	81 e1 c0 00 00 00    	and    ecx,0xc0
+   140001bc0:	48 89 45 f8          	mov    QWORD PTR [rbp-0x8],rax
+   140001bc4:	75 1a                	jne    0x140001be0
+   140001bc6:	b9 ff ff ff ff       	mov    ecx,0xffffffff
+   140001bcb:	48 39 c8             	cmp    rax,rcx
+   140001bce:	0f 8f ab 00 00 00    	jg     0x140001c7f
+   140001bd4:	48 3d 00 00 00 80    	cmp    rax,0xffffffff80000000
+   140001bda:	0f 8c 9f 00 00 00    	jl     0x140001c7f
+   140001be0:	4c 89 f9             	mov    rcx,r15
+   140001be3:	4d 89 e5             	mov    r13,r12
+   140001be6:	e8 b5 fb ff ff       	call   0x1400017a0
+   140001beb:	41 b8 04 00 00 00    	mov    r8d,0x4
+   140001bf1:	4c 89 e2             	mov    rdx,r12
+   140001bf4:	4c 89 f9             	mov    rcx,r15
+   140001bf7:	e8 4c 0d 00 00       	call   0x140002948
+   140001bfc:	e9 46 fe ff ff       	jmp    0x140001a47
+   140001c01:	0f 1f 80 00 00 00 00 	nop    DWORD PTR [rax+0x0]
+   140001c08:	41 0f b6 07          	movzx  eax,BYTE PTR [r15]
+   140001c0c:	84 c0                	test   al,al
+   140001c0e:	79 06                	jns    0x140001c16
+   140001c10:	48 0d 00 ff ff ff    	or     rax,0xffffffffffffff00
+   140001c16:	4c 29 c0             	sub    rax,r8
+   140001c19:	4c 01 c8             	add    rax,r9
+   140001c1c:	81 e1 c0 00 00 00    	and    ecx,0xc0
+   140001c22:	48 89 45 f8          	mov    QWORD PTR [rbp-0x8],rax
+   140001c26:	75 0e                	jne    0x140001c36
+   140001c28:	48 3d ff 00 00 00    	cmp    rax,0xff
+   140001c2e:	7f 4f                	jg     0x140001c7f
+   140001c30:	48 83 f8 80          	cmp    rax,0xffffffffffffff80
+   140001c34:	7c 49                	jl     0x140001c7f
+   140001c36:	4c 89 f9             	mov    rcx,r15
+   140001c39:	4d 89 e5             	mov    r13,r12
+   140001c3c:	e8 5f fb ff ff       	call   0x1400017a0
+   140001c41:	41 b8 01 00 00 00    	mov    r8d,0x1
+   140001c47:	4c 89 e2             	mov    rdx,r12
+   140001c4a:	4c 89 f9             	mov    rcx,r15
+   140001c4d:	e8 f6 0c 00 00       	call   0x140002948
+   140001c52:	e9 f0 fd ff ff       	jmp    0x140001a47
+   140001c57:	8b 4b 08             	mov    ecx,DWORD PTR [rbx+0x8]
+   140001c5a:	85 c9                	test   ecx,ecx
+   140001c5c:	0f 85 56 fd ff ff    	jne    0x1400019b8
+   140001c62:	48 83 c3 0c          	add    rbx,0xc
+   140001c66:	e9 38 fd ff ff       	jmp    0x1400019a3
+   140001c6b:	48 8d 0d 46 26 00 00 	lea    rcx,[rip+0x2646]        # 0x1400042b8
+   140001c72:	48 c7 45 f8 00 00 00 	mov    QWORD PTR [rbp-0x8],0x0
+   140001c79:	00
+   140001c7a:	e8 c1 fa ff ff       	call   0x140001740
+   140001c7f:	48 89 44 24 20       	mov    QWORD PTR [rsp+0x20],rax
+   140001c84:	4d 89 f8             	mov    r8,r15
+   140001c87:	48 8d 0d 5a 26 00 00 	lea    rcx,[rip+0x265a]        # 0x1400042e8
+   140001c8e:	e8 ad fa ff ff       	call   0x140001740
+   140001c93:	48 8d 0d e6 25 00 00 	lea    rcx,[rip+0x25e6]        # 0x140004280
+   140001c9a:	e8 a1 fa ff ff       	call   0x140001740
+   140001c9f:	90                   	nop
+   140001ca0:	48 83 ec 58          	sub    rsp,0x58
+   140001ca4:	48 8b 05 05 54 00 00 	mov    rax,QWORD PTR [rip+0x5405]        # 0x1400070b0
+   140001cab:	48 85 c0             	test   rax,rax
+   140001cae:	74 29                	je     0x140001cd9
+   140001cb0:	f2 0f 10 84 24 80 00 	movsd  xmm0,QWORD PTR [rsp+0x80]
+   140001cb7:	00 00
+   140001cb9:	66 0f 14 d3          	unpcklpd xmm2,xmm3
+   140001cbd:	89 4c 24 20          	mov    DWORD PTR [rsp+0x20],ecx
+   140001cc1:	48 8d 4c 24 20       	lea    rcx,[rsp+0x20]
+   140001cc6:	48 89 54 24 28       	mov    QWORD PTR [rsp+0x28],rdx
+   140001ccb:	0f 11 54 24 30       	movups XMMWORD PTR [rsp+0x30],xmm2
+   140001cd0:	f2 0f 11 44 24 40    	movsd  QWORD PTR [rsp+0x40],xmm0
+   140001cd6:	ff d0                	call   rax
+   140001cd8:	90                   	nop
+   140001cd9:	48 83 c4 58          	add    rsp,0x58
+   140001cdd:	c3                   	ret
+   140001cde:	66 90                	xchg   ax,ax
+   140001ce0:	48 89 0d c9 53 00 00 	mov    QWORD PTR [rip+0x53c9],rcx        # 0x1400070b0
+   140001ce7:	e9 64 0c 00 00       	jmp    0x140002950
+   140001cec:	90                   	nop
+   140001ced:	90                   	nop
+   140001cee:	90                   	nop
+   140001cef:	90                   	nop
+   140001cf0:	48 83 ec 28          	sub    rsp,0x28
+   140001cf4:	f6 41 04 02          	test   BYTE PTR [rcx+0x4],0x2
+   140001cf8:	0f 85 22 01 00 00    	jne    0x140001e20
+   140001cfe:	48 b8 ff ff ff 20 01 	movabs rax,0x120ffffff
+   140001d05:	00 00 00
+   140001d08:	48 23 01             	and    rax,QWORD PTR [rcx]
+   140001d0b:	48 3d 43 43 47 20    	cmp    rax,0x20474343
+   140001d11:	74 7d                	je     0x140001d90
+   140001d13:	8b 01                	mov    eax,DWORD PTR [rcx]
+   140001d15:	3d 96 00 00 c0       	cmp    eax,0xc0000096
+   140001d1a:	0f 87 00 01 00 00    	ja     0x140001e20
+   140001d20:	3d 8b 00 00 c0       	cmp    eax,0xc000008b
+   140001d25:	76 21                	jbe    0x140001d48
+   140001d27:	05 73 ff ff 3f       	add    eax,0x3fffff73
+   140001d2c:	83 f8 09             	cmp    eax,0x9
+   140001d2f:	77 5f                	ja     0x140001d90
+   140001d31:	48 8d 15 08 26 00 00 	lea    rdx,[rip+0x2608]        # 0x140004340
+   140001d38:	48 63 04 82          	movsxd rax,DWORD PTR [rdx+rax*4]
+   140001d3c:	48 01 d0             	add    rax,rdx
+   140001d3f:	ff e0                	jmp    rax
+   140001d41:	0f 1f 80 00 00 00 00 	nop    DWORD PTR [rax+0x0]
+   140001d48:	3d 05 00 00 c0       	cmp    eax,0xc0000005
+   140001d4d:	74 79                	je     0x140001dc8
+   140001d4f:	0f 86 db 00 00 00    	jbe    0x140001e30
+   140001d55:	3d 08 00 00 c0       	cmp    eax,0xc0000008
+   140001d5a:	74 34                	je     0x140001d90
+   140001d5c:	3d 1d 00 00 c0       	cmp    eax,0xc000001d
+   140001d61:	0f 85 b9 00 00 00    	jne    0x140001e20
+   140001d67:	31 d2                	xor    edx,edx
+   140001d69:	b9 04 00 00 00       	mov    ecx,0x4
+   140001d6e:	e8 c5 0b 00 00       	call   0x140002938
+   140001d73:	48 83 f8 01          	cmp    rax,0x1
+   140001d77:	0f 84 db 00 00 00    	je     0x140001e58
+   140001d7d:	48 85 c0             	test   rax,rax
+   140001d80:	0f 84 9a 00 00 00    	je     0x140001e20
+   140001d86:	b9 04 00 00 00       	mov    ecx,0x4
+   140001d8b:	ff d0                	call   rax
+   140001d8d:	0f 1f 00             	nop    DWORD PTR [rax]
+   140001d90:	31 c0                	xor    eax,eax
+   140001d92:	48 83 c4 28          	add    rsp,0x28
+   140001d96:	c3                   	ret
+   140001d97:	66 0f 1f 84 00 00 00 	nop    WORD PTR [rax+rax*1+0x0]
+   140001d9e:	00 00
+   140001da0:	31 d2                	xor    edx,edx
+   140001da2:	b9 08 00 00 00       	mov    ecx,0x8
+   140001da7:	e8 8c 0b 00 00       	call   0x140002938
+   140001dac:	48 83 f8 01          	cmp    rax,0x1
+   140001db0:	0f 84 ba 00 00 00    	je     0x140001e70
+   140001db6:	48 85 c0             	test   rax,rax
+   140001db9:	74 65                	je     0x140001e20
+   140001dbb:	b9 08 00 00 00       	mov    ecx,0x8
+   140001dc0:	ff d0                	call   rax
+   140001dc2:	eb cc                	jmp    0x140001d90
+   140001dc4:	0f 1f 40 00          	nop    DWORD PTR [rax+0x0]
+   140001dc8:	31 d2                	xor    edx,edx
+   140001dca:	b9 0b 00 00 00       	mov    ecx,0xb
+   140001dcf:	e8 64 0b 00 00       	call   0x140002938
+   140001dd4:	48 83 f8 01          	cmp    rax,0x1
+   140001dd8:	74 66                	je     0x140001e40
+   140001dda:	48 85 c0             	test   rax,rax
+   140001ddd:	74 41                	je     0x140001e20
+   140001ddf:	b9 0b 00 00 00       	mov    ecx,0xb
+   140001de4:	ff d0                	call   rax
+   140001de6:	eb a8                	jmp    0x140001d90
+   140001de8:	0f 1f 84 00 00 00 00 	nop    DWORD PTR [rax+rax*1+0x0]
+   140001def:	00
+   140001df0:	31 d2                	xor    edx,edx
+   140001df2:	b9 08 00 00 00       	mov    ecx,0x8
+   140001df7:	e8 3c 0b 00 00       	call   0x140002938
+   140001dfc:	48 83 f8 01          	cmp    rax,0x1
+   140001e00:	75 b4                	jne    0x140001db6
+   140001e02:	ba 01 00 00 00       	mov    edx,0x1
+   140001e07:	b9 08 00 00 00       	mov    ecx,0x8
+   140001e0c:	e8 27 0b 00 00       	call   0x140002938
+   140001e11:	e9 7a ff ff ff       	jmp    0x140001d90
+   140001e16:	66 2e 0f 1f 84 00 00 	cs nop WORD PTR [rax+rax*1+0x0]
+   140001e1d:	00 00 00
+   140001e20:	b8 01 00 00 00       	mov    eax,0x1
+   140001e25:	e9 68 ff ff ff       	jmp    0x140001d92
+   140001e2a:	66 0f 1f 44 00 00    	nop    WORD PTR [rax+rax*1+0x0]
+   140001e30:	3d 02 00 00 80       	cmp    eax,0x80000002
+   140001e35:	0f 95 c0             	setne  al
+   140001e38:	0f b6 c0             	movzx  eax,al
+   140001e3b:	e9 52 ff ff ff       	jmp    0x140001d92
+   140001e40:	ba 01 00 00 00       	mov    edx,0x1
+   140001e45:	b9 0b 00 00 00       	mov    ecx,0xb
+   140001e4a:	e8 e9 0a 00 00       	call   0x140002938
+   140001e4f:	e9 3c ff ff ff       	jmp    0x140001d90
+   140001e54:	0f 1f 40 00          	nop    DWORD PTR [rax+0x0]
+   140001e58:	ba 01 00 00 00       	mov    edx,0x1
+   140001e5d:	b9 04 00 00 00       	mov    ecx,0x4
+   140001e62:	e8 d1 0a 00 00       	call   0x140002938
+   140001e67:	e9 24 ff ff ff       	jmp    0x140001d90
+   140001e6c:	0f 1f 40 00          	nop    DWORD PTR [rax+0x0]
+   140001e70:	ba 01 00 00 00       	mov    edx,0x1
+   140001e75:	b9 08 00 00 00       	mov    ecx,0x8
+   140001e7a:	e8 b9 0a 00 00       	call   0x140002938
+   140001e7f:	e8 7c 04 00 00       	call   0x140002300
+   140001e84:	e9 07 ff ff ff       	jmp    0x140001d90
+   140001e89:	0f 1f 80 00 00 00 00 	nop    DWORD PTR [rax+0x0]
+   140001e90:	53                   	push   rbx
+   140001e91:	48 83 ec 20          	sub    rsp,0x20
+   140001e95:	48 8b 11             	mov    rdx,QWORD PTR [rcx]
+   140001e98:	8b 02                	mov    eax,DWORD PTR [rdx]
+   140001e9a:	48 89 cb             	mov    rbx,rcx
+   140001e9d:	89 c1                	mov    ecx,eax
+   140001e9f:	81 e1 ff ff ff 20    	and    ecx,0x20ffffff
+   140001ea5:	81 f9 43 43 47 20    	cmp    ecx,0x20474343
+   140001eab:	0f 84 bf 00 00 00    	je     0x140001f70
+   140001eb1:	3d 96 00 00 c0       	cmp    eax,0xc0000096
+   140001eb6:	77 47                	ja     0x140001eff
+   140001eb8:	3d 8b 00 00 c0       	cmp    eax,0xc000008b
+   140001ebd:	76 61                	jbe    0x140001f20
+   140001ebf:	05 73 ff ff 3f       	add    eax,0x3fffff73
+   140001ec4:	83 f8 09             	cmp    eax,0x9
+   140001ec7:	0f 87 94 00 00 00    	ja     0x140001f61
+   140001ecd:	48 8d 15 94 24 00 00 	lea    rdx,[rip+0x2494]        # 0x140004368
+   140001ed4:	48 63 04 82          	movsxd rax,DWORD PTR [rdx+rax*4]
+   140001ed8:	48 01 d0             	add    rax,rdx
+   140001edb:	ff e0                	jmp    rax
+   140001edd:	0f 1f 00             	nop    DWORD PTR [rax]
+   140001ee0:	31 d2                	xor    edx,edx
+   140001ee2:	b9 08 00 00 00       	mov    ecx,0x8
+   140001ee7:	e8 4c 0a 00 00       	call   0x140002938
+   140001eec:	48 83 f8 01          	cmp    rax,0x1
+   140001ef0:	0f 84 3e 01 00 00    	je     0x140002034
+   140001ef6:	48 85 c0             	test   rax,rax
+   140001ef9:	0f 85 01 01 00 00    	jne    0x140002000
+   140001eff:	48 8b 05 ca 51 00 00 	mov    rax,QWORD PTR [rip+0x51ca]        # 0x1400070d0
+   140001f06:	48 85 c0             	test   rax,rax
+   140001f09:	74 75                	je     0x140001f80
+   140001f0b:	48 89 d9             	mov    rcx,rbx
+   140001f0e:	48 83 c4 20          	add    rsp,0x20
+   140001f12:	5b                   	pop    rbx
+   140001f13:	48 ff e0             	rex.W jmp rax
+   140001f16:	66 2e 0f 1f 84 00 00 	cs nop WORD PTR [rax+rax*1+0x0]
+   140001f1d:	00 00 00
+   140001f20:	3d 05 00 00 c0       	cmp    eax,0xc0000005
+   140001f25:	0f 84 a5 00 00 00    	je     0x140001fd0
+   140001f2b:	0f 86 8f 00 00 00    	jbe    0x140001fc0
+   140001f31:	3d 08 00 00 c0       	cmp    eax,0xc0000008
+   140001f36:	74 29                	je     0x140001f61
+   140001f38:	3d 1d 00 00 c0       	cmp    eax,0xc000001d
+   140001f3d:	75 c0                	jne    0x140001eff
+   140001f3f:	31 d2                	xor    edx,edx
+   140001f41:	b9 04 00 00 00       	mov    ecx,0x4
+   140001f46:	e8 ed 09 00 00       	call   0x140002938
+   140001f4b:	48 83 f8 01          	cmp    rax,0x1
+   140001f4f:	0f 84 cb 00 00 00    	je     0x140002020
+   140001f55:	48 85 c0             	test   rax,rax
+   140001f58:	74 a5                	je     0x140001eff
+   140001f5a:	b9 04 00 00 00       	mov    ecx,0x4
+   140001f5f:	ff d0                	call   rax
+   140001f61:	b8 ff ff ff ff       	mov    eax,0xffffffff
+   140001f66:	48 83 c4 20          	add    rsp,0x20
+   140001f6a:	5b                   	pop    rbx
+   140001f6b:	c3                   	ret
+   140001f6c:	0f 1f 40 00          	nop    DWORD PTR [rax+0x0]
+   140001f70:	f6 42 04 01          	test   BYTE PTR [rdx+0x4],0x1
+   140001f74:	0f 85 37 ff ff ff    	jne    0x140001eb1
+   140001f7a:	eb e5                	jmp    0x140001f61
+   140001f7c:	0f 1f 40 00          	nop    DWORD PTR [rax+0x0]
+   140001f80:	31 c0                	xor    eax,eax
+   140001f82:	48 83 c4 20          	add    rsp,0x20
+   140001f86:	5b                   	pop    rbx
+   140001f87:	c3                   	ret
+   140001f88:	0f 1f 84 00 00 00 00 	nop    DWORD PTR [rax+rax*1+0x0]
+   140001f8f:	00
+   140001f90:	31 d2                	xor    edx,edx
+   140001f92:	b9 08 00 00 00       	mov    ecx,0x8
+   140001f97:	e8 9c 09 00 00       	call   0x140002938
+   140001f9c:	48 83 f8 01          	cmp    rax,0x1
+   140001fa0:	0f 85 50 ff ff ff    	jne    0x140001ef6
+   140001fa6:	ba 01 00 00 00       	mov    edx,0x1
+   140001fab:	b9 08 00 00 00       	mov    ecx,0x8
+   140001fb0:	e8 83 09 00 00       	call   0x140002938
+   140001fb5:	eb aa                	jmp    0x140001f61
+   140001fb7:	66 0f 1f 84 00 00 00 	nop    WORD PTR [rax+rax*1+0x0]
+   140001fbe:	00 00
+   140001fc0:	3d 02 00 00 80       	cmp    eax,0x80000002
+   140001fc5:	0f 85 34 ff ff ff    	jne    0x140001eff
+   140001fcb:	eb 94                	jmp    0x140001f61
+   140001fcd:	0f 1f 00             	nop    DWORD PTR [rax]
+   140001fd0:	31 d2                	xor    edx,edx
+   140001fd2:	b9 0b 00 00 00       	mov    ecx,0xb
+   140001fd7:	e8 5c 09 00 00       	call   0x140002938
+   140001fdc:	48 83 f8 01          	cmp    rax,0x1
+   140001fe0:	74 2a                	je     0x14000200c
+   140001fe2:	48 85 c0             	test   rax,rax
+   140001fe5:	0f 84 14 ff ff ff    	je     0x140001eff
+   140001feb:	b9 0b 00 00 00       	mov    ecx,0xb
+   140001ff0:	ff d0                	call   rax
+   140001ff2:	e9 6a ff ff ff       	jmp    0x140001f61
+   140001ff7:	66 0f 1f 84 00 00 00 	nop    WORD PTR [rax+rax*1+0x0]
+   140001ffe:	00 00
+   140002000:	b9 08 00 00 00       	mov    ecx,0x8
+   140002005:	ff d0                	call   rax
+   140002007:	e9 55 ff ff ff       	jmp    0x140001f61
+   14000200c:	ba 01 00 00 00       	mov    edx,0x1
+   140002011:	b9 0b 00 00 00       	mov    ecx,0xb
+   140002016:	e8 1d 09 00 00       	call   0x140002938
+   14000201b:	e9 41 ff ff ff       	jmp    0x140001f61
+   140002020:	ba 01 00 00 00       	mov    edx,0x1
+   140002025:	b9 04 00 00 00       	mov    ecx,0x4
+   14000202a:	e8 09 09 00 00       	call   0x140002938
+   14000202f:	e9 2d ff ff ff       	jmp    0x140001f61
+   140002034:	ba 01 00 00 00       	mov    edx,0x1
+   140002039:	b9 08 00 00 00       	mov    ecx,0x8
+   14000203e:	e8 f5 08 00 00       	call   0x140002938
+   140002043:	e8 b8 02 00 00       	call   0x140002300
+   140002048:	e9 14 ff ff ff       	jmp    0x140001f61
+   14000204d:	90                   	nop
+   14000204e:	90                   	nop
+   14000204f:	90                   	nop
+   140002050:	66 2e 0f 1f 84 00 00 	cs nop WORD PTR [rax+rax*1+0x0]
+   140002057:	00 00 00
+   14000205a:	66 0f 1f 44 00 00    	nop    WORD PTR [rax+rax*1+0x0]
+   140002060:	55                   	push   rbp
+   140002061:	57                   	push   rdi
+   140002062:	56                   	push   rsi
+   140002063:	53                   	push   rbx
+   140002064:	48 83 ec 28          	sub    rsp,0x28
+   140002068:	48 8d 0d 91 50 00 00 	lea    rcx,[rip+0x5091]        # 0x140007100
+   14000206f:	ff 15 f3 61 00 00    	call   QWORD PTR [rip+0x61f3]        # 0x140008268
+   140002075:	48 8b 1d 64 50 00 00 	mov    rbx,QWORD PTR [rip+0x5064]        # 0x1400070e0
+   14000207c:	48 85 db             	test   rbx,rbx
+   14000207f:	74 33                	je     0x1400020b4
+   140002081:	48 8b 2d 10 62 00 00 	mov    rbp,QWORD PTR [rip+0x6210]        # 0x140008298
+   140002088:	48 8b 3d e1 61 00 00 	mov    rdi,QWORD PTR [rip+0x61e1]        # 0x140008270
+   14000208f:	90                   	nop
+   140002090:	8b 0b                	mov    ecx,DWORD PTR [rbx]
+   140002092:	ff d5                	call   rbp
+   140002094:	48 89 c6             	mov    rsi,rax
+   140002097:	ff d7                	call   rdi
+   140002099:	48 85 f6             	test   rsi,rsi
+   14000209c:	74 0d                	je     0x1400020ab
+   14000209e:	85 c0                	test   eax,eax
+   1400020a0:	75 09                	jne    0x1400020ab
+   1400020a2:	48 8b 43 08          	mov    rax,QWORD PTR [rbx+0x8]
+   1400020a6:	48 89 f1             	mov    rcx,rsi
+   1400020a9:	ff d0                	call   rax
+   1400020ab:	48 8b 5b 10          	mov    rbx,QWORD PTR [rbx+0x10]
+   1400020af:	48 85 db             	test   rbx,rbx
+   1400020b2:	75 dc                	jne    0x140002090
+   1400020b4:	48 8d 0d 45 50 00 00 	lea    rcx,[rip+0x5045]        # 0x140007100
+   1400020bb:	48 83 c4 28          	add    rsp,0x28
+   1400020bf:	5b                   	pop    rbx
+   1400020c0:	5e                   	pop    rsi
+   1400020c1:	5f                   	pop    rdi
+   1400020c2:	5d                   	pop    rbp
+   1400020c3:	48 ff 25 b6 61 00 00 	rex.W jmp QWORD PTR [rip+0x61b6]        # 0x140008280
+   1400020ca:	66 0f 1f 44 00 00    	nop    WORD PTR [rax+rax*1+0x0]
+   1400020d0:	48 83 ec 38          	sub    rsp,0x38
+   1400020d4:	8b 05 0e 50 00 00    	mov    eax,DWORD PTR [rip+0x500e]        # 0x1400070e8
+   1400020da:	41 89 c9             	mov    r9d,ecx
+   1400020dd:	85 c0                	test   eax,eax
+   1400020df:	75 0f                	jne    0x1400020f0
+   1400020e1:	31 c0                	xor    eax,eax
+   1400020e3:	48 83 c4 38          	add    rsp,0x38
+   1400020e7:	c3                   	ret
+   1400020e8:	0f 1f 84 00 00 00 00 	nop    DWORD PTR [rax+rax*1+0x0]
+   1400020ef:	00
+   1400020f0:	48 89 54 24 48       	mov    QWORD PTR [rsp+0x48],rdx
+   1400020f5:	b9 01 00 00 00       	mov    ecx,0x1
+   1400020fa:	ba 18 00 00 00       	mov    edx,0x18
+   1400020ff:	44 89 4c 24 40       	mov    DWORD PTR [rsp+0x40],r9d
+   140002104:	e8 6f 08 00 00       	call   0x140002978
+   140002109:	48 85 c0             	test   rax,rax
+   14000210c:	74 49                	je     0x140002157
+   14000210e:	44 8b 4c 24 40       	mov    r9d,DWORD PTR [rsp+0x40]
+   140002113:	4c 8b 44 24 48       	mov    r8,QWORD PTR [rsp+0x48]
+   140002118:	48 89 44 24 28       	mov    QWORD PTR [rsp+0x28],rax
+   14000211d:	48 8d 0d dc 4f 00 00 	lea    rcx,[rip+0x4fdc]        # 0x140007100
+   140002124:	44 89 08             	mov    DWORD PTR [rax],r9d
+   140002127:	4c 89 40 08          	mov    QWORD PTR [rax+0x8],r8
+   14000212b:	ff 15 37 61 00 00    	call   QWORD PTR [rip+0x6137]        # 0x140008268
+   140002131:	48 8b 15 a8 4f 00 00 	mov    rdx,QWORD PTR [rip+0x4fa8]        # 0x1400070e0
+   140002138:	48 8b 44 24 28       	mov    rax,QWORD PTR [rsp+0x28]
+   14000213d:	48 8d 0d bc 4f 00 00 	lea    rcx,[rip+0x4fbc]        # 0x140007100
+   140002144:	48 89 50 10          	mov    QWORD PTR [rax+0x10],rdx
+   140002148:	48 89 05 91 4f 00 00 	mov    QWORD PTR [rip+0x4f91],rax        # 0x1400070e0
+   14000214f:	ff 15 2b 61 00 00    	call   QWORD PTR [rip+0x612b]        # 0x140008280
+   140002155:	eb 8a                	jmp    0x1400020e1
+   140002157:	b8 ff ff ff ff       	mov    eax,0xffffffff
+   14000215c:	eb 85                	jmp    0x1400020e3
+   14000215e:	66 90                	xchg   ax,ax
+   140002160:	48 83 ec 28          	sub    rsp,0x28
+   140002164:	8b 05 7e 4f 00 00    	mov    eax,DWORD PTR [rip+0x4f7e]        # 0x1400070e8
+   14000216a:	85 c0                	test   eax,eax
+   14000216c:	75 0a                	jne    0x140002178
+   14000216e:	31 c0                	xor    eax,eax
+   140002170:	48 83 c4 28          	add    rsp,0x28
+   140002174:	c3                   	ret
+   140002175:	0f 1f 00             	nop    DWORD PTR [rax]
+   140002178:	89 4c 24 30          	mov    DWORD PTR [rsp+0x30],ecx
+   14000217c:	48 8d 0d 7d 4f 00 00 	lea    rcx,[rip+0x4f7d]        # 0x140007100
+   140002183:	ff 15 df 60 00 00    	call   QWORD PTR [rip+0x60df]        # 0x140008268
+   140002189:	48 8b 0d 50 4f 00 00 	mov    rcx,QWORD PTR [rip+0x4f50]        # 0x1400070e0
+   140002190:	48 85 c9             	test   rcx,rcx
+   140002193:	74 2e                	je     0x1400021c3
+   140002195:	8b 54 24 30          	mov    edx,DWORD PTR [rsp+0x30]
+   140002199:	45 31 c0             	xor    r8d,r8d
+   14000219c:	eb 0d                	jmp    0x1400021ab
+   14000219e:	66 90                	xchg   ax,ax
+   1400021a0:	49 89 c8             	mov    r8,rcx
+   1400021a3:	48 85 c0             	test   rax,rax
+   1400021a6:	74 1b                	je     0x1400021c3
+   1400021a8:	48 89 c1             	mov    rcx,rax
+   1400021ab:	8b 01                	mov    eax,DWORD PTR [rcx]
+   1400021ad:	39 d0                	cmp    eax,edx
+   1400021af:	48 8b 41 10          	mov    rax,QWORD PTR [rcx+0x10]
+   1400021b3:	75 eb                	jne    0x1400021a0
+   1400021b5:	4d 85 c0             	test   r8,r8
+   1400021b8:	74 26                	je     0x1400021e0
+   1400021ba:	49 89 40 10          	mov    QWORD PTR [r8+0x10],rax
+   1400021be:	e8 bd 07 00 00       	call   0x140002980
+   1400021c3:	48 8d 0d 36 4f 00 00 	lea    rcx,[rip+0x4f36]        # 0x140007100
+   1400021ca:	ff 15 b0 60 00 00    	call   QWORD PTR [rip+0x60b0]        # 0x140008280
+   1400021d0:	31 c0                	xor    eax,eax
+   1400021d2:	48 83 c4 28          	add    rsp,0x28
+   1400021d6:	c3                   	ret
+   1400021d7:	66 0f 1f 84 00 00 00 	nop    WORD PTR [rax+rax*1+0x0]
+   1400021de:	00 00
+   1400021e0:	48 89 05 f9 4e 00 00 	mov    QWORD PTR [rip+0x4ef9],rax        # 0x1400070e0
+   1400021e7:	eb d5                	jmp    0x1400021be
+   1400021e9:	0f 1f 80 00 00 00 00 	nop    DWORD PTR [rax+0x0]
+   1400021f0:	48 83 ec 38          	sub    rsp,0x38
+   1400021f4:	83 fa 02             	cmp    edx,0x2
+   1400021f7:	0f 84 bb 00 00 00    	je     0x1400022b8
+   1400021fd:	77 29                	ja     0x140002228
+   1400021ff:	85 d2                	test   edx,edx
+   140002201:	74 3d                	je     0x140002240
+   140002203:	8b 05 df 4e 00 00    	mov    eax,DWORD PTR [rip+0x4edf]        # 0x1400070e8
+   140002209:	85 c0                	test   eax,eax
+   14000220b:	0f 84 cf 00 00 00    	je     0x1400022e0
+   140002211:	c7 05 cd 4e 00 00 01 	mov    DWORD PTR [rip+0x4ecd],0x1        # 0x1400070e8
+   140002218:	00 00 00
+   14000221b:	b8 01 00 00 00       	mov    eax,0x1
+   140002220:	48 83 c4 38          	add    rsp,0x38
+   140002224:	c3                   	ret
+   140002225:	0f 1f 00             	nop    DWORD PTR [rax]
+   140002228:	83 fa 03             	cmp    edx,0x3
+   14000222b:	75 ee                	jne    0x14000221b
+   14000222d:	8b 05 b5 4e 00 00    	mov    eax,DWORD PTR [rip+0x4eb5]        # 0x1400070e8
+   140002233:	85 c0                	test   eax,eax
+   140002235:	74 e4                	je     0x14000221b
+   140002237:	e8 24 fe ff ff       	call   0x140002060
+   14000223c:	eb dd                	jmp    0x14000221b
+   14000223e:	66 90                	xchg   ax,ax
+   140002240:	8b 05 a2 4e 00 00    	mov    eax,DWORD PTR [rip+0x4ea2]        # 0x1400070e8
+   140002246:	85 c0                	test   eax,eax
+   140002248:	0f 85 82 00 00 00    	jne    0x1400022d0
+   14000224e:	8b 05 94 4e 00 00    	mov    eax,DWORD PTR [rip+0x4e94]        # 0x1400070e8
+   140002254:	83 f8 01             	cmp    eax,0x1
+   140002257:	75 c2                	jne    0x14000221b
+   140002259:	48 8b 05 80 4e 00 00 	mov    rax,QWORD PTR [rip+0x4e80]        # 0x1400070e0
+   140002260:	48 85 c0             	test   rax,rax
+   140002263:	74 26                	je     0x14000228b
+   140002265:	66 66 2e 0f 1f 84 00 	data16 cs nop WORD PTR [rax+rax*1+0x0]
+   14000226c:	00 00 00 00
+   140002270:	48 89 c1             	mov    rcx,rax
+   140002273:	48 8b 40 10          	mov    rax,QWORD PTR [rax+0x10]
+   140002277:	48 89 44 24 28       	mov    QWORD PTR [rsp+0x28],rax
+   14000227c:	e8 ff 06 00 00       	call   0x140002980
+   140002281:	48 8b 44 24 28       	mov    rax,QWORD PTR [rsp+0x28]
+   140002286:	48 85 c0             	test   rax,rax
+   140002289:	75 e5                	jne    0x140002270
+   14000228b:	48 8d 0d 6e 4e 00 00 	lea    rcx,[rip+0x4e6e]        # 0x140007100
+   140002292:	48 c7 05 43 4e 00 00 	mov    QWORD PTR [rip+0x4e43],0x0        # 0x1400070e0
+   140002299:	00 00 00 00
+   14000229d:	c7 05 41 4e 00 00 00 	mov    DWORD PTR [rip+0x4e41],0x0        # 0x1400070e8
+   1400022a4:	00 00 00
+   1400022a7:	ff 15 b3 5f 00 00    	call   QWORD PTR [rip+0x5fb3]        # 0x140008260
+   1400022ad:	e9 69 ff ff ff       	jmp    0x14000221b
+   1400022b2:	66 0f 1f 44 00 00    	nop    WORD PTR [rax+rax*1+0x0]
+   1400022b8:	e8 43 00 00 00       	call   0x140002300
+   1400022bd:	b8 01 00 00 00       	mov    eax,0x1
+   1400022c2:	48 83 c4 38          	add    rsp,0x38
+   1400022c6:	c3                   	ret
+   1400022c7:	66 0f 1f 84 00 00 00 	nop    WORD PTR [rax+rax*1+0x0]
+   1400022ce:	00 00
+   1400022d0:	e8 8b fd ff ff       	call   0x140002060
+   1400022d5:	e9 74 ff ff ff       	jmp    0x14000224e
+   1400022da:	66 0f 1f 44 00 00    	nop    WORD PTR [rax+rax*1+0x0]
+   1400022e0:	48 8d 0d 19 4e 00 00 	lea    rcx,[rip+0x4e19]        # 0x140007100
+   1400022e7:	ff 15 8b 5f 00 00    	call   QWORD PTR [rip+0x5f8b]        # 0x140008278
+   1400022ed:	e9 1f ff ff ff       	jmp    0x140002211
+   1400022f2:	90                   	nop
+   1400022f3:	90                   	nop
+   1400022f4:	90                   	nop
+   1400022f5:	90                   	nop
+   1400022f6:	90                   	nop
+   1400022f7:	90                   	nop
+   1400022f8:	90                   	nop
+   1400022f9:	90                   	nop
+   1400022fa:	90                   	nop
+   1400022fb:	90                   	nop
+   1400022fc:	90                   	nop
+   1400022fd:	90                   	nop
+   1400022fe:	90                   	nop
+   1400022ff:	90                   	nop
+   140002300:	db e3                	fninit
+   140002302:	c3                   	ret
+   140002303:	90                   	nop
+   140002304:	90                   	nop
+   140002305:	90                   	nop
+   140002306:	90                   	nop
+   140002307:	90                   	nop
+   140002308:	90                   	nop
+   140002309:	90                   	nop
+   14000230a:	90                   	nop
+   14000230b:	90                   	nop
+   14000230c:	90                   	nop
+   14000230d:	90                   	nop
+   14000230e:	90                   	nop
+   14000230f:	90                   	nop
+   140002310:	31 c0                	xor    eax,eax
+   140002312:	66 81 39 4d 5a       	cmp    WORD PTR [rcx],0x5a4d
+   140002317:	75 0f                	jne    0x140002328
+   140002319:	48 63 51 3c          	movsxd rdx,DWORD PTR [rcx+0x3c]
+   14000231d:	48 01 d1             	add    rcx,rdx
+   140002320:	81 39 50 45 00 00    	cmp    DWORD PTR [rcx],0x4550
+   140002326:	74 08                	je     0x140002330
+   140002328:	c3                   	ret
+   140002329:	0f 1f 80 00 00 00 00 	nop    DWORD PTR [rax+0x0]
+   140002330:	31 c0                	xor    eax,eax
+   140002332:	66 81 79 18 0b 02    	cmp    WORD PTR [rcx+0x18],0x20b
+   140002338:	0f 94 c0             	sete   al
+   14000233b:	c3                   	ret
+   14000233c:	0f 1f 40 00          	nop    DWORD PTR [rax+0x0]
+   140002340:	48 63 41 3c          	movsxd rax,DWORD PTR [rcx+0x3c]
+   140002344:	48 01 c8             	add    rax,rcx
+   140002347:	0f b7 48 06          	movzx  ecx,WORD PTR [rax+0x6]
+   14000234b:	66 85 c9             	test   cx,cx
+   14000234e:	74 3d                	je     0x14000238d
+   140002350:	44 0f b7 40 14       	movzx  r8d,WORD PTR [rax+0x14]
+   140002355:	83 e9 01             	sub    ecx,0x1
+   140002358:	48 8d 0c 89          	lea    rcx,[rcx+rcx*4]
+   14000235c:	4a 8d 44 00 18       	lea    rax,[rax+r8*1+0x18]
+   140002361:	4c 8d 4c c8 28       	lea    r9,[rax+rcx*8+0x28]
+   140002366:	66 2e 0f 1f 84 00 00 	cs nop WORD PTR [rax+rax*1+0x0]
+   14000236d:	00 00 00
+   140002370:	44 8b 40 0c          	mov    r8d,DWORD PTR [rax+0xc]
+   140002374:	4c 89 c1             	mov    rcx,r8
+   140002377:	4c 39 c2             	cmp    rdx,r8
+   14000237a:	72 08                	jb     0x140002384
+   14000237c:	03 48 08             	add    ecx,DWORD PTR [rax+0x8]
+   14000237f:	48 39 ca             	cmp    rdx,rcx
+   140002382:	72 0b                	jb     0x14000238f
+   140002384:	48 83 c0 28          	add    rax,0x28
+   140002388:	4c 39 c8             	cmp    rax,r9
+   14000238b:	75 e3                	jne    0x140002370
+   14000238d:	31 c0                	xor    eax,eax
+   14000238f:	c3                   	ret
+   140002390:	55                   	push   rbp
+   140002391:	57                   	push   rdi
+   140002392:	56                   	push   rsi
+   140002393:	53                   	push   rbx
+   140002394:	48 83 ec 28          	sub    rsp,0x28
+   140002398:	48 89 cf             	mov    rdi,rcx
+   14000239b:	e8 e0 04 00 00       	call   0x140002880
+   1400023a0:	48 83 f8 08          	cmp    rax,0x8
+   1400023a4:	77 0e                	ja     0x1400023b4
+   1400023a6:	48 8b 05 33 20 00 00 	mov    rax,QWORD PTR [rip+0x2033]        # 0x1400043e0
+   1400023ad:	66 81 38 4d 5a       	cmp    WORD PTR [rax],0x5a4d
+   1400023b2:	74 14                	je     0x1400023c8
+   1400023b4:	31 db                	xor    ebx,ebx
+   1400023b6:	48 89 d8             	mov    rax,rbx
+   1400023b9:	48 83 c4 28          	add    rsp,0x28
+   1400023bd:	5b                   	pop    rbx
+   1400023be:	5e                   	pop    rsi
+   1400023bf:	5f                   	pop    rdi
+   1400023c0:	5d                   	pop    rbp
+   1400023c1:	c3                   	ret
+   1400023c2:	66 0f 1f 44 00 00    	nop    WORD PTR [rax+rax*1+0x0]
+   1400023c8:	48 63 68 3c          	movsxd rbp,DWORD PTR [rax+0x3c]
+   1400023cc:	48 01 c5             	add    rbp,rax
+   1400023cf:	81 7d 00 50 45 00 00 	cmp    DWORD PTR [rbp+0x0],0x4550
+   1400023d6:	75 dc                	jne    0x1400023b4
+   1400023d8:	66 81 7d 18 0b 02    	cmp    WORD PTR [rbp+0x18],0x20b
+   1400023de:	75 d4                	jne    0x1400023b4
+   1400023e0:	66 83 7d 06 00       	cmp    WORD PTR [rbp+0x6],0x0
+   1400023e5:	74 cd                	je     0x1400023b4
+   1400023e7:	0f b7 45 14          	movzx  eax,WORD PTR [rbp+0x14]
+   1400023eb:	31 f6                	xor    esi,esi
+   1400023ed:	48 8d 5c 05 18       	lea    rbx,[rbp+rax*1+0x18]
+   1400023f2:	0f 1f 00             	nop    DWORD PTR [rax]
+   1400023f5:	66 66 2e 0f 1f 84 00 	data16 cs nop WORD PTR [rax+rax*1+0x0]
+   1400023fc:	00 00 00 00
+   140002400:	41 b8 08 00 00 00    	mov    r8d,0x8
+   140002406:	48 89 fa             	mov    rdx,rdi
+   140002409:	48 89 d9             	mov    rcx,rbx
+   14000240c:	e8 77 04 00 00       	call   0x140002888
+   140002411:	85 c0                	test   eax,eax
+   140002413:	74 a1                	je     0x1400023b6
+   140002415:	0f b7 45 06          	movzx  eax,WORD PTR [rbp+0x6]
+   140002419:	83 c6 01             	add    esi,0x1
+   14000241c:	48 83 c3 28          	add    rbx,0x28
+   140002420:	39 c6                	cmp    esi,eax
+   140002422:	72 dc                	jb     0x140002400
+   140002424:	eb 8e                	jmp    0x1400023b4
+   140002426:	66 2e 0f 1f 84 00 00 	cs nop WORD PTR [rax+rax*1+0x0]
+   14000242d:	00 00 00
+   140002430:	48 8b 15 a9 1f 00 00 	mov    rdx,QWORD PTR [rip+0x1fa9]        # 0x1400043e0
+   140002437:	31 c0                	xor    eax,eax
+   140002439:	66 81 3a 4d 5a       	cmp    WORD PTR [rdx],0x5a4d
+   14000243e:	75 10                	jne    0x140002450
+   140002440:	4c 63 42 3c          	movsxd r8,DWORD PTR [rdx+0x3c]
+   140002444:	49 01 d0             	add    r8,rdx
+   140002447:	41 81 38 50 45 00 00 	cmp    DWORD PTR [r8],0x4550
+   14000244e:	74 08                	je     0x140002458
+   140002450:	c3                   	ret
+   140002451:	0f 1f 80 00 00 00 00 	nop    DWORD PTR [rax+0x0]
+   140002458:	66 41 81 78 18 0b 02 	cmp    WORD PTR [r8+0x18],0x20b
+   14000245f:	75 ef                	jne    0x140002450
+   140002461:	45 0f b7 48 06       	movzx  r9d,WORD PTR [r8+0x6]
+   140002466:	66 45 85 c9          	test   r9w,r9w
+   14000246a:	74 e4                	je     0x140002450
+   14000246c:	41 0f b7 40 14       	movzx  eax,WORD PTR [r8+0x14]
+   140002471:	48 29 d1             	sub    rcx,rdx
+   140002474:	41 8d 51 ff          	lea    edx,[r9-0x1]
+   140002478:	48 8d 14 92          	lea    rdx,[rdx+rdx*4]
+   14000247c:	49 8d 44 00 18       	lea    rax,[r8+rax*1+0x18]
+   140002481:	4c 8d 4c d0 28       	lea    r9,[rax+rdx*8+0x28]
+   140002486:	66 2e 0f 1f 84 00 00 	cs nop WORD PTR [rax+rax*1+0x0]
+   14000248d:	00 00 00
+   140002490:	44 8b 40 0c          	mov    r8d,DWORD PTR [rax+0xc]
+   140002494:	4c 89 c2             	mov    rdx,r8
+   140002497:	4c 39 c1             	cmp    rcx,r8
+   14000249a:	72 08                	jb     0x1400024a4
+   14000249c:	03 50 08             	add    edx,DWORD PTR [rax+0x8]
+   14000249f:	48 39 d1             	cmp    rcx,rdx
+   1400024a2:	72 ac                	jb     0x140002450
+   1400024a4:	48 83 c0 28          	add    rax,0x28
+   1400024a8:	4c 39 c8             	cmp    rax,r9
+   1400024ab:	75 e3                	jne    0x140002490
+   1400024ad:	31 c0                	xor    eax,eax
+   1400024af:	c3                   	ret
+   1400024b0:	48 8b 05 29 1f 00 00 	mov    rax,QWORD PTR [rip+0x1f29]        # 0x1400043e0
+   1400024b7:	31 c9                	xor    ecx,ecx
+   1400024b9:	66 81 38 4d 5a       	cmp    WORD PTR [rax],0x5a4d
+   1400024be:	75 0f                	jne    0x1400024cf
+   1400024c0:	48 63 50 3c          	movsxd rdx,DWORD PTR [rax+0x3c]
+   1400024c4:	48 01 d0             	add    rax,rdx
+   1400024c7:	81 38 50 45 00 00    	cmp    DWORD PTR [rax],0x4550
+   1400024cd:	74 09                	je     0x1400024d8
+   1400024cf:	89 c8                	mov    eax,ecx
+   1400024d1:	c3                   	ret
+   1400024d2:	66 0f 1f 44 00 00    	nop    WORD PTR [rax+rax*1+0x0]
+   1400024d8:	66 81 78 18 0b 02    	cmp    WORD PTR [rax+0x18],0x20b
+   1400024de:	75 ef                	jne    0x1400024cf
+   1400024e0:	0f b7 48 06          	movzx  ecx,WORD PTR [rax+0x6]
+   1400024e4:	89 c8                	mov    eax,ecx
+   1400024e6:	c3                   	ret
+   1400024e7:	66 0f 1f 84 00 00 00 	nop    WORD PTR [rax+rax*1+0x0]
+   1400024ee:	00 00
+   1400024f0:	4c 8b 05 e9 1e 00 00 	mov    r8,QWORD PTR [rip+0x1ee9]        # 0x1400043e0
+   1400024f7:	31 c0                	xor    eax,eax
+   1400024f9:	66 41 81 38 4d 5a    	cmp    WORD PTR [r8],0x5a4d
+   1400024ff:	75 0f                	jne    0x140002510
+   140002501:	49 63 50 3c          	movsxd rdx,DWORD PTR [r8+0x3c]
+   140002505:	4c 01 c2             	add    rdx,r8
+   140002508:	81 3a 50 45 00 00    	cmp    DWORD PTR [rdx],0x4550
+   14000250e:	74 08                	je     0x140002518
+   140002510:	c3                   	ret
+   140002511:	0f 1f 80 00 00 00 00 	nop    DWORD PTR [rax+0x0]
+   140002518:	66 81 7a 18 0b 02    	cmp    WORD PTR [rdx+0x18],0x20b
+   14000251e:	75 f0                	jne    0x140002510
+   140002520:	44 0f b7 42 06       	movzx  r8d,WORD PTR [rdx+0x6]
+   140002525:	66 45 85 c0          	test   r8w,r8w
+   140002529:	74 e5                	je     0x140002510
+   14000252b:	0f b7 42 14          	movzx  eax,WORD PTR [rdx+0x14]
+   14000252f:	48 8d 44 02 18       	lea    rax,[rdx+rax*1+0x18]
+   140002534:	41 8d 50 ff          	lea    edx,[r8-0x1]
+   140002538:	48 8d 14 92          	lea    rdx,[rdx+rdx*4]
+   14000253c:	48 8d 54 d0 28       	lea    rdx,[rax+rdx*8+0x28]
+   140002541:	0f 1f 40 00          	nop    DWORD PTR [rax+0x0]
+   140002545:	66 66 2e 0f 1f 84 00 	data16 cs nop WORD PTR [rax+rax*1+0x0]
+   14000254c:	00 00 00 00
+   140002550:	f6 40 27 20          	test   BYTE PTR [rax+0x27],0x20
+   140002554:	74 09                	je     0x14000255f
+   140002556:	48 85 c9             	test   rcx,rcx
+   140002559:	74 b5                	je     0x140002510
+   14000255b:	48 83 e9 01          	sub    rcx,0x1
+   14000255f:	48 83 c0 28          	add    rax,0x28
+   140002563:	48 39 c2             	cmp    rdx,rax
+   140002566:	75 e8                	jne    0x140002550
+   140002568:	31 c0                	xor    eax,eax
+   14000256a:	c3                   	ret
+   14000256b:	0f 1f 44 00 00       	nop    DWORD PTR [rax+rax*1+0x0]
+   140002570:	48 8b 05 69 1e 00 00 	mov    rax,QWORD PTR [rip+0x1e69]        # 0x1400043e0
+   140002577:	31 d2                	xor    edx,edx
+   140002579:	66 81 38 4d 5a       	cmp    WORD PTR [rax],0x5a4d
+   14000257e:	75 0f                	jne    0x14000258f
+   140002580:	48 63 48 3c          	movsxd rcx,DWORD PTR [rax+0x3c]
+   140002584:	48 01 c1             	add    rcx,rax
+   140002587:	81 39 50 45 00 00    	cmp    DWORD PTR [rcx],0x4550
+   14000258d:	74 09                	je     0x140002598
+   14000258f:	48 89 d0             	mov    rax,rdx
+   140002592:	c3                   	ret
+   140002593:	0f 1f 44 00 00       	nop    DWORD PTR [rax+rax*1+0x0]
+   140002598:	66 81 79 18 0b 02    	cmp    WORD PTR [rcx+0x18],0x20b
+   14000259e:	48 0f 44 d0          	cmove  rdx,rax
+   1400025a2:	48 89 d0             	mov    rax,rdx
+   1400025a5:	c3                   	ret
+   1400025a6:	66 2e 0f 1f 84 00 00 	cs nop WORD PTR [rax+rax*1+0x0]
+   1400025ad:	00 00 00
+   1400025b0:	48 8b 15 29 1e 00 00 	mov    rdx,QWORD PTR [rip+0x1e29]        # 0x1400043e0
+   1400025b7:	31 c0                	xor    eax,eax
+   1400025b9:	66 81 3a 4d 5a       	cmp    WORD PTR [rdx],0x5a4d
+   1400025be:	75 10                	jne    0x1400025d0
+   1400025c0:	4c 63 42 3c          	movsxd r8,DWORD PTR [rdx+0x3c]
+   1400025c4:	49 01 d0             	add    r8,rdx
+   1400025c7:	41 81 38 50 45 00 00 	cmp    DWORD PTR [r8],0x4550
+   1400025ce:	74 08                	je     0x1400025d8
+   1400025d0:	c3                   	ret
+   1400025d1:	0f 1f 80 00 00 00 00 	nop    DWORD PTR [rax+0x0]
+   1400025d8:	66 41 81 78 18 0b 02 	cmp    WORD PTR [r8+0x18],0x20b
+   1400025df:	75 ef                	jne    0x1400025d0
+   1400025e1:	45 0f b7 48 06       	movzx  r9d,WORD PTR [r8+0x6]
+   1400025e6:	66 45 85 c9          	test   r9w,r9w
+   1400025ea:	74 e4                	je     0x1400025d0
+   1400025ec:	41 0f b7 40 14       	movzx  eax,WORD PTR [r8+0x14]
+   1400025f1:	48 29 d1             	sub    rcx,rdx
+   1400025f4:	41 8d 51 ff          	lea    edx,[r9-0x1]
+   1400025f8:	48 8d 14 92          	lea    rdx,[rdx+rdx*4]
+   1400025fc:	49 8d 44 00 18       	lea    rax,[r8+rax*1+0x18]
+   140002601:	4c 8d 4c d0 28       	lea    r9,[rax+rdx*8+0x28]
+   140002606:	66 2e 0f 1f 84 00 00 	cs nop WORD PTR [rax+rax*1+0x0]
+   14000260d:	00 00 00
+   140002610:	44 8b 40 0c          	mov    r8d,DWORD PTR [rax+0xc]
+   140002614:	4c 89 c2             	mov    rdx,r8
+   140002617:	4c 39 c1             	cmp    rcx,r8
+   14000261a:	72 08                	jb     0x140002624
+   14000261c:	03 50 08             	add    edx,DWORD PTR [rax+0x8]
+   14000261f:	48 39 d1             	cmp    rcx,rdx
+   140002622:	72 0c                	jb     0x140002630
+   140002624:	48 83 c0 28          	add    rax,0x28
+   140002628:	49 39 c1             	cmp    r9,rax
+   14000262b:	75 e3                	jne    0x140002610
+   14000262d:	31 c0                	xor    eax,eax
+   14000262f:	c3                   	ret
+   140002630:	8b 40 24             	mov    eax,DWORD PTR [rax+0x24]
+   140002633:	f7 d0                	not    eax
+   140002635:	c1 e8 1f             	shr    eax,0x1f
+   140002638:	c3                   	ret
+   140002639:	0f 1f 80 00 00 00 00 	nop    DWORD PTR [rax+0x0]
+   140002640:	4c 8b 1d 99 1d 00 00 	mov    r11,QWORD PTR [rip+0x1d99]        # 0x1400043e0
+   140002647:	45 31 c0             	xor    r8d,r8d
+   14000264a:	66 41 81 3b 4d 5a    	cmp    WORD PTR [r11],0x5a4d
+   140002650:	75 0f                	jne    0x140002661
+   140002652:	49 63 53 3c          	movsxd rdx,DWORD PTR [r11+0x3c]
+   140002656:	4c 01 da             	add    rdx,r11
+   140002659:	81 3a 50 45 00 00    	cmp    DWORD PTR [rdx],0x4550
+   14000265f:	74 07                	je     0x140002668
+   140002661:	4c 89 c0             	mov    rax,r8
+   140002664:	c3                   	ret
+   140002665:	0f 1f 00             	nop    DWORD PTR [rax]
+   140002668:	66 81 7a 18 0b 02    	cmp    WORD PTR [rdx+0x18],0x20b
+   14000266e:	75 f1                	jne    0x140002661
+   140002670:	8b 82 90 00 00 00    	mov    eax,DWORD PTR [rdx+0x90]
+   140002676:	85 c0                	test   eax,eax
+   140002678:	74 e7                	je     0x140002661
+   14000267a:	44 0f b7 4a 06       	movzx  r9d,WORD PTR [rdx+0x6]
+   14000267f:	66 45 85 c9          	test   r9w,r9w
+   140002683:	74 dc                	je     0x140002661
+   140002685:	44 0f b7 42 14       	movzx  r8d,WORD PTR [rdx+0x14]
+   14000268a:	4a 8d 54 02 18       	lea    rdx,[rdx+r8*1+0x18]
+   14000268f:	45 8d 41 ff          	lea    r8d,[r9-0x1]
+   140002693:	4f 8d 04 80          	lea    r8,[r8+r8*4]
+   140002697:	4e 8d 54 c2 28       	lea    r10,[rdx+r8*8+0x28]
+   14000269c:	0f 1f 40 00          	nop    DWORD PTR [rax+0x0]
+   1400026a0:	44 8b 4a 0c          	mov    r9d,DWORD PTR [rdx+0xc]
+   1400026a4:	4d 89 c8             	mov    r8,r9
+   1400026a7:	4c 39 c8             	cmp    rax,r9
+   1400026aa:	72 09                	jb     0x1400026b5
+   1400026ac:	44 03 42 08          	add    r8d,DWORD PTR [rdx+0x8]
+   1400026b0:	4c 39 c0             	cmp    rax,r8
+   1400026b3:	72 13                	jb     0x1400026c8
+   1400026b5:	48 83 c2 28          	add    rdx,0x28
+   1400026b9:	49 39 d2             	cmp    r10,rdx
+   1400026bc:	75 e2                	jne    0x1400026a0
+   1400026be:	45 31 c0             	xor    r8d,r8d
+   1400026c1:	4c 89 c0             	mov    rax,r8
+   1400026c4:	c3                   	ret
+   1400026c5:	0f 1f 00             	nop    DWORD PTR [rax]
+   1400026c8:	4c 01 d8             	add    rax,r11
+   1400026cb:	eb 0a                	jmp    0x1400026d7
+   1400026cd:	0f 1f 00             	nop    DWORD PTR [rax]
+   1400026d0:	83 e9 01             	sub    ecx,0x1
+   1400026d3:	48 83 c0 14          	add    rax,0x14
+   1400026d7:	44 8b 40 04          	mov    r8d,DWORD PTR [rax+0x4]
+   1400026db:	45 85 c0             	test   r8d,r8d
+   1400026de:	75 07                	jne    0x1400026e7
+   1400026e0:	8b 50 0c             	mov    edx,DWORD PTR [rax+0xc]
+   1400026e3:	85 d2                	test   edx,edx
+   1400026e5:	74 d7                	je     0x1400026be
+   1400026e7:	85 c9                	test   ecx,ecx
+   1400026e9:	7f e5                	jg     0x1400026d0
+   1400026eb:	44 8b 40 0c          	mov    r8d,DWORD PTR [rax+0xc]
+   1400026ef:	4d 01 d8             	add    r8,r11
+   1400026f2:	4c 89 c0             	mov    rax,r8
+   1400026f5:	c3                   	ret
+   1400026f6:	90                   	nop
+   1400026f7:	90                   	nop
+   1400026f8:	90                   	nop
+   1400026f9:	90                   	nop
+   1400026fa:	90                   	nop
+   1400026fb:	90                   	nop
+   1400026fc:	90                   	nop
+   1400026fd:	90                   	nop
+   1400026fe:	90                   	nop
+   1400026ff:	90                   	nop
+   140002700:	51                   	push   rcx
+   140002701:	50                   	push   rax
+   140002702:	48 3d 00 10 00 00    	cmp    rax,0x1000
+   140002708:	48 8d 4c 24 18       	lea    rcx,[rsp+0x18]
+   14000270d:	72 19                	jb     0x140002728
+   14000270f:	48 81 e9 00 10 00 00 	sub    rcx,0x1000
+   140002716:	48 83 09 00          	or     QWORD PTR [rcx],0x0
+   14000271a:	48 2d 00 10 00 00    	sub    rax,0x1000
+   140002720:	48 3d 00 10 00 00    	cmp    rax,0x1000
+   140002726:	77 e7                	ja     0x14000270f
+   140002728:	48 29 c1             	sub    rcx,rax
+   14000272b:	48 83 09 00          	or     QWORD PTR [rcx],0x0
+   14000272f:	58                   	pop    rax
+   140002730:	59                   	pop    rcx
+   140002731:	c3                   	ret
+   140002732:	90                   	nop
+   140002733:	90                   	nop
+   140002734:	90                   	nop
+   140002735:	90                   	nop
+   140002736:	90                   	nop
+   140002737:	90                   	nop
+   140002738:	90                   	nop
+   140002739:	90                   	nop
+   14000273a:	90                   	nop
+   14000273b:	90                   	nop
+   14000273c:	90                   	nop
+   14000273d:	90                   	nop
+   14000273e:	90                   	nop
+   14000273f:	90                   	nop
+   140002740:	57                   	push   rdi
+   140002741:	56                   	push   rsi
+   140002742:	53                   	push   rbx
+   140002743:	48 83 ec 30          	sub    rsp,0x30
+   140002747:	48 89 cb             	mov    rbx,rcx
+   14000274a:	48 89 d6             	mov    rsi,rdx
+   14000274d:	4c 89 c7             	mov    rdi,r8
+   140002750:	e8 7b 00 00 00       	call   0x1400027d0
+   140002755:	45 31 c9             	xor    r9d,r9d
+   140002758:	49 89 f0             	mov    r8,rsi
+   14000275b:	48 89 da             	mov    rdx,rbx
+   14000275e:	48 8b 08             	mov    rcx,QWORD PTR [rax]
+   140002761:	48 89 7c 24 20       	mov    QWORD PTR [rsp+0x20],rdi
+   140002766:	e8 3d 01 00 00       	call   0x1400028a8
+   14000276b:	48 83 c4 30          	add    rsp,0x30
+   14000276f:	5b                   	pop    rbx
+   140002770:	5e                   	pop    rsi
+   140002771:	5f                   	pop    rdi
+   140002772:	c3                   	ret
+   140002773:	90                   	nop
+   140002774:	90                   	nop
+   140002775:	90                   	nop
+   140002776:	90                   	nop
+   140002777:	90                   	nop
+   140002778:	90                   	nop
+   140002779:	90                   	nop
+   14000277a:	90                   	nop
+   14000277b:	90                   	nop
+   14000277c:	90                   	nop
+   14000277d:	90                   	nop
+   14000277e:	90                   	nop
+   14000277f:	90                   	nop
+   140002780:	57                   	push   rdi
+   140002781:	56                   	push   rsi
+   140002782:	53                   	push   rbx
+   140002783:	48 83 ec 40          	sub    rsp,0x40
+   140002787:	48 8d 7c 24 70       	lea    rdi,[rsp+0x70]
+   14000278c:	48 89 cb             	mov    rbx,rcx
+   14000278f:	48 89 d6             	mov    rsi,rdx
+   140002792:	4c 89 44 24 70       	mov    QWORD PTR [rsp+0x70],r8
+   140002797:	4c 89 4c 24 78       	mov    QWORD PTR [rsp+0x78],r9
+   14000279c:	48 89 7c 24 38       	mov    QWORD PTR [rsp+0x38],rdi
+   1400027a1:	e8 2a 00 00 00       	call   0x1400027d0
+   1400027a6:	45 31 c9             	xor    r9d,r9d
+   1400027a9:	49 89 f0             	mov    r8,rsi
+   1400027ac:	48 89 da             	mov    rdx,rbx
+   1400027af:	48 8b 08             	mov    rcx,QWORD PTR [rax]
+   1400027b2:	48 89 7c 24 20       	mov    QWORD PTR [rsp+0x20],rdi
+   1400027b7:	e8 ec 00 00 00       	call   0x1400028a8
+   1400027bc:	48 83 c4 40          	add    rsp,0x40
+   1400027c0:	5b                   	pop    rbx
+   1400027c1:	5e                   	pop    rsi
+   1400027c2:	5f                   	pop    rdi
+   1400027c3:	c3                   	ret
+   1400027c4:	90                   	nop
+   1400027c5:	90                   	nop
+   1400027c6:	90                   	nop
+   1400027c7:	90                   	nop
+   1400027c8:	90                   	nop
+   1400027c9:	90                   	nop
+   1400027ca:	90                   	nop
+   1400027cb:	90                   	nop
+   1400027cc:	90                   	nop
+   1400027cd:	90                   	nop
+   1400027ce:	90                   	nop
+   1400027cf:	90                   	nop
+   1400027d0:	48 8d 05 79 08 00 00 	lea    rax,[rip+0x879]        # 0x140003050
+   1400027d7:	c3                   	ret
+   1400027d8:	90                   	nop
+   1400027d9:	90                   	nop
+   1400027da:	90                   	nop
+   1400027db:	90                   	nop
+   1400027dc:	90                   	nop
+   1400027dd:	90                   	nop
+   1400027de:	90                   	nop
+   1400027df:	90                   	nop
+   1400027e0:	48 8b 05 49 1c 00 00 	mov    rax,QWORD PTR [rip+0x1c49]        # 0x140004430
+   1400027e7:	48 8b 00             	mov    rax,QWORD PTR [rax]
+   1400027ea:	c3                   	ret
+   1400027eb:	90                   	nop
+   1400027ec:	90                   	nop
+   1400027ed:	90                   	nop
+   1400027ee:	90                   	nop
+   1400027ef:	90                   	nop
+   1400027f0:	53                   	push   rbx
+   1400027f1:	48 83 ec 20          	sub    rsp,0x20
+   1400027f5:	89 cb                	mov    ebx,ecx
+   1400027f7:	b9 02 00 00 00       	mov    ecx,0x2
+   1400027fc:	e8 8f 00 00 00       	call   0x140002890
+   140002801:	41 89 d8             	mov    r8d,ebx
+   140002804:	48 8d 15 85 1b 00 00 	lea    rdx,[rip+0x1b85]        # 0x140004390
+   14000280b:	48 89 c1             	mov    rcx,rax
+   14000280e:	e8 6d ff ff ff       	call   0x140002780
+   140002813:	b9 ff 00 00 00       	mov    ecx,0xff
+   140002818:	e8 db 00 00 00       	call   0x1400028f8
+   14000281d:	90                   	nop
+   14000281e:	90                   	nop
+   14000281f:	90                   	nop
+   140002820:	55                   	push   rbp
+   140002821:	57                   	push   rdi
+   140002822:	56                   	push   rsi
+   140002823:	53                   	push   rbx
+   140002824:	48 83 ec 28          	sub    rsp,0x28
+   140002828:	44 89 cd             	mov    ebp,r9d
+   14000282b:	48 89 d6             	mov    rsi,rdx
+   14000282e:	4c 89 c3             	mov    rbx,r8
+   140002831:	48 89 cf             	mov    rdi,rcx
+   140002834:	e8 c7 00 00 00       	call   0x140002900
+   140002839:	83 fd 01             	cmp    ebp,0x1
+   14000283c:	b9 01 00 00 00       	mov    ecx,0x1
+   140002841:	83 d9 ff             	sbb    ecx,0xffffffff
+   140002844:	e8 9f 00 00 00       	call   0x1400028e8
+   140002849:	e8 82 00 00 00       	call   0x1400028d0
+   14000284e:	8b 00                	mov    eax,DWORD PTR [rax]
+   140002850:	89 07                	mov    DWORD PTR [rdi],eax
+   140002852:	e8 81 00 00 00       	call   0x1400028d8
+   140002857:	48 8b 00             	mov    rax,QWORD PTR [rax]
+   14000285a:	48 89 06             	mov    QWORD PTR [rsi],rax
+   14000285d:	e8 2e 01 00 00       	call   0x140002990
+   140002862:	48 8b 00             	mov    rax,QWORD PTR [rax]
+   140002865:	48 89 03             	mov    QWORD PTR [rbx],rax
+   140002868:	48 8b 44 24 70       	mov    rax,QWORD PTR [rsp+0x70]
+   14000286d:	8b 08                	mov    ecx,DWORD PTR [rax]
+   14000286f:	e8 fc 00 00 00       	call   0x140002970
+   140002874:	31 c0                	xor    eax,eax
+   140002876:	48 83 c4 28          	add    rsp,0x28
+   14000287a:	5b                   	pop    rbx
+   14000287b:	5e                   	pop    rsi
+   14000287c:	5f                   	pop    rdi
+   14000287d:	5d                   	pop    rbp
+   14000287e:	c3                   	ret
+   14000287f:	90                   	nop
+   140002880:	ff 25 5a 5b 00 00    	jmp    QWORD PTR [rip+0x5b5a]        # 0x1400083e0
+   140002886:	90                   	nop
+   140002887:	90                   	nop
+   140002888:	ff 25 5a 5b 00 00    	jmp    QWORD PTR [rip+0x5b5a]        # 0x1400083e8
+   14000288e:	90                   	nop
+   14000288f:	90                   	nop
+   140002890:	ff 25 0a 5b 00 00    	jmp    QWORD PTR [rip+0x5b0a]        # 0x1400083a0
+   140002896:	90                   	nop
+   140002897:	90                   	nop
+   140002898:	ff 25 0a 5b 00 00    	jmp    QWORD PTR [rip+0x5b0a]        # 0x1400083a8
+   14000289e:	90                   	nop
+   14000289f:	90                   	nop
+   1400028a0:	ff 25 0a 5b 00 00    	jmp    QWORD PTR [rip+0x5b0a]        # 0x1400083b0
+   1400028a6:	90                   	nop
+   1400028a7:	90                   	nop
+   1400028a8:	ff 25 0a 5b 00 00    	jmp    QWORD PTR [rip+0x5b0a]        # 0x1400083b8
+   1400028ae:	90                   	nop
+   1400028af:	90                   	nop
+   1400028b0:	ff 25 0a 5b 00 00    	jmp    QWORD PTR [rip+0x5b0a]        # 0x1400083c0
+   1400028b6:	90                   	nop
+   1400028b7:	90                   	nop
+   1400028b8:	ff 25 0a 5b 00 00    	jmp    QWORD PTR [rip+0x5b0a]        # 0x1400083c8
+   1400028be:	90                   	nop
+   1400028bf:	90                   	nop
+   1400028c0:	ff 25 0a 5b 00 00    	jmp    QWORD PTR [rip+0x5b0a]        # 0x1400083d0
+   1400028c6:	90                   	nop
+   1400028c7:	90                   	nop
+   1400028c8:	0f 1f 84 00 00 00 00 	nop    DWORD PTR [rax+rax*1+0x0]
+   1400028cf:	00
+   1400028d0:	ff 25 52 5a 00 00    	jmp    QWORD PTR [rip+0x5a52]        # 0x140008328
+   1400028d6:	90                   	nop
+   1400028d7:	90                   	nop
+   1400028d8:	ff 25 52 5a 00 00    	jmp    QWORD PTR [rip+0x5a52]        # 0x140008330
+   1400028de:	90                   	nop
+   1400028df:	90                   	nop
+   1400028e0:	ff 25 52 5a 00 00    	jmp    QWORD PTR [rip+0x5a52]        # 0x140008338
+   1400028e6:	90                   	nop
+   1400028e7:	90                   	nop
+   1400028e8:	ff 25 52 5a 00 00    	jmp    QWORD PTR [rip+0x5a52]        # 0x140008340
+   1400028ee:	90                   	nop
+   1400028ef:	90                   	nop
+   1400028f0:	ff 25 52 5a 00 00    	jmp    QWORD PTR [rip+0x5a52]        # 0x140008348
+   1400028f6:	90                   	nop
+   1400028f7:	90                   	nop
+   1400028f8:	ff 25 52 5a 00 00    	jmp    QWORD PTR [rip+0x5a52]        # 0x140008350
+   1400028fe:	90                   	nop
+   1400028ff:	90                   	nop
+   140002900:	ff 25 52 5a 00 00    	jmp    QWORD PTR [rip+0x5a52]        # 0x140008358
+   140002906:	90                   	nop
+   140002907:	90                   	nop
+   140002908:	ff 25 52 5a 00 00    	jmp    QWORD PTR [rip+0x5a52]        # 0x140008360
+   14000290e:	90                   	nop
+   14000290f:	90                   	nop
+   140002910:	ff 25 52 5a 00 00    	jmp    QWORD PTR [rip+0x5a52]        # 0x140008368
+   140002916:	90                   	nop
+   140002917:	90                   	nop
+   140002918:	ff 25 52 5a 00 00    	jmp    QWORD PTR [rip+0x5a52]        # 0x140008370
+   14000291e:	90                   	nop
+   14000291f:	90                   	nop
+   140002920:	ff 25 52 5a 00 00    	jmp    QWORD PTR [rip+0x5a52]        # 0x140008378
+   140002926:	90                   	nop
+   140002927:	90                   	nop
+   140002928:	ff 25 52 5a 00 00    	jmp    QWORD PTR [rip+0x5a52]        # 0x140008380
+   14000292e:	90                   	nop
+   14000292f:	90                   	nop
+   140002930:	ff 25 52 5a 00 00    	jmp    QWORD PTR [rip+0x5a52]        # 0x140008388
+   140002936:	90                   	nop
+   140002937:	90                   	nop
+   140002938:	ff 25 52 5a 00 00    	jmp    QWORD PTR [rip+0x5a52]        # 0x140008390
+   14000293e:	90                   	nop
+   14000293f:	90                   	nop
+   140002940:	ff 25 ca 59 00 00    	jmp    QWORD PTR [rip+0x59ca]        # 0x140008310
+   140002946:	90                   	nop
+   140002947:	90                   	nop
+   140002948:	ff 25 ca 59 00 00    	jmp    QWORD PTR [rip+0x59ca]        # 0x140008318
+   14000294e:	90                   	nop
+   14000294f:	90                   	nop
+   140002950:	ff 25 aa 59 00 00    	jmp    QWORD PTR [rip+0x59aa]        # 0x140008300
+   140002956:	90                   	nop
+   140002957:	90                   	nop
+   140002958:	0f 1f 84 00 00 00 00 	nop    DWORD PTR [rax+rax*1+0x0]
+   14000295f:	00
+   140002960:	ff 25 8a 59 00 00    	jmp    QWORD PTR [rip+0x598a]        # 0x1400082f0
+   140002966:	90                   	nop
+   140002967:	90                   	nop
+   140002968:	0f 1f 84 00 00 00 00 	nop    DWORD PTR [rax+rax*1+0x0]
+   14000296f:	00
+   140002970:	ff 25 52 59 00 00    	jmp    QWORD PTR [rip+0x5952]        # 0x1400082c8
+   140002976:	90                   	nop
+   140002977:	90                   	nop
+   140002978:	ff 25 52 59 00 00    	jmp    QWORD PTR [rip+0x5952]        # 0x1400082d0
+   14000297e:	90                   	nop
+   14000297f:	90                   	nop
+   140002980:	ff 25 52 59 00 00    	jmp    QWORD PTR [rip+0x5952]        # 0x1400082d8
+   140002986:	90                   	nop
+   140002987:	90                   	nop
+   140002988:	ff 25 52 59 00 00    	jmp    QWORD PTR [rip+0x5952]        # 0x1400082e0
+   14000298e:	90                   	nop
+   14000298f:	90                   	nop
+   140002990:	ff 25 22 59 00 00    	jmp    QWORD PTR [rip+0x5922]        # 0x1400082b8
+   140002996:	90                   	nop
+   140002997:	90                   	nop
+   140002998:	0f 1f 84 00 00 00 00 	nop    DWORD PTR [rax+rax*1+0x0]
+   14000299f:	00
+   1400029a0:	ff 25 02 59 00 00    	jmp    QWORD PTR [rip+0x5902]        # 0x1400082a8
+   1400029a6:	90                   	nop
+   1400029a7:	90                   	nop
+   1400029a8:	ff 25 f2 58 00 00    	jmp    QWORD PTR [rip+0x58f2]        # 0x1400082a0
+   1400029ae:	90                   	nop
+   1400029af:	90                   	nop
+   1400029b0:	ff 25 e2 58 00 00    	jmp    QWORD PTR [rip+0x58e2]        # 0x140008298
+   1400029b6:	90                   	nop
+   1400029b7:	90                   	nop
+   1400029b8:	ff 25 d2 58 00 00    	jmp    QWORD PTR [rip+0x58d2]        # 0x140008290
+   1400029be:	90                   	nop
+   1400029bf:	90                   	nop
+   1400029c0:	ff 25 c2 58 00 00    	jmp    QWORD PTR [rip+0x58c2]        # 0x140008288
+   1400029c6:	90                   	nop
+   1400029c7:	90                   	nop
+   1400029c8:	ff 25 b2 58 00 00    	jmp    QWORD PTR [rip+0x58b2]        # 0x140008280
+   1400029ce:	90                   	nop
+   1400029cf:	90                   	nop
+   1400029d0:	ff 25 a2 58 00 00    	jmp    QWORD PTR [rip+0x58a2]        # 0x140008278
+   1400029d6:	90                   	nop
+   1400029d7:	90                   	nop
+   1400029d8:	ff 25 92 58 00 00    	jmp    QWORD PTR [rip+0x5892]        # 0x140008270
+   1400029de:	90                   	nop
+   1400029df:	90                   	nop
+   1400029e0:	ff 25 82 58 00 00    	jmp    QWORD PTR [rip+0x5882]        # 0x140008268
+   1400029e6:	90                   	nop
+   1400029e7:	90                   	nop
+   1400029e8:	ff 25 72 58 00 00    	jmp    QWORD PTR [rip+0x5872]        # 0x140008260
+   1400029ee:	90                   	nop
+   1400029ef:	90                   	nop
+   1400029f0:	41 54                	push   r12
+   1400029f2:	55                   	push   rbp
+   1400029f3:	57                   	push   rdi
+   1400029f4:	56                   	push   rsi
+   1400029f5:	53                   	push   rbx
+   1400029f6:	48 83 ec 60          	sub    rsp,0x60
+   1400029fa:	be 01 00 00 00       	mov    esi,0x1
+   1400029ff:	bb ff ff ff ff       	mov    ebx,0xffffffff
+   140002a04:	e8 57 eb ff ff       	call   0x140001560
+   140002a09:	4c 8d 15 f0 15 00 00 	lea    r10,[rip+0x15f0]        # 0x140004000
+   140002a10:	45 31 db             	xor    r11d,r11d
+   140002a13:	48 c7 44 24 20 00 00 	mov    QWORD PTR [rsp+0x20],0x0
+   140002a1a:	00 00
+   140002a1c:	48 c7 44 24 28 00 00 	mov    QWORD PTR [rsp+0x28],0x0
+   140002a23:	00 00
+   140002a25:	b8 5a 00 00 00       	mov    eax,0x5a
+   140002a2a:	48 c7 44 24 30 00 00 	mov    QWORD PTR [rsp+0x30],0x0
+   140002a31:	00 00
+   140002a33:	48 c7 44 24 38 00 00 	mov    QWORD PTR [rsp+0x38],0x0
+   140002a3a:	00 00
+   140002a3c:	48 c7 44 24 40 00 00 	mov    QWORD PTR [rsp+0x40],0x0
+   140002a43:	00 00
+   140002a45:	48 c7 44 24 48 00 00 	mov    QWORD PTR [rsp+0x48],0x0
+   140002a4c:	00 00
+   140002a4e:	48 c7 44 24 50 00 00 	mov    QWORD PTR [rsp+0x50],0x0
+   140002a55:	00 00
+   140002a57:	48 c7 44 24 58 00 00 	mov    QWORD PTR [rsp+0x58],0x0
+   140002a5e:	00 00
+   140002a60:	e9 36 01 00 00       	jmp    0x140002b9b
+   140002a65:	0f 1f 00             	nop    DWORD PTR [rax]
+   140002a68:	3c 2f                	cmp    al,0x2f
+   140002a6a:	0f 8f 70 02 00 00    	jg     0x140002ce0
+   140002a70:	3c 2b                	cmp    al,0x2b
+   140002a72:	0f 84 58 02 00 00    	je     0x140002cd0
+   140002a78:	3c 2f                	cmp    al,0x2f
+   140002a7a:	0f 85 1b 02 00 00    	jne    0x140002c9b
+   140002a80:	31 ed                	xor    ebp,ebp
+   140002a82:	b8 3f 00 00 00       	mov    eax,0x3f
+   140002a87:	66 0f 1f 84 00 00 00 	nop    WORD PTR [rax+rax*1+0x0]
+   140002a8e:	00 00
+   140002a90:	80 fa 39             	cmp    dl,0x39
+   140002a93:	0f 8f 57 01 00 00    	jg     0x140002bf0
+   140002a99:	44 8d 4a 04          	lea    r9d,[rdx+0x4]
+   140002a9d:	80 fa 2f             	cmp    dl,0x2f
+   140002aa0:	7f 1a                	jg     0x140002abc
+   140002aa2:	41 b9 3e 00 00 00    	mov    r9d,0x3e
+   140002aa8:	80 fa 2b             	cmp    dl,0x2b
+   140002aab:	74 0f                	je     0x140002abc
+   140002aad:	41 b9 3f 00 00 00    	mov    r9d,0x3f
+   140002ab3:	80 fa 2f             	cmp    dl,0x2f
+   140002ab6:	0f 85 84 02 00 00    	jne    0x140002d40
+   140002abc:	80 f9 3d             	cmp    cl,0x3d
+   140002abf:	0f 84 4f 01 00 00    	je     0x140002c14
+   140002ac5:	80 f9 39             	cmp    cl,0x39
+   140002ac8:	0f 8f 92 01 00 00    	jg     0x140002c60
+   140002ace:	80 f9 2f             	cmp    cl,0x2f
+   140002ad1:	0f 8f a1 02 00 00    	jg     0x140002d78
+   140002ad7:	80 f9 2b             	cmp    cl,0x2b
+   140002ada:	0f 84 80 02 00 00    	je     0x140002d60
+   140002ae0:	80 f9 2f             	cmp    cl,0x2f
+   140002ae3:	0f 85 67 02 00 00    	jne    0x140002d50
+   140002ae9:	ba 3f 00 00 00       	mov    edx,0x3f
+   140002aee:	41 80 f8 3d          	cmp    r8b,0x3d
+   140002af2:	0f 84 28 01 00 00    	je     0x140002c20
+   140002af8:	0f 1f 84 00 00 00 00 	nop    DWORD PTR [rax+rax*1+0x0]
+   140002aff:	00
+   140002b00:	41 80 f8 39          	cmp    r8b,0x39
+   140002b04:	0f 8f 36 01 00 00    	jg     0x140002c40
+   140002b0a:	41 80 f8 2f          	cmp    r8b,0x2f
+   140002b0e:	0f 8f 8c 02 00 00    	jg     0x140002da0
+   140002b14:	41 80 f8 2b          	cmp    r8b,0x2b
+   140002b18:	0f 84 72 02 00 00    	je     0x140002d90
+   140002b1e:	41 80 f8 2f          	cmp    r8b,0x2f
+   140002b22:	0f 85 c8 01 00 00    	jne    0x140002cf0
+   140002b28:	bf 3f 00 00 00       	mov    edi,0x3f
+   140002b2d:	0f 1f 00             	nop    DWORD PTR [rax]
+   140002b30:	40 84 ed             	test   bpl,bpl
+   140002b33:	0f 85 b7 01 00 00    	jne    0x140002cf0
+   140002b39:	83 fa ff             	cmp    edx,0xffffffff
+   140002b3c:	0f 84 ae 01 00 00    	je     0x140002cf0
+   140002b42:	45 89 cc             	mov    r12d,r9d
+   140002b45:	c1 e0 02             	shl    eax,0x2
+   140002b48:	49 8d 6b 01          	lea    rbp,[r11+0x1]
+   140002b4c:	41 c1 fc 04          	sar    r12d,0x4
+   140002b50:	44 09 e0             	or     eax,r12d
+   140002b53:	42 88 44 1c 20       	mov    BYTE PTR [rsp+r11*1+0x20],al
+   140002b58:	80 f9 3d             	cmp    cl,0x3d
+   140002b5b:	0f 84 cf 00 00 00    	je     0x140002c30
+   140002b61:	89 d0                	mov    eax,edx
+   140002b63:	41 c1 e1 04          	shl    r9d,0x4
+   140002b67:	49 83 c3 02          	add    r11,0x2
+   140002b6b:	c1 f8 02             	sar    eax,0x2
+   140002b6e:	41 09 c1             	or     r9d,eax
+   140002b71:	44 88 4c 2c 20       	mov    BYTE PTR [rsp+rbp*1+0x20],r9b
+   140002b76:	41 80 f8 3d          	cmp    r8b,0x3d
+   140002b7a:	74 0e                	je     0x140002b8a
+   140002b7c:	c1 e2 06             	shl    edx,0x6
+   140002b7f:	09 fa                	or     edx,edi
+   140002b81:	42 88 54 1c 20       	mov    BYTE PTR [rsp+r11*1+0x20],dl
+   140002b86:	49 83 c3 01          	add    r11,0x1
+   140002b8a:	41 0f be 42 04       	movsx  eax,BYTE PTR [r10+0x4]
+   140002b8f:	49 83 c2 04          	add    r10,0x4
+   140002b93:	84 c0                	test   al,al
+   140002b95:	0f 84 15 02 00 00    	je     0x140002db0
+   140002b9b:	41 0f be 52 01       	movsx  edx,BYTE PTR [r10+0x1]
+   140002ba0:	84 d2                	test   dl,dl
+   140002ba2:	0f 84 08 02 00 00    	je     0x140002db0
+   140002ba8:	41 0f b6 4a 02       	movzx  ecx,BYTE PTR [r10+0x2]
+   140002bad:	84 c9                	test   cl,cl
+   140002baf:	0f 84 fb 01 00 00    	je     0x140002db0
+   140002bb5:	45 0f b6 42 03       	movzx  r8d,BYTE PTR [r10+0x3]
+   140002bba:	45 84 c0             	test   r8b,r8b
+   140002bbd:	0f 84 ed 01 00 00    	je     0x140002db0
+   140002bc3:	3c 39                	cmp    al,0x39
+   140002bc5:	0f 8e 9d fe ff ff    	jle    0x140002a68
+   140002bcb:	3c 5a                	cmp    al,0x5a
+   140002bcd:	0f 8f b5 00 00 00    	jg     0x140002c88
+   140002bd3:	3c 40                	cmp    al,0x40
+   140002bd5:	0f 8e c0 00 00 00    	jle    0x140002c9b
+   140002bdb:	83 e8 41             	sub    eax,0x41
+   140002bde:	31 ed                	xor    ebp,ebp
+   140002be0:	80 fa 39             	cmp    dl,0x39
+   140002be3:	0f 8e b0 fe ff ff    	jle    0x140002a99
+   140002be9:	0f 1f 80 00 00 00 00 	nop    DWORD PTR [rax+0x0]
+   140002bf0:	80 fa 5a             	cmp    dl,0x5a
+   140002bf3:	0f 8f b7 00 00 00    	jg     0x140002cb0
+   140002bf9:	44 0f be ca          	movsx  r9d,dl
+   140002bfd:	41 83 e9 41          	sub    r9d,0x41
+   140002c01:	80 fa 40             	cmp    dl,0x40
+   140002c04:	0f 4e ee             	cmovle ebp,esi
+   140002c07:	44 0f 4e cb          	cmovle r9d,ebx
+   140002c0b:	80 f9 3d             	cmp    cl,0x3d
+   140002c0e:	0f 85 b1 fe ff ff    	jne    0x140002ac5
+   140002c14:	31 d2                	xor    edx,edx
+   140002c16:	41 80 f8 3d          	cmp    r8b,0x3d
+   140002c1a:	0f 85 e0 fe ff ff    	jne    0x140002b00
+   140002c20:	40 84 ed             	test   bpl,bpl
+   140002c23:	0f 85 c7 00 00 00    	jne    0x140002cf0
+   140002c29:	31 ff                	xor    edi,edi
+   140002c2b:	e9 12 ff ff ff       	jmp    0x140002b42
+   140002c30:	49 89 eb             	mov    r11,rbp
+   140002c33:	e9 3e ff ff ff       	jmp    0x140002b76
+   140002c38:	0f 1f 84 00 00 00 00 	nop    DWORD PTR [rax+rax*1+0x0]
+   140002c3f:	00
+   140002c40:	41 80 f8 5a          	cmp    r8b,0x5a
+   140002c44:	0f 8f d6 00 00 00    	jg     0x140002d20
+   140002c4a:	41 80 f8 40          	cmp    r8b,0x40
+   140002c4e:	0f 8e 9c 00 00 00    	jle    0x140002cf0
+   140002c54:	41 0f be f8          	movsx  edi,r8b
+   140002c58:	83 ef 41             	sub    edi,0x41
+   140002c5b:	e9 d0 fe ff ff       	jmp    0x140002b30
+   140002c60:	80 f9 5a             	cmp    cl,0x5a
+   140002c63:	0f 8f 97 00 00 00    	jg     0x140002d00
+   140002c69:	80 f9 40             	cmp    cl,0x40
+   140002c6c:	0f 8e de 00 00 00    	jle    0x140002d50
+   140002c72:	0f be d1             	movsx  edx,cl
+   140002c75:	83 ea 41             	sub    edx,0x41
+   140002c78:	41 80 f8 3d          	cmp    r8b,0x3d
+   140002c7c:	0f 85 7e fe ff ff    	jne    0x140002b00
+   140002c82:	eb 9c                	jmp    0x140002c20
+   140002c84:	0f 1f 40 00          	nop    DWORD PTR [rax+0x0]
+   140002c88:	44 8d 48 9f          	lea    r9d,[rax-0x61]
+   140002c8c:	31 ed                	xor    ebp,ebp
+   140002c8e:	83 e8 47             	sub    eax,0x47
+   140002c91:	41 80 f9 19          	cmp    r9b,0x19
+   140002c95:	0f 86 f5 fd ff ff    	jbe    0x140002a90
+   140002c9b:	bd 01 00 00 00       	mov    ebp,0x1
+   140002ca0:	b8 ff ff ff ff       	mov    eax,0xffffffff
+   140002ca5:	e9 e6 fd ff ff       	jmp    0x140002a90
+   140002caa:	66 0f 1f 44 00 00    	nop    WORD PTR [rax+rax*1+0x0]
+   140002cb0:	44 8d 4a 9f          	lea    r9d,[rdx-0x61]
+   140002cb4:	41 80 f9 19          	cmp    r9b,0x19
+   140002cb8:	0f 87 82 00 00 00    	ja     0x140002d40
+   140002cbe:	44 8d 4a b9          	lea    r9d,[rdx-0x47]
+   140002cc2:	e9 f5 fd ff ff       	jmp    0x140002abc
+   140002cc7:	66 0f 1f 84 00 00 00 	nop    WORD PTR [rax+rax*1+0x0]
+   140002cce:	00 00
+   140002cd0:	31 ed                	xor    ebp,ebp
+   140002cd2:	b8 3e 00 00 00       	mov    eax,0x3e
+   140002cd7:	e9 b4 fd ff ff       	jmp    0x140002a90
+   140002cdc:	0f 1f 40 00          	nop    DWORD PTR [rax+0x0]
+   140002ce0:	83 c0 04             	add    eax,0x4
+   140002ce3:	31 ed                	xor    ebp,ebp
+   140002ce5:	e9 a6 fd ff ff       	jmp    0x140002a90
+   140002cea:	66 0f 1f 44 00 00    	nop    WORD PTR [rax+rax*1+0x0]
+   140002cf0:	b8 01 00 00 00       	mov    eax,0x1
+   140002cf5:	48 83 c4 60          	add    rsp,0x60
+   140002cf9:	5b                   	pop    rbx
+   140002cfa:	5e                   	pop    rsi
+   140002cfb:	5f                   	pop    rdi
+   140002cfc:	5d                   	pop    rbp
+   140002cfd:	41 5c                	pop    r12
+   140002cff:	c3                   	ret
+   140002d00:	8d 51 9f             	lea    edx,[rcx-0x61]
+   140002d03:	80 fa 19             	cmp    dl,0x19
+   140002d06:	77 48                	ja     0x140002d50
+   140002d08:	0f be d1             	movsx  edx,cl
+   140002d0b:	83 ea 47             	sub    edx,0x47
+   140002d0e:	41 80 f8 3d          	cmp    r8b,0x3d
+   140002d12:	0f 85 e8 fd ff ff    	jne    0x140002b00
+   140002d18:	e9 03 ff ff ff       	jmp    0x140002c20
+   140002d1d:	0f 1f 00             	nop    DWORD PTR [rax]
+   140002d20:	41 8d 78 9f          	lea    edi,[r8-0x61]
+   140002d24:	40 80 ff 19          	cmp    dil,0x19
+   140002d28:	77 c6                	ja     0x140002cf0
+   140002d2a:	41 0f be f8          	movsx  edi,r8b
+   140002d2e:	83 ef 47             	sub    edi,0x47
+   140002d31:	e9 fa fd ff ff       	jmp    0x140002b30
+   140002d36:	66 2e 0f 1f 84 00 00 	cs nop WORD PTR [rax+rax*1+0x0]
+   140002d3d:	00 00 00
+   140002d40:	bd 01 00 00 00       	mov    ebp,0x1
+   140002d45:	41 b9 ff ff ff ff    	mov    r9d,0xffffffff
+   140002d4b:	e9 6c fd ff ff       	jmp    0x140002abc
+   140002d50:	41 80 f8 3d          	cmp    r8b,0x3d
+   140002d54:	74 9a                	je     0x140002cf0
+   140002d56:	ba ff ff ff ff       	mov    edx,0xffffffff
+   140002d5b:	e9 a0 fd ff ff       	jmp    0x140002b00
+   140002d60:	ba 3e 00 00 00       	mov    edx,0x3e
+   140002d65:	41 80 f8 3d          	cmp    r8b,0x3d
+   140002d69:	0f 85 91 fd ff ff    	jne    0x140002b00
+   140002d6f:	e9 ac fe ff ff       	jmp    0x140002c20
+   140002d74:	0f 1f 40 00          	nop    DWORD PTR [rax+0x0]
+   140002d78:	0f be d1             	movsx  edx,cl
+   140002d7b:	83 c2 04             	add    edx,0x4
+   140002d7e:	41 80 f8 3d          	cmp    r8b,0x3d
+   140002d82:	0f 85 78 fd ff ff    	jne    0x140002b00
+   140002d88:	e9 93 fe ff ff       	jmp    0x140002c20
+   140002d8d:	0f 1f 00             	nop    DWORD PTR [rax]
+   140002d90:	bf 3e 00 00 00       	mov    edi,0x3e
+   140002d95:	e9 96 fd ff ff       	jmp    0x140002b30
+   140002d9a:	66 0f 1f 44 00 00    	nop    WORD PTR [rax+rax*1+0x0]
+   140002da0:	41 0f be f8          	movsx  edi,r8b
+   140002da4:	83 c7 04             	add    edi,0x4
+   140002da7:	e9 84 fd ff ff       	jmp    0x140002b30
+   140002dac:	0f 1f 40 00          	nop    DWORD PTR [rax+0x0]
+   140002db0:	48 8d 4c 24 20       	lea    rcx,[rsp+0x20]
+   140002db5:	e8 fe fa ff ff       	call   0x1400028b8
+   140002dba:	31 c0                	xor    eax,eax
+   140002dbc:	48 83 c4 60          	add    rsp,0x60
+   140002dc0:	5b                   	pop    rbx
+   140002dc1:	5e                   	pop    rsi
+   140002dc2:	5f                   	pop    rdi
+   140002dc3:	5d                   	pop    rbp
+   140002dc4:	41 5c                	pop    r12
+   140002dc6:	c3                   	ret
+   140002dc7:	90                   	nop
+   140002dc8:	90                   	nop
+   140002dc9:	90                   	nop
+   140002dca:	90                   	nop
+   140002dcb:	90                   	nop
+   140002dcc:	90                   	nop
+   140002dcd:	90                   	nop
+   140002dce:	90                   	nop
+   140002dcf:	90                   	nop
+   140002dd0:	e9 9b e6 ff ff       	jmp    0x140001470
+   140002dd5:	90                   	nop
+   140002dd6:	90                   	nop
+   140002dd7:	90                   	nop
+   140002dd8:	90                   	nop
+   140002dd9:	90                   	nop
+   140002dda:	90                   	nop
+   140002ddb:	90                   	nop
+   140002ddc:	90                   	nop
+   140002ddd:	90                   	nop
+   140002dde:	90                   	nop
+   140002ddf:	90                   	nop
+COMMAND> Select-String -LiteralPath 'C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\批次14_20260929\527_木兰当户织\反汇编_objdump_disassembly.txt' -Pattern '1400083c8|1400083e0|1400083e8|1400083b8' -Context 5,5
+
+  玄机刷题\题目资料\批次14_20260929\527_木兰当户织\反汇编_objdump_disassembly.txt:1752:   14000287b:	5e
+   	pop    rsi
+  玄机刷题\题目资料\批次14_20260929\527_木兰当户织\反汇编_objdump_disassembly.txt:1753:   14000287c:	5f
+   	pop    rdi
+  玄机刷题\题目资料\批次14_20260929\527_木兰当户织\反汇编_objdump_disassembly.txt:1754:   14000287d:	5d
+   	pop    rbp
+  玄机刷题\题目资料\批次14_20260929\527_木兰当户织\反汇编_objdump_disassembly.txt:1755:   14000287e:	c3
+   	ret
+  玄机刷题\题目资料\批次14_20260929\527_木兰当户织\反汇编_objdump_disassembly.txt:1756:   14000287f:	90
+   	nop
+> 玄机刷题\题目资料\批次14_20260929\527_木兰当户织\反汇编_objdump_disassembly.txt:1757:   140002880:	ff 25 5a 5b 00 00
+   	jmp    QWORD PTR [rip+0x5b5a]        # 0x1400083e0
+  玄机刷题\题目资料\批次14_20260929\527_木兰当户织\反汇编_objdump_disassembly.txt:1758:   140002886:	90
+   	nop
+  玄机刷题\题目资料\批次14_20260929\527_木兰当户织\反汇编_objdump_disassembly.txt:1759:   140002887:	90
+   	nop
+> 玄机刷题\题目资料\批次14_20260929\527_木兰当户织\反汇编_objdump_disassembly.txt:1760:   140002888:	ff 25 5a 5b 00 00
+   	jmp    QWORD PTR [rip+0x5b5a]        # 0x1400083e8
+  玄机刷题\题目资料\批次14_20260929\527_木兰当户织\反汇编_objdump_disassembly.txt:1761:   14000288e:	90
+   	nop
+  玄机刷题\题目资料\批次14_20260929\527_木兰当户织\反汇编_objdump_disassembly.txt:1762:   14000288f:	90
+   	nop
+  玄机刷题\题目资料\批次14_20260929\527_木兰当户织\反汇编_objdump_disassembly.txt:1763:   140002890:	ff 25 0a 5b 00 00
+   	jmp    QWORD PTR [rip+0x5b0a]        # 0x1400083a0
+  玄机刷题\题目资料\批次14_20260929\527_木兰当户织\反汇编_objdump_disassembly.txt:1764:   140002896:	90
+   	nop
+  玄机刷题\题目资料\批次14_20260929\527_木兰当户织\反汇编_objdump_disassembly.txt:1765:   140002897:	90
+   	nop
+  玄机刷题\题目资料\批次14_20260929\527_木兰当户织\反汇编_objdump_disassembly.txt:1767:   14000289e:	90
+   	nop
+  玄机刷题\题目资料\批次14_20260929\527_木兰当户织\反汇编_objdump_disassembly.txt:1768:   14000289f:	90
+   	nop
+  玄机刷题\题目资料\批次14_20260929\527_木兰当户织\反汇编_objdump_disassembly.txt:1769:   1400028a0:	ff 25 0a 5b 00 00
+   	jmp    QWORD PTR [rip+0x5b0a]        # 0x1400083b0
+  玄机刷题\题目资料\批次14_20260929\527_木兰当户织\反汇编_objdump_disassembly.txt:1770:   1400028a6:	90
+   	nop
+  玄机刷题\题目资料\批次14_20260929\527_木兰当户织\反汇编_objdump_disassembly.txt:1771:   1400028a7:	90
+   	nop
+> 玄机刷题\题目资料\批次14_20260929\527_木兰当户织\反汇编_objdump_disassembly.txt:1772:   1400028a8:	ff 25 0a 5b 00 00
+   	jmp    QWORD PTR [rip+0x5b0a]        # 0x1400083b8
+  玄机刷题\题目资料\批次14_20260929\527_木兰当户织\反汇编_objdump_disassembly.txt:1773:   1400028ae:	90
+   	nop
+  玄机刷题\题目资料\批次14_20260929\527_木兰当户织\反汇编_objdump_disassembly.txt:1774:   1400028af:	90
+   	nop
+  玄机刷题\题目资料\批次14_20260929\527_木兰当户织\反汇编_objdump_disassembly.txt:1775:   1400028b0:	ff 25 0a 5b 00 00
+   	jmp    QWORD PTR [rip+0x5b0a]        # 0x1400083c0
+  玄机刷题\题目资料\批次14_20260929\527_木兰当户织\反汇编_objdump_disassembly.txt:1776:   1400028b6:	90
+   	nop
+  玄机刷题\题目资料\批次14_20260929\527_木兰当户织\反汇编_objdump_disassembly.txt:1777:   1400028b7:	90
+   	nop
+> 玄机刷题\题目资料\批次14_20260929\527_木兰当户织\反汇编_objdump_disassembly.txt:1778:   1400028b8:	ff 25 0a 5b 00 00
+   	jmp    QWORD PTR [rip+0x5b0a]        # 0x1400083c8
+  玄机刷题\题目资料\批次14_20260929\527_木兰当户织\反汇编_objdump_disassembly.txt:1779:   1400028be:	90
+   	nop
+  玄机刷题\题目资料\批次14_20260929\527_木兰当户织\反汇编_objdump_disassembly.txt:1780:   1400028bf:	90
+   	nop
+  玄机刷题\题目资料\批次14_20260929\527_木兰当户织\反汇编_objdump_disassembly.txt:1781:   1400028c0:	ff 25 0a 5b 00 00
+   	jmp    QWORD PTR [rip+0x5b0a]        # 0x1400083d0
+  玄机刷题\题目资料\批次14_20260929\527_木兰当户织\反汇编_objdump_disassembly.txt:1782:   1400028c6:	90
+   	nop
+  玄机刷题\题目资料\批次14_20260929\527_木兰当户织\反汇编_objdump_disassembly.txt:1783:   1400028c7:	90
+   	nop
+**********************
+PowerShell transcript end
+End time: 20260929154417
+**********************
+**********************
+PowerShell transcript start
+Start time: 20260929154441
+Username: DESKTOP-412KTAR\mzj
+RunAs User: DESKTOP-412KTAR\mzj
+Configuration Name: 
+Machine: DESKTOP-412KTAR (Microsoft Windows NT 10.0.26200.0)
+Host Application: C:\Users\mzj\.cache\codex-runtimes\codex-primary-runtime\dependencies\native\powershell\pwsh.dll -Command try { [Console]::OutputEncoding=[System.Text.Encoding]::UTF8 } catch {}
+$ErrorActionPreference = 'Stop'
+$disFile = 'C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\批次14_20260929\527_木兰当户织\反汇编_objdump_disassembly.txt'
+$log = 'C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\批次14_20260929\527_木兰当户织\记录_命令与输出.txt'
+Start-Transcript -LiteralPath $log -Append | Out-Null
+Write-Output "COMMAND> Select-String -LiteralPath '$disFile' -Pattern 'call\s+0x140002880|call\s+0x140002888|call\s+0x1400028b8|call\s+0x1400028b0' -Context 6,8"
+Select-String -LiteralPath $disFile -Pattern 'call\s+0x140002880|call\s+0x140002888|call\s+0x1400028b8|call\s+0x1400028b0' -Context 6,8
+Stop-Transcript | Out-Null
+Process ID: 132
+PSVersion: 7.6.5
+PSEdition: Core
+GitCommitId: 7.6.5
+OS: Microsoft Windows 10.0.26200
+Platform: Win32NT
+PSCompatibleVersions: 1.0, 2.0, 3.0, 4.0, 5.0, 5.1, 6.0, 7.0
+PSRemotingProtocolVersion: 2.4
+SerializationVersion: 1.1.0.1
+WSManStackVersion: 3.0
+**********************
+COMMAND> Select-String -LiteralPath 'C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\批次14_20260929\527_木兰当户织\反汇编_objdump_disassembly.txt' -Pattern 'call\s+0x140002880|call\s+0x140002888|call\s+0x1400028b8|call\s+0x1400028b0' -Context 6,8
+
+  玄机刷题\题目资料\批次14_20260929\527_木兰当户织\反汇编_objdump_disassembly.txt:199:   140001328:	48 89 c1
+  	mov    rcx,rax
+  玄机刷题\题目资料\批次14_20260929\527_木兰当户织\反汇编_objdump_disassembly.txt:200:   14000132b:	e8 18 16 00 00
+  	call   0x140002948
+  玄机刷题\题目资料\批次14_20260929\527_木兰当户织\反汇编_objdump_disassembly.txt:201:   140001330:	4c 39 f6
+  	cmp    rsi,r14
+  玄机刷题\题目资料\批次14_20260929\527_木兰当户织\反汇编_objdump_disassembly.txt:202:   140001333:	74 4b
+  	je     0x140001380
+  玄机刷题\题目资料\批次14_20260929\527_木兰当户织\反汇编_objdump_disassembly.txt:203:   140001335:	48 83 c6 01
+  	add    rsi,0x1
+  玄机刷题\题目资料\批次14_20260929\527_木兰当户织\反汇编_objdump_disassembly.txt:204:   140001339:	49 8b 4c f7 f8
+  	mov    rcx,QWORD PTR [r15+rsi*8-0x8]
+> 玄机刷题\题目资料\批次14_20260929\527_木兰当户织\反汇编_objdump_disassembly.txt:205:   14000133e:	e8 3d 15 00 00
+  	call   0x140002880
+  玄机刷题\题目资料\批次14_20260929\527_木兰当户织\反汇编_objdump_disassembly.txt:206:   140001343:	48 8d 78 01
+  	lea    rdi,[rax+0x1]
+  玄机刷题\题目资料\批次14_20260929\527_木兰当户织\反汇编_objdump_disassembly.txt:207:   140001347:	48 89 f9
+  	mov    rcx,rdi
+  玄机刷题\题目资料\批次14_20260929\527_木兰当户织\反汇编_objdump_disassembly.txt:208:   14000134a:	e8 39 16 00 00
+  	call   0x140002988
+  玄机刷题\题目资料\批次14_20260929\527_木兰当户织\反汇编_objdump_disassembly.txt:209:   14000134f:	49 89 44 f4 f8
+  	mov    QWORD PTR [r12+rsi*8-0x8],rax
+  玄机刷题\题目资料\批次14_20260929\527_木兰当户织\反汇编_objdump_disassembly.txt:210:   140001354:	48 85 c0
+  	test   rax,rax
+  玄机刷题\题目资料\批次14_20260929\527_木兰当户织\反汇编_objdump_disassembly.txt:211:   140001357:	75 c7
+  	jne    0x140001320
+  玄机刷题\题目资料\批次14_20260929\527_木兰当户织\反汇编_objdump_disassembly.txt:212:   140001359:	b9 08 00 00 00
+  	mov    ecx,0x8
+  玄机刷题\题目资料\批次14_20260929\527_木兰当户织\反汇编_objdump_disassembly.txt:213:   14000135e:	e8 8d 14 00 00
+  	call   0x1400027f0
+  玄机刷题\题目资料\批次14_20260929\527_木兰当户织\反汇编_objdump_disassembly.txt:1337:   140002390:	55
+   	push   rbp
+  玄机刷题\题目资料\批次14_20260929\527_木兰当户织\反汇编_objdump_disassembly.txt:1338:   140002391:	57
+   	push   rdi
+  玄机刷题\题目资料\批次14_20260929\527_木兰当户织\反汇编_objdump_disassembly.txt:1339:   140002392:	56
+   	push   rsi
+  玄机刷题\题目资料\批次14_20260929\527_木兰当户织\反汇编_objdump_disassembly.txt:1340:   140002393:	53
+   	push   rbx
+  玄机刷题\题目资料\批次14_20260929\527_木兰当户织\反汇编_objdump_disassembly.txt:1341:   140002394:	48 83 ec 28
+   	sub    rsp,0x28
+  玄机刷题\题目资料\批次14_20260929\527_木兰当户织\反汇编_objdump_disassembly.txt:1342:   140002398:	48 89 cf
+   	mov    rdi,rcx
+> 玄机刷题\题目资料\批次14_20260929\527_木兰当户织\反汇编_objdump_disassembly.txt:1343:   14000239b:	e8 e0 04 00 00
+   	call   0x140002880
+  玄机刷题\题目资料\批次14_20260929\527_木兰当户织\反汇编_objdump_disassembly.txt:1344:   1400023a0:	48 83 f8 08
+   	cmp    rax,0x8
+  玄机刷题\题目资料\批次14_20260929\527_木兰当户织\反汇编_objdump_disassembly.txt:1345:   1400023a4:	77 0e
+   	ja     0x1400023b4
+  玄机刷题\题目资料\批次14_20260929\527_木兰当户织\反汇编_objdump_disassembly.txt:1346:   1400023a6:	48 8b 05 33 20 00
+00 	mov    rax,QWORD PTR [rip+0x2033]        # 0x1400043e0
+  玄机刷题\题目资料\批次14_20260929\527_木兰当户织\反汇编_objdump_disassembly.txt:1347:   1400023ad:	66 81 38 4d 5a
+   	cmp    WORD PTR [rax],0x5a4d
+  玄机刷题\题目资料\批次14_20260929\527_木兰当户织\反汇编_objdump_disassembly.txt:1348:   1400023b2:	74 14
+   	je     0x1400023c8
+  玄机刷题\题目资料\批次14_20260929\527_木兰当户织\反汇编_objdump_disassembly.txt:1349:   1400023b4:	31 db
+   	xor    ebx,ebx
+  玄机刷题\题目资料\批次14_20260929\527_木兰当户织\反汇编_objdump_disassembly.txt:1350:   1400023b6:	48 89 d8
+   	mov    rax,rbx
+  玄机刷题\题目资料\批次14_20260929\527_木兰当户织\反汇编_objdump_disassembly.txt:1351:   1400023b9:	48 83 c4 28
+   	add    rsp,0x28
+  玄机刷题\题目资料\批次14_20260929\527_木兰当户织\反汇编_objdump_disassembly.txt:1369:   1400023f2:	0f 1f 00
+   	nop    DWORD PTR [rax]
+  玄机刷题\题目资料\批次14_20260929\527_木兰当户织\反汇编_objdump_disassembly.txt:1370:   1400023f5:	66 66 2e 0f 1f 84
+00 	data16 cs nop WORD PTR [rax+rax*1+0x0]
+  玄机刷题\题目资料\批次14_20260929\527_木兰当户织\反汇编_objdump_disassembly.txt:1371:   1400023fc:	00 00 00 00
+  玄机刷题\题目资料\批次14_20260929\527_木兰当户织\反汇编_objdump_disassembly.txt:1372:   140002400:	41 b8 08 00 00 00
+   	mov    r8d,0x8
+  玄机刷题\题目资料\批次14_20260929\527_木兰当户织\反汇编_objdump_disassembly.txt:1373:   140002406:	48 89 fa
+   	mov    rdx,rdi
+  玄机刷题\题目资料\批次14_20260929\527_木兰当户织\反汇编_objdump_disassembly.txt:1374:   140002409:	48 89 d9
+   	mov    rcx,rbx
+> 玄机刷题\题目资料\批次14_20260929\527_木兰当户织\反汇编_objdump_disassembly.txt:1375:   14000240c:	e8 77 04 00 00
+   	call   0x140002888
+  玄机刷题\题目资料\批次14_20260929\527_木兰当户织\反汇编_objdump_disassembly.txt:1376:   140002411:	85 c0
+   	test   eax,eax
+  玄机刷题\题目资料\批次14_20260929\527_木兰当户织\反汇编_objdump_disassembly.txt:1377:   140002413:	74 a1
+   	je     0x1400023b6
+  玄机刷题\题目资料\批次14_20260929\527_木兰当户织\反汇编_objdump_disassembly.txt:1378:   140002415:	0f b7 45 06
+   	movzx  eax,WORD PTR [rbp+0x6]
+  玄机刷题\题目资料\批次14_20260929\527_木兰当户织\反汇编_objdump_disassembly.txt:1379:   140002419:	83 c6 01
+   	add    esi,0x1
+  玄机刷题\题目资料\批次14_20260929\527_木兰当户织\反汇编_objdump_disassembly.txt:1380:   14000241c:	48 83 c3 28
+   	add    rbx,0x28
+  玄机刷题\题目资料\批次14_20260929\527_木兰当户织\反汇编_objdump_disassembly.txt:1381:   140002420:	39 c6
+   	cmp    esi,eax
+  玄机刷题\题目资料\批次14_20260929\527_木兰当户织\反汇编_objdump_disassembly.txt:1382:   140002422:	72 dc
+   	jb     0x140002400
+  玄机刷题\题目资料\批次14_20260929\527_木兰当户织\反汇编_objdump_disassembly.txt:1383:   140002424:	eb 8e
+   	jmp    0x1400023b4
+  玄机刷题\题目资料\批次14_20260929\527_木兰当户织\反汇编_objdump_disassembly.txt:2121:   140002d9a:	66 0f 1f 44 00 00
+   	nop    WORD PTR [rax+rax*1+0x0]
+  玄机刷题\题目资料\批次14_20260929\527_木兰当户织\反汇编_objdump_disassembly.txt:2122:   140002da0:	41 0f be f8
+   	movsx  edi,r8b
+  玄机刷题\题目资料\批次14_20260929\527_木兰当户织\反汇编_objdump_disassembly.txt:2123:   140002da4:	83 c7 04
+   	add    edi,0x4
+  玄机刷题\题目资料\批次14_20260929\527_木兰当户织\反汇编_objdump_disassembly.txt:2124:   140002da7:	e9 84 fd ff ff
+   	jmp    0x140002b30
+  玄机刷题\题目资料\批次14_20260929\527_木兰当户织\反汇编_objdump_disassembly.txt:2125:   140002dac:	0f 1f 40 00
+   	nop    DWORD PTR [rax+0x0]
+  玄机刷题\题目资料\批次14_20260929\527_木兰当户织\反汇编_objdump_disassembly.txt:2126:   140002db0:	48 8d 4c 24 20
+   	lea    rcx,[rsp+0x20]
+> 玄机刷题\题目资料\批次14_20260929\527_木兰当户织\反汇编_objdump_disassembly.txt:2127:   140002db5:	e8 fe fa ff ff
+   	call   0x1400028b8
+  玄机刷题\题目资料\批次14_20260929\527_木兰当户织\反汇编_objdump_disassembly.txt:2128:   140002dba:	31 c0
+   	xor    eax,eax
+  玄机刷题\题目资料\批次14_20260929\527_木兰当户织\反汇编_objdump_disassembly.txt:2129:   140002dbc:	48 83 c4 60
+   	add    rsp,0x60
+  玄机刷题\题目资料\批次14_20260929\527_木兰当户织\反汇编_objdump_disassembly.txt:2130:   140002dc0:	5b
+   	pop    rbx
+  玄机刷题\题目资料\批次14_20260929\527_木兰当户织\反汇编_objdump_disassembly.txt:2131:   140002dc1:	5e
+   	pop    rsi
+  玄机刷题\题目资料\批次14_20260929\527_木兰当户织\反汇编_objdump_disassembly.txt:2132:   140002dc2:	5f
+   	pop    rdi
+  玄机刷题\题目资料\批次14_20260929\527_木兰当户织\反汇编_objdump_disassembly.txt:2133:   140002dc3:	5d
+   	pop    rbp
+  玄机刷题\题目资料\批次14_20260929\527_木兰当户织\反汇编_objdump_disassembly.txt:2134:   140002dc4:	41 5c
+   	pop    r12
+  玄机刷题\题目资料\批次14_20260929\527_木兰当户织\反汇编_objdump_disassembly.txt:2135:   140002dc6:	c3
+   	ret
+**********************
+PowerShell transcript end
+End time: 20260929154441
+**********************
+**********************
+PowerShell transcript start
+Start time: 20260929154614
+Username: DESKTOP-412KTAR\mzj
+RunAs User: DESKTOP-412KTAR\mzj
+Configuration Name: 
+Machine: DESKTOP-412KTAR (Microsoft Windows NT 10.0.26200.0)
+Host Application: C:\Users\mzj\.cache\codex-runtimes\codex-primary-runtime\dependencies\native\powershell\pwsh.dll -Command try { [Console]::OutputEncoding=[System.Text.Encoding]::UTF8 } catch {}
+$ErrorActionPreference = 'Stop'
+$ascii = 'C:\Users\mzj\Desktop\CTF\challenge527.exe'
+$payload = 'ZmxhZ3swODE3NDE1OC1jY2I1LTRkMDMtOTNhYS05ZWYxfQ=='
+$log = 'C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\批次14_20260929\527_木兰当户织\记录_命令与输出.txt'
+Start-Transcript -LiteralPath $log -Append | Out-Null
+Write-Output "COMMAND> [System.Text.Encoding]::ASCII.GetString([Convert]::FromBase64String('$payload'))"
+$flag = [System.Text.Encoding]::ASCII.GetString([Convert]::FromBase64String($payload))
+Write-Output $flag
+Write-Output "COMMAND> [Convert]::ToBase64String([System.Text.Encoding]::ASCII.GetBytes('$flag'))"
+[Convert]::ToBase64String([System.Text.Encoding]::ASCII.GetBytes($flag))
+Write-Output "COMMAND> & '$ascii'"
+& $ascii
+Write-Output "EXITCODE> $LASTEXITCODE"
+Stop-Transcript | Out-Null
+Process ID: 42932
+PSVersion: 7.6.5
+PSEdition: Core
+GitCommitId: 7.6.5
+OS: Microsoft Windows 10.0.26200
+Platform: Win32NT
+PSCompatibleVersions: 1.0, 2.0, 3.0, 4.0, 5.0, 5.1, 6.0, 7.0
+PSRemotingProtocolVersion: 2.4
+SerializationVersion: 1.1.0.1
+WSManStackVersion: 3.0
+**********************
+COMMAND> [System.Text.Encoding]::ASCII.GetString([Convert]::FromBase64String('ZmxhZ3swODE3NDE1OC1jY2I1LTRkMDMtOTNhYS05ZWYxfQ=='))
+flag{08174158-ccb5-4d03-93aa-9ef1}
+COMMAND> [Convert]::ToBase64String([System.Text.Encoding]::ASCII.GetBytes('flag{08174158-ccb5-4d03-93aa-9ef1}'))
+ZmxhZ3swODE3NDE1OC1jY2I1LTRkMDMtOTNhYS05ZWYxfQ==
+COMMAND> & 'C:\Users\mzj\Desktop\CTF\challenge527.exe'
+
+EXITCODE> 0
+**********************
+PowerShell transcript end
+End time: 20260929154614
+**********************
+**********************
+PowerShell transcript start
+Start time: 20260929154705
+Username: DESKTOP-412KTAR\mzj
+RunAs User: DESKTOP-412KTAR\mzj
+Configuration Name: 
+Machine: DESKTOP-412KTAR (Microsoft Windows NT 10.0.26200.0)
+Host Application: C:\Users\mzj\.cache\codex-runtimes\codex-primary-runtime\dependencies\native\powershell\pwsh.dll -Command try { [Console]::OutputEncoding=[System.Text.Encoding]::UTF8 } catch {}
+$ErrorActionPreference = 'Stop'
+$ascii = 'C:\Users\mzj\Desktop\CTF\challenge527.exe'
+$log = 'C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\批次14_20260929\527_木兰当户织\记录_命令与输出.txt'
+Start-Transcript -LiteralPath $log -Append | Out-Null
+Write-Output "COMMAND> strings.exe -t x -a -n 4 '$ascii'"
+& 'C:\msys64\mingw64\bin\strings.exe' -t x -a -n 4 $ascii
+Write-Output "COMMAND> objdump.exe -s -j .rdata '$ascii'"
+& 'C:\msys64\mingw64\bin\objdump.exe' -s -j .rdata $ascii
+Stop-Transcript | Out-Null
+Process ID: 30624
+PSVersion: 7.6.5
+PSEdition: Core
+GitCommitId: 7.6.5
+OS: Microsoft Windows 10.0.26200
+Platform: Win32NT
+PSCompatibleVersions: 1.0, 2.0, 3.0, 4.0, 5.0, 5.1, 6.0, 7.0
+PSRemotingProtocolVersion: 2.4
+SerializationVersion: 1.1.0.1
+WSManStackVersion: 3.0
+**********************
+COMMAND> strings.exe -t x -a -n 4 'C:\Users\mzj\Desktop\CTF\challenge527.exe'
+
+COMMAND> objdump.exe -s -j .rdata 'C:\Users\mzj\Desktop\CTF\challenge527.exe'
+
+**********************
+PowerShell transcript end
+End time: 20260929154705
+**********************
+**********************
+PowerShell transcript start
+Start time: 20260929155035
+Username: DESKTOP-412KTAR\mzj
+RunAs User: DESKTOP-412KTAR\mzj
+Configuration Name: 
+Machine: DESKTOP-412KTAR (Microsoft Windows NT 10.0.26200.0)
+Host Application: C:\Users\mzj\.cache\codex-runtimes\codex-primary-runtime\dependencies\native\powershell\pwsh.dll -Command try { [Console]::OutputEncoding=[System.Text.Encoding]::UTF8 } catch {}
+$task = 'C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\批次14_20260929\527_木兰当户织'
+$log = Join-Path $task '记录_命令与输出.txt'
+$script = Join-Path $task 'solve.py'
+Start-Transcript -LiteralPath $log -Append | Out-Null
+Write-Output "COMMAND> & 'C:\Users\mzj\AppData\Local\Programs\Python\Python312\python.exe' '$script'"
+& 'C:\Users\mzj\AppData\Local\Programs\Python\Python312\python.exe' $script
+Write-Output "PYTHON_EXITCODE> $LASTEXITCODE"
+Write-Output "COMMAND> Get-ChildItem -LiteralPath '$task' -Recurse -File | Select-Object FullName,Length"
+Get-ChildItem -LiteralPath $task -Recurse -File | Select-Object FullName,Length
+Stop-Transcript | Out-Null
+Process ID: 25020
+PSVersion: 7.6.5
+PSEdition: Core
+GitCommitId: 7.6.5
+OS: Microsoft Windows 10.0.26200
+Platform: Win32NT
+PSCompatibleVersions: 1.0, 2.0, 3.0, 4.0, 5.0, 5.1, 6.0, 7.0
+PSRemotingProtocolVersion: 2.4
+SerializationVersion: 1.1.0.1
+WSManStackVersion: 3.0
+**********************
+COMMAND> & 'C:\Users\mzj\AppData\Local\Programs\Python\Python312\python.exe' 'C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\批次14_20260929\527_木兰当户织\solve.py'
+
+PYTHON_EXITCODE> 0
+COMMAND> Get-ChildItem -LiteralPath 'C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\批次14_20260929\527_木兰当户织' -Recurse -File | Select-Object FullName,Length
+
+**********************
+PowerShell transcript end
+End time: 20260929155035
+**********************
+**********************
+PowerShell transcript start
+Start time: 20260929155125
+Username: DESKTOP-412KTAR\mzj
+RunAs User: DESKTOP-412KTAR\mzj
+Configuration Name: 
+Machine: DESKTOP-412KTAR (Microsoft Windows NT 10.0.26200.0)
+Host Application: C:\Users\mzj\.cache\codex-runtimes\codex-primary-runtime\dependencies\native\powershell\pwsh.dll -Command try { [Console]::OutputEncoding=[System.Text.Encoding]::UTF8 } catch {}
+$task = 'C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\批次14_20260929\527_木兰当户织'
+$log = Join-Path $task '记录_命令与输出.txt'
+$script = Join-Path $task 'solve.py'
+$download = 'D:\Downloads\唧唧复唧唧，木兰当户织.zip'
+$copy = Join-Path $task '唧唧复唧唧，木兰当户织.zip'
+Start-Transcript -LiteralPath $log -Append | Out-Null
+Write-Output "COMMAND> & 'C:\Users\mzj\AppData\Local\Programs\Python\Python312\python.exe' '$script'"
+& 'C:\Users\mzj\AppData\Local\Programs\Python\Python312\python.exe' $script
+Write-Output "PYTHON_EXITCODE> $LASTEXITCODE"
+Write-Output "COMMAND> Get-FileHash -LiteralPath '$download','$copy' -Algorithm SHA256 | Format-Table Algorithm,Hash,Path -AutoSize"
+Get-FileHash -LiteralPath $download,$copy -Algorithm SHA256 | Format-Table Algorithm,Hash,Path -AutoSize
+Stop-Transcript | Out-Null
+Process ID: 6136
+PSVersion: 7.6.5
+PSEdition: Core
+GitCommitId: 7.6.5
+OS: Microsoft Windows 10.0.26200
+Platform: Win32NT
+PSCompatibleVersions: 1.0, 2.0, 3.0, 4.0, 5.0, 5.1, 6.0, 7.0
+PSRemotingProtocolVersion: 2.4
+SerializationVersion: 1.1.0.1
+WSManStackVersion: 3.0
+**********************
+COMMAND> & 'C:\Users\mzj\AppData\Local\Programs\Python\Python312\python.exe' 'C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\批次14_20260929\527_木兰当户织\solve.py'
+
+PYTHON_EXITCODE> 0
+COMMAND> Get-FileHash -LiteralPath 'D:\Downloads\唧唧复唧唧，木兰当户织.zip','C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\批次14_20260929\527_木兰当户织\唧唧复唧唧，木兰当户织.zip' -Algorithm SHA256 | Format-Table Algorithm,Hash,Path -AutoSize
+
+Algorithm Hash                                                             Path
+--------- ----                                                             ----
+SHA256    8E267FD489F7AF515B59C738ADC4940537BBE9D5732E507AA939FD3E9B33E60E D:\Downloads\唧唧复唧唧，木兰当户织.zip
+SHA256    8E267FD489F7AF515B59C738ADC4940537BBE9D5732E507AA939FD3E9B33E60E C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\…
+
+**********************
+PowerShell transcript end
+End time: 20260929155126
+**********************
+**********************
+PowerShell transcript start
+Start time: 20260929160530
+Username: DESKTOP-412KTAR\mzj
+RunAs User: DESKTOP-412KTAR\mzj
+Configuration Name: 
+Machine: DESKTOP-412KTAR (Microsoft Windows NT 10.0.26200.0)
+Host Application: C:\Users\mzj\.cache\codex-runtimes\codex-primary-runtime\dependencies\native\powershell\pwsh.dll -Command try { [Console]::OutputEncoding=[System.Text.Encoding]::UTF8 } catch {}
+$project = 'C:\Users\mzj\Desktop\CTF\玄机刷题'
+$task = Join-Path $project '题目资料\批次14_20260929\527_木兰当户织'
+$log = Join-Path $task '记录_命令与输出.txt'
+$readme = Join-Path $project 'README.md'
+$guide = Join-Path $project '指南\玄机刷题指南_合并源.md'
+Start-Transcript -LiteralPath $log -Append | Out-Null
+Write-Output "COMMAND> Get-Item -LiteralPath '$readme','$guide' | Select-Object FullName,Length,LastWriteTime"
+Get-Item -LiteralPath $readme,$guide | Select-Object FullName,Length,LastWriteTime
+Write-Output "COMMAND> Get-Content -LiteralPath '$readme'"
+Get-Content -LiteralPath $readme
+Write-Output "COMMAND> Get-Content -LiteralPath '$guide' -TotalCount 160"
+Get-Content -LiteralPath $guide -TotalCount 160
+Write-Output "COMMAND> Select-String -LiteralPath '$guide' -Pattern '527|唧唧复唧唧|48题|47题|批次13|已完成总数' -Context 1,1"
+Select-String -LiteralPath $guide -Pattern '527|唧唧复唧唧|48题|47题|批次13|已完成总数' -Context 1,1
+Stop-Transcript | Out-Null
+Process ID: 8616
+PSVersion: 7.6.5
+PSEdition: Core
+GitCommitId: 7.6.5
+OS: Microsoft Windows 10.0.26200
+Platform: Win32NT
+PSCompatibleVersions: 1.0, 2.0, 3.0, 4.0, 5.0, 5.1, 6.0, 7.0
+PSRemotingProtocolVersion: 2.4
+SerializationVersion: 1.1.0.1
+WSManStackVersion: 3.0
+**********************
+COMMAND> Get-Item -LiteralPath 'C:\Users\mzj\Desktop\CTF\玄机刷题\README.md','C:\Users\mzj\Desktop\CTF\玄机刷题\指南\玄机刷题指南_合并源.md' | Select-Object FullName,Length,LastWriteTime
+
+**********************
+PowerShell transcript end
+End time: 20260929160530
+**********************
+**********************
+PowerShell transcript start
+Start time: 20260929160626
+Username: DESKTOP-412KTAR\mzj
+RunAs User: DESKTOP-412KTAR\mzj
+Configuration Name: 
+Machine: DESKTOP-412KTAR (Microsoft Windows NT 10.0.26200.0)
+Host Application: C:\Users\mzj\.cache\codex-runtimes\codex-primary-runtime\dependencies\native\powershell\pwsh.dll -Command try { [Console]::OutputEncoding=[System.Text.Encoding]::UTF8 } catch {}
+$project = 'C:\Users\mzj\Desktop\CTF\玄机刷题'
+$task = Join-Path $project '题目资料\批次14_20260929\527_木兰当户织'
+$log = Join-Path $task '记录_命令与输出.txt'
+$guide = Join-Path $project '指南\玄机刷题指南_合并源.md'
+Start-Transcript -LiteralPath $log -Append | Out-Null
+Write-Output "COMMAND> (Get-Content -LiteralPath '$guide' -Encoding UTF8 | Select-String -Pattern '^#' | ForEach-Object { $_.Line }) | Select-Object -Last 50"
+(Get-Content -LiteralPath $guide -Encoding UTF8 | Select-String -Pattern '^#' | ForEach-Object { $_.Line }) | Select-Object -Last 50
+Write-Output "COMMAND> Get-Content -LiteralPath '$guide' -Encoding UTF8 | Select-Object -Last 120"
+Get-Content -LiteralPath $guide -Encoding UTF8 | Select-Object -Last 120
+Stop-Transcript | Out-Null
+Process ID: 8732
+PSVersion: 7.6.5
+PSEdition: Core
+GitCommitId: 7.6.5
+OS: Microsoft Windows 10.0.26200
+Platform: Win32NT
+PSCompatibleVersions: 1.0, 2.0, 3.0, 4.0, 5.0, 5.1, 6.0, 7.0
+PSRemotingProtocolVersion: 2.4
+SerializationVersion: 1.1.0.1
+WSManStackVersion: 3.0
+**********************
+COMMAND> (Get-Content -LiteralPath 'C:\Users\mzj\Desktop\CTF\玄机刷题\指南\玄机刷题指南_合并源.md' -Encoding UTF8 | Select-String -Pattern '^#' | ForEach-Object { .Line }) | Select-Object -Last 50
+### 题目目标与证据
+### 从附件恢复地图规则
+### 在状态空间上求最短路
+### 最终路线与复放
+### 复现资料
+## 30. 第二届 CCF 智能汽车大赛 Digital Key UWB（ID 520，Crypto / 中等）
+### 题目目标和附件
+### 验证消息摘要并确认 nonce 重用
+### 用 ECDSA 方程恢复 nonce 和私钥
+### 从恢复私钥解密 SM4 载荷
+### 命令、脚本和外部线索
+## 31. 2026CCF 被入侵的数据库（ID 451，应急响应 / 中等）
+### 题目与附件
+### 从普通扫描中找出数据枚举链
+### 命令与输出记录
+## 32. 2026CCF SQL 注入的应急排查（ID 450，应急响应 / 中等）
+### 题目与附件
+### 筛选唯一带外访问线索
+### 命令记录与附件
+## 33. 第三届“长城杯”初赛 EzFlag（ID 367，Crypto / 中等）
+### 样本与初步识别
+### 反汇编并还原字符生成规则
+### 附件、复算源码和日志
+# 第六至第八批：平台已验证题目
+## #588 2026安网杯-密钥生成审计
+## #559 第一届 OpenHarmony arkt
+## #531 你若安好便是晴
+## #530 慕然回首，那人却在灯火阑珊处
+## #558 第三届黄河流域公安院校网络安全技能挑战赛 R
+## #549 第二届 Parloo 杯 ParlooChecker
+## 第九批：PaluFlat、PaluGOGOGO 与 PaluArray
+### #547 第二届 Parloo 杯 RE PaluFlat
+### #548 第二届 Parloo 杯 PaluGOGOGO
+### #546 第二届 Parloo 杯 PaluArray（仍未解决）
+### 本批仍待解决
+#532《人生自古谁无死》的两个已提交候选均无平台完成回执，需新的独立证据后再决定；#546《PaluArray》的静态候选被平台明确拒绝，需解释二进制推导与平台 flag 不一致的原因；#561《第一届OpenHarmony secret》的 pattern 闭环已复核，但题内 MD5 示例与明文公式不符，现有候选也未获平台确认；#562 checker 的 ZIP 与 checker.exe 副本哈希一致，静态复核仍得到已被拒绝的同一候选；#541《ezBase》本批静态逆向候选被前台平台拒绝，且附件比较常量存在填充分支歧义，暂不盲目重交。这五题都不计入已完成总数。
+## 第十批：平台已验证题目
+### #552 Butterfly（平台已接受）
+## 第十一批：湘岚杯静态逆向题
+### #539 湘岚杯 cryptor（平台已接受）
+### #540 湘岚杯 maybesignin（平台已接受）
+### 第十一批其他记录
+#541 ezBase 的本地候选仅是分析分支，平台明确拒绝；不把它作为答案。候选输入、拒绝回执、解包修正、分支检查和逐命令记录见 题目资料/批次11_20260929/541_ezBase/ 与 记录/提交核验_20260929_第十一批.md。
+## 第十二批：商丘师范学院第四届网络安全及信息对抗大赛 REVERSE
+### #535 往事暗沉不可追（平台已接受）
+### #536 遇事不决，可问春风（平台已接受）
+## 第十三批：湘岚杯 REVERSE
+### #537 湘岚杯ezbase（平台已接受）
+### 本批未计入完成数
+# 终端记录与复现文件
+COMMAND> Get-Content -LiteralPath 'C:\Users\mzj\Desktop\CTF\玄机刷题\指南\玄机刷题指南_合并源.md' -Encoding UTF8 | Select-Object -Last 120
+
+- 平台 ID：548；REVERSE；免费、中等。玄机前台提交 `flag{bg92Oejpfgl}` 后显示“FLAG 正确~，恭喜你完成此挑战~”，题目“已完成”、步骤 1/1。
+- `GetValue` 使用 Go `math/rand` 的 `Seed(996)`，10 次 `Intn(100)` 改写输入数组，再取 `Intn(2)` 选择 key。静态复现得 key=79。程序逐字符生成十六进制 token：`ord(ch)+79+(i mod 5)`，并以逗号连接；附件中 84 字节目标共 17 项。逐项逆算得到候选，再正向生成完整 84 字节串，与附件常量完全一致。
+- 附件没有运行；Go PRNG 状态、函数反汇编、目标数据映射与复现脚本见 `题目资料/PaluGOGOGO_548/analysis/`，完整 WP 见同目录 `wp.md`。
+
+### #546 第二届 Parloo 杯 PaluArray（仍未解决）
+
+- 平台 ID：546；REVERSE；免费、中等。独立静态分析确认实际字符表为 `Palu_996!?`（起始 RVA `0x5e68`），目标索引串为 `1145141919810`；可逆得输入 `aa_9a_a?a?!aP`，MD5 为 `1b501325fc96d5a845cbdd2ba4f01cd7`。
+- 按静态显示包装，候选 `palu{1b501325fc96d5a845cbdd2ba4f01cd7}` 已在玄机前台提交，但页面返回“FLAG 不正确”。因此这项本地计算不能算答案，未重复盲交；平台配置或 flag 格式仍待有证据地排查。旧字符表候选也曾被拒绝。完整审计和失败修正见 `题目资料/PaluArray_546/wp.md` 与 `analysis` 子目录；前台回执见 `记录/提交核验_20260929_第九批.md`。
+
+### 本批仍待解决
+
+#532《人生自古谁无死》的两个已提交候选均无平台完成回执，需新的独立证据后再决定；#546《PaluArray》的静态候选被平台明确拒绝，需解释二进制推导与平台 flag 不一致的原因；#561《第一届OpenHarmony secret》的 pattern 闭环已复核，但题内 MD5 示例与明文公式不符，现有候选也未获平台确认；#562 checker 的 ZIP 与 checker.exe 副本哈希一致，静态复核仍得到已被拒绝的同一候选；#541《ezBase》本批静态逆向候选被前台平台拒绝，且附件比较常量存在填充分支歧义，暂不盲目重交。这五题都不计入已完成总数。
+
+## 第十批：平台已验证题目
+
+本批从平台“全部”列表中筛选并分析了三道免费、中等 REVERSE 题。本指南只把取得平台接受回执的题目纳入已完成题解；本批其余候选和平台状态保存在单独的题目资料与提交记录中，待解决后再加入。
+
+### #552 Butterfly（平台已接受）
+
+ELF 为静态链接 x86-64。反汇编还原每个 8 字节块的加密流程：按字节 XOR `MMXEncod`，每个 16 位字交换高低字节，把小端 64 位值循环左移一位，最后逐字节加 key 并模 256。逆变换完整恢复 32 字节主体；`encode.dat` 尾部四字节没有经过块变换，其中 `i}` 属于 flag，末尾 LF 是文件换行。候选为 `flag{66eec38e269e0e267849a1f7b708i}`。重新正向处理后 36 字节与附件完全一致，平台显示“已完成”、步骤 `1/1`。注意候选本体不包含换行。完整逐步 WP、反汇编、块级 trace 与终端记录在 `题目资料/批次10_20260929/552_butterfly/`。
+
+## 第十一批：湘岚杯静态逆向题
+
+本批在玄机平台“全部”题目列表中核对免费、中等 REVERSE 项。#539「湘岚杯cryptor」和 #540「湘岚杯maybesignin」取得前台正确回执；#541「ezBase」的候选被拒绝，因此未放入已完成表。
+
+### #539 湘岚杯 cryptor（平台已接受）
+
+- 平台 ID：539；REVERSE；免费、中等。候选 flag{AtYpXBh38fNvc1ymsQ7vL} 在玄机前台提交后显示正确、步骤 1/1 和一血。
+- main.py 只接收输入并调用 cryptor.check；判定逻辑位于 CPython 3.10 x64 的 Cython .pyd。静态字符串与数据区提供 AES 模式、零填充提示、Base64 密文、16 字节 key EzCrypt0ofPython 和 16 字节 IV 1145140A01919810。IV 按 16 个 ASCII 字符处理。
+- Base64 解码得到 32 字节密文。按 AES-128-CBC、关闭标准填充解密，明文为 flag 后接 5 个 NUL 字节；去掉 NUL 后得到候选。Python cryptography 与 OpenSSL 两套独立实现的明文十六进制相同；扩展未加载或运行。
+- 首轮尝试 ECB / PKCS#7 未得到有效明文；缺少 PyCryptodome、PowerShell/.NET API 差异和中文路径工具调用问题均保留在命令记录中。完整常量定位、错误分支、命令输出和复现代码见 题目资料/批次11_20260929/539_cryptor/wp.md 及其 analysis 子目录。
+
+### #540 湘岚杯 maybesignin（平台已接受）
+
+- 平台 ID：540；REVERSE；免费、中等。候选 flag{wlascJDAFS} 前台提交后显示正确、步骤 1/1。
+- 附件是 12,800 字节 PE32+ x86-64。静态识别比较目标块 1C84BE5145CE1AF31FA3F75E3A38D0BE，并从 S-box、FK、CK 和轮函数常量确认校验算法为标准 SM4 单块变换。
+- 关键字节序检查：四个 mov dword 立即数按小端存储组成 16 字节 key 01 02 03 04 05 06 07 08 09 10 11 12 13 14 15 16（十六进制字节）。逆序轮密钥解密得到 flag{wlascJDAFS}；本地 Python 正向加密回目标块，且 OpenSSL SM4-ECB 独立解密得到相同明文。附件 EXE 未运行。
+- 首次将 key 误读成更长的十六进制序列，虽然自洽重加密仍不对；回到小端立即数还原后才得到正确 16 字节 key。详细反汇编、常量表、错误假设、复算命令和输出见 题目资料/批次11_20260929/540_maybesignin/wp.md 与 analysis。
+
+### 第十一批其他记录
+
+#541 ezBase 的本地候选仅是分析分支，平台明确拒绝；不把它作为答案。候选输入、拒绝回执、解包修正、分支检查和逐命令记录见 题目资料/批次11_20260929/541_ezBase/ 与 记录/提交核验_20260929_第十一批.md。
+
+## 第十二批：商丘师范学院第四届网络安全及信息对抗大赛 REVERSE
+
+本批从平台“全部”题目列表中选取三道免费、中等 REVERSE 题。主指南只收录已取得平台接受回执的解题；#535、#536 已通过平台验证，#534 仍未解决，留在独立资料与核验记录中，不计入完成数。
+
+### #535 往事暗沉不可追（平台已接受）
+
+- 平台 ID：535；REVERSE；免费、中等。题面说明“解密后的数据就是 flag，用逗号隔开”。平台实际接受的文本为 `flag{7549ecca-f}`，步骤 1/1，页面记录一血。
+- 附件是 PyInstaller one-file x64 PE。静态解析 CArchive，恢复 Python 3.10 冻结主模块；未运行陌生 EXE、DLL、PYD 或其中代码。由于本机 marshal 版本为 Python 3.12，使用仅解析结构的 Python 3.10 marshal 读取器恢复代码对象和常量。
+- 密文数组为 `153,147,158,152,132,200,202,203,198,154,156,156,158,210,153,130`；两条嵌入 XOR 常数分别为 0x55、0xAA，异或合成 0xFF。逐字节计算 `cipher[i] XOR 0x55 XOR 0xAA` 得到 `102,108,97,103,123,55,53,52,57,101,99,99,97,45,102,125`，ASCII 解释为上面的 flag 文本。再次 XOR 0xFF 能逐字节还原原密文。
+- 需如实保留实现缺陷：VM 的六条真实指令只读取密文第一个字节，写入两个内存位置，没有遍历 16 字节，也没有打印完整明文。完整 flag 是基于题面数据和嵌入 XOR 链逐字节推导出来；平台接受回执确认候选正确，但不能称 VM 本地实际执行产出了完整 flag。
+- 前台 Computer Use 提交后，玄机显示“FLAG 正确~，恭喜你完成此挑战~”、步骤 1/1、进度 100% 和一血。
+- 中文逐步 WP、附件、CArchive/字节码提取物、求解器与完整命令/输出记录：`题目资料/批次12_20260929/535_往事暗沉不可追/`；本批三题选择和平台核验记录：`记录/批次_20260929_第十二批题目确认.md`、`记录/提交核验_20260929_第十二批.md`。
+### #536 遇事不决，可问春风（平台已接受）
+
+- 平台 ID：536；REVERSE；免费、中等。修正候选 `flag{f8f06f2b-60ee-43ca-8e3a-1048042edddd}` 前台提交后被接受，详情页标记“已完成”、步骤 1/1，并显示一血。
+- APK 静态解析定位应用自有类 `com.example.wakurev.MainActivity` 于 `classes3.dex`。原始指令 code unit `06df 4205` 中 opcode `0xdf` 对应 Dalvik `xor-int/lit8`，不是初版解析器误标的 OR。第三个 code unit 提供立即数 `0x42`；`decryptPassword()` 对密文逐字符 XOR 0x42。
+- 密文为 `$z$rt$p otr''ovq!#oz'q#osrvzrvp'&&&&`。逐字符执行 `ord(ch) XOR 0x42` 得到 `f8f06f2b-60ee-43ca-8e3a-1048042edddd`。校验方法将输入字符串与 `decryptPassword()` 结果比较；成功分支 `buildFlag()` 明确拼接 `flag{`、用户输入和 `}`，因此得到上面的完整 flag。
+- 首次静态解读把 `0xdf` 错读成 OR，形成的候选被平台拒绝。复查 opcode 表和原始 DEX code unit 后修正译码、脚本及 WP；修正候选得到平台接受。把这次错误与更正保留在逐题材料中，避免将错误推导写成正确流程。
+- APK 未安装、未运行。附件哈希、DEX 结构、反汇编、逐字符结果、错误分支、前台提交回执和完整命令输出：`题目资料/批次12_20260929/536_遇事不决可问春风/`；三题确认和平台验收：`记录/批次_20260929_第十二批题目确认.md`、`记录/提交核验_20260929_第十二批.md`。
+## 第十三批：湘岚杯 REVERSE
+
+本批从玄机“全部”列表确认三道免费、中等 REVERSE 题：#533「圣人当仁不让」、#537「湘岚杯ezbase」、#538「湘岚杯1997」。本批只有 #537 获平台接受；#533 仍未解决，#538 因程序输入约束矛盾而没有可提交 flag。后二题均不计入平台已完成数。
+
+### #537 湘岚杯ezbase（平台已接受）
+
+- 平台 ID：537；REVERSE；免费、中等。提交 `flag{2qOrxQfRmDEdSkGt2mFoyilZQFU4BQDxBsuc}` 后，玄机前台显示 `FLAG 正确`、`已完成 1/1`，并显示一血。平台已接受总数从 46 增至 47。
+- 附件 `ezbase.zip` 的 SHA-256 为 `24E646D8337FE6284DDAACEFB05D3ACEAFA01EAE746CF1CBB872046F3A9EBECB`；ZIP 中的 PE32/i386 `ezbase.exe` 为 40,719 字节，SHA-256 为 `AEE861E105AFD0DDA6DDBACD27865FAFDC91E2FA225105920DB88DB38A30CAA0`。静态字符串、PE 头和反汇编指出它由 UPX 打包，节名被改为 `PXU0/PXU1/UXP2`；原件不变，仅在分析副本恢复节名为 `UPX0/UPX1/UPX2` 后通过 `upx -t` 并静态解包。全程没有运行陌生 EXE。
+- 在解包后 `_main` (`0x4015d7`) 看到格式串 `%42s` 和长度 `42` 检查；输入的每个字节随后 XOR `0x10`。编码函数位于 `0x401410`，使用 64 字节自定义 Base64 字母表 `Fvm/RkQucZNVyYABpS2w6enjdtGPO8UalxrbD45Ci07MT9KLEJo1h3zHgfX+WqsI`，不能用标准 Base64 字母表替代。
+- 程序将编码结果下标 `12` 与 `18` 交换，再与栈上 14 条小端序 DWORD 立即数拼出的 56 字节目标比较：
+
+  ```text
+  8CJJ8zTrdeqr3RkzpCG6ejS/U38DcC3naz4faR0veD6D6Dk6GkZbtjY9
+  ```
+
+- 逆向步骤：先对目标串撤销下标 12/18 交换，得到 `8CJJ8zTrdeqrGRkzpC36ejS/U38DcC3naz4faR0veD6D6Dk6GkZbtjY9`；按自定义字母表解码得到 42 字节 `767c71776b22615f62684176427d545574437b5764227d567f69797c4a4156452452415468526365736d`；逐字节 XOR `0x10` 后得到 ASCII `flag{2qOrxQfRmDEdSkGt2mFoyilZQFU4BQDxBsuc}`。
+- 正向闭环：把候选逐字节 XOR `0x10`，按同一自定义表重新 Base64 编码并交换下标 12/18，结果逐字节等于上面的 56 字节比较目标。复现脚本输出 `forward_reencode_match=True`；平台随后接受同一 flag 并显示一血。
+- 完整中文步骤、失败假设修正、附件与分析产物见 `题目资料/批次13_20260929/537_湘岚杯ezbase/wp.md` 和其 `analysis/`；选题及附件来源见 `记录/批次_20260929_第十三批题目确认.md`、`记录/批次13_附件归档_20260929.txt`；前台核验摘要见 `记录/提交核验_20260929_第十三批.md`。逐条 PowerShell 命令与输出见 `记录/批次13_提交核验_20260929.txt`。
+
+### 本批未计入完成数
+
+- **#533 圣人当仁不让：** 仍未解决，当前没有平台接受回执，不计入已完成题数。
+- **#538 湘岚杯1997：** 独立静态逆变换的 32 字节前像虽可正向重加密匹配目标，但第 28 字节为 `0x20` 空格。输入由 `scanf("%s")` 读取，空格会提前结束输入，故程序随后要求的长度 32 条件不可达；没有可提交 flag，本批未提交，不计入已完成题数。
+# 终端记录与复现文件
+
+指南正文逐题保留解题推理、关键命令、关键输出、错误分支和平台状态；补充命令记录与复核材料按题目保存在 `记录/` 和 `题目资料/`：
+
+- Pixel 本地补查：`记录/代理-Pixel-终端记录.txt`
+- 项目清理过程：`记录/项目清理终端记录.txt`
+- 本轮附件普查、六题脚本复跑与 Webmin HTTP 命令/响应：`记录/WP补全-资料普查记录.txt`
+- note、ezRe、XXTEA 等候选复算命令与输出：`记录/代理-WP补全-子代理B.txt`
+- 本轮找回的历史题 WP 草稿副本：`记录/子代理B_WP草稿.md`
+- Ancient-Recall PWN 原题附件、求解器和阶段脚本：WSL `\\wsl.localhost\Ubuntu-24.04\home\mzj\pwn-lab\platform`
+- 本批 #367、#450、#451 的终端记录：记录/新题批次_367_分析.txt、记录/新题批次_450_附件分析.txt、记录/新题批次_451_附件分析.txt。
+- 本批 #520 的主分析与平台回执：记录/DigitalKey_UWB_520-分析.txt；代理复核：记录/代理-520-附件普查及公式验证.txt。
+- 本批 #551 的完整静态分析、路径复放及平台回执：记录/PaluMaze_551-fresh-static.txt、记录/PaluMaze_551-终端记录.txt；最终路线脚本和输出在题目资料/PaluMaze_551/。
+- 第六批 #530/#531/#532 FLAG 提交核验：记录/提交核验_20260929_第六批.md；PowerShell transcript：记录/提交记录_20260929_第六批.txt。
+- 第七批 #559/#588 平台验收与项目更新过程：记录/批次_20260929_第七批平台核对.md、记录/批次_20260929_第七批协调.txt。
+- 第八批 #549/#558 前台平台接受回执与 #562 待复核记录：记录/提交核验_20260929_第八批.md。
+- 第八批文档校对与统计检查的 PowerShell 命令输出：记录/第八批_后续校对_20260929.txt；#562 独立拒绝原因静态复核：题目资料/checker_562/analysis/checker_rejection_audit_20260929.md。
+- 第九批 #547/#548 接受、#546 拒绝的前台逐步记录：记录/提交核验_20260929_第九批.md；题目选择与附件哈希：记录/批次_20260929_第九批题目确认.md；各题完整 WP 和静态分析均在题目资料/PaluFlat_547、PaluGOGOGO_548、PaluArray_546。
+- 第十批前台提交核验及附件确认：记录/提交核验_20260929_第十批.md、记录/批次_20260929_第十批题目确认.md、记录/第十批_附件归档_20260929.txt；本批已验证题目 #552 的完整 WP 在题目资料/批次10_20260929/552_butterfly/。
+- 第十一批 #539/#540 平台接受、#541 被拒绝的前台核验及附件确认：记录/批次_20260929_第十一批题目确认.md、记录/提交核验_20260929_第十一批.md；附件哈希、逐题 WP、静态分析产物与终端记录见 题目资料/批次11_20260929/。
+- 第十三批 #537 平台接受（1/1、一血），#533 未解决，#538 因 `%s` 输入空格截断导致长度检查不可达而未提交：前台核验报告 `记录/提交核验_20260929_第十三批.md`；选题与附件记录见 `记录/批次_20260929_第十三批题目确认.md`、`记录/批次13_附件归档_20260929.txt`，逐 PowerShell 命令/输出 transcript 为 `记录/批次13_提交核验_20260929.txt`；#537 完整 WP 和求解脚本见 `题目资料/批次13_20260929/537_湘岚杯ezbase/`。
+- 各题逐题记录：`记录/*-解题记录.md`、`记录/*-分析过程记录.md`
+- 各题附件、脚本和分析产物：`题目资料/<题目>/`
+
+记录中的玄机账户名和密码均以占位符脱敏；其余解题命令与输出保留。浏览器页面通过 Computer Use 前台操作；对留有回执的题目，以题目页确认文字与步骤进度为准。只有明确存在的截图才给出本地路径，没有保存到文件的会话截图不声称为本地图片。
+
+
+
+
+
+
+
+
+
+**********************
+PowerShell transcript end
+End time: 20260929160626
+**********************
+**********************
+PowerShell transcript start
+Start time: 20260929160725
+Username: DESKTOP-412KTAR\mzj
+RunAs User: DESKTOP-412KTAR\mzj
+Configuration Name: 
+Machine: DESKTOP-412KTAR (Microsoft Windows NT 10.0.26200.0)
+Host Application: C:\Users\mzj\.cache\codex-runtimes\codex-primary-runtime\dependencies\native\powershell\pwsh.dll -Command try { [Console]::OutputEncoding=[System.Text.Encoding]::UTF8 } catch {}
+$project = 'C:\Users\mzj\Desktop\CTF\玄机刷题'
+$task = Join-Path $project '题目资料\批次14_20260929\527_木兰当户织'
+$guide = Join-Path $project '指南\玄机刷题指南_合并源.md'
+$readme = Join-Path $project 'README.md'
+$log = Join-Path $task '记录_命令与输出.txt'
+Start-Transcript -LiteralPath $log -Append | Out-Null
+Write-Output "COMMAND> Select-String -LiteralPath '$guide','$readme' -Pattern '47' | ForEach-Object { \"$($_.Path):$($_.LineNumber):$($_.Line)\" }"
+Select-String -LiteralPath $guide,$readme -Pattern '47' | ForEach-Object { "$($_.Path):$($_.LineNumber):$($_.Line)" }
+Write-Output "COMMAND> Select-String -LiteralPath '$guide','$readme' -Pattern '527|唧唧复唧唧|批次14|第十四批' | ForEach-Object { \"$($_.Path):$($_.LineNumber):$($_.Line)\" }"
+Select-String -LiteralPath $guide,$readme -Pattern '527|唧唧复唧唧|批次14|第十四批' | ForEach-Object { "$($_.Path):$($_.LineNumber):$($_.Line)" }
+Stop-Transcript | Out-Null
+Process ID: 37900
+PSVersion: 7.6.5
+PSEdition: Core
+GitCommitId: 7.6.5
+OS: Microsoft Windows 10.0.26200
+Platform: Win32NT
+PSCompatibleVersions: 1.0, 2.0, 3.0, 4.0, 5.0, 5.1, 6.0, 7.0
+PSRemotingProtocolVersion: 2.4
+SerializationVersion: 1.1.0.1
+WSManStackVersion: 3.0
+**********************
+COMMAND> Select-String -LiteralPath 'C:\Users\mzj\Desktop\CTF\玄机刷题\指南\玄机刷题指南_合并源.md','C:\Users\mzj\Desktop\CTF\玄机刷题\README.md' -Pattern '47' | ForEach-Object { \
+::\ }
+C:\Users\mzj\Desktop\CTF\玄机刷题\指南\玄机刷题指南_合并源.md:15:本指南原记录了玄机平台“已完成”筛选中的 28 道题。此后 #367、#450、#451、#520、#551、#530、#531、#559、#588、#549、#558、#547、#548、#552、#539、#540、#535、#536、#537 共 19 道新题均取得平台接受回执，手册现收录 47 道已完成题。解题状态、flag 与过程分别以平台回执、附件分析和命令输出为证；不把完成徽标扩写成没有证据的步骤细节。
+C:\Users\mzj\Desktop\CTF\玄机刷题\指南\玄机刷题指南_合并源.md:23:## 平台已完成（47 道）
+C:\Users\mzj\Desktop\CTF\玄机刷题\指南\玄机刷题指南_合并源.md:57:| 547 | 第二届 Parloo 杯 RE PaluFlat | REVERSE / 中等 | 平台已接受；变换状态机逆算及目标闭环齐全；附件 NUL/strlen 矛盾另有说明 |
+C:\Users\mzj\Desktop\CTF\玄机刷题\指南\玄机刷题指南_合并源.md:79:**统计：本指南原收录 28 道，后续新增的 #367、#450、#451、#520、#551、#530、#531、#559、#588、#549、#558、#547、#548、#552、#539、#540、#535、#536、#537 共 19 道均有逐题平台接受回执，当前共 47 道。现有证据可给出 45 道已完成题的 flag 候选或公开 Writeup 结果；Ancient-Recall 与 pwn-ezpwn 的最终 flag 输出仍缺失。#532、#533、#534、#538、#541、#546、#561、#562 均未获平台接受，不计入已完成总数；其中 #538 的程序输入约束矛盾使校验长度条件不可达。旧题若只有平台完成徽标或离线候选，仍与具体 flag 的提交回执分开标注。**
+C:\Users\mzj\Desktop\CTF\玄机刷题\指南\玄机刷题指南_合并源.md:227:3. 对比两个 ZIP 的 SHA-256：均为 `402954C3AFE63A36482472141CEE24BDCE40C935F58AEE6F2986131C9523D23E`，所以内容相同。
+C:\Users\mzj\Desktop\CTF\玄机刷题\指南\玄机刷题指南_合并源.md:229:5. 将 PCAP 解压到 `C:\Users\mzj\Desktop\CTF\Veiled Shell-附件\incident_traffic.pcap`。解压后的 SHA-256 为 `BEB0179DB35C9BCAF71F4F08DB4FF8F6F740B6F5D182C0A55834F475061FECCF`。
+C:\Users\mzj\Desktop\CTF\玄机刷题\指南\玄机刷题指南_合并源.md:258:读取 PCAP 头后确认：经典 PCAP 2.4、小端序、Ethernet 链路类型、snaplen 65,535。逐条解析记录得到 **147 个包，全部为 TCP**。所有有效会话集中在 `172.28.0.20` 与 `172.28.0.10:80` 之间，HTTP Host 为 `www.corp.internal`，未看到 TLS。
+C:\Users\mzj\Desktop\CTF\玄机刷题\指南\玄机刷题指南_合并源.md:393:5. 解压至 `C:\Users\mzj\Desktop\CTF\即随本心-附件\即随本心.exe`。EXE 的 SHA-256 为 `2E4C213156658B8CC2047F93CA555F1121E0A75BAC19C8B5FD04A9DF6985C27D`。文件没有数字签名。
+C:\Users\mzj\Desktop\CTF\玄机刷题\指南\玄机刷题指南_合并源.md:434:TOC 中主脚本条目名为 `aes题目加强反调试`，类型为 `s`，压缩长度 1,039 字节，解压长度 1,472 字节。它是 zlib 压缩的 Python marshal code object。用 `marshal.loads` 读取代码对象并用 `dis.dis` 反汇编，只解析字节码，没有执行它。
+C:\Users\mzj\Desktop\CTF\玄机刷题\指南\玄机刷题指南_合并源.md:604:- T-029、T-047：CH-22 虽是 block/exfiltrate，但通道类型为 eval，排除。
+C:\Users\mzj\Desktop\CTF\玄机刷题\指南\玄机刷题指南_合并源.md:663:977584561F17C43A26A8047AEBE1DC25B14D407962B942BD4BB3E5B06267B0BD
+C:\Users\mzj\Desktop\CTF\玄机刷题\指南\玄机刷题指南_合并源.md:771:B426473FC5838490B9F2F4B77A91FD68CE182B5B07A7BFD0008C63A93CF46025
+C:\Users\mzj\Desktop\CTF\玄机刷题\指南\玄机刷题指南_合并源.md:778:(2712847316, 2, 4, 0, 0, 262144, 276)
+C:\Users\mzj\Desktop\CTF\玄机刷题\指南\玄机刷题指南_合并源.md:844:- 附件：`babyRSA-附件\task.py`，SHA256：`5208DCEEA3A61D0A100C71CEC66E83C8472F01CE00C053C6F4918C0FF337D2FE`。
+C:\Users\mzj\Desktop\CTF\玄机刷题\指南\玄机刷题指南_合并源.md:898:    plaintext hex = 666c61677b746831735f31735f345f747572655f666c34677d
+C:\Users\mzj\Desktop\CTF\玄机刷题\指南\玄机刷题指南_合并源.md:910:- 附件 SHA256：`5208DCEEA3A61D0A100C71CEC66E83C8472F01CE00C053C6F4918C0FF337D2FE`；flag 仅记录在本地指南，平台已验证。
+C:\Users\mzj\Desktop\CTF\玄机刷题\指南\玄机刷题指南_合并源.md:946:   - 第 2 块密文：`F5333E4783390B91EDB9D2B4FD2A5FC0`
+C:\Users\mzj\Desktop\CTF\玄机刷题\指南\玄机刷题指南_合并源.md:1065:  key_hex=67616834336A4A4B67666A474D654152
+C:\Users\mzj\Desktop\CTF\玄机刷题\指南\玄机刷题指南_合并源.md:1066:  plaintext_hex=666C61677B52655F3174735F66306E7D
+C:\Users\mzj\Desktop\CTF\玄机刷题\指南\玄机刷题指南_合并源.md:1072:  key_hex=67612134336A4A4B67666A474D654152
+C:\Users\mzj\Desktop\CTF\玄机刷题\指南\玄机刷题指南_合并源.md:1208:- 圆外径直接按 ASCII 解释得到 `(.4:@FLR`，反序、外径数字串 `4046525864707682`、半径数字串 `2023262932353841`，以及尺寸和颜色序号组合；
+C:\Users\mzj\Desktop\CTF\玄机刷题\指南\玄机刷题指南_合并源.md:1229:把可见图形转换成的主要序列 `12345612`、`13524613`、`BRYGPCBR`、圆外径串 `4046525864707682` 和 ASCII 串 `(.4:@FLR` 分别做 MD5、SHA-1、SHA-256、Base64、十六进制文本变换，共 75 个派生候选，全部解密失败。还试了半径串 `2023262932353841`、颜色名的连字符/下划线形式、颜色字母对应 A1Z26、零起始方块索引、ASCII 圆径与颜色序号加减等候选，均未命中。
+C:\Users\mzj\Desktop\CTF\玄机刷题\指南\玄机刷题指南_合并源.md:1422:2. `readelf` 显示入口地址 `0x400910`。入口将 `0x4047cb` 交给 `__libc_start_main`，该函数设置 60 秒 alarm 后 fork。
+C:\Users\mzj\Desktop\CTF\玄机刷题\指南\玄机刷题指南_合并源.md:1432:key = bytes.fromhex("f470bbc031caee5e58b272ea02f3ffe6")
+C:\Users\mzj\Desktop\CTF\玄机刷题\指南\玄机刷题指南_合并源.md:1453:- `key`：\hexwrap{f470bbc031caee5e58b272ea02f3ffe6}
+C:\Users\mzj\Desktop\CTF\玄机刷题\指南\玄机刷题指南_合并源.md:1554:1      S-147      dba8bc3e
+C:\Users\mzj\Desktop\CTF\玄机刷题\指南\玄机刷题指南_合并源.md:1684:2559c31f3c41df061b7af835057cec5e6169f30c1347fe2a294b890b1e1c8b132873ba6e3e57ea3a1e5af7
+C:\Users\mzj\Desktop\CTF\玄机刷题\指南\玄机刷题指南_合并源.md:1822:题面要求帕鲁以最短路径走完全部五个出口，flag 形式为 flag{md5(最短路径步骤)}，程序提示最短步数是 295。附件 game_flag.exe 大小 6,731,652 字节，SHA-256 为 319DE70C476CC7C2761A57D88B83A5529D2DEA53C1F73DC23926D21ABC86EE019。原 EXE 未运行，分析通过 PyInstaller 静态提取和 Python 字节码反汇编完成。
+C:\Users\mzj\Desktop\CTF\玄机刷题\指南\玄机刷题指南_合并源.md:1869:题目描述给出 BLE 唤醒、UWB 测距和数字钥匙认证签名，要求从车端取证日志中恢复受保护数据。平台下载的真实附件为 SQLite 数据库 digital_key_trace.sqlite，SHA-256 为 74BA2CE83C3B7DB4B237FC747B67D4F57492172F42B02B03BDD61E19A1FD6EF3。题目页显示免费、中等、Crypto，完成进度步骤 1/1。
+C:\Users\mzj\Desktop\CTF\玄机刷题\指南\玄机刷题指南_合并源.md:1981:从玄机附件 ZIP EzFlag_248f149404428676e6aa45e6312d069c.zip 解出一个 20,640 字节 ELF64 小端 x86-64 PIE 文件，SHA-256 为 7BBD540A5B7E688D57EFD7F1175368FA9F934F3C83A1E6262457B870BD0B5996。题目页显示免费、中等、Crypto。使用 strings 检查静态字符串，发现输入提示 Enter password、硬编码口令 V3ryStr0ngp@ssw0rd、失败提示 Wrong password!、前缀 flag{ 和查表串 012ab9c3478d56ef。硬编码口令只允许进入 flag 生成逻辑，不是 flag 本身。
+C:\Users\mzj\Desktop\CTF\玄机刷题\指南\玄机刷题指南_合并源.md:1997:原始 32 字符串为 106326741d21909f2914769f60219a24。题目程序在字符下标 7、12、17、22 后显示连字符。第一次脚本逐次插入连字符，导致之前插入改变了后续索引，日志中出现了错误中间结果 flag{10632674-1d21-909f-2914-769f60219a24}。修正后从原始字符串一次性生成分组，得到：
+C:\Users\mzj\Desktop\CTF\玄机刷题\指南\玄机刷题指南_合并源.md:1999:    flag{10632674-1d219-09f29-14769-f60219a24}
+C:\Users\mzj\Desktop\CTF\玄机刷题\指南\玄机刷题指南_合并源.md:2091:### #547 第二届 Parloo 杯 RE PaluFlat
+C:\Users\mzj\Desktop\CTF\玄机刷题\指南\玄机刷题指南_合并源.md:2093:- 平台 ID：547；REVERSE；免费、中等。候选 `flag{bdm23Ne6ljz5O}` 由附件目标字节逆算，并经正向变换逐字节匹配 19 字节常量；玄机前台提交后显示“FLAG 正确~，恭喜你完成此挑战~”，页面为“已完成”、步骤 1/1。
+C:\Users\mzj\Desktop\CTF\玄机刷题\指南\玄机刷题指南_合并源.md:2095:- 附件的比较目标第 16 字节为 NUL；虽然目标和候选正向输出完全相同，`strlen(output)` 实际为 16，与代码要求 19 冲突。因此本地附件的成功分支不可达；平台接受回执是 flag 正确的最终依据，不能声称附件本地运行通过。ZIP、7z、PE 归档完整性及分块检查材料见 `题目资料/PaluFlat_547/analysis/`，逐步 WP 见 `题目资料/PaluFlat_547/wp.md`。
+C:\Users\mzj\Desktop\CTF\玄机刷题\指南\玄机刷题指南_合并源.md:2150:- 密文数组为 `153,147,158,152,132,200,202,203,198,154,156,156,158,210,153,130`；两条嵌入 XOR 常数分别为 0x55、0xAA，异或合成 0xFF。逐字节计算 `cipher[i] XOR 0x55 XOR 0xAA` 得到 `102,108,97,103,123,55,53,52,57,101,99,99,97,45,102,125`，ASCII 解释为上面的 flag 文本。再次 XOR 0xFF 能逐字节还原原密文。
+C:\Users\mzj\Desktop\CTF\玄机刷题\指南\玄机刷题指南_合并源.md:2167:- 平台 ID：537；REVERSE；免费、中等。提交 `flag{2qOrxQfRmDEdSkGt2mFoyilZQFU4BQDxBsuc}` 后，玄机前台显示 `FLAG 正确`、`已完成 1/1`，并显示一血。平台已接受总数从 46 增至 47。
+C:\Users\mzj\Desktop\CTF\玄机刷题\指南\玄机刷题指南_合并源.md:2201:- 第九批 #547/#548 接受、#546 拒绝的前台逐步记录：记录/提交核验_20260929_第九批.md；题目选择与附件哈希：记录/批次_20260929_第九批题目确认.md；各题完整 WP 和静态分析均在题目资料/PaluFlat_547、PaluGOGOGO_548、PaluArray_546。
+C:\Users\mzj\Desktop\CTF\玄机刷题\README.md:19:《指南/玄机刷题指南_合并源.md》是状态与逐题 WP 的主索引；手册已同步列出 47 道平台接受题；平台当前已接受总数为 47 道；旧版 README 的 10 题统计已废止。第十一批的逐题验收状态见 `记录/提交核验_20260929_第十一批.md`。独立 WP 和过程补充保存在 `记录/`。
+C:\Users\mzj\Desktop\CTF\玄机刷题\README.md:21:第九批 #547、#548 已由前台平台接受；#546 的候选已被拒绝，仍待复核。三题详情、附件哈希与任务范围见 `记录/批次_20260929_第九批题目确认.md`，提交过程与回执见第九批平台验收记录。第十批从“全部”列表选出的免费中等题 #552、#543、#542 中，#552 已接受，#543、#542 的候选被平台拒绝；提交过程与状态见 `记录/提交核验_20260929_第十批.md`，附件副本与哈希见 `记录/批次_20260929_第十批题目确认.md` 和 `记录/第十批_附件归档_20260929.txt`。两道未解决题不计入完成数，静态 WP 保存在各自题目资料目录，等待新证据后再纳入已完成题解。
+C:\Users\mzj\Desktop\CTF\玄机刷题\README.md:33:第十三批核验：免费、中等 REVERSE #533、#537、#538 中，#537「湘岚杯ezbase」已由前台接受（FLAG 正确、1/1、一血），总数由 46 更新为 47；完整 WP、静态求解器和分析证据见 `题目资料/批次13_20260929/537_湘岚杯ezbase/`。#533 仍未解决；#538 的 32 字节逆像含空格，`scanf("%s")` 会截断，长度校验不可达，因此没有可提交 flag、未提交；这两题均不计入已完成数。三题选题/附件索引见 `记录/批次_20260929_第十三批题目确认.md`、`记录/批次13_附件归档_20260929.txt`；核验报告见 `记录/提交核验_20260929_第十三批.md`，PowerShell 命令与输出 transcript 见 `记录/批次13_提交核验_20260929.txt`。
+COMMAND> Select-String -LiteralPath 'C:\Users\mzj\Desktop\CTF\玄机刷题\指南\玄机刷题指南_合并源.md','C:\Users\mzj\Desktop\CTF\玄机刷题\README.md' -Pattern '527|唧唧复唧唧|批次14|第十四批' | ForEach-Object { \
+::\ }
+C:\Users\mzj\Desktop\CTF\玄机刷题\指南\玄机刷题指南_合并源.md:163:**思路：** 附件 PE 头有损坏、内部还 UPX，所以先把“修头 / 解包 / 反推 / 运行”拆成独立步骤：复制后修 PE 签名，用官方 UPX 解包得到 527,872 字节的工作副本，再静态定位比较逻辑——读入前 16 字节、跑自定义 AES、与 16 字节目标常量比较。它借用 AES-128 骨架（Nk=4、Nr=10），但每轮有三处自定义：状态 SubBytes 后再 XOR `0xA1`、MixColumns 每输出字节再 XOR `0x54`、每次 AddRoundKey 后再 XOR 固定 16 字节 round mask。另外初始化函数有反调试分支：无调试器时把 key 第 3 字节写成 `h`。
+C:\Users\mzj\Desktop\CTF\玄机刷题\指南\玄机刷题指南_合并源.md:320:- **客户端口 / 时间:** 35272 / 02:25:36；**解密出的请求明文:** `assert|system('id');`；**解密后的服务端输出:** `uid=33(www-data) gid=33(www-data) groups=33(www-data)`；**用途:** 确认命令以 Web 服务用户运行
+C:\Users\mzj\Desktop\CTF\玄机刷题\指南\玄机刷题指南_合并源.md:321:- **客户端口 / 时间:** 35274 / 02:25:38；**解密出的请求明文:** `assert|system('whoami');`；**解密后的服务端输出:** `www-data`；**用途:** 与 `id` 输出相互印证
+C:\Users\mzj\Desktop\CTF\玄机刷题\指南\玄机刷题指南_合并源.md:995:初始 PE signature 的首字节在文件偏移 0x108 处异常。我们没有覆盖原始文件，而是复制后恢复分析副本的 PE 签名，再准备 UPX 输入副本。早期尝试用自写 NRV 解压器解析时遇到输出边界错误；它只是说明自写解码器假设不完整，不构成附件损坏的结论。随后对照官方 UPX 5.2.0 静态解包成功，得到 527,872 字节的 unpacked PE。
+C:\Users\mzj\Desktop\CTF\玄机刷题\指南\玄机刷题指南_合并源.md:1001:crazyaes-upx-unpacked.exe    527,872 bytes
+**********************
+PowerShell transcript end
+End time: 20260929160725
+**********************
+**********************
+PowerShell transcript start
+Start time: 20260929161033
+Username: DESKTOP-412KTAR\mzj
+RunAs User: DESKTOP-412KTAR\mzj
+Configuration Name: 
+Machine: DESKTOP-412KTAR (Microsoft Windows NT 10.0.26200.0)
+Host Application: C:\Users\mzj\.cache\codex-runtimes\codex-primary-runtime\dependencies\native\powershell\pwsh.dll -Command try { [Console]::OutputEncoding=[System.Text.Encoding]::UTF8 } catch {}
+$project = 'C:\Users\mzj\Desktop\CTF\玄机刷题'
+$task = Join-Path $project '题目资料\批次14_20260929\527_木兰当户织'
+$log = Join-Path $task '记录_命令与输出.txt'
+$readme = Join-Path $project 'README.md'
+$guide = Join-Path $project '指南\玄机刷题指南_合并源.md'
+Start-Transcript -LiteralPath $log -Append | Out-Null
+Write-Output "COMMAND> Select-String -LiteralPath '$readme','$guide' -Pattern '48 道平台接受题|平台已完成（48|第十四批|527 唧唧复唧唧' | ForEach-Object { \"$($_.Path):$($_.LineNumber):$($_.Line)\" }"
+Select-String -LiteralPath $readme,$guide -Pattern '48 道平台接受题|平台已完成（48|第十四批|527 唧唧复唧唧' | ForEach-Object { "$($_.Path):$($_.LineNumber):$($_.Line)" }
+Write-Output "COMMAND> Get-ChildItem -LiteralPath 'C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料' -Directory | Where-Object { $_.Name -match '561|562|527' } | Select-Object FullName,Name"
+Get-ChildItem -LiteralPath (Join-Path $project '题目资料') -Directory | Where-Object { $_.Name -match '561|562|527' } | Select-Object FullName,Name
+Stop-Transcript | Out-Null
+Process ID: 32376
+PSVersion: 7.6.5
+PSEdition: Core
+GitCommitId: 7.6.5
+OS: Microsoft Windows 10.0.26200
+Platform: Win32NT
+PSCompatibleVersions: 1.0, 2.0, 3.0, 4.0, 5.0, 5.1, 6.0, 7.0
+PSRemotingProtocolVersion: 2.4
+SerializationVersion: 1.1.0.1
+WSManStackVersion: 3.0
+**********************
+COMMAND> Select-String -LiteralPath 'C:\Users\mzj\Desktop\CTF\玄机刷题\README.md','C:\Users\mzj\Desktop\CTF\玄机刷题\指南\玄机刷题指南_合并源.md' -Pattern '48 道平台接受题|平台已完成（48|第十四批|527 唧唧复唧唧' | ForEach-Object { \
+::\ }
+COMMAND> Get-ChildItem -LiteralPath 'C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料' -Directory | Where-Object { .Name -match '561|562|527' } | Select-Object FullName,Name
+
+**********************
+PowerShell transcript end
+End time: 20260929161033
+**********************

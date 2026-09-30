@@ -1,0 +1,39 @@
+raw_key_ascii= lntfvpus
+key_xor_index_rows=
+  i=0 raw=0x6c xor=0x00 effective=0x6c char=l
+  i=1 raw=0x6e xor=0x01 effective=0x6f char=o
+  i=2 raw=0x74 xor=0x02 effective=0x76 char=v
+  i=3 raw=0x66 xor=0x03 effective=0x65 char=e
+  i=4 raw=0x76 xor=0x04 effective=0x72 char=r
+  i=5 raw=0x70 xor=0x05 effective=0x75 char=u
+  i=6 raw=0x75 xor=0x06 effective=0x73 char=s
+  i=7 raw=0x73 xor=0x07 effective=0x74 char=t
+effective_key_ascii= loverust
+target_len= 19 target_hex= 18590728f4adc8c3b63f2d39ca34d18ef503b0
+ksa_state_len= 256 ksa_state_prefix16= 0a148c2c1e9a43b96f3839683f123656
+candidate_bytes= 666c61677b386131633261373363323962327d
+candidate_ascii= flag{8a1c2a73c29b2}
+candidate_matches_expected= True
+per_byte_forward_check: idx plain mask cipher_recalc cipher_target ok
+00   66    71   18          18         True
+01   6c    34   59          59         True
+02   61    67   07          07         True
+03   67    40   28          28         True
+04   7b    88   f4          f4         True
+05   38    94   ad          ad         True
+06   61    a6   c8          c8         True
+07   31    f3   c3          c3         True
+08   63    d6   b6          b6         True
+09   32    0c   3f          3f         True
+10   61    4d   2d          2d         True
+11   37    0f   39          39         True
+12   33    fa   ca          ca         True
+13   63    50   34          34         True
+14   32    e2   d1          d1         True
+15   39    b4   8e          8e         True
+16   62    96   f5          f5         True
+17   32    30   03          03         True
+18   7d    d2   b0          b0         True
+forward_hex= 18590728f4adc8c3b63f2d39ca34d18ef503b0
+forward_matches_target= True
+all_19_byte_masks_and_ciphertext_match= True

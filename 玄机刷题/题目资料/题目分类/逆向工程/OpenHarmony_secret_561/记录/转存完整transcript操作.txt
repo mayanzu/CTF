@@ -1,0 +1,36 @@
+**********************
+PowerShell transcript start
+Start time: 20260929155442
+Username: DESKTOP-412KTAR\mzj
+RunAs User: DESKTOP-412KTAR\mzj
+Configuration Name: 
+Machine: DESKTOP-412KTAR (Microsoft Windows NT 10.0.26200.0)
+Host Application: C:\Users\mzj\.cache\codex-runtimes\codex-primary-runtime\dependencies\native\powershell\pwsh.dll -Command try { [Console]::OutputEncoding=[System.Text.Encoding]::UTF8 } catch {}
+$ErrorActionPreference = 'Stop'
+$dest='C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\批次14_20260929\561_OpenHarmony_secret'
+Start-Transcript -Path (Join-Path $dest '记录\转存完整transcript操作.txt') -Append
+$source='C:\Users\mzj\Desktop\CTF\玄机刷题\记录\批次14_561_调查记录.txt'
+$target=Join-Path $dest '记录\批次14_561_调查记录.txt'
+Write-Output ('COMMAND> Copy-Item -LiteralPath ' + $source + ' -Destination ' + $target + ' -Force')
+Copy-Item -LiteralPath $source -Destination $target -Force
+Get-Item -LiteralPath $source,$target | Select-Object FullName,Length,LastWriteTime
+Get-FileHash -LiteralPath $source,$target -Algorithm SHA256 | Select-Object Path,Hash
+Stop-Transcript
+Process ID: 40688
+PSVersion: 7.6.5
+PSEdition: Core
+GitCommitId: 7.6.5
+OS: Microsoft Windows 10.0.26200
+Platform: Win32NT
+PSCompatibleVersions: 1.0, 2.0, 3.0, 4.0, 5.0, 5.1, 6.0, 7.0
+PSRemotingProtocolVersion: 2.4
+SerializationVersion: 1.1.0.1
+WSManStackVersion: 3.0
+**********************
+Transcript started, output file is C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\批次14_20260929\561_OpenHarmony_secret\记录\转存完整transcript操作.txt
+COMMAND> Copy-Item -LiteralPath C:\Users\mzj\Desktop\CTF\玄机刷题\记录\批次14_561_调查记录.txt -Destination C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\批次14_20260929\561_OpenHarmony_secret\记录\批次14_561_调查记录.txt -Force
+
+**********************
+PowerShell transcript end
+End time: 20260929155442
+**********************

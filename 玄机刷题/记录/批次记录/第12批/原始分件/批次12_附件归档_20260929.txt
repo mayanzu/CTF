@@ -1,0 +1,55 @@
+**********************
+PowerShell transcript start
+Start time: 20260929135200
+Username: DESKTOP-412KTAR\mzj
+RunAs User: DESKTOP-412KTAR\mzj
+Configuration Name: 
+Machine: DESKTOP-412KTAR (Microsoft Windows NT 10.0.26200.0)
+Host Application: C:\Users\mzj\.cache\codex-runtimes\codex-primary-runtime\dependencies\native\powershell\pwsh.dll -NoProfile -Command try { [Console]::OutputEncoding=[System.Text.Encoding]::UTF8 } catch {}
+$log = 'C:\Users\mzj\Desktop\CTF\玄机刷题\记录\批次12_附件归档_20260929.txt'; Start-Transcript -LiteralPath $log -Force; Get-ChildItem -LiteralPath 'D:\Downloads' -File | Sort-Object LastWriteTime -Descending | Select-Object -First 12 Name,Length,LastWriteTime,FullName; Stop-Transcript
+Process ID: 14320
+PSVersion: 7.6.5
+PSEdition: Core
+GitCommitId: 7.6.5
+OS: Microsoft Windows 10.0.26200
+Platform: Win32NT
+PSCompatibleVersions: 1.0, 2.0, 3.0, 4.0, 5.0, 5.1, 6.0, 7.0
+PSRemotingProtocolVersion: 2.4
+SerializationVersion: 1.1.0.1
+WSManStackVersion: 3.0
+**********************
+Transcript started, output file is C:\Users\mzj\Desktop\CTF\玄机刷题\记录\批次12_附件归档_20260929.txt
+
+**********************
+PowerShell transcript end
+End time: 20260929135200
+**********************
+**********************
+PowerShell transcript start
+Start time: 20260929135222
+Username: DESKTOP-412KTAR\mzj
+RunAs User: DESKTOP-412KTAR\mzj
+Configuration Name: 
+Machine: DESKTOP-412KTAR (Microsoft Windows NT 10.0.26200.0)
+Host Application: C:\Users\mzj\.cache\codex-runtimes\codex-primary-runtime\dependencies\native\powershell\pwsh.dll -NoProfile -Command try { [Console]::OutputEncoding=[System.Text.Encoding]::UTF8 } catch {}
+$log = 'C:\Users\mzj\Desktop\CTF\玄机刷题\记录\批次12_附件归档_20260929.txt'; Start-Transcript -LiteralPath $log -Append; $root = 'C:\Users\mzj\Desktop\CTF\玄机刷题'; $batch = Join-Path $root '题目资料\批次12_20260929'; $dirs = @('534_天下谁人不识君','535_往事暗沉不可追','536_遇事不决可问春风'); foreach ($d in $dirs) { New-Item -ItemType Directory -Force -Path (Join-Path $batch "$d\originals"), (Join-Path $batch "$d\analysis"), (Join-Path $batch "$d\evidence") | Out-Null }; Copy-Item -LiteralPath 'D:\Downloads\天下谁人不识君.zip' -Destination (Join-Path $batch '534_天下谁人不识君\originals\天下谁人不识君.zip') -Force; Copy-Item -LiteralPath 'D:\Downloads\来日之路光明灿烂.zip' -Destination (Join-Path $batch '535_往事暗沉不可追\originals\来日之路光明灿烂.zip') -Force; Copy-Item -LiteralPath 'D:\Downloads\app-debug.zip' -Destination (Join-Path $batch '536_遇事不决可问春风\originals\app-debug.zip') -Force; Get-ChildItem -LiteralPath $batch -Recurse -File | ForEach-Object { Get-FileHash -Algorithm SHA256 -LiteralPath $_.FullName | Select-Object Path,Hash }; foreach ($f in (Get-ChildItem -LiteralPath $batch -Recurse -File -Filter '*.zip')) { Write-Output ('ARCHIVE ' + $f.FullName); tar.exe -tf $f.FullName }; Stop-Transcript
+Process ID: 18016
+PSVersion: 7.6.5
+PSEdition: Core
+GitCommitId: 7.6.5
+OS: Microsoft Windows 10.0.26200
+Platform: Win32NT
+PSCompatibleVersions: 1.0, 2.0, 3.0, 4.0, 5.0, 5.1, 6.0, 7.0
+PSRemotingProtocolVersion: 2.4
+SerializationVersion: 1.1.0.1
+WSManStackVersion: 3.0
+**********************
+Transcript started, output file is C:\Users\mzj\Desktop\CTF\玄机刷题\记录\批次12_附件归档_20260929.txt
+
+
+
+
+**********************
+PowerShell transcript end
+End time: 20260929135223
+**********************

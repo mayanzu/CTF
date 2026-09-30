@@ -1,0 +1,122 @@
+=== imported IAT addresses ===
+KERNEL32.dll
+  IAT 0x40813c: DeleteCriticalSection
+  IAT 0x408140: EnterCriticalSection
+  IAT 0x408144: ExitProcess
+  IAT 0x408148: FindClose
+  IAT 0x40814c: FindFirstFileA
+  IAT 0x408150: FindNextFileA
+  IAT 0x408154: FreeLibrary
+  IAT 0x408158: GetCommandLineA
+  IAT 0x40815c: GetLastError
+  IAT 0x408160: GetModuleHandleA
+  IAT 0x408164: GetProcAddress
+  IAT 0x408168: InitializeCriticalSection
+  IAT 0x40816c: LeaveCriticalSection
+  IAT 0x408170: LoadLibraryA
+  IAT 0x408174: SetUnhandledExceptionFilter
+  IAT 0x408178: Sleep
+  IAT 0x40817c: TlsGetValue
+  IAT 0x408180: VirtualProtect
+  IAT 0x408184: VirtualQuery
+msvcrt.dll
+  IAT 0x40818c: _strdup
+  IAT 0x408190: _stricoll
+msvcrt.dll
+  IAT 0x408198: __getmainargs
+  IAT 0x40819c: __mb_cur_max
+  IAT 0x4081a0: __p__environ
+  IAT 0x4081a4: __p__fmode
+  IAT 0x4081a8: __set_app_type
+  IAT 0x4081ac: _cexit
+  IAT 0x4081b0: _errno
+  IAT 0x4081b4: _fpreset
+  IAT 0x4081b8: _fullpath
+  IAT 0x4081bc: _iob
+  IAT 0x4081c0: _isctype
+  IAT 0x4081c4: _onexit
+  IAT 0x4081c8: _pctype
+  IAT 0x4081cc: _setmode
+  IAT 0x4081d0: abort
+  IAT 0x4081d4: atexit
+  IAT 0x4081d8: calloc
+  IAT 0x4081dc: fgets
+  IAT 0x4081e0: free
+  IAT 0x4081e4: fwrite
+  IAT 0x4081e8: malloc
+  IAT 0x4081ec: mbstowcs
+  IAT 0x4081f0: memcpy
+  IAT 0x4081f4: printf
+  IAT 0x4081f8: puts
+  IAT 0x4081fc: realloc
+  IAT 0x408200: setlocale
+  IAT 0x408204: signal
+  IAT 0x408208: strcmp
+  IAT 0x40820c: strcoll
+  IAT 0x408210: strcspn
+  IAT 0x408214: strlen
+  IAT 0x408218: tolower
+  IAT 0x40821c: vfprintf
+  IAT 0x408220: wcstombs
+=== wrapper disassembly, aligned from .text base ===
+0x403b40: ff2520824000     jmp      dword ptr [0x408220]
+0x403b46: 90               nop      
+0x403b47: 90               nop      
+0x403b48: ff251c824000     jmp      dword ptr [0x40821c]
+0x403b4e: 90               nop      
+0x403b4f: 90               nop      
+0x403b50: ff2518824000     jmp      dword ptr [0x408218]
+0x403b56: 90               nop      
+0x403b57: 90               nop      
+0x403b58: ff2514824000     jmp      dword ptr [0x408214]
+0x403b5e: 90               nop      
+0x403b5f: 90               nop      
+0x403b60: ff2510824000     jmp      dword ptr [0x408210]
+0x403b66: 90               nop      
+0x403b67: 90               nop      
+0x403b68: ff250c824000     jmp      dword ptr [0x40820c]
+0x403b6e: 90               nop      
+0x403b6f: 90               nop      
+0x403b70: ff2508824000     jmp      dword ptr [0x408208]
+0x403b76: 90               nop      
+0x403b77: 90               nop      
+0x403b78: ff2504824000     jmp      dword ptr [0x408204]
+0x403b7e: 90               nop      
+0x403b7f: 90               nop      
+0x403b80: ff2500824000     jmp      dword ptr [0x408200]
+0x403b86: 90               nop      
+0x403b87: 90               nop      
+0x403b88: ff25fc814000     jmp      dword ptr [0x4081fc]
+0x403b8e: 90               nop      
+0x403b8f: 90               nop      
+0x403b90: ff25f8814000     jmp      dword ptr [0x4081f8]
+0x403b96: 90               nop      
+0x403b97: 90               nop      
+0x403b98: ff25f4814000     jmp      dword ptr [0x4081f4]
+0x403b9e: 90               nop      
+0x403b9f: 90               nop      
+0x403ba0: ff25f0814000     jmp      dword ptr [0x4081f0]
+0x403ba6: 90               nop      
+0x403ba7: 90               nop      
+0x403ba8: ff25ec814000     jmp      dword ptr [0x4081ec]
+0x403bae: 90               nop      
+0x403baf: 90               nop      
+0x403bb0: ff25e8814000     jmp      dword ptr [0x4081e8]
+0x403bb6: 90               nop      
+0x403bb7: 90               nop      
+0x403bb8: ff25e4814000     jmp      dword ptr [0x4081e4]
+0x403bbe: 90               nop      
+0x403bbf: 90               nop      
+0x403bc0: ff25e0814000     jmp      dword ptr [0x4081e0]
+0x403bc6: 90               nop      
+0x403bc7: 90               nop      
+0x403bc8: ff25dc814000     jmp      dword ptr [0x4081dc]
+0x403bce: 90               nop      
+0x403bcf: 90               nop      
+0x403bd0: ff25d8814000     jmp      dword ptr [0x4081d8]
+0x403bd6: 90               nop      
+0x403bd7: 90               nop      
+0x403bd8: ff25d0814000     jmp      dword ptr [0x4081d0]
+0x403bde: 90               nop      
+0x403bdf: 90               nop      
+

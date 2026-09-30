@@ -1,0 +1,1401 @@
+**********************
+PowerShell transcript start
+Start time: 20260929045550
+Username: DESKTOP-412KTAR\mzj
+RunAs User: DESKTOP-412KTAR\mzj
+Configuration Name: 
+Machine: DESKTOP-412KTAR (Microsoft Windows NT 10.0.26200.0)
+Host Application: C:\Users\mzj\.cache\codex-runtimes\codex-primary-runtime\dependencies\native\powershell\pwsh.dll -Command try { [Console]::OutputEncoding=[System.Text.Encoding]::UTF8 } catch {}
+$log='arkt561_analysis_transcript_20260929.txt'; Start-Transcript -LiteralPath $log -Append; Write-Output 'COMMAND> check existing #561 challenge directory and enumerate local files'; Get-ChildItem -LiteralPath 'C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料' -Directory -ErrorAction SilentlyContinue | Where-Object Name -Like '*secret*561*' | Select-Object FullName,LastWriteTime; Get-ChildItem -LiteralPath 'C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\OpenHarmony_secret_561' -Force -Recurse -ErrorAction SilentlyContinue | Select-Object FullName,Length,LastWriteTime; Stop-Transcript
+Process ID: 27392
+PSVersion: 7.6.5
+PSEdition: Core
+GitCommitId: 7.6.5
+OS: Microsoft Windows 10.0.26200
+Platform: Win32NT
+PSCompatibleVersions: 1.0, 2.0, 3.0, 4.0, 5.0, 5.1, 6.0, 7.0
+PSRemotingProtocolVersion: 2.4
+SerializationVersion: 1.1.0.1
+WSManStackVersion: 3.0
+**********************
+Transcript started, output file is arkt561_analysis_transcript_20260929.txt
+COMMAND> check existing #561 challenge directory and enumerate local files
+
+**********************
+PowerShell transcript end
+End time: 20260929045550
+**********************
+**********************
+PowerShell transcript start
+Start time: 20260929045622
+Username: DESKTOP-412KTAR\mzj
+RunAs User: DESKTOP-412KTAR\mzj
+Configuration Name: 
+Machine: DESKTOP-412KTAR (Microsoft Windows NT 10.0.26200.0)
+Host Application: C:\Users\mzj\.cache\codex-runtimes\codex-primary-runtime\dependencies\native\powershell\pwsh.dll -Command try { [Console]::OutputEncoding=[System.Text.Encoding]::UTF8 } catch {}
+$source='C:\Users\mzj\Desktop\CTF\arkt561_analysis_transcript_20260929.txt'; $dest='C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\OpenHarmony_secret_561\arkt561_analysis_transcript_20260929.txt'; if (Test-Path -LiteralPath $dest) { throw "Destination already exists; not overwriting: $dest" }; Copy-Item -LiteralPath $source -Destination $dest; Start-Transcript -LiteralPath $dest -Append; Write-Output 'COMMAND> moved initial inventory evidence into challenge-local transcript; inspect existing WP and findings'; Get-Content -LiteralPath '.\WP.md'; Write-Output '=== resource flow findings ==='; Get-Content -LiteralPath '.\analysis\secret561_resource_flow_findings_20260929.md'; Write-Output '=== existing recovery output ==='; Get-Content -LiteralPath '.\analysis\recover_pattern_561_output.txt'; Write-Output '=== existing roundtrip verification output ==='; Get-Content -LiteralPath '.\analysis\verify_roundtrip_and_decode_jpeg.py'; Stop-Transcript
+Process ID: 31332
+PSVersion: 7.6.5
+PSEdition: Core
+GitCommitId: 7.6.5
+OS: Microsoft Windows 10.0.26200
+Platform: Win32NT
+PSCompatibleVersions: 1.0, 2.0, 3.0, 4.0, 5.0, 5.1, 6.0, 7.0
+PSRemotingProtocolVersion: 2.4
+SerializationVersion: 1.1.0.1
+WSManStackVersion: 3.0
+**********************
+Transcript started, output file is C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\OpenHarmony_secret_561\arkt561_analysis_transcript_20260929.txt
+COMMAND> moved initial inventory evidence into challenge-local transcript; inspect existing WP and findings
+# 第一届 OpenHarmony secret（玄机 #561）完整解题记录
+
+> **状态：本地逆向链已复核；平台尚未确认，题目明文示例已证伪。** 2026-09-29 在玄机题页提交过无逗号与逗号两种由实际 pattern 推导的候选，刷新后页面仍为 `0 / 1`。独立复算确认题目示例的 digest 与其自己给出的密码和公式不相符；不将示例 flag 当作有效候选，也不把 #561 标成平台已完成。
+
+## 1. 题目信息与材料
+
+- 平台：玄机，`https://xj.edisec.net/challenges/561`
+- 题目：第一届 OpenHarmony secret
+- 类型 / 难度：REVERSE / 中等；免费
+- 页面提示：`The smart box hiding a secret, can you find it ?`
+- 附件包：`secret_platform_20260929.zip`，SHA-256：`77177B600FEA6DA73C41935763ED555047F15CB7F17B7A707550BBD9E633080F`
+- HAP：`secret.hap`，SHA-256：`743EB75674EB2BBF8696D5414FD9E122236022E49FB2C30D19A1D24D76D07720`
+- 解包目录：`hap_contents/`
+- 原附件、副本、分析脚本、反汇编和命令输出均留在本题目录内；批次级 PowerShell 记录位于项目 `记录/批次_20260929_选题与本地资料核对.txt`，资源解密探索日志位于 `analysis/agent_secret561_assets_20260929.txt`。
+
+## 2. 先理解应用的文件与提示流程
+
+HAP 中最有用的部分是 `ets/modules.abc`、`resources.index`、`resources/rawfile/enc` 和 `libs/x86_64/libsecret.so`。`sourceMaps.map` 有模块名和映射，但不含可直接还原的 `sourcesContent`，所以主线是读 Panda 字节码和 native ELF。
+
+从已保存的 `analysis/disassemble_app_output.txt` 可以还原出这些调用关系：
+
+1. `pages/face` 通过文件选择器读入照片字节，转为 Base64 后写入应用私有目录的 `bb.txt`。
+2. 页面读回 `bb.txt`，调用 `secret.ValidateCiphertext(bbText, enc)` 做照片校验；成功后才路由到下一页和 pattern lock。
+3. final 页再次读 `bb.txt`，调用 `CryptoJS.MD5(fileText).toString(CryptoJS.enc.Hex)`，以这串摘要解密 `resources.index` 中的 AES 密文，再显示解出的提示文本。
+4. 因此，final 页里的 MD5/AES 过程是**取出题目提示**的流程；它本身不把 pattern 传给 final，也不在应用代码里自动生成最后的 flag。
+
+`resources/rawfile/enc` 是 ASCII Base64 文本，解码后为 45,264 字节密文。`decrypt_enc_custom_sm4.py` 使用附件中 `libsecret.so` 的自定义 SM4 实现、S-box、轮常量和硬编码轮密钥解密。结果为带 PKCS#7 padding 的 Base64 文本；逐块重加密可回到原密文，padding 为 12 个有效字节。去 padding 后得到 45,252 字节 Base64，解码为 33,939 字节 JPEG，SHA-256 为：
+
+```text
+71E5D289A949A642D8D139C4193894133110B327EE3379CCFE0AF619360C772F
+```
+
+图片是 OpenHarmony 标志。它主要用于理解 face 页的验证和生成 `bb.txt` 的流程，不包含明文 flag。
+
+## 3. 解出资源索引里的加密提示
+
+`resources.index` 的 ASCII 数据中，`Salted__` Base64 数据从十进制偏移 `1060`（`0x424`）开始，长度 `344`（`0x158`），覆盖 `[0x424, 0x57c)`。Base64 解码为 256 字节：8 字节 `Salted__`、8 字节 salt `5efd2afd3fa774c7`、240 字节 AES-CBC 密文。
+
+把恢复的 JPEG 原始 33,939 字节重新 Base64 编码，得到 45,252 字节；对此 Base64 文本做 MD5 得小写十六进制口令：
+
+```text
+4ba9b421e88b4a70cff1b4300af97b74
+```
+
+该口令用于 OpenSSL AES-256-CBC（`Salted__` 格式、MD5 KDF）解密，成功输出 233 字节明文。逐字内容如下：
+
+```text
+The flag is MD5 of: (lock's password + "Harmony5337").
+For example: If the lock's password is 012345678
+Then the flag is flag{md5("012345678" + "Harmony5337")} (Note! There is no ',')
+Which is flag{871f72716d85a6374f438ea70c2fd62c}
+```
+
+这里的关键是最后一行示例与前两行公式不相符。标准 MD5(`012345678Harmony5337`) 为 `a8f2f50ac7bcf159d3e017721542768b`，不是提示所写的 `871f72716d85a6374f438ea70c2fd62c`。对 0–8 无重复的长度 4–9 序列，以逗号或无逗号形式加后缀枚举，也没有匹配到提示中的 `871f...`。故不能把该示例 digest 当成可信的最终 flag；需由平台验证裁决。
+
+## 4. 逆向 pattern lock
+
+### 4.1 找校验入口
+
+`libsecret.so` 的 NAPI 导出注册了 `verifyPattern`、`readFileUsingPickerFd`、`ValidateCiphertext` 等函数。native `verifyPattern`：
+
+1. 要求传入数组长度恰好为 9；
+2. 取出 9 个整数；
+3. 对该数组执行 `init_proc`；
+4. 将结果逐项与全局数组 `is` 比较。
+
+关键地址和反汇编分别保存在：
+
+- `analysis/libsecret_callbacks_disassembly.txt`
+- `analysis/libsecret_init_proc_disassembly.txt`
+
+`init_proc` 是标准 XXTEA 加密循环，delta 为 `0x9e3779b9`，轮数为 `6 + 52/n`。固定 4-word key `what` 和 9-word 目标数组 `is` 位于 ELF `.data`：文件偏移分别是 `0xe730` 与 `0xe740`。key 和目标值由 `analysis/recover_pattern_561.py` 从 x86_64 ELF 中按小端序读取。
+
+### 4.2 逆向 XXTEA
+
+脚本对目标 `is` 做 XXTEA 解密，再将解出的 9 个整数重新加密。关键输出：
+
+```text
+key words       = ['0xb', '0x2d', '0xe', '0x1bf52']
+target words    = ['0xe52bcc34', '0x344e3b05', '0xded45d41', '0x5f1ed75a', '0x97439820', '0x1f1b5b18', '0xf108fe7f', '0x93962769', '0xc4b198ca']
+decrypted words = [1, 3, 7, 5, 2, 4, 8, 6, 0]
+re-encrypt      = ['0xe52bcc34', '0x344e3b05', '0xded45d41', '0x5f1ed75a', '0x97439820', '0x1f1b5b18', '0xf108fe7f', '0x93962769', '0xc4b198ca']
+round-trip      = True
+```
+
+闭环吻合证明了解出的整数序列确实是 native 校验器期望的输入，而不是只依靠函数名猜测。pattern 节点值范围为 0–8，每个点一次，序列是：
+
+```text
+[1, 3, 7, 5, 2, 4, 8, 6, 0]
+```
+
+反汇编还确认 `onPatternComplete` 中 `input.toString()` 仅用于 `console.log`；native 收到的是原始数组。成功分支只路由到 final，没有把路径作为参数传给 final。结合提示的 `There is no ','`，计算公式时将数字直接连起来：
+
+```text
+lock password = 137524860
+MD5 输入      = 137524860Harmony5337
+MD5           = 8b4ec604943712483bfca67cacf85f1a
+候选          = flag{8b4ec604943712483bfca67cacf85f1a}
+```
+
+## 5. 本地复现
+
+主 solver：`analysis/recover_pattern_561.py`。在项目根目录的 PowerShell 中传入解包后的 x86_64 ELF：
+
+```powershell
+py -3 "C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\OpenHarmony_secret_561\analysis\recover_pattern_561.py" "C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\OpenHarmony_secret_561\hap_contents\libs\x86_64\libsecret.so"
+```
+
+输出原文保存在 `analysis/recover_pattern_561_output.txt`；完整批次命令及 stdout/stderr 保存在 `记录/批次_20260929_选题与本地资料核对.txt`。辅助复算在 `analysis/check_formula_variants.py`，SM4 解密及闭环在 `analysis/decrypt_enc_custom_sm4.py` 与 `analysis/verify_roundtrip_and_decode_jpeg.py`，字节码主输出为 `analysis/disassemble_app_output.txt`。
+
+## 6. 玄机平台验证记录
+
+玄机 #561 页面（登录账号 `slu_mzj`）上已通过可见的“提交 FLAG”表单进行过以下两次测试：
+
+| 测试 | 提交内容 | 页面回执 |
+|---|---|---|
+| A | `flag{8b4ec604943712483bfca67cacf85f1a}` | 提交后刷新页面，步骤仍为 `0 / 1`，未显示“已完成”；记为未通过/未确认 |
+| B | `flag{429ebe492a801046d1a43c328db88e7f}`（把 path 按 JavaScript 数组逗号形式参与 MD5） | 提交后刷新仍为 `0 / 1`；记为未通过/未确认 |
+
+因此当前正确状态应记录为：**native pattern 已闭环，本地公式候选存在，但 #561 尚未通过玄机平台验证。** 不能把题内示例值、候选值或本地 XXTEA 闭环混写成平台接受回执。两次表单交互由 CUA 前台浏览器完成；具体交互状态可在本轮工具记录中查阅。后续再次提交网页表单需按 computer-use 技能在提交时另行确认。
+
+## 7. 资料索引与后续事项
+
+- 原始题包：`secret_platform_20260929.zip`
+- HAP 原件：`secret.hap`、`附件_20260929/secret.hap`
+- 解包资料：`hap_contents/`
+- 图片路径：`analysis/enc.base64-decoded.bin`、`enc.custom-sm4-decrypted.bin`、`enc.recovered.jpg`
+- 关键 native 证据：`analysis/libsecret_callbacks_disassembly.txt`、`libsecret_init_proc_disassembly.txt`
+- Panda 分析：`analysis/disassemble_app_output.txt`、`disassemble_indexed_output.txt`
+- XXTEA solver 与输出：`analysis/recover_pattern_561.py`、`recover_pattern_561_output.txt`
+- 资源密文和公式分析：`analysis/resource_index_salted_ciphertext.b64`、`secret561_resource_flow_findings_20260929.md`
+- 终端日志：`analysis/agent_secret561_assets_20260929.txt`、`记录/批次_20260929_选题与本地资料核对.txt`
+
+后续状态：当前没有由现存附件唯一支持、且尚未测试的 flag 候选。示例值与明文自己的公式不一致，不纳入候选；只有出现新的独立技术证据时才继续推导。
+
+## 8. 独立审计补记（2026-09-29）
+
+本轮独立复查没有再向平台提交任何内容。完整 PowerShell 命令和输出保存在 `analysis/agent_secret561_independent_audit_20260929.txt`。
+
+### 8.1 附件与逆向结果复核
+
+- 重新计算的题包 SHA-256 为 `77177B600FEA6DA73C41935763ED555047F15CB7F17B7A707550BBD9E633080F`；HAP 为 `743EB75674EB2BBF8696D5414FD9E122236022E49FB2C30D19A1D24D76D07720`；所用 `libs/x86_64/libsecret.so` 为 `388EC90B343F5C74E70F2ECB5F83098F9C3A09F23B6222F59F33F2587967627A`。
+- 再次执行 `recover_pattern_561.py`，恢复数组 `[1,3,7,5,2,4,8,6,0]`，XXTEA 重新加密后的 9 个 word 与 native `.data` 中目标 `is` 全部相同，`round-trip = True`。
+- `verifyPattern` 的反汇编逐项证实 N-API 取 9 个数组元素并转换为 int32，调用 `init_proc_`，然后比较变换结果与目标数组。因此反演所得数组是此附件 native 校验器所期望的输入。
+
+### 8.2 ArkTS 数据流再核对
+
+- `pages/lock::Index` 将字符串 `0,1,2,3,4,5,6,7,8` 设为 PatternLock 的 `defaultPassword` 属性；这是组件配置值，不是成功回调的哈希输入。
+- PatternLock 的 `onPatternComplete` 回调先执行 `input.toString()` 并将文本传入 `console.log('enter password :', ...)`；接下来直接将原数组传给 `secret.verifyPattern(input)`。由此日志形式虽为 `1,3,7,5,2,4,8,6,0`，但校验器接收的是数组，逗号文本没有传给验证器。
+- native 验证成功后，回调只路由到 final 页面。final 页独立从运行时私有目录读取 `bb.txt`（照片 Base64），其 MD5 用来解开应用资源中的 AES 提示；final 未读取 PatternLock 数组，也没有把它作为最终 MD5 的调用参数。
+- 因而“实际 pattern 的节点编号串接后加 Harmony5337”是依据资源提示推导的外部 flag 计算，而不是应用运行时执行的哈希逻辑。原数组的逗号表示只用于日志；提示写明无逗号时，紧凑候选是 `flag{8b4ec604943712483bfca67cacf85f1a}`。
+
+### 8.3 示例 MD5 矛盾及候选边界
+
+独立复算得到：
+
+```text
+MD5("012345678Harmony5337")         = a8f2f50ac7bcf159d3e017721542768b
+题目明文声称该示例的摘要为            = 871f72716d85a6374f438ea70c2fd62c
+MD5("137524860Harmony5337")          = 8b4ec604943712483bfca67cacf85f1a
+MD5("1,3,7,5,2,4,8,6,0Harmony5337")   = 429ebe492a801046d1a43c328db88e7f
+```
+
+差异不是大小写或是否含逗号造成的：`check_formula_variants.py` 核对了常见表示；`brute_pattern_example_hash.py` 穷举了节点 `0`–`8` 不重复、长度 4–9 的所有序列，分别以紧凑串和逗号串拼接后缀，共测试 985,824 个输入，目标 `871f...` 的命中数为 0。故 `flag{871f72716d85a6374f438ea70c2fd62c}` 仅是与公式冲突的字面示例，不应当作推导结果或“备用候选”。
+
+### 8.4 当前结论
+
+本地强证据支持的 flag 推导只有实际 path 的紧凑串结果 `flag{8b4ec604943712483bfca67cacf85f1a}`。该紧凑候选与逗号候选都曾在玄机页面提交并未获通过回执，页面仍显示 `0/1`；所以它目前只是有证据的本地推导，**题目未解出/未平台验证**。题目示例摘要存在源材料内部错误；继续枚举或提交该示例不能修复这个矛盾。需要新的独立证据（例如题目维护方更正的公式/附件，或对 native/界面输入语义的新发现）才能可靠推进。
+=== resource flow findings ===
+# #561 OpenHarmony_secret：资源与应用流程独立分析
+
+日期：2026-09-29。此笔记记录本地附件静态分析；没有浏览公开 Writeup。平台提交结果见本笔记末尾。
+
+## 核查材料
+
+- HAP：`secret.hap`，SHA-256 `743EB75674EB2BBF8696D5414FD9E122236022E49FB2C30D19A1D24D76D07720`
+- `hap_contents/ets/modules.abc`：334,752 字节。
+- `hap_contents/ets/sourceMaps.map`：59,374 字节，是按模块名索引的 Source Map JSON；页面有 `sources` 与 `mappings`，无 `sourcesContent`，因此没有可直接还原的源码文本。
+- 普通解包树中没有 `bb.txt`。它是在应用私有 `filesDir` 内运行时生成的文件。
+
+## 文件与资源链
+
+1. `resources/rawfile/enc` 是 60,352 字节的 ASCII Base64 文本。解码后 45,264 字节；既有 `decrypt_enc_custom_sm4.py` 用 HAP 内 `libsecret.so` 的自定义 SM4 轮函数、S-box、轮常量以及硬编码轮密钥解密。
+2. 解密结果是带 PKCS#7 padding 的 Base64 文本，不是 JPEG 原始字节。已有校验脚本确认每个 16 字节块可重新加密回原密文，padding 为 12 字节且逐字节合法。移除 padding 得到 45,252 字节 Base64，解码成 33,939 字节 JPEG，SHA-256 为 `71E5D289A949A642D8D139C4193894133110B327EE3379CCFE0AF619360C772F`。图像内容是 OpenHarmony 标志。
+3. `pages/face` 路径从照片选择器取图，将字节编码为 Base64，并保存到 `context.filesDir + '/' + fileName`；此流程把文件名设为 `bb.txt`。同页从该文件读回字符串，并调用 native `secret.ValidateCiphertext(bbText, enc)` 验证，然后进入 `pages/final`。
+4. `pages/final` 再读 `bb.txt`，调用 `getMd5(fileText)`；`getMd5` 是 `CryptoJS.MD5(fileText).toString(CryptoJS.enc.Hex)`。接着通过 `context.resourceManager.getStringSync(...)` 取资源字符串，把它与 MD5 字符串交给 `CryptoJS.AES.decrypt(ciphertext, key)`，再由 `TextDecoder` 读出明文。
+
+上述调用证据可在 `analysis/disassemble_app_output.txt` 找到：`readStringFromFile` 定义约 1981 行、face 保存 Base64 调用约 1715 行、`bb.txt` 与 `ValidateCiphertext` 调用约 2602–2619 行、`getMd5` 约 3132–3164 行、final AES 解密约 3641–3718 行。行号依据当前已保存的反汇编输出。
+
+## resources.index 密文提取与解密
+
+`hap_contents/resources.index` 的 ASCII 数据中，Salted Base64 字符串从偏移十进制 `1060`（`0x424`）开始，长度 `344`（`0x158`）；字节区间为 `[0x424, 0x57c)`。其后 1404–1406 是 NUL 分隔，`53cr37` 从十进制偏移 1407 开始。
+
+提取出的 Base64 保存为 `analysis/resource_index_salted_ciphertext.b64`。解码后共 256 字节：
+
+- 前 8 字节是 OpenSSL 标记 `Salted__`。
+- 接下来 8 字节 salt：`5efd2afd3fa774c7`。
+- 剩下 240 字节为 AES-CBC 密文（15 个 16 字节块）。
+
+用已恢复 JPEG 的原始 33,939 字节重新 Base64 编码，得到 45,252 字节 ASCII；对此字符串做 MD5 得小写十六进制口令 `4ba9b421e88b4a70cff1b4300af97b74`。该口令交给 OpenSSL 的 AES-256-CBC 解密后，Exit Code 为 0，PKCS#7 解码成功，输出 233 字节。可复现脚本：`analysis/probe_resource_index_secret.py`。完整命令与输出收录在 `analysis/agent_secret561_assets_20260929.txt`。
+
+解密明文逐字内容（`\n` 表示换行）：
+
+```text
+The flag is MD5 of: (lock's password + "Harmony5337"). \nFor example: If the lock's password is 012345678 \nThen the flag is flag{md5("012345678" + "Harmony5337")} (Note! There is no ',')\nWhich is flag{871f72716d85a6374f438ea70c2fd62c}
+```
+
+## 锁密码证据与矛盾
+
+- 锁页 `pages/lock::Index` 构造处（反汇编输出约第 4136–4137 行）将 `defaultPassword` 设为字符串 `0,1,2,3,4,5,6,7,8`。
+- `onPatternComplete` 的 `method_id=0x178` 在模块的 method-index 表中映射到方法实体 `0x2bbe`，即 `pages/lock::#7109887286077709236#`（code offset `0x1fd02`）。回调对原输入数组调用 `toString()` 仅用于 `console.log('enter password :', ...)`；随后将未转换的数组直接传给 `secret.verifyPattern(input)`。native 校验要求数组长度为 9，并逐项校验节点值。
+- 校验成功后，回调只执行 `router.replaceUrl(...)` 跳转，不把数组或 `toString()` 结果作为参数传给 final。final 页独立读取 `bb.txt` 中照片的 Base64 字符串，并对它求 MD5 来解密资源提示。因而不能把日志中的逗号序列当作 flag 哈希输入。
+- `defaultPassword` 在 `Index` 初始化时被赋值为字符串 `0,1,2,3,4,5,6,7,8`，这是页面/组件属性；静态回调路径显示真正的图案校验走 native `verifyPattern`。已通过 native XXTEA 逆向恢复精确路径 `[1,3,7,5,2,4,8,6,0]`，并以重新加密命中 native 目标数组确认。
+- 资源明文自身的公式示例不一致：标准 MD5(`012345678Harmony5337`) 计算结果为 `a8f2f50ac7bcf159d3e017721542768b`，不是明文声称的 `871f72716d85a6374f438ea70c2fd62c`。此外枚举 0–8 不重复的长度 4–9 序列（无逗号与逗号连接两种形式，共 985,824 个序列）也没有任何一个在拼接 `Harmony5337` 后得到该目标摘要。复现验证：`analysis/check_formula_variants.py`、`analysis/brute_pattern_example_hash.py`。
+
+因此，明文末尾的 `flag{871f72716d85a6374f438ea70c2fd62c}` 与其示例密码和公式不能相互验证，不应直接当作答案。依据 native 验证通过的 pattern 路径，按明文给出的无逗号公式计算，当前本地候选为 `flag{8b4ec604943712483bfca67cacf85f1a}`；由于平台未提交验证，仍不能标成已解决。本分析没有进行平台提交。
+
+## 本次新增分析资料
+
+- `analysis/agent_secret561_assets_20260929.txt`：PowerShell transcript，记录命令与输出，包括探索中出现的错误。
+- `analysis/resource_index_salted_ciphertext.b64`：从 `resources.index` 直接提取的密文。
+- `analysis/probe_resource_index_secret.py`：尝试几种口令、解密并校验示例哈希的脚本。
+- `analysis/check_formula_variants.py`：核对示例中常见字符串格式的 MD5。
+- `analysis/brute_pattern_example_hash.py`：枚举 0–8 pattern 输入格式的本地校验。
+
+## 按恢复出的 pattern 序列计算公式（补充）
+
+静态分析恢复出的锁路径为 `[1,3,7,5,2,4,8,6,0]`。`pages/lock::#7109887286077709236#` 把原数组交给 `secret.verifyPattern(input)`；`input.toString()` 只用于日志，既不传给 final，也不作为 hash 输入。按资源明文“没有逗号”的说明，把节点编号串接成 `137524860`，再拼接 `Harmony5337`：
+
+```text
+输入 = 137524860Harmony5337
+MD5  = 8b4ec604943712483bfca67cacf85f1a
+候选 = flag{8b4ec604943712483bfca67cacf85f1a}
+```
+
+`analysis/check_formula_variants.py` 可复算逗号与无逗号两种表示。final 页没有接收锁密码的状态字段：它从 `bb.txt` 读取照片 Base64，并用其 MD5 作为 AES 口令解出上述提示；应用本身不执行“pattern + Harmony5337”的最终 flag 哈希。资源明文给出的示例 hash `871f...` 仍与标准 MD5(`012345678Harmony5337`) 不符，故不能用该示例 hash 替代基于实际 pattern 的计算。
+
+### 平台验证补记
+
+在玄机 #561 可见的“提交 FLAG”表单中测试过两个候选：无逗号候选 `flag{8b4ec604943712483bfca67cacf85f1a}` 和逗号候选 `flag{429ebe492a801046d1a43c328db88e7f}`。刷新后页面仍显示 `0/1`，没有“已完成”回执；因此题目当前仍未通过平台验证。过程详见同目录 `../WP.md`，批次 PowerShell 输入/输出详见项目 `记录/批次_20260929_选题与本地资料核对.txt`。后续提交其他候选须按 computer-use 技能在操作当时确认。
+=== existing recovery output ===
+ELF attachment = C:\Users\mzj\Desktop\CTF\����ˢ��\��Ŀ����\OpenHarmony_secret_561\hap_contents\libs\x86_64\libsecret.so
+key words       = ['0xb', '0x2d', '0xe', '0x1bf52']
+target words    = ['0xe52bcc34', '0x344e3b05', '0xded45d41', '0x5f1ed75a', '0x97439820', '0x1f1b5b18', '0xf108fe7f', '0x93962769', '0xc4b198ca']
+decrypted words = [1, 3, 7, 5, 2, 4, 8, 6, 0]
+re-encrypt      = ['0xe52bcc34', '0x344e3b05', '0xded45d41', '0x5f1ed75a', '0x97439820', '0x1f1b5b18', '0xf108fe7f', '0x93962769', '0xc4b198ca']
+round-trip      = True
+PatternLock Array.toString() = 1,3,7,5,2,4,8,6,0
+compact candidate password  = 137524860
+MD5(comma path+Harmony5337)  = 429ebe492a801046d1a43c328db88e7f
+MD5(compact+Harmony5337)     = 8b4ec604943712483bfca67cacf85f1a
+example digest in source     = 871f72716d85a6374f438ea70c2fd62c
+example digest recomputed    = a8f2f50ac7bcf159d3e017721542768b
+primary candidate flag      = flag{429ebe492a801046d1a43c328db88e7f}
+alternate candidate flag    = flag{8b4ec604943712483bfca67cacf85f1a}
+=== existing roundtrip verification output ===
+import base64
+import hashlib
+import pathlib
+import sys
+
+sys.path.insert(0, str(pathlib.Path(__file__).resolve().parent))
+import decrypt_enc_custom_sm4 as cipher_impl
+
+cipher = cipher_impl.cipher
+plain = cipher_impl.plain
+rk = cipher_impl.rk
+checks = [cipher_impl.encrypt_block(plain[i:i+16], rk) == cipher[i:i+16] for i in range(0, len(cipher), 16)]
+print('block count:', len(checks))
+print('all blocks re-encrypt exactly to decoded resource ciphertext:', all(checks))
+print('mismatch block indexes:', [i for i, ok in enumerate(checks) if not ok][:20])
+print('decrypted tail bytes/repr:', plain[-32:].hex(), repr(plain[-32:]))
+padding = plain[-1]
+assert 1 <= padding <= 16 and plain[-padding:] == bytes([padding]) * padding
+unpadded = plain[:-padding]
+print('PKCS#7 padding length and exact-byte validation:', padding, True)
+print('unpadded Base64 length:', len(unpadded), 'mod4:', len(unpadded) % 4)
+image = base64.b64decode(unpadded, validate=True)
+out = cipher_impl.ROOT / 'analysis/enc.recovered.jpg'
+out.write_bytes(image)
+print('decoded JPEG bytes:', len(image))
+print('decoded JPEG SHA256:', hashlib.sha256(image).hexdigest())
+print('JPEG magic:', image[:16].hex())
+print('JPEG output:', out)
+**********************
+PowerShell transcript end
+End time: 20260929045622
+**********************
+**********************
+PowerShell transcript start
+Start time: 20260929045842
+Username: DESKTOP-412KTAR\mzj
+RunAs User: DESKTOP-412KTAR\mzj
+Configuration Name: 
+Machine: DESKTOP-412KTAR (Microsoft Windows NT 10.0.26200.0)
+Host Application: C:\Users\mzj\.cache\codex-runtimes\codex-primary-runtime\dependencies\native\powershell\pwsh.dll -Command try { [Console]::OutputEncoding=[System.Text.Encoding]::UTF8 } catch {}
+$log='arkt561_analysis_transcript_20260929.txt'; Start-Transcript -LiteralPath $log -Append; Write-Output 'COMMAND> inspect saved native verification and XXTEA assembly excerpts'; Select-String -LiteralPath '.\analysis\libsecret_callbacks_disassembly.txt' -Pattern 'verifyPattern|init_proc|target|compare|cmp|length|call' -Context 1,2 | Select-Object -First 120 | ForEach-Object { $_.ToString() }; Write-Output '=== init_proc excerpt ==='; Get-Content -LiteralPath '.\analysis\libsecret_init_proc_disassembly.txt' -TotalCount 220; Write-Output '=== formula variant script ==='; Get-Content -LiteralPath '.\analysis\check_formula_variants.py'; Write-Output '=== prior example brute-force summary ==='; Get-Content -LiteralPath '.\analysis\brute_pattern_example_hash.py'; Stop-Transcript
+Process ID: 28568
+PSVersion: 7.6.5
+PSEdition: Core
+GitCommitId: 7.6.5
+OS: Microsoft Windows 10.0.26200
+Platform: Win32NT
+PSCompatibleVersions: 1.0, 2.0, 3.0, 4.0, 5.0, 5.1, 6.0, 7.0
+PSRemotingProtocolVersion: 2.4
+SerializationVersion: 1.1.0.1
+WSManStackVersion: 3.0
+**********************
+Transcript started, output file is arkt561_analysis_transcript_20260929.txt
+COMMAND> inspect saved native verification and XXTEA assembly excerpts
+  C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\OpenHarmony_secret_561\analysis\libsecret_callbacks_disassembly.txt:22:    8152:	45 31 c9             	xor    %r9d,%r9d
+> C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\OpenHarmony_secret_561\analysis\libsecret_callbacks_disassembly.txt:23:    8155:	e8 96 6d 00 00       	call   eef0 <napi_get_cb_info@plt>
+  C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\OpenHarmony_secret_561\analysis\libsecret_callbacks_disassembly.txt:24:    815a:	85 c0                	test   %eax,%eax
+  C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\OpenHarmony_secret_561\analysis\libsecret_callbacks_disassembly.txt:25:    815c:	0f 85 4b 01 00 00    	jne    82ad <RegisterEntryModule+0x21d>
+> C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\OpenHarmony_secret_561\analysis\libsecret_callbacks_disassembly.txt:26:    8162:	48 83 7c 24 18 00    	cmpq   $0x0,0x18(%rsp)
+  C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\OpenHarmony_secret_561\analysis\libsecret_callbacks_disassembly.txt:27:    8168:	0f 84 3f 01 00 00    	je     82ad <RegisterEntryModule+0x21d>
+  C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\OpenHarmony_secret_561\analysis\libsecret_callbacks_disassembly.txt:28:    816e:	48 8b 74 24 48       	mov    0x48(%rsp),%rsi
+  C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\OpenHarmony_secret_561\analysis\libsecret_callbacks_disassembly.txt:30:    8178:	4c 89 ff             	mov    %r15,%rdi
+> C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\OpenHarmony_secret_561\analysis\libsecret_callbacks_disassembly.txt:31:    817b:	e8 80 6d 00 00       	call   ef00 <napi_is_array@plt>
+  C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\OpenHarmony_secret_561\analysis\libsecret_callbacks_disassembly.txt:32:    8180:	85 c0                	test   %eax,%eax
+  C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\OpenHarmony_secret_561\analysis\libsecret_callbacks_disassembly.txt:33:    8182:	0f 85 3b 01 00 00    	jne    82c3 <RegisterEntryModule+0x233>
+> C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\OpenHarmony_secret_561\analysis\libsecret_callbacks_disassembly.txt:34:    8188:	80 7c 24 17 00       	cmpb   $0x0,0x17(%rsp)
+  C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\OpenHarmony_secret_561\analysis\libsecret_callbacks_disassembly.txt:35:    818d:	0f 84 30 01 00 00    	je     82c3 <RegisterEntryModule+0x233>
+  C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\OpenHarmony_secret_561\analysis\libsecret_callbacks_disassembly.txt:36:    8193:	48 8b 74 24 48       	mov    0x48(%rsp),%rsi
+  C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\OpenHarmony_secret_561\analysis\libsecret_callbacks_disassembly.txt:38:    819d:	4c 89 ff             	mov    %r15,%rdi
+> C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\OpenHarmony_secret_561\analysis\libsecret_callbacks_disassembly.txt:39:    81a0:	e8 6b 6d 00 00       	call   ef10 <napi_get_array_length@plt>
+  C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\OpenHarmony_secret_561\analysis\libsecret_callbacks_disassembly.txt:40:    81a5:	85 c0                	test   %eax,%eax
+  C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\OpenHarmony_secret_561\analysis\libsecret_callbacks_disassembly.txt:41:    81a7:	0f 85 1f 01 00 00    	jne    82cc <RegisterEntryModule+0x23c>
+> C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\OpenHarmony_secret_561\analysis\libsecret_callbacks_disassembly.txt:42:    81ad:	83 7c 24 10 09       	cmpl   $0x9,0x10(%rsp)
+  C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\OpenHarmony_secret_561\analysis\libsecret_callbacks_disassembly.txt:43:    81b2:	0f 85 14 01 00 00    	jne    82cc <RegisterEntryModule+0x23c>
+  C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\OpenHarmony_secret_561\analysis\libsecret_callbacks_disassembly.txt:44:    81b8:	31 db                	xor    %ebx,%ebx
+  C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\OpenHarmony_secret_561\analysis\libsecret_callbacks_disassembly.txt:52:    81da:	4c 89 f1             	mov    %r14,%rcx
+> C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\OpenHarmony_secret_561\analysis\libsecret_callbacks_disassembly.txt:53:    81dd:	e8 3e 6d 00 00       	call   ef20 <napi_get_element@plt>
+  C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\OpenHarmony_secret_561\analysis\libsecret_callbacks_disassembly.txt:54:    81e2:	85 c0                	test   %eax,%eax
+  C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\OpenHarmony_secret_561\analysis\libsecret_callbacks_disassembly.txt:55:    81e4:	0f 85 eb 00 00 00    	jne    82d5 <RegisterEntryModule+0x245>
+  C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\OpenHarmony_secret_561\analysis\libsecret_callbacks_disassembly.txt:58:    81f2:	4c 89 e2             	mov    %r12,%rdx
+> C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\OpenHarmony_secret_561\analysis\libsecret_callbacks_disassembly.txt:59:    81f5:	e8 36 6d 00 00       	call   ef30 <napi_get_value_int32@plt>
+  C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\OpenHarmony_secret_561\analysis\libsecret_callbacks_disassembly.txt:60:    81fa:	85 c0                	test   %eax,%eax
+  C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\OpenHarmony_secret_561\analysis\libsecret_callbacks_disassembly.txt:61:    81fc:	0f 85 dc 00 00 00    	jne    82de <RegisterEntryModule+0x24e>
+  C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\OpenHarmony_secret_561\analysis\libsecret_callbacks_disassembly.txt:65:    820d:	8b 44 24 10          	mov    0x10(%rsp),%eax
+> C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\OpenHarmony_secret_561\analysis\libsecret_callbacks_disassembly.txt:66:    8211:	48 39 c3             	cmp    %rax,%rbx
+  C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\OpenHarmony_secret_561\analysis\libsecret_callbacks_disassembly.txt:67:    8214:	72 ba                	jb     81d0 <RegisterEntryModule+0x140>
+  C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\OpenHarmony_secret_561\analysis\libsecret_callbacks_disassembly.txt:68:    8216:	48 8b 1d db 82 00 00 	mov    0x82db(%rip),%rbx        # 104f8 <fwrite@plt+0x13b8>
+  C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\OpenHarmony_secret_561\analysis\libsecret_callbacks_disassembly.txt:76:    8238:	48 8d 7c 24 20       	lea    0x20(%rsp),%rdi
+> C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\OpenHarmony_secret_561\analysis\libsecret_callbacks_disassembly.txt:77:    823d:	e8 1e 6c 00 00       	call   ee60 <init_proc_(unsigned int*)@plt>
+  C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\OpenHarmony_secret_561\analysis\libsecret_callbacks_disassembly.txt:78:    8242:	8b 44 24 20          	mov    0x20(%rsp),%eax
+> C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\OpenHarmony_secret_561\analysis\libsecret_callbacks_disassembly.txt:79:    8246:	3b 03                	cmp    (%rbx),%eax
+  C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\OpenHarmony_secret_561\analysis\libsecret_callbacks_disassembly.txt:80:    8248:	0f 85 c3 00 00 00    	jne    8311 <RegisterEntryModule+0x281>
+  C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\OpenHarmony_secret_561\analysis\libsecret_callbacks_disassembly.txt:81:    824e:	8b 44 24 24          	mov    0x24(%rsp),%eax
+> C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\OpenHarmony_secret_561\analysis\libsecret_callbacks_disassembly.txt:82:    8252:	3b 43 04             	cmp    0x4(%rbx),%eax
+  C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\OpenHarmony_secret_561\analysis\libsecret_callbacks_disassembly.txt:83:    8255:	0f 85 b6 00 00 00    	jne    8311 <RegisterEntryModule+0x281>
+  C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\OpenHarmony_secret_561\analysis\libsecret_callbacks_disassembly.txt:84:    825b:	8b 44 24 28          	mov    0x28(%rsp),%eax
+> C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\OpenHarmony_secret_561\analysis\libsecret_callbacks_disassembly.txt:85:    825f:	3b 43 08             	cmp    0x8(%rbx),%eax
+  C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\OpenHarmony_secret_561\analysis\libsecret_callbacks_disassembly.txt:86:    8262:	0f 85 a9 00 00 00    	jne    8311 <RegisterEntryModule+0x281>
+  C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\OpenHarmony_secret_561\analysis\libsecret_callbacks_disassembly.txt:87:    8268:	8b 44 24 2c          	mov    0x2c(%rsp),%eax
+> C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\OpenHarmony_secret_561\analysis\libsecret_callbacks_disassembly.txt:88:    826c:	3b 43 0c             	cmp    0xc(%rbx),%eax
+  C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\OpenHarmony_secret_561\analysis\libsecret_callbacks_disassembly.txt:89:    826f:	0f 85 9c 00 00 00    	jne    8311 <RegisterEntryModule+0x281>
+  C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\OpenHarmony_secret_561\analysis\libsecret_callbacks_disassembly.txt:90:    8275:	8b 44 24 30          	mov    0x30(%rsp),%eax
+> C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\OpenHarmony_secret_561\analysis\libsecret_callbacks_disassembly.txt:91:    8279:	3b 43 10             	cmp    0x10(%rbx),%eax
+  C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\OpenHarmony_secret_561\analysis\libsecret_callbacks_disassembly.txt:92:    827c:	0f 85 8f 00 00 00    	jne    8311 <RegisterEntryModule+0x281>
+  C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\OpenHarmony_secret_561\analysis\libsecret_callbacks_disassembly.txt:93:    8282:	8b 44 24 34          	mov    0x34(%rsp),%eax
+> C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\OpenHarmony_secret_561\analysis\libsecret_callbacks_disassembly.txt:94:    8286:	3b 43 14             	cmp    0x14(%rbx),%eax
+  C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\OpenHarmony_secret_561\analysis\libsecret_callbacks_disassembly.txt:95:    8289:	0f 85 82 00 00 00    	jne    8311 <RegisterEntryModule+0x281>
+  C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\OpenHarmony_secret_561\analysis\libsecret_callbacks_disassembly.txt:96:    828f:	8b 44 24 38          	mov    0x38(%rsp),%eax
+> C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\OpenHarmony_secret_561\analysis\libsecret_callbacks_disassembly.txt:97:    8293:	3b 43 18             	cmp    0x18(%rbx),%eax
+  C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\OpenHarmony_secret_561\analysis\libsecret_callbacks_disassembly.txt:98:    8296:	75 79                	jne    8311 <RegisterEntryModule+0x281>
+  C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\OpenHarmony_secret_561\analysis\libsecret_callbacks_disassembly.txt:99:    8298:	8b 44 24 3c          	mov    0x3c(%rsp),%eax
+> C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\OpenHarmony_secret_561\analysis\libsecret_callbacks_disassembly.txt:100:    829c:	3b 43 1c             	cmp    0x1c(%rbx),%eax
+  C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\OpenHarmony_secret_561\analysis\libsecret_callbacks_disassembly.txt:101:    829f:	75 70                	jne    8311 <RegisterEntryModule+0x281>
+  C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\OpenHarmony_secret_561\analysis\libsecret_callbacks_disassembly.txt:102:    82a1:	8b 44 24 40          	mov    0x40(%rsp),%eax
+> C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\OpenHarmony_secret_561\analysis\libsecret_callbacks_disassembly.txt:103:    82a5:	3b 43 20             	cmp    0x20(%rbx),%eax
+  C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\OpenHarmony_secret_561\analysis\libsecret_callbacks_disassembly.txt:104:    82a8:	0f 94 c0             	sete   %al
+  C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\OpenHarmony_secret_561\analysis\libsecret_callbacks_disassembly.txt:105:    82ab:	eb 66                	jmp    8313 <RegisterEntryModule+0x283>
+  C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\OpenHarmony_secret_561\analysis\libsecret_callbacks_disassembly.txt:109:    82ba:	31 f6                	xor    %esi,%esi
+> C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\OpenHarmony_secret_561\analysis\libsecret_callbacks_disassembly.txt:110:    82bc:	e8 7f 6c 00 00       	call   ef40 <napi_throw_error@plt>
+  C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\OpenHarmony_secret_561\analysis\libsecret_callbacks_disassembly.txt:111:    82c1:	eb 2f                	jmp    82f2 <RegisterEntryModule+0x262>
+  C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\OpenHarmony_secret_561\analysis\libsecret_callbacks_disassembly.txt:112:    82c3:	48 8d 15 75 a8 ff ff 	lea    -0x578b(%rip),%rdx        # 2b3f <Base64(char const*, int, char**)-0x46e1>
+  C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\OpenHarmony_secret_561\analysis\libsecret_callbacks_disassembly.txt:121:    82eb:	31 f6                	xor    %esi,%esi
+> C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\OpenHarmony_secret_561\analysis\libsecret_callbacks_disassembly.txt:122:    82ed:	e8 5e 6c 00 00       	call   ef50 <napi_throw_type_error@plt>
+  C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\OpenHarmony_secret_561\analysis\libsecret_callbacks_disassembly.txt:123:    82f2:	64 48 8b 04 25 28 00 	mov    %fs:0x28,%rax
+  C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\OpenHarmony_secret_561\analysis\libsecret_callbacks_disassembly.txt:124:    82f9:	00 00
+> C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\OpenHarmony_secret_561\analysis\libsecret_callbacks_disassembly.txt:125:    82fb:	48 3b 44 24 50       	cmp    0x50(%rsp),%rax
+  C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\OpenHarmony_secret_561\analysis\libsecret_callbacks_disassembly.txt:126:    8300:	75 35                	jne    8337 <RegisterEntryModule+0x2a7>
+  C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\OpenHarmony_secret_561\analysis\libsecret_callbacks_disassembly.txt:127:    8302:	4c 89 f0             	mov    %r14,%rax
+  C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\OpenHarmony_secret_561\analysis\libsecret_callbacks_disassembly.txt:137:    831b:	4c 89 ff             	mov    %r15,%rdi
+> C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\OpenHarmony_secret_561\analysis\libsecret_callbacks_disassembly.txt:138:    831e:	e8 3d 6c 00 00       	call   ef60 <napi_get_boolean@plt>
+  C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\OpenHarmony_secret_561\analysis\libsecret_callbacks_disassembly.txt:139:    8323:	85 c0                	test   %eax,%eax
+  C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\OpenHarmony_secret_561\analysis\libsecret_callbacks_disassembly.txt:140:    8325:	74 09                	je     8330 <RegisterEntryModule+0x2a0>
+  C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\OpenHarmony_secret_561\analysis\libsecret_callbacks_disassembly.txt:144:    8335:	eb bb                	jmp    82f2 <RegisterEntryModule+0x262>
+> C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\OpenHarmony_secret_561\analysis\libsecret_callbacks_disassembly.txt:145:    8337:	e8 f4 6a 00 00       	call   ee30 <__stack_chk_fail@plt>
+  C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\OpenHarmony_secret_561\analysis\libsecret_callbacks_disassembly.txt:146:    833c:	cc                   	int3
+  C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\OpenHarmony_secret_561\analysis\libsecret_callbacks_disassembly.txt:147:    833d:	cc                   	int3
+  C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\OpenHarmony_secret_561\analysis\libsecret_callbacks_disassembly.txt:170:    8388:	45 31 c9             	xor    %r9d,%r9d
+> C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\OpenHarmony_secret_561\analysis\libsecret_callbacks_disassembly.txt:171:    838b:	e8 60 6b 00 00       	call   eef0 <napi_get_cb_info@plt>
+  C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\OpenHarmony_secret_561\analysis\libsecret_callbacks_disassembly.txt:172:    8390:	48 8b b4 24 20 01 00 	mov    0x120(%rsp),%rsi
+  C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\OpenHarmony_secret_561\analysis\libsecret_callbacks_disassembly.txt:173:    8397:	00
+  C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\OpenHarmony_secret_561\analysis\libsecret_callbacks_disassembly.txt:174:    8398:	4c 89 e7             	mov    %r12,%rdi
+> C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\OpenHarmony_secret_561\analysis\libsecret_callbacks_disassembly.txt:175:    839b:	e8 d0 6b 00 00       	call   ef70 <OH_ResourceManager_InitNativeResourceManager@plt>
+  C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\OpenHarmony_secret_561\analysis\libsecret_callbacks_disassembly.txt:176:    83a0:	49 89 c6             	mov    %rax,%r14
+  C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\OpenHarmony_secret_561\analysis\libsecret_callbacks_disassembly.txt:177:    83a3:	48 8b b4 24 28 01 00 	mov    0x128(%rsp),%rsi
+  C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\OpenHarmony_secret_561\analysis\libsecret_callbacks_disassembly.txt:183:    83bd:	48 89 da             	mov    %rbx,%rdx
+> C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\OpenHarmony_secret_561\analysis\libsecret_callbacks_disassembly.txt:184:    83c0:	e8 bb 6b 00 00       	call   ef80 <napi_get_value_string_utf8@plt>
+  C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\OpenHarmony_secret_561\analysis\libsecret_callbacks_disassembly.txt:185:    83c5:	4c 89 f7             	mov    %r14,%rdi
+  C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\OpenHarmony_secret_561\analysis\libsecret_callbacks_disassembly.txt:186:    83c8:	48 89 de             	mov    %rbx,%rsi
+> C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\OpenHarmony_secret_561\analysis\libsecret_callbacks_disassembly.txt:187:    83cb:	e8 a0 6a 00 00       	call   ee70 <OH_ResourceManager_OpenRawFile@plt>
+  C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\OpenHarmony_secret_561\analysis\libsecret_callbacks_disassembly.txt:188:    83d0:	48 85 c0             	test   %rax,%rax
+  C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\OpenHarmony_secret_561\analysis\libsecret_callbacks_disassembly.txt:189:    83d3:	74 66                	je     843b <RegisterEntryModule+0x3ab>
+  C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\OpenHarmony_secret_561\analysis\libsecret_callbacks_disassembly.txt:191:    83d8:	48 89 c7             	mov    %rax,%rdi
+> C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\OpenHarmony_secret_561\analysis\libsecret_callbacks_disassembly.txt:192:    83db:	e8 a0 6a 00 00       	call   ee80 <OH_ResourceManager_GetRawFileSize@plt>
+  C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\OpenHarmony_secret_561\analysis\libsecret_callbacks_disassembly.txt:193:    83e0:	49 89 c5             	mov    %rax,%r13
+  C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\OpenHarmony_secret_561\analysis\libsecret_callbacks_disassembly.txt:194:    83e3:	48 89 c7             	mov    %rax,%rdi
+> C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\OpenHarmony_secret_561\analysis\libsecret_callbacks_disassembly.txt:195:    83e6:	e8 a5 6b 00 00       	call   ef90 <operator new[](unsigned long)@plt>
+  C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\OpenHarmony_secret_561\analysis\libsecret_callbacks_disassembly.txt:196:    83eb:	49 89 c7             	mov    %rax,%r15
+  C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\OpenHarmony_secret_561\analysis\libsecret_callbacks_disassembly.txt:197:    83ee:	48 89 c7             	mov    %rax,%rdi
+  C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\OpenHarmony_secret_561\analysis\libsecret_callbacks_disassembly.txt:199:    83f3:	4c 89 ea             	mov    %r13,%rdx
+> C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\OpenHarmony_secret_561\analysis\libsecret_callbacks_disassembly.txt:200:    83f6:	e8 a5 6b 00 00       	call   efa0 <memset@plt>
+  C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\OpenHarmony_secret_561\analysis\libsecret_callbacks_disassembly.txt:201:    83fb:	48 89 df             	mov    %rbx,%rdi
+  C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\OpenHarmony_secret_561\analysis\libsecret_callbacks_disassembly.txt:202:    83fe:	4c 89 fe             	mov    %r15,%rsi
+  C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\OpenHarmony_secret_561\analysis\libsecret_callbacks_disassembly.txt:203:    8401:	4c 89 ea             	mov    %r13,%rdx
+> C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\OpenHarmony_secret_561\analysis\libsecret_callbacks_disassembly.txt:204:    8404:	e8 87 6a 00 00       	call   ee90 <OH_ResourceManager_ReadRawFile@plt>
+  C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\OpenHarmony_secret_561\analysis\libsecret_callbacks_disassembly.txt:205:    8409:	48 89 df             	mov    %rbx,%rdi
+> C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\OpenHarmony_secret_561\analysis\libsecret_callbacks_disassembly.txt:206:    840c:	e8 8f 6a 00 00       	call   eea0 <OH_ResourceManager_CloseRawFile@plt>
+  C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\OpenHarmony_secret_561\analysis\libsecret_callbacks_disassembly.txt:207:    8411:	4c 89 f7             	mov    %r14,%rdi
+> C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\OpenHarmony_secret_561\analysis\libsecret_callbacks_disassembly.txt:208:    8414:	e8 97 6b 00 00       	call   efb0 <OH_ResourceManager_ReleaseNativeResourceManager@plt>
+  C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\OpenHarmony_secret_561\analysis\libsecret_callbacks_disassembly.txt:209:    8419:	48 8d 4c 24 08       	lea    0x8(%rsp),%rcx
+  C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\OpenHarmony_secret_561\analysis\libsecret_callbacks_disassembly.txt:210:    841e:	4c 89 e7             	mov    %r12,%rdi
+  C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\OpenHarmony_secret_561\analysis\libsecret_callbacks_disassembly.txt:212:    8424:	4c 89 ea             	mov    %r13,%rdx
+> C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\OpenHarmony_secret_561\analysis\libsecret_callbacks_disassembly.txt:213:    8427:	e8 94 6b 00 00       	call   efc0 <napi_create_string_utf8@plt>
+  C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\OpenHarmony_secret_561\analysis\libsecret_callbacks_disassembly.txt:214:    842c:	48 8b 5c 24 08       	mov    0x8(%rsp),%rbx
+  C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\OpenHarmony_secret_561\analysis\libsecret_callbacks_disassembly.txt:215:    8431:	4c 89 ff             	mov    %r15,%rdi
+> C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\OpenHarmony_secret_561\analysis\libsecret_callbacks_disassembly.txt:216:    8434:	e8 97 6b 00 00       	call   efd0 <operator delete[](void*)@plt>
+  C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\OpenHarmony_secret_561\analysis\libsecret_callbacks_disassembly.txt:217:    8439:	eb 0a                	jmp    8445 <RegisterEntryModule+0x3b5>
+  C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\OpenHarmony_secret_561\analysis\libsecret_callbacks_disassembly.txt:218:    843b:	4c 89 f7             	mov    %r14,%rdi
+> C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\OpenHarmony_secret_561\analysis\libsecret_callbacks_disassembly.txt:219:    843e:	e8 6d 6b 00 00       	call   efb0 <OH_ResourceManager_ReleaseNativeResourceManager@plt>
+  C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\OpenHarmony_secret_561\analysis\libsecret_callbacks_disassembly.txt:220:    8443:	31 db                	xor    %ebx,%ebx
+  C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\OpenHarmony_secret_561\analysis\libsecret_callbacks_disassembly.txt:221:    8445:	64 48 8b 04 25 28 00 	mov    %fs:0x28,%rax
+  C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\OpenHarmony_secret_561\analysis\libsecret_callbacks_disassembly.txt:222:    844c:	00 00 
+> C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\OpenHarmony_secret_561\analysis\libsecret_callbacks_disassembly.txt:223:    844e:	48 3b 84 24 38 01 00 	cmp    0x138(%rsp),%rax
+  C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\OpenHarmony_secret_561\analysis\libsecret_callbacks_disassembly.txt:224:    8455:	00 
+  C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\OpenHarmony_secret_561\analysis\libsecret_callbacks_disassembly.txt:225:    8456:	75 14                	jne    846c <RegisterEntryModule+0x3dc>
+  C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\OpenHarmony_secret_561\analysis\libsecret_callbacks_disassembly.txt:233:    846b:	c3                   	ret
+> C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\OpenHarmony_secret_561\analysis\libsecret_callbacks_disassembly.txt:234:    846c:	e8 bf 69 00 00       	call   ee30 <__stack_chk_fail@plt>
+  C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\OpenHarmony_secret_561\analysis\libsecret_callbacks_disassembly.txt:235:    8471:	eb 00                	jmp    8473 <RegisterEntryModule+0x3e3>
+  C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\OpenHarmony_secret_561\analysis\libsecret_callbacks_disassembly.txt:236:    8473:	48 89 c3             	mov    %rax,%rbx
+  C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\OpenHarmony_secret_561\analysis\libsecret_callbacks_disassembly.txt:237:    8476:	4c 89 ff             	mov    %r15,%rdi
+> C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\OpenHarmony_secret_561\analysis\libsecret_callbacks_disassembly.txt:238:    8479:	e8 52 6b 00 00       	call   efd0 <operator delete[](void*)@plt>
+  C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\OpenHarmony_secret_561\analysis\libsecret_callbacks_disassembly.txt:239:    847e:	48 89 df             	mov    %rbx,%rdi
+> C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\OpenHarmony_secret_561\analysis\libsecret_callbacks_disassembly.txt:240:    8481:	e8 6a 69 00 00       	call   edf0 <_Unwind_Resume@plt>
+  C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\OpenHarmony_secret_561\analysis\libsecret_callbacks_disassembly.txt:241:    8486:	cc                   	int3
+  C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\OpenHarmony_secret_561\analysis\libsecret_callbacks_disassembly.txt:242:    8487:	cc                   	int3
+  C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\OpenHarmony_secret_561\analysis\libsecret_callbacks_disassembly.txt:266:    84d1:	45 31 c9             	xor    %r9d,%r9d
+> C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\OpenHarmony_secret_561\analysis\libsecret_callbacks_disassembly.txt:267:    84d4:	e8 17 6a 00 00       	call   eef0 <napi_get_cb_info@plt>
+  C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\OpenHarmony_secret_561\analysis\libsecret_callbacks_disassembly.txt:268:    84d9:	c7 44 24 14 ff ff ff 	movl   $0xffffffff,0x14(%rsp)
+  C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\OpenHarmony_secret_561\analysis\libsecret_callbacks_disassembly.txt:269:    84e0:	ff
+  C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\OpenHarmony_secret_561\analysis\libsecret_callbacks_disassembly.txt:273:    84ee:	48 89 df             	mov    %rbx,%rdi
+> C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\OpenHarmony_secret_561\analysis\libsecret_callbacks_disassembly.txt:274:    84f1:	e8 ea 6a 00 00       	call   efe0 <napi_get_value_uint32@plt>
+  C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\OpenHarmony_secret_561\analysis\libsecret_callbacks_disassembly.txt:275:    84f6:	8b 7c 24 14          	mov    0x14(%rsp),%edi
+  C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\OpenHarmony_secret_561\analysis\libsecret_callbacks_disassembly.txt:276:    84fa:	48 8d 74 24 20       	lea    0x20(%rsp),%rsi
+  C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\OpenHarmony_secret_561\analysis\libsecret_callbacks_disassembly.txt:277:    84ff:	ba e8 03 00 00       	mov    $0x3e8,%edx
+> C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\OpenHarmony_secret_561\analysis\libsecret_callbacks_disassembly.txt:278:    8504:	e8 e7 6a 00 00       	call   eff0 <read@plt>
+> C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\OpenHarmony_secret_561\analysis\libsecret_callbacks_disassembly.txt:279:    8509:	48 83 f8 ff          	cmp    $0xffffffffffffffff,%rax
+  C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\OpenHarmony_secret_561\analysis\libsecret_callbacks_disassembly.txt:280:    850d:	74 17                	je     8526 <RegisterEntryModule+0x496>
+  C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\OpenHarmony_secret_561\analysis\libsecret_callbacks_disassembly.txt:281:    850f:	48 8d 74 24 20       	lea    0x20(%rsp),%rsi
+  C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\OpenHarmony_secret_561\analysis\libsecret_callbacks_disassembly.txt:284:    851c:	48 89 c2             	mov    %rax,%rdx
+> C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\OpenHarmony_secret_561\analysis\libsecret_callbacks_disassembly.txt:285:    851f:	e8 9c 6a 00 00       	call   efc0 <napi_create_string_utf8@plt>
+  C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\OpenHarmony_secret_561\analysis\libsecret_callbacks_disassembly.txt:286:    8524:	eb 0d                	jmp    8533 <RegisterEntryModule+0x4a3>
+  C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\OpenHarmony_secret_561\analysis\libsecret_callbacks_disassembly.txt:287:    8526:	48 8d 74 24 08       	lea    0x8(%rsp),%rsi
+  C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\OpenHarmony_secret_561\analysis\libsecret_callbacks_disassembly.txt:288:    852b:	48 89 df             	mov    %rbx,%rdi
+> C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\OpenHarmony_secret_561\analysis\libsecret_callbacks_disassembly.txt:289:    852e:	e8 cd 6a 00 00       	call   f000 <napi_get_undefined@plt>
+  C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\OpenHarmony_secret_561\analysis\libsecret_callbacks_disassembly.txt:290:    8533:	48 8b 44 24 08       	mov    0x8(%rsp),%rax
+  C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\OpenHarmony_secret_561\analysis\libsecret_callbacks_disassembly.txt:291:    8538:	64 48 8b 0c 25 28 00 	mov    %fs:0x28,%rcx
+  C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\OpenHarmony_secret_561\analysis\libsecret_callbacks_disassembly.txt:292:    853f:	00 00 
+> C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\OpenHarmony_secret_561\analysis\libsecret_callbacks_disassembly.txt:293:    8541:	48 3b 8c 24 18 04 00 	cmp    0x418(%rsp),%rcx
+  C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\OpenHarmony_secret_561\analysis\libsecret_callbacks_disassembly.txt:294:    8548:	00 
+  C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\OpenHarmony_secret_561\analysis\libsecret_callbacks_disassembly.txt:295:    8549:	75 09                	jne    8554 <RegisterEntryModule+0x4c4>
+  C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\OpenHarmony_secret_561\analysis\libsecret_callbacks_disassembly.txt:298:    8553:	c3                   	ret
+> C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\OpenHarmony_secret_561\analysis\libsecret_callbacks_disassembly.txt:299:    8554:	e8 d7 68 00 00       	call   ee30 <__stack_chk_fail@plt>
+  C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\OpenHarmony_secret_561\analysis\libsecret_callbacks_disassembly.txt:300:    8559:	cc                   	int3
+  C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\OpenHarmony_secret_561\analysis\libsecret_callbacks_disassembly.txt:301:    855a:	cc                   	int3
+=== init_proc excerpt ===
+
+C:\Users\mzj\Desktop\CTF\libsecret_x86_64_20260929.so:     file format elf64-x86-64
+
+
+Disassembly of section .text:
+
+0000000000007c20 <init_proc_(unsigned int*)>:
+    7c20:	55                   	push   %rbp
+    7c21:	41 57                	push   %r15
+    7c23:	41 56                	push   %r14
+    7c25:	41 55                	push   %r13
+    7c27:	41 54                	push   %r12
+    7c29:	53                   	push   %rbx
+    7c2a:	48 83 ec 58          	sub    $0x58,%rsp
+    7c2e:	64 48 8b 04 25 28 00 	mov    %fs:0x28,%rax
+    7c35:	00 00
+    7c37:	48 89 44 24 50       	mov    %rax,0x50(%rsp)
+    7c3c:	48 8b 05 ad 88 00 00 	mov    0x88ad(%rip),%rax        # 104f0 <fwrite@plt+0x13b0>
+    7c43:	0f 28 00             	movaps (%rax),%xmm0
+    7c46:	0f 29 44 24 40       	movaps %xmm0,0x40(%rsp)
+    7c4b:	8b 47 20             	mov    0x20(%rdi),%eax
+    7c4e:	44 8b 3f             	mov    (%rdi),%r15d
+    7c51:	44 8b 47 04          	mov    0x4(%rdi),%r8d
+    7c55:	8b 5f 10             	mov    0x10(%rdi),%ebx
+    7c58:	8b 4f 14             	mov    0x14(%rdi),%ecx
+    7c5b:	48 89 4c 24 08       	mov    %rcx,0x8(%rsp)
+    7c60:	44 8b 4f 18          	mov    0x18(%rdi),%r9d
+    7c64:	8b 6f 08             	mov    0x8(%rdi),%ebp
+    7c67:	44 8b 77 0c          	mov    0xc(%rdi),%r14d
+    7c6b:	48 89 7c 24 20       	mov    %rdi,0x20(%rsp)
+    7c70:	8b 4f 1c             	mov    0x1c(%rdi),%ecx
+    7c73:	41 bb b9 79 37 9e    	mov    $0x9e3779b9,%r11d
+    7c79:	ba f5 ff ff ff       	mov    $0xfffffff5,%edx
+    7c7e:	66 90                	xchg   %ax,%ax
+    7c80:	89 54 24 14          	mov    %edx,0x14(%rsp)
+    7c84:	4c 89 4c 24 38       	mov    %r9,0x38(%rsp)
+    7c89:	89 da                	mov    %ebx,%edx
+    7c8b:	48 89 54 24 18       	mov    %rdx,0x18(%rsp)
+    7c90:	41 89 e9             	mov    %ebp,%r9d
+    7c93:	44 89 f3             	mov    %r14d,%ebx
+    7c96:	44 89 c2             	mov    %r8d,%edx
+    7c99:	48 89 4c 24 28       	mov    %rcx,0x28(%rsp)
+    7c9e:	45 89 de             	mov    %r11d,%r14d
+    7ca1:	41 c1 ee 02          	shr    $0x2,%r14d
+    7ca5:	41 83 e6 03          	and    $0x3,%r14d
+    7ca9:	89 c6                	mov    %eax,%esi
+    7cab:	48 89 74 24 30       	mov    %rsi,0x30(%rsp)
+    7cb0:	c1 ee 05             	shr    $0x5,%esi
+    7cb3:	8d 2c 95 00 00 00 00 	lea    0x0(,%rdx,4),%ebp
+    7cba:	31 f5                	xor    %esi,%ebp
+    7cbc:	44 89 c7             	mov    %r8d,%edi
+    7cbf:	89 c6                	mov    %eax,%esi
+    7cc1:	c1 e6 04             	shl    $0x4,%esi
+    7cc4:	c1 ef 03             	shr    $0x3,%edi
+    7cc7:	31 fe                	xor    %edi,%esi
+    7cc9:	44 89 c7             	mov    %r8d,%edi
+    7ccc:	44 31 df             	xor    %r11d,%edi
+    7ccf:	01 ee                	add    %ebp,%esi
+    7cd1:	46 8b 64 b4 40       	mov    0x40(%rsp,%r14,4),%r12d
+    7cd6:	44 31 e0             	xor    %r12d,%eax
+    7cd9:	01 f8                	add    %edi,%eax
+    7cdb:	31 f0                	xor    %esi,%eax
+    7cdd:	41 01 c7             	add    %eax,%r15d
+    7ce0:	44 89 f8             	mov    %r15d,%eax
+    7ce3:	42 8d 34 8d 00 00 00 	lea    0x0(,%r9,4),%esi
+    7cea:	00
+    7ceb:	c1 e8 05             	shr    $0x5,%eax
+    7cee:	44 89 cf             	mov    %r9d,%edi
+    7cf1:	c1 ef 03             	shr    $0x3,%edi
+    7cf4:	44 89 fd             	mov    %r15d,%ebp
+    7cf7:	31 c6                	xor    %eax,%esi
+    7cf9:	c1 e5 04             	shl    $0x4,%ebp
+    7cfc:	45 89 ca             	mov    %r9d,%r10d
+    7cff:	45 31 da             	xor    %r11d,%r10d
+    7d02:	31 fd                	xor    %edi,%ebp
+    7d04:	44 89 f0             	mov    %r14d,%eax
+    7d07:	83 f0 01             	xor    $0x1,%eax
+    7d0a:	44 8b 6c 84 40       	mov    0x40(%rsp,%rax,4),%r13d
+    7d0f:	01 f5                	add    %esi,%ebp
+    7d11:	45 89 e8             	mov    %r13d,%r8d
+    7d14:	45 31 f8             	xor    %r15d,%r8d
+    7d17:	45 01 d0             	add    %r10d,%r8d
+    7d1a:	41 31 e8             	xor    %ebp,%r8d
+    7d1d:	41 01 d0             	add    %edx,%r8d
+    7d20:	44 89 c2             	mov    %r8d,%edx
+    7d23:	8d 34 9d 00 00 00 00 	lea    0x0(,%rbx,4),%esi
+    7d2a:	c1 ea 05             	shr    $0x5,%edx
+    7d2d:	89 df                	mov    %ebx,%edi
+    7d2f:	c1 ef 03             	shr    $0x3,%edi
+    7d32:	44 89 c0             	mov    %r8d,%eax
+    7d35:	31 d6                	xor    %edx,%esi
+    7d37:	c1 e0 04             	shl    $0x4,%eax
+    7d3a:	89 da                	mov    %ebx,%edx
+    7d3c:	44 31 da             	xor    %r11d,%edx
+    7d3f:	31 f8                	xor    %edi,%eax
+    7d41:	44 89 f7             	mov    %r14d,%edi
+    7d44:	83 f7 02             	xor    $0x2,%edi
+    7d47:	44 8b 54 bc 40       	mov    0x40(%rsp,%rdi,4),%r10d
+    7d4c:	01 f0                	add    %esi,%eax
+    7d4e:	44 89 d5             	mov    %r10d,%ebp
+    7d51:	44 31 c5             	xor    %r8d,%ebp
+    7d54:	01 d5                	add    %edx,%ebp
+    7d56:	31 c5                	xor    %eax,%ebp
+    7d58:	44 01 cd             	add    %r9d,%ebp
+    7d5b:	4c 8b 4c 24 38       	mov    0x38(%rsp),%r9
+    7d60:	89 e8                	mov    %ebp,%eax
+    7d62:	48 8b 4c 24 18       	mov    0x18(%rsp),%rcx
+    7d67:	8d 14 8d 00 00 00 00 	lea    0x0(,%rcx,4),%edx
+    7d6e:	c1 e8 05             	shr    $0x5,%eax
+    7d71:	31 c2                	xor    %eax,%edx
+    7d73:	89 c8                	mov    %ecx,%eax
+    7d75:	c1 e8 03             	shr    $0x3,%eax
+    7d78:	89 ee                	mov    %ebp,%esi
+    7d7a:	c1 e6 04             	shl    $0x4,%esi
+    7d7d:	31 c6                	xor    %eax,%esi
+    7d7f:	89 cf                	mov    %ecx,%edi
+    7d81:	01 d6                	add    %edx,%esi
+    7d83:	41 83 f6 03          	xor    $0x3,%r14d
+    7d87:	42 8b 4c b4 40       	mov    0x40(%rsp,%r14,4),%ecx
+    7d8c:	41 89 ce             	mov    %ecx,%r14d
+    7d8f:	44 31 df             	xor    %r11d,%edi
+    7d92:	41 31 ee             	xor    %ebp,%r14d
+    7d95:	41 01 fe             	add    %edi,%r14d
+    7d98:	41 31 f6             	xor    %esi,%r14d
+    7d9b:	41 01 de             	add    %ebx,%r14d
+    7d9e:	44 89 f2             	mov    %r14d,%edx
+    7da1:	c1 ea 05             	shr    $0x5,%edx
+    7da4:	48 8b 44 24 08       	mov    0x8(%rsp),%rax
+    7da9:	8d 34 85 00 00 00 00 	lea    0x0(,%rax,4),%esi
+    7db0:	31 d6                	xor    %edx,%esi
+    7db2:	89 c7                	mov    %eax,%edi
+    7db4:	c1 ef 03             	shr    $0x3,%edi
+    7db7:	44 89 f2             	mov    %r14d,%edx
+    7dba:	c1 e2 04             	shl    $0x4,%edx
+    7dbd:	31 fa                	xor    %edi,%edx
+    7dbf:	89 c7                	mov    %eax,%edi
+    7dc1:	44 31 df             	xor    %r11d,%edi
+    7dc4:	01 f2                	add    %esi,%edx
+    7dc6:	44 89 e3             	mov    %r12d,%ebx
+    7dc9:	44 31 f3             	xor    %r14d,%ebx
+    7dcc:	01 fb                	add    %edi,%ebx
+    7dce:	31 d3                	xor    %edx,%ebx
+    7dd0:	03 5c 24 18          	add    0x18(%rsp),%ebx
+    7dd4:	89 da                	mov    %ebx,%edx
+    7dd6:	42 8d 34 8d 00 00 00 	lea    0x0(,%r9,4),%esi
+    7ddd:	00
+    7dde:	c1 ea 05             	shr    $0x5,%edx
+    7de1:	31 d6                	xor    %edx,%esi
+    7de3:	44 89 ca             	mov    %r9d,%edx
+    7de6:	89 df                	mov    %ebx,%edi
+    7de8:	c1 ea 03             	shr    $0x3,%edx
+    7deb:	c1 e7 04             	shl    $0x4,%edi
+    7dee:	31 d7                	xor    %edx,%edi
+    7df0:	01 f7                	add    %esi,%edi
+    7df2:	44 89 ca             	mov    %r9d,%edx
+    7df5:	44 31 da             	xor    %r11d,%edx
+    7df8:	41 31 dd             	xor    %ebx,%r13d
+    7dfb:	41 01 d5             	add    %edx,%r13d
+    7dfe:	41 31 fd             	xor    %edi,%r13d
+    7e01:	44 01 e8             	add    %r13d,%eax
+    7e04:	89 c2                	mov    %eax,%edx
+    7e06:	4c 8b 6c 24 28       	mov    0x28(%rsp),%r13
+    7e0b:	42 8d 34 ad 00 00 00 	lea    0x0(,%r13,4),%esi
+    7e12:	00
+    7e13:	c1 ea 05             	shr    $0x5,%edx
+    7e16:	31 d6                	xor    %edx,%esi
+    7e18:	44 89 ea             	mov    %r13d,%edx
+    7e1b:	89 c7                	mov    %eax,%edi
+    7e1d:	c1 ea 03             	shr    $0x3,%edx
+    7e20:	c1 e7 04             	shl    $0x4,%edi
+    7e23:	31 d7                	xor    %edx,%edi
+    7e25:	01 f7                	add    %esi,%edi
+    7e27:	44 89 ea             	mov    %r13d,%edx
+    7e2a:	44 31 da             	xor    %r11d,%edx
+    7e2d:	48 89 44 24 08       	mov    %rax,0x8(%rsp)
+    7e32:	41 31 c2             	xor    %eax,%r10d
+    7e35:	41 01 d2             	add    %edx,%r10d
+    7e38:	41 31 fa             	xor    %edi,%r10d
+    7e3b:	45 01 d1             	add    %r10d,%r9d
+    7e3e:	44 89 ca             	mov    %r9d,%edx
+    7e41:	4c 8b 54 24 30       	mov    0x30(%rsp),%r10
+    7e46:	42 8d 34 95 00 00 00 	lea    0x0(,%r10,4),%esi
+    7e4d:	00
+    7e4e:	c1 ea 05             	shr    $0x5,%edx
+    7e51:	31 d6                	xor    %edx,%esi
+    7e53:	44 89 d2             	mov    %r10d,%edx
+    7e56:	44 89 cf             	mov    %r9d,%edi
+    7e59:	c1 ea 03             	shr    $0x3,%edx
+    7e5c:	c1 e7 04             	shl    $0x4,%edi
+    7e5f:	31 d7                	xor    %edx,%edi
+    7e61:	01 f7                	add    %esi,%edi
+    7e63:	44 89 d2             	mov    %r10d,%edx
+    7e66:	44 31 da             	xor    %r11d,%edx
+    7e69:	44 31 c9             	xor    %r9d,%ecx
+    7e6c:	01 d1                	add    %edx,%ecx
+    7e6e:	31 f9                	xor    %edi,%ecx
+    7e70:	44 01 e9             	add    %r13d,%ecx
+    7e73:	89 ca                	mov    %ecx,%edx
+    7e75:	42 8d 34 bd 00 00 00 	lea    0x0(,%r15,4),%esi
+    7e7c:	00
+    7e7d:	c1 ea 05             	shr    $0x5,%edx
+    7e80:	31 d6                	xor    %edx,%esi
+    7e82:	44 89 fa             	mov    %r15d,%edx
+    7e85:	89 cf                	mov    %ecx,%edi
+    7e87:	c1 ea 03             	shr    $0x3,%edx
+    7e8a:	c1 e7 04             	shl    $0x4,%edi
+    7e8d:	31 d7                	xor    %edx,%edi
+    7e8f:	01 f7                	add    %esi,%edi
+    7e91:	44 89 fa             	mov    %r15d,%edx
+    7e94:	44 31 da             	xor    %r11d,%edx
+    7e97:	41 31 cc             	xor    %ecx,%r12d
+    7e9a:	41 01 d4             	add    %edx,%r12d
+    7e9d:	8b 54 24 14          	mov    0x14(%rsp),%edx
+    7ea1:	41 31 fc             	xor    %edi,%r12d
+    7ea4:	44 89 e0             	mov    %r12d,%eax
+    7ea7:	44 01 d0             	add    %r10d,%eax
+    7eaa:	41 81 c3 b9 79 37 9e 	add    $0x9e3779b9,%r11d
+    7eb1:	ff c2                	inc    %edx
+    7eb3:	0f 85 c7 fd ff ff    	jne    7c80 <init_proc_(unsigned int*)+0x60>
+    7eb9:	48 8b 54 24 20       	mov    0x20(%rsp),%rdx
+=== formula variant script ===
+import hashlib
+patterns=['137524860','1,3,7,5,2,4,8,6,0','012345678','0,1,2,3,4,5,6,7,8']
+suffix='Harmony5337'
+for pattern in patterns:
+    raw=pattern+suffix
+    print('password_repr=',repr(pattern),'md5_input=',repr(raw),'md5=',hashlib.md5(raw.encode()).hexdigest(),'flag=flag{'+hashlib.md5(raw.encode()).hexdigest()+'}')
+=== prior example brute-force summary ===
+import hashlib,itertools,time
+wanted='871f72716d85a6374f438ea70c2fd62c'
+suffix='Harmony5337'
+start=time.perf_counter(); count=0; found=[]
+for length in range(4,10):
+    for tup in itertools.permutations('012345678',length):
+        raw=''.join(tup)
+        count+=1
+        if hashlib.md5((raw+suffix).encode()).hexdigest()==wanted:
+            found.append(('joined',raw))
+        if hashlib.md5((',' .join(tup)+suffix).encode()).hexdigest()==wanted:
+            found.append(('comma',','.join(tup)))
+print('tested',count,'unique digit sequences lengths 4..9 in joined/comma format')
+print('matches',found)
+print('elapsed_seconds',round(time.perf_counter()-start,3))
+**********************
+PowerShell transcript end
+End time: 20260929045842
+**********************
+**********************
+PowerShell transcript start
+Start time: 20260929045856
+Username: DESKTOP-412KTAR\mzj
+RunAs User: DESKTOP-412KTAR\mzj
+Configuration Name: 
+Machine: DESKTOP-412KTAR (Microsoft Windows NT 10.0.26200.0)
+Host Application: C:\Users\mzj\.cache\codex-runtimes\codex-primary-runtime\dependencies\native\powershell\pwsh.dll -Command try { [Console]::OutputEncoding=[System.Text.Encoding]::UTF8 } catch {}
+$log='arkt561_analysis_transcript_20260929.txt'; Start-Transcript -LiteralPath $log -Append; Write-Output 'COMMAND> inspect reproducible native pattern inverse implementation'; Get-Content -LiteralPath '.\analysis\recover_pattern_561.py'; Stop-Transcript
+Process ID: 30996
+PSVersion: 7.6.5
+PSEdition: Core
+GitCommitId: 7.6.5
+OS: Microsoft Windows 10.0.26200
+Platform: Win32NT
+PSCompatibleVersions: 1.0, 2.0, 3.0, 4.0, 5.0, 5.1, 6.0, 7.0
+PSRemotingProtocolVersion: 2.4
+SerializationVersion: 1.1.0.1
+WSManStackVersion: 3.0
+**********************
+Transcript started, output file is arkt561_analysis_transcript_20260929.txt
+COMMAND> inspect reproducible native pattern inverse implementation
+#!/usr/bin/env python3
+"""Recover the 9-point pattern from OpenHarmony_secret's native verifier.
+
+Evidence: libsecret.so::verifyPattern requires nine int32 values, copies the
+hard-coded 9-word array, calls init_proc, and compares the transformed values
+against that array. init_proc is the standard XXTEA encryption loop with
+delta=0x9e3779b9 and rounds=6+52/n. The fixed key and target words are stored
+in the ELF .data section as `what` and `is` respectively.
+"""
+
+from __future__ import annotations
+
+import hashlib
+import struct
+import sys
+from pathlib import Path
+
+MASK = 0xFFFFFFFF
+DELTA = 0x9E3779B9
+DATA_FILE_OFFSET = 0xE720  # .data VMA 0x11720, file offset 0xE720
+KEY_RELATIVE_OFFSET = 0x10  # `what` at VMA 0x11730
+TARGET_RELATIVE_OFFSET = 0x20  # `is` at VMA 0x11740
+WORDS = 9
+
+
+def mx(z: int, y: int, total: int, key: tuple[int, ...], e: int, p: int) -> int:
+    return (
+        (((z >> 5) ^ (y << 2)) + ((y >> 3) ^ (z << 4)))
+        ^ ((total ^ y) + (key[(p & 3) ^ e] ^ z))
+    ) & MASK
+
+
+def encrypt(values: list[int], key: tuple[int, ...]) -> list[int]:
+    v = [x & MASK for x in values]
+    n = len(v)
+    rounds = 6 + 52 // n
+    total = 0
+    z = v[-1]
+    while rounds:
+        total = (total + DELTA) & MASK
+        e = (total >> 2) & 3
+        for p in range(n - 1):
+            y = v[p + 1]
+            v[p] = (v[p] + mx(z, y, total, key, e, p)) & MASK
+            z = v[p]
+        y = v[0]
+        v[-1] = (v[-1] + mx(z, y, total, key, e, n - 1)) & MASK
+        z = v[-1]
+        rounds -= 1
+    return v
+
+
+def decrypt(values: list[int], key: tuple[int, ...]) -> list[int]:
+    v = [x & MASK for x in values]
+    n = len(v)
+    rounds = 6 + 52 // n
+    total = (rounds * DELTA) & MASK
+    y = v[0]
+    while total:
+        e = (total >> 2) & 3
+        for p in range(n - 1, 0, -1):
+            z = v[p - 1]
+            v[p] = (v[p] - mx(z, y, total, key, e, p)) & MASK
+            y = v[p]
+        z = v[-1]
+        v[0] = (v[0] - mx(z, y, total, key, e, 0)) & MASK
+        y = v[0]
+        total = (total - DELTA) & MASK
+    return v
+
+
+def main() -> None:
+    path = Path(sys.argv[1])
+    blob = path.read_bytes()
+    key = struct.unpack_from("<4I", blob, DATA_FILE_OFFSET + KEY_RELATIVE_OFFSET)
+    target = list(
+        struct.unpack_from("<9I", blob, DATA_FILE_OFFSET + TARGET_RELATIVE_OFFSET)
+    )
+    pattern = decrypt(target, key)
+    check = encrypt(pattern, key)
+    if check != target:
+        raise SystemExit("round-trip check failed")
+
+    # The ArkTS callback calls Array.toString(), which yields comma-separated
+    # point indices. Keep the compact form only as an alternate because the
+    # prose hint's example omits commas and its example digest is inconsistent.
+    password_array_string = ",".join(str(value) for value in pattern)
+    password_compact = "".join(str(value) for value in pattern)
+    flag_digest_array = hashlib.md5(
+        (password_array_string + "Harmony5337").encode("ascii")
+    ).hexdigest()
+    flag_digest_compact = hashlib.md5(
+        (password_compact + "Harmony5337").encode("ascii")
+    ).hexdigest()
+    example_digest_computed = hashlib.md5(
+        b"012345678Harmony5337"
+    ).hexdigest()
+    print(f"ELF attachment = {path}")
+    print(f"key words       = {[hex(value) for value in key]}")
+    print(f"target words    = {[hex(value) for value in target]}")
+    print(f"decrypted words = {pattern}")
+    print(f"re-encrypt      = {[hex(value) for value in check]}")
+    print(f"round-trip      = {check == target}")
+    print(f"PatternLock Array.toString() = {password_array_string}")
+    print(f"compact candidate password  = {password_compact}")
+    print(f"MD5(comma path+Harmony5337)  = {flag_digest_array}")
+    print(f"MD5(compact+Harmony5337)     = {flag_digest_compact}")
+    print(f"example digest in source     = 871f72716d85a6374f438ea70c2fd62c")
+    print(f"example digest recomputed    = {example_digest_computed}")
+    print(f"primary candidate flag      = flag{{{flag_digest_array}}}")
+    print(f"alternate candidate flag    = flag{{{flag_digest_compact}}}")
+
+
+if __name__ == "__main__":
+    main()
+**********************
+PowerShell transcript end
+End time: 20260929045856
+**********************
+**********************
+PowerShell transcript start
+Start time: 20260929050050
+Username: DESKTOP-412KTAR\mzj
+RunAs User: DESKTOP-412KTAR\mzj
+Configuration Name: 
+Machine: DESKTOP-412KTAR (Microsoft Windows NT 10.0.26200.0)
+Host Application: C:\Users\mzj\.cache\codex-runtimes\codex-primary-runtime\dependencies\native\powershell\pwsh.dll -Command try { [Console]::OutputEncoding=[System.Text.Encoding]::UTF8 } catch {}
+$log='arkt561_analysis_transcript_20260929.txt'; Start-Transcript -LiteralPath $log -Append; Write-Output 'COMMAND> compute original artifact SHA256 and independently derive the native pattern plus likely digest encodings'; Get-FileHash -LiteralPath '.\secret_platform_20260929.zip','.\secret.hap','.\hap_contents\ets\modules.abc','.\hap_contents\libs\x86_64\libsecret.so' -Algorithm SHA256 | Format-Table -AutoSize; Write-Output '=== independent XXTEA and formula variants ==='; python .\analysis\independent_rederive_secret561.py; Write-Output ('EXIT_CODE=' + $LASTEXITCODE); Write-Output '=== existing native solver cross-check ==='; python .\analysis\recover_pattern_561.py .\hap_contents\libs\x86_64\libsecret.so; Write-Output ('EXIT_CODE=' + $LASTEXITCODE); Stop-Transcript
+Process ID: 31016
+PSVersion: 7.6.5
+PSEdition: Core
+GitCommitId: 7.6.5
+OS: Microsoft Windows 10.0.26200
+Platform: Win32NT
+PSCompatibleVersions: 1.0, 2.0, 3.0, 4.0, 5.0, 5.1, 6.0, 7.0
+PSRemotingProtocolVersion: 2.4
+SerializationVersion: 1.1.0.1
+WSManStackVersion: 3.0
+**********************
+Transcript started, output file is arkt561_analysis_transcript_20260929.txt
+COMMAND> compute original artifact SHA256 and independently derive the native pattern plus likely digest encodings
+
+Algorithm Hash                                                             Path
+--------- ----                                                             ----
+SHA256    77177B600FEA6DA73C41935763ED555047F15CB7F17B7A707550BBD9E633080F C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\…
+SHA256    743EB75674EB2BBF8696D5414FD9E122236022E49FB2C30D19A1D24D76D07720 C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\…
+SHA256    114534191129BB84CF11E3B1021D8E4F3A85E34C72DE34464D48A1BA8237FE83 C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\…
+SHA256    388EC90B343F5C74E70F2ECB5F83098F9C3A09F23B6222F59F33F2587967627A C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\…
+
+=== independent XXTEA and formula variants ===
+
+EXIT_CODE=0
+=== existing native solver cross-check ===
+
+EXIT_CODE=0
+**********************
+PowerShell transcript end
+End time: 20260929050051
+**********************
+**********************
+PowerShell transcript start
+Start time: 20260929050115
+Username: DESKTOP-412KTAR\mzj
+RunAs User: DESKTOP-412KTAR\mzj
+Configuration Name: 
+Machine: DESKTOP-412KTAR (Microsoft Windows NT 10.0.26200.0)
+Host Application: C:\Users\mzj\.cache\codex-runtimes\codex-primary-runtime\dependencies\native\powershell\pwsh.dll -Command try { [Console]::OutputEncoding=[System.Text.Encoding]::UTF8 } catch {}
+$log='arkt561_analysis_transcript_20260929.txt'; Start-Transcript -LiteralPath $log -Append; Write-Output 'COMMAND> recheck ArkTS default PatternLock, callback argument flow, and final-page hash input from saved disassembly'; Select-String -LiteralPath '.\analysis\disassemble_app_output.txt' -Pattern 'defaultPassword|onPatternComplete|verifyPattern|enter password|Harmony5337|MD5|MD5' -Context 2,5 | Select-Object -First 90 | ForEach-Object { $_.ToString() }; Stop-Transcript
+Process ID: 30308
+PSVersion: 7.6.5
+PSEdition: Core
+GitCommitId: 7.6.5
+OS: Microsoft Windows 10.0.26200
+Platform: Win32NT
+PSCompatibleVersions: 1.0, 2.0, 3.0, 4.0, 5.0, 5.1, 6.0, 7.0
+PSRemotingProtocolVersion: 2.4
+SerializationVersion: 1.1.0.1
+WSManStackVersion: 3.0
+**********************
+Transcript started, output file is arkt561_analysis_transcript_20260929.txt
+COMMAND> recheck ArkTS default PatternLock, callback argument flow, and final-page hash input from saved disassembly
+  C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\OpenHarmony_secret_561\analysis\disassemble_app_output.txt:3130:001f: return    [64]
+  C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\OpenHarmony_secret_561\analysis\disassemble_app_output.txt:3131:
+> C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\OpenHarmony_secret_561\analysis\disassemble_app_output.txt:3132:METHOD L&entry/src/main/ets/pages/final&;::getMd5 code_off=0x1f61f debug=0x39a1c vregs=10 args=4 size=79 tries=0
+  C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\OpenHarmony_secret_561\analysis\disassemble_app_output.txt:3133:0000: mov v1:out:any, v2:in:any v1=10, v2=0    [44 a0]
+  C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\OpenHarmony_secret_561\analysis\disassemble_app_output.txt:3134:0002: mov v1:out:any, v2:in:any v1=11, v2=1    [44 b1]
+  C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\OpenHarmony_secret_561\analysis\disassemble_app_output.txt:3135:0004: mov v1:out:any, v2:in:any v1=12, v2=2    [44 c2]
+  C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\OpenHarmony_secret_561\analysis\disassemble_app_output.txt:3136:0006: mov v1:out:any, v2:in:any v1=13, v2=3    [44 d3]
+  C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\OpenHarmony_secret_561\analysis\disassemble_app_output.txt:3137:0008: ldexternalmodulevar imm:u8 imm=1    [7e 01]
+  C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\OpenHarmony_secret_561\analysis\disassemble_app_output.txt:3139:000e: sta v:out:any v=7    [61 07]
+  C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\OpenHarmony_secret_561\analysis\disassemble_app_output.txt:3140:0010: lda v:in:any v=7    [60 07]
+> C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\OpenHarmony_secret_561\analysis\disassemble_app_output.txt:3141:0012: ldobjbyname imm:u16, string_id imm=0, id=0x121->'MD5'    [42 00 21 01]
+  C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\OpenHarmony_secret_561\analysis\disassemble_app_output.txt:3142:0016: sta v:out:any v=6    [61 06]
+  C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\OpenHarmony_secret_561\analysis\disassemble_app_output.txt:3143:0018: lda v:in:any v=3    [60 03]
+  C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\OpenHarmony_secret_561\analysis\disassemble_app_output.txt:3144:001a: sta v:out:any v=8    [61 08]
+  C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\OpenHarmony_secret_561\analysis\disassemble_app_output.txt:3145:001c: lda v:in:any v=6    [60 06]
+  C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\OpenHarmony_secret_561\analysis\disassemble_app_output.txt:3146:001e: callthis1 imm:u8, v1:in:top, v2:in:top imm=2, v1=7, v2=8    [2e 02 07 08]
+  C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\OpenHarmony_secret_561\analysis\disassemble_app_output.txt:4135:007e: sta v:out:any v=10    [61 0a]
+  C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\OpenHarmony_secret_561\analysis\disassemble_app_output.txt:4136:0080: lda.str string_id id=0x151->'0,1,2,3,4,5,6,7,8'    [3e 51 01]
+> C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\OpenHarmony_secret_561\analysis\disassemble_app_output.txt:4137:0083: stobjbyname imm:u16, string_id, v:in:top imm=10, id=0x15e->'defaultPassword', v=10    [43 0a 5e 01 0a]
+  C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\OpenHarmony_secret_561\analysis\disassemble_app_output.txt:4138:0088: lda v:in:any v=2    [60 02]
+  C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\OpenHarmony_secret_561\analysis\disassemble_app_output.txt:4139:008a: throw.ifsupernotcorrectcall imm:u16 imm=0    [fe 07 00]
+  C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\OpenHarmony_secret_561\analysis\disassemble_app_output.txt:4140:008d: sta v:out:any v=10    [61 0a]
+  C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\OpenHarmony_secret_561\analysis\disassemble_app_output.txt:4141:008f: tryldglobalbyname imm:u16, string_id imm=12, id=0x155->'PatternLockController'    [3f 0c 55 01]
+  C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\OpenHarmony_secret_561\analysis\disassemble_app_output.txt:4142:0093: sta v:out:any v=11    [61 0b]
+  C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\OpenHarmony_secret_561\analysis\disassemble_app_output.txt:4832:0101: sta v:out:any v=7    [61 07]
+  C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\OpenHarmony_secret_561\analysis\disassemble_app_output.txt:4833:0103: lda v:in:any v=7    [60 07]
+> C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\OpenHarmony_secret_561\analysis\disassemble_app_output.txt:4834:0105: ldobjbyname imm:u16, string_id imm=56, id=0x165->'onPatternComplete'    [42 38 65 01]
+  C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\OpenHarmony_secret_561\analysis\disassemble_app_output.txt:4835:0109: sta v:out:any v=6    [61 06]
+  C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\OpenHarmony_secret_561\analysis\disassemble_app_output.txt:4836:010b: definefunc imm1:u16, method_id, imm2:u8 imm1=58, id=0x178, imm2=1    [33 3a 78 01 01]
+  C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\OpenHarmony_secret_561\analysis\disassemble_app_output.txt:4837:0110: sta v:out:any v=8    [61 08]
+  C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\OpenHarmony_secret_561\analysis\disassemble_app_output.txt:4838:0112: lda v:in:any v=6    [60 06]
+  C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\OpenHarmony_secret_561\analysis\disassemble_app_output.txt:4839:0114: callthis1 imm:u8, v1:in:top, v2:in:top imm=59, v1=7, v2=8    [2e 3b 07 08]
+  C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\OpenHarmony_secret_561\analysis\disassemble_app_output.txt:4923:0010: ldobjbyname imm:u16, string_id imm=1, id=0x164->'log'    [42 01 64 01]
+  C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\OpenHarmony_secret_561\analysis\disassemble_app_output.txt:4924:0014: sta v:out:any v=5    [61 05]
+> C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\OpenHarmony_secret_561\analysis\disassemble_app_output.txt:4925:0016: lda.str string_id id=0x15f->'enter password :'    [3e 5f 01]
+  C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\OpenHarmony_secret_561\analysis\disassemble_app_output.txt:4926:0019: sta v:out:any v=7    [61 07]
+  C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\OpenHarmony_secret_561\analysis\disassemble_app_output.txt:4927:001b: lda v:in:any v=3    [60 03]
+  C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\OpenHarmony_secret_561\analysis\disassemble_app_output.txt:4928:001d: sta v:out:any v=9    [61 09]
+  C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\OpenHarmony_secret_561\analysis\disassemble_app_output.txt:4929:001f: lda v:in:any v=9    [60 09]
+  C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\OpenHarmony_secret_561\analysis\disassemble_app_output.txt:4930:0021: ldobjbyname imm:u16, string_id imm=3, id=0x12c->'toString'    [42 03 2c 01]
+  C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\OpenHarmony_secret_561\analysis\disassemble_app_output.txt:4976:008d: returnundefined    [65]
+  C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\OpenHarmony_secret_561\analysis\disassemble_app_output.txt:4977:008e: ldexternalmodulevar imm:u8 imm=3    [7e 03]
+> C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\OpenHarmony_secret_561\analysis\disassemble_app_output.txt:4978:0090: throw.undefinedifholewithname string_id id=0x16c->'verifyPattern'    [fe 09 6c 01]
+  C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\OpenHarmony_secret_561\analysis\disassemble_app_output.txt:4979:0094: sta v:out:any v=6    [61 06]
+  C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\OpenHarmony_secret_561\analysis\disassemble_app_output.txt:4980:0096: lda v:in:any v=6    [60 06]
+> C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\OpenHarmony_secret_561\analysis\disassemble_app_output.txt:4981:0098: ldobjbyname imm:u16, string_id imm=22, id=0x16c->'verifyPattern'    [42 16 6c 01]
+  C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\OpenHarmony_secret_561\analysis\disassemble_app_output.txt:4982:009c: sta v:out:any v=5    [61 05]
+  C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\OpenHarmony_secret_561\analysis\disassemble_app_output.txt:4983:009e: lda v:in:any v=3    [60 03]
+  C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\OpenHarmony_secret_561\analysis\disassemble_app_output.txt:4984:00a0: sta v:out:any v=7    [61 07]
+  C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\OpenHarmony_secret_561\analysis\disassemble_app_output.txt:4985:00a2: lda v:in:any v=5    [60 05]
+  C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\OpenHarmony_secret_561\analysis\disassemble_app_output.txt:4986:00a4: callthis1 imm:u8, v1:in:top, v2:in:top imm=24, v1=6, v2=7    [2e 18 06 07]
+  C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\OpenHarmony_secret_561\analysis\disassemble_app_output.txt:5289:000a: sta v:out:any v=6    [61 06]
+  C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\OpenHarmony_secret_561\analysis\disassemble_app_output.txt:5290:000c: lda v:in:any v=6    [60 06]
+> C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\OpenHarmony_secret_561\analysis\disassemble_app_output.txt:5291:000e: ldobjbyname imm:u16, string_id imm=0, id=0x15e->'defaultPassword'    [42 00 5e 01]
+  C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\OpenHarmony_secret_561\analysis\disassemble_app_output.txt:5292:0012: sta v:out:any v=5    [61 05]
+  C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\OpenHarmony_secret_561\analysis\disassemble_app_output.txt:5293:0014: ldundefined    [00]
+  C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\OpenHarmony_secret_561\analysis\disassemble_app_output.txt:5294:0015: strictnoteq imm:u8, v:in:top imm=2, v=5    [27 02 05]
+  C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\OpenHarmony_secret_561\analysis\disassemble_app_output.txt:5295:0018: jeqz imm:i32 imm=21    [4f 15]
+  C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\OpenHarmony_secret_561\analysis\disassemble_app_output.txt:5296:001a: lda v:in:any v=2    [60 02]
+  C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\OpenHarmony_secret_561\analysis\disassemble_app_output.txt:5299:0020: sta v:out:any v=6    [61 06]
+  C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\OpenHarmony_secret_561\analysis\disassemble_app_output.txt:5300:0022: lda v:in:any v=6    [60 06]
+> C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\OpenHarmony_secret_561\analysis\disassemble_app_output.txt:5301:0024: ldobjbyname imm:u16, string_id imm=3, id=0x15e->'defaultPassword'    [42 03 5e 01]
+> C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\OpenHarmony_secret_561\analysis\disassemble_app_output.txt:5302:0028: stobjbyname imm:u16, string_id, v:in:top imm=5, id=0x15e->'defaultPassword', v=5    [43 05 5e 01 05]
+  C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\OpenHarmony_secret_561\analysis\disassemble_app_output.txt:5303:002d: lda v:in:any v=3    [60 03]
+  C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\OpenHarmony_secret_561\analysis\disassemble_app_output.txt:5304:002f: sta v:out:any v=6    [61 06]
+  C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\OpenHarmony_secret_561\analysis\disassemble_app_output.txt:5305:0031: lda v:in:any v=6    [60 06]
+  C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\OpenHarmony_secret_561\analysis\disassemble_app_output.txt:5306:0033: ldobjbyname imm:u16, string_id imm=7, id=0x16a->'patternLockController'    [42 07 6a 01]
+  C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\OpenHarmony_secret_561\analysis\disassemble_app_output.txt:5307:0037: sta v:out:any v=5    [61 05]
+**********************
+PowerShell transcript end
+End time: 20260929050115
+**********************
+**********************
+PowerShell transcript start
+Start time: 20260929050237
+Username: DESKTOP-412KTAR\mzj
+RunAs User: DESKTOP-412KTAR\mzj
+Configuration Name: 
+Machine: DESKTOP-412KTAR (Microsoft Windows NT 10.0.26200.0)
+Host Application: C:\Users\mzj\.cache\codex-runtimes\codex-primary-runtime\dependencies\native\powershell\pwsh.dll -Command try { [Console]::OutputEncoding=[System.Text.Encoding]::UTF8 } catch {}
+$log='arkt561_analysis_transcript_20260929.txt'; Start-Transcript -LiteralPath $log -Append; Write-Output 'COMMAND> inspect final WP lines before appending independent recheck section'; Get-Content -LiteralPath '.\WP.md' -Tail 35; Stop-Transcript
+Process ID: 33240
+PSVersion: 7.6.5
+PSEdition: Core
+GitCommitId: 7.6.5
+OS: Microsoft Windows 10.0.26200
+Platform: Win32NT
+PSCompatibleVersions: 1.0, 2.0, 3.0, 4.0, 5.0, 5.1, 6.0, 7.0
+PSRemotingProtocolVersion: 2.4
+SerializationVersion: 1.1.0.1
+WSManStackVersion: 3.0
+**********************
+Transcript started, output file is arkt561_analysis_transcript_20260929.txt
+COMMAND> inspect final WP lines before appending independent recheck section
+后续状态：当前没有由现存附件唯一支持、且尚未测试的 flag 候选。示例值与明文自己的公式不一致，不纳入候选；只有出现新的独立技术证据时才继续推导。
+
+## 8. 独立审计补记（2026-09-29）
+
+本轮独立复查没有再向平台提交任何内容。完整 PowerShell 命令和输出保存在 `analysis/agent_secret561_independent_audit_20260929.txt`。
+
+### 8.1 附件与逆向结果复核
+
+- 重新计算的题包 SHA-256 为 `77177B600FEA6DA73C41935763ED555047F15CB7F17B7A707550BBD9E633080F`；HAP 为 `743EB75674EB2BBF8696D5414FD9E122236022E49FB2C30D19A1D24D76D07720`；所用 `libs/x86_64/libsecret.so` 为 `388EC90B343F5C74E70F2ECB5F83098F9C3A09F23B6222F59F33F2587967627A`。
+- 再次执行 `recover_pattern_561.py`，恢复数组 `[1,3,7,5,2,4,8,6,0]`，XXTEA 重新加密后的 9 个 word 与 native `.data` 中目标 `is` 全部相同，`round-trip = True`。
+- `verifyPattern` 的反汇编逐项证实 N-API 取 9 个数组元素并转换为 int32，调用 `init_proc_`，然后比较变换结果与目标数组。因此反演所得数组是此附件 native 校验器所期望的输入。
+
+### 8.2 ArkTS 数据流再核对
+
+- `pages/lock::Index` 将字符串 `0,1,2,3,4,5,6,7,8` 设为 PatternLock 的 `defaultPassword` 属性；这是组件配置值，不是成功回调的哈希输入。
+- PatternLock 的 `onPatternComplete` 回调先执行 `input.toString()` 并将文本传入 `console.log('enter password :', ...)`；接下来直接将原数组传给 `secret.verifyPattern(input)`。由此日志形式虽为 `1,3,7,5,2,4,8,6,0`，但校验器接收的是数组，逗号文本没有传给验证器。
+- native 验证成功后，回调只路由到 final 页面。final 页独立从运行时私有目录读取 `bb.txt`（照片 Base64），其 MD5 用来解开应用资源中的 AES 提示；final 未读取 PatternLock 数组，也没有把它作为最终 MD5 的调用参数。
+- 因而“实际 pattern 的节点编号串接后加 Harmony5337”是依据资源提示推导的外部 flag 计算，而不是应用运行时执行的哈希逻辑。原数组的逗号表示只用于日志；提示写明无逗号时，紧凑候选是 `flag{8b4ec604943712483bfca67cacf85f1a}`。
+
+### 8.3 示例 MD5 矛盾及候选边界
+
+独立复算得到：
+
+```text
+MD5("012345678Harmony5337")         = a8f2f50ac7bcf159d3e017721542768b
+题目明文声称该示例的摘要为            = 871f72716d85a6374f438ea70c2fd62c
+MD5("137524860Harmony5337")          = 8b4ec604943712483bfca67cacf85f1a
+MD5("1,3,7,5,2,4,8,6,0Harmony5337")   = 429ebe492a801046d1a43c328db88e7f
+```
+
+差异不是大小写或是否含逗号造成的：`check_formula_variants.py` 核对了常见表示；`brute_pattern_example_hash.py` 穷举了节点 `0`–`8` 不重复、长度 4–9 的所有序列，分别以紧凑串和逗号串拼接后缀，共测试 985,824 个输入，目标 `871f...` 的命中数为 0。故 `flag{871f72716d85a6374f438ea70c2fd62c}` 仅是与公式冲突的字面示例，不应当作推导结果或“备用候选”。
+
+### 8.4 当前结论
+
+本地强证据支持的 flag 推导只有实际 path 的紧凑串结果 `flag{8b4ec604943712483bfca67cacf85f1a}`。该紧凑候选与逗号候选都曾在玄机页面提交并未获通过回执，页面仍显示 `0/1`；所以它目前只是有证据的本地推导，**题目未解出/未平台验证**。题目示例摘要存在源材料内部错误；继续枚举或提交该示例不能修复这个矛盾。需要新的独立证据（例如题目维护方更正的公式/附件，或对 native/界面输入语义的新发现）才能可靠推进。
+**********************
+PowerShell transcript end
+End time: 20260929050237
+**********************
+**********************
+PowerShell transcript start
+Start time: 20260929050317
+Username: DESKTOP-412KTAR\mzj
+RunAs User: DESKTOP-412KTAR\mzj
+Configuration Name: 
+Machine: DESKTOP-412KTAR (Microsoft Windows NT 10.0.26200.0)
+Host Application: C:\Users\mzj\.cache\codex-runtimes\codex-primary-runtime\dependencies\native\powershell\pwsh.dll -Command try { [Console]::OutputEncoding=[System.Text.Encoding]::UTF8 } catch {}
+$log='arkt561_analysis_transcript_20260929.txt'; Start-Transcript -LiteralPath $log -Append; Write-Output 'COMMAND> inspect resource prompt decryption script entrypoint before reproducing it'; Get-Content -LiteralPath '.\analysis\probe_resource_index_secret.py'; Stop-Transcript
+Process ID: 23328
+PSVersion: 7.6.5
+PSEdition: Core
+GitCommitId: 7.6.5
+OS: Microsoft Windows 10.0.26200
+Platform: Win32NT
+PSCompatibleVersions: 1.0, 2.0, 3.0, 4.0, 5.0, 5.1, 6.0, 7.0
+PSRemotingProtocolVersion: 2.4
+SerializationVersion: 1.1.0.1
+WSManStackVersion: 3.0
+**********************
+Transcript started, output file is arkt561_analysis_transcript_20260929.txt
+COMMAND> inspect resource prompt decryption script entrypoint before reproducing it
+from pathlib import Path
+import base64, hashlib, subprocess, sys
+sys.stdout.reconfigure(encoding='utf-8', errors='backslashreplace')
+root=Path(r'C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\OpenHarmony_secret_561')
+analysis=root/'analysis'
+cipher_b64=(analysis/'resource_index_salted_ciphertext.b64').read_bytes()
+img=(analysis/'enc.recovered.jpg').read_bytes()
+full=(analysis/'enc.custom-sm4-decrypted.bin').read_bytes()
+img_b64=base64.b64encode(img)
+full_b64=base64.b64encode(full)
+candidates=[
+ ('md5.jpg.b64.lower',hashlib.md5(img_b64).hexdigest()),
+ ('md5.jpg.b64.upper',hashlib.md5(img_b64).hexdigest().upper()),
+ ('md5.jpg.bytes.lower',hashlib.md5(img).hexdigest()),
+ ('md5.jpg.bytes.upper',hashlib.md5(img).hexdigest().upper()),
+ ('md5.full.b64.lower',hashlib.md5(full_b64).hexdigest()),
+ ('md5.full.bytes.lower',hashlib.md5(full).hexdigest()),
+ ('33cr33','33cr33'),('53cr37','53cr37'),('secret','secret'),('Secret','Secret')]
+openssl=r'C:\msys64\mingw64\bin\openssl.exe'
+for label,password in candidates:
+    p=subprocess.run([openssl,'enc','-d','-aes-256-cbc','-md','md5','-a','-A','-pass','pass:'+password],input=cipher_b64,capture_output=True)
+    preview=p.stdout.decode('utf-8','replace')[:220]
+    print(f'{label}: exit={p.returncode} bytes={len(p.stdout)} plaintext={preview!r}')
+    if p.returncode==0:
+        print('  SUCCESS_TEXT_REPR='+repr(p.stdout.decode('utf-8')))
+        print('  SUCCESS_HEX='+p.stdout.hex())
+print('jpeg_bytes',len(img),'jpeg_md5',hashlib.md5(img).hexdigest(),'jpeg_base64_md5',hashlib.md5(img_b64).hexdigest())
+print('full_plain_bytes',len(full),'full_md5',hashlib.md5(full).hexdigest(),'full_base64_md5',hashlib.md5(full_b64).hexdigest())
+positions=[i for i in range(len(full)-1) if full[i:i+2]==b'\xff\xd9']
+print('jpeg_eoi_offsets',positions[-8:])
+if positions:
+    eoi=positions[-1]+2
+    tail=full[eoi:]
+    print('last_eoi_end',eoi,'tail_length',len(tail),'tail_head_hex',tail[:128].hex(),'tail_ascii',repr(tail[:128]))
+example_input='012345678'+'Harmony5337'
+print('example_flag_input',repr(example_input))
+print('example_flag_md5',hashlib.md5(example_input.encode()).hexdigest())
+
+**********************
+PowerShell transcript end
+End time: 20260929050317
+**********************
+**********************
+PowerShell transcript start
+Start time: 20260929050325
+Username: DESKTOP-412KTAR\mzj
+RunAs User: DESKTOP-412KTAR\mzj
+Configuration Name: 
+Machine: DESKTOP-412KTAR (Microsoft Windows NT 10.0.26200.0)
+Host Application: C:\Users\mzj\.cache\codex-runtimes\codex-primary-runtime\dependencies\native\powershell\pwsh.dll -Command try { [Console]::OutputEncoding=[System.Text.Encoding]::UTF8 } catch {}
+$log='arkt561_analysis_transcript_20260929.txt'; Start-Transcript -LiteralPath $log -Append; Write-Output 'COMMAND> reproduce encoded image decryption round-trip and resource prompt key search against local data'; python .\analysis\verify_roundtrip_and_decode_jpeg.py; Write-Output ('VERIFY_EXIT_CODE=' + $LASTEXITCODE); python .\analysis\probe_resource_index_secret.py; Write-Output ('PROMPT_EXIT_CODE=' + $LASTEXITCODE); Stop-Transcript
+Process ID: 33472
+PSVersion: 7.6.5
+PSEdition: Core
+GitCommitId: 7.6.5
+OS: Microsoft Windows 10.0.26200
+Platform: Win32NT
+PSCompatibleVersions: 1.0, 2.0, 3.0, 4.0, 5.0, 5.1, 6.0, 7.0
+PSRemotingProtocolVersion: 2.4
+SerializationVersion: 1.1.0.1
+WSManStackVersion: 3.0
+**********************
+Transcript started, output file is arkt561_analysis_transcript_20260929.txt
+COMMAND> reproduce encoded image decryption round-trip and resource prompt key search against local data
+
+VERIFY_EXIT_CODE=1
+
+PROMPT_EXIT_CODE=0
+**********************
+PowerShell transcript end
+End time: 20260929050328
+**********************
+**********************
+PowerShell transcript start
+Start time: 20260929050407
+Username: DESKTOP-412KTAR\mzj
+RunAs User: DESKTOP-412KTAR\mzj
+Configuration Name: 
+Machine: DESKTOP-412KTAR (Microsoft Windows NT 10.0.26200.0)
+Host Application: C:\Users\mzj\.cache\codex-runtimes\codex-primary-runtime\dependencies\native\powershell\pwsh.dll -Command try { [Console]::OutputEncoding=[System.Text.Encoding]::UTF8 } catch {}
+$log='arkt561_analysis_transcript_20260929.txt'; Start-Transcript -LiteralPath $log -Append; Write-Output 'COMMAND> inspect custom SM4 decrypt script path constants before making it project-relative'; Get-Content -LiteralPath '.\analysis\decrypt_enc_custom_sm4.py' -TotalCount 90; Stop-Transcript
+Process ID: 20304
+PSVersion: 7.6.5
+PSEdition: Core
+GitCommitId: 7.6.5
+OS: Microsoft Windows 10.0.26200
+Platform: Win32NT
+PSCompatibleVersions: 1.0, 2.0, 3.0, 4.0, 5.0, 5.1, 6.0, 7.0
+PSRemotingProtocolVersion: 2.4
+SerializationVersion: 1.1.0.1
+WSManStackVersion: 3.0
+**********************
+Transcript started, output file is arkt561_analysis_transcript_20260929.txt
+COMMAND> inspect custom SM4 decrypt script path constants before making it project-relative
+import base64
+import hashlib
+import pathlib
+import struct
+
+ROOT = pathlib.Path('/mnt/c/Users/mzj/Desktop/CTF/玄机刷题/题目资料/OpenHarmony_secret_561')
+LIB = ROOT / 'hap_contents/libs/x86_64/libsecret.so'
+ENC = ROOT / 'hap_contents/resources/rawfile/enc'
+OUT = ROOT / 'analysis/enc.custom-sm4-decrypted.bin'
+MASK = 0xffffffff
+DELTA = 0x9e3779b9
+FK = [0xa3b1bac6, 0x56aa3350, 0x677d9197, 0xb27022dc]
+KEY = [0xe52bcc34, 0x1f1b5b18, 0x5f1ed75a, 0xf108fe7f]
+
+lib = LIB.read_bytes()
+sbox = list(lib[0x44e0:0x45e0])
+ck = [int.from_bytes(lib[0x45e0 + 8*i:0x45e0 + 8*i + 4], 'little') for i in range(32)]
+assert len(sbox) == 256 and len(ck) == 32
+
+def rol(x, n):
+    x &= MASK
+    return ((x << n) | (x >> (32 - n))) & MASK
+
+def tau(x):
+    return ((sbox[(x >> 24) & 255] << 24) |
+            (sbox[(x >> 16) & 255] << 16) |
+            (sbox[(x >> 8) & 255] << 8) |
+            sbox[x & 255])
+
+def l2(x):
+    return x ^ rol(x, 13) ^ rol(x, 23)
+
+def l1(x):
+    return x ^ rol(x, 2) ^ rol(x, 10) ^ rol(x, 18) ^ rol(x, 24)
+
+def make_rk(key):
+    state = [(key[i] ^ FK[i]) & MASK for i in range(4)]
+    rk = []
+    for i in range(32):
+        j = i & 3
+        mix = state[(i+2)&3] ^ state[(i+1)&3] ^ state[(i-1)&3] ^ ck[i]
+        nxt = state[j] ^ l2(tau(mix))
+        state[j] = nxt & MASK
+        rk.append(nxt & MASK)
+    return rk
+
+def round_f(a, b, c, rk):
+    return (l1(tau((a ^ b ^ c ^ rk) & MASK)) ^ DELTA) & MASK
+
+def encrypt_block(block, rk):
+    x = list(struct.unpack('>4I', block))
+    for i in range(32):
+        j = i & 3
+        x[j] = (x[j] ^ round_f(x[(i+1)&3], x[(i+2)&3], x[(i+3)&3], rk[i])) & MASK
+    return struct.pack('>4I', *reversed(x))
+
+def decrypt_block(block, rk):
+    x = list(reversed(struct.unpack('>4I', block)))
+    for i in range(31, -1, -1):
+        j = i & 3
+        x[j] = (x[j] ^ round_f(x[(i+1)&3], x[(i+2)&3], x[(i+3)&3], rk[i])) & MASK
+    return struct.pack('>4I', *x)
+
+rk = make_rk(KEY)
+test = bytes(range(16))
+test_enc = encrypt_block(test, rk)
+print('SM4-like custom schedule source: native .rodata S-box @0x44e0, CK @0x45e0')
+print('S-box head/tail:', bytes(sbox[:8]).hex(), bytes(sbox[-8:]).hex())
+print('CK head/tail:', [f'{x:08x}' for x in ck[:4]], [f'{x:08x}' for x in ck[-4:]])
+print('key words:', [f'{x:08x}' for x in KEY])
+print('round key first/last:', [f'{x:08x}' for x in rk[:4]], [f'{x:08x}' for x in rk[-4:]])
+print('internal block round-trip:', decrypt_block(test_enc, rk) == test)
+print('test block/cipher:', test.hex(), test_enc.hex())
+raw_b64 = ENC.read_bytes()
+cipher = base64.b64decode(raw_b64, validate=True)
+print('enc ASCII length/SHA256:', len(raw_b64), hashlib.sha256(raw_b64).hexdigest())
+print('decoded ciphertext length/SHA256:', len(cipher), hashlib.sha256(cipher).hexdigest())
+print('block aligned:', len(cipher) % 16 == 0)
+plain = b''.join(decrypt_block(cipher[i:i+16], rk) for i in range(0, len(cipher), 16))
+OUT.write_bytes(plain)
+print('decrypted length/SHA256:', len(plain), hashlib.sha256(plain).hexdigest())
+print('first 96 plaintext bytes:', plain[:96].hex())
+print('first 96 plaintext repr:', repr(plain[:96]))
+print('printable ASCII ratio:', sum(32 <= b < 127 or b in (9,10,13) for b in plain) / len(plain))
+print('first-block re-encryption matches input:', encrypt_block(plain[:16], rk) == cipher[:16])
+print('output path:', OUT)
+**********************
+PowerShell transcript end
+End time: 20260929050407
+**********************
+**********************
+PowerShell transcript start
+Start time: 20260929050424
+Username: DESKTOP-412KTAR\mzj
+RunAs User: DESKTOP-412KTAR\mzj
+Configuration Name: 
+Machine: DESKTOP-412KTAR (Microsoft Windows NT 10.0.26200.0)
+Host Application: C:\Users\mzj\.cache\codex-runtimes\codex-primary-runtime\dependencies\native\powershell\pwsh.dll -Command try { [Console]::OutputEncoding=[System.Text.Encoding]::UTF8 } catch {}
+$log='arkt561_analysis_transcript_20260929.txt'; Start-Transcript -LiteralPath $log -Append; Write-Output 'COMMAND> rerun local SM4-like resource decrypt and verify every block after correcting script to resolve project paths'; python .\analysis\verify_roundtrip_and_decode_jpeg.py; Write-Output ('VERIFY_EXIT_CODE=' + $LASTEXITCODE); Stop-Transcript
+Process ID: 13248
+PSVersion: 7.6.5
+PSEdition: Core
+GitCommitId: 7.6.5
+OS: Microsoft Windows 10.0.26200
+Platform: Win32NT
+PSCompatibleVersions: 1.0, 2.0, 3.0, 4.0, 5.0, 5.1, 6.0, 7.0
+PSRemotingProtocolVersion: 2.4
+SerializationVersion: 1.1.0.1
+WSManStackVersion: 3.0
+**********************
+Transcript started, output file is arkt561_analysis_transcript_20260929.txt
+COMMAND> rerun local SM4-like resource decrypt and verify every block after correcting script to resolve project paths
+
+VERIFY_EXIT_CODE=0
+**********************
+PowerShell transcript end
+End time: 20260929050424
+**********************
+**********************
+PowerShell transcript start
+Start time: 20260929050441
+Username: DESKTOP-412KTAR\mzj
+RunAs User: DESKTOP-412KTAR\mzj
+Configuration Name: 
+Machine: DESKTOP-412KTAR (Microsoft Windows NT 10.0.26200.0)
+Host Application: C:\Users\mzj\.cache\codex-runtimes\codex-primary-runtime\dependencies\native\powershell\pwsh.dll -Command try { [Console]::OutputEncoding=[System.Text.Encoding]::UTF8 } catch {}
+$log='arkt561_analysis_transcript_20260929.txt'; Start-Transcript -LiteralPath $log -Append; Write-Output 'COMMAND> independently enumerate whether prompt sample digest matches any distinct 0..8 path string with or without commas'; python .\analysis\brute_pattern_example_hash.py; Write-Output ('EXIT_CODE=' + $LASTEXITCODE); Stop-Transcript
+Process ID: 31316
+PSVersion: 7.6.5
+PSEdition: Core
+GitCommitId: 7.6.5
+OS: Microsoft Windows 10.0.26200
+Platform: Win32NT
+PSCompatibleVersions: 1.0, 2.0, 3.0, 4.0, 5.0, 5.1, 6.0, 7.0
+PSRemotingProtocolVersion: 2.4
+SerializationVersion: 1.1.0.1
+WSManStackVersion: 3.0
+**********************
+Transcript started, output file is arkt561_analysis_transcript_20260929.txt
+COMMAND> independently enumerate whether prompt sample digest matches any distinct 0..8 path string with or without commas
+
+EXIT_CODE=0
+**********************
+PowerShell transcript end
+End time: 20260929050444
+**********************
+**********************
+PowerShell transcript start
+Start time: 20260929050531
+Username: DESKTOP-412KTAR\mzj
+RunAs User: DESKTOP-412KTAR\mzj
+Configuration Name: 
+Machine: DESKTOP-412KTAR (Microsoft Windows NT 10.0.26200.0)
+Host Application: C:\Users\mzj\.cache\codex-runtimes\codex-primary-runtime\dependencies\native\powershell\pwsh.dll -Command try { [Console]::OutputEncoding=[System.Text.Encoding]::UTF8 } catch {}
+$log='arkt561_analysis_transcript_20260929.txt'; Start-Transcript -LiteralPath $log -Append; Write-Output 'COMMAND> final artifact check for WP, transcript, independent solver, and Windows-relative SM4 path'; Get-Item -LiteralPath '.\WP.md','.\arkt561_analysis_transcript_20260929.txt','.\analysis\independent_rederive_secret561.py','.\analysis\decrypt_enc_custom_sm4.py' | Select-Object FullName,Length; Select-String -LiteralPath '.\analysis\decrypt_enc_custom_sm4.py' -Pattern '^ROOT ='; Get-Content -LiteralPath '.\WP.md' -Tail 32; Stop-Transcript
+Process ID: 7472
+PSVersion: 7.6.5
+PSEdition: Core
+GitCommitId: 7.6.5
+OS: Microsoft Windows 10.0.26200
+Platform: Win32NT
+PSCompatibleVersions: 1.0, 2.0, 3.0, 4.0, 5.0, 5.1, 6.0, 7.0
+PSRemotingProtocolVersion: 2.4
+SerializationVersion: 1.1.0.1
+WSManStackVersion: 3.0
+**********************
+Transcript started, output file is arkt561_analysis_transcript_20260929.txt
+COMMAND> final artifact check for WP, transcript, independent solver, and Windows-relative SM4 path
+
+**********************
+PowerShell transcript end
+End time: 20260929050531
+**********************

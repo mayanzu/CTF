@@ -1,0 +1,177 @@
+DEX classes3.dex version 035 file_size 3556
+  file_size: 3556
+  header_size: 112
+  string_ids_size: 84
+  type_ids_size: 22
+  proto_ids_size: 17
+  field_ids_size: 11
+  method_ids_size: 25
+  class_defs_size: 2
+
+CLASS Lcom/example/wakurev/MainActivity$$ExternalSyntheticLambda0; access=0x1011 source=D8$$SyntheticClass
+  extends Ljava/lang/Object;
+  class_data static_fields=0 instance_fields=3 direct_methods=1 virtual_methods=1
+  instance field f$0: Lcom/example/wakurev/MainActivity; access=0x1011
+  instance field f$1: Landroid/widget/EditText; access=0x1011
+  instance field f$2: Landroid/widget/TextView; access=0x1011
+
+  METHOD Lcom/example/wakurev/MainActivity$$ExternalSyntheticLambda0;-><init>(Lcom/example/wakurev/MainActivity;Landroid/widget/EditText;Landroid/widget/TextView;)V access=0x11001 code_off=0x444
+  code: registers=4 ins=4 outs=1 tries=0 units=10
+    0000: invoke-direct {v0}, method@17=Ljava/lang/Object;-><init>()V [1070 0011 0000]
+    0003: iput-object [015b 0000]
+    0005: iput-object [025b 0001]
+    0007: iput-object [035b 0002]
+    0009: return-void [000e]
+
+  METHOD Lcom/example/wakurev/MainActivity$$ExternalSyntheticLambda0;->onClick(Landroid/view/View;)V access=0x11 code_off=0x468
+  code: registers=5 ins=2 outs=4 tries=0 units=10
+    0000: iget-object [3054 0000]
+    0002: iget-object [3154 0001]
+    0004: iget-object [3254 0002]
+    0006: invoke-virtual {v0,v1,v2,v4}, method@14=Lcom/example/wakurev/MainActivity;->lambda$onCreate$0$com-example-wakurev-MainActivity(Landroid/widget/EditText;Landroid/widget/TextView;Landroid/view/View;)V [406e 000e 4210]
+    0009: return-void [000e]
+
+CLASS Lcom/example/wakurev/MainActivity; access=0x1 source=MainActivity.java
+  extends Landroidx/appcompat/app/AppCompatActivity;
+  class_data static_fields=4 instance_fields=0 direct_methods=6 virtual_methods=2
+  static field ENCRYPTED_PARTS: [Ljava/lang/String; access=0x1a
+  static field FLAG_PREFIX: Ljava/lang/String; access=0x1a
+  static field FLAG_SUFFIX: Ljava/lang/String; access=0x1a
+  static field XOR_KEY: I access=0x1a
+  encoded static values: [('ENCRYPTED_PARTS', None), ('FLAG_PREFIX', 'REFLAG'), ('FLAG_SUFFIX', '}'), ('XOR_KEY', 66)]
+
+  METHOD Lcom/example/wakurev/MainActivity;-><clinit>()V access=0x10008 code_off=0x588
+  code: registers=8 ins=0 outs=8 tries=0 units=23
+    0000: const-string v0, string@3="$z$rt$p otr''ovq!#oz'q#osrvzrvp'&&&&" [001a 0003]
+    0002: filled-new-array/range [0125 0015 0000]
+    0005: move-result-object v0 [000c]
+    0006: sput-object v0, field@3=Lcom/example/wakurev/MainActivity;->ENCRYPTED_PARTS:[Ljava/lang/String; [0069 0003]
+    0008: return-void [000e]
+    0009: nop [0000]
+    000a: nop [0000]
+    000b: nop [0000]
+    000c: nop [0000]
+    000d: nop [0000]
+    000e: nop [0000]
+    000f: nop [0000]
+    0010: nop [0000]
+    0011: nop [0000]
+    0012: nop [0000]
+    0013: nop [0000]
+    0014: nop [0000]
+    0015: nop [0000]
+    0016: nop [0000]
+
+  METHOD Lcom/example/wakurev/MainActivity;-><init>()V access=0x10001 code_off=0x5c8
+  code: registers=1 ins=1 outs=1 tries=0 units=4
+    0000: invoke-direct {v0}, method@3=Landroidx/appcompat/app/AppCompatActivity;-><init>()V [1070 0003 0000]
+    0003: return-void [000e]
+
+  METHOD Lcom/example/wakurev/MainActivity;->buildFlag(Ljava/lang/String;)Ljava/lang/String; access=0x2 code_off=0x4b0
+  code: registers=4 ins=2 outs=2 tries=0 units=26
+    0000: new-instance v0, type@17=Ljava/lang/StringBuilder; [0022 0011]
+    0002: invoke-direct {v0}, method@21=Ljava/lang/StringBuilder;-><init>()V [1070 0015 0000]
+    0005: const-string v1, string@60='flag{' [011a 003c]
+    0007: invoke-virtual {v0,v1}, method@23=Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder; [206e 0017 0010]
+    000a: move-result-object v0 [000c]
+    000b: invoke-virtual {v0,v3}, method@23=Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder; [206e 0017 0030]
+    000e: move-result-object v0 [000c]
+    000f: const-string v1, string@79='}' [011a 004f]
+    0011: invoke-virtual {v0,v1}, method@23=Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder; [206e 0017 0010]
+    0014: move-result-object v0 [000c]
+    0015: invoke-virtual {v0}, method@24=Ljava/lang/StringBuilder;->toString()Ljava/lang/String; [106e 0018 0000]
+    0018: move-result-object v0 [000c]
+    0019: return-object v0 [0011]
+
+  METHOD Lcom/example/wakurev/MainActivity;->checkPassword(Ljava/lang/String;)Z access=0x2 code_off=0x48c
+  code: registers=3 ins=2 outs=2 tries=0 units=9
+    0000: invoke-direct {v1}, method@11=Lcom/example/wakurev/MainActivity;->decryptPassword()Ljava/lang/String; [1070 000b 0001]
+    0003: move-result-object v0 [000c]
+    0004: invoke-virtual {v2,v0}, method@19=Ljava/lang/String;->equals(Ljava/lang/Object;)Z [206e 0013 0002]
+    0007: move-result v0 [000a]
+    0008: return v0 [000f]
+
+  METHOD Lcom/example/wakurev/MainActivity;->decryptPassword()Ljava/lang/String; access=0x2 code_off=0x4f4
+  code: registers=8 ins=1 outs=2 tries=0 units=33
+    0000: invoke-direct {v7}, method@13=Lcom/example/wakurev/MainActivity;->getText()Ljava/lang/String; [1070 000d 0007]
+    0003: move-result-object v0 [000c]
+    0004: invoke-virtual {v0}, method@20=Ljava/lang/String;->toCharArray()[C [106e 0014 0000]
+    0007: move-result-object v1 [010c]
+    0008: new-instance v2, type@17=Ljava/lang/StringBuilder; [0222 0011]
+    000a: invoke-direct {v2}, method@21=Ljava/lang/StringBuilder;-><init>()V [1070 0015 0002]
+    000d: array-length v3, v1 [1321]
+    000e: const/4 v4, #0 [0412]
+    000f: if-ge v4, v3, +13 -> 001c [3435 000d]
+    0011: aget-char v5, v1, v4 [0549 0401]
+    0013: xor-int/lit8 v6, v5, #66 [06df 4205]
+    0015: int-to-char v6, v6 [668e]
+    0016: invoke-virtual {v2,v6}, method@22=Ljava/lang/StringBuilder;->append(C)Ljava/lang/StringBuilder; [206e 0016 0062]
+    0019: add-int/lit8 v4, v4, #1 [04d8 0104]
+    001b: goto +-12 -> 000f [f428]
+    001c: invoke-virtual {v2}, method@24=Ljava/lang/StringBuilder;->toString()Ljava/lang/String; [106e 0018 0002]
+    001f: move-result-object v3 [030c]
+    0020: return-object v3 [0311]
+
+  METHOD Lcom/example/wakurev/MainActivity;->getText()Ljava/lang/String; access=0x2 code_off=0x548
+  code: registers=6 ins=1 outs=2 tries=0 units=24
+    0000: new-instance v0, type@17=Ljava/lang/StringBuilder; [0022 0011]
+    0002: invoke-direct {v0}, method@21=Ljava/lang/StringBuilder;-><init>()V [1070 0015 0000]
+    0005: sget-object v1, field@3=Lcom/example/wakurev/MainActivity;->ENCRYPTED_PARTS:[Ljava/lang/String; [0162 0003]
+    0007: array-length v2, v1 [1221]
+    0008: const/4 v3, #0 [0312]
+    0009: if-ge v3, v2, +10 -> 0013 [2335 000a]
+    000b: aget-object v4, v1, v3 [0446 0301]
+    000d: invoke-virtual {v0,v4}, method@23=Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder; [206e 0017 0040]
+    0010: add-int/lit8 v3, v3, #1 [03d8 0103]
+    0012: goto +-9 -> 0009 [f728]
+    0013: invoke-virtual {v0}, method@24=Ljava/lang/StringBuilder;->toString()Ljava/lang/String; [106e 0018 0000]
+    0016: move-result-object v1 [010c]
+    0017: return-object v1 [0111]
+
+  METHOD Lcom/example/wakurev/MainActivity;->lambda$onCreate$0$com-example-wakurev-MainActivity(Landroid/widget/EditText;Landroid/widget/TextView;Landroid/view/View;)V access=0x1000 code_off=0x5e0
+  code: registers=7 ins=4 outs=2 tries=0 units=47
+    0000: invoke-virtual {v4}, method@1=Landroid/widget/EditText;->getText()Landroid/text/Editable; [106e 0001 0004]
+    0003: move-result-object v0 [000c]
+    0004: invoke-virtual {v0}, method@18=Ljava/lang/Object;->toString()Ljava/lang/String; [106e 0012 0000]
+    0007: move-result-object v0 [000c]
+    0008: invoke-direct {v3,v0}, method@10=Lcom/example/wakurev/MainActivity;->checkPassword(Ljava/lang/String;)Z [2070 000a 0003]
+    000b: move-result v1 [010a]
+    000c: if-eqz v1, +29 -> 0029 [0138 001d]
+    000e: new-instance v1, type@17=Ljava/lang/StringBuilder; [0122 0011]
+    0010: invoke-direct {v1}, method@21=Ljava/lang/StringBuilder;-><init>()V [1070 0015 0001]
+    0013: const-string v2, string@83='��֤�ɹ�! Flag: ' [021a 0053]
+    0015: invoke-virtual {v1,v2}, method@23=Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder; [206e 0017 0021]
+    0018: move-result-object v1 [010c]
+    0019: invoke-direct {v3,v0}, method@9=Lcom/example/wakurev/MainActivity;->buildFlag(Ljava/lang/String;)Ljava/lang/String; [2070 0009 0003]
+    001c: move-result-object v2 [020c]
+    001d: invoke-virtual {v1,v2}, method@23=Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder; [206e 0017 0021]
+    0020: move-result-object v1 [010c]
+    0021: invoke-virtual {v1}, method@24=Ljava/lang/StringBuilder;->toString()Ljava/lang/String; [106e 0018 0001]
+    0024: move-result-object v1 [010c]
+    0025: invoke-virtual {v5,v1}, method@2=Landroid/widget/TextView;->setText(Ljava/lang/CharSequence;)V [206e 0002 0015]
+    0028: goto +6 -> 002e [0628]
+    0029: const-string v1, string@82='��֤ʧ��' [011a 0052]
+    002b: invoke-virtual {v5,v1}, method@2=Landroid/widget/TextView;->setText(Ljava/lang/CharSequence;)V [206e 0002 0015]
+    002e: return-void [000e]
+
+  METHOD Lcom/example/wakurev/MainActivity;->onCreate(Landroid/os/Bundle;)V access=0x4 code_off=0x650
+  code: registers=6 ins=2 outs=4 tries=0 units=41
+    0000: invoke-super {v4,v5}, method@4=Landroidx/appcompat/app/AppCompatActivity;->onCreate(Landroid/os/Bundle;)V [206f 0004 0054]
+    0003: sget v0, field@10=Lcom/example/wakurev/R$layout;->activity_main:I [0060 000a]
+    0005: invoke-virtual {v4,v0}, method@16=Lcom/example/wakurev/MainActivity;->setContentView(I)V [206e 0010 0004]
+    0008: sget v0, field@8=Lcom/example/wakurev/R$id;->etInput:I [0060 0008]
+    000a: invoke-virtual {v4,v0}, method@12=Lcom/example/wakurev/MainActivity;->findViewById(I)Landroid/view/View; [206e 000c 0004]
+    000d: move-result-object v0 [000c]
+    000e: check-cast v0, type@7=Landroid/widget/EditText; [001f 0007]
+    0010: sget v1, field@7=Lcom/example/wakurev/R$id;->btnVerify:I [0160 0007]
+    0012: invoke-virtual {v4,v1}, method@12=Lcom/example/wakurev/MainActivity;->findViewById(I)Landroid/view/View; [206e 000c 0014]
+    0015: move-result-object v1 [010c]
+    0016: check-cast v1, type@6=Landroid/widget/Button; [011f 0006]
+    0018: sget v2, field@9=Lcom/example/wakurev/R$id;->tvResult:I [0260 0009]
+    001a: invoke-virtual {v4,v2}, method@12=Lcom/example/wakurev/MainActivity;->findViewById(I)Landroid/view/View; [206e 000c 0024]
+    001d: move-result-object v2 [020c]
+    001e: check-cast v2, type@8=Landroid/widget/TextView; [021f 0008]
+    0020: new-instance v3, type@10=Lcom/example/wakurev/MainActivity$$ExternalSyntheticLambda0; [0322 000a]
+    0022: invoke-direct {v3,v4,v0,v2}, method@5=Lcom/example/wakurev/MainActivity$$ExternalSyntheticLambda0;-><init>(Lcom/example/wakurev/MainActivity;Landroid/widget/EditText;Landroid/widget/TextView;)V [4070 0005 2043]
+    0025: invoke-virtual {v1,v3}, method@0=Landroid/widget/Button;->setOnClickListener(Landroid/view/View$OnClickListener;)V [206e 0000 0031]
+    0028: return-void [000e]

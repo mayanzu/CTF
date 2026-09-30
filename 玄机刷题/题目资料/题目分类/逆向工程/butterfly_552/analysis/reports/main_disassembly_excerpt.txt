@@ -1,0 +1,175 @@
+  4018d0:	f3 0f 1e fa          	endbr64
+  4018d4:	41 57                	push   r15
+  4018d6:	41 56                	push   r14
+  4018d8:	41 55                	push   r13
+  4018da:	41 54                	push   r12
+  4018dc:	55                   	push   rbp
+  4018dd:	53                   	push   rbx
+  4018de:	48 89 f3             	mov    rbx,rsi
+  4018e1:	48 81 ec 28 01 00 00 	sub    rsp,0x128
+  4018e8:	83 ff 03             	cmp    edi,0x3
+  4018eb:	74 43                	je     0x401930
+  4018ed:	48 8b 16             	mov    rdx,QWORD PTR [rsi]
+  4018f0:	bf 02 00 00 00       	mov    edi,0x2
+  4018f5:	31 c0                	xor    eax,eax
+  4018f7:	48 8d 35 22 45 08 00 	lea    rsi,[rip+0x84522]        # 0x485e20
+  4018fe:	e8 cd 5d 07 00       	call   0x4776d0
+  401903:	48 8b 13             	mov    rdx,QWORD PTR [rbx]
+  401906:	bf 02 00 00 00       	mov    edi,0x2
+  40190b:	31 c0                	xor    eax,eax
+  40190d:	48 8d 35 34 45 08 00 	lea    rsi,[rip+0x84534]        # 0x485e48
+  401914:	e8 b7 5d 07 00       	call   0x4776d0
+  401919:	b8 01 00 00 00       	mov    eax,0x1
+  40191e:	48 81 c4 28 01 00 00 	add    rsp,0x128
+  401925:	5b                   	pop    rbx
+  401926:	5d                   	pop    rbp
+  401927:	41 5c                	pop    r12
+  401929:	41 5d                	pop    r13
+  40192b:	41 5e                	pop    r14
+  40192d:	41 5f                	pop    r15
+  40192f:	c3                   	ret
+  401930:	4c 8b 76 08          	mov    r14,QWORD PTR [rsi+0x8]
+  401934:	4c 8b 6e 10          	mov    r13,QWORD PTR [rsi+0x10]
+  401938:	48 8d 35 40 0c 08 00 	lea    rsi,[rip+0x80c40]        # 0x48257f
+  40193f:	4c 89 f7             	mov    rdi,r14
+  401942:	e8 f9 3b 00 00       	call   0x405540
+  401947:	49 89 c4             	mov    r12,rax
+  40194a:	48 85 c0             	test   rax,rax
+  40194d:	0f 84 e7 01 00 00    	je     0x401b3a
+  401953:	ba 02 00 00 00       	mov    edx,0x2
+  401958:	31 f6                	xor    esi,esi
+  40195a:	48 89 c7             	mov    rdi,rax
+  40195d:	e8 1e 5b 00 00       	call   0x407480
+  401962:	4c 89 e7             	mov    rdi,r12
+  401965:	e8 d6 3c 00 00       	call   0x405640
+  40196a:	31 d2                	xor    edx,edx
+  40196c:	31 f6                	xor    esi,esi
+  40196e:	4c 89 e7             	mov    rdi,r12
+  401971:	48 89 c3             	mov    rbx,rax
+  401974:	e8 07 5b 00 00       	call   0x407480
+  401979:	4c 8d 7b 08          	lea    r15,[rbx+0x8]
+  40197d:	4c 89 ff             	mov    rdi,r15
+  401980:	e8 9b 0c 01 00       	call   0x412620
+  401985:	48 89 c5             	mov    rbp,rax
+  401988:	48 85 c0             	test   rax,rax
+  40198b:	0f 84 c4 01 00 00    	je     0x401b55
+  401991:	4c 89 fe             	mov    rsi,r15
+  401994:	48 89 c7             	mov    rdi,rax
+  401997:	4d 89 e0             	mov    r8,r12
+  40199a:	48 89 d9             	mov    rcx,rbx
+  40199d:	ba 01 00 00 00       	mov    edx,0x1
+  4019a2:	e8 d9 b2 01 00       	call   0x41cc80
+  4019a7:	4c 89 e7             	mov    rdi,r12
+  4019aa:	49 89 c7             	mov    r15,rax
+  4019ad:	e8 ce 37 00 00       	call   0x405180
+  4019b2:	4c 39 fb             	cmp    rbx,r15
+  4019b5:	0f 85 66 01 00 00    	jne    0x401b21
+  4019bb:	88 5c 1d 00          	mov    BYTE PTR [rbp+rbx*1+0x0],bl
+  4019bf:	4c 89 f2             	mov    rdx,r14
+  4019c2:	48 8d 35 fb 0b 08 00 	lea    rsi,[rip+0x80bfb]        # 0x4825c4
+  4019c9:	31 c0                	xor    eax,eax
+  4019cb:	88 7c 1d 01          	mov    BYTE PTR [rbp+rbx*1+0x1],bh
+  4019cf:	f3 0f 6f 05 df 0b 08 	movdqu xmm0,XMMWORD PTR [rip+0x80bdf]        # 0x4825b6
+  4019d6:	00 
+  4019d7:	bf 02 00 00 00       	mov    edi,0x2
+  4019dc:	f3 0f 6f 0d e2 0b 08 	movdqu xmm1,XMMWORD PTR [rip+0x80be2]        # 0x4825c6
+  4019e3:	00 
+  4019e4:	0f 29 04 24          	movaps XMMWORD PTR [rsp],xmm0
+  4019e8:	0f 29 4c 24 10       	movaps XMMWORD PTR [rsp+0x10],xmm1
+  4019ed:	e8 de 5c 07 00       	call   0x4776d0
+  4019f2:	48 89 da             	mov    rdx,rbx
+  4019f5:	bf 02 00 00 00       	mov    edi,0x2
+  4019fa:	31 c0                	xor    eax,eax
+  4019fc:	48 8d 35 d4 0b 08 00 	lea    rsi,[rip+0x80bd4]        # 0x4825d7
+  401a03:	e8 c8 5c 07 00       	call   0x4776d0
+  401a08:	48 8b 04 24          	mov    rax,QWORD PTR [rsp]
+  401a0c:	48 89 44 24 20       	mov    QWORD PTR [rsp+0x20],rax
+  401a11:	83 fb 07             	cmp    ebx,0x7
+  401a14:	7e 65                	jle    0x401a7b
+  401a16:	8d 53 ff             	lea    edx,[rbx-0x1]
+  401a19:	8d 4b f8             	lea    ecx,[rbx-0x8]
+  401a1c:	48 89 e8             	mov    rax,rbp
+  401a1f:	c1 ea 03             	shr    edx,0x3
+  401a22:	c1 e9 03             	shr    ecx,0x3
+  401a25:	8d 14 d5 00 00 00 00 	lea    edx,[rdx*8+0x0]
+  401a2c:	8d 0c cd 00 00 00 00 	lea    ecx,[rcx*8+0x0]
+  401a33:	48 01 ea             	add    rdx,rbp
+  401a36:	48 8d 4c 0d 08       	lea    rcx,[rbp+rcx*1+0x8]
+  401a3b:	eb 0c                	jmp    0x401a49
+  401a3d:	0f 1f 00             	nop    DWORD PTR [rax]
+  401a40:	48 83 c0 08          	add    rax,0x8
+  401a44:	48 39 c1             	cmp    rcx,rax
+  401a47:	74 32                	je     0x401a7b
+  401a49:	0f 6f 00             	movq   mm0,QWORD PTR [rax]
+  401a4c:	0f 6f 4c 24 20       	movq   mm1,QWORD PTR [rsp+0x20]
+  401a51:	0f ef c1             	pxor   mm0,mm1
+  401a54:	0f 6f d0             	movq   mm2,mm0
+  401a57:	0f 71 f2 08          	psllw  mm2,0x8
+  401a5b:	0f 71 d0 08          	psrlw  mm0,0x8
+  401a5f:	0f eb c2             	por    mm0,mm2
+  401a62:	0f 6f d0             	movq   mm2,mm0
+  401a65:	0f 73 f0 01          	psllq  mm0,0x1
+  401a69:	0f 73 d2 3f          	psrlq  mm2,0x3f
+  401a6d:	0f eb c2             	por    mm0,mm2
+  401a70:	0f fc c1             	paddb  mm0,mm1
+  401a73:	0f 7f 00             	movq   QWORD PTR [rax],mm0
+  401a76:	48 39 c2             	cmp    rdx,rax
+  401a79:	75 c5                	jne    0x401a40
+  401a7b:	0f 77                	emms
+  401a7d:	48 89 da             	mov    rdx,rbx
+  401a80:	48 89 ee             	mov    rsi,rbp
+  401a83:	4c 89 ef             	mov    rdi,r13
+  401a86:	e8 15 02 00 00       	call   0x401ca0
+  401a8b:	85 c0                	test   eax,eax
+  401a8d:	75 0f                	jne    0x401a9e
+  401a8f:	48 89 ef             	mov    rdi,rbp
+  401a92:	e8 59 12 01 00       	call   0x412cf0
+  401a97:	31 c0                	xor    eax,eax
+  401a99:	e9 80 fe ff ff       	jmp    0x40191e
+  401a9e:	4c 89 ea             	mov    rdx,r13
+  401aa1:	48 8d 35 49 0b 08 00 	lea    rsi,[rip+0x80b49]        # 0x4825f1
+  401aa8:	bf 02 00 00 00       	mov    edi,0x2
+  401aad:	31 c0                	xor    eax,eax
+  401aaf:	e8 1c 5c 07 00       	call   0x4776d0
+  401ab4:	48 89 da             	mov    rdx,rbx
+  401ab7:	bf 02 00 00 00       	mov    edi,0x2
+  401abc:	31 c0                	xor    eax,eax
+  401abe:	48 8d 35 49 0b 08 00 	lea    rsi,[rip+0x80b49]        # 0x48260e
+  401ac5:	48 8d 5c 24 20       	lea    rbx,[rsp+0x20]
+  401aca:	e8 01 5c 07 00       	call   0x4776d0
+  401acf:	ba 02 00 00 00       	mov    edx,0x2
+  401ad4:	48 89 df             	mov    rdi,rbx
+  401ad7:	31 c0                	xor    eax,eax
+  401ad9:	be 00 01 00 00       	mov    esi,0x100
+  401ade:	4d 89 e9             	mov    r9,r13
+  401ae1:	b9 00 01 00 00       	mov    ecx,0x100
+  401ae6:	4c 8d 05 3a 0b 08 00 	lea    r8,[rip+0x80b3a]        # 0x482627
+  401aed:	e8 ae 5c 07 00       	call   0x4777a0
+  401af2:	48 89 e6             	mov    rsi,rsp
+  401af5:	ba 20 00 00 00       	mov    edx,0x20
+  401afa:	48 89 df             	mov    rdi,rbx
+  401afd:	e8 9e 01 00 00       	call   0x401ca0
+  401b02:	85 c0                	test   eax,eax
+  401b04:	74 89                	je     0x401a8f
+  401b06:	48 89 da             	mov    rdx,rbx
+  401b09:	48 8d 35 1e 0b 08 00 	lea    rsi,[rip+0x80b1e]        # 0x48262e
+  401b10:	bf 02 00 00 00       	mov    edi,0x2
+  401b15:	31 c0                	xor    eax,eax
+  401b17:	e8 b4 5b 07 00       	call   0x4776d0
+  401b1c:	e9 6e ff ff ff       	jmp    0x401a8f
+  401b21:	48 89 ef             	mov    rdi,rbp
+  401b24:	e8 c7 11 01 00       	call   0x412cf0
+  401b29:	48 8d 3d 6e 0a 08 00 	lea    rdi,[rip+0x80a6e]        # 0x48259e
+  401b30:	e8 6b 59 07 00       	call   0x4774a0
+  401b35:	e9 df fd ff ff       	jmp    0x401919
+  401b3a:	4c 89 f2             	mov    rdx,r14
+  401b3d:	48 8d 35 3e 0a 08 00 	lea    rsi,[rip+0x80a3e]        # 0x482582
+  401b44:	bf 02 00 00 00       	mov    edi,0x2
+  401b49:	31 c0                	xor    eax,eax
+  401b4b:	e8 80 5b 07 00       	call   0x4776d0
+  401b50:	e9 c4 fd ff ff       	jmp    0x401919
+  401b55:	4c 89 e7             	mov    rdi,r12
+  401b58:	e8 23 36 00 00       	call   0x405180
+  401b5d:	48 8d 3d 0c 43 08 00 	lea    rdi,[rip+0x8430c]        # 0x485e70
+  401b64:	e8 37 59 07 00       	call   0x4774a0
+  401b69:	e9 ab fd ff ff       	jmp    0x401919

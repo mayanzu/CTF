@@ -1,0 +1,292 @@
+**********************
+PowerShell transcript start
+Start time: 20260929031612
+Username: DESKTOP-412KTAR\mzj
+RunAs User: DESKTOP-412KTAR\mzj
+Configuration Name: 
+Machine: DESKTOP-412KTAR (Microsoft Windows NT 10.0.26200.0)
+Host Application: C:\Users\mzj\.cache\codex-runtimes\codex-primary-runtime\dependencies\native\powershell\pwsh.dll -Command try { [Console]::OutputEncoding=[System.Text.Encoding]::UTF8 } catch {}
+$log='C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\checker_562\analysis\checker_audit_terminal_20260929.txt'; Start-Transcript -LiteralPath $log -Append; Write-Output 'COMMAND> Get-FileHash -Algorithm SHA256 on ZIP and its extracted checker copies'; Get-FileHash -Algorithm SHA256 -LiteralPath 'C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\checker_562\checker_platform_20260929.zip','C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\checker_562\附件_20260929\checker.exe','C:\Users\mzj\Desktop\CTF\checker_static_20260929.exe' | Format-List; Write-Output 'COMMAND> python solve_checker_from_pe.py'; python 'C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\checker_562\analysis\solve_checker_from_pe.py' 2>&1; Write-Output 'COMMAND> candidate | checker_static_20260929.exe'; $flag='flag{enp17I4p8TZmAriao2lq5tAArZ2P1wxBUwXU2}'; $flag | & 'C:\Users\mzj\Desktop\CTF\checker_static_20260929.exe' 2>&1; Stop-Transcript
+Process ID: 27240
+PSVersion: 7.6.5
+PSEdition: Core
+GitCommitId: 7.6.5
+OS: Microsoft Windows 10.0.26200
+Platform: Win32NT
+PSCompatibleVersions: 1.0, 2.0, 3.0, 4.0, 5.0, 5.1, 6.0, 7.0
+PSRemotingProtocolVersion: 2.4
+SerializationVersion: 1.1.0.1
+WSManStackVersion: 3.0
+**********************
+Transcript started, output file is C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\checker_562\analysis\checker_audit_terminal_20260929.txt
+COMMAND> Get-FileHash -Algorithm SHA256 on ZIP and its extracted checker copies
+
+Algorithm : SHA256
+Hash      : 598E457DCDFFCB89F4A1B5CF56133E1D8A194E737B8C25C6C0EA722854426D36
+Path      : C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\checker_562\checker_platform_20260929.zip
+
+Algorithm : SHA256
+Hash      : 449D9F4569A0ED70FCB9BC8B96737719B62CFD8AE7C1E99D2864A3999887FDF5
+Path      : C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\checker_562\附件_20260929\checker.exe
+
+Algorithm : SHA256
+Hash      : 449D9F4569A0ED70FCB9BC8B96737719B62CFD8AE7C1E99D2864A3999887FDF5
+Path      : C:\Users\mzj\Desktop\CTF\checker_static_20260929.exe
+
+COMMAND> python solve_checker_from_pe.py
+COMMAND> candidate | checker_static_20260929.exe
+**********************
+PowerShell transcript end
+End time: 20260929031614
+**********************
+**********************
+PowerShell transcript start
+Start time: 20260929031710
+Username: DESKTOP-412KTAR\mzj
+RunAs User: DESKTOP-412KTAR\mzj
+Configuration Name: 
+Machine: DESKTOP-412KTAR (Microsoft Windows NT 10.0.26200.0)
+Host Application: C:\Users\mzj\.cache\codex-runtimes\codex-primary-runtime\dependencies\native\powershell\pwsh.dll -Command try { [Console]::OutputEncoding=[System.Text.Encoding]::UTF8 } catch {}
+$log='C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\checker_562\analysis\checker_audit_terminal_20260929.txt'; Start-Transcript -LiteralPath $log -Append; Write-Output 'COMMAND> Open the original archive and hash the checker.exe member'; Add-Type -AssemblyName System.IO.Compression.FileSystem; $zipPath='C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\checker_562\checker_platform_20260929.zip'; $archive=[System.IO.Compression.ZipFile]::OpenRead($zipPath); $archive.Entries | Select-Object FullName,Length | Format-Table -AutoSize; $entry=$archive.GetEntry('checker.exe'); if ($null -eq $entry) { $entry=$archive.Entries | Where-Object { $_.Name -eq 'checker.exe' } | Select-Object -First 1 }; if ($null -eq $entry) { throw 'checker.exe not present in original archive' }; $stream=$entry.Open(); $sha=[System.Security.Cryptography.SHA256]::Create(); $entryHash=([BitConverter]::ToString($sha.ComputeHash($stream))).Replace('-',''); $stream.Dispose(); $sha.Dispose(); $archive.Dispose(); Write-Output ('archive member: ' + $entry.FullName); Write-Output ('archive member size: ' + $entry.Length); Write-Output ('archive member SHA-256: ' + $entryHash); Write-Output 'COMMAND> Show focused checker functions from saved disassembly'; $dis='C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\checker_562\analysis\checker_disassembly.txt'; Select-String -LiteralPath $dis -Pattern '00401460 <_fake_check>:|00401490 <_encrypt_flag>:|004014f0 <_check_flag>:|0040152a <_main>:' -Context 0,52 | ForEach-Object { $_.Line; $_.Context.PostContext; '---' }; Stop-Transcript
+Process ID: 18412
+PSVersion: 7.6.5
+PSEdition: Core
+GitCommitId: 7.6.5
+OS: Microsoft Windows 10.0.26200
+Platform: Win32NT
+PSCompatibleVersions: 1.0, 2.0, 3.0, 4.0, 5.0, 5.1, 6.0, 7.0
+PSRemotingProtocolVersion: 2.4
+SerializationVersion: 1.1.0.1
+WSManStackVersion: 3.0
+**********************
+Transcript started, output file is C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\checker_562\analysis\checker_audit_terminal_20260929.txt
+COMMAND> Open the original archive and hash the checker.exe member
+
+FullName    Length
+--------    ------
+checker.exe  42857
+
+archive member: checker.exe
+archive member size: 42857
+archive member SHA-256: 449D9F4569A0ED70FCB9BC8B96737719B62CFD8AE7C1E99D2864A3999887FDF5
+COMMAND> Show focused checker functions from saved disassembly
+00401460 <_fake_check>:
+  401460:	55                   	push   ebp
+  401461:	89 e5                	mov    ebp,esp
+  401463:	83 ec 18             	sub    esp,0x18
+  401466:	c7 04 24 64 50 40 00 	mov    DWORD PTR [esp],0x405064
+  40146d:	e8 1e 27 00 00       	call   403b90 <_puts>
+  401472:	c7 04 24 e8 03 00 00 	mov    DWORD PTR [esp],0x3e8
+  401479:	e8 ba 27 00 00       	call   403c38 <_Sleep@4>
+  40147e:	83 ec 04             	sub    esp,0x4
+  401481:	c7 04 24 81 50 40 00 	mov    DWORD PTR [esp],0x405081
+  401488:	e8 03 27 00 00       	call   403b90 <_puts>
+  40148d:	90                   	nop
+  40148e:	c9                   	leave
+  40148f:	c3                   	ret
+
+00401490 <_encrypt_flag>:
+  401490:	55                   	push   ebp
+  401491:	89 e5                	mov    ebp,esp
+  401493:	83 ec 28             	sub    esp,0x28
+  401496:	c7 45 f0 23 00 00 00 	mov    DWORD PTR [ebp-0x10],0x23
+  40149d:	c7 45 f4 00 00 00 00 	mov    DWORD PTR [ebp-0xc],0x0
+  4014a4:	eb 1e                	jmp    4014c4 <_encrypt_flag+0x34>
+  4014a6:	8b 55 f4             	mov    edx,DWORD PTR [ebp-0xc]
+  4014a9:	8b 45 0c             	mov    eax,DWORD PTR [ebp+0xc]
+  4014ac:	01 d0                	add    eax,edx
+  4014ae:	8b 4d f4             	mov    ecx,DWORD PTR [ebp-0xc]
+  4014b1:	8b 55 08             	mov    edx,DWORD PTR [ebp+0x8]
+  4014b4:	01 ca                	add    edx,ecx
+  4014b6:	0f b6 0a             	movzx  ecx,BYTE PTR [edx]
+  4014b9:	8b 55 f0             	mov    edx,DWORD PTR [ebp-0x10]
+  4014bc:	31 ca                	xor    edx,ecx
+  4014be:	88 10                	mov    BYTE PTR [eax],dl
+  4014c0:	83 45 f4 01          	add    DWORD PTR [ebp-0xc],0x1
+  4014c4:	8b 45 08             	mov    eax,DWORD PTR [ebp+0x8]
+  4014c7:	89 04 24             	mov    DWORD PTR [esp],eax
+  4014ca:	e8 89 26 00 00       	call   403b58 <_strlen>
+  4014cf:	89 c2                	mov    edx,eax
+  4014d1:	8b 45 f4             	mov    eax,DWORD PTR [ebp-0xc]
+  4014d4:	39 c2                	cmp    edx,eax
+  4014d6:	77 ce                	ja     4014a6 <_encrypt_flag+0x16>
+  4014d8:	8b 45 08             	mov    eax,DWORD PTR [ebp+0x8]
+  4014db:	89 04 24             	mov    DWORD PTR [esp],eax
+  4014de:	e8 75 26 00 00       	call   403b58 <_strlen>
+  4014e3:	89 c2                	mov    edx,eax
+  4014e5:	8b 45 0c             	mov    eax,DWORD PTR [ebp+0xc]
+  4014e8:	01 d0                	add    eax,edx
+  4014ea:	c6 00 00             	mov    BYTE PTR [eax],0x0
+  4014ed:	90                   	nop
+  4014ee:	c9                   	leave
+  4014ef:	c3                   	ret
+
+004014f0 <_check_flag>:
+  4014f0:	55                   	push   ebp
+---
+00401490 <_encrypt_flag>:
+  401490:	55                   	push   ebp
+  401491:	89 e5                	mov    ebp,esp
+  401493:	83 ec 28             	sub    esp,0x28
+  401496:	c7 45 f0 23 00 00 00 	mov    DWORD PTR [ebp-0x10],0x23
+  40149d:	c7 45 f4 00 00 00 00 	mov    DWORD PTR [ebp-0xc],0x0
+  4014a4:	eb 1e                	jmp    4014c4 <_encrypt_flag+0x34>
+  4014a6:	8b 55 f4             	mov    edx,DWORD PTR [ebp-0xc]
+  4014a9:	8b 45 0c             	mov    eax,DWORD PTR [ebp+0xc]
+  4014ac:	01 d0                	add    eax,edx
+  4014ae:	8b 4d f4             	mov    ecx,DWORD PTR [ebp-0xc]
+  4014b1:	8b 55 08             	mov    edx,DWORD PTR [ebp+0x8]
+  4014b4:	01 ca                	add    edx,ecx
+  4014b6:	0f b6 0a             	movzx  ecx,BYTE PTR [edx]
+  4014b9:	8b 55 f0             	mov    edx,DWORD PTR [ebp-0x10]
+  4014bc:	31 ca                	xor    edx,ecx
+  4014be:	88 10                	mov    BYTE PTR [eax],dl
+  4014c0:	83 45 f4 01          	add    DWORD PTR [ebp-0xc],0x1
+  4014c4:	8b 45 08             	mov    eax,DWORD PTR [ebp+0x8]
+  4014c7:	89 04 24             	mov    DWORD PTR [esp],eax
+  4014ca:	e8 89 26 00 00       	call   403b58 <_strlen>
+  4014cf:	89 c2                	mov    edx,eax
+  4014d1:	8b 45 f4             	mov    eax,DWORD PTR [ebp-0xc]
+  4014d4:	39 c2                	cmp    edx,eax
+  4014d6:	77 ce                	ja     4014a6 <_encrypt_flag+0x16>
+  4014d8:	8b 45 08             	mov    eax,DWORD PTR [ebp+0x8]
+  4014db:	89 04 24             	mov    DWORD PTR [esp],eax
+  4014de:	e8 75 26 00 00       	call   403b58 <_strlen>
+  4014e3:	89 c2                	mov    edx,eax
+  4014e5:	8b 45 0c             	mov    eax,DWORD PTR [ebp+0xc]
+  4014e8:	01 d0                	add    eax,edx
+  4014ea:	c6 00 00             	mov    BYTE PTR [eax],0x0
+  4014ed:	90                   	nop
+  4014ee:	c9                   	leave
+  4014ef:	c3                   	ret
+
+004014f0 <_check_flag>:
+  4014f0:	55                   	push   ebp
+  4014f1:	89 e5                	mov    ebp,esp
+  4014f3:	83 ec 58             	sub    esp,0x58
+  4014f6:	e8 65 ff ff ff       	call   401460 <_fake_check>
+  4014fb:	8d 45 c6             	lea    eax,[ebp-0x3a]
+  4014fe:	89 44 24 04          	mov    DWORD PTR [esp+0x4],eax
+  401502:	8b 45 08             	mov    eax,DWORD PTR [ebp+0x8]
+  401505:	89 04 24             	mov    DWORD PTR [esp],eax
+  401508:	e8 83 ff ff ff       	call   401490 <_encrypt_flag>
+  40150d:	c7 44 24 04 20 40 40 	mov    DWORD PTR [esp+0x4],0x404020
+  401514:	00
+  401515:	8d 45 c6             	lea    eax,[ebp-0x3a]
+  401518:	89 04 24             	mov    DWORD PTR [esp],eax
+  40151b:	e8 50 26 00 00       	call   403b70 <_strcmp>
+  401520:	85 c0                	test   eax,eax
+  401522:	0f 94 c0             	sete   al
+---
+004014f0 <_check_flag>:
+  4014f0:	55                   	push   ebp
+  4014f1:	89 e5                	mov    ebp,esp
+  4014f3:	83 ec 58             	sub    esp,0x58
+  4014f6:	e8 65 ff ff ff       	call   401460 <_fake_check>
+  4014fb:	8d 45 c6             	lea    eax,[ebp-0x3a]
+  4014fe:	89 44 24 04          	mov    DWORD PTR [esp+0x4],eax
+  401502:	8b 45 08             	mov    eax,DWORD PTR [ebp+0x8]
+  401505:	89 04 24             	mov    DWORD PTR [esp],eax
+  401508:	e8 83 ff ff ff       	call   401490 <_encrypt_flag>
+  40150d:	c7 44 24 04 20 40 40 	mov    DWORD PTR [esp+0x4],0x404020
+  401514:	00
+  401515:	8d 45 c6             	lea    eax,[ebp-0x3a]
+  401518:	89 04 24             	mov    DWORD PTR [esp],eax
+  40151b:	e8 50 26 00 00       	call   403b70 <_strcmp>
+  401520:	85 c0                	test   eax,eax
+  401522:	0f 94 c0             	sete   al
+  401525:	0f b6 c0             	movzx  eax,al
+  401528:	c9                   	leave
+  401529:	c3                   	ret
+
+0040152a <_main>:
+  40152a:	55                   	push   ebp
+  40152b:	89 e5                	mov    ebp,esp
+  40152d:	83 e4 f0             	and    esp,0xfffffff0
+  401530:	83 ec 50             	sub    esp,0x50
+  401533:	e8 a8 05 00 00       	call   401ae0 <___main>
+  401538:	c7 04 24 93 50 40 00 	mov    DWORD PTR [esp],0x405093
+  40153f:	e8 54 26 00 00       	call   403b98 <_printf>
+  401544:	a1 bc 81 40 00       	mov    eax,ds:0x4081bc
+  401549:	89 44 24 08          	mov    DWORD PTR [esp+0x8],eax
+  40154d:	c7 44 24 04 32 00 00 	mov    DWORD PTR [esp+0x4],0x32
+  401554:	00
+  401555:	8d 44 24 1e          	lea    eax,[esp+0x1e]
+  401559:	89 04 24             	mov    DWORD PTR [esp],eax
+  40155c:	e8 67 26 00 00       	call   403bc8 <_fgets>
+  401561:	c7 44 24 04 a4 50 40 	mov    DWORD PTR [esp+0x4],0x4050a4
+  401568:	00
+  401569:	8d 44 24 1e          	lea    eax,[esp+0x1e]
+  40156d:	89 04 24             	mov    DWORD PTR [esp],eax
+  401570:	e8 eb 25 00 00       	call   403b60 <_strcspn>
+  401575:	c6 44 04 1e 00       	mov    BYTE PTR [esp+eax*1+0x1e],0x0
+  40157a:	8d 44 24 1e          	lea    eax,[esp+0x1e]
+  40157e:	89 04 24             	mov    DWORD PTR [esp],eax
+  401581:	e8 6a ff ff ff       	call   4014f0 <_check_flag>
+  401586:	85 c0                	test   eax,eax
+  401588:	74 0e                	je     401598 <_main+0x6e>
+  40158a:	c7 04 24 a6 50 40 00 	mov    DWORD PTR [esp],0x4050a6
+  401591:	e8 fa 25 00 00       	call   403b90 <_puts>
+  401596:	eb 0c                	jmp    4015a4 <_main+0x7a>
+  401598:	c7 04 24 c2 50 40 00 	mov    DWORD PTR [esp],0x4050c2
+  40159f:	e8 ec 25 00 00       	call   403b90 <_puts>
+  4015a4:	b8 00 00 00 00       	mov    eax,0x0
+---
+0040152a <_main>:
+  40152a:	55                   	push   ebp
+  40152b:	89 e5                	mov    ebp,esp
+  40152d:	83 e4 f0             	and    esp,0xfffffff0
+  401530:	83 ec 50             	sub    esp,0x50
+  401533:	e8 a8 05 00 00       	call   401ae0 <___main>
+  401538:	c7 04 24 93 50 40 00 	mov    DWORD PTR [esp],0x405093
+  40153f:	e8 54 26 00 00       	call   403b98 <_printf>
+  401544:	a1 bc 81 40 00       	mov    eax,ds:0x4081bc
+  401549:	89 44 24 08          	mov    DWORD PTR [esp+0x8],eax
+  40154d:	c7 44 24 04 32 00 00 	mov    DWORD PTR [esp+0x4],0x32
+  401554:	00
+  401555:	8d 44 24 1e          	lea    eax,[esp+0x1e]
+  401559:	89 04 24             	mov    DWORD PTR [esp],eax
+  40155c:	e8 67 26 00 00       	call   403bc8 <_fgets>
+  401561:	c7 44 24 04 a4 50 40 	mov    DWORD PTR [esp+0x4],0x4050a4
+  401568:	00
+  401569:	8d 44 24 1e          	lea    eax,[esp+0x1e]
+  40156d:	89 04 24             	mov    DWORD PTR [esp],eax
+  401570:	e8 eb 25 00 00       	call   403b60 <_strcspn>
+  401575:	c6 44 04 1e 00       	mov    BYTE PTR [esp+eax*1+0x1e],0x0
+  40157a:	8d 44 24 1e          	lea    eax,[esp+0x1e]
+  40157e:	89 04 24             	mov    DWORD PTR [esp],eax
+  401581:	e8 6a ff ff ff       	call   4014f0 <_check_flag>
+  401586:	85 c0                	test   eax,eax
+  401588:	74 0e                	je     401598 <_main+0x6e>
+  40158a:	c7 04 24 a6 50 40 00 	mov    DWORD PTR [esp],0x4050a6
+  401591:	e8 fa 25 00 00       	call   403b90 <_puts>
+  401596:	eb 0c                	jmp    4015a4 <_main+0x7a>
+  401598:	c7 04 24 c2 50 40 00 	mov    DWORD PTR [esp],0x4050c2
+  40159f:	e8 ec 25 00 00       	call   403b90 <_puts>
+  4015a4:	b8 00 00 00 00       	mov    eax,0x0
+  4015a9:	c9                   	leave
+  4015aa:	c3                   	ret
+  4015ab:	90                   	nop
+  4015ac:	66 90                	xchg   ax,ax
+  4015ae:	66 90                	xchg   ax,ax
+
+004015b0 <__setargv>:
+  4015b0:	55                   	push   ebp
+  4015b1:	89 e5                	mov    ebp,esp
+  4015b3:	57                   	push   edi
+  4015b4:	56                   	push   esi
+  4015b5:	53                   	push   ebx
+  4015b6:	83 ec 4c             	sub    esp,0x4c
+  4015b9:	f6 05 60 40 40 00 02 	test   BYTE PTR ds:0x404060,0x2
+  4015c0:	0f 84 ea 02 00 00    	je     4018b0 <__setargv+0x300>
+  4015c6:	e8 ad 26 00 00       	call   403c78 <_GetCommandLineA@0>
+  4015cb:	89 65 c4             	mov    DWORD PTR [ebp-0x3c],esp
+  4015ce:	89 04 24             	mov    DWORD PTR [esp],eax
+  4015d1:	89 c6                	mov    esi,eax
+  4015d3:	e8 80 25 00 00       	call   403b58 <_strlen>
+  4015d8:	8d 44 00 11          	lea    eax,[eax+eax*1+0x11]
+---
+**********************
+PowerShell transcript end
+End time: 20260929031710
+**********************

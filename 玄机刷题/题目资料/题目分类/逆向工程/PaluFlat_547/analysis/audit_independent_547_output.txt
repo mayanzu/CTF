@@ -1,0 +1,76 @@
+AUDIT_SCOPE = static-only; no challenge .com or .exe executed
+MAX_BUFFERED_CHUNK = 4194304 bytes; no 1 GiB whole-file reads
+COMMAND> Python zipfile: list/test outer ZIP and stream-compare its sole member to the saved .com
+OUTER_ZIP_SIZE = 9644
+OUTER_ZIP_SHA256 = 5CA642495D769B3A02FCB73B3F2F20281A4AE4001938B0F282736332C72409D7
+OUTER_ZIP_MEMBERS = [('PaluFlat_flag.com', 164561, 9476, '2ACE2719')]
+OUTER_ZIP_CRC_TEST = PASS
+ZIP_MEMBER_EQUALS_SAVED_COM = PASS; size=164561; sha256=678801F5EBBAF73B346D5B090A2A44191CB1629C1C12CD57D34FD6A69603D185
+COMMAND> tar -tvf <PaluFlat_flag.com> (list only; no extraction)
+ARGV_ASCII_ESCAPED = ['tar', '-tvf', 'C:\\\\Users\\\\mzj\\\\Desktop\\\\CTF\\\\\\u7384\\u673a\\u5237\\u9898\\\\\\u9898\\u76ee\\u8d44\\u6599\\\\PaluFlat_547\\\\analysis\\\\extracted\\\\PaluFlat_flag.com']
+EXIT_CODE = 0
+STDOUT_BEGIN
+-rw-r--r--  0 0      0  1073741824 7�� 24 19:38 PaluFlat.exe
+STDOUT_END
+STDERR = ''
+INNER_7Z_MEMBERS = ['PaluFlat.exe']; declared_size=1073741824; path_is_flat=PASS
+COMMAND> tar -xOf <PaluFlat_flag.com> PaluFlat.exe | bounded stream compare against saved PE
+ARGV_ASCII_ESCAPED = ['tar', '-xOf', 'C:\\\\Users\\\\mzj\\\\Desktop\\\\CTF\\\\\\u7384\\u673a\\u5237\\u9898\\\\\\u9898\\u76ee\\u8d44\\u6599\\\\PaluFlat_547\\\\analysis\\\\extracted\\\\PaluFlat_flag.com', 'PaluFlat.exe']
+EXIT_CODE = 0
+STDERR = ''
+INNER_7Z_STREAM_EQUALS_SAVED_PE = PASS; size=1073741824; sha256=EC9F3D4B137085E6D45530744CDD3D3CC49573B35176062855C5E2732A81006D
+COMMAND> bounded PE parse: read exactly first 0x5000 bytes from saved PE
+PE_OFFSET = 0x80; MACHINE = 0x8664; OPTIONAL_MAGIC = 0x020b; IMAGE_BASE = 0x400000
+ENTRY_POINT_VA = 0x4014e0; SIZE_OF_IMAGE = 0xc000; SIZE_OF_HEADERS = 0x400; SECTION_COUNT = 9
+SECTION .text    RVA=0x1000 VSize=0x2988 RawOff=0x0400 RawSize=0x2a00 RawEnd=0x2e00
+SECTION .data    RVA=0x4000 VSize=0x00d0 RawOff=0x2e00 RawSize=0x0200 RawEnd=0x3000
+SECTION .rdata   RVA=0x5000 VSize=0x05b0 RawOff=0x3000 RawSize=0x0600 RawEnd=0x3600
+SECTION .pdata   RVA=0x6000 VSize=0x027c RawOff=0x3600 RawSize=0x0400 RawEnd=0x3a00
+SECTION .xdata   RVA=0x7000 VSize=0x0200 RawOff=0x3a00 RawSize=0x0200 RawEnd=0x3c00
+SECTION .bss     RVA=0x8000 VSize=0x0980 RawOff=0x0000 RawSize=0x0000 RawEnd=0x0000
+SECTION .idata   RVA=0x9000 VSize=0x07c4 RawOff=0x3c00 RawSize=0x0800 RawEnd=0x4400
+SECTION .CRT     RVA=0xa000 VSize=0x0068 RawOff=0x4400 RawSize=0x0200 RawEnd=0x4600
+SECTION .tls     RVA=0xb000 VSize=0x0010 RawOff=0x4600 RawSize=0x0200 RawEnd=0x4800
+PE_RAW_SECTIONS = non-overlapping, fully inside bounded 0x5000 read; last raw end=0x4800
+COMMAND> independent PE table/target/state parse from the bounded source prefix
+JUMP_TABLE_COUNT = 46; STATE_RANGE = 0..45
+JUMP_TABLE = 0:0x4015e2, 1:0x4016a1, 2:0x401785, 3:0x401855, 4:0x40191a, 5:0x40193f, 6:0x4019be, 7:0x4019f3, 8:0x401a14, 9:0x402098, 10:0x401a2a, 11:0x401aa9, 12:0x401ade, 13:0x402098, 14:0x402098, 15:0x401b77, 16:0x402098, 17:0x402098, 18:0x402098, 19:0x402098, 20:0x401bf6, 21:0x401c8f, 22:0x401d14, 23:0x402098, 24:0x402098, 25:0x401d35, 26:0x402098, 27:0x402098, 28:0x402098, 29:0x402098, 30:0x401dce, 31:0x401e53, 32:0x401ecd, 33:0x402098, 34:0x402098, 35:0x401ee3, 36:0x402098, 37:0x402098, 38:0x402098, 39:0x402098, 40:0x401f68, 41:0x401fe2, 42:0x402007, 43:0x402098, 44:0x402098, 45:0x402029
+SEED = 0x3039; BITS0_TO_15 = 1001110000001100
+ACTIVE_PATH_PER_BYTE = 0 -> 10 -> 12 -> 2 -> 3 -> 4 -> 0
+PATH_BRANCH_EVIDENCE = state0 tests bit0 at 0x4015fe; bit0=1 enters 0x401654; state0 then tests bit2 at 0x401654; bit2=0 sets state10 at 0x401689; state10 tests bit13/14 at 0x401a52/0x401a6e, yielding state12; state12 XORs input/key then sets state2; state2 tests bits6,7,8, all zero -> state3; state3 subtracts 0x55, tests bits9,10,11, all zero -> state4; state4 NOTs/writes and returns state0.
+STATE2_BYTES = 0fbe45ebc1e00489c20fb645ebc0f804
+STATE3_BYTES = 0fb645eb83e8558845eb8b45
+STATE4_BYTES = f655eb8b45f84898488b55184801c20fb645eb880283
+STATE2_SEMANTICS = temp is sign-extended for SHL EAX,4; a separate MOVZX then SAR AL,4 feeds OR EAX,EDX; for candidate XOR bytes all <0x80 this is exact nibble swap. For high-bit bytes SAR fills low nibble with F, so do not generalize nibble-swap simplification to arbitrary bytes.
+STATE3_SEMANTICS = byte(temp - 0x55) modulo 256; STATE4_SEMANTICS = bitwise NOT on byte
+TARGET_BYTES = f3548423a474d4c3305f3243f054f474002243
+TARGET_LEN_IMMEDIATE = 19; TARGET_NUL_INDICES = [16]
+KEY_STRINGS = b'palu', b'flat'; KEY_STREAM = 706c6c74706c6c74706c6c74706c6c74706c6c
+CANDIDATE = flag{bdm23Ne6ljz5O}
+CANDIDATE_HEX = 666c61677b62646d32334e65366c6a7a354f7d
+ROW_FORMAT = index target input key xor/intermediate q after_sub output equality
+ROW 00 target=f3 input=66 key=70 xor=16 q=61 sub=0c output=f3 match=True
+ROW 01 target=54 input=6c key=6c xor=00 q=00 sub=ab output=54 match=True
+ROW 02 target=84 input=61 key=6c xor=0d q=d0 sub=7b output=84 match=True
+ROW 03 target=23 input=67 key=74 xor=13 q=31 sub=dc output=23 match=True
+ROW 04 target=a4 input=7b key=70 xor=0b q=b0 sub=5b output=a4 match=True
+ROW 05 target=74 input=62 key=6c xor=0e q=e0 sub=8b output=74 match=True
+ROW 06 target=d4 input=64 key=6c xor=08 q=80 sub=2b output=d4 match=True
+ROW 07 target=c3 input=6d key=74 xor=19 q=91 sub=3c output=c3 match=True
+ROW 08 target=30 input=32 key=70 xor=42 q=24 sub=cf output=30 match=True
+ROW 09 target=5f input=33 key=6c xor=5f q=f5 sub=a0 output=5f match=True
+ROW 10 target=32 input=4e key=6c xor=22 q=22 sub=cd output=32 match=True
+ROW 11 target=43 input=65 key=74 xor=11 q=11 sub=bc output=43 match=True
+ROW 12 target=f0 input=36 key=70 xor=46 q=64 sub=0f output=f0 match=True
+ROW 13 target=54 input=6c key=6c xor=00 q=00 sub=ab output=54 match=True
+ROW 14 target=f4 input=6a key=6c xor=06 q=60 sub=0b output=f4 match=True
+ROW 15 target=74 input=7a key=74 xor=0e q=e0 sub=8b output=74 match=True
+ROW 16 target=00 input=35 key=70 xor=45 q=54 sub=ff output=00 match=True
+ROW 17 target=22 input=4f key=6c xor=23 q=32 sub=dd output=22 match=True
+ROW 18 target=43 input=7d key=6c xor=11 q=11 sub=bc output=43 match=True
+FORWARD_BYTES = f3548423a474d4c3305f3243f054f474002243
+FORWARD_EXACT_19_BYTE_MATCH = True
+IMPORT_RESOLUTION = msvcrt.dll!strlen -> IAT 0x40937c; call at 0x40216a reaches thunk 0x4036f0
+MAIN_LENGTH_GATE = output strlen must equal 19 before 19-byte compare; exact target has NUL at offset 16, forward output strlen=16; LENGTH_GATE_PASSES=False
+STATIC_CONCLUSION = candidate is exactly determined by invertible target relation on all 19 bytes and forward-recomputes fully; the supplied PE's own success path is internally unreachable due strlen/embedded-NUL contradiction.
+PLATFORM_STATUS = not checked by this audit; candidate remains pending platform verification

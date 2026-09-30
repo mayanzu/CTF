@@ -1,0 +1,84 @@
+**********************
+PowerShell transcript start
+Start time: 20260929090104
+Username: DESKTOP-412KTAR\mzj
+RunAs User: DESKTOP-412KTAR\mzj
+Configuration Name: 
+Machine: DESKTOP-412KTAR (Microsoft Windows NT 10.0.26200.0)
+Host Application: C:\Users\mzj\.cache\codex-runtimes\codex-primary-runtime\dependencies\native\powershell\pwsh.dll -Command try { [Console]::OutputEncoding=[System.Text.Encoding]::UTF8 } catch {}
+$log = Join-Path (Get-Location) '.\题目资料\OpenHarmony_arkt_559\analysis\reproduce_arkt559_transcript_20260929.txt'; Start-Transcript -LiteralPath $log -Force | Out-Null; try { Write-Output "RECORD_DATE=$(Get-Date -Format 'yyyy-MM-dd HH:mm:ss K')"; Write-Output "PYTHON_VERSION_COMMAND> python --version"; python --version; Write-Output 'COMMAND> python -B -u .\analysis\reproduce_arkt559.py'; Push-Location '.\题目资料\OpenHarmony_arkt_559'; python -B -u '.\analysis\reproduce_arkt559.py'; $pythonExit = $LASTEXITCODE; Pop-Location; Write-Output "PYTHON_EXIT_CODE=$pythonExit" } finally { Stop-Transcript | Out-Null }; if ($pythonExit -ne 0) { throw "Reproduction script failed with exit code $pythonExit" }
+Process ID: 36512
+PSVersion: 7.6.5
+PSEdition: Core
+GitCommitId: 7.6.5
+OS: Microsoft Windows 10.0.26200
+Platform: Win32NT
+PSCompatibleVersions: 1.0, 2.0, 3.0, 4.0, 5.0, 5.1, 6.0, 7.0
+PSRemotingProtocolVersion: 2.4
+SerializationVersion: 1.1.0.1
+WSManStackVersion: 3.0
+**********************
+RECORD_DATE=2026-09-29 09:01:04 +08:00
+PYTHON_VERSION_COMMAND> python --version
+
+COMMAND> python -B -u .\analysis\reproduce_arkt559.py
+
+PYTHON_EXIT_CODE=0
+**********************
+PowerShell transcript end
+End time: 20260929090105
+**********************
+**********************
+PowerShell transcript start
+Start time: 20260929090309
+Username: DESKTOP-412KTAR\mzj
+RunAs User: DESKTOP-412KTAR\mzj
+Configuration Name: 
+Machine: DESKTOP-412KTAR (Microsoft Windows NT 10.0.26200.0)
+Host Application: C:\Users\mzj\.cache\codex-runtimes\codex-primary-runtime\dependencies\native\powershell\pwsh.dll -Command try { [Console]::OutputEncoding=[System.Text.Encoding]::UTF8 } catch {}
+$log = Join-Path (Get-Location) '.\题目资料\OpenHarmony_arkt_559\analysis\reproduce_arkt559_transcript_20260929.txt'; Start-Transcript -LiteralPath $log -Append | Out-Null; try { Write-Output 'COMMAND> python -B -u .\analysis\agent_arkt559_independent_reproduce.py'; Push-Location '.\题目资料\OpenHarmony_arkt_559'; python -B -u '.\analysis\agent_arkt559_independent_reproduce.py'; $pythonExit = $LASTEXITCODE; Pop-Location; Write-Output "INDEPENDENT_PYTHON_EXIT_CODE=$pythonExit" } finally { Stop-Transcript | Out-Null }; if ($pythonExit -ne 0) { throw "Independent reproduction failed with exit code $pythonExit" }
+Process ID: 31852
+PSVersion: 7.6.5
+PSEdition: Core
+GitCommitId: 7.6.5
+OS: Microsoft Windows 10.0.26200
+Platform: Win32NT
+PSCompatibleVersions: 1.0, 2.0, 3.0, 4.0, 5.0, 5.1, 6.0, 7.0
+PSRemotingProtocolVersion: 2.4
+SerializationVersion: 1.1.0.1
+WSManStackVersion: 3.0
+**********************
+COMMAND> python -B -u .\analysis\agent_arkt559_independent_reproduce.py
+
+INDEPENDENT_PYTHON_EXIT_CODE=0
+**********************
+PowerShell transcript end
+End time: 20260929090310
+**********************
+**********************
+PowerShell transcript start
+Start time: 20260929090755
+Username: DESKTOP-412KTAR\mzj
+RunAs User: DESKTOP-412KTAR\mzj
+Configuration Name: 
+Machine: DESKTOP-412KTAR (Microsoft Windows NT 10.0.26200.0)
+Host Application: C:\Users\mzj\.cache\codex-runtimes\codex-primary-runtime\dependencies\native\powershell\pwsh.dll -Command try { [Console]::OutputEncoding=[System.Text.Encoding]::UTF8 } catch {}
+$log = Join-Path (Get-Location) '.\题目资料\OpenHarmony_arkt_559\analysis\reproduce_arkt559_transcript_20260929.txt'; Start-Transcript -LiteralPath $log -Append | Out-Null; try { Write-Output 'COMMAND> python -B -u .\analysis\agent_arkt559_independent_reproduce.py'; Push-Location '.\题目资料\OpenHarmony_arkt_559'; python -B -u '.\analysis\agent_arkt559_independent_reproduce.py'; $pythonExit = $LASTEXITCODE; Pop-Location; Write-Output "INDEPENDENT_PYTHON_EXIT_CODE=$pythonExit" } finally { Stop-Transcript | Out-Null }; if ($pythonExit -ne 0) { throw "Independent reproduction failed with exit code $pythonExit" }
+Process ID: 24000
+PSVersion: 7.6.5
+PSEdition: Core
+GitCommitId: 7.6.5
+OS: Microsoft Windows 10.0.26200
+Platform: Win32NT
+PSCompatibleVersions: 1.0, 2.0, 3.0, 4.0, 5.0, 5.1, 6.0, 7.0
+PSRemotingProtocolVersion: 2.4
+SerializationVersion: 1.1.0.1
+WSManStackVersion: 3.0
+**********************
+COMMAND> python -B -u .\analysis\agent_arkt559_independent_reproduce.py
+
+INDEPENDENT_PYTHON_EXIT_CODE=0
+**********************
+PowerShell transcript end
+End time: 20260929090756
+**********************

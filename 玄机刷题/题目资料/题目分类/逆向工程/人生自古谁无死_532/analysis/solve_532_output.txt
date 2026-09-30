@@ -1,0 +1,26 @@
+1.enc (30 bytes):
+  hex = 286c66633364366c6c63636361606d61673066616d6c60656d2e32343933
+  ascii= '(lfc3d6llccca`mag0faml`em.2493'
+2.enc (25 bytes):
+  hex = e59c368465b9c7c11907703035e7f45e70ccc0431e3db178d9
+  ascii= '\\xe5\\x9c6\\x84e\\xb9\\xc7\\xc1\x19\x07p05\\xe7\\xf4^p\\xcc\\xc0C\x1e=\\xb1x\\xd9'
+1.enc reversed then XOR 0x55 (30 bytes):
+  hex = 666c61677b3830353938343365323438353436363639396331663633397d
+  ascii= 'flag{8059843e2485466699c1f639}'
+ChaCha state words = 61707865 3320646e 79622d32 6b206574 fbadbfcf f7a9bbcb f3a5b7c7 cfa1b3c3 cb9d8fff c7998bfb c39587f7 df9183f3 00000000 33221100 77665544 bbaa9988
+ChaCha key         = cfbfadfbcbbba9f7c7b7a5f3c3b3a1cfff8f9dcbfb8b99c7f78795c3f38391df
+ChaCha counter     = 00000000
+ChaCha nonce       = 00112233445566778899aabb
+ChaCha keystream   = 83f057e31e81f7f4203f440350cac66a48f9ed77280b8755a42a88e3f7950c8d844b5fa7720cf776b00aed4407869d984f22f57e9cae7718ace4d15f59b1c5c3
+target_str XOR ChaCha20(first 25 bytes) (25 bytes):
+  hex = 53514354467b7265616c5f63686163686132305f666c61677d
+  ascii= 'SQCTF{real_chacha20_flag}'
+2.enc XOR ChaCha20 keystream (25 bytes):
+  hex = 666c61677b38303539383433652d323438352d343636362d7d
+  ascii= 'flag{8059843e-2485-4666-}'
+2.enc normalized prefix = flag{8059843e24854666
+1.enc full candidate    = flag{8059843e2485466699c1f639}
+2.enc prefix matches 1.enc = True
+actual decoy_str after XOR/reverse n=29 (30 bytes):
+  hex = 514354467b66616b655f666c61675f646f5f6e6f745f7375626d69747d06
+  ascii= 'QCTF{fake_flag_do_not_submit}\x06'

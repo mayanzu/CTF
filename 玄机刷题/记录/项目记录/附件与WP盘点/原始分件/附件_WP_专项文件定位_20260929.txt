@@ -1,0 +1,202 @@
+**********************
+PowerShell transcript start
+Start time: 20260929164802
+Username: DESKTOP-412KTAR\mzj
+RunAs User: DESKTOP-412KTAR\mzj
+Configuration Name: 
+Machine: DESKTOP-412KTAR (Microsoft Windows NT 10.0.26200.0)
+Host Application: C:\Users\mzj\.cache\codex-runtimes\codex-primary-runtime\dependencies\native\powershell\pwsh.dll -NoProfile -Command try { [Console]::OutputEncoding=[System.Text.Encoding]::UTF8 } catch {}
+$ErrorActionPreference='Continue'
+$project='C:\Users\mzj\Desktop\CTF\玄机刷题';$log=Join-Path $project '记录\附件_WP_专项文件定位_20260929.txt';Start-Transcript -LiteralPath $log -Force|Out-Null
+Write-Output 'COMMAND> Get-Content 题目资料\原始下载附件\manifest.csv'
+$manifest=Join-Path $project '题目资料\原始下载附件\manifest.csv';if(Test-Path -LiteralPath $manifest){Get-Content -LiteralPath $manifest}
+Write-Output 'COMMAND> list attachment files under project labs\platform\attachments and challenge-specific topic folders'
+$roots=@((Join-Path $project 'labs\platform\attachments'),(Join-Path $project '题目资料\新题批次'),(Join-Path $project '题目资料\原始下载附件'))
+foreach($r in $roots){if(Test-Path -LiteralPath $r){Write-Output "ROOT $r";Get-ChildItem -LiteralPath $r -File -Recurse -Force -ErrorAction SilentlyContinue|Where-Object{$_.Extension -match '(?i)^\.(zip|7z|rar|pcap|pcapng|exe|elf|apk|dex|bin|db|sqlite|png|jpg|pdf|c|py|json|csv|txt)$'}|ForEach-Object{'FILE '+$_.FullName.Substring($project.Length+1)+' ['+$_.Length+' B]'}}}
+Write-Output 'COMMAND> list non-empty WP-like files under 题目资料, with relative path and text length'
+Get-ChildItem -LiteralPath (Join-Path $project '题目资料') -File -Recurse -Force -ErrorAction SilentlyContinue|Where-Object{$_.Name -match '(?i)(wp|write.?up|题解|solution|分析记录)' -and $_.Extension -match '(?i)^\.(md|txt|tex|pdf|docx)$'}|ForEach-Object{$chars=0;if($_.Extension -match '(?i)^\.(md|txt|tex)$'){try{$chars=(Get-Content -LiteralPath $_.FullName -Raw -ErrorAction Stop).Length}catch{}};'WP '+$_.FullName.Substring($project.Length+1)+' ['+$_.Length+' B; '+$chars+' chars]'}
+Write-Output 'COMMAND> check named guide and PDF build outputs'
+Get-ChildItem -LiteralPath (Join-Path $project '指南') -File -Force|Where-Object{$_.Name -match '玄机刷题指南'}|ForEach-Object{'GUIDE '+$_.Name+' ['+$_.Length+' B; '+$_.LastWriteTime.ToString('s')+']'}
+Stop-Transcript|Out-Null;Write-Output "TRANSCRIPT=$log"
+Process ID: 10540
+PSVersion: 7.6.5
+PSEdition: Core
+GitCommitId: 7.6.5
+OS: Microsoft Windows 10.0.26200
+Platform: Win32NT
+PSCompatibleVersions: 1.0, 2.0, 3.0, 4.0, 5.0, 5.1, 6.0, 7.0
+PSRemotingProtocolVersion: 2.4
+SerializationVersion: 1.1.0.1
+WSManStackVersion: 3.0
+**********************
+COMMAND> Get-Content 题目资料\原始下载附件\manifest.csv
+"Source","ProjectCopy","SHA256","Action"
+"班次邮戳附件.zip","题目资料\原始下载附件\班次邮戳附件.zip","651F3AD412CED6FDF09D664BE51FA19FC016C60641CE2FBEFC71F8F249382CAB","copied"
+"被入侵的数据库.zip","题目资料\原始下载附件\被入侵的数据库.zip","B4AEEED35FA4BEBFAF07A57418ADE000B40557CF526BE70AEE9E4C4C0D80939E","copied"
+"附件.zip","labs\platform\attachments\296-pwn-ezpwn.zip","FF4C0D75AF198996A67A3ABA90351FD4042949D99B31B6EA2846BBE3BA42C640","identical copy already in project"
+"即随本心.zip","题目资料\原始下载附件\即随本心.zip","42970559976D203681A666531B00BCB9DEE61E3C3BAF8B1100120CDA3CD3CAAB","copied"
+"可疑流量分析附件.zip","题目资料\原始下载附件\可疑流量分析附件.zip","1DA68FF7021F1A3294C2D6BFEC355564A2DBF5BCC96C33451D9D9422AE1B5AFA","copied"
+"联号回执附件.zip","labs\platform\attachments\587-linked-receipts.zip","986CB14C6EE777339F29F8406B73943C093DE07B76E1EE35810B651D35CD02FF","identical copy already in project"
+"题目附件.zip","labs\platform\attachments\573-cifar10.zip","9B3BE7234E7369BB89E1F36D49D3EE562B04AEABA4FF6C40C56B7BC128BDF05B","identical copy already in project"
+"外泄流量取证附件.zip","labs\platform\attachments\581-network-forensics.zip","CBF1DDC1890E9A52552CCC1071D4310E40B1B58F01D5AB38FBBA0A0206929140","identical copy already in project"
+"五格电文附件.zip","labs\platform\attachments\586-five-grid.zip","A6F281CE48857C914F6AA5E717189311E01991A10AE25CB29A14FBDB0F875F68","identical copy already in project"
+"像素囚笼附件.zip","labs\platform\attachments\583-pixel-cage.zip","91ADAF6FBB46D68BF5192AFDD802078C1F46A9F1EDD60D1EEC50D3D84CDF203E","identical copy already in project"
+"闸机票根附件.zip","labs\platform\attachments\589-gate-ticket.zip","637B9EDBFBC409B717751D900154B6A137017A5E74A7C5826652A5FCAE58EDF0","identical copy already in project"
+"attachments.zip","题目资料\原始下载附件\attachments.zip","33298161377449297E9B96230960511CF4732C9F50815941D643902AC948B339","copied"
+"crazyaes-20240524094418-p72tac5.zip","题目资料\原始下载附件\crazyaes-20240524094418-p72tac5.zip","73A995ED5992DD4E31C16CB008B8EAE945286E1A2F8F63175AA2F36993DAB5D5","copied"
+"digital_key_trace.sqlite.zip","题目资料\新题批次\DigitalKey_UWB_520\digital_key_trace.sqlite.zip","9CF7B9FD309CE62947F0136AE2E55147EF3CB9C82AC889BBB61D674EAADD73A6","identical copy already in project"
+"easyre.zip","题目资料\原始下载附件\easyre.zip","7401DF22E0BEEA48C439938B622931414F3EC89D383B5AA4CD72E138C42805EA","copied"
+"encrypted_flag.zip","题目资料\原始下载附件\encrypted_flag.zip","0C563421AE63279233377EEEDFAA34DD85DEFA23A663C46CF1F9DC18FFB0F834","copied"
+"ezBase-20250521104055-dq14shk.rar","题目资料\原始下载附件\ezBase-20250521104055-dq14shk.rar","0A7420F1D2D832474AD09EA55825900AF75EBA30DEA46DFB63F9A1AD17F0AF18","copied"
+"EzFlag_248f149404428676e6aa45e6312d069c.zip","labs\platform\attachments\367-ezflag\EzFlag.zip","6D75C39BF4AF49D2C609844C7A754DEA3251D5D67039E128706B6541964F58FC","identical copy already in project"
+"game_flag.exe","题目资料\新题批次\PaluMaze_551\game_flag.exe","319DE70C476CC7C2761A57D88B83A5529D06CFD0A909D0EC48EC9CD588F82556","identical copy already in project"
+"game_flag (1).exe","题目资料\新题批次\PaluMaze_551\game_flag.exe","319DE70C476CC7C2761A57D88B83A5529D06CFD0A909D0EC48EC9CD588F82556","identical copy already in project"
+"go_for_it.zip","题目资料\原始下载附件\go_for_it.zip","68B5FED390B6DEF2E3095AF77DA6DD3047128E91AD77A87BEDE19065878AFB4A","copied"
+"hookme.rar","题目资料\原始下载附件\hookme.rar","1DC981B273CB80A32863B9A89A09CFA82B731F6D4BC8E37D72C445DEB29E993F","copied"
+"mqtt.zip","题目资料\WSL平台归档\pwn-lab\platform\mqtt.zip","DD0E862D33CE025FB56E60515E8B39B02FF11CF382149CD2FA2AA64D38D53A06","identical copy already in project"
+"note.zip","题目资料\原始下载附件\note.zip","E9C657065D4AEB1E128C90A2E5A6A42ACA03DB75D7493DABDBE12CA5A6938AD9","copied"
+"PaluArray_flag.zip","题目资料\原始下载附件\PaluArray_flag.zip","106CF19A6967105AEA4ACAEAA3B10E8DB169293E3057C9109845D324FF85779A","copied"
+"Poisoned+Samples附件.zip","labs\platform\attachments\591-poisoned-samples.zip","FBA0CE8E25F620AF659EBE7051A4FC0D4A3F271FF1BEAC3351A2C0164AE83A7F","identical copy already in project"
+"Prompt+Trace附件.zip","题目资料\原始下载附件\Prompt+Trace附件.zip","93DEAA4BA1FB60DCE3550F447F6035FBC029478F51EDA61D611FFFE27FCD3CDD","copied"
+"qgd.zip","labs\platform\attachments\557-qgd.zip","58E431863B858A26A7491457B5F30B54262D7859B525AB21E30D393CD64CECF7","identical copy already in project"
+"rainbow.zip","题目资料\原始下载附件\rainbow.zip","D8D5AA578D7AD1856A9CD2EA375B8D68399BCDF92E40791915EE22C762B9F852","copied"
+"ROP2.zip","题目资料\WSL平台归档\pwn-lab\platform\krop2.zip","3EC658480DEAC2914BD2F11588B97037DCA9829C556F407413BA49C9DCF53206","identical copy already in project"
+"secret.zip","题目资料\原始下载附件\secret.zip","77177B600FEA6DA73C41935763ED555047F15CB7F17B7A707550BBD9E633080F","copied"
+"spring.zip","题目资料\原始下载附件\spring.zip","0B55AE0DBCA33E366EA2E7A2AB04837D67CE669C3A1A7FDD81FB5586FDE24058","copied"
+"Sql注入的应急排查.zip","题目资料\原始下载附件\Sql注入的应急排查.zip","62E3BCFC987E7461B111EE8E5E91409AB830FF286D50DA31DB34DA48E94DA79E","copied"
+"tradre.zip","题目资料\原始下载附件\tradre.zip","71BE666F73FF9214BEF7211C8F413FED628B9AB42ABD10EE1E2F8AB9D1995FB0","copied"
+"Veiled+Shell附件.zip","题目资料\原始下载附件\Veiled+Shell附件.zip","402954C3AFE63A36482472141CEE24BDCE40C935F58AEE6F2986131C9523D23E","copied"
+"Victory_Melody.zip","题目资料\原始下载附件\Victory_Melody.zip","4556D1E81570878B8AB4A86A01B034D9C523B411059AB47419BFC01E43C2102B","copied"
+"VM555.exe","题目资料\Victory_Melody_555\Victory_Melody.exe","9909D359461E16E1CA1D55521A187302799C781C718BE3B6613E5A8FB2D3D87B","identical copy already in project"
+"abs.zip","题目资料\WSL平台归档\pwn-lab\platform\abs.zip","6E64874876C33B22E82A2EF4C014036AACAA3662DB61B08E714989E9D9C3B91D","identical copy already in project"
+"babyRe.zip","题目资料\原始下载附件\babyRe.zip","DD4BA411EA15DF78CC7BEE2959090FAC9081D824FB41FE452EF02FC6B7B034F9","copied"
+"babyrsa.zip","题目资料\原始下载附件\babyrsa.zip","ECDA4109A4DFA064C7F9CE6BED03777A760EC99BC934131D5F7ECD739A0295E0","copied"
+"arkt.zip","题目资料\原始下载附件\arkt.zip","81D7F3225DC36345A968A2F498E00AAD570C08B8DCAD89E13405BD3195A4263B","copied"
+"你知道Base么-20250521104202-am92t17.rar","题目资料\原始下载附件\你知道Base么-20250521104202-am92t17.rar","3FEC5E1930230660DCABDF0F31F4D97F8BB980D67306242D48A4377B74590801","copied"
+"checker.zip","题目资料\原始下载附件\checker.zip","598E457DCDFFCB89F4A1B5CF56133E1D8A194E737B8C25C6C0EA722854426D36","copied"
+COMMAND> list attachment files under project labs\platform\attachments and challenge-specific topic folders
+ROOT C:\Users\mzj\Desktop\CTF\玄机刷题\labs\platform\attachments
+FILE labs\platform\attachments\296-pwn-ezpwn.zip [4870 B]
+FILE labs\platform\attachments\557-qgd.zip [909049 B]
+FILE labs\platform\attachments\573-cifar10.zip [4282 B]
+FILE labs\platform\attachments\581-network-forensics.zip [57931 B]
+FILE labs\platform\attachments\583-pixel-cage.zip [3902 B]
+FILE labs\platform\attachments\586-five-grid.zip [1163 B]
+FILE labs\platform\attachments\587-linked-receipts.zip [1478 B]
+FILE labs\platform\attachments\589-gate-ticket.zip [2549 B]
+FILE labs\platform\attachments\591-poisoned-samples.zip [1658 B]
+FILE labs\platform\attachments\367-ezflag\EzFlag.zip [5589 B]
+FILE labs\platform\attachments\573-cifar10\trigger-detail.png [367 B]
+FILE labs\platform\attachments\573-cifar10\trigger.png [104 B]
+FILE labs\platform\attachments\581-network-forensics\screenshot.png [24969 B]
+FILE labs\platform\attachments\583-pixel-cage\challenge.png [5187 B]
+FILE labs\platform\attachments\591-poisoned-samples\poisoned_samples_bundle\metadata.json [160 B]
+FILE labs\platform\attachments\591-poisoned-samples\poisoned_samples_bundle\README.txt [205 B]
+FILE labs\platform\attachments\591-poisoned-samples\poisoned_samples_bundle\train_samples.csv [1563 B]
+ROOT C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\新题批次
+FILE 题目资料\新题批次\DigitalKey_UWB_520\digital_key_trace.sqlite.zip [2560 B]
+FILE 题目资料\新题批次\DigitalKey_UWB_520\inspect_sqlite.py [960 B]
+FILE 题目资料\新题批次\DigitalKey_UWB_520\solve_uwb_520.py [4009 B]
+FILE 题目资料\新题批次\DigitalKey_UWB_520\extracted\digital_key_trace.sqlite [28672 B]
+FILE 题目资料\新题批次\DigitalKey_UWB_520\extracted\__MACOSX\._digital_key_trace.sqlite [319 B]
+FILE 题目资料\新题批次\PaluMaze_551\compact_dis.py [652 B]
+FILE 题目资料\新题批次\PaluMaze_551\compact_dis.txt [33102 B]
+FILE 题目资料\新题批次\PaluMaze_551\compute_candidates.py [3062 B]
+FILE 题目资料\新题批次\PaluMaze_551\compute_candidates.txt [861 B]
+FILE 题目资料\新题批次\PaluMaze_551\dis311.py [819 B]
+FILE 题目资料\新题批次\PaluMaze_551\disassemble_game.py [2281 B]
+FILE 题目资料\新题批次\PaluMaze_551\disassemble_static.py [621 B]
+FILE 题目资料\新题批次\PaluMaze_551\disassembly.txt [49452 B]
+FILE 题目资料\新题批次\PaluMaze_551\enumerate_optimal.py [2138 B]
+FILE 题目资料\新题批次\PaluMaze_551\extract_static.py [751 B]
+FILE 题目资料\新题批次\PaluMaze_551\game_disassembly.txt [99260 B]
+FILE 题目资料\新题批次\PaluMaze_551\game_flag.exe [6731652 B]
+FILE 题目资料\新题批次\PaluMaze_551\game.bin [7955 B]
+FILE 题目资料\新题批次\PaluMaze_551\inspect_archive.py [1316 B]
+FILE 题目资料\新题批次\PaluMaze_551\optimal_summary.txt [7484 B]
+FILE 题目资料\新题批次\PaluMaze_551\order_check.py [1535 B]
+FILE 题目资料\新题批次\PaluMaze_551\pydisasm_focus.txt [14595 B]
+FILE 题目资料\新题批次\PaluMaze_551\PYZ-00.pyz.bin [1319318 B]
+FILE 题目资料\新题批次\PaluMaze_551\recreate_maze.py [1886 B]
+FILE 题目资料\新题批次\PaluMaze_551\xdis311.txt [23133 B]
+ROOT C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\原始下载附件
+FILE 题目资料\原始下载附件\班次邮戳附件.zip [160365 B]
+FILE 题目资料\原始下载附件\被入侵的数据库.zip [29595 B]
+FILE 题目资料\原始下载附件\即随本心.zip [12817910 B]
+FILE 题目资料\原始下载附件\可疑流量分析附件.zip [266740 B]
+FILE 题目资料\原始下载附件\你知道Base么-20250521104202-am92t17.rar [14603 B]
+FILE 题目资料\原始下载附件\arkt.zip [109627 B]
+FILE 题目资料\原始下载附件\attachments.zip [6049341 B]
+FILE 题目资料\原始下载附件\babyRe.zip [5883266 B]
+FILE 题目资料\原始下载附件\babyrsa.zip [1661 B]
+FILE 题目资料\原始下载附件\checker.zip [17498 B]
+FILE 题目资料\原始下载附件\crazyaes-20240524094418-p72tac5.zip [155757 B]
+FILE 题目资料\原始下载附件\easyre.zip [117343 B]
+FILE 题目资料\原始下载附件\encrypted_flag.zip [198 B]
+FILE 题目资料\原始下载附件\ezBase-20250521104055-dq14shk.rar [7833 B]
+FILE 题目资料\原始下载附件\go_for_it.zip [636919 B]
+FILE 题目资料\原始下载附件\hookme.rar [5125397 B]
+FILE 题目资料\原始下载附件\manifest.csv [6979 B]
+FILE 题目资料\原始下载附件\note.zip [5832 B]
+FILE 题目资料\原始下载附件\PaluArray_flag.zip [73952 B]
+FILE 题目资料\原始下载附件\Prompt+Trace附件.zip [2579 B]
+FILE 题目资料\原始下载附件\rainbow.zip [4038 B]
+FILE 题目资料\原始下载附件\secret.zip [1170497 B]
+FILE 题目资料\原始下载附件\spring.zip [30014 B]
+FILE 题目资料\原始下载附件\Sql注入的应急排查.zip [315805 B]
+FILE 题目资料\原始下载附件\tradre.zip [11073 B]
+FILE 题目资料\原始下载附件\Veiled+Shell附件.zip [7404 B]
+FILE 题目资料\原始下载附件\Victory_Melody.zip [13676 B]
+COMMAND> list non-empty WP-like files under 题目资料, with relative path and text length
+WP 题目资料\Asymmetric_544\wp.md [7050 B; 4689 chars]
+WP 题目资料\butterfly_552\wp.md [17473 B; 10111 chars]
+WP 题目资料\CatchPalu_545\wp.md [8921 B; 5753 chars]
+WP 题目资料\challenge_558\wp.md [8729 B; 6408 chars]
+WP 题目资料\checker_562\analysis\agent_checker562_independent_WP_transcript_20260929.txt [44890 B; 37218 chars]
+WP 题目资料\checker_562\analysis\checker_562_independent_reaudit_WP_20260929.md [9925 B; 6593 chars]
+WP 题目资料\checker_562\analysis\checker_562_WP.md [12465 B; 7257 chars]
+WP 题目资料\ezBase_541\WP.md [8668 B; 4956 chars]
+WP 题目资料\Maybesignin_540\WP.md [9171 B; 5951 chars]
+WP 题目资料\OpenHarmony_arkt_559\WP.md [13073 B; 8206 chars]
+WP 题目资料\OpenHarmony_easyre_560\WP.md [5571 B; 3589 chars]
+WP 题目资料\OpenHarmony_secret_561\WP.md [20100 B; 13539 chars]
+WP 题目资料\PaluArray_546\wp.md [10279 B; 6357 chars]
+WP 题目资料\PaluFlat_547\wp.md [17727 B; 10835 chars]
+WP 题目资料\PaluGOGOGO_548\wp.md [12086 B; 7954 chars]
+WP 题目资料\ParlooChecker_549\wp.md [10701 B; 7307 chars]
+WP 题目资料\rainbow\分析记录.md [2635 B; 1607 chars]
+WP 题目资料\人生自古谁无死_532\wp.md [9701 B; 5815 chars]
+WP 题目资料\你若安好便是晴_531\wp.md [7179 B; 4219 chars]
+WP 题目资料\密钥生成审计_588\wp.md [5542 B; 3214 chars]
+WP 题目资料\慕然回首_530\wp.md [7272 B; 4344 chars]
+WP 题目资料\批次10_20260929\542_hookme\wp.md [14062 B; 9982 chars]
+WP 题目资料\批次10_20260929\543_Base\wp.md [11827 B; 7509 chars]
+WP 题目资料\批次10_20260929\552_butterfly\wp.md [8959 B; 5849 chars]
+WP 题目资料\批次11_20260929\539_cryptor\wp.md [6079 B; 4079 chars]
+WP 题目资料\批次11_20260929\540_maybesignin\wp.md [5976 B; 3768 chars]
+WP 题目资料\批次11_20260929\541_ezBase\wp.md [8754 B; 4772 chars]
+WP 题目资料\批次12_20260929\534_天下谁人不识君\wp.md [6663 B; 4011 chars]
+WP 题目资料\批次12_20260929\535_往事暗沉不可追\wp.md [5773 B; 3389 chars]
+WP 题目资料\批次12_20260929\536_遇事不决可问春风\wp.md [5261 B; 3489 chars]
+WP 题目资料\批次13_20260929\533_圣人当仁不让\wp.md [3917 B; 2201 chars]
+WP 题目资料\批次13_20260929\537_湘岚杯ezbase\wp.md [7849 B; 4939 chars]
+WP 题目资料\批次13_20260929\538_湘岚杯1997\wp.md [8441 B; 5063 chars]
+WP 题目资料\批次14_20260929\527_木兰当户织\WP_唧唧复唧唧木兰当户织.md [4745 B; 2385 chars]
+WP 题目资料\批次14_20260929\561_OpenHarmony_secret\WP.md [9689 B; 6112 chars]
+WP 题目资料\批次14_20260929\561_OpenHarmony_secret\analysis\WP_preexisting_20260929.md [20100 B; 13539 chars]
+WP 题目资料\批次14_20260929\562_checker\WP_第一届启航杯checker.md [9246 B; 5505 chars]
+WP 题目资料\第一届启航杯checker_562\wp.md [9586 B; 6064 chars]
+COMMAND> check named guide and PDF build outputs
+GUIDE 玄机刷题指南_合并源.md [179840 B; 2026-09-29T16:13:20]
+GUIDE 玄机刷题指南_样式.tex [1730 B; 2026-09-28T21:54:22]
+GUIDE 玄机刷题指南_正文.tex [145716 B; 2026-09-28T21:54:31]
+GUIDE 玄机刷题指南.aux [43176 B; 2026-09-28T21:54:42]
+GUIDE 玄机刷题指南.log [31373 B; 2026-09-28T21:54:42]
+GUIDE 玄机刷题指南.out [25129 B; 2026-09-28T21:54:42]
+GUIDE 玄机刷题指南.pdf [500753 B; 2026-09-28T21:54:42]
+GUIDE 玄机刷题指南.tex [1366 B; 2026-09-28T21:13:35]
+GUIDE 玄机刷题指南.toc [15381 B; 2026-09-28T21:54:42]
+**********************
+PowerShell transcript end
+End time: 20260929164803
+**********************

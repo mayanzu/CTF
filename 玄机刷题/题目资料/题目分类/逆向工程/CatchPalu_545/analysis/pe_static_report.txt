@@ -1,0 +1,266 @@
+FILE=C:\Users\mzj\Desktop\CTF\����ˢ��\��Ŀ����\CatchPalu_545\extracted\CatchPalu_flag.exe
+SIZE=11776 bytes
+MZ=b'MZ'
+e_lfanew=0xf0; PE signature=b'PE\x00\x00'
+MACHINE=0x014c; sections=5; timestamp=0x68280a6f; optional_size=224; characteristics=0x0102; optional_magic=0x010b
+BITS=32; entry_rva=0x1a2b; imagebase=0x400000; section_alignment=0x1000; file_alignment=0x200; size_image=0x7000; size_headers=0x400; subsystem=3; dllchars=0x8140; data_directories=16
+SECTION .text: RVA=0x1000, VirtualSize=0x15ac, RawPtr=0x400, RawSize=0x1600, Characteristics=0x60000020
+SECTION .rdata: RVA=0x3000, VirtualSize=0xc3e, RawPtr=0x1a00, RawSize=0xe00, Characteristics=0x40000040
+SECTION .data: RVA=0x4000, VirtualSize=0x488, RawPtr=0x2800, RawSize=0x200, Characteristics=0xc0000040
+SECTION .rsrc: RVA=0x5000, VirtualSize=0x1e0, RawPtr=0x2a00, RawSize=0x200, Characteristics=0x40000040
+SECTION .reloc: RVA=0x6000, VirtualSize=0x1c8, RawPtr=0x2c00, RawSize=0x200, Characteristics=0x42000040
+DIR[0] rva=0x0 size=0x0
+DIR[1] rva=0x360c size=0xb4
+DIR[2] rva=0x5000 size=0x1e0
+DIR[3] rva=0x0 size=0x0
+DIR[4] rva=0x0 size=0x0
+DIR[5] rva=0x6000 size=0x1c8
+DIR[6] rva=0x31e0 size=0x70
+DIR[7] rva=0x0 size=0x0
+DIR[8] rva=0x0 size=0x0
+DIR[9] rva=0x0 size=0x0
+DIR[10] rva=0x3120 size=0x40
+DIR[11] rva=0x0 size=0x0
+DIR[12] rva=0x3000 size=0xe0
+DIR[13] rva=0x0 size=0x0
+DIR[14] rva=0x0 size=0x0
+DIR[15] rva=0x0 size=0x0
+--- IMPORTS ---
+DLL KERNEL32.dll FirstThunk=0x3000 OFT=0x36c0
+  VirtualProtect
+  GetModuleHandleA
+  LoadLibraryA
+  IsDebuggerPresent
+  InitializeSListHead
+  GetSystemTimeAsFileTime
+  GetCurrentThreadId
+  GetCurrentProcessId
+  QueryPerformanceCounter
+  IsProcessorFeaturePresent
+  TerminateProcess
+  GetCurrentProcess
+  SetUnhandledExceptionFilter
+  UnhandledExceptionFilter
+  GetModuleHandleW
+DLL USER32.dll FirstThunk=0x3040 OFT=0x3700
+  MessageBoxA
+  MessageBoxW
+DLL VCRUNTIME140.dll FirstThunk=0x304c OFT=0x370c
+  __current_exception_context
+  memset
+  _except_handler4_common
+  __current_exception
+DLL api-ms-win-crt-stdio-l1-1-0.dll FirstThunk=0x30c8 OFT=0x3788
+  __stdio_common_vfprintf
+  __p__commode
+  __stdio_common_vfscanf
+  _set_fmode
+  __acrt_iob_func
+DLL api-ms-win-crt-runtime-l1-1-0.dll FirstThunk=0x3078 OFT=0x3738
+  _initterm_e
+  _cexit
+  _initterm
+  _initialize_onexit_table
+  __p___argv
+  _crt_atexit
+  _controlfp_s
+  terminate
+  _get_initial_narrow_environment
+  _initialize_narrow_environment
+  _register_thread_local_exe_atexit_callback
+  __p___argc
+  exit
+  _configure_narrow_argv
+  _register_onexit_function
+  _exit
+  _set_app_type
+  _seh_filter_exe
+  _c_exit
+DLL api-ms-win-crt-math-l1-1-0.dll FirstThunk=0x3070 OFT=0x3730
+  __setusermatherr
+DLL api-ms-win-crt-locale-l1-1-0.dll FirstThunk=0x3068 OFT=0x3728
+  _configthreadlocale
+DLL api-ms-win-crt-heap-l1-1-0.dll FirstThunk=0x3060 OFT=0x3720
+  _set_new_mode
+--- ASCII STRINGS (>=4 chars) WITH OFFSETS ---
+0x004d: !This program cannot be run in DOS mode.
+0x0096: j{$ukz7
+0x009e: j{$uiz4
+0x00a6: j{$unz9
+0x00ae: j{$uoz&
+0x00b6: j{Arkz0
+0x00c9: tbz4
+0x00d9: thz4
+0x00de: j{Rich5
+0x01e8: .text
+0x020f: `.rdata
+0x0237: @.data
+0x0260: .rsrc
+0x0287: @.reloc
+0x0773: SVWt
+0x0bb0: hl@@
+0x0bb5: h`@@
+0x0e0f: Y_^[
+0x1009: =5D@
+0x102d: u"h8D@
+0x103e: hDD@
+0x111a: Y_^[
+0x1141: =4D@
+0x1169: =8D@
+0x117b: h8D@
+0x124d: hPD@
+0x1428: >csm
+0x1474: %XD@
+0x14e0: h%!@
+0x1558: %`D@
+0x1578: SVW3
+0x15a1: Genu
+0x15a8: 5ineI
+0x15b3: 5ntel
+0x15ea: t#=`
+0x168f: j$X9E
+0x16c6: 5T@@
+0x16e4: 5T@@
+0x1711: 5T@@
+0x1854: #=P@@
+0x185b: =P@@
+0x1875: =P@@
+0x187a: _^[3
+0x188e: %X0@
+0x1894: %L0@
+0x189a: %P0@
+0x18a0: %T0@
+0x18b2: %p0@
+0x18d0: %x0@
+0x18f4: %|0@
+0x1906: %h0@
+0x190c: %`0@
+0x193a: =`D@
+0x1cf0: RSDS
+0x1d08: Hello Palu! I Am Your Master I Give You Flowers!      
+0x1d54: GCTL
+0x1d60: .text$mn
+0x1d74: .idata$5
+0x1d88: .00cfg
+0x1d98: .CRT$XCA
+0x1dac: .CRT$XCAA
+0x1dc0: .CRT$XCZ
+0x1dd4: .CRT$XIA
+0x1de8: .CRT$XIAA
+0x1dfc: .CRT$XIAC
+0x1e10: .CRT$XIZ
+0x1e24: .CRT$XPA
+0x1e38: .CRT$XPZ
+0x1e4c: .CRT$XTA
+0x1e60: .CRT$XTZ
+0x1e74: .rdata
+0x1e84: .rdata$sxdata
+0x1e9c: .rdata$voltmd
+0x1eb4: .rdata$zzzdbg
+0x1ecc: .rtc$IAA
+0x1ee0: .rtc$IZZ
+0x1ef4: .rtc$TAA
+0x1f08: .rtc$TZZ
+0x1f1c: .xdata$x
+0x1f30: .idata$2
+0x1f44: .idata$3
+0x1f58: .idata$4
+0x1f6c: .idata$6
+0x1f80: .data
+0x1f90: .bss
+0x1fa0: .rsrc$01
+0x1fb4: .rsrc$02
+0x21a2: VirtualProtect
+0x21b4: GetModuleHandleA
+0x21c8: LoadLibraryA
+0x21d6: KERNEL32.dll
+0x21e6: MessageBoxA
+0x21f4: MessageBoxW
+0x2200: USER32.dll
+0x220e: __current_exception
+0x2224: __current_exception_context
+0x2242: memset
+0x224c: _except_handler4_common
+0x2264: VCRUNTIME140.dll
+0x2278: __acrt_iob_func
+0x228a: __stdio_common_vfprintf
+0x22a4: __stdio_common_vfscanf
+0x22be: _seh_filter_exe
+0x22d0: _set_app_type
+0x22e0: __setusermatherr
+0x22f4: _configure_narrow_argv
+0x230e: _initialize_narrow_environment
+0x2330: _get_initial_narrow_environment
+0x2352: _initterm
+0x235e: _initterm_e
+0x236c: exit
+0x2374: _exit
+0x237c: _set_fmode
+0x238a: __p___argc
+0x2398: __p___argv
+0x23a6: _cexit
+0x23b0: _c_exit
+0x23ba: _register_thread_local_exe_atexit_callback
+0x23e8: _configthreadlocale
+0x23fe: _set_new_mode
+0x240e: __p__commode
+0x241e: _initialize_onexit_table
+0x243a: _register_onexit_function
+0x2456: _crt_atexit
+0x2464: _controlfp_s
+0x2474: terminate
+0x247e: api-ms-win-crt-stdio-l1-1-0.dll
+0x249e: api-ms-win-crt-runtime-l1-1-0.dll
+0x24c0: api-ms-win-crt-math-l1-1-0.dll
+0x24e0: api-ms-win-crt-locale-l1-1-0.dll
+0x2502: api-ms-win-crt-heap-l1-1-0.dll
+0x2524: UnhandledExceptionFilter
+0x2540: SetUnhandledExceptionFilter
+0x255e: GetCurrentProcess
+0x2572: TerminateProcess
+0x2586: IsProcessorFeaturePresent
+0x25a2: QueryPerformanceCounter
+0x25bc: GetCurrentProcessId
+0x25d2: GetCurrentThreadId
+0x25e8: GetSystemTimeAsFileTime
+0x2602: InitializeSListHead
+0x2618: IsDebuggerPresent
+0x262c: GetModuleHandleW
+0x2860: Correct?
+0x286c: NoSuccess?
+0x2878: flag{PcdrJzml9i7nr2HEC}
+0x2890: You entered: %s
+0x28a4: %25s
+0x28ac: Enter your flag: 
+0x28c0: MessageBoxA
+0x28cc: Wellcome Palu!!!
+0x2908: forpalu
+0x2a60: <?xml version='1.0' encoding='UTF-8' standalone='yes'?>
+0x2a99: <assembly xmlns='urn:schemas-microsoft-com:asm.v1' manifestVersion='1.0'>
+0x2ae4:   <trustInfo xmlns="urn:schemas-microsoft-com:asm.v3">
+0x2b1c:     <security>
+0x2b2c:       <requestedPrivileges>
+0x2b49:         <requestedExecutionLevel level='asInvoker' uiAccess='false' />
+0x2b91:       </requestedPrivileges>
+0x2baf:     </security>
+0x2bc0:   </trustInfo>
+0x2bd0: </assembly>
+0x2c0b: 0A0j0
+0x2c1b: 3'5,545J5g5t5y5~5
+0x2c37: 6 737D7S7
+0x2c59: 9)9c9<:E:P:W:j:x:~:
+0x2c93: ;#;3;C;L;
+0x2ca1: <0<?<V<\<b<h<n<t<z<
+0x2cbf: <5=B=j=|=
+0x2cd1: =1>:>N>T>
+0x2cf7: 0u0~0
+0x2d09: 0@1E1Y1c1l1
+0x2d2d: 3X3a3j3u3}3
+0x2d53: 4@4N4V4\4b4p4v4
+0x2d95: 5%5+515;5
+0x2db3: 1\1`1h1
+--- UTF16LE PRINTABLE STRINGS (>=4 chars) ---
+0x28e0: Correct!
+0x28f4: Success!
+0x28e0: Correct!
+0x28f4: Success!

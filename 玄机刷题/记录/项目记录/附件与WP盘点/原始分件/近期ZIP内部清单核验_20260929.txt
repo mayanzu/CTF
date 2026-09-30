@@ -1,0 +1,188 @@
+**********************
+PowerShell transcript start
+Start time: 20260929165533
+Username: DESKTOP-412KTAR\mzj
+RunAs User: DESKTOP-412KTAR\mzj
+Configuration Name: 
+Machine: DESKTOP-412KTAR (Microsoft Windows NT 10.0.26200.0)
+Host Application: C:\Users\mzj\.cache\codex-runtimes\codex-primary-runtime\dependencies\native\powershell\pwsh.dll -NoProfile -Command try { [Console]::OutputEncoding=[System.Text.Encoding]::UTF8 } catch {}
+$ErrorActionPreference='Continue';$project='C:\Users\mzj\Desktop\CTF\玄机刷题';$log=Join-Path $project '记录\近期ZIP内部清单核验_20260929.txt';Start-Transcript -LiteralPath $log -Force|Out-Null
+Write-Output 'COMMAND> enumerate entries inside recent ZIP attachments in D:\Downloads (read only; no extraction)'
+Add-Type -AssemblyName System.IO.Compression.FileSystem;$terms=@('mediadrive','miraclestruct','true_or_false','blindflow','luc','aurix','remote','diagnostic','DMZ','database','insecure','ciscn','flag','challenge','附件','crypto','pcap','log','logfile','apk','exe','main','source');$archives=Get-ChildItem -LiteralPath 'D:\Downloads' -File -Recurse -Force -ErrorAction SilentlyContinue|Where-Object{$_.Extension -eq '.zip' -and $_.LastWriteTime -ge [datetime]'2026-09-24'}|Sort-Object LastWriteTime -Descending;foreach($a in $archives){try{$z=[System.IO.Compression.ZipFile]::OpenRead($a.FullName);$entries=@($z.Entries|ForEach-Object{$_.FullName});$matches=@($entries|Where-Object{$e=$_;$terms|Where-Object{$e -match [regex]::Escape($_)}});Write-Output "ZIP $($a.FullName) entries=$($entries.Count)";if($matches.Count){$matches|Select-Object -First 25|ForEach-Object{' MATCH '+$_}}elseif($entries.Count -le 12){$entries|ForEach-Object{' ENTRY '+$_}}else{$entries|Select-Object -First 5|ForEach-Object{' FIRST '+$_}};$z.Dispose()}catch{Write-Output "ZIP_ERROR $($a.FullName): $($_.Exception.Message)"}}
+Stop-Transcript|Out-Null;Write-Output "TRANSCRIPT=$log"
+Process ID: 33272
+PSVersion: 7.6.5
+PSEdition: Core
+GitCommitId: 7.6.5
+OS: Microsoft Windows 10.0.26200
+Platform: Win32NT
+PSCompatibleVersions: 1.0, 2.0, 3.0, 4.0, 5.0, 5.1, 6.0, 7.0
+PSRemotingProtocolVersion: 2.4
+SerializationVersion: 1.1.0.1
+WSManStackVersion: 3.0
+**********************
+COMMAND> enumerate entries inside recent ZIP attachments in D:\Downloads (read only; no extraction)
+ZIP D:\Downloads\secret (2).zip entries=1
+ ENTRY secret.hap
+ZIP D:\Downloads\checker (5).zip entries=1
+ MATCH checker.exe
+ZIP D:\Downloads\唧唧复唧唧，木兰当户织.zip entries=1
+ MATCH 唧唧复唧唧，木兰当户织.exe
+ZIP D:\Downloads\ez_vm.zip entries=1
+ MATCH ez_vm.exe
+ZIP D:\Downloads\1997.zip entries=1
+ MATCH 123.exe
+ZIP D:\Downloads\ezbase.zip entries=1
+ MATCH ezbase.exe
+ZIP D:\Downloads\来日之路光明灿烂.zip entries=1
+ MATCH 来日之路光明灿烂.exe
+ZIP D:\Downloads\app-debug.zip entries=1
+ MATCH app-debug.apk
+ZIP D:\Downloads\天下谁人不识君.zip entries=1
+ ENTRY 天下谁人不识君.py
+ZIP D:\Downloads\MaybeSignin (1).zip entries=1
+ MATCH ezsignin.exe
+ZIP D:\Downloads\cryptor.zip entries=2
+ MATCH cryptor.cp310-win_amd64.pyd
+ MATCH main.py
+ZIP D:\Downloads\密钥生成审计附件.zip entries=3
+ MATCH attachments/challenge.py
+ZIP D:\Downloads\are_you_ok.zip entries=1
+ MATCH 你好吗.exe
+ZIP D:\Downloads\人生自古谁无死.zip entries=3
+ MATCH 人生自古谁无死.exe
+ZIP D:\Downloads\tom (1).zip entries=1
+ MATCH Jerry.exe
+ZIP D:\Downloads\tom.zip entries=1
+ MATCH Jerry.exe
+ZIP D:\Downloads\CatchPalu_flag.zip entries=1
+ MATCH CatchPalu_flag.exe
+ZIP D:\Downloads\PaluArray_flag (1).zip entries=1
+ MATCH PaluArray_flag.exe
+ZIP D:\Downloads\Asymmetric_flag.zip entries=1
+ MATCH Asymmetric_flag.exe
+ZIP D:\Downloads\PaluFlat_flag.zip entries=1
+ MATCH PaluFlat_flag.com
+ZIP D:\Downloads\checker (4).zip entries=1
+ MATCH checker.exe
+ZIP D:\Downloads\ParlooChecker_flag.zip entries=1
+ MATCH ParlooChecker_flag.apk
+ZIP D:\Downloads\palugogogo_flag.zip entries=1
+ MATCH palugogogo_flag.exe
+ZIP D:\Downloads\checker (3).zip entries=1
+ MATCH checker.exe
+ZIP D:\Downloads\R.zip entries=1
+ MATCH R.exe
+ZIP D:\Downloads\MaybeSignin.zip entries=1
+ MATCH ezsignin.exe
+ZIP D:\Downloads\arkt (1).zip entries=1
+ ENTRY task_5.hap
+ZIP D:\Downloads\secret (1).zip entries=1
+ ENTRY secret.hap
+ZIP D:\Downloads\checker (2).zip entries=1
+ MATCH checker.exe
+ZIP D:\Downloads\easyre (1).zip entries=1
+ ENTRY entry-default-signed.hap
+ZIP D:\Downloads\checker (1).zip entries=1
+ MATCH checker.exe
+ZIP D:\Downloads\digital_key_trace.sqlite.zip entries=2
+ ENTRY digital_key_trace.sqlite
+ ENTRY __MACOSX/._digital_key_trace.sqlite
+ZIP D:\Downloads\EzFlag_248f149404428676e6aa45e6312d069c.zip entries=1
+ MATCH EzFlag
+ZIP D:\Downloads\被入侵的数据库.zip entries=1
+ MATCH access.log
+ZIP D:\Downloads\2025-CCB-CISCN-Quals-attachments.zip entries=17
+ MATCH ����ѧ-EzFlag.zip
+ MATCH ���򹤳�-wasm-login.zip
+ZIP D:\Downloads\Sql注入的应急排查.zip entries=1
+ MATCH access.log
+ZIP D:\Downloads\Victory_Melody.zip entries=1
+ MATCH Victory_Melody.exe
+ZIP D:\Downloads\encrypted_flag.zip entries=1
+ MATCH encrypted_flag.bin
+ZIP D:\Downloads\PaluArray_flag.zip entries=1
+ MATCH PaluArray_flag.exe
+ZIP D:\Downloads\go_for_it.zip entries=1
+ MATCH go.exe
+ZIP D:\Downloads\checker.zip entries=1
+ MATCH checker.exe
+ZIP D:\Downloads\secret.zip entries=1
+ ENTRY secret.hap
+ZIP D:\Downloads\easyre.zip entries=1
+ ENTRY entry-default-signed.hap
+ZIP D:\Downloads\arkt.zip entries=1
+ ENTRY task_5.hap
+ZIP D:\Downloads\babyRe.zip entries=1
+ MATCH 33.exe
+ZIP D:\Downloads\note.zip entries=1
+ ENTRY note
+ZIP D:\Downloads\rainbow.zip entries=2
+ ENTRY output.txt
+ ENTRY rainbow
+ZIP D:\Downloads\spring.zip entries=1
+ MATCH main.exe
+ZIP D:\Downloads\crazyaes-20240524094418-p72tac5.zip entries=1
+ MATCH crazyaes.exe
+ZIP D:\Downloads\attachments.zip entries=2
+ ENTRY output
+ ENTRY Tch3s
+ZIP D:\Downloads\babyrsa.zip entries=1
+ ENTRY task.py
+ZIP D:\Downloads\tradre.zip entries=1
+ ENTRY tradre
+ZIP D:\Downloads\可疑流量分析附件.zip entries=1
+ MATCH challenge.pcap
+ZIP D:\Downloads\班次邮戳附件.zip entries=1
+ ENTRY stamp.png
+ZIP D:\Downloads\即随本心.zip entries=1
+ MATCH 即随本心.exe
+ZIP D:\Downloads\Prompt+Trace附件.zip entries=5
+ ENTRY prompt_trace_bundle/README.txt
+ ENTRY prompt_trace_bundle/channels.json
+ ENTRY prompt_trace_bundle/export_meta.json
+ ENTRY prompt_trace_bundle/guard_events.csv
+ ENTRY prompt_trace_bundle/system_prompt.txt
+ZIP D:\Downloads\abs.zip entries=2
+ ENTRY libc-2.27.so
+ ENTRY abs.c
+ZIP D:\Downloads\ROP2.zip entries=1
+ ENTRY ROP2
+ZIP D:\Downloads\mqtt.zip entries=5
+ ENTRY ld-linux-x86-64.so.2
+ ENTRY libc.so.6
+ ENTRY libcjson.so.1
+ ENTRY libpaho-mqtt3c.so.1
+ ENTRY pwn
+ZIP D:\Downloads\闸机票根附件.zip entries=1
+ ENTRY gate_ticket
+ZIP D:\Downloads\Poisoned+Samples附件.zip entries=3
+ ENTRY poisoned_samples_bundle/README.txt
+ ENTRY poisoned_samples_bundle/metadata.json
+ ENTRY poisoned_samples_bundle/train_samples.csv
+ZIP D:\Downloads\附件.zip entries=1
+ ENTRY server.tgz
+ZIP D:\Downloads\题目附件.zip entries=2
+ ENTRY buffers.npz
+ ENTRY gen.py
+ZIP D:\Downloads\外泄流量取证附件.zip entries=1
+ MATCH challenge.pcap
+ZIP D:\Downloads\Veiled+Shell附件.zip entries=1
+ MATCH incident_traffic.pcap
+ZIP D:\Downloads\qgd.zip entries=3
+ MATCH part1flag.txt
+ MATCH part2flag.exe
+ZIP D:\Downloads\像素囚笼附件.zip entries=1
+ MATCH challenge.png
+ZIP D:\Downloads\联号回执附件.zip entries=3
+ ENTRY attachments/
+ ENTRY attachments/export.json
+ ENTRY attachments/format.txt
+ZIP D:\Downloads\五格电文附件.zip entries=3
+ ENTRY attachments/
+ ENTRY attachments/archive.json
+ ENTRY attachments/format.txt
+**********************
+PowerShell transcript end
+End time: 20260929165534
+**********************

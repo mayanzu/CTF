@@ -1,0 +1,45 @@
+**********************
+PowerShell transcript start
+Start time: 20260929102411
+Username: DESKTOP-412KTAR\mzj
+RunAs User: DESKTOP-412KTAR\mzj
+Configuration Name: 
+Machine: DESKTOP-412KTAR (Microsoft Windows NT 10.0.26200.0)
+Host Application: C:\Users\mzj\.cache\codex-runtimes\codex-primary-runtime\dependencies\native\powershell\pwsh.dll -Command try { [Console]::OutputEncoding=[System.Text.Encoding]::UTF8 } catch {}
+$Project = 'C:\Users\mzj\Desktop\CTF\玄机刷题'
+$Batch = Join-Path $Project '题目资料\批次10_20260929'
+$Transcript = Join-Path $Project '记录\第十批_附件归档_20260929.txt'
+Start-Transcript -LiteralPath $Transcript -Append
+New-Item -ItemType Directory -Force -Path (Join-Path $Batch '552_butterfly\originals'), (Join-Path $Batch '543_Base\originals'), (Join-Path $Batch '542_hookme\originals') | Select-Object FullName
+Copy-Item -LiteralPath 'D:\Downloads\butterfly (1).7z' -Destination (Join-Path $Batch '552_butterfly\originals\butterfly.7z') -Force
+Copy-Item -LiteralPath 'D:\Downloads\你知道Base么-20250521104202-am92t17 (1).rar' -Destination (Join-Path $Batch '543_Base\originals\Base.rar') -Force
+Copy-Item -LiteralPath 'D:\Downloads\hookme (1).rar' -Destination (Join-Path $Batch '542_hookme\originals\hookme.rar') -Force
+Get-ChildItem -LiteralPath $Batch -File -Recurse | Sort-Object FullName | Select-Object FullName,Length
+Get-ChildItem -LiteralPath $Batch -File -Recurse | Sort-Object FullName | ForEach-Object { Get-FileHash -LiteralPath $_.FullName -Algorithm SHA256 | Select-Object Path,Hash }
+Stop-Transcript
+Process ID: 31340
+PSVersion: 7.6.5
+PSEdition: Core
+GitCommitId: 7.6.5
+OS: Microsoft Windows 10.0.26200
+Platform: Win32NT
+PSCompatibleVersions: 1.0, 2.0, 3.0, 4.0, 5.0, 5.1, 6.0, 7.0
+PSRemotingProtocolVersion: 2.4
+SerializationVersion: 1.1.0.1
+WSManStackVersion: 3.0
+**********************
+Transcript started, output file is C:\Users\mzj\Desktop\CTF\玄机刷题\记录\第十批_附件归档_20260929.txt
+
+**********************
+PowerShell transcript end
+End time: 20260929102411
+**********************
+
+=== 交互输出补录：副本清单与 SHA-256 ===
+说明：本次 pwsh host 的 Start-Transcript 只保留了起止元数据，未记录流水线对象输出。以下是归档后再次执行的核验命令和该命令在终端中显示的完整文本输出；没有省略或猜测附件哈希。
+
+COMMAND> Get-ChildItem -LiteralPath '玄机刷题\题目资料\批次10_20260929' -File -Recurse | Sort-Object FullName | ForEach-Object { $item = $_; $hash = (Get-FileHash -LiteralPath $item.FullName -Algorithm SHA256).Hash; Write-Output ('FILE={0} LENGTH={1} SHA256={2}' -f $item.FullName,$item.Length,$hash) }
+OUTPUT>
+FILE=C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\批次10_20260929\542_hookme\originals\hookme.rar LENGTH=5125397 SHA256=1DC981B273CB80A32863B9A89A09CFA82B731F6D4BC8E37D72C445DEB29E993F
+FILE=C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\批次10_20260929\543_Base\originals\Base.rar LENGTH=14603 SHA256=3FEC5E1930230660DCABDF0F31F4D97F8BB980D67306242D48A4377B74590801
+FILE=C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\批次10_20260929\552_butterfly\originals\butterfly.7z LENGTH=260238 SHA256=85FDF4CEC63C0A33F2D8A144D2652B63188BE015907F5C2A78559FD469B43228

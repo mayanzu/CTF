@@ -1,0 +1,58 @@
+**********************
+PowerShell transcript start
+Start time: 20260929165639
+Username: DESKTOP-412KTAR\mzj
+RunAs User: DESKTOP-412KTAR\mzj
+Configuration Name: 
+Machine: DESKTOP-412KTAR (Microsoft Windows NT 10.0.26200.0)
+Host Application: C:\Users\mzj\.cache\codex-runtimes\codex-primary-runtime\dependencies\native\powershell\pwsh.dll -NoProfile -Command try { [Console]::OutputEncoding=[System.Text.Encoding]::UTF8 } catch {}
+$ErrorActionPreference='Continue';$project='C:\Users\mzj\Desktop\CTF\玄机刷题';$log=Join-Path $project '记录\CCB附件压缩包内容核验_20260929.txt';Start-Transcript -LiteralPath $log -Force|Out-Null
+Write-Output 'COMMAND> list all entries in D:\Downloads\2025-CCB-CISCN-Quals-attachments.zip; inspect selected recent generic archives'
+Add-Type -AssemblyName System.IO.Compression.FileSystem;$names=@('D:\Downloads\2025-CCB-CISCN-Quals-attachments.zip','D:\Downloads\来日之路光明灿烂.zip','D:\Downloads\ez_vm.zip','D:\Downloads\1997.zip','D:\Downloads\ezbase.zip','D:\Downloads\app-debug.zip','D:\Downloads\encrypted_flag.zip');foreach($path in $names){if(Test-Path -LiteralPath $path){try{$z=[System.IO.Compression.ZipFile]::OpenRead($path);Write-Output "ZIP $path entries=$($z.Entries.Count)";$z.Entries|ForEach-Object{' ENTRY '+$_.FullName+' ['+$_.Length+' B]'};$z.Dispose()}catch{Write-Output "ZIP_ERROR $path $($_.Exception.Message)"}}else{Write-Output "MISSING $path"}}
+Stop-Transcript|Out-Null;Write-Output "TRANSCRIPT=$log"
+Process ID: 3720
+PSVersion: 7.6.5
+PSEdition: Core
+GitCommitId: 7.6.5
+OS: Microsoft Windows 10.0.26200
+Platform: Win32NT
+PSCompatibleVersions: 1.0, 2.0, 3.0, 4.0, 5.0, 5.1, 6.0, 7.0
+PSRemotingProtocolVersion: 2.4
+SerializationVersion: 1.1.0.1
+WSManStackVersion: 3.0
+**********************
+COMMAND> list all entries in D:\Downloads\2025-CCB-CISCN-Quals-attachments.zip; inspect selected recent generic archives
+ZIP D:\Downloads\2025-CCB-CISCN-Quals-attachments.zip entries=17
+ ENTRY AI��ȫ-The_Silent_Heist.zip [178155 B]
+ ENTRY AI��ȫ-��թ���ֵĺ�������.zip [114517 B]
+ ENTRY PWN-easy_rw.zip [851358 B]
+ ENTRY PWN-minihttpd.zip [844389 B]
+ ENTRY PWN-ram_snoop.zip [14310154 B]
+ ENTRY PWN-robo.zip [2650882 B]
+ ENTRY PWN-smart_home.zip [3519 B]
+ ENTRY Web��ȫ-Deprecated.zip [77349 B]
+ ENTRY Web��ȫ-JavaSql.zip [19971470 B]
+ ENTRY ����ѧ-ECDSA.zip [10713 B]
+ ENTRY ����ѧ-EzFlag.zip [5589 B]
+ ENTRY ����ѧ-RSA_NestingDoll.zip [2083 B]
+ ENTRY ��������-SnakeBackdoor.zip [4058948 B]
+ ENTRY ���򹤳�-babygame.zip [35052232 B]
+ ENTRY ���򹤳�-Eternum.zip [2408247 B]
+ ENTRY ���򹤳�-vvvmmm.zip [1092261 B]
+ ENTRY ���򹤳�-wasm-login.zip [143831 B]
+ZIP D:\Downloads\来日之路光明灿烂.zip entries=1
+ ENTRY 来日之路光明灿烂.exe [5465233 B]
+ZIP D:\Downloads\ez_vm.zip entries=1
+ ENTRY ez_vm.exe [82661 B]
+ZIP D:\Downloads\1997.zip entries=1
+ ENTRY 123.exe [63228 B]
+ZIP D:\Downloads\ezbase.zip entries=1
+ ENTRY ezbase.exe [40719 B]
+ZIP D:\Downloads\app-debug.zip entries=1
+ ENTRY app-debug.apk [4609869 B]
+ZIP D:\Downloads\encrypted_flag.zip entries=1
+ ENTRY encrypted_flag.bin [26 B]
+**********************
+PowerShell transcript end
+End time: 20260929165639
+**********************

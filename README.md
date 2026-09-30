@@ -1,101 +1,59 @@
-# CTF 零基础自学资料
+# CTF 学习资料
 
-本资料按题目引入和讲解 Web、Crypto、Reverse、Pwn、Misc 五个方向，面向学过 Python/C 和命令行、但刚接触 CTF 的学生。题目正文之后有逐题带做记录：每题包括第一次尝试、操作步骤、观察结果、答案核对、引申知识和变式练习。已验证真题给出完整 flag；没有得到平台正确反馈的题明确写出未完成环节。
+本目录供学生离线阅读和复现 CTF 入门练习。建议先读五个方向的讲义，再按题型练习玄机真题。
 
-## 文件结构
+## 从哪里开始
 
-- `handout-web.tex` / `handout-crypto.tex` / `handout-reverse.tex` / `handout-pwn.tex` / `handout-misc.tex`：五本方向讲义，编译后生成同名的 `handout-*.pdf`。
-- `handout-common.tex`：五本共享的导言区与排版宏，单本讲义不得修改。
-- `STYLE-SPEC.md`：五本讲义的重构规范（统一结构、题面卡格式、截图流水线、验收指标）。
-- `figures/`：讲义插图；`figures/raw/` 保存每张终端截图对应的实录文本与演示脚本。
-- `tools/`：终端实录与渲染工具（`termcap.py`、`term2png.py`）。
-- `labs/`：离线题目的源码、数据、复现脚本和玄机附件副本。
+1. 打开 [讲义/README.md](讲义/README.md)，选择 Web、Crypto、Reverse、Pwn 或 Misc 的 PDF。
+2. 在本目录运行 `labs/` 中的本地练习。讲义中的 `labs/...`、`tools/...` 命令均以本目录为当前目录。
+3. 阅读 [玄机刷题指南.pdf](玄机刷题/指南/玄机刷题指南.pdf)，再到 [题目分类](玄机刷题/题目资料/题目分类/README.md) 找附件、逐题 WP 和复现脚本。
+4. 需要核对操作细节时，查看 [完整过程记录](玄机刷题/记录/README.md)。
 
-`labs/platform/attachments/` 当前保存题目 296、557、573、581、583、586、587、589、591 的附件 ZIP。583 的 `challenge.png` 已解压为独立图片并嵌入讲义；573 的 `trigger.png` 和 `trigger-detail.png` 由本地脚本生成，分别展示完整输入和左上触发区域放大图。591 附件的 CSV/JSON 解包副本位于同目录的 `591-poisoned-samples/` 子目录。平台页面截图没有伪造；文中的图是题目原始附件、真实执行的终端实录截图或本地脚本输出，每张终端截图在 `figures/raw/` 留有同名实录文本，可逐行核对。
+## 目录
 
-## 玄机题目的离线范围
+| 位置 | 用途 |
+| --- | --- |
+| `讲义/` | 五册 PDF、LaTeX 源稿和讲义构建脚本 |
+| `玄机刷题/` | 玄机平台题解指南、按题型整理的题目资料、原始过程记录 |
+| `labs/` | 本地练习题与平台题复现脚本、配套附件 |
+| `figures/` | 讲义插图和 `figures/raw/` 中的终端实录 |
+| `tools/` | 截图制作工具及离线逆向工具 |
+| `tmp/` | 已过时或待清理资料，由维护者手动删除；不属于教学内容 |
 
-本资料引用了 10 道玄机题。9 道提供的附件 ZIP 已收进 `labs/platform/attachments/`；题目 570 的页面只提供在线环境启动，没有“下载附件”，所以本地包不含它的题目服务端文件。请按下表安排练习：
+### `玄机刷题/` 内部结构
 
-| 题号 | 本地材料 | 断网时能做到什么 |
-| --- | --- | --- |
-| 557、586、587、581、589、591 | 原始附件 ZIP 和对应复现脚本 | 解出并打印完整 flag；命令见上文 |
-| 573 | 原始附件 ZIP、触发图恢复脚本和两张本地示意图 | 复算触发向量并生成输入图；取得服务端 flag 仍需题目在线环境 |
-| 583 | 原始附件 ZIP、解出的 `challenge.png` | 可练习 PNG 文件尾部与追加 ZIP 的识别；ZipCrypto 口令和最终 flag 尚未恢复 |
-| 296 | 原始附件 ZIP、远程交互求解脚本 | 可检查附件；拿到当前实例的 HOST/PORT 后才能运行脚本并读取服务端 flag |
-| 570 | 无可下载附件 | 只能在玄机启动在线环境后练习；`labs/web/app.py` 是独立的本地 Web 入门题，不是该平台题目的副本 |
+| 位置 | 用途 |
+| --- | --- |
+| `指南/` | 刷题指南合并源 `玄机刷题指南_合并源.md` 与 PDF 构建脚本 |
+| `题目资料/题目分类/<题型>/<题名_题号>/` | 每题的附件、`analysis/` 分析产物、`WP.md` 题解与复现脚本 |
+| `题目资料/<同名目录>/` | 指向分类目录的目录联接，兼容旧记录里的路径；维护时改分类目录中的原件 |
+| `题目资料/原始下载附件/` | 平台附件去重归档，SHA-256 清单见该目录 README |
+| `记录/` | 批次准备终端记录（`批次记录/`）、逐题过程记录（`题目记录/`）与项目级记录；史料按原样保留 |
 
-因此，“资料包可离线打开”不等于“10 道玄机题都能断网完整解出”。如果上课网络不可用，可直接使用上表标为可打印 flag 的 6 道题和 `labs/` 中的本地练习；573、583、296、570 的限制已在带做记录中注明。
+2026-09-29 批次拆分后，各题从批次目录迁出的对照表见 [批次资料 README](玄机刷题/题目资料/题目分类/逆向工程/批次资料/README.md)。
 
-平台题解脚本默认读取本资料中的附件，学生无需先从个人下载目录找文件：
+## 复现环境
 
-```sh
-python3 labs/platform/solve_five_grid.py
-python3 labs/platform/solve_receipt.py
-python3 labs/platform/solve_qgd.py
-python3 labs/platform/solve_581_network_forensics.py
-python3 labs/platform/solve_589_gate_ticket.py
-python3 labs/platform/solve_591_poisoned_samples.py
+基础练习需要 Python 3。Pwn 与部分逆向练习需要 WSL/Ubuntu 或 Linux，以及 GCC。平台复现脚本的 Python 依赖可在本目录安装：
+
+```powershell
+python -m pip install -r .\requirements.txt
 ```
 
-程序也接受 ZIP 路径参数，便于替换附件后复算。CIFAR-10 脚本需要显式给 ZIP 和输出图片：
+例：
 
-```sh
-python3 labs/platform/solve_cifar_trigger.py \
-  labs/platform/attachments/573-cifar10.zip trigger.png
+```powershell
+python .\labs\platform\solve_five_grid.py
+python .\labs\platform\solve_receipt.py
+python .\labs\platform\solve_qgd.py
 ```
 
-`solve_pwn_ezpwn.py` 需要题目当前实例的 HOST/PORT；启动实例后从对应题目页面读取，不可使用过期地址：
+在线靶机题仍需在题目页面获取当前实例地址；离线包提供附件和已记录的分析过程。
 
-```sh
-python3 labs/platform/solve_pwn_ezpwn.py HOST PORT
-```
+## 修改与构建
 
-## 编译讲义
+- 五册讲义：编辑 `讲义/handout-*.tex`，运行 `& .\讲义\build.ps1`。需要 TeX Live 的 `xelatex`。
+- 玄机指南：编辑 `玄机刷题/指南/玄机刷题指南_合并源.md`，运行 `& .\玄机刷题\指南\build.ps1`。需要 `pandoc` 和 `xelatex`。
+- 题目资料的主位置是 `玄机刷题/题目资料/题目分类/<题型>/<题目>/`。顶层的同名目录联接供旧记录引用，维护时请修改分类目录中的原件。
 
-对每一本分别连跑两次 XeLaTeX，以更新目录和引用（下面以 Web 分册为例）：
-
-```text
-xelatex -interaction=nonstopmode handout-web.tex
-xelatex -interaction=nonstopmode handout-web.tex
-```
-
-五本文件名依次为 `handout-web.tex`、`handout-crypto.tex`、`handout-reverse.tex`、`handout-pwn.tex`、`handout-misc.tex`。Windows 需安装 TeX Live 或 MiKTeX 和 `ctex` 宏包；WSL/Ubuntu 可安装 TeX Live。讲义用朴素黑白排版，插图只使用本地文件，不需网络资源。
-
-## 离线练习环境
-
-Windows 学生可在 WSL/Ubuntu 或 Linux 虚拟机完成 Linux ELF/Pwn/Reverse 练习。Web、Crypto 和基础 Misc 练习需要 Python 3；Pwn 练习需要 x86-64 GCC。CIFAR-10 图片恢复脚本需要 NumPy 和 Pillow；581 流量复现脚本需要 Pillow。可用以下命令安装平台复现脚本的 Python 依赖：
-
-```sh
-python3 -m pip install -r requirements.txt
-```
-
-先生成课程练习数据并编译程序：
-
-```sh
-python3 labs/crypto/make_challenges.py
-python3 labs/misc/make_challenges.py
-gcc -O0 -o labs/reverse/check1 labs/reverse/check1.c
-gcc -O0 -fno-stack-protector -no-pie -o labs/pwn/overflow labs/pwn/overflow.c
-gcc -O0 -o labs/pwn/format labs/pwn/format.c
-```
-
-`overflow.c` 的越界写入是本地教学题特意设置的行为，GCC 可能给出警告。Web 靶场在本机回环地址启动：
-
-```sh
-python3 labs/web/app.py
-```
-
-浏览器访问 `http://127.0.0.1:8765/`。练习结束后在服务端终端按 `Ctrl+C`。
-
-## 玄机真题状态
-
-- 586 五格电文、587 联号回执、557 qgd、581 外泄流量取证、296 pwn-ezpwn、589 闸机票根、591 Poisoned Samples：已在平台提交并得到正确反馈。589 与 591 的本地附件解法可直接运行。
-- 573 CIFAR-10：附件算法恢复出唯一触发向量并可生成输入图片；当时的在线服务没有返回可用响应，因此没有已验证 flag。
-- 583 像素囚笼：已确认 PNG 尾部追加了加密 ZIP，但尚未得到经过验证的解密口令或 flag。
-- 570 SU_photogallery：平台实例此前无有效响应，尚无本实例确认的利用过程或 flag。
-
-已确认的真题答案在带做记录中给出。在线靶场需要仍有效的实例；该资料不会保存账号密码。所有操作仅用于对应平台授权题目和本地练习。
-
-## 玄机平台刷题归档
-刷题指南、逐题记录、附件和分析材料已集中到 玄机刷题/。整理后的目录说明见 玄机刷题/README.md。
+`.git` 和 `.gitignore` 用于版本管理。不要将 `tmp/` 打入学生资料包。

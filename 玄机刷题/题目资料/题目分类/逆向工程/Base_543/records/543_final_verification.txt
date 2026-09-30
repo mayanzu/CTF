@@ -1,0 +1,23 @@
+Challenge #543 static end-to-end closure; executable never launched.
+First-level key bytes: b'y0uokTea'
+First-level key ASCII: y0uokTea
+Forward 32-round block result: ['0xa92f3865', '0x9e60e953']
+Expected target words: ['0xa92f3865', '0x9e60e953']
+First-level exact match: True
+Embedded 64-byte second-stage target: d4592376b4bfe32c588f5619daf0c0bd363d7b461bb8171fe3d00345cd04edc967e6ab29a7bc0bde5c3071d7d55ac69f4065c471a9c3aed9b5e5128c80523436
+RC4/additive keystream: 6d03abff45797bdcdf3b27c08dc07e72d3f51612b980d0dc8e768fd95fb89697149c5cf47673c66cf10500a15fe0563ed301831f518a3b7067a1df172feccaff
+Recovered 64-byte Base_Table: gVxwoFhPyT/YM0BKcHe4b8GCUZtlnLW2SJO51IErk+q6vzpamdARX9siND3uQfj7
+Base_Table length / printable / unique: 64 / True / 64
+Alphabet selected by assembly (table[1:33]): VxwoFhPyT/YM0BKcHe4b8GCUZtlnLW2S
+Alphabet length and uniqueness: 32 / 32
+Additive RC4 forward output: d4592376b4bfe32c588f5619daf0c0bd363d7b461bb8171fe3d00345cd04edc967e6ab29a7bc0bde5c3071d7d55ac69f4065c471a9c3aed9b5e5128c80523436
+64-byte forward match: True
+Embedded Base32-like target (48 bytes): 0tCPwtnncFZyYUlSK/4Cw0/echcG2lteBWnG2Ulw0htCYTMW
+Decoded exact 30-byte candidate: flag{y0u__rea11y__k1ow__Base!}
+Full candidate Base32 forward output: 0tCPwtnncFZyYUlSK/4Cw0/echcG2lteBWnG2Ulw0htCYTMW
+Full 48-byte match: True
+29-byte prefix (for local scanf cap): flag{y0u__rea11y__k1ow__Base!
+29-byte prefix forward output begins: 0tCPwtnncFZyYUlSK/4Cw0/echcG2l
+Comparator range from disassembly: 30 bytes (i=0..29)
+Prefix matches locally compared target: True
+Caveat: scanf format is %29s (max 29 ASCII bytes); the complete platform candidate is recovered from the embedded 48-byte target and is 30 bytes. The static comparator only checks first 30 encoded bytes, which makes the local interactive check weaker than the embedded full target.

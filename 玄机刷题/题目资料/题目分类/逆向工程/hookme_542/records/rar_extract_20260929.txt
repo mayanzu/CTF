@@ -1,0 +1,45 @@
+**********************
+PowerShell transcript start
+Start time: 20260929102900
+Username: DESKTOP-412KTAR\mzj
+RunAs User: DESKTOP-412KTAR\mzj
+Configuration Name: 
+Machine: DESKTOP-412KTAR (Microsoft Windows NT 10.0.26200.0)
+Host Application: C:\Users\mzj\.cache\codex-runtimes\codex-primary-runtime\dependencies\native\powershell\pwsh.dll -Command try { [Console]::OutputEncoding=[System.Text.Encoding]::UTF8 } catch {}
+$log = 'C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\批次10_20260929\542_hookme\records\rar_extract_20260929.txt'
+New-Item -ItemType Directory -Path 'C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\批次10_20260929\542_hookme\records' -Force | Out-Null
+New-Item -ItemType Directory -Path 'C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\批次10_20260929\542_hookme\extracted' -Force | Out-Null
+Start-Transcript -LiteralPath $log -Force
+$archive = 'C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\批次10_20260929\542_hookme\originals\hookme.rar'
+$destination = 'C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\批次10_20260929\542_hookme\extracted'
+tar.exe -xf $archive --directory $destination hookme/HookMe.apk
+Get-Item -LiteralPath (Join-Path $destination 'hookme\HookMe.apk') | Select-Object FullName,Length,LastWriteTime
+Get-FileHash -Algorithm SHA256 -LiteralPath (Join-Path $destination 'hookme\HookMe.apk') | Format-List Algorithm,Hash,Path
+Stop-Transcript
+Process ID: 35260
+PSVersion: 7.6.5
+PSEdition: Core
+GitCommitId: 7.6.5
+OS: Microsoft Windows 10.0.26200
+Platform: Win32NT
+PSCompatibleVersions: 1.0, 2.0, 3.0, 4.0, 5.0, 5.1, 6.0, 7.0
+PSRemotingProtocolVersion: 2.4
+SerializationVersion: 1.1.0.1
+WSManStackVersion: 3.0
+**********************
+Transcript started, output file is C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\批次10_20260929\542_hookme\records\rar_extract_20260929.txt
+
+
+FullName                                                                                           Length LastWriteTime
+--------                                                                                           ------ -------------
+C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\批次10_20260929\542_hookme\extracted\hookme\HookMe.apk 7329635 2025/4/24 21…
+
+
+Algorithm : SHA256
+Hash      : 61BB5BA33C8EBD3BD01BA9ECF6EDC69A18D664D91F3309447B95132B27E14E9B
+Path      : C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\批次10_20260929\542_hookme\extracted\hookme\HookMe.apk
+
+**********************
+PowerShell transcript end
+End time: 20260929102900
+**********************

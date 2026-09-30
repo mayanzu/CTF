@@ -1,0 +1,508 @@
+{
+  "scope": "Read-only byte parsing. Jerry.exe was not launched or loaded.",
+  "files": {
+    "zip": {
+      "path": "originals/tom.zip",
+      "size": 51073,
+      "sha256": "15832F8EA58617B1D40050CBDEB138E92A1DFA2E9DBEBEC1AF25446306B99EE9",
+      "members": [
+        {
+          "name": "Jerry.exe",
+          "uncompressed_size": 159118,
+          "compressed_size": 50957,
+          "crc32": "66697c1e",
+          "dos_timestamp_local": "2026-07-17T14:41:50"
+        }
+      ],
+      "testzip_bad_member": null
+    },
+    "exe": {
+      "path": "extracted/Jerry.exe",
+      "size": 159118,
+      "sha256": "6E1E38D0C0036AC10EBA97D04F698C1B3771805A8F5B101A6328EC3583364BFF",
+      "zip_member_byte_identical": true
+    }
+  },
+  "pe": {
+    "pe_offset": 128,
+    "machine": 34404,
+    "section_count": 18,
+    "timestamp": 1742906715,
+    "symbol_table_ptr": 125952,
+    "symbol_count": 1488,
+    "optional_size": 240,
+    "characteristics": 39,
+    "magic": 523,
+    "entry_rva": 5376,
+    "image_base": 4194304,
+    "section_alignment": 4096,
+    "file_alignment": 512,
+    "size_image": 172032,
+    "size_headers": 1536,
+    "subsystem": 3,
+    "dll_characteristics": 0,
+    "directories": [
+      [
+        0,
+        0
+      ],
+      [
+        32768,
+        2020
+      ],
+      [
+        0,
+        0
+      ],
+      [
+        20480,
+        564
+      ],
+      [
+        0,
+        0
+      ],
+      [
+        0,
+        0
+      ],
+      [
+        0,
+        0
+      ],
+      [
+        0,
+        0
+      ],
+      [
+        0,
+        0
+      ],
+      [
+        40992,
+        40
+      ],
+      [
+        0,
+        0
+      ],
+      [
+        0,
+        0
+      ],
+      [
+        33268,
+        440
+      ],
+      [
+        0,
+        0
+      ],
+      [
+        0,
+        0
+      ],
+      [
+        0,
+        0
+      ]
+    ],
+    "security_directory": [
+      0,
+      0
+    ],
+    "sections": [
+      {
+        "name": ".text",
+        "virtual_size": 7776,
+        "rva": 4096,
+        "raw_size": 8192,
+        "raw_ptr": 1536,
+        "flags": 1615855648,
+        "entropy": 5.834895291058976
+      },
+      {
+        "name": ".data",
+        "virtual_size": 320,
+        "rva": 12288,
+        "raw_size": 512,
+        "raw_ptr": 9728,
+        "flags": 3228565568,
+        "entropy": 1.5064882735427172
+      },
+      {
+        "name": ".rdata",
+        "virtual_size": 2240,
+        "rva": 16384,
+        "raw_size": 2560,
+        "raw_ptr": 10240,
+        "flags": 1078984768,
+        "entropy": 3.7219305674602627
+      },
+      {
+        "name": ".pdata",
+        "virtual_size": 564,
+        "rva": 20480,
+        "raw_size": 1024,
+        "raw_ptr": 12800,
+        "flags": 1076887616,
+        "entropy": 2.3998411226244873
+      },
+      {
+        "name": ".xdata",
+        "virtual_size": 504,
+        "rva": 24576,
+        "raw_size": 512,
+        "raw_ptr": 13824,
+        "flags": 1076887616,
+        "entropy": 3.9194615624227267
+      },
+      {
+        "name": ".bss",
+        "virtual_size": 2656,
+        "rva": 28672,
+        "raw_size": 0,
+        "raw_ptr": 0,
+        "flags": 3228565632,
+        "entropy": 0.0
+      },
+      {
+        "name": ".idata",
+        "virtual_size": 2020,
+        "rva": 32768,
+        "raw_size": 2048,
+        "raw_ptr": 14336,
+        "flags": 3224371264,
+        "entropy": 3.984774834925564
+      },
+      {
+        "name": ".CRT",
+        "virtual_size": 104,
+        "rva": 36864,
+        "raw_size": 512,
+        "raw_ptr": 16384,
+        "flags": 3225419840,
+        "entropy": 0.2694448386073115
+      },
+      {
+        "name": ".tls",
+        "virtual_size": 104,
+        "rva": 40960,
+        "raw_size": 512,
+        "raw_ptr": 16896,
+        "flags": 3227516992,
+        "entropy": 0.1974380783882105
+      },
+      {
+        "name": "/4",
+        "virtual_size": 1104,
+        "rva": 45056,
+        "raw_size": 1536,
+        "raw_ptr": 17408,
+        "flags": 1112539200,
+        "entropy": 1.2459222742224525
+      },
+      {
+        "name": "/19",
+        "virtual_size": 49245,
+        "rva": 49152,
+        "raw_size": 49664,
+        "raw_ptr": 18944,
+        "flags": 1108344896,
+        "entropy": 5.959209628130674
+      },
+      {
+        "name": "/31",
+        "virtual_size": 6833,
+        "rva": 102400,
+        "raw_size": 7168,
+        "raw_ptr": 68608,
+        "flags": 1108344896,
+        "entropy": 4.52251416051333
+      },
+      {
+        "name": "/45",
+        "virtual_size": 7331,
+        "rva": 110592,
+        "raw_size": 7680,
+        "raw_ptr": 75776,
+        "flags": 1108344896,
+        "entropy": 5.5582805767144645
+      },
+      {
+        "name": "/57",
+        "virtual_size": 2840,
+        "rva": 118784,
+        "raw_size": 3072,
+        "raw_ptr": 83456,
+        "flags": 1111490624,
+        "entropy": 4.068045801771524
+      },
+      {
+        "name": "/70",
+        "virtual_size": 768,
+        "rva": 122880,
+        "raw_size": 1024,
+        "raw_ptr": 86528,
+        "flags": 1108344896,
+        "entropy": 4.203682850575411
+      },
+      {
+        "name": "/81",
+        "virtual_size": 11268,
+        "rva": 126976,
+        "raw_size": 11776,
+        "raw_ptr": 87552,
+        "flags": 1108344896,
+        "entropy": 2.245477587218324
+      },
+      {
+        "name": "/92",
+        "virtual_size": 24711,
+        "rva": 139264,
+        "raw_size": 25088,
+        "raw_ptr": 99328,
+        "flags": 1108344896,
+        "entropy": 5.590646369030486
+      },
+      {
+        "name": "/105",
+        "virtual_size": 1312,
+        "rva": 167936,
+        "raw_size": 1536,
+        "raw_ptr": 124416,
+        "flags": 1108344896,
+        "entropy": 1.3849517103723037
+      }
+    ],
+    "imports": [
+      {
+        "dll": "KERNEL32.dll",
+        "symbols": [
+          "DeleteCriticalSection (hint 216)",
+          "EnterCriticalSection (hint 248)",
+          "GetCurrentProcess (hint 461)",
+          "GetCurrentProcessId (hint 462)",
+          "GetCurrentThreadId (hint 466)",
+          "GetLastError (hint 528)",
+          "GetStartupInfoA (hint 627)",
+          "GetSystemTimeAsFileTime (hint 650)",
+          "GetTickCount (hint 677)",
+          "InitializeCriticalSection (hint 761)",
+          "LeaveCriticalSection (hint 843)",
+          "QueryPerformanceCounter (hint 955)",
+          "RtlAddFunctionTable (hint 1025)",
+          "RtlCaptureContext (hint 1026)",
+          "RtlLookupFunctionEntry (hint 1033)",
+          "RtlVirtualUnwind (hint 1040)",
+          "SetUnhandledExceptionFilter (hint 1183)",
+          "Sleep (hint 1196)",
+          "TerminateProcess (hint 1210)",
+          "TlsGetValue (hint 1217)",
+          "UnhandledExceptionFilter (hint 1230)",
+          "VirtualProtect (hint 1260)",
+          "VirtualQuery (hint 1262)"
+        ]
+      },
+      {
+        "dll": "msvcrt.dll",
+        "symbols": [
+          "__C_specific_handler (hint 55)",
+          "__dllonexit (hint 78)",
+          "__getmainargs (hint 81)",
+          "__initenv (hint 82)",
+          "__iob_func (hint 83)",
+          "__lconv_init (hint 90)",
+          "__set_app_type (hint 96)",
+          "__setusermatherr (hint 98)",
+          "_acmdln (hint 116)",
+          "_amsg_exit (hint 123)",
+          "_cexit (hint 141)",
+          "_fmode (hint 253)",
+          "_initterm (hint 329)",
+          "_lock (hint 441)",
+          "_onexit (hint 610)",
+          "_unlock (hint 818)",
+          "abort (hint 1030)",
+          "calloc (hint 1044)",
+          "exit (hint 1055)",
+          "fprintf (hint 1072)",
+          "free (hint 1079)",
+          "fwrite (hint 1090)",
+          "malloc (hint 1137)",
+          "memcpy (hint 1145)",
+          "puts (hint 1156)",
+          "scanf (hint 1168)",
+          "signal (hint 1174)",
+          "strlen (hint 1193)",
+          "strncmp (hint 1196)",
+          "vfprintf (hint 1227)"
+        ]
+      }
+    ],
+    "raw_end": 125952,
+    "symbol_string_table_size": 6382,
+    "symbol_table_end": 159118,
+    "timestamp_utc_as_encoded": "2025-03-25T12:45:15+00:00",
+    "entry_va": "0x401500",
+    "bytes_after_section_data": 33166,
+    "coff_symbol_table_bytes": 26784,
+    "coff_string_table_bytes_including_length_dword": 6382,
+    "coff_symbol_and_string_tables_end_offset": 159118,
+    "unaccounted_bytes_after_coff_tables": 0,
+    "directory_names": [
+      "export",
+      "import",
+      "resource",
+      "exception",
+      "security/certificate",
+      "base_relocation",
+      "debug",
+      "architecture",
+      "global_ptr",
+      "tls",
+      "load_config",
+      "bound_import",
+      "iat",
+      "delay_import",
+      "clr",
+      "reserved"
+    ]
+  },
+  "embedded_literals_file_offsets": {
+    "Welcome to the Maze Game!": "file offset 0x2800",
+    "Find the path from 'S' to 'E' using w/a/s/d to move.": "file offset 0x2820",
+    "Enter your moves (e.g., 'wasd'):": "file offset 0x2858",
+    "Invalid move!": "file offset 0x287d",
+    "You are so clever! This is Jerry!": "file offset 0x2890",
+    "xixi Now enter the flag in the format 'flag{your_path} ':": "file offset 0x28b8",
+    "%c": "file offset 0x287a"
+  },
+  "maze": {
+    "rva": "0x3040",
+    "file_offset": "0x2640",
+    "dimensions": "10x10",
+    "rows": [
+      "S******###",
+      "######*###",
+      "#******###",
+      "#*########",
+      "#****#####",
+      "####*#####",
+      "##E**#####",
+      "##########",
+      "##########",
+      "##########"
+    ],
+    "start_rc_zero_based": [
+      0,
+      0
+    ],
+    "end_rc_zero_based": [
+      6,
+      2
+    ],
+    "shortest_route_wasd": "ddddddssaaaaassdddssaa",
+    "shortest_route_length": 22,
+    "number_of_shortest_routes": 1,
+    "candidate_flag_from_prompt_template": "flag{ddddddssaaaaassdddssaa}",
+    "simulation": {
+      "trajectory_rc_zero_based": [
+        [
+          0,
+          0
+        ],
+        [
+          0,
+          1
+        ],
+        [
+          0,
+          2
+        ],
+        [
+          0,
+          3
+        ],
+        [
+          0,
+          4
+        ],
+        [
+          0,
+          5
+        ],
+        [
+          0,
+          6
+        ],
+        [
+          1,
+          6
+        ],
+        [
+          2,
+          6
+        ],
+        [
+          2,
+          5
+        ],
+        [
+          2,
+          4
+        ],
+        [
+          2,
+          3
+        ],
+        [
+          2,
+          2
+        ],
+        [
+          2,
+          1
+        ],
+        [
+          3,
+          1
+        ],
+        [
+          4,
+          1
+        ],
+        [
+          4,
+          2
+        ],
+        [
+          4,
+          3
+        ],
+        [
+          4,
+          4
+        ],
+        [
+          5,
+          4
+        ],
+        [
+          6,
+          4
+        ],
+        [
+          6,
+          3
+        ],
+        [
+          6,
+          2
+        ]
+      ],
+      "final_cell": "E",
+      "reaches_E": true
+    }
+  }
+}

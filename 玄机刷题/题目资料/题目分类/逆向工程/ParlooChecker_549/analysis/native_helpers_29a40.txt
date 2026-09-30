@@ -1,0 +1,250 @@
+
+.\analysis\code\lib\x86_64\libparloo.so:     file format elf64-x86-64
+
+
+Disassembly of section .text:
+
+0000000000029a40 <Java_com_linkhash_parloochecker_MainActivity_onCreat3@@Base+0x420>:
+   29a40:	55                   	push   rbp
+   29a41:	48 89 e5             	mov    rbp,rsp
+   29a44:	48 83 ec 40          	sub    rsp,0x40
+   29a48:	64 48 8b 04 25 28 00 	mov    rax,QWORD PTR fs:0x28
+   29a4f:	00 00 
+   29a51:	48 89 45 f8          	mov    QWORD PTR [rbp-0x8],rax
+   29a55:	48 89 7d e0          	mov    QWORD PTR [rbp-0x20],rdi
+   29a59:	48 89 75 d8          	mov    QWORD PTR [rbp-0x28],rsi
+   29a5d:	48 89 55 d0          	mov    QWORD PTR [rbp-0x30],rdx
+   29a61:	48 8b 7d e0          	mov    rdi,QWORD PTR [rbp-0x20]
+   29a65:	48 89 7d c8          	mov    QWORD PTR [rbp-0x38],rdi
+   29a69:	48 8d 75 f0          	lea    rsi,[rbp-0x10]
+   29a6d:	48 8d 55 e8          	lea    rdx,[rbp-0x18]
+   29a71:	e8 0a 2e 00 00       	call   2c880 <Java_com_linkhash_parloochecker_MainActivity_onCreat3@@Base+0x3260>
+   29a76:	48 8b 7d c8          	mov    rdi,QWORD PTR [rbp-0x38]
+   29a7a:	48 8b 75 d8          	mov    rsi,QWORD PTR [rbp-0x28]
+   29a7e:	48 8b 55 d0          	mov    rdx,QWORD PTR [rbp-0x30]
+   29a82:	e8 59 74 02 00       	call   50ee0 <Java_com_linkhash_parloochecker_MainActivity_onCreat3@@Base+0x278c0>
+   29a87:	64 48 8b 04 25 28 00 	mov    rax,QWORD PTR fs:0x28
+   29a8e:	00 00 
+   29a90:	48 8b 4d f8          	mov    rcx,QWORD PTR [rbp-0x8]
+   29a94:	48 39 c8             	cmp    rax,rcx
+   29a97:	0f 85 06 00 00 00    	jne    29aa3 <Java_com_linkhash_parloochecker_MainActivity_onCreat3@@Base+0x483>
+   29a9d:	48 83 c4 40          	add    rsp,0x40
+   29aa1:	5d                   	pop    rbp
+   29aa2:	c3                   	ret
+   29aa3:	e8 f8 2e 04 00       	call   6c9a0 <__stack_chk_fail@plt>
+   29aa8:	cc                   	int3
+   29aa9:	cc                   	int3
+   29aaa:	cc                   	int3
+   29aab:	cc                   	int3
+   29aac:	cc                   	int3
+   29aad:	cc                   	int3
+   29aae:	cc                   	int3
+   29aaf:	cc                   	int3
+   29ab0:	55                   	push   rbp
+   29ab1:	48 89 e5             	mov    rbp,rsp
+   29ab4:	48 83 ec 10          	sub    rsp,0x10
+   29ab8:	48 89 7d f8          	mov    QWORD PTR [rbp-0x8],rdi
+   29abc:	48 89 75 f0          	mov    QWORD PTR [rbp-0x10],rsi
+   29ac0:	48 8b 7d f8          	mov    rdi,QWORD PTR [rbp-0x8]
+   29ac4:	48 8b 07             	mov    rax,QWORD PTR [rdi]
+   29ac7:	48 8b 80 38 05 00 00 	mov    rax,QWORD PTR [rax+0x538]
+   29ace:	48 8b 75 f0          	mov    rsi,QWORD PTR [rbp-0x10]
+   29ad2:	ff d0                	call   rax
+   29ad4:	48 83 c4 10          	add    rsp,0x10
+   29ad8:	5d                   	pop    rbp
+   29ad9:	c3                   	ret
+   29ada:	cc                   	int3
+   29adb:	cc                   	int3
+   29adc:	cc                   	int3
+   29add:	cc                   	int3
+   29ade:	cc                   	int3
+   29adf:	cc                   	int3
+   29ae0:	55                   	push   rbp
+   29ae1:	48 89 e5             	mov    rbp,rsp
+   29ae4:	48 89 7d f8          	mov    QWORD PTR [rbp-0x8],rdi
+   29ae8:	48 8b 4d f8          	mov    rcx,QWORD PTR [rbp-0x8]
+   29aec:	48 8b 01             	mov    rax,QWORD PTR [rcx]
+   29aef:	48 3b 41 08          	cmp    rax,QWORD PTR [rcx+0x8]
+   29af3:	0f 94 c0             	sete   al
+   29af6:	24 01                	and    al,0x1
+   29af8:	0f b6 c0             	movzx  eax,al
+   29afb:	5d                   	pop    rbp
+   29afc:	c3                   	ret
+   29afd:	cc                   	int3
+   29afe:	cc                   	int3
+   29aff:	cc                   	int3
+   29b00:	55                   	push   rbp
+   29b01:	48 89 e5             	mov    rbp,rsp
+   29b04:	48 83 ec 20          	sub    rsp,0x20
+   29b08:	48 89 7d f8          	mov    QWORD PTR [rbp-0x8],rdi
+   29b0c:	48 89 75 f0          	mov    QWORD PTR [rbp-0x10],rsi
+   29b10:	48 89 55 e8          	mov    QWORD PTR [rbp-0x18],rdx
+   29b14:	48 8b 7d f8          	mov    rdi,QWORD PTR [rbp-0x8]
+   29b18:	48 8b 07             	mov    rax,QWORD PTR [rdi]
+   29b1b:	48 8b 80 48 05 00 00 	mov    rax,QWORD PTR [rax+0x548]
+   29b22:	48 8b 75 f0          	mov    rsi,QWORD PTR [rbp-0x10]
+   29b26:	48 8b 55 e8          	mov    rdx,QWORD PTR [rbp-0x18]
+   29b2a:	ff d0                	call   rax
+   29b2c:	48 83 c4 20          	add    rsp,0x20
+   29b30:	5d                   	pop    rbp
+   29b31:	c3                   	ret
+   29b32:	cc                   	int3
+   29b33:	cc                   	int3
+   29b34:	cc                   	int3
+   29b35:	cc                   	int3
+   29b36:	cc                   	int3
+   29b37:	cc                   	int3
+   29b38:	cc                   	int3
+   29b39:	cc                   	int3
+   29b3a:	cc                   	int3
+   29b3b:	cc                   	int3
+   29b3c:	cc                   	int3
+   29b3d:	cc                   	int3
+   29b3e:	cc                   	int3
+   29b3f:	cc                   	int3
+   29b40:	55                   	push   rbp
+   29b41:	48 89 e5             	mov    rbp,rsp
+   29b44:	48 83 ec 20          	sub    rsp,0x20
+   29b48:	48 89 7d f8          	mov    QWORD PTR [rbp-0x8],rdi
+   29b4c:	48 89 75 f0          	mov    QWORD PTR [rbp-0x10],rsi
+   29b50:	48 89 55 e8          	mov    QWORD PTR [rbp-0x18],rdx
+   29b54:	48 8b 7d f8          	mov    rdi,QWORD PTR [rbp-0x8]
+   29b58:	48 8b 07             	mov    rax,QWORD PTR [rdi]
+   29b5b:	48 8b 80 50 05 00 00 	mov    rax,QWORD PTR [rax+0x550]
+   29b62:	48 8b 75 f0          	mov    rsi,QWORD PTR [rbp-0x10]
+   29b66:	48 8b 55 e8          	mov    rdx,QWORD PTR [rbp-0x18]
+   29b6a:	ff d0                	call   rax
+   29b6c:	48 83 c4 20          	add    rsp,0x20
+   29b70:	5d                   	pop    rbp
+   29b71:	c3                   	ret
+   29b72:	cc                   	int3
+   29b73:	cc                   	int3
+   29b74:	cc                   	int3
+   29b75:	cc                   	int3
+   29b76:	cc                   	int3
+   29b77:	cc                   	int3
+   29b78:	cc                   	int3
+   29b79:	cc                   	int3
+   29b7a:	cc                   	int3
+   29b7b:	cc                   	int3
+   29b7c:	cc                   	int3
+   29b7d:	cc                   	int3
+   29b7e:	cc                   	int3
+   29b7f:	cc                   	int3
+   29b80:	55                   	push   rbp
+   29b81:	48 89 e5             	mov    rbp,rsp
+   29b84:	48 83 ec 70          	sub    rsp,0x70
+   29b88:	64 48 8b 04 25 28 00 	mov    rax,QWORD PTR fs:0x28
+   29b8f:	00 00 
+   29b91:	48 89 45 f8          	mov    QWORD PTR [rbp-0x8],rax
+   29b95:	48 89 75 f0          	mov    QWORD PTR [rbp-0x10],rsi
+   29b99:	48 89 55 e8          	mov    QWORD PTR [rbp-0x18],rdx
+   29b9d:	48 89 7d c0          	mov    QWORD PTR [rbp-0x40],rdi
+   29ba1:	48 8b 7d c0          	mov    rdi,QWORD PTR [rbp-0x40]
+   29ba5:	48 89 7d 98          	mov    QWORD PTR [rbp-0x68],rdi
+   29ba9:	e8 12 5a 00 00       	call   2f5c0 <Java_com_linkhash_parloochecker_MainActivity_onCreat3@@Base+0x5fa0>
+   29bae:	48 8b 45 f0          	mov    rax,QWORD PTR [rbp-0x10]
+   29bb2:	48 89 45 e0          	mov    QWORD PTR [rbp-0x20],rax
+   29bb6:	48 8b 45 e8          	mov    rax,QWORD PTR [rbp-0x18]
+   29bba:	48 89 45 d8          	mov    QWORD PTR [rbp-0x28],rax
+   29bbe:	48 8b 7d e0          	mov    rdi,QWORD PTR [rbp-0x20]
+   29bc2:	48 8b 75 d8          	mov    rsi,QWORD PTR [rbp-0x28]
+   29bc6:	e8 f5 73 00 00       	call   30fc0 <Java_com_linkhash_parloochecker_MainActivity_onCreat3@@Base+0x79a0>
+   29bcb:	48 89 45 a0          	mov    QWORD PTR [rbp-0x60],rax
+   29bcf:	e9 00 00 00 00       	jmp    29bd4 <Java_com_linkhash_parloochecker_MainActivity_onCreat3@@Base+0x5b4>
+   29bd4:	48 8b 45 a0          	mov    rax,QWORD PTR [rbp-0x60]
+   29bd8:	48 89 45 b8          	mov    QWORD PTR [rbp-0x48],rax
+   29bdc:	48 83 7d b8 00       	cmp    QWORD PTR [rbp-0x48],0x0
+   29be1:	0f 86 5b 00 00 00    	jbe    29c42 <Java_com_linkhash_parloochecker_MainActivity_onCreat3@@Base+0x622>
+   29be7:	48 8b 7d 98          	mov    rdi,QWORD PTR [rbp-0x68]
+   29beb:	48 8b 75 b8          	mov    rsi,QWORD PTR [rbp-0x48]
+   29bef:	e8 ac 6c 00 00       	call   308a0 <Java_com_linkhash_parloochecker_MainActivity_onCreat3@@Base+0x7280>
+   29bf4:	e9 00 00 00 00       	jmp    29bf9 <Java_com_linkhash_parloochecker_MainActivity_onCreat3@@Base+0x5d9>
+   29bf9:	48 8b 7d 98          	mov    rdi,QWORD PTR [rbp-0x68]
+   29bfd:	48 8b 45 f0          	mov    rax,QWORD PTR [rbp-0x10]
+   29c01:	48 89 45 d0          	mov    QWORD PTR [rbp-0x30],rax
+   29c05:	48 8b 45 e8          	mov    rax,QWORD PTR [rbp-0x18]
+   29c09:	48 89 45 c8          	mov    QWORD PTR [rbp-0x38],rax
+   29c0d:	48 8b 4d b8          	mov    rcx,QWORD PTR [rbp-0x48]
+   29c11:	48 8b 75 d0          	mov    rsi,QWORD PTR [rbp-0x30]
+   29c15:	48 8b 55 c8          	mov    rdx,QWORD PTR [rbp-0x38]
+   29c19:	e8 12 74 00 00       	call   31030 <Java_com_linkhash_parloochecker_MainActivity_onCreat3@@Base+0x7a10>
+   29c1e:	e9 00 00 00 00       	jmp    29c23 <Java_com_linkhash_parloochecker_MainActivity_onCreat3@@Base+0x603>
+   29c23:	e9 1a 00 00 00       	jmp    29c42 <Java_com_linkhash_parloochecker_MainActivity_onCreat3@@Base+0x622>
+   29c28:	48 8b 7d 98          	mov    rdi,QWORD PTR [rbp-0x68]
+   29c2c:	48 89 c1             	mov    rcx,rax
+   29c2f:	89 d0                	mov    eax,edx
+   29c31:	48 89 4d b0          	mov    QWORD PTR [rbp-0x50],rcx
+   29c35:	89 45 ac             	mov    DWORD PTR [rbp-0x54],eax
+   29c38:	e8 73 5b 00 00       	call   2f7b0 <Java_com_linkhash_parloochecker_MainActivity_onCreat3@@Base+0x6190>
+   29c3d:	e9 1c 00 00 00       	jmp    29c5e <Java_com_linkhash_parloochecker_MainActivity_onCreat3@@Base+0x63e>
+   29c42:	64 48 8b 04 25 28 00 	mov    rax,QWORD PTR fs:0x28
+   29c49:	00 00 
+   29c4b:	48 8b 4d f8          	mov    rcx,QWORD PTR [rbp-0x8]
+   29c4f:	48 39 c8             	cmp    rax,rcx
+   29c52:	0f 85 0f 00 00 00    	jne    29c67 <Java_com_linkhash_parloochecker_MainActivity_onCreat3@@Base+0x647>
+   29c58:	48 83 c4 70          	add    rsp,0x70
+   29c5c:	5d                   	pop    rbp
+   29c5d:	c3                   	ret
+   29c5e:	48 8b 7d b0          	mov    rdi,QWORD PTR [rbp-0x50]
+   29c62:	e8 69 f1 03 00       	call   68dd0 <Java_com_linkhash_parloochecker_MainActivity_onCreat3@@Base+0x3f7b0>
+   29c67:	e8 34 2d 04 00       	call   6c9a0 <__stack_chk_fail@plt>
+   29c6c:	cc                   	int3
+   29c6d:	cc                   	int3
+   29c6e:	cc                   	int3
+   29c6f:	cc                   	int3
+   29c70:	55                   	push   rbp
+   29c71:	48 89 e5             	mov    rbp,rsp
+   29c74:	48 83 ec 40          	sub    rsp,0x40
+   29c78:	48 89 7d f8          	mov    QWORD PTR [rbp-0x8],rdi
+   29c7c:	48 89 75 f0          	mov    QWORD PTR [rbp-0x10],rsi
+   29c80:	48 8b 7d f8          	mov    rdi,QWORD PTR [rbp-0x8]
+   29c84:	e8 17 f0 ff ff       	call   28ca0 <Java_com_linkhash_parloochecker_MainActivity_onCreat3@@Base-0x980>
+   29c89:	48 89 45 e8          	mov    QWORD PTR [rbp-0x18],rax
+   29c8d:	48 8b 45 e8          	mov    rax,QWORD PTR [rbp-0x18]
+   29c91:	48 89 45 c0          	mov    QWORD PTR [rbp-0x40],rax
+   29c95:	48 8b 7d f0          	mov    rdi,QWORD PTR [rbp-0x10]
+   29c99:	e8 02 f0 ff ff       	call   28ca0 <Java_com_linkhash_parloochecker_MainActivity_onCreat3@@Base-0x980>
+   29c9e:	48 8b 4d c0          	mov    rcx,QWORD PTR [rbp-0x40]
+   29ca2:	48 89 c2             	mov    rdx,rax
+   29ca5:	31 c0                	xor    eax,eax
+   29ca7:	48 39 d1             	cmp    rcx,rdx
+   29caa:	88 45 cf             	mov    BYTE PTR [rbp-0x31],al
+   29cad:	0f 85 3b 00 00 00    	jne    29cee <Java_com_linkhash_parloochecker_MainActivity_onCreat3@@Base+0x6ce>
+   29cb3:	48 8b 7d f8          	mov    rdi,QWORD PTR [rbp-0x8]
+   29cb7:	e8 f4 76 00 00       	call   313b0 <Java_com_linkhash_parloochecker_MainActivity_onCreat3@@Base+0x7d90>
+   29cbc:	48 89 45 e0          	mov    QWORD PTR [rbp-0x20],rax
+   29cc0:	48 8b 7d f8          	mov    rdi,QWORD PTR [rbp-0x8]
+   29cc4:	e8 17 77 00 00       	call   313e0 <Java_com_linkhash_parloochecker_MainActivity_onCreat3@@Base+0x7dc0>
+   29cc9:	48 89 45 d8          	mov    QWORD PTR [rbp-0x28],rax
+   29ccd:	48 8b 7d f0          	mov    rdi,QWORD PTR [rbp-0x10]
+   29cd1:	e8 da 76 00 00       	call   313b0 <Java_com_linkhash_parloochecker_MainActivity_onCreat3@@Base+0x7d90>
+   29cd6:	48 89 45 d0          	mov    QWORD PTR [rbp-0x30],rax
+   29cda:	48 8b 7d e0          	mov    rdi,QWORD PTR [rbp-0x20]
+   29cde:	48 8b 75 d8          	mov    rsi,QWORD PTR [rbp-0x28]
+   29ce2:	48 8b 55 d0          	mov    rdx,QWORD PTR [rbp-0x30]
+   29ce6:	e8 45 76 00 00       	call   31330 <Java_com_linkhash_parloochecker_MainActivity_onCreat3@@Base+0x7d10>
+   29ceb:	88 45 cf             	mov    BYTE PTR [rbp-0x31],al
+   29cee:	8a 45 cf             	mov    al,BYTE PTR [rbp-0x31]
+   29cf1:	24 01                	and    al,0x1
+   29cf3:	0f b6 c0             	movzx  eax,al
+   29cf6:	48 83 c4 40          	add    rsp,0x40
+   29cfa:	5d                   	pop    rbp
+   29cfb:	c3                   	ret
+   29cfc:	cc                   	int3
+   29cfd:	cc                   	int3
+   29cfe:	cc                   	int3
+   29cff:	cc                   	int3
+   29d00:	55                   	push   rbp
+   29d01:	48 89 e5             	mov    rbp,rsp
+   29d04:	48 83 ec 20          	sub    rsp,0x20
+   29d08:	48 89 7d f8          	mov    QWORD PTR [rbp-0x8],rdi
+   29d0c:	48 89 75 f0          	mov    QWORD PTR [rbp-0x10],rsi
+   29d10:	48 8b 7d f8          	mov    rdi,QWORD PTR [rbp-0x8]
+   29d14:	e8 27 00 00 00       	call   29d40 <Java_com_linkhash_parloochecker_MainActivity_onCreat3@@Base+0x720>
+   29d19:	48 89 45 e8          	mov    QWORD PTR [rbp-0x18],rax
+   29d1d:	48 8b 7d f0          	mov    rdi,QWORD PTR [rbp-0x10]
+   29d21:	e8 1a 00 00 00       	call   29d40 <Java_com_linkhash_parloochecker_MainActivity_onCreat3@@Base+0x720>
+   29d26:	48 89 c1             	mov    rcx,rax
+   29d29:	48 8b 45 e8          	mov    rax,QWORD PTR [rbp-0x18]
+   29d2d:	48 39 c8             	cmp    rax,rcx

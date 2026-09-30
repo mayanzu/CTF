@@ -1,0 +1,172 @@
+=== aligned .text instructions 0x4014e0-0x401610 ===
+0x4014e3: 89c2                 mov      edx, eax
+0x4014e5: 8b450c               mov      eax, dword ptr [ebp + 0xc]
+0x4014e8: 01d0                 add      eax, edx
+0x4014ea: c60000               mov      byte ptr [eax], 0
+0x4014ed: 90                   nop      
+0x4014ee: c9                   leave    
+0x4014ef: c3                   ret      
+0x4014f0: 55                   push     ebp
+0x4014f1: 89e5                 mov      ebp, esp
+0x4014f3: 83ec58               sub      esp, 0x58
+0x4014f6: e865ffffff           call     0x401460
+0x4014fb: 8d45c6               lea      eax, [ebp - 0x3a]
+0x4014fe: 89442404             mov      dword ptr [esp + 4], eax
+0x401502: 8b4508               mov      eax, dword ptr [ebp + 8]
+0x401505: 890424               mov      dword ptr [esp], eax
+0x401508: e883ffffff           call     0x401490
+0x40150d: c744240420404000     mov      dword ptr [esp + 4], 0x404020
+0x401515: 8d45c6               lea      eax, [ebp - 0x3a]
+0x401518: 890424               mov      dword ptr [esp], eax
+0x40151b: e850260000           call     0x403b70
+0x401520: 85c0                 test     eax, eax
+0x401522: 0f94c0               sete     al
+0x401525: 0fb6c0               movzx    eax, al
+0x401528: c9                   leave    
+0x401529: c3                   ret      
+0x40152a: 55                   push     ebp
+0x40152b: 89e5                 mov      ebp, esp
+0x40152d: 83e4f0               and      esp, 0xfffffff0
+0x401530: 83ec50               sub      esp, 0x50
+0x401533: e8a8050000           call     0x401ae0
+0x401538: c7042493504000       mov      dword ptr [esp], 0x405093
+0x40153f: e854260000           call     0x403b98
+0x401544: a1bc814000           mov      eax, dword ptr [0x4081bc]
+0x401549: 89442408             mov      dword ptr [esp + 8], eax
+0x40154d: c744240432000000     mov      dword ptr [esp + 4], 0x32
+0x401555: 8d44241e             lea      eax, [esp + 0x1e]
+0x401559: 890424               mov      dword ptr [esp], eax
+0x40155c: e867260000           call     0x403bc8
+0x401561: c7442404a4504000     mov      dword ptr [esp + 4], 0x4050a4
+0x401569: 8d44241e             lea      eax, [esp + 0x1e]
+0x40156d: 890424               mov      dword ptr [esp], eax
+0x401570: e8eb250000           call     0x403b60
+0x401575: c644041e00           mov      byte ptr [esp + eax + 0x1e], 0
+0x40157a: 8d44241e             lea      eax, [esp + 0x1e]
+0x40157e: 890424               mov      dword ptr [esp], eax
+0x401581: e86affffff           call     0x4014f0
+0x401586: 85c0                 test     eax, eax
+0x401588: 740e                 je       0x401598
+0x40158a: c70424a6504000       mov      dword ptr [esp], 0x4050a6
+0x401591: e8fa250000           call     0x403b90
+0x401596: eb0c                 jmp      0x4015a4
+0x401598: c70424c2504000       mov      dword ptr [esp], 0x4050c2
+0x40159f: e8ec250000           call     0x403b90
+0x4015a4: b800000000           mov      eax, 0
+0x4015a9: c9                   leave    
+0x4015aa: c3                   ret      
+0x4015ab: 90                   nop      
+0x4015ac: 6690                 nop      
+0x4015ae: 6690                 nop      
+0x4015b0: 55                   push     ebp
+0x4015b1: 89e5                 mov      ebp, esp
+0x4015b3: 57                   push     edi
+0x4015b4: 56                   push     esi
+0x4015b5: 53                   push     ebx
+0x4015b6: 83ec4c               sub      esp, 0x4c
+0x4015b9: f6056040400002       test     byte ptr [0x404060], 2
+0x4015c0: 0f84ea020000         je       0x4018b0
+0x4015c6: e8ad260000           call     0x403c78
+0x4015cb: 8965c4               mov      dword ptr [ebp - 0x3c], esp
+0x4015ce: 890424               mov      dword ptr [esp], eax
+0x4015d1: 89c6                 mov      esi, eax
+0x4015d3: e880250000           call     0x403b58
+0x4015d8: 8d440011             lea      eax, [eax + eax + 0x11]
+0x4015dc: c1e804               shr      eax, 4
+0x4015df: c1e004               shl      eax, 4
+0x4015e2: e8490b0000           call     0x402130
+0x4015e7: 29c4                 sub      esp, eax
+0x4015e9: c745e400000000       mov      dword ptr [ebp - 0x1c], 0
+0x4015f0: c745d400000000       mov      dword ptr [ebp - 0x2c], 0
+0x4015f7: 8d442410             lea      eax, [esp + 0x10]
+0x4015fb: c745d000000000       mov      dword ptr [ebp - 0x30], 0
+0x401602: 89c2                 mov      edx, eax
+0x401604: 8945cc               mov      dword ptr [ebp - 0x34], eax
+0x401607: a160404000           mov      eax, dword ptr [0x404060]
+0x40160c: 2500440000           and      eax, 0x4400
+=== aligned .text instructions 0x401b00-0x401c00 ===
+0x401b00: 83ec1c               sub      esp, 0x1c
+0x401b03: 8b442424             mov      eax, dword ptr [esp + 0x24]
+0x401b07: 83f803               cmp      eax, 3
+0x401b0a: 7414                 je       0x401b20
+0x401b0c: 85c0                 test     eax, eax
+0x401b0e: 7410                 je       0x401b20
+0x401b10: b801000000           mov      eax, 1
+0x401b15: 83c41c               add      esp, 0x1c
+0x401b18: c20c00               ret      0xc
+0x401b1b: 90                   nop      
+0x401b1c: 8d742600             lea      esi, [esi]
+0x401b20: 8b542428             mov      edx, dword ptr [esp + 0x28]
+0x401b24: 89442404             mov      dword ptr [esp + 4], eax
+0x401b28: 8b442420             mov      eax, dword ptr [esp + 0x20]
+0x401b2c: 89542408             mov      dword ptr [esp + 8], edx
+0x401b30: 890424               mov      dword ptr [esp], eax
+0x401b33: e848020000           call     0x401d80
+0x401b38: b801000000           mov      eax, 1
+0x401b3d: 83c41c               add      esp, 0x1c
+0x401b40: c20c00               ret      0xc
+0x401b43: 8db600000000         lea      esi, [esi]
+0x401b49: 8dbc2700000000       lea      edi, [edi]
+0x401b50: 56                   push     esi
+0x401b51: 53                   push     ebx
+0x401b52: 83ec14               sub      esp, 0x14
+0x401b55: 833d6470400002       cmp      dword ptr [0x407064], 2
+0x401b5c: 8b442424             mov      eax, dword ptr [esp + 0x24]
+0x401b60: 740a                 je       0x401b6c
+0x401b62: c7056470400002000000 mov      dword ptr [0x407064], 2
+0x401b6c: 83f802               cmp      eax, 2
+0x401b6f: 7412                 je       0x401b83
+0x401b71: 83f801               cmp      eax, 1
+0x401b74: 743f                 je       0x401bb5
+0x401b76: 83c414               add      esp, 0x14
+0x401b79: b801000000           mov      eax, 1
+0x401b7e: 5b                   pop      ebx
+0x401b7f: 5e                   pop      esi
+0x401b80: c20c00               ret      0xc
+0x401b83: be14904000           mov      esi, 0x409014
+0x401b88: 81ee14904000         sub      esi, 0x409014
+0x401b8e: 83fe03               cmp      esi, 3
+0x401b91: 7ee3                 jle      0x401b76
+0x401b93: 31db                 xor      ebx, ebx
+0x401b95: 8b8314904000         mov      eax, dword ptr [ebx + 0x409014]
+0x401b9b: 85c0                 test     eax, eax
+0x401b9d: 7402                 je       0x401ba1
+0x401b9f: ffd0                 call     eax
+0x401ba1: 83c304               add      ebx, 4
+0x401ba4: 39de                 cmp      esi, ebx
+0x401ba6: 75ed                 jne      0x401b95
+0x401ba8: 83c414               add      esp, 0x14
+0x401bab: b801000000           mov      eax, 1
+0x401bb0: 5b                   pop      ebx
+0x401bb1: 5e                   pop      esi
+0x401bb2: c20c00               ret      0xc
+0x401bb5: 8b442428             mov      eax, dword ptr [esp + 0x28]
+0x401bb9: c744240401000000     mov      dword ptr [esp + 4], 1
+0x401bc1: 89442408             mov      dword ptr [esp + 8], eax
+0x401bc5: 8b442420             mov      eax, dword ptr [esp + 0x20]
+0x401bc9: 890424               mov      dword ptr [esp], eax
+0x401bcc: e8af010000           call     0x401d80
+0x401bd1: eba3                 jmp      0x401b76
+0x401bd3: 8db600000000         lea      esi, [esi]
+0x401bd9: 8dbc2700000000       lea      edi, [edi]
+0x401be0: 31c0                 xor      eax, eax
+0x401be2: c3                   ret      
+0x401be3: 90                   nop      
+0x401be4: 90                   nop      
+0x401be5: 90                   nop      
+0x401be6: 90                   nop      
+0x401be7: 90                   nop      
+0x401be8: 90                   nop      
+0x401be9: 90                   nop      
+0x401bea: 90                   nop      
+0x401beb: 90                   nop      
+0x401bec: 90                   nop      
+0x401bed: 90                   nop      
+0x401bee: 90                   nop      
+0x401bef: 90                   nop      
+0x401bf0: 56                   push     esi
+0x401bf1: 53                   push     ebx
+0x401bf2: 83ec14               sub      esp, 0x14
+0x401bf5: c7042444704000       mov      dword ptr [esp], 0x407044
+0x401bfc: e8a7200000           call     0x403ca8
+

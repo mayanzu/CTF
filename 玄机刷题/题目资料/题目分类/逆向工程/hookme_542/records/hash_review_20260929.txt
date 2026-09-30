@@ -1,0 +1,59 @@
+**********************
+PowerShell transcript start
+Start time: 20260929110924
+Username: DESKTOP-412KTAR\mzj
+RunAs User: DESKTOP-412KTAR\mzj
+Configuration Name: 
+Machine: DESKTOP-412KTAR (Microsoft Windows NT 10.0.26200.0)
+Host Application: C:\Users\mzj\.cache\codex-runtimes\codex-primary-runtime\dependencies\native\powershell\pwsh.dll -Command try { [Console]::OutputEncoding=[System.Text.Encoding]::UTF8 } catch {}
+$root='C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\批次10_20260929\542_hookme'
+$log=Join-Path $root 'records\hash_review_20260929.txt'
+Start-Transcript -LiteralPath $log -Force
+$paths=@(
+ (Join-Path $root 'originals\hookme.rar'),
+ (Join-Path $root 'extracted\hookme\HookMe.apk'),
+ (Join-Path $root 'analysis\components\AndroidManifest.xml'),
+ (Join-Path $root 'analysis\components\classes.dex'),
+ (Join-Path $root 'analysis\components\classes2.dex'),
+ (Join-Path $root 'analysis\components\classes3.dex'),
+ (Join-Path $root 'analysis\components\classes4.dex'),
+ (Join-Path $root 'analysis\components\lib\arm64-v8a\libhookme.so'),
+ (Join-Path $root 'analysis\components\lib\armeabi-v7a\libhookme.so'),
+ (Join-Path $root 'analysis\components\lib\x86\libhookme.so'),
+ (Join-Path $root 'analysis\components\lib\x86_64\libhookme.so'),
+ (Join-Path $root 'analysis\resources\arsc_parse.txt')
+)
+foreach($item in $paths){
+ $hash=(Get-FileHash -Algorithm SHA256 -LiteralPath $item).Hash
+ $relative=$item.Substring($root.Length+1)
+ Write-Output ($relative + "`t" + $hash)
+}
+Stop-Transcript
+Process ID: 24984
+PSVersion: 7.6.5
+PSEdition: Core
+GitCommitId: 7.6.5
+OS: Microsoft Windows 10.0.26200
+Platform: Win32NT
+PSCompatibleVersions: 1.0, 2.0, 3.0, 4.0, 5.0, 5.1, 6.0, 7.0
+PSRemotingProtocolVersion: 2.4
+SerializationVersion: 1.1.0.1
+WSManStackVersion: 3.0
+**********************
+Transcript started, output file is C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\批次10_20260929\542_hookme\records\hash_review_20260929.txt
+originals\hookme.rar	1DC981B273CB80A32863B9A89A09CFA82B731F6D4BC8E37D72C445DEB29E993F
+extracted\hookme\HookMe.apk	61BB5BA33C8EBD3BD01BA9ECF6EDC69A18D664D91F3309447B95132B27E14E9B
+analysis\components\AndroidManifest.xml	1585F1535F814F2B9BA93A750357F8BFF24DA68A0DAD2BCA71284FCB91019059
+analysis\components\classes.dex	488746FFA37A656EB3CBCD28D78F0179D2DEA53C1F73DC23926D21ABC86EE019
+analysis\components\classes2.dex	6CBBB5CA6B4D734C017973D9782BCB79C4BBF995F93DD6F66B3E4EFB8BFECE4E
+analysis\components\classes3.dex	59E97C3D35CE2D9AD7148B65630048E4C7E193D1BCBE60CF4844AB0ADEB58DD8
+analysis\components\classes4.dex	C3CB9DB6ECF2DBBFA9B1C49476B9EE1EDC3085AA6808B5CFF98190EE3FABF0CA
+analysis\components\lib\arm64-v8a\libhookme.so	7E34475E2B6B29C3CF9AC7F256544FCE17264F992E418B2DB6667CEA35D91B85
+analysis\components\lib\armeabi-v7a\libhookme.so	3F0F0FE9814293CF1826D7C663128BFA9505883C554E4295C15523800891A9DB
+analysis\components\lib\x86\libhookme.so	1F337C1D15A8F212EE1CC8BBF05D6820AC5CF9EF802ABF3FC517D63F7A17E763
+analysis\components\lib\x86_64\libhookme.so	C222F80B8C1565594F821648EA6FC36625501E213E61C48E22FFF83A3768F6C1
+analysis\resources\arsc_parse.txt	1003E73BB810B00609762A22CBB3B3E059A4C7FDAA36C7BFDEC9B8310F2243CF
+**********************
+PowerShell transcript end
+End time: 20260929110924
+**********************

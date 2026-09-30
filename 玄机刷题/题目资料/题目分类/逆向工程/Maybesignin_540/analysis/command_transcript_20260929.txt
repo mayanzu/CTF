@@ -1,0 +1,260 @@
+# #540 湘岚杯maybesignin — 命令/输出记录
+# 日期：2026-09-29（Asia/Shanghai）
+# 工作目录：C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\批次11_20260929\540_maybesignin
+# 原始附件只读；本记录从附件核对开始。以下命令和输出按实际执行保留。
+
+COMMAND> Get-Location; Get-ChildItem -Force | Select-Object Mode,Length,LastWriteTime,Name
+OUTPUT>
+Path
+----
+C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\批次11_20260929\540_maybesignin
+
+Mode          : d----
+Length        :
+LastWriteTime : 2026/9/29 12:53:52
+Name          : analysis
+
+Mode          : d----
+Length        :
+LastWriteTime : 2026/9/29 12:50:33
+Name          : originals
+
+Mode          : -a---
+Length        : 498
+LastWriteTime : 2026/9/29 12:52:50
+Name          : README.md
+EXIT_CODE> 0
+
+COMMAND> Get-ChildItem -LiteralPath '.\originals' -Force | Select-Object Mode,Length,LastWriteTime,Name
+OUTPUT>
+Mode  Length LastWriteTime      Name
+----  ------ -------------      ----
+-a---   6305 2026/9/29 12:48:55 MaybeSignin (1).zip
+EXIT_CODE> 0
+
+COMMAND> Get-FileHash -LiteralPath '.\originals\MaybeSignin (1).zip' -Algorithm SHA256 | Format-List Algorithm,Hash,Path
+OUTPUT>
+Algorithm : SHA256
+Hash      : 79D0749B152E8A886AF6911CAEF49730CCC29067D66BF30739B89D2EAE13F8A2
+Path      : C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\批次11_20260929\540_maybesignin\originals\MaybeSignin (1).zip
+EXIT_CODE> 0
+
+COMMAND> tar.exe -tf '.\originals\MaybeSignin (1).zip'
+OUTPUT>
+ezsignin.exe
+EXIT_CODE> 0
+
+COMMAND> Get-Content -LiteralPath '.\README.md' -Raw
+OUTPUT>
+# 540 — 湘岚杯maybesignin
+
+- 平台：https://xj.edisec.net/challenges/540
+- 类型/难度：REVERSE / 中等
+- 平台状态（下载时）：免费，步骤 0/1
+- 原始附件：`originals/MaybeSignin (1).zip`（保留下载原件的副本）
+- SHA-256：`79D0749B152E8A886AF6911CAEF49730CCC29067D66BF30739B89D2EAE13F8A2`
+- 压缩包成员：`ezsignin.exe`
+- WP：`wp.md`（解题中；未验证 flag 前不得标记已解决）
+- 命令及输出：`analysis/command_transcript_20260929.txt`
+EXIT_CODE> 0
+
+COMMAND> Expand-Archive -LiteralPath '.\originals\MaybeSignin (1).zip' -DestinationPath '.\analysis\unpacked' -Force; Get-ChildItem -LiteralPath '.\analysis\unpacked' -Force | Select-Object Mode,Length,Name; Get-FileHash -LiteralPath '.\analysis\unpacked\ezsignin.exe' -Algorithm SHA256 | Format-List Algorithm,Hash,Path
+OUTPUT>
+Mode  Length Name
+----  ------ ----
+-a---  12800 ezsignin.exe
+
+Algorithm : SHA256
+Hash      : DA87C9A85AB1E99370891AEBC6494A97B4AA1BB6694AF415DC455D68F5E18AE5
+Path      : C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\批次11_20260929\540_maybesignin\analysis\unpacked\ezsignin.exe
+EXIT_CODE> 0
+
+COMMAND> $names = 'python','python3','py','strings','objdump','dumpbin','rabin2','r2','ghidraRun','7z'; foreach ($n in $names) { $c = Get-Command $n -ErrorAction SilentlyContinue; if ($c) { '{0}: {1}' -f $n,$c.Source } else { '{0}: unavailable' -f $n } }
+OUTPUT>
+python: C:\Users\mzj\AppData\Local\Programs\Python\Python312\python.exe
+python3: C:\Users\mzj\AppData\Local\Microsoft\WindowsApps\python3.exe
+py: C:\WINDOWS\py.exe
+strings: C:\msys64\mingw64\bin\strings.exe
+objdump: C:\msys64\mingw64\bin\objdump.exe
+dumpbin: unavailable
+rabin2: unavailable
+r2: unavailable
+ghidraRun: unavailable
+7z: unavailable
+EXIT_CODE> 0
+
+COMMAND> strings.exe -a -n 3 '.\analysis\unpacked\ezsignin.exe'
+OUTPUT_FILE> analysis/strings_ascii.txt (same command rerun with stdout redirected; complete output preserved)
+KEY_OBSERVATION> includes `plz input your flag:`, `success`, `pause`; PDB path shows a Visual Studio x64 Release build.
+EXIT_CODE> 0
+
+COMMAND> strings.exe -e l -n 3 '.\analysis\unpacked\ezsignin.exe'
+OUTPUT>
+(empty; no UTF-16LE strings matched)
+EXIT_CODE> 0
+
+COMMAND> objdump.exe -x '.\analysis\unpacked\ezsignin.exe'
+OUTPUT>
+Initial console capture was truncated by the tool (535 total lines); complete output was saved by rerunning to `analysis/pe_headers_full.txt`.
+KEY_OBSERVATION> PE32+ x86-64, console subsystem; imports include CRT formatted I/O, allocation/free, and `system`; no external crypto DLL.
+EXIT_CODE> 0
+
+COMMAND> objdump.exe -d -Mintel --start-address=0x140001000 --stop-address=0x140001800 '.\analysis\unpacked\ezsignin.exe'
+OUTPUT_FILE> analysis/disasm_140001000_140001800.txt (full disassembly preserved)
+KEY_OBSERVATION> main at 0x140001590 initializes a 16-byte key, reads `%s`, calls transform at 0x1400010E0, then compares exactly 16 output bytes before printing `success`.
+EXIT_CODE> 0
+
+COMMAND> python -c "import importlib.util as u; print('\\n'.join(f'{m}: {bool(u.find_spec(m))}' for m in ['pefile','capstone','unicorn','angr','lief','iced_x86','keystone']))"
+OUTPUT>
+pefile: False
+capstone: True
+unicorn: False
+angr: False
+lief: False
+iced_x86: False
+keystone: False
+DECISION> Used GNU objdump plus a standalone Python SM4 implementation; no missing-dependency installation needed.
+EXIT_CODE> 0
+
+COMMAND> objdump.exe -s -j .rdata --start-address=0x140003260 --stop-address=0x140003480 '.\analysis\unpacked\ezsignin.exe'
+OUTPUT_FILE> analysis/rdata_3260_3480.txt (full dump preserved)
+KEY_OBSERVATION> RVA 0x32A0 begins the standard SM4 S-box; RVA 0x33A0 contains standard FK, and RVA 0x33B0 begins standard CK constants.
+EXIT_CODE> 0
+
+COMMAND> python '.\analysis\solve_sm4.py'
+OUTPUT>
+exe_sha256=DA87C9A85AB1E99370891AEBC6494A97B4AA1BB6694AF415DC455D68F5E18AE5
+key_hex=0102030405060708090A0B0C0D0E0F10111213141516
+sbox_first16=D690E9FECCE13DB716B614C228FB2C05
+sbox_last16=18F07DEC3ADC4D2079EE5F3ED7CB3948
+round_keys_first4=EDB6D8BD E8756E6D 0D954BD3 0DD23D5E
+round_keys_last4=92D44D89 2354699B E775035F A390681D
+target_hex=1C84BE5145CE1AF31FA3F75E3A38D0BE
+candidate_hex=8D8ED47A1EDDC5C9A2875E2ADA595746
+candidate_repr=b'\\x8d\\x8e\\xd4z\\x1e\\xdd\\xc5\\xc9\\xa2\\x87^*\\xdaYWF'
+candidate_ascii=\\x8d\\x8e\\xd4z\x1e\\xdd\\xc5\\xc9\\xa2\\x87^*\\xdaYWF
+reencrypt_hex=1C84BE5145CE1AF31FA3F75E3A38D0BE
+reencrypt_matches_target=True
+FAILED ATTEMPT> I initially transcribed `01 02 ... 16` as consecutive hex bytes. This yielded nonprintable data despite a round-trip and was rejected. Re-reading the four little-endian immediates corrected the exact stack byte sequence; see next run.
+EXIT_CODE> 0
+
+COMMAND> python '.\analysis\solve_sm4.py'  # after correcting key to exact stack bytes
+OUTPUT>
+exe_sha256=DA87C9A85AB1E99370891AEBC6494A97B4AA1BB6694AF415DC455D68F5E18AE5
+key_hex=01020304050607080910111213141516
+sbox_first16=D690E9FECCE13DB716B614C228FB2C05
+sbox_last16=18F07DEC3ADC4D2079EE5F3ED7CB3948
+round_keys_first4=EF9617A7 A2B5FE78 A2CC9F82 725A5C4D
+round_keys_last4=6E737D23 50E139C1 C2C47D56 AC4B390A
+target_hex=1C84BE5145CE1AF31FA3F75E3A38D0BE
+candidate_hex=666C61677B776C6173634A444146537D
+candidate_repr=b'flag{wlascJDAFS}'
+candidate_ascii=flag{wlascJDAFS}
+reencrypt_hex=1C84BE5145CE1AF31FA3F75E3A38D0BE
+reencrypt_matches_target=True
+EXIT_CODE> 0
+
+COMMAND> $c = Get-Command openssl -ErrorAction SilentlyContinue; if ($c) { $c.Source; openssl version; openssl list -cipher-algorithms | Select-String -Pattern 'SM4-ECB' } else { 'openssl: unavailable' }
+OUTPUT>
+C:\msys64\mingw64\bin\openssl.exe
+OpenSSL 3.5.2 5 Aug 2025 (Library: OpenSSL 3.5.2)
+  SM4-ECB
+  { 1.2.156.10197.1.104.1, SM4-ECB } @ default
+EXIT_CODE> 0
+
+COMMAND> python -c "from pathlib import Path; Path('.\analysis\cipher_block.bin').write_bytes(bytes.fromhex('1c84be5145ce1af31fa3f75e3a38d0be')); print('wrote 16-byte ciphertext block')"
+OUTPUT>
+wrote 16-byte ciphertext block
+EXIT_CODE> 0
+
+COMMAND> openssl enc -sm4-ecb -d -nopad -K 01020304050607080910111213141516 -in '.\analysis\cipher_block.bin' -out '.\analysis\openssl_plaintext.bin'; python -c "from pathlib import Path; b=Path('.\analysis\openssl_plaintext.bin').read_bytes(); print('length=',len(b)); print('hex=',b.hex().upper()); print('ascii=',b.decode('ascii'))"
+OUTPUT>
+length= 16
+hex= 666C61677B776C6173634A444146537D
+ascii= flag{wlascJDAFS}
+EXIT_CODE> 0
+
+COMMAND> objdump.exe -x '.\analysis\unpacked\ezsignin.exe' > '.\analysis\pe_headers_full.txt'
+OUTPUT>
+(empty; full output redirected to `analysis/pe_headers_full.txt`)
+EXIT_CODE> 0
+
+COMMAND> objdump.exe -d -Mintel --start-address=0x140001000 --stop-address=0x140001800 '.\analysis\unpacked\ezsignin.exe' > '.\analysis\disasm_140001000_140001800.txt'
+OUTPUT>
+(empty; full output redirected to `analysis/disasm_140001000_140001800.txt`)
+EXIT_CODE> 0
+
+COMMAND> strings.exe -a -n 3 '.\analysis\unpacked\ezsignin.exe' > '.\analysis\strings_ascii.txt'
+OUTPUT>
+(empty; full output redirected to `analysis/strings_ascii.txt`)
+EXIT_CODE> 0
+
+COMMAND> strings.exe -e l -n 3 '.\analysis\unpacked\ezsignin.exe' > '.\analysis\strings_wide.txt'
+OUTPUT>
+(empty; output file `analysis/strings_wide.txt` is empty)
+EXIT_CODE> 0
+
+COMMAND> objdump.exe -s -j .rdata --start-address=0x140003260 --stop-address=0x140003480 '.\analysis\unpacked\ezsignin.exe' > '.\analysis\rdata_3260_3480.txt'
+OUTPUT>
+(empty; full output redirected to `analysis/rdata_3260_3480.txt`)
+EXIT_CODE> 0
+
+COMMAND> Get-Content -LiteralPath '.\analysis\command_transcript_20260929.txt' -Tail 12
+OUTPUT>
+
+COMMAND> Get-FileHash -LiteralPath '.\originals\MaybeSignin (1).zip' -Algorithm SHA256 | Format-List Algorithm,Hash,Path
+OUTPUT>
+Algorithm : SHA256
+Hash      : 79D0749B152E8A886AF6911CAEF49730CCC29067D66BF30739B89D2EAE13F8A2
+Path      : C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\批次11_20260929\540_maybesignin\originals\MaybeSignin (1).zip
+EXIT_CODE> 0
+
+COMMAND> tar.exe -tf '.\originals\MaybeSignin (1).zip'
+OUTPUT>
+ezsignin.exe
+EXIT_CODE> 0
+NOTE> This was a read-only check of the transcript contents before the later analysis entries were appended.
+
+PLATFORM VERIFICATION (root agent via foreground Computer Use; no shell command)> `flag{wlascJDAFS}` submitted on Xuanji challenge #540; platform showed completed 1/1. No further submission was performed by this subagent.
+
+COMMAND> Get-ChildItem -LiteralPath '.\analysis' -Force | Sort-Object Name | Select-Object Mode,Length,Name; Get-Content -LiteralPath '.\README.md' -Raw
+OUTPUT>
+Mode  Length Name
+----  ------ ----
+-a---     16 cipher_block.bin
+-a---   9880 command_transcript_20260929.txt
+-a---  33567 disasm_140001000_140001800.txt
+-a---     16 openssl_plaintext.bin
+-a---  25197 pe_headers_full.txt
+-a---   2339 rdata_3260_3480.txt
+-a---   2750 solve_sm4.py
+-a---   2915 strings_ascii.txt
+-a---      0 strings_wide.txt
+d----        unpacked
+# 540 — 湘岚杯maybesignin
+
+- 平台：https://xj.edisec.net/challenges/540
+- 类型/难度：REVERSE / 中等
+- 平台状态（下载时）：免费，步骤 0/1
+- 原始附件：`originals/MaybeSignin (1).zip`（保留下载原件的副本）
+- SHA-256：`79D0749B152E8A886AF6911CAEF49730CCC29067D66BF30739B89D2EAE13F8A2`
+- 压缩包成员：`ezsignin.exe`
+- 解题状态：已解决；平台前台验证显示 1/1
+- WP：`wp.md`
+- 命令及输出：`analysis/command_transcript_20260929.txt`
+- 静态分析产物：`analysis/pe_headers_full.txt`、`analysis/disasm_140001000_140001800.txt`、`analysis/rdata_3260_3480.txt`、`analysis/strings_ascii.txt`
+- 复现代码：`analysis/solve_sm4.py`（只分析数据文件，不运行题目 PE）
+- 本地独立复核：Python SM4 解密并重加密回目标块；OpenSSL 3.5.2 SM4-ECB 解密得到同一候选
+- flag：`flag{wlascJDAFS}`（玄机平台已验收）
+EXIT_CODE> 0
+NOTE> Transcript length was 9,880 bytes before this final inventory/output entry was appended.
+
+COMMAND> Get-Item -LiteralPath '.\README.md','.\wp.md','.\analysis\command_transcript_20260929.txt','.\analysis\solve_sm4.py','.\analysis\unpacked\ezsignin.exe' | ForEach-Object { '{0} | {1}' -f $_.FullName,$_.Length }
+OUTPUT>
+C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\批次11_20260929\540_maybesignin\README.md | 919
+C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\批次11_20260929\540_maybesignin\wp.md | 5976
+C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\批次11_20260929\540_maybesignin\analysis\command_transcript_20260929.txt | 11434
+C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\批次11_20260929\540_maybesignin\analysis\solve_sm4.py | 2750
+C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\批次11_20260929\540_maybesignin\analysis\unpacked\ezsignin.exe | 12800
+EXIT_CODE> 0
+FINAL_CHECK> README, WP, transcript, analysis code, and extracted sample are all present.

@@ -1,0 +1,194 @@
+**********************
+PowerShell transcript start
+Start time: 20260929172637
+Username: DESKTOP-412KTAR\mzj
+RunAs User: DESKTOP-412KTAR\mzj
+Configuration Name: 
+Machine: DESKTOP-412KTAR (Microsoft Windows NT 10.0.26200.0)
+Host Application: C:\Users\mzj\.cache\codex-runtimes\codex-primary-runtime\dependencies\native\powershell\pwsh.dll -Command try { [Console]::OutputEncoding=[System.Text.Encoding]::UTF8 } catch {}
+$root='C:\Users\mzj\Desktop\CTF\玄机刷题'; $data=Join-Path $root '题目资料'; $log=Join-Path $root '记录\已完成51题附件WP核查_本地目录摘要.txt'; Start-Transcript -LiteralPath $log -Force; Write-Output '=== top-level material folders ==='; Get-ChildItem -LiteralPath $data -Directory -Force | Select-Object Name; Write-Output '=== directory/file counts by batch ==='; Get-ChildItem -LiteralPath $data -Directory -Force | ForEach-Object { $files=Get-ChildItem -LiteralPath $_.FullName -Recurse -File -Force -ErrorAction SilentlyContinue; [pscustomobject]@{Folder=$_.Name; FileCount=$files.Count; WPCount=($files | Where-Object { $_.Name -match '(^wp|wp|题解|解题记录)' -and $_.Extension -in '.md','.txt','.tex' }).Count; ArchiveCount=($files | Where-Object { $_.Extension -match '^\.(zip|rar|7z|tar|gz|tgz)$' }).Count; BinaryCount=($files | Where-Object { $_.Extension -match '^\.(exe|dll|so|elf|apk|hap|dex|class|jar|bin|pcap|pcapng|pdf|docx|xlsx|csv|json|log|db|sqlite)$' }).Count } } | Format-Table -AutoSize; Write-Output '=== challenge WP-like files ==='; Get-ChildItem -LiteralPath $data -Recurse -File -Force -ErrorAction SilentlyContinue | Where-Object { $_.Name -match '(?i)(^wp|write.?up|题解|解题记录)' -and $_.Extension -in '.md','.txt','.tex' } | Select-Object FullName,Length; Write-Output '=== candidate source manifests ==='; Get-ChildItem -LiteralPath $root -Recurse -File -Force -ErrorAction SilentlyContinue | Where-Object { $_.Name -match '(?i)(manifest|index|inventory|completed|51题|28题|已完成)' -and $_.Extension -in '.md','.txt','.csv','.json' } | Select-Object FullName,Length; Stop-Transcript
+Process ID: 14888
+PSVersion: 7.6.5
+PSEdition: Core
+GitCommitId: 7.6.5
+OS: Microsoft Windows 10.0.26200
+Platform: Win32NT
+PSCompatibleVersions: 1.0, 2.0, 3.0, 4.0, 5.0, 5.1, 6.0, 7.0
+PSRemotingProtocolVersion: 2.4
+SerializationVersion: 1.1.0.1
+WSManStackVersion: 3.0
+**********************
+Transcript started, output file is C:\Users\mzj\Desktop\CTF\玄机刷题\记录\已完成51题附件WP核查_本地目录摘要.txt
+=== top-level material folders ===
+
+Name
+----
+班次邮戳
+被入侵的数据库_451
+不劳春风解我忧
+第一届启航杯checker_562
+即随本心
+可疑流量分析
+密钥生成审计_588
+慕然回首_530
+你若安好便是晴_531
+批次10_20260929
+批次11_20260929
+批次12_20260929
+批次13_20260929
+批次14_20260929
+人生自古谁无死_532
+像素囚笼1
+新题批次
+原始下载附件
+Asymmetric_544
+babyRSA
+Base_543
+butterfly_552
+CatchPalu_545
+challenge_558
+checker_562
+crazyaes
+ezBase_541
+EzFlag_367
+ezRe
+go_for_it_556
+hookme_542
+Maybesignin_540
+OpenHarmony_arkt_559
+OpenHarmony_easyre_560
+OpenHarmony_secret_561
+PaluArray_546
+PaluFlat_547
+PaluGOGOGO_548
+PaluMaze_551
+PaluMaze_551_fresh
+ParlooChecker_549
+PositionalXOR_550
+Prompt Trace
+rainbow
+Sql注入的应急排查_450
+Tch3s
+tradre
+Veiled Shell
+Victory_Melody_555
+WSL平台归档
+=== directory/file counts by batch ===
+
+
+Folder                  FileCount WPCount ArchiveCount BinaryCount
+------                  --------- ------- ------------ -----------
+班次邮戳                        5       0            0           0
+被入侵的数据库_451              1       0            0           1
+不劳春风解我忧                  2       0            0           1
+第一届启航杯checker_562        26       1            1           2
+即随本心                        1       0            0           1
+可疑流量分析                    1       0            0           1
+密钥生成审计_588               13       1            1           1
+慕然回首_530                    6       1            1           3
+你若安好便是晴_531             11       1            1           3
+批次10_20260929               752       3            3          11
+批次11_20260929                50       3            3           8
+批次12_20260929                62       3            4           8
+批次13_20260929                52       3            3           6
+批次14_20260929                80       4            3          15
+人生自古谁无死_532             24       1            1           4
+像素囚笼1                      73       0            2           0
+新题批次                       28       0            1           5
+原始下载附件                   28       0           26           1
+Asymmetric_544                 20       1            1           2
+babyRSA                         1       0            0           0
+Base_543                        3       0            0           1
+butterfly_552                  17       1            1           1
+CatchPalu_545                  15       1            1           2
+challenge_558                  16       1            1           2
+checker_562                    19       3            2           2
+crazyaes                        5       0            0           2
+ezBase_541                     55       1            1          18
+EzFlag_367                      2       0            0           0
+ezRe                           61       0            0          57
+go_for_it_556                 245       0            0           3
+hookme_542                     20       0            0           9
+Maybesignin_540                17       1            1           1
+OpenHarmony_arkt_559           51       1            1           7
+OpenHarmony_easyre_560         47       1            1           7
+OpenHarmony_secret_561         56       1            1          15
+PaluArray_546                  61       1            1           7
+PaluFlat_547                   24       1            1           3
+PaluGOGOGO_548                 37       1            1           3
+PaluMaze_551                   72       0            1          42
+PaluMaze_551_fresh              8       0            0           0
+ParlooChecker_549              35       1            1           9
+PositionalXOR_550               2       0            0           1
+Prompt Trace                    5       0            0           3
+rainbow                         5       0            0           0
+Sql注入的应急排查_450           1       0            0           1
+Tch3s                           8       0            0           1
+tradre                          7       0            0           3
+Veiled Shell                    1       0            0           1
+Victory_Melody_555              1       0            0           1
+WSL平台归档                    47       0            3          12
+
+=== challenge WP-like files ===
+
+FullName                                                                                                              L
+                                                                                                                      e
+                                                                                                                      n
+                                                                                                                      g
+                                                                                                                      t
+                                                                                                                      h
+--------                                                                                                              -
+C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\Asymmetric_544\wp.md                                                       0
+C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\butterfly_552\wp.md                                                        3
+C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\CatchPalu_545\wp.md                                                        1
+C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\challenge_558\wp.md                                                        9
+C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\ezBase_541\WP.md                                                           8
+C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\Maybesignin_540\WP.md                                                      1
+C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\OpenHarmony_arkt_559\WP.md                                                 3
+C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\OpenHarmony_easyre_560\WP.md                                               1
+C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\OpenHarmony_secret_561\WP.md                                               0
+C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\PaluArray_546\wp.md                                                        9
+C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\PaluFlat_547\wp.md                                                         7
+C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\PaluGOGOGO_548\wp.md                                                       6
+C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\ParlooChecker_549\wp.md                                                    1
+C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\人生自古谁无死_532\wp.md                                                   1
+C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\你若安好便是晴_531\wp.md                                                   9
+C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\密钥生成审计_588\wp.md                                                     2
+C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\慕然回首_530\wp.md                                                         2
+C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\批次10_20260929\542_hookme\wp.md                                           2
+C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\批次10_20260929\543_Base\wp.md                                             7
+C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\批次10_20260929\552_butterfly\wp.md                                        9
+C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\批次11_20260929\539_cryptor\wp.md                                          9
+C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\批次11_20260929\540_maybesignin\wp.md                                      6
+C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\批次11_20260929\541_ezBase\wp.md                                           4
+C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\批次12_20260929\534_天下谁人不识君\wp.md                                   3
+C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\批次12_20260929\535_往事暗沉不可追\wp.md                                   3
+C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\批次12_20260929\536_遇事不决可问春风\wp.md                                 1
+C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\批次13_20260929\533_圣人当仁不让\wp.md                                     3
+C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\批次13_20260929\537_湘岚杯ezbase\wp.md                                     9
+C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\批次13_20260929\538_湘岚杯1997\wp.md                                       1
+C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\批次14_20260929\527_木兰当户织\WP_唧唧复唧唧木兰当户织.md                  5
+C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\批次14_20260929\561_OpenHarmony_secret\WP.md                               9
+C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\批次14_20260929\561_OpenHarmony_secret\analysis\WP_preexisting_20260929.md 0
+C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\批次14_20260929\562_checker\WP_第一届启航杯checker.md                      7
+C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\第一届启航杯checker_562\wp.md                                              6
+=== candidate source manifests ===
+C:\Users\mzj\Desktop\CTF\玄机刷题\记录\已完成51题附件WP核查_本地目录摘要.txt                                          7
+C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\OpenHarmony_arkt_559\analysis\SHA256_INVENTORY_20260929.txt                3
+C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\OpenHarmony_arkt_559\analysis\SHA256_INVENTORY_RUN_20260929.txt            5
+C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\OpenHarmony_easyre_560\analysis\disassemble_indexed_output.txt             3
+C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\OpenHarmony_easyre_560\analysis\dump_index_records_output.txt              6
+C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\OpenHarmony_secret_561\analysis\disassemble_indexed_output.txt             9
+C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\OpenHarmony_secret_561\analysis\sha256_manifest_20260929.csv               9
+C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\原始下载附件\manifest.csv                                                  9
+C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\批次10_20260929\542_hookme\records\apk_inventory_20260929.txt              4
+C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\批次10_20260929\542_hookme\records\tool_inventory_20260929.txt             5
+C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\批次10_20260929\543_Base\records\543_inventory_transcript.txt              6
+C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\批次10_20260929\552_butterfly\analysis\artifact_manifest_20260929.txt      2
+C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\批次12_20260929\536_遇事不决可问春风\analysis\apk_contents_index.txt       2
+C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\批次12_20260929\536_遇事不决可问春风\analysis\manifest_report.txt          4
+C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\批次14_20260929\561_OpenHarmony_secret\analysis\sha256_manifest_20260929.… 9
+**********************
+PowerShell transcript end
+End time: 20260929172638
+**********************

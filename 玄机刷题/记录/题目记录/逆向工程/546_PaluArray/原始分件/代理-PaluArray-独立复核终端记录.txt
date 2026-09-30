@@ -1,0 +1,1289 @@
+**********************
+PowerShell transcript start
+Start time: 20260929100631
+Username: DESKTOP-412KTAR\mzj
+RunAs User: DESKTOP-412KTAR\mzj
+Configuration Name: 
+Machine: DESKTOP-412KTAR (Microsoft Windows NT 10.0.26200.0)
+Host Application: C:\Users\mzj\.cache\codex-runtimes\codex-primary-runtime\dependencies\native\powershell\pwsh.dll -Command try { [Console]::OutputEncoding=[System.Text.Encoding]::UTF8 } catch {}
+$base = 'C:\Users\mzj\Desktop\CTF\玄机刷题'; $log = Join-Path $base '记录\代理-PaluArray-独立复核终端记录.txt'; Start-Transcript -LiteralPath $log -Append; Get-Content -LiteralPath (Join-Path $base '题目资料\PaluArray_546\analysis\solve_paluarray_546_static.py'); Get-Content -LiteralPath (Join-Path $base '题目资料\PaluArray_546\analysis\independent_audit_546.py'); Get-Content -LiteralPath (Join-Path $base '题目资料\PaluArray_546\WP.md'); Stop-Transcript
+Process ID: 7184
+PSVersion: 7.6.5
+PSEdition: Core
+GitCommitId: 7.6.5
+OS: Microsoft Windows 10.0.26200
+Platform: Win32NT
+PSCompatibleVersions: 1.0, 2.0, 3.0, 4.0, 5.0, 5.1, 6.0, 7.0
+PSRemotingProtocolVersion: 2.4
+SerializationVersion: 1.1.0.1
+WSManStackVersion: 3.0
+**********************
+Transcript started, output file is C:\Users\mzj\Desktop\CTF\玄机刷题\记录\代理-PaluArray-独立复核终端记录.txt
+from __future__ import annotations
+
+import hashlib
+import struct
+import zipfile
+from pathlib import Path
+
+ROOT = Path(__file__).resolve().parents[1]
+ARCHIVE = ROOT / "originals" / "PaluArray_flag.zip"
+EXTRACTED = ROOT / "extracted" / "PaluArray_flag.exe"
+PACKED = ROOT / "PaluArray_flag.exe"
+PATCHED = ROOT / "PaluArray_flag_upx_names.exe"
+UNPACKED = ROOT / "analysis" / "PaluArray_flag_unpacked_repro.exe"
+KNOWN_UNPACKED = ROOT / "PaluArray_flag_unpacked.exe"
+
+
+def sha256(data: bytes) -> str:
+    return hashlib.sha256(data).hexdigest().upper()
+
+
+def parse_pe(data: bytes):
+    if data[:2] != b"MZ":
+        raise ValueError("missing DOS MZ signature")
+    pe_offset = struct.unpack_from("<I", data, 0x3C)[0]
+    if data[pe_offset:pe_offset + 4] != b"PE\0\0":
+        raise ValueError("missing PE signature")
+    section_count = struct.unpack_from("<H", data, pe_offset + 6)[0]
+    optional_size = struct.unpack_from("<H", data, pe_offset + 20)[0]
+    optional = pe_offset + 24
+    magic = struct.unpack_from("<H", data, optional)[0]
+    if magic != 0x20B:
+        raise ValueError(f"expected PE32+, got optional-header magic {magic:#x}")
+    entry_rva = struct.unpack_from("<I", data, optional + 16)[0]
+    image_base = struct.unpack_from("<Q", data, optional + 24)[0]
+    section_table = optional + optional_size
+    sections = []
+    for i in range(section_count):
+        off = section_table + i * 40
+        name = data[off:off + 8].split(b"\0", 1)[0].decode("ascii", "strict")
+        virtual_size, rva, raw_size, raw_ptr = struct.unpack_from("<IIII", data, off + 8)
+        sections.append((name, virtual_size, rva, raw_size, raw_ptr))
+    return entry_rva, image_base, sections
+
+
+def rva_to_offset(rva: int, sections) -> int:
+    for name, _virtual_size, section_rva, raw_size, raw_ptr in sections:
+        if section_rva <= rva < section_rva + raw_size:
+            return raw_ptr + rva - section_rva
+    raise ValueError(f"RVA {rva:#x} is not backed by section raw data")
+
+
+def read_utf16z(data: bytes, rva: int, sections) -> str:
+    off = rva_to_offset(rva, sections)
+    end = off
+    while end + 1 < len(data):
+        if data[end:end + 2] == b"\0\0":
+            return data[off:end].decode("utf-16le", "strict")
+        end += 2
+    raise ValueError(f"unterminated UTF-16 string at RVA {rva:#x}")
+
+
+def main() -> None:
+    with zipfile.ZipFile(ARCHIVE) as zf:
+        names = zf.namelist()
+        if names != ["PaluArray_flag.exe"]:
+            raise ValueError(f"unexpected archive members: {names!r}")
+        archive_bytes = zf.read(names[0])
+    extracted_bytes = EXTRACTED.read_bytes()
+    packed_bytes = PACKED.read_bytes()
+    patched_bytes = PATCHED.read_bytes()
+    unpacked_bytes = UNPACKED.read_bytes()
+    known_unpacked_bytes = KNOWN_UNPACKED.read_bytes()
+
+    if archive_bytes != extracted_bytes or extracted_bytes != packed_bytes:
+        raise ValueError("ZIP member, extracted file, and project input differ")
+    expected_patched = bytearray(packed_bytes)
+    for offset, before, after in (
+        (0x208, b"PALU", b"UPX0"),
+        (0x230, b"PALU", b"UPX1"),
+        (0x3E0, b"PALU", b"UPX!"),
+    ):
+        if bytes(expected_patched[offset:offset + 4]) != before:
+            raise ValueError(f"unexpected original bytes at file offset {offset:#x}")
+        expected_patched[offset:offset + 4] = after
+    if bytes(expected_patched) != patched_bytes:
+        raise ValueError("patched file differs from the three documented UPX marker edits")
+    if unpacked_bytes != known_unpacked_bytes:
+        raise ValueError("reproduced UPX unpacking differs from saved unpacked copy")
+
+    entry_rva, image_base, sections = parse_pe(unpacked_bytes)
+    # Static initialization at RVA 0x1040 passes this pointer to the table.
+    # RVA 0x5e66 is the final ASCII 'g' in "string too long\\0"; reading
+    # UTF-16LE there would incorrectly prepend that byte to the real alphabet.
+    alphabet_rva = 0x5E68
+    alphabet = read_utf16z(unpacked_bytes, alphabet_rva, sections)
+    target = read_utf16z(unpacked_bytes, 0x5EA0, sections)
+    prefix = read_utf16z(unpacked_bytes, 0x5E90, sections)
+    suffix = read_utf16z(unpacked_bytes, 0x5E8C, sections)
+    dialog_title = read_utf16z(unpacked_bytes, 0x5E80, sections)
+    assert alphabet == "Palu_996!?"
+    assert target == "1145141919810"
+    assert prefix == "palu{"
+    assert suffix == "}"
+    assert dialog_title == "flag"
+
+    candidate_chars = []
+    mapping = []
+    for position, digit in enumerate(target):
+        index = int(digit)
+        if not 0 <= index < len(alphabet):
+            raise ValueError(f"target digit {digit!r} outside alphabet at position {position}")
+        char = alphabet[index]
+        actual_index = alphabet.find(char)
+        if actual_index != index:
+            raise ValueError(
+                f"index {index} is not reachable under first-match find(); "
+                f"{char!r} first occurs at {actual_index}"
+            )
+        candidate_chars.append(char)
+        mapping.append((position, digit, index, char, actual_index))
+
+    candidate = "".join(candidate_chars)
+    forward = "".join(str(alphabet.find(ch)) for ch in candidate)
+    if forward != target:
+        raise ValueError(f"forward transform mismatch: {forward!r} != {target!r}")
+    candidate_bytes = candidate.encode("ascii", "strict")
+    digest = hashlib.md5(candidate_bytes).hexdigest()
+    flag = f"{prefix}{digest}{suffix}"
+
+    print("mode=static-analysis-only; challenge EXE was not executed")
+    print(f"archive_member={names[0]} size={len(archive_bytes)}")
+    print(f"archive_extracted_bytes_match={archive_bytes == extracted_bytes}")
+    print(f"original_sha256={sha256(packed_bytes)}")
+    print(f"patched_sha256={sha256(patched_bytes)}")
+    print(f"unpacked_reproduction_matches_saved={unpacked_bytes == known_unpacked_bytes}")
+    print(f"unpacked_sha256={sha256(unpacked_bytes)} size={len(unpacked_bytes)}")
+    print(f"pe_entry_rva={entry_rva:#x} image_base={image_base:#x}")
+    print(f"sections={[(name, hex(rva), hex(raw_size), hex(raw_ptr)) for name, _, rva, raw_size, raw_ptr in sections]}")
+    print(f"alphabet_rva={alphabet_rva:#x} alphabet={alphabet!r} length={len(alphabet)}")
+    print(f"alphabet_positions={list(enumerate(alphabet))}")
+    print(f"target_rva=0x5ea0 target={target!r} length={len(target)}")
+    print(f"flag_prefix={prefix!r} flag_suffix={suffix!r} dialog_title={dialog_title!r}")
+    print("mapping_position,target_digit,index,alphabet_char,first_find_index")
+    for row in mapping:
+        print(",".join((str(row[0]), row[1], str(row[2]), repr(row[3]), str(row[4]))))
+    print(f"candidate_input={candidate!r}")
+    print(f"candidate_input_ascii_hex={candidate_bytes.hex()}")
+    print(f"forward_find_transform={forward}")
+    print(f"forward_equals_target={forward == target}")
+    print(f"md5_ascii_candidate={digest}")
+    print(f"candidate_flag={flag}")
+
+
+if __name__ == "__main__":
+    main()
+
+from pathlib import Path
+import hashlib,struct,zipfile
+from capstone import Cs,CS_ARCH_X86,CS_MODE_64,CS_OP_MEM
+from capstone.x86_const import X86_REG_RIP
+root=Path(__file__).resolve().parents[1]; z=zipfile.ZipFile(root/'originals'/'PaluArray_flag.zip'); orig=(root/'extracted'/'PaluArray_flag.exe').read_bytes(); unpack=(root/'analysis'/'PaluArray_flag_unpacked_repro.exe').read_bytes()
+pe=struct.unpack_from('<I',unpack,0x3c)[0]; opt=pe+24; image=struct.unpack_from('<Q',unpack,opt+24)[0]; sh=opt+struct.unpack_from('<H',unpack,pe+20)[0]; sections=[]
+for i in range(struct.unpack_from('<H',unpack,pe+6)[0]):
+ s=sh+40*i; name=unpack[s:s+8].split(b'\0')[0].decode();vs,va,rs,rp=struct.unpack_from('<IIII',unpack,s+8);sections.append((name,va,rs,rp,vs))
+def rvaoff(r):
+ for name,va,rs,rp,vs in sections:
+  if va<=r<va+rs:return rp+r-va
+ raise ValueError(hex(r))
+def zstr(r,encoding='utf-16le'):
+ o=rvaoff(r);end=o
+ if encoding=='utf-16le':
+  while unpack[end:end+2]!=b'\0\0':end+=2
+ else:
+  while unpack[end:end+1]!=b'\0':end+=1
+ return unpack[o:end].decode(encoding)
+print('original_zip_member_bytes_match_extracted=',z.read('PaluArray_flag.exe')==orig)
+print('original_exe_sha256=',hashlib.sha256(orig).hexdigest().upper())
+print('unpacked_exe_sha256=',hashlib.sha256(unpack).hexdigest().upper())
+print('rva_5e50_to_5e90_hex=',unpack[rvaoff(0x5e50):rvaoff(0x5e90)].hex())
+print('ascii_error_at_5e58=',zstr(0x5e58,'ascii'))
+print('utf16_if_misread_from_5e66=',zstr(0x5e66))
+alphabet=zstr(0x5e68); target=zstr(0x5ea0); prefix=zstr(0x5e90); suffix=zstr(0x5e8c); title=zstr(0x5e80)
+print('global_init_code_rva_0x1040_table_arg_rva=0x5e68')
+print('actual_initializer_source_table=',repr(alphabet),'length=',len(alphabet),'ordinals=',list(enumerate(alphabet)))
+print('target=',target,'len=',len(target))
+print('prefix=',prefix,'suffix=',suffix,'dialog_title=',title)
+candidate=''.join(alphabet[int(c)] for c in target)
+forward=''.join(str(alphabet.find(c)) for c in candidate)
+print('candidate=',candidate)
+print('candidate_hex=',candidate.encode('ascii').hex())
+print('per_char=',[(i,int(d),candidate[i],alphabet.find(candidate[i])) for i,d in enumerate(target)])
+print('forward=',forward,'match=',forward==target)
+digest=hashlib.md5(candidate.encode('ascii')).hexdigest();flag=prefix+digest+suffix
+print('md5_ascii=',digest)
+print('program_wrapper_value=',flag)
+old='PPu_PuP!P!6Pg'; print('prior_candidate=',old,'its_forward_under_actual_table=',''.join(str(alphabet.find(c)) for c in old))
+print('prior_candidate_contains_absent_g=', 'g' in old, 'g_find=',alphabet.find('g'))
+assert alphabet=='Palu_996!?' and target=='1145141919810'
+assert forward==target and hashlib.md5(candidate.encode('ascii')).hexdigest()==digest
+assert alphabet.find('9')==5 and alphabet[6]=='9'
+assert 'g' not in alphabet and alphabet.find('g')==-1
+# Literal xrefs in the unpacked code: constructor arg to alphabet global and MD5 wrapper.
+md=Cs(CS_ARCH_X86,CS_MODE_64);md.detail=True;text=next(x for x in sections if x[0]=='.text'); name,va,rs,rp,_=text
+want={0x140000000+0x5e68:'alphabet initializer source',0x140000000+0x5ea0:'index target',0x140000000+0x5e8c:'suffix',0x140000000+0x5e90:'prefix',0x140000000+0x5e80:'dialog title'}
+print('code_xrefs:')
+for ins in md.disasm(unpack[rp:rp+rs],image+va):
+ for op in ins.operands:
+  if op.type==CS_OP_MEM and op.mem.base==X86_REG_RIP:
+   dest=ins.address+ins.size+op.mem.disp
+   if dest in want:print(f'  ins_rva={ins.address-image:#x} -> data_rva={dest-image:#x} {want[dest]}: {ins.mnemonic} {ins.op_str}')
+# PaluArray（玄机 ID 546）静态逆向 WP
+
+## 结论
+
+> **重要纠错：旧候选已被平台拒绝。** 旧候选 `palu{c5302025cc6eab4bb4c17c67fe39e44d}` 来自把 RVA `0x5e66` 处前一条 ASCII 错误消息的 UTF-16LE 读法误当字符表起点，因而多读入了一个 `g`。静态初始化代码实际将 RVA `0x5e68` 传给字符表对象；按真实字符表重新反解得到下面的新候选。**新候选尚未提交，玄机题目页面仍待验证。**
+
+从附件静态恢复出的输入字符串为：
+
+```text
+aa_9a_a?a?!aP
+```
+
+逐字节按程序实际使用的字符表 `Palu_996!?` 查找首个匹配索引后，得到题目内置目标串 `1145141919810`。程序在输入通过后，会对这段 ASCII 输入计算标准 MD5，并将 32 位小写十六进制摘要包装成 `palu{...}`。据此得到待验证候选 flag：
+
+```text
+palu{1b501325fc96d5a845cbdd2ba4f01cd7}
+```
+
+本 WP 更正了此前错误的字符表起点和摘要。正确候选仍只由静态分析推出，尚未向玄机平台提交或获得平台接受结果。
+
+## 附件与分析边界
+
+原压缩包为 `originals\PaluArray_flag.zip`，其中只有 `PaluArray_flag.exe`（89,088 字节）。解压后的文件与压缩包内文件逐字节相同，SHA-256 为：
+
+```text
+CD8E2BE79AAA454F295132B7ECE6AE30D0CC05FF24DA7541639F05F76D482A4D
+```
+
+附件是 PE32+ x64 文件，带有经改名的 UPX 标记。为静态拆包，先在副本的三个 4 字节位置恢复 UPX 标记，再使用项目里的 UPX 5.2.0 解包。原 ZIP 与原 EXE 均保留不动：
+
+| 阶段 | 文件 | SHA-256 |
+|---|---|---|
+| 原始附件 | `extracted\PaluArray_flag.exe` | `CD8E2BE79AAA454F295132B7ECE6AE30D0CC05FF24DA7541639F05F76D482A4D` |
+| 恢复标记的副本 | `PaluArray_flag_upx_names.exe` | `CDDE48AC7862A5753C11A52D5BAAF3CF677576DBC5108542F9094CB98E8282FA` |
+| UPX 解包副本 | `analysis\PaluArray_flag_unpacked_repro.exe` | `8B1263DE36EDA3E5E3F1183C2D08C520ECAE09649B1A04891F597033FDF842A5` |
+
+标记恢复仅改动副本：文件偏移 `0x208` 的 `PALU` → `UPX0`，`0x230` 的 `PALU` → `UPX1`，`0x3E0` 的 `PALU` → `UPX!`。重新解包所得副本与项目中已有的 `PaluArray_flag_unpacked.exe` 哈希完全相同。这一过程只让 UPX 工具读取并重建 PE 文件数据，没有启动、加载或执行附件程序。
+
+## 1. 确认程序内置常量
+
+拆包后按 PE 头解析节表。镜像基址为 `0x140000000`，入口 RVA 为 `0x37d0`；`.rdata` 节从 RVA `0x5000` 开始，对应文件偏移 `0x4200`。按 `file_offset = raw_ptr + (RVA - section_RVA)` 换算，关键 UTF-16LE 字符串位于：
+
+| RVA | 文件偏移 | 字符串 | 用途 |
+|---|---:|---|---|
+| `0x5e68` | `0x5068` | `Palu_996!?` | 字符索引表（初始化代码传入的起点） |
+| `0x5e80` | `0x5080` | `flag` | 成功时弹窗标题 |
+| `0x5e8c` | `0x508c` | `}` | flag 后缀 |
+| `0x5e90` | `0x5090` | `palu{` | flag 前缀 |
+| `0x5ea0` | `0x50a0` | `1145141919810` | 正确索引序列 |
+| `0x5ec0` | `0x50c0` | `Success` | 成功分支提示 |
+| `0x5ed0` | `0x50d0` | `Failed` | 失败分支提示 |
+
+另有界面字符串 `Input Flag:`。字符表和目标都存成 UTF-16LE；静态字符串扫描与反汇编交叉引用显示，验证逻辑会读取字符表和目标串。字符表前一个区域是 ASCII 错误消息 `string too long\0`：RVA `0x5e66` 是其末尾字节 `g`，RVA `0x5e67` 是 NUL。若从 `0x5e66` 按 UTF-16LE 解码，会把 `67 00` 错当成字符 `g`，再接上从 `0x5e68` 开始的真实表，从而误得 `gPalu_996!?`。静态初始化代码（RVA `0x1040`）计算并传入的表指针是 RVA `0x5e68`，验证器使用该初始化后的全局对象。因此表不包含 `g`。`analysis\string_xrefs.txt` 保存了相关交叉引用，`analysis\validator_disassembly.txt` 保存了验证函数反汇编；`analysis\independent_audit.md` 记录了这次独立复核。
+
+## 2. 还原字符索引校验
+
+验证函数在 RVA `0x1994`。其循环逐个读取输入字符，使用内置字符表查找当前字符的位置，并把找到的索引转为十进制文本追加到结果串；如果字符未找到（返回 `-1`），该分支不追加索引。循环结束后，主流程（RVA `0x1e4e` 附近）把生成的索引串与内置目标 `1145141919810` 比较，再选择 `Success` 或 `Failed` 分支。
+
+程序实际传入字符表对象的 UTF-16LE 数据从 RVA `0x5e68` 开始。按下标展开如下：
+
+| 下标 | 字符 | 下标 | 字符 |
+|---:|:---:|---:|:---:|
+| 0 | `P` | 5 | `9` |
+| 1 | `a` | 6 | `9` |
+| 2 | `l` | 7 | `6` |
+| 3 | `u` | 8 | `!` |
+| 4 | `_` | 9 | `?` |
+
+这里有一个会影响反解的细节：`9` 在下标 5 和 6 重复出现，而代码用的是首个匹配语义的 `find`。因此输入字符 `9` 只会编码为 `5`；下标 6 对应的第二个 `9` 无法被单独表示。目标串中没有数字 `6`，所以仍可逐位反解。字符表之前的 `g` 不属于表；从 `0x5e66` 解码产生的旧字符表会使所有索引错位。
+
+把目标串每一位 `d` 反查为 `alphabet[d]`，并同时验证反向查找确实回到 `d`：
+
+| 位次（从 0 起） | 目标数字 | 字符表下标 | 输入字符 | `find` 首次返回 |
+|---:|---:|---:|:---:|---:|
+| 0 | 1 | 1 | `a` | 1 |
+| 1 | 1 | 1 | `a` | 1 |
+| 2 | 4 | 4 | `_` | 4 |
+| 3 | 5 | 5 | `9` | 5 |
+| 4 | 1 | 1 | `a` | 1 |
+| 5 | 4 | 4 | `_` | 4 |
+| 6 | 1 | 1 | `a` | 1 |
+| 7 | 9 | 9 | `?` | 9 |
+| 8 | 1 | 1 | `a` | 1 |
+| 9 | 9 | 9 | `?` | 9 |
+| 10 | 8 | 8 | `!` | 8 |
+| 11 | 1 | 1 | `a` | 1 |
+| 12 | 0 | 0 | `P` | 0 |
+
+拼接得到：
+
+```text
+目标索引串：1145141919810
+候选输入：  aa_9a_a?a?!aP
+```
+
+## 3. 正向校验候选输入
+
+对候选输入再次按字符表执行首个匹配查找：
+
+```text
+a  a  _  9  a  _  a  ?  a  ?  !  a  P
+1  1  4  5  1  4  1  9  1  9  8  1  0
+```
+
+连接索引得 `1145141919810`，与 `.rdata` 中逐字节解码出的目标文本相同。候选输入的 ASCII 十六进制字节为：
+
+```text
+61 61 5f 39 61 5f 61 3f 61 3f 21 61 50
+```
+
+这一步同时覆盖了重复字符陷阱：字符 `9` 的首次下标为 5；候选中的两个 `9` 都因此贡献索引 5。候选所有字符都满足 `alphabet.find(ch) == 对应目标下标`。
+
+## 4. 还原 MD5 与 flag 包装
+
+成功比较之后，代码调用 RVA `0x1a48` 的摘要路径。静态指令显示 MD5 的四个标准初始状态常量：`67452301`、`efcdab89`、`98badcfe`、`10325476`；随后对输入串的字节指针和长度进行更新、补位和最终压缩。十六进制输出使用字符表 `0123456789abcdef`。成功路径还引用 UTF-16LE 前缀 `palu{` 和后缀 `}`，并把完成的文本以 `flag` 为标题显示。因此应计算的是**候选输入原始 ASCII 字节**的 MD5，再包装成小写 `palu{...}`，无需把目标数字串拿去哈希，也不要把外层 `palu{}` 一起作为 MD5 输入。
+
+以标准库独立计算：
+
+```text
+MD5(ASCII("aa_9a_a?a?!aP")) = 1b501325fc96d5a845cbdd2ba4f01cd7
+结果格式 = palu{<32 位小写 MD5>}
+候选 flag = palu{1b501325fc96d5a845cbdd2ba4f01cd7}
+```
+
+旧候选 `palu{c5302025cc6eab4bb4c17c67fe39e44d}` 的 MD5 对应的是错误输入 `PPu_PuP!P!6Pg`，且该输入包含真实字符表中不存在的 `g`，无法通过程序的字符查找校验；平台也已拒绝该旧候选。当前新候选的 MD5 由主静态求解脚本根据 ASCII 输入计算，并将与独立复核结果比对。新候选尚未提交，平台验证状态仍待更新。命令和输出追加保存在 `analysis\commands_output.log`。
+
+
+`analysis\solve_paluarray_546_static.py` 会直接读取 ZIP、检查抽取文件与附件相同、核对三个 UPX 标记改动、解析 PE RVA、从初始化实际传入的 RVA `0x5e68` 提取字符表、提取目标、执行带重复字符首索引断言的逆算、正向重算目标串并计算 MD5。脚本只读文件字节，不调用或加载 EXE。每次运行的完整标准输出追加到 `analysis\commands_output.log`。
+
+## 5. 可复现命令
+
+在 PowerShell 中从题目目录执行以下命令。拆包器读取的是恢复标记后的副本，Python 脚本只解析数据：
+
+```powershell
+$Root = 'C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\PaluArray_546'
+$UPX = 'C:\Users\mzj\Desktop\CTF\玄机刷题\tools\upx-5.2.0\upx-5.2.0-win64\upx.exe'
+py -3.12 "$Root\patch_palu_markers.py"
+& $UPX -d "$Root\PaluArray_flag_upx_names.exe" -o "$Root\analysis\PaluArray_flag_unpacked_repro.exe"
+py -3.12 "$Root\analysis\solve_paluarray_546_static.py"
+```
+
+本轮 PowerShell 命令、错误、标准输出与哈希核对均追加记录在 `analysis\commands_output.log`。此前的阶段分析记录也保存在项目 `记录\代理-PaluArray-终端记录.txt` 和 `记录\代理-PaluArray-MD5复核终端记录.txt` 中。
+
+## 6. 题目文件索引与验证边界
+
+- 附件原件：`originals\PaluArray_flag.zip`
+- 解压原件：`extracted\PaluArray_flag.exe`
+- 静态分析的解包副本：`analysis\PaluArray_flag_unpacked_repro.exe`
+- 可重复验证脚本：`analysis\solve_paluarray_546_static.py`
+- 逆算与摘要输出：`analysis\solve_static_output.txt`、`analysis\corrected_alphabet_output.txt`、`analysis\legacy_solver_output.txt`
+- 标记恢复记录：`analysis\patch_upx_markers_output.txt`
+- 字符串引用和反汇编：`analysis\string_xrefs.txt`、`analysis\validator_disassembly.txt`、`analysis\transform_helper_disassembly.txt`、`analysis\success_pipeline_disassembly.txt`、`analysis\md5_flow_disassembly.txt`
+- PowerShell 命令/输出记录：`analysis\commands_output.log`
+
+结论是从 PE 静态初始化参数、验证逻辑、正向索引重算和 MD5 计算互相印证出来的。附件程序没有被执行；更正后的候选尚未提交，题目页面仍待平台验证。因此本 WP 给出的是结构和算法均可复现的候选解，平台是否接受仍未知。
+
+
+
+**********************
+PowerShell transcript end
+End time: 20260929100631
+**********************
+**********************
+PowerShell transcript start
+Start time: 20260929100701
+Username: DESKTOP-412KTAR\mzj
+RunAs User: DESKTOP-412KTAR\mzj
+Configuration Name: 
+Machine: DESKTOP-412KTAR (Microsoft Windows NT 10.0.26200.0)
+Host Application: C:\Users\mzj\.cache\codex-runtimes\codex-primary-runtime\dependencies\native\powershell\pwsh.dll -Command try { [Console]::OutputEncoding=[System.Text.Encoding]::UTF8 } catch {}
+$base='C:\Users\mzj\Desktop\CTF\玄机刷题'; $log=Join-Path $base '记录\代理-PaluArray-独立复核终端记录.txt'; Start-Transcript -LiteralPath $log -Append; Get-ChildItem -LiteralPath (Join-Path $base '题目资料\PaluArray_546\analysis') -File | Select-Object Name,Length; Get-Content -LiteralPath (Join-Path $base '题目资料\PaluArray_546\analysis\string_xrefs.txt' -TotalCount 120); Get-Content -LiteralPath (Join-Path $base '题目资料\PaluArray_546\analysis\md5_flow_disassembly.txt' -TotalCount 120); Get-Content -LiteralPath (Join-Path $base '记录\提交核验_20260929_第六批.md' -ErrorAction SilentlyContinue); Stop-Transcript
+Process ID: 10524
+PSVersion: 7.6.5
+PSEdition: Core
+GitCommitId: 7.6.5
+OS: Microsoft Windows 10.0.26200
+Platform: Win32NT
+PSCompatibleVersions: 1.0, 2.0, 3.0, 4.0, 5.0, 5.1, 6.0, 7.0
+PSRemotingProtocolVersion: 2.4
+SerializationVersion: 1.1.0.1
+WSManStackVersion: 3.0
+**********************
+Transcript started, output file is C:\Users\mzj\Desktop\CTF\玄机刷题\记录\代理-PaluArray-独立复核终端记录.txt
+
+Get-Content: 
+Line |
+   2 |  … ame,Length; Get-Content -LiteralPath (Join-Path $base '题目资料\PaluArray …
+     |                ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+     | Cannot find path 'C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\PaluArray_546\analysis\string_xrefs.txt\-TotalCount\120' because it does not exist.
+Get-Content: 
+Line |
+   2 |  … Count 120); Get-Content -LiteralPath (Join-Path $base '题目资料\PaluArray …
+     |                ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+     | Cannot find path 'C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\PaluArray_546\analysis\md5_flow_disassembly.txt\-TotalCount\120' because it does not exist.
+**********************
+PowerShell transcript end
+End time: 20260929100701
+**********************
+**********************
+PowerShell transcript start
+Start time: 20260929102011
+Username: DESKTOP-412KTAR\mzj
+RunAs User: DESKTOP-412KTAR\mzj
+Configuration Name: 
+Machine: DESKTOP-412KTAR (Microsoft Windows NT 10.0.26200.0)
+Host Application: C:\Users\mzj\.cache\codex-runtimes\codex-primary-runtime\dependencies\native\powershell\pwsh.dll -Command try { [Console]::OutputEncoding=[System.Text.Encoding]::UTF8 } catch {}
+$base='C:\Users\mzj\Desktop\CTF\玄机刷题'; $log=Join-Path $base '记录\代理-PaluArray-独立复核终端记录.txt'; Start-Transcript -LiteralPath $log -Append; Get-Content -LiteralPath (Join-Path $base '题目资料\PaluArray_546\analysis\independent_audit.md') -TotalCount 180; Get-Content -LiteralPath (Join-Path $base '题目资料\PaluArray_546\analysis\success_pipeline_disassembly.txt') -TotalCount 150; Stop-Transcript
+Process ID: 17244
+PSVersion: 7.6.5
+PSEdition: Core
+GitCommitId: 7.6.5
+OS: Microsoft Windows 10.0.26200
+Platform: Win32NT
+PSCompatibleVersions: 1.0, 2.0, 3.0, 4.0, 5.0, 5.1, 6.0, 7.0
+PSRemotingProtocolVersion: 2.4
+SerializationVersion: 1.1.0.1
+WSManStackVersion: 3.0
+**********************
+Transcript started, output file is C:\Users\mzj\Desktop\CTF\玄机刷题\记录\代理-PaluArray-独立复核终端记录.txt
+# PaluArray（玄机 ID 546）独立静态审计
+
+## 审计结论
+
+独立审计发现，现有 `wp.md`、`solve_paluarray.py` 和 `solve_paluarray_546_static.py` 使用的字符表起点错了：它们把 RVA `0x5e66` 解作 UTF-16 字符串 `gPalu_996!?`，但该位置的 `g\0` 实际是前一条 ASCII 错误消息 `string too long\0` 的结尾。程序的静态初始化代码把 RVA `0x5e68` 传给字符表全局对象；验证器随后查询该全局对象。因此程序实际使用的表是 **`Palu_996!?`**，没有 `g`。
+
+按真实字符表还原并正向重算后：
+
+```text
+candidate input: aa_9a_a?a?!aP
+MD5 (ASCII):     1b501325fc96d5a845cbdd2ba4f01cd7
+constructed flag: palu{1b501325fc96d5a845cbdd2ba4f01cd7}
+```
+
+旧候选 `PPu_PuP!P!6Pg` 不满足程序的实际索引校验：`g` 不在真实表中，`find('g')` 返回 `-1`；其正向编码结果是 `003403080870-1`，与目标串不符。旧报告中的 MD5 `c530...` 是对错误输入求出的摘要，不能作为本题候选 flag。
+
+没有运行、加载或调用任何挑战 EXE，没有联网查 Writeup，也没有提交平台。以下是对附件、已有的静态解包副本和代码字节的独立只读审计。
+
+## 1. 绑定原附件与分析文件
+
+- 原 ZIP 内只有 `PaluArray_flag.exe`，大小 89,088 字节。
+- ZIP 内文件与 `extracted/PaluArray_flag.exe` 字节完全相同。
+- 原 EXE SHA-256：`CD8E2BE79AAA454F295132B7ECE6AE30D0CC05FF24DA7541639F05F76D482A4D`。
+- 静态解包副本 `analysis/PaluArray_flag_unpacked_repro.exe` SHA-256：`8B1263DE36EDA3E5E3F1183C2D08C520ECAE09649B1A04891F597033FDF842A5`。
+- 已有标记恢复副本与原件相比，仅在 `0x208`、`0x230`、`0x3E0` 三处各改变 4 字节：`PALU` → `UPX0`、`UPX1`、`UPX!`。原文件未被改写。
+
+独立解析解包副本 PE 节表后确认：ImageBase `0x140000000`，`.rdata` RVA `0x5000` 对应 raw offset `0x4200`，故本报告使用的 RVA→文件偏移关系为：
+
+```text
+file_offset = 0x4200 + (RVA - 0x5000)
+```
+
+本节、下述 RVA 和反汇编都可由 `analysis/independent_audit_546.py` 与 `analysis/independent_audit_output.txt` 复核。
+
+## 2. 重新判定字符表起点
+
+关键原始字节：
+
+```text
+RVA 0x5e58 起的 ASCII：string too long\0
+RVA 0x5e66..0x5e67：     67 00      # 上述 ASCII 文本最后的 'g' 与 NUL
+RVA 0x5e68 起的 UTF-16LE：50 00 61 00 6c 00 75 00 5f 00 39 00 39 00 36 00 21 00 3f 00 00 00
+                            P     a     l     u     _     9     9     6     !     ?
+```
+
+如果从 `0x5e66` 强行按 UTF-16LE 解码，前两个字节 `67 00` 会看起来像字符 `g`，后面再接上 `0x5e68` 的真表，于是得到误导性的 `gPalu_996!?`。但这两个字节本属于 ASCII 字符串 `string too long\0`，不能作为另一个宽字符串首字符。
+
+代码交叉引用进一步确定了实际起点：
+
+- RVA `0x1040`：`lea rdx, [rip + 0x4e21]`；下一指令地址是 `0x1047`，故 `RDX = 0x5e68`。
+- RVA `0x1047`：`lea rcx, [rip + 0x8afa]`；下一指令地址是 `0x104e`，故 `RCX = 0x9b48`，即字符表全局对象。
+- RVA `0x104e` 调用 IAT RVA `0x5428`（静态导入解析为 `mfc140u.dll!ordinal_286`），把 `0x5e68` 的字符串交给 `0x9b48` 对象初始化。
+- 验证函数 RVA `0x1994` 的循环在 RVA `0x19ee` 再次把 `0x9b48` 放入 `RCX`，对当前字符执行查找。
+
+所以这里真正用于查找的字符表是从 `0x5e68` 开始的 UTF-16 字符串：
+
+```text
+Palu_996!?
+```
+
+字符到索引如下；重复字符 `9` 的首次匹配索引为 5：
+
+| 索引 | 字符 | 索引 | 字符 |
+|---:|:---:|---:|:---:|
+| 0 | `P` | 5 | `9` |
+| 1 | `a` | 6 | `9` |
+| 2 | `l` | 7 | `6` |
+| 3 | `u` | 8 | `!` |
+| 4 | `_` | 9 | `?` |
+
+## 3. 目标串与验证循环
+
+目标串位于 RVA `0x5ea0`，按 UTF-16LE 解码为 `1145141919810`，长度 13。验证函数的静态指令流如下：
+
+1. 用 `EBX` 作为当前输入字符索引，循环读取原输入中的宽字符。
+2. `movzx edx, ax` 取得当前字符；`xor r8d, r8d` 将查找起始位置设为 0；`RCX` 指向 RVA `0x9b48` 的字符表全局对象。
+3. RVA `0x19f5` 调用 MFC 字符串查找函数（静态 IAT 名称为 `mfc140u.dll!ordinal_4510`），返回首次匹配位置。
+4. 如果返回值为 `-1`，分支跳过索引追加；否则把索引交给输出串构造逻辑。
+5. 主校验流程在 RVA `0x1e54` 直接引用目标串 RVA `0x5ea0`，比较构造结果；相等进入 `Success` 分支，不等进入 `Failed` 分支。
+
+按实际表反查目标各位，得到：
+
+| 位次 | 目标数字 | 表索引 | 输入字符 | `find` 首次结果 |
+|---:|---:|---:|:---:|---:|
+| 0 | 1 | 1 | `a` | 1 |
+| 1 | 1 | 1 | `a` | 1 |
+| 2 | 4 | 4 | `_` | 4 |
+| 3 | 5 | 5 | `9` | 5 |
+| 4 | 1 | 1 | `a` | 1 |
+| 5 | 4 | 4 | `_` | 4 |
+| 6 | 1 | 1 | `a` | 1 |
+| 7 | 9 | 9 | `?` | 9 |
+| 8 | 1 | 1 | `a` | 1 |
+| 9 | 9 | 9 | `?` | 9 |
+| 10 | 8 | 8 | `!` | 8 |
+| 11 | 1 | 1 | `a` | 1 |
+| 12 | 0 | 0 | `P` | 0 |
+
+拼接得到唯一的直接反查输入：
+
+```text
+aa_9a_a?a?!aP
+```
+
+独立脚本逐字符重新执行首个匹配查找，编码结果是 `1145141919810`，与二进制常量完全相同。候选中没有表外字符，重复字符 `9` 也正好使用首次索引 5。
+
+### 对旧候选的反证
+
+旧候选 `PPu_PuP!P!6Pg` 是从错误的 `gPalu_996!?` 表反查出的。用程序实际表 `Palu_996!?` 正向编码时：
+
+```text
+P P u _ P u P ! P ! 6 P g
+0 0 3 4 0 3 0 8 0 8 7 0 -1
+```
+
+末尾 `g` 的查找失败，且前面的索引也与目标不符。因此旧候选不会通过这段输入校验。
+
+## 4. 独立核对 MD5 与实际包装
+
+主流程在验证索引串相等后，取**原输入文本**进入后续成功路径；它没有把索引目标串送入摘要函数。RVA `0x1f6c` 调用 `WideCharToMultiByte`，传入 CodePage `3`（`CP_THREAD_ACP`）；对于此候选所含的 ASCII 字符，窄字节值与 ASCII 编码相同。随后 RVA `0x1ec5` 调用摘要函数 RVA `0x1a48`。
+
+从解包 EXE 重新反汇编摘要路径可见：
+
+- RVA `0x1a48` 初始化 MD5 状态为标准四个初值：`0x67452301`、`0xefcdab89`、`0x98badcfe`、`0x10325476`；随后传入输入数据长度/字节并进入块更新与填充路径。
+- 该函数调用 RVA `0x2d70` 生成摘要文本。
+- RVA `0x2eca` 引用小写十六进制表 `0123456789abcdef`；后续循环迭代 16 个摘要字节，分别取高、低 4 位，因此写出 32 个小写十六进制字符。
+
+用 Python 标准库独立计算：
+
+```text
+MD5(ASCII("aa_9a_a?a?!aP")) = 1b501325fc96d5a845cbdd2ba4f01cd7
+```
+
+程序包装字符串也经代码引用确认，不是从 flag 前缀猜测：
+
+- 后缀 `}` 在 RVA `0x5e8c`；摘要/包装函数 RVA `0x1b24` 直接引用它。
+- 前缀 `palu{` 在 RVA `0x5e90`；同一函数 RVA `0x1b6d` 与 `0x1b84` 引用它并将其与摘要字符串合并。
+- 拼接辅助函数 RVA `0x14d8` 的参数是两个字符串对象；其指令先取两串长度、分配合并长度并依次复制。调用点 RVA `0x1c2e` 把已形成的 `palu{` + 摘要串作为第一部分、`}` 作为第二部分传入。
+- 最终字符串经 `MessageBoxW` 显示，窗口标题取自 RVA `0x5e80` 的 `flag`。
+
+因此程序构造的内容为 `palu{<MD5(input)>}`，候选 flag 是：
+
+```text
+palu{1b501325fc96d5a845cbdd2ba4f01cd7}
+```
+
+## 5. 可复核材料
+
+- `analysis/independent_audit_546.py`：独立 ZIP/PE 静态提取、RVA 映射、实际字符表反查、正向验证和 MD5 计算。
+- `analysis/independent_audit_output.txt`：上述脚本的完整输出。
+- `analysis/independent_global_xrefs.py`、`analysis/independent_global_xrefs_output.txt`：字符表全局对象和初始化/验证代码的静态交叉引用。
+- `analysis/independent_wrapper_disasm.py`、`analysis/independent_wrapper_disasm_output.txt`：前缀、摘要、后缀字符串拼接路径的静态反汇编。
+- `analysis/independent_audit_commands_output.log`：所有独立审计 PowerShell 命令、输出及被修正的脚本错误记录。
+
+审计中有一次脚本尝试从 `0x5e66` 解 UTF-16，随后发现该处与 ASCII 错误字符串重叠；最终结论改用代码初始化参数 `0x5e68` 与验证器使用的同一个全局对象 `0x9b48` 交叉确认。该失败尝试及修正均如实保存在独立命令日志中。
+
+## 状态
+
+静态审计确认的候选输入为 `aa_9a_a?a?!aP`，由程序静态构造的 flag 为 `palu{1b501325fc96d5a845cbdd2ba4f01cd7}`。没有运行附件或平台验证；这只是从静态代码路径及独立摘要计算得出的本地候选。
+0x140001f6c: mov      rax, rsp
+0x140001f6f: mov      qword ptr [rax + 8], rbx
+0x140001f73: mov      qword ptr [rax + 0x10], rbp
+0x140001f77: mov      qword ptr [rax + 0x18], rsi
+0x140001f7b: mov      qword ptr [rax + 0x20], rdi
+0x140001f7f: push     r14
+0x140001f81: sub      rsp, 0x40
+0x140001f85: lea      rsi, [rcx + 8]
+0x140001f89: mov      rbp, rdx
+0x140001f8c: mov      qword ptr [rcx], rsi
+0x140001f8f: mov      rdi, rcx
+0x140001f92: test     rdx, rdx
+0x140001f95: jne      0x140001fb8
+0x140001f97: mov      qword ptr [rcx], rdx
+0x140001f9a: mov      rbx, qword ptr [rsp + 0x50]
+0x140001f9f: mov      rax, rdi
+0x140001fa2: mov      rdi, qword ptr [rsp + 0x68]
+0x140001fa7: mov      rbp, qword ptr [rsp + 0x58]
+0x140001fac: mov      rsi, qword ptr [rsp + 0x60]
+0x140001fb1: add      rsp, 0x40
+0x140001fb5: pop      r14
+0x140001fb7: ret
+0x140001fb8: mov      rcx, rbp
+0x140001fbb: call     qword ptr [rip + 0x3307]
+0x140001fc1: mov      r8, rsi
+0x140001fc4: mov      rcx, rdi
+0x140001fc7: lea      r14d, [rax + 1]
+0x140001fcb: lea      ebx, [r14*4]
+0x140001fd3: mov      edx, ebx
+0x140001fd5: call     0x140002368
+0x140001fda: mov      rcx, qword ptr [rdi]
+0x140001fdd: xor      edx, edx
+0x140001fdf: mov      qword ptr [rsp + 0x38], 0
+0x140001fe8: mov      r9d, r14d
+0x140001feb: mov      qword ptr [rsp + 0x30], 0
+0x140001ff4: mov      r8, rbp
+0x140001ff7: mov      dword ptr [rsp + 0x28], ebx
+0x140001ffb: mov      qword ptr [rsp + 0x20], rcx
+0x140002000: lea      ecx, [rdx + 3]
+0x140002003: call     qword ptr [rip + 0x30b7]
+0x140002009: xor      ebx, ebx
+0x14000200b: test     eax, eax
+0x14000200d: sete     bl
+0x140002010: test     eax, eax
+0x140002012: jne      0x14000209c
+0x140002018: call     qword ptr [rip + 0x3012]
+0x14000201e: cmp      eax, 0x7a
+0x140002021: jne      0x14000209c
+0x140002023: mov      qword ptr [rsp + 0x38], 0
+0x14000202c: lea      ecx, [rax - 0x77]
+0x14000202f: mov      qword ptr [rsp + 0x30], 0
+0x140002038: mov      r9d, r14d
+0x14000203b: mov      dword ptr [rsp + 0x28], 0
+0x140002043: mov      r8, rbp
+0x140002046: xor      edx, edx
+0x140002048: mov      qword ptr [rsp + 0x20], 0
+0x140002051: call     qword ptr [rip + 0x3069]
+0x140002057: mov      r8, rsi
+0x14000205a: mov      rcx, rdi
+0x14000205d: mov      edx, eax
+0x14000205f: mov      ebx, eax
+0x140002061: call     0x140002368
+0x140002066: mov      rax, qword ptr [rdi]
+0x140002069: xor      edx, edx
+0x14000206b: mov      qword ptr [rsp + 0x38], 0
+0x140002074: mov      r9d, r14d
+0x140002077: mov      qword ptr [rsp + 0x30], 0
+0x140002080: mov      r8, rbp
+0x140002083: mov      dword ptr [rsp + 0x28], ebx
+0x140002087: lea      ecx, [rdx + 3]
+0x14000208a: mov      qword ptr [rsp + 0x20], rax
+0x14000208f: call     qword ptr [rip + 0x302b]
+0x140002095: xor      ebx, ebx
+0x140002097: test     eax, eax
+0x140002099: sete     bl
+0x14000209c: test     ebx, ebx
+0x14000209e: je       0x140001f9a
+0x1400020a4: mov      rcx, qword ptr [rdi]
+0x1400020a7: mov      rdx, rsi
+0x1400020aa: call     0x140002354
+0x1400020af: call     0x14000141c
+0x1400020b4: int3
+0x1400020b5: int3
+0x1400020b6: int3
+0x1400020b7: int3
+0x1400020b8: push     rbx
+0x1400020ba: sub      rsp, 0x20
+0x1400020be: mov      rdx, qword ptr [rcx + 0x18]
+0x1400020c2: mov      rbx, rcx
+0x1400020c5: cmp      rdx, 0xf
+0x1400020c9: jbe      0x1400020f7
+0x1400020cb: mov      rcx, qword ptr [rcx]
+0x1400020ce: inc      rdx
+0x1400020d1: cmp      rdx, 0x1000
+0x1400020d8: jb       0x1400020f2
+0x1400020da: mov      r8, qword ptr [rcx - 8]
+0x1400020de: add      rdx, 0x27
+0x1400020e2: sub      rcx, r8
+0x1400020e5: lea      rax, [rcx - 8]
+0x1400020e9: cmp      rax, 0x1f
+0x1400020ed: ja       0x140002110
+0x1400020ef: mov      rcx, r8
+0x1400020f2: call     0x140003a60
+0x1400020f7: mov      qword ptr [rbx + 0x10], 0
+0x1400020ff: mov      qword ptr [rbx + 0x18], 0xf
+0x140002107: mov      byte ptr [rbx], 0
+0x14000210a: add      rsp, 0x20
+0x14000210e: pop      rbx
+0x14000210f: ret
+0x140002110: call     qword ptr [rip + 0x3182]
+0x140002116: int3
+0x140002117: int3
+0x140002118: mov      qword ptr [rsp + 0x18], rbx
+0x14000211d: mov      qword ptr [rsp + 0x20], rbp
+0x140002122: push     rsi
+0x140002123: push     rdi
+0x140002124: push     r14
+0x140002126: sub      rsp, 0x20
+0x14000212a: xorps    xmm0, xmm0
+0x14000212d: mov      rbx, rcx
+0x140002130: movups   xmmword ptr [rcx], xmm0
+0x140002133: mov      qword ptr [rcx + 0x10], 0
+0x14000213b: mov      r14, rdx
+0x14000213e: mov      qword ptr [rcx + 0x18], 0
+0x140002146: mov      rcx, rdx
+0x140002149: call     qword ptr [rip + 0x3171]
+0x14000214f: movabs   rbp, 0x7fffffffffffffff
+0x140002159: mov      rsi, rax
+0x14000215c: cmp      rax, rbp
+0x14000215f: ja       0x140002236
+0x140002165: cmp      rax, 0xf
+0x140002169: ja       0x14000218f
+0x14000216b: mov      r8, rax
+0x14000216e: mov      qword ptr [rbx + 0x10], rax
+0x140002172: mov      rdx, r14
+0x140002175: mov      qword ptr [rbx + 0x18], 0xf
+0x14000217d: mov      rcx, rbx
+0x140002180: call     qword ptr [rip + 0x3002]
+0x140002186: mov      byte ptr [rbx + rsi], 0
+0x14000218a: jmp      0x140002220
+0x14000218f: or       rax, 0xf
+0x140002193: cmp      rax, rbp
+0x140002196: jbe      0x1400021c2
+0x140002198: movabs   rax, 0x8000000000000000
+0x1400021a2: add      rax, 0x27
+0x1400021a6: mov      rcx, rax
+0x1400021a9: call     qword ptr [rip + 0x3311]
+0x1400021af: test     rax, rax
+0x1400021b2: je       0x1400021f2
+0x1400021b4: lea      rdi, [rax + 0x27]
+**********************
+PowerShell transcript end
+End time: 20260929102012
+**********************
+**********************
+PowerShell transcript start
+Start time: 20260929102037
+Username: DESKTOP-412KTAR\mzj
+RunAs User: DESKTOP-412KTAR\mzj
+Configuration Name: 
+Machine: DESKTOP-412KTAR (Microsoft Windows NT 10.0.26200.0)
+Host Application: C:\Users\mzj\.cache\codex-runtimes\codex-primary-runtime\dependencies\native\powershell\pwsh.dll -Command try { [Console]::OutputEncoding=[System.Text.Encoding]::UTF8 } catch {}
+$base='C:\Users\mzj\Desktop\CTF\玄机刷题'; $log=Join-Path $base '记录\代理-PaluArray-独立复核终端记录.txt'; Start-Transcript -LiteralPath $log -Append; Get-Content -LiteralPath (Join-Path $base '题目资料\PaluArray_546\analysis\success_pipeline_disassembly.txt'); Get-Content -LiteralPath (Join-Path $base '题目资料\PaluArray_546\analysis\independent_wrapper_disasm_output.txt'); Stop-Transcript
+Process ID: 29944
+PSVersion: 7.6.5
+PSEdition: Core
+GitCommitId: 7.6.5
+OS: Microsoft Windows 10.0.26200
+Platform: Win32NT
+PSCompatibleVersions: 1.0, 2.0, 3.0, 4.0, 5.0, 5.1, 6.0, 7.0
+PSRemotingProtocolVersion: 2.4
+SerializationVersion: 1.1.0.1
+WSManStackVersion: 3.0
+**********************
+Transcript started, output file is C:\Users\mzj\Desktop\CTF\玄机刷题\记录\代理-PaluArray-独立复核终端记录.txt
+0x140001f6c: mov      rax, rsp
+0x140001f6f: mov      qword ptr [rax + 8], rbx
+0x140001f73: mov      qword ptr [rax + 0x10], rbp
+0x140001f77: mov      qword ptr [rax + 0x18], rsi
+0x140001f7b: mov      qword ptr [rax + 0x20], rdi
+0x140001f7f: push     r14
+0x140001f81: sub      rsp, 0x40
+0x140001f85: lea      rsi, [rcx + 8]
+0x140001f89: mov      rbp, rdx
+0x140001f8c: mov      qword ptr [rcx], rsi
+0x140001f8f: mov      rdi, rcx
+0x140001f92: test     rdx, rdx
+0x140001f95: jne      0x140001fb8
+0x140001f97: mov      qword ptr [rcx], rdx
+0x140001f9a: mov      rbx, qword ptr [rsp + 0x50]
+0x140001f9f: mov      rax, rdi
+0x140001fa2: mov      rdi, qword ptr [rsp + 0x68]
+0x140001fa7: mov      rbp, qword ptr [rsp + 0x58]
+0x140001fac: mov      rsi, qword ptr [rsp + 0x60]
+0x140001fb1: add      rsp, 0x40
+0x140001fb5: pop      r14
+0x140001fb7: ret
+0x140001fb8: mov      rcx, rbp
+0x140001fbb: call     qword ptr [rip + 0x3307]
+0x140001fc1: mov      r8, rsi
+0x140001fc4: mov      rcx, rdi
+0x140001fc7: lea      r14d, [rax + 1]
+0x140001fcb: lea      ebx, [r14*4]
+0x140001fd3: mov      edx, ebx
+0x140001fd5: call     0x140002368
+0x140001fda: mov      rcx, qword ptr [rdi]
+0x140001fdd: xor      edx, edx
+0x140001fdf: mov      qword ptr [rsp + 0x38], 0
+0x140001fe8: mov      r9d, r14d
+0x140001feb: mov      qword ptr [rsp + 0x30], 0
+0x140001ff4: mov      r8, rbp
+0x140001ff7: mov      dword ptr [rsp + 0x28], ebx
+0x140001ffb: mov      qword ptr [rsp + 0x20], rcx
+0x140002000: lea      ecx, [rdx + 3]
+0x140002003: call     qword ptr [rip + 0x30b7]
+0x140002009: xor      ebx, ebx
+0x14000200b: test     eax, eax
+0x14000200d: sete     bl
+0x140002010: test     eax, eax
+0x140002012: jne      0x14000209c
+0x140002018: call     qword ptr [rip + 0x3012]
+0x14000201e: cmp      eax, 0x7a
+0x140002021: jne      0x14000209c
+0x140002023: mov      qword ptr [rsp + 0x38], 0
+0x14000202c: lea      ecx, [rax - 0x77]
+0x14000202f: mov      qword ptr [rsp + 0x30], 0
+0x140002038: mov      r9d, r14d
+0x14000203b: mov      dword ptr [rsp + 0x28], 0
+0x140002043: mov      r8, rbp
+0x140002046: xor      edx, edx
+0x140002048: mov      qword ptr [rsp + 0x20], 0
+0x140002051: call     qword ptr [rip + 0x3069]
+0x140002057: mov      r8, rsi
+0x14000205a: mov      rcx, rdi
+0x14000205d: mov      edx, eax
+0x14000205f: mov      ebx, eax
+0x140002061: call     0x140002368
+0x140002066: mov      rax, qword ptr [rdi]
+0x140002069: xor      edx, edx
+0x14000206b: mov      qword ptr [rsp + 0x38], 0
+0x140002074: mov      r9d, r14d
+0x140002077: mov      qword ptr [rsp + 0x30], 0
+0x140002080: mov      r8, rbp
+0x140002083: mov      dword ptr [rsp + 0x28], ebx
+0x140002087: lea      ecx, [rdx + 3]
+0x14000208a: mov      qword ptr [rsp + 0x20], rax
+0x14000208f: call     qword ptr [rip + 0x302b]
+0x140002095: xor      ebx, ebx
+0x140002097: test     eax, eax
+0x140002099: sete     bl
+0x14000209c: test     ebx, ebx
+0x14000209e: je       0x140001f9a
+0x1400020a4: mov      rcx, qword ptr [rdi]
+0x1400020a7: mov      rdx, rsi
+0x1400020aa: call     0x140002354
+0x1400020af: call     0x14000141c
+0x1400020b4: int3
+0x1400020b5: int3
+0x1400020b6: int3
+0x1400020b7: int3
+0x1400020b8: push     rbx
+0x1400020ba: sub      rsp, 0x20
+0x1400020be: mov      rdx, qword ptr [rcx + 0x18]
+0x1400020c2: mov      rbx, rcx
+0x1400020c5: cmp      rdx, 0xf
+0x1400020c9: jbe      0x1400020f7
+0x1400020cb: mov      rcx, qword ptr [rcx]
+0x1400020ce: inc      rdx
+0x1400020d1: cmp      rdx, 0x1000
+0x1400020d8: jb       0x1400020f2
+0x1400020da: mov      r8, qword ptr [rcx - 8]
+0x1400020de: add      rdx, 0x27
+0x1400020e2: sub      rcx, r8
+0x1400020e5: lea      rax, [rcx - 8]
+0x1400020e9: cmp      rax, 0x1f
+0x1400020ed: ja       0x140002110
+0x1400020ef: mov      rcx, r8
+0x1400020f2: call     0x140003a60
+0x1400020f7: mov      qword ptr [rbx + 0x10], 0
+0x1400020ff: mov      qword ptr [rbx + 0x18], 0xf
+0x140002107: mov      byte ptr [rbx], 0
+0x14000210a: add      rsp, 0x20
+0x14000210e: pop      rbx
+0x14000210f: ret
+0x140002110: call     qword ptr [rip + 0x3182]
+0x140002116: int3
+0x140002117: int3
+0x140002118: mov      qword ptr [rsp + 0x18], rbx
+0x14000211d: mov      qword ptr [rsp + 0x20], rbp
+0x140002122: push     rsi
+0x140002123: push     rdi
+0x140002124: push     r14
+0x140002126: sub      rsp, 0x20
+0x14000212a: xorps    xmm0, xmm0
+0x14000212d: mov      rbx, rcx
+0x140002130: movups   xmmword ptr [rcx], xmm0
+0x140002133: mov      qword ptr [rcx + 0x10], 0
+0x14000213b: mov      r14, rdx
+0x14000213e: mov      qword ptr [rcx + 0x18], 0
+0x140002146: mov      rcx, rdx
+0x140002149: call     qword ptr [rip + 0x3171]
+0x14000214f: movabs   rbp, 0x7fffffffffffffff
+0x140002159: mov      rsi, rax
+0x14000215c: cmp      rax, rbp
+0x14000215f: ja       0x140002236
+0x140002165: cmp      rax, 0xf
+0x140002169: ja       0x14000218f
+0x14000216b: mov      r8, rax
+0x14000216e: mov      qword ptr [rbx + 0x10], rax
+0x140002172: mov      rdx, r14
+0x140002175: mov      qword ptr [rbx + 0x18], 0xf
+0x14000217d: mov      rcx, rbx
+0x140002180: call     qword ptr [rip + 0x3002]
+0x140002186: mov      byte ptr [rbx + rsi], 0
+0x14000218a: jmp      0x140002220
+0x14000218f: or       rax, 0xf
+0x140002193: cmp      rax, rbp
+0x140002196: jbe      0x1400021c2
+0x140002198: movabs   rax, 0x8000000000000000
+0x1400021a2: add      rax, 0x27
+0x1400021a6: mov      rcx, rax
+0x1400021a9: call     qword ptr [rip + 0x3311]
+0x1400021af: test     rax, rax
+0x1400021b2: je       0x1400021f2
+0x1400021b4: lea      rdi, [rax + 0x27]
+0x1400021b8: and      rdi, 0xffffffffffffffe0
+0x1400021bc: mov      qword ptr [rdi - 8], rax
+0x1400021c0: jmp      0x140002202
+0x1400021c2: mov      ecx, 0x16
+0x1400021c7: mov      rbp, rax
+0x1400021ca: cmp      rax, rcx
+0x1400021cd: cmovb    rbp, rcx
+0x1400021d1: lea      rcx, [rbp + 1]
+0x1400021d5: test     rcx, rcx
+0x1400021d8: jne      0x1400021de
+0x1400021da: xor      edi, edi
+0x1400021dc: jmp      0x140002202
+0x1400021de: cmp      rcx, 0x1000
+0x1400021e5: jb       0x1400021f9
+0x1400021e7: lea      rax, [rcx + 0x27]
+0x1400021eb: cmp      rax, rcx
+0x1400021ee: jbe      0x14000223c
+0x1400021f0: jmp      0x1400021a6
+0x1400021f2: call     qword ptr [rip + 0x30a0]
+0x1400021f8: int3
+0x1400021f9: call     qword ptr [rip + 0x32c1]
+0x1400021ff: mov      rdi, rax
+0x140002202: mov      r8, rsi
+0x140002205: mov      qword ptr [rbx], rdi
+0x140002208: mov      rdx, r14
+0x14000220b: mov      qword ptr [rbx + 0x10], rsi
+0x14000220f: mov      rcx, rdi
+0x140002212: mov      qword ptr [rbx + 0x18], rbp
+0x140002216: call     qword ptr [rip + 0x2f6c]
+0x14000221c: mov      byte ptr [rdi + rsi], 0
+0x140002220: mov      rbp, qword ptr [rsp + 0x58]
+0x140002225: mov      rax, rbx
+0x140002228: mov      rbx, qword ptr [rsp + 0x50]
+0x14000222d: add      rsp, 0x20
+0x140002231: pop      r14
+0x140002233: pop      rdi
+0x140002234: pop      rsi
+0x140002235: ret
+0x140002236: call     0x1400017a0
+0x14000223b: int3
+0x14000223c: call     0x140001700
+0x140002241: int3
+0x140002242: int3
+0x140002243: int3
+=== RVA 0x14d8-0x1700 ===
+0014d8: mov      qword ptr [rsp + 8], rbx
+0014dd: mov      qword ptr [rsp + 0x10], rbp
+0014e2: mov      qword ptr [rsp + 0x18], rsi
+0014e7: push     rdi
+0014e8: push     r14
+0014ea: push     r15
+0014ec: sub      rsp, 0x20
+0014f0: mov      r14, rcx
+0014f3: mov      qword ptr [rcx + 8], 0
+0014fb: mov      dword ptr [rcx + 0x10], 1
+001502: mov      rbp, r8
+001505: mov      rcx, qword ptr [rdx]
+001508: mov      r15, rdx
+00150b: test     rcx, rcx
+00150e: je       0x140001522
+001510: mov      rcx, qword ptr [rcx]
+001513: test     rcx, rcx
+001516: je       0x140001522
+001518: call     qword ptr [rip + 0x3bd2]
+00151e: mov      esi, eax
+001520: jmp      0x140001524
+001522: xor      esi, esi
+001524: mov      rax, qword ptr [rbp]
+001528: test     rax, rax
+00152b: je       0x14000153f
+00152d: mov      rcx, qword ptr [rax]
+001530: test     rcx, rcx
+001533: je       0x14000153f
+001535: call     qword ptr [rip + 0x3bb5]
+00153b: mov      edi, eax
+00153d: jmp      0x140001541
+00153f: xor      edi, edi
+001541: lea      ebx, [rdi + rsi]
+001544: cmp      ebx, edi
+001546: jb       0x14000162a
+00154c: mov      eax, ebx
+00154e: mov      ecx, 0xffffffff
+001553: add      rax, rax
+001556: cmp      rax, rcx
+001559: ja       0x14000162a
+00155f: lea      edx, [rbx + rbx]
+001562: xor      ecx, ecx
+001564: call     qword ptr [rip + 0x3b76]
+00156a: mov      qword ptr [r14], rax
+00156d: mov      rcx, rax
+001570: test     rax, rax
+001573: jne      0x140001582
+001575: test     ebx, ebx
+001577: jne      0x14000162a
+00157d: jmp      0x14000160e
+001582: mov      rax, qword ptr [r15]
+001585: test     rax, rax
+001588: je       0x1400015cc
+00158a: mov      rdx, qword ptr [rax]
+00158d: test     rdx, rdx
+001590: je       0x1400015cc
+001592: lea      r9d, [rbx + 1]
+001596: add      r9, r9
+001599: lea      r8d, [rsi + 1]
+00159d: add      r8, r8
+0015a0: je       0x1400015cc
+0015a2: cmp      r9, r8
+0015a5: jb       0x1400015af
+0015a7: call     qword ptr [rip + 0x3bdb]
+0015ad: jmp      0x1400015cc
+0015af: mov      r8, r9
+0015b2: xor      edx, edx
+0015b4: call     qword ptr [rip + 0x3ba6]
+0015ba: call     qword ptr [rip + 0x3c58]
+0015c0: mov      dword ptr [rax], 0x22
+0015c6: call     qword ptr [rip + 0x3c8c]
+0015cc: mov      rax, qword ptr [rbp]
+0015d0: test     rax, rax
+0015d3: je       0x14000160e
+0015d5: mov      rdx, qword ptr [rax]
+0015d8: test     rdx, rdx
+0015db: je       0x14000160e
+0015dd: mov      rax, qword ptr [r14]
+0015e0: lea      r8d, [rdi + 1]
+0015e4: mov      ecx, esi
+0015e6: lea      rcx, [rax + rcx*2]
+0015ea: add      r8, r8
+0015ed: je       0x14000160e
+0015ef: test     rcx, rcx
+0015f2: jne      0x140001608
+0015f4: call     qword ptr [rip + 0x3c1e]
+0015fa: mov      dword ptr [rax], 0x16
+001600: call     qword ptr [rip + 0x3c52]
+001606: jmp      0x14000160e
+001608: call     qword ptr [rip + 0x3b7a]
+00160e: mov      rbx, qword ptr [rsp + 0x40]
+001613: mov      rax, r14
+001616: mov      rbp, qword ptr [rsp + 0x48]
+00161b: mov      rsi, qword ptr [rsp + 0x50]
+001620: add      rsp, 0x20
+001624: pop      r15
+001626: pop      r14
+001628: pop      rdi
+001629: ret
+00162a: mov      ecx, 0x8007000e
+00162f: call     0x1400044c0
+001634: int3
+001635: int3
+001636: int3
+001637: int3
+001638: push     rbx
+00163a: sub      rsp, 0x20
+00163e: mov      rbx, rcx
+001641: mov      rax, rdx
+001644: lea      rcx, [rip + 0x4c9d]
+00164b: xorps    xmm0, xmm0
+00164e: mov      qword ptr [rbx], rcx
+001651: lea      rdx, [rbx + 8]
+001655: lea      rcx, [rax + 8]
+001659: movups   xmmword ptr [rdx], xmm0
+00165c: call     qword ptr [rip + 0x3b2e]
+001662: mov      rax, rbx
+001665: add      rsp, 0x20
+001669: pop      rbx
+00166a: ret
+00166b: int3
+00166c: cmp      qword ptr [rcx + 8], 0
+001671: lea      rax, [rip + 0x47b0]
+001678: cmovne   rax, qword ptr [rcx + 8]
+00167d: ret
+00167e: int3
+00167f: int3
+001680: mov      qword ptr [rsp + 8], rbx
+001685: push     rdi
+001686: sub      rsp, 0x20
+00168a: lea      rax, [rip + 0x4c57]
+001691: mov      rdi, rcx
+001694: mov      qword ptr [rcx], rax
+001697: mov      ebx, edx
+001699: add      rcx, 8
+00169d: call     qword ptr [rip + 0x3add]
+0016a3: test     bl, 1
+0016a6: je       0x1400016b5
+0016a8: mov      edx, 0x18
+0016ad: mov      rcx, rdi
+0016b0: call     0x140003a60
+0016b5: mov      rbx, qword ptr [rsp + 0x30]
+0016ba: mov      rax, rdi
+0016bd: add      rsp, 0x20
+0016c1: pop      rdi
+0016c2: ret
+0016c3: int3
+0016c4: lea      rax, [rip + 0x4775]
+0016cb: mov      qword ptr [rcx + 0x10], 0
+0016d3: mov      qword ptr [rcx + 8], rax
+0016d7: lea      rax, [rip + 0x4bda]
+0016de: mov      qword ptr [rcx], rax
+0016e1: mov      rax, rcx
+0016e4: ret
+0016e5: int3
+0016e6: int3
+0016e7: int3
+0016e8: lea      rax, [rip + 0x4bf9]
+0016ef: mov      qword ptr [rcx], rax
+0016f2: add      rcx, 8
+0016f6: jmp      qword ptr [rip + 0x3a83]
+0016fd: int3
+0016fe: int3
+0016ff: int3
+=== RVA 0x1b24-0x1c8f ===
+001b24: lea      rcx, [rip + 0x4361]
+001b2b: call     0x1400044d0
+001b30: mov      qword ptr [rbx], rax
+001b33: jmp      0x140001b38
+001b35: mov      rbx, r14
+001b38: mov      qword ptr [rsp + 0x40], rbx
+001b3d: test     rbx, rbx
+001b40: je       0x140001db5
+001b46: lea      rcx, [rbp - 0x28]
+001b4a: call     qword ptr [rip + 0x38b8]
+001b50: mov      rdx, rax
+001b53: lea      rcx, [rsp + 0x38]
+001b58: call     qword ptr [rip + 0x38a2]
+001b5e: mov      dword ptr [rsp + 0x30], 1
+001b66: mov      rdi, qword ptr [rbp - 0x28]
+001b6a: mov      ebx, dword ptr [rdi - 0x10]
+001b6d: lea      rcx, [rip + 0x431c]
+001b74: call     qword ptr [rip + 0x374e]
+001b7a: mov      dword ptr [rsp + 0x20], ebx
+001b7e: mov      r9, rdi
+001b81: mov      r8d, eax
+001b84: lea      rdx, [rip + 0x4305]
+001b8b: lea      rcx, [rsp + 0x38]
+001b90: call     qword ptr [rip + 0x3862]
+001b96: mov      rdi, qword ptr [rsp + 0x38]
+001b9b: mov      qword ptr [rsp + 0x48], r14
+001ba0: mov      rcx, r13
+001ba3: call     qword ptr [rip + 0x3917]
+001ba9: mov      rbx, rax
+001bac: mov      qword ptr [rsp + 0x50], rax
+001bb1: test     rax, rax
+001bb4: je       0x140001be9
+001bb6: xorps    xmm0, xmm0
+001bb9: xor      eax, eax
+001bbb: movups   xmmword ptr [rbx], xmm0
+001bbe: mov      qword ptr [rbx + 0x10], rax
+001bc2: mov      qword ptr [rbx + 8], r14
+001bc6: mov      dword ptr [rbx + 0x10], 1
+001bcd: mov      rcx, rdi
+001bd0: call     qword ptr [rip + 0x3522]
+001bd6: mov      qword ptr [rbx], rax
+001bd9: test     rax, rax
+001bdc: jne      0x140001bec
+001bde: test     rdi, rdi
+001be1: jne      0x140001dc0
+001be7: jmp      0x140001bec
+001be9: mov      rbx, r14
+001bec: mov      qword ptr [rsp + 0x48], rbx
+001bf1: test     rbx, rbx
+001bf4: je       0x140001dcb
+001bfa: mov      dword ptr [rsp + 0x30], 3
+001c02: mov      rcx, r13
+001c05: call     qword ptr [rip + 0x38b5]
+001c0b: mov      qword ptr [rsp + 0x50], rax
+001c10: test     rax, rax
+001c13: je       0x140001c38
+001c15: xorps    xmm0, xmm0
+001c18: xor      ecx, ecx
+001c1a: movups   xmmword ptr [rax], xmm0
+001c1d: mov      qword ptr [rax + 0x10], rcx
+001c21: lea      r8, [rsp + 0x40]
+001c26: lea      rdx, [rsp + 0x48]
+001c2b: mov      rcx, rax
+001c2e: call     0x1400014d8
+001c33: mov      rdi, rax
+001c36: jmp      0x140001c3b
+001c38: mov      rdi, r14
+001c3b: test     rdi, rdi
+001c3e: je       0x140001dcb
+001c44: or       eax, 0xffffffff
+001c47: lock xadd dword ptr [rbx + 0x10], eax
+001c4c: cmp      eax, 1
+001c4f: jne      0x140001c80
+001c51: mov      rcx, qword ptr [rbx]
+001c54: test     rcx, rcx
+001c57: je       0x140001c62
+001c59: call     qword ptr [rip + 0x3489]
+001c5f: mov      qword ptr [rbx], r14
+001c62: mov      rcx, qword ptr [rbx + 8]
+001c66: test     rcx, rcx
+001c69: je       0x140001c75
+001c6b: call     qword ptr [rip + 0x3b27]
+001c71: mov      qword ptr [rbx + 8], r14
+001c75: mov      rdx, r13
+001c78: mov      rcx, rbx
+001c7b: call     0x140003a60
+001c80: xor      r9d, r9d
+001c83: lea      r8, [rip + 0x41f6]
+001c8a: mov      rdx, qword ptr [rdi]
+001c8d: xor      ecx, ecx
+**********************
+PowerShell transcript end
+End time: 20260929102037
+**********************
+**********************
+PowerShell transcript start
+Start time: 20260929102435
+Username: DESKTOP-412KTAR\mzj
+RunAs User: DESKTOP-412KTAR\mzj
+Configuration Name: 
+Machine: DESKTOP-412KTAR (Microsoft Windows NT 10.0.26200.0)
+Host Application: C:\Users\mzj\.cache\codex-runtimes\codex-primary-runtime\dependencies\native\powershell\pwsh.dll -Command try { [Console]::OutputEncoding=[System.Text.Encoding]::UTF8 } catch {}
+$base='C:\Users\mzj\Desktop\CTF\玄机刷题'; $log=Join-Path $base '记录\代理-PaluArray-独立复核终端记录.txt'; Start-Transcript -LiteralPath $log -Append; $wp=Join-Path $base '题目资料\PaluArray_546\WP.md'; $raw=[System.IO.File]::ReadAllText($wp); $raw=$raw.Replace('新候选尚未提交，玄机题目页面仍待验证。','新候选已在玄机平台提交，但平台拒绝；本题仍未解决。'); $raw=$raw.Replace('当前新候选的 MD5 由主静态求解脚本根据 ASCII 输入计算，并将与独立复核结果比对。新候选尚未提交，平台验证状态仍待更新。','当前新候选的 MD5 由主静态求解脚本根据 ASCII 输入计算，并与独立复核结果比对。该候选已提交平台但被拒绝，不能据此标记为已解决。'); $raw=$raw.Replace('结论是从 PE 静态初始化参数、验证逻辑、正向索引重算和 MD5 计算互相印证出来的。附件程序没有被执行；更正后的候选尚未提交，题目页面仍待平台验证。因此本 WP 给出的是结构和算法均可复现的候选解，平台是否接受仍未知。','结论是从 PE 静态初始化参数、验证逻辑、正向索引重算和 MD5 计算互相印证出来的。附件程序没有被执行。更正后的候选已在平台提交但被拒绝；现有静态链条与平台结果矛盾，本题保持未解决，不猜测其他 flag 格式，也不重复盲提。'); [System.IO.File]::WriteAllText($wp,$raw,[System.Text.UTF8Encoding]::new($false)); $note=Join-Path $base '题目资料\PaluArray_546\analysis\platform_rejection_followup_20260929.md'; @'
+# PaluArray 546 平台拒绝后的复核记录
+
+日期：2026-09-29
+
+## 平台结果
+
+根任务在玄机平台前台提交静态候选 `palu{1b501325fc96d5a845cbdd2ba4f01cd7}` 后收到拒绝。本题保持未解决；此处不把本地推导候选称作正确 flag，也没有再次提交或尝试猜测格式。
+
+## 复核到的静态证据
+
+本轮复核了项目内的独立 PE 字节解析脚本、静态反汇编和此前保存的审计输出；没有运行或加载挑战附件，没有进行解包后二进制执行，也没有浏览公开 writeup。
+
+- UPX 标记恢复副本只用于静态拆包；`PaluArray_flag_unpacked_repro.exe` 与已保存的解包副本有相同 SHA-256 `8B1263DE36EDA3E5E3F1183C2D08C520ECAE09649B1A04891F597033FDF842A5`。
+- 全局初始化指令将 RVA `0x5e68` 传入字符表对象，故真实表为 `Palu_996!?`。`0x5e66` 的 `67 00` 是 ASCII 报错字符串 `string too long\0` 的末尾 `g` 与 NUL；将这里误作 UTF-16 起点会多出 `g`。旧候选 `PPu_PuP!P!6Pg` 含真实表中不存在的 `g`，正向查表不等于目标。
+- 现有静态输出给出的表内目标为 `1145141919810`，逐字符首次查找反算输入 `aa_9a_a?a?!aP`，再正向查表能够回到目标。
+- 现有摘要/包装反汇编记录显示成功路径调用 `WideCharToMultiByte`，CodePage 参数为 3（`CP_THREAD_ACP`）；本候选全为 ASCII，窄字节与 ASCII 相同。后续进入 MD5 路径；保存的标准库输出为裸输入 ASCII 的 MD5 `1b501325fc96d5a845cbdd2ba4f01cd7`。包装路径引用 `palu{` 与 `}`。
+
+## 未解决的矛盾
+
+平台拒绝与当前静态推导的输入校验、输入到 MD5 的链条及包装形式不一致。仅凭拒绝结果，不能确定问题是隐藏的输入前后处理、目标题附件/平台题目错配、还有未识别的程序逻辑，还是其他原因。现有证据不足以支持一个新的候选 flag 或其他格式，因此不猜测、不盲目重提。要继续解决，需要获得能区分这些方向的新证据（例如平台对提交格式/步骤的明确反馈，或重新对实际平台附件与保存附件做来源核对）。
+
+## 命令记录
+
+本轮文件检查命令与输出、一次无副作用的 PowerShell 参数调用错误，以及 WP 状态更正均记录于：`记录\代理-PaluArray-独立复核终端记录.txt`。对话根任务报告的平台提交拒绝是本节平台结果的依据；本代理未操作平台。
+'@ | Set-Content -LiteralPath $note -Encoding utf8; Get-Item -LiteralPath $wp,$note,$log | Select-Object FullName,Length; Stop-Transcript
+Process ID: 14932
+PSVersion: 7.6.5
+PSEdition: Core
+GitCommitId: 7.6.5
+OS: Microsoft Windows 10.0.26200
+Platform: Win32NT
+PSCompatibleVersions: 1.0, 2.0, 3.0, 4.0, 5.0, 5.1, 6.0, 7.0
+PSRemotingProtocolVersion: 2.4
+SerializationVersion: 1.1.0.1
+WSManStackVersion: 3.0
+**********************
+Transcript started, output file is C:\Users\mzj\Desktop\CTF\玄机刷题\记录\代理-PaluArray-独立复核终端记录.txt
+
+**********************
+PowerShell transcript end
+End time: 20260929102435
+**********************

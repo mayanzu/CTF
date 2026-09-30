@@ -1,0 +1,377 @@
+**********************
+PowerShell transcript start
+Start time: 20260930142512
+Username: DESKTOP-412KTAR\mzj
+RunAs User: DESKTOP-412KTAR\mzj
+Configuration Name: 
+Machine: DESKTOP-412KTAR (Microsoft Windows NT 10.0.26200.0)
+Host Application: C:\Users\mzj\.cache\codex-runtimes\codex-primary-runtime\dependencies\native\powershell\pwsh.dll -Command try { [Console]::OutputEncoding=[System.Text.Encoding]::UTF8 } catch {}
+$log='C:\Users\mzj\Desktop\CTF\玄机刷题\记录\未解题续攻_20260930_续.txt'; Start-Transcript -Path $log -Append; Get-Command upx,upx.exe -ErrorAction SilentlyContinue | Select-Object Name,Source; rg --files 'C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\题目分类\逆向工程\ezBase_541' | rg 'exe$|rar$|unpacked_runtime.bin$|decode_upx.py$'; Stop-Transcript
+Process ID: 50928
+PSVersion: 7.6.5
+PSEdition: Core
+GitCommitId: 7.6.5
+OS: Microsoft Windows 10.0.26200
+Platform: Win32NT
+PSCompatibleVersions: 1.0, 2.0, 3.0, 4.0, 5.0, 5.1, 6.0, 7.0
+PSRemotingProtocolVersion: 2.4
+SerializationVersion: 1.1.0.1
+WSManStackVersion: 3.0
+**********************
+Transcript started, output file is C:\Users\mzj\Desktop\CTF\玄机刷题\记录\未解题续攻_20260930_续.txt
+**********************
+PowerShell transcript end
+End time: 20260930142512
+**********************
+**********************
+PowerShell transcript start
+Start time: 20260930142529
+Username: DESKTOP-412KTAR\mzj
+RunAs User: DESKTOP-412KTAR\mzj
+Configuration Name: 
+Machine: DESKTOP-412KTAR (Microsoft Windows NT 10.0.26200.0)
+Host Application: C:\Users\mzj\.cache\codex-runtimes\codex-primary-runtime\dependencies\native\powershell\pwsh.dll -Command try { [Console]::OutputEncoding=[System.Text.Encoding]::UTF8 } catch {}
+$log='C:\Users\mzj\Desktop\CTF\玄机刷题\记录\未解题续攻_20260930_续.txt'; Start-Transcript -Path $log -Append; $p='C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\题目分类\逆向工程\ezBase_541\附件_平台原件\解压复核_20260929\ezBase\ezre.exe'; Get-FileHash -LiteralPath $p -Algorithm SHA256; Get-Item -LiteralPath $p | Select-Object Length; Format-Hex -LiteralPath $p | Select-Object -First 12; Stop-Transcript
+Process ID: 53664
+PSVersion: 7.6.5
+PSEdition: Core
+GitCommitId: 7.6.5
+OS: Microsoft Windows 10.0.26200
+Platform: Win32NT
+PSCompatibleVersions: 1.0, 2.0, 3.0, 4.0, 5.0, 5.1, 6.0, 7.0
+PSRemotingProtocolVersion: 2.4
+SerializationVersion: 1.1.0.1
+WSManStackVersion: 3.0
+**********************
+Transcript started, output file is C:\Users\mzj\Desktop\CTF\玄机刷题\记录\未解题续攻_20260930_续.txt
+
+Algorithm       Hash                                                                   Path
+---------       ----                                                                   ----
+SHA256          607BD3E8E5D7E715F7A9B819C8D5CC235C8DCC22F06A4AE77D0383E46BBDDACE       C:\Users\mzj\Desktop\CTF\玄机刷…
+
+Length : 9216
+
+
+Offset    : 0
+Offset64  : 0
+Bytes     : {77, 90, 120, 0…}
+Path      : C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\题目分类\逆向工程\ezBase_541\附件_平台原件\解压复核_20260929\ezB
+            ase\ezre.exe
+HexOffset : 0000000000000000
+Label     : C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\题目分类\逆向工程\ezBase_541\附件_平台原件\解压复核_20260929\ezB
+            ase\ezre.exe
+HexBytes  : 4D 5A 78 00 01 00 00 00 04 00 00 00 00 00 00 00
+Ascii     : MZx �   �
+
+
+Offset    : 16
+Offset64  : 16
+Bytes     : {0, 0, 0, 0…}
+Path      : C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\题目分类\逆向工程\ezBase_541\附件_平台原件\解压复核_20260929\ezB
+            ase\ezre.exe
+HexOffset : 0000000000000010
+Label     : C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\题目分类\逆向工程\ezBase_541\附件_平台原件\解压复核_20260929\ezB
+            ase\ezre.exe
+HexBytes  : 00 00 00 00 00 00 00 00 40 00 00 00 00 00 00 00
+Ascii     :         @
+
+
+Offset    : 32
+Offset64  : 32
+Bytes     : {0, 0, 0, 0…}
+Path      : C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\题目分类\逆向工程\ezBase_541\附件_平台原件\解压复核_20260929\ezB
+            ase\ezre.exe
+HexOffset : 0000000000000020
+Label     : C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\题目分类\逆向工程\ezBase_541\附件_平台原件\解压复核_20260929\ezB
+            ase\ezre.exe
+HexBytes  : 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+Ascii     : 
+
+
+Offset    : 48
+Offset64  : 48
+Bytes     : {0, 0, 0, 0…}
+Path      : C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\题目分类\逆向工程\ezBase_541\附件_平台原件\解压复核_20260929\ezB
+            ase\ezre.exe
+HexOffset : 0000000000000030
+Label     : C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\题目分类\逆向工程\ezBase_541\附件_平台原件\解压复核_20260929\ezB
+            ase\ezre.exe
+HexBytes  : 00 00 00 00 00 00 00 00 00 00 00 00 78 00 00 00
+Ascii     :             x
+
+
+Offset    : 64
+Offset64  : 64
+Bytes     : {14, 31, 186, 14…}
+Path      : C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\题目分类\逆向工程\ezBase_541\附件_平台原件\解压复核_20260929\ezB
+            ase\ezre.exe
+HexOffset : 0000000000000040
+Label     : C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\题目分类\逆向工程\ezBase_541\附件_平台原件\解压复核_20260929\ezB
+            ase\ezre.exe
+HexBytes  : 0E 1F BA 0E 00 B4 09 CD 21 B8 01 4C CD 21 54 68
+Ascii     : ��º� ´�Í!¸�LÍ!Th
+
+
+Offset    : 80
+Offset64  : 80
+Bytes     : {105, 115, 32, 112…}
+Path      : C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\题目分类\逆向工程\ezBase_541\附件_平台原件\解压复核_20260929\ezB
+            ase\ezre.exe
+HexOffset : 0000000000000050
+Label     : C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\题目分类\逆向工程\ezBase_541\附件_平台原件\解压复核_20260929\ezB
+            ase\ezre.exe
+HexBytes  : 69 73 20 70 72 6F 67 72 61 6D 20 63 61 6E 6E 6F
+Ascii     : is program canno
+
+
+Offset    : 96
+Offset64  : 96
+Bytes     : {116, 32, 98, 101…}
+Path      : C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\题目分类\逆向工程\ezBase_541\附件_平台原件\解压复核_20260929\ezB
+            ase\ezre.exe
+HexOffset : 0000000000000060
+Label     : C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\题目分类\逆向工程\ezBase_541\附件_平台原件\解压复核_20260929\ezB
+            ase\ezre.exe
+HexBytes  : 74 20 62 65 20 72 75 6E 20 69 6E 20 44 4F 53 20
+Ascii     : t be run in DOS
+
+
+Offset    : 112
+Offset64  : 112
+Bytes     : {109, 111, 100, 101…}
+Path      : C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\题目分类\逆向工程\ezBase_541\附件_平台原件\解压复核_20260929\ezB
+            ase\ezre.exe
+HexOffset : 0000000000000070
+Label     : C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\题目分类\逆向工程\ezBase_541\附件_平台原件\解压复核_20260929\ezB
+            ase\ezre.exe
+HexBytes  : 6D 6F 64 65 2E 24 00 00 50 45 00 00 64 86 03 00
+Ascii     : mode.$  PE  d��
+
+
+Offset    : 128
+Offset64  : 128
+Bytes     : {244, 135, 24, 104…}
+Path      : C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\题目分类\逆向工程\ezBase_541\附件_平台原件\解压复核_20260929\ezB
+            ase\ezre.exe
+HexOffset : 0000000000000080
+Label     : C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\题目分类\逆向工程\ezBase_541\附件_平台原件\解压复核_20260929\ezB
+            ase\ezre.exe
+HexBytes  : F4 87 18 68 00 00 00 00 00 00 00 00 F0 00 22 00
+Ascii     : ô��h        ð "
+
+
+Offset    : 144
+Offset64  : 144
+Bytes     : {11, 2, 14, 0…}
+Path      : C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\题目分类\逆向工程\ezBase_541\附件_平台原件\解压复核_20260929\ezB
+            ase\ezre.exe
+HexOffset : 0000000000000090
+Label     : C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\题目分类\逆向工程\ezBase_541\附件_平台原件\解压复核_20260929\ezB
+            ase\ezre.exe
+HexBytes  : 0B 02 0E 00 00 20 00 00 00 10 00 00 00 B0 00 00
+Ascii     : ���      �   °
+
+
+Offset    : 160
+Offset64  : 160
+Bytes     : {96, 217, 0, 0…}
+Path      : C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\题目分类\逆向工程\ezBase_541\附件_平台原件\解压复核_20260929\ezB
+            ase\ezre.exe
+HexOffset : 00000000000000A0
+Label     : C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\题目分类\逆向工程\ezBase_541\附件_平台原件\解压复核_20260929\ezB
+            ase\ezre.exe
+HexBytes  : 60 D9 00 00 00 C0 00 00 00 00 00 40 01 00 00 00
+Ascii     : `Ù   À     @�
+
+
+Offset    : 176
+Offset64  : 176
+Bytes     : {0, 16, 0, 0…}
+Path      : C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\题目分类\逆向工程\ezBase_541\附件_平台原件\解压复核_20260929\ezB
+            ase\ezre.exe
+HexOffset : 00000000000000B0
+Label     : C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\题目分类\逆向工程\ezBase_541\附件_平台原件\解压复核_20260929\ezB
+            ase\ezre.exe
+HexBytes  : 00 10 00 00 00 02 00 00 06 00 00 00 00 00 00 00
+Ascii     :  �   �  �
+
+**********************
+PowerShell transcript end
+End time: 20260930142529
+**********************
+**********************
+PowerShell transcript start
+Start time: 20260930142635
+Username: DESKTOP-412KTAR\mzj
+RunAs User: DESKTOP-412KTAR\mzj
+Configuration Name: 
+Machine: DESKTOP-412KTAR (Microsoft Windows NT 10.0.26200.0)
+Host Application: C:\Users\mzj\.cache\codex-runtimes\codex-primary-runtime\dependencies\native\powershell\pwsh.dll -Command try { [Console]::OutputEncoding=[System.Text.Encoding]::UTF8 } catch {}
+$log='C:\Users\mzj\Desktop\CTF\玄机刷题\记录\未解题续攻_20260930_续.txt'; Start-Transcript -Path $log -Append; $release=Invoke-RestMethod -Uri 'https://api.github.com/repos/upx/upx/releases/tags/v5.2.1' -Headers @{ 'User-Agent'='Codex-CTF-audit' }; $asset=$release.assets | Where-Object name -eq 'upx-5.2.1-win64.zip'; $asset | Select-Object name,size,digest,browser_download_url; Stop-Transcript
+Process ID: 25368
+PSVersion: 7.6.5
+PSEdition: Core
+GitCommitId: 7.6.5
+OS: Microsoft Windows 10.0.26200
+Platform: Win32NT
+PSCompatibleVersions: 1.0, 2.0, 3.0, 4.0, 5.0, 5.1, 6.0, 7.0
+PSRemotingProtocolVersion: 2.4
+SerializationVersion: 1.1.0.1
+WSManStackVersion: 3.0
+**********************
+Transcript started, output file is C:\Users\mzj\Desktop\CTF\玄机刷题\记录\未解题续攻_20260930_续.txt
+
+**********************
+PowerShell transcript end
+End time: 20260930142636
+**********************
+**********************
+PowerShell transcript start
+Start time: 20260930142656
+Username: DESKTOP-412KTAR\mzj
+RunAs User: DESKTOP-412KTAR\mzj
+Configuration Name: 
+Machine: DESKTOP-412KTAR (Microsoft Windows NT 10.0.26200.0)
+Host Application: C:\Users\mzj\.cache\codex-runtimes\codex-primary-runtime\dependencies\native\powershell\pwsh.dll -Command try { [Console]::OutputEncoding=[System.Text.Encoding]::UTF8 } catch {}
+$log='C:\Users\mzj\Desktop\CTF\玄机刷题\记录\未解题续攻_20260930_续.txt'; Start-Transcript -Path $log -Append; $dir='C:\Users\mzj\Desktop\CTF\tmp\upx-audit-541'; New-Item -ItemType Directory -Path $dir -Force | Out-Null; $zip=Join-Path $dir 'upx-5.2.1-win64.zip'; Invoke-WebRequest -Uri 'https://github.com/upx/upx/releases/download/v5.2.1/upx-5.2.1-win64.zip' -OutFile $zip; $h=(Get-FileHash -LiteralPath $zip -Algorithm SHA256).Hash.ToLowerInvariant(); 'download_sha256='+$h; 'official_sha256=eabc6792a347d45e945be7748423e7868fd01b0d2bcaa2f4b1031fd71ff69bda'; if($h -ne 'eabc6792a347d45e945be7748423e7868fd01b0d2bcaa2f4b1031fd71ff69bda'){throw '官方哈希不匹配'}; Expand-Archive -LiteralPath $zip -DestinationPath $dir -Force; rg --files $dir | rg 'upx.exe$'; Stop-Transcript
+Process ID: 29732
+PSVersion: 7.6.5
+PSEdition: Core
+GitCommitId: 7.6.5
+OS: Microsoft Windows 10.0.26200
+Platform: Win32NT
+PSCompatibleVersions: 1.0, 2.0, 3.0, 4.0, 5.0, 5.1, 6.0, 7.0
+PSRemotingProtocolVersion: 2.4
+SerializationVersion: 1.1.0.1
+WSManStackVersion: 3.0
+**********************
+Transcript started, output file is C:\Users\mzj\Desktop\CTF\玄机刷题\记录\未解题续攻_20260930_续.txt
+download_sha256=eabc6792a347d45e945be7748423e7868fd01b0d2bcaa2f4b1031fd71ff69bda
+official_sha256=eabc6792a347d45e945be7748423e7868fd01b0d2bcaa2f4b1031fd71ff69bda
+**********************
+PowerShell transcript end
+End time: 20260930142658
+**********************
+**********************
+PowerShell transcript start
+Start time: 20260930142718
+Username: DESKTOP-412KTAR\mzj
+RunAs User: DESKTOP-412KTAR\mzj
+Configuration Name: 
+Machine: DESKTOP-412KTAR (Microsoft Windows NT 10.0.26200.0)
+Host Application: C:\Users\mzj\.cache\codex-runtimes\codex-primary-runtime\dependencies\native\powershell\pwsh.dll -Command try { [Console]::OutputEncoding=[System.Text.Encoding]::UTF8 } catch {}
+$log='C:\Users\mzj\Desktop\CTF\玄机刷题\记录\未解题续攻_20260930_续.txt'; Start-Transcript -Path $log -Append; $upx='C:\Users\mzj\Desktop\CTF\tmp\upx-audit-541\upx-5.2.1-win64\upx.exe'; $src='C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\题目分类\逆向工程\ezBase_541\附件_平台原件\解压复核_20260929\ezBase\ezre.exe'; $out='C:\Users\mzj\Desktop\CTF\tmp\upx-audit-541\ezre-unpacked.exe'; & $upx -l $src; & $upx -t $src; & $upx -d -o $out $src; if(Test-Path -LiteralPath $out){Get-Item -LiteralPath $out | Select-Object Length; Get-FileHash -LiteralPath $out -Algorithm SHA256}; Stop-Transcript
+Process ID: 50840
+PSVersion: 7.6.5
+PSEdition: Core
+GitCommitId: 7.6.5
+OS: Microsoft Windows 10.0.26200
+Platform: Win32NT
+PSCompatibleVersions: 1.0, 2.0, 3.0, 4.0, 5.0, 5.1, 6.0, 7.0
+PSRemotingProtocolVersion: 2.4
+SerializationVersion: 1.1.0.1
+WSManStackVersion: 3.0
+**********************
+Transcript started, output file is C:\Users\mzj\Desktop\CTF\玄机刷题\记录\未解题续攻_20260930_续.txt
+
+
+
+**********************
+PowerShell transcript end
+End time: 20260930142718
+**********************
+**********************
+PowerShell transcript start
+Start time: 20260930142738
+Username: DESKTOP-412KTAR\mzj
+RunAs User: DESKTOP-412KTAR\mzj
+Configuration Name: 
+Machine: DESKTOP-412KTAR (Microsoft Windows NT 10.0.26200.0)
+Host Application: C:\Users\mzj\.cache\codex-runtimes\codex-primary-runtime\dependencies\native\powershell\pwsh.dll -Command try { [Console]::OutputEncoding=[System.Text.Encoding]::UTF8 } catch {}
+$log='C:\Users\mzj\Desktop\CTF\玄机刷题\记录\未解题续攻_20260930_续.txt'; Start-Transcript -Path $log -Append; $dir='C:\Users\mzj\Desktop\CTF\tmp\upx-audit-541'; $src='C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\题目分类\逆向工程\ezBase_541\附件_平台原件\解压复核_20260929\ezBase\ezre.exe'; $copy=Join-Path $dir 'ezre-packed.exe'; Copy-Item -LiteralPath $src -Destination $copy -Force; Get-FileHash -LiteralPath $src,$copy -Algorithm SHA256 | Select-Object Path,Hash; & (Join-Path $dir 'upx-5.2.1-win64\upx.exe') -d -f -o (Join-Path $dir 'ezre-unpacked.exe') $copy; Stop-Transcript
+Process ID: 27460
+PSVersion: 7.6.5
+PSEdition: Core
+GitCommitId: 7.6.5
+OS: Microsoft Windows 10.0.26200
+Platform: Win32NT
+PSCompatibleVersions: 1.0, 2.0, 3.0, 4.0, 5.0, 5.1, 6.0, 7.0
+PSRemotingProtocolVersion: 2.4
+SerializationVersion: 1.1.0.1
+WSManStackVersion: 3.0
+**********************
+Transcript started, output file is C:\Users\mzj\Desktop\CTF\玄机刷题\记录\未解题续攻_20260930_续.txt
+
+
+**********************
+PowerShell transcript end
+End time: 20260930142738
+**********************
+**********************
+PowerShell transcript start
+Start time: 20260930142757
+Username: DESKTOP-412KTAR\mzj
+RunAs User: DESKTOP-412KTAR\mzj
+Configuration Name: 
+Machine: DESKTOP-412KTAR (Microsoft Windows NT 10.0.26200.0)
+Host Application: C:\Users\mzj\.cache\codex-runtimes\codex-primary-runtime\dependencies\native\powershell\pwsh.dll -Command try { [Console]::OutputEncoding=[System.Text.Encoding]::UTF8 } catch {}
+$log='C:\Users\mzj\Desktop\CTF\玄机刷题\记录\未解题续攻_20260930_续.txt'; Start-Transcript -Path $log -Append; $p='C:\Users\mzj\Desktop\CTF\tmp\upx-audit-541\ezre-packed.exe'; $b=[IO.File]::ReadAllBytes($p); 'sha256='+((Get-FileHash -LiteralPath $p -Algorithm SHA256).Hash); 'UPX! offset='+([Text.Encoding]::ASCII.GetString($b).IndexOf('UPX!')); 'UPX0 offset='+([Text.Encoding]::ASCII.GetString($b).IndexOf('UPX0')); 'UPX1 offset='+([Text.Encoding]::ASCII.GetString($b).IndexOf('UPX1')); Stop-Transcript
+Process ID: 50692
+PSVersion: 7.6.5
+PSEdition: Core
+GitCommitId: 7.6.5
+OS: Microsoft Windows 10.0.26200
+Platform: Win32NT
+PSCompatibleVersions: 1.0, 2.0, 3.0, 4.0, 5.0, 5.1, 6.0, 7.0
+PSRemotingProtocolVersion: 2.4
+SerializationVersion: 1.1.0.1
+WSManStackVersion: 3.0
+**********************
+Transcript started, output file is C:\Users\mzj\Desktop\CTF\玄机刷题\记录\未解题续攻_20260930_续.txt
+sha256=607BD3E8E5D7E715F7A9B819C8D5CC235C8DCC22F06A4AE77D0383E46BBDDACE
+UPX! offset=-1
+UPX0 offset=-1
+UPX1 offset=-1
+**********************
+PowerShell transcript end
+End time: 20260930142757
+**********************
+**********************
+PowerShell transcript start
+Start time: 20260930143704
+Username: DESKTOP-412KTAR\mzj
+RunAs User: DESKTOP-412KTAR\mzj
+Configuration Name: 
+Machine: DESKTOP-412KTAR (Microsoft Windows NT 10.0.26200.0)
+Host Application: C:\Users\mzj\.cache\codex-runtimes\codex-primary-runtime\dependencies\native\powershell\pwsh.dll -Command try { [Console]::OutputEncoding=[System.Text.Encoding]::UTF8 } catch {}
+$log='C:\Users\mzj\Desktop\CTF\玄机刷题\记录\未解题续攻_20260930_续.txt'; Start-Transcript -Path $log -Append; $script='C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\题目分类\逆向工程\hookme_542\analysis\solve_static.py'; $out='C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\题目分类\逆向工程\hookme_542\analysis\solve_static_20260930_output.txt'; python -X utf8 $script | Tee-Object -FilePath $out; Stop-Transcript
+Process ID: 60744
+PSVersion: 7.6.5
+PSEdition: Core
+GitCommitId: 7.6.5
+OS: Microsoft Windows 10.0.26200
+Platform: Win32NT
+PSCompatibleVersions: 1.0, 2.0, 3.0, 4.0, 5.0, 5.1, 6.0, 7.0
+PSRemotingProtocolVersion: 2.4
+SerializationVersion: 1.1.0.1
+WSManStackVersion: 3.0
+**********************
+Transcript started, output file is C:\Users\mzj\Desktop\CTF\玄机刷题\记录\未解题续攻_20260930_续.txt
+APK_SHA256=61BB5BA33C8EBD3BD01BA9ECF6EDC69A18D664D91F3309447B95132B27E14E9B
+PACKAGE=com.example.hookme
+KEY_HEX=636f6d2e6578616d706c652e686f6f6b6d65
+SEED=(key[0]<<8)|key[1]=0x636f (25455)
+MT_FIRST_8=1f6217df,b54945be,c0032c26,aa67d988,f954e755,3807be10,926687e6,96b6f54d
+MT_IMPL_MATCH=True
+SBOX_FIRST_32=dfbe26885510e64d9aea6a0707d86813eaea9e8bda6115bb9cff4c68c836eef2
+CIPHERTEXT_HEX=f235b888b3f4e08bff17e7e29bc3bf67d0f9a1b7b6581bb4a1eb299684e99923a8d193caf91d
+CIPHERTEXT_LEN=38
+PLAINTEXT_HEX=666c61677b65653966623036323632346331653532376661623336643361323734383464317d
+PLAINTEXT_UTF8=flag{ee9fb062624c1e527fab36d3a27484d1}
+FLAG_CANDIDATE=flag{ee9fb062624c1e527fab36d3a27484d1}
+FORWARD_CLOSURE=True
+REPRODUCED_HEX=f235b888b3f4e08bff17e7e29bc3bf67d0f9a1b7b6581bb4a1eb299684e99923a8d193caf91d
+**********************
+PowerShell transcript end
+End time: 20260930143704
+**********************

@@ -1,0 +1,893 @@
+ABC=C:\Users\mzj\Desktop\CTF\����ˢ��\��Ŀ����\OpenHarmony_arkt_559\�������\HAP����\ets\modules.abc SIZE=22072 OPCODE_FORMS=332 ISA=C:\Users\mzj\Desktop\CTF\����ˢ��\��Ŀ����\OpenHarmony_easyre_560\analysis\reference\isa.yaml
+SELECTED_METHODS 8
+METHOD #~@0>#enc class=L&entry/src/main/ets/pages/Index&; rec=0x790 code=0x30a6 insn=0x30ab vregs=20 args=4 size=208 tries=0
+  0000 [450014                ] mov v1:out:any, v2:in:any v1=0 v2=20
+  0003 [450115                ] mov v1:out:any, v2:in:any v1=1 v2=21
+  0006 [450216                ] mov v1:out:any, v2:in:any v1=2 v2=22
+  0009 [450317                ] mov v1:out:any, v2:in:any v1=3 v2=23
+  000c [6002                  ] lda v:in:any v=2
+  000e [6109                  ] sta v:out:any v=9
+  0010 [6009                  ] lda v:in:any v=9
+  0012 [42007d00              ] ldobjbyname imm:u16, string_id imm=0 id=125 -> string_id 0x1bb4 'rc4Encrypt'
+  0016 [6108                  ] sta v:out:any v=8
+  0018 [6002                  ] lda v:in:any v=2
+  001a [610a                  ] sta v:out:any v=10
+  001c [600a                  ] lda v:in:any v=10
+  001e [42028200              ] ldobjbyname imm:u16, string_id imm=2 id=130 -> string_id 0x1bf2 'secretKey'
+  0022 [610a                  ] sta v:out:any v=10
+  0024 [6003                  ] lda v:in:any v=3
+  0026 [610b                  ] sta v:out:any v=11
+  0028 [6008                  ] lda v:in:any v=8
+  002a [2f04090a0b            ] callthis2 imm:u8, v1:in:top, v2:in:top, v3:in:top imm=4 v1=9 v2=10 v3=11
+  002f [6105                  ] sta v:out:any v=5
+  0031 [6002                  ] lda v:in:any v=2
+  0033 [6109                  ] sta v:out:any v=9
+  0035 [6009                  ] lda v:in:any v=9
+  0037 [42068100              ] ldobjbyname imm:u16, string_id imm=6 id=129 -> string_id 0x1be6 'rsaEncrypt'
+  003b [6108                  ] sta v:out:any v=8
+  003d [6005                  ] lda v:in:any v=5
+  003f [610a                  ] sta v:out:any v=10
+  0041 [6008                  ] lda v:in:any v=8
+  0043 [2e08090a              ] callthis1 imm:u8, v1:in:top, v2:in:top imm=8 v1=9 v2=10
+  0047 [6106                  ] sta v:out:any v=6
+  0049 [050a                  ] createemptyarray imm:u16 imm=10
+  004b [6108                  ] sta v:out:any v=8
+  004d [6104                  ] sta v:out:any v=4
+  004f [6200000000            ] ldai imm:i32 imm=0
+  0054 [6109                  ] sta v:out:any v=9
+  0056 [6009                  ] lda v:in:any v=9
+  0058 [610a                  ] sta v:out:any v=10
+  005a [6006                  ] lda v:in:any v=6
+  005c [610b                  ] sta v:out:any v=11
+  005e [600b                  ] lda v:in:any v=11
+  0060 [420b6e00              ] ldobjbyname imm:u16, string_id imm=11 id=110 -> string_id 0x1b09 'length'
+  0064 [110d0a                ] less imm:u8, v:in:top imm=13 v=10
+  0067 [4f66                  ] jeqz imm:i32 imm=102
+  0069 [6004                  ] lda v:in:any v=4
+  006b [610a                  ] sta v:out:any v=10
+  006d [6009                  ] lda v:in:any v=9
+  006f [610b                  ] sta v:out:any v=11
+  0071 [6002                  ] lda v:in:any v=2
+  0073 [610d                  ] sta v:out:any v=13
+  0075 [600d                  ] lda v:in:any v=13
+  0077 [420e5500              ] ldobjbyname imm:u16, string_id imm=14 id=85 -> string_id 0x19f7 'customBase64'
+  007b [610c                  ] sta v:out:any v=12
+  007d [6002                  ] lda v:in:any v=2
+  007f [610f                  ] sta v:out:any v=15
+  0081 [600f                  ] lda v:in:any v=15
+  0083 [42108600              ] ldobjbyname imm:u16, string_id imm=16 id=134 -> string_id 0x1c23 'stringToUint8Array'
+  0087 [610e                  ] sta v:out:any v=14
+  0089 [6006                  ] lda v:in:any v=6
+  008b [6112                  ] sta v:out:any v=18
+  008d [6009                  ] lda v:in:any v=9
+  008f [6113                  ] sta v:out:any v=19
+  0091 [6013                  ] lda v:in:any v=19
+  0093 [371212                ] ldobjbyvalue imm:u16, v:in:top imm=18 v=18
+  0096 [6111                  ] sta v:out:any v=17
+  0098 [6011                  ] lda v:in:any v=17
+  009a [42148900              ] ldobjbyname imm:u16, string_id imm=20 id=137 -> string_id 0x1c50 'toString'
+  009e [6110                  ] sta v:out:any v=16
+  00a0 [6010                  ] lda v:in:any v=16
+  00a2 [2d1611                ] callthis0 imm:u8, v:in:top imm=22 v=17
+  00a5 [6110                  ] sta v:out:any v=16
+  00a7 [600e                  ] lda v:in:any v=14
+  00a9 [2e180f10              ] callthis1 imm:u8, v1:in:top, v2:in:top imm=24 v1=15 v2=16
+  00ad [610e                  ] sta v:out:any v=14
+  00af [600c                  ] lda v:in:any v=12
+  00b1 [2e1a0d0e              ] callthis1 imm:u8, v1:in:top, v2:in:top imm=26 v1=13 v2=14
+  00b5 [381c0a0b              ] stobjbyvalue imm:u16, v1:in:top, v2:in:top imm=28 v1=10 v2=11
+  00b9 [6009                  ] lda v:in:any v=9
+  00bb [610a                  ] sta v:out:any v=10
+  00bd [600a                  ] lda v:in:any v=10
+  00bf [1e1e                  ] tonumeric imm:u8 imm=30
+  00c1 [610a                  ] sta v:out:any v=10
+  00c3 [600a                  ] lda v:in:any v=10
+  00c5 [211f                  ] inc imm:u8 imm=31
+  00c7 [6109                  ] sta v:out:any v=9
+  00c9 [600a                  ] lda v:in:any v=10
+  00cb [4d8b                  ] jmp imm:i32 imm=139
+  00cd [6004                  ] lda v:in:any v=4
+  00cf [64                    ] return
+METHOD #~@0=#Index class=L&entry/src/main/ets/pages/Index&; rec=0x7c7 code=0x2cf2 insn=0x2cf7 vregs=15 args=9 size=357 tries=0
+  0000 [44f0                  ] mov v1:out:any, v2:in:any v1=0 v2=15
+  0002 [450110                ] mov v1:out:any, v2:in:any v1=1 v2=16
+  0005 [450211                ] mov v1:out:any, v2:in:any v1=2 v2=17
+  0008 [450312                ] mov v1:out:any, v2:in:any v1=3 v2=18
+  000b [450413                ] mov v1:out:any, v2:in:any v1=4 v2=19
+  000e [450514                ] mov v1:out:any, v2:in:any v1=5 v2=20
+  0011 [450615                ] mov v1:out:any, v2:in:any v1=6 v2=21
+  0014 [450716                ] mov v1:out:any, v2:in:any v1=7 v2=22
+  0017 [450817                ] mov v1:out:any, v2:in:any v1=8 v2=23
+  001a [6006                  ] lda v:in:any v=6
+  001c [610a                  ] sta v:out:any v=10
+  001e [00                    ] ldundefined
+  001f [28000a                ] stricteq imm:u8, v:in:top imm=0 v=10
+  0022 [4f0f                  ] jeqz imm:i32 imm=15
+  0024 [6201000000            ] ldai imm:i32 imm=1
+  0029 [610a                  ] sta v:out:any v=10
+  002b [600a                  ] lda v:in:any v=10
+  002d [1f01                  ] neg imm:u8 imm=1
+  002f [6106                  ] sta v:out:any v=6
+  0031 [6007                  ] lda v:in:any v=7
+  0033 [610a                  ] sta v:out:any v=10
+  0035 [00                    ] ldundefined
+  0036 [28020a                ] stricteq imm:u8, v:in:top imm=2 v=10
+  0039 [4f05                  ] jeqz imm:i32 imm=5
+  003b [00                    ] ldundefined
+  003c [6107                  ] sta v:out:any v=7
+  003e [6003                  ] lda v:in:any v=3
+  0040 [610a                  ] sta v:out:any v=10
+  0042 [6005                  ] lda v:in:any v=5
+  0044 [610b                  ] sta v:out:any v=11
+  0046 [6006                  ] lda v:in:any v=6
+  0048 [610c                  ] sta v:out:any v=12
+  004a [6008                  ] lda v:in:any v=8
+  004c [610d                  ] sta v:out:any v=13
+  004e [3203040a              ] supercallthisrange imm1:u8, imm2:u8, v:in:top imm1=3 imm2=4 v=10
+  0052 [610a                  ] sta v:out:any v=10
+  0054 [6002                  ] lda v:in:any v=2
+  0056 [fe0701                ] throw.ifsupernotcorrectcall imm:u16 imm=1
+  0059 [600a                  ] lda v:in:any v=10
+  005b [6102                  ] sta v:out:any v=2
+  005d [6007                  ] lda v:in:any v=7
+  005f [1c05                  ] typeof imm:u16 imm=5
+  0061 [610a                  ] sta v:out:any v=10
+  0063 [3e6000                ] lda.str string_id id=96 -> string_id 0x1a71 'function'
+  0066 [28070a                ] stricteq imm:u8, v:in:top imm=7 v=10
+  0069 [4f10                  ] jeqz imm:i32 imm=16
+  006b [6002                  ] lda v:in:any v=2
+  006d [fe0700                ] throw.ifsupernotcorrectcall imm:u16 imm=0
+  0070 [610a                  ] sta v:out:any v=10
+  0072 [6007                  ] lda v:in:any v=7
+  0074 [430878000a            ] stobjbyname imm:u16, string_id, v:in:top imm=8 id=120 -> string_id 0x1b6f 'paramsGenerator_' v=10
+  0079 [6002                  ] lda v:in:any v=2
+  007b [fe0700                ] throw.ifsupernotcorrectcall imm:u16 imm=0
+  007e [610a                  ] sta v:out:any v=10
+  0080 [3f0a4000              ] tryldglobalbyname imm:u16, string_id imm=10 id=64 -> string_id 0x1899 'ObservedPropertySimplePU'
+  0084 [610b                  ] sta v:out:any v=11
+  0086 [3e2800                ] lda.str string_id id=40 -> string_id 0x1226 ''
+  0089 [610c                  ] sta v:out:any v=12
+  008b [6002                  ] lda v:in:any v=2
+  008d [fe0700                ] throw.ifsupernotcorrectcall imm:u16 imm=0
+  0090 [610d                  ] sta v:out:any v=13
+  0092 [3e6a00                ] lda.str string_id id=106 -> string_id 0x1ad1 'inputText'
+  0095 [610e                  ] sta v:out:any v=14
+  0097 [080b040b              ] newobjrange imm1:u16, imm2:u8, v:in:top imm1=11 imm2=4 v=11
+  009b [430d49000a            ] stobjbyname imm:u16, string_id, v:in:top imm=13 id=73 -> string_id 0x1913 '__inputText' v=10
+  00a0 [6002                  ] lda v:in:any v=2
+  00a2 [fe0700                ] throw.ifsupernotcorrectcall imm:u16 imm=0
+  00a5 [610a                  ] sta v:out:any v=10
+  00a7 [3f0f4000              ] tryldglobalbyname imm:u16, string_id imm=15 id=64 -> string_id 0x1899 'ObservedPropertySimplePU'
+  00ab [610b                  ] sta v:out:any v=11
+  00ad [03                    ] ldfalse
+  00ae [610c                  ] sta v:out:any v=12
+  00b0 [6002                  ] lda v:in:any v=2
+  00b2 [fe0700                ] throw.ifsupernotcorrectcall imm:u16 imm=0
+  00b5 [610d                  ] sta v:out:any v=13
+  00b7 [3e6b00                ] lda.str string_id id=107 -> string_id 0x1adc 'isDialogShow'
+  00ba [610e                  ] sta v:out:any v=14
+  00bc [0810040b              ] newobjrange imm1:u16, imm2:u8, v:in:top imm1=16 imm2=4 v=11
+  00c0 [43124a000a            ] stobjbyname imm:u16, string_id, v:in:top imm=18 id=74 -> string_id 0x1920 '__isDialogShow' v=10
+  00c5 [6002                  ] lda v:in:any v=2
+  00c7 [fe0700                ] throw.ifsupernotcorrectcall imm:u16 imm=0
+  00ca [610a                  ] sta v:out:any v=10
+  00cc [3f144000              ] tryldglobalbyname imm:u16, string_id imm=20 id=64 -> string_id 0x1899 'ObservedPropertySimplePU'
+  00d0 [610b                  ] sta v:out:any v=11
+  00d2 [3e2800                ] lda.str string_id id=40 -> string_id 0x1226 ''
+  00d5 [610c                  ] sta v:out:any v=12
+  00d7 [6002                  ] lda v:in:any v=2
+  00d9 [fe0700                ] throw.ifsupernotcorrectcall imm:u16 imm=0
+  00dc [610d                  ] sta v:out:any v=13
+  00de [3e5700                ] lda.str string_id id=87 -> string_id 0x1a0d 'dialogMessage'
+  00e1 [610e                  ] sta v:out:any v=14
+  00e3 [0815040b              ] newobjrange imm1:u16, imm2:u8, v:in:top imm1=21 imm2=4 v=11
+  00e7 [431748000a            ] stobjbyname imm:u16, string_id, v:in:top imm=23 id=72 -> string_id 0x1902 '__dialogMessage' v=10
+  00ec [6002                  ] lda v:in:any v=2
+  00ee [fe0700                ] throw.ifsupernotcorrectcall imm:u16 imm=0
+  00f1 [610a                  ] sta v:out:any v=10
+  00f3 [0619b600              ] createarraywithbuffer imm:u16, literalarray_id imm=25 id=182 -> literalarray_id 0x265a
+  00f7 [610b                  ] sta v:out:any v=11
+  00f9 [431a88000a            ] stobjbyname imm:u16, string_id, v:in:top imm=26 id=136 -> string_id 0x1c42 'targetCipher' v=10
+  00fe [6002                  ] lda v:in:any v=2
+  0100 [fe0700                ] throw.ifsupernotcorrectcall imm:u16 imm=0
+  0103 [610a                  ] sta v:out:any v=10
+  0105 [3e3e00                ] lda.str string_id id=62 -> string_id 0x1883 'OHCTF2025'
+  0108 [431c82000a            ] stobjbyname imm:u16, string_id, v:in:top imm=28 id=130 -> string_id 0x1bf2 'secretKey' v=10
+  010d [6002                  ] lda v:in:any v=2
+  010f [fe0700                ] throw.ifsupernotcorrectcall imm:u16 imm=0
+  0112 [610a                  ] sta v:out:any v=10
+  0114 [3f1e4000              ] tryldglobalbyname imm:u16, string_id imm=30 id=64 -> string_id 0x1899 'ObservedPropertySimplePU'
+  0118 [610b                  ] sta v:out:any v=11
+  011a [03                    ] ldfalse
+  011b [610c                  ] sta v:out:any v=12
+  011d [6002                  ] lda v:in:any v=2
+  011f [fe0700                ] throw.ifsupernotcorrectcall imm:u16 imm=0
+  0122 [610d                  ] sta v:out:any v=13
+  0124 [3e6c00                ] lda.str string_id id=108 -> string_id 0x1aea 'isInitialized'
+  0127 [610e                  ] sta v:out:any v=14
+  0129 [081f040b              ] newobjrange imm1:u16, imm2:u8, v:in:top imm1=31 imm2=4 v=11
+  012d [43214b000a            ] stobjbyname imm:u16, string_id, v:in:top imm=33 id=75 -> string_id 0x1930 '__isInitialized' v=10
+  0132 [6002                  ] lda v:in:any v=2
+  0134 [fe0700                ] throw.ifsupernotcorrectcall imm:u16 imm=0
+  0137 [610b                  ] sta v:out:any v=11
+  0139 [600b                  ] lda v:in:any v=11
+  013b [42238400              ] ldobjbyname imm:u16, string_id imm=35 id=132 -> string_id 0x1c02 'setInitiallyProvidedValue'
+  013f [610a                  ] sta v:out:any v=10
+  0141 [6004                  ] lda v:in:any v=4
+  0143 [610c                  ] sta v:out:any v=12
+  0145 [600a                  ] lda v:in:any v=10
+  0147 [2e250b0c              ] callthis1 imm:u8, v1:in:top, v2:in:top imm=37 v1=11 v2=12
+  014b [6002                  ] lda v:in:any v=2
+  014d [fe0700                ] throw.ifsupernotcorrectcall imm:u16 imm=0
+  0150 [610b                  ] sta v:out:any v=11
+  0152 [600b                  ] lda v:in:any v=11
+  0154 [42275c00              ] ldobjbyname imm:u16, string_id imm=39 id=92 -> string_id 0x1a43 'finalizeConstruction'
+  0158 [610a                  ] sta v:out:any v=10
+  015a [600a                  ] lda v:in:any v=10
+  015c [2d290b                ] callthis0 imm:u8, v:in:top imm=41 v=11
+  015f [6002                  ] lda v:in:any v=2
+  0161 [fe0700                ] throw.ifsupernotcorrectcall imm:u16 imm=0
+  0164 [64                    ] return
+METHOD #~@0>#modPow class=L&entry/src/main/ets/pages/Index&; rec=0x836 code=0x346d insn=0x3472 vregs=11 args=6 size=177 tries=0
+  0000 [44b0                  ] mov v1:out:any, v2:in:any v1=0 v2=11
+  0002 [44c1                  ] mov v1:out:any, v2:in:any v1=1 v2=12
+  0004 [44d2                  ] mov v1:out:any, v2:in:any v1=2 v2=13
+  0006 [44e3                  ] mov v1:out:any, v2:in:any v1=3 v2=14
+  0008 [44f4                  ] mov v1:out:any, v2:in:any v1=4 v2=15
+  000a [450510                ] mov v1:out:any, v2:in:any v1=5 v2=16
+  000d [6005                  ] lda v:in:any v=5
+  000f [6108                  ] sta v:out:any v=8
+  0011 [6200000000            ] ldai imm:i32 imm=0
+  0016 [280008                ] stricteq imm:u8, v:in:top imm=0 v=8
+  0019 [4f13                  ] jeqz imm:i32 imm=19
+  001b [3f013800              ] tryldglobalbyname imm:u16, string_id imm=1 id=56 -> string_id 0x1846 'Error'
+  001f [6108                  ] sta v:out:any v=8
+  0021 [3e3d00                ] lda.str string_id id=61 -> string_id 0x186a 'Modulus cannot be zero.'
+  0024 [6109                  ] sta v:out:any v=9
+  0026 [08020208              ] newobjrange imm1:u16, imm2:u8, v:in:top imm1=2 imm2=2 v=8
+  002a [fe00                  ] throw
+  002c [6201000000            ] ldai imm:i32 imm=1
+  0031 [6106                  ] sta v:out:any v=6
+  0033 [6003                  ] lda v:in:any v=3
+  0035 [6108                  ] sta v:out:any v=8
+  0037 [6005                  ] lda v:in:any v=5
+  0039 [0e0408                ] mod2 imm:u8, v:in:top imm=4 v=8
+  003c [6103                  ] sta v:out:any v=3
+  003e [6004                  ] lda v:in:any v=4
+  0040 [6108                  ] sta v:out:any v=8
+  0042 [6200000000            ] ldai imm:i32 imm=0
+  0047 [130508                ] greater imm:u8, v:in:top imm=5 v=8
+  004a [4f64                  ] jeqz imm:i32 imm=100
+  004c [6004                  ] lda v:in:any v=4
+  004e [6109                  ] sta v:out:any v=9
+  0050 [6202000000            ] ldai imm:i32 imm=2
+  0055 [0e0609                ] mod2 imm:u8, v:in:top imm=6 v=9
+  0058 [6108                  ] sta v:out:any v=8
+  005a [6201000000            ] ldai imm:i32 imm=1
+  005f [280708                ] stricteq imm:u8, v:in:top imm=7 v=8
+  0062 [4f14                  ] jeqz imm:i32 imm=20
+  0064 [6006                  ] lda v:in:any v=6
+  0066 [6109                  ] sta v:out:any v=9
+  0068 [6003                  ] lda v:in:any v=3
+  006a [0c0809                ] mul2 imm:u8, v:in:top imm=8 v=9
+  006d [6108                  ] sta v:out:any v=8
+  006f [6005                  ] lda v:in:any v=5
+  0071 [0e0908                ] mod2 imm:u8, v:in:top imm=9 v=8
+  0074 [6106                  ] sta v:out:any v=6
+  0076 [6003                  ] lda v:in:any v=3
+  0078 [6109                  ] sta v:out:any v=9
+  007a [6003                  ] lda v:in:any v=3
+  007c [0c0a09                ] mul2 imm:u8, v:in:top imm=10 v=9
+  007f [6108                  ] sta v:out:any v=8
+  0081 [6005                  ] lda v:in:any v=5
+  0083 [0e0b08                ] mod2 imm:u8, v:in:top imm=11 v=8
+  0086 [6103                  ] sta v:out:any v=3
+  0088 [3f0c3c00              ] tryldglobalbyname imm:u16, string_id imm=12 id=60 -> string_id 0x1864 'Math'
+  008c [6109                  ] sta v:out:any v=9
+  008e [6009                  ] lda v:in:any v=9
+  0090 [420d5d00              ] ldobjbyname imm:u16, string_id imm=13 id=93 -> string_id 0x1a59 'floor'
+  0094 [6108                  ] sta v:out:any v=8
+  0096 [6004                  ] lda v:in:any v=4
+  0098 [610a                  ] sta v:out:any v=10
+  009a [6202000000            ] ldai imm:i32 imm=2
+  009f [0d0f0a                ] div2 imm:u8, v:in:top imm=15 v=10
+  00a2 [610a                  ] sta v:out:any v=10
+  00a4 [6008                  ] lda v:in:any v=8
+  00a6 [2e10090a              ] callthis1 imm:u8, v1:in:top, v2:in:top imm=16 v1=9 v2=10
+  00aa [6104                  ] sta v:out:any v=4
+  00ac [4d92                  ] jmp imm:i32 imm=146
+  00ae [6006                  ] lda v:in:any v=6
+  00b0 [64                    ] return
+METHOD #~@0>#rc4Encrypt class=L&entry/src/main/ets/pages/Index&; rec=0x8f6 code=0x35e4 insn=0x35e9 vregs=21 args=5 size=573 tries=0
+  0000 [450015                ] mov v1:out:any, v2:in:any v1=0 v2=21
+  0003 [450116                ] mov v1:out:any, v2:in:any v1=1 v2=22
+  0006 [450217                ] mov v1:out:any, v2:in:any v1=2 v2=23
+  0009 [450318                ] mov v1:out:any, v2:in:any v1=3 v2=24
+  000c [450419                ] mov v1:out:any, v2:in:any v1=4 v2=25
+  000f [0500                  ] createemptyarray imm:u16 imm=0
+  0011 [610a                  ] sta v:out:any v=10
+  0013 [6108                  ] sta v:out:any v=8
+  0015 [6200000000            ] ldai imm:i32 imm=0
+  001a [6106                  ] sta v:out:any v=6
+  001c [6200000000            ] ldai imm:i32 imm=0
+  0021 [6107                  ] sta v:out:any v=7
+  0023 [6200000000            ] ldai imm:i32 imm=0
+  0028 [6106                  ] sta v:out:any v=6
+  002a [6006                  ] lda v:in:any v=6
+  002c [610a                  ] sta v:out:any v=10
+  002e [6200010000            ] ldai imm:i32 imm=256
+  0033 [11010a                ] less imm:u8, v:in:top imm=1 v=10
+  0036 [4f2c                  ] jeqz imm:i32 imm=44
+  0038 [6008                  ] lda v:in:any v=8
+  003a [610b                  ] sta v:out:any v=11
+  003c [600b                  ] lda v:in:any v=11
+  003e [42027c00              ] ldobjbyname imm:u16, string_id imm=2 id=124 -> string_id 0x1bae 'push'
+  0042 [610a                  ] sta v:out:any v=10
+  0044 [6006                  ] lda v:in:any v=6
+  0046 [610c                  ] sta v:out:any v=12
+  0048 [600a                  ] lda v:in:any v=10
+  004a [2e040b0c              ] callthis1 imm:u8, v1:in:top, v2:in:top imm=4 v1=11 v2=12
+  004e [6006                  ] lda v:in:any v=6
+  0050 [610a                  ] sta v:out:any v=10
+  0052 [600a                  ] lda v:in:any v=10
+  0054 [1e06                  ] tonumeric imm:u8 imm=6
+  0056 [610a                  ] sta v:out:any v=10
+  0058 [600a                  ] lda v:in:any v=10
+  005a [2107                  ] inc imm:u8 imm=7
+  005c [6106                  ] sta v:out:any v=6
+  005e [600a                  ] lda v:in:any v=10
+  0060 [4dca                  ] jmp imm:i32 imm=202
+  0062 [6200000000            ] ldai imm:i32 imm=0
+  0067 [6106                  ] sta v:out:any v=6
+  0069 [6006                  ] lda v:in:any v=6
+  006b [610a                  ] sta v:out:any v=10
+  006d [6200010000            ] ldai imm:i32 imm=256
+  0072 [11080a                ] less imm:u8, v:in:top imm=8 v=10
+  0075 [509800                ] jeqz imm:i32 imm=152
+  0078 [6007                  ] lda v:in:any v=7
+  007a [610d                  ] sta v:out:any v=13
+  007c [6008                  ] lda v:in:any v=8
+  007e [610e                  ] sta v:out:any v=14
+  0080 [6007                  ] lda v:in:any v=7
+  0082 [610f                  ] sta v:out:any v=15
+  0084 [600f                  ] lda v:in:any v=15
+  0086 [37090e                ] ldobjbyvalue imm:u16, v:in:top imm=9 v=14
+  0089 [0a0b0d                ] add2 imm:u8, v:in:top imm=11 v=13
+  008c [610c                  ] sta v:out:any v=12
+  008e [6003                  ] lda v:in:any v=3
+  0090 [610e                  ] sta v:out:any v=14
+  0092 [600e                  ] lda v:in:any v=14
+  0094 [420c5100              ] ldobjbyname imm:u16, string_id imm=12 id=81 -> string_id 0x19c9 'charCodeAt'
+  0098 [610d                  ] sta v:out:any v=13
+  009a [6007                  ] lda v:in:any v=7
+  009c [610f                  ] sta v:out:any v=15
+  009e [6003                  ] lda v:in:any v=3
+  00a0 [6110                  ] sta v:out:any v=16
+  00a2 [6010                  ] lda v:in:any v=16
+  00a4 [420e6e00              ] ldobjbyname imm:u16, string_id imm=14 id=110 -> string_id 0x1b09 'length'
+  00a8 [0e100f                ] mod2 imm:u8, v:in:top imm=16 v=15
+  00ab [610f                  ] sta v:out:any v=15
+  00ad [600d                  ] lda v:in:any v=13
+  00af [2e110e0f              ] callthis1 imm:u8, v1:in:top, v2:in:top imm=17 v1=14 v2=15
+  00b3 [0a130c                ] add2 imm:u8, v:in:top imm=19 v=12
+  00b6 [610b                  ] sta v:out:any v=11
+  00b8 [6200010000            ] ldai imm:i32 imm=256
+  00bd [0e140b                ] mod2 imm:u8, v:in:top imm=20 v=11
+  00c0 [6107                  ] sta v:out:any v=7
+  00c2 [6008                  ] lda v:in:any v=8
+  00c4 [610b                  ] sta v:out:any v=11
+  00c6 [6006                  ] lda v:in:any v=6
+  00c8 [610c                  ] sta v:out:any v=12
+  00ca [600c                  ] lda v:in:any v=12
+  00cc [37150b                ] ldobjbyvalue imm:u16, v:in:top imm=21 v=11
+  00cf [610a                  ] sta v:out:any v=10
+  00d1 [6008                  ] lda v:in:any v=8
+  00d3 [610b                  ] sta v:out:any v=11
+  00d5 [6006                  ] lda v:in:any v=6
+  00d7 [610c                  ] sta v:out:any v=12
+  00d9 [6008                  ] lda v:in:any v=8
+  00db [610d                  ] sta v:out:any v=13
+  00dd [6007                  ] lda v:in:any v=7
+  00df [610e                  ] sta v:out:any v=14
+  00e1 [600e                  ] lda v:in:any v=14
+  00e3 [37170d                ] ldobjbyvalue imm:u16, v:in:top imm=23 v=13
+  00e6 [38190b0c              ] stobjbyvalue imm:u16, v1:in:top, v2:in:top imm=25 v1=11 v2=12
+  00ea [6008                  ] lda v:in:any v=8
+  00ec [610b                  ] sta v:out:any v=11
+  00ee [6007                  ] lda v:in:any v=7
+  00f0 [610c                  ] sta v:out:any v=12
+  00f2 [600a                  ] lda v:in:any v=10
+  00f4 [381b0b0c              ] stobjbyvalue imm:u16, v1:in:top, v2:in:top imm=27 v1=11 v2=12
+  00f8 [6006                  ] lda v:in:any v=6
+  00fa [610a                  ] sta v:out:any v=10
+  00fc [600a                  ] lda v:in:any v=10
+  00fe [1e1d                  ] tonumeric imm:u8 imm=29
+  0100 [610a                  ] sta v:out:any v=10
+  0102 [600a                  ] lda v:in:any v=10
+  0104 [211e                  ] inc imm:u8 imm=30
+  0106 [6106                  ] sta v:out:any v=6
+  0108 [600a                  ] lda v:in:any v=10
+  010a [4e5fff                ] jmp imm:i32 imm=65375
+  010d [6200000000            ] ldai imm:i32 imm=0
+  0112 [6106                  ] sta v:out:any v=6
+  0114 [6200000000            ] ldai imm:i32 imm=0
+  0119 [6107                  ] sta v:out:any v=7
+  011b [3f1f4500              ] tryldglobalbyname imm:u16, string_id imm=31 id=69 -> string_id 0x18e7 'Uint8Array'
+  011f [610a                  ] sta v:out:any v=10
+  0121 [6004                  ] lda v:in:any v=4
+  0123 [610c                  ] sta v:out:any v=12
+  0125 [600c                  ] lda v:in:any v=12
+  0127 [42206e00              ] ldobjbyname imm:u16, string_id imm=32 id=110 -> string_id 0x1b09 'length'
+  012b [610b                  ] sta v:out:any v=11
+  012d [0822020a              ] newobjrange imm1:u16, imm2:u8, v:in:top imm1=34 imm2=2 v=10
+  0131 [6105                  ] sta v:out:any v=5
+  0133 [6200000000            ] ldai imm:i32 imm=0
+  0138 [610b                  ] sta v:out:any v=11
+  013a [600b                  ] lda v:in:any v=11
+  013c [610c                  ] sta v:out:any v=12
+  013e [6004                  ] lda v:in:any v=4
+  0140 [610d                  ] sta v:out:any v=13
+  0142 [600d                  ] lda v:in:any v=13
+  0144 [42246e00              ] ldobjbyname imm:u16, string_id imm=36 id=110 -> string_id 0x1b09 'length'
+  0148 [11260c                ] less imm:u8, v:in:top imm=38 v=12
+  014b [50ef00                ] jeqz imm:i32 imm=239
+  014e [6006                  ] lda v:in:any v=6
+  0150 [610f                  ] sta v:out:any v=15
+  0152 [6201000000            ] ldai imm:i32 imm=1
+  0157 [0a270f                ] add2 imm:u8, v:in:top imm=39 v=15
+  015a [610e                  ] sta v:out:any v=14
+  015c [6200010000            ] ldai imm:i32 imm=256
+  0161 [0e280e                ] mod2 imm:u8, v:in:top imm=40 v=14
+  0164 [6106                  ] sta v:out:any v=6
+  0166 [6007                  ] lda v:in:any v=7
+  0168 [610f                  ] sta v:out:any v=15
+  016a [6008                  ] lda v:in:any v=8
+  016c [6110                  ] sta v:out:any v=16
+  016e [6006                  ] lda v:in:any v=6
+  0170 [6111                  ] sta v:out:any v=17
+  0172 [6011                  ] lda v:in:any v=17
+  0174 [372910                ] ldobjbyvalue imm:u16, v:in:top imm=41 v=16
+  0177 [0a2b0f                ] add2 imm:u8, v:in:top imm=43 v=15
+  017a [610e                  ] sta v:out:any v=14
+  017c [6200010000            ] ldai imm:i32 imm=256
+  0181 [0e2c0e                ] mod2 imm:u8, v:in:top imm=44 v=14
+  0184 [6107                  ] sta v:out:any v=7
+  0186 [6008                  ] lda v:in:any v=8
+  0188 [610e                  ] sta v:out:any v=14
+  018a [6006                  ] lda v:in:any v=6
+  018c [610f                  ] sta v:out:any v=15
+  018e [600f                  ] lda v:in:any v=15
+  0190 [372d0e                ] ldobjbyvalue imm:u16, v:in:top imm=45 v=14
+  0193 [610d                  ] sta v:out:any v=13
+  0195 [6008                  ] lda v:in:any v=8
+  0197 [610e                  ] sta v:out:any v=14
+  0199 [6006                  ] lda v:in:any v=6
+  019b [610f                  ] sta v:out:any v=15
+  019d [6008                  ] lda v:in:any v=8
+  019f [6110                  ] sta v:out:any v=16
+  01a1 [6007                  ] lda v:in:any v=7
+  01a3 [6111                  ] sta v:out:any v=17
+  01a5 [6011                  ] lda v:in:any v=17
+  01a7 [372f10                ] ldobjbyvalue imm:u16, v:in:top imm=47 v=16
+  01aa [38310e0f              ] stobjbyvalue imm:u16, v1:in:top, v2:in:top imm=49 v1=14 v2=15
+  01ae [6008                  ] lda v:in:any v=8
+  01b0 [610e                  ] sta v:out:any v=14
+  01b2 [6007                  ] lda v:in:any v=7
+  01b4 [610f                  ] sta v:out:any v=15
+  01b6 [600d                  ] lda v:in:any v=13
+  01b8 [38330e0f              ] stobjbyvalue imm:u16, v1:in:top, v2:in:top imm=51 v1=14 v2=15
+  01bc [6008                  ] lda v:in:any v=8
+  01be [610e                  ] sta v:out:any v=14
+  01c0 [6008                  ] lda v:in:any v=8
+  01c2 [6112                  ] sta v:out:any v=18
+  01c4 [6006                  ] lda v:in:any v=6
+  01c6 [6113                  ] sta v:out:any v=19
+  01c8 [6013                  ] lda v:in:any v=19
+  01ca [373512                ] ldobjbyvalue imm:u16, v:in:top imm=53 v=18
+  01cd [6111                  ] sta v:out:any v=17
+  01cf [6008                  ] lda v:in:any v=8
+  01d1 [6112                  ] sta v:out:any v=18
+  01d3 [6007                  ] lda v:in:any v=7
+  01d5 [6113                  ] sta v:out:any v=19
+  01d7 [6013                  ] lda v:in:any v=19
+  01d9 [373712                ] ldobjbyvalue imm:u16, v:in:top imm=55 v=18
+  01dc [0a3911                ] add2 imm:u8, v:in:top imm=57 v=17
+  01df [6110                  ] sta v:out:any v=16
+  01e1 [6200010000            ] ldai imm:i32 imm=256
+  01e6 [0e3a10                ] mod2 imm:u8, v:in:top imm=58 v=16
+  01e9 [610f                  ] sta v:out:any v=15
+  01eb [600f                  ] lda v:in:any v=15
+  01ed [373b0e                ] ldobjbyvalue imm:u16, v:in:top imm=59 v=14
+  01f0 [610c                  ] sta v:out:any v=12
+  01f2 [6005                  ] lda v:in:any v=5
+  01f4 [610e                  ] sta v:out:any v=14
+  01f6 [600b                  ] lda v:in:any v=11
+  01f8 [610f                  ] sta v:out:any v=15
+  01fa [6004                  ] lda v:in:any v=4
+  01fc [6113                  ] sta v:out:any v=19
+  01fe [6013                  ] lda v:in:any v=19
+  0200 [423d5100              ] ldobjbyname imm:u16, string_id imm=61 id=81 -> string_id 0x19c9 'charCodeAt'
+  0204 [6112                  ] sta v:out:any v=18
+  0206 [600b                  ] lda v:in:any v=11
+  0208 [6114                  ] sta v:out:any v=20
+  020a [6012                  ] lda v:in:any v=18
+  020c [2e3f1314              ] callthis1 imm:u8, v1:in:top, v2:in:top imm=63 v1=19 v2=20
+  0210 [6111                  ] sta v:out:any v=17
+  0212 [600c                  ] lda v:in:any v=12
+  0214 [0a4111                ] add2 imm:u8, v:in:top imm=65 v=17
+  0217 [6110                  ] sta v:out:any v=16
+  0219 [6200010000            ] ldai imm:i32 imm=256
+  021e [0e4210                ] mod2 imm:u8, v:in:top imm=66 v=16
+  0221 [38430e0f              ] stobjbyvalue imm:u16, v1:in:top, v2:in:top imm=67 v1=14 v2=15
+  0225 [600b                  ] lda v:in:any v=11
+  0227 [610c                  ] sta v:out:any v=12
+  0229 [600c                  ] lda v:in:any v=12
+  022b [1e45                  ] tonumeric imm:u8 imm=69
+  022d [610c                  ] sta v:out:any v=12
+  022f [600c                  ] lda v:in:any v=12
+  0231 [2146                  ] inc imm:u8 imm=70
+  0233 [610b                  ] sta v:out:any v=11
+  0235 [600c                  ] lda v:in:any v=12
+  0237 [4e03ff                ] jmp imm:i32 imm=65283
+  023a [6005                  ] lda v:in:any v=5
+  023c [64                    ] return
+METHOD #~@0>#rsaEncrypt class=L&entry/src/main/ets/pages/Index&; rec=0x911 code=0x3843 insn=0x3848 vregs=17 args=4 size=136 tries=0
+  0000 [450011                ] mov v1:out:any, v2:in:any v1=0 v2=17
+  0003 [450112                ] mov v1:out:any, v2:in:any v1=1 v2=18
+  0006 [450213                ] mov v1:out:any, v2:in:any v1=2 v2=19
+  0009 [450314                ] mov v1:out:any, v2:in:any v1=3 v2=20
+  000c [0500                  ] createemptyarray imm:u16 imm=0
+  000e [6108                  ] sta v:out:any v=8
+  0010 [6105                  ] sta v:out:any v=5
+  0012 [623b250100            ] ldai imm:i32 imm=75067
+  0017 [6104                  ] sta v:out:any v=4
+  0019 [6207000000            ] ldai imm:i32 imm=7
+  001e [6106                  ] sta v:out:any v=6
+  0020 [6200000000            ] ldai imm:i32 imm=0
+  0025 [6109                  ] sta v:out:any v=9
+  0027 [6009                  ] lda v:in:any v=9
+  0029 [610a                  ] sta v:out:any v=10
+  002b [6003                  ] lda v:in:any v=3
+  002d [610b                  ] sta v:out:any v=11
+  002f [600b                  ] lda v:in:any v=11
+  0031 [42016e00              ] ldobjbyname imm:u16, string_id imm=1 id=110 -> string_id 0x1b09 'length'
+  0035 [11030a                ] less imm:u8, v:in:top imm=3 v=10
+  0038 [4f4d                  ] jeqz imm:i32 imm=77
+  003a [6005                  ] lda v:in:any v=5
+  003c [610a                  ] sta v:out:any v=10
+  003e [6009                  ] lda v:in:any v=9
+  0040 [610b                  ] sta v:out:any v=11
+  0042 [6002                  ] lda v:in:any v=2
+  0044 [610d                  ] sta v:out:any v=13
+  0046 [600d                  ] lda v:in:any v=13
+  0048 [42047200              ] ldobjbyname imm:u16, string_id imm=4 id=114 -> string_id 0x1b27 'modPow'
+  004c [610c                  ] sta v:out:any v=12
+  004e [6003                  ] lda v:in:any v=3
+  0050 [610e                  ] sta v:out:any v=14
+  0052 [6009                  ] lda v:in:any v=9
+  0054 [610f                  ] sta v:out:any v=15
+  0056 [600f                  ] lda v:in:any v=15
+  0058 [37060e                ] ldobjbyvalue imm:u16, v:in:top imm=6 v=14
+  005b [610e                  ] sta v:out:any v=14
+  005d [6006                  ] lda v:in:any v=6
+  005f [610f                  ] sta v:out:any v=15
+  0061 [6004                  ] lda v:in:any v=4
+  0063 [6110                  ] sta v:out:any v=16
+  0065 [600c                  ] lda v:in:any v=12
+  0067 [30080d0e0f10          ] callthis3 imm:u8, v1:in:top, v2:in:top, v3:in:top, v4:in:top imm=8 v1=13 v2=14 v3=15 v4=16
+  006d [380a0a0b              ] stobjbyvalue imm:u16, v1:in:top, v2:in:top imm=10 v1=10 v2=11
+  0071 [6009                  ] lda v:in:any v=9
+  0073 [610a                  ] sta v:out:any v=10
+  0075 [600a                  ] lda v:in:any v=10
+  0077 [1e0c                  ] tonumeric imm:u8 imm=12
+  0079 [610a                  ] sta v:out:any v=10
+  007b [600a                  ] lda v:in:any v=10
+  007d [210d                  ] inc imm:u8 imm=13
+  007f [6109                  ] sta v:out:any v=9
+  0081 [600a                  ] lda v:in:any v=10
+  0083 [4da4                  ] jmp imm:i32 imm=164
+  0085 [6005                  ] lda v:in:any v=5
+  0087 [64                    ] return
+METHOD #~@0>#handleCheck class=L&entry/src/main/ets/pages/Index&; rec=0x92c code=0x317b insn=0x3180 vregs=15 args=3 size=354 tries=0
+  0000 [b602b500              ] newlexenvwithname imm:u8, literalarray_id imm=2 id=181 -> literalarray_id 0x263d
+  0004 [44f0                  ] mov v1:out:any, v2:in:any v1=0 v2=15
+  0006 [6010                  ] lda v:in:any v=16
+  0008 [3d00                  ] stlexvar imm1:u8, imm2:u8 imm1=0 imm2=0
+  000a [6011                  ] lda v:in:any v=17
+  000c [3d10                  ] stlexvar imm1:u8, imm2:u8 imm1=0 imm2=1
+  000e [3c10                  ] ldlexvar imm1:u8, imm2:u8 imm1=0 imm2=1
+  0010 [6109                  ] sta v:out:any v=9
+  0012 [6009                  ] lda v:in:any v=9
+  0014 [42005900              ] ldobjbyname imm:u16, string_id imm=0 id=89 -> string_id 0x1a22 'enc'
+  0018 [6108                  ] sta v:out:any v=8
+  001a [3c10                  ] ldlexvar imm1:u8, imm2:u8 imm1=0 imm2=1
+  001c [610a                  ] sta v:out:any v=10
+  001e [600a                  ] lda v:in:any v=10
+  0020 [42026a00              ] ldobjbyname imm:u16, string_id imm=2 id=106 -> string_id 0x1ad1 'inputText'
+  0024 [610a                  ] sta v:out:any v=10
+  0026 [6008                  ] lda v:in:any v=8
+  0028 [2e04090a              ] callthis1 imm:u8, v1:in:top, v2:in:top imm=4 v1=9 v2=10
+  002c [6103                  ] sta v:out:any v=3
+  002e [03                    ] ldfalse
+  002f [6105                  ] sta v:out:any v=5
+  0031 [3e2800                ] lda.str string_id id=40 -> string_id 0x1226 ''
+  0034 [6104                  ] sta v:out:any v=4
+  0036 [6200000000            ] ldai imm:i32 imm=0
+  003b [6106                  ] sta v:out:any v=6
+  003d [6200000000            ] ldai imm:i32 imm=0
+  0042 [6109                  ] sta v:out:any v=9
+  0044 [6009                  ] lda v:in:any v=9
+  0046 [610a                  ] sta v:out:any v=10
+  0048 [6003                  ] lda v:in:any v=3
+  004a [610b                  ] sta v:out:any v=11
+  004c [600b                  ] lda v:in:any v=11
+  004e [42066e00              ] ldobjbyname imm:u16, string_id imm=6 id=110 -> string_id 0x1b09 'length'
+  0052 [11080a                ] less imm:u8, v:in:top imm=8 v=10
+  0055 [507900                ] jeqz imm:i32 imm=121
+  0058 [6003                  ] lda v:in:any v=3
+  005a [610b                  ] sta v:out:any v=11
+  005c [6009                  ] lda v:in:any v=9
+  005e [610c                  ] sta v:out:any v=12
+  0060 [600c                  ] lda v:in:any v=12
+  0062 [37090b                ] ldobjbyvalue imm:u16, v:in:top imm=9 v=11
+  0065 [610a                  ] sta v:out:any v=10
+  0067 [3c10                  ] ldlexvar imm1:u8, imm2:u8 imm1=0 imm2=1
+  0069 [610c                  ] sta v:out:any v=12
+  006b [600c                  ] lda v:in:any v=12
+  006d [420b8800              ] ldobjbyname imm:u16, string_id imm=11 id=136 -> string_id 0x1c42 'targetCipher'
+  0071 [610b                  ] sta v:out:any v=11
+  0073 [6009                  ] lda v:in:any v=9
+  0075 [610c                  ] sta v:out:any v=12
+  0077 [600c                  ] lda v:in:any v=12
+  0079 [370d0b                ] ldobjbyvalue imm:u16, v:in:top imm=13 v=11
+  007c [280f0a                ] stricteq imm:u8, v:in:top imm=15 v=10
+  007f [4f14                  ] jeqz imm:i32 imm=20
+  0081 [6006                  ] lda v:in:any v=6
+  0083 [610a                  ] sta v:out:any v=10
+  0085 [600a                  ] lda v:in:any v=10
+  0087 [1e10                  ] tonumeric imm:u8 imm=16
+  0089 [610a                  ] sta v:out:any v=10
+  008b [600a                  ] lda v:in:any v=10
+  008d [2111                  ] inc imm:u8 imm=17
+  008f [6106                  ] sta v:out:any v=6
+  0091 [600a                  ] lda v:in:any v=10
+  0093 [6004                  ] lda v:in:any v=4
+  0095 [610a                  ] sta v:out:any v=10
+  0097 [3e2900                ] lda.str string_id id=41 -> string_id 0x1228 '"'
+  009a [610c                  ] sta v:out:any v=12
+  009c [6003                  ] lda v:in:any v=3
+  009e [610d                  ] sta v:out:any v=13
+  00a0 [6009                  ] lda v:in:any v=9
+  00a2 [610e                  ] sta v:out:any v=14
+  00a4 [600e                  ] lda v:in:any v=14
+  00a6 [37120d                ] ldobjbyvalue imm:u16, v:in:top imm=18 v=13
+  00a9 [0a140c                ] add2 imm:u8, v:in:top imm=20 v=12
+  00ac [610b                  ] sta v:out:any v=11
+  00ae [3e2a00                ] lda.str string_id id=42 -> string_id 0x122b '",\n'
+  00b1 [0a150b                ] add2 imm:u8, v:in:top imm=21 v=11
+  00b4 [0a160a                ] add2 imm:u8, v:in:top imm=22 v=10
+  00b7 [6104                  ] sta v:out:any v=4
+  00b9 [6009                  ] lda v:in:any v=9
+  00bb [610a                  ] sta v:out:any v=10
+  00bd [600a                  ] lda v:in:any v=10
+  00bf [1e17                  ] tonumeric imm:u8 imm=23
+  00c1 [610a                  ] sta v:out:any v=10
+  00c3 [600a                  ] lda v:in:any v=10
+  00c5 [2118                  ] inc imm:u8 imm=24
+  00c7 [6109                  ] sta v:out:any v=9
+  00c9 [600a                  ] lda v:in:any v=10
+  00cb [4e79ff                ] jmp imm:i32 imm=65401
+  00ce [6006                  ] lda v:in:any v=6
+  00d0 [6108                  ] sta v:out:any v=8
+  00d2 [3c10                  ] ldlexvar imm1:u8, imm2:u8 imm1=0 imm2=1
+  00d4 [610a                  ] sta v:out:any v=10
+  00d6 [600a                  ] lda v:in:any v=10
+  00d8 [42198800              ] ldobjbyname imm:u16, string_id imm=25 id=136 -> string_id 0x1c42 'targetCipher'
+  00dc [6109                  ] sta v:out:any v=9
+  00de [6009                  ] lda v:in:any v=9
+  00e0 [421b6e00              ] ldobjbyname imm:u16, string_id imm=27 id=110 -> string_id 0x1b09 'length'
+  00e4 [281d08                ] stricteq imm:u8, v:in:top imm=29 v=8
+  00e7 [4f05                  ] jeqz imm:i32 imm=5
+  00e9 [02                    ] ldtrue
+  00ea [6105                  ] sta v:out:any v=5
+  00ec [3f1e5200              ] tryldglobalbyname imm:u16, string_id imm=30 id=82 -> string_id 0x19d5 'console'
+  00f0 [6109                  ] sta v:out:any v=9
+  00f2 [6009                  ] lda v:in:any v=9
+  00f4 [421f6f00              ] ldobjbyname imm:u16, string_id imm=31 id=111 -> string_id 0x1b11 'log'
+  00f8 [6108                  ] sta v:out:any v=8
+  00fa [6004                  ] lda v:in:any v=4
+  00fc [610a                  ] sta v:out:any v=10
+  00fe [6008                  ] lda v:in:any v=8
+  0100 [2e21090a              ] callthis1 imm:u8, v1:in:top, v2:in:top imm=33 v1=9 v2=10
+  0104 [3c10                  ] ldlexvar imm1:u8, imm2:u8 imm1=0 imm2=1
+  0106 [6108                  ] sta v:out:any v=8
+  0108 [6005                  ] lda v:in:any v=5
+  010a [fb1423                ] callruntime.isfalse imm:u8 imm=35
+  010d [5107                  ] jnez imm:i32 imm=7
+  010f [3e9100                ] lda.str string_id id=145 -> string_id 0x1ca6 '\u6821\ufffd'
+  0112 [4d05                  ] jmp imm:i32 imm=5
+  0114 [3e9000                ] lda.str string_id id=144 -> string_id 0x1c98 '\u6821\ufffd'
+  0117 [4324570008            ] stobjbyname imm:u16, string_id, v:in:top imm=36 id=87 -> string_id 0x1a0d 'dialogMessage' v=8
+  011c [3f263100              ] tryldglobalbyname imm:u16, string_id imm=38 id=49 -> string_id 0x1805 'AlertDialog'
+  0120 [6109                  ] sta v:out:any v=9
+  0122 [6009                  ] lda v:in:any v=9
+  0124 [42278500              ] ldobjbyname imm:u16, string_id imm=39 id=133 -> string_id 0x1c1d 'show'
+  0128 [6108                  ] sta v:out:any v=8
+  012a [0729b300              ] createobjectwithbuffer imm:u16, literalarray_id imm=41 id=179 -> literalarray_id 0x260c
+  012e [610a                  ] sta v:out:any v=10
+  0130 [3c10                  ] ldlexvar imm1:u8, imm2:u8 imm1=0 imm2=1
+  0132 [610b                  ] sta v:out:any v=11
+  0134 [600b                  ] lda v:in:any v=11
+  0136 [422a5700              ] ldobjbyname imm:u16, string_id imm=42 id=87 -> string_id 0x1a0d 'dialogMessage'
+  013a [dc2c71000a            ] definepropertybyname imm:u8, string_id, v:in:top imm=44 id=113 -> string_id 0x1b1e 'message' v=10
+  013f [072eb400              ] createobjectwithbuffer imm:u16, literalarray_id imm=46 id=180 -> literalarray_id 0x2628
+  0143 [610b                  ] sta v:out:any v=11
+  0145 [332fa80000            ] definefunc imm1:u16, method_id, imm2:u8 imm1=47 id=168 -> method_id 0x8bf #~@0>@1*#action imm2=0
+  014a [dc304f000b            ] definepropertybyname imm:u8, string_id, v:in:top imm=48 id=79 -> string_id 0x19b0 'action' v=11
+  014f [600b                  ] lda v:in:any v=11
+  0151 [dc327a000a            ] definepropertybyname imm:u8, string_id, v:in:top imm=50 id=122 -> string_id 0x1b86 'primaryButton' v=10
+  0156 [600a                  ] lda v:in:any v=10
+  0158 [610a                  ] sta v:out:any v=10
+  015a [6008                  ] lda v:in:any v=8
+  015c [2e34090a              ] callthis1 imm:u8, v1:in:top, v2:in:top imm=52 v1=9 v2=10
+  0160 [00                    ] ldundefined
+  0161 [65                    ] returnundefined
+METHOD #~@0>#customBase64 class=L&entry/src/main/ets/pages/Index&; rec=0x97d code=0x2f14 insn=0x2f19 vregs=23 args=4 size=295 tries=3
+  0000 [450017                ] mov v1:out:any, v2:in:any v1=0 v2=23
+  0003 [450118                ] mov v1:out:any, v2:in:any v1=1 v2=24
+  0006 [450219                ] mov v1:out:any, v2:in:any v1=2 v2=25
+  0009 [45031a                ] mov v1:out:any, v2:in:any v1=3 v2=26
+  000c [7e00                  ] ldexternalmodulevar imm:u8 imm=0
+  000e [fe098c00              ] throw.undefinedifholewithname string_id id=140 -> string_id 0x1c76 'util'
+  0012 [610c                  ] sta v:out:any v=12
+  0014 [600c                  ] lda v:in:any v=12
+  0016 [42003300              ] ldobjbyname imm:u16, string_id imm=0 id=51 -> string_id 0x1819 'Base64Helper'
+  001a [610b                  ] sta v:out:any v=11
+  001c [0802010b              ] newobjrange imm1:u16, imm2:u8, v:in:top imm1=2 imm2=1 v=11
+  0020 [6105                  ] sta v:out:any v=5
+  0022 [6005                  ] lda v:in:any v=5
+  0024 [610c                  ] sta v:out:any v=12
+  0026 [600c                  ] lda v:in:any v=12
+  0028 [42045b00              ] ldobjbyname imm:u16, string_id imm=4 id=91 -> string_id 0x1a2f 'encodeToStringSync'
+  002c [610b                  ] sta v:out:any v=11
+  002e [6003                  ] lda v:in:any v=3
+  0030 [610d                  ] sta v:out:any v=13
+  0032 [600b                  ] lda v:in:any v=11
+  0034 [2e060c0d              ] callthis1 imm:u8, v1:in:top, v2:in:top imm=6 v1=12 v2=13
+  0038 [6109                  ] sta v:out:any v=9
+  003a [3e3000                ] lda.str string_id id=48 -> string_id 0x17c2 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/'
+  003d [6104                  ] sta v:out:any v=4
+  003f [3e4c00                ] lda.str string_id id=76 -> string_id 0x1941 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789+/'
+  0042 [6107                  ] sta v:out:any v=7
+  0044 [3f083200              ] tryldglobalbyname imm:u16, string_id imm=8 id=50 -> string_id 0x1812 'Array'
+  0048 [610c                  ] sta v:out:any v=12
+  004a [600c                  ] lda v:in:any v=12
+  004c [42095f00              ] ldobjbyname imm:u16, string_id imm=9 id=95 -> string_id 0x1a6b 'from'
+  0050 [610b                  ] sta v:out:any v=11
+  0052 [6007                  ] lda v:in:any v=7
+  0054 [610d                  ] sta v:out:any v=13
+  0056 [600b                  ] lda v:in:any v=11
+  0058 [2e0b0c0d              ] callthis1 imm:u8, v1:in:top, v2:in:top imm=11 v1=12 v2=13
+  005c [6106                  ] sta v:out:any v=6
+  005e [3e2800                ] lda.str string_id id=40 -> string_id 0x1226 ''
+  0061 [6108                  ] sta v:out:any v=8
+  0063 [6009                  ] lda v:in:any v=9
+  0065 [4d08                  ] jmp imm:i32 imm=8
+  0067 [610c                  ] sta v:out:any v=12
+  0069 [600c                  ] lda v:in:any v=12
+  006b [fe00                  ] throw
+  006d [670d                  ] getiterator imm:u16 imm=13
+  006f [610f                  ] sta v:out:any v=15
+  0071 [600f                  ] lda v:in:any v=15
+  0073 [420f7300              ] ldobjbyname imm:u16, string_id imm=15 id=115 -> string_id 0x1b2f 'next'
+  0077 [610e                  ] sta v:out:any v=14
+  0079 [03                    ] ldfalse
+  007a [610d                  ] sta v:out:any v=13
+  007c [600e                  ] lda v:in:any v=14
+  007e [2d110f                ] callthis0 imm:u8, v:in:top imm=17 v=15
+  0081 [6110                  ] sta v:out:any v=16
+  0083 [fe0510                ] throw.ifnotobject v:in:top v=16
+  0086 [6010                  ] lda v:in:any v=16
+  0088 [42135800              ] ldobjbyname imm:u16, string_id imm=19 id=88 -> string_id 0x1a1c 'done'
+  008c [fb1315                ] callruntime.istrue imm:u8 imm=21
+  008f [9b9500                ] jnez imm:i32 imm=149
+  0092 [6010                  ] lda v:in:any v=16
+  0094 [42168d00              ] ldobjbyname imm:u16, string_id imm=22 id=141 -> string_id 0x1c7c 'value'
+  0098 [6111                  ] sta v:out:any v=17
+  009a [6011                  ] lda v:in:any v=17
+  009c [6112                  ] sta v:out:any v=18
+  009e [6004                  ] lda v:in:any v=4
+  00a0 [6115                  ] sta v:out:any v=21
+  00a2 [6015                  ] lda v:in:any v=21
+  00a4 [42186700              ] ldobjbyname imm:u16, string_id imm=24 id=103 -> string_id 0x1aad 'indexOf'
+  00a8 [6114                  ] sta v:out:any v=20
+  00aa [6012                  ] lda v:in:any v=18
+  00ac [6116                  ] sta v:out:any v=22
+  00ae [6014                  ] lda v:in:any v=20
+  00b0 [2e1a1516              ] callthis1 imm:u8, v1:in:top, v2:in:top imm=26 v1=21 v2=22
+  00b4 [6113                  ] sta v:out:any v=19
+  00b6 [6008                  ] lda v:in:any v=8
+  00b8 [6114                  ] sta v:out:any v=20
+  00ba [6013                  ] lda v:in:any v=19
+  00bc [6115                  ] sta v:out:any v=21
+  00be [6201000000            ] ldai imm:i32 imm=1
+  00c3 [6116                  ] sta v:out:any v=22
+  00c5 [6016                  ] lda v:in:any v=22
+  00c7 [1f1c                  ] neg imm:u8 imm=28
+  00c9 [271d15                ] strictnoteq imm:u8, v:in:top imm=29 v=21
+  00cc [4f11                  ] jeqz imm:i32 imm=17
+  00ce [6006                  ] lda v:in:any v=6
+  00d0 [6115                  ] sta v:out:any v=21
+  00d2 [6013                  ] lda v:in:any v=19
+  00d4 [6116                  ] sta v:out:any v=22
+  00d6 [6016                  ] lda v:in:any v=22
+  00d8 [371e15                ] ldobjbyvalue imm:u16, v:in:top imm=30 v=21
+  00db [4d05                  ] jmp imm:i32 imm=5
+  00dd [3e2f00                ] lda.str string_id id=47 -> string_id 0x17bf '='
+  00e0 [0a2014                ] add2 imm:u8, v:in:top imm=32 v=20
+  00e3 [6108                  ] sta v:out:any v=8
+  00e5 [4d3c                  ] jmp imm:i32 imm=60
+  00e7 [6112                  ] sta v:out:any v=18
+  00e9 [600d                  ] lda v:in:any v=13
+  00eb [fb1321                ] callruntime.istrue imm:u8 imm=33
+  00ee [512f                  ] jnez imm:i32 imm=47
+  00f0 [02                    ] ldtrue
+  00f1 [610d                  ] sta v:out:any v=13
+  00f3 [00                    ] ldundefined
+  00f4 [6113                  ] sta v:out:any v=19
+  00f6 [70                    ] ldhole
+  00f7 [6114                  ] sta v:out:any v=20
+  00f9 [600f                  ] lda v:in:any v=15
+  00fb [42228000              ] ldobjbyname imm:u16, string_id imm=34 id=128 -> string_id 0x1bde 'return'
+  00ff [610e                  ] sta v:out:any v=14
+  0101 [6115                  ] sta v:out:any v=21
+  0103 [00                    ] ldundefined
+  0104 [0f2415                ] eq imm:u8, v:in:top imm=36 v=21
+  0107 [5116                  ] jnez imm:i32 imm=22
+  0109 [600e                  ] lda v:in:any v=14
+  010b [2d250f                ] callthis0 imm:u8, v:in:top imm=37 v=15
+  010e [6113                  ] sta v:out:any v=19
+  0110 [4d04                  ] jmp imm:i32 imm=4
+  0112 [6114                  ] sta v:out:any v=20
+  0114 [6012                  ] lda v:in:any v=18
+  0116 [fe00                  ] throw
+  0118 [6013                  ] lda v:in:any v=19
+  011a [fe0513                ] throw.ifnotobject v:in:top v=19
+  011d [6012                  ] lda v:in:any v=18
+  011f [fe00                  ] throw
+  0121 [4e5bff                ] jmp imm:i32 imm=65371
+  0124 [6008                  ] lda v:in:any v=8
+  0126 [64                    ] return
+METHOD #~@0>#stringToUint8Array class=L&entry/src/main/ets/pages/Index&; rec=0xa8b code=0x39bd insn=0x39c1 vregs=10 args=5 size=74 tries=0
+  0000 [44a0                  ] mov v1:out:any, v2:in:any v1=0 v2=10
+  0002 [44b1                  ] mov v1:out:any, v2:in:any v1=1 v2=11
+  0004 [44c2                  ] mov v1:out:any, v2:in:any v1=2 v2=12
+  0006 [44d3                  ] mov v1:out:any, v2:in:any v1=3 v2=13
+  0008 [44e4                  ] mov v1:out:any, v2:in:any v1=4 v2=14
+  000a [6004                  ] lda v:in:any v=4
+  000c [6107                  ] sta v:out:any v=7
+  000e [00                    ] ldundefined
+  000f [280007                ] stricteq imm:u8, v:in:top imm=0 v=7
+  0012 [4f07                  ] jeqz imm:i32 imm=7
+  0014 [3e8b00                ] lda.str string_id id=139 -> string_id 0x1c6f 'utf-8'
+  0017 [6104                  ] sta v:out:any v=4
+  0019 [7e00                  ] ldexternalmodulevar imm:u8 imm=0
+  001b [fe098c00              ] throw.undefinedifholewithname string_id id=140 -> string_id 0x1c76 'util'
+  001f [6108                  ] sta v:out:any v=8
+  0021 [6008                  ] lda v:in:any v=8
+  0023 [42014300              ] ldobjbyname imm:u16, string_id imm=1 id=67 -> string_id 0x18cf 'TextEncoder'
+  0027 [6107                  ] sta v:out:any v=7
+  0029 [6004                  ] lda v:in:any v=4
+  002b [6108                  ] sta v:out:any v=8
+  002d [08030207              ] newobjrange imm1:u16, imm2:u8, v:in:top imm1=3 imm2=2 v=7
+  0031 [6105                  ] sta v:out:any v=5
+  0033 [6005                  ] lda v:in:any v=5
+  0035 [6108                  ] sta v:out:any v=8
+  0037 [6008                  ] lda v:in:any v=8
+  0039 [42055a00              ] ldobjbyname imm:u16, string_id imm=5 id=90 -> string_id 0x1a27 'encode'
+  003d [6107                  ] sta v:out:any v=7
+  003f [6003                  ] lda v:in:any v=3
+  0041 [6109                  ] sta v:out:any v=9
+  0043 [6007                  ] lda v:in:any v=7
+  0045 [2e070809              ] callthis1 imm:u8, v1:in:top, v2:in:top imm=7 v1=8 v2=9
+  0049 [64                    ] return

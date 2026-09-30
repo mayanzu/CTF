@@ -1,0 +1,42 @@
+**********************
+PowerShell transcript start
+Start time: 20260929164852
+Username: DESKTOP-412KTAR\mzj
+RunAs User: DESKTOP-412KTAR\mzj
+Configuration Name: 
+Machine: DESKTOP-412KTAR (Microsoft Windows NT 10.0.26200.0)
+Host Application: C:\Users\mzj\.cache\codex-runtimes\codex-primary-runtime\dependencies\native\powershell\pwsh.dll -NoProfile -Command try { [Console]::OutputEncoding=[System.Text.Encoding]::UTF8 } catch {}
+$ErrorActionPreference='Continue'
+$project='C:\Users\mzj\Desktop\CTF\玄机刷题';$log=Join-Path $project '记录\繁体资料目录_WP_附件盘点_20260929.txt';Start-Transcript -LiteralPath $log -Force|Out-Null
+Write-Output 'COMMAND> Get-ChildItem 题目資料 -Directory -Force; recursively classify attachment candidates and WP candidates'
+$root=Join-Path $project '题目資料';if(Test-Path -LiteralPath $root){$dirs=Get-ChildItem -LiteralPath $root -Directory -Force|Sort-Object Name;Write-Output "DIRCOUNT=$($dirs.Count)";foreach($d in $dirs){$fs=@(Get-ChildItem -LiteralPath $d.FullName -File -Recurse -Force -ErrorAction SilentlyContinue|Where-Object{$_.FullName -notmatch '\\(__pycache__|node_modules|\.git)\\'});$wps=@($fs|Where-Object{$_.Name -match '(?i)(wp|write.?up|题解|解题|solution|readme|过程|分析记录)' -and $_.Extension -match '(?i)^\.(md|txt|tex|pdf|docx)$'});$atts=@($fs|Where-Object{$_.Extension -match '(?i)^\.(zip|7z|rar|tar|gz|pcap|pcapng|cap|elf|exe|dll|so|apk|dex|class|jar|bin|dat|db|sqlite|pdf|docx|xlsx|png|jpg|jpeg|gif|webp|mp4|wav|mp3|py|c|cpp|java|js|php|go|rs|ipynb|json|csv|pem|key|txt)$'});$wi=@($wps|ForEach-Object{$n=0;if($_.Extension -match '(?i)^\.(md|txt|tex)$'){try{$n=(Get-Content -LiteralPath $_.FullName -Raw).Length}catch{}};('{0}({1}B,{2}c)' -f $_.FullName.Substring($d.FullName.Length+1),$_.Length,$n)});$ai=@($atts|ForEach-Object{('{0}({1}B)' -f $_.FullName.Substring($d.FullName.Length+1),$_.Length)});Write-Output "FOLDER $($d.Name) files=$($fs.Count) attachment_candidates=$($atts.Count) wp_candidates=$($wps.Count)";if($ai.Count){Write-Output (' ATT '+($ai -join '; '))};if($wi.Count){Write-Output (' WP '+($wi -join '; '))}}}else{Write-Output 'MISSING'}
+Write-Output 'COMMAND> list top-level non-ASCII names in project to catch split records';Get-ChildItem -LiteralPath $project -Directory -Force|ForEach-Object{('{0} => {1}' -f $_.Name,$_.FullName)}
+Stop-Transcript|Out-Null;Write-Output "TRANSCRIPT=$log"
+Process ID: 27448
+PSVersion: 7.6.5
+PSEdition: Core
+GitCommitId: 7.6.5
+OS: Microsoft Windows 10.0.26200
+Platform: Win32NT
+PSCompatibleVersions: 1.0, 2.0, 3.0, 4.0, 5.0, 5.1, 6.0, 7.0
+PSRemotingProtocolVersion: 2.4
+SerializationVersion: 1.1.0.1
+WSManStackVersion: 3.0
+**********************
+COMMAND> Get-ChildItem 题目資料 -Directory -Force; recursively classify attachment candidates and WP candidates
+DIRCOUNT=1
+FOLDER challenge_558 files=3 attachment_candidates=2 wp_candidates=0
+ ATT analysis\independent_reverse_558.py(1984B); analysis\independent_static_audit_transcript_20260929.txt(17775B)
+COMMAND> list top-level non-ASCII names in project to catch split records
+工作区 => C:\Users\mzj\Desktop\CTF\玄机刷题\工作区
+记录 => C:\Users\mzj\Desktop\CTF\玄机刷题\记录
+题目资料 => C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料
+题目資料 => C:\Users\mzj\Desktop\CTF\玄机刷题\题目資料
+指南 => C:\Users\mzj\Desktop\CTF\玄机刷题\指南
+figures => C:\Users\mzj\Desktop\CTF\玄机刷题\figures
+labs => C:\Users\mzj\Desktop\CTF\玄机刷题\labs
+tools => C:\Users\mzj\Desktop\CTF\玄机刷题\tools
+**********************
+PowerShell transcript end
+End time: 20260929164852
+**********************

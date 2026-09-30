@@ -1,0 +1,21 @@
+DEX classes4.dex SHA-256: C3CB9DB6ECF2DBBFA9B1C49476B9EE1EDC3085AA6808B5CFF98190EE3FABF0CA
+Package/app classes:
+- Lcom/example/hookme/MainActivity$$ExternalSyntheticLambda0;
+- Lcom/example/hookme/MainActivity$Companion;
+- Lcom/example/hookme/MainActivity;
+
+Native methods verified by the independent class_data parser in dex_debug.py and instruction table in classes4.dex.disasm.txt:
+- MainActivity.rc4Encrypt(Ljava/lang/String;)[B ; access_flags=0x111 ; code_off=0 (native)
+- MainActivity.setPackageNameToNative(Ljava/lang/String;)V ; access_flags=0x111 ; code_off=0 (native)
+
+Relevant DEX strings:
+- correct_ciphertext / correctCiphertext / correctCiphertextHex
+- rc4Encrypt
+- encryptedData
+- setPackageNameToNative
+- System.loadLibrary("hookme")
+- inputField, submitButton, resultTextView
+- success, wrong, 请输入flag！
+
+The initial dex_static.py report missed ACC_NATIVE; it is preserved separately as classes4.dex.report.initial_parser_bug.txt. The correction is supported by dex_debug.py / records/dex_debug_20260929.txt and the disassembly transcript.
+

@@ -1,0 +1,165 @@
+section=.text rva=0x1000 vsize=0x3cde raw=0x400+0x3e00 flags=0x60000020
+section=.rdata rva=0x5000 vsize=0x373a raw=0x4200+0x3800 flags=0x40000040
+section=.data rva=0x9000 vsize=0xb60 raw=0x7a00+0x400 flags=0xc0000040
+section=.pdata rva=0xa000 vsize=0x444 raw=0x7e00+0x600 flags=0x40000040
+section=.rsrc rva=0xb000 vsize=0x113c0 raw=0x8400+0x11400 flags=0x40000040
+section=.reloc rva=0x1d000 vsize=0x214 raw=0x19800+0x400 flags=0x42000040
+entry_rva=0x37d0 entry_va=0x1400037d0
+string='gPalu_996!?' file_offset=0x5066 va=0x140005e66
+string='flag' file_offset=0x5080 va=0x140005e80
+string='palu{' file_offset=0x5090 va=0x140005e90
+string='1145141919810' file_offset=0x50a0 va=0x140005ea0
+string='Success' file_offset=0x50c0 va=0x140005ec0
+string='Failed' file_offset=0x50d0 va=0x140005ed0
+string='Input Flag:' file_offset=0x191b8 va=0x14001bdb8
+--- .text decoded=4499 xrefs=7 ---
+xref string='gPalu_996!?' target=0x140005e66
+0x140001006: lea      rcx, [rip + 0x89c3]
+0x14000100d: call     qword ptr [rip + 0x46f5]
+0x140001013: lea      rax, [rip + 0x4b66]
+0x14000101a: mov      dword ptr [rip + 0x8af8], 1
+0x140001024: lea      rcx, [rip + 0x3c75]
+0x14000102b: mov      qword ptr [rip + 0x899e], rax
+0x140001032: add      rsp, 0x28
+0x140001036: jmp      0x140003a48
+0x14000103b: int3     
+0x14000103c: sub      rsp, 0x28
+0x140001040: lea      rdx, [rip + 0x4e21]
+0x140001047: lea      rcx, [rip + 0x8afa]
+0x14000104e: call     qword ptr [rip + 0x43d4]
+0x140001054: lea      rcx, [rip + 0x3c55]
+0x14000105b: add      rsp, 0x28
+0x14000105f: jmp      0x140003a48
+0x140001064: sub      rsp, 0x28
+0x140001068: lea      rcx, [rip + 0x88f1]
+0x14000106f: call     0x1400043e0
+0x140001074: lea      rcx, [rip + 0x3c45]
+0x14000107b: add      rsp, 0x28
+0x14000107f: jmp      0x140003a48
+0x140001084: int3     
+0x140001085: int3     
+0x140001086: int3     
+0x140001087: int3     
+xref string='palu{' target=0x140005e90
+0x140001b3d: test     rbx, rbx
+0x140001b40: je       0x140001db5
+0x140001b46: lea      rcx, [rbp - 0x28]
+0x140001b4a: call     qword ptr [rip + 0x38b8]
+0x140001b50: mov      rdx, rax
+0x140001b53: lea      rcx, [rsp + 0x38]
+0x140001b58: call     qword ptr [rip + 0x38a2]
+0x140001b5e: mov      dword ptr [rsp + 0x30], 1
+0x140001b66: mov      rdi, qword ptr [rbp - 0x28]
+0x140001b6a: mov      ebx, dword ptr [rdi - 0x10]
+0x140001b6d: lea      rcx, [rip + 0x431c]
+0x140001b74: call     qword ptr [rip + 0x374e]
+0x140001b7a: mov      dword ptr [rsp + 0x20], ebx
+0x140001b7e: mov      r9, rdi
+0x140001b81: mov      r8d, eax
+0x140001b84: lea      rdx, [rip + 0x4305]
+0x140001b8b: lea      rcx, [rsp + 0x38]
+0x140001b90: call     qword ptr [rip + 0x3862]
+0x140001b96: mov      rdi, qword ptr [rsp + 0x38]
+0x140001b9b: mov      qword ptr [rsp + 0x48], r14
+0x140001ba0: mov      rcx, r13
+0x140001ba3: call     qword ptr [rip + 0x3917]
+0x140001ba9: mov      rbx, rax
+0x140001bac: mov      qword ptr [rsp + 0x50], rax
+0x140001bb1: test     rax, rax
+0x140001bb4: je       0x140001be9
+xref string='palu{' target=0x140005e90
+0x140001bb6: xorps    xmm0, xmm0
+0x140001bb9: xor      eax, eax
+0x140001bbb: movups   xmmword ptr [rbx], xmm0
+0x140001bbe: mov      qword ptr [rbx + 0x10], rax
+0x140001bc2: mov      qword ptr [rbx + 8], r14
+xref string='flag' target=0x140005e80
+0x140001c5f: mov      qword ptr [rbx], r14
+0x140001c62: mov      rcx, qword ptr [rbx + 8]
+0x140001c66: test     rcx, rcx
+0x140001c69: je       0x140001c75
+0x140001c6b: call     qword ptr [rip + 0x3b27]
+0x140001c71: mov      qword ptr [rbx + 8], r14
+0x140001c75: mov      rdx, r13
+0x140001c78: mov      rcx, rbx
+0x140001c7b: call     0x140003a60
+0x140001c80: xor      r9d, r9d
+0x140001c83: lea      r8, [rip + 0x41f6]
+0x140001c8a: mov      rdx, qword ptr [rdi]
+0x140001c8d: xor      ecx, ecx
+0x140001c8f: call     qword ptr [rip + 0x348b]
+0x140001c95: nop      
+0x140001c96: or       eax, 0xffffffff
+0x140001c99: lock xadd dword ptr [rdi + 0x10], eax
+0x140001c9e: cmp      eax, 1
+0x140001ca1: jne      0x140001cd3
+0x140001ca3: mov      rcx, qword ptr [rdi]
+0x140001ca6: test     rcx, rcx
+0x140001ca9: je       0x140001cb4
+0x140001cab: call     qword ptr [rip + 0x3437]
+0x140001cb1: mov      qword ptr [rdi], r14
+0x140001cb4: mov      rcx, qword ptr [rdi + 8]
+0x140001cb8: test     rcx, rcx
+xref string='1145141919810' target=0x140005ea0
+0x140001e2b: lea      rdx, [rbp - 0x20]
+0x140001e2f: mov      rcx, rdi
+0x140001e32: call     qword ptr [rip + 0x34e8]
+0x140001e38: lea      rdx, [rbp - 0x20]
+0x140001e3c: lea      rcx, [rsp + 0x20]
+0x140001e41: call     qword ptr [rip + 0x35d9]
+0x140001e47: mov      rdx, rax
+0x140001e4a: lea      rcx, [rbp - 0x18]
+0x140001e4e: call     0x140001994
+0x140001e53: nop      
+0x140001e54: lea      rdx, [rip + 0x4045]
+0x140001e5b: lea      rcx, [rbp - 0x18]
+0x140001e5f: call     qword ptr [rip + 0x35ab]
+0x140001e65: xor      r9d, r9d
+0x140001e68: xor      r8d, r8d
+0x140001e6b: mov      rcx, rbx
+0x140001e6e: test     eax, eax
+0x140001e70: jne      0x140001f0b
+0x140001e76: lea      rdx, [rip + 0x4043]
+0x140001e7d: call     qword ptr [rip + 0x3475]
+0x140001e83: mov      rdx, qword ptr [rbp - 0x20]
+0x140001e87: lea      rcx, [rsp + 0x50]
+0x140001e8c: call     0x140001f6c
+0x140001e91: nop      
+0x140001e92: mov      rdx, qword ptr [rax]
+0x140001e95: lea      rcx, [rbp - 0x10]
+xref string='Success' target=0x140005ec0
+0x140001e99: call     0x140002118
+0x140001e9e: nop      
+0x140001e9f: lea      rax, [rsp + 0x58]
+0x140001ea4: mov      rcx, qword ptr [rsp + 0x50]
+0x140001ea9: cmp      rcx, rax
+0x140001eac: je       0x140001eb4
+0x140001eae: call     qword ptr [rip + 0x3324]
+0x140001eb4: lea      rdx, [rbp - 0x10]
+xref string='Failed' target=0x140005ed0
+0x140001ee8: add      rdx, 0x27
+0x140001eec: mov      rcx, qword ptr [rcx - 8]
+0x140001ef0: sub      rax, rcx
+0x140001ef3: add      rax, -8
+0x140001ef7: cmp      rax, 0x1f
+0x140001efb: jbe      0x140001f04
+0x140001efd: call     qword ptr [rip + 0x3395]
+0x140001f03: int3     
+0x140001f04: call     0x140003a60
+0x140001f09: jmp      0x140001f19
+0x140001f0b: lea      rdx, [rip + 0x3fbe]
+0x140001f12: call     qword ptr [rip + 0x33e0]
+0x140001f18: nop      
+0x140001f19: lea      rcx, [rbp - 0x18]
+0x140001f1d: call     qword ptr [rip + 0x387d]
+0x140001f23: nop      
+0x140001f24: lea      rcx, [rbp - 0x20]
+0x140001f28: call     qword ptr [rip + 0x3872]
+0x140001f2e: mov      rcx, qword ptr [rbp + 0x10]
+0x140001f32: xor      rcx, rsp
+0x140001f35: call     0x140003800
+0x140001f3a: lea      r11, [rsp + 0x120]
+0x140001f42: mov      rbx, qword ptr [r11 + 0x18]
+0x140001f46: mov      rdi, qword ptr [r11 + 0x20]
+0x140001f4a: mov      rsp, r11
+0x140001f4d: pop      rbp

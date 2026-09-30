@@ -1,0 +1,14 @@
+First-level target output dwords from main: 0xa92f3865 and 0x9e60e953.
+Main passes data as two little-endian DWORDs; key words are 12345678,3456789a,89abcdef,12345678.
+Round: sum+=0x9e3779b9; v0+=mix(v1,sum,k0,k1); v1+=mix(v0,sum,k2,k3), modulo 2^32.
+mix(y,sum,a,b)=((y<<4)+a) XOR (y+sum) XOR ((y>>5)+b), modulo 2^32 on additions.
+DEC round 32: sum=0xc6ef3720 a92f3865,9e60e953 -> c4e09883,2263fdd2
+DEC round 31: sum=0x28b7bd67 c4e09883,2263fdd2 -> bee277c9,ffeda509
+DEC round 02: sum=0x3c6ef372 ccb599e9,19011c5f -> 4fea20aa,d44539fc
+DEC round 01: sum=0x9e3779b9 4fea20aa,d44539fc -> 6f753079,6165546b
+Decrypted words: 0x6f753079, 0x6165546b
+Little-endian input bytes: 79 30 75 6f 6b 54 65 61
+Input representation: b'y0uokTea'
+Forward check: 0xa92f3865, 0x9e60e953
+Forward matches embedded target: True
+All eight bytes printable ASCII: True

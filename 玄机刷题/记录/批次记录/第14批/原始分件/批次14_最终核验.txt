@@ -1,0 +1,121 @@
+**********************
+PowerShell transcript start
+Start time: 20260929162048
+Username: DESKTOP-412KTAR\mzj
+RunAs User: DESKTOP-412KTAR\mzj
+Configuration Name: 
+Machine: DESKTOP-412KTAR (Microsoft Windows NT 10.0.26200.0)
+Host Application: C:\Users\mzj\.cache\codex-runtimes\codex-primary-runtime\dependencies\native\powershell\pwsh.dll -Command try { [Console]::OutputEncoding=[System.Text.Encoding]::UTF8 } catch {}
+$ErrorActionPreference = 'Stop'
+$transcriptPath = 'C:\Users\mzj\Desktop\CTF\玄机刷题\记录\批次14_最终核验.txt'
+Start-Transcript -LiteralPath $transcriptPath -Force
+Write-Output 'COMMAND> Verify challenge materials and WP filenames'
+$batchRoot = 'C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\批次14_20260929'
+Get-ChildItem -LiteralPath $batchRoot -Directory | ForEach-Object { Write-Output ("DIR> " + $_.FullName); Get-ChildItem -LiteralPath $_.FullName -File -Recurse | ForEach-Object { Write-Output ("FILE> " + $_.FullName) } }
+Write-Output 'COMMAND> Verify guide and README hashes'
+Get-FileHash -LiteralPath 'C:\Users\mzj\Desktop\CTF\玄机刷题\README.md','C:\Users\mzj\Desktop\CTF\玄机刷题\指南\玄机刷题指南_合并源.md' -Algorithm SHA256 | ForEach-Object { Write-Output ("HASH> " + $_.Path + " " + $_.Hash) }
+Write-Output 'COMMAND> Verify temporary copy and cleanup record'
+Write-Output ("TEMP_COPY_EXISTS> " + (Test-Path -LiteralPath 'C:\Users\mzj\Desktop\CTF\challenge527.exe'))
+Write-Output ("CLEANUP_RECORD_EXISTS> " + (Test-Path -LiteralPath 'C:\Users\mzj\Desktop\CTF\玄机刷题\记录\批次14_临时文件清理_拦截记录.md'))
+Stop-Transcript
+Process ID: 36804
+PSVersion: 7.6.5
+PSEdition: Core
+GitCommitId: 7.6.5
+OS: Microsoft Windows 10.0.26200
+Platform: Win32NT
+PSCompatibleVersions: 1.0, 2.0, 3.0, 4.0, 5.0, 5.1, 6.0, 7.0
+PSRemotingProtocolVersion: 2.4
+SerializationVersion: 1.1.0.1
+WSManStackVersion: 3.0
+**********************
+Transcript started, output file is C:\Users\mzj\Desktop\CTF\玄机刷题\记录\批次14_最终核验.txt
+COMMAND> Verify challenge materials and WP filenames
+DIR> C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\批次14_20260929\527_木兰当户织
+FILE> C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\批次14_20260929\527_木兰当户织\反汇编_objdump_disassembly.txt
+FILE> C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\批次14_20260929\527_木兰当户织\唧唧复唧唧，木兰当户织.zip
+FILE> C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\批次14_20260929\527_木兰当户织\记录_命令与输出.txt
+FILE> C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\批次14_20260929\527_木兰当户织\README.md
+FILE> C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\批次14_20260929\527_木兰当户织\solve.py
+FILE> C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\批次14_20260929\527_木兰当户织\WP_唧唧复唧唧木兰当户织.md
+FILE> C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\批次14_20260929\527_木兰当户织\附件\唧唧复唧唧，木兰当户织.exe
+DIR> C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\批次14_20260929\561_OpenHarmony_secret
+FILE> C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\批次14_20260929\561_OpenHarmony_secret\README.md
+FILE> C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\批次14_20260929\561_OpenHarmony_secret\WP.md
+FILE> C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\批次14_20260929\561_OpenHarmony_secret\analysis\batch14_bruteforce_stdout.txt
+FILE> C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\批次14_20260929\561_OpenHarmony_secret\analysis\batch14_custom_sm4_stdout.txt
+FILE> C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\批次14_20260929\561_OpenHarmony_secret\analysis\batch14_formula_stdout.txt
+FILE> C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\批次14_20260929\561_OpenHarmony_secret\analysis\batch14_recover_hint_stdout.txt
+FILE> C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\批次14_20260929\561_OpenHarmony_secret\analysis\batch14_revalidate_native_stdout.txt
+FILE> C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\批次14_20260929\561_OpenHarmony_secret\analysis\batch14_roundtrip_stdout.txt
+FILE> C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\批次14_20260929\561_OpenHarmony_secret\analysis\brute_pattern_example_hash.py
+FILE> C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\批次14_20260929\561_OpenHarmony_secret\analysis\check_formula_variants.py
+FILE> C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\批次14_20260929\561_OpenHarmony_secret\analysis\decrypt_enc_custom_sm4.py
+FILE> C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\批次14_20260929\561_OpenHarmony_secret\analysis\disassemble_app_output.txt
+FILE> C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\批次14_20260929\561_OpenHarmony_secret\analysis\enc.custom-sm4-decrypted.bin
+FILE> C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\批次14_20260929\561_OpenHarmony_secret\analysis\enc.recovered.jpg
+FILE> C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\批次14_20260929\561_OpenHarmony_secret\analysis\hash_materials_561.py
+FILE> C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\批次14_20260929\561_OpenHarmony_secret\analysis\hint_plaintext.txt
+FILE> C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\批次14_20260929\561_OpenHarmony_secret\analysis\libsecret_callbacks_disassembly.txt
+FILE> C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\批次14_20260929\561_OpenHarmony_secret\analysis\libsecret_init_proc_disassembly.txt
+FILE> C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\批次14_20260929\561_OpenHarmony_secret\analysis\recover_hint_batch14.py
+FILE> C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\批次14_20260929\561_OpenHarmony_secret\analysis\recover_pattern_561_output.txt
+FILE> C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\批次14_20260929\561_OpenHarmony_secret\analysis\resource_index_salted_ciphertext.b64
+FILE> C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\批次14_20260929\561_OpenHarmony_secret\analysis\revalidate_561_transcript_20260929.txt
+FILE> C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\批次14_20260929\561_OpenHarmony_secret\analysis\revalidate_native_pattern.py
+FILE> C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\批次14_20260929\561_OpenHarmony_secret\analysis\secret561_resource_flow_findings_20260929.md
+FILE> C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\批次14_20260929\561_OpenHarmony_secret\analysis\sha256_manifest_20260929.csv
+FILE> C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\批次14_20260929\561_OpenHarmony_secret\analysis\verify_roundtrip_and_decode_jpeg.py
+FILE> C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\批次14_20260929\561_OpenHarmony_secret\analysis\WP_preexisting_20260929.md
+FILE> C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\批次14_20260929\561_OpenHarmony_secret\analysis\__pycache__\decrypt_enc_custom_sm4.cpython-314.pyc
+FILE> C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\批次14_20260929\561_OpenHarmony_secret\记录\批次14_561_调查记录.txt
+FILE> C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\批次14_20260929\561_OpenHarmony_secret\记录\转存完整transcript操作.txt
+FILE> C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\批次14_20260929\561_OpenHarmony_secret\附件\secret_玄机新下载.zip
+FILE> C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\批次14_20260929\561_OpenHarmony_secret\附件\hap_contents\.pages.info
+FILE> C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\批次14_20260929\561_OpenHarmony_secret\附件\hap_contents\module.json
+FILE> C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\批次14_20260929\561_OpenHarmony_secret\附件\hap_contents\pack.info
+FILE> C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\批次14_20260929\561_OpenHarmony_secret\附件\hap_contents\pkgContextInfo.json
+FILE> C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\批次14_20260929\561_OpenHarmony_secret\附件\hap_contents\resources.index
+FILE> C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\批次14_20260929\561_OpenHarmony_secret\附件\hap_contents\ets\modules.abc
+FILE> C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\批次14_20260929\561_OpenHarmony_secret\附件\hap_contents\ets\sourceMaps.map
+FILE> C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\批次14_20260929\561_OpenHarmony_secret\附件\hap_contents\libs\arm64-v8a\libc++_shared.so
+FILE> C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\批次14_20260929\561_OpenHarmony_secret\附件\hap_contents\libs\arm64-v8a\libsecret.so
+FILE> C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\批次14_20260929\561_OpenHarmony_secret\附件\hap_contents\libs\x86_64\libc++_shared.so
+FILE> C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\批次14_20260929\561_OpenHarmony_secret\附件\hap_contents\libs\x86_64\libsecret.so
+FILE> C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\批次14_20260929\561_OpenHarmony_secret\附件\hap_contents\resources\base\media\background.png
+FILE> C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\批次14_20260929\561_OpenHarmony_secret\附件\hap_contents\resources\base\media\foreground.png
+FILE> C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\批次14_20260929\561_OpenHarmony_secret\附件\hap_contents\resources\base\media\ic_back.png
+FILE> C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\批次14_20260929\561_OpenHarmony_secret\附件\hap_contents\resources\base\media\icon.png
+FILE> C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\批次14_20260929\561_OpenHarmony_secret\附件\hap_contents\resources\base\media\layered_image.json
+FILE> C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\批次14_20260929\561_OpenHarmony_secret\附件\hap_contents\resources\base\media\startIcon.png
+FILE> C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\批次14_20260929\561_OpenHarmony_secret\附件\hap_contents\resources\base\profile\backup_config.json
+FILE> C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\批次14_20260929\561_OpenHarmony_secret\附件\hap_contents\resources\base\profile\main_pages.json
+FILE> C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\批次14_20260929\561_OpenHarmony_secret\附件\hap_contents\resources\rawfile\enc
+FILE> C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\批次14_20260929\561_OpenHarmony_secret\附件\zip_contents\secret.hap
+DIR> C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\批次14_20260929\562_checker
+FILE> C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\批次14_20260929\562_checker\独立执行复核输出.txt
+FILE> C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\批次14_20260929\562_checker\关键函数反汇编.txt
+FILE> C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\批次14_20260929\562_checker\命令与输出记录.txt
+FILE> C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\批次14_20260929\562_checker\正向复算输出.txt
+FILE> C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\批次14_20260929\562_checker\data_区段.txt
+FILE> C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\批次14_20260929\562_checker\independent_forward_check.py
+FILE> C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\批次14_20260929\562_checker\README.md
+FILE> C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\批次14_20260929\562_checker\sections.txt
+FILE> C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\批次14_20260929\562_checker\SHA256SUMS.txt
+FILE> C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\批次14_20260929\562_checker\solve_checker.py
+FILE> C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\批次14_20260929\562_checker\strings_ascii.txt
+FILE> C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\批次14_20260929\562_checker\symbols_full.txt
+FILE> C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\批次14_20260929\562_checker\WP_第一届启航杯checker.md
+FILE> C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\批次14_20260929\562_checker\复核_独立\checker.exe
+FILE> C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\批次14_20260929\562_checker\提取_分析\checker.exe
+FILE> C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\批次14_20260929\562_checker\附件_原始\checker_20260929.zip
+COMMAND> Verify guide and README hashes
+HASH> C:\Users\mzj\Desktop\CTF\玄机刷题\README.md D5F5ABC3D0A46EEF9968DB10B75A5F888DC80BC1EF4915CD3BAB4868B1E684A0
+HASH> C:\Users\mzj\Desktop\CTF\玄机刷题\指南\玄机刷题指南_合并源.md 485E66110EC5BA12D42F072AD9816EA19421D2ECEAF3E543E03BAC596B1D916A
+COMMAND> Verify temporary copy and cleanup record
+TEMP_COPY_EXISTS> True
+CLEANUP_RECORD_EXISTS> True
+**********************
+PowerShell transcript end
+End time: 20260929162048
+**********************

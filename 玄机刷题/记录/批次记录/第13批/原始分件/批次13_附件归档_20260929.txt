@@ -1,0 +1,252 @@
+**********************
+PowerShell transcript start
+Start time: 20260929143402
+Username: DESKTOP-412KTAR\mzj
+RunAs User: DESKTOP-412KTAR\mzj
+Configuration Name: 
+Machine: DESKTOP-412KTAR (Microsoft Windows NT 10.0.26200.0)
+Host Application: C:\Users\mzj\.cache\codex-runtimes\codex-primary-runtime\dependencies\native\powershell\pwsh.dll -NoProfile -Command try { [Console]::OutputEncoding=[System.Text.Encoding]::UTF8 } catch {}
+& 'C:\Users\mzj\Desktop\CTF\玄机刷题\记录\批次13_归档附件.ps1'
+Process ID: 36128
+PSVersion: 7.6.5
+PSEdition: Core
+GitCommitId: 7.6.5
+OS: Microsoft Windows 10.0.26200
+Platform: Win32NT
+PSCompatibleVersions: 1.0, 2.0, 3.0, 4.0, 5.0, 5.1, 6.0, 7.0
+PSRemotingProtocolVersion: 2.4
+SerializationVersion: 1.1.0.1
+WSManStackVersion: 3.0
+**********************
+Transcript started, output file is C:\Users\mzj\Desktop\CTF\玄机刷题\记录\批次13_附件归档_20260929.txt
+=== #533 圣人当仁不让 ===
+Source: D:\Downloads\ez_vm.zip
+Copy: C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\批次13_20260929\533_圣人当仁不让\originals\ez_vm.zip
+ZIP bytes: 26778
+SHA256 source: B9B280302A0B975F272CFCA88B59CFFB0EDE4DE3529D56A1BB328CE0D0ED071E
+SHA256 copy:   B9B280302A0B975F272CFCA88B59CFFB0EDE4DE3529D56A1BB328CE0D0ED071E
+Archive entries:
+
+Name      Length
+----      ------
+ez_vm.exe  82661
+
+Extracted files:
+
+FullName                                                                                       Length
+--------                                                                                       ------
+C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\批次13_20260929\533_圣人当仁不让\analysis\ez_vm.exe  82661
+=== #537 湘岚杯ezbase ===
+Source: D:\Downloads\ezbase.zip
+Copy: C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\批次13_20260929\537_湘岚杯ezbase\originals\ezbase.zip
+ZIP bytes: 30016
+SHA256 source: 24E646D8337FE6284DDAACEFB05D3ACEAFA01EAE746CF1CBB872046F3A9EBECB
+SHA256 copy:   24E646D8337FE6284DDAACEFB05D3ACEAFA01EAE746CF1CBB872046F3A9EBECB
+Archive entries:
+
+
+Name       Length
+----       ------
+ezbase.exe  40719
+
+Extracted files:
+
+FullName                                                                                        Length
+--------                                                                                        ------
+C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\批次13_20260929\537_湘岚杯ezbase\analysis\ezbase.exe  40719
+=== #538 湘岚杯1997 ===
+Source: D:\Downloads\1997.zip
+Copy: C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\批次13_20260929\538_湘岚杯1997\originals\1997.zip
+ZIP bytes: 20292
+SHA256 source: 832F1BA75D90A93FF2B8D867483CE8612CF42157685976C4FD665ED4AC07193B
+SHA256 copy:   832F1BA75D90A93FF2B8D867483CE8612CF42157685976C4FD665ED4AC07193B
+Archive entries:
+
+
+Name    Length
+----    ------
+123.exe  63228
+
+Extracted files:
+
+**********************
+PowerShell transcript end
+End time: 20260929143403
+**********************
+**********************
+PowerShell transcript start
+Start time: 20260929143537
+Username: DESKTOP-412KTAR\mzj
+RunAs User: DESKTOP-412KTAR\mzj
+Configuration Name: 
+Machine: DESKTOP-412KTAR (Microsoft Windows NT 10.0.26200.0)
+Host Application: C:\Users\mzj\.cache\codex-runtimes\codex-primary-runtime\dependencies\native\powershell\pwsh.dll -NoProfile -Command try { [Console]::OutputEncoding=[System.Text.Encoding]::UTF8 } catch {}
+$root='C:\Users\mzj\Desktop\CTF\玄机刷题'; $log=Join-Path $root '记录\批次13_附件归档_20260929.txt'; Start-Transcript -LiteralPath $log -Append; Write-Output '=== 选择记录内容 ==='; Get-Content -LiteralPath (Join-Path $root '记录\批次_20260929_第十三批题目确认.md') -Raw; Write-Output '=== 第十二批修正版文件核验 ==='; Get-Content -LiteralPath (Join-Path $root '题目资料\批次12_20260929\536_遇事不决可问春风\README.md') -TotalCount 90; Select-String -LiteralPath (Join-Path $root '题目资料\批次12_20260929\536_遇事不决可问春风\wp.md') -Pattern 'FLAG 正确','opcode','0xdf','f8f06f2b' | ForEach-Object { $_.Line }; Write-Output '=== 主指南/README hashes ==='; Get-FileHash -LiteralPath (Join-Path $root '指南\玄机刷题指南_合并源.md'),(Join-Path $root 'README.md') -Algorithm SHA256 | Select-Object Path,Hash; Stop-Transcript
+Process ID: 41900
+PSVersion: 7.6.5
+PSEdition: Core
+GitCommitId: 7.6.5
+OS: Microsoft Windows 10.0.26200
+Platform: Win32NT
+PSCompatibleVersions: 1.0, 2.0, 3.0, 4.0, 5.0, 5.1, 6.0, 7.0
+PSRemotingProtocolVersion: 2.4
+SerializationVersion: 1.1.0.1
+WSManStackVersion: 3.0
+**********************
+Transcript started, output file is C:\Users\mzj\Desktop\CTF\玄机刷题\记录\批次13_附件归档_20260929.txt
+=== 选择记录内容 ===
+# 第十三批题目确认（2026-09-29）
+
+## 选择方式
+
+- 在玄机 `/challenges` 页面选择“全部”题目，保留状态单选“全部”，点击难度“中等”；未依赖“未完成”筛选，因为用户指出该筛选不完整。
+- 在中等难度分页中逐题核对详情页，确认免费、中等、REVERSE、步骤 0/1 且无“已完成”徽标。选取三道新题；排除已完成题、此前尝试过的 #532、#534、#541、#542、#546、#561、#562 等题。
+
+## 本批题目
+
+### #533 圣人当仁不让
+
+- 详情页：https://xj.edisec.net/challenges/533
+- 核验：免费；难度中等；类型 REVERSE；挑战步骤 0/1；提交前没有“已完成”徽标。
+- 附件：$(@{Id=533; Title=圣人当仁不让; Zip=ez_vm.zip; SHA256=B9B280302A0B975F272CFCA88B59CFFB0EDE4DE3529D56A1BB328CE0D0ED071E; Entries=ez_vm.exe (82661 bytes)}.Zip)；SHA-256 $(@{Id=533; Title=圣人当仁不让; Zip=ez_vm.zip; SHA256=B9B280302A0B975F272CFCA88B59CFFB0EDE4DE3529D56A1BB328CE0D0ED071E; Entries=ez_vm.exe (82661 bytes)}.SHA256)。ZIP 成员：ez_vm.exe (82661 bytes)。
+- 归档目录：题目资料/批次13_20260929/533_圣人当仁不让/。
+
+### #537 湘岚杯ezbase
+
+- 详情页：https://xj.edisec.net/challenges/537
+- 核验：免费；难度中等；类型 REVERSE；挑战步骤 0/1；提交前没有“已完成”徽标。
+- 附件：$(@{Id=537; Title=湘岚杯ezbase; Zip=ezbase.zip; SHA256=24E646D8337FE6284DDAACEFB05D3ACEAFA01EAE746CF1CBB872046F3A9EBECB; Entries=ezbase.exe (40719 bytes)}.Zip)；SHA-256 $(@{Id=537; Title=湘岚杯ezbase; Zip=ezbase.zip; SHA256=24E646D8337FE6284DDAACEFB05D3ACEAFA01EAE746CF1CBB872046F3A9EBECB; Entries=ezbase.exe (40719 bytes)}.SHA256)。ZIP 成员：ezbase.exe (40719 bytes)。
+- 归档目录：题目资料/批次13_20260929/537_湘岚杯ezbase/。
+
+### #538 湘岚杯1997
+
+- 详情页：https://xj.edisec.net/challenges/538
+- 核验：免费；难度中等；类型 REVERSE；挑战步骤 0/1；提交前没有“已完成”徽标。
+- 附件：$(@{Id=538; Title=湘岚杯1997; Zip=1997.zip; SHA256=832F1BA75D90A93FF2B8D867483CE8612CF42157685976C4FD665ED4AC07193B; Entries=123.exe (63228 bytes)}.Zip)；SHA-256 $(@{Id=538; Title=湘岚杯1997; Zip=1997.zip; SHA256=832F1BA75D90A93FF2B8D867483CE8612CF42157685976C4FD665ED4AC07193B; Entries=123.exe (63228 bytes)}.SHA256)。ZIP 成员：123.exe (63228 bytes)。
+- 归档目录：题目资料/批次13_20260929/538_湘岚杯1997/。
+
+## 状态
+
+- 三题附件已由玄机详情页通过前台下载并复制入项目；D:\Downloads 原始文件保留。
+- 各题由独立子代理静态分析。平台提交只由 root 根据本地复核过的候选在前台进行。
+- 页面选择及详情核对在 Computer Use 交互中可见；没有将交互截图另存为项目 PNG。
+=== 第十二批修正版文件核验 ===
+# 玄机 CTF #536：遇事不决，可问春风
+
+## 题目信息与状态
+
+- 题目：商丘师范学院第四届网络安全及信息对抗大赛《遇事不决，可问春风》
+- 平台题页状态（任务开始时）：免费、中等、未完成、1 步 0/1
+- 静态分析状态：已从 APK 的应用代码恢复修正后的候选 flag，并用本地脚本复现字节码中的转换与 flag 拼接逻辑。
+- 平台验证：修正版已由 root 在玄机前台接受，页面显示“FLAG 正确~，恭喜你完成此挑战~”，题目状态 1/1 完成；一血栏显示 35分14秒。第一版候选曾被拒绝，原因已追溯为 DEX opcode 名称表错误。
+- APK 处理约束：只作静态分析，未安装、未启动或以其他方式运行 APK。
+
+## 哈希与原始归档
+
+| 文件 | 大小 | SHA256 |
+|---|---:|---|
+| `originals/app-debug.zip` | 4,419,022 bytes | `A366F7C8B031940BC96016811BBD441A17B3473F8B9D288511E02CC63E6A1D59` |
+| ZIP 内 `app-debug.apk`（未压缩） | 4,609,869 bytes | `BA82DA14824377E2CCCB085B7A6871FAAB9C3B0CCB3E02EB555DBC8B92C1EFD7` |
+| APK 内 `classes3.dex` | 3,556 bytes | `29DCC3110E4B13F6AB3C9B009EAD33362C1D324351CF6AD4BD0EE5BB87E24553` |
+| APK 内 `AndroidManifest.xml` | 5,336 bytes | `1A8ED86F458F5451F889CF7C776DE78EA602669B3EDCF9CC6182AFD9419304AF` |
+
+ZIP 只含一个文件：`app-debug.apk`（压缩后 4,418,898 bytes）。APK 共 863 个条目，完整路径、长度和压缩长度见 [`analysis/apk_contents_index.txt`](analysis/apk_contents_index.txt)。原始 ZIP 和其中 APK 的哈希、DEX 与 manifest 的索引见本 README 与命令记录。
+
+## 文件索引
+
+- [`wp.md`](wp.md)：完整逐步中文解题过程、DEX 证据、候选 flag 与限制。
+- [`analysis/command_transcript_20260929.txt`](analysis/command_transcript_20260929.txt)：本题本地检查命令和对应完整 stdout/stderr（PowerShell 成功/错误流合并记录）。
+- [`analysis/app-debug.apk`](analysis/app-debug.apk)：从原 ZIP 提取的 APK，仅作为静态分析输入。
+- [`analysis/apk_contents_index.txt`](analysis/apk_contents_index.txt)：APK 内全部 863 个条目的路径和大小。
+- [`analysis/dex_static/AndroidManifest.xml`](analysis/dex_static/AndroidManifest.xml)：从 APK 提取的二进制 manifest。
+- [`analysis/dex_static/classes.dex`](analysis/dex_static/classes.dex)、[`analysis/dex_static/classes2.dex`](analysis/dex_static/classes2.dex)、[`analysis/dex_static/classes3.dex`](analysis/dex_static/classes3.dex)：从 APK 提取的 DEX 文件；自有校验逻辑位于 `classes3.dex`。
+- [`analysis/parse_axml.py`](analysis/parse_axml.py) 与 [`analysis/manifest_report.txt`](analysis/manifest_report.txt)：最小只读 binary-XML 解析器及 manifest 摘要。
+- [`analysis/analyze_dex.py`](analysis/analyze_dex.py) 与 [`analysis/dex_report.txt`](analysis/dex_report.txt)：针对 DEX 结构和相关 opcode 的只读解析/反汇编脚本及输出。
+- [`analysis/recover_candidate.py`](analysis/recover_candidate.py) 与 [`analysis/recovery_report.txt`](analysis/recovery_report.txt)：从 DEX 常量和指令提取转换、复现候选，并输出逐字符映射。
+- [`analysis/audit_apk.py`](analysis/audit_apk.py) 与 [`analysis/apk_audit_report.txt`](analysis/apk_audit_report.txt)：静态扫描 APK ZIP 的条目类别与 flag/校验标记。
+
+## 候选与限制
+
+已接受的 flag 是 `flag{f8f06f2b-60ee-43ca-8e3a-1048042edddd}`。root 的最终前台流程：进入 [#536 题页](https://xj.edisec.net/challenges/536) → 点击“提交FLAG” → 在“提交 FLAG”弹窗输入修正候选 → 点击“提 交”。页面即时显示“FLAG 正确~，恭喜你完成此挑战~”，详情页标记“已完成”、步骤 1/1；一血栏显示 35分14秒。此前提交的第一版 `flag{fzfrvfrbovrggovsccozgscosrvzrvrgffff}` 被拒绝，原文为“FLAG 不正确~”。拒绝原因已定位：上一版自写 opcode 表将 DEX `0xdf` 误标为 `or-int/lit8`；DEX 实际定义为 `xor-int/lit8`。更新后的 `analysis/dex_report.txt` 与 `analysis/recovery_report.txt` 以 `xor-int/lit8 #66`（0x42）复现，得出 UUID 形态密码 `f8f06f2b-60ee-43ca-8e3a-1048042edddd`。`checkPassword()` 将输入与解密结果比较，`buildFlag()` 使用 `flag{` 与 `}` 拼接结果。
+
+本地恢复脚本检查这些关键字节码和字符串并验证逐字符变换。APK 全包扫描未发现 `assets/`、`lib/`、`res/raw/` 等额外 payload；flag/校验相关字符串只出现在应用自有 `classes3.dex`，Android 证书元数据包含竞赛签名 `Reflag Signing`。未在 Android 上动态运行。前台页面已接受修正版。解析器是为本题相关 DEX/manifest 字段编写的最小只读工具，不是通用完整 Android 反编译器；未联网或参考公开 writeup。
+> 已接受 flag：`flag{f8f06f2b-60ee-43ca-8e3a-1048042edddd}`。root 在玄机 #536 前台提交修正版后，页面显示“FLAG 正确~，恭喜你完成此挑战~”，题目状态 1/1；一血栏显示 35分14秒。此前第一版被拒绝，原因是本地 DEX opcode 名称表错误，详见第 5 节。
+DEX Dalvik opcode 映射中，`0xde` 才是 `or-int/lit8`，`0xdf` 是 `xor-int/lit8`。反汇编的 code unit 为 `06df 4205`：首单元低 8 位 `0xdf`，下一单元高 8 位 `0x42` 是立即数 66。因此实际变换是每个 UTF-16 字符与 `0x42` 按位 XOR：
+静态字段值表显示 `XOR_KEY=66`、`FLAG_PREFIX="REFLAG"`、`FLAG_SUFFIX="}"`。校验方法中的 `0xdf` 与 key 66 相符；`buildFlag()` 的字节码直接使用硬编码的 `flag{` 与 `}`，并未通过 `FLAG_PREFIX` 取前缀。
+f8f06f2b-60ee-43ca-8e3a-1048042edddd
+flag{f8f06f2b-60ee-43ca-8e3a-1048042edddd}
+脚本会打印密文、实际 opcode 立即数、密码、完整 flag 和每个字符的 Unicode 码点对应关系；输出保存在 `analysis/recovery_report.txt`。核心校验是 DEX 中确实存在 `xor-int/lit8` 立即数 66、后续 `int-to-char`，且输入字符串在校验分支中作为 `equals` 的接收者。
+- 已通过本地静态证据重建校验与 flag 生成链，并由修正后的复现脚本验证 XOR 字符变换和字符串拼接。第一版曾误将 `0xdf` 解作 OR；这是解析器 opcode 表错误，已修复。
+- root 第一次提交 `flag{fzfrvfrbovrggovsccozgscosrvzrvrgffff}`，页面返回“FLAG 不正确~”。复核 `0xdf` 的定义为 `xor-int/lit8` 后，从同一附件重算为 `flag{f8f06f2b-60ee-43ca-8e3a-1048042edddd}`。最终完整 UI 流程：进入 [https://xj.edisec.net/challenges/536](https://xj.edisec.net/challenges/536) → 点击“提交FLAG” → 在“提交 FLAG”弹窗输入修正候选 → 点击“提 交”。页面即时返回“FLAG 正确~，恭喜你完成此挑战~”；详情页显示“已完成”、步骤 1/1；一血栏显示 35分14秒。
+=== 主指南/README hashes ===
+
+**********************
+PowerShell transcript end
+End time: 20260929143537
+**********************
+**********************
+PowerShell transcript start
+Start time: 20260929145806
+Username: DESKTOP-412KTAR\mzj
+RunAs User: DESKTOP-412KTAR\mzj
+Configuration Name: 
+Machine: DESKTOP-412KTAR (Microsoft Windows NT 10.0.26200.0)
+Host Application: C:\Users\mzj\.cache\codex-runtimes\codex-primary-runtime\dependencies\native\powershell\pwsh.dll -NoProfile -Command try { [Console]::OutputEncoding=[System.Text.Encoding]::UTF8 } catch {}
+& 'C:\Users\mzj\Desktop\CTF\玄机刷题\记录\批次13_修正选题记录.ps1'
+Process ID: 34388
+PSVersion: 7.6.5
+PSEdition: Core
+GitCommitId: 7.6.5
+OS: Microsoft Windows 10.0.26200
+Platform: Win32NT
+PSCompatibleVersions: 1.0, 2.0, 3.0, 4.0, 5.0, 5.1, 6.0, 7.0
+PSRemotingProtocolVersion: 2.4
+SerializationVersion: 1.1.0.1
+WSManStackVersion: 3.0
+**********************
+Transcript started, output file is C:\Users\mzj\Desktop\CTF\玄机刷题\记录\批次13_附件归档_20260929.txt
+修正后的题目确认记录：C:\Users\mzj\Desktop\CTF\玄机刷题\记录\批次_20260929_第十三批题目确认.md
+# 第十三批题目确认（2026-09-29）
+
+## 选择方式
+
+- 在玄机 `/challenges` 页面选择“全部”题目，保留状态单选“全部”，点击难度“中等”；未依赖“未完成”筛选，因为该筛选不完整。
+- 在中等难度分页中逐题核对详情页，确认免费、中等、REVERSE、步骤 0/1 且无“已完成”徽标。选取三道新题；排除已完成题、此前尝试过的 #532、#534、#541、#542、#546、#561、#562 等题。
+
+## 本批题目
+
+### #533 圣人当仁不让
+
+- 详情页：https://xj.edisec.net/challenges/533
+- 核验：免费；难度中等；类型 REVERSE；挑战步骤 0/1；提交前没有“已完成”徽标。
+- 附件：`ez_vm.zip`；SHA-256 `B9B280302A0B975F272CFCA88B59CFFB0EDE4DE3529D56A1BB328CE0D0ED071E`。ZIP 成员：`ez_vm.exe`（82,661 bytes）。
+- 归档目录：`题目资料/批次13_20260929/533_圣人当仁不让/`。
+
+### #537 湘岚杯ezbase
+
+- 详情页：https://xj.edisec.net/challenges/537
+- 核验：免费；难度中等；类型 REVERSE；挑战步骤 0/1；提交前没有“已完成”徽标。
+- 附件：`ezbase.zip`；SHA-256 `24E646D8337FE6284DDAACEFB05D3ACEAFA01EAE746CF1CBB872046F3A9EBECB`。ZIP 成员：`ezbase.exe`（40,719 bytes）。
+- 归档目录：`题目资料/批次13_20260929/537_湘岚杯ezbase/`。
+
+### #538 湘岚杯1997
+
+- 详情页：https://xj.edisec.net/challenges/538
+- 核验：免费；难度中等；类型 REVERSE；挑战步骤 0/1；提交前没有“已完成”徽标。
+- 附件：`1997.zip`；SHA-256 `832F1BA75D90A93FF2B8D867483CE8612CF42157685976C4FD665ED4AC07193B`。ZIP 成员：`123.exe`（63,228 bytes）。
+- 归档目录：`题目资料/批次13_20260929/538_湘岚杯1997/`。
+
+## 状态
+
+- 三题附件均通过玄机详情页在前台下载并复制到项目；D:\Downloads 原始下载保留。
+- 每题由一名独立子代理静态分析；未知 EXE 不运行。FLAG 只在 root 前台复核后提交。
+- 页面选择和核验在 Computer Use 交互中可见；没有把交互截图另存为项目 PNG。
+
+Algorithm : SHA256
+Hash      : 4A295D3F672534C1CC6EDBF9357A7707B6BE2AC71929E65733384ED143E2AFA3
+Path      : C:\Users\mzj\Desktop\CTF\玄机刷题\记录\批次_20260929_第十三批题目确认.md
+
+**********************
+PowerShell transcript end
+End time: 20260929145806
+**********************

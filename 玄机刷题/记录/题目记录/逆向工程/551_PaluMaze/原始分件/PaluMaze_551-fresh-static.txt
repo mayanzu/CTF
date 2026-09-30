@@ -1,0 +1,951 @@
+**********************
+PowerShell transcript start
+Start time: 20260928235744
+Username: DESKTOP-412KTAR\mzj
+RunAs User: DESKTOP-412KTAR\mzj
+Configuration Name: 
+Machine: DESKTOP-412KTAR (Microsoft Windows NT 10.0.26200.0)
+Host Application: C:\Users\mzj\.cache\codex-runtimes\codex-primary-runtime\dependencies\native\powershell\pwsh.dll -Command try { [Console]::OutputEncoding=[System.Text.Encoding]::UTF8 } catch {}
+$ErrorActionPreference='Stop'; $src='D:\Downloads\game_flag (1).exe'; $dir='C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\PaluMaze_551_fresh'; $log='C:\Users\mzj\Desktop\CTF\玄机刷题\记录\PaluMaze_551-fresh-static.txt'; New-Item -ItemType Directory -Path $dir -Force | Out-Null; Start-Transcript -LiteralPath $log -Force; Write-Output "COMMAND> Get-Item -LiteralPath '$src'"; Get-Item -LiteralPath $src | Format-List FullName,Length,LastWriteTime; Write-Output "COMMAND> Get-FileHash -LiteralPath '$src' -Algorithm SHA256"; Get-FileHash -LiteralPath $src -Algorithm SHA256 | Format-List; Write-Output "COMMAND> objdump -f '$src'"; objdump -f $src; Write-Output "COMMAND> objdump -h '$src'"; objdump -h $src; Write-Output "COMMAND> strings.exe -n 5 '$src' | Select-String /flag|flag|PyInstaller|python311|Hint|最短"; strings.exe -n 5 $src | Select-String -Pattern '/flag|flag|PyInstaller|python311|Hint|最短|出口|路径' -CaseSensitive:$false | Select-Object -First 120 | ForEach-Object {$_.Line}; Stop-Transcript
+Process ID: 2752
+PSVersion: 7.6.5
+PSEdition: Core
+GitCommitId: 7.6.5
+OS: Microsoft Windows 10.0.26200
+Platform: Win32NT
+PSCompatibleVersions: 1.0, 2.0, 3.0, 4.0, 5.0, 5.1, 6.0, 7.0
+PSRemotingProtocolVersion: 2.4
+SerializationVersion: 1.1.0.1
+WSManStackVersion: 3.0
+**********************
+Transcript started, output file is C:\Users\mzj\Desktop\CTF\玄机刷题\记录\PaluMaze_551-fresh-static.txt
+COMMAND> Get-Item -LiteralPath 'D:\Downloads\game_flag (1).exe'
+
+FullName      : D:\Downloads\game_flag (1).exe
+Length        : 6731652
+LastWriteTime : 2026/9/28 23:55:55
+
+COMMAND> Get-FileHash -LiteralPath 'D:\Downloads\game_flag (1).exe' -Algorithm SHA256
+
+Algorithm : SHA256
+Hash      : 319DE70C476CC7C2761A57D88B83A5529D06CFD0A909D0EC48EC9CD588F82556
+Path      : D:\Downloads\game_flag (1).exe
+
+COMMAND> objdump -f 'D:\Downloads\game_flag (1).exe'
+
+COMMAND> objdump -h 'D:\Downloads\game_flag (1).exe'
+
+COMMAND> strings.exe -n 5 'D:\Downloads\game_flag (1).exe' | Select-String /flag|flag|PyInstaller|python311|Hint|最短
+PYINSTALLER_STRICT_UNPACK_MODE
+Could not load PyInstaller's embedded PKG archive from the executable (%s)
+Could not side-load PyInstaller's PKG archive from external file (%s)
+PyRun_SimpleStringFlags
+unknown header flags set
+bpython311.dll
+7python311.dll
+**********************
+PowerShell transcript end
+End time: 20260928235744
+**********************
+**********************
+PowerShell transcript start
+Start time: 20260928235825
+Username: DESKTOP-412KTAR\mzj
+RunAs User: DESKTOP-412KTAR\mzj
+Configuration Name: 
+Machine: DESKTOP-412KTAR (Microsoft Windows NT 10.0.26200.0)
+Host Application: C:\Users\mzj\.cache\codex-runtimes\codex-primary-runtime\dependencies\native\powershell\pwsh.dll -Command try { [Console]::OutputEncoding=[System.Text.Encoding]::UTF8 } catch {}
+$dir='C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\PaluMaze_551_fresh'; $script=Join-Path $dir 'static_unpack.py'; $src=@'
+from pathlib import Path
+import struct, zlib
+source=Path(r'D:\Downloads\game_flag (1).exe')
+out=Path(r'C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\PaluMaze_551_fresh\archive')
+data=source.read_bytes()
+magic=b'MEI'+bytes((12,11,10,11,14))
+loc=data.rfind(magic)
+if loc<0: raise SystemExit('PyInstaller v6 cookie not found')
+raw=data[loc:loc+88]
+if len(raw)!=88: raise SystemExit(f'truncated cookie: {len(raw)} bytes')
+fields=struct.unpack('!8sIIII64s',raw)
+pkg_len,toc_offset,toc_len,pyvers,pylib=fields[1:]
+start=len(data)-pkg_len
+archive=data[start:loc]
+print(f'source_bytes={len(data)} cookie_offset=0x{loc:x}')
+print(f'archive_start=0x{start:x} package_len={pkg_len} pyinstaller_python={pyvers} python_dll={pylib.split(bytes((0,)))[0].decode(errors="replace")}')
+print(f'toc_offset={toc_offset} toc_length={toc_len} archive_payload_len={len(archive)}')
+entries=[]; pos=toc_offset; end=pos+toc_len
+while pos<end:
+    size=struct.unpack('!I',archive[pos:pos+4])[0]
+    if size<18 or pos+size>end: raise SystemExit(f'invalid TOC entry at {pos}: size={size}')
+    offset,clen,ulen,compressed,kind=struct.unpack('!IIIBc',archive[pos+4:pos+18])
+    name=archive[pos+18:pos+size].split(bytes((0,)),1)[0].decode('utf-8','replace')
+    entries.append((name,kind.decode('ascii','replace'),compressed,offset,clen,ulen))
+    pos+=size
+print('entry_count=',len(entries))
+for name,kind,c,off,clen,ulen in entries:
+    print(f'ENTRY type={kind!r} compressed={c} offset={off} compressed_len={clen} raw_len={ulen} name={name!r}')
+print('FLAG_NAME_MATCHES=',[e for e in entries if 'flag' in e[0].lower()])
+print('PATH_NAME_MATCHES=',[e for e in entries if e[0].lower() in ('/flag','flag','flag.txt') or 'flag' in e[0].lower()])
+for name,kind,c,off,clen,ulen in entries:
+    if name in ('game','game.pyc','flag','flag.txt') or 'flag' in name.lower():
+        blob=archive[off:off+clen]
+        content=zlib.decompress(blob) if c else blob
+        if len(content)!=ulen: raise SystemExit(f'length mismatch in {name}: {len(content)} != {ulen}')
+        dest=out/(name.replace('/','_').replace('\\','_'))
+        dest.parent.mkdir(parents=True,exist_ok=True); dest.write_bytes(content)
+        print(f'EXTRACTED {name!r} bytes={len(content)} -> {dest}')
+'@; Set-Content -LiteralPath $script -Value $src -Encoding utf8; $log='C:\Users\mzj\Desktop\CTF\玄机刷题\记录\PaluMaze_551-fresh-static.txt'; Start-Transcript -LiteralPath $log -Append; Write-Output "COMMAND> python -B '$script'"; python -B $script; Stop-Transcript
+Process ID: 28912
+PSVersion: 7.6.5
+PSEdition: Core
+GitCommitId: 7.6.5
+OS: Microsoft Windows 10.0.26200
+Platform: Win32NT
+PSCompatibleVersions: 1.0, 2.0, 3.0, 4.0, 5.0, 5.1, 6.0, 7.0
+PSRemotingProtocolVersion: 2.4
+SerializationVersion: 1.1.0.1
+WSManStackVersion: 3.0
+**********************
+Transcript started, output file is C:\Users\mzj\Desktop\CTF\玄机刷题\记录\PaluMaze_551-fresh-static.txt
+COMMAND> python -B 'C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\PaluMaze_551_fresh\static_unpack.py'
+
+**********************
+PowerShell transcript end
+End time: 20260928235825
+**********************
+**********************
+PowerShell transcript start
+Start time: 20260928235845
+Username: DESKTOP-412KTAR\mzj
+RunAs User: DESKTOP-412KTAR\mzj
+Configuration Name: 
+Machine: DESKTOP-412KTAR (Microsoft Windows NT 10.0.26200.0)
+Host Application: C:\Users\mzj\.cache\codex-runtimes\codex-primary-runtime\dependencies\native\powershell\pwsh.dll -Command try { [Console]::OutputEncoding=[System.Text.Encoding]::UTF8 } catch {}
+$log='C:\Users\mzj\Desktop\CTF\玄机刷题\记录\PaluMaze_551-fresh-static.txt'; Start-Transcript -LiteralPath $log -Append; Write-Output 'COMMAND> py -0p'; py -0p; Write-Output 'COMMAND> Get-Command python,python3,python3.11,python3.12,py -ErrorAction SilentlyContinue'; Get-Command python,python3,python3.11,python3.12,py -ErrorAction SilentlyContinue | Select-Object Name,Source | Format-Table -AutoSize; Write-Output 'COMMAND> Get-ChildItem Python installs'; Get-ChildItem 'C:\Users\mzj\AppData\Local\Programs\Python' -Directory -ErrorAction SilentlyContinue | Select-Object FullName; Stop-Transcript
+Process ID: 27568
+PSVersion: 7.6.5
+PSEdition: Core
+GitCommitId: 7.6.5
+OS: Microsoft Windows 10.0.26200
+Platform: Win32NT
+PSCompatibleVersions: 1.0, 2.0, 3.0, 4.0, 5.0, 5.1, 6.0, 7.0
+PSRemotingProtocolVersion: 2.4
+SerializationVersion: 1.1.0.1
+WSManStackVersion: 3.0
+**********************
+Transcript started, output file is C:\Users\mzj\Desktop\CTF\玄机刷题\记录\PaluMaze_551-fresh-static.txt
+COMMAND> py -0p
+
+COMMAND> Get-Command python,python3,python3.11,python3.12,py -ErrorAction SilentlyContinue
+
+Name        Source
+----        ------
+python.exe  C:\Users\mzj\AppData\Local\Programs\Python\Python312\python.exe
+python3.exe C:\Users\mzj\AppData\Local\Microsoft\WindowsApps\python3.exe
+py.exe      C:\WINDOWS\py.exe
+
+COMMAND> Get-ChildItem Python installs
+
+**********************
+PowerShell transcript end
+End time: 20260928235845
+**********************
+**********************
+PowerShell transcript start
+Start time: 20260929000009
+Username: DESKTOP-412KTAR\mzj
+RunAs User: DESKTOP-412KTAR\mzj
+Configuration Name: 
+Machine: DESKTOP-412KTAR (Microsoft Windows NT 10.0.26200.0)
+Host Application: C:\Users\mzj\.cache\codex-runtimes\codex-primary-runtime\dependencies\native\powershell\pwsh.dll -Command try { [Console]::OutputEncoding=[System.Text.Encoding]::UTF8 } catch {}
+$dir='C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\PaluMaze_551_fresh'; $script=Join-Path $dir 'summarize_code_static.py'; $src=@'
+from pathlib import Path
+import marshal,types
+p=Path(r'C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\PaluMaze_551_fresh\archive\game')
+root=marshal.loads(p.read_bytes())
+allnames=set(); allstrings=[]
+def walk(code,depth=0):
+    pad='  '*depth
+    print(f'{pad}FUNCTION={code.co_name!r} line={code.co_firstlineno} argcount={code.co_argcount}')
+    print(f'{pad}  NAMES={code.co_names!r}')
+    allnames.update(code.co_names)
+    for i,value in enumerate(code.co_consts):
+        if isinstance(value,types.CodeType):
+            walk(value,depth+1)
+        elif isinstance(value,str):
+            print(f'{pad}  STRING_CONST[{i}]={value!r}')
+            allstrings.append(value)
+        elif value is not None and (isinstance(value,(int,float,bytes)) or isinstance(value,tuple)):
+            print(f'{pad}  CONST[{i}]={value!r}')
+walk(root)
+print('ALL_GLOBAL_OR_ATTR_NAMES=',sorted(allnames))
+print('STATIC_STRING_HAS_/flag=',any('/flag' in s.lower() for s in allstrings))
+print('STATIC_NAME_HAS_FILE_READ=',sorted(n for n in allnames if n.lower() in {'open','read','read_text','read_bytes','pathlib','hashlib','md5'}))
+print('STATIC_NAME_HAS_HASH=',sorted(n for n in allnames if 'hash' in n.lower() or n.lower()=='md5'))
+'@; Set-Content -LiteralPath $script -Value $src -Encoding utf8; $log='C:\Users\mzj\Desktop\CTF\玄机刷题\记录\PaluMaze_551-fresh-static.txt'; Start-Transcript -LiteralPath $log -Append; Write-Output "COMMAND> python -B '$script'"; python -B $script; Stop-Transcript
+Process ID: 27408
+PSVersion: 7.6.5
+PSEdition: Core
+GitCommitId: 7.6.5
+OS: Microsoft Windows 10.0.26200
+Platform: Win32NT
+PSCompatibleVersions: 1.0, 2.0, 3.0, 4.0, 5.0, 5.1, 6.0, 7.0
+PSRemotingProtocolVersion: 2.4
+SerializationVersion: 1.1.0.1
+WSManStackVersion: 3.0
+**********************
+Transcript started, output file is C:\Users\mzj\Desktop\CTF\玄机刷题\记录\PaluMaze_551-fresh-static.txt
+COMMAND> python -B 'C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\PaluMaze_551_fresh\summarize_code_static.py'
+
+**********************
+PowerShell transcript end
+End time: 20260929000009
+**********************
+**********************
+PowerShell transcript start
+Start time: 20260929000121
+Username: DESKTOP-412KTAR\mzj
+RunAs User: DESKTOP-412KTAR\mzj
+Configuration Name: 
+Machine: DESKTOP-412KTAR (Microsoft Windows NT 10.0.26200.0)
+Host Application: C:\Users\mzj\.cache\codex-runtimes\codex-primary-runtime\dependencies\native\powershell\pwsh.dll -Command try { [Console]::OutputEncoding=[System.Text.Encoding]::UTF8 } catch {}
+$dir='C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\PaluMaze_551_fresh'; $script=Join-Path $dir 'summarize_code_ascii.py'; $src=@'
+from pathlib import Path
+import marshal,types
+root=marshal.loads(Path(r'C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\PaluMaze_551_fresh\archive\game').read_bytes())
+allnames=set(); strings=[]
+def walk(code,depth=0):
+ pad='  '*depth
+ print(f'{pad}CODE name={code.co_name!a} firstline={code.co_firstlineno} args={code.co_varnames[:code.co_argcount]!a} names={code.co_names!a}')
+ allnames.update(code.co_names)
+ for i,c in enumerate(code.co_consts):
+  if isinstance(c,types.CodeType):walk(c,depth+1)
+  elif isinstance(c,str):
+   print(f'{pad}  STRING[{i}]={c!a}'); strings.append(c)
+  elif c is not None and isinstance(c,(int,float,bytes,tuple)):
+   print(f'{pad}  CONST[{i}]={c!a}')
+walk(root)
+print('UNION_NAMES=',sorted(allnames))
+print('FLAG_PATH_LITERAL=',any('/flag' in x.lower() for x in strings))
+print('MD5_LITERAL=',any('md5' in x.lower() for x in strings))
+'@; Set-Content -LiteralPath $script -Value $src -Encoding utf8; $log='C:\Users\mzj\Desktop\CTF\玄机刷题\记录\PaluMaze_551-fresh-static.txt'; Start-Transcript -LiteralPath $log -Append; Write-Output "COMMAND> python -B '$script'"; python -B $script; Stop-Transcript
+Process ID: 14988
+PSVersion: 7.6.5
+PSEdition: Core
+GitCommitId: 7.6.5
+OS: Microsoft Windows 10.0.26200
+Platform: Win32NT
+PSCompatibleVersions: 1.0, 2.0, 3.0, 4.0, 5.0, 5.1, 6.0, 7.0
+PSRemotingProtocolVersion: 2.4
+SerializationVersion: 1.1.0.1
+WSManStackVersion: 3.0
+**********************
+Transcript started, output file is C:\Users\mzj\Desktop\CTF\玄机刷题\记录\PaluMaze_551-fresh-static.txt
+COMMAND> python -B 'C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\PaluMaze_551_fresh\summarize_code_ascii.py'
+
+**********************
+PowerShell transcript end
+End time: 20260929000121
+**********************
+**********************
+PowerShell transcript start
+Start time: 20260929000133
+Username: DESKTOP-412KTAR\mzj
+RunAs User: DESKTOP-412KTAR\mzj
+Configuration Name: 
+Machine: DESKTOP-412KTAR (Microsoft Windows NT 10.0.26200.0)
+Host Application: C:\Users\mzj\.cache\codex-runtimes\codex-primary-runtime\dependencies\native\powershell\pwsh.dll -Command try { [Console]::OutputEncoding=[System.Text.Encoding]::UTF8 } catch {}
+$log='C:\Users\mzj\Desktop\CTF\玄机刷题\记录\PaluMaze_551-fresh-static.txt'; Start-Transcript -LiteralPath $log -Append; Write-Output 'COMMAND> python -c "import importlib.util; print(importlib.util.find_spec('xdis')); print(importlib.util.find_spec('decompyle3'))"'; python -B -c "import importlib.util; print('xdis=',importlib.util.find_spec('xdis')); print('decompyle3=',importlib.util.find_spec('decompyle3'))"; Stop-Transcript
+Process ID: 18636
+PSVersion: 7.6.5
+PSEdition: Core
+GitCommitId: 7.6.5
+OS: Microsoft Windows 10.0.26200
+Platform: Win32NT
+PSCompatibleVersions: 1.0, 2.0, 3.0, 4.0, 5.0, 5.1, 6.0, 7.0
+PSRemotingProtocolVersion: 2.4
+SerializationVersion: 1.1.0.1
+WSManStackVersion: 3.0
+**********************
+Transcript started, output file is C:\Users\mzj\Desktop\CTF\玄机刷题\记录\PaluMaze_551-fresh-static.txt
+COMMAND> python -c "import importlib.util; print(importlib.util.find_spec(
+xdis)); print(importlib.util.find_spec(decompyle3))"
+
+**********************
+PowerShell transcript end
+End time: 20260929000133
+**********************
+**********************
+PowerShell transcript start
+Start time: 20260929000411
+Username: DESKTOP-412KTAR\mzj
+RunAs User: DESKTOP-412KTAR\mzj
+Configuration Name: 
+Machine: DESKTOP-412KTAR (Microsoft Windows NT 10.0.26200.0)
+Host Application: C:\Users\mzj\.cache\codex-runtimes\codex-primary-runtime\dependencies\native\powershell\pwsh.dll -Command try { [Console]::OutputEncoding=[System.Text.Encoding]::UTF8 } catch {}
+$dir='C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\PaluMaze_551_fresh'; $script=Join-Path $dir 'reconstruct_routes.py'; $src=@'
+# Reconstructed only from the fresh attachment's marshaled game code constants.
+# This script does not execute game_flag.exe.
+import hashlib, random
+from collections import deque, defaultdict
+
+SIZE=32
+SEED=5822171
+CARVE_STEPS=((0,2),(2,0),(0,-2),(-2,0))
+OPEN_NEIGHBORS=((0,1),(1,0),(0,-1),(-1,0))
+EXITS_FORMULA='[(1,n-2),(n-2,n-2),(n-2,n//2),(n-2,1),(n//2,1)]'
+
+def build_maze(width=SIZE,height=SIZE,seed=SEED):
+    n=min(width,height)
+    random.seed(seed)
+    maze=[[1 for _ in range(n)] for _ in range(n)]
+    maze[1][1]=0
+    def carve(x,y):
+        directions=list(CARVE_STEPS)
+        random.shuffle(directions)
+        for dx,dy in directions:
+            nx,ny=x+dx,y+dy
+            if 0<nx<n-1 and 0<ny<n-1 and maze[nx][ny]==1:
+                maze[x+dx//2][y+dy//2]=0
+                maze[nx][ny]=0
+                carve(nx,ny)
+    carve(1,1)
+    exits=[(1,n-2),(n-2,n-2),(n-2,n//2),(n-2,1),(n//2,1)]
+    for x,y in exits:
+        for dx,dy in OPEN_NEIGHBORS:
+            nx,ny=x+dx,y+dy
+            if 0<=nx<n and 0<=ny<n:
+                maze[nx][ny]=0
+        maze[x][y]=2
+    return maze,exits
+
+maze,exits=build_maze()
+index={p:i for i,p in enumerate(exits)}
+step_order=[(-1,0,'w'),(0,-1,'a'),(1,0,'s'),(0,1,'d')]
+start=((1,1),0)
+distance={start:0}
+parents=defaultdict(list)
+queue=deque([start])
+minimum=None
+while queue:
+    state=queue.popleft(); (x,y),mask=state; d=distance[state]
+    if minimum is not None and d>=minimum:
+        continue
+    for dx,dy,key in step_order:
+        nx,ny=x+dx,y+dy
+        if not(0<=nx<SIZE and 0<=ny<SIZE) or maze[nx][ny]==1:
+            continue
+        newmask=mask | ((1<<index[(nx,ny)]) if (nx,ny) in index else 0)
+        nxt=((nx,ny),newmask); nd=d+1
+        if nxt not in distance:
+            distance[nxt]=nd; parents[nxt].append((state,key)); queue.append(nxt)
+        elif distance[nxt]==nd:
+            parents[nxt].append((state,key))
+        if newmask==(1<<len(exits))-1:
+            minimum=nd if minimum is None else min(minimum,nd)
+goals=[s for s,d in distance.items() if s[1]==(1<<len(exits))-1 and d==minimum]
+cache={start:['']}
+def reconstruct(state):
+    if state in cache:return cache[state]
+    routes=[]
+    for prior,key in parents[state]:
+        routes.extend(prefix+key for prefix in reconstruct(prior))
+    cache[state]=routes
+    return routes
+routes=[p for goal in goals for p in reconstruct(goal)]
+print('source=game_flag (1).exe static reconstructed model')
+print('size=',SIZE,'seed=',SEED)
+print('carve_steps=',CARVE_STEPS)
+print('exit_coordinates=',exits)
+print('exit_adjacent_open_order=',OPEN_NEIGHBORS)
+print('minimum_steps=',minimum)
+print('goal_states=',[g[0] for g in goals])
+print('shortest_route_count=',len(routes),'unique_route_count=',len(set(routes)))
+route=routes[0]
+print('canonical_for_this_script_only=FIFO BFS; move order w,a,s,d')
+print('example_route=',route)
+print('example_route_md5=',hashlib.md5(route.encode('ascii')).hexdigest())
+print('example_flag_candidate=flag{'+hashlib.md5(route.encode('ascii')).hexdigest()+'}')
+print('not_platform_verified=True')
+'@; Set-Content -LiteralPath $script -Value $src -Encoding utf8; $log='C:\Users\mzj\Desktop\CTF\玄机刷题\记录\PaluMaze_551-fresh-static.txt'; Start-Transcript -LiteralPath $log -Append; Write-Output "COMMAND> python -B '$script'"; python -B $script; Stop-Transcript
+Process ID: 26172
+PSVersion: 7.6.5
+PSEdition: Core
+GitCommitId: 7.6.5
+OS: Microsoft Windows 10.0.26200
+Platform: Win32NT
+PSCompatibleVersions: 1.0, 2.0, 3.0, 4.0, 5.0, 5.1, 6.0, 7.0
+PSRemotingProtocolVersion: 2.4
+SerializationVersion: 1.1.0.1
+WSManStackVersion: 3.0
+**********************
+Transcript started, output file is C:\Users\mzj\Desktop\CTF\玄机刷题\记录\PaluMaze_551-fresh-static.txt
+COMMAND> python -B 'C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\PaluMaze_551_fresh\reconstruct_routes.py'
+
+**********************
+PowerShell transcript end
+End time: 20260929000411
+**********************
+**********************
+PowerShell transcript start
+Start time: 20260929000531
+Username: DESKTOP-412KTAR\mzj
+RunAs User: DESKTOP-412KTAR\mzj
+Configuration Name: 
+Machine: DESKTOP-412KTAR (Microsoft Windows NT 10.0.26200.0)
+Host Application: C:\Users\mzj\.cache\codex-runtimes\codex-primary-runtime\dependencies\native\powershell\pwsh.dll -Command try { [Console]::OutputEncoding=[System.Text.Encoding]::UTF8 } catch {}
+$path='C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\PaluMaze_551_fresh\reconstruct_routes.py'; $log='C:\Users\mzj\Desktop\CTF\玄机刷题\记录\PaluMaze_551-fresh-static.txt'; $text=Get-Content -LiteralPath $path -Raw -Encoding utf8; $append=@'
+route=routes[0]
+position=(1,1); seen=[]; at=[]
+for step_number,key in enumerate(route,1):
+    dx,dy={'w':(-1,0),'a':(0,-1),'s':(1,0),'d':(0,1)}[key]
+    position=(position[0]+dx,position[1]+dy)
+    if position in index and position not in seen:
+        seen.append(position); at.append((step_number,position))
+print('route_replay_steps=',len(route))
+print('route_replay_exit_visits=',at)
+print('route_replay_final_position=',position)
+'@; $text=$text+$append; Set-Content -LiteralPath $path -Value $text -Encoding utf8; Start-Transcript -LiteralPath $log -Append; Write-Output "COMMAND> python -B '$path'"; python -B $path; Stop-Transcript
+Process ID: 18200
+PSVersion: 7.6.5
+PSEdition: Core
+GitCommitId: 7.6.5
+OS: Microsoft Windows 10.0.26200
+Platform: Win32NT
+PSCompatibleVersions: 1.0, 2.0, 3.0, 4.0, 5.0, 5.1, 6.0, 7.0
+PSRemotingProtocolVersion: 2.4
+SerializationVersion: 1.1.0.1
+WSManStackVersion: 3.0
+**********************
+Transcript started, output file is C:\Users\mzj\Desktop\CTF\玄机刷题\记录\PaluMaze_551-fresh-static.txt
+COMMAND> python -B 'C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\PaluMaze_551_fresh\reconstruct_routes.py'
+
+**********************
+PowerShell transcript end
+End time: 20260929000531
+**********************
+**********************
+PowerShell transcript start
+Start time: 20260929000717
+Username: DESKTOP-412KTAR\mzj
+RunAs User: DESKTOP-412KTAR\mzj
+Configuration Name: 
+Machine: DESKTOP-412KTAR (Microsoft Windows NT 10.0.26200.0)
+Host Application: C:\Users\mzj\.cache\codex-runtimes\codex-primary-runtime\dependencies\native\powershell\pwsh.dll -NoProfile -Command try { [Console]::OutputEncoding=[System.Text.Encoding]::UTF8 } catch {}
+$script='C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\PaluMaze_551_fresh\reconstruct_routes.py'; $log='C:\Users\mzj\Desktop\CTF\玄机刷题\记录\PaluMaze_551-fresh-static.txt'; Start-Transcript -LiteralPath $log -Append; Write-Output "COMMAND> py -3.12 -B '$script'"; py -3.12 -B $script; Stop-Transcript
+Process ID: 18900
+PSVersion: 7.6.5
+PSEdition: Core
+GitCommitId: 7.6.5
+OS: Microsoft Windows 10.0.26200
+Platform: Win32NT
+PSCompatibleVersions: 1.0, 2.0, 3.0, 4.0, 5.0, 5.1, 6.0, 7.0
+PSRemotingProtocolVersion: 2.4
+SerializationVersion: 1.1.0.1
+WSManStackVersion: 3.0
+**********************
+Transcript started, output file is C:\Users\mzj\Desktop\CTF\玄机刷题\记录\PaluMaze_551-fresh-static.txt
+COMMAND> py -3.12 -B 'C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\PaluMaze_551_fresh\reconstruct_routes.py'
+
+**********************
+PowerShell transcript end
+End time: 20260929000717
+**********************
+**********************
+PowerShell transcript start
+Start time: 20260929001057
+Username: DESKTOP-412KTAR\mzj
+RunAs User: DESKTOP-412KTAR\mzj
+Configuration Name: 
+Machine: DESKTOP-412KTAR (Microsoft Windows NT 10.0.26200.0)
+Host Application: C:\Users\mzj\.cache\codex-runtimes\codex-primary-runtime\dependencies\native\powershell\pwsh.dll -Command try { [Console]::OutputEncoding=[System.Text.Encoding]::UTF8 } catch {}
+$dir='C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\PaluMaze_551_fresh'; $script=Join-Path $dir 'enumerate_exit_order_candidates.py'; $src=@'
+import random,itertools,hashlib
+from collections import deque
+N=32; seed=5822171; carve=((0,2),(2,0),(0,-2),(-2,0)); border=((0,1),(1,0),(0,-1),(-1,0))
+random.seed(seed); maze=[[1 for _ in range(N)] for _ in range(N)]; maze[1][1]=0
+def dig(x,y):
+    dirs=list(carve); random.shuffle(dirs)
+    for dx,dy in dirs:
+        xx,yy=x+dx,y+dy
+        if 0<xx<N-1 and 0<yy<N-1 and maze[xx][yy]==1:
+            maze[x+dx//2][y+dy//2]=0; maze[xx][yy]=0; dig(xx,yy)
+dig(1,1)
+exits=[(1,N-2),(N-2,N-2),(N-2,N//2),(N-2,1),(N//2,1)]
+for x,y in exits:
+    for dx,dy in border:
+        xx,yy=x+dx,y+dy
+        if 0<=xx<N and 0<=yy<N:maze[xx][yy]=0
+    maze[x][y]=2
+moves=[(-1,0,'w'),(0,-1,'a'),(1,0,'s'),(0,1,'d')]
+def route_between(start,goal):
+    q=deque([start]); prev={start:None}; incoming={}
+    while q:
+        x,y=q.popleft()
+        if (x,y)==goal:break
+        for dx,dy,key in moves:
+            nxt=(x+dx,y+dy)
+            if 0<=nxt[0]<N and 0<=nxt[1]<N and maze[nxt[0]][nxt[1]]!=1 and nxt not in prev:
+                prev[nxt]=(x,y); incoming[nxt]=key; q.append(nxt)
+    p=goal; rev=[]
+    while prev[p] is not None:rev.append(incoming[p]);p=prev[p]
+    return ''.join(reversed(rev))
+points=[(1,1)]+exits
+pair={(a,b):route_between(a,b) for a in points for b in points}
+rows=[]
+for order in itertools.permutations(range(5)):
+    seq=(0,)+tuple(i+1 for i in order)
+    route=''.join(pair[(points[seq[i]],points[seq[i+1]])] for i in range(5))
+    rows.append((len(route),order,route,hashlib.md5(route.encode('ascii')).hexdigest()))
+minimum=min(x[0] for x in rows)
+print('declared_exit_order=',exits)
+for label,order in [('declared',tuple(range(5))),('reverse_declared',tuple(reversed(range(5))))]:
+    item=next(r for r in rows if r[1]==order)
+    print(f'{label}_length={item[0]} order={[exits[i] for i in order]} md5={item[3]} route={item[2]}')
+best=[r for r in rows if r[0]==minimum]
+print('permutations=',len(rows),'minimum_total=',minimum,'minimum_orders=',len(best))
+for length,order,route,digest in best:
+    print('optimal_order=',[exits[i] for i in order],'length=',length,'md5=',digest,'route=',route)
+'@; Set-Content -LiteralPath $script -Value $src -Encoding utf8; $log='C:\Users\mzj\Desktop\CTF\玄机刷题\记录\PaluMaze_551-fresh-static.txt'; Start-Transcript -LiteralPath $log -Append; Write-Output "COMMAND> python -B '$script'"; python -B $script; Stop-Transcript
+Process ID: 14316
+PSVersion: 7.6.5
+PSEdition: Core
+GitCommitId: 7.6.5
+OS: Microsoft Windows 10.0.26200
+Platform: Win32NT
+PSCompatibleVersions: 1.0, 2.0, 3.0, 4.0, 5.0, 5.1, 6.0, 7.0
+PSRemotingProtocolVersion: 2.4
+SerializationVersion: 1.1.0.1
+WSManStackVersion: 3.0
+**********************
+Transcript started, output file is C:\Users\mzj\Desktop\CTF\玄机刷题\记录\PaluMaze_551-fresh-static.txt
+COMMAND> python -B 'C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\PaluMaze_551_fresh\enumerate_exit_order_candidates.py'
+
+**********************
+PowerShell transcript end
+End time: 20260929001057
+**********************
+
+=== 玄机平台页面验证尝试 ===
+页面: https://xj.edisec.net/challenges/551（“第二届Parloo杯 帕鲁迷宫”）。
+从静态重建中取 FIFO BFS、邻接方向优先序 w,a,s,d 的 295 步最短路线；复放确认访问五个出口，最终位于 (1,30)。其 MD5 为 73826d4b386ef387a8b45de4bf2b40bf，候选 flag 为 flag{73826d4b386ef387a8b45de4bf2b40bf}。
+在题页“提交FLAG”对话框提交该候选后，页面返回“FLAG 不正确~”；步骤仍为 0/1。
+这证明该任意最短路线的 MD5 不是平台预期值。题目路线模型中存在 512 条等长最短路线；继续检查题目源码对出口顺序、动作编码或路线字符串表示的约定，不把此候选当作完成结果。
+**********************
+PowerShell transcript start
+Start time: 20260929001826
+Username: DESKTOP-412KTAR\mzj
+RunAs User: DESKTOP-412KTAR\mzj
+Configuration Name: 
+Machine: DESKTOP-412KTAR (Microsoft Windows NT 10.0.26200.0)
+Host Application: C:\Users\mzj\.cache\codex-runtimes\codex-primary-runtime\dependencies\native\powershell\pwsh.dll -Command try { [Console]::OutputEncoding=[System.Text.Encoding]::UTF8 } catch {}
+$dir='C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\PaluMaze_551_fresh'; $script=Join-Path $dir 'enumerate_direction_tiebreaks.py'; $src=@'
+import random,itertools,hashlib
+from collections import deque
+N=32; random.seed(5822171); maze=[[1]*N for _ in range(N)]; maze[1][1]=0
+carve=((0,2),(2,0),(0,-2),(-2,0))
+def dig(x,y):
+ dirs=list(carve); random.shuffle(dirs)
+ for dx,dy in dirs:
+  xx,yy=x+dx,y+dy
+  if 0<xx<N-1 and 0<yy<N-1 and maze[xx][yy]==1:
+   maze[x+dx//2][y+dy//2]=0; maze[xx][yy]=0; dig(xx,yy)
+dig(1,1)
+exits=[(1,N-2),(N-2,N-2),(N-2,N//2),(N-2,1),(N//2,1)]
+for x,y in exits:
+ for dx,dy in ((0,1),(1,0),(0,-1),(-1,0)):
+  xx,yy=x+dx,y+dy
+  if 0<=xx<N and 0<=yy<N:maze[xx][yy]=0
+ maze[x][y]=2
+labels=[(-1,0,'w'),(0,-1,'a'),(1,0,'s'),(0,1,'d')]
+rows=[]
+for order in itertools.permutations(labels):
+ index={p:i for i,p in enumerate(exits)}; start=((1,1),0); q=deque([start]); prev={start:None}; incoming={}; goal=None
+ while q:
+  pos,mask=q.popleft()
+  if mask==31:goal=(pos,mask); break
+  x,y=pos
+  for dx,dy,key in order:
+   nxt=(x+dx,y+dy)
+   if not(0<=nxt[0]<N and 0<=nxt[1]<N) or maze[nxt[0]][nxt[1]]==1:continue
+   nm=mask|((1<<index[nxt]) if nxt in index else 0); state=(nxt,nm)
+   if state not in prev:prev[state]=(pos,mask);incoming[state]=key;q.append(state)
+ rev=[]; state=goal
+ while prev[state] is not None:rev.append(incoming[state]);state=prev[state]
+ route=''.join(reversed(rev)); digest=hashlib.md5(route.encode('ascii')).hexdigest()
+ rows.append((''.join(x[2] for x in order),len(route),digest,route))
+print('direction_order_count=',len(rows),'unique_routes=',len({r[3] for r in rows}),'lengths=',sorted({r[1] for r in rows}))
+for order,length,digest,route in rows:print('order=',order,'length=',length,'md5=',digest)
+for order in ('wasd','asdw','dwas','sawd','dsaw','wdsa'):
+ row=next(r for r in rows if r[0]==order)
+ print('example',order,'route=',row[3])
+'@; Set-Content -LiteralPath $script -Value $src -Encoding utf8; $log='C:\Users\mzj\Desktop\CTF\玄机刷题\记录\PaluMaze_551-fresh-static.txt'; Start-Transcript -LiteralPath $log -Append; Write-Output "COMMAND> python -B '$script'"; python -B $script; Stop-Transcript
+Process ID: 20004
+PSVersion: 7.6.5
+PSEdition: Core
+GitCommitId: 7.6.5
+OS: Microsoft Windows 10.0.26200
+Platform: Win32NT
+PSCompatibleVersions: 1.0, 2.0, 3.0, 4.0, 5.0, 5.1, 6.0, 7.0
+PSRemotingProtocolVersion: 2.4
+SerializationVersion: 1.1.0.1
+WSManStackVersion: 3.0
+**********************
+Transcript started, output file is C:\Users\mzj\Desktop\CTF\玄机刷题\记录\PaluMaze_551-fresh-static.txt
+COMMAND> python -B 'C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\PaluMaze_551_fresh\enumerate_direction_tiebreaks.py'
+
+**********************
+PowerShell transcript end
+End time: 20260929001826
+**********************
+**********************
+PowerShell transcript start
+Start time: 20260929001939
+Username: DESKTOP-412KTAR\mzj
+RunAs User: DESKTOP-412KTAR\mzj
+Configuration Name: 
+Machine: DESKTOP-412KTAR (Microsoft Windows NT 10.0.26200.0)
+Host Application: C:\Users\mzj\.cache\codex-runtimes\codex-primary-runtime\dependencies\native\powershell\pwsh.dll -Command try { [Console]::OutputEncoding=[System.Text.Encoding]::UTF8 } catch {}
+$script='C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\PaluMaze_551_fresh\reconstruct_routes.py'; $log='C:\Users\mzj\Desktop\CTF\玄机刷题\记录\PaluMaze_551-fresh-static.txt'; Start-Transcript -LiteralPath $log -Append; foreach($version in @('3.12','3.13','3.14')) { Write-Output "COMMAND> py -$version -B '$script'"; py -$version -B $script | Select-String -Pattern 'minimum_steps|shortest_route_count|example_route_md5|example_flag_candidate|route_replay_exit_visits' | ForEach-Object {$_.Line} }; Stop-Transcript
+Process ID: 11464
+PSVersion: 7.6.5
+PSEdition: Core
+GitCommitId: 7.6.5
+OS: Microsoft Windows 10.0.26200
+Platform: Win32NT
+PSCompatibleVersions: 1.0, 2.0, 3.0, 4.0, 5.0, 5.1, 6.0, 7.0
+PSRemotingProtocolVersion: 2.4
+SerializationVersion: 1.1.0.1
+WSManStackVersion: 3.0
+**********************
+Transcript started, output file is C:\Users\mzj\Desktop\CTF\玄机刷题\记录\PaluMaze_551-fresh-static.txt
+COMMAND> py -3.12 -B 'C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\PaluMaze_551_fresh\reconstruct_routes.py'
+minimum_steps= 295
+shortest_route_count= 512 unique_route_count= 512
+example_route_md5= 73826d4b386ef387a8b45de4bf2b40bf
+example_flag_candidate=flag{73826d4b386ef387a8b45de4bf2b40bf}
+route_replay_exit_visits= [(39, (16, 1)), (93, (30, 1)), (188, (30, 16)), (204, (30, 30)), (295, (1, 30))]
+COMMAND> py -3.13 -B 'C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\PaluMaze_551_fresh\reconstruct_routes.py'
+COMMAND> py -3.14 -B 'C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\PaluMaze_551_fresh\reconstruct_routes.py'
+minimum_steps= 295
+shortest_route_count= 512 unique_route_count= 512
+example_route_md5= 73826d4b386ef387a8b45de4bf2b40bf
+example_flag_candidate=flag{73826d4b386ef387a8b45de4bf2b40bf}
+route_replay_exit_visits= [(39, (16, 1)), (93, (30, 1)), (188, (30, 16)), (204, (30, 30)), (295, (1, 30))]
+**********************
+PowerShell transcript end
+End time: 20260929001941
+**********************
+**********************
+PowerShell transcript start
+Start time: 20260929001948
+Username: DESKTOP-412KTAR\mzj
+RunAs User: DESKTOP-412KTAR\mzj
+Configuration Name: 
+Machine: DESKTOP-412KTAR (Microsoft Windows NT 10.0.26200.0)
+Host Application: C:\Users\mzj\.cache\codex-runtimes\codex-primary-runtime\dependencies\native\powershell\pwsh.dll -NoProfile -Command try { [Console]::OutputEncoding=[System.Text.Encoding]::UTF8 } catch {}
+$script='C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\新题批次\PaluMaze_551\disassemble_game.py'
+$src=@'
+from pathlib import Path
+import dis, io, marshal, struct, types, zlib
+root=Path(__file__).parent
+exe=root/'game_flag.exe'
+data=exe.read_bytes()
+cookie_size=88
+magic, package_len, toc_offset, toc_len, pyver, py_dll=struct.unpack('!8sIIII64s',data[-cookie_size:])
+if magic != bytes.fromhex('4d45490c0b0a0b0e'):
+    raise SystemExit('Unexpected PyInstaller cookie')
+package_start=len(data)-package_len
+toc=data[package_start+toc_offset:package_start+toc_offset+toc_len]
+pos=0; found=None
+while pos<len(toc):
+    entry_size,offset,stored_len,original_len,compressed,type_code=struct.unpack('!iIIIBc',toc[pos:pos+18])
+    name=toc[pos+18:pos+entry_size].split(b'\x00',1)[0].decode('utf-8','replace')
+    if name=='game':
+        raw=data[package_start+offset:package_start+offset+stored_len]
+        found=zlib.decompress(raw) if compressed else raw
+        break
+    pos+=entry_size
+if found is None:
+    raise SystemExit('game entry not found')
+(root/'game.marshal').write_bytes(found)
+print('exe_sha256=',__import__('hashlib').sha256(data).hexdigest())
+print('game_marshaled_bytes=',len(found),'first16=',found[:16].hex())
+try:
+    code=marshal.loads(found)
+except Exception as exc:
+    raise SystemExit(f'marshal.loads under this Python failed: {exc!r}')
+if not isinstance(code,types.CodeType):
+    raise SystemExit(f'Unexpected marshal object: {type(code)}')
+print('module_code_name=',code.co_name,'firstlineno=',code.co_firstlineno,'constants=',len(code.co_consts),'names=',code.co_names)
+out=io.StringIO()
+def walk(obj,depth=0):
+    if not isinstance(obj,types.CodeType): return
+    print('\n'+'='*20+' '*depth+' CODE '+obj.co_name+' line '+str(obj.co_firstlineno)+' '+'='*20,file=out)
+    print('co_names=',obj.co_names,file=out)
+    print('co_varnames=',obj.co_varnames,file=out)
+    print('co_consts=',repr(obj.co_consts),file=out)
+    dis.dis(obj,file=out)
+    for value in obj.co_consts:
+        if isinstance(value,types.CodeType): walk(value,depth+1)
+walk(code)
+text=out.getvalue()
+(root/'game_disassembly.txt').write_text(text,encoding='utf-8')
+print('disassembly_chars=',len(text),'saved=',root/'game_disassembly.txt')
+print('file_operations_in_code_names=',[name for name in code.co_names if any(term in name.lower() for term in ('open','read','hash','md5','flag'))])
+'@
+Set-Content -LiteralPath $script -Value $src -Encoding utf8
+$log='C:\Users\mzj\Desktop\CTF\玄机刷题\记录\PaluMaze_551-fresh-static.txt'
+Start-Transcript -LiteralPath $log -Append
+Write-Output "COMMAND> py -3.12 -B '$script'"
+py -3.12 -B $script
+Stop-Transcript
+Process ID: 14108
+PSVersion: 7.6.5
+PSEdition: Core
+GitCommitId: 7.6.5
+OS: Microsoft Windows 10.0.26200
+Platform: Win32NT
+PSCompatibleVersions: 1.0, 2.0, 3.0, 4.0, 5.0, 5.1, 6.0, 7.0
+PSRemotingProtocolVersion: 2.4
+SerializationVersion: 1.1.0.1
+WSManStackVersion: 3.0
+**********************
+Transcript started, output file is C:\Users\mzj\Desktop\CTF\玄机刷题\记录\PaluMaze_551-fresh-static.txt
+COMMAND> py -3.12 -B 'C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\新题批次\PaluMaze_551\disassemble_game.py'
+
+**********************
+PowerShell transcript end
+End time: 20260929001948
+**********************
+**********************
+PowerShell transcript start
+Start time: 20260929002450
+Username: DESKTOP-412KTAR\mzj
+RunAs User: DESKTOP-412KTAR\mzj
+Configuration Name: 
+Machine: DESKTOP-412KTAR (Microsoft Windows NT 10.0.26200.0)
+Host Application: C:\Users\mzj\.cache\codex-runtimes\codex-primary-runtime\dependencies\native\powershell\pwsh.dll -NoProfile -Command try { [Console]::OutputEncoding=[System.Text.Encoding]::UTF8 } catch {}
+$script='C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\PaluMaze_551_fresh\enumerate_direction_tiebreaks.py'
+$log='C:\Users\mzj\Desktop\CTF\玄机刷题\记录\PaluMaze_551-fresh-static.txt'
+Start-Transcript -LiteralPath $log -Append
+Write-Output "COMMAND> py -3.12 -B '$script'"
+py -3.12 -B $script
+Stop-Transcript
+Process ID: 14516
+PSVersion: 7.6.5
+PSEdition: Core
+GitCommitId: 7.6.5
+OS: Microsoft Windows 10.0.26200
+Platform: Win32NT
+PSCompatibleVersions: 1.0, 2.0, 3.0, 4.0, 5.0, 5.1, 6.0, 7.0
+PSRemotingProtocolVersion: 2.4
+SerializationVersion: 1.1.0.1
+WSManStackVersion: 3.0
+**********************
+Transcript started, output file is C:\Users\mzj\Desktop\CTF\玄机刷题\记录\PaluMaze_551-fresh-static.txt
+COMMAND> py -3.12 -B 'C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\PaluMaze_551_fresh\enumerate_direction_tiebreaks.py'
+
+**********************
+PowerShell transcript end
+End time: 20260929002451
+**********************
+**********************
+PowerShell transcript start
+Start time: 20260929002642
+Username: DESKTOP-412KTAR\mzj
+RunAs User: DESKTOP-412KTAR\mzj
+Configuration Name: 
+Machine: DESKTOP-412KTAR (Microsoft Windows NT 10.0.26200.0)
+Host Application: C:\Users\mzj\.cache\codex-runtimes\codex-primary-runtime\dependencies\native\powershell\pwsh.dll -NoProfile -Command try { [Console]::OutputEncoding=[System.Text.Encoding]::UTF8 } catch {}
+$root='C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\新题批次\PaluMaze_551'
+$marshal=Join-Path $root 'game.marshal'
+$pyc=Join-Path $root 'game_py311.pyc'
+$log='C:\Users\mzj\Desktop\CTF\玄机刷题\记录\PaluMaze_551-fresh-static.txt'
+Start-Transcript -LiteralPath $log -Append
+Write-Output 'COMMAND> py -3.12 -c [create .pyc with Python 3.11 magic + 12-byte PEP 552 header + raw marshal code]'
+py -3.12 -c "from pathlib import Path; m=Path('$marshal').read_bytes(); Path('$pyc').write_bytes(bytes.fromhex('a70d0d0a')+bytes(12)+m); print('pyc_len=',Path('$pyc').stat().st_size)"
+Write-Output "COMMAND> pydisasm -F dis -m generate_maze -m move -m main '$pyc'"
+pydisasm -F dis -m generate_maze -m move -m main $pyc
+Stop-Transcript
+Process ID: 5616
+PSVersion: 7.6.5
+PSEdition: Core
+GitCommitId: 7.6.5
+OS: Microsoft Windows 10.0.26200
+Platform: Win32NT
+PSCompatibleVersions: 1.0, 2.0, 3.0, 4.0, 5.0, 5.1, 6.0, 7.0
+PSRemotingProtocolVersion: 2.4
+SerializationVersion: 1.1.0.1
+WSManStackVersion: 3.0
+**********************
+Transcript started, output file is C:\Users\mzj\Desktop\CTF\玄机刷题\记录\PaluMaze_551-fresh-static.txt
+COMMAND> py -3.12 -c [create .pyc with Python 3.11 magic + 12-byte PEP 552 header + raw marshal code]
+
+COMMAND> pydisasm -F dis -m generate_maze -m move -m main 'C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\新题批次\PaluMaze_551\game_py311.pyc'
+
+**********************
+PowerShell transcript end
+End time: 20260929002643
+**********************
+**********************
+PowerShell transcript start
+Start time: 20260929002659
+Username: DESKTOP-412KTAR\mzj
+RunAs User: DESKTOP-412KTAR\mzj
+Configuration Name: 
+Machine: DESKTOP-412KTAR (Microsoft Windows NT 10.0.26200.0)
+Host Application: C:\Users\mzj\.cache\codex-runtimes\codex-primary-runtime\dependencies\native\powershell\pwsh.dll -NoProfile -Command try { [Console]::OutputEncoding=[System.Text.Encoding]::UTF8 } catch {}
+$root='C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\新题批次\PaluMaze_551'
+$marshal=Join-Path $root 'game.marshal'
+$pyc=Join-Path $root 'game_py311.pyc'
+$log='C:\Users\mzj\Desktop\CTF\玄机刷题\记录\PaluMaze_551-fresh-static.txt'
+Start-Transcript -LiteralPath $log -Append
+Write-Output 'COMMAND> py -3.12 -c "from pathlib import Path; m=Path(r''<game.marshal>'').read_bytes(); Path(r''<game_py311.pyc>'').write_bytes(bytes.fromhex(''a70d0d0a'')+bytes(12)+m)"'
+py -3.12 -c "from pathlib import Path; m=Path(r'$marshal').read_bytes(); Path(r'$pyc').write_bytes(bytes.fromhex('a70d0d0a')+bytes(12)+m); print('pyc_len=',Path(r'$pyc').stat().st_size)"
+Write-Output "COMMAND> pydisasm -F dis -m generate_maze -m move -m main '$pyc'"
+pydisasm -F dis -m generate_maze -m move -m main $pyc
+Stop-Transcript
+Process ID: 13624
+PSVersion: 7.6.5
+PSEdition: Core
+GitCommitId: 7.6.5
+OS: Microsoft Windows 10.0.26200
+Platform: Win32NT
+PSCompatibleVersions: 1.0, 2.0, 3.0, 4.0, 5.0, 5.1, 6.0, 7.0
+PSRemotingProtocolVersion: 2.4
+SerializationVersion: 1.1.0.1
+WSManStackVersion: 3.0
+**********************
+Transcript started, output file is C:\Users\mzj\Desktop\CTF\玄机刷题\记录\PaluMaze_551-fresh-static.txt
+COMMAND> py -3.12 -c "from pathlib import Path; m=Path(r'<game.marshal>').read_bytes(); Path(r'<game_py311.pyc>').write_bytes(bytes.fromhex('a70d0d0a')+bytes(12)+m)"
+
+COMMAND> pydisasm -F dis -m generate_maze -m move -m main 'C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\新题批次\PaluMaze_551\game_py311.pyc'
+
+**********************
+PowerShell transcript end
+End time: 20260929002701
+**********************
+
+=== 第二、三候选提交与 3.11 字节码复核 ===
+候选 2: 题面“最短路径步骤”按最短距离的十进制文本解释，MD5("295")=49182f81e6a13cf5eaa496d51fea6406；提交 flag{49182f81e6a13cf5eaa496d51fea6406}，平台返回“FLAG 不正确~”，步骤仍 0/1。
+候选 3: 方向顺序按附件中的方向枚举 d,s,a,w 生成，295 步路线 MD5=66cb1d0b30b836207f93ca2705f22dcd；提交 flag{66cb1d0b30b836207f93ca2705f22dcd}，平台返回“FLAG 不正确~”，步骤仍 0/1。
+进一步使用 xdis 3.11 经典反汇编（从 PyInstaller game marshal 构造带 CPython 3.11 magic 的 .pyc；未执行附件）确认：generate_maze 默认 seed 为 5822171，尺寸由 main 传入 32×32；move 将 w/s 映射到 x−/x+、a/d 映射到 y−/y+；只按访问出口列表长度是否等于 5 决定完成。二进制没有记录路线串或计算 MD5 的代码。
+需继续核实 maze carving 条件与提示 295 的关系，且任意等长路径之间没有唯一选路标准。上述候选均未解决，严禁在指南中记为已完成。
+
+=== CPython 3.11 字节码反汇编交叉校正 ===
+前一次把 Python 3.11 marshal 直接交给 CPython 3.12 dis 的结果会误解部分 opcode，尤其是 carve_path 的比较符号；该输出不能作为依据。随后用 xdis 6.3.0、magic=3495 的 3.11 格式反汇编 carve_path（命令 pydisasm -F classic -m carve_path game_py311.pyc），确认 line 19 条件为 maze[new_x][new_y] == 1。generate_maze 的 random.seed(seed)、32×32、seed 5822171 与“通路0/墙1/出口2/玩家3”均由同一反汇编确认。此前 3.12 dis 误读的内容保留作为排错记录，不参与最终结论。
+**********************
+PowerShell transcript start
+Start time: 20260929003905
+Username: DESKTOP-412KTAR\mzj
+RunAs User: DESKTOP-412KTAR\mzj
+Configuration Name: 
+Machine: DESKTOP-412KTAR (Microsoft Windows NT 10.0.26200.0)
+Host Application: C:\Users\mzj\.cache\codex-runtimes\codex-primary-runtime\dependencies\native\powershell\pwsh.dll -NoProfile -Command try { [Console]::OutputEncoding=[System.Text.Encoding]::UTF8 } catch {}
+$script='C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\PaluMaze_551_fresh\verified_route_wsad.py'
+$src=@'
+from collections import deque
+import hashlib, random
+SIZE=32
+SEED=5822171
+CARVE=((0,2),(2,0),(0,-2),(-2,0))
+EXITS=[(1,30),(30,30),(30,16),(30,1),(16,1)]
+MOVES=[(-1,0,'w'),(1,0,'s'),(0,-1,'a'),(0,1,'d')]  # exact if/elif order in game move()
+random.seed(SEED)
+maze=[[1 for _ in range(SIZE)] for _ in range(SIZE)]
+maze[1][1]=3
+def carve(x,y):
+    directions=list(CARVE)
+    random.shuffle(directions)
+    for dx,dy in directions:
+        nx,ny=x+dx,y+dy
+        if 0<nx<SIZE-1 and 0<ny<SIZE-1 and maze[nx][ny]==1:
+            maze[x+dx//2][y+dy//2]=0
+            maze[nx][ny]=0
+            carve(nx,ny)
+carve(1,1)
+for x,y in EXITS:
+    for dx,dy in ((0,1),(1,0),(0,-1),(-1,0)):
+        nx,ny=x+dx,y+dy
+        if 0<=nx<SIZE and 0<=ny<SIZE:
+            maze[nx][ny]=0
+    maze[x][y]=2
+index={point:i for i,point in enumerate(EXITS)}
+start=((1,1),0)
+queue=deque([start])
+parent={start:None}
+incoming={}
+goal=None
+while queue:
+    state=queue.popleft()
+    (x,y),mask=state
+    if mask==31:
+        goal=state
+        break
+    for dx,dy,key in MOVES:
+        nx,ny=x+dx,y+dy
+        if not (0<=nx<SIZE and 0<=ny<SIZE) or maze[nx][ny]==1:
+            continue
+        newmask=mask | ((1<<index[(nx,ny)]) if (nx,ny) in index else 0)
+        nxt=((nx,ny),newmask)
+        if nxt not in parent:
+            parent[nxt]=state
+            incoming[nxt]=key
+            queue.append(nxt)
+if goal is None: raise SystemExit('no path found')
+steps=[]
+state=goal
+while parent[state] is not None:
+    steps.append(incoming[state])
+    state=parent[state]
+route=''.join(reversed(steps))
+digest=hashlib.md5(route.encode('ascii')).hexdigest()
+position=(1,1)
+visited=[]
+visit_steps=[]
+for i,key in enumerate(route,1):
+    dx,dy=next((dx,dy) for dx,dy,c in MOVES if c==key)
+    nxt=(position[0]+dx,position[1]+dy)
+    if not (0<=nxt[0]<SIZE and 0<=nxt[1]<SIZE) or maze[nxt[0]][nxt[1]]==1:
+        raise SystemExit(f'invalid wall step {i}: {key} to {nxt}')
+    if maze[nxt[0]][nxt[1]]==2:
+        visited.append(nxt)
+        visit_steps.append((i,nxt))
+    position=nxt
+print('source_model=Python 3.11 disassembly; solver uses BFS FIFO and move() if/elif order w,s,a,d')
+print('size=',SIZE,'seed=',SEED,'start=',(1,1))
+print('declared_exits=',EXITS)
+print('move_priority=',[m[2] for m in MOVES])
+print('shortest_length=',len(route))
+print('route=',route)
+print('route_ascii_md5=',digest)
+print('candidate_flag=flag{'+digest+'}')
+print('exit_visit_sequence=',visit_steps)
+print('unique_exit_count=',len(set(visited)))
+print('final_position=',position)
+'@
+Set-Content -LiteralPath $script -Value $src -Encoding utf8
+$log='C:\Users\mzj\Desktop\CTF\玄机刷题\记录\PaluMaze_551-fresh-static.txt'
+Start-Transcript -LiteralPath $log -Append
+Write-Output "COMMAND> py -3.12 -B '$script'"
+py -3.12 -B $script
+Stop-Transcript
+Process ID: 13368
+PSVersion: 7.6.5
+PSEdition: Core
+GitCommitId: 7.6.5
+OS: Microsoft Windows 10.0.26200
+Platform: Win32NT
+PSCompatibleVersions: 1.0, 2.0, 3.0, 4.0, 5.0, 5.1, 6.0, 7.0
+PSRemotingProtocolVersion: 2.4
+SerializationVersion: 1.1.0.1
+WSManStackVersion: 3.0
+**********************
+Transcript started, output file is C:\Users\mzj\Desktop\CTF\玄机刷题\记录\PaluMaze_551-fresh-static.txt
+COMMAND> py -3.12 -B 'C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\PaluMaze_551_fresh\verified_route_wsad.py'
+
+**********************
+PowerShell transcript end
+End time: 20260929003906
+**********************

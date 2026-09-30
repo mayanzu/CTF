@@ -1,0 +1,29 @@
+**********************
+PowerShell transcript start
+Start time: 20260930131226
+Username: DESKTOP-412KTAR\mzj
+RunAs User: DESKTOP-412KTAR\mzj
+Configuration Name: 
+Machine: DESKTOP-412KTAR (Microsoft Windows NT 10.0.26200.0)
+Host Application: C:\Users\mzj\.cache\codex-runtimes\codex-primary-runtime\dependencies\native\powershell\pwsh.dll -Command try { [Console]::OutputEncoding=[System.Text.Encoding]::UTF8 } catch {}
+$log='C:\Users\mzj\Desktop\CTF\玄机刷题\记录\指南新页视觉核验_20260930.txt'; Start-Transcript -LiteralPath $log -Force; $pdf='C:\Users\mzj\Desktop\CTF\玄机刷题\指南\玄机刷题指南.pdf'; $pages=(pdftotext -layout $pdf -) -join "`n" -split [char]12; Write-Output ('PAGE_COUNT='+$pages.Count); for($i=0;$i -lt $pages.Count;$i++){ if($pages[$i].Contains('天下谁人不识君') -or $pages[$i].Contains('OpenHarmony secret')){ Write-Output ('TITLE_PAGE=' + ($i+1)); } }; Stop-Transcript
+Process ID: 11696
+PSVersion: 7.6.5
+PSEdition: Core
+GitCommitId: 7.6.5
+OS: Microsoft Windows 10.0.26200
+Platform: Win32NT
+PSCompatibleVersions: 1.0, 2.0, 3.0, 4.0, 5.0, 5.1, 6.0, 7.0
+PSRemotingProtocolVersion: 2.4
+SerializationVersion: 1.1.0.1
+WSManStackVersion: 3.0
+**********************
+Transcript started, output file is C:\Users\mzj\Desktop\CTF\玄机刷题\记录\指南新页视觉核验_20260930.txt
+PAGE_COUNT=96
+TITLE_PAGE=3
+TITLE_PAGE=66
+TITLE_PAGE=67
+**********************
+PowerShell transcript end
+End time: 20260930131227
+**********************

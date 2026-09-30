@@ -1,0 +1,75 @@
+
+.\ParlooChecker_549_x86_64.so:     file format elf64-x86-64
+
+
+Disassembly of section .text:
+
+0000000000028b20 <Java_com_linkhash_parloochecker_MainActivity_onCreat3@@Base-0xb00>:
+   28b20:	55                   	push   %rbp
+   28b21:	48 89 e5             	mov    %rsp,%rbp
+   28b24:	48 89 7d f8          	mov    %rdi,-0x8(%rbp)
+   28b28:	48 89 75 f0          	mov    %rsi,-0x10(%rbp)
+   28b2c:	48 8b 45 f8          	mov    -0x8(%rbp),%rax
+   28b30:	8b 00                	mov    (%rax),%eax
+   28b32:	89 45 ec             	mov    %eax,-0x14(%rbp)
+   28b35:	48 8b 45 f8          	mov    -0x8(%rbp),%rax
+   28b39:	8b 40 04             	mov    0x4(%rax),%eax
+   28b3c:	89 45 e8             	mov    %eax,-0x18(%rbp)
+   28b3f:	c7 45 e4 00 00 00 00 	movl   $0x0,-0x1c(%rbp)
+   28b46:	c7 45 e0 00 00 00 00 	movl   $0x0,-0x20(%rbp)
+   28b4d:	83 7d e0 20          	cmpl   $0x20,-0x20(%rbp)
+   28b51:	0f 83 8a 00 00 00    	jae    28be1 <Java_com_linkhash_parloochecker_MainActivity_onCreat3@@Base-0xa3f>
+   28b57:	48 8b 45 f0          	mov    -0x10(%rbp),%rax
+   28b5b:	8b 4d e0             	mov    -0x20(%rbp),%ecx
+   28b5e:	83 e1 03             	and    $0x3,%ecx
+   28b61:	89 c9                	mov    %ecx,%ecx
+   28b63:	8b 04 88             	mov    (%rax,%rcx,4),%eax
+   28b66:	33 45 e0             	xor    -0x20(%rbp),%eax
+   28b69:	05 b9 79 37 9e       	add    $0x9e3779b9,%eax
+   28b6e:	89 45 dc             	mov    %eax,-0x24(%rbp)
+   28b71:	8b 45 e8             	mov    -0x18(%rbp),%eax
+   28b74:	c1 e0 04             	shl    $0x4,%eax
+   28b77:	8b 4d e8             	mov    -0x18(%rbp),%ecx
+   28b7a:	c1 e9 05             	shr    $0x5,%ecx
+   28b7d:	31 c8                	xor    %ecx,%eax
+   28b7f:	03 45 e8             	add    -0x18(%rbp),%eax
+   28b82:	8b 4d e4             	mov    -0x1c(%rbp),%ecx
+   28b85:	48 8b 55 f0          	mov    -0x10(%rbp),%rdx
+   28b89:	8b 75 e4             	mov    -0x1c(%rbp),%esi
+   28b8c:	83 e6 03             	and    $0x3,%esi
+   28b8f:	89 f6                	mov    %esi,%esi
+   28b91:	03 0c b2             	add    (%rdx,%rsi,4),%ecx
+   28b94:	31 c8                	xor    %ecx,%eax
+   28b96:	03 45 ec             	add    -0x14(%rbp),%eax
+   28b99:	89 45 ec             	mov    %eax,-0x14(%rbp)
+   28b9c:	8b 45 dc             	mov    -0x24(%rbp),%eax
+   28b9f:	03 45 e4             	add    -0x1c(%rbp),%eax
+   28ba2:	89 45 e4             	mov    %eax,-0x1c(%rbp)
+   28ba5:	8b 45 ec             	mov    -0x14(%rbp),%eax
+   28ba8:	c1 e0 04             	shl    $0x4,%eax
+   28bab:	8b 4d ec             	mov    -0x14(%rbp),%ecx
+   28bae:	c1 e9 05             	shr    $0x5,%ecx
+   28bb1:	31 c8                	xor    %ecx,%eax
+   28bb3:	03 45 ec             	add    -0x14(%rbp),%eax
+   28bb6:	8b 4d e4             	mov    -0x1c(%rbp),%ecx
+   28bb9:	48 8b 55 f0          	mov    -0x10(%rbp),%rdx
+   28bbd:	8b 75 e4             	mov    -0x1c(%rbp),%esi
+   28bc0:	c1 ee 0b             	shr    $0xb,%esi
+   28bc3:	83 e6 03             	and    $0x3,%esi
+   28bc6:	89 f6                	mov    %esi,%esi
+   28bc8:	03 0c b2             	add    (%rdx,%rsi,4),%ecx
+   28bcb:	31 c8                	xor    %ecx,%eax
+   28bcd:	03 45 e8             	add    -0x18(%rbp),%eax
+   28bd0:	89 45 e8             	mov    %eax,-0x18(%rbp)
+   28bd3:	8b 45 e0             	mov    -0x20(%rbp),%eax
+   28bd6:	83 c0 01             	add    $0x1,%eax
+   28bd9:	89 45 e0             	mov    %eax,-0x20(%rbp)
+   28bdc:	e9 6c ff ff ff       	jmp    28b4d <Java_com_linkhash_parloochecker_MainActivity_onCreat3@@Base-0xad3>
+   28be1:	8b 4d ec             	mov    -0x14(%rbp),%ecx
+   28be4:	48 8b 45 f8          	mov    -0x8(%rbp),%rax
+   28be8:	89 08                	mov    %ecx,(%rax)
+   28bea:	8b 4d e8             	mov    -0x18(%rbp),%ecx
+   28bed:	48 8b 45 f8          	mov    -0x8(%rbp),%rax
+   28bf1:	89 48 04             	mov    %ecx,0x4(%rax)
+   28bf4:	5d                   	pop    %rbp
+   28bf5:	c3                   	ret

@@ -1,0 +1,414 @@
+**********************
+PowerShell transcript start
+Start time: 20260929172055
+Username: DESKTOP-412KTAR\mzj
+RunAs User: DESKTOP-412KTAR\mzj
+Configuration Name: 
+Machine: DESKTOP-412KTAR (Microsoft Windows NT 10.0.26200.0)
+Host Application: C:\Users\mzj\.cache\codex-runtimes\codex-primary-runtime\dependencies\native\powershell\pwsh.dll -Command try { [Console]::OutputEncoding=[System.Text.Encoding]::UTF8 } catch {}
+$root='C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\批次14_20260929\562_checker'; $transcript=Join-Path $root 'rederive_562_transcript_20260929.txt'; Start-Transcript -LiteralPath $transcript; Write-Output 'COMMAND> Create an independent static derivation script that starts from the preserved original ZIP and contains no candidate literal'; $py=@'
+from pathlib import Path
+import hashlib
+import re
+import struct
+import zipfile
+
+root = Path(__file__).resolve().parent
+archive = root / "附件_原始" / "checker_20260929.zip"
+mirror_paths = [root / "提取_分析" / "checker.exe", root / "复核_独立" / "checker.exe"]
+
+
+def sha256(blob):
+    return hashlib.sha256(blob).hexdigest().upper()
+
+
+def va_to_file_offset(blob, va):
+    pe = struct.unpack_from("<I", blob, 0x3C)[0]
+    coff = pe + 4
+    section_count = struct.unpack_from("<H", blob, coff + 2)[0]
+    optional_size = struct.unpack_from("<H", blob, coff + 16)[0]
+    optional = coff + 20
+    image_base = struct.unpack_from("<I", blob, optional + 28)[0]
+    rva = va - image_base
+    sections = []
+    for index in range(section_count):
+        section_offset = optional + optional_size + 40 * index
+        name = blob[section_offset:section_offset + 8].split(b"\0", 1)[0].decode("ascii")
+        virtual_size, section_rva, raw_size, raw_pointer = struct.unpack_from("<IIII", blob, section_offset + 8)
+        if section_rva <= rva < section_rva + max(virtual_size, raw_size):
+            delta = rva - section_rva
+            if delta >= raw_size:
+                raise ValueError(f"VA 0x{va:08X} is in an unbacked section tail")
+            return raw_pointer + delta, name, image_base
+    raise ValueError(f"VA 0x{va:08X} does not map to a PE section")
+
+
+archive_bytes = archive.read_bytes()
+print(f"original attachment copy: {archive}")
+print(f"original ZIP size: {len(archive_bytes)}")
+print(f"original ZIP SHA-256: {sha256(archive_bytes)}")
+with zipfile.ZipFile(archive) as zf:
+    members = [entry for entry in zf.infolist() if not entry.is_dir()]
+    print(f"non-directory ZIP members: {[entry.filename for entry in members]}")
+    if len(members) != 1:
+        raise SystemExit("expected exactly one file in the original attachment ZIP")
+    exe = zf.read(members[0])
+print(f"ZIP member name: {members[0].filename}")
+print(f"ZIP member size: {len(exe)}")
+print(f"ZIP member SHA-256: {sha256(exe)}")
+for path in mirror_paths:
+    mirror = path.read_bytes()
+    print(f"mirror: {path.relative_to(root)}; size={len(mirror)}; SHA-256={sha256(mirror)}; byte-identical={mirror == exe}")
+    if mirror != exe:
+        raise SystemExit(f"mirror differs from the original ZIP member: {path}")
+if exe[:2] != b"MZ":
+    raise SystemExit("DOS MZ signature absent")
+pe = struct.unpack_from("<I", exe, 0x3C)[0]
+if exe[pe:pe + 4] != b"PE\0\0":
+    raise SystemExit("PE signature absent")
+coff = pe + 4
+machine = struct.unpack_from("<H", exe, coff)[0]
+optional = coff + 20
+magic = struct.unpack_from("<H", exe, optional)[0]
+image_base = struct.unpack_from("<I", exe, optional + 28)[0]
+print(f"PE machine: 0x{machine:04X}; optional header: 0x{magic:04X}; image base: 0x{image_base:08X}")
+if (machine, magic, image_base) != (0x014C, 0x010B, 0x00400000):
+    raise SystemExit("unexpected PE architecture or image base")
+
+# Read and assert the machine-code bytes that set the XOR key and perform the transform.
+key_va = 0x00401496
+key_offset, key_section, _ = va_to_file_offset(exe, key_va)
+key_instruction = exe[key_offset:key_offset + 7]
+if key_instruction[:3] != bytes.fromhex("C7 45 F0"):
+    raise SystemExit("key-setting instruction is not the expected MOV immediate")
+key = struct.unpack_from("<I", key_instruction, 3)[0]
+xor_va = 0x004014BC
+xor_offset, xor_section, _ = va_to_file_offset(exe, xor_va)
+xor_instruction = exe[xor_offset:xor_offset + 4]
+if xor_instruction != bytes.fromhex("31 CA 88 10"):
+    raise SystemExit("input byte is not XORed and stored as expected")
+loop_va = 0x004014D4
+loop_offset, _, _ = va_to_file_offset(exe, loop_va)
+loop_instruction = exe[loop_offset:loop_offset + 4]
+if loop_instruction != bytes.fromhex("39 C2 77 CE"):
+    raise SystemExit("unexpected loop bound / branch in transform")
+print(f"XOR key immediate at 0x{key_va:08X} ({key_section}+0x{key_offset:X}): 0x{key:02X}")
+print(f"transform bytes at 0x{xor_va:08X} ({xor_section}+0x{xor_offset:X}): {xor_instruction.hex(' ').upper()}")
+print(f"loop compare/branch bytes at 0x{loop_va:08X}: {loop_instruction.hex(' ').upper()}")
+
+# Verify checker passes that input through the transform and compares against VA 0x404020.
+compare_va = 0x0040150D
+compare_offset, compare_section, _ = va_to_file_offset(exe, compare_va)
+compare_instruction = exe[compare_offset:compare_offset + 8]
+if compare_instruction != bytes.fromhex("C7 44 24 04 20 40 40 00"):
+    raise SystemExit("checker no longer points at the expected comparison target")
+strcmp_call_va = 0x0040151B
+call_offset, _, _ = va_to_file_offset(exe, strcmp_call_va)
+call_bytes = exe[call_offset:call_offset + 5]
+if call_bytes[0] != 0xE8:
+    raise SystemExit("expected relative call after comparison target setup")
+call_target = strcmp_call_va + 5 + struct.unpack_from("<i", call_bytes, 1)[0]
+if call_target != 0x00403B70:
+    raise SystemExit(f"unexpected comparison call target: 0x{call_target:08X}")
+print(f"comparison target immediate at 0x{compare_va:08X}: VA 0x{struct.unpack_from('<I', compare_instruction, 4)[0]:08X}")
+print(f"following call resolves to comparison routine: 0x{call_target:08X}")
+
+# Verify main's input capacity and newline stripping from its actual instruction bytes.
+fgets_va = 0x0040154D
+fgets_offset, _, _ = va_to_file_offset(exe, fgets_va)
+fgets_instruction = exe[fgets_offset:fgets_offset + 8]
+if fgets_instruction != bytes.fromhex("C7 44 24 04 32 00 00 00"):
+    raise SystemExit("unexpected fgets size argument")
+newline_va = 0x004050A4
+newline_offset, _, _ = va_to_file_offset(exe, newline_va)
+if exe[newline_offset:newline_offset + 2] != b"\n\0":
+    raise SystemExit("strcspn delimiter is not LF")
+print(f"fgets size argument: {struct.unpack_from('<I', fgets_instruction, 4)[0]} bytes")
+print(f"line terminator byte at 0x{newline_va:08X}: LF")
+
+# Recover the complete NUL-terminated comparison value directly from the original ZIP member.
+target_va = 0x00404020
+target_offset, target_section, _ = va_to_file_offset(exe, target_va)
+if target_section != ".data":
+    raise SystemExit("comparison target is not in .data")
+terminator = exe.find(b"\0", target_offset)
+if terminator < 0:
+    raise SystemExit("comparison string has no NUL terminator")
+cipher = exe[target_offset:terminator]
+plain = bytes(value ^ key for value in cipher)
+if bytes(value ^ key for value in plain) != cipher:
+    raise SystemExit("forward XOR verification failed")
+if not re.fullmatch(rb"flag\{[A-Za-z0-9_]+\}", plain):
+    raise SystemExit("derived bytes do not match the observed flag syntax")
+if b"\0" in plain or b"\r" in plain or b"\n" in plain:
+    raise SystemExit("derived input contains a forbidden line-input byte")
+if len(plain) + 1 > 49:
+    raise SystemExit("input plus LF would exceed fgets' maximum data length")
+print(f"comparison target: VA 0x{target_va:08X} -> file offset 0x{target_offset:X} (.data)")
+print(f"embedded comparison bytes before NUL: {len(cipher)}")
+print(f"embedded comparison hex: {cipher.hex(' ').upper()}")
+print(f"decoded input ASCII: {plain.decode('ascii')}")
+print(f"derived input length: {len(plain)}; plus LF: {len(plain) + 1}; fgets limit: 49")
+print(f"forward transform exactly matches embedded comparison: {bytes(value ^ key for value in plain) == cipher}")
+print("STATIC_ONLY=true; no executable launched; no platform/network accessed; no submission made")
+'@; Set-Content -LiteralPath (Join-Path $root 'independent_rederive_from_original_zip.py') -Value $py -Encoding utf8; Write-Output 'COMMAND> Run the new static-only derivation and save its standard output'; python (Join-Path $root 'independent_rederive_from_original_zip.py') | Tee-Object -FilePath (Join-Path $root 'independent_rederive_output.txt'); if ($LASTEXITCODE -ne 0) { throw "Python derivation failed with exit code $LASTEXITCODE" }; Write-Output 'COMMAND> Append fresh derivation and evidence boundary to the complete WP'; $wp=Join-Path $root 'WP_第一届启航杯checker.md'; Add-Content -LiteralPath $wp -Encoding utf8 -Value @'
+
+## Fresh static re-derivation from the original ZIP (2026-09-29)
+
+A separate verifier, `independent_rederive_from_original_zip.py`, was created without embedding or reading the earlier candidate. It reads `附件_原始\checker_20260929.zip` directly, hashes the archive and its single `checker.exe` member, and confirms that both saved extraction copies are byte-identical to that member. It independently parses the PE32 section table and checks the actual instruction bytes setting the XOR key, XORing each input byte, bounding the loop by `strlen`, passing comparison VA `0x404020` to the comparison routine, and reading input with `fgets(..., 50, ...)` while stripping LF.
+
+The fresh derivation reconstructs the only input accepted by this local PE and verifies a byte-for-byte XOR round trip against the embedded NUL-terminated target. This result reproduces the previously rejected local-only candidate; it is not a new platform candidate and has not been submitted. The attachment proves the exact local predicate only. Because the platform rejection record conflicts with that predicate and this task is offline-only, the platform's expected value remains unresolved. No alternative input is supported by the attachment evidence.
+
+Exact input ZIP reference: `附件_原始\checker_20260929.zip` (original download recorded as `D:\Downloads\checker (5).zip`); SHA-256 `598E457DCDFFCB89F4A1B5CF56133E1D8A194E737B8C25C6C0EA722854426D36`. Its sole member `checker.exe` is 42,857 bytes, SHA-256 `449D9F4569A0ED70FCB9BC8B96737719B62CFD8AE7C1E99D2864A3999887FDF5`.
+
+Reproduction command: `python .\independent_rederive_from_original_zip.py`. The complete PowerShell Start-Transcript record is `rederive_562_transcript_20260929.txt`; captured script stdout is `independent_rederive_output.txt`. The script statically reads the binary and does not launch it.
+'@; Write-Output 'COMMAND> Write concise final status note'; $status=@'
+# 562 checker status — 2026-09-29
+
+**Status: unresolved; no new candidate proven.** A fresh static derivation directly from the preserved original ZIP confirms that its checker has one hardcoded accepted input. That input is the same local-only value already reported rejected by the platform, so it is not a new candidate and was not submitted again. The attachment cannot establish the server-side expected value; no supported alternative is present in the binary evidence.
+
+- Original ZIP: `附件_原始\checker_20260929.zip`
+- ZIP SHA-256: `598E457DCDFFCB89F4A1B5CF56133E1D8A194E737B8C25C6C0EA722854426D36`
+- ZIP member `checker.exe` SHA-256: `449D9F4569A0ED70FCB9BC8B96737719B62CFD8AE7C1E99D2864A3999887FDF5`
+- Reproduce: `python .\independent_rederive_from_original_zip.py`
+- Outputs: `independent_rederive_output.txt`, `rederive_562_transcript_20260929.txt`
+'@; Set-Content -LiteralPath (Join-Path $root 'STATUS_562.txt') -Value $status -Encoding utf8; Write-Output 'COMMAND> Refresh SHA-256 manifest for the original archive, both binaries, fresh verifier and reports (transcript excluded while active)'; $manifestPaths=@((Join-Path $root '附件_原始\checker_20260929.zip'),(Join-Path $root '提取_分析\checker.exe'),(Join-Path $root '复核_独立\checker.exe'),(Join-Path $root 'independent_rederive_from_original_zip.py'),(Join-Path $root 'independent_rederive_output.txt'),(Join-Path $root 'WP_第一届启航杯checker.md'),(Join-Path $root 'STATUS_562.txt')); $manifestLines=foreach($p in $manifestPaths){$h=Get-FileHash -LiteralPath $p -Algorithm SHA256; '{0} *{1}' -f $h.Hash,$p.Substring($root.Length+1)}; Set-Content -LiteralPath (Join-Path $root 'FRESH_REDERIVE_SHA256SUMS.txt') -Value $manifestLines -Encoding utf8; Write-Output 'COMMAND> Verify final note, core hashes, and artifact sizes'; Get-Content -LiteralPath (Join-Path $root 'STATUS_562.txt'); Get-Content -LiteralPath (Join-Path $root 'FRESH_REDERIVE_SHA256SUMS.txt'); Get-Item -LiteralPath (Join-Path $root 'WP_第一届启航杯checker.md'),(Join-Path $root 'independent_rederive_from_original_zip.py'),(Join-Path $root 'independent_rederive_output.txt'),(Join-Path $root 'rederive_562_transcript_20260929.txt'),(Join-Path $root 'STATUS_562.txt') | Select-Object FullName,Length | Format-Table -AutoSize; Write-Output ('TRANSCRIPT=' + $transcript); Stop-Transcript
+Process ID: 37272
+PSVersion: 7.6.5
+PSEdition: Core
+GitCommitId: 7.6.5
+OS: Microsoft Windows 10.0.26200
+Platform: Win32NT
+PSCompatibleVersions: 1.0, 2.0, 3.0, 4.0, 5.0, 5.1, 6.0, 7.0
+PSRemotingProtocolVersion: 2.4
+SerializationVersion: 1.1.0.1
+WSManStackVersion: 3.0
+**********************
+Transcript started, output file is C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\批次14_20260929\562_checker\rederive_562_transcript_20260929.txt
+COMMAND> Create an independent static derivation script that starts from the preserved original ZIP and contains no candidate literal
+COMMAND> Run the new static-only derivation and save its standard output
+original attachment copy: C:\Users\mzj\Desktop\CTF\����ˢ��\��Ŀ����\����14_20260929\562_checker\����_ԭʼ\checker_20260929.zip
+original ZIP size: 17498
+original ZIP SHA-256: 598E457DCDFFCB89F4A1B5CF56133E1D8A194E737B8C25C6C0EA722854426D36
+non-directory ZIP members: ['checker.exe']
+ZIP member name: checker.exe
+ZIP member size: 42857
+ZIP member SHA-256: 449D9F4569A0ED70FCB9BC8B96737719B62CFD8AE7C1E99D2864A3999887FDF5
+mirror: ��ȡ_����\checker.exe; size=42857; SHA-256=449D9F4569A0ED70FCB9BC8B96737719B62CFD8AE7C1E99D2864A3999887FDF5; byte-identical=True
+mirror: ����_����\checker.exe; size=42857; SHA-256=449D9F4569A0ED70FCB9BC8B96737719B62CFD8AE7C1E99D2864A3999887FDF5; byte-identical=True
+PE machine: 0x014C; optional header: 0x010B; image base: 0x00400000
+XOR key immediate at 0x00401496 (.text+0x896): 0x23
+transform bytes at 0x004014BC (.text+0x8BC): 31 CA 88 10
+loop compare/branch bytes at 0x004014D4: 39 C2 77 CE
+comparison target immediate at 0x0040150D: VA 0x00404020
+following call resolves to comparison routine: 0x00403B70
+fgets size argument: 50 bytes
+line terminator byte at 0x004050A4: LF
+comparison target: VA 0x00404020 -> file offset 0x3220 (.data)
+embedded comparison bytes before NUL: 43
+embedded comparison hex: 45 4F 42 44 58 46 4D 53 12 14 6A 17 53 1B 77 79 4E 62 51 4A 42 4C 11 4F 52 16 57 62 62 51 79 11 73 12 54 5B 61 76 54 7B 76 11 5E
+decoded input ASCII: flag{enp17I4p8TZmAriao2lq5tAArZ2P1wxBUwXU2}
+derived input length: 43; plus LF: 44; fgets limit: 49
+forward transform exactly matches embedded comparison: True
+STATIC_ONLY=true; no executable launched; no platform/network accessed; no submission made
+COMMAND> Append fresh derivation and evidence boundary to the complete WP
+COMMAND> Write concise final status note
+COMMAND> Refresh SHA-256 manifest for the original archive, both binaries, fresh verifier and reports (transcript excluded while active)
+COMMAND> Verify final note, core hashes, and artifact sizes
+# 562 checker status — 2026-09-29
+
+**Status: unresolved; no new candidate proven.** A fresh static derivation directly from the preserved original ZIP confirms that its checker has one hardcoded accepted input. That input is the same local-only value already reported rejected by the platform, so it is not a new candidate and was not submitted again. The attachment cannot establish the server-side expected value; no supported alternative is present in the binary evidence.
+
+- Original ZIP: `附件_原始\checker_20260929.zip`
+- ZIP SHA-256: `598E457DCDFFCB89F4A1B5CF56133E1D8A194E737B8C25C6C0EA722854426D36`
+- ZIP member `checker.exe` SHA-256: `449D9F4569A0ED70FCB9BC8B96737719B62CFD8AE7C1E99D2864A3999887FDF5`
+- Reproduce: `python .\independent_rederive_from_original_zip.py`
+- Outputs: `independent_rederive_output.txt`, `rederive_562_transcript_20260929.txt`
+598E457DCDFFCB89F4A1B5CF56133E1D8A194E737B8C25C6C0EA722854426D36 *附件_原始\checker_20260929.zip
+449D9F4569A0ED70FCB9BC8B96737719B62CFD8AE7C1E99D2864A3999887FDF5 *提取_分析\checker.exe
+449D9F4569A0ED70FCB9BC8B96737719B62CFD8AE7C1E99D2864A3999887FDF5 *复核_独立\checker.exe
+91B5BE24C9EA204225153FA6702E3A31DB61B3FE1C9205EC503DD2A52B8A1958 *independent_rederive_from_original_zip.py
+3F632D07A04A67769530AD165B884BC2AE5A36036C2E57F5F3E1F9A86C7E902A *independent_rederive_output.txt
+356B4C777B9E3955E4507A4C0CAEF87CD4792B468BE74F959B82F83A059482E9 *WP_第一届启航杯checker.md
+60BC05AAD17D36222D0E2329D245F009C26EFDAC277113BABEC5156D641E618A *STATUS_562.txt
+
+FullName                                                                                                         Length
+--------                                                                                                         ------
+C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\批次14_20260929\562_checker\WP_第一届启航杯checker.md                  11107
+C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\批次14_20260929\562_checker\independent_rederive_from_original_zip.py   7362
+C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\批次14_20260929\562_checker\independent_rederive_output.txt             1729
+C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\批次14_20260929\562_checker\rederive_562_transcript_20260929.txt       17338
+C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\批次14_20260929\562_checker\STATUS_562.txt                               869
+
+TRANSCRIPT=C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\批次14_20260929\562_checker\rederive_562_transcript_20260929.txt
+**********************
+PowerShell transcript end
+End time: 20260929172056
+**********************
+**********************
+PowerShell transcript start
+Start time: 20260929172351
+Username: DESKTOP-412KTAR\mzj
+RunAs User: DESKTOP-412KTAR\mzj
+Configuration Name: 
+Machine: DESKTOP-412KTAR (Microsoft Windows NT 10.0.26200.0)
+Host Application: C:\Users\mzj\.cache\codex-runtimes\codex-primary-runtime\dependencies\native\powershell\pwsh.dll -Command try { [Console]::OutputEncoding=[System.Text.Encoding]::UTF8 } catch {}
+$root='C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\批次14_20260929\562_checker'; $transcript=Join-Path $root 'rederive_562_transcript_20260929.txt'; [Console]::OutputEncoding=[System.Text.Encoding]::UTF8; $OutputEncoding=[System.Text.Encoding]::UTF8; Start-Transcript -LiteralPath $transcript -Append; Write-Output 'COMMAND> Re-run the independent static verifier with UTF-8 console output and replace its captured stdout'; python (Join-Path $root 'independent_rederive_from_original_zip.py') | Tee-Object -FilePath (Join-Path $root 'independent_rederive_output.txt'); if ($LASTEXITCODE -ne 0) { throw "Python derivation failed with exit code $LASTEXITCODE" }; Write-Output 'COMMAND> Display the saved UTF-8 verifier output'; Get-Content -LiteralPath (Join-Path $root 'independent_rederive_output.txt') -Encoding utf8; Write-Output 'COMMAND> Refresh saved hashes'; $manifestPaths=@((Join-Path $root '附件_原始\checker_20260929.zip'),(Join-Path $root '提取_分析\checker.exe'),(Join-Path $root '复核_独立\checker.exe'),(Join-Path $root 'independent_rederive_from_original_zip.py'),(Join-Path $root 'independent_rederive_output.txt'),(Join-Path $root 'WP_第一届启航杯checker.md'),(Join-Path $root 'STATUS_562.txt')); $manifestLines=foreach($p in $manifestPaths){$h=Get-FileHash -LiteralPath $p -Algorithm SHA256; '{0} *{1}' -f $h.Hash,$p.Substring($root.Length+1)}; Set-Content -LiteralPath (Join-Path $root 'FRESH_REDERIVE_SHA256SUMS.txt') -Value $manifestLines -Encoding utf8; Get-Content -LiteralPath (Join-Path $root 'FRESH_REDERIVE_SHA256SUMS.txt') -Encoding utf8; Stop-Transcript
+Process ID: 25240
+PSVersion: 7.6.5
+PSEdition: Core
+GitCommitId: 7.6.5
+OS: Microsoft Windows 10.0.26200
+Platform: Win32NT
+PSCompatibleVersions: 1.0, 2.0, 3.0, 4.0, 5.0, 5.1, 6.0, 7.0
+PSRemotingProtocolVersion: 2.4
+SerializationVersion: 1.1.0.1
+WSManStackVersion: 3.0
+**********************
+Transcript started, output file is C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\批次14_20260929\562_checker\rederive_562_transcript_20260929.txt
+COMMAND> Re-run the independent static verifier with UTF-8 console output and replace its captured stdout
+original attachment copy: C:\Users\mzj\Desktop\CTF\����ˢ��\��Ŀ����\����14_20260929\562_checker\����_ԭʼ\checker_20260929.zip
+original ZIP size: 17498
+original ZIP SHA-256: 598E457DCDFFCB89F4A1B5CF56133E1D8A194E737B8C25C6C0EA722854426D36
+non-directory ZIP members: ['checker.exe']
+ZIP member name: checker.exe
+ZIP member size: 42857
+ZIP member SHA-256: 449D9F4569A0ED70FCB9BC8B96737719B62CFD8AE7C1E99D2864A3999887FDF5
+mirror: ��ȡ_����\checker.exe; size=42857; SHA-256=449D9F4569A0ED70FCB9BC8B96737719B62CFD8AE7C1E99D2864A3999887FDF5; byte-identical=True
+mirror: ����_����\checker.exe; size=42857; SHA-256=449D9F4569A0ED70FCB9BC8B96737719B62CFD8AE7C1E99D2864A3999887FDF5; byte-identical=True
+PE machine: 0x014C; optional header: 0x010B; image base: 0x00400000
+XOR key immediate at 0x00401496 (.text+0x896): 0x23
+transform bytes at 0x004014BC (.text+0x8BC): 31 CA 88 10
+loop compare/branch bytes at 0x004014D4: 39 C2 77 CE
+comparison target immediate at 0x0040150D: VA 0x00404020
+following call resolves to comparison routine: 0x00403B70
+fgets size argument: 50 bytes
+line terminator byte at 0x004050A4: LF
+comparison target: VA 0x00404020 -> file offset 0x3220 (.data)
+embedded comparison bytes before NUL: 43
+embedded comparison hex: 45 4F 42 44 58 46 4D 53 12 14 6A 17 53 1B 77 79 4E 62 51 4A 42 4C 11 4F 52 16 57 62 62 51 79 11 73 12 54 5B 61 76 54 7B 76 11 5E
+decoded input ASCII: flag{enp17I4p8TZmAriao2lq5tAArZ2P1wxBUwXU2}
+derived input length: 43; plus LF: 44; fgets limit: 49
+forward transform exactly matches embedded comparison: True
+STATIC_ONLY=true; no executable launched; no platform/network accessed; no submission made
+COMMAND> Display the saved UTF-8 verifier output
+original attachment copy: C:\Users\mzj\Desktop\CTF\����ˢ��\��Ŀ����\����14_20260929\562_checker\����_ԭʼ\checker_20260929.zip
+original ZIP size: 17498
+original ZIP SHA-256: 598E457DCDFFCB89F4A1B5CF56133E1D8A194E737B8C25C6C0EA722854426D36
+non-directory ZIP members: ['checker.exe']
+ZIP member name: checker.exe
+ZIP member size: 42857
+ZIP member SHA-256: 449D9F4569A0ED70FCB9BC8B96737719B62CFD8AE7C1E99D2864A3999887FDF5
+mirror: ��ȡ_����\checker.exe; size=42857; SHA-256=449D9F4569A0ED70FCB9BC8B96737719B62CFD8AE7C1E99D2864A3999887FDF5; byte-identical=True
+mirror: ����_����\checker.exe; size=42857; SHA-256=449D9F4569A0ED70FCB9BC8B96737719B62CFD8AE7C1E99D2864A3999887FDF5; byte-identical=True
+PE machine: 0x014C; optional header: 0x010B; image base: 0x00400000
+XOR key immediate at 0x00401496 (.text+0x896): 0x23
+transform bytes at 0x004014BC (.text+0x8BC): 31 CA 88 10
+loop compare/branch bytes at 0x004014D4: 39 C2 77 CE
+comparison target immediate at 0x0040150D: VA 0x00404020
+following call resolves to comparison routine: 0x00403B70
+fgets size argument: 50 bytes
+line terminator byte at 0x004050A4: LF
+comparison target: VA 0x00404020 -> file offset 0x3220 (.data)
+embedded comparison bytes before NUL: 43
+embedded comparison hex: 45 4F 42 44 58 46 4D 53 12 14 6A 17 53 1B 77 79 4E 62 51 4A 42 4C 11 4F 52 16 57 62 62 51 79 11 73 12 54 5B 61 76 54 7B 76 11 5E
+decoded input ASCII: flag{enp17I4p8TZmAriao2lq5tAArZ2P1wxBUwXU2}
+derived input length: 43; plus LF: 44; fgets limit: 49
+forward transform exactly matches embedded comparison: True
+STATIC_ONLY=true; no executable launched; no platform/network accessed; no submission made
+COMMAND> Refresh saved hashes
+598E457DCDFFCB89F4A1B5CF56133E1D8A194E737B8C25C6C0EA722854426D36 *附件_原始\checker_20260929.zip
+449D9F4569A0ED70FCB9BC8B96737719B62CFD8AE7C1E99D2864A3999887FDF5 *提取_分析\checker.exe
+449D9F4569A0ED70FCB9BC8B96737719B62CFD8AE7C1E99D2864A3999887FDF5 *复核_独立\checker.exe
+91B5BE24C9EA204225153FA6702E3A31DB61B3FE1C9205EC503DD2A52B8A1958 *independent_rederive_from_original_zip.py
+3F632D07A04A67769530AD165B884BC2AE5A36036C2E57F5F3E1F9A86C7E902A *independent_rederive_output.txt
+356B4C777B9E3955E4507A4C0CAEF87CD4792B468BE74F959B82F83A059482E9 *WP_第一届启航杯checker.md
+60BC05AAD17D36222D0E2329D245F009C26EFDAC277113BABEC5156D641E618A *STATUS_562.txt
+**********************
+PowerShell transcript end
+End time: 20260929172352
+**********************
+**********************
+PowerShell transcript start
+Start time: 20260929172433
+Username: DESKTOP-412KTAR\mzj
+RunAs User: DESKTOP-412KTAR\mzj
+Configuration Name: 
+Machine: DESKTOP-412KTAR (Microsoft Windows NT 10.0.26200.0)
+Host Application: C:\Users\mzj\.cache\codex-runtimes\codex-primary-runtime\dependencies\native\powershell\pwsh.dll -Command try { [Console]::OutputEncoding=[System.Text.Encoding]::UTF8 } catch {}
+$root='C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\批次14_20260929\562_checker'; $transcript=Join-Path $root 'rederive_562_transcript_20260929.txt'; [Console]::OutputEncoding=[System.Text.Encoding]::UTF8; $OutputEncoding=[System.Text.Encoding]::UTF8; Start-Transcript -LiteralPath $transcript -Append; Write-Output 'COMMAND> Escape non-ASCII diagnostic paths in the independent verifier so saved stdout is portable'; $scriptPath=Join-Path $root 'independent_rederive_from_original_zip.py'; $source=Get-Content -LiteralPath $scriptPath -Raw; $source=$source.Replace('print(f"original attachment copy: {archive}")','print("original attachment copy: " + str(archive).encode("unicode_escape").decode("ascii"))'); $source=$source.Replace('print(f"mirror: {path.relative_to(root)}; size={len(mirror)}; SHA-256={sha256(mirror)}; byte-identical={mirror == exe}")','print("mirror: " + str(path.relative_to(root)).encode("unicode_escape").decode("ascii") + f"; size={len(mirror)}; SHA-256={sha256(mirror)}; byte-identical={mirror == exe}")'); Set-Content -LiteralPath $scriptPath -Value $source -Encoding utf8; Write-Output 'COMMAND> Run verifier and capture final readable stdout'; python $scriptPath | Tee-Object -FilePath (Join-Path $root 'independent_rederive_output.txt'); if ($LASTEXITCODE -ne 0) { throw "Python derivation failed with exit code $LASTEXITCODE" }; Write-Output 'COMMAND> Refresh final artifact hashes'; $manifestPaths=@((Join-Path $root '附件_原始\checker_20260929.zip'),(Join-Path $root '提取_分析\checker.exe'),(Join-Path $root '复核_独立\checker.exe'),$scriptPath,(Join-Path $root 'independent_rederive_output.txt'),(Join-Path $root 'WP_第一届启航杯checker.md'),(Join-Path $root 'STATUS_562.txt')); $manifestLines=foreach($p in $manifestPaths){$h=Get-FileHash -LiteralPath $p -Algorithm SHA256; '{0} *{1}' -f $h.Hash,$p.Substring($root.Length+1)}; Set-Content -LiteralPath (Join-Path $root 'FRESH_REDERIVE_SHA256SUMS.txt') -Value $manifestLines -Encoding utf8; Write-Output 'COMMAND> Review final captured output and hash manifest'; Get-Content -LiteralPath (Join-Path $root 'independent_rederive_output.txt') -Encoding utf8; Get-Content -LiteralPath (Join-Path $root 'FRESH_REDERIVE_SHA256SUMS.txt') -Encoding utf8; Stop-Transcript
+Process ID: 14760
+PSVersion: 7.6.5
+PSEdition: Core
+GitCommitId: 7.6.5
+OS: Microsoft Windows 10.0.26200
+Platform: Win32NT
+PSCompatibleVersions: 1.0, 2.0, 3.0, 4.0, 5.0, 5.1, 6.0, 7.0
+PSRemotingProtocolVersion: 2.4
+SerializationVersion: 1.1.0.1
+WSManStackVersion: 3.0
+**********************
+Transcript started, output file is C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\批次14_20260929\562_checker\rederive_562_transcript_20260929.txt
+COMMAND> Escape non-ASCII diagnostic paths in the independent verifier so saved stdout is portable
+COMMAND> Run verifier and capture final readable stdout
+original attachment copy: C:\\Users\\mzj\\Desktop\\CTF\\\u7384\u673a\u5237\u9898\\\u9898\u76ee\u8d44\u6599\\\u6279\u6b2114_20260929\\562_checker\\\u9644\u4ef6_\u539f\u59cb\\checker_20260929.zip
+original ZIP size: 17498
+original ZIP SHA-256: 598E457DCDFFCB89F4A1B5CF56133E1D8A194E737B8C25C6C0EA722854426D36
+non-directory ZIP members: ['checker.exe']
+ZIP member name: checker.exe
+ZIP member size: 42857
+ZIP member SHA-256: 449D9F4569A0ED70FCB9BC8B96737719B62CFD8AE7C1E99D2864A3999887FDF5
+mirror: \u63d0\u53d6_\u5206\u6790\\checker.exe; size=42857; SHA-256=449D9F4569A0ED70FCB9BC8B96737719B62CFD8AE7C1E99D2864A3999887FDF5; byte-identical=True
+mirror: \u590d\u6838_\u72ec\u7acb\\checker.exe; size=42857; SHA-256=449D9F4569A0ED70FCB9BC8B96737719B62CFD8AE7C1E99D2864A3999887FDF5; byte-identical=True
+PE machine: 0x014C; optional header: 0x010B; image base: 0x00400000
+XOR key immediate at 0x00401496 (.text+0x896): 0x23
+transform bytes at 0x004014BC (.text+0x8BC): 31 CA 88 10
+loop compare/branch bytes at 0x004014D4: 39 C2 77 CE
+comparison target immediate at 0x0040150D: VA 0x00404020
+following call resolves to comparison routine: 0x00403B70
+fgets size argument: 50 bytes
+line terminator byte at 0x004050A4: LF
+comparison target: VA 0x00404020 -> file offset 0x3220 (.data)
+embedded comparison bytes before NUL: 43
+embedded comparison hex: 45 4F 42 44 58 46 4D 53 12 14 6A 17 53 1B 77 79 4E 62 51 4A 42 4C 11 4F 52 16 57 62 62 51 79 11 73 12 54 5B 61 76 54 7B 76 11 5E
+decoded input ASCII: flag{enp17I4p8TZmAriao2lq5tAArZ2P1wxBUwXU2}
+derived input length: 43; plus LF: 44; fgets limit: 49
+forward transform exactly matches embedded comparison: True
+STATIC_ONLY=true; no executable launched; no platform/network accessed; no submission made
+COMMAND> Refresh final artifact hashes
+COMMAND> Review final captured output and hash manifest
+original attachment copy: C:\\Users\\mzj\\Desktop\\CTF\\\u7384\u673a\u5237\u9898\\\u9898\u76ee\u8d44\u6599\\\u6279\u6b2114_20260929\\562_checker\\\u9644\u4ef6_\u539f\u59cb\\checker_20260929.zip
+original ZIP size: 17498
+original ZIP SHA-256: 598E457DCDFFCB89F4A1B5CF56133E1D8A194E737B8C25C6C0EA722854426D36
+non-directory ZIP members: ['checker.exe']
+ZIP member name: checker.exe
+ZIP member size: 42857
+ZIP member SHA-256: 449D9F4569A0ED70FCB9BC8B96737719B62CFD8AE7C1E99D2864A3999887FDF5
+mirror: \u63d0\u53d6_\u5206\u6790\\checker.exe; size=42857; SHA-256=449D9F4569A0ED70FCB9BC8B96737719B62CFD8AE7C1E99D2864A3999887FDF5; byte-identical=True
+mirror: \u590d\u6838_\u72ec\u7acb\\checker.exe; size=42857; SHA-256=449D9F4569A0ED70FCB9BC8B96737719B62CFD8AE7C1E99D2864A3999887FDF5; byte-identical=True
+PE machine: 0x014C; optional header: 0x010B; image base: 0x00400000
+XOR key immediate at 0x00401496 (.text+0x896): 0x23
+transform bytes at 0x004014BC (.text+0x8BC): 31 CA 88 10
+loop compare/branch bytes at 0x004014D4: 39 C2 77 CE
+comparison target immediate at 0x0040150D: VA 0x00404020
+following call resolves to comparison routine: 0x00403B70
+fgets size argument: 50 bytes
+line terminator byte at 0x004050A4: LF
+comparison target: VA 0x00404020 -> file offset 0x3220 (.data)
+embedded comparison bytes before NUL: 43
+embedded comparison hex: 45 4F 42 44 58 46 4D 53 12 14 6A 17 53 1B 77 79 4E 62 51 4A 42 4C 11 4F 52 16 57 62 62 51 79 11 73 12 54 5B 61 76 54 7B 76 11 5E
+decoded input ASCII: flag{enp17I4p8TZmAriao2lq5tAArZ2P1wxBUwXU2}
+derived input length: 43; plus LF: 44; fgets limit: 49
+forward transform exactly matches embedded comparison: True
+STATIC_ONLY=true; no executable launched; no platform/network accessed; no submission made
+598E457DCDFFCB89F4A1B5CF56133E1D8A194E737B8C25C6C0EA722854426D36 *附件_原始\checker_20260929.zip
+449D9F4569A0ED70FCB9BC8B96737719B62CFD8AE7C1E99D2864A3999887FDF5 *提取_分析\checker.exe
+449D9F4569A0ED70FCB9BC8B96737719B62CFD8AE7C1E99D2864A3999887FDF5 *复核_独立\checker.exe
+7E911C1C6275B2952461019FFF24DBFB640742DDC4F57EF013177ECB38591325 *independent_rederive_from_original_zip.py
+0F78F41085FF5DB20E00DCE5620F875903A8507EA811AA0E9E8AED604204DFCF *independent_rederive_output.txt
+356B4C777B9E3955E4507A4C0CAEF87CD4792B468BE74F959B82F83A059482E9 *WP_第一届启航杯checker.md
+60BC05AAD17D36222D0E2329D245F009C26EFDAC277113BABEC5156D641E618A *STATUS_562.txt
+**********************
+PowerShell transcript end
+End time: 20260929172433
+**********************

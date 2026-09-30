@@ -1,0 +1,27 @@
+K = 4d4d58456e636f64 = b'MMXEncod'
+Each step is 8 raw bytes in memory order; arithmetic on bytes is modulo 256.
+block +00: C=8fa39cb7188d7116
+  C-K       = 42564472aa2a02b2
+  ROR64(1)  = 212b223955150159
+  pair swap = 2b21392215555901
+  XOR K     = 666c61677b363665 -> b'flag{66e'
+  forward: P^K=2b21392215555901 swap=212b223955150159 ROL64(1)=42564472aa2a02b2 +K=8fa39cb7188d7116 match=True
+block +08: C=a99d521b10792916
+  C-K       = 5c50fad6a216bab2
+  ROR64(1)  = 2e287d6b510b5d59
+  pair swap = 282e6b7d0b51595d
+  XOR K     = 6563333865323639 -> b'ec38e269'
+  forward: P^K=282e6b7d0b51595d swap=2e287d6b510b5d59 ROL64(1)=5c50fad6a216bab2 +K=a99d521b10792916 match=True
+block +16: C=479d46bf16130f12
+  C-K       = fa50ee7aa8b0a0ae
+  ROR64(1)  = 7d28773d54585057
+  pair swap = 287d3d7758545750
+  XOR K     = 6530653236373834 -> b'e0e26784'
+  forward: P^K=287d3d7758545750 swap=7d28773d54585057 ROL64(1)=fa50ee7aa8b0a0ae +K=479d46bf16130f12 match=True
+block +24: C=a5359e1770151714
+  C-K       = 58e846d202b2a8b0
+  ROR64(1)  = 2c74236901595458
+  pair swap = 742c692359015854
+  XOR K     = 3961316637623730 -> b'9a1f7b70'
+  forward: P^K=742c692359015854 swap=2c74236901595458 ROL64(1)=58e846d202b2a8b0 +K=a5359e1770151714 match=True
+tail unchanged [32:36] = 38697d0a (b'8i}\n')

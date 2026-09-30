@@ -1,0 +1,209 @@
+
+.\analysis\code\lib\x86_64\libparloo.so:     file format elf64-x86-64
+
+
+Disassembly of section .text:
+
+0000000000029620 <Java_com_linkhash_parloochecker_MainActivity_onCreat3@@Base>:
+   29620:	55                   	push   rbp
+   29621:	48 89 e5             	mov    rbp,rsp
+   29624:	48 81 ec 10 01 00 00 	sub    rsp,0x110
+   2962b:	64 48 8b 04 25 28 00 	mov    rax,QWORD PTR fs:0x28
+   29632:	00 00 
+   29634:	48 89 45 f8          	mov    QWORD PTR [rbp-0x8],rax
+   29638:	48 89 bd 70 ff ff ff 	mov    QWORD PTR [rbp-0x90],rdi
+   2963f:	48 89 b5 68 ff ff ff 	mov    QWORD PTR [rbp-0x98],rsi
+   29646:	48 89 95 60 ff ff ff 	mov    QWORD PTR [rbp-0xa0],rdx
+   2964d:	48 8d 05 1d 9a 04 00 	lea    rax,[rip+0x49a1d]        # 73071 <pthread_rwlock_rdlock@plt+0x6151>
+   29654:	f6 00 01             	test   BYTE PTR [rax],0x1
+   29657:	0f 85 05 00 00 00    	jne    29662 <Java_com_linkhash_parloochecker_MainActivity_onCreat3@@Base+0x42>
+   2965d:	e8 ee fe ff ff       	call   29550 <Java_com_linkhash_parloochecker_MainActivity_onCreat3@@Base-0xd0>
+   29662:	e8 b9 ea ff ff       	call   28120 <Java_com_linkhash_parloochecker_MainActivity_onCreat3@@Base-0x1500>
+   29667:	a8 01                	test   al,0x1
+   29669:	0f 85 05 00 00 00    	jne    29674 <Java_com_linkhash_parloochecker_MainActivity_onCreat3@@Base+0x54>
+   2966f:	e9 8d 00 00 00       	jmp    29701 <Java_com_linkhash_parloochecker_MainActivity_onCreat3@@Base+0xe1>
+   29674:	48 8d 35 75 98 04 00 	lea    rsi,[rip+0x49875]        # 72ef0 <pthread_rwlock_rdlock@plt+0x5fd0>
+   2967b:	48 8d 7d e0          	lea    rdi,[rbp-0x20]
+   2967f:	48 89 bd 18 ff ff ff 	mov    QWORD PTR [rbp-0xe8],rdi
+   29686:	ba 22 00 00 00       	mov    edx,0x22
+   2968b:	e8 b0 03 00 00       	call   29a40 <Java_com_linkhash_parloochecker_MainActivity_onCreat3@@Base+0x420>
+   29690:	48 8b bd 18 ff ff ff 	mov    rdi,QWORD PTR [rbp-0xe8]
+   29697:	48 8b 85 70 ff ff ff 	mov    rax,QWORD PTR [rbp-0x90]
+   2969e:	48 89 85 20 ff ff ff 	mov    QWORD PTR [rbp-0xe0],rax
+   296a5:	e8 66 de ff ff       	call   27510 <Java_com_linkhash_parloochecker_MainActivity_onCreat3@@Base-0x2110>
+   296aa:	48 8b bd 20 ff ff ff 	mov    rdi,QWORD PTR [rbp-0xe0]
+   296b1:	48 89 c6             	mov    rsi,rax
+   296b4:	e8 f7 03 00 00       	call   29ab0 <Java_com_linkhash_parloochecker_MainActivity_onCreat3@@Base+0x490>
+   296b9:	48 89 85 28 ff ff ff 	mov    QWORD PTR [rbp-0xd8],rax
+   296c0:	e9 00 00 00 00       	jmp    296c5 <Java_com_linkhash_parloochecker_MainActivity_onCreat3@@Base+0xa5>
+   296c5:	48 8b 85 28 ff ff ff 	mov    rax,QWORD PTR [rbp-0xd8]
+   296cc:	48 89 85 78 ff ff ff 	mov    QWORD PTR [rbp-0x88],rax
+   296d3:	48 8d 7d e0          	lea    rdi,[rbp-0x20]
+   296d7:	e8 f4 76 02 00       	call   50dd0 <Java_com_linkhash_parloochecker_MainActivity_onCreat3@@Base+0x277b0>
+   296dc:	e9 13 03 00 00       	jmp    299f4 <Java_com_linkhash_parloochecker_MainActivity_onCreat3@@Base+0x3d4>
+   296e1:	48 89 c1             	mov    rcx,rax
+   296e4:	89 d0                	mov    eax,edx
+   296e6:	48 89 8d 58 ff ff ff 	mov    QWORD PTR [rbp-0xa8],rcx
+   296ed:	89 85 54 ff ff ff    	mov    DWORD PTR [rbp-0xac],eax
+   296f3:	48 8d 7d e0          	lea    rdi,[rbp-0x20]
+   296f7:	e8 d4 76 02 00       	call   50dd0 <Java_com_linkhash_parloochecker_MainActivity_onCreat3@@Base+0x277b0>
+   296fc:	e9 27 03 00 00       	jmp    29a28 <Java_com_linkhash_parloochecker_MainActivity_onCreat3@@Base+0x408>
+   29701:	e8 8a fc ff ff       	call   29390 <Java_com_linkhash_parloochecker_MainActivity_onCreat3@@Base-0x290>
+   29706:	e8 c5 fa ff ff       	call   291d0 <Java_com_linkhash_parloochecker_MainActivity_onCreat3@@Base-0x450>
+   2970b:	48 8d 05 5e 99 04 00 	lea    rax,[rip+0x4995e]        # 73070 <pthread_rwlock_rdlock@plt+0x6150>
+   29712:	f6 00 01             	test   BYTE PTR [rax],0x1
+   29715:	0f 84 19 00 00 00    	je     29734 <Java_com_linkhash_parloochecker_MainActivity_onCreat3@@Base+0x114>
+   2971b:	48 8d 3d 36 99 04 00 	lea    rdi,[rip+0x49936]        # 73058 <pthread_rwlock_rdlock@plt+0x6138>
+   29722:	e8 b9 03 00 00       	call   29ae0 <Java_com_linkhash_parloochecker_MainActivity_onCreat3@@Base+0x4c0>
+   29727:	a8 01                	test   al,0x1
+   29729:	0f 85 05 00 00 00    	jne    29734 <Java_com_linkhash_parloochecker_MainActivity_onCreat3@@Base+0x114>
+   2972f:	e9 1f 00 00 00       	jmp    29753 <Java_com_linkhash_parloochecker_MainActivity_onCreat3@@Base+0x133>
+   29734:	48 8b bd 70 ff ff ff 	mov    rdi,QWORD PTR [rbp-0x90]
+   2973b:	48 8d 35 de 97 04 00 	lea    rsi,[rip+0x497de]        # 72f20 <pthread_rwlock_rdlock@plt+0x6000>
+   29742:	e8 69 03 00 00       	call   29ab0 <Java_com_linkhash_parloochecker_MainActivity_onCreat3@@Base+0x490>
+   29747:	48 89 85 78 ff ff ff 	mov    QWORD PTR [rbp-0x88],rax
+   2974e:	e9 a1 02 00 00       	jmp    299f4 <Java_com_linkhash_parloochecker_MainActivity_onCreat3@@Base+0x3d4>
+   29753:	48 83 bd 60 ff ff ff 	cmp    QWORD PTR [rbp-0xa0],0x0
+   2975a:	00 
+   2975b:	0f 85 1f 00 00 00    	jne    29780 <Java_com_linkhash_parloochecker_MainActivity_onCreat3@@Base+0x160>
+   29761:	48 8b bd 70 ff ff ff 	mov    rdi,QWORD PTR [rbp-0x90]
+   29768:	48 8d 35 e1 97 04 00 	lea    rsi,[rip+0x497e1]        # 72f50 <pthread_rwlock_rdlock@plt+0x6030>
+   2976f:	e8 3c 03 00 00       	call   29ab0 <Java_com_linkhash_parloochecker_MainActivity_onCreat3@@Base+0x490>
+   29774:	48 89 85 78 ff ff ff 	mov    QWORD PTR [rbp-0x88],rax
+   2977b:	e9 74 02 00 00       	jmp    299f4 <Java_com_linkhash_parloochecker_MainActivity_onCreat3@@Base+0x3d4>
+   29780:	48 8b bd 70 ff ff ff 	mov    rdi,QWORD PTR [rbp-0x90]
+   29787:	48 8b b5 60 ff ff ff 	mov    rsi,QWORD PTR [rbp-0xa0]
+   2978e:	31 c0                	xor    eax,eax
+   29790:	89 c2                	mov    edx,eax
+   29792:	e8 69 03 00 00       	call   29b00 <Java_com_linkhash_parloochecker_MainActivity_onCreat3@@Base+0x4e0>
+   29797:	48 89 85 48 ff ff ff 	mov    QWORD PTR [rbp-0xb8],rax
+   2979e:	48 83 bd 48 ff ff ff 	cmp    QWORD PTR [rbp-0xb8],0x0
+   297a5:	00 
+   297a6:	0f 85 1f 00 00 00    	jne    297cb <Java_com_linkhash_parloochecker_MainActivity_onCreat3@@Base+0x1ab>
+   297ac:	48 8b bd 70 ff ff ff 	mov    rdi,QWORD PTR [rbp-0x90]
+   297b3:	48 8d 35 b6 97 04 00 	lea    rsi,[rip+0x497b6]        # 72f70 <pthread_rwlock_rdlock@plt+0x6050>
+   297ba:	e8 f1 02 00 00       	call   29ab0 <Java_com_linkhash_parloochecker_MainActivity_onCreat3@@Base+0x490>
+   297bf:	48 89 85 78 ff ff ff 	mov    QWORD PTR [rbp-0x88],rax
+   297c6:	e9 29 02 00 00       	jmp    299f4 <Java_com_linkhash_parloochecker_MainActivity_onCreat3@@Base+0x3d4>
+   297cb:	48 8b b5 48 ff ff ff 	mov    rsi,QWORD PTR [rbp-0xb8]
+   297d2:	48 8d 7d c8          	lea    rdi,[rbp-0x38]
+   297d6:	e8 c5 dc ff ff       	call   274a0 <Java_com_linkhash_parloochecker_MainActivity_onCreat3@@Base-0x2180>
+   297db:	48 8b bd 70 ff ff ff 	mov    rdi,QWORD PTR [rbp-0x90]
+   297e2:	48 8b b5 60 ff ff ff 	mov    rsi,QWORD PTR [rbp-0xa0]
+   297e9:	48 8b 95 48 ff ff ff 	mov    rdx,QWORD PTR [rbp-0xb8]
+   297f0:	e8 4b 03 00 00       	call   29b40 <Java_com_linkhash_parloochecker_MainActivity_onCreat3@@Base+0x520>
+   297f5:	e9 00 00 00 00       	jmp    297fa <Java_com_linkhash_parloochecker_MainActivity_onCreat3@@Base+0x1da>
+   297fa:	48 8d 7d c8          	lea    rdi,[rbp-0x38]
+   297fe:	48 89 bd 10 ff ff ff 	mov    QWORD PTR [rbp-0xf0],rdi
+   29805:	e8 c6 de ff ff       	call   276d0 <Java_com_linkhash_parloochecker_MainActivity_onCreat3@@Base-0x1f50>
+   2980a:	48 8b bd 10 ff ff ff 	mov    rdi,QWORD PTR [rbp-0xf0]
+   29811:	48 89 85 40 ff ff ff 	mov    QWORD PTR [rbp-0xc0],rax
+   29818:	e8 13 df ff ff       	call   27730 <Java_com_linkhash_parloochecker_MainActivity_onCreat3@@Base-0x1ef0>
+   2981d:	48 89 85 38 ff ff ff 	mov    QWORD PTR [rbp-0xc8],rax
+   29824:	48 8b b5 40 ff ff ff 	mov    rsi,QWORD PTR [rbp-0xc0]
+   2982b:	48 8b 95 38 ff ff ff 	mov    rdx,QWORD PTR [rbp-0xc8]
+   29832:	48 8d 7d b0          	lea    rdi,[rbp-0x50]
+   29836:	e8 45 03 00 00       	call   29b80 <Java_com_linkhash_parloochecker_MainActivity_onCreat3@@Base+0x560>
+   2983b:	e9 00 00 00 00       	jmp    29840 <Java_com_linkhash_parloochecker_MainActivity_onCreat3@@Base+0x220>
+   29840:	48 8d 7d b0          	lea    rdi,[rbp-0x50]
+   29844:	be 08 00 00 00       	mov    esi,0x8
+   29849:	e8 b2 f3 ff ff       	call   28c00 <Java_com_linkhash_parloochecker_MainActivity_onCreat3@@Base-0xa20>
+   2984e:	e9 00 00 00 00       	jmp    29853 <Java_com_linkhash_parloochecker_MainActivity_onCreat3@@Base+0x233>
+   29853:	48 8d 15 e6 97 04 00 	lea    rdx,[rip+0x497e6]        # 73040 <pthread_rwlock_rdlock@plt+0x6120>
+   2985a:	48 8d 0d ef 97 04 00 	lea    rcx,[rip+0x497ef]        # 73050 <pthread_rwlock_rdlock@plt+0x6130>
+   29861:	48 8d 7d 98          	lea    rdi,[rbp-0x68]
+   29865:	48 8d 75 b0          	lea    rsi,[rbp-0x50]
+   29869:	e8 c2 f4 ff ff       	call   28d30 <Java_com_linkhash_parloochecker_MainActivity_onCreat3@@Base-0x8f0>
+   2986e:	e9 00 00 00 00       	jmp    29873 <Java_com_linkhash_parloochecker_MainActivity_onCreat3@@Base+0x253>
+   29873:	48 8d 7d 80          	lea    rdi,[rbp-0x80]
+   29877:	e8 84 c5 ff ff       	call   25e00 <Java_com_linkhash_parloochecker_MainActivity_onCreat3@@Base-0x3820>
+   2987c:	48 8d 7d 98          	lea    rdi,[rbp-0x68]
+   29880:	e8 5b 02 00 00       	call   29ae0 <Java_com_linkhash_parloochecker_MainActivity_onCreat3@@Base+0x4c0>
+   29885:	88 c1                	mov    cl,al
+   29887:	31 c0                	xor    eax,eax
+   29889:	f6 c1 01             	test   cl,0x1
+   2988c:	88 85 0f ff ff ff    	mov    BYTE PTR [rbp-0xf1],al
+   29892:	0f 85 2c 00 00 00    	jne    298c4 <Java_com_linkhash_parloochecker_MainActivity_onCreat3@@Base+0x2a4>
+   29898:	48 8d 35 b9 97 04 00 	lea    rsi,[rip+0x497b9]        # 73058 <pthread_rwlock_rdlock@plt+0x6138>
+   2989f:	48 8d 7d 98          	lea    rdi,[rbp-0x68]
+   298a3:	e8 c8 03 00 00       	call   29c70 <Java_com_linkhash_parloochecker_MainActivity_onCreat3@@Base+0x650>
+   298a8:	88 85 0e ff ff ff    	mov    BYTE PTR [rbp-0xf2],al
+   298ae:	e9 00 00 00 00       	jmp    298b3 <Java_com_linkhash_parloochecker_MainActivity_onCreat3@@Base+0x293>
+   298b3:	8a 85 0e ff ff ff    	mov    al,BYTE PTR [rbp-0xf2]
+   298b9:	88 85 0f ff ff ff    	mov    BYTE PTR [rbp-0xf1],al
+   298bf:	e9 00 00 00 00       	jmp    298c4 <Java_com_linkhash_parloochecker_MainActivity_onCreat3@@Base+0x2a4>
+   298c4:	8a 85 0f ff ff ff    	mov    al,BYTE PTR [rbp-0xf1]
+   298ca:	24 01                	and    al,0x1
+   298cc:	88 85 37 ff ff ff    	mov    BYTE PTR [rbp-0xc9],al
+   298d2:	f6 85 37 ff ff ff 01 	test   BYTE PTR [rbp-0xc9],0x1
+   298d9:	0f 84 76 00 00 00    	je     29955 <Java_com_linkhash_parloochecker_MainActivity_onCreat3@@Base+0x335>
+   298df:	48 8d 35 aa 96 04 00 	lea    rsi,[rip+0x496aa]        # 72f90 <pthread_rwlock_rdlock@plt+0x6070>
+   298e6:	48 8d 7d 80          	lea    rdi,[rbp-0x80]
+   298ea:	ba 21 00 00 00       	mov    edx,0x21
+   298ef:	e8 6c 76 02 00       	call   50f60 <Java_com_linkhash_parloochecker_MainActivity_onCreat3@@Base+0x27940>
+   298f4:	e9 00 00 00 00       	jmp    298f9 <Java_com_linkhash_parloochecker_MainActivity_onCreat3@@Base+0x2d9>
+   298f9:	e9 76 00 00 00       	jmp    29974 <Java_com_linkhash_parloochecker_MainActivity_onCreat3@@Base+0x354>
+   298fe:	48 89 c1             	mov    rcx,rax
+   29901:	89 d0                	mov    eax,edx
+   29903:	48 89 8d 58 ff ff ff 	mov    QWORD PTR [rbp-0xa8],rcx
+   2990a:	89 85 54 ff ff ff    	mov    DWORD PTR [rbp-0xac],eax
+   29910:	e9 d1 00 00 00       	jmp    299e6 <Java_com_linkhash_parloochecker_MainActivity_onCreat3@@Base+0x3c6>
+   29915:	48 89 c1             	mov    rcx,rax
+   29918:	89 d0                	mov    eax,edx
+   2991a:	48 89 8d 58 ff ff ff 	mov    QWORD PTR [rbp-0xa8],rcx
+   29921:	89 85 54 ff ff ff    	mov    DWORD PTR [rbp-0xac],eax
+   29927:	e9 b1 00 00 00       	jmp    299dd <Java_com_linkhash_parloochecker_MainActivity_onCreat3@@Base+0x3bd>
+   2992c:	48 89 c1             	mov    rcx,rax
+   2992f:	89 d0                	mov    eax,edx
+   29931:	48 89 8d 58 ff ff ff 	mov    QWORD PTR [rbp-0xa8],rcx
+   29938:	89 85 54 ff ff ff    	mov    DWORD PTR [rbp-0xac],eax
+   2993e:	48 8d 7d 80          	lea    rdi,[rbp-0x80]
+   29942:	e8 89 74 02 00       	call   50dd0 <Java_com_linkhash_parloochecker_MainActivity_onCreat3@@Base+0x277b0>
+   29947:	48 8d 7d 98          	lea    rdi,[rbp-0x68]
+   2994b:	e8 00 f1 ff ff       	call   28a50 <Java_com_linkhash_parloochecker_MainActivity_onCreat3@@Base-0xbd0>
+   29950:	e9 88 00 00 00       	jmp    299dd <Java_com_linkhash_parloochecker_MainActivity_onCreat3@@Base+0x3bd>
+   29955:	48 8d 35 64 96 04 00 	lea    rsi,[rip+0x49664]        # 72fc0 <pthread_rwlock_rdlock@plt+0x60a0>
+   2995c:	48 8d 7d 80          	lea    rdi,[rbp-0x80]
+   29960:	ba 1d 00 00 00       	mov    edx,0x1d
+   29965:	e8 f6 75 02 00       	call   50f60 <Java_com_linkhash_parloochecker_MainActivity_onCreat3@@Base+0x27940>
+   2996a:	e9 00 00 00 00       	jmp    2996f <Java_com_linkhash_parloochecker_MainActivity_onCreat3@@Base+0x34f>
+   2996f:	e9 00 00 00 00       	jmp    29974 <Java_com_linkhash_parloochecker_MainActivity_onCreat3@@Base+0x354>
+   29974:	48 8b 85 70 ff ff ff 	mov    rax,QWORD PTR [rbp-0x90]
+   2997b:	48 89 85 f8 fe ff ff 	mov    QWORD PTR [rbp-0x108],rax
+   29982:	48 8d 7d 80          	lea    rdi,[rbp-0x80]
+   29986:	e8 85 db ff ff       	call   27510 <Java_com_linkhash_parloochecker_MainActivity_onCreat3@@Base-0x2110>
+   2998b:	48 8b bd f8 fe ff ff 	mov    rdi,QWORD PTR [rbp-0x108]
+   29992:	48 89 c6             	mov    rsi,rax
+   29995:	e8 16 01 00 00       	call   29ab0 <Java_com_linkhash_parloochecker_MainActivity_onCreat3@@Base+0x490>
+   2999a:	48 89 85 00 ff ff ff 	mov    QWORD PTR [rbp-0x100],rax
+   299a1:	e9 00 00 00 00       	jmp    299a6 <Java_com_linkhash_parloochecker_MainActivity_onCreat3@@Base+0x386>
+   299a6:	48 8b 85 00 ff ff ff 	mov    rax,QWORD PTR [rbp-0x100]
+   299ad:	48 89 85 78 ff ff ff 	mov    QWORD PTR [rbp-0x88],rax
+   299b4:	48 8d 7d 80          	lea    rdi,[rbp-0x80]
+   299b8:	e8 13 74 02 00       	call   50dd0 <Java_com_linkhash_parloochecker_MainActivity_onCreat3@@Base+0x277b0>
+   299bd:	48 8d 7d 98          	lea    rdi,[rbp-0x68]
+   299c1:	e8 8a f0 ff ff       	call   28a50 <Java_com_linkhash_parloochecker_MainActivity_onCreat3@@Base-0xbd0>
+   299c6:	48 8d 7d b0          	lea    rdi,[rbp-0x50]
+   299ca:	e8 81 f0 ff ff       	call   28a50 <Java_com_linkhash_parloochecker_MainActivity_onCreat3@@Base-0xbd0>
+   299cf:	48 8d 7d c8          	lea    rdi,[rbp-0x38]
+   299d3:	e8 f8 73 02 00       	call   50dd0 <Java_com_linkhash_parloochecker_MainActivity_onCreat3@@Base+0x277b0>
+   299d8:	e9 17 00 00 00       	jmp    299f4 <Java_com_linkhash_parloochecker_MainActivity_onCreat3@@Base+0x3d4>
+   299dd:	48 8d 7d b0          	lea    rdi,[rbp-0x50]
+   299e1:	e8 6a f0 ff ff       	call   28a50 <Java_com_linkhash_parloochecker_MainActivity_onCreat3@@Base-0xbd0>
+   299e6:	48 8d 7d c8          	lea    rdi,[rbp-0x38]
+   299ea:	e8 e1 73 02 00       	call   50dd0 <Java_com_linkhash_parloochecker_MainActivity_onCreat3@@Base+0x277b0>
+   299ef:	e9 34 00 00 00       	jmp    29a28 <Java_com_linkhash_parloochecker_MainActivity_onCreat3@@Base+0x408>
+   299f4:	48 8b 85 78 ff ff ff 	mov    rax,QWORD PTR [rbp-0x88]
+   299fb:	48 89 85 f0 fe ff ff 	mov    QWORD PTR [rbp-0x110],rax
+   29a02:	64 48 8b 04 25 28 00 	mov    rax,QWORD PTR fs:0x28
+   29a09:	00 00 
+   29a0b:	48 8b 4d f8          	mov    rcx,QWORD PTR [rbp-0x8]
+   29a0f:	48 39 c8             	cmp    rax,rcx
+   29a12:	0f 85 1c 00 00 00    	jne    29a34 <Java_com_linkhash_parloochecker_MainActivity_onCreat3@@Base+0x414>
+   29a18:	48 8b 85 f0 fe ff ff 	mov    rax,QWORD PTR [rbp-0x110]
+   29a1f:	48 81 c4 10 01 00 00 	add    rsp,0x110
+   29a26:	5d                   	pop    rbp
+   29a27:	c3                   	ret
+   29a28:	48 8b bd 58 ff ff ff 	mov    rdi,QWORD PTR [rbp-0xa8]
+   29a2f:	e8 9c f3 03 00       	call   68dd0 <Java_com_linkhash_parloochecker_MainActivity_onCreat3@@Base+0x3f7b0>
+   29a34:	e8 67 2f 04 00       	call   6c9a0 <__stack_chk_fail@plt>

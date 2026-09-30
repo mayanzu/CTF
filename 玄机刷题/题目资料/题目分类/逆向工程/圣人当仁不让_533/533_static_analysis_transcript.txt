@@ -1,0 +1,734 @@
+**********************
+PowerShell transcript start
+Start time: 20260929143454
+Username: DESKTOP-412KTAR\mzj
+RunAs User: DESKTOP-412KTAR\mzj
+Configuration Name: 
+Machine: DESKTOP-412KTAR (Microsoft Windows NT 10.0.26200.0)
+Host Application: C:\Users\mzj\.cache\codex-runtimes\codex-primary-runtime\dependencies\native\powershell\pwsh.dll -Command try { [Console]::OutputEncoding=[System.Text.Encoding]::UTF8 } catch {}
+$ErrorActionPreference='Stop'
+$root='C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\批次13_20260929\533_圣人当仁不让'
+New-Item -ItemType Directory -Force -Path (Join-Path $root 'analysis'),(Join-Path $root 'evidence') | Out-Null
+$log=Join-Path $root '533_static_analysis_transcript.txt'
+Start-Transcript -LiteralPath $log -Append
+Write-Output "COMMAND> Get-ChildItem -Force '$root'"
+Get-ChildItem -Force -LiteralPath $root | Format-List FullName,Length,LastWriteTime,Mode
+Write-Output "COMMAND> Get-ChildItem -Recurse -File '$root' | Select-Object FullName,Length"
+Get-ChildItem -Recurse -File -LiteralPath $root | Select-Object FullName,Length | Format-Table -AutoSize
+Write-Output "COMMAND> Get-FileHash '$root\originals\ez_vm.zip' -Algorithm SHA256"
+Get-FileHash -LiteralPath (Join-Path $root 'originals\ez_vm.zip') -Algorithm SHA256 | Format-List
+Write-Output "COMMAND> Get-FileHash '$root\analysis\ez_vm.exe' -Algorithm SHA256"
+Get-FileHash -LiteralPath (Join-Path $root 'analysis\ez_vm.exe') -Algorithm SHA256 | Format-List
+Write-Output 'COMMAND> Get-Content (Get-Command 7z.exe -ErrorAction SilentlyContinue).Source'
+$z=Get-Command 7z.exe -ErrorAction SilentlyContinue
+if($z){ & $z.Source l (Join-Path $root 'originals\ez_vm.zip') } else { Write-Output '7z.exe unavailable' }
+Stop-Transcript
+Process ID: 13928
+PSVersion: 7.6.5
+PSEdition: Core
+GitCommitId: 7.6.5
+OS: Microsoft Windows 10.0.26200
+Platform: Win32NT
+PSCompatibleVersions: 1.0, 2.0, 3.0, 4.0, 5.0, 5.1, 6.0, 7.0
+PSRemotingProtocolVersion: 2.4
+SerializationVersion: 1.1.0.1
+WSManStackVersion: 3.0
+**********************
+Transcript started, output file is C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\批次13_20260929\533_圣人当仁不让\533_static_analysis_transcript.txt
+COMMAND> Get-ChildItem -Force 'C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\批次13_20260929\533_圣人当仁不让'
+
+FullName      : C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\批次13_20260929\533_圣人当仁不让\analysis
+LastWriteTime : 2026/9/29 14:34:03
+Mode          : d----
+
+FullName      : C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\批次13_20260929\533_圣人当仁不让\evidence
+LastWriteTime : 2026/9/29 14:34:54
+Mode          : d----
+
+FullName      : C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\批次13_20260929\533_圣人当仁不让\originals
+LastWriteTime : 2026/9/29 14:34:02
+Mode          : d----
+
+FullName      : C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\批次13_20260929\533_圣人当仁不让\533_static_analysis_transcr
+                ipt.txt
+Length        : 2200
+LastWriteTime : 2026/9/29 14:34:54
+Mode          : -a---
+
+COMMAND> Get-ChildItem -Recurse -File 'C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\批次13_20260929\533_圣人当仁不让' | Select-Object FullName,Length
+
+FullName                                                                                                       Length
+--------                                                                                                       ------
+C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\批次13_20260929\533_圣人当仁不让\533_static_analysis_transcript.txt   3275
+C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\批次13_20260929\533_圣人当仁不让\analysis\ez_vm.exe                  82661
+C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\批次13_20260929\533_圣人当仁不让\originals\ez_vm.zip                 26778
+
+COMMAND> Get-FileHash 'C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\批次13_20260929\533_圣人当仁不让\originals\ez_vm.zip' -Algorithm SHA256
+
+Algorithm : SHA256
+Hash      : B9B280302A0B975F272CFCA88B59CFFB0EDE4DE3529D56A1BB328CE0D0ED071E
+Path      : C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\批次13_20260929\533_圣人当仁不让\originals\ez_vm.zip
+
+COMMAND> Get-FileHash 'C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\批次13_20260929\533_圣人当仁不让\analysis\ez_vm.exe' -Algorithm SHA256
+
+Algorithm : SHA256
+Hash      : 918ACDAA4DF332FC53C0D8F2B0FC281D5B2710753C5C27BFC53F97E530572E91
+Path      : C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\批次13_20260929\533_圣人当仁不让\analysis\ez_vm.exe
+
+COMMAND> Get-Content (Get-Command 7z.exe -ErrorAction SilentlyContinue).Source
+7z.exe unavailable
+**********************
+PowerShell transcript end
+End time: 20260929143454
+**********************
+**********************
+PowerShell transcript start
+Start time: 20260929143535
+Username: DESKTOP-412KTAR\mzj
+RunAs User: DESKTOP-412KTAR\mzj
+Configuration Name: 
+Machine: DESKTOP-412KTAR (Microsoft Windows NT 10.0.26200.0)
+Host Application: C:\Users\mzj\.cache\codex-runtimes\codex-primary-runtime\dependencies\native\powershell\pwsh.dll -Command try { [Console]::OutputEncoding=[System.Text.Encoding]::UTF8 } catch {}
+$ErrorActionPreference='Stop'
+$root='C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\批次13_20260929\533_圣人当仁不让'
+$log=Join-Path $root '533_static_analysis_transcript.txt'
+Start-Transcript -LiteralPath $log -Append
+Write-Output 'COMMAND> Get-Command python,py,strings.exe,objdump.exe,llvm-readobj.exe,dumpbin.exe,radare2.exe,rabin2.exe,diec.exe,7z.exe -ErrorAction SilentlyContinue'
+Get-Command python,py,strings.exe,objdump.exe,llvm-readobj.exe,dumpbin.exe,radare2.exe,rabin2.exe,diec.exe,7z.exe -ErrorAction SilentlyContinue | Select-Object Name,Source | Format-Table -AutoSize
+Write-Output 'COMMAND> Get-Content Get-Command python'
+$py=Get-Command python -ErrorAction SilentlyContinue
+if($py){ & $py.Source --version } else { Write-Output 'python unavailable' }
+Write-Output 'COMMAND> python static_pe.py <analysis\ez_vm.exe>'
+$script=@'
+import sys, struct, re, hashlib
+from pathlib import Path
+p=Path(sys.argv[1]); b=p.read_bytes()
+print(f"file={p} size={len(b)} sha256={hashlib.sha256(b).hexdigest()}")
+print(f"DOS_magic={b[:2]!r} e_lfanew=0x{struct.unpack_from('<I',b,0x3c)[0]:x}")
+o=struct.unpack_from('<I',b,0x3c)[0]
+print(f"PE_signature={b[o:o+4]!r}")
+machine,nsec,timestamp,ptrsym,nsym,opt_size,chars=struct.unpack_from('<HHIIIHH',b,o+4)
+print(f"machine=0x{machine:04x} sections={nsec} timestamp=0x{timestamp:08x} optional_size={opt_size} characteristics=0x{chars:04x}")
+opt=o+24; magic=struct.unpack_from('<H',b,opt)[0]
+print(f"optional_magic=0x{magic:04x}")
+if magic==0x10b: imagebase=struct.unpack_from('<I',b,opt+28)[0]; dd=opt+96
+elif magic==0x20b: imagebase=struct.unpack_from('<Q',b,opt+24)[0]; dd=opt+112
+else: imagebase=None; dd=None
+if imagebase is not None:
+    print(f"imagebase=0x{imagebase:x} entry_rva=0x{struct.unpack_from('<I',b,opt+16)[0]:x} image_size=0x{struct.unpack_from('<I',b,opt+56)[0]:x} subsystem={struct.unpack_from('<H',b,opt+68)[0]}")
+secs=[]; sh=opt+opt_size
+for i in range(nsec):
+    x=sh+i*40; name=b[x:x+8].split(b'\0')[0].decode('ascii','replace')
+    vs,va,rs,rp=struct.unpack_from('<IIII',b,x+8)
+    sc=struct.unpack_from('<I',b,x+36)[0]
+    secs.append((name,va,max(vs,rs),rp,rs))
+    print(f"section[{i}] name={name!r} rva=0x{va:x} vsize=0x{vs:x} raw=0x{rp:x}+0x{rs:x} flags=0x{sc:08x}")
+def rvaoff(r):
+    for name,va,span,rp,rs in secs:
+        if va<=r<va+span:
+            z=r-va
+            if z<rs:return rp+z
+    return None
+if dd is not None:
+    imp_rva,imp_sz=struct.unpack_from('<II',b,dd+8)
+    print(f"import_dir_rva=0x{imp_rva:x} size=0x{imp_sz:x}")
+    io=rvaoff(imp_rva) if imp_rva else None
+    if io is not None:
+        for n in range(128):
+            d=b[io+n*20:io+(n+1)*20]
+            if len(d)<20:break
+            ilt,name_rva,ft=struct.unpack('<IIIII',d)
+            if not (ilt|name_rva|ft):break
+            no=rvaoff(name_rva)
+            nm=b[no:b.find(b'\0',no)].decode('ascii','replace') if no is not None else '?'
+            print(f"import_dll={nm}")
+# ASCII strings
+strings=[]
+for m in re.finditer(rb'[\x20-\x7e]{4,}',b): strings.append((m.start(),m.group().decode('ascii','replace')))
+print('--- ASCII STRINGS (>=4) ---')
+for off,s in strings: print(f"0x{off:06x}: {s}")
+print('--- UTF16LE STRINGS (>=4) ---')
+for m in re.finditer(rb'(?:[\x20-\x7e]\x00){4,}',b):
+    try:s=m.group().decode('utf-16le')
+    except:continue
+    print(f"0x{m.start():06x}: {s}")
+'@
+$pyFile=Join-Path $root 'analysis\static_pe.py'
+Set-Content -LiteralPath $pyFile -Value $script -Encoding UTF8
+Write-Output "SCRIPT SAVED> $pyFile"
+if($py){ & $py.Source $pyFile (Join-Path $root 'analysis\ez_vm.exe') }
+Stop-Transcript
+Process ID: 17720
+PSVersion: 7.6.5
+PSEdition: Core
+GitCommitId: 7.6.5
+OS: Microsoft Windows 10.0.26200
+Platform: Win32NT
+PSCompatibleVersions: 1.0, 2.0, 3.0, 4.0, 5.0, 5.1, 6.0, 7.0
+PSRemotingProtocolVersion: 2.4
+SerializationVersion: 1.1.0.1
+WSManStackVersion: 3.0
+**********************
+Transcript started, output file is C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\批次13_20260929\533_圣人当仁不让\533_static_analysis_transcript.txt
+COMMAND> Get-Command python,py,strings.exe,objdump.exe,llvm-readobj.exe,dumpbin.exe,radare2.exe,rabin2.exe,diec.exe,7z.exe -ErrorAction SilentlyContinue
+
+Name        Source
+----        ------
+python.exe  C:\Users\mzj\AppData\Local\Programs\Python\Python312\python.exe
+py.exe      C:\WINDOWS\py.exe
+strings.exe C:\msys64\mingw64\bin\strings.exe
+objdump.exe C:\msys64\mingw64\bin\objdump.exe
+
+COMMAND> Get-Content Get-Command python
+
+COMMAND> python static_pe.py <analysis\ez_vm.exe>
+SCRIPT SAVED> C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\批次13_20260929\533_圣人当仁不让\analysis\static_pe.py
+
+**********************
+PowerShell transcript end
+End time: 20260929143537
+**********************
+**********************
+PowerShell transcript start
+Start time: 20260929143549
+Username: DESKTOP-412KTAR\mzj
+RunAs User: DESKTOP-412KTAR\mzj
+Configuration Name: 
+Machine: DESKTOP-412KTAR (Microsoft Windows NT 10.0.26200.0)
+Host Application: C:\Users\mzj\.cache\codex-runtimes\codex-primary-runtime\dependencies\native\powershell\pwsh.dll -Command try { [Console]::OutputEncoding=[System.Text.Encoding]::UTF8 } catch {}
+$ErrorActionPreference='Stop'
+$root='C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\批次13_20260929\533_圣人当仁不让'
+$log=Join-Path $root '533_static_analysis_transcript.txt'
+Start-Transcript -LiteralPath $log -Append
+$pyFile=Join-Path $root 'analysis\static_pe.py'
+Write-Output "COMMAND> Fix import descriptor parser in '$pyFile' then rerun"
+$content=Get-Content -Raw -LiteralPath $pyFile
+$content=$content.Replace('ilt,name_rva,ft=struct.unpack(''<IIIII'',d)','ilt,stamp,forwarder,name_rva,ft=struct.unpack(''<IIIII'',d)')
+Set-Content -LiteralPath $pyFile -Value $content -Encoding UTF8
+Write-Output 'COMMAND> python static_pe.py analysis\ez_vm.exe'
+python $pyFile (Join-Path $root 'analysis\ez_vm.exe')
+Write-Output 'COMMAND> objdump -x analysis\ez_vm.exe'
+& 'C:\msys64\mingw64\bin\objdump.exe' -x (Join-Path $root 'analysis\ez_vm.exe')
+Write-Output 'COMMAND> strings -a -n 4 analysis\ez_vm.exe'
+& 'C:\msys64\mingw64\bin\strings.exe' -a -n 4 (Join-Path $root 'analysis\ez_vm.exe')
+Stop-Transcript
+Process ID: 34944
+PSVersion: 7.6.5
+PSEdition: Core
+GitCommitId: 7.6.5
+OS: Microsoft Windows 10.0.26200
+Platform: Win32NT
+PSCompatibleVersions: 1.0, 2.0, 3.0, 4.0, 5.0, 5.1, 6.0, 7.0
+PSRemotingProtocolVersion: 2.4
+SerializationVersion: 1.1.0.1
+WSManStackVersion: 3.0
+**********************
+Transcript started, output file is C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\批次13_20260929\533_圣人当仁不让\533_static_analysis_transcript.txt
+COMMAND> Fix import descriptor parser in 'C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\批次13_20260929\533_圣人当仁不让\analysis\static_pe.py' then rerun
+COMMAND> python static_pe.py analysis\ez_vm.exe
+
+COMMAND> objdump -x analysis\ez_vm.exe
+
+COMMAND> strings -a -n 4 analysis\ez_vm.exe
+
+**********************
+PowerShell transcript end
+End time: 20260929143549
+**********************
+**********************
+PowerShell transcript start
+Start time: 20260929143621
+Username: DESKTOP-412KTAR\mzj
+RunAs User: DESKTOP-412KTAR\mzj
+Configuration Name: 
+Machine: DESKTOP-412KTAR (Microsoft Windows NT 10.0.26200.0)
+Host Application: C:\Users\mzj\.cache\codex-runtimes\codex-primary-runtime\dependencies\native\powershell\pwsh.dll -Command try { [Console]::OutputEncoding=[System.Text.Encoding]::UTF8 } catch {}
+$ErrorActionPreference='Stop'
+$root='C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\批次13_20260929\533_圣人当仁不让'
+$log=Join-Path $root '533_static_analysis_transcript.txt'
+Start-Transcript -LiteralPath $log -Append
+Write-Output 'COMMAND> Copy PE to ASCII path for GNU binutils compatibility'
+Copy-Item -LiteralPath (Join-Path $root 'analysis\ez_vm.exe') -Destination 'C:\vm533.exe' -Force
+Write-Output 'COMMAND> objdump -t C:\vm533.exe | Select-String main|base64|vm_execute'
+& 'C:\msys64\mingw64\bin\objdump.exe' -t 'C:\vm533.exe' | Select-String 'main|base64|vm_execute'
+Write-Output 'COMMAND> objdump -d -M intel --disassemble=main C:\vm533.exe'
+& 'C:\msys64\mingw64\bin\objdump.exe' -d -M intel --disassemble=main 'C:\vm533.exe'
+Write-Output 'COMMAND> objdump -d -M intel --disassemble=_Z10vm_executePc C:\vm533.exe'
+& 'C:\msys64\mingw64\bin\objdump.exe' -d -M intel --disassemble=_Z10vm_executePc 'C:\vm533.exe'
+Write-Output 'COMMAND> python decode extracted Base64 and inspect flag related data strings'
+@'
+import base64
+s='z8nO0NTOntKdop6dloqh1Q=='
+b=base64.b64decode(s)
+print('ciphertext hex:',b.hex())
+print('ciphertext repr:',repr(b))
+print('plain candidates with simple transforms:')
+for k in range(256):
+ x=bytes(c^k for c in b)
+ if all(32<=c<127 for c in x): print('xor',hex(k),repr(x))
+for k in range(256):
+ x=bytes((c-k)&255 for c in b)
+ if all(32<=c<127 for c in x): print('sub',hex(k),repr(x))
+'@ | python -
+Stop-Transcript
+Process ID: 32140
+PSVersion: 7.6.5
+PSEdition: Core
+GitCommitId: 7.6.5
+OS: Microsoft Windows 10.0.26200
+Platform: Win32NT
+PSCompatibleVersions: 1.0, 2.0, 3.0, 4.0, 5.0, 5.1, 6.0, 7.0
+PSRemotingProtocolVersion: 2.4
+SerializationVersion: 1.1.0.1
+WSManStackVersion: 3.0
+**********************
+Transcript started, output file is C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\批次13_20260929\533_圣人当仁不让\533_static_analysis_transcript.txt
+COMMAND> Copy PE to ASCII path for GNU binutils compatibility
+PS>TerminatingError(Copy-Item): "The running command stopped because the preference variable "ErrorActionPreference" or common parameter is set to Stop: Access to the path 'C:\vm533.exe' is denied."
+>> TerminatingError(Copy-Item): "The running command stopped because the preference variable "ErrorActionPreference" or common parameter is set to Stop: Access to the path 'C:\vm533.exe' is denied."
+Copy-Item:
+Line |
+   7 |  Copy-Item -LiteralPath (Join-Path $root 'analysis\ez_vm.exe') -Destin …
+     |  ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+     | Access to the path 'C:\vm533.exe' is denied.
+PS>$global:?
+False
+**********************
+PowerShell transcript end
+End time: 20260929143622
+**********************
+**********************
+PowerShell transcript start
+Start time: 20260929143644
+Username: DESKTOP-412KTAR\mzj
+RunAs User: DESKTOP-412KTAR\mzj
+Configuration Name: 
+Machine: DESKTOP-412KTAR (Microsoft Windows NT 10.0.26200.0)
+Host Application: C:\Users\mzj\.cache\codex-runtimes\codex-primary-runtime\dependencies\native\powershell\pwsh.dll -Command try { [Console]::OutputEncoding=[System.Text.Encoding]::UTF8 } catch {}
+$ErrorActionPreference='Continue'
+$root='C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\批次13_20260929\533_圣人当仁不让'
+$log=Join-Path $root '533_static_analysis_transcript.txt'
+Start-Transcript -LiteralPath $log -Append
+try {
+Write-Output 'COMMAND> Copy-Item analysis\ez_vm.exe C:\Users\mzj\Desktop\CTF\vm533.exe'
+Copy-Item -LiteralPath (Join-Path $root 'analysis\ez_vm.exe') -Destination 'C:\Users\mzj\Desktop\CTF\vm533.exe' -Force
+Write-Output 'COMMAND> objdump -t C:\Users\mzj\Desktop\CTF\vm533.exe | Select-String main|base64|vm_execute'
+& 'C:\msys64\mingw64\bin\objdump.exe' -t 'C:\Users\mzj\Desktop\CTF\vm533.exe' | Select-String 'main|base64|vm_execute'
+Write-Output 'COMMAND> objdump -d -M intel --disassemble=main C:\Users\mzj\Desktop\CTF\vm533.exe'
+& 'C:\msys64\mingw64\bin\objdump.exe' -d -M intel --disassemble=main 'C:\Users\mzj\Desktop\CTF\vm533.exe'
+Write-Output 'COMMAND> objdump -d -M intel --disassemble=_Z10vm_executePc C:\Users\mzj\Desktop\CTF\vm533.exe'
+& 'C:\msys64\mingw64\bin\objdump.exe' -d -M intel --disassemble=_Z10vm_executePc 'C:\Users\mzj\Desktop\CTF\vm533.exe'
+Write-Output 'COMMAND> python decode Base64 payload and try single-byte XOR/substitution'
+@'
+import base64
+s='z8nO0NTOntKdop6dloqh1Q=='
+b=base64.b64decode(s)
+print('ciphertext hex:',b.hex())
+print('ciphertext repr:',repr(b))
+for mode,fn in [('xor',lambda c,k:c^k),('sub',lambda c,k:(c-k)&255)]:
+ for k in range(256):
+  x=bytes(fn(c,k) for c in b)
+  if all(32<=c<127 for c in x): print(mode,hex(k),repr(x))
+'@ | python -
+} finally { Stop-Transcript }
+
+Process ID: 11348
+PSVersion: 7.6.5
+PSEdition: Core
+GitCommitId: 7.6.5
+OS: Microsoft Windows 10.0.26200
+Platform: Win32NT
+PSCompatibleVersions: 1.0, 2.0, 3.0, 4.0, 5.0, 5.1, 6.0, 7.0
+PSRemotingProtocolVersion: 2.4
+SerializationVersion: 1.1.0.1
+WSManStackVersion: 3.0
+**********************
+Transcript started, output file is C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\批次13_20260929\533_圣人当仁不让\533_static_analysis_transcript.txt
+COMMAND> Copy-Item analysis\ez_vm.exe C:\Users\mzj\Desktop\CTF\vm533.exe
+COMMAND> objdump -t C:\Users\mzj\Desktop\CTF\vm533.exe | Select-String main|base64|vm_execute
+
+[  6](sec  6)(fl 0x00)(ty    0)(scl   3) (nx 0) 0x000000000000001c mainret
+[ 28](sec  1)(fl 0x00)(ty   20)(scl   2) (nx 0) 0x00000000000000f6 WinMainCRTStartup
+[ 31](sec  1)(fl 0x00)(ty   20)(scl   2) (nx 0) 0x0000000000000125 mainCRTStartup
+[ 34](sec  1)(fl 0x00)(ty   20)(scl   3) (nx 0) 0x0000000000000154 __tmainCRTStartup
+[107](sec  3)(fl 0x00)(ty    0)(scl   3) (nx 0) 0x0000000000000000 _ZL12base64_table
+[108](sec  1)(fl 0x00)(ty   20)(scl   2) (nx 0) 0x00000000000005e0 _Z13base64_encodePKhy
+[109](sec  1)(fl 0x00)(ty   20)(scl   2) (nx 0) 0x0000000000000823 _Z10vm_executePc
+[110](sec  1)(fl 0x00)(ty   20)(scl   2) (nx 0) 0x00000000000008b9 main
+[129](sec -2)(fl 0x00)(ty    0)(scl 103) (nx 1) 0x0000000000000097 gccmain.c
+[138](sec  1)(fl 0x00)(ty   20)(scl   2) (nx 0) 0x0000000000000a87 __main
+[1401](sec  2)(fl 0x00)(ty    0)(scl   2) (nx 0) 0x0000000000000010 __native_dllmain_reason
+[1419](sec  7)(fl 0x00)(ty    0)(scl   2) (nx 0) 0x0000000000000278 __imp___getmainargs
+[1447](sec  1)(fl 0x00)(ty   20)(scl   2) (nx 0) 0x0000000000008288 __getmainargs
+COMMAND> objdump -d -M intel --disassemble=main C:\Users\mzj\Desktop\CTF\vm533.exe
+
+COMMAND> objdump -d -M intel --disassemble=_Z10vm_executePc C:\Users\mzj\Desktop\CTF\vm533.exe
+
+COMMAND> python decode Base64 payload and try single-byte XOR/substitution
+**********************
+PowerShell transcript end
+End time: 20260929143645
+**********************
+**********************
+PowerShell transcript start
+Start time: 20260929143723
+Username: DESKTOP-412KTAR\mzj
+RunAs User: DESKTOP-412KTAR\mzj
+Configuration Name: 
+Machine: DESKTOP-412KTAR (Microsoft Windows NT 10.0.26200.0)
+Host Application: C:\Users\mzj\.cache\codex-runtimes\codex-primary-runtime\dependencies\native\powershell\pwsh.dll -Command try { [Console]::OutputEncoding=[System.Text.Encoding]::UTF8 } catch {}
+$ErrorActionPreference='Stop'
+$root='C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\批次13_20260929\533_圣人当仁不让'
+$log=Join-Path $root '533_static_analysis_transcript.txt'
+Start-Transcript -LiteralPath $log -Append
+try {
+Write-Output 'COMMAND> objdump -d -M intel --disassemble=_Z13base64_encodePKhy C:\Users\mzj\Desktop\CTF\vm533.exe'
+& 'C:\msys64\mingw64\bin\objdump.exe' -d -M intel --disassemble=_Z13base64_encodePKhy 'C:\Users\mzj\Desktop\CTF\vm533.exe'
+Write-Output 'COMMAND> python inspect exact bytes around strings and decode target with length'
+@'
+from pathlib import Path
+import re,base64
+b=Path(r'C:\Users\mzj\Desktop\CTF\vm533.exe').read_bytes()
+for s in [b'z8nO0NTOntKdop6dloqh1Q==',b' flag: ',b' flag ',b'\n']:
+ i=b.find(s)
+ print(repr(s), 'offset',hex(i), 'raw',b[i:i+len(s)+8].hex(), 'base64decoded' if s.startswith(b'z8') else '')
+ if s.startswith(b'z8'):
+  d=base64.b64decode(s);print('decoded len',len(d),'bytes',d.hex())
+  print('all bytewise inverse (y-3)^aa:',bytes((((x-3)&255)^0xaa) for x in d), 'hex',bytes((((x-3)&255)^0xaa) for x in d).hex())
+'@ | python -
+} finally {Stop-Transcript}
+
+Process ID: 27936
+PSVersion: 7.6.5
+PSEdition: Core
+GitCommitId: 7.6.5
+OS: Microsoft Windows 10.0.26200
+Platform: Win32NT
+PSCompatibleVersions: 1.0, 2.0, 3.0, 4.0, 5.0, 5.1, 6.0, 7.0
+PSRemotingProtocolVersion: 2.4
+SerializationVersion: 1.1.0.1
+WSManStackVersion: 3.0
+**********************
+Transcript started, output file is C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\批次13_20260929\533_圣人当仁不让\533_static_analysis_transcript.txt
+COMMAND> objdump -d -M intel --disassemble=_Z13base64_encodePKhy C:\Users\mzj\Desktop\CTF\vm533.exe
+
+COMMAND> python inspect exact bytes around strings and decode target with length
+**********************
+PowerShell transcript end
+End time: 20260929143723
+**********************
+**********************
+PowerShell transcript start
+Start time: 20260929143906
+Username: DESKTOP-412KTAR\mzj
+RunAs User: DESKTOP-412KTAR\mzj
+Configuration Name: 
+Machine: DESKTOP-412KTAR (Microsoft Windows NT 10.0.26200.0)
+Host Application: C:\Users\mzj\.cache\codex-runtimes\codex-primary-runtime\dependencies\native\powershell\pwsh.dll -Command try { [Console]::OutputEncoding=[System.Text.Encoding]::UTF8 } catch {}
+$ErrorActionPreference='Stop'
+$root='C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\批次13_20260929\533_圣人当仁不让'
+$log=Join-Path $root '533_static_analysis_transcript.txt'
+Start-Transcript -LiteralPath $log -Append
+try {
+$script=@'
+import base64,string
+ct='z8nO0NTOntKdop6dloqh1Q=='
+t=base64.b64decode(ct)
+inv=lambda y: (((y-3)&255)^0xaa)
+known=bytes(inv(y) for y in t)
+alpha='ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/'
+print('target:',ct,'length',len(ct))
+print('decoded transformed bytes:',t.hex())
+print('input[0:16] inverse:',repr(known), 'hex',known.hex())
+# The binary writes 4*ceil(n/3) characters, then incorrectly overwrites (encoded_len-(n%3))%4 trailing characters with '='.
+# For n=17 it emits two pads. Thus target chars 20 and 21 encode transformed byte 15 and high nibble of transformed byte 16.
+q=alpha.index(ct[21])
+print('last meaningful Base64 sextet:',ct[21],q,bin(q))
+need_hi=q&15
+print('required high nibble of transformed input[16]:',hex(need_hi))
+def encode_bug(inp):
+    out=base64.b64encode(inp).decode()
+    pad=(len(out)-(len(inp)%3))&3
+    return out[:len(out)-pad]+'='*pad
+matches=[]
+for c in range(0x20,0x7f):
+    y=((c^0xaa)+3)&255
+    if (y>>4)==need_hi:
+        candidate=known+bytes([c])
+        transformed=bytes((((x^0xaa)+3)&255) for x in candidate)
+        enc=encode_bug(transformed)
+        if enc==ct:
+            matches.append((c,candidate,transformed))
+print('printable final-byte candidates that forward-encode exactly:')
+for c,candidate,transformed in matches:print(f'char={chr(c)!r} input={candidate!r} input_hex={candidate.hex()} transformed={transformed.hex()} forward={encode_bug(transformed)}')
+print('match_count',len(matches))
+print('strict flag syntax candidates:')
+for c,candidate,_ in matches:
+    s=candidate.decode('ascii')
+    print(repr(s),'opens flag{',s.startswith('flag{'),'closes }',s.endswith('}'),'brace count',s.count('{'),s.count('}'))
+'@
+$verify=Join-Path $root 'analysis\derive_candidate.py'
+Set-Content -LiteralPath $verify -Value $script -Encoding UTF8
+Write-Output "COMMAND> python '$verify'"
+python $verify
+} finally {Stop-Transcript}
+
+Process ID: 16528
+PSVersion: 7.6.5
+PSEdition: Core
+GitCommitId: 7.6.5
+OS: Microsoft Windows 10.0.26200
+Platform: Win32NT
+PSCompatibleVersions: 1.0, 2.0, 3.0, 4.0, 5.0, 5.1, 6.0, 7.0
+PSRemotingProtocolVersion: 2.4
+SerializationVersion: 1.1.0.1
+WSManStackVersion: 3.0
+**********************
+Transcript started, output file is C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\批次13_20260929\533_圣人当仁不让\533_static_analysis_transcript.txt
+COMMAND> python 'C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\批次13_20260929\533_圣人当仁不让\analysis\derive_candidate.py'
+
+**********************
+PowerShell transcript end
+End time: 20260929143906
+**********************
+**********************
+PowerShell transcript start
+Start time: 20260929144051
+Username: DESKTOP-412KTAR\mzj
+RunAs User: DESKTOP-412KTAR\mzj
+Configuration Name: 
+Machine: DESKTOP-412KTAR (Microsoft Windows NT 10.0.26200.0)
+Host Application: C:\Users\mzj\.cache\codex-runtimes\codex-primary-runtime\dependencies\native\powershell\pwsh.dll -Command try { [Console]::OutputEncoding=[System.Text.Encoding]::UTF8 } catch {}
+$ErrorActionPreference='Stop'
+$root='C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\批次13_20260929\533_圣人当仁不让'
+$log=Join-Path $root '533_static_analysis_transcript.txt'
+Start-Transcript -LiteralPath $log -Append
+try {
+Write-Output 'COMMAND> python dump fixed strings / recompute target for a brace-closed input'
+$script=@'
+from pathlib import Path
+import base64
+p=Path(r'C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\批次13_20260929\533_圣人当仁不让\analysis\ez_vm.exe')
+b=p.read_bytes()
+for start,end in [(0x8c40,0x8cd0),(0x8c00,0x8cc0)]:
+ print(f'file[{start:#x}:{end:#x}]',repr(b[start:end]))
+ for i in range(start,end):
+  if b[i:i+1] == b'\0': continue
+# emulate the exact operation established by disassembly
+def transform(x):return bytes((((c^0xaa)+3)&255) for c in x)
+def bug_b64(data):
+ out=base64.b64encode(data).decode()
+ pad=(len(out)-(len(data)%3))&3
+ return out[:len(out)-pad]+'='*pad
+for candidate in [b'flag{a1e05109-4xT',b'flag{a1e05109-4xU',b'flag{a1e05109-4xW',b'flag{a1e05109-4x}']:
+ enc=bug_b64(transform(candidate))
+ print('candidate',repr(candidate),'len',len(candidate),'transform',transform(candidate).hex(),'encoded',enc,'target_match',enc=='z8nO0NTOntKdop6dloqh1Q==')
+'@
+$pyFile=Join-Path $root 'analysis\inspect_tail.py'
+Set-Content -LiteralPath $pyFile -Value $script -Encoding UTF8
+Write-Output "COMMAND> python '$pyFile'"
+python $pyFile
+Write-Output 'COMMAND> objdump -s -j .rdata C:\Users\mzj\Desktop\CTF\vm533.exe'
+& 'C:\msys64\mingw64\bin\objdump.exe' -s -j .rdata 'C:\Users\mzj\Desktop\CTF\vm533.exe'
+} finally {Stop-Transcript}
+
+Process ID: 3868
+PSVersion: 7.6.5
+PSEdition: Core
+GitCommitId: 7.6.5
+OS: Microsoft Windows 10.0.26200
+Platform: Win32NT
+PSCompatibleVersions: 1.0, 2.0, 3.0, 4.0, 5.0, 5.1, 6.0, 7.0
+PSRemotingProtocolVersion: 2.4
+SerializationVersion: 1.1.0.1
+WSManStackVersion: 3.0
+**********************
+Transcript started, output file is C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\批次13_20260929\533_圣人当仁不让\533_static_analysis_transcript.txt
+COMMAND> python dump fixed strings / recompute target for a brace-closed input
+COMMAND> python 'C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\批次13_20260929\533_圣人当仁不让\analysis\inspect_tail.py'
+
+COMMAND> objdump -s -j .rdata C:\Users\mzj\Desktop\CTF\vm533.exe
+
+**********************
+PowerShell transcript end
+End time: 20260929144052
+**********************
+**********************
+PowerShell transcript start
+Start time: 20260929144918
+Username: DESKTOP-412KTAR\mzj
+RunAs User: DESKTOP-412KTAR\mzj
+Configuration Name: 
+Machine: DESKTOP-412KTAR (Microsoft Windows NT 10.0.26200.0)
+Host Application: C:\Users\mzj\.cache\codex-runtimes\codex-primary-runtime\dependencies\native\powershell\pwsh.dll -Command try { [Console]::OutputEncoding=[System.Text.Encoding]::UTF8 } catch {}
+$ErrorActionPreference='Stop'
+$root='C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\批次13_20260929\533_圣人当仁不让'
+$log=Join-Path $root '533_static_analysis_transcript.txt'
+Start-Transcript -LiteralPath $log -Append
+try {
+Write-Output 'OPERATION> apply_patch added README.md, wp.md and evidence/533_static_evidence.md; tool returned empty success object.'
+Write-Output 'COMMAND> Get-FileHash -Algorithm SHA256 for retained source and documentation files'
+Get-FileHash -LiteralPath (Join-Path $root 'originals\ez_vm.zip'),(Join-Path $root 'analysis\ez_vm.exe'),(Join-Path $root 'wp.md'),(Join-Path $root 'README.md'),(Join-Path $root 'evidence\533_static_evidence.md') -Algorithm SHA256 | Format-Table -AutoSize
+Write-Output 'COMMAND> python analysis\derive_candidate.py'
+python (Join-Path $root 'analysis\derive_candidate.py')
+Write-Output 'COMMAND> Test-Path -LiteralPath C:\Users\mzj\Desktop\CTF\vm533.exe'
+Test-Path -LiteralPath 'C:\Users\mzj\Desktop\CTF\vm533.exe'
+Write-Output 'COMMAND> Get-ChildItem -Recurse -File challenge directory'
+Get-ChildItem -Recurse -File -LiteralPath $root | Select-Object FullName,Length | Format-Table -AutoSize
+} finally {Stop-Transcript}
+Process ID: 34492
+PSVersion: 7.6.5
+PSEdition: Core
+GitCommitId: 7.6.5
+OS: Microsoft Windows 10.0.26200
+Platform: Win32NT
+PSCompatibleVersions: 1.0, 2.0, 3.0, 4.0, 5.0, 5.1, 6.0, 7.0
+PSRemotingProtocolVersion: 2.4
+SerializationVersion: 1.1.0.1
+WSManStackVersion: 3.0
+**********************
+Transcript started, output file is C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\批次13_20260929\533_圣人当仁不让\533_static_analysis_transcript.txt
+OPERATION> apply_patch added README.md, wp.md and evidence/533_static_evidence.md; tool returned empty success object.
+COMMAND> Get-FileHash -Algorithm SHA256 for retained source and documentation files
+
+Algorithm Hash                                                             Path
+--------- ----                                                             ----
+SHA256    B9B280302A0B975F272CFCA88B59CFFB0EDE4DE3529D56A1BB328CE0D0ED071E C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\…
+SHA256    918ACDAA4DF332FC53C0D8F2B0FC281D5B2710753C5C27BFC53F97E530572E91 C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\…
+SHA256    77A524D15BA1144D1BC5421A83560689BC42C876382707A05CF21CBB12A3275D C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\…
+SHA256    EAC4DDB0AF6497216C72DADD4D80F3826AF645DAA776ECC051DA7D7397BAFE28 C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\…
+SHA256    DCE6623C20D86D472849A7D81DBE13CA8F939145671F70E43379E9F53214DE12 C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\…
+
+COMMAND> python analysis\derive_candidate.py
+
+COMMAND> Test-Path -LiteralPath C:\Users\mzj\Desktop\CTF\vm533.exe
+True
+COMMAND> Get-ChildItem -Recurse -File challenge directory
+
+FullName                                                                                                       Length
+--------                                                                                                       ------
+C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\批次13_20260929\533_圣人当仁不让\533_static_analysis_transcript.txt  31384
+C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\批次13_20260929\533_圣人当仁不让\README.md                             606
+C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\批次13_20260929\533_圣人当仁不让\wp.md                                3917
+C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\批次13_20260929\533_圣人当仁不让\analysis\derive_candidate.py         1697
+C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\批次13_20260929\533_圣人当仁不让\analysis\ez_vm.exe                  82661
+C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\批次13_20260929\533_圣人当仁不让\analysis\inspect_tail.py              885
+C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\批次13_20260929\533_圣人当仁不让\analysis\static_pe.py                2523
+C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\批次13_20260929\533_圣人当仁不让\evidence\533_static_evidence.md      2972
+C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\批次13_20260929\533_圣人当仁不让\originals\ez_vm.zip                 26778
+
+**********************
+PowerShell transcript end
+End time: 20260929144918
+**********************
+**********************
+PowerShell transcript start
+Start time: 20260929145000
+Username: DESKTOP-412KTAR\mzj
+RunAs User: DESKTOP-412KTAR\mzj
+Configuration Name: 
+Machine: DESKTOP-412KTAR (Microsoft Windows NT 10.0.26200.0)
+Host Application: C:\Users\mzj\.cache\codex-runtimes\codex-primary-runtime\dependencies\native\powershell\pwsh.dll -Command try { [Console]::OutputEncoding=[System.Text.Encoding]::UTF8 } catch {}
+$root='C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\批次13_20260929\533_圣人当仁不让'
+$log=Join-Path $root '533_static_analysis_transcript.txt'
+Start-Transcript -LiteralPath $log -Append
+try {
+Write-Output 'COMMAND> [System.IO.File]::Delete(C:\Users\mzj\Desktop\CTF\vm533.exe); Test-Path the temporary copy'
+[System.IO.File]::Delete('C:\Users\mzj\Desktop\CTF\vm533.exe')
+Test-Path -LiteralPath 'C:\Users\mzj\Desktop\CTF\vm533.exe'
+Write-Output 'COMMAND> Get-ChildItem -Recurse -File challenge directory after cleanup'
+Get-ChildItem -Recurse -File -LiteralPath $root | Select-Object FullName,Length | Format-Table -AutoSize
+} finally {Stop-Transcript}
+Process ID: 32856
+PSVersion: 7.6.5
+PSEdition: Core
+GitCommitId: 7.6.5
+OS: Microsoft Windows 10.0.26200
+Platform: Win32NT
+PSCompatibleVersions: 1.0, 2.0, 3.0, 4.0, 5.0, 5.1, 6.0, 7.0
+PSRemotingProtocolVersion: 2.4
+SerializationVersion: 1.1.0.1
+WSManStackVersion: 3.0
+**********************
+Transcript started, output file is C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\批次13_20260929\533_圣人当仁不让\533_static_analysis_transcript.txt
+COMMAND> [System.IO.File]::Delete(C:\Users\mzj\Desktop\CTF\vm533.exe); Test-Path the temporary copy
+False
+COMMAND> Get-ChildItem -Recurse -File challenge directory after cleanup
+
+FullName                                                                                                       Length
+--------                                                                                                       ------
+C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\批次13_20260929\533_圣人当仁不让\533_static_analysis_transcript.txt  34677
+C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\批次13_20260929\533_圣人当仁不让\README.md                             606
+C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\批次13_20260929\533_圣人当仁不让\wp.md                                3917
+C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\批次13_20260929\533_圣人当仁不让\analysis\derive_candidate.py         1697
+C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\批次13_20260929\533_圣人当仁不让\analysis\ez_vm.exe                  82661
+C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\批次13_20260929\533_圣人当仁不让\analysis\inspect_tail.py              885
+C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\批次13_20260929\533_圣人当仁不让\analysis\static_pe.py                2523
+C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\批次13_20260929\533_圣人当仁不让\evidence\533_static_evidence.md      2972
+C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\批次13_20260929\533_圣人当仁不让\originals\ez_vm.zip                 26778
+
+**********************
+PowerShell transcript end
+End time: 20260929145000
+**********************
+**********************
+PowerShell transcript start
+Start time: 20260929145036
+Username: DESKTOP-412KTAR\mzj
+RunAs User: DESKTOP-412KTAR\mzj
+Configuration Name: 
+Machine: DESKTOP-412KTAR (Microsoft Windows NT 10.0.26200.0)
+Host Application: C:\Users\mzj\.cache\codex-runtimes\codex-primary-runtime\dependencies\native\powershell\pwsh.dll -Command try { [Console]::OutputEncoding=[System.Text.Encoding]::UTF8 } catch {}
+$ErrorActionPreference='Stop'
+$root='C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\批次13_20260929\533_圣人当仁不让'
+$log=Join-Path $root '533_static_analysis_transcript.txt'
+Start-Transcript -LiteralPath $log -Append
+try {
+Write-Output 'COMMAND> Set-Content README.md to state unresolved checker ambiguity explicitly'
+@'
+# #533 圣人当仁不让
+
+批次 13 的 #533 静态分析。
+
+- 状态：未解决/程序校验歧义；未提交，平台 flag 未确定。
+- 结论：Base64 尾部填充错误，使三个不完整输入都通过附件内比较；不能由附件确定唯一、完整的平台 flag。
+- 分析没有运行未知 EXE，也没有猜测提交。
+- 完整中文 WP：wp.md
+- 原始附件和解压 PE：originals/ 与 analysis/
+- 复现脚本：analysis/static_pe.py、analysis/derive_candidate.py、analysis/inspect_tail.py
+- 完整命令及输出：533_static_analysis_transcript.txt
+- 关键证据摘要：evidence/533_static_evidence.md
+'@ | Set-Content -LiteralPath (Join-Path $root 'README.md') -Encoding UTF8
+Write-Output 'COMMAND> Get-Content README.md'
+Get-Content -LiteralPath (Join-Path $root 'README.md')
+} finally {Stop-Transcript}
+Process ID: 30436
+PSVersion: 7.6.5
+PSEdition: Core
+GitCommitId: 7.6.5
+OS: Microsoft Windows 10.0.26200
+Platform: Win32NT
+PSCompatibleVersions: 1.0, 2.0, 3.0, 4.0, 5.0, 5.1, 6.0, 7.0
+PSRemotingProtocolVersion: 2.4
+SerializationVersion: 1.1.0.1
+WSManStackVersion: 3.0
+**********************
+Transcript started, output file is C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\批次13_20260929\533_圣人当仁不让\533_static_analysis_transcript.txt
+COMMAND> Set-Content README.md to state unresolved checker ambiguity explicitly
+COMMAND> Get-Content README.md
+# #533 圣人当仁不让
+
+批次 13 的 #533 静态分析。
+
+- 状态：未解决/程序校验歧义；未提交，平台 flag 未确定。
+- 结论：Base64 尾部填充错误，使三个不完整输入都通过附件内比较；不能由附件确定唯一、完整的平台 flag。
+- 分析没有运行未知 EXE，也没有猜测提交。
+- 完整中文 WP：wp.md
+- 原始附件和解压 PE：originals/ 与 analysis/
+- 复现脚本：analysis/static_pe.py、analysis/derive_candidate.py、analysis/inspect_tail.py
+- 完整命令及输出：533_static_analysis_transcript.txt
+- 关键证据摘要：evidence/533_static_evidence.md
+**********************
+PowerShell transcript end
+End time: 20260929145036
+**********************

@@ -1,0 +1,472 @@
+===== STATE 00 -> 0x4015e2 =====
+0x4015e2: 8b45f8                   mov      eax, dword ptr [rbp - 8]
+0x4015e5: 3b45dc                   cmp      eax, dword ptr [rbp - 0x24]
+0x4015e8: 7c14                     jl       0x4015fe
+0x4015ea: 8b45f8                   mov      eax, dword ptr [rbp - 8]
+0x4015ed: 4898                     cdqe     
+0x4015ef: 488b5518                 mov      rdx, qword ptr [rbp + 0x18]
+0x4015f3: 4801d0                   add      rax, rdx
+0x4015f6: c60000                   mov      byte ptr [rax], 0
+0x4015f9: e99b0a0000               jmp      0x402099
+===== STATE 01 -> 0x4016a1 =====
+0x4016a1: 8b45f8                   mov      eax, dword ptr [rbp - 8]
+0x4016a4: 4898                     cdqe     
+0x4016a6: 488b5510                 mov      rdx, qword ptr [rbp + 0x10]
+0x4016aa: 4801d0                   add      rax, rdx
+0x4016ad: 0fb608                   movzx    ecx, byte ptr [rax]
+0x4016b0: 8b45f8                   mov      eax, dword ptr [rbp - 8]
+0x4016b3: 99                       cdq      
+0x4016b4: f77dec                   idiv     dword ptr [rbp - 0x14]
+0x4016b7: 89d0                     mov      eax, edx
+0x4016b9: 4898                     cdqe     
+0x4016bb: 488b55f0                 mov      rdx, qword ptr [rbp - 0x10]
+0x4016bf: 4801d0                   add      rax, rdx
+0x4016c2: 0fb600                   movzx    eax, byte ptr [rax]
+0x4016c5: 31c8                     xor      eax, ecx
+0x4016c7: 8845eb                   mov      byte ptr [rbp - 0x15], al
+0x4016ca: 8b45d8                   mov      eax, dword ptr [rbp - 0x28]
+0x4016cd: c1e803                   shr      eax, 3
+0x4016d0: 83e001                   and      eax, 1
+0x4016d3: 85c0                     test     eax, eax
+0x4016d5: 7557                     jne      0x40172e
+0x4016d7: 8b45d8                   mov      eax, dword ptr [rbp - 0x28]
+0x4016da: c1e804                   shr      eax, 4
+0x4016dd: 83e001                   and      eax, 1
+0x4016e0: 85c0                     test     eax, eax
+0x4016e2: 7525                     jne      0x401709
+0x4016e4: 8b45d8                   mov      eax, dword ptr [rbp - 0x28]
+0x4016e7: c1e805                   shr      eax, 5
+0x4016ea: 83e001                   and      eax, 1
+0x4016ed: 85c0                     test     eax, eax
+0x4016ef: 750c                     jne      0x4016fd
+0x4016f1: c745fc02000000           mov      dword ptr [rbp - 4], 2
+0x4016f8: e996090000               jmp      0x402093
+===== STATE 02 -> 0x401785 =====
+0x401785: 0fbe45eb                 movsx    eax, byte ptr [rbp - 0x15]
+0x401789: c1e004                   shl      eax, 4
+0x40178c: 89c2                     mov      edx, eax
+0x40178e: 0fb645eb                 movzx    eax, byte ptr [rbp - 0x15]
+0x401792: c0f804                   sar      al, 4
+0x401795: 09d0                     or       eax, edx
+0x401797: 8845eb                   mov      byte ptr [rbp - 0x15], al
+0x40179a: 8b45d8                   mov      eax, dword ptr [rbp - 0x28]
+0x40179d: c1e806                   shr      eax, 6
+0x4017a0: 83e001                   and      eax, 1
+0x4017a3: 85c0                     test     eax, eax
+0x4017a5: 7557                     jne      0x4017fe
+0x4017a7: 8b45d8                   mov      eax, dword ptr [rbp - 0x28]
+0x4017aa: c1e807                   shr      eax, 7
+0x4017ad: 83e001                   and      eax, 1
+0x4017b0: 85c0                     test     eax, eax
+0x4017b2: 7525                     jne      0x4017d9
+0x4017b4: 8b45d8                   mov      eax, dword ptr [rbp - 0x28]
+0x4017b7: c1e808                   shr      eax, 8
+0x4017ba: 83e001                   and      eax, 1
+0x4017bd: 85c0                     test     eax, eax
+0x4017bf: 750c                     jne      0x4017cd
+0x4017c1: c745fc03000000           mov      dword ptr [rbp - 4], 3
+0x4017c8: e9c6080000               jmp      0x402093
+===== STATE 03 -> 0x401855 =====
+0x401855: 0fb645eb                 movzx    eax, byte ptr [rbp - 0x15]
+0x401859: 83e855                   sub      eax, 0x55
+0x40185c: 8845eb                   mov      byte ptr [rbp - 0x15], al
+0x40185f: 8b45d8                   mov      eax, dword ptr [rbp - 0x28]
+0x401862: c1e809                   shr      eax, 9
+0x401865: 83e001                   and      eax, 1
+0x401868: 85c0                     test     eax, eax
+0x40186a: 7557                     jne      0x4018c3
+0x40186c: 8b45d8                   mov      eax, dword ptr [rbp - 0x28]
+0x40186f: c1e80a                   shr      eax, 0xa
+0x401872: 83e001                   and      eax, 1
+0x401875: 85c0                     test     eax, eax
+0x401877: 7525                     jne      0x40189e
+0x401879: 8b45d8                   mov      eax, dword ptr [rbp - 0x28]
+0x40187c: c1e80b                   shr      eax, 0xb
+0x40187f: 83e001                   and      eax, 1
+0x401882: 85c0                     test     eax, eax
+0x401884: 750c                     jne      0x401892
+0x401886: c745fc04000000           mov      dword ptr [rbp - 4], 4
+0x40188d: e901080000               jmp      0x402093
+===== STATE 04 -> 0x40191a =====
+0x40191a: f655eb                   not      byte ptr [rbp - 0x15]
+0x40191d: 8b45f8                   mov      eax, dword ptr [rbp - 8]
+0x401920: 4898                     cdqe     
+0x401922: 488b5518                 mov      rdx, qword ptr [rbp + 0x18]
+0x401926: 4801c2                   add      rdx, rax
+0x401929: 0fb645eb                 movzx    eax, byte ptr [rbp - 0x15]
+0x40192d: 8802                     mov      byte ptr [rdx], al
+0x40192f: 8345f801                 add      dword ptr [rbp - 8], 1
+0x401933: c745fc00000000           mov      dword ptr [rbp - 4], 0
+0x40193a: e954070000               jmp      0x402093
+===== STATE 05 -> 0x40193f =====
+0x40193f: 8b45f8                   mov      eax, dword ptr [rbp - 8]
+0x401942: 83e001                   and      eax, 1
+0x401945: 85c0                     test     eax, eax
+0x401947: 7510                     jne      0x401959
+0x401949: 488d45d3                 lea      rax, [rbp - 0x2d]
+0x40194d: 488945f0                 mov      qword ptr [rbp - 0x10], rax
+0x401951: 8b45e4                   mov      eax, dword ptr [rbp - 0x1c]
+0x401954: 8945ec                   mov      dword ptr [rbp - 0x14], eax
+0x401957: eb0e                     jmp      0x401967
+===== STATE 06 -> 0x4019be =====
+0x4019be: 8b45f8                   mov      eax, dword ptr [rbp - 8]
+0x4019c1: 4898                     cdqe     
+0x4019c3: 488b5510                 mov      rdx, qword ptr [rbp + 0x10]
+0x4019c7: 4801d0                   add      rax, rdx
+0x4019ca: 0fb608                   movzx    ecx, byte ptr [rax]
+0x4019cd: 8b45f8                   mov      eax, dword ptr [rbp - 8]
+0x4019d0: 99                       cdq      
+0x4019d1: f77dec                   idiv     dword ptr [rbp - 0x14]
+0x4019d4: 89d0                     mov      eax, edx
+0x4019d6: 4898                     cdqe     
+0x4019d8: 488b55f0                 mov      rdx, qword ptr [rbp - 0x10]
+0x4019dc: 4801d0                   add      rax, rdx
+0x4019df: 0fb600                   movzx    eax, byte ptr [rax]
+0x4019e2: 31c8                     xor      eax, ecx
+0x4019e4: 8845eb                   mov      byte ptr [rbp - 0x15], al
+0x4019e7: c745fc02000000           mov      dword ptr [rbp - 4], 2
+0x4019ee: e9a0060000               jmp      0x402093
+===== STATE 07 -> 0x4019f3 =====
+0x4019f3: 0fbe45eb                 movsx    eax, byte ptr [rbp - 0x15]
+0x4019f7: c1e004                   shl      eax, 4
+0x4019fa: 89c2                     mov      edx, eax
+0x4019fc: 0fb645eb                 movzx    eax, byte ptr [rbp - 0x15]
+0x401a00: c0f804                   sar      al, 4
+0x401a03: 09d0                     or       eax, edx
+0x401a05: 8845eb                   mov      byte ptr [rbp - 0x15], al
+0x401a08: c745fc03000000           mov      dword ptr [rbp - 4], 3
+0x401a0f: e97f060000               jmp      0x402093
+===== STATE 08 -> 0x401a14 =====
+0x401a14: 0fb645eb                 movzx    eax, byte ptr [rbp - 0x15]
+0x401a18: 83e855                   sub      eax, 0x55
+0x401a1b: 8845eb                   mov      byte ptr [rbp - 0x15], al
+0x401a1e: c745fc04000000           mov      dword ptr [rbp - 4], 4
+0x401a25: e969060000               jmp      0x402093
+===== STATE 09 -> 0x402098 =====
+0x402098: 90                       nop      
+0x402099: 4883c460                 add      rsp, 0x60
+0x40209d: 5d                       pop      rbp
+0x40209e: c3                       ret      
+===== STATE 10 -> 0x401a2a =====
+0x401a2a: 8b45f8                   mov      eax, dword ptr [rbp - 8]
+0x401a2d: 83e001                   and      eax, 1
+0x401a30: 85c0                     test     eax, eax
+0x401a32: 7510                     jne      0x401a44
+0x401a34: 488d45d3                 lea      rax, [rbp - 0x2d]
+0x401a38: 488945f0                 mov      qword ptr [rbp - 0x10], rax
+0x401a3c: 8b45e4                   mov      eax, dword ptr [rbp - 0x1c]
+0x401a3f: 8945ec                   mov      dword ptr [rbp - 0x14], eax
+0x401a42: eb0e                     jmp      0x401a52
+===== STATE 11 -> 0x401aa9 =====
+0x401aa9: 8b45f8                   mov      eax, dword ptr [rbp - 8]
+0x401aac: 4898                     cdqe     
+0x401aae: 488b5510                 mov      rdx, qword ptr [rbp + 0x10]
+0x401ab2: 4801d0                   add      rax, rdx
+0x401ab5: 0fb608                   movzx    ecx, byte ptr [rax]
+0x401ab8: 8b45f8                   mov      eax, dword ptr [rbp - 8]
+0x401abb: 99                       cdq      
+0x401abc: f77dec                   idiv     dword ptr [rbp - 0x14]
+0x401abf: 89d0                     mov      eax, edx
+0x401ac1: 4898                     cdqe     
+0x401ac3: 488b55f0                 mov      rdx, qword ptr [rbp - 0x10]
+0x401ac7: 4801d0                   add      rax, rdx
+0x401aca: 0fb600                   movzx    eax, byte ptr [rax]
+0x401acd: 31c8                     xor      eax, ecx
+0x401acf: 8845eb                   mov      byte ptr [rbp - 0x15], al
+0x401ad2: c745fc02000000           mov      dword ptr [rbp - 4], 2
+0x401ad9: e9b5050000               jmp      0x402093
+===== STATE 12 -> 0x401ade =====
+0x401ade: 8b45f8                   mov      eax, dword ptr [rbp - 8]
+0x401ae1: 4898                     cdqe     
+0x401ae3: 488b5510                 mov      rdx, qword ptr [rbp + 0x10]
+0x401ae7: 4801d0                   add      rax, rdx
+0x401aea: 0fb608                   movzx    ecx, byte ptr [rax]
+0x401aed: 8b45f8                   mov      eax, dword ptr [rbp - 8]
+0x401af0: 99                       cdq      
+0x401af1: f77dec                   idiv     dword ptr [rbp - 0x14]
+0x401af4: 89d0                     mov      eax, edx
+0x401af6: 4898                     cdqe     
+0x401af8: 488b55f0                 mov      rdx, qword ptr [rbp - 0x10]
+0x401afc: 4801d0                   add      rax, rdx
+0x401aff: 0fb600                   movzx    eax, byte ptr [rax]
+0x401b02: 31c8                     xor      eax, ecx
+0x401b04: 8845eb                   mov      byte ptr [rbp - 0x15], al
+0x401b07: 8b45d8                   mov      eax, dword ptr [rbp - 0x28]
+0x401b0a: c1e80e                   shr      eax, 0xe
+0x401b0d: 83e001                   and      eax, 1
+0x401b10: 85c0                     test     eax, eax
+0x401b12: 750c                     jne      0x401b20
+0x401b14: c745fc02000000           mov      dword ptr [rbp - 4], 2
+0x401b1b: e973050000               jmp      0x402093
+===== STATE 13 -> 0x402098 =====
+0x402098: 90                       nop      
+0x402099: 4883c460                 add      rsp, 0x60
+0x40209d: 5d                       pop      rbp
+0x40209e: c3                       ret      
+===== STATE 14 -> 0x402098 =====
+0x402098: 90                       nop      
+0x402099: 4883c460                 add      rsp, 0x60
+0x40209d: 5d                       pop      rbp
+0x40209e: c3                       ret      
+===== STATE 15 -> 0x401b77 =====
+0x401b77: 8b45f8                   mov      eax, dword ptr [rbp - 8]
+0x401b7a: 83e001                   and      eax, 1
+0x401b7d: 85c0                     test     eax, eax
+0x401b7f: 7510                     jne      0x401b91
+0x401b81: 488d45d3                 lea      rax, [rbp - 0x2d]
+0x401b85: 488945f0                 mov      qword ptr [rbp - 0x10], rax
+0x401b89: 8b45e4                   mov      eax, dword ptr [rbp - 0x1c]
+0x401b8c: 8945ec                   mov      dword ptr [rbp - 0x14], eax
+0x401b8f: eb0e                     jmp      0x401b9f
+===== STATE 16 -> 0x402098 =====
+0x402098: 90                       nop      
+0x402099: 4883c460                 add      rsp, 0x60
+0x40209d: 5d                       pop      rbp
+0x40209e: c3                       ret      
+===== STATE 17 -> 0x402098 =====
+0x402098: 90                       nop      
+0x402099: 4883c460                 add      rsp, 0x60
+0x40209d: 5d                       pop      rbp
+0x40209e: c3                       ret      
+===== STATE 18 -> 0x402098 =====
+0x402098: 90                       nop      
+0x402099: 4883c460                 add      rsp, 0x60
+0x40209d: 5d                       pop      rbp
+0x40209e: c3                       ret      
+===== STATE 19 -> 0x402098 =====
+0x402098: 90                       nop      
+0x402099: 4883c460                 add      rsp, 0x60
+0x40209d: 5d                       pop      rbp
+0x40209e: c3                       ret      
+===== STATE 20 -> 0x401bf6 =====
+0x401bf6: 8b45f8                   mov      eax, dword ptr [rbp - 8]
+0x401bf9: 4898                     cdqe     
+0x401bfb: 488b5510                 mov      rdx, qword ptr [rbp + 0x10]
+0x401bff: 4801d0                   add      rax, rdx
+0x401c02: 0fb608                   movzx    ecx, byte ptr [rax]
+0x401c05: 8b45f8                   mov      eax, dword ptr [rbp - 8]
+0x401c08: 99                       cdq      
+0x401c09: f77dec                   idiv     dword ptr [rbp - 0x14]
+0x401c0c: 89d0                     mov      eax, edx
+0x401c0e: 4898                     cdqe     
+0x401c10: 488b55f0                 mov      rdx, qword ptr [rbp - 0x10]
+0x401c14: 4801d0                   add      rax, rdx
+0x401c17: 0fb600                   movzx    eax, byte ptr [rax]
+0x401c1a: 31c8                     xor      eax, ecx
+0x401c1c: 8845eb                   mov      byte ptr [rbp - 0x15], al
+0x401c1f: 8b45d8                   mov      eax, dword ptr [rbp - 0x28]
+0x401c22: c1e810                   shr      eax, 0x10
+0x401c25: 83e001                   and      eax, 1
+0x401c28: 85c0                     test     eax, eax
+0x401c2a: 750c                     jne      0x401c38
+0x401c2c: c745fc02000000           mov      dword ptr [rbp - 4], 2
+0x401c33: e95b040000               jmp      0x402093
+===== STATE 21 -> 0x401c8f =====
+0x401c8f: 0fbe45eb                 movsx    eax, byte ptr [rbp - 0x15]
+0x401c93: c1e004                   shl      eax, 4
+0x401c96: 89c2                     mov      edx, eax
+0x401c98: 0fb645eb                 movzx    eax, byte ptr [rbp - 0x15]
+0x401c9c: c0f804                   sar      al, 4
+0x401c9f: 09d0                     or       eax, edx
+0x401ca1: 8845eb                   mov      byte ptr [rbp - 0x15], al
+0x401ca4: 8b45d8                   mov      eax, dword ptr [rbp - 0x28]
+0x401ca7: c1e811                   shr      eax, 0x11
+0x401caa: 83e001                   and      eax, 1
+0x401cad: 85c0                     test     eax, eax
+0x401caf: 750c                     jne      0x401cbd
+0x401cb1: c745fc03000000           mov      dword ptr [rbp - 4], 3
+0x401cb8: e9d6030000               jmp      0x402093
+===== STATE 22 -> 0x401d14 =====
+0x401d14: 0fbe45eb                 movsx    eax, byte ptr [rbp - 0x15]
+0x401d18: c1e004                   shl      eax, 4
+0x401d1b: 89c2                     mov      edx, eax
+0x401d1d: 0fb645eb                 movzx    eax, byte ptr [rbp - 0x15]
+0x401d21: c0f804                   sar      al, 4
+0x401d24: 09d0                     or       eax, edx
+0x401d26: 8845eb                   mov      byte ptr [rbp - 0x15], al
+0x401d29: c745fc03000000           mov      dword ptr [rbp - 4], 3
+0x401d30: e95e030000               jmp      0x402093
+===== STATE 23 -> 0x402098 =====
+0x402098: 90                       nop      
+0x402099: 4883c460                 add      rsp, 0x60
+0x40209d: 5d                       pop      rbp
+0x40209e: c3                       ret      
+===== STATE 24 -> 0x402098 =====
+0x402098: 90                       nop      
+0x402099: 4883c460                 add      rsp, 0x60
+0x40209d: 5d                       pop      rbp
+0x40209e: c3                       ret      
+===== STATE 25 -> 0x401d35 =====
+0x401d35: 8b45f8                   mov      eax, dword ptr [rbp - 8]
+0x401d38: 4898                     cdqe     
+0x401d3a: 488b5510                 mov      rdx, qword ptr [rbp + 0x10]
+0x401d3e: 4801d0                   add      rax, rdx
+0x401d41: 0fb608                   movzx    ecx, byte ptr [rax]
+0x401d44: 8b45f8                   mov      eax, dword ptr [rbp - 8]
+0x401d47: 99                       cdq      
+0x401d48: f77dec                   idiv     dword ptr [rbp - 0x14]
+0x401d4b: 89d0                     mov      eax, edx
+0x401d4d: 4898                     cdqe     
+0x401d4f: 488b55f0                 mov      rdx, qword ptr [rbp - 0x10]
+0x401d53: 4801d0                   add      rax, rdx
+0x401d56: 0fb600                   movzx    eax, byte ptr [rax]
+0x401d59: 31c8                     xor      eax, ecx
+0x401d5b: 8845eb                   mov      byte ptr [rbp - 0x15], al
+0x401d5e: 8b45d8                   mov      eax, dword ptr [rbp - 0x28]
+0x401d61: c1e812                   shr      eax, 0x12
+0x401d64: 83e001                   and      eax, 1
+0x401d67: 85c0                     test     eax, eax
+0x401d69: 750c                     jne      0x401d77
+0x401d6b: c745fc02000000           mov      dword ptr [rbp - 4], 2
+0x401d72: e91c030000               jmp      0x402093
+===== STATE 26 -> 0x402098 =====
+0x402098: 90                       nop      
+0x402099: 4883c460                 add      rsp, 0x60
+0x40209d: 5d                       pop      rbp
+0x40209e: c3                       ret      
+===== STATE 27 -> 0x402098 =====
+0x402098: 90                       nop      
+0x402099: 4883c460                 add      rsp, 0x60
+0x40209d: 5d                       pop      rbp
+0x40209e: c3                       ret      
+===== STATE 28 -> 0x402098 =====
+0x402098: 90                       nop      
+0x402099: 4883c460                 add      rsp, 0x60
+0x40209d: 5d                       pop      rbp
+0x40209e: c3                       ret      
+===== STATE 29 -> 0x402098 =====
+0x402098: 90                       nop      
+0x402099: 4883c460                 add      rsp, 0x60
+0x40209d: 5d                       pop      rbp
+0x40209e: c3                       ret      
+===== STATE 30 -> 0x401dce =====
+0x401dce: 0fbe45eb                 movsx    eax, byte ptr [rbp - 0x15]
+0x401dd2: c1e004                   shl      eax, 4
+0x401dd5: 89c2                     mov      edx, eax
+0x401dd7: 0fb645eb                 movzx    eax, byte ptr [rbp - 0x15]
+0x401ddb: c0f804                   sar      al, 4
+0x401dde: 09d0                     or       eax, edx
+0x401de0: 8845eb                   mov      byte ptr [rbp - 0x15], al
+0x401de3: 8b45d8                   mov      eax, dword ptr [rbp - 0x28]
+0x401de6: c1e813                   shr      eax, 0x13
+0x401de9: 83e001                   and      eax, 1
+0x401dec: 85c0                     test     eax, eax
+0x401dee: 750c                     jne      0x401dfc
+0x401df0: c745fc03000000           mov      dword ptr [rbp - 4], 3
+0x401df7: e997020000               jmp      0x402093
+===== STATE 31 -> 0x401e53 =====
+0x401e53: 0fb645eb                 movzx    eax, byte ptr [rbp - 0x15]
+0x401e57: 83e855                   sub      eax, 0x55
+0x401e5a: 8845eb                   mov      byte ptr [rbp - 0x15], al
+0x401e5d: 8b45d8                   mov      eax, dword ptr [rbp - 0x28]
+0x401e60: c1e814                   shr      eax, 0x14
+0x401e63: 83e001                   and      eax, 1
+0x401e66: 85c0                     test     eax, eax
+0x401e68: 750c                     jne      0x401e76
+0x401e6a: c745fc04000000           mov      dword ptr [rbp - 4], 4
+0x401e71: e91d020000               jmp      0x402093
+===== STATE 32 -> 0x401ecd =====
+0x401ecd: 0fb645eb                 movzx    eax, byte ptr [rbp - 0x15]
+0x401ed1: 83e855                   sub      eax, 0x55
+0x401ed4: 8845eb                   mov      byte ptr [rbp - 0x15], al
+0x401ed7: c745fc04000000           mov      dword ptr [rbp - 4], 4
+0x401ede: e9b0010000               jmp      0x402093
+===== STATE 33 -> 0x402098 =====
+0x402098: 90                       nop      
+0x402099: 4883c460                 add      rsp, 0x60
+0x40209d: 5d                       pop      rbp
+0x40209e: c3                       ret      
+===== STATE 34 -> 0x402098 =====
+0x402098: 90                       nop      
+0x402099: 4883c460                 add      rsp, 0x60
+0x40209d: 5d                       pop      rbp
+0x40209e: c3                       ret      
+===== STATE 35 -> 0x401ee3 =====
+0x401ee3: 0fbe45eb                 movsx    eax, byte ptr [rbp - 0x15]
+0x401ee7: c1e004                   shl      eax, 4
+0x401eea: 89c2                     mov      edx, eax
+0x401eec: 0fb645eb                 movzx    eax, byte ptr [rbp - 0x15]
+0x401ef0: c0f804                   sar      al, 4
+0x401ef3: 09d0                     or       eax, edx
+0x401ef5: 8845eb                   mov      byte ptr [rbp - 0x15], al
+0x401ef8: 8b45d8                   mov      eax, dword ptr [rbp - 0x28]
+0x401efb: c1e815                   shr      eax, 0x15
+0x401efe: 83e001                   and      eax, 1
+0x401f01: 85c0                     test     eax, eax
+0x401f03: 750c                     jne      0x401f11
+0x401f05: c745fc03000000           mov      dword ptr [rbp - 4], 3
+0x401f0c: e982010000               jmp      0x402093
+===== STATE 36 -> 0x402098 =====
+0x402098: 90                       nop      
+0x402099: 4883c460                 add      rsp, 0x60
+0x40209d: 5d                       pop      rbp
+0x40209e: c3                       ret      
+===== STATE 37 -> 0x402098 =====
+0x402098: 90                       nop      
+0x402099: 4883c460                 add      rsp, 0x60
+0x40209d: 5d                       pop      rbp
+0x40209e: c3                       ret      
+===== STATE 38 -> 0x402098 =====
+0x402098: 90                       nop      
+0x402099: 4883c460                 add      rsp, 0x60
+0x40209d: 5d                       pop      rbp
+0x40209e: c3                       ret      
+===== STATE 39 -> 0x402098 =====
+0x402098: 90                       nop      
+0x402099: 4883c460                 add      rsp, 0x60
+0x40209d: 5d                       pop      rbp
+0x40209e: c3                       ret      
+===== STATE 40 -> 0x401f68 =====
+0x401f68: 0fb645eb                 movzx    eax, byte ptr [rbp - 0x15]
+0x401f6c: 83e855                   sub      eax, 0x55
+0x401f6f: 8845eb                   mov      byte ptr [rbp - 0x15], al
+0x401f72: 8b45d8                   mov      eax, dword ptr [rbp - 0x28]
+0x401f75: c1e816                   shr      eax, 0x16
+0x401f78: 83e001                   and      eax, 1
+0x401f7b: 85c0                     test     eax, eax
+0x401f7d: 750c                     jne      0x401f8b
+0x401f7f: c745fc04000000           mov      dword ptr [rbp - 4], 4
+0x401f86: e908010000               jmp      0x402093
+===== STATE 41 -> 0x401fe2 =====
+0x401fe2: f655eb                   not      byte ptr [rbp - 0x15]
+0x401fe5: 8b45f8                   mov      eax, dword ptr [rbp - 8]
+0x401fe8: 4898                     cdqe     
+0x401fea: 488b5518                 mov      rdx, qword ptr [rbp + 0x18]
+0x401fee: 4801c2                   add      rdx, rax
+0x401ff1: 0fb645eb                 movzx    eax, byte ptr [rbp - 0x15]
+0x401ff5: 8802                     mov      byte ptr [rdx], al
+0x401ff7: 8345f801                 add      dword ptr [rbp - 8], 1
+0x401ffb: c745fc00000000           mov      dword ptr [rbp - 4], 0
+0x402002: e98c000000               jmp      0x402093
+===== STATE 42 -> 0x402007 =====
+0x402007: f655eb                   not      byte ptr [rbp - 0x15]
+0x40200a: 8b45f8                   mov      eax, dword ptr [rbp - 8]
+0x40200d: 4898                     cdqe     
+0x40200f: 488b5518                 mov      rdx, qword ptr [rbp + 0x18]
+0x402013: 4801c2                   add      rdx, rax
+0x402016: 0fb645eb                 movzx    eax, byte ptr [rbp - 0x15]
+0x40201a: 8802                     mov      byte ptr [rdx], al
+0x40201c: 8345f801                 add      dword ptr [rbp - 8], 1
+0x402020: c745fc00000000           mov      dword ptr [rbp - 4], 0
+0x402027: eb6a                     jmp      0x402093
+===== STATE 43 -> 0x402098 =====
+0x402098: 90                       nop      
+0x402099: 4883c460                 add      rsp, 0x60
+0x40209d: 5d                       pop      rbp
+0x40209e: c3                       ret      
+===== STATE 44 -> 0x402098 =====
+0x402098: 90                       nop      
+0x402099: 4883c460                 add      rsp, 0x60
+0x40209d: 5d                       pop      rbp
+0x40209e: c3                       ret      
+===== STATE 45 -> 0x402029 =====
+0x402029: 0fb645eb                 movzx    eax, byte ptr [rbp - 0x15]
+0x40202d: 83e855                   sub      eax, 0x55
+0x402030: 8845eb                   mov      byte ptr [rbp - 0x15], al
+0x402033: 8b45d8                   mov      eax, dword ptr [rbp - 0x28]
+0x402036: c1e817                   shr      eax, 0x17
+0x402039: 83e001                   and      eax, 1
+0x40203c: 85c0                     test     eax, eax
+0x40203e: 7509                     jne      0x402049
+0x402040: c745fc04000000           mov      dword ptr [rbp - 4], 4
+0x402047: eb49                     jmp      0x402092

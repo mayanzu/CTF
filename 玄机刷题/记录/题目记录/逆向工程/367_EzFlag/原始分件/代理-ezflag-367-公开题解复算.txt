@@ -1,0 +1,455 @@
+**********************
+PowerShell transcript start
+Start time: 20260928232618
+Username: DESKTOP-412KTAR\mzj
+RunAs User: DESKTOP-412KTAR\mzj
+Configuration Name: 
+Machine: DESKTOP-412KTAR (Microsoft Windows NT 10.0.26200.0)
+Host Application: C:\Users\mzj\.cache\codex-runtimes\codex-primary-runtime\dependencies\native\powershell\pwsh.dll -Command try { [Console]::OutputEncoding=[System.Text.Encoding]::UTF8 } catch {}
+$log='C:\Users\mzj\Desktop\CTF\记录\代理-ezflag-367-公开题解复算.txt'; Start-Transcript -LiteralPath $log -Force; Write-Output '题目：玄机 #367 EzFlag；复算依据：公开二进制分析题解所给算法，不代表平台提交回执。'; $py=@'
+K = "012ab9c3478d56ef"
+mask = (1 << 64) - 1
+fib = [0, 1]
+for _ in range(22):
+    fib.append((fib[-1] + fib[-2]) & 0xF)
+print("Fibonacci mod 16, indices 0..23:", fib)
+v = 1
+chars = []
+rows = []
+for i in range(32):
+    j = v % 24
+    f = fib[j]
+    c = K[f]
+    chars.append(c)
+    rows.append((i, v, j, f, c))
+    v = (v * 8 + i + 64) & mask
+print("i | seed_before | seed%24 | fib_mod16 | K[index]")
+for row in rows:
+    print("%2d | %20d | %7d | %9d | %s" % row)
+content = ""
+for i, row in enumerate(rows):
+    content += row[-1]
+    if i in (7, 12, 17, 22):
+        content += "-"
+print("flag: flag{%s}" % content)
+'@; Write-Output 'COMMAND> python -c [inline recurrence solver]'; python -c $py; Write-Output "EXITCODE> $LASTEXITCODE"; Stop-Transcript
+Process ID: 22464
+PSVersion: 7.6.5
+PSEdition: Core
+GitCommitId: 7.6.5
+OS: Microsoft Windows 10.0.26200
+Platform: Win32NT
+PSCompatibleVersions: 1.0, 2.0, 3.0, 4.0, 5.0, 5.1, 6.0, 7.0
+PSRemotingProtocolVersion: 2.4
+SerializationVersion: 1.1.0.1
+WSManStackVersion: 3.0
+**********************
+Transcript started, output file is C:\Users\mzj\Desktop\CTF\记录\代理-ezflag-367-公开题解复算.txt
+题目：玄机 #367 EzFlag；复算依据：公开二进制分析题解所给算法，不代表平台提交回执。
+COMMAND> python -c [inline recurrence solver]
+
+EXITCODE> 0
+**********************
+PowerShell transcript end
+End time: 20260928232619
+**********************
+**********************
+PowerShell transcript start
+Start time: 20260928232815
+Username: DESKTOP-412KTAR\mzj
+RunAs User: DESKTOP-412KTAR\mzj
+Configuration Name: 
+Machine: DESKTOP-412KTAR (Microsoft Windows NT 10.0.26200.0)
+Host Application: C:\Users\mzj\.cache\codex-runtimes\codex-primary-runtime\dependencies\native\powershell\pwsh.dll -Command try { [Console]::OutputEncoding=[System.Text.Encoding]::UTF8 } catch {}
+$log='C:\Users\mzj\Desktop\CTF\记录\代理-ezflag-367-公开题解复算.txt'; Start-Transcript -Path $log -Append; $uri='https://api.github.com/repos/CTF-Archives/2025-CCB-CISCN-Quals/releases/tags/attachments'; $asset=(Invoke-RestMethod -Uri $uri -Headers @{ 'User-Agent'='Codex-CTF-Research' }).assets[0]; Write-Output "COMMAND> public asset metadata via $uri"; Write-Output "ASSET> $($asset.name), size=$($asset.size), URL=$($asset.browser_download_url)"; $dest='D:\Downloads\2025-CCB-CISCN-Quals-attachments.zip'; Write-Output "COMMAND> Invoke-WebRequest -Uri <public release asset> -OutFile '$dest'"; Invoke-WebRequest -Uri $asset.browser_download_url -OutFile $dest; Get-Item -LiteralPath $dest | Select-Object FullName,Length,LastWriteTime; Stop-Transcript
+Process ID: 15848
+PSVersion: 7.6.5
+PSEdition: Core
+GitCommitId: 7.6.5
+OS: Microsoft Windows 10.0.26200
+Platform: Win32NT
+PSCompatibleVersions: 1.0, 2.0, 3.0, 4.0, 5.0, 5.1, 6.0, 7.0
+PSRemotingProtocolVersion: 2.4
+SerializationVersion: 1.1.0.1
+WSManStackVersion: 3.0
+**********************
+Transcript started, output file is C:\Users\mzj\Desktop\CTF\记录\代理-ezflag-367-公开题解复算.txt
+COMMAND> public asset metadata via https://api.github.com/repos/CTF-Archives/2025-CCB-CISCN-Quals/releases/tags/attachments
+ASSET> attachments.zip, size=81641704, URL=https://github.com/CTF-Archives/2025-CCB-CISCN-Quals/releases/download/attachments/attachments.zip
+COMMAND> Invoke-WebRequest -Uri <public release asset> -OutFile 'D:\Downloads\2025-CCB-CISCN-Quals-attachments.zip'
+
+**********************
+PowerShell transcript end
+End time: 20260928232831
+**********************
+**********************
+PowerShell transcript start
+Start time: 20260928232840
+Username: DESKTOP-412KTAR\mzj
+RunAs User: DESKTOP-412KTAR\mzj
+Configuration Name: 
+Machine: DESKTOP-412KTAR (Microsoft Windows NT 10.0.26200.0)
+Host Application: C:\Users\mzj\.cache\codex-runtimes\codex-primary-runtime\dependencies\native\powershell\pwsh.dll -Command try { [Console]::OutputEncoding=[System.Text.Encoding]::UTF8 } catch {}
+$log='C:\Users\mzj\Desktop\CTF\记录\代理-ezflag-367-公开题解复算.txt'; Start-Transcript -Path $log -Append; Add-Type -AssemblyName System.IO.Compression.FileSystem; $zip='D:\Downloads\2025-CCB-CISCN-Quals-attachments.zip'; Write-Output "COMMAND> [IO.Compression.ZipFile]::OpenRead('$zip') entries | Where FullName -match EzFlag"; $archive=[IO.Compression.ZipFile]::OpenRead($zip); $matches=$archive.Entries | Where-Object { $_.FullName -match '(?i)ez.?flag' }; $matches | Select-Object FullName,Length,CompressedLength | Format-Table -AutoSize; $archive.Dispose(); Stop-Transcript
+Process ID: 6392
+PSVersion: 7.6.5
+PSEdition: Core
+GitCommitId: 7.6.5
+OS: Microsoft Windows 10.0.26200
+Platform: Win32NT
+PSCompatibleVersions: 1.0, 2.0, 3.0, 4.0, 5.0, 5.1, 6.0, 7.0
+PSRemotingProtocolVersion: 2.4
+SerializationVersion: 1.1.0.1
+WSManStackVersion: 3.0
+**********************
+Transcript started, output file is C:\Users\mzj\Desktop\CTF\记录\代理-ezflag-367-公开题解复算.txt
+COMMAND> [IO.Compression.ZipFile]::OpenRead('D:\Downloads\2025-CCB-CISCN-Quals-attachments.zip') entries | Where FullName -match EzFlag
+
+FullName         Length CompressedLength
+--------         ------ ----------------
+����ѧ-EzFlag.zip   5589             5589
+
+**********************
+PowerShell transcript end
+End time: 20260928232840
+**********************
+**********************
+PowerShell transcript start
+Start time: 20260928232907
+Username: DESKTOP-412KTAR\mzj
+RunAs User: DESKTOP-412KTAR\mzj
+Configuration Name: 
+Machine: DESKTOP-412KTAR (Microsoft Windows NT 10.0.26200.0)
+Host Application: C:\Users\mzj\.cache\codex-runtimes\codex-primary-runtime\dependencies\native\powershell\pwsh.dll -Command try { [Console]::OutputEncoding=[System.Text.Encoding]::UTF8 } catch {}
+$log='C:\Users\mzj\Desktop\CTF\记录\代理-ezflag-367-公开题解复算.txt'; Start-Transcript -Path $log -Append; Add-Type -AssemblyName System.IO.Compression.FileSystem; $outer='D:\Downloads\2025-CCB-CISCN-Quals-attachments.zip'; $dir='C:\Users\mzj\Desktop\CTF\labs\platform\attachments\367-ezflag'; New-Item -ItemType Directory -Path $dir -Force | Out-Null; $archive=[IO.Compression.ZipFile]::OpenRead($outer); $entry=$archive.Entries | Where-Object { $_.FullName -match '(?i)ez.?flag\.zip$' } | Select-Object -First 1; $dest=Join-Path $dir 'EzFlag.zip'; Write-Output "COMMAND> extract selected public archive entry to '$dest'"; $input=$entry.Open(); $output=[IO.File]::Create($dest); $input.CopyTo($output); $output.Dispose(); $input.Dispose(); $archive.Dispose(); Get-Item -LiteralPath $dest | Select-Object FullName,Length; Write-Output "COMMAND> list nested archive entries"; $nested=[IO.Compression.ZipFile]::OpenRead($dest); $nested.Entries | Select-Object FullName,Length,CompressedLength | Format-Table -AutoSize; $nested.Dispose(); Stop-Transcript
+Process ID: 24676
+PSVersion: 7.6.5
+PSEdition: Core
+GitCommitId: 7.6.5
+OS: Microsoft Windows 10.0.26200
+Platform: Win32NT
+PSCompatibleVersions: 1.0, 2.0, 3.0, 4.0, 5.0, 5.1, 6.0, 7.0
+PSRemotingProtocolVersion: 2.4
+SerializationVersion: 1.1.0.1
+WSManStackVersion: 3.0
+**********************
+Transcript started, output file is C:\Users\mzj\Desktop\CTF\记录\代理-ezflag-367-公开题解复算.txt
+COMMAND> extract selected public archive entry to 'C:\Users\mzj\Desktop\CTF\labs\platform\attachments\367-ezflag\EzFlag.zip'
+
+FullName                                                                 Length
+--------                                                                 ------
+C:\Users\mzj\Desktop\CTF\labs\platform\attachments\367-ezflag\EzFlag.zip   5589
+COMMAND> list nested archive entries
+
+
+FullName Length CompressedLength
+-------- ------ ----------------
+EzFlag    20640             5427
+
+**********************
+PowerShell transcript end
+End time: 20260928232907
+**********************
+**********************
+PowerShell transcript start
+Start time: 20260928232932
+Username: DESKTOP-412KTAR\mzj
+RunAs User: DESKTOP-412KTAR\mzj
+Configuration Name: 
+Machine: DESKTOP-412KTAR (Microsoft Windows NT 10.0.26200.0)
+Host Application: C:\Users\mzj\.cache\codex-runtimes\codex-primary-runtime\dependencies\native\powershell\pwsh.dll -Command try { [Console]::OutputEncoding=[System.Text.Encoding]::UTF8 } catch {}
+$log='C:\Users\mzj\Desktop\CTF\记录\代理-ezflag-367-公开题解复算.txt'; Start-Transcript -Path $log -Append; Add-Type -AssemblyName System.IO.Compression.FileSystem; $zip=[IO.Compression.ZipFile]::OpenRead('C:\Users\mzj\Desktop\CTF\labs\platform\attachments\367-ezflag\EzFlag.zip'); $entry=$zip.GetEntry('EzFlag'); $bin='C:\Users\mzj\Desktop\CTF\labs\platform\attachments\367-ezflag\EzFlag'; $stream=$entry.Open(); $out=[IO.File]::Create($bin); $stream.CopyTo($out); $out.Dispose(); $stream.Dispose(); $zip.Dispose(); Write-Output "COMMAND> Get-FileHash '$bin' -Algorithm SHA256"; Get-FileHash -LiteralPath $bin -Algorithm SHA256 | Format-List; Write-Output 'COMMAND> objdump -f -h EzFlag'; objdump -f -h $bin; Write-Output 'COMMAND> strings -a EzFlag | Select-String -Pattern password|012ab9c3478d56ef'; strings -a $bin | Select-String -Pattern 'password|012ab9c3478d56ef'; Stop-Transcript
+Process ID: 29628
+PSVersion: 7.6.5
+PSEdition: Core
+GitCommitId: 7.6.5
+OS: Microsoft Windows 10.0.26200
+Platform: Win32NT
+PSCompatibleVersions: 1.0, 2.0, 3.0, 4.0, 5.0, 5.1, 6.0, 7.0
+PSRemotingProtocolVersion: 2.4
+SerializationVersion: 1.1.0.1
+WSManStackVersion: 3.0
+**********************
+Transcript started, output file is C:\Users\mzj\Desktop\CTF\记录\代理-ezflag-367-公开题解复算.txt
+COMMAND> Get-FileHash 'C:\Users\mzj\Desktop\CTF\labs\platform\attachments\367-ezflag\EzFlag' -Algorithm SHA256
+
+Algorithm : SHA256
+Hash      : 7BBD540A5B7E688D57EFD7F1175368FA9F934F3C83A1E6262457B870BD0B5996
+Path      : C:\Users\mzj\Desktop\CTF\labs\platform\attachments\367-ezflag\EzFlag
+
+COMMAND> objdump -f -h EzFlag
+
+COMMAND> strings -a EzFlag | Select-String -Pattern password|012ab9c3478d56ef
+
+Enter password:
+Wrong password!
+012ab9c3478d56ef
+**********************
+PowerShell transcript end
+End time: 20260928232932
+**********************
+**********************
+PowerShell transcript start
+Start time: 20260928232946
+Username: DESKTOP-412KTAR\mzj
+RunAs User: DESKTOP-412KTAR\mzj
+Configuration Name: 
+Machine: DESKTOP-412KTAR (Microsoft Windows NT 10.0.26200.0)
+Host Application: C:\Users\mzj\.cache\codex-runtimes\codex-primary-runtime\dependencies\native\powershell\pwsh.dll -Command try { [Console]::OutputEncoding=[System.Text.Encoding]::UTF8 } catch {}
+$log='C:\Users\mzj\Desktop\CTF\记录\代理-ezflag-367-公开题解复算.txt'; Start-Transcript -Path $log -Append; $bin='C:\Users\mzj\Desktop\CTF\labs\platform\attachments\367-ezflag\EzFlag'; Write-Output 'COMMAND> objdump -t -C EzFlag'; objdump -t -C $bin | Select-String -Pattern ' f\(|main|Fib|GLOBAL'; Write-Output 'COMMAND> objdump -d -Mintel -C EzFlag | Select-String around main/f'; objdump -d -Mintel -C $bin | Select-String -Pattern '<main>|<f\(' -Context 0,65; Stop-Transcript
+Process ID: 1020
+PSVersion: 7.6.5
+PSEdition: Core
+GitCommitId: 7.6.5
+OS: Microsoft Windows 10.0.26200
+Platform: Win32NT
+PSCompatibleVersions: 1.0, 2.0, 3.0, 4.0, 5.0, 5.1, 6.0, 7.0
+PSRemotingProtocolVersion: 2.4
+SerializationVersion: 1.1.0.1
+WSManStackVersion: 3.0
+**********************
+Transcript started, output file is C:\Users\mzj\Desktop\CTF\记录\代理-ezflag-367-公开题解复算.txt
+COMMAND> objdump -t -C EzFlag
+
+00000000000011e0 l     F .text	0000000000000000              __do_global_dtors_aux
+0000000000003da8 l     O .fini_array	0000000000000000              __do_global_dtors_aux_fini_array_entry
+0000000000001508 l     F .text	000000000000000b              _GLOBAL__sub_I__Z1fy
+0000000000003fe8 l     O .got.plt	0000000000000000              _GLOBAL_OFFSET_TABLE_
+000000000000129b g     F .text	00000000000001e7              main
+0000000000000000       F *UND*	0000000000000000              __libc_start_main@GLIBC_2.34
+0000000000001229 g     F .text	0000000000000072              f(unsigned long long)
+COMMAND> objdump -d -Mintel -C EzFlag | Select-String around main/f
+>     1154:	48 8d 3d 40 01 00 00 	lea    rdi,[rip+0x140]        # 129b <main>
+      115b:	ff 15 67 2e 00 00    	call   QWORD PTR [rip+0x2e67]        # 3fc8 <__libc_start_main@GLIBC_2.34>
+      1161:	f4                   	hlt
+      1162:	66 2e 0f 1f 84 00 00 	cs nop WORD PTR [rax+rax*1+0x0]
+      1169:	00 00 00
+      116c:	0f 1f 40 00          	nop    DWORD PTR [rax+0x0]
+
+  0000000000001170 <deregister_tm_clones>:
+      1170:	48 8d 3d 21 2f 00 00 	lea    rdi,[rip+0x2f21]        # 4098 <__TMC_END__>
+      1177:	48 8d 05 1a 2f 00 00 	lea    rax,[rip+0x2f1a]        # 4098 <__TMC_END__>
+      117e:	48 39 f8             	cmp    rax,rdi
+      1181:	74 15                	je     1198 <deregister_tm_clones+0x28>
+      1183:	48 8b 05 46 2e 00 00 	mov    rax,QWORD PTR [rip+0x2e46]        # 3fd0 <_ITM_deregisterTMCloneTable@Base>
+      118a:	48 85 c0             	test   rax,rax
+      118d:	74 09                	je     1198 <deregister_tm_clones+0x28>
+      118f:	ff e0                	jmp    rax
+      1191:	0f 1f 80 00 00 00 00 	nop    DWORD PTR [rax+0x0]
+      1198:	c3                   	ret
+      1199:	0f 1f 80 00 00 00 00 	nop    DWORD PTR [rax+0x0]
+
+  00000000000011a0 <register_tm_clones>:
+      11a0:	48 8d 3d f1 2e 00 00 	lea    rdi,[rip+0x2ef1]        # 4098 <__TMC_END__>
+      11a7:	48 8d 35 ea 2e 00 00 	lea    rsi,[rip+0x2eea]        # 4098 <__TMC_END__>
+      11ae:	48 29 fe             	sub    rsi,rdi
+      11b1:	48 89 f0             	mov    rax,rsi
+      11b4:	48 c1 ee 3f          	shr    rsi,0x3f
+      11b8:	48 c1 f8 03          	sar    rax,0x3
+      11bc:	48 01 c6             	add    rsi,rax
+      11bf:	48 d1 fe             	sar    rsi,1
+      11c2:	74 14                	je     11d8 <register_tm_clones+0x38>
+      11c4:	48 8b 05 15 2e 00 00 	mov    rax,QWORD PTR [rip+0x2e15]        # 3fe0 <_ITM_registerTMCloneTable@Base>
+      11cb:	48 85 c0             	test   rax,rax
+      11ce:	74 08                	je     11d8 <register_tm_clones+0x38>
+      11d0:	ff e0                	jmp    rax
+      11d2:	66 0f 1f 44 00 00    	nop    WORD PTR [rax+rax*1+0x0]
+      11d8:	c3                   	ret
+      11d9:	0f 1f 80 00 00 00 00 	nop    DWORD PTR [rax+0x0]
+
+  00000000000011e0 <__do_global_dtors_aux>:
+      11e0:	f3 0f 1e fa          	endbr64
+      11e4:	80 3d 0d 31 00 00 00 	cmp    BYTE PTR [rip+0x310d],0x0        # 42f8 <completed.0>
+      11eb:	75 2b                	jne    1218 <__do_global_dtors_aux+0x38>
+      11ed:	55                   	push   rbp
+      11ee:	48 83 3d ba 2d 00 00 	cmp    QWORD PTR [rip+0x2dba],0x0        # 3fb0 <__cxa_finalize@GLIBC_2.2.5>
+      11f5:	00
+      11f6:	48 89 e5             	mov    rbp,rsp
+      11f9:	74 0c                	je     1207 <__do_global_dtors_aux+0x27>
+      11fb:	48 8b 3d 86 2e 00 00 	mov    rdi,QWORD PTR [rip+0x2e86]        # 4088 <__dso_handle>
+      1202:	e8 29 ff ff ff       	call   1130 <__cxa_finalize@plt>
+      1207:	e8 64 ff ff ff       	call   1170 <deregister_tm_clones>
+      120c:	c6 05 e5 30 00 00 01 	mov    BYTE PTR [rip+0x30e5],0x1        # 42f8 <completed.0>
+      1213:	5d                   	pop    rbp
+      1214:	c3                   	ret
+      1215:	0f 1f 00             	nop    DWORD PTR [rax]
+      1218:	c3                   	ret
+      1219:	0f 1f 80 00 00 00 00 	nop    DWORD PTR [rax+0x0]
+
+  0000000000001220 <frame_dummy>:
+      1220:	f3 0f 1e fa          	endbr64
+      1224:	e9 77 ff ff ff       	jmp    11a0 <register_tm_clones>
+
+> 0000000000001229 <f(unsigned long long)>:
+      1229:	55                   	push   rbp
+      122a:	48 89 e5             	mov    rbp,rsp
+      122d:	48 83 ec 30          	sub    rsp,0x30
+      1231:	48 89 7d d8          	mov    QWORD PTR [rbp-0x28],rdi
+      1235:	48 c7 45 f8 00 00 00 	mov    QWORD PTR [rbp-0x8],0x0
+      123c:	00
+      123d:	48 c7 45 f0 01 00 00 	mov    QWORD PTR [rbp-0x10],0x1
+      1244:	00
+      1245:	48 c7 45 e8 00 00 00 	mov    QWORD PTR [rbp-0x18],0x0
+      124c:	00
+>     124d:	eb 27                	jmp    1276 <f(unsigned long long)+0x4d>
+      124f:	48 8b 45 f0          	mov    rax,QWORD PTR [rbp-0x10]
+      1253:	48 89 45 e0          	mov    QWORD PTR [rbp-0x20],rax
+      1257:	48 8b 55 f8          	mov    rdx,QWORD PTR [rbp-0x8]
+      125b:	48 8b 45 f0          	mov    rax,QWORD PTR [rbp-0x10]
+      125f:	48 01 d0             	add    rax,rdx
+      1262:	83 e0 0f             	and    eax,0xf
+      1265:	48 89 45 f0          	mov    QWORD PTR [rbp-0x10],rax
+      1269:	48 8b 45 e0          	mov    rax,QWORD PTR [rbp-0x20]
+      126d:	48 89 45 f8          	mov    QWORD PTR [rbp-0x8],rax
+      1271:	48 83 45 e8 01       	add    QWORD PTR [rbp-0x18],0x1
+      1276:	48 8b 45 e8          	mov    rax,QWORD PTR [rbp-0x18]
+      127a:	48 3b 45 d8          	cmp    rax,QWORD PTR [rbp-0x28]
+>     127e:	72 cf                	jb     124f <f(unsigned long long)+0x26>
+      1280:	48 8b 45 f8          	mov    rax,QWORD PTR [rbp-0x8]
+      1284:	48 89 c6             	mov    rsi,rax
+      1287:	48 8d 05 72 30 00 00 	lea    rax,[rip+0x3072]        # 4300 <K>
+      128e:	48 89 c7             	mov    rdi,rax
+      1291:	e8 3a fe ff ff       	call   10d0 <std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<
+char> >::operator[](unsigned long) const@plt>
+      1296:	0f b6 00             	movzx  eax,BYTE PTR [rax]
+      1299:	c9                   	leave
+      129a:	c3                   	ret
+
+> 000000000000129b <main>:
+      129b:	55                   	push   rbp
+      129c:	48 89 e5             	mov    rbp,rsp
+      129f:	53                   	push   rbx
+      12a0:	48 83 ec 48          	sub    rsp,0x48
+      12a4:	48 8d 45 b0          	lea    rax,[rbp-0x50]
+      12a8:	48 89 c7             	mov    rdi,rax
+      12ab:	e8 60 fe ff ff       	call   1110 <std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<
+char> >::basic_string()@plt>
+      12b0:	48 8d 05 50 0d 00 00 	lea    rax,[rip+0xd50]        # 2007 <std::ignore+0x1>
+      12b7:	48 89 c6             	mov    rsi,rax
+      12ba:	48 8d 05 ff 2d 00 00 	lea    rax,[rip+0x2dff]        # 40c0 <std::cout@GLIBCXX_3.4>
+      12c1:	48 89 c7             	mov    rdi,rax
+      12c4:	e8 e7 fd ff ff       	call   10b0 <std::basic_ostream<char, std::char_traits<char> >& std::operator<< <std:
+:char_traits<char> >(std::basic_ostream<char, std::char_traits<char> >&, char const*)@plt>
+      12c9:	48 8d 45 b0          	lea    rax,[rbp-0x50]
+      12cd:	48 89 c6             	mov    rsi,rax
+      12d0:	48 8d 05 09 2f 00 00 	lea    rax,[rip+0x2f09]        # 41e0 <std::cin@GLIBCXX_3.4>
+      12d7:	48 89 c7             	mov    rdi,rax
+      12da:	e8 61 fd ff ff       	call   1040 <std::basic_istream<char, std::char_traits<char> >& std::getline<char, st
+d::char_traits<char>, std::allocator<char> >(std::basic_istream<char, std::char_traits<char> >&, std::__cxx11::basic_st
+ring<char, std::char_traits<char>, std::allocator<char> >&)@plt>
+      12df:	48 8d 45 b0          	lea    rax,[rbp-0x50]
+      12e3:	48 8d 15 2e 0d 00 00 	lea    rdx,[rip+0xd2e]        # 2018 <std::ignore+0x12>
+      12ea:	48 89 d6             	mov    rsi,rdx
+      12ed:	48 89 c7             	mov    rdi,rax
+      12f0:	e8 de 02 00 00       	call   15d3 <bool std::operator!=<char, std::char_traits<char>, std::allocator<char>
+>(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > const&, char const*)>
+      12f5:	84 c0                	test   al,al
+      12f7:	74 35                	je     132e <main+0x93>
+      12f9:	48 8d 05 2b 0d 00 00 	lea    rax,[rip+0xd2b]        # 202b <std::ignore+0x25>
+      1300:	48 89 c6             	mov    rsi,rax
+      1303:	48 8d 05 b6 2d 00 00 	lea    rax,[rip+0x2db6]        # 40c0 <std::cout@GLIBCXX_3.4>
+      130a:	48 89 c7             	mov    rdi,rax
+      130d:	e8 9e fd ff ff       	call   10b0 <std::basic_ostream<char, std::char_traits<char> >& std::operator<< <std:
+:char_traits<char> >(std::basic_ostream<char, std::char_traits<char> >&, char const*)@plt>
+      1312:	48 8b 15 9f 2c 00 00 	mov    rdx,QWORD PTR [rip+0x2c9f]        # 3fb8 <std::basic_ostream<char, std::char_t
+raits<char> >& std::endl<char, std::char_traits<char> >(std::basic_ostream<char, std::char_traits<char> >&)@GLIBCXX_3.4
+>
+      1319:	48 89 d6             	mov    rsi,rdx
+      131c:	48 89 c7             	mov    rdi,rax
+      131f:	e8 9c fd ff ff       	call   10c0 <std::ostream::operator<<(std::ostream& (*)(std::ostream&))@plt>
+      1324:	bb 00 00 00 00       	mov    ebx,0x0
+      1329:	e9 24 01 00 00       	jmp    1452 <main+0x1b7>
+      132e:	48 8d 05 06 0d 00 00 	lea    rax,[rip+0xd06]        # 203b <std::ignore+0x35>
+      1335:	48 89 c6             	mov    rsi,rax
+      1338:	48 8d 05 81 2d 00 00 	lea    rax,[rip+0x2d81]        # 40c0 <std::cout@GLIBCXX_3.4>
+      133f:	48 89 c7             	mov    rdi,rax
+      1342:	e8 69 fd ff ff       	call   10b0 <std::basic_ostream<char, std::char_traits<char> >& std::operator<< <std:
+:char_traits<char> >(std::basic_ostream<char, std::char_traits<char> >&, char const*)@plt>
+      1347:	48 8d 05 72 2d 00 00 	lea    rax,[rip+0x2d72]        # 40c0 <std::cout@GLIBCXX_3.4>
+      134e:	48 89 c7             	mov    rdi,rax
+      1351:	e8 2a fd ff ff       	call   1080 <std::ostream::flush()@plt>
+      1356:	48 c7 45 e8 01 00 00 	mov    QWORD PTR [rbp-0x18],0x1
+      135d:	00
+      135e:	c7 45 e4 00 00 00 00 	mov    DWORD PTR [rbp-0x1c],0x0
+      1365:	e9 ae 00 00 00       	jmp    1418 <main+0x17d>
+      136a:	48 8b 45 e8          	mov    rax,QWORD PTR [rbp-0x18]
+      136e:	48 89 c7             	mov    rdi,rax
+>     1371:	e8 b3 fe ff ff       	call   1229 <f(unsigned long long)>
+      1376:	88 45 e3             	mov    BYTE PTR [rbp-0x1d],al
+      1379:	0f be 45 e3          	movsx  eax,BYTE PTR [rbp-0x1d]
+      137d:	89 c6                	mov    esi,eax
+      137f:	48 8d 05 3a 2d 00 00 	lea    rax,[rip+0x2d3a]        # 40c0 <std::cout@GLIBCXX_3.4>
+      1386:	48 89 c7             	mov    rdi,rax
+      1389:	e8 52 fd ff ff       	call   10e0 <std::basic_ostream<char, std::char_traits<char> >& std::operator<< <std:
+:char_traits<char> >(std::basic_ostream<char, std::char_traits<char> >&, char)@plt>
+      138e:	48 8d 05 2b 2d 00 00 	lea    rax,[rip+0x2d2b]        # 40c0 <std::cout@GLIBCXX_3.4>
+      1395:	48 89 c7             	mov    rdi,rax
+      1398:	e8 e3 fc ff ff       	call   1080 <std::ostream::flush()@plt>
+      139d:	83 7d e4 07          	cmp    DWORD PTR [rbp-0x1c],0x7
+      13a1:	74 12                	je     13b5 <main+0x11a>
+      13a3:	83 7d e4 0c          	cmp    DWORD PTR [rbp-0x1c],0xc
+      13a7:	74 0c                	je     13b5 <main+0x11a>
+      13a9:	83 7d e4 11          	cmp    DWORD PTR [rbp-0x1c],0x11
+      13ad:	74 06                	je     13b5 <main+0x11a>
+      13af:	83 7d e4 16          	cmp    DWORD PTR [rbp-0x1c],0x16
+      13b3:	75 28                	jne    13dd <main+0x142>
+      13b5:	48 8d 05 85 0c 00 00 	lea    rax,[rip+0xc85]        # 2041 <std::ignore+0x3b>
+      13bc:	48 89 c6             	mov    rsi,rax
+      13bf:	48 8d 05 fa 2c 00 00 	lea    rax,[rip+0x2cfa]        # 40c0 <std::cout@GLIBCXX_3.4>
+      13c6:	48 89 c7             	mov    rdi,rax
+      13c9:	e8 e2 fc ff ff       	call   10b0 <std::basic_ostream<char, std::char_traits<char> >& std::operator<< <std:
+:char_traits<char> >(std::basic_ostream<char, std::char_traits<char> >&, char const*)@plt>
+      13ce:	48 8d 05 eb 2c 00 00 	lea    rax,[rip+0x2ceb]        # 40c0 <std::cout@GLIBCXX_3.4>
+      13d5:	48 89 c7             	mov    rdi,rax
+      13d8:	e8 a3 fc ff ff       	call   1080 <std::ostream::flush()@plt>
+      13dd:	48 c1 65 e8 03       	shl    QWORD PTR [rbp-0x18],0x3
+      13e2:	8b 45 e4             	mov    eax,DWORD PTR [rbp-0x1c]
+      13e5:	83 c0 40             	add    eax,0x40
+      13e8:	48 98                	cdqe
+      13ea:	48 01 45 e8          	add    QWORD PTR [rbp-0x18],rax
+      13ee:	c7 45 dc 01 00 00 00 	mov    DWORD PTR [rbp-0x24],0x1
+      13f5:	48 8d 55 dc          	lea    rdx,[rbp-0x24]
+      13f9:	48 8d 45 d0          	lea    rax,[rbp-0x30]
+      13fd:	48 89 d6             	mov    rsi,rdx
+      1400:	48 89 c7             	mov    rdi,rax
+      1403:	e8 f4 01 00 00       	call   15fc <std::chrono::duration<long, std::ratio<1l, 1l> >::duration<int, void>(in
+t const&)>
+      1408:	48 8d 45 d0          	lea    rax,[rbp-0x30]
+      140c:	48 89 c7             	mov    rdi,rax
+      140f:	e8 5f 03 00 00       	call   1773 <void std::this_thread::sleep_for<long, std::ratio<1l, 1l> >(std::chrono:
+:duration<long, std::ratio<1l, 1l> > const&)>
+      1414:	83 45 e4 01          	add    DWORD PTR [rbp-0x1c],0x1
+      1418:	83 7d e4 1f          	cmp    DWORD PTR [rbp-0x1c],0x1f
+      141c:	0f 8e 48 ff ff ff    	jle    136a <main+0xcf>
+      1422:	48 8d 05 1a 0c 00 00 	lea    rax,[rip+0xc1a]        # 2043 <std::ignore+0x3d>
+      1429:	48 89 c6             	mov    rsi,rax
+      142c:	48 8d 05 8d 2c 00 00 	lea    rax,[rip+0x2c8d]        # 40c0 <std::cout@GLIBCXX_3.4>
+      1433:	48 89 c7             	mov    rdi,rax
+      1436:	e8 75 fc ff ff       	call   10b0 <std::basic_ostream<char, std::char_traits<char> >& std::operator<< <std:
+:char_traits<char> >(std::basic_ostream<char, std::char_traits<char> >&, char const*)@plt>
+      143b:	48 8b 15 76 2b 00 00 	mov    rdx,QWORD PTR [rip+0x2b76]        # 3fb8 <std::basic_ostream<char, std::char_t
+raits<char> >& std::endl<char, std::char_traits<char> >(std::basic_ostream<char, std::char_traits<char> >&)@GLIBCXX_3.4
+>
+      1442:	48 89 d6             	mov    rsi,rdx
+      1445:	48 89 c7             	mov    rdi,rax
+      1448:	e8 73 fc ff ff       	call   10c0 <std::ostream::operator<<(std::ostream& (*)(std::ostream&))@plt>
+      144d:	bb 00 00 00 00       	mov    ebx,0x0
+      1452:	48 8d 45 b0          	lea    rax,[rbp-0x50]
+      1456:	48 89 c7             	mov    rdi,rax
+      1459:	e8 da fc ff ff       	call   1138 <std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<
+char> >::~basic_string()@plt>
+      145e:	89 d8                	mov    eax,ebx
+      1460:	eb 1a                	jmp    147c <main+0x1e1>
+      1462:	48 89 c3             	mov    rbx,rax
+      1465:	48 8d 45 b0          	lea    rax,[rbp-0x50]
+      1469:	48 89 c7             	mov    rdi,rax
+      146c:	e8 c7 fc ff ff       	call   1138 <std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<
+char> >::~basic_string()@plt>
+      1471:	48 89 d8             	mov    rax,rbx
+      1474:	48 89 c7             	mov    rdi,rax
+      1477:	e8 a4 fc ff ff       	call   1120 <_Unwind_Resume@plt>
+      147c:	48 8b 5d f8          	mov    rbx,QWORD PTR [rbp-0x8]
+**********************
+PowerShell transcript end
+End time: 20260928232946
+**********************

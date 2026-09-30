@@ -1,0 +1,2107 @@
+file C:\Users\mzj\Desktop\CTF\����ˢ��\��Ŀ����\��һ��������checker_562\analysis\extracted\checker.exe length 42857 sha256 449D9F4569A0ED70FCB9BC8B96737719B62CFD8AE7C1E99D2864A3999887FDF5
+PE machine=0x014c sections=13 optional_magic=0x010b PE32+=False
+imagebase=0x400000 entry_rva=0x12e0 entry_va=0x4012e0 size_image=0x11000 align(sec/file)=0x1000/0x200
+SECTION '.text' RVA=0x1000 virtual=11508 raw=0x400+11776 chars=0x60500060
+SECTION '.data' RVA=0x4000 virtual=120 raw=0x3200+512 chars=0xc0600040
+SECTION '.rdata' RVA=0x5000 virtual=832 raw=0x3400+1024 chars=0x40300040
+SECTION '/4' RVA=0x6000 virtual=2564 raw=0x3800+3072 chars=0x40300040
+SECTION '.bss' RVA=0x7000 virtual=112 raw=0x0+0 chars=0xc0300080
+SECTION '.idata' RVA=0x8000 virtual=1572 raw=0x4400+2048 chars=0xc0300040
+SECTION '.CRT' RVA=0x9000 virtual=24 raw=0x4c00+512 chars=0xc0300040
+SECTION '.tls' RVA=0xa000 virtual=32 raw=0x4e00+512 chars=0xc0300040
+SECTION '/14' RVA=0xb000 virtual=56 raw=0x5000+512 chars=0x42400040
+SECTION '/29' RVA=0xc000 virtual=7423 raw=0x5200+7680 chars=0x42100040
+SECTION '/41' RVA=0xe000 virtual=303 raw=0x7000+512 chars=0x42100040
+SECTION '/55' RVA=0xf000 virtual=456 raw=0x7200+512 chars=0x42100040
+SECTION '/67' RVA=0x10000 virtual=56 raw=0x7400+512 chars=0x42300040
+IMPORT directory rva=0x8000 size=0x624
+DLL KERNEL32.dll
+  imports: DeleteCriticalSection, EnterCriticalSection, ExitProcess, FindClose, FindFirstFileA, FindNextFileA, FreeLibrary, GetCommandLineA, GetLastError, GetModuleHandleA, GetProcAddress, InitializeCriticalSection, LeaveCriticalSection, LoadLibraryA, SetUnhandledExceptionFilter, Sleep, TlsGetValue, VirtualProtect, VirtualQuery
+DLL msvcrt.dll
+  imports: _strdup, _stricoll
+DLL msvcrt.dll
+  imports: __getmainargs, __mb_cur_max, __p__environ, __p__fmode, __set_app_type, _cexit, _errno, _fpreset, _fullpath, _iob, _isctype, _onexit, _pctype, _setmode, abort, atexit, calloc, fgets, free, fwrite, malloc, mbstowcs, memcpy, printf, puts, realloc, setlocale, signal, strcmp, strcoll, strcspn, strlen, tolower, vfprintf, wcstombs
+total named/ordinal imports 56
+=== ASCII strings >= 4 ===
+0x4d: !This program cannot be run in DOS mode.
+0x178: .text
+0x19e: P`.data
+0x1c8: .rdata
+0x1ee: 0@/4
+0x216: 0@.bss
+0x240: .idata
+0x268: .CRT
+0x290: .tls
+0x2de: @B/29
+0x307: B/41
+0x32f: B/55
+0x357: B/67
+0x7c2: $AP@
+0x7f3: $t@@
+0x868: $dP@
+0xae5: [^_]
+0xcb8: [^_]
+0xf56: =dp@
+0xf5d: D$$t
+0xff7: $Dp@
+0x103d: $Dp@
+0x1090: $Dp@
+0x10b3: $Dp@
+0x1102: $Dp@
+0x1132: $Dp@
+0x1160: $Dp@
+0x11ba: $Dp@
+0x11f2: $Dp@
+0x12c0: L[^_]
+0x1342: L[^_]
+0x137f: -@S@
+0x1399: 5@S@
+0x1423: $XQ@
+0x1472:  [^_
+0x1521: $$Q@
+0x160e: ?t?1
+0x1672: t\VS
+0x1845: <]ta<
+0x1859: [^_]
+0x18b0: [^_]
+0x18c3: <]t.<
+0x18fb: [^_]
+0x1a48: ,[^_]
+0x1a9a: ,[^_]
+0x1b52: <]t[
+0x1fd9: [^_]
+0x200b: t(<{t?
+0x206c: <,u@
+0x20b0: <{t,
+0x2346: </t&<\t"
+0x254e: [^_]
+0x2702: 5hp@
+0x2960: [^_]
+0x2bd0: UWVS
+0x2d29: [^_]
+0x3220: EOBDXFMS
+0x322e: wyNbQJBL
+0x323a: WbbQy
+0x3242: T[avT{v
+0x3400: libgcc_s_dw2-1.dll
+0x3413: __register_frame_info
+0x3429: __deregister_frame_info
+0x3441: libgcj-16.dll
+0x344f: _Jv_RegisterClasses
+0x3464: Performing initial checks...
+0x3481: Checks completed.
+0x3493: Enter the flag: 
+0x34a6: Correct! You have the flag.
+0x34c2: Incorrect flag.
+0x34d8: Mingw runtime failure:
+0x34f0:   VirtualQuery failed for %d bytes at address %p
+0x3524:   Unknown pseudo relocation protocol version %d.
+0x3558:   Unknown pseudo relocation bit size %d.
+0x3586: glob-1.0-mingw32
+0x35a0: GCC: (GNU) 6.3.0
+0x35b4: GCC: (GNU) 6.3.0
+0x35c8: GCC: (MinGW.org GCC-6.3.0-1) 6.3.0
+0x35ec: GCC: (GNU) 6.3.0
+0x3600: GCC: (GNU) 6.3.0
+0x3614: GCC: (GNU) 6.3.0
+0x3628: GCC: (GNU) 6.3.0
+0x363c: GCC: (GNU) 6.3.0
+0x3650: GCC: (GNU) 6.3.0
+0x3664: GCC: (GNU) 6.3.0
+0x3678: GCC: (GNU) 6.3.0
+0x368c: GCC: (GNU) 6.3.0
+0x36a0: GCC: (GNU) 6.3.0
+0x36b4: GCC: (GNU) 6.3.0
+0x36c8: GCC: (GNU) 6.3.0
+0x36dc: GCC: (GNU) 6.3.0
+0x36f0: GCC: (GNU) 6.3.0
+0x3704: GCC: (GNU) 6.3.0
+0x3718: GCC: (GNU) 6.3.0
+0x372c: GCC: (GNU) 6.3.0
+0x462a: DeleteCriticalSection
+0x4642: EnterCriticalSection
+0x465a: ExitProcess
+0x4668: FindClose
+0x4674: FindFirstFileA
+0x4686: FindNextFileA
+0x4696: FreeLibrary
+0x46a4: GetCommandLineA
+0x46b6: GetLastError
+0x46c6: GetModuleHandleA
+0x46da: GetProcAddress
+0x46ec: InitializeCriticalSection
+0x4708: LeaveCriticalSection
+0x4720: LoadLibraryA
+0x4730: SetUnhandledExceptionFilter
+0x474e: Sleep
+0x4756: TlsGetValue
+0x4764: VirtualProtect
+0x4776: VirtualQuery
+0x4786: _strdup
+0x4790: _stricoll
+0x479c: __getmainargs
+0x47ac: __mb_cur_max
+0x47bc: __p__environ
+0x47cc: __p__fmode
+0x47da: __set_app_type
+0x47ec: _cexit
+0x47f6: _errno
+0x4800: _fpreset
+0x480c: _fullpath
+0x4818: _iob
+0x4820: _isctype
+0x482c: _onexit
+0x4836: _pctype
+0x4840: _setmode
+0x484c: abort
+0x4854: atexit
+0x485e: calloc
+0x4868: fgets
+0x4870: free
+0x4878: fwrite
+0x4882: malloc
+0x488c: mbstowcs
+0x4898: memcpy
+0x48a2: printf
+0x48ac: puts
+0x48b4: realloc
+0x48be: setlocale
+0x48ca: signal
+0x48d4: strcmp
+0x48de: strcoll
+0x48e8: strcspn
+0x48f2: strlen
+0x48fc: tolower
+0x4906: vfprintf
+0x4912: wcstombs
+0x4968: KERNEL32.dll
+0x4980: msvcrt.dll
+0x4a18: msvcrt.dll
+0x5218: ../../../src/gcc-6.3.0/libgcc/config/i386/cygwin.S
+0x524b: /home/keith/src/mingw/gcc-build/gcc-6.3.0-mingw32-cross-native/mingw32/libgcc
+0x5299: GNU AS 2.28
+0x52b3: GNU C11 6.3.0 -mtune=generic -march=i586 -g -g -g -O2 -O2 -O2 -fbuilding-libgcc -fno-stack-protector
+0x5319: ../../../src/gcc-6.3.0/libgcc/libgcc2.c
+0x5341: /home/keith/src/mingw/gcc-build/gcc-6.3.0-mingw32-cross-native/mingw32/libgcc
+0x53a2: unsigned int
+0x53b2: short unsigned int
+0x53c8: long long int
+0x53d9: long double
+0x53e8: char
+0x53f5: long int
+0x53ff: _iobuf
+0x540e: _ptr
+0x541b: _cnt
+0x5428: _base
+0x5436: _flag
+0x5444: _file
+0x5452: _charbuf
+0x5463: _bufsiz
+0x5473: _tmpfname
+0x548c: FILE
+0x54a3: _iob
+0x54b1: short int
+0x54be: long unsigned int
+0x54d1: _argc
+0x54de: _argv
+0x54f1: __mb_cur_max
+0x5505: _sys_nerr
+0x5521: _sys_errlist
+0x5535: _osver
+0x5543: _winver
+0x5552: _winmajor
+0x5563: _winminor
+0x5574: _fmode
+0x5585: sizetype
+0x558f: optind
+0x559d: optopt
+0x55ab: opterr
+0x55b9: optarg
+0x55c7: _daylight
+0x55d9: _timezone
+0x55fb: _tzname
+0x560b: daylight
+0x561c: timezone
+0x562d: tzname
+0x563c: hashval_t
+0x564d: htab_hash
+0x567a: htab_eq
+0x56a3: htab_hash_pointer
+0x56bc: htab_eq_pointer
+0x56d5: unsigned char
+0x56e4: stringop_alg
+0x56fd: no_stringop
+0x570b: libcall
+0x5715: rep_prefix_1_byte
+0x5729: rep_prefix_4_byte
+0x573d: rep_prefix_8_byte
+0x5751: loop_1_byte
+0x575f: loop
+0x5766: unrolled_loop
+0x5776: vector_loop
+0x5784: last_alg
+0x57b0: unspec_strings
+0x57c7: unspecv_strings
+0x57df: stringop_strategy
+0x5811: noalign
+0x5827: stringop_algs
+0x583d: unknown_size
+0x5852: size
+0x5875: processor_costs
+0x58a6: shift_var
+0x58b8: shift_const
+0x58cc: mult_init
+0x58de: mult_bit
+0x58ef: divide
+0x58fe: movsx
+0x590c: movzx
+0x591a: large_insn
+0x592d: move_ratio
+0x5940: movzbl_load
+0x5954: int_load
+0x5965: int_store
+0x5977: fp_move
+0x5987: fp_load
+0x5997: fp_store
+0x59a8: mmx_move
+0x59b9: mmx_load
+0x59ca: mmx_store
+0x59dc: sse_move
+0x59ed: sse_load
+0x59fe: sse_store
+0x5a10: mmxsse_to_integer
+0x5a2a: l1_cache_size
+0x5a40: l2_cache_size
+0x5a56: prefetch_block
+0x5a6d: simultaneous_prefetches
+0x5a8d: branch_cost
+0x5aa1: fadd
+0x5aae: fmul
+0x5abb: fdiv
+0x5ac8: fabs
+0x5ad5: fchs
+0x5ae2: fsqrt
+0x5af0: memcpy
+0x5b00: memset
+0x5b10: scalar_stmt_cost
+0x5b2a: scalar_load_cost
+0x5b44: scalar_store_cost
+0x5b5f: vec_stmt_cost
+0x5b76: vec_to_scalar_cost
+0x5b92: scalar_to_vec_cost
+0x5baf: vec_align_load_cost
+0x5bcd: vec_unalign_load_cost
+0x5bed: vec_store_cost
+0x5c06: cond_taken_branch_cost
+0x5c27: cond_not_taken_branch_cost
+0x5c97: ix86_cost
+0x5caf: ix86_size_cost
+0x5cc6: ix86_tune_indices
+0x5ce5: X86_TUNE_SCHEDULE
+0x5cf9: X86_TUNE_PARTIAL_REG_DEPENDENCY
+0x5d1b: X86_TUNE_SSE_PARTIAL_REG_DEPENDENCY
+0x5d41: X86_TUNE_SSE_SPLIT_REGS
+0x5d5b: X86_TUNE_PARTIAL_FLAG_REG_STALL
+0x5d7d: X86_TUNE_MOVX
+0x5d8d: X86_TUNE_MEMORY_MISMATCH_STALL
+0x5dae: X86_TUNE_FUSE_CMP_AND_BRANCH_32
+0x5dd0: X86_TUNE_FUSE_CMP_AND_BRANCH_64
+0x5df2: X86_TUNE_FUSE_CMP_AND_BRANCH_SOFLAGS
+0x5e19: X86_TUNE_FUSE_ALU_AND_BRANCH
+0x5e38: X86_TUNE_REASSOC_INT_TO_PARALLEL
+0x5e5b: X86_TUNE_REASSOC_FP_TO_PARALLEL
+0x5e7d: X86_TUNE_ACCUMULATE_OUTGOING_ARGS
+0x5ea1: X86_TUNE_PROLOGUE_USING_MOVE
+0x5ec0: X86_TUNE_EPILOGUE_USING_MOVE
+0x5edf: X86_TUNE_USE_LEAVE
+0x5ef4: X86_TUNE_PUSH_MEMORY
+0x5f0b: X86_TUNE_SINGLE_PUSH
+0x5f22: X86_TUNE_DOUBLE_PUSH
+0x5f39: X86_TUNE_SINGLE_POP
+0x5f4f: X86_TUNE_DOUBLE_POP
+0x5f65: X86_TUNE_PAD_SHORT_FUNCTION
+0x5f83: X86_TUNE_PAD_RETURNS
+0x5f9a: X86_TUNE_FOUR_JUMP_LIMIT
+0x5fb5: X86_TUNE_SOFTWARE_PREFETCHING_BENEFICIAL
+0x5fe0: X86_TUNE_LCP_STALL
+0x5ff5: X86_TUNE_READ_MODIFY
+0x600c: X86_TUNE_USE_INCDEC
+0x6022: X86_TUNE_INTEGER_DFMODE_MOVES
+0x6042: X86_TUNE_OPT_AGU
+0x6055: X86_TUNE_AVOID_LEA_FOR_ADDR
+0x6073: X86_TUNE_SLOW_IMUL_IMM32_MEM
+0x6092: X86_TUNE_SLOW_IMUL_IMM8
+0x60ac: X86_TUNE_AVOID_MEM_OPND_FOR_CMOVE
+0x60d0: X86_TUNE_SINGLE_STRINGOP
+0x60eb: X86_TUNE_MISALIGNED_MOVE_STRING_PRO_EPILOGUES
+0x611b: X86_TUNE_USE_SAHF
+0x612f: X86_TUNE_USE_CLTD
+0x6143: X86_TUNE_USE_BT
+0x6155: X86_TUNE_USE_HIMODE_FIOP
+0x6170: X86_TUNE_USE_SIMODE_FIOP
+0x618b: X86_TUNE_USE_FFREEP
+0x61a1: X86_TUNE_EXT_80387_CONSTANTS
+0x61c0: X86_TUNE_VECTORIZE_DOUBLE
+0x61dc: X86_TUNE_GENERAL_REGS_SSE_SPILL
+0x61fe: X86_TUNE_SSE_UNALIGNED_LOAD_OPTIMAL
+0x6224: X86_TUNE_SSE_UNALIGNED_STORE_OPTIMAL
+0x624b: X86_TUNE_SSE_PACKED_SINGLE_INSN_OPTIMAL
+0x6275: X86_TUNE_SSE_TYPELESS_STORES
+0x6294: X86_TUNE_SSE_LOAD0_BY_PXOR
+0x62b1: X86_TUNE_INTER_UNIT_MOVES_TO_VEC
+0x62d4: X86_TUNE_INTER_UNIT_MOVES_FROM_VEC
+0x62f9: X86_TUNE_INTER_UNIT_CONVERSIONS
+0x631b: X86_TUNE_SPLIT_MEM_OPND_FOR_FP_CONVERTS
+0x6345: X86_TUNE_USE_VECTOR_FP_CONVERTS
+0x6367: X86_TUNE_USE_VECTOR_CONVERTS
+0x6386: X86_TUNE_SLOW_PSHUFB
+0x639d: X86_TUNE_VECTOR_PARALLEL_EXECUTION
+0x63c2: X86_TUNE_AVOID_4BYTE_PREFIXES
+0x63e2: X86_TUNE_AVX256_UNALIGNED_LOAD_OPTIMAL
+0x640b: X86_TUNE_AVX256_UNALIGNED_STORE_OPTIMAL
+0x6435: X86_TUNE_AVX128_OPTIMAL
+0x644f: X86_TUNE_DOUBLE_WITH_ADD
+0x646a: X86_TUNE_ALWAYS_FANCY_MATH_387
+0x648b: X86_TUNE_UNROLL_STRLEN
+0x64a4: X86_TUNE_SHIFT1
+0x64b6: X86_TUNE_ZERO_EXTEND_WITH_AND
+0x64d6: X86_TUNE_PROMOTE_HIMODE_IMUL
+0x64f5: X86_TUNE_FAST_PREFIX
+0x650c: X86_TUNE_READ_MODIFY_WRITE
+0x6529: X86_TUNE_MOVE_M1_VIA_OR
+0x6543: X86_TUNE_NOT_UNPAIRABLE
+0x655d: X86_TUNE_PARTIAL_REG_STALL
+0x657a: X86_TUNE_PROMOTE_QIMODE
+0x6594: X86_TUNE_PROMOTE_HI_REGS
+0x65af: X86_TUNE_HIMODE_MATH
+0x65c6: X86_TUNE_SPLIT_LONG_MOVES
+0x65e2: X86_TUNE_USE_XCHGB
+0x65f7: X86_TUNE_USE_MOV0
+0x660b: X86_TUNE_NOT_VECTORMODE
+0x6625: X86_TUNE_AVOID_VECTOR_DECODE
+0x6644: X86_TUNE_AVOID_FALSE_DEP_FOR_BMI
+0x6667: X86_TUNE_BRANCH_PREDICTION_HINTS
+0x668a: X86_TUNE_QIMODE_MATH
+0x66a1: X86_TUNE_PROMOTE_QI_REGS
+0x66bc: X86_TUNE_ADJUST_UNROLL
+0x66d5: X86_TUNE_ONE_IF_CONV_INSN
+0x66f1: X86_TUNE_LAST
+0x6712: ix86_tune_features
+0x672d: ix86_arch_indices
+0x674c: X86_ARCH_CMOV
+0x675c: X86_ARCH_CMPXCHG
+0x676f: X86_ARCH_CMPXCHG8B
+0x6784: X86_ARCH_XADD
+0x6794: X86_ARCH_BSWAP
+0x67a5: X86_ARCH_LAST
+0x67c6: ix86_arch_features
+0x67e1: x86_prefetch_sse
+0x67fa: _dont_use_tree_here_
+0x6810: x86_mfence
+0x6829: reg_class
+0x6840: NO_REGS
+0x684a: AREG
+0x6851: DREG
+0x6858: CREG
+0x685f: BREG
+0x6866: SIREG
+0x686e: DIREG
+0x6876: AD_REGS
+0x6880: CLOBBERED_REGS
+0x6891: Q_REGS
+0x689a: NON_Q_REGS
+0x68a7: INDEX_REGS
+0x68b4: LEGACY_REGS
+0x68c2: GENERAL_REGS
+0x68d1: FP_TOP_REG
+0x68de: FP_SECOND_REG
+0x68ee: FLOAT_REGS
+0x68fb: SSE_FIRST_REG
+0x690b: NO_REX_SSE_REGS
+0x691d: SSE_REGS
+0x6928: EVEX_SSE_REGS
+0x6938: BND_REGS
+0x6943: ALL_SSE_REGS
+0x6952: MMX_REGS
+0x695d: FP_TOP_SSE_REGS
+0x696f: FP_SECOND_SSE_REGS
+0x6984: FLOAT_SSE_REGS
+0x6995: FLOAT_INT_REGS
+0x69a6: INT_SSE_REGS
+0x69b5: FLOAT_INT_SSE_REGS
+0x69ca: MASK_EVEX_REGS
+0x69db: MASK_REGS
+0x69e7: ALL_REGS
+0x69f2: LIM_REG_CLASSES
+0x6a1f: dbx_register_map
+0x6a38: dbx64_register_map
+0x6a53: svr4_dbx_register_map
+0x6a86: x86_64_ms_sysv_extra_clobbered_registers
+0x6ab7: processor_type
+0x6ad3: PROCESSOR_GENERIC
+0x6ae7: PROCESSOR_I386
+0x6af8: PROCESSOR_I486
+0x6b09: PROCESSOR_PENTIUM
+0x6b1d: PROCESSOR_LAKEMONT
+0x6b32: PROCESSOR_PENTIUMPRO
+0x6b49: PROCESSOR_PENTIUM4
+0x6b5e: PROCESSOR_NOCONA
+0x6b71: PROCESSOR_CORE2
+0x6b83: PROCESSOR_NEHALEM
+0x6b97: PROCESSOR_SANDYBRIDGE
+0x6baf: PROCESSOR_HASWELL
+0x6bc3: PROCESSOR_BONNELL
+0x6bd7: PROCESSOR_SILVERMONT
+0x6bee: PROCESSOR_KNL
+0x6bfe: PROCESSOR_SKYLAKE_AVX512
+0x6c19: PROCESSOR_INTEL
+0x6c2b: PROCESSOR_GEODE
+0x6c3d: PROCESSOR_K6
+0x6c4c: PROCESSOR_ATHLON
+0x6c5f: PROCESSOR_K8
+0x6c6e: PROCESSOR_AMDFAM10
+0x6c83: PROCESSOR_BDVER1
+0x6c96: PROCESSOR_BDVER2
+0x6ca9: PROCESSOR_BDVER3
+0x6cbc: PROCESSOR_BDVER4
+0x6ccf: PROCESSOR_BTVER1
+0x6ce2: PROCESSOR_BTVER2
+0x6cf5: PROCESSOR_ZNVER1
+0x6d08: PROCESSOR_max
+0x6d19: ix86_tune
+0x6d2b: ix86_arch
+0x6d3d: ix86_preferred_stack_boundary
+0x6d63: ix86_incoming_stack_boundary
+0x6d9d: regclass_map
+0x6db4: signed char
+0x6dc1: UQItype
+0x6dd7: long long unsigned int
+0x6df1: float
+0x6dfa: complex float
+0x6e0b: double
+0x6e15: complex double
+0x6e27: complex long double
+0x6e3e: __float128
+0x6e4c: __unknown__
+0x6e6e: __popcount_tab
+0x6e85: __clz_tab
+0x6e97: func_ptr
+0x6eb9: __CTOR_LIST__
+0x6ece: __DTOR_LIST__
+0x721b: ../../../src/gcc-6.3.0/libgcc/config/i386
+0x7246: cygwin.S
+0x725e: ""YK0g=YY0/>""
+0x728c: /home/keith/mingw32-gcc-6.3.0/include
+0x72b2: ../../../src/gcc-6.3.0/libgcc/../include
+0x72db: ../.././gcc
+0x72e7: ../../../src/gcc-6.3.0/libgcc/../gcc/config/i386
+0x7318: ../../../src/gcc-6.3.0/libgcc
+0x7337: stdio.h
+0x7342: stdlib.h
+0x734e: getopt.h
+0x735a: time.h
+0x7364: hashtab.h
+0x7371: insn-constants.h
+0x7385: i386.h
+0x738f: i386-opts.h
+0x739e: libgcc2.h
+0x73ab: gbl-ctors.h
+0x73ba: libgcc2.c
+0x7636: _atexit
+0x7648: __onexit0
+0x765a: .text
+0x767e: .bss
+0x76a2: .file
+0x76b4: cygming-crtbegin.c_obj
+0x7732: .text
+0x7756: .data
+0x777a: .bss
+0x77c2: .rdata
+0x780a: .jcr
+0x781c: .file
+0x782e: checker.c
+0x7888: _main
+0x789a: .text
+0x78be: .data
+0x78e2: .bss
+0x7906: .rdata
+0x7996: .text
+0x79de: .text
+0x7a02: .bss
+0x7a5c: ___main
+0x7a6e: .text
+0x7a92: .data
+0x7ab6: .bss
+0x7afe: .text
+0x7b22: .bss
+0x7b46: .CRT$XDZ
+0x7b6a: .CRT$XDA
+0x7b8e: .CRT$XLA
+0x7bb2: .tls$ZZZ
+0x7bd6: .tls$AAA
+0x7c30: .text
+0x7c54: .bss
+0x7c8a: .text
+0x7cae: .bss
+0x7cd2: .rdata
+0x7cf6: .file
+0x7d08: fake
+0x7d86: .text
+0x7daa: .data
+0x7dce: .bss
+0x7e3a: .file
+0x7e4c: libgcc2.c
+0x7e5e: .text
+0x7e82: .data
+0x7ea6: .bss
+0x7fa2: .text
+0x7fc6: .data
+0x800e: .text
+0x8032: .rdata
+0x807a: .text
+0x809e: .bss
+0x80c2: .rdata
+0x8152: .text
+0x8176: .idata$5 
+0x8188: .idata$6
+0x819a: .idata$5
+0x81ac: .idata$6
+0x81be: .idata$5
+0x81d0: .idata$6
+0x81e2: .idata$5
+0x81f4: .idata$6
+0x8206: .idata$5
+0x8218: .idata$6
+0x822a: .idata$5
+0x823c: .idata$6
+0x824e: .idata$5
+0x8260: .idata$6
+0x8272: .idata$5
+0x8284: .idata$6
+0x8296: .idata$5
+0x82a8: .idata$6
+0x82ba: .idata$5
+0x82cc: .idata$6
+0x82de: .idata$5
+0x82f0: .idata$6
+0x8302: .idata$5
+0x8314: .idata$6
+0x8326: .idata$5
+0x8338: .idata$6
+0x834a: .idata$5
+0x835c: .idata$6
+0x836e: .idata$5
+0x8380: .idata$6
+0x8392: .idata$5
+0x83a4: .idata$6v
+0x83b6: .idata$5
+0x83c8: .idata$6n
+0x83da: .idata$5
+0x83ec: .idata$6f
+0x83fe: .idata$5
+0x8410: .idata$6\
+0x8422: .idata$6R
+0x8434: .idata$5
+0x8446: .idata$6J
+0x8458: .idata$5
+0x846a: .idata$6>
+0x847c: .idata$64
+0x848e: .idata$6*
+0x84a0: .idata$5
+0x84b2: .idata$6
+0x84c4: .idata$6
+0x84d6: .idata$5
+0x84e8: .idata$6
+0x84fa: .idata$5
+0x850c: .idata$6
+0x851e: .idata$5
+0x8530: .idata$6
+0x8542: .idata$5
+0x8554: .idata$6
+0x8566: .idata$5
+0x8578: .idata$6
+0x858a: .idata$6
+0x859c: .idata$5
+0x85ae: .idata$6
+0x85c0: .idata$4
+0x85d2: .idata$5
+0x85e4: .idata$5
+0x85f6: .idata$6t
+0x8608: .idata$5
+0x861a: .idata$6b
+0x862c: .idata$5|
+0x863e: .idata$6T
+0x8650: .idata$5x
+0x8662: .idata$6L
+0x8674: .idata$5t
+0x8686: .idata$6.
+0x8698: .idata$5p
+0x86aa: .idata$6
+0x86bc: .idata$5l
+0x86ce: .idata$6
+0x86e0: .idata$5h
+0x86f2: .idata$6
+0x8704: .idata$5d
+0x8716: .idata$6
+0x8728: .idata$5`
+0x873a: .idata$6
+0x874c: .idata$5\
+0x875e: .idata$6
+0x8770: .idata$5X
+0x8782: .idata$6
+0x8794: .idata$5T
+0x87a6: .idata$6
+0x87b8: .idata$5P
+0x87ca: .idata$6
+0x87dc: .idata$5L
+0x87ee: .idata$6r
+0x8800: .idata$5H
+0x8812: .idata$6f
+0x8824: .idata$5D
+0x8836: .idata$6X
+0x8848: .idata$5@
+0x885a: .idata$6@
+0x886c: .idata$5<
+0x887e: .idata$6(
+0x8890: .idata$4P
+0x88a2: .idata$5<
+0x88b4: .idata$5
+0x88c6: .idata$6
+0x88d8: .idata$5
+0x88ea: .idata$6
+0x88fc: .idata$4
+0x890e: .idata$5
+0x8920: .file
+0x8932: cygming-crtend.c
+0x898c: .text
+0x89b0: .data
+0x89d4: .bss
+0x8a1c: .jcr
+0x8aac: .idata$5
+0x8abe: .idata$6
+0x8ad0: .idata$5
+0x8ae2: .idata$6
+0x8b06: __cexit
+0x8b4e: _strcspn`+
+0x8bba: _free
+0x8bde: _strcmp
+0x8ca4: __errno
+0x8cec: ___xl_c
+0x8d8e: ___xl_z
+0x8dc4: _puts
+0x8f74: _strcollh+
+0x8fbc: __dll__
+0x8ff2: _fwrite
+0x90b8: _memcpy
+0x9124: __argc
+0x91a2: _tolowerP+
+0x91b4: ___xl_a
+0x91c6: ___xl_d
+0x920e: __CRT_MTd
+0x927a: _strdup
+0x929e: __argv
+0x92c2: _calloc
+0x92d4: __fmode
+0x9352: _realloc
+0x93e2: __end__
+0x9406: _signal
+0x9418: _malloc
+0x9514: _abort
+0x96b2: _fgets
+0x971e: _strlen
+0x97ae: _printf
+0x981a: _Sleep@48,
+0x988a: .eh_frame
+0x9894: .debug_aranges
+0x98a3: .debug_info
+0x98af: .debug_abbrev
+0x98bd: .debug_line
+0x98c9: .debug_frame
+0x98d6: __mingw32_init_mainargs
+0x98ee: _mainCRTStartup
+0x98fe: _WinMainCRTStartup
+0x9911: _deregister_frame_fn
+0x9926: ___JCR_LIST__
+0x9934: ___gcc_register_frame
+0x994a: ___gcc_deregister_frame
+0x9962: .eh_frame
+0x996c: .rdata$zzz
+0x9977: _fake_check
+0x9983: _encrypt_flag
+0x9991: _check_flag
+0x999d: __setargv
+0x99a7: ___cpu_features_init
+0x99bc: ___do_global_dtors
+0x99cf: ___do_global_ctors
+0x99e2: ___dyn_tls_init@12
+0x99f5: ___tlregdtor
+0x9a02: ____w64_mingwthr_add_key_dtor
+0x9a20: ____w64_mingwthr_remove_key_dtor
+0x9a41: ___mingw_TLScallback
+0x9a56: __pei386_runtime_relocator
+0x9a71: .debug_info
+0x9a7d: .debug_abbrev
+0x9a8b: .debug_line
+0x9a97: .debug_aranges
+0x9aa6: .debug_frame
+0x9ab3: _fesetenv
+0x9abd: ___mingw_glob
+0x9acb: ___mingw_globfree
+0x9add: ___mingw_dirname
+0x9aee: ___mingw_opendir
+0x9aff: ___mingw_readdir
+0x9b10: ___mingw_closedir
+0x9b22: ___mingw_rewinddir
+0x9b35: ___mingw_telldir
+0x9b46: ___mingw_seekdir
+0x9b57: ___FRAME_END__
+0x9b66: ___JCR_END__
+0x9b73: _register_frame_ctor
+0x9b88: .text.startup
+0x9b96: .ctors.65535
+0x9ba3: __imp__FindFirstFileA@8
+0x9bbb: _VirtualProtect@16
+0x9bce: ___RUNTIME_PSEUDO_RELOC_LIST__
+0x9bed: __imp___fullpath
+0x9bfe: _FindFirstFileA@8
+0x9c10: __imp___setmode
+0x9c20: __data_start__
+0x9c2f: _FreeLibrary@4
+0x9c3e: ___DTOR_LIST__
+0x9c4d: __imp__VirtualProtect@16
+0x9c66: __imp___onexit
+0x9c75: ___p__fmode
+0x9c81: __imp__GetLastError@0
+0x9c97: _SetUnhandledExceptionFilter@4
+0x9cb6: __imp__VirtualQuery@12
+0x9ccd: __imp__FindNextFileA@8
+0x9ce4: ___tls_start__
+0x9cf3: __imp__TlsGetValue@4
+0x9d08: __libmsvcrt_a_iname
+0x9d1c: __imp__InitializeCriticalSection@4
+0x9d3f: _DeleteCriticalSection@4
+0x9d58: __rt_psrelocs_start
+0x9d6c: __imp__abort
+0x9d79: __dll_characteristics__
+0x9d91: __size_of_stack_commit__
+0x9daa: __size_of_stack_reserve__
+0x9dc4: __major_subsystem_version__
+0x9de0: ___crt_xl_start__
+0x9df2: ___crt_xi_start__
+0x9e04: ___crt_xi_end__
+0x9e14: __imp__stricoll
+0x9e24: __imp____mb_cur_max
+0x9e38: _GetLastError@0
+0x9e48: __imp____p__environ
+0x9e5c: __imp___pctype
+0x9e6b: _VirtualQuery@12
+0x9e7c: _mingw_initltsdrot_force
+0x9e95: __imp___iob
+0x9ea1: _GetModuleHandleA@4
+0x9eb5: ___register_frame_info
+0x9ecc: __libmoldname_a_iname
+0x9ee2: _hmod_libgcc
+0x9eef: .weak.___register_frame_info.___EH_FRAME_BEGIN__
+0x9f20: __imp__strdup
+0x9f2e: __imp___isctype
+0x9f3e: __bss_start__
+0x9f4c: ___RUNTIME_PSEUDO_RELOC_LIST_END__
+0x9f6f: __fpreset
+0x9f79: __size_of_heap_commit__
+0x9f91: __imp___errno
+0x9f9f: ___p__environ
+0x9fad: __imp__GetProcAddress@8
+0x9fc5: _GetProcAddress@8
+0x9fd7: ___crt_xp_start__
+0x9fe9: __imp__wcstombs
+0x9ff9: _GetCommandLineA@0
+0xa00c: ___crt_xp_end__
+0xa01c: __imp__signal
+0xa02a: __imp__puts
+0xa036: __minor_os_version__
+0xa04b: __imp__atexit
+0xa059: _encrypted_flag
+0xa069: __imp__mbstowcs
+0xa079: __head_libmsvcrt_a
+0xa08c: __image_base__
+0xa09b: __isctype
+0xa0a5: __section_alignment__
+0xa0bb: _LoadLibraryA@4
+0xa0cb: _wcstombs
+0xa0d5: __imp__FreeLibrary@4
+0xa0ea: __IAT_end__
+0xa0f6: __head_libmoldname_a
+0xa10b: __RUNTIME_PSEUDO_RELOC_LIST__
+0xa129: _setlocale
+0xa134: __imp____p__fmode
+0xa146: __tls_start
+0xa152: _ExitProcess@4
+0xa161: __imp__strcoll
+0xa170: __data_end__
+0xa17d: ___getmainargs
+0xa18c: _FindClose@4
+0xa199: __CTOR_LIST__
+0xa1a7: _mbstowcs
+0xa1b1: ___set_app_type
+0xa1c1: __bss_end__
+0xa1cd: __CRT_fmode
+0xa1d9: ___crt_xc_end__
+0xa1e9: __tls_index
+0xa1f5: ___crt_xc_start__
+0xa207: __imp__fgets
+0xa214: ___CTOR_LIST__
+0xa223: __rt_psrelocs_size
+0xa236: __imp__memcpy
+0xa244: _FindNextFileA@8
+0xa255: __imp__strcmp
+0xa263: __file_alignment__
+0xa276: __imp__LeaveCriticalSection@4
+0xa294: __imp__malloc
+0xa2a2: ___EH_FRAME_BEGIN__
+0xa2b6: __major_os_version__
+0xa2cb: __imp__realloc
+0xa2da: __IAT_start__
+0xa2e8: _stricoll
+0xa2f2: __tls_end
+0xa2fc: __imp__GetModuleHandleA@4
+0xa316: __DTOR_LIST__
+0xa324: __imp___fpreset
+0xa334: .weak.___deregister_frame_info.___EH_FRAME_BEGIN__
+0xa367: _EnterCriticalSection@4
+0xa37f: __fullpath
+0xa38a: __size_of_heap_reserve__
+0xa3a3: ___crt_xt_start__
+0xa3b5: ___ImageBase
+0xa3c2: __subsystem__
+0xa3d0: __imp__strlen
+0xa3de: .weak.__Jv_RegisterClasses.___EH_FRAME_BEGIN__
+0xa40d: __CRT_fenv
+0xa418: __imp__calloc
+0xa426: __Jv_RegisterClasses
+0xa43b: __imp____getmainargs
+0xa450: ___tls_end__
+0xa45d: __imp__ExitProcess@4
+0xa472: _mingw_initltssuo_force
+0xa48a: _InitializeCriticalSection@4
+0xa4a7: ___cpu_features
+0xa4b7: __imp__free
+0xa4c3: __imp__SetUnhandledExceptionFilter@4
+0xa4e8: ___deregister_frame_info
+0xa501: __major_image_version__
+0xa519: __loader_flags__
+0xa52a: __imp__tolower
+0xa539: __CRT_glob
+0xa544: __setmode
+0xa54e: __imp__printf
+0xa55c: ___chkstk_ms
+0xa569: __head_libkernel32_a
+0xa57e: __rt_psrelocs_end
+0xa590: __imp___cexit
+0xa59e: __minor_subsystem_version__
+0xa5ba: __imp__FindClose@4
+0xa5cd: __minor_image_version__
+0xa5e5: __imp__Sleep@4
+0xa5f4: __imp__vfprintf
+0xa604: __imp____set_app_type
+0xa61a: _mingw_initltsdyn_force
+0xa632: _TlsGetValue@4
+0xa641: __imp__DeleteCriticalSection@4
+0xa660: _LeaveCriticalSection@4
+0xa678: __imp__GetCommandLineA@0
+0xa691: __imp__LoadLibraryA@4
+0xa6a7: __imp__strcspn
+0xa6b6: __imp__setlocale
+0xa6c7: __RUNTIME_PSEUDO_RELOC_LIST_END__
+0xa6e9: __libkernel32_a_iname
+0xa6ff: ___dyn_tls_init_callback
+0xa718: __tls_used
+0xa723: ___crt_xt_end__
+0xa733: _vfprintf
+0xa73d: __imp__EnterCriticalSection@4
+0xa75b: __imp__fwrite
+=== UTF-16LE strings >= 4 ===
+=== Entry disassembly, first 0x240 bytes ===
+entry file offset 1760
+0x4012e0: 83ec1c                   sub      esp, 0x1c
+0x4012e3: c7042401000000           mov      dword ptr [esp], 1
+0x4012ea: ff15a8814000             call     dword ptr [0x4081a8]
+0x4012f0: e8bbfeffff               call     0x4011b0
+0x4012f5: 8d742600                 lea      esi, [esi]
+0x4012f9: 8dbc2700000000           lea      edi, [edi]
+0x401300: 83ec1c                   sub      esp, 0x1c
+0x401303: c7042402000000           mov      dword ptr [esp], 2
+0x40130a: ff15a8814000             call     dword ptr [0x4081a8]
+0x401310: e89bfeffff               call     0x4011b0
+0x401315: 8d742600                 lea      esi, [esi]
+0x401319: 8dbc2700000000           lea      edi, [edi]
+0x401320: ff25d4814000             jmp      dword ptr [0x4081d4]
+0x401326: 8d7600                   lea      esi, [esi]
+0x401329: 8dbc2700000000           lea      edi, [edi]
+0x401330: ff25c4814000             jmp      dword ptr [0x4081c4]
+0x401336: 90                       nop      
+0x401337: 90                       nop      
+0x401338: 90                       nop      
+0x401339: 90                       nop      
+0x40133a: 90                       nop      
+0x40133b: 90                       nop      
+0x40133c: 90                       nop      
+0x40133d: 90                       nop      
+0x40133e: 90                       nop      
+0x40133f: 90                       nop      
+0x401340: 55                       push     ebp
+0x401341: 89e5                     mov      ebp, esp
+0x401343: 56                       push     esi
+0x401344: 53                       push     ebx
+0x401345: 83ec10                   sub      esp, 0x10
+0x401348: c7042400504000           mov      dword ptr [esp], 0x405000
+0x40134f: e814290000               call     0x403c68
+0x401354: 83ec04                   sub      esp, 4
+0x401357: 85c0                     test     eax, eax
+0x401359: 0f84b1000000             je       0x401410
+0x40135f: c7042400504000           mov      dword ptr [esp], 0x405000
+0x401366: 89c3                     mov      ebx, eax
+0x401368: e8db280000               call     0x403c48
+0x40136d: 83ec04                   sub      esp, 4
+0x401370: a36c704000               mov      dword ptr [0x40706c], eax
+0x401375: c744240413504000         mov      dword ptr [esp + 4], 0x405013
+0x40137d: 891c24                   mov      dword ptr [esp], ebx
+0x401380: e8db280000               call     0x403c60
+0x401385: 83ec08                   sub      esp, 8
+0x401388: 89c6                     mov      esi, eax
+0x40138a: c744240429504000         mov      dword ptr [esp + 4], 0x405029
+0x401392: 891c24                   mov      dword ptr [esp], ebx
+0x401395: e8c6280000               call     0x403c60
+0x40139a: 83ec08                   sub      esp, 8
+0x40139d: a300404000               mov      dword ptr [0x404000], eax
+0x4013a2: 85f6                     test     esi, esi
+0x4013a4: 7411                     je       0x4013b7
+0x4013a6: c744240408704000         mov      dword ptr [esp + 4], 0x407008
+0x4013ae: c70424b8604000           mov      dword ptr [esp], 0x4060b8
+0x4013b5: ffd6                     call     esi
+0x4013b7: a174404000               mov      eax, dword ptr [0x404074]
+0x4013bc: 85c0                     test     eax, eax
+0x4013be: 743a                     je       0x4013fa
+0x4013c0: c7042441504000           mov      dword ptr [esp], 0x405041
+0x4013c7: e89c280000               call     0x403c68
+0x4013cc: 83ec04                   sub      esp, 4
+0x4013cf: 85c0                     test     eax, eax
+0x4013d1: ba00000000               mov      edx, 0
+0x4013d6: 7415                     je       0x4013ed
+0x4013d8: c74424044f504000         mov      dword ptr [esp + 4], 0x40504f
+0x4013e0: 890424                   mov      dword ptr [esp], eax
+0x4013e3: e878280000               call     0x403c60
+0x4013e8: 83ec08                   sub      esp, 8
+0x4013eb: 89c2                     mov      edx, eax
+0x4013ed: 85d2                     test     edx, edx
+0x4013ef: 7409                     je       0x4013fa
+0x4013f1: c7042474404000           mov      dword ptr [esp], 0x404074
+0x4013f8: ffd2                     call     edx
+0x4013fa: c7042430144000           mov      dword ptr [esp], 0x401430
+0x401401: e81affffff               call     0x401320
+0x401406: 8d65f8                   lea      esp, [ebp - 8]
+0x401409: 5b                       pop      ebx
+0x40140a: 5e                       pop      esi
+0x40140b: 5d                       pop      ebp
+0x40140c: c3                       ret      
+0x40140d: 8d7600                   lea      esi, [esi]
+0x401410: c7050040400000000000     mov      dword ptr [0x404000], 0
+0x40141a: be00000000               mov      esi, 0
+0x40141f: eb81                     jmp      0x4013a2
+0x401421: eb0d                     jmp      0x401430
+0x401423: 90                       nop      
+0x401424: 90                       nop      
+0x401425: 90                       nop      
+0x401426: 90                       nop      
+0x401427: 90                       nop      
+0x401428: 90                       nop      
+0x401429: 90                       nop      
+0x40142a: 90                       nop      
+0x40142b: 90                       nop      
+0x40142c: 90                       nop      
+0x40142d: 90                       nop      
+0x40142e: 90                       nop      
+0x40142f: 90                       nop      
+0x401430: 55                       push     ebp
+0x401431: 89e5                     mov      ebp, esp
+0x401433: 83ec18                   sub      esp, 0x18
+0x401436: a100404000               mov      eax, dword ptr [0x404000]
+0x40143b: 85c0                     test     eax, eax
+0x40143d: 7409                     je       0x401448
+0x40143f: c70424b8604000           mov      dword ptr [esp], 0x4060b8
+0x401446: ffd0                     call     eax
+0x401448: a16c704000               mov      eax, dword ptr [0x40706c]
+0x40144d: 85c0                     test     eax, eax
+0x40144f: 740b                     je       0x40145c
+0x401451: 890424                   mov      dword ptr [esp], eax
+0x401454: e827280000               call     0x403c80
+0x401459: 83ec04                   sub      esp, 4
+0x40145c: c9                       leave    
+0x40145d: c3                       ret      
+0x40145e: 90                       nop      
+0x40145f: 90                       nop      
+0x401460: 55                       push     ebp
+0x401461: 89e5                     mov      ebp, esp
+0x401463: 83ec18                   sub      esp, 0x18
+0x401466: c7042464504000           mov      dword ptr [esp], 0x405064
+0x40146d: e81e270000               call     0x403b90
+0x401472: c70424e8030000           mov      dword ptr [esp], 0x3e8
+0x401479: e8ba270000               call     0x403c38
+0x40147e: 83ec04                   sub      esp, 4
+0x401481: c7042481504000           mov      dword ptr [esp], 0x405081
+0x401488: e803270000               call     0x403b90
+0x40148d: 90                       nop      
+0x40148e: c9                       leave    
+0x40148f: c3                       ret      
+0x401490: 55                       push     ebp
+0x401491: 89e5                     mov      ebp, esp
+0x401493: 83ec28                   sub      esp, 0x28
+0x401496: c745f023000000           mov      dword ptr [ebp - 0x10], 0x23
+0x40149d: c745f400000000           mov      dword ptr [ebp - 0xc], 0
+0x4014a4: eb1e                     jmp      0x4014c4
+0x4014a6: 8b55f4                   mov      edx, dword ptr [ebp - 0xc]
+0x4014a9: 8b450c                   mov      eax, dword ptr [ebp + 0xc]
+0x4014ac: 01d0                     add      eax, edx
+0x4014ae: 8b4df4                   mov      ecx, dword ptr [ebp - 0xc]
+0x4014b1: 8b5508                   mov      edx, dword ptr [ebp + 8]
+0x4014b4: 01ca                     add      edx, ecx
+0x4014b6: 0fb60a                   movzx    ecx, byte ptr [edx]
+0x4014b9: 8b55f0                   mov      edx, dword ptr [ebp - 0x10]
+0x4014bc: 31ca                     xor      edx, ecx
+0x4014be: 8810                     mov      byte ptr [eax], dl
+0x4014c0: 8345f401                 add      dword ptr [ebp - 0xc], 1
+0x4014c4: 8b4508                   mov      eax, dword ptr [ebp + 8]
+0x4014c7: 890424                   mov      dword ptr [esp], eax
+0x4014ca: e889260000               call     0x403b58
+0x4014cf: 89c2                     mov      edx, eax
+0x4014d1: 8b45f4                   mov      eax, dword ptr [ebp - 0xc]
+0x4014d4: 39c2                     cmp      edx, eax
+0x4014d6: 77ce                     ja       0x4014a6
+0x4014d8: 8b4508                   mov      eax, dword ptr [ebp + 8]
+0x4014db: 890424                   mov      dword ptr [esp], eax
+0x4014de: e875260000               call     0x403b58
+0x4014e3: 89c2                     mov      edx, eax
+0x4014e5: 8b450c                   mov      eax, dword ptr [ebp + 0xc]
+0x4014e8: 01d0                     add      eax, edx
+0x4014ea: c60000                   mov      byte ptr [eax], 0
+0x4014ed: 90                       nop      
+0x4014ee: c9                       leave    
+0x4014ef: c3                       ret      
+0x4014f0: 55                       push     ebp
+0x4014f1: 89e5                     mov      ebp, esp
+0x4014f3: 83ec58                   sub      esp, 0x58
+0x4014f6: e865ffffff               call     0x401460
+0x4014fb: 8d45c6                   lea      eax, [ebp - 0x3a]
+0x4014fe: 89442404                 mov      dword ptr [esp + 4], eax
+0x401502: 8b4508                   mov      eax, dword ptr [ebp + 8]
+0x401505: 890424                   mov      dword ptr [esp], eax
+0x401508: e883ffffff               call     0x401490
+0x40150d: c744240420404000         mov      dword ptr [esp + 4], 0x404020
+0x401515: 8d45c6                   lea      eax, [ebp - 0x3a]
+0x401518: 890424                   mov      dword ptr [esp], eax
+0x40151b: e850260000               call     0x403b70
+
+=== Independent disassembly and data dump ===
+COMMAND> python 'C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\第一届启航杯checker_562\analysis\independent_audit_562_disasm.py' (Capstone decode only)
+=== startup helper: 0x401150-0x401220 ===
+0x401150: 8b4808               mov      ecx, dword ptr [eax + 8]
+0x401153: 894a08               mov      dword ptr [edx + 8], ecx
+0x401156: 890424               mov      dword ptr [esp], eax
+0x401159: e8621e0000           call     0x402fc0
+0x40115e: c7042444704000       mov      dword ptr [esp], 0x407044
+0x401165: e8e61e0000           call     0x403050
+0x40116a: 83ec04               sub      esp, 4
+0x40116d: ebd0                 jmp      0x40113f
+0x40116f: 8b4208               mov      eax, dword ptr [edx + 8]
+0x401172: a33c704000           mov      dword ptr [0x40703c], eax
+0x401177: 89d0                 mov      eax, edx
+0x401179: ebdb                 jmp      0x401156
+0x40117b: 90                   nop      
+0x40117c: 8d742600             lea      esi, [esi]
+0x401180: 83ec1c               sub      esp, 0x1c
+0x401183: 8b442424             mov      eax, dword ptr [esp + 0x24]
+0x401187: 83f801               cmp      eax, 1
+0x40118a: 7447                 je       0x4011d3
+0x40118c: 7217                 jb       0x4011a5
+0x40118e: 83f803               cmp      eax, 3
+0x401191: 7509                 jne      0x40119c
+0x401193: a140704000           mov      eax, dword ptr [0x407040]
+0x401198: 85c0                 test     eax, eax
+0x40119a: 7565                 jne      0x401201
+0x40119c: b801000000           mov      eax, 1
+0x4011a1: 83c41c               add      esp, 0x1c
+0x4011a4: c3                   ret      
+0x4011a5: a140704000           mov      eax, dword ptr [0x407040]
+0x4011aa: 85c0                 test     eax, eax
+0x4011ac: 7562                 jne      0x401210
+0x4011ae: a140704000           mov      eax, dword ptr [0x407040]
+0x4011b3: 83f801               cmp      eax, 1
+0x4011b6: 75e4                 jne      0x40119c
+0x4011b8: c7042444704000       mov      dword ptr [esp], 0x407044
+0x4011bf: c7054070400000000000 mov      dword ptr [0x407040], 0
+0x4011c9: e8e21e0000           call     0x4030b0
+0x4011ce: 83ec04               sub      esp, 4
+0x4011d1: ebc9                 jmp      0x40119c
+0x4011d3: a140704000           mov      eax, dword ptr [0x407040]
+0x4011d8: 85c0                 test     eax, eax
+0x4011da: 7414                 je       0x4011f0
+0x4011dc: c7054070400001000000 mov      dword ptr [0x407040], 1
+0x4011e6: b801000000           mov      eax, 1
+0x4011eb: 83c41c               add      esp, 0x1c
+0x4011ee: c3                   ret      
+0x4011ef: 90                   nop      
+0x4011f0: c7042444704000       mov      dword ptr [esp], 0x407044
+0x4011f7: e85c1e0000           call     0x403058
+0x4011fc: 83ec04               sub      esp, 4
+0x4011ff: ebdb                 jmp      0x4011dc
+0x401201: e8eafdffff           call     0x400ff0
+0x401206: eb94                 jmp      0x40119c
+0x401208: 90                   nop      
+0x401209: 8db42600000000       lea      esi, [esi]
+0x401210: e8dbfdffff           call     0x400ff0
+0x401215: eb97                 jmp      0x4011ae
+0x401217: 90                   nop      
+0x401218: 90                   nop      
+0x401219: 90                   nop      
+0x40121a: 90                   nop      
+0x40121b: 90                   nop      
+0x40121c: 90                   nop      
+0x40121d: 90                   nop      
+0x40121e: 90                   nop      
+0x40121f: 90                   nop      
+=== entry/CRT and custom startup: 0x4012e0-0x401420 ===
+0x4012e0: 896c240c             mov      dword ptr [esp + 0xc], ebp
+0x4012e4: 89442404             mov      dword ptr [esp + 4], eax
+0x4012e8: 8b442424             mov      eax, dword ptr [esp + 0x24]
+0x4012ec: 890424               mov      dword ptr [esp], eax
+0x4012ef: e8341d0000           call     0x403028
+0x4012f4: 83ec10               sub      esp, 0x10
+0x4012f7: 8b542438             mov      edx, dword ptr [esp + 0x38]
+0x4012fb: 897c2408             mov      dword ptr [esp + 8], edi
+0x4012ff: 89742404             mov      dword ptr [esp + 4], esi
+0x401303: 891c24               mov      dword ptr [esp], ebx
+0x401306: 8954241c             mov      dword ptr [esp + 0x1c], edx
+0x40130a: e8911c0000           call     0x402fa0
+0x40130f: 8b54241c             mov      edx, dword ptr [esp + 0x1c]
+0x401313: 83fa40               cmp      edx, 0x40
+0x401316: 74a6                 je       0x4012be
+0x401318: 83fa04               cmp      edx, 4
+0x40131b: 74a1                 je       0x4012be
+0x40131d: 8b442420             mov      eax, dword ptr [esp + 0x20]
+0x401321: 896c240c             mov      dword ptr [esp + 0xc], ebp
+0x401325: 89442408             mov      dword ptr [esp + 8], eax
+0x401329: 8b442430             mov      eax, dword ptr [esp + 0x30]
+0x40132d: 89442404             mov      dword ptr [esp + 4], eax
+0x401331: 8b442424             mov      eax, dword ptr [esp + 0x24]
+0x401335: 890424               mov      dword ptr [esp], eax
+0x401338: e8eb1c0000           call     0x403028
+0x40133d: 83ec10               sub      esp, 0x10
+0x401340: 83c44c               add      esp, 0x4c
+0x401343: 5b                   pop      ebx
+0x401344: 5e                   pop      esi
+0x401345: 5f                   pop      edi
+0x401346: 5d                   pop      ebp
+0x401347: c3                   ret      
+0x401348: 895c2408             mov      dword ptr [esp + 8], ebx
+0x40134c: c74424041c000000     mov      dword ptr [esp + 4], 0x1c
+0x401354: c70424f0504000       mov      dword ptr [esp], 0x4050f0
+0x40135b: e8c0feffff           call     0x401220
+0x401360: a15c704000           mov      eax, dword ptr [0x40705c]
+0x401365: 85c0                 test     eax, eax
+0x401367: 7407                 je       0x401370
+0x401369: c3                   ret      
+0x40136a: 8db600000000         lea      esi, [esi]
+0x401370: b840534000           mov      eax, 0x405340
+0x401375: c7055c70400001000000 mov      dword ptr [0x40705c], 1
+0x40137f: 2d40534000           sub      eax, 0x405340
+0x401384: 83f807               cmp      eax, 7
+0x401387: 7ee0                 jle      0x401369
+0x401389: 57                   push     edi
+0x40138a: 56                   push     esi
+0x40138b: 53                   push     ebx
+0x40138c: 83ec20               sub      esp, 0x20
+0x40138f: 83f80b               cmp      eax, 0xb
+0x401392: 0f8ee8000000         jle      0x401480
+0x401398: 8b3540534000         mov      esi, dword ptr [0x405340]
+0x40139e: 85f6                 test     esi, esi
+0x4013a0: 0f858f000000         jne      0x401435
+0x4013a6: 8b1d44534000         mov      ebx, dword ptr [0x405344]
+0x4013ac: 85db                 test     ebx, ebx
+0x4013ae: 0f8581000000         jne      0x401435
+0x4013b4: 8b0d48534000         mov      ecx, dword ptr [0x405348]
+0x4013ba: bb4c534000           mov      ebx, 0x40534c
+0x4013bf: 85c9                 test     ecx, ecx
+0x4013c1: 0f84be000000         je       0x401485
+0x4013c7: bb40534000           mov      ebx, 0x405340
+0x4013cc: 8b4308               mov      eax, dword ptr [ebx + 8]
+0x4013cf: 83f801               cmp      eax, 1
+0x4013d2: 0f8543010000         jne      0x40151b
+0x4013d8: 83c30c               add      ebx, 0xc
+0x4013db: 81fb40534000         cmp      ebx, 0x405340
+0x4013e1: 0f8389000000         jae      0x401470
+0x4013e7: 8b13                 mov      edx, dword ptr [ebx]
+0x4013e9: 8b7b04               mov      edi, dword ptr [ebx + 4]
+0x4013ec: 8db200004000         lea      esi, [edx + 0x400000]
+0x4013f2: 8b8a00004000         mov      ecx, dword ptr [edx + 0x400000]
+0x4013f8: 0fb65308             movzx    edx, byte ptr [ebx + 8]
+0x4013fc: 8d8700004000         lea      eax, [edi + 0x400000]
+0x401402: 83fa10               cmp      edx, 0x10
+0x401405: 0f8495000000         je       0x4014a0
+0x40140b: 83fa20               cmp      edx, 0x20
+0x40140e: 0f84ec000000         je       0x401500
+0x401414: 83fa08               cmp      edx, 8
+0x401417: 0f84b3000000         je       0x4014d0
+=== candidate helpers 401460..401530: 0x401460-0x401530 ===
+0x401460: 54                   push     esp
+0x401461: 241c                 and      al, 0x1c
+0x401463: e808feffff           call     0x401270
+0x401468: 81fb40534000         cmp      ebx, 0x405340
+0x40146e: 72d2                 jb       0x401442
+0x401470: 83c420               add      esp, 0x20
+0x401473: 5b                   pop      ebx
+0x401474: 5e                   pop      esi
+0x401475: 5f                   pop      edi
+0x401476: c3                   ret      
+0x401477: 89f6                 mov      esi, esi
+0x401479: 8dbc2700000000       lea      edi, [edi]
+0x401480: bb40534000           mov      ebx, 0x405340
+0x401485: 8b13                 mov      edx, dword ptr [ebx]
+0x401487: 85d2                 test     edx, edx
+0x401489: 75af                 jne      0x40143a
+0x40148b: 8b4304               mov      eax, dword ptr [ebx + 4]
+0x40148e: 85c0                 test     eax, eax
+0x401490: 0f8436ffffff         je       0x4013cc
+0x401496: eba2                 jmp      0x40143a
+0x401498: 90                   nop      
+0x401499: 8db42600000000       lea      esi, [esi]
+0x4014a0: 0fb79700004000       movzx    edx, word ptr [edi + 0x400000]
+0x4014a7: 6685d2               test     dx, dx
+0x4014aa: 7906                 jns      0x4014b2
+0x4014ac: 81ca0000ffff         or       edx, 0xffff0000
+0x4014b2: 29f2                 sub      edx, esi
+0x4014b4: 01d1                 add      ecx, edx
+0x4014b6: 8d54241c             lea      edx, [esp + 0x1c]
+0x4014ba: 894c241c             mov      dword ptr [esp + 0x1c], ecx
+0x4014be: b902000000           mov      ecx, 2
+0x4014c3: e8a8fdffff           call     0x401270
+0x4014c8: e90bffffff           jmp      0x4013d8
+0x4014cd: 8d7600               lea      esi, [esi]
+0x4014d0: 0fb638               movzx    edi, byte ptr [eax]
+0x4014d3: 89fa                 mov      edx, edi
+0x4014d5: 84d2                 test     dl, dl
+0x4014d7: 7906                 jns      0x4014df
+0x4014d9: 81cf00ffffff         or       edi, 0xffffff00
+0x4014df: 29f7                 sub      edi, esi
+0x4014e1: 8d54241c             lea      edx, [esp + 0x1c]
+0x4014e5: 01f9                 add      ecx, edi
+0x4014e7: 894c241c             mov      dword ptr [esp + 0x1c], ecx
+0x4014eb: b901000000           mov      ecx, 1
+0x4014f0: e87bfdffff           call     0x401270
+0x4014f5: e9defeffff           jmp      0x4013d8
+0x4014fa: 8db600000000         lea      esi, [esi]
+0x401500: 29f1                 sub      ecx, esi
+0x401502: 0308                 add      ecx, dword ptr [eax]
+0x401504: 8d54241c             lea      edx, [esp + 0x1c]
+0x401508: 894c241c             mov      dword ptr [esp + 0x1c], ecx
+0x40150c: b904000000           mov      ecx, 4
+0x401511: e85afdffff           call     0x401270
+0x401516: e9bdfeffff           jmp      0x4013d8
+0x40151b: 89442404             mov      dword ptr [esp + 4], eax
+0x40151f: c7042424514000       mov      dword ptr [esp], 0x405124
+0x401526: e8f5fcffff           call     0x401220
+0x40152b: 90                   nop      
+0x40152c: 90                   nop      
+0x40152d: 90                   nop      
+0x40152e: 90                   nop      
+0x40152f: 90                   nop      
+=== candidate challenge main/remainder: 0x401530-0x401800 ===
+0x401530: 51                   push     ecx
+0x401531: 50                   push     eax
+0x401532: 3d00100000           cmp      eax, 0x1000
+0x401537: 8d4c240c             lea      ecx, [esp + 0xc]
+0x40153b: 7215                 jb       0x401552
+0x40153d: 81e900100000         sub      ecx, 0x1000
+0x401543: 830900               or       dword ptr [ecx], 0
+0x401546: 2d00100000           sub      eax, 0x1000
+0x40154b: 3d00100000           cmp      eax, 0x1000
+0x401550: 77eb                 ja       0x40153d
+0x401552: 29c1                 sub      ecx, eax
+0x401554: 830900               or       dword ptr [ecx], 0
+0x401557: 58                   pop      eax
+0x401558: 59                   pop      ecx
+0x401559: c3                   ret      
+0x40155a: 90                   nop      
+0x40155b: 90                   nop      
+0x40155c: 6690                 nop      
+0x40155e: 6690                 nop      
+0x401560: 83ec1c               sub      esp, 0x1c
+0x401563: 8b442420             mov      eax, dword ptr [esp + 0x20]
+0x401567: c744240c801f0000     mov      dword ptr [esp + 0xc], 0x1f80
+0x40156f: 83f8fd               cmp      eax, -3
+0x401572: 7431                 je       0x4015a5
+0x401574: 83f8fc               cmp      eax, -4
+0x401577: 743a                 je       0x4015b3
+0x401579: 85c0                 test     eax, eax
+0x40157b: 7448                 je       0x4015c5
+0x40157d: 83f8ff               cmp      eax, -1
+0x401580: 742d                 je       0x4015af
+0x401582: 83f8fe               cmp      eax, -2
+0x401585: 7436                 je       0x4015bd
+0x401587: d920                 fldenv   [eax]
+0x401589: 0fb7401c             movzx    eax, word ptr [eax + 0x1c]
+0x40158d: 8944240c             mov      dword ptr [esp + 0xc], eax
+0x401591: f6052470400010       test     byte ptr [0x407024], 0x10
+0x401598: 7405                 je       0x40159f
+0x40159a: 0fae54240c           ldmxcsr  dword ptr [esp + 0xc]
+0x40159f: 31c0                 xor      eax, eax
+0x4015a1: 83c41c               add      esp, 0x1c
+0x4015a4: c3                   ret      
+0x4015a5: c70570404000ffffffff mov      dword ptr [0x404070], 0xffffffff
+0x4015af: dbe3                 fninit   
+0x4015b1: ebde                 jmp      0x401591
+0x4015b3: c70570404000feffffff mov      dword ptr [0x404070], 0xfffffffe
+0x4015bd: ff15b4814000         call     dword ptr [0x4081b4]
+0x4015c3: ebcc                 jmp      0x401591
+0x4015c5: a170404000           mov      eax, dword ptr [0x404070]
+0x4015ca: ebb1                 jmp      0x40157d
+0x4015cc: 90                   nop      
+0x4015cd: 90                   nop      
+0x4015ce: 90                   nop      
+0x4015cf: 90                   nop      
+0x4015d0: 85c0                 test     eax, eax
+0x4015d2: 0f8482000000         je       0x40165a
+0x4015d8: 56                   push     esi
+0x4015d9: 53                   push     ebx
+0x4015da: 89d3                 mov      ebx, edx
+0x4015dc: c1eb05               shr      ebx, 5
+0x4015df: 31c9                 xor      ecx, ecx
+0x4015e1: 83f301               xor      ebx, 1
+0x4015e4: 83e301               and      ebx, 1
+0x4015e7: 89f6                 mov      esi, esi
+0x4015e9: 8dbc2700000000       lea      edi, [edi]
+0x4015f0: 0fbe10               movsx    edx, byte ptr [eax]
+0x4015f3: 85d2                 test     edx, edx
+0x4015f5: 7429                 je       0x401620
+0x4015f7: 84db                 test     bl, bl
+0x4015f9: 7405                 je       0x401600
+0x4015fb: 83fa7f               cmp      edx, 0x7f
+0x4015fe: 7440                 je       0x401640
+0x401600: 83c001               add      eax, 1
+0x401603: 85c9                 test     ecx, ecx
+0x401605: 751e                 jne      0x401625
+0x401607: 83fa2a               cmp      edx, 0x2a
+0x40160a: 7444                 je       0x401650
+0x40160c: 83fa3f               cmp      edx, 0x3f
+0x40160f: 743f                 je       0x401650
+0x401611: 31c9                 xor      ecx, ecx
+0x401613: 83fa5b               cmp      edx, 0x5b
+0x401616: 0fbe10               movsx    edx, byte ptr [eax]
+0x401619: 0f94c1               sete     cl
+0x40161c: 85d2                 test     edx, edx
+0x40161e: 75d7                 jne      0x4015f7
+0x401620: 89d0                 mov      eax, edx
+0x401622: 5b                   pop      ebx
+0x401623: 5e                   pop      esi
+0x401624: c3                   ret      
+0x401625: 83f901               cmp      ecx, 1
+0x401628: 7e05                 jle      0x40162f
+0x40162a: 83fa5d               cmp      edx, 0x5d
+0x40162d: 7421                 je       0x401650
+0x40162f: 83fa21               cmp      edx, 0x21
+0x401632: 0f95c2               setne    dl
+0x401635: 0fb6d2               movzx    edx, dl
+0x401638: 01d1                 add      ecx, edx
+0x40163a: ebb4                 jmp      0x4015f0
+0x40163c: 8d742600             lea      esi, [esi]
+0x401640: 80780100             cmp      byte ptr [eax + 1], 0
+0x401644: 8d7002               lea      esi, [eax + 2]
+0x401647: 7416                 je       0x40165f
+0x401649: 89f0                 mov      eax, esi
+0x40164b: ebb6                 jmp      0x401603
+0x40164d: 8d7600               lea      esi, [esi]
+0x401650: ba01000000           mov      edx, 1
+0x401655: 89d0                 mov      eax, edx
+0x401657: 5b                   pop      ebx
+0x401658: 5e                   pop      esi
+0x401659: c3                   ret      
+0x40165a: 31d2                 xor      edx, edx
+0x40165c: 89d0                 mov      eax, edx
+0x40165e: c3                   ret      
+0x40165f: 31d2                 xor      edx, edx
+0x401661: ebbd                 jmp      0x401620
+0x401663: 8db600000000         lea      esi, [esi]
+0x401669: 8dbc2700000000       lea      edi, [edi]
+0x401670: 85c0                 test     eax, eax
+0x401672: 745c                 je       0x4016d0
+0x401674: 56                   push     esi
+0x401675: 53                   push     ebx
+0x401676: 89c6                 mov      esi, eax
+0x401678: 83ec14               sub      esp, 0x14
+0x40167b: 8b400c               mov      eax, dword ptr [eax + 0xc]
+0x40167e: 8d5801               lea      ebx, [eax + 1]
+0x401681: 8d049d00000000       lea      eax, [ebx*4]
+0x401688: 890424               mov      dword ptr [esp], eax
+0x40168b: e820190000           call     0x402fb0
+0x401690: 89c1                 mov      ecx, eax
+0x401692: 894608               mov      dword ptr [esi + 8], eax
+0x401695: b803000000           mov      eax, 3
+0x40169a: 85c9                 test     ecx, ecx
+0x40169c: 7422                 je       0x4016c0
+0x40169e: 85db                 test     ebx, ebx
+0x4016a0: 89da                 mov      edx, ebx
+0x4016a2: c7460400000000       mov      dword ptr [esi + 4], 0
+0x4016a9: 7e13                 jle      0x4016be
+0x4016ab: 90                   nop      
+0x4016ac: 8d742600             lea      esi, [esi]
+0x4016b0: 83ea01               sub      edx, 1
+0x4016b3: 85d2                 test     edx, edx
+0x4016b5: c7049100000000       mov      dword ptr [ecx + edx*4], 0
+0x4016bc: 75f2                 jne      0x4016b0
+0x4016be: 31c0                 xor      eax, eax
+0x4016c0: 83c414               add      esp, 0x14
+0x4016c3: 5b                   pop      ebx
+0x4016c4: 5e                   pop      esi
+0x4016c5: c3                   ret      
+0x4016c6: 8d7600               lea      esi, [esi]
+0x4016c9: 8dbc2700000000       lea      edi, [edi]
+0x4016d0: 31c0                 xor      eax, eax
+0x4016d2: c3                   ret      
+0x4016d3: 8db600000000         lea      esi, [esi]
+0x4016d9: 8dbc2700000000       lea      edi, [edi]
+0x4016e0: 55                   push     ebp
+0x4016e1: 57                   push     edi
+0x4016e2: 89c7                 mov      edi, eax
+0x4016e4: 56                   push     esi
+0x4016e5: 53                   push     ebx
+0x4016e6: 83ec3c               sub      esp, 0x3c
+0x4016e9: 0fbe18               movsx    ebx, byte ptr [eax]
+0x4016ec: 8954241c             mov      dword ptr [esp + 0x1c], edx
+0x4016f0: 894c2420             mov      dword ptr [esp + 0x20], ecx
+0x4016f4: 83fb5d               cmp      ebx, 0x5d
+0x4016f7: 89dd                 mov      ebp, ebx
+0x4016f9: 0f8461010000         je       0x401860
+0x4016ff: 83fb2d               cmp      ebx, 0x2d
+0x401702: 0f8458010000         je       0x401860
+0x401708: 8b4c241c             mov      ecx, dword ptr [esp + 0x1c]
+0x40170c: 89c8                 mov      eax, ecx
+0x40170e: f7d0                 not      eax
+0x401710: 89442428             mov      dword ptr [esp + 0x28], eax
+0x401714: b801000000           mov      eax, 1
+0x401719: 29c8                 sub      eax, ecx
+0x40171b: 8944242c             mov      dword ptr [esp + 0x2c], eax
+0x40171f: eb0d                 jmp      0x40172e
+0x401721: 89ee                 mov      esi, ebp
+0x401723: 2b74241c             sub      esi, dword ptr [esp + 0x1c]
+0x401727: 85f6                 test     esi, esi
+0x401729: 7468                 je       0x401793
+0x40172b: 0fbeda               movsx    ebx, dl
+0x40172e: 83fb5d               cmp      ebx, 0x5d
+0x401731: 8d7701               lea      esi, [edi + 1]
+0x401734: 0f841a010000         je       0x401854
+0x40173a: 83fb2d               cmp      ebx, 0x2d
+0x40173d: 0f848d000000         je       0x4017d0
+0x401743: 85db                 test     ebx, ebx
+0x401745: 0f8409010000         je       0x401854
+0x40174b: 83fb2f               cmp      ebx, 0x2f
+0x40174e: 0f8400010000         je       0x401854
+0x401754: 83fb5c               cmp      ebx, 0x5c
+0x401757: 0f84f7000000         je       0x401854
+0x40175d: 0fb616               movzx    edx, byte ptr [esi]
+0x401760: 89dd                 mov      ebp, ebx
+0x401762: 89f7                 mov      edi, esi
+0x401764: f744242000400000     test     dword ptr [esp + 0x20], 0x4000
+0x40176c: 75b3                 jne      0x401721
+0x40176e: 892c24               mov      dword ptr [esp], ebp
+0x401771: 88542424             mov      byte ptr [esp + 0x24], dl
+0x401775: e8d6170000           call     0x402f50
+0x40177a: 89c6                 mov      esi, eax
+0x40177c: 8b44241c             mov      eax, dword ptr [esp + 0x1c]
+0x401780: 890424               mov      dword ptr [esp], eax
+0x401783: e8c8170000           call     0x402f50
+0x401788: 29c6                 sub      esi, eax
+0x40178a: 0fb6542424           movzx    edx, byte ptr [esp + 0x24]
+0x40178f: 85f6                 test     esi, esi
+0x401791: 7598                 jne      0x40172b
+0x401793: 8b442420             mov      eax, dword ptr [esp + 0x20]
+0x401797: 83e020               and      eax, 0x20
+0x40179a: eb12                 jmp      0x4017ae
+0x40179c: 8d742600             lea      esi, [esi]
+0x4017a0: 83c701               add      edi, 1
+0x4017a3: 84d2                 test     dl, dl
+0x4017a5: 0f84a9000000         je       0x401854
+0x4017ab: 0fb617               movzx    edx, byte ptr [edi]
+0x4017ae: 80fa5d               cmp      dl, 0x5d
+0x4017b1: 0f843e010000         je       0x4018f5
+0x4017b7: 80fa7f               cmp      dl, 0x7f
+0x4017ba: 75e4                 jne      0x4017a0
+0x4017bc: 85c0                 test     eax, eax
+0x4017be: 0f853c010000         jne      0x401900
+0x4017c4: 0fb65701             movzx    edx, byte ptr [edi + 1]
+0x4017c8: 83c701               add      edi, 1
+0x4017cb: ebd3                 jmp      0x4017a0
+0x4017cd: 8d7600               lea      esi, [esi]
+0x4017d0: 0fb65701             movzx    edx, byte ptr [edi + 1]
+0x4017d4: 80fa5d               cmp      dl, 0x5d
+0x4017d7: 0f8495000000         je       0x401872
+0x4017dd: 0fbeda               movsx    ebx, dl
+0x4017e0: 85db                 test     ebx, ebx
+0x4017e2: 7470                 je       0x401854
+0x4017e4: 8b4c2420             mov      ecx, dword ptr [esp + 0x20]
+0x4017e8: 8d7702               lea      esi, [edi + 2]
+0x4017eb: 81e100400000         and      ecx, 0x4000
+0x4017f1: 39dd                 cmp      ebp, ebx
+0x4017f3: 0f8d0f010000         jge      0x401908
+0x4017f9: 89742424             mov      dword ptr [esp + 0x24], esi
+0x4017fd: 89e8                 mov      eax, ebp
+=== data around challenge strings ===
+0x3200: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 45 4f 42 44 58 46 4d 53 12 14 6a 17 53 1b 77 79 4e 62 51 4a 42 4c 11 4f 52 16 57 62 62 51 79 11 b'\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00EOBDXFMS\x12\x14j\x17S\x1bwyNbQJBL\x11OR\x16WbbQy\x11'
+0x3210: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 45 4f 42 44 58 46 4d 53 12 14 6a 17 53 1b 77 79 4e 62 51 4a 42 4c 11 4f 52 16 57 62 62 51 79 11 73 12 54 5b 61 76 54 7b 76 11 5e 00 00 00 00 00 b'\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00EOBDXFMS\x12\x14j\x17S\x1bwyNbQJBL\x11OR\x16WbbQy\x11s\x12T[avT{v\x11^\x00\x00\x00\x00\x00'
+0x3220: 45 4f 42 44 58 46 4d 53 12 14 6a 17 53 1b 77 79 4e 62 51 4a 42 4c 11 4f 52 16 57 62 62 51 79 11 73 12 54 5b 61 76 54 7b 76 11 5e 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 b'EOBDXFMS\x12\x14j\x17S\x1bwyNbQJBL\x11OR\x16WbbQy\x11s\x12T[avT{v\x11^\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00'
+0x3230: 4e 62 51 4a 42 4c 11 4f 52 16 57 62 62 51 79 11 73 12 54 5b 61 76 54 7b 76 11 5e 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 02 00 00 00 fd ff ff ff 00 40 00 00 f0 3c 40 00 b'NbQJBL\x11OR\x16WbbQy\x11s\x12T[avT{v\x11^\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x02\x00\x00\x00\xfd\xff\xff\xff\x00@\x00\x00\xf0<@\x00'
+0x3240: 73 12 54 5b 61 76 54 7b 76 11 5e 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 02 00 00 00 fd ff ff ff 00 40 00 00 f0 3c 40 00 ff ff ff ff 00 00 00 00 00 00 00 00 00 00 00 00 b's\x12T[avT{v\x11^\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x02\x00\x00\x00\xfd\xff\xff\xff\x00@\x00\x00\xf0<@\x00\xff\xff\xff\xff\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00'
+0x3250: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 02 00 00 00 fd ff ff ff 00 40 00 00 f0 3c 40 00 ff ff ff ff 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 b'\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x02\x00\x00\x00\xfd\xff\xff\xff\x00@\x00\x00\xf0<@\x00\xff\xff\xff\xff\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00'
+0x3270: ff ff ff ff 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 b'\xff\xff\xff\xff\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00'
+0x3490: 64 2e 00 45 6e 74 65 72 20 74 68 65 20 66 6c 61 67 3a 20 00 0a 00 43 6f 72 72 65 63 74 21 20 59 6f 75 20 68 61 76 65 20 74 68 65 20 66 6c 61 67 2e 00 49 6e 63 6f 72 72 65 63 74 20 66 6c 61 67 b'd.\x00Enter the flag: \x00\n\x00Correct! You have the flag.\x00Incorrect flag'
+
+
+=== Independent .text xrefs ===
+COMMAND> python 'C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\第一届启航杯checker_562\analysis\independent_audit_562_xrefs.py' (static Capstone xref scan)
+disassembled .text instructions: 3498
+XREF 0x40150d: mov dword ptr [esp + 4], 0x404020 => ['encrypted bytes/table at file offset 0x3220']
+XREF 0x401538: mov dword ptr [esp], 0x405093 => ['Enter the flag']
+XREF 0x40158a: mov dword ptr [esp], 0x4050a6 => ['Correct message']
+XREF 0x401598: mov dword ptr [esp], 0x4050c2 => ['Incorrect message']
+=== direct relative call graph targets in challenge-text address range ===
+0x401033 -> 0x403b78
+0x401088 -> 0x403b78
+0x4010bf -> 0x403b78
+0x4010d8 -> 0x403b78
+0x40110a -> 0x403b78
+0x401152 -> 0x403b78
+0x40115e -> 0x402160
+0x40117c -> 0x403b78
+0x401198 -> 0x403b78
+0x4011e3 -> 0x403c40
+0x4011eb -> 0x401950
+0x4011f8 -> 0x402160
+0x4011fd -> 0x4015b0
+0x401220 -> 0x403be0
+0x401234 -> 0x403be0
+0x401248 -> 0x403be0
+0x40124d -> 0x403c08
+0x40125a -> 0x401f60
+0x401262 -> 0x401ae0
+0x401267 -> 0x403c10
+0x401283 -> 0x40152a
+0x40128a -> 0x403c00
+0x401292 -> 0x403ca0
+0x4012d6 -> 0x403c18
+0x4012f0 -> 0x4011b0
+0x401310 -> 0x4011b0
+0x40134f -> 0x403c68
+0x401368 -> 0x403c48
+0x401380 -> 0x403c60
+0x401395 -> 0x403c60
+0x4013c7 -> 0x403c68
+0x4013e3 -> 0x403c60
+0x401401 -> 0x401320
+0x401454 -> 0x403c80
+0x40146d -> 0x403b90
+0x401479 -> 0x403c38
+0x401488 -> 0x403b90
+0x4014ca -> 0x403b58
+0x4014de -> 0x403b58
+0x4014f6 -> 0x401460
+0x401508 -> 0x401490
+0x40151b -> 0x403b70
+0x401533 -> 0x401ae0
+0x40153f -> 0x403b98
+0x40155c -> 0x403bc8
+0x401570 -> 0x403b60
+0x401581 -> 0x4014f0
+0x401591 -> 0x403b90
+0x40159f -> 0x403b90
+0x4015c6 -> 0x403c78
+0x4015d3 -> 0x403b58
+0x4015e2 -> 0x402130
+0x40179e -> 0x403be8
+0x4018a1 -> 0x403100
+0x4018b0 -> 0x4012a0
+0x4018ff -> 0x403100
+0x401ab6 -> 0x401320
+0x401b33 -> 0x401d80
+0x401bcc -> 0x401d80
+0x401bfc -> 0x403ca8
+0x401c15 -> 0x403c30
+0x401c1f -> 0x403c70
+0x401c42 -> 0x403c50
+0x401c7f -> 0x403bd0
+0x401c9e -> 0x403ca8
+0x401cbb -> 0x403c50
+0x401d07 -> 0x403ca8
+0x401d37 -> 0x403c50
+0x401d59 -> 0x403bc0
+0x401d65 -> 0x403c50
+0x401dc9 -> 0x403cb0
+0x401df7 -> 0x403c58
+0x401e01 -> 0x401bf0
+0x401e10 -> 0x401bf0
+0x401e4c -> 0x403bb8
+0x401e60 -> 0x403b48
+0x401e65 -> 0x403bd8
+0x401e90 -> 0x403c20
+0x401eb9 -> 0x403ba0
+0x401eef -> 0x403c28
+0x401f0a -> 0x403ba0
+0x401f38 -> 0x403c28
+0x401f5b -> 0x401e20
+0x402030 -> 0x401e20
+0x402063 -> 0x401e70
+0x4020c3 -> 0x401e70
+0x4020f0 -> 0x401e70
+0x402111 -> 0x401e70
+0x402126 -> 0x401e20
+0x40228b -> 0x403bb0
+0x402375 -> 0x403b50
+0x402383 -> 0x403b50
+0x40241e -> 0x403b50
+0x40242c -> 0x403b50
+0x40253f -> 0x403b50
+0x40254d -> 0x403b50
+0x402625 -> 0x403b50
+0x40262f -> 0x403b50
+0x40268f -> 0x4025a0
+0x4026b6 -> 0x4022e0
+0x40271b -> 0x4022e0
+0x4027e1 -> 0x403b88
+0x40282f -> 0x402820
+0x402848 -> 0x402820
+0x402850 -> 0x403bc0
+0x402862 -> 0x4027c0
+0x402890 -> 0x403b58
+0x4028a1 -> 0x402130
+0x4028b7 -> 0x403ba0
+0x4028bf -> 0x403250
+0x4028d3 -> 0x402270
+0x4028ea -> 0x4021d0
+0x402907 -> 0x402870
+0x402941 -> 0x403b58
+0x4029fc -> 0x4037d0
+0x402a1e -> 0x403b58
+0x402a43 -> 0x403990
+0x402a6a -> 0x4025a0
+0x402a87 -> 0x402130
+0x402ab9 -> 0x403ba0
+0x402ac1 -> 0x403b58
+0x402acf -> 0x402130
+0x402b0c -> 0x403cc0
+0x402b53 -> 0x403b68
+0x402b75 -> 0x403cb8
+0x402b96 -> 0x403bb0
+0x402be6 -> 0x403b58
+0x402bf4 -> 0x402130
+0x402d84 -> 0x402870
+0x402dd6 -> 0x403b58
+0x402de4 -> 0x402130
+0x402e20 -> 0x403cc0
+0x402e32 -> 0x4027c0
+0x402e66 -> 0x4039e0
+0x402e78 -> 0x402820
+0x402e89 -> 0x403bc0
+0x402eda -> 0x403bc0
+0x402ef2 -> 0x403bc0
+0x402f10 -> 0x403bc0
+0x402f36 -> 0x403ba0
+0x402f80 -> 0x4027c0
+0x402fc1 -> 0x403bf8
+0x402ffc -> 0x403bb0
+0x40302f -> 0x4021d0
+0x403044 -> 0x403b58
+0x403052 -> 0x402130
+0x403081 -> 0x403cc0
+0x40309e -> 0x4027c0
+0x403128 -> 0x402270
+0x40313d -> 0x402870
+0x40316e -> 0x403b58
+0x40317c -> 0x402130
+0x4031be -> 0x403cc0
+0x4031d6 -> 0x4027c0
+0x403233 -> 0x403bc0
+0x403268 -> 0x403b80
+0x403276 -> 0x403cc0
+0x40328c -> 0x403b80
+0x4032b7 -> 0x403b40
+0x4032cb -> 0x403b88
+0x4032e4 -> 0x403b40
+0x4032f4 -> 0x403b80
+0x4032fc -> 0x403bc0
+0x40332a -> 0x403ba8
+0x40333b -> 0x402130
+0x403354 -> 0x403ba8
+0x403443 -> 0x403b40
+0x40345a -> 0x403b88
+0x403474 -> 0x403b40
+0x40352f -> 0x403b40
+0x40354b -> 0x403b80
+0x403553 -> 0x403bc0
+0x4035bb -> 0x403b80
+0x4035c3 -> 0x403bc0
+0x403665 -> 0x403c90
+0x4036ce -> 0x403bf8
+0x4036d5 -> 0x403c70
+0x4036e1 -> 0x403bf8
+0x4036ee -> 0x403bf8
+0x4036f8 -> 0x403bf8
+0x403705 -> 0x403bf8
+0x403712 -> 0x403bf8
+0x403735 -> 0x403c88
+0x4037a2 -> 0x403c70
+0x4037ac -> 0x403bf8
+0x403805 -> 0x403bf0
+0x4038cc -> 0x403bb0
+0x4038ef -> 0x403ba0
+0x4038f8 -> 0x403650
+0x403950 -> 0x403bf8
+0x40395f -> 0x403bf8
+0x40396c -> 0x403bf8
+0x403980 -> 0x403bc0
+0x4039b7 -> 0x403720
+0x4039c7 -> 0x403bf8
+0x4039f5 -> 0x403c98
+0x403a04 -> 0x403bc0
+0x403a10 -> 0x403bf8
+0x403a45 -> 0x403c98
+0x403a51 -> 0x403bf8
+0x403a69 -> 0x403650
+0x403aa5 -> 0x403bf8
+0x403ad4 -> 0x403a30
+0x403af8 -> 0x403720
+0x403b20 -> 0x403bf8
+
+
+=== Independent aligned challenge code ===
+COMMAND> python 'C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\第一届启航杯checker_562\analysis\independent_audit_562_main.py' (Capstone disassembly from start of .text, static only)
+=== aligned .text instructions 0x4014e0-0x401610 ===
+0x4014e3: 89c2                 mov      edx, eax
+0x4014e5: 8b450c               mov      eax, dword ptr [ebp + 0xc]
+0x4014e8: 01d0                 add      eax, edx
+0x4014ea: c60000               mov      byte ptr [eax], 0
+0x4014ed: 90                   nop      
+0x4014ee: c9                   leave    
+0x4014ef: c3                   ret      
+0x4014f0: 55                   push     ebp
+0x4014f1: 89e5                 mov      ebp, esp
+0x4014f3: 83ec58               sub      esp, 0x58
+0x4014f6: e865ffffff           call     0x401460
+0x4014fb: 8d45c6               lea      eax, [ebp - 0x3a]
+0x4014fe: 89442404             mov      dword ptr [esp + 4], eax
+0x401502: 8b4508               mov      eax, dword ptr [ebp + 8]
+0x401505: 890424               mov      dword ptr [esp], eax
+0x401508: e883ffffff           call     0x401490
+0x40150d: c744240420404000     mov      dword ptr [esp + 4], 0x404020
+0x401515: 8d45c6               lea      eax, [ebp - 0x3a]
+0x401518: 890424               mov      dword ptr [esp], eax
+0x40151b: e850260000           call     0x403b70
+0x401520: 85c0                 test     eax, eax
+0x401522: 0f94c0               sete     al
+0x401525: 0fb6c0               movzx    eax, al
+0x401528: c9                   leave    
+0x401529: c3                   ret      
+0x40152a: 55                   push     ebp
+0x40152b: 89e5                 mov      ebp, esp
+0x40152d: 83e4f0               and      esp, 0xfffffff0
+0x401530: 83ec50               sub      esp, 0x50
+0x401533: e8a8050000           call     0x401ae0
+0x401538: c7042493504000       mov      dword ptr [esp], 0x405093
+0x40153f: e854260000           call     0x403b98
+0x401544: a1bc814000           mov      eax, dword ptr [0x4081bc]
+0x401549: 89442408             mov      dword ptr [esp + 8], eax
+0x40154d: c744240432000000     mov      dword ptr [esp + 4], 0x32
+0x401555: 8d44241e             lea      eax, [esp + 0x1e]
+0x401559: 890424               mov      dword ptr [esp], eax
+0x40155c: e867260000           call     0x403bc8
+0x401561: c7442404a4504000     mov      dword ptr [esp + 4], 0x4050a4
+0x401569: 8d44241e             lea      eax, [esp + 0x1e]
+0x40156d: 890424               mov      dword ptr [esp], eax
+0x401570: e8eb250000           call     0x403b60
+0x401575: c644041e00           mov      byte ptr [esp + eax + 0x1e], 0
+0x40157a: 8d44241e             lea      eax, [esp + 0x1e]
+0x40157e: 890424               mov      dword ptr [esp], eax
+0x401581: e86affffff           call     0x4014f0
+0x401586: 85c0                 test     eax, eax
+0x401588: 740e                 je       0x401598
+0x40158a: c70424a6504000       mov      dword ptr [esp], 0x4050a6
+0x401591: e8fa250000           call     0x403b90
+0x401596: eb0c                 jmp      0x4015a4
+0x401598: c70424c2504000       mov      dword ptr [esp], 0x4050c2
+0x40159f: e8ec250000           call     0x403b90
+0x4015a4: b800000000           mov      eax, 0
+0x4015a9: c9                   leave    
+0x4015aa: c3                   ret      
+0x4015ab: 90                   nop      
+0x4015ac: 6690                 nop      
+0x4015ae: 6690                 nop      
+0x4015b0: 55                   push     ebp
+0x4015b1: 89e5                 mov      ebp, esp
+0x4015b3: 57                   push     edi
+0x4015b4: 56                   push     esi
+0x4015b5: 53                   push     ebx
+0x4015b6: 83ec4c               sub      esp, 0x4c
+0x4015b9: f6056040400002       test     byte ptr [0x404060], 2
+0x4015c0: 0f84ea020000         je       0x4018b0
+0x4015c6: e8ad260000           call     0x403c78
+0x4015cb: 8965c4               mov      dword ptr [ebp - 0x3c], esp
+0x4015ce: 890424               mov      dword ptr [esp], eax
+0x4015d1: 89c6                 mov      esi, eax
+0x4015d3: e880250000           call     0x403b58
+0x4015d8: 8d440011             lea      eax, [eax + eax + 0x11]
+0x4015dc: c1e804               shr      eax, 4
+0x4015df: c1e004               shl      eax, 4
+0x4015e2: e8490b0000           call     0x402130
+0x4015e7: 29c4                 sub      esp, eax
+0x4015e9: c745e400000000       mov      dword ptr [ebp - 0x1c], 0
+0x4015f0: c745d400000000       mov      dword ptr [ebp - 0x2c], 0
+0x4015f7: 8d442410             lea      eax, [esp + 0x10]
+0x4015fb: c745d000000000       mov      dword ptr [ebp - 0x30], 0
+0x401602: 89c2                 mov      edx, eax
+0x401604: 8945cc               mov      dword ptr [ebp - 0x34], eax
+0x401607: a160404000           mov      eax, dword ptr [0x404060]
+0x40160c: 2500440000           and      eax, 0x4400
+=== aligned .text instructions 0x401b00-0x401c00 ===
+0x401b00: 83ec1c               sub      esp, 0x1c
+0x401b03: 8b442424             mov      eax, dword ptr [esp + 0x24]
+0x401b07: 83f803               cmp      eax, 3
+0x401b0a: 7414                 je       0x401b20
+0x401b0c: 85c0                 test     eax, eax
+0x401b0e: 7410                 je       0x401b20
+0x401b10: b801000000           mov      eax, 1
+0x401b15: 83c41c               add      esp, 0x1c
+0x401b18: c20c00               ret      0xc
+0x401b1b: 90                   nop      
+0x401b1c: 8d742600             lea      esi, [esi]
+0x401b20: 8b542428             mov      edx, dword ptr [esp + 0x28]
+0x401b24: 89442404             mov      dword ptr [esp + 4], eax
+0x401b28: 8b442420             mov      eax, dword ptr [esp + 0x20]
+0x401b2c: 89542408             mov      dword ptr [esp + 8], edx
+0x401b30: 890424               mov      dword ptr [esp], eax
+0x401b33: e848020000           call     0x401d80
+0x401b38: b801000000           mov      eax, 1
+0x401b3d: 83c41c               add      esp, 0x1c
+0x401b40: c20c00               ret      0xc
+0x401b43: 8db600000000         lea      esi, [esi]
+0x401b49: 8dbc2700000000       lea      edi, [edi]
+0x401b50: 56                   push     esi
+0x401b51: 53                   push     ebx
+0x401b52: 83ec14               sub      esp, 0x14
+0x401b55: 833d6470400002       cmp      dword ptr [0x407064], 2
+0x401b5c: 8b442424             mov      eax, dword ptr [esp + 0x24]
+0x401b60: 740a                 je       0x401b6c
+0x401b62: c7056470400002000000 mov      dword ptr [0x407064], 2
+0x401b6c: 83f802               cmp      eax, 2
+0x401b6f: 7412                 je       0x401b83
+0x401b71: 83f801               cmp      eax, 1
+0x401b74: 743f                 je       0x401bb5
+0x401b76: 83c414               add      esp, 0x14
+0x401b79: b801000000           mov      eax, 1
+0x401b7e: 5b                   pop      ebx
+0x401b7f: 5e                   pop      esi
+0x401b80: c20c00               ret      0xc
+0x401b83: be14904000           mov      esi, 0x409014
+0x401b88: 81ee14904000         sub      esi, 0x409014
+0x401b8e: 83fe03               cmp      esi, 3
+0x401b91: 7ee3                 jle      0x401b76
+0x401b93: 31db                 xor      ebx, ebx
+0x401b95: 8b8314904000         mov      eax, dword ptr [ebx + 0x409014]
+0x401b9b: 85c0                 test     eax, eax
+0x401b9d: 7402                 je       0x401ba1
+0x401b9f: ffd0                 call     eax
+0x401ba1: 83c304               add      ebx, 4
+0x401ba4: 39de                 cmp      esi, ebx
+0x401ba6: 75ed                 jne      0x401b95
+0x401ba8: 83c414               add      esp, 0x14
+0x401bab: b801000000           mov      eax, 1
+0x401bb0: 5b                   pop      ebx
+0x401bb1: 5e                   pop      esi
+0x401bb2: c20c00               ret      0xc
+0x401bb5: 8b442428             mov      eax, dword ptr [esp + 0x28]
+0x401bb9: c744240401000000     mov      dword ptr [esp + 4], 1
+0x401bc1: 89442408             mov      dword ptr [esp + 8], eax
+0x401bc5: 8b442420             mov      eax, dword ptr [esp + 0x20]
+0x401bc9: 890424               mov      dword ptr [esp], eax
+0x401bcc: e8af010000           call     0x401d80
+0x401bd1: eba3                 jmp      0x401b76
+0x401bd3: 8db600000000         lea      esi, [esi]
+0x401bd9: 8dbc2700000000       lea      edi, [edi]
+0x401be0: 31c0                 xor      eax, eax
+0x401be2: c3                   ret      
+0x401be3: 90                   nop      
+0x401be4: 90                   nop      
+0x401be5: 90                   nop      
+0x401be6: 90                   nop      
+0x401be7: 90                   nop      
+0x401be8: 90                   nop      
+0x401be9: 90                   nop      
+0x401bea: 90                   nop      
+0x401beb: 90                   nop      
+0x401bec: 90                   nop      
+0x401bed: 90                   nop      
+0x401bee: 90                   nop      
+0x401bef: 90                   nop      
+0x401bf0: 56                   push     esi
+0x401bf1: 53                   push     ebx
+0x401bf2: 83ec14               sub      esp, 0x14
+0x401bf5: c7042444704000       mov      dword ptr [esp], 0x407044
+0x401bfc: e8a7200000           call     0x403ca8
+
+
+=== Independent candidate recovery and forward check ===
+COMMAND> python '.\题目资料\第一届启航杯checker_562\analysis\independent_audit_562_candidate.py' (static PE read and XOR-only transform; no checker.exe execution)
+input PE SHA256: 449D9F4569A0ED70FCB9BC8B96737719B62CFD8AE7C1E99D2864A3999887FDF5
+target VA=0x404020, RVA=0x4020, raw offset=0x3220
+encrypted NUL-terminated buffer length: 43
+encrypted bytes: 454f424458464d5312146a17531b77794e62514a424c114f52165762625179117312545b6176547b76115e
+candidate repr: b'flag{enp17I4p8TZmAriao2lq5tAArZ2P1wxBUwXU2}'
+candidate ascii: flag{enp17I4p8TZmAriao2lq5tAArZ2P1wxBUwXU2}
+candidate length: 43
+forward XOR output: 454f424458464d5312146a17531b77794e62514a424c114f52165762625179117312545b6176547b76115e
+target match: True
+format check: True
+
+
+=== Import wrapper mapping ===
+COMMAND> python '.\题目资料\第一届启航杯checker_562\analysis\independent_audit_562_import_wrappers.py' (static PE imports and disassembly)
+=== imported IAT addresses ===
+KERNEL32.dll
+  IAT 0x40813c: DeleteCriticalSection
+  IAT 0x408140: EnterCriticalSection
+  IAT 0x408144: ExitProcess
+  IAT 0x408148: FindClose
+  IAT 0x40814c: FindFirstFileA
+  IAT 0x408150: FindNextFileA
+  IAT 0x408154: FreeLibrary
+  IAT 0x408158: GetCommandLineA
+  IAT 0x40815c: GetLastError
+  IAT 0x408160: GetModuleHandleA
+  IAT 0x408164: GetProcAddress
+  IAT 0x408168: InitializeCriticalSection
+  IAT 0x40816c: LeaveCriticalSection
+  IAT 0x408170: LoadLibraryA
+  IAT 0x408174: SetUnhandledExceptionFilter
+  IAT 0x408178: Sleep
+  IAT 0x40817c: TlsGetValue
+  IAT 0x408180: VirtualProtect
+  IAT 0x408184: VirtualQuery
+msvcrt.dll
+  IAT 0x40818c: _strdup
+  IAT 0x408190: _stricoll
+msvcrt.dll
+  IAT 0x408198: __getmainargs
+  IAT 0x40819c: __mb_cur_max
+  IAT 0x4081a0: __p__environ
+  IAT 0x4081a4: __p__fmode
+  IAT 0x4081a8: __set_app_type
+  IAT 0x4081ac: _cexit
+  IAT 0x4081b0: _errno
+  IAT 0x4081b4: _fpreset
+  IAT 0x4081b8: _fullpath
+  IAT 0x4081bc: _iob
+  IAT 0x4081c0: _isctype
+  IAT 0x4081c4: _onexit
+  IAT 0x4081c8: _pctype
+  IAT 0x4081cc: _setmode
+  IAT 0x4081d0: abort
+  IAT 0x4081d4: atexit
+  IAT 0x4081d8: calloc
+  IAT 0x4081dc: fgets
+  IAT 0x4081e0: free
+  IAT 0x4081e4: fwrite
+  IAT 0x4081e8: malloc
+  IAT 0x4081ec: mbstowcs
+  IAT 0x4081f0: memcpy
+  IAT 0x4081f4: printf
+  IAT 0x4081f8: puts
+  IAT 0x4081fc: realloc
+  IAT 0x408200: setlocale
+  IAT 0x408204: signal
+  IAT 0x408208: strcmp
+  IAT 0x40820c: strcoll
+  IAT 0x408210: strcspn
+  IAT 0x408214: strlen
+  IAT 0x408218: tolower
+  IAT 0x40821c: vfprintf
+  IAT 0x408220: wcstombs
+=== wrapper disassembly, aligned from .text base ===
+0x403b40: ff2520824000     jmp      dword ptr [0x408220]
+0x403b46: 90               nop      
+0x403b47: 90               nop      
+0x403b48: ff251c824000     jmp      dword ptr [0x40821c]
+0x403b4e: 90               nop      
+0x403b4f: 90               nop      
+0x403b50: ff2518824000     jmp      dword ptr [0x408218]
+0x403b56: 90               nop      
+0x403b57: 90               nop      
+0x403b58: ff2514824000     jmp      dword ptr [0x408214]
+0x403b5e: 90               nop      
+0x403b5f: 90               nop      
+0x403b60: ff2510824000     jmp      dword ptr [0x408210]
+0x403b66: 90               nop      
+0x403b67: 90               nop      
+0x403b68: ff250c824000     jmp      dword ptr [0x40820c]
+0x403b6e: 90               nop      
+0x403b6f: 90               nop      
+0x403b70: ff2508824000     jmp      dword ptr [0x408208]
+0x403b76: 90               nop      
+0x403b77: 90               nop      
+0x403b78: ff2504824000     jmp      dword ptr [0x408204]
+0x403b7e: 90               nop      
+0x403b7f: 90               nop      
+0x403b80: ff2500824000     jmp      dword ptr [0x408200]
+0x403b86: 90               nop      
+0x403b87: 90               nop      
+0x403b88: ff25fc814000     jmp      dword ptr [0x4081fc]
+0x403b8e: 90               nop      
+0x403b8f: 90               nop      
+0x403b90: ff25f8814000     jmp      dword ptr [0x4081f8]
+0x403b96: 90               nop      
+0x403b97: 90               nop      
+0x403b98: ff25f4814000     jmp      dword ptr [0x4081f4]
+0x403b9e: 90               nop      
+0x403b9f: 90               nop      
+0x403ba0: ff25f0814000     jmp      dword ptr [0x4081f0]
+0x403ba6: 90               nop      
+0x403ba7: 90               nop      
+0x403ba8: ff25ec814000     jmp      dword ptr [0x4081ec]
+0x403bae: 90               nop      
+0x403baf: 90               nop      
+0x403bb0: ff25e8814000     jmp      dword ptr [0x4081e8]
+0x403bb6: 90               nop      
+0x403bb7: 90               nop      
+0x403bb8: ff25e4814000     jmp      dword ptr [0x4081e4]
+0x403bbe: 90               nop      
+0x403bbf: 90               nop      
+0x403bc0: ff25e0814000     jmp      dword ptr [0x4081e0]
+0x403bc6: 90               nop      
+0x403bc7: 90               nop      
+0x403bc8: ff25dc814000     jmp      dword ptr [0x4081dc]
+0x403bce: 90               nop      
+0x403bcf: 90               nop      
+0x403bd0: ff25d8814000     jmp      dword ptr [0x4081d8]
+0x403bd6: 90               nop      
+0x403bd7: 90               nop      
+0x403bd8: ff25d0814000     jmp      dword ptr [0x4081d0]
+0x403bde: 90               nop      
+0x403bdf: 90               nop      
+
+
+=== Independent audit report saved ===
+COMMAND> Set-Content -LiteralPath 'C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\第一届启航杯checker_562\analysis\independent_audit_562.md' (UTF-8 Markdown); rerun independent candidate check
+input PE SHA256: 449D9F4569A0ED70FCB9BC8B96737719B62CFD8AE7C1E99D2864A3999887FDF5
+target VA=0x404020, RVA=0x4020, raw offset=0x3220
+encrypted NUL-terminated buffer length: 43
+encrypted bytes: 454f424458464d5312146a17531b77794e62514a424c114f52165762625179117312545b6176547b76115e
+candidate repr: b'flag{enp17I4p8TZmAriao2lq5tAArZ2P1wxBUwXU2}'
+candidate ascii: flag{enp17I4p8TZmAriao2lq5tAArZ2P1wxBUwXU2}
+candidate length: 43
+forward XOR output: 454f424458464d5312146a17531b77794e62514a424c114f52165762625179117312545b6176547b76115e
+target match: True
+format check: True
+

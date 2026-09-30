@@ -1,0 +1,1624 @@
+**********************
+PowerShell transcript start
+Start time: 20260929052151
+Username: DESKTOP-412KTAR\mzj
+RunAs User: DESKTOP-412KTAR\mzj
+Configuration Name: 
+Machine: DESKTOP-412KTAR (Microsoft Windows NT 10.0.26200.0)
+Host Application: C:\Users\mzj\.cache\codex-runtimes\codex-primary-runtime\dependencies\native\powershell\pwsh.dll -Command try { [Console]::OutputEncoding=[System.Text.Encoding]::UTF8 } catch {}
+$ErrorActionPreference = 'Continue'
+$root = 'C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\challenge_558'
+$log = Join-Path $root 'analysis\third_route_state_table_transcript_20260929.txt'
+Start-Transcript -LiteralPath $log -Force | Out-Null
+Write-Output 'COMMAND> Get-ChildItem challenge_558 recursively with file sizes'
+Get-ChildItem -LiteralPath $root -Force -Recurse | Select-Object Mode,Length,FullName | Format-Table -AutoSize
+Write-Output 'COMMAND> Get-FileHash on challenge_558 files excluding the active transcript'
+Get-ChildItem -LiteralPath $root -File -Recurse | Where-Object { $_.FullName -ne $log } | Get-FileHash -Algorithm SHA256 | Select-Object Hash,Path | Format-List
+Write-Output 'COMMAND> Get-Command for existing static analysis utilities'
+Get-Command python,py,objdump,llvm-objdump,dumpbin,llvm-readobj,strings,rg,radare2,rizin,ghidraRun -ErrorAction SilentlyContinue | Select-Object Name,Source | Format-Table -AutoSize
+Write-Output 'COMMAND> Find readable analysis files likely documenting first and second routes'
+Get-ChildItem -LiteralPath (Join-Path $root 'analysis') -File | Select-Object Name,Length,LastWriteTime | Format-Table -AutoSize
+Stop-Transcript | Out-Null
+Write-Output ("TRANSCRIPT=" + $log)
+Process ID: 25788
+PSVersion: 7.6.5
+PSEdition: Core
+GitCommitId: 7.6.5
+OS: Microsoft Windows 10.0.26200
+Platform: Win32NT
+PSCompatibleVersions: 1.0, 2.0, 3.0, 4.0, 5.0, 5.1, 6.0, 7.0
+PSRemotingProtocolVersion: 2.4
+SerializationVersion: 1.1.0.1
+WSManStackVersion: 3.0
+**********************
+COMMAND> Get-ChildItem challenge_558 recursively with file sizes
+
+Mode  Length FullName
+----  ------ --------
+d----        C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\challenge_558\analysis
+d----        C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\challenge_558\attachment
+-a--- 87569  C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\challenge_558\R.zip
+-a--- 165572 C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\challenge_558\analysis\independent_static_audit_transcript_202…
+-a--- 160143 C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\challenge_558\analysis\powershell_transcript_20260929.txt
+-a--- 1961   C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\challenge_558\analysis\third_route_state_table_transcript_2026…
+-a--- 186880 C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\challenge_558\attachment\R.exe
+
+COMMAND> Get-FileHash on challenge_558 files excluding the active transcript
+
+Get-FileHash: 
+Line |
+   9 |  … ect { $_.FullName -ne $log } | Get-FileHash -Algorithm SHA256 | Selec …
+     |                                   ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+     | The process cannot access the file 'C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\challenge_558\analysis\powershell_transcript_20260929.txt' because it is being used by another process.
+Hash : CD7967ECD4DA09A57F544E14C28CEAF016272D8B7EC095B949D141D096C408DB
+Path : C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\challenge_558\R.zip
+
+Hash : 94BA7AD1FD3904B2F3655C87DF7D8ABB53EC29167132686981B5B04CF1194DD5
+Path : C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\challenge_558\analysis\independent_static_audit_transcript_20260929.t
+       xt
+
+Get-FileHash:
+Line |
+   9 |  … ect { $_.FullName -ne $log } | Get-FileHash -Algorithm SHA256 | Selec …
+     |                                   ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+     | The process cannot access the file 'C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\challenge_558\analysis\powershell_transcript_20260929.txt' because it is being used by another process.
+Hash : E2B0CA7ED72159F82649C33F373E3B38C0E9C9283AA1DAEC627018A328F08651
+Path : C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\challenge_558\attachment\R.exe
+
+COMMAND> Get-Command for existing static analysis utilities
+
+Name        Source
+----        ------
+python.exe  C:\Users\mzj\AppData\Local\Programs\Python\Python312\python.exe
+py.exe      C:\WINDOWS\py.exe
+objdump.exe C:\msys64\mingw64\bin\objdump.exe
+strings.exe C:\msys64\mingw64\bin\strings.exe
+rg.exe      C:\Users\mzj\AppData\Local\OpenAI\Codex\bin\0ddb895c950eaeba\rg.exe
+
+COMMAND> Find readable analysis files likely documenting first and second routes
+
+Name                                             Length LastWriteTime
+----                                             ------ -------------
+independent_static_audit_transcript_20260929.txt 165572 2026/9/29 5:19:32
+powershell_transcript_20260929.txt               160143 2026/9/29 5:16:01
+third_route_state_table_transcript_20260929.txt    4670 2026/9/29 5:21:51
+
+**********************
+PowerShell transcript end
+End time: 20260929052151
+**********************
+**********************
+PowerShell transcript start
+Start time: 20260929052222
+Username: DESKTOP-412KTAR\mzj
+RunAs User: DESKTOP-412KTAR\mzj
+Configuration Name: 
+Machine: DESKTOP-412KTAR (Microsoft Windows NT 10.0.26200.0)
+Host Application: C:\Users\mzj\.cache\codex-runtimes\codex-primary-runtime\dependencies\native\powershell\pwsh.dll -Command try { [Console]::OutputEncoding=[System.Text.Encoding]::UTF8 } catch {}
+$ErrorActionPreference = 'Continue'
+$root = 'C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\challenge_558'
+$log = Join-Path $root 'analysis\third_route_state_table_transcript_20260929.txt'
+$tempExe = 'C:\Users\mzj\Desktop\CTF\challenge558_third_route_static.exe'
+Start-Transcript -LiteralPath $log -Append | Out-Null
+Write-Output 'COMMAND> Search the two existing static transcripts for target functions, candidates, and conclusions'
+$existing = @((Join-Path $root 'analysis\independent_static_audit_transcript_20260929.txt'),(Join-Path $root 'analysis\powershell_transcript_20260929.txt'))
+Select-String -Path $existing -Pattern '140003c80|140003f40|flag\{|state table|closure|闭包|状态表|候选|candidate' -Context 2,2 | Select-Object -First 160 Path,LineNumber,Line | Format-List
+Write-Output 'COMMAND> Hash original archive and attached R.exe'
+Get-FileHash -Algorithm SHA256 -LiteralPath (Join-Path $root 'R.zip'),(Join-Path $root 'attachment\R.exe') | Select-Object Algorithm,Hash,Path | Format-List
+Write-Output 'COMMAND> Copy R.exe to ASCII-only temporary path for static objdump access'
+Copy-Item -LiteralPath (Join-Path $root 'attachment\R.exe') -Destination $tempExe -Force
+Get-FileHash -Algorithm SHA256 -LiteralPath $tempExe | Format-List
+Write-Output 'COMMAND> objdump PE metadata and sections'
+& 'C:\msys64\mingw64\bin\objdump.exe' -p $tempExe | Select-String -Pattern 'file format|ImageBase|AddressOfEntryPoint|Subsystem|DLL Name|Sections:' -Context 0,1 | Select-Object -First 30
+Write-Output 'COMMAND> objdump focused disassembly 0x140003c80 through 0x140004120'
+& 'C:\msys64\mingw64\bin\objdump.exe' -d -Mintel --start-address=0x140003c80 --stop-address=0x140004120 $tempExe
+Stop-Transcript | Out-Null
+Write-Output ("TRANSCRIPT_APPEND=" + $log)
+Write-Output ("TEMP_STATIC_COPY=" + $tempExe)
+Process ID: 3044
+PSVersion: 7.6.5
+PSEdition: Core
+GitCommitId: 7.6.5
+OS: Microsoft Windows 10.0.26200
+Platform: Win32NT
+PSCompatibleVersions: 1.0, 2.0, 3.0, 4.0, 5.0, 5.1, 6.0, 7.0
+PSRemotingProtocolVersion: 2.4
+SerializationVersion: 1.1.0.1
+WSManStackVersion: 3.0
+**********************
+COMMAND> Search the two existing static transcripts for target functions, candidates, and conclusions
+
+Path       : C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\challenge_558\analysis\independent_static_audit_transcript_2026
+             0929.txt
+LineNumber : 160
+Line       : {invalid syntax}{recursion limit reached}?'for<> , []::{closureshim:# as  mut const ; dyn  + unsafe extern
+              "
+
+Path       : C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\challenge_558\analysis\independent_static_audit_transcript_2026
+             0929.txt
+LineNumber : 1917
+Line       : $log='C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\challenge_558\analysis\independent_static_audit_transcrip
+             t_20260929.txt'; Start-Transcript -LiteralPath $log -Append; Write-Output 'COMMAND> static disassembly of
+             main candidate validation region near failure-output descriptor; no binary execution'; & 'C:\msys64\mingw6
+             4\bin\objdump.exe' -d -Mintel --start-address=0x140004000 --stop-address=0x140004500 '.\attachment\R.exe';
+              Stop-Transcript
+
+Path       : C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\challenge_558\analysis\independent_static_audit_transcript_2026
+             0929.txt
+LineNumber : 1930
+Line       : COMMAND> static disassembly of main candidate validation region near failure-output descriptor; no binary
+             execution
+
+Path       : C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\challenge_558\analysis\independent_static_audit_transcript_2026
+             0929.txt
+LineNumber : 2164
+Line       : $log='C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\challenge_558\analysis\independent_static_audit_transcrip
+             t_20260929.txt'; Start-Transcript -LiteralPath $log -Append; foreach($r in @(@{A='0x140003c80';B='0x140003
+             f40';Name='main transform initializer 0x3c80'},@{A='0x140003f40';B='0x1400040e0';Name='transform closure a
+             nd byte function 0x3f40'})){ Write-Output ('COMMAND> static disassembly of '+$r['Name']); & 'C:\msys64\min
+             gw64\bin\objdump.exe' -d -Mintel ('--start-address='+$r['A']) ('--stop-address='+$r['B']) '.\attachment\R.
+             exe' }; Stop-Transcript
+
+Path       : C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\challenge_558\analysis\independent_static_audit_transcript_2026
+             0929.txt
+LineNumber : 2179
+Line       : COMMAND> static disassembly of transform closure and byte function 0x3f40
+
+Path       : C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\challenge_558\analysis\powershell_transcript_20260929.txt
+LineNumber : 77
+Line       : C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\新题批次\PaluMaze_551\compute_candidates.py
+
+Path       : C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\challenge_558\analysis\powershell_transcript_20260929.txt
+LineNumber : 78
+Line       : C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\新题批次\PaluMaze_551\compute_candidates.txt
+
+Path       : C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\challenge_558\analysis\powershell_transcript_20260929.txt
+LineNumber : 2718
+Line       : PS C:\Users\mzj\Desktop\CTF> Write-Output 'COMMAND> objdump -d -Mintel R558.exe | Select-String call 0x140
+             003f40 -Context 2,2'
+
+Path       : C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\challenge_558\analysis\powershell_transcript_20260929.txt
+LineNumber : 2719
+Line       : COMMAND> objdump -d -Mintel R558.exe | Select-String call 0x140003f40 -Context 2,2
+
+Path       : C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\challenge_558\analysis\powershell_transcript_20260929.txt
+LineNumber : 2720
+Line       : PS C:\Users\mzj\Desktop\CTF> & 'C:\msys64\mingw64\bin\objdump.exe' -d -Mintel $asciiExe | Select-String -P
+             attern 'call\s+0x140003f40|# 0x140003f40|140003f40' -Context 2,2
+
+Path       : C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\challenge_558\analysis\powershell_transcript_20260929.txt
+LineNumber : 2724
+Line       : >    140003f40:	48 83 ec 48          	sub    rsp,0x48
+
+Path       : C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\challenge_558\analysis\powershell_transcript_20260929.txt
+LineNumber : 2729
+Line       : >    14000577e:	e8 bd e7 ff ff       	call   0x140003f40
+
+Path       : C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\challenge_558\analysis\powershell_transcript_20260929.txt
+LineNumber : 2748
+Line       : PS C:\Users\mzj\Desktop\CTF> Write-Output 'COMMAND> objdump -d -Mintel --start-address=0x140005700 --stop-
+             address=0x1400057d0 R558.exe (closure wrapper)'
+
+Path       : C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\challenge_558\analysis\powershell_transcript_20260929.txt
+LineNumber : 2749
+Line       : COMMAND> objdump -d -Mintel --start-address=0x140005700 --stop-address=0x1400057d0 R558.exe (closure wrapp
+             er)
+
+Path       : C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\challenge_558\analysis\powershell_transcript_20260929.txt
+LineNumber : 2764
+Line       : PS C:\Users\mzj\Desktop\CTF> objdump -d -Mintel $asciiExe --start-address=0x140003c80 --stop-address=0x140
+             003f48
+
+Path       : C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\challenge_558\analysis\powershell_transcript_20260929.txt
+LineNumber : 2772
+Line       : PS C:\Users\mzj\Desktop\CTF> objdump -d -Mintel $asciiExe --start-address=0x140003f40 --stop-address=0x140
+             0040d0
+
+COMMAND> Hash original archive and attached R.exe
+
+Algorithm : SHA256
+Hash      : CD7967ECD4DA09A57F544E14C28CEAF016272D8B7EC095B949D141D096C408DB
+Path      : C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\challenge_558\R.zip
+
+Algorithm : SHA256
+Hash      : E2B0CA7ED72159F82649C33F373E3B38C0E9C9283AA1DAEC627018A328F08651
+Path      : C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\challenge_558\attachment\R.exe
+
+COMMAND> Copy R.exe to ASCII-only temporary path for static objdump access
+
+Algorithm : SHA256
+Hash      : E2B0CA7ED72159F82649C33F373E3B38C0E9C9283AA1DAEC627018A328F08651
+Path      : C:\Users\mzj\Desktop\CTF\challenge558_third_route_static.exe
+
+COMMAND> objdump PE metadata and sections
+
+> C:\Users\mzj\Desktop\CTF\challenge558_third_route_static.exe:     file format pei-x86-64
+
+> AddressOfEntryPoint	000000000001ea70
+  BaseOfCode		0000000000001000
+> ImageBase		0000000140000000
+  SectionAlignment	00001000
+> MajorSubsystemVersion	6
+> MinorSubsystemVersion	0
+  Win32Version		00000000
+> Subsystem		00000003	(Windows CUI)
+  DllCharacteristics	00008160
+> 	DLL Name: api-ms-win-core-synch-l1-2-0.dll
+  	vma:     Ordinal  Hint  Member-Name  Bound-To
+> 	DLL Name: KERNEL32.dll
+  	vma:     Ordinal  Hint  Member-Name  Bound-To
+> 	DLL Name: ntdll.dll
+  	vma:     Ordinal  Hint  Member-Name  Bound-To
+> 	DLL Name: VCRUNTIME140.dll
+  	vma:     Ordinal  Hint  Member-Name  Bound-To
+> 	DLL Name: api-ms-win-crt-runtime-l1-1-0.dll
+  	vma:     Ordinal  Hint  Member-Name  Bound-To
+> 	DLL Name: api-ms-win-crt-math-l1-1-0.dll
+  	vma:     Ordinal  Hint  Member-Name  Bound-To
+> 	DLL Name: api-ms-win-crt-stdio-l1-1-0.dll
+  	vma:     Ordinal  Hint  Member-Name  Bound-To
+> 	DLL Name: api-ms-win-crt-locale-l1-1-0.dll
+  	vma:     Ordinal  Hint  Member-Name  Bound-To
+> 	DLL Name: api-ms-win-crt-heap-l1-1-0.dll
+  	vma:     Ordinal  Hint  Member-Name  Bound-To
+COMMAND> objdump focused disassembly 0x140003c80 through 0x140004120
+
+**********************
+PowerShell transcript end
+End time: 20260929052222
+**********************
+**********************
+PowerShell transcript start
+Start time: 20260929052401
+Username: DESKTOP-412KTAR\mzj
+RunAs User: DESKTOP-412KTAR\mzj
+Configuration Name: 
+Machine: DESKTOP-412KTAR (Microsoft Windows NT 10.0.26200.0)
+Host Application: C:\Users\mzj\.cache\codex-runtimes\codex-primary-runtime\dependencies\native\powershell\pwsh.dll -Command try { [Console]::OutputEncoding=[System.Text.Encoding]::UTF8 } catch {}
+$ErrorActionPreference = 'Continue'
+$root = 'C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\challenge_558'
+$log = Join-Path $root 'analysis\third_route_state_table_transcript_20260929.txt'
+$tempExe = 'C:\Users\mzj\Desktop\CTF\challenge558_third_route_static.exe'
+Start-Transcript -LiteralPath $log -Append | Out-Null
+Write-Output 'COMMAND> Find candidate flag-shaped strings in the existing challenge_558 audit transcripts'
+$logs = @((Join-Path $root 'analysis\independent_static_audit_transcript_20260929.txt'),(Join-Path $root 'analysis\powershell_transcript_20260929.txt'))
+foreach ($p in $logs) {
+  Write-Output ('--- ' + (Split-Path $p -Leaf) + ' ---')
+  Select-String -LiteralPath $p -Pattern 'flag\{[A-Za-z0-9_\-]{8,}\}' -AllMatches | ForEach-Object { $_.Matches.Value } | Sort-Object -Unique
+}
+Write-Output 'COMMAND> Find references to address 0x140003c80 in disassembly and callsites'
+& 'C:\msys64\mingw64\bin\objdump.exe' -d -Mintel $tempExe | Select-String -Pattern '140003c80|call\s+0x140003c80' -Context 3,3 | Select-Object -First 80
+Write-Output 'COMMAND> Read existing first/second route function notes around targeted disassembly'
+Get-Content -LiteralPath (Join-Path $root 'analysis\independent_static_audit_transcript_20260929.txt') | Select-Object -Skip 2150 -First 100
+Write-Output 'COMMAND> Read existing second route summary around call-site analysis'
+Get-Content -LiteralPath (Join-Path $root 'analysis\powershell_transcript_20260929.txt') | Select-Object -Skip 2700 -First 110
+Stop-Transcript | Out-Null
+Write-Output ("TRANSCRIPT_APPEND=" + $log)
+Process ID: 18580
+PSVersion: 7.6.5
+PSEdition: Core
+GitCommitId: 7.6.5
+OS: Microsoft Windows 10.0.26200
+Platform: Win32NT
+PSCompatibleVersions: 1.0, 2.0, 3.0, 4.0, 5.0, 5.1, 6.0, 7.0
+PSRemotingProtocolVersion: 2.4
+SerializationVersion: 1.1.0.1
+WSManStackVersion: 3.0
+**********************
+COMMAND> Find candidate flag-shaped strings in the existing challenge_558 audit transcripts
+--- independent_static_audit_transcript_20260929.txt ---
+--- powershell_transcript_20260929.txt ---
+COMMAND> Find references to address 0x140003c80 in disassembly and callsites
+
+     140003c7d:	c3                   	ret
+     140003c7e:	cc                   	int3
+     140003c7f:	cc                   	int3
+>    140003c80:	55                   	push   rbp
+     140003c81:	48 81 ec 50 01 00 00 	sub    rsp,0x150
+     140003c88:	48 8d ac 24 80 00 00 	lea    rbp,[rsp+0x80]
+     140003c8f:	00
+     1400042c7:	48 89 e0             	mov    rax,rsp
+     1400042ca:	48 89 48 20          	mov    QWORD PTR [rax+0x20],rcx
+     1400042ce:	48 8d 8d f8 00 00 00 	lea    rcx,[rbp+0xf8]
+>    1400042d5:	e8 a6 f9 ff ff       	call   0x140003c80
+     1400042da:	eb 00                	jmp    0x1400042dc
+     1400042dc:	b9 13 00 00 00       	mov    ecx,0x13
+     1400042e1:	ba 01 00 00 00       	mov    edx,0x1
+COMMAND> Read existing first/second route function notes around targeted disassembly
+COMMAND> list static call sites of transform helper 0x140004000
+**********************
+PowerShell transcript end
+End time: 20260929051841
+**********************
+**********************
+PowerShell transcript start
+Start time: 20260929051932
+Username: DESKTOP-412KTAR\mzj
+RunAs User: DESKTOP-412KTAR\mzj
+Configuration Name:
+Machine: DESKTOP-412KTAR (Microsoft Windows NT 10.0.26200.0)
+Host Application: C:\Users\mzj\.cache\codex-runtimes\codex-primary-runtime\dependencies\native\powershell\pwsh.dll -Command try { [Console]::OutputEncoding=[System.Text.Encoding]::UTF8 } catch {}
+$log='C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\challenge_558\analysis\independent_static_audit_transcript_20260929.txt'; Start-Transcript -LiteralPath $log -Append; foreach($r in @(@{A='0x140003c80';B='0x140003f40';Name='main transform initializer 0x3c80'},@{A='0x140003f40';B='0x1400040e0';Name='transform closure and byte function 0x3f40'})){ Write-Output ('COMMAND> static disassembly of '+$r['Name']); & 'C:\msys64\mingw64\bin\objdump.exe' -d -Mintel ('--start-address='+$r['A']) ('--stop-address='+$r['B']) '.\attachment\R.exe' }; Stop-Transcript
+Process ID: 23572
+PSVersion: 7.6.5
+PSEdition: Core
+GitCommitId: 7.6.5
+OS: Microsoft Windows 10.0.26200
+Platform: Win32NT
+PSCompatibleVersions: 1.0, 2.0, 3.0, 4.0, 5.0, 5.1, 6.0, 7.0
+PSRemotingProtocolVersion: 2.4
+SerializationVersion: 1.1.0.1
+WSManStackVersion: 3.0
+**********************
+Transcript started, output file is C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\challenge_558\analysis\independent_static_audit_transcript_20260929.txt
+COMMAND> static disassembly of main transform initializer 0x3c80
+
+COMMAND> static disassembly of transform closure and byte function 0x3f40
+
+**********************
+PowerShell transcript end
+End time: 20260929051932
+**********************
+**********************
+PowerShell transcript start
+Start time: 20260929052307
+Username: DESKTOP-412KTAR\mzj
+RunAs User: DESKTOP-412KTAR\mzj
+Configuration Name:
+Machine: DESKTOP-412KTAR (Microsoft Windows NT 10.0.26200.0)
+Host Application: C:\Users\mzj\.cache\codex-runtimes\codex-primary-runtime\dependencies\native\powershell\pwsh.dll -Command try { [Console]::OutputEncoding=[System.Text.Encoding]::UTF8 } catch {}
+$log='C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\challenge_558\analysis\independent_static_audit_transcript_20260929.txt'; Start-Transcript -LiteralPath $log -Append; Write-Output 'COMMAND> reproduce cipher from static KSA/PRGA hypotheses and reverse the embedded 19-byte check value (no R.exe execution)'; python -c "key=b'lntfvpus'; c=bytes.fromhex('18 59 07 28 f4 ad c8 c3 b6 3f 2d 39 ca 34 d1 8e f5 03 b0'); S=list(range(256)); j=0; exec('for i in range(256):\n j=(j+S[i]+(key[i%len(key)]^0x66))&255\n S[i],S[j]=S[j],S[i]'); i=j=0; out=bytearray(); ks=bytearray(); exec('for b in c:\n i=(i+1)&255\n j=(j+S[i])&255\n S[i],S[j]=S[j],S[i]\n k=S[(S[i]+S[j])&255]\n k=((((k<<4)|(k>>4))&255)+1)&255\n ks.append(k)\n out.append((((b-1)&255)^k)&255)'); print('key=',key); print('target_len=',len(c)); print('keystream=',ks.hex()); print('plaintext_hex=',out.hex()); print('plaintext_repr=',repr(bytes(out))); print('utf8=',bytes(out).decode('utf-8','replace')); print('flag_prefix=',bytes(out).startswith(b'flag{')); print('inverse_reencrypt_pass=',all((((((out[n]^ks[n])+1)&255)+1)&255)==c[n] for n in range(len(c))))"; Stop-Transcript
+Process ID: 34192
+PSVersion: 7.6.5
+PSEdition: Core
+GitCommitId: 7.6.5
+OS: Microsoft Windows 10.0.26200
+Platform: Win32NT
+PSCompatibleVersions: 1.0, 2.0, 3.0, 4.0, 5.0, 5.1, 6.0, 7.0
+PSRemotingProtocolVersion: 2.4
+SerializationVersion: 1.1.0.1
+WSManStackVersion: 3.0
+**********************
+Transcript started, output file is C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\challenge_558\analysis\independent_static_audit_transcript_20260929.txt
+COMMAND> reproduce cipher from static KSA/PRGA hypotheses and reverse the embedded 19-byte check value (no R.exe execution)
+
+**********************
+PowerShell transcript end
+End time: 20260929052307
+**********************
+COMMAND> Read existing second route summary around call-site analysis
+
+PS C:\Users\mzj\Desktop\CTF> Write-Output 'COMMAND> objdump -d -Mintel --start-address=0x1400037e0 --stop-address=0x1400039a0 R558.exe'
+COMMAND> objdump -d -Mintel --start-address=0x1400037e0 --stop-address=0x1400039a0 R558.exe
+PS C:\Users\mzj\Desktop\CTF> & 'C:\msys64\mingw64\bin\objdump.exe' -d -Mintel '--start-address=0x1400037e0' '--stop-address=0x1400039a0' $asciiExe
+
+PS C:\Users\mzj\Desktop\CTF> Write-Output 'COMMAND> objdump -d -Mintel --start-address=0x140003e80 --stop-address=0x1400040e0 R558.exe (remaining transformation loop)'
+COMMAND> objdump -d -Mintel --start-address=0x140003e80 --stop-address=0x1400040e0 R558.exe (remaining transformation loop)
+PS C:\Users\mzj\Desktop\CTF> & 'C:\msys64\mingw64\bin\objdump.exe' -d -Mintel '--start-address=0x140003e80' '--stop-address=0x1400040e0' $asciiExe
+
+PS C:\Users\mzj\Desktop\CTF> Write-Output 'COMMAND> objdump -s --start-address=0x140021b60 --stop-address=0x140021bb0 R558.exe (lookup constants)'
+COMMAND> objdump -s --start-address=0x140021b60 --stop-address=0x140021bb0 R558.exe (lookup constants)
+PS C:\Users\mzj\Desktop\CTF> & 'C:\msys64\mingw64\bin\objdump.exe' -s '--start-address=0x140021b60' '--stop-address=0x140021bb0' $asciiExe
+
+PS C:\Users\mzj\Desktop\CTF> Write-Output 'COMMAND> objdump -d -Mintel --start-address=0x1400057d0 --stop-address=0x140005870 R558.exe (iterator/callback helper)'
+COMMAND> objdump -d -Mintel --start-address=0x1400057d0 --stop-address=0x140005870 R558.exe (iterator/callback helper)
+PS C:\Users\mzj\Desktop\CTF> & 'C:\msys64\mingw64\bin\objdump.exe' -d -Mintel '--start-address=0x1400057d0' '--stop-address=0x140005870' $asciiExe
+
+PS C:\Users\mzj\Desktop\CTF> Write-Output 'COMMAND> objdump -d -Mintel R558.exe | Select-String call 0x140003f40 -Context 2,2'
+COMMAND> objdump -d -Mintel R558.exe | Select-String call 0x140003f40 -Context 2,2
+PS C:\Users\mzj\Desktop\CTF> & 'C:\msys64\mingw64\bin\objdump.exe' -d -Mintel $asciiExe | Select-String -Pattern 'call\s+0x140003f40|# 0x140003f40|140003f40' -Context 2,2
+
+     140003f3e:	cc                   	int3
+     140003f3f:	cc                   	int3
+>    140003f40:	48 83 ec 48          	sub    rsp,0x48
+     140003f44:	48 89 4c 24 38       	mov    QWORD PTR [rsp+0x38],rcx
+     140003f49:	8a 02                	mov    al,BYTE PTR [rdx]
+     140005776:	c6 45 f7 01          	mov    BYTE PTR [rbp-0x9],0x1
+     14000577a:	48 83 c1 18          	add    rcx,0x18
+>    14000577e:	e8 bd e7 ff ff       	call   0x140003f40
+     140005783:	88 45 f6             	mov    BYTE PTR [rbp-0xa],al
+     140005786:	eb 00                	jmp    0x140005788
+
+
+PS C:\Users\mzj\Desktop\CTF> Write-Output 'COMMAND> objdump -p R558.exe | Select-String debug directory -Context 0,12'
+COMMAND> objdump -p R558.exe | Select-String debug directory -Context 0,12
+PS C:\Users\mzj\Desktop\CTF> & 'C:\msys64\mingw64\bin\objdump.exe' -p $asciiExe | Select-String -Pattern 'There is a debug directory|CodeView|PDB|RSDS|NB10|Type\s+Size|\.pdb' -Context 0,12
+
+> There is a debug directory in .rdata at 0x400273a0
+
+> Type                Size     Rva      Offset
+>   2        CodeView 00000021 000274fc 000262fc
+> (format RSDS signature f0ed348b28c343a5af64a5bfb9f86e55 age 7 pdb rust.pdb)
+   12         Feature 00000014 00027520 00026320
+   13         CoffGrp 00000330 00027534 00026334
+
+
+
+PS C:\Users\mzj\Desktop\CTF> Write-Output 'COMMAND> objdump -d -Mintel --start-address=0x140005700 --stop-address=0x1400057d0 R558.exe (closure wrapper)'
+COMMAND> objdump -d -Mintel --start-address=0x140005700 --stop-address=0x1400057d0 R558.exe (closure wrapper)
+PS C:\Users\mzj\Desktop\CTF> & 'C:\msys64\mingw64\bin\objdump.exe' -d -Mintel '--start-address=0x140005700' '--stop-address=0x1400057d0' $asciiExe
+
+PS C:\Users\mzj\Desktop\CTF> Write-Output 'COMMAND> Get-ChildItem D:\Downloads -Recurse -Filter rust.pdb -File; Get-ChildItem analysis dirs for *.pdb'
+COMMAND> Get-ChildItem D:\Downloads -Recurse -Filter rust.pdb -File; Get-ChildItem analysis dirs for *.pdb
+PS C:\Users\mzj\Desktop\CTF> Get-ChildItem -LiteralPath 'D:\Downloads' -Recurse -Filter 'rust.pdb' -File -ErrorAction SilentlyContinue | Select-Object FullName,Length
+PS C:\Users\mzj\Desktop\CTF> Get-ChildItem -LiteralPath 'C:\Users\mzj\Desktop\CTF\玄机刷题' -Recurse -Filter '*.pdb' -File -ErrorAction SilentlyContinue | Select-Object -First 20 FullName,Length
+PS C:\Users\mzj\Desktop\CTF> Write-Output 'COMMAND> objdump -d -Mintel --start-address=0x140005200 --stop-address=0x140005390 R558.exe'
+COMMAND> objdump -d -Mintel --start-address=0x140005200 --stop-address=0x140005390 R558.exe
+PS C:\Users\mzj\Desktop\CTF> & 'C:\msys64\mingw64\bin\objdump.exe' -d -Mintel '--start-address=0x140005200' '--stop-address=0x140005390' $asciiExe
+
+PS C:\Users\mzj\Desktop\CTF> Write-Output 'COMMAND> objdump -d -Mintel --start-address=0x1400053f0 --stop-address=0x140005700 R558.exe'
+COMMAND> objdump -d -Mintel --start-address=0x1400053f0 --stop-address=0x140005700 R558.exe
+PS C:\Users\mzj\Desktop\CTF> & 'C:\msys64\mingw64\bin\objdump.exe' -d -Mintel '--start-address=0x1400053f0' '--stop-address=0x140005700' $asciiExe
+
+PS C:\Users\mzj\Desktop\CTF> objdump -d -Mintel $asciiExe --start-address=0x140003c80 --stop-address=0x140003f48
+
+PS C:\Users\mzj\Desktop\CTF> objdump -d -Mintel $asciiExe --start-address=0x140005100 --stop-address=0x1400058b0
+
+PS C:\Users\mzj\Desktop\CTF> objdump -d -Mintel $asciiExe --start-address=0x140006470 --stop-address=0x1400069c0
+
+PS C:\Users\mzj\Desktop\CTF> objdump -d -Mintel $asciiExe --start-address=0x140006a80 --stop-address=0x140006d20
+
+PS C:\Users\mzj\Desktop\CTF> objdump -d -Mintel $asciiExe --start-address=0x140003f40 --stop-address=0x1400040d0
+
+PS C:\Users\mzj\Desktop\CTF> $analysisDir = 'C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\challenge_558\analysis'
+PS C:\Users\mzj\Desktop\CTF> $solver = @'
+#!/usr/bin/env python3
+"""Static reconstruction of challenge 558 Rust byte transform."""
+KEY = b"lntfvpus"
+TARGET = bytes.fromhex("18 59 07 28 f4 ad c8 c3 b6 3f 2d 39 ca 34 d1 8e f5 03 b0")
+
+def ksa(key):
+    s = list(range(256))
+    j = 0
+    trace = []
+    for i in range(256):
+        kb = key[i % len(key)] ^ 0x66
+        j = (j + s[i] + kb) & 0xff
+        s[i], s[j] = s[j], s[i]
+        if i < 8:
+            trace.append((i, kb, j, s[i], s[j]))
+    return s, trace
+
+def keystream_for_ciphertext(ciphertext, s):
+    i = j = 0
+    plain = bytearray()
+    trace = []
+    for pos, c in enumerate(ciphertext):
+        i = (i + 1) & 0xff
+        j = (j + s[i]) & 0xff
+        s[i], s[j] = s[j], s[i]
+        t = (s[i] + s[j]) & 0xff
+        v = s[t]
+        mask = ((((v << 4) | (v >> 4)) & 0xff) + 1) & 0xff
+        p = ((c - 1) & 0xff) ^ mask
+        plain.append(p)
+        if pos < 8:
+            trace.append((pos, i, j, s[i], s[j], t, v, mask, c, p))
+    return bytes(plain), trace
+
+def encrypt(plain, s):
+**********************
+PowerShell transcript end
+End time: 20260929052402
+**********************
+**********************
+PowerShell transcript start
+Start time: 20260929052624
+Username: DESKTOP-412KTAR\mzj
+RunAs User: DESKTOP-412KTAR\mzj
+Configuration Name: 
+Machine: DESKTOP-412KTAR (Microsoft Windows NT 10.0.26200.0)
+Host Application: C:\Users\mzj\.cache\codex-runtimes\codex-primary-runtime\dependencies\native\powershell\pwsh.dll -Command try { [Console]::OutputEncoding=[System.Text.Encoding]::UTF8 } catch {}
+$ErrorActionPreference = 'Continue'
+$root = 'C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\challenge_558'
+$log = Join-Path $root 'analysis\third_route_state_table_transcript_20260929.txt'
+$tempExe = 'C:\Users\mzj\Desktop\CTF\challenge558_third_route_static.exe'
+Start-Transcript -LiteralPath $log -Append | Out-Null
+$regions = @(
+ @{Start='0x140004240';Stop='0x140004320';Name='caller of state initializer 0x140003c80'},
+ @{Start='0x140005100';Stop='0x1400051c0';Name='helper 0x140005120'},
+ @{Start='0x140005420';Stop='0x1400054c0';Name='helper 0x140005440'},
+ @{Start='0x140005600';Stop='0x140005700';Name='helpers 0x140005620 and 0x140005680'},
+ @{Start='0x1400057b0';Stop='0x140005870';Name='helper 0x1400057d0'},
+ @{Start='0x140006450';Stop='0x1400064c0';Name='helper 0x140006470'},
+ @{Start='0x140006660';Stop='0x140006730';Name='helpers 0x140006680 and 0x1400066c0'}
+)
+foreach ($region in $regions) {
+  Write-Output ('COMMAND> objdump focused region: ' + $region.Name)
+  & 'C:\msys64\mingw64\bin\objdump.exe' -d -Mintel ('--start-address='+$region.Start) ('--stop-address='+$region.Stop) $tempExe
+}
+Stop-Transcript | Out-Null
+Write-Output ("TRANSCRIPT_APPEND=" + $log)
+Process ID: 6076
+PSVersion: 7.6.5
+PSEdition: Core
+GitCommitId: 7.6.5
+OS: Microsoft Windows 10.0.26200
+Platform: Win32NT
+PSCompatibleVersions: 1.0, 2.0, 3.0, 4.0, 5.0, 5.1, 6.0, 7.0
+PSRemotingProtocolVersion: 2.4
+SerializationVersion: 1.1.0.1
+WSManStackVersion: 3.0
+**********************
+COMMAND> objdump focused region: caller of state initializer 0x140003c80
+
+COMMAND> objdump focused region: helper 0x140005120
+
+COMMAND> objdump focused region: helper 0x140005440
+
+COMMAND> objdump focused region: helpers 0x140005620 and 0x140005680
+
+COMMAND> objdump focused region: helper 0x1400057d0
+
+COMMAND> objdump focused region: helper 0x140006470
+
+COMMAND> objdump focused region: helpers 0x140006680 and 0x1400066c0
+
+**********************
+PowerShell transcript end
+End time: 20260929052624
+**********************
+**********************
+PowerShell transcript start
+Start time: 20260929052950
+Username: DESKTOP-412KTAR\mzj
+RunAs User: DESKTOP-412KTAR\mzj
+Configuration Name: 
+Machine: DESKTOP-412KTAR (Microsoft Windows NT 10.0.26200.0)
+Host Application: C:\Users\mzj\.cache\codex-runtimes\codex-primary-runtime\dependencies\native\powershell\pwsh.dll -Command try { [Console]::OutputEncoding=[System.Text.Encoding]::UTF8 } catch {}
+$ErrorActionPreference = 'Continue'
+$root = 'C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\challenge_558'
+$log = Join-Path $root 'analysis\third_route_state_table_transcript_20260929.txt'
+$tempExe = 'C:\Users\mzj\Desktop\CTF\challenge558_third_route_static.exe'
+Start-Transcript -LiteralPath $log -Append | Out-Null
+Write-Output 'COMMAND> objdump main validation region and target literal 0x1400041a0-0x140004440'
+& 'C:\msys64\mingw64\bin\objdump.exe' -d -Mintel --start-address=0x1400041a0 --stop-address=0x140004440 $tempExe
+Write-Output 'COMMAND> Find key and target bytes in static ASCII/binary strings output'
+& 'C:\msys64\mingw64\bin\strings.exe' -a -t x $tempExe | Select-String -Pattern 'lntfvpus|flag|18Y|\\x18|incorrect|correct' | Select-Object -First 80
+Stop-Transcript | Out-Null
+Write-Output ("TRANSCRIPT_APPEND=" + $log)
+Process ID: 7900
+PSVersion: 7.6.5
+PSEdition: Core
+GitCommitId: 7.6.5
+OS: Microsoft Windows 10.0.26200
+Platform: Win32NT
+PSCompatibleVersions: 1.0, 2.0, 3.0, 4.0, 5.0, 5.1, 6.0, 7.0
+PSRemotingProtocolVersion: 2.4
+SerializationVersion: 1.1.0.1
+WSManStackVersion: 3.0
+**********************
+COMMAND> objdump main validation region and target literal 0x1400041a0-0x140004440
+
+COMMAND> Find key and target bytes in static ASCII/binary strings output
+
+  20aa8 input your flag:
+**********************
+PowerShell transcript end
+End time: 20260929052950
+**********************
+**********************
+PowerShell transcript start
+Start time: 20260929053344
+Username: DESKTOP-412KTAR\mzj
+RunAs User: DESKTOP-412KTAR\mzj
+Configuration Name: 
+Machine: DESKTOP-412KTAR (Microsoft Windows NT 10.0.26200.0)
+Host Application: C:\Users\mzj\.cache\codex-runtimes\codex-primary-runtime\dependencies\native\powershell\pwsh.dll -Command try { [Console]::OutputEncoding=[System.Text.Encoding]::UTF8 } catch {}
+$ErrorActionPreference = 'Continue'
+$root = 'C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\challenge_558'
+$log = Join-Path $root 'analysis\third_route_state_table_transcript_20260929.txt'
+$tempExe = 'C:\Users\mzj\Desktop\CTF\challenge558_third_route_static.exe'
+Start-Transcript -LiteralPath $log -Append | Out-Null
+Write-Output 'COMMAND> objdump KSA loop tail and state-table return 0x140003e19-0x140003f04'
+& 'C:\msys64\mingw64\bin\objdump.exe' -d -Mintel --start-address=0x140003e19 --stop-address=0x140003f04 $tempExe
+Write-Output 'COMMAND> objdump wrapper/caller around closure 0x140005700-0x140005800'
+& 'C:\msys64\mingw64\bin\objdump.exe' -d -Mintel --start-address=0x140005700 --stop-address=0x140005800 $tempExe
+Write-Output 'COMMAND> objdump transform driver 0x140005870-0x140005a80'
+& 'C:\msys64\mingw64\bin\objdump.exe' -d -Mintel --start-address=0x140005870 --stop-address=0x140005a80 $tempExe
+Stop-Transcript | Out-Null
+Write-Output ("TRANSCRIPT_APPEND=" + $log)
+Process ID: 8076
+PSVersion: 7.6.5
+PSEdition: Core
+GitCommitId: 7.6.5
+OS: Microsoft Windows 10.0.26200
+Platform: Win32NT
+PSCompatibleVersions: 1.0, 2.0, 3.0, 4.0, 5.0, 5.1, 6.0, 7.0
+PSRemotingProtocolVersion: 2.4
+SerializationVersion: 1.1.0.1
+WSManStackVersion: 3.0
+**********************
+COMMAND> objdump KSA loop tail and state-table return 0x140003e19-0x140003f04
+
+COMMAND> objdump wrapper/caller around closure 0x140005700-0x140005800
+
+COMMAND> objdump transform driver 0x140005870-0x140005a80
+
+**********************
+PowerShell transcript end
+End time: 20260929053344
+**********************
+**********************
+PowerShell transcript start
+Start time: 20260929053646
+Username: DESKTOP-412KTAR\mzj
+RunAs User: DESKTOP-412KTAR\mzj
+Configuration Name: 
+Machine: DESKTOP-412KTAR (Microsoft Windows NT 10.0.26200.0)
+Host Application: C:\Users\mzj\.cache\codex-runtimes\codex-primary-runtime\dependencies\native\powershell\pwsh.dll -Command try { [Console]::OutputEncoding=[System.Text.Encoding]::UTF8 } catch {}
+$ErrorActionPreference = 'Continue'
+$root = 'C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\challenge_558'
+$log = Join-Path $root 'analysis\third_route_state_table_transcript_20260929.txt'
+$tempExe = 'C:\Users\mzj\Desktop\CTF\challenge558_third_route_static.exe'
+Start-Transcript -LiteralPath $log -Append | Out-Null
+$regions = @(
+ @{Start='0x140004560';Stop='0x140004720';Name='state/iterator constructor 0x140004570'},
+ @{Start='0x140005680';Stop='0x140005740';Name='closure copy and lifetime wrapper'},
+ @{Start='0x140005a80';Stop='0x140005c20';Name='range iterator/setup and closure construction'},
+ @{Start='0x1400065e0';Stop='0x140006630';Name='iterator unwrap helper 0x1400065e0'}
+)
+foreach ($region in $regions) {
+  Write-Output ('COMMAND> objdump focused region: ' + $region.Name)
+  & 'C:\msys64\mingw64\bin\objdump.exe' -d -Mintel ('--start-address='+$region.Start) ('--stop-address='+$region.Stop) $tempExe
+}
+Stop-Transcript | Out-Null
+Write-Output ("TRANSCRIPT_APPEND=" + $log)
+Process ID: 28796
+PSVersion: 7.6.5
+PSEdition: Core
+GitCommitId: 7.6.5
+OS: Microsoft Windows 10.0.26200
+Platform: Win32NT
+PSCompatibleVersions: 1.0, 2.0, 3.0, 4.0, 5.0, 5.1, 6.0, 7.0
+PSRemotingProtocolVersion: 2.4
+SerializationVersion: 1.1.0.1
+WSManStackVersion: 3.0
+**********************
+COMMAND> objdump focused region: state/iterator constructor 0x140004570
+
+COMMAND> objdump focused region: closure copy and lifetime wrapper
+
+COMMAND> objdump focused region: range iterator/setup and closure construction
+
+COMMAND> objdump focused region: iterator unwrap helper 0x1400065e0
+
+**********************
+PowerShell transcript end
+End time: 20260929053647
+**********************
+**********************
+PowerShell transcript start
+Start time: 20260929053908
+Username: DESKTOP-412KTAR\mzj
+RunAs User: DESKTOP-412KTAR\mzj
+Configuration Name: 
+Machine: DESKTOP-412KTAR (Microsoft Windows NT 10.0.26200.0)
+Host Application: C:\Users\mzj\.cache\codex-runtimes\codex-primary-runtime\dependencies\native\powershell\pwsh.dll -Command try { [Console]::OutputEncoding=[System.Text.Encoding]::UTF8 } catch {}
+$ErrorActionPreference='Continue'; $transcript='C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\challenge_558\analysis\third_route_state_table_transcript_20260929.txt'; Start-Transcript -LiteralPath $transcript -Append; Write-Output '=== Continue third-route static verification ==='; Write-Output ('Time: ' + (Get-Date -Format o)); Write-Output '=== objdump location ==='; Get-Command objdump | Format-List Source,CommandType; Write-Output '=== key mutation / main context 0x140004200-0x140004430 ==='; & objdump -d -Mintel --start-address=0x140004200 --stop-address=0x140004430 'C:\Users\mzj\Desktop\CTF\challenge558_third_route_static.exe'; Write-Output '=== PRGA constructor / captured closure state 0x140003d60-0x140003e18 ==='; & objdump -d -Mintel --start-address=0x140003d60 --stop-address=0x140003e18 'C:\Users\mzj\Desktop\CTF\challenge558_third_route_static.exe'; Stop-Transcript
+Process ID: 32052
+PSVersion: 7.6.5
+PSEdition: Core
+GitCommitId: 7.6.5
+OS: Microsoft Windows 10.0.26200
+Platform: Win32NT
+PSCompatibleVersions: 1.0, 2.0, 3.0, 4.0, 5.0, 5.1, 6.0, 7.0
+PSRemotingProtocolVersion: 2.4
+SerializationVersion: 1.1.0.1
+WSManStackVersion: 3.0
+**********************
+Transcript started, output file is C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\challenge_558\analysis\third_route_state_table_transcript_20260929.txt
+=== Continue third-route static verification ===
+Time: 2026-09-29T05:39:08.8441819+08:00
+=== objdump location ===
+
+Source      : C:\msys64\mingw64\bin\objdump.exe
+CommandType : Application
+
+=== key mutation / main context 0x140004200-0x140004430 ===
+
+=== PRGA constructor / captured closure state 0x140003d60-0x140003e18 ===
+
+**********************
+PowerShell transcript end
+End time: 20260929053908
+**********************
+**********************
+PowerShell transcript start
+Start time: 20260929053958
+Username: DESKTOP-412KTAR\mzj
+RunAs User: DESKTOP-412KTAR\mzj
+Configuration Name: 
+Machine: DESKTOP-412KTAR (Microsoft Windows NT 10.0.26200.0)
+Host Application: C:\Users\mzj\.cache\codex-runtimes\codex-primary-runtime\dependencies\native\powershell\pwsh.dll -Command try { [Console]::OutputEncoding=[System.Text.Encoding]::UTF8 } catch {}
+$ErrorActionPreference='Stop'; $transcript='C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\challenge_558\analysis\third_route_state_table_transcript_20260929.txt'; Start-Transcript -LiteralPath $transcript -Append; $verifyPath='C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\challenge_558\analysis\third_route_verify_20260929.py'; $verifyCode=@'
+from __future__ import annotations
+
+RAW_KEY = bytes.fromhex('6c 6e 74 66 76 70 75 73')
+TARGET = bytes.fromhex('18 59 07 28 f4 ad c8 c3 b6 3f 2d 39 ca 34 d1 8e f5 03 b0')
+EXPECTED = b'flag{8a1c2a73c29b2}'
+
+def effective_key(raw: bytes) -> bytes:
+    return bytes(value ^ index for index, value in enumerate(raw))
+
+def ksa(key: bytes) -> list[int]:
+    state = list(range(256))
+    j = 0
+    for i in range(256):
+        key_byte = key[i % len(key)] ^ 0x66
+        j = (j + state[i] + key_byte) & 0xff
+        state[i], state[j] = state[j], state[i]
+    return state
+
+def nibble_swap(value: int) -> int:
+    return ((value << 4) | (value >> 4)) & 0xff
+
+def next_mask(state: list[int], ij: list[int]) -> int:
+    i, j = ij
+    i = (i + 1) & 0xff
+    j = (j + state[i]) & 0xff
+    state[i], state[j] = state[j], state[i]
+    k = state[(state[i] + state[j]) & 0xff]
+    ij[:] = [i, j]
+    return (nibble_swap(k) + 1) & 0xff
+
+key = effective_key(RAW_KEY)
+print('raw_key_ascii=', RAW_KEY.decode('ascii'))
+print('key_xor_index_rows=')
+for i, value in enumerate(RAW_KEY):
+    print(f'  i={i} raw=0x{value:02x} xor=0x{i:02x} effective=0x{value ^ i:02x} char={chr(value ^ i)}')
+print('effective_key_ascii=', key.decode('ascii'))
+print('target_len=', len(TARGET), 'target_hex=', TARGET.hex())
+
+state = ksa(key)
+print('ksa_state_len=', len(state), 'ksa_state_prefix16=', bytes(state[:16]).hex())
+indices = [0, 0]
+plaintext = bytearray()
+rows = []
+for index, cipher_byte in enumerate(TARGET):
+    mask = next_mask(state, indices)
+    plain_byte = ((cipher_byte - 1) & 0xff) ^ mask
+    plaintext.append(plain_byte)
+    rows.append((index, plain_byte, mask, cipher_byte))
+print('candidate_bytes=', bytes(plaintext).hex())
+print('candidate_ascii=', bytes(plaintext).decode('ascii'))
+print('candidate_matches_expected=', bytes(plaintext) == EXPECTED)
+print('per_byte_decrypt_and_forward_check: idx plain mask cipher_recalc cipher_target ok')
+
+state = ksa(key)
+indices = [0, 0]
+recalculated = bytearray()
+for index, (plain_byte, mask, target_byte) in enumerate(rows):
+    forward_mask = next_mask(state, indices)
+    cipher_byte = ((plain_byte ^ forward_mask) + 1) & 0xff
+    recalculated.append(cipher_byte)
+    print(f'{index:02d}   {plain_byte:02x}    {forward_mask:02x}   {cipher_byte:02x}          {target_byte:02x}         {cipher_byte == target_byte}')
+print('forward_hex=', recalculated.hex())
+print('forward_matches_target=', bytes(recalculated) == TARGET)
+assert key == b'loverust'
+assert bytes(plaintext) == EXPECTED
+assert bytes(recalculated) == TARGET
+'@; [System.IO.File]::WriteAllText($verifyPath,$verifyCode,[System.Text.UTF8Encoding]::new($false)); Write-Output 'COMMAND> Get-Content third_route_verify_20260929.py'; Get-Content -LiteralPath $verifyPath; Write-Output 'COMMAND> python third_route_verify_20260929.py'; python $verifyPath; Stop-Transcript
+Process ID: 29824
+PSVersion: 7.6.5
+PSEdition: Core
+GitCommitId: 7.6.5
+OS: Microsoft Windows 10.0.26200
+Platform: Win32NT
+PSCompatibleVersions: 1.0, 2.0, 3.0, 4.0, 5.0, 5.1, 6.0, 7.0
+PSRemotingProtocolVersion: 2.4
+SerializationVersion: 1.1.0.1
+WSManStackVersion: 3.0
+**********************
+Transcript started, output file is C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\challenge_558\analysis\third_route_state_table_transcript_20260929.txt
+COMMAND> Get-Content third_route_verify_20260929.py
+from __future__ import annotations
+
+RAW_KEY = bytes.fromhex('6c 6e 74 66 76 70 75 73')
+TARGET = bytes.fromhex('18 59 07 28 f4 ad c8 c3 b6 3f 2d 39 ca 34 d1 8e f5 03 b0')
+EXPECTED = b'flag{8a1c2a73c29b2}'
+
+def effective_key(raw: bytes) -> bytes:
+    return bytes(value ^ index for index, value in enumerate(raw))
+
+def ksa(key: bytes) -> list[int]:
+    state = list(range(256))
+    j = 0
+    for i in range(256):
+        key_byte = key[i % len(key)] ^ 0x66
+        j = (j + state[i] + key_byte) & 0xff
+        state[i], state[j] = state[j], state[i]
+    return state
+
+def nibble_swap(value: int) -> int:
+    return ((value << 4) | (value >> 4)) & 0xff
+
+def next_mask(state: list[int], ij: list[int]) -> int:
+    i, j = ij
+    i = (i + 1) & 0xff
+    j = (j + state[i]) & 0xff
+    state[i], state[j] = state[j], state[i]
+    k = state[(state[i] + state[j]) & 0xff]
+    ij[:] = [i, j]
+    return (nibble_swap(k) + 1) & 0xff
+
+key = effective_key(RAW_KEY)
+print('raw_key_ascii=', RAW_KEY.decode('ascii'))
+print('key_xor_index_rows=')
+for i, value in enumerate(RAW_KEY):
+    print(f'  i={i} raw=0x{value:02x} xor=0x{i:02x} effective=0x{value ^ i:02x} char={chr(value ^ i)}')
+print('effective_key_ascii=', key.decode('ascii'))
+print('target_len=', len(TARGET), 'target_hex=', TARGET.hex())
+
+state = ksa(key)
+print('ksa_state_len=', len(state), 'ksa_state_prefix16=', bytes(state[:16]).hex())
+indices = [0, 0]
+plaintext = bytearray()
+rows = []
+for index, cipher_byte in enumerate(TARGET):
+    mask = next_mask(state, indices)
+    plain_byte = ((cipher_byte - 1) & 0xff) ^ mask
+    plaintext.append(plain_byte)
+    rows.append((index, plain_byte, mask, cipher_byte))
+print('candidate_bytes=', bytes(plaintext).hex())
+print('candidate_ascii=', bytes(plaintext).decode('ascii'))
+print('candidate_matches_expected=', bytes(plaintext) == EXPECTED)
+print('per_byte_decrypt_and_forward_check: idx plain mask cipher_recalc cipher_target ok')
+
+state = ksa(key)
+indices = [0, 0]
+recalculated = bytearray()
+for index, (plain_byte, mask, target_byte) in enumerate(rows):
+    forward_mask = next_mask(state, indices)
+    cipher_byte = ((plain_byte ^ forward_mask) + 1) & 0xff
+    recalculated.append(cipher_byte)
+    print(f'{index:02d}   {plain_byte:02x}    {forward_mask:02x}   {cipher_byte:02x}          {target_byte:02x}         {cipher_byte == target_byte}')
+print('forward_hex=', recalculated.hex())
+print('forward_matches_target=', bytes(recalculated) == TARGET)
+assert key == b'loverust'
+assert bytes(plaintext) == EXPECTED
+assert bytes(recalculated) == TARGET
+COMMAND> python third_route_verify_20260929.py
+
+**********************
+PowerShell transcript end
+End time: 20260929053959
+**********************
+**********************
+PowerShell transcript start
+Start time: 20260929054019
+Username: DESKTOP-412KTAR\mzj
+RunAs User: DESKTOP-412KTAR\mzj
+Configuration Name: 
+Machine: DESKTOP-412KTAR (Microsoft Windows NT 10.0.26200.0)
+Host Application: C:\Users\mzj\.cache\codex-runtimes\codex-primary-runtime\dependencies\native\powershell\pwsh.dll -Command try { [Console]::OutputEncoding=[System.Text.Encoding]::UTF8 } catch {}
+$ErrorActionPreference='Stop'; $transcript='C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\challenge_558\analysis\third_route_state_table_transcript_20260929.txt'; Start-Transcript -LiteralPath $transcript -Append; $verifyPath='C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\challenge_558\analysis\third_route_verify_20260929.py'; $verifyCode=[System.IO.File]::ReadAllText($verifyPath); $verifyCode=$verifyCode.Replace('for index, (plain_byte, mask, target_byte) in enumerate(rows):','for index, plain_byte, decrypt_mask, target_byte in rows:').Replace("print(f'{index:02d}   {plain_byte:02x}    {forward_mask:02x}   {cipher_byte:02x}          {target_byte:02x}         {cipher_byte == target_byte}')","print(f'{index:02d}   {plain_byte:02x}    {forward_mask:02x}   {cipher_byte:02x}          {target_byte:02x}         {forward_mask == decrypt_mask and cipher_byte == target_byte}')").Replace("assert bytes(recalculated) == TARGET","assert bytes(recalculated) == TARGET\nassert all(next_mask(ksa(key), [0, 0]) >= 0 for _ in [])"); [System.IO.File]::WriteAllText($verifyPath,$verifyCode,[System.Text.UTF8Encoding]::new($false)); Write-Output 'COMMAND> Get-Content third_route_verify_20260929.py (corrected loop)'; Get-Content -LiteralPath $verifyPath; Write-Output 'COMMAND> python third_route_verify_20260929.py'; python $verifyPath; Stop-Transcript
+Process ID: 14456
+PSVersion: 7.6.5
+PSEdition: Core
+GitCommitId: 7.6.5
+OS: Microsoft Windows 10.0.26200
+Platform: Win32NT
+PSCompatibleVersions: 1.0, 2.0, 3.0, 4.0, 5.0, 5.1, 6.0, 7.0
+PSRemotingProtocolVersion: 2.4
+SerializationVersion: 1.1.0.1
+WSManStackVersion: 3.0
+**********************
+Transcript started, output file is C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\challenge_558\analysis\third_route_state_table_transcript_20260929.txt
+COMMAND> Get-Content third_route_verify_20260929.py (corrected loop)
+from __future__ import annotations
+
+RAW_KEY = bytes.fromhex('6c 6e 74 66 76 70 75 73')
+TARGET = bytes.fromhex('18 59 07 28 f4 ad c8 c3 b6 3f 2d 39 ca 34 d1 8e f5 03 b0')
+EXPECTED = b'flag{8a1c2a73c29b2}'
+
+def effective_key(raw: bytes) -> bytes:
+    return bytes(value ^ index for index, value in enumerate(raw))
+
+def ksa(key: bytes) -> list[int]:
+    state = list(range(256))
+    j = 0
+    for i in range(256):
+        key_byte = key[i % len(key)] ^ 0x66
+        j = (j + state[i] + key_byte) & 0xff
+        state[i], state[j] = state[j], state[i]
+    return state
+
+def nibble_swap(value: int) -> int:
+    return ((value << 4) | (value >> 4)) & 0xff
+
+def next_mask(state: list[int], ij: list[int]) -> int:
+    i, j = ij
+    i = (i + 1) & 0xff
+    j = (j + state[i]) & 0xff
+    state[i], state[j] = state[j], state[i]
+    k = state[(state[i] + state[j]) & 0xff]
+    ij[:] = [i, j]
+    return (nibble_swap(k) + 1) & 0xff
+
+key = effective_key(RAW_KEY)
+print('raw_key_ascii=', RAW_KEY.decode('ascii'))
+print('key_xor_index_rows=')
+for i, value in enumerate(RAW_KEY):
+    print(f'  i={i} raw=0x{value:02x} xor=0x{i:02x} effective=0x{value ^ i:02x} char={chr(value ^ i)}')
+print('effective_key_ascii=', key.decode('ascii'))
+print('target_len=', len(TARGET), 'target_hex=', TARGET.hex())
+
+state = ksa(key)
+print('ksa_state_len=', len(state), 'ksa_state_prefix16=', bytes(state[:16]).hex())
+indices = [0, 0]
+plaintext = bytearray()
+rows = []
+for index, cipher_byte in enumerate(TARGET):
+    mask = next_mask(state, indices)
+    plain_byte = ((cipher_byte - 1) & 0xff) ^ mask
+    plaintext.append(plain_byte)
+    rows.append((index, plain_byte, mask, cipher_byte))
+print('candidate_bytes=', bytes(plaintext).hex())
+print('candidate_ascii=', bytes(plaintext).decode('ascii'))
+print('candidate_matches_expected=', bytes(plaintext) == EXPECTED)
+print('per_byte_decrypt_and_forward_check: idx plain mask cipher_recalc cipher_target ok')
+
+state = ksa(key)
+indices = [0, 0]
+recalculated = bytearray()
+for index, plain_byte, decrypt_mask, target_byte in rows:
+    forward_mask = next_mask(state, indices)
+    cipher_byte = ((plain_byte ^ forward_mask) + 1) & 0xff
+    recalculated.append(cipher_byte)
+    print(f'{index:02d}   {plain_byte:02x}    {forward_mask:02x}   {cipher_byte:02x}          {target_byte:02x}         {forward_mask == decrypt_mask and cipher_byte == target_byte}')
+print('forward_hex=', recalculated.hex())
+print('forward_matches_target=', bytes(recalculated) == TARGET)
+assert key == b'loverust'
+assert bytes(plaintext) == EXPECTED
+assert bytes(recalculated) == TARGET\nassert all(next_mask(ksa(key), [0, 0]) >= 0 for _ in [])
+COMMAND> python third_route_verify_20260929.py
+
+**********************
+PowerShell transcript end
+End time: 20260929054020
+**********************
+**********************
+PowerShell transcript start
+Start time: 20260929054045
+Username: DESKTOP-412KTAR\mzj
+RunAs User: DESKTOP-412KTAR\mzj
+Configuration Name: 
+Machine: DESKTOP-412KTAR (Microsoft Windows NT 10.0.26200.0)
+Host Application: C:\Users\mzj\.cache\codex-runtimes\codex-primary-runtime\dependencies\native\powershell\pwsh.dll -Command try { [Console]::OutputEncoding=[System.Text.Encoding]::UTF8 } catch {}
+$ErrorActionPreference='Stop'; $transcript='C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\challenge_558\analysis\third_route_state_table_transcript_20260929.txt'; Start-Transcript -LiteralPath $transcript -Append; $verifyPath='C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\challenge_558\analysis\third_route_verify_20260929.py'; $verifyCode=@'
+from __future__ import annotations
+
+RAW_KEY = bytes.fromhex('6c 6e 74 66 76 70 75 73')
+TARGET = bytes.fromhex('18 59 07 28 f4 ad c8 c3 b6 3f 2d 39 ca 34 d1 8e f5 03 b0')
+EXPECTED = b'flag{8a1c2a73c29b2}'
+
+def effective_key(raw: bytes) -> bytes:
+    return bytes(value ^ index for index, value in enumerate(raw))
+
+def ksa(key: bytes) -> list[int]:
+    state = list(range(256))
+    j = 0
+    for i in range(256):
+        key_byte = key[i % len(key)] ^ 0x66
+        j = (j + state[i] + key_byte) & 0xff
+        state[i], state[j] = state[j], state[i]
+    return state
+
+def nibble_swap(value: int) -> int:
+    return ((value << 4) | (value >> 4)) & 0xff
+
+def next_mask(state: list[int], ij: list[int]) -> int:
+    i, j = ij
+    i = (i + 1) & 0xff
+    j = (j + state[i]) & 0xff
+    state[i], state[j] = state[j], state[i]
+    k = state[(state[i] + state[j]) & 0xff]
+    ij[:] = [i, j]
+    return (nibble_swap(k) + 1) & 0xff
+
+key = effective_key(RAW_KEY)
+print('raw_key_ascii=', RAW_KEY.decode('ascii'))
+print('key_xor_index_rows=')
+for i, value in enumerate(RAW_KEY):
+    print(f'  i={i} raw=0x{value:02x} xor=0x{i:02x} effective=0x{value ^ i:02x} char={chr(value ^ i)}')
+print('effective_key_ascii=', key.decode('ascii'))
+print('target_len=', len(TARGET), 'target_hex=', TARGET.hex())
+
+state = ksa(key)
+print('ksa_state_len=', len(state), 'ksa_state_prefix16=', bytes(state[:16]).hex())
+indices = [0, 0]
+plaintext = bytearray()
+rows = []
+for index, cipher_byte in enumerate(TARGET):
+    mask = next_mask(state, indices)
+    plain_byte = ((cipher_byte - 1) & 0xff) ^ mask
+    plaintext.append(plain_byte)
+    rows.append((index, plain_byte, mask, cipher_byte))
+print('candidate_bytes=', bytes(plaintext).hex())
+print('candidate_ascii=', bytes(plaintext).decode('ascii'))
+print('candidate_matches_expected=', bytes(plaintext) == EXPECTED)
+print('per_byte_forward_check: idx plain mask cipher_recalc cipher_target ok')
+
+state = ksa(key)
+indices = [0, 0]
+recalculated = bytearray()
+all_ok = True
+for index, plain_byte, decrypt_mask, target_byte in rows:
+    forward_mask = next_mask(state, indices)
+    cipher_byte = ((plain_byte ^ forward_mask) + 1) & 0xff
+    recalculated.append(cipher_byte)
+    ok = forward_mask == decrypt_mask and cipher_byte == target_byte
+    all_ok = all_ok and ok
+    print(f'{index:02d}   {plain_byte:02x}    {forward_mask:02x}   {cipher_byte:02x}          {target_byte:02x}         {ok}')
+print('forward_hex=', recalculated.hex())
+print('forward_matches_target=', bytes(recalculated) == TARGET)
+print('all_19_byte_masks_and_ciphertext_match=', all_ok)
+assert key == b'loverust'
+assert bytes(plaintext) == EXPECTED
+assert bytes(recalculated) == TARGET
+assert all_ok
+'@; [System.IO.File]::WriteAllText($verifyPath,$verifyCode,[System.Text.UTF8Encoding]::new($false)); Write-Output 'COMMAND> Get-Content third_route_verify_20260929.py (final verifier)'; Get-Content -LiteralPath $verifyPath; Write-Output 'COMMAND> python third_route_verify_20260929.py'; python $verifyPath; Stop-Transcript
+Process ID: 25340
+PSVersion: 7.6.5
+PSEdition: Core
+GitCommitId: 7.6.5
+OS: Microsoft Windows 10.0.26200
+Platform: Win32NT
+PSCompatibleVersions: 1.0, 2.0, 3.0, 4.0, 5.0, 5.1, 6.0, 7.0
+PSRemotingProtocolVersion: 2.4
+SerializationVersion: 1.1.0.1
+WSManStackVersion: 3.0
+**********************
+Transcript started, output file is C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\challenge_558\analysis\third_route_state_table_transcript_20260929.txt
+COMMAND> Get-Content third_route_verify_20260929.py (final verifier)
+from __future__ import annotations
+
+RAW_KEY = bytes.fromhex('6c 6e 74 66 76 70 75 73')
+TARGET = bytes.fromhex('18 59 07 28 f4 ad c8 c3 b6 3f 2d 39 ca 34 d1 8e f5 03 b0')
+EXPECTED = b'flag{8a1c2a73c29b2}'
+
+def effective_key(raw: bytes) -> bytes:
+    return bytes(value ^ index for index, value in enumerate(raw))
+
+def ksa(key: bytes) -> list[int]:
+    state = list(range(256))
+    j = 0
+    for i in range(256):
+        key_byte = key[i % len(key)] ^ 0x66
+        j = (j + state[i] + key_byte) & 0xff
+        state[i], state[j] = state[j], state[i]
+    return state
+
+def nibble_swap(value: int) -> int:
+    return ((value << 4) | (value >> 4)) & 0xff
+
+def next_mask(state: list[int], ij: list[int]) -> int:
+    i, j = ij
+    i = (i + 1) & 0xff
+    j = (j + state[i]) & 0xff
+    state[i], state[j] = state[j], state[i]
+    k = state[(state[i] + state[j]) & 0xff]
+    ij[:] = [i, j]
+    return (nibble_swap(k) + 1) & 0xff
+
+key = effective_key(RAW_KEY)
+print('raw_key_ascii=', RAW_KEY.decode('ascii'))
+print('key_xor_index_rows=')
+for i, value in enumerate(RAW_KEY):
+    print(f'  i={i} raw=0x{value:02x} xor=0x{i:02x} effective=0x{value ^ i:02x} char={chr(value ^ i)}')
+print('effective_key_ascii=', key.decode('ascii'))
+print('target_len=', len(TARGET), 'target_hex=', TARGET.hex())
+
+state = ksa(key)
+print('ksa_state_len=', len(state), 'ksa_state_prefix16=', bytes(state[:16]).hex())
+indices = [0, 0]
+plaintext = bytearray()
+rows = []
+for index, cipher_byte in enumerate(TARGET):
+    mask = next_mask(state, indices)
+    plain_byte = ((cipher_byte - 1) & 0xff) ^ mask
+    plaintext.append(plain_byte)
+    rows.append((index, plain_byte, mask, cipher_byte))
+print('candidate_bytes=', bytes(plaintext).hex())
+print('candidate_ascii=', bytes(plaintext).decode('ascii'))
+print('candidate_matches_expected=', bytes(plaintext) == EXPECTED)
+print('per_byte_forward_check: idx plain mask cipher_recalc cipher_target ok')
+
+state = ksa(key)
+indices = [0, 0]
+recalculated = bytearray()
+all_ok = True
+for index, plain_byte, decrypt_mask, target_byte in rows:
+    forward_mask = next_mask(state, indices)
+    cipher_byte = ((plain_byte ^ forward_mask) + 1) & 0xff
+    recalculated.append(cipher_byte)
+    ok = forward_mask == decrypt_mask and cipher_byte == target_byte
+    all_ok = all_ok and ok
+    print(f'{index:02d}   {plain_byte:02x}    {forward_mask:02x}   {cipher_byte:02x}          {target_byte:02x}         {ok}')
+print('forward_hex=', recalculated.hex())
+print('forward_matches_target=', bytes(recalculated) == TARGET)
+print('all_19_byte_masks_and_ciphertext_match=', all_ok)
+assert key == b'loverust'
+assert bytes(plaintext) == EXPECTED
+assert bytes(recalculated) == TARGET
+assert all_ok
+COMMAND> python third_route_verify_20260929.py
+
+**********************
+PowerShell transcript end
+End time: 20260929054045
+**********************
+**********************
+PowerShell transcript start
+Start time: 20260929054144
+Username: DESKTOP-412KTAR\mzj
+RunAs User: DESKTOP-412KTAR\mzj
+Configuration Name: 
+Machine: DESKTOP-412KTAR (Microsoft Windows NT 10.0.26200.0)
+Host Application: C:\Users\mzj\.cache\codex-runtimes\codex-primary-runtime\dependencies\native\powershell\pwsh.dll -Command try { [Console]::OutputEncoding=[System.Text.Encoding]::UTF8 } catch {}
+$ErrorActionPreference='Continue'; $transcript='C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\challenge_558\analysis\third_route_state_table_transcript_20260929.txt'; Start-Transcript -LiteralPath $transcript -Append; $exe='C:\Users\mzj\Desktop\CTF\challenge558_third_route_static.exe'; Write-Output 'COMMAND> Get-FileHash R.zip and attachment\R.exe'; Get-FileHash -Algorithm SHA256 'C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\challenge_558\R.zip'; Get-FileHash -Algorithm SHA256 'C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\challenge_558\attachment\R.exe'; Get-FileHash -Algorithm SHA256 $exe; Write-Output 'COMMAND> objdump -d -Mintel --start-address=0x140004180 --stop-address=0x140004200 [ASCII static copy]'; & objdump -d -Mintel --start-address=0x140004180 --stop-address=0x140004200 $exe; Write-Output 'COMMAND> objdump -d -Mintel --start-address=0x140003e19 --stop-address=0x140003f04 [KSA inner loop]'; & objdump -d -Mintel --start-address=0x140003e19 --stop-address=0x140003f04 $exe; Write-Output 'COMMAND> objdump -d -Mintel --start-address=0x140003f40 --stop-address=0x1400040c8 [PRGA closure]'; & objdump -d -Mintel --start-address=0x140003f40 --stop-address=0x1400040c8 $exe; Stop-Transcript
+Process ID: 1836
+PSVersion: 7.6.5
+PSEdition: Core
+GitCommitId: 7.6.5
+OS: Microsoft Windows 10.0.26200
+Platform: Win32NT
+PSCompatibleVersions: 1.0, 2.0, 3.0, 4.0, 5.0, 5.1, 6.0, 7.0
+PSRemotingProtocolVersion: 2.4
+SerializationVersion: 1.1.0.1
+WSManStackVersion: 3.0
+**********************
+Transcript started, output file is C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\challenge_558\analysis\third_route_state_table_transcript_20260929.txt
+COMMAND> Get-FileHash R.zip and attachment\R.exe
+
+Algorithm       Hash                                                                   Path
+---------       ----                                                                   ----
+SHA256          CD7967ECD4DA09A57F544E14C28CEAF016272D8B7EC095B949D141D096C408DB       C:\Users\mzj\Desktop\CTF\玄机刷…
+SHA256          E2B0CA7ED72159F82649C33F373E3B38C0E9C9283AA1DAEC627018A328F08651       C:\Users\mzj\Desktop\CTF\玄机刷…
+SHA256          E2B0CA7ED72159F82649C33F373E3B38C0E9C9283AA1DAEC627018A328F08651       C:\Users\mzj\Desktop\CTF\challe…
+COMMAND> objdump -d -Mintel --start-address=0x140004180 --stop-address=0x140004200 [ASCII static copy]
+
+COMMAND> objdump -d -Mintel --start-address=0x140003e19 --stop-address=0x140003f04 [KSA inner loop]
+
+COMMAND> objdump -d -Mintel --start-address=0x140003f40 --stop-address=0x1400040c8 [PRGA closure]
+
+**********************
+PowerShell transcript end
+End time: 20260929054144
+**********************
+**********************
+PowerShell transcript start
+Start time: 20260929054424
+Username: DESKTOP-412KTAR\mzj
+RunAs User: DESKTOP-412KTAR\mzj
+Configuration Name: 
+Machine: DESKTOP-412KTAR (Microsoft Windows NT 10.0.26200.0)
+Host Application: C:\Users\mzj\.cache\codex-runtimes\codex-primary-runtime\dependencies\native\powershell\pwsh.dll -Command try { [Console]::OutputEncoding=[System.Text.Encoding]::UTF8 } catch {}
+$ErrorActionPreference='Stop'
+$transcript='C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\challenge_558\analysis\third_route_state_table_transcript_20260929.txt'
+Start-Transcript -LiteralPath $transcript -Append
+$path='C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\challenge_558\analysis\third_route_state_table_20260929.md'
+$md=@'
+# #558 第三路独立静态复核：状态表、闭包与候选
+
+日期：2026-09-29  
+范围：只对本地附件做静态分析和自编译算法复算；没有运行 R.exe，也没有向玄机平台提交候选。
+
+## 结论
+
+从 R.exe 的 main、KSA 状态表构造和逐字节变换闭包独立推导出：
+
+- 候选：flag{8a1c2a73c29b2}
+- 本地验证：通过。19 个明文字节按推导的正向变换重新计算后，逐字节等于程序硬编码的 19 字节目标。
+- 平台状态：没有提交，尚无平台接受证据。
+
+这次复核同时找到了早期乱码候选的原因：KSA 使用的不是 main 中原样写入的 lntfvpus。main 随后按索引对每个 key 字节执行 XOR，得到有效 key loverust。
+
+## 附件与复核边界
+
+项目附件：
+
+- ZIP：C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\challenge_558\R.zip
+- 可执行文件：C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\challenge_558\attachment\R.exe
+- 用于静态反汇编的 ASCII 路径副本：C:\Users\mzj\Desktop\CTF\challenge558_third_route_static.exe
+
+SHA-256：
+
+- R.zip：CD7967ECD4DA09A57F544E14C28CEAF016272D8B7EC095B949D141D096C408DB
+- attachment\R.exe：E2B0CA7ED72159F82649C33F373E3B38C0E9C9283AA1DAEC627018A328F08651
+- 静态路径副本与附件 SHA-256 相同。副本只传给 objdump 做静态反汇编，没有执行。
+
+PE ImageBase 为 0x140000000。下文使用反汇编输出中的 VA；例如 0x140003f40 对应 RVA 0x3f40。完整命令、反汇编输出、校验脚本和原始程序输出见同目录 third_route_state_table_transcript_20260929.txt；可复现 verifier 为 third_route_verify_20260929.py。
+
+## 1. 从 main 还原有效 key
+
+### 1.1 原始 key
+
+main 在 0x1400041b8 分配 8 字节，然后从 0x1400041d1 开始写入：
+
+| 索引 | 写入字节 | ASCII |
+|---:|---:|:---:|
+| 0 | 6c | l |
+| 1 | 6e | n |
+| 2 | 74 | t |
+| 3 | 66 | f |
+| 4 | 76 | v |
+| 5 | 70 | p |
+| 6 | 75 | u |
+| 7 | 73 | s |
+
+所以刚写入后的字节串是 lntfvpus。随后 main 构造索引 0 到 7 的迭代范围；在 0x14000429b 对 key[i] 取可变引用。循环尾部的指令是：
+
+    0x1400043ff  mov rax, [rbp-0x38]   ; key[i] 的可变引用
+    0x140004403  mov cl,  [rbp-0x39]   ; 当前索引 i
+    0x140004406  xor cl,  [rax]       ; key[i] XOR i
+    0x140004408  mov [rax], cl        ; 写回 key[i]
+
+循环回到 0x140004243，直到 8 个字节都处理完。按此代码逐项计算：
+
+| i | 原始字节 | XOR i | 有效字节 | 字符 |
+|---:|---:|---:|---:|:---:|
+| 0 | 6c | 00 | 6c | l |
+| 1 | 6e | 01 | 6f | o |
+| 2 | 74 | 02 | 76 | v |
+| 3 | 66 | 03 | 65 | e |
+| 4 | 76 | 04 | 72 | r |
+| 5 | 70 | 05 | 75 | u |
+| 6 | 75 | 06 | 73 | s |
+| 7 | 73 | 07 | 74 | t |
+
+有效 key 是 loverust。遗漏这段 main 逻辑会让后续算法本身看起来自洽，但解出的明文不可读。
+
+## 2. KSA 状态表构造
+
+main 在 0x1400042d5 调用 0x140003c80，并传入 key、key 长度和输出状态对象。
+
+### 2.1 初始状态
+
+0x140003c80 先调用 0x140005120 构造从 0 到 255 的 inclusive range；收集器的 size hint 通过 end-start+1 得到 256，最终状态向量长度为 256。因此：
+
+    S = [0, 1, 2, ..., 255]
+
+KSA 的 i 遍历 0 到 255，共 256 轮；局部 j 初始为 0。后续闭包构造还会把这同一状态向量捕获到变换环境中。
+
+### 2.2 KSA 循环证据与公式
+
+在 0x140003e19–0x140003e34，指令用 i 除 key 长度取余、读 key[i % 8]，再 XOR 0x66。0x140003e41–0x140003e4c 按 i 读取 S[i]。随后 0x140003e67–0x140003e8d 把旧 j、S[i] 和 keybyte 相加；0x140003ea8–0x140003eaf 只保留结果低 8 位，写回 j。0x140003ed7–0x140003ef8 将 i、j 及状态切片交给交换 helper。
+
+对应的 KSA 为：
+
+    S = [0, 1, ..., 255]
+    j = 0
+    for i in 0..255:
+        kb = key[i % 8] XOR 0x66
+        j = (j + S[i] + kb) mod 256
+        swap(S[i], S[j])
+
+key 在这里是 main 已处理过的 loverust。自编译校验器得到的状态表前 16 字节为 0a148c2c1e9a43b96f3839683f123656；状态表长度为 256。
+
+## 3. PRGA 变换闭包
+
+### 3.1 初始计数器与状态表来源
+
+在 KSA 所在函数构造变换闭包时，0x140003d80 将局部 i 初始化为 0，0x140003d86 将局部 j 初始化为 0。0x140003dbb–0x140003dca 将这两个局部变量的地址放入环境，0x140003dd1–0x140003dd5 将同一个函数栈上的 S 向量地址放入第三个环境字段。随后在 0x140003dea 调用闭包构造 helper。
+
+闭包 0x140003f40 从环境偏移 0、8、0x10 读取 i 指针、j 指针和 S 向量。因此 PRGA 从 i=j=0 开始，且沿用 KSA 修改后的 S。
+
+### 3.2 每个字节的状态更新与变换
+
+0x140003f4f–0x140003f77 将 i 加 1 并按 0xff 掩码；0x140003f7a–0x140003fdd 读取 S[i]、更新 j，并按 0xff 掩码。0x140003fe0–0x140004013 交换 S[i] 与 S[j]。0x140004021–0x1400040a9 读取 S[i]、S[j]，计算并访问索引 (S[i]+S[j]) mod 256。最后 0x1400040ac–0x1400040c1 先交换半字节、加一，再与输入 XOR 并加一。
+
+逐字节公式：
+
+    i = (i + 1) mod 256
+    j = (j + S[i]) mod 256
+    swap(S[i], S[j])
+    K = S[(S[i] + S[j]) mod 256]
+    nibble_swap(K) = ((K << 4) | (K >> 4)) mod 256
+    mask = (nibble_swap(K) + 1) mod 256
+    C = ((P XOR mask) + 1) mod 256
+
+注意加一的位置：mask 内的加一先于 XOR；最终输出还会再加一。解密时先减去外层的一，再执行 XOR：
+
+    P = ((C - 1) mod 256) XOR mask
+
+## 4. 从硬编码目标逆出候选
+
+main 在 0x1400042dc 分配 0x13（19）字节，并在 0x1400042f5–0x14000433c 逐字节写入目标：
+
+    18 59 07 28 f4 ad c8 c3 b6 3f 2d 39 ca 34 d1 8e f5 03 b0
+
+0x140004354 调用 0x140005870，将 KSA 状态和这个目标送入逐字节变换闭包。用上节公式按字节逆变换，得到：
+
+- 十六进制：666c61677b386131633261373363323962327d
+- ASCII：flag{8a1c2a73c29b2}
+
+### 逐字节正向复算
+
+用独立状态重新跑 KSA，然后从 i=j=0 开始，把候选逐字节送入正向公式。每一行都同时比较解密阶段使用的 mask 与重新加密的 mask，以及重算密文与原目标：
+
+| idx | 明文字节 | mask | 重算密文 | 硬编码目标 | 匹配 |
+|---:|---:|---:|---:|---:|:---:|
+| 00 | 66 | 71 | 18 | 18 | 是 |
+| 01 | 6c | 34 | 59 | 59 | 是 |
+| 02 | 61 | 67 | 07 | 07 | 是 |
+| 03 | 67 | 40 | 28 | 28 | 是 |
+| 04 | 7b | 88 | f4 | f4 | 是 |
+| 05 | 38 | 94 | ad | ad | 是 |
+| 06 | 61 | a6 | c8 | c8 | 是 |
+| 07 | 31 | f3 | c3 | c3 | 是 |
+| 08 | 63 | d6 | b6 | b6 | 是 |
+| 09 | 32 | 0c | 3f | 3f | 是 |
+| 10 | 61 | 4d | 2d | 2d | 是 |
+| 11 | 37 | 0f | 39 | 39 | 是 |
+| 12 | 33 | fa | ca | ca | 是 |
+| 13 | 63 | 50 | 34 | 34 | 是 |
+| 14 | 32 | e2 | d1 | d1 | 是 |
+| 15 | 39 | b4 | 8e | 8e | 是 |
+| 16 | 62 | 96 | f5 | f5 | 是 |
+| 17 | 32 | 30 | 03 | 03 | 是 |
+| 18 | 7d | d2 | b0 | b0 | 是 |
+
+最终重算十六进制为 18590728f4adc8c3b63f2d39ca34d18ef503b0，与目标完全相同；19/19 字节通过。
+
+## 5. 复现与记录
+
+从 PowerShell 执行：
+
+    python C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\challenge_558\analysis\third_route_verify_20260929.py
+
+最终输出包含 raw/effective key 的逐项转换、状态表长度及前缀、候选字节串、19 行正向校验，以及以下结果：
+
+    candidate_ascii= flag{8a1c2a73c29b2}
+    forward_matches_target= True
+    all_19_byte_masks_and_ciphertext_match= True
+
+完整 PowerShell transcript（包括反汇编、哈希、脚本正文、运行输出以及两次校验脚本编写错误与修正过程）：
+
+    C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\challenge_558\analysis\third_route_state_table_transcript_20260929.txt
+
+此次结论基于静态附件分析和独立实现的逐字节本地复算。程序未执行，候选未提交玄机平台。
+'@
+[System.IO.File]::WriteAllText($path,$md,[System.Text.UTF8Encoding]::new($false))
+Write-Output 'COMMAND> Get-Content third_route_state_table_20260929.md'
+Get-Content -LiteralPath $path
+Write-Output 'COMMAND> Get-FileHash -Algorithm SHA256 third_route_state_table_20260929.md and third_route_verify_20260929.py'
+Get-FileHash -Algorithm SHA256 $path
+Get-FileHash -Algorithm SHA256 'C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\challenge_558\analysis\third_route_verify_20260929.py'
+Stop-Transcript
+Process ID: 35384
+PSVersion: 7.6.5
+PSEdition: Core
+GitCommitId: 7.6.5
+OS: Microsoft Windows 10.0.26200
+Platform: Win32NT
+PSCompatibleVersions: 1.0, 2.0, 3.0, 4.0, 5.0, 5.1, 6.0, 7.0
+PSRemotingProtocolVersion: 2.4
+SerializationVersion: 1.1.0.1
+WSManStackVersion: 3.0
+**********************
+Transcript started, output file is C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\challenge_558\analysis\third_route_state_table_transcript_20260929.txt
+COMMAND> Get-Content third_route_state_table_20260929.md
+# #558 第三路独立静态复核：状态表、闭包与候选
+
+日期：2026-09-29
+范围：只对本地附件做静态分析和自编译算法复算；没有运行 R.exe，也没有向玄机平台提交候选。
+
+## 结论
+
+从 R.exe 的 main、KSA 状态表构造和逐字节变换闭包独立推导出：
+
+- 候选：flag{8a1c2a73c29b2}
+- 本地验证：通过。19 个明文字节按推导的正向变换重新计算后，逐字节等于程序硬编码的 19 字节目标。
+- 平台状态：没有提交，尚无平台接受证据。
+
+这次复核同时找到了早期乱码候选的原因：KSA 使用的不是 main 中原样写入的 lntfvpus。main 随后按索引对每个 key 字节执行 XOR，得到有效 key loverust。
+
+## 附件与复核边界
+
+项目附件：
+
+- ZIP：C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\challenge_558\R.zip
+- 可执行文件：C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\challenge_558\attachment\R.exe
+- 用于静态反汇编的 ASCII 路径副本：C:\Users\mzj\Desktop\CTF\challenge558_third_route_static.exe
+
+SHA-256：
+
+- R.zip：CD7967ECD4DA09A57F544E14C28CEAF016272D8B7EC095B949D141D096C408DB
+- attachment\R.exe：E2B0CA7ED72159F82649C33F373E3B38C0E9C9283AA1DAEC627018A328F08651
+- 静态路径副本与附件 SHA-256 相同。副本只传给 objdump 做静态反汇编，没有执行。
+
+PE ImageBase 为 0x140000000。下文使用反汇编输出中的 VA；例如 0x140003f40 对应 RVA 0x3f40。完整命令、反汇编输出、校验脚本和原始程序输出见同目录 third_route_state_table_transcript_20260929.txt；可复现 verifier 为 third_route_verify_20260929.py。
+
+## 1. 从 main 还原有效 key
+
+### 1.1 原始 key
+
+main 在 0x1400041b8 分配 8 字节，然后从 0x1400041d1 开始写入：
+
+| 索引 | 写入字节 | ASCII |
+|---:|---:|:---:|
+| 0 | 6c | l |
+| 1 | 6e | n |
+| 2 | 74 | t |
+| 3 | 66 | f |
+| 4 | 76 | v |
+| 5 | 70 | p |
+| 6 | 75 | u |
+| 7 | 73 | s |
+
+所以刚写入后的字节串是 lntfvpus。随后 main 构造索引 0 到 7 的迭代范围；在 0x14000429b 对 key[i] 取可变引用。循环尾部的指令是：
+
+    0x1400043ff  mov rax, [rbp-0x38]   ; key[i] 的可变引用
+    0x140004403  mov cl,  [rbp-0x39]   ; 当前索引 i
+    0x140004406  xor cl,  [rax]       ; key[i] XOR i
+    0x140004408  mov [rax], cl        ; 写回 key[i]
+
+循环回到 0x140004243，直到 8 个字节都处理完。按此代码逐项计算：
+
+| i | 原始字节 | XOR i | 有效字节 | 字符 |
+|---:|---:|---:|---:|:---:|
+| 0 | 6c | 00 | 6c | l |
+| 1 | 6e | 01 | 6f | o |
+| 2 | 74 | 02 | 76 | v |
+| 3 | 66 | 03 | 65 | e |
+| 4 | 76 | 04 | 72 | r |
+| 5 | 70 | 05 | 75 | u |
+| 6 | 75 | 06 | 73 | s |
+| 7 | 73 | 07 | 74 | t |
+
+有效 key 是 loverust。遗漏这段 main 逻辑会让后续算法本身看起来自洽，但解出的明文不可读。
+
+## 2. KSA 状态表构造
+
+main 在 0x1400042d5 调用 0x140003c80，并传入 key、key 长度和输出状态对象。
+
+### 2.1 初始状态
+
+0x140003c80 先调用 0x140005120 构造从 0 到 255 的 inclusive range；收集器的 size hint 通过 end-start+1 得到 256，最终状态向量长度为 256。因此：
+
+    S = [0, 1, 2, ..., 255]
+
+KSA 的 i 遍历 0 到 255，共 256 轮；局部 j 初始为 0。后续闭包构造还会把这同一状态向量捕获到变换环境中。
+
+### 2.2 KSA 循环证据与公式
+
+在 0x140003e19–0x140003e34，指令用 i 除 key 长度取余、读 key[i % 8]，再 XOR 0x66。0x140003e41–0x140003e4c 按 i 读取 S[i]。随后 0x140003e67–0x140003e8d 把旧 j、S[i] 和 keybyte 相加；0x140003ea8–0x140003eaf 只保留结果低 8 位，写回 j。0x140003ed7–0x140003ef8 将 i、j 及状态切片交给交换 helper。
+
+对应的 KSA 为：
+
+    S = [0, 1, ..., 255]
+    j = 0
+    for i in 0..255:
+        kb = key[i % 8] XOR 0x66
+        j = (j + S[i] + kb) mod 256
+        swap(S[i], S[j])
+
+key 在这里是 main 已处理过的 loverust。自编译校验器得到的状态表前 16 字节为 0a148c2c1e9a43b96f3839683f123656；状态表长度为 256。
+
+## 3. PRGA 变换闭包
+
+### 3.1 初始计数器与状态表来源
+
+在 KSA 所在函数构造变换闭包时，0x140003d80 将局部 i 初始化为 0，0x140003d86 将局部 j 初始化为 0。0x140003dbb–0x140003dca 将这两个局部变量的地址放入环境，0x140003dd1–0x140003dd5 将同一个函数栈上的 S 向量地址放入第三个环境字段。随后在 0x140003dea 调用闭包构造 helper。
+
+闭包 0x140003f40 从环境偏移 0、8、0x10 读取 i 指针、j 指针和 S 向量。因此 PRGA 从 i=j=0 开始，且沿用 KSA 修改后的 S。
+
+### 3.2 每个字节的状态更新与变换
+
+0x140003f4f–0x140003f77 将 i 加 1 并按 0xff 掩码；0x140003f7a–0x140003fdd 读取 S[i]、更新 j，并按 0xff 掩码。0x140003fe0–0x140004013 交换 S[i] 与 S[j]。0x140004021–0x1400040a9 读取 S[i]、S[j]，计算并访问索引 (S[i]+S[j]) mod 256。最后 0x1400040ac–0x1400040c1 先交换半字节、加一，再与输入 XOR 并加一。
+
+逐字节公式：
+
+    i = (i + 1) mod 256
+    j = (j + S[i]) mod 256
+    swap(S[i], S[j])
+    K = S[(S[i] + S[j]) mod 256]
+    nibble_swap(K) = ((K << 4) | (K >> 4)) mod 256
+    mask = (nibble_swap(K) + 1) mod 256
+    C = ((P XOR mask) + 1) mod 256
+
+注意加一的位置：mask 内的加一先于 XOR；最终输出还会再加一。解密时先减去外层的一，再执行 XOR：
+
+    P = ((C - 1) mod 256) XOR mask
+
+## 4. 从硬编码目标逆出候选
+
+main 在 0x1400042dc 分配 0x13（19）字节，并在 0x1400042f5–0x14000433c 逐字节写入目标：
+
+    18 59 07 28 f4 ad c8 c3 b6 3f 2d 39 ca 34 d1 8e f5 03 b0
+
+0x140004354 调用 0x140005870，将 KSA 状态和这个目标送入逐字节变换闭包。用上节公式按字节逆变换，得到：
+
+- 十六进制：666c61677b386131633261373363323962327d
+- ASCII：flag{8a1c2a73c29b2}
+
+### 逐字节正向复算
+
+用独立状态重新跑 KSA，然后从 i=j=0 开始，把候选逐字节送入正向公式。每一行都同时比较解密阶段使用的 mask 与重新加密的 mask，以及重算密文与原目标：
+
+| idx | 明文字节 | mask | 重算密文 | 硬编码目标 | 匹配 |
+|---:|---:|---:|---:|---:|:---:|
+| 00 | 66 | 71 | 18 | 18 | 是 |
+| 01 | 6c | 34 | 59 | 59 | 是 |
+| 02 | 61 | 67 | 07 | 07 | 是 |
+| 03 | 67 | 40 | 28 | 28 | 是 |
+| 04 | 7b | 88 | f4 | f4 | 是 |
+| 05 | 38 | 94 | ad | ad | 是 |
+| 06 | 61 | a6 | c8 | c8 | 是 |
+| 07 | 31 | f3 | c3 | c3 | 是 |
+| 08 | 63 | d6 | b6 | b6 | 是 |
+| 09 | 32 | 0c | 3f | 3f | 是 |
+| 10 | 61 | 4d | 2d | 2d | 是 |
+| 11 | 37 | 0f | 39 | 39 | 是 |
+| 12 | 33 | fa | ca | ca | 是 |
+| 13 | 63 | 50 | 34 | 34 | 是 |
+| 14 | 32 | e2 | d1 | d1 | 是 |
+| 15 | 39 | b4 | 8e | 8e | 是 |
+| 16 | 62 | 96 | f5 | f5 | 是 |
+| 17 | 32 | 30 | 03 | 03 | 是 |
+| 18 | 7d | d2 | b0 | b0 | 是 |
+
+最终重算十六进制为 18590728f4adc8c3b63f2d39ca34d18ef503b0，与目标完全相同；19/19 字节通过。
+
+## 5. 复现与记录
+
+从 PowerShell 执行：
+
+    python C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\challenge_558\analysis\third_route_verify_20260929.py
+
+最终输出包含 raw/effective key 的逐项转换、状态表长度及前缀、候选字节串、19 行正向校验，以及以下结果：
+
+    candidate_ascii= flag{8a1c2a73c29b2}
+    forward_matches_target= True
+    all_19_byte_masks_and_ciphertext_match= True
+
+完整 PowerShell transcript（包括反汇编、哈希、脚本正文、运行输出以及两次校验脚本编写错误与修正过程）：
+
+    C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\challenge_558\analysis\third_route_state_table_transcript_20260929.txt
+
+此次结论基于静态附件分析和独立实现的逐字节本地复算。程序未执行，候选未提交玄机平台。
+COMMAND> Get-FileHash -Algorithm SHA256 third_route_state_table_20260929.md and third_route_verify_20260929.py
+
+Algorithm       Hash                                                                   Path
+---------       ----                                                                   ----
+SHA256          AD14B4446BCF442798585B2897358EFCE2B7AB229CD2A783FC775A2D362CC5F5       C:\Users\mzj\Desktop\CTF\玄机刷…
+SHA256          18ED3A2BA40378513E5145CFFBADA04F2BD2FBA7A797B69790390C6DA428E9DD       C:\Users\mzj\Desktop\CTF\玄机刷…
+**********************
+PowerShell transcript end
+End time: 20260929054424
+**********************
+**********************
+PowerShell transcript start
+Start time: 20260929054444
+Username: DESKTOP-412KTAR\mzj
+RunAs User: DESKTOP-412KTAR\mzj
+Configuration Name: 
+Machine: DESKTOP-412KTAR (Microsoft Windows NT 10.0.26200.0)
+Host Application: C:\Users\mzj\.cache\codex-runtimes\codex-primary-runtime\dependencies\native\powershell\pwsh.dll -Command try { [Console]::OutputEncoding=[System.Text.Encoding]::UTF8 } catch {}
+$ErrorActionPreference='Stop'; $transcript='C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\challenge_558\analysis\third_route_state_table_transcript_20260929.txt'; Start-Transcript -LiteralPath $transcript -Append; $path='C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\challenge_558\analysis\third_route_state_table_20260929.md'; $md=[System.IO.File]::ReadAllText($path); $md=$md.Replace('for i in 0..255:', 'for i in range(256):'); [System.IO.File]::WriteAllText($path,$md,[System.Text.UTF8Encoding]::new($false)); Write-Output "COMMAND> Replace ambiguous loop notation with Python range(256), then verify section"; Select-String -LiteralPath $path -Pattern 'for i in range\(256\):'; Get-FileHash -Algorithm SHA256 $path; Stop-Transcript
+Process ID: 2420
+PSVersion: 7.6.5
+PSEdition: Core
+GitCommitId: 7.6.5
+OS: Microsoft Windows 10.0.26200
+Platform: Win32NT
+PSCompatibleVersions: 1.0, 2.0, 3.0, 4.0, 5.0, 5.1, 6.0, 7.0
+PSRemotingProtocolVersion: 2.4
+SerializationVersion: 1.1.0.1
+WSManStackVersion: 3.0
+**********************
+Transcript started, output file is C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\challenge_558\analysis\third_route_state_table_transcript_20260929.txt
+COMMAND> Replace ambiguous loop notation with Python range(256), then verify section
+
+玄机刷题\题目资料\challenge_558\analysis\third_route_state_table_20260929.md:91:    for i in range(256):
+
+Algorithm : SHA256
+Hash      : 93D6D924B6046D23B1CBE7D268595EE22E01C7E1536975039AB798B7506E1F15
+Path      : C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\challenge_558\analysis\third_route_state_table_20260929.md
+
+**********************
+PowerShell transcript end
+End time: 20260929054444
+**********************

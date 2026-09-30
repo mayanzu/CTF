@@ -1,0 +1,430 @@
+**********************
+PowerShell transcript start
+Start time: 20260929082848
+Username: DESKTOP-412KTAR\mzj
+RunAs User: DESKTOP-412KTAR\mzj
+Configuration Name: 
+Machine: DESKTOP-412KTAR (Microsoft Windows NT 10.0.26200.0)
+Host Application: C:\Users\mzj\.cache\codex-runtimes\codex-primary-runtime\dependencies\native\powershell\pwsh.dll -Command try { [Console]::OutputEncoding=[System.Text.Encoding]::UTF8 } catch {}
+$ErrorActionPreference = 'Continue'
+$project = 'C:\Users\mzj\Desktop\CTF\玄机刷题'
+$records = Join-Path $project '记录'
+New-Item -ItemType Directory -Path $records -Force | Out-Null
+$coord = Join-Path $records '批次_20260929_第六批协调.txt'
+Start-Transcript -Path $coord
+$folders = @(
+  (Join-Path $project '题目资料\慕然回首_530'),
+  (Join-Path $project '题目资料\你若安好便是晴_531'),
+  (Join-Path $project '题目资料\人生自古谁无死_532')
+)
+foreach ($folder in $folders) {
+  Write-Output "COMMAND> Get-ChildItem -LiteralPath '$folder' -Recurse -File"
+  Get-ChildItem -LiteralPath $folder -Recurse -File | Select-Object FullName,Length
+}
+foreach ($wp in @(
+  (Join-Path $folders[0] 'wp.md'),
+  (Join-Path $folders[1] 'wp.md')
+)) {
+  Write-Output "COMMAND> Get-Content -LiteralPath '$wp' -TotalCount 180"
+  Get-Content -LiteralPath $wp -TotalCount 180
+}
+Stop-Transcript
+Process ID: 5928
+PSVersion: 7.6.5
+PSEdition: Core
+GitCommitId: 7.6.5
+OS: Microsoft Windows 10.0.26200
+Platform: Win32NT
+PSCompatibleVersions: 1.0, 2.0, 3.0, 4.0, 5.0, 5.1, 6.0, 7.0
+PSRemotingProtocolVersion: 2.4
+SerializationVersion: 1.1.0.1
+WSManStackVersion: 3.0
+**********************
+Transcript started, output file is C:\Users\mzj\Desktop\CTF\玄机刷题\记录\批次_20260929_第六批协调.txt
+COMMAND> Get-ChildItem -LiteralPath 'C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\慕然回首_530' -Recurse -File
+
+**********************
+PowerShell transcript end
+End time: 20260929082848
+**********************
+**********************
+PowerShell transcript start
+Start time: 20260929083319
+Username: DESKTOP-412KTAR\mzj
+RunAs User: DESKTOP-412KTAR\mzj
+Configuration Name: 
+Machine: DESKTOP-412KTAR (Microsoft Windows NT 10.0.26200.0)
+Host Application: C:\Users\mzj\.cache\codex-runtimes\codex-primary-runtime\dependencies\native\powershell\pwsh.dll -Command try { [Console]::OutputEncoding=[System.Text.Encoding]::UTF8 } catch {}
+$ErrorActionPreference = 'Continue'
+$project = 'C:\Users\mzj\Desktop\CTF\玄机刷题'
+$records = Join-Path $project '记录'
+$coord = Join-Path $records '批次_20260929_第六批协调.txt'
+$selection = Join-Path $records '批次_20260929_第六批选题与核对.md'
+Start-Transcript -Append -Path $coord
+Write-Output "COMMAND> Get-Content -LiteralPath '$selection' -Tail 120"
+Get-Content -LiteralPath $selection -Tail 120
+Stop-Transcript
+Process ID: 35820
+PSVersion: 7.6.5
+PSEdition: Core
+GitCommitId: 7.6.5
+OS: Microsoft Windows 10.0.26200
+Platform: Win32NT
+PSCompatibleVersions: 1.0, 2.0, 3.0, 4.0, 5.0, 5.1, 6.0, 7.0
+PSRemotingProtocolVersion: 2.4
+SerializationVersion: 1.1.0.1
+WSManStackVersion: 3.0
+**********************
+Transcript started, output file is C:\Users\mzj\Desktop\CTF\玄机刷题\记录\批次_20260929_第六批协调.txt
+COMMAND> Get-Content -LiteralPath 'C:\Users\mzj\Desktop\CTF\玄机刷题\记录\批次_20260929_第六批选题与核对.md' -Tail 120
+# 第六批选题与状态核对（2026-09-29）
+
+## 选题核验
+
+在玄机平台“全部”列表中通过可见搜索分别打开详情页核验；以详情页标出的“免费”、难度“中等”和步骤 `0/1` 为准，不依赖不完整的已完成/未完成筛选。当前登录账号：`slu_mzj`。
+
+| ID | 题目 | 分类 | 难度 | 费用 | 详情步骤 | 原始附件 | SHA-256 |
+|---:|---|---|---|---|---|---|---|
+| 530 | 商丘师范学院第四届网络安全及信息对抗大赛 慕然回首，那人却在灯火阑珊处 | REVERSE | 中等 | 免费 | 0/1 | `题目资料\慕然回首_530\originals\tom.zip` | `15832F8EA58617B1D40050CBDEB138E92A1DFA2E9DBEBEC1AF25446306B99EE9` |
+| 531 | 商丘师范学院第四届网络安全及信息对抗大赛 你若安好便是晴 | REVERSE | 中等 | 免费 | 0/1 | `题目资料\你若安好便是晴_531\originals\are_you_ok.zip` | `F0DC4577D9C540ACCAF2A8B3C819028EC6091723295ED705228813158350F9E3` |
+| 532 | 商丘师范学院第四届网络安全及信息对抗大赛 人生自古谁无死 | REVERSE | 中等 | 免费 | 0/1 | `题目资料\人生自古谁无死_532\originals\人生自古谁无死.zip` | `C27CFAEE48A03D4512461E558795B09C2A3E715B808A5BA697A33D774C9655E5` |
+
+## 页面与附件记录
+
+- #530 页面说明“Tom 能不能捉到 Jerry 捏？”，下载 `tom.zip`，ZIP 内有 `Jerry.exe`（159,118 字节）。
+- #531 页面说明“你若见到 ta，不妨喝杯茶叙叙旧；不要再去当舔狗了。”，下载 `are_you_ok.zip`，ZIP 内有 `你好吗.exe`（132,122 字节）。
+- #532 页面说明“小李学了个新算法，但是可恶的阿尼亚把秘密删了，只剩下谜语。你能把给他找到答案吗？”，ZIP 内有 `1.enc`、`2.enc` 与 `人生自古谁无死.exe`（136,097 字节）。
+- 附件通过题目详情页的“下载附件”按钮取得，并复制到项目；ZIP 内容只列举并解压，没有运行任何 EXE。
+- `tom.zip` 与下载目录的 `tom (1).zip` SHA-256 相同；项目仅保留一份原始 ZIP。
+
+## 当前进度
+
+- 题目目录已建立，原始 ZIP 与解压文件已归档。
+- 待分别完成三题的静态分析、可复现脚本、逐步中文 WP 和逐条命令/输出日志。
+- 平台步骤尚为 `0/1`，本批尚未提交候选。
+**********************
+PowerShell transcript end
+End time: 20260929083319
+**********************
+**********************
+PowerShell transcript start
+Start time: 20260929083351
+Username: DESKTOP-412KTAR\mzj
+RunAs User: DESKTOP-412KTAR\mzj
+Configuration Name: 
+Machine: DESKTOP-412KTAR (Microsoft Windows NT 10.0.26200.0)
+Host Application: C:\Users\mzj\.cache\codex-runtimes\codex-primary-runtime\dependencies\native\powershell\pwsh.dll -Command try { [Console]::OutputEncoding=[System.Text.Encoding]::UTF8 } catch {}
+$ErrorActionPreference = 'Stop'
+$project = 'C:\Users\mzj\Desktop\CTF\玄机刷题'
+$records = Join-Path $project '记录'
+$coord = Join-Path $records '批次_20260929_第六批协调.txt'
+$selection = Join-Path $records '批次_20260929_第六批选题与核对.md'
+Start-Transcript -Append -Path $coord
+Write-Output "COMMAND> Append static solve results to '$selection'"
+$append = @'
+
+## 静态求解结果（平台待验证）
+
+| ID | 静态候选 | 证据 | 平台状态 |
+|---:|---|---|---|
+| 530 | `flag{ddddddssaaaaassdddssaa}` | 从 PE `.data` 取 10×10 迷宫、BFS 得唯一最短路径；程序只打印 flag 格式提示，不校验 flag。 | 待提交；未标记已完成 |
+| 531 | `flag{9e76e57b-a921-4cbc-8}` | TEA 32 轮解密、去除六字节 `0x06` padding、XOR `0x16`；重新加密与原密文逐字节一致；独立复核确认 26 字节候选。 | 待提交；未标记已完成 |
+| 532 | `flag{8059843e2485466699c1f639}` | `1.enc` 反转再 XOR `0x55` 得完整 flag；`2.enc` 经 EXE 状态恢复的 ChaCha20 密钥流解开后，去掉连字符得到相同主体的前 16 位。独立复核确认。 | 待提交；未标记已完成 |
+
+#532 EXE 另有可静态复现的 `SQCTF{real_chacha20_flag}` 嵌入字符串，以及明确的 `fake_flag_do_not_submit` 诱饵。完整 WPs 列出这些分支和数据来源；在平台验收前均以附件相互印证的完整 `flag{...}` 为主候选。
+
+## WP 和复现材料
+
+- #530：[wp.md](../题目资料/慕然回首_530/wp.md)；脚本 `analysis/static_analyze.py`，输出 `static_analysis.json`，PowerShell 记录 `analysis/commands_output.log`。
+- #531：[wp.md](../题目资料/你若安好便是晴_531/wp.md)；脚本 `analysis/decrypt_static.py`，输出 `decrypt_static_output.txt`，独立复核及命令记录位于 `analysis/independent_review*`。
+- #532：[wp.md](../题目资料/人生自古谁无死_532/wp.md)；脚本 `analysis/solve_532.py`，输出 `solve_532_output.txt`；独立复核材料位于 `analysis/independent_review*`。
+- 本批协调与本地核验命令/输出见 `批次_20260929_第六批协调.txt`。详情页可见状态最近核验为 #530/#531/#532 均免费、中等、REVERSE、进度 `0/1`。
+
+静态解题和资料归档已完成；由于尚未提交平台，本批外部验证仍未完成。
+'@
+Add-Content -LiteralPath $selection -Value $append -Encoding utf8
+Write-Output "Selection record updated; bytes=$((Get-Item -LiteralPath $selection).Length)"
+Stop-Transcript
+Process ID: 15996
+PSVersion: 7.6.5
+PSEdition: Core
+GitCommitId: 7.6.5
+OS: Microsoft Windows 10.0.26200
+Platform: Win32NT
+PSCompatibleVersions: 1.0, 2.0, 3.0, 4.0, 5.0, 5.1, 6.0, 7.0
+PSRemotingProtocolVersion: 2.4
+SerializationVersion: 1.1.0.1
+WSManStackVersion: 3.0
+**********************
+Transcript started, output file is C:\Users\mzj\Desktop\CTF\玄机刷题\记录\批次_20260929_第六批协调.txt
+COMMAND> Append static solve results to 'C:\Users\mzj\Desktop\CTF\玄机刷题\记录\批次_20260929_第六批选题与核对.md'
+Selection record updated; bytes=4221
+**********************
+PowerShell transcript end
+End time: 20260929083351
+**********************
+**********************
+PowerShell transcript start
+Start time: 20260929083503
+Username: DESKTOP-412KTAR\mzj
+RunAs User: DESKTOP-412KTAR\mzj
+Configuration Name: 
+Machine: DESKTOP-412KTAR (Microsoft Windows NT 10.0.26200.0)
+Host Application: C:\Users\mzj\.cache\codex-runtimes\codex-primary-runtime\dependencies\native\powershell\pwsh.dll -Command try { [Console]::OutputEncoding=[System.Text.Encoding]::UTF8 } catch {}
+$ErrorActionPreference = 'Continue'
+$project = 'C:\Users\mzj\Desktop\CTF\玄机刷题'
+$records = Join-Path $project '记录'
+$coord = Join-Path $records '批次_20260929_第六批协调.txt'
+Start-Transcript -Append -Path $coord
+Write-Output "COMMAND> Get-ChildItem -LiteralPath '$records' -Filter '*第五批*'"
+Get-ChildItem -LiteralPath $records -Filter '*第五批*' | Select-Object FullName,Length
+$wp = Join-Path $project '题目资料\PaluArray_546\wp.md'
+Write-Output "COMMAND> Get-Content -LiteralPath '$wp' -TotalCount 140"
+Get-Content -LiteralPath $wp -TotalCount 140
+Stop-Transcript
+Process ID: 33708
+PSVersion: 7.6.5
+PSEdition: Core
+GitCommitId: 7.6.5
+OS: Microsoft Windows 10.0.26200
+Platform: Win32NT
+PSCompatibleVersions: 1.0, 2.0, 3.0, 4.0, 5.0, 5.1, 6.0, 7.0
+PSRemotingProtocolVersion: 2.4
+SerializationVersion: 1.1.0.1
+WSManStackVersion: 3.0
+**********************
+Transcript started, output file is C:\Users\mzj\Desktop\CTF\玄机刷题\记录\批次_20260929_第六批协调.txt
+COMMAND> Get-ChildItem -LiteralPath 'C:\Users\mzj\Desktop\CTF\玄机刷题\记录' -Filter '*第五批*'
+
+**********************
+PowerShell transcript end
+End time: 20260929083503
+**********************
+**********************
+PowerShell transcript start
+Start time: 20260929083650
+Username: DESKTOP-412KTAR\mzj
+RunAs User: DESKTOP-412KTAR\mzj
+Configuration Name: 
+Machine: DESKTOP-412KTAR (Microsoft Windows NT 10.0.26200.0)
+Host Application: C:\Users\mzj\.cache\codex-runtimes\codex-primary-runtime\dependencies\native\powershell\pwsh.dll -Command try { [Console]::OutputEncoding=[System.Text.Encoding]::UTF8 } catch {}
+$ErrorActionPreference = 'Continue'
+$project = 'C:\Users\mzj\Desktop\CTF\玄机刷题'
+$coord = Join-Path $project '记录\批次_20260929_第六批协调.txt'
+$stage = 'C:\Users\mzj\Desktop\CTF\analysis_tmp'
+Start-Transcript -Append -Path $coord
+Write-Output "COMMAND> Get-ChildItem -LiteralPath '$stage' -Force"
+Get-ChildItem -LiteralPath $stage -Force | Select-Object FullName,Length
+Write-Output "COMMAND> Compare staged duplicates against project source files"
+$checks = @(
+  @('C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\人生自古谁无死_532\extracted\人生自古谁无死.exe', (Join-Path $stage 'target.exe')),
+  @('C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\人生自古谁无死_532\extracted\1.enc', (Join-Path $stage '1.enc')),
+  @('C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\人生自古谁无死_532\extracted\2.enc', (Join-Path $stage '2.enc'))
+)
+foreach ($pair in $checks) {
+  $a = (Get-FileHash -LiteralPath $pair[0] -Algorithm SHA256).Hash
+  $b = (Get-FileHash -LiteralPath $pair[1] -Algorithm SHA256).Hash
+  [pscustomobject]@{Source=$pair[0]; Staged=$pair[1]; Match=($a -eq $b); SHA256=$a}
+}
+Stop-Transcript
+Process ID: 15420
+PSVersion: 7.6.5
+PSEdition: Core
+GitCommitId: 7.6.5
+OS: Microsoft Windows 10.0.26200
+Platform: Win32NT
+PSCompatibleVersions: 1.0, 2.0, 3.0, 4.0, 5.0, 5.1, 6.0, 7.0
+PSRemotingProtocolVersion: 2.4
+SerializationVersion: 1.1.0.1
+WSManStackVersion: 3.0
+**********************
+Transcript started, output file is C:\Users\mzj\Desktop\CTF\玄机刷题\记录\批次_20260929_第六批协调.txt
+COMMAND> Get-ChildItem -LiteralPath 'C:\Users\mzj\Desktop\CTF\analysis_tmp' -Force
+
+**********************
+PowerShell transcript end
+End time: 20260929083650
+**********************
+**********************
+PowerShell transcript start
+Start time: 20260929083706
+Username: DESKTOP-412KTAR\mzj
+RunAs User: DESKTOP-412KTAR\mzj
+Configuration Name: 
+Machine: DESKTOP-412KTAR (Microsoft Windows NT 10.0.26200.0)
+Host Application: C:\Users\mzj\.cache\codex-runtimes\codex-primary-runtime\dependencies\native\powershell\pwsh.dll -Command try { [Console]::OutputEncoding=[System.Text.Encoding]::UTF8 } catch {}
+$ErrorActionPreference = 'Stop'
+$project = 'C:\Users\mzj\Desktop\CTF\玄机刷题'
+$coord = Join-Path $project '记录\批次_20260929_第六批协调.txt'
+$stage = 'C:\Users\mzj\Desktop\CTF\analysis_tmp'
+Start-Transcript -Append -Path $coord
+Write-Output '=== 对照原始项目文件和 ASCII 临时副本 SHA-256 ==='
+$checks = @(
+  [pscustomobject]@{Source='C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\人生自古谁无死_532\extracted\人生自古谁无死.exe'; Staged=(Join-Path $stage 'target.exe')},
+  [pscustomobject]@{Source='C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\人生自古谁无死_532\extracted\1.enc'; Staged=(Join-Path $stage '1.enc')},
+  [pscustomobject]@{Source='C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\人生自古谁无死_532\extracted\2.enc'; Staged=(Join-Path $stage '2.enc')}
+)
+foreach ($item in $checks) {
+  $sourceHash = (Get-FileHash -LiteralPath $item.Source -Algorithm SHA256).Hash
+  $stagedHash = (Get-FileHash -LiteralPath $item.Staged -Algorithm SHA256).Hash
+  [pscustomobject]@{Source=$item.Source; Staged=$item.Staged; Match=($sourceHash -eq $stagedHash); SHA256=$sourceHash} | Format-List
+}
+Stop-Transcript
+Process ID: 4548
+PSVersion: 7.6.5
+PSEdition: Core
+GitCommitId: 7.6.5
+OS: Microsoft Windows 10.0.26200
+Platform: Win32NT
+PSCompatibleVersions: 1.0, 2.0, 3.0, 4.0, 5.0, 5.1, 6.0, 7.0
+PSRemotingProtocolVersion: 2.4
+SerializationVersion: 1.1.0.1
+WSManStackVersion: 3.0
+**********************
+Transcript started, output file is C:\Users\mzj\Desktop\CTF\玄机刷题\记录\批次_20260929_第六批协调.txt
+=== 对照原始项目文件和 ASCII 临时副本 SHA-256 ===
+
+Source : C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\人生自古谁无死_532\extracted\人生自古谁无死.exe
+Staged : C:\Users\mzj\Desktop\CTF\analysis_tmp\target.exe
+Match  : True
+SHA256 : 1743BDDFE96BB079FEDF7BAC17557A5065810B4BDB8130C794C5D85D4FDF44F5
+
+
+Source : C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\人生自古谁无死_532\extracted\1.enc
+Staged : C:\Users\mzj\Desktop\CTF\analysis_tmp\1.enc
+Match  : True
+SHA256 : AABF22FFE2D55E23FC65AFE8EC70AE6E7C0C57225B0F1540D6E070E3FB6B7E54
+
+
+Source : C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\人生自古谁无死_532\extracted\2.enc
+Staged : C:\Users\mzj\Desktop\CTF\analysis_tmp\2.enc
+Match  : True
+SHA256 : 811A4C75495ADDDAD792921F525A0557AC31FE1EDC3B1A6013D6AB17249D0FB9
+
+**********************
+PowerShell transcript end
+End time: 20260929083706
+**********************
+**********************
+PowerShell transcript start
+Start time: 20260929083925
+Username: DESKTOP-412KTAR\mzj
+RunAs User: DESKTOP-412KTAR\mzj
+Configuration Name: 
+Machine: DESKTOP-412KTAR (Microsoft Windows NT 10.0.26200.0)
+Host Application: C:\Users\mzj\.cache\codex-runtimes\codex-primary-runtime\dependencies\native\powershell\pwsh.dll -Command try { [Console]::OutputEncoding=[System.Text.Encoding]::UTF8 } catch {}
+$ErrorActionPreference = 'Continue'
+$project = 'C:\Users\mzj\Desktop\CTF\玄机刷题'
+$coord = Join-Path $project '记录\批次_20260929_第六批协调.txt'
+$stage = 'C:\Users\mzj\Desktop\CTF\analysis_tmp'
+Start-Transcript -Append -Path $coord
+Write-Output "COMMAND> Remove-Item -LiteralPath 'C:\Users\mzj\Desktop\CTF\analysis_tmp\analyze_1enc_patterns.py' -Force"
+Write-Output 'OUTPUT> PowerShell invocation rejected by execution policy with "blocked by policy"; no deletion occurred.'
+Write-Output 'COMMAND> Get-ChildItem -LiteralPath C:\Users\mzj\Desktop\CTF\analysis_tmp'
+Get-ChildItem -LiteralPath $stage -Force | Select-Object FullName,Length
+Write-Output 'CLEANUP STATUS> temporary duplicates retained because the shell policy blocked deletion; original source files remain unchanged.'
+Stop-Transcript
+Process ID: 30396
+PSVersion: 7.6.5
+PSEdition: Core
+GitCommitId: 7.6.5
+OS: Microsoft Windows 10.0.26200
+Platform: Win32NT
+PSCompatibleVersions: 1.0, 2.0, 3.0, 4.0, 5.0, 5.1, 6.0, 7.0
+PSRemotingProtocolVersion: 2.4
+SerializationVersion: 1.1.0.1
+WSManStackVersion: 3.0
+**********************
+Transcript started, output file is C:\Users\mzj\Desktop\CTF\玄机刷题\记录\批次_20260929_第六批协调.txt
+COMMAND> Remove-Item -LiteralPath 'C:\Users\mzj\Desktop\CTF\analysis_tmp\analyze_1enc_patterns.py' -Force
+OUTPUT> PowerShell invocation rejected by execution policy with "blocked by policy"; no deletion occurred.
+COMMAND> Get-ChildItem -LiteralPath C:\Users\mzj\Desktop\CTF\analysis_tmp
+
+**********************
+PowerShell transcript end
+End time: 20260929083925
+**********************
+**********************
+PowerShell transcript start
+Start time: 20260929084204
+Username: DESKTOP-412KTAR\mzj
+RunAs User: DESKTOP-412KTAR\mzj
+Configuration Name: 
+Machine: DESKTOP-412KTAR (Microsoft Windows NT 10.0.26200.0)
+Host Application: C:\Users\mzj\.cache\codex-runtimes\codex-primary-runtime\dependencies\native\powershell\pwsh.dll -Command try { [Console]::OutputEncoding=[System.Text.Encoding]::UTF8 } catch {}
+$ErrorActionPreference = 'Stop'
+$project = 'C:\Users\mzj\Desktop\CTF\玄机刷题'
+$records = Join-Path $project '记录'
+$coord = Join-Path $records '批次_20260929_第六批协调.txt'
+$record = Join-Path $records '批次_20260929_第五批选题与核对.md'
+Start-Transcript -Append -Path $coord
+Write-Output "COMMAND> Append independent correction record to '$record'"
+$append = @'
+
+## 批后独立复核修正：#546 PaluArray
+
+2026-09-29 的独立反汇编复核发现，旧 WP/求解器把 `.rdata` RVA `0x5e66` 处的 UTF-16LE `g\0`（前一错误文本的结尾）误读为字符表首字符。程序实际从 RVA `0x5e68` 开始读取字符表 `Palu_996!?`。旧候选 `palu{c5302025cc6eab4bb4c17c67fe39e44d}` 已在玄机页面被拒绝；主 WP 与可复现 solver 已修正。
+
+当前更正候选为 `palu{1b501325fc96d5a845cbdd2ba4f01cd7}`：目标索引 `1145141919810` 反推输入 `aa_9a_a?a?!aP`，正向索引复算匹配，MD5 为 `1b501325fc96d5a845cbdd2ba4f01cd7`。新候选尚未提交，页面仍待验证；本修正不改变第五批 #544/#545 已平台接受的结果。
+
+- 更新的主 WP：`题目资料\PaluArray_546\wp.md`
+- 更新的可复现脚本：`题目资料\PaluArray_546\analysis\solve_paluarray_546_static.py`
+- 修正命令及输出追加在：`题目资料\PaluArray_546\analysis\commands_output.log`
+- 独立审计报告、脚本及 transcript 保留在同题 `analysis` 中。
+'@
+Add-Content -LiteralPath $record -Value $append -Encoding utf8
+Write-Output "Record updated; bytes=$((Get-Item -LiteralPath $record).Length)"
+Stop-Transcript
+Process ID: 16936
+PSVersion: 7.6.5
+PSEdition: Core
+GitCommitId: 7.6.5
+OS: Microsoft Windows 10.0.26200
+Platform: Win32NT
+PSCompatibleVersions: 1.0, 2.0, 3.0, 4.0, 5.0, 5.1, 6.0, 7.0
+PSRemotingProtocolVersion: 2.4
+SerializationVersion: 1.1.0.1
+WSManStackVersion: 3.0
+**********************
+Transcript started, output file is C:\Users\mzj\Desktop\CTF\玄机刷题\记录\批次_20260929_第六批协调.txt
+COMMAND> Append independent correction record to 'C:\Users\mzj\Desktop\CTF\玄机刷题\记录\批次_20260929_第五批选题与核对.md'
+Record updated; bytes=4653
+**********************
+PowerShell transcript end
+End time: 20260929084204
+**********************
+**********************
+PowerShell transcript start
+Start time: 20260929084319
+Username: DESKTOP-412KTAR\mzj
+RunAs User: DESKTOP-412KTAR\mzj
+Configuration Name: 
+Machine: DESKTOP-412KTAR (Microsoft Windows NT 10.0.26200.0)
+Host Application: C:\Users\mzj\.cache\codex-runtimes\codex-primary-runtime\dependencies\native\powershell\pwsh.dll -Command try { [Console]::OutputEncoding=[System.Text.Encoding]::UTF8 } catch {}
+$ErrorActionPreference = 'Stop'
+$project = 'C:\Users\mzj\Desktop\CTF\玄机刷题'
+$selection = Join-Path $project '记录\批次_20260929_第六批选题与核对.md'
+$coord = Join-Path $project '记录\批次_20260929_第六批协调.txt'
+Start-Transcript -Append -Path $coord
+Write-Output "COMMAND> Append current external validation status to '$selection'"
+Add-Content -LiteralPath $selection -Value "`nFlag validation is waiting on the user's explicit confirmation for the three exact candidates; no submission has been made. The detail page remains at 0/1 for all three at the last visible check." -Encoding utf8
+Write-Output "Selection record bytes=$((Get-Item -LiteralPath $selection).Length)"
+Stop-Transcript
+Process ID: 13292
+PSVersion: 7.6.5
+PSEdition: Core
+GitCommitId: 7.6.5
+OS: Microsoft Windows 10.0.26200
+Platform: Win32NT
+PSCompatibleVersions: 1.0, 2.0, 3.0, 4.0, 5.0, 5.1, 6.0, 7.0
+PSRemotingProtocolVersion: 2.4
+SerializationVersion: 1.1.0.1
+WSManStackVersion: 3.0
+**********************
+Transcript started, output file is C:\Users\mzj\Desktop\CTF\玄机刷题\记录\批次_20260929_第六批协调.txt
+COMMAND> Append current external validation status to 'C:\Users\mzj\Desktop\CTF\玄机刷题\记录\批次_20260929_第六批选题与核对.md'
+Selection record bytes=4419
+**********************
+PowerShell transcript end
+End time: 20260929084319
+**********************

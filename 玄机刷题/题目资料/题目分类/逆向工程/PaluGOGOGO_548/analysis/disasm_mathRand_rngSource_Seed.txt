@@ -1,0 +1,118 @@
+
+Z:\palu548_static_copy.exe:     file format pei-x86-64
+
+
+Disassembly of section .text:
+
+0000000000494ba0 <.text+0x93ba0>:
+  494ba0:	48 c7 00 00 00 00 00 	mov    QWORD PTR [rax],0x0
+  494ba7:	48 c7 40 08 4e 01 00 	mov    QWORD PTR [rax+0x8],0x14e
+  494bae:	00 
+  494baf:	48 89 d9             	mov    rcx,rbx
+  494bb2:	48 c1 fb 3f          	sar    rbx,0x3f
+  494bb6:	48 89 c2             	mov    rdx,rax
+  494bb9:	48 b8 03 00 00 00 01 	movabs rax,0x8000000100000003
+  494bc0:	00 00 80 
+  494bc3:	48 89 d6             	mov    rsi,rdx
+  494bc6:	48 f7 e9             	imul   rcx
+  494bc9:	48 01 ca             	add    rdx,rcx
+  494bcc:	48 c1 fa 1e          	sar    rdx,0x1e
+  494bd0:	48 29 da             	sub    rdx,rbx
+  494bd3:	48 89 d3             	mov    rbx,rdx
+  494bd6:	48 c1 e2 1f          	shl    rdx,0x1f
+  494bda:	48 29 da             	sub    rdx,rbx
+  494bdd:	48 29 d1             	sub    rcx,rdx
+  494be0:	48 8d 91 ff ff ff 7f 	lea    rdx,[rcx+0x7fffffff]
+  494be7:	48 85 c9             	test   rcx,rcx
+  494bea:	48 0f 4c ca          	cmovl  rcx,rdx
+  494bee:	48 85 c9             	test   rcx,rcx
+  494bf1:	ba 47 64 55 05       	mov    edx,0x5556447
+  494bf6:	48 0f 44 ca          	cmove  rcx,rdx
+  494bfa:	48 c7 c0 ec ff ff ff 	mov    rax,0xffffffffffffffec
+  494c01:	eb 03                	jmp    0x494c06
+  494c03:	48 ff c0             	inc    rax
+  494c06:	48 3d 5f 02 00 00    	cmp    rax,0x25f
+  494c0c:	0f 8d f5 00 00 00    	jge    0x494d07
+  494c12:	48 63 d1             	movsxd rdx,ecx
+  494c15:	bb 91 13 8f bc       	mov    ebx,0xbc8f1391
+  494c1a:	48 0f af da          	imul   rbx,rdx
+  494c1e:	48 c1 fa 3f          	sar    rdx,0x3f
+  494c22:	48 c1 fb 2f          	sar    rbx,0x2f
+  494c26:	29 d3                	sub    ebx,edx
+  494c28:	69 d3 c8 ad 00 00    	imul   edx,ebx,0xadc8
+  494c2e:	29 d1                	sub    ecx,edx
+  494c30:	69 c9 8f bc 00 00    	imul   ecx,ecx,0xbc8f
+  494c36:	69 d3 47 0d 00 00    	imul   edx,ebx,0xd47
+  494c3c:	29 d1                	sub    ecx,edx
+  494c3e:	8d 91 ff ff ff 7f    	lea    edx,[rcx+0x7fffffff]
+  494c44:	85 c9                	test   ecx,ecx
+  494c46:	0f 4c ca             	cmovl  ecx,edx
+  494c49:	48 85 c0             	test   rax,rax
+  494c4c:	0f 8c a9 00 00 00    	jl     0x494cfb
+  494c52:	48 63 d1             	movsxd rdx,ecx
+  494c55:	48 89 d3             	mov    rbx,rdx
+  494c58:	48 c1 e2 28          	shl    rdx,0x28
+  494c5c:	48 8d 3d 7d d1 0b 00 	lea    rdi,[rip+0xbd17d]        # 0x551de0
+  494c63:	4c 8b 04 c7          	mov    r8,QWORD PTR [rdi+rax*8]
+  494c67:	41 b9 91 13 8f bc    	mov    r9d,0xbc8f1391
+  494c6d:	4c 0f af cb          	imul   r9,rbx
+  494c71:	49 c1 f9 2f          	sar    r9,0x2f
+  494c75:	48 c1 fb 3f          	sar    rbx,0x3f
+  494c79:	41 29 d9             	sub    r9d,ebx
+  494c7c:	41 69 d9 c8 ad 00 00 	imul   ebx,r9d,0xadc8
+  494c83:	29 d9                	sub    ecx,ebx
+  494c85:	69 d9 8f bc 00 00    	imul   ebx,ecx,0xbc8f
+  494c8b:	45 69 c9 47 0d 00 00 	imul   r9d,r9d,0xd47
+  494c92:	44 29 cb             	sub    ebx,r9d
+  494c95:	44 8d 8b ff ff ff 7f 	lea    r9d,[rbx+0x7fffffff]
+  494c9c:	85 db                	test   ebx,ebx
+  494c9e:	41 0f 4c d9          	cmovl  ebx,r9d
+  494ca2:	4c 63 cb             	movsxd r9,ebx
+  494ca5:	4d 89 ca             	mov    r10,r9
+  494ca8:	49 c1 e1 14          	shl    r9,0x14
+  494cac:	4c 31 ca             	xor    rdx,r9
+  494caf:	41 b9 91 13 8f bc    	mov    r9d,0xbc8f1391
+  494cb5:	4d 0f af ca          	imul   r9,r10
+  494cb9:	49 c1 f9 2f          	sar    r9,0x2f
+  494cbd:	49 c1 fa 3f          	sar    r10,0x3f
+  494cc1:	45 29 d1             	sub    r9d,r10d
+  494cc4:	45 69 d1 c8 ad 00 00 	imul   r10d,r9d,0xadc8
+  494ccb:	44 29 d3             	sub    ebx,r10d
+  494cce:	69 cb 8f bc 00 00    	imul   ecx,ebx,0xbc8f
+  494cd4:	41 69 d9 47 0d 00 00 	imul   ebx,r9d,0xd47
+  494cdb:	29 d9                	sub    ecx,ebx
+  494cdd:	8d 99 ff ff ff 7f    	lea    ebx,[rcx+0x7fffffff]
+  494ce3:	85 c9                	test   ecx,ecx
+  494ce5:	0f 4c cb             	cmovl  ecx,ebx
+  494ce8:	48 63 d9             	movsxd rbx,ecx
+  494ceb:	48 31 da             	xor    rdx,rbx
+  494cee:	49 31 d0             	xor    r8,rdx
+  494cf1:	4c 89 44 c6 10       	mov    QWORD PTR [rsi+rax*8+0x10],r8
+  494cf6:	e9 08 ff ff ff       	jmp    0x494c03
+  494cfb:	48 8d 3d de d0 0b 00 	lea    rdi,[rip+0xbd0de]        # 0x551de0
+  494d02:	e9 fc fe ff ff       	jmp    0x494c03
+  494d07:	c3                   	ret
+  494d08:	cc                   	int3
+  494d09:	cc                   	int3
+  494d0a:	cc                   	int3
+  494d0b:	cc                   	int3
+  494d0c:	cc                   	int3
+  494d0d:	cc                   	int3
+  494d0e:	cc                   	int3
+  494d0f:	cc                   	int3
+  494d10:	cc                   	int3
+  494d11:	cc                   	int3
+  494d12:	cc                   	int3
+  494d13:	cc                   	int3
+  494d14:	cc                   	int3
+  494d15:	cc                   	int3
+  494d16:	cc                   	int3
+  494d17:	cc                   	int3
+  494d18:	cc                   	int3
+  494d19:	cc                   	int3
+  494d1a:	cc                   	int3
+  494d1b:	cc                   	int3
+  494d1c:	cc                   	int3
+  494d1d:	cc                   	int3
+  494d1e:	cc                   	int3
+  494d1f:	cc                   	int3

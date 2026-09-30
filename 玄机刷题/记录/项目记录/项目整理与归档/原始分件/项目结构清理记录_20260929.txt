@@ -1,0 +1,591 @@
+**********************
+PowerShell transcript start
+Start time: 20260929211802
+Username: DESKTOP-412KTAR\mzj
+RunAs User: DESKTOP-412KTAR\mzj
+Configuration Name: 
+Machine: DESKTOP-412KTAR (Microsoft Windows NT 10.0.26200.0)
+Host Application: C:\Users\mzj\.cache\codex-runtimes\codex-primary-runtime\dependencies\native\powershell\pwsh.dll -Command try { [Console]::OutputEncoding=[System.Text.Encoding]::UTF8 } catch {}
+$root='C:\Users\mzj\Desktop\CTF\玄机刷题'
+$resolved=(Resolve-Path -LiteralPath $root).Path
+if ($resolved -ne $root) { throw "路径不匹配：$resolved" }
+$log=Join-Path $root '记录\项目结构清理记录_20260929.txt'
+Start-Transcript -Path $log -Force | Out-Null
+try {
+    Write-Output '=== root items ==='
+    Get-ChildItem -LiteralPath $root -Force | Select-Object Mode,Length,LastWriteTime,Name
+    Write-Output '=== first-level directory inventory ==='
+    $dirs=Get-ChildItem -LiteralPath $root -Directory -Force
+    $dirStats=foreach($d in $dirs){
+        $fs=Get-ChildItem -LiteralPath $d.FullName -File -Recurse -Force -ErrorAction SilentlyContinue
+        $subdirs=Get-ChildItem -LiteralPath $d.FullName -Directory -Recurse -Force -ErrorAction SilentlyContinue
+        [pscustomobject]@{Directory=$d.Name;Files=$fs.Count;Bytes=($fs | Measure-Object Length -Sum).Sum;Subdirs=$subdirs.Count}
+    }
+    $dirStats | Sort-Object Directory | Format-Table -AutoSize
+    Write-Output '=== file extension totals ==='
+    $all=Get-ChildItem -LiteralPath $root -File -Recurse -Force -ErrorAction SilentlyContinue
+    $all | Group-Object { if($_.Extension){$_.Extension.ToLowerInvariant()}else{'[no extension]'} } | ForEach-Object { [pscustomobject]@{Extension=$_.Name;Count=$_.Count;Bytes=($_.Group | Measure-Object Length -Sum).Sum} } | Sort-Object Bytes -Descending | Format-Table -AutoSize
+    Write-Output '=== large files over 50 MiB ==='
+    $all | Where-Object Length -gt 50MB | Sort-Object Length -Descending | Select-Object @{n='MiB';e={[math]::Round($_.Length/1MB,1)}},FullName
+    Write-Output '=== temporary/build/cache candidates ==='
+    $all | Where-Object { $_.FullName -match '\\(tmp|temp|cache|__pycache__|build|dist)\\' -or $_.Extension -in '.aux','.toc','.out','.synctex','.log' } | Select-Object Length,FullName
+}
+finally { Stop-Transcript | Out-Null }
+Process ID: 37492
+PSVersion: 7.6.5
+PSEdition: Core
+GitCommitId: 7.6.5
+OS: Microsoft Windows 10.0.26200
+Platform: Win32NT
+PSCompatibleVersions: 1.0, 2.0, 3.0, 4.0, 5.0, 5.1, 6.0, 7.0
+PSRemotingProtocolVersion: 2.4
+SerializationVersion: 1.1.0.1
+WSManStackVersion: 3.0
+**********************
+=== root items ===
+
+Mode  Length LastWriteTime      Name
+----  ------ -------------      ----
+d----        2026/9/27 19:03:47 工作区
+d----        2026/9/29 21:18:02 记录
+d----        2026/9/29 15:40:09 题目资料
+d----        2026/9/29 5:26:20  题目資料
+d----        2026/9/28 21:55:37 指南
+d----        2026/9/29 1:33:49  figures
+d----        2026/9/29 1:33:50  labs
+d----        2026/9/29 18:20:33 tmp
+d----        2026/9/29 19:20:53 tools
+-a--- 5419   2026/9/29 16:16:27 README.md
+=== first-level directory inventory ===
+
+
+Directory Files         Bytes Subdirs
+--------- -----         ----- -------
+工作区        3      29026.00       1
+记录        137   10335761.00       1
+题目资料   2184 1387272670.00     285
+题目資料      3      25579.00       2
+指南         12    1187232.00       1
+figures     241    8670951.00       1
+labs         29    1095557.00       9
+tmp         937  231744699.00      11
+tools        13    1528079.00       2
+
+=== file extension totals ===
+
+Extension      Count         Bytes
+---------      -----         -----
+.exe              57 1117446071.00
+.png            1047  213344096.00
+.zip              71   53369596.00
+.txt             790   51395015.00
+.dex              14   41810128.00
+.jpg              50   27104351.00
+.apk               4   26423290.00
+[no extension]    37   23200898.00
+.bin              74   14595271.00
+.dll              49   13525571.00
+.log              30   12244651.00
+.so               23   12075208.00
+.rar               7   10303499.00
+.hap               6   10201874.00
+.pyd              15    2526808.00
+.6                 1    2220400.00
+.pyz               2    2119384.00
+.md              126    1181189.00
+.py              395    1016474.00
+.arsc              1    1013392.00
+.abc               4     720824.00
+.pcap              2     716965.00
+.pdf               1     628002.00
+.7z                2     520476.00
+.xml             609     505268.00
+.tex               3     258553.00
+.2                 1     240936.00
+.1                 3     220693.00
+.com               1     164561.00
+.map               4     141702.00
+.cpp               6     124621.00
+.pyc              13     100176.00
+.ps1              19      74817.00
+.yaml              1      67649.00
+.c                23      51749.00
+.h                 6      44485.00
+.html              1      38597.00
+.sqlite            2      28991.00
+.aux               1      23690.00
+.json             25      21912.00
+.elf               1      20480.00
+.csv               5      15247.00
+.out               1      14066.00
+.index             4      10728.00
+.marshal           3       9041.00
+.toc               1       7417.00
+.info              7       3244.00
+.def               2       1698.00
+.sh                2       1353.00
+.b64               2        688.00
+.dat               2         72.00
+.key               2         64.00
+.enc               2         55.00
+
+=== large files over 50 MiB ===
+
+**********************
+PowerShell transcript end
+End time: 20260929211803
+**********************
+**********************
+PowerShell transcript start
+Start time: 20260929213211
+Username: DESKTOP-412KTAR\mzj
+RunAs User: DESKTOP-412KTAR\mzj
+Configuration Name: 
+Machine: DESKTOP-412KTAR (Microsoft Windows NT 10.0.26200.0)
+Host Application: C:\Users\mzj\.cache\codex-runtimes\codex-primary-runtime\dependencies\native\powershell\pwsh.dll -Command try { [Console]::OutputEncoding=[System.Text.Encoding]::UTF8 } catch {}
+$root='C:\Users\mzj\Desktop\CTF\玄机刷题'; $log=Join-Path $root '记录\项目结构清理记录_20260929.txt'; Start-Transcript -Path $log -Append | Out-Null; try { $base=Join-Path $root '题目资料\challenge_558'; $alt=Join-Path $root '题目資料\challenge_558'; Write-Output '=== compare alternate 558 files ==='; foreach($f in Get-ChildItem -LiteralPath $alt -File -Recurse){$rel=$f.FullName.Substring($alt.Length).TrimStart('\');$dst=Join-Path $base $rel;$sha=(Get-FileHash -LiteralPath $f.FullName -Algorithm SHA256).Hash;if(Test-Path -LiteralPath $dst){$target=(Get-FileHash -LiteralPath $dst -Algorithm SHA256).Hash;$equal=($sha -eq $target)}else{$target='[MISSING]';$equal=$false};Write-Output ("{0} | alt={1} | canonical={2} | equal={3}" -f $rel,$sha,$target,$equal)}; Write-Output '=== collision transcript headers ==='; $source=Join-Path $alt 'analysis\independent_static_audit_transcript_20260929.txt'; $dest=Join-Path $base 'analysis\independent_static_audit_transcript_20260929.txt'; if(Test-Path -LiteralPath $dest){Get-FileHash -LiteralPath $source,$dest -Algorithm SHA256 | Select-Object Path,Hash; Get-Content -LiteralPath $source -TotalCount 8; Get-Content -LiteralPath $dest -TotalCount 8}; Write-Output '=== note_563 canonical duplicate candidates ==='; Get-ChildItem -LiteralPath (Join-Path $root '工作区\note_563') -File -Recurse | ForEach-Object { $rel=$_.FullName.Substring((Join-Path $root '工作区\note_563').Length).TrimStart('\'); $matches=Get-ChildItem -LiteralPath (Join-Path $root '题目资料') -File -Recurse -Filter $_.Name -ErrorAction SilentlyContinue; [pscustomobject]@{WorkFile=$rel;Length=$_.Length;Hash=(Get-FileHash -LiteralPath $_.FullName -Algorithm SHA256).Hash;ExistingMatches=($matches.FullName -join '; ')} } | Format-List; Write-Output '=== true duplicate hashes, excluding tmp previews and files above 100 MiB ==='; $files=Get-ChildItem -LiteralPath $root -File -Recurse -Force -ErrorAction SilentlyContinue | Where-Object { $_.FullName -notlike (Join-Path $root 'tmp')+'\*' -and $_.Length -lt 100MB }; $candidates=$files | Group-Object Length | Where-Object Count -gt 1 | ForEach-Object Group; $hashed=foreach($f in $candidates){$sha=(Get-FileHash -LiteralPath $f.FullName -Algorithm SHA256).Hash;[pscustomobject]@{Hash=$sha;Length=$f.Length;Path=$f.FullName}}; $dups=$hashed | Group-Object Hash | Where-Object Count -gt 1; foreach($g in $dups){Write-Output ("DUPLICATE SHA256 {0} ({1} bytes)" -f $g.Name,$g.Group[0].Length);$g.Group | ForEach-Object {Write-Output ('  '+$_.Path)}} } finally { Stop-Transcript | Out-Null }
+Process ID: 38740
+PSVersion: 7.6.5
+PSEdition: Core
+GitCommitId: 7.6.5
+OS: Microsoft Windows 10.0.26200
+Platform: Win32NT
+PSCompatibleVersions: 1.0, 2.0, 3.0, 4.0, 5.0, 5.1, 6.0, 7.0
+PSRemotingProtocolVersion: 2.4
+SerializationVersion: 1.1.0.1
+WSManStackVersion: 3.0
+**********************
+=== compare alternate 558 files ===
+analysis\independent_reverse_558.py | alt=64722CBCFFFB16CD49289A3323C987E0E83908DAF6EC22D8CCEC8D09D7986A6D | canonical=[MISSING] | equal=False
+analysis\independent_static_audit_20260929.md | alt=B3A7061BCC17C2869E03C6AF91BCA38A7FE14B1A6F7BEC2DDD2AB54917EAEEDD | canonical=[MISSING] | equal=False
+analysis\independent_static_audit_transcript_20260929.txt | alt=0B734E89701FAAC8AD344D1AAC50D3986BC0C64BD5877AEF19EC92C215BB3B03 | canonical=811778B25C1E9C516DC2E6571207061916E796C4DE54CDA62119B39138B554FD | equal=False
+=== collision transcript headers ===
+
+Path                                                                                                               Hash
+----                                                                                                               ----
+C:\Users\mzj\Desktop\CTF\玄机刷题\题目資料\challenge_558\analysis\independent_static_audit_transcript_20260929.txt 0B7…
+C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\challenge_558\analysis\independent_static_audit_transcript_20260929.txt 811…
+**********************
+PowerShell transcript start
+Start time: 20260929052620
+Username: DESKTOP-412KTAR\mzj
+RunAs User: DESKTOP-412KTAR\mzj
+Configuration Name:
+Machine: DESKTOP-412KTAR (Microsoft Windows NT 10.0.26200.0)
+Host Application: C:\Users\mzj\.cache\codex-runtimes\codex-primary-runtime\dependencies\native\powershell\pwsh.dll -Command try { [Console]::OutputEncoding=[System.Text.Encoding]::UTF8 } catch {}
+**********************
+PowerShell transcript start
+Start time: 20260929050959
+Username: DESKTOP-412KTAR\mzj
+RunAs User: DESKTOP-412KTAR\mzj
+Configuration Name:
+Machine: DESKTOP-412KTAR (Microsoft Windows NT 10.0.26200.0)
+Host Application: C:\Users\mzj\.cache\codex-runtimes\codex-primary-runtime\dependencies\native\powershell\pwsh.dll -Command try { [Console]::OutputEncoding=[System.Text.Encoding]::UTF8 } catch {}
+=== note_563 canonical duplicate candidates ===
+
+
+WorkFile        : dump_runtime.py
+Length          : 2186
+Hash            : 3485EECD8B4FFA84B87BC584A2E047C9C53A8ECF313FB09F50A26C10775B56AA
+ExistingMatches : 
+
+WorkFile        : note
+Length          : 6360
+Hash            : D7A2FD4096C6D108C45869E2F8480E85A25FA8414D030629D2E7E402AF628C92
+ExistingMatches : 
+
+WorkFile        : note_unpacked_mem.elf
+Length          : 20480
+Hash            : 001727F135B5EB58FFDCA19FC138F2334C3FA22610280EE1B1728763105F279C
+ExistingMatches : 
+
+=== true duplicate hashes, excluding tmp previews and files above 100 MiB ===
+DUPLICATE SHA256 040EEB90739561493F11EAA11BB64D207EC6143254A5D5922B48231D5808E6A4 (7971 bytes)
+  C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\新题批次\PaluMaze_551\game_311.pyc
+  C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\新题批次\PaluMaze_551\game_py311.pyc
+DUPLICATE SHA256 042CEA13A1F52A39C3946B429DF72726B3B13AE18C349ED423D1C5CE0E662D4B (548 bytes)
+  C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\批次10_20260929\542_hookme\analysis\resources\ic_launcher_round.xml
+  C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\批次10_20260929\542_hookme\analysis\resources\ic_launcher.xml
+DUPLICATE SHA256 04449FE1DDF911A36A9A9644657F316F052B46640C224EAE61BCE3B08904D87E (154037 bytes)
+  C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\OpenHarmony_easyre_560\entry-default-signed.hap
+  C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\OpenHarmony_easyre_560\附件_20260929\entry-default-signed.hap
+DUPLICATE SHA256 05CBFFF8A8B8A6FC5480A052ECA238097D3456C16071D61FEA74E2455666C611 (29 bytes)
+  C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\OpenHarmony_arkt_559\附件解包\HAP内容\resources\base\profile\backup_config.json
+  C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\OpenHarmony_easyre_560\hap_extracted\resources\base\profile\backup_config.json
+  C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\OpenHarmony_secret_561\hap_contents\resources\base\profile\backup_config.json
+  C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\批次14_20260929\561_OpenHarmony_secret\附件\hap_contents\resources\base\profile\backup_config.json
+DUPLICATE SHA256 0A7420F1D2D832474AD09EA55825900AF75EBA30DEA46DFB63F9A1AD17F0AF18 (7833 bytes)
+  C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\ezBase_541\附件_平台原件\ezBase_platform_20260929.rar
+  C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\原始下载附件\ezBase-20250521104055-dq14shk.rar
+  C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\批次11_20260929\541_ezBase\originals\ezBase-20250521104055-dq14shk (2).rar
+DUPLICATE SHA256 0AB3BC82B3B9FD8499202CAFE3D494A9F66FBA248D01E90B90E932C8849947CC (328 bytes)
+  C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\批次10_20260929\542_hookme\analysis\resources\btn_checkbox_checked_mtrl_animation_interpolator_1.xml
+  C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\批次10_20260929\542_hookme\analysis\resources\btn_checkbox_unchecked_mtrl_animation_interpolator_1.xml
+DUPLICATE SHA256 0CF62296FBF86672EC522789AC91B3EFDF37E9BF1A4A83CD22BC49AD5A06C5DE (1319318 bytes)
+  C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\PaluMaze_551\extracted\PYZ-00.pyz
+  C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\新题批次\PaluMaze_551\PYZ-00.pyz.bin
+DUPLICATE SHA256 106CF19A6967105AEA4ACAEAA3B10E8DB169293E3057C9109845D324FF85779A (73952 bytes)
+  C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\PaluArray_546\originals\PaluArray_flag.zip
+  C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\原始下载附件\PaluArray_flag.zip
+DUPLICATE SHA256 1084EBA6ACC6D6A7E0CBD647D0A055EBFDB61E055C9577F488FF567C6BB03884 (36 bytes)
+  C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\批次10_20260929\552_butterfly\analysis\candidate.txt
+  C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\批次10_20260929\552_butterfly\analysis\recovered_plaintext.bin
+DUPLICATE SHA256 114534191129BB84CF11E3B1021D8E4F3A85E34C72DE34464D48A1BA8237FE83 (334752 bytes)
+  C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\OpenHarmony_secret_561\hap_contents\ets\modules.abc
+  C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\批次14_20260929\561_OpenHarmony_secret\附件\hap_contents\ets\modules.abc
+DUPLICATE SHA256 156D6B4FD21E8C77DE5BF8D72B4BFC0576D04E527E3CC976FE4DC3C48C1A083E (500 bytes)
+  C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\批次10_20260929\542_hookme\analysis\resources\m3_button_background_color_selector.xml
+  C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\批次10_20260929\542_hookme\analysis\resources\m3_fab_efab_background_color_selector.xml
+DUPLICATE SHA256 1585F1535F814F2B9BA93A750357F8BFF24DA68A0DAD2BCA71284FCB91019059 (5328 bytes)
+  C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\hookme_542\代码附件\AndroidManifest.xml
+  C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\批次10_20260929\542_hookme\analysis\components\AndroidManifest.xml
+  C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\批次10_20260929\542_hookme\analysis\resources\AndroidManifest.xml
+DUPLICATE SHA256 1743BDDFE96BB079FEDF7BAC17557A5065810B4BDB8130C794C5D85D4FDF44F5 (136097 bytes)
+  C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\人生自古谁无死_532\analysis\target.exe
+  C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\人生自古谁无死_532\extracted\人生自古谁无死.exe
+DUPLICATE SHA256 1D307EDE66CEA05A2B4C6D34CF6FC71EA035884104CC133AD09DD1891C4332E3 (46757 bytes)
+  C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\批次11_20260929\541_ezBase\analysis\rederived_541_patched.bin
+  C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\批次11_20260929\541_ezBase\analysis\upx0_patched.bin
+DUPLICATE SHA256 1DC981B273CB80A32863B9A89A09CFA82B731F6D4BC8E37D72C445DEB29E993F (5125397 bytes)
+  C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\原始下载附件\hookme.rar
+  C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\批次10_20260929\542_hookme\originals\hookme.rar
+DUPLICATE SHA256 1ED54DCFB684AA6FD8583FEF8EC874AB27B6D6ED2C68D0464FA88D5CD07E78BA (45264 bytes)
+  C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\OpenHarmony_secret_561\analysis\enc.custom-sm4-decrypted.bin
+  C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\批次14_20260929\561_OpenHarmony_secret\analysis\enc.custom-sm4-decrypted.bin
+DUPLICATE SHA256 1F337C1D15A8F212EE1CC8BBF05D6820AC5CF9EF802ABF3FC517D63F7A17E763 (413936 bytes)
+  C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\hookme_542\代码附件\lib\x86\libhookme.so
+  C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\批次10_20260929\542_hookme\analysis\components\lib\x86\libhookme.so
+DUPLICATE SHA256 22359EFCE9B4EE6FECBE050F8FE5A57AF40D95A3AC769D7D206BDEE699707770 (344 bytes)
+  C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\OpenHarmony_secret_561\analysis\resource_index_salted_ciphertext.b64
+  C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\批次14_20260929\561_OpenHarmony_secret\analysis\resource_index_salted_ciphertext.b64
+DUPLICATE SHA256 22A48051594C1949DEED7040850C1F0F8764537F5191BE56732D16A54C1D8153 (32 bytes)
+  C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\go_for_it_556\base_Ax32.txt
+  C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\go_for_it_556\probes\base_Ax32.txt
+  C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\go_for_it_556\probes\matrix_baseline.txt
+DUPLICATE SHA256 25AB1CE587BE6DB8194D9CF77C67FECD7ED1B96B365B7CCAB239DF9203919F2E (619 bytes)
+  C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\OpenHarmony_secret_561\hap_contents\pack.info
+  C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\批次14_20260929\561_OpenHarmony_secret\附件\hap_contents\pack.info
+DUPLICATE SHA256 27D0700E25A24207976D9462C34C1AA71DC58C87004E32DF57C8AC0FC15B3365 (500 bytes)
+  C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\批次10_20260929\542_hookme\analysis\resources\m3_button_foreground_color_selector.xml
+  C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\批次10_20260929\542_hookme\analysis\resources\m3_fab_efab_foreground_color_selector.xml
+DUPLICATE SHA256 2AB792EBF63411CE5B5D116127D197602EBED426321CF02BF20B1DEA992994A1 (325 bytes)
+  C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\OpenHarmony_secret_561\analysis\check_formula_variants.py
+  C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\批次14_20260929\561_OpenHarmony_secret\analysis\check_formula_variants.py
+DUPLICATE SHA256 2B43B1FCA5A0CFA3E72C9D092D5C693AB92475A5899179B66C17C5623AB65402 (1053 bytes)
+  C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\OpenHarmony_secret_561\analysis\recover_pattern_561_output.txt
+  C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\批次14_20260929\561_OpenHarmony_secret\analysis\recover_pattern_561_output.txt
+DUPLICATE SHA256 2BA36E4DEECE0D74EF13765352AF25F9063BE11BDEC3C582206FBAD6556BDFCC (60352 bytes)
+  C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\OpenHarmony_secret_561\hap_contents\resources\rawfile\enc
+  C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\批次14_20260929\561_OpenHarmony_secret\附件\hap_contents\resources\rawfile\enc
+DUPLICATE SHA256 2BC60FB720EB9E87661D20ED9A5A7EF190DDD276468E8CBA05F29FF41588FF18 (747 bytes)
+  C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\OpenHarmony_secret_561\hap_contents\pkgContextInfo.json
+  C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\批次14_20260929\561_OpenHarmony_secret\附件\hap_contents\pkgContextInfo.json
+DUPLICATE SHA256 2E3E81E68D3CA9E0DAF507FEBD9D125820201D1FB19337A63F495BEF96BA7CDB (63 bytes)
+  C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\OpenHarmony_secret_561\hap_contents\resources\base\profile\main_pages.json
+  C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\批次14_20260929\561_OpenHarmony_secret\附件\hap_contents\resources\base\profile\main_pages.json
+DUPLICATE SHA256 2EF3E3CCDB4DF9AE7B39EBCE677818EABCE3ACB78802E01AEACA56572734D2B1 (36 bytes)
+  C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\butterfly_552\analysis\extracted\encode.dat
+  C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\批次10_20260929\552_butterfly\analysis\extracted\encode.dat
+DUPLICATE SHA256 34F17C7DB6B9CA3EF7B7AAE7E845A75F9254AC20A352B19565804A87F4D54C2C (624 bytes)
+  C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\批次10_20260929\542_hookme\analysis\resources\m3_tabs_icon_color.xml
+  C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\批次10_20260929\542_hookme\analysis\resources\m3_tabs_text_color.xml
+DUPLICATE SHA256 388EC90B343F5C74E70F2ECB5F83098F9C3A09F23B6222F59F33F2587967627A (61384 bytes)
+  C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\OpenHarmony_secret_561\hap_contents\libs\x86_64\libsecret.so
+  C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\批次14_20260929\561_OpenHarmony_secret\附件\hap_contents\libs\x86_64\libsecret.so
+DUPLICATE SHA256 3DEBC947A1A9073F7A9D2E82C2AF39C721B61764F33066CEDCCA2385694E278F (32 bytes)
+  C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\butterfly_552\analysis\extracted\encode.dat.key
+  C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\批次10_20260929\552_butterfly\analysis\extracted\encode.dat.key
+DUPLICATE SHA256 3F0F0FE9814293CF1826D7C663128BFA9505883C554E4295C15523800891A9DB (265360 bytes)
+  C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\hookme_542\代码附件\lib\armeabi-v7a\libhookme.so
+  C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\批次10_20260929\542_hookme\analysis\components\lib\armeabi-v7a\libhookme.so
+DUPLICATE SHA256 3FEC5E1930230660DCABDF0F31F4D97F8BB980D67306242D48A4377B74590801 (14603 bytes)
+  C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\原始下载附件\你知道Base么-20250521104202-am92t17.rar
+  C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\批次10_20260929\543_Base\originals\Base.rar
+DUPLICATE SHA256 41F4EEDA3FDB86E16683BDC6DDD954EBA2202B4E65065065CDC82968841C710E (60088 bytes)
+  C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\OpenHarmony_secret_561\hap_contents\libs\arm64-v8a\libsecret.so
+  C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\批次14_20260929\561_OpenHarmony_secret\附件\hap_contents\libs\arm64-v8a\libsecret.so
+DUPLICATE SHA256 424D78D937C44C273E1788C6C1ED89EEECF30486557945D1F0EF864C66527056 (1672 bytes)
+  C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\批次10_20260929\542_hookme\analysis\resources\mtrl_navigation_bar_ripple_color.xml
+  C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\批次10_20260929\542_hookme\analysis\resources\mtrl_tabs_ripple_color.xml
+DUPLICATE SHA256 449D9F4569A0ED70FCB9BC8B96737719B62CFD8AE7C1E99D2864A3999887FDF5 (42857 bytes)
+  C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\checker_562\checker.exe
+  C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\checker_562\附件_20260929\checker.exe
+  C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\批次14_20260929\562_checker\复核_独立\checker.exe
+  C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\批次14_20260929\562_checker\提取_分析\checker.exe
+  C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\第一届启航杯checker_562\analysis\extracted\checker.exe
+DUPLICATE SHA256 48049DE33DA1EDED47C0185A1F4E6764906AC09F45CCCEB8BDC9FA042BD255C3 (32 bytes)
+  C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\go_for_it_556\probes\candidate_recheck.txt
+  C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\go_for_it_556\probes\candidate.txt
+DUPLICATE SHA256 487C0D6B010F1D1F18F797F0A61AA73A632EECEE8BE325218F47AC4190E2BAB3 (1369 bytes)
+  C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\OpenHarmony_secret_561\analysis\hash_materials_561.py
+  C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\批次14_20260929\561_OpenHarmony_secret\analysis\hash_materials_561.py
+DUPLICATE SHA256 488746FFA37A656EB3CBCD28D78F0179D2DEA53C1F73DC23926D21ABC86EE019 (9916936 bytes)
+  C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\hookme_542\代码附件\classes.dex
+  C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\批次10_20260929\542_hookme\analysis\components\classes.dex
+DUPLICATE SHA256 4D4CC625C9B6139EB5D627A2181ACFF6DE7423C03FF741AE3BF08F746C1C7D17 (97 bytes)
+  C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\批次11_20260929\539_cryptor\analysis\main.py
+  C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\批次11_20260929\539_cryptor\analysis\extracted\main.py
+DUPLICATE SHA256 5043455910A856392870118843EE76372658CD1793DA889E1710AA522A1DFCC8 (7782 bytes)
+  C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\批次10_20260929\543_Base\analysis\strings_ascii_ascii.txt
+  C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\批次10_20260929\543_Base\analysis\strings_ascii.txt
+DUPLICATE SHA256 50ADA7DAA664C49B58BE1C74D8FE0AEAB253614C266029D768B5B17B8EF56A06 (592 bytes)
+  C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\批次10_20260929\542_hookme\analysis\resources\$mtrl_checkbox_button_icon_unchecked_indeterminate__2.xml
+  C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\批次10_20260929\542_hookme\analysis\resources\$mtrl_checkbox_button_unchecked_checked__2.xml
+DUPLICATE SHA256 53CE1F45F81705A84F05AA0D6956A64180D1FD6984A79B7A784F3931A311BD6F (6790 bytes)
+  C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\OpenHarmony_secret_561\hap_contents\resources\base\media\icon.png
+  C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\批次14_20260929\561_OpenHarmony_secret\附件\hap_contents\resources\base\media\icon.png
+DUPLICATE SHA256 567C7C0C7A321CA180E010AD880F0F7519F6D351AC2B9665E2EE710E7CFE7778 (20093 bytes)
+  C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\OpenHarmony_arkt_559\附件解包\HAP内容\resources\base\media\startIcon.png
+  C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\OpenHarmony_easyre_560\hap_extracted\resources\base\media\startIcon.png
+  C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\OpenHarmony_secret_561\hap_contents\resources\base\media\startIcon.png
+  C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\批次14_20260929\561_OpenHarmony_secret\附件\hap_contents\resources\base\media\startIcon.png
+DUPLICATE SHA256 582B172DFA941DD8FF07ECF8ED2082AB1E13653E23FFF64C886F67BE8E3B7C6F (948 bytes)
+  C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\批次10_20260929\542_hookme\analysis\resources\mtrl_navigation_bar_colored_ripple_color.xml
+  C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\批次10_20260929\542_hookme\analysis\resources\mtrl_tabs_colored_ripple_color.xml
+DUPLICATE SHA256 598E457DCDFFCB89F4A1B5CF56133E1D8A194E737B8C25C6C0EA722854426D36 (17498 bytes)
+  C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\checker_562\checker_platform_20260929.zip
+  C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\checker_562\originals\checker_platform_download_20260929_051349.zip
+  C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\原始下载附件\checker.zip
+  C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\批次14_20260929\562_checker\附件_原始\checker_20260929.zip
+  C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\第一届启航杯checker_562\originals\checker.zip
+DUPLICATE SHA256 59E97C3D35CE2D9AD7148B65630048E4C7E193D1BCBE60CF4844AB0ADEB58DD8 (2464 bytes)
+  C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\hookme_542\代码附件\classes3.dex
+  C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\批次10_20260929\542_hookme\analysis\components\classes3.dex
+DUPLICATE SHA256 5DEF2E11E28DB1899B8F5808FBFD6F874CCA7E517D8DC5913D88BE332B17301D (1456640 bytes)
+  C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\PaluGOGOGO_548\analysis\palu548_static_copy.exe
+  C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\PaluGOGOGO_548\analysis\palugogogo_flag.exe
+DUPLICATE SHA256 5E571CAEBA5DE7AA508C2149B00A6172B58D6EAF94D10705396FD33C7076BDF3 (376 bytes)
+  C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\批次10_20260929\542_hookme\analysis\resources\material_divider_color.xml
+  C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\批次10_20260929\542_hookme\analysis\resources\material_timepicker_clockface.xml
+DUPLICATE SHA256 607BD3E8E5D7E715F7A9B819C8D5CC235C8DCC22F06A4AE77D0383E46BBDDACE (9216 bytes)
+  C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\ezBase_541\ezBase\ezre.exe
+  C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\ezBase_541\runshim\ezre.exe
+  C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\ezBase_541\附件_平台原件\解压复核_20260929\ezBase\ezre.exe
+  C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\批次11_20260929\541_ezBase\analysis\rar_reextract\ezBase\ezre.exe
+  C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\批次11_20260929\541_ezBase\extracted\ezBase\ezre.exe
+DUPLICATE SHA256 619BD8A333BF7C209D90DE3CDBB36DF37B51A4D0315E4020824DFA151F9C0E90 (1201 bytes)
+  C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\OpenHarmony_secret_561\analysis\verify_roundtrip_and_decode_jpeg.py
+  C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\批次14_20260929\561_OpenHarmony_secret\analysis\verify_roundtrip_and_decode_jpeg.py
+DUPLICATE SHA256 61BB5BA33C8EBD3BD01BA9ECF6EDC69A18D664D91F3309447B95132B27E14E9B (7329635 bytes)
+  C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\hookme_542\附件解包\hookme\HookMe.apk
+  C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\批次10_20260929\542_hookme\extracted\hookme\HookMe.apk
+DUPLICATE SHA256 61F3DFAA1FFD5F0B62E089C5A9F2E241FA407820CACB3700E5987771CF714AC3 (278 bytes)
+  C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\批次10_20260929\543_Base\analysis\strings_utf16le_ascii.txt
+  C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\批次10_20260929\543_Base\analysis\strings_utf16le.txt
+DUPLICATE SHA256 63CEEEEF6A3EFFB8F0C25786EC857F1B3A7F40BCAA0B14FD6AFB72488F706134 (3355 bytes)
+  C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\OpenHarmony_secret_561\hap_contents\resources\base\media\ic_back.png
+  C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\批次14_20260929\561_OpenHarmony_secret\附件\hap_contents\resources\base\media\ic_back.png
+DUPLICATE SHA256 6488561DDA81745C2C785E337A89D440263871CE86031258448809377862322C (668 bytes)
+  C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\批次10_20260929\542_hookme\analysis\resources\abc_tint_edittext.xml
+  C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\批次10_20260929\542_hookme\analysis\resources\abc_tint_spinner.xml
+DUPLICATE SHA256 67E1B2669A2BC35560BC8DD2048B48653BFF7C19A58AC6E60B4BA0CA39991703 (1262056 bytes)
+  C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\OpenHarmony_secret_561\hap_contents\libs\arm64-v8a\libc++_shared.so
+  C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\批次14_20260929\561_OpenHarmony_secret\附件\hap_contents\libs\arm64-v8a\libc++_shared.so
+DUPLICATE SHA256 68B7FC0E819C526C7E31C1413B1821BC0CCFCF4AB550C356A7F740A9D84917DC (316 bytes)
+  C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\批次10_20260929\542_hookme\analysis\resources\btn_checkbox_checked_mtrl_animation_interpolator_0.xml
+  C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\批次10_20260929\542_hookme\analysis\resources\btn_checkbox_unchecked_mtrl_animation_interpolator_0.xml
+DUPLICATE SHA256 69F10550B7A37B9EDBC368022B2579DFB3347EB2FBE75A1EB012A7FAAE6C3DAC (3803 bytes)
+  C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\批次10_20260929\542_hookme\analysis\dex_static_before_debug.py
+  C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\批次10_20260929\542_hookme\analysis\dex_static_initial_false_negative.py
+DUPLICATE SHA256 6CBBB5CA6B4D734C017973D9782BCB79C4BBF995F93DD6F66B3E4EFB8BFECE4E (512592 bytes)
+  C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\hookme_542\代码附件\classes2.dex
+  C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\批次10_20260929\542_hookme\analysis\components\classes2.dex
+DUPLICATE SHA256 6E9573291647F341F86939BA7EF870744C7E22B39BD6E5E56837098433098871 (17302 bytes)
+  C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\OpenHarmony_secret_561\analysis\libsecret_callbacks_disassembly.txt
+  C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\批次14_20260929\561_OpenHarmony_secret\analysis\libsecret_callbacks_disassembly.txt
+DUPLICATE SHA256 71E5D289A949A642D8D139C4193894133110B327EE3379CCFE0AF619360C772F (33939 bytes)
+  C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\OpenHarmony_secret_561\analysis\enc.recovered.jpg
+  C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\批次14_20260929\561_OpenHarmony_secret\analysis\enc.recovered.jpg
+DUPLICATE SHA256 7401DF22E0BEEA48C439938B622931414F3EC89D383B5AA4CD72E138C42805EA (117343 bytes)
+  C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\OpenHarmony_easyre_560\easyre_platform_20260929.zip
+  C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\原始下载附件\easyre.zip
+DUPLICATE SHA256 743EB75674EB2BBF8696D5414FD9E122236022E49FB2C30D19A1D24D76D07720 (3252706 bytes)
+  C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\OpenHarmony_secret_561\secret.hap
+  C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\OpenHarmony_secret_561\附件_20260929\secret.hap
+  C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\批次14_20260929\561_OpenHarmony_secret\附件\zip_contents\secret.hap
+DUPLICATE SHA256 77177B600FEA6DA73C41935763ED555047F15CB7F17B7A707550BBD9E633080F (1170497 bytes)
+  C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\OpenHarmony_secret_561\secret_platform_20260929.zip
+  C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\原始下载附件\secret.zip
+  C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\批次14_20260929\561_OpenHarmony_secret\附件\secret_玄机新下载.zip
+DUPLICATE SHA256 79D0749B152E8A886AF6911CAEF49730CCC29067D66BF30739B89D2EAE13F8A2 (6305 bytes)
+  C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\Maybesignin_540\附件\MaybeSignin_platform_20260929.zip
+  C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\批次11_20260929\540_maybesignin\originals\MaybeSignin (1).zip
+DUPLICATE SHA256 7BBD540A5B7E688D57EFD7F1175368FA9F934F3C83A1E6262457B870BD0B5996 (20640 bytes)
+  C:\Users\mzj\Desktop\CTF\玄机刷题\labs\platform\attachments\367-ezflag\EzFlag
+  C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\EzFlag_367\EzFlag
+DUPLICATE SHA256 7E34475E2B6B29C3CF9AC7F256544FCE17264F992E418B2DB6667CEA35D91B85 (442072 bytes)
+  C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\hookme_542\代码附件\lib\arm64-v8a\libhookme.so
+  C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\批次10_20260929\542_hookme\analysis\components\lib\arm64-v8a\libhookme.so
+DUPLICATE SHA256 81D7F3225DC36345A968A2F498E00AAD570C08B8DCAD89E13405BD3195A4263B (109627 bytes)
+  C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\OpenHarmony_arkt_559\附件\arkt_platform_20260929.zip
+  C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\原始下载附件\arkt.zip
+DUPLICATE SHA256 856B8EC900EADDFEED0F1AF8177E1C999133AF19B8EB6D3EDF12D707EC21DD3B (5187 bytes)
+  C:\Users\mzj\Desktop\CTF\玄机刷题\labs\platform\attachments\583-pixel-cage\challenge.png
+  C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\像素囚笼1\附件\challenge.png
+DUPLICATE SHA256 85FDF4CEC63C0A33F2D8A144D2652B63188BE015907F5C2A78559FD469B43228 (260238 bytes)
+  C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\butterfly_552\originals\butterfly.7z
+  C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\批次10_20260929\552_butterfly\originals\butterfly.7z
+DUPLICATE SHA256 8B1263DE36EDA3E5E3F1183C2D08C520ECAE09649B1A04891F597033FDF842A5 (105472 bytes)
+  C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\PaluArray_546\PaluArray_flag_unpacked.exe
+  C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\PaluArray_546\analysis\PaluArray_flag_unpacked_repro.exe
+DUPLICATE SHA256 8F89EE6C629FF383223B1E16301C22B5E01DB56A0DE6AF4E3AB2D177B11FCFE5 (808 bytes)
+  C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\批次10_20260929\542_hookme\analysis\resources\m3_button_ripple_color_selector.xml
+  C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\批次10_20260929\542_hookme\analysis\resources\m3_tonal_button_ripple_color_selector.xml
+DUPLICATE SHA256 8F936FFC518B9720A0F27BEFA0A2089B423EF45365E6A66288CB00B701DE882E (592 bytes)
+  C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\批次10_20260929\542_hookme\analysis\resources\$mtrl_checkbox_button_icon_unchecked_checked__0.xml
+  C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\批次10_20260929\542_hookme\analysis\resources\$mtrl_checkbox_button_icon_unchecked_indeterminate__0.xml
+  C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\批次10_20260929\542_hookme\analysis\resources\$mtrl_checkbox_button_unchecked_checked__0.xml
+DUPLICATE SHA256 90CAE288BD9D293E4B25FD8B16419AD0905B0E81DA89A5C0C6994A5E4F344CEC (1136 bytes)
+  C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\批次10_20260929\542_hookme\analysis\resources\$avd_show_password__0.xml
+  C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\批次10_20260929\542_hookme\analysis\resources\$m3_avd_show_password__0.xml
+DUPLICATE SHA256 91ADAF6FBB46D68BF5192AFDD802078C1F46A9F1EDD60D1EEC50D3D84CDF203E (3902 bytes)
+  C:\Users\mzj\Desktop\CTF\玄机刷题\labs\platform\attachments\583-pixel-cage.zip
+  C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\像素囚笼1\附件\像素囚笼附件 (1).zip
+  C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\像素囚笼1\附件\像素囚笼附件.zip
+DUPLICATE SHA256 99632913BEFEB1F8B840C62A58D76B0FAAD68F4C19909840386B205643DEB7B4 (669 bytes)
+  C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\OpenHarmony_secret_561\analysis\brute_pattern_example_hash.py
+  C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\批次14_20260929\561_OpenHarmony_secret\analysis\brute_pattern_example_hash.py
+DUPLICATE SHA256 998A56CEE62082A596A6B843C6AB0CE50DCC1A2A95ED7E0D29F0F7451E85D8A9 (592 bytes)
+  C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\批次10_20260929\542_hookme\analysis\resources\$mtrl_checkbox_button_checked_unchecked__2.xml
+  C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\批次10_20260929\542_hookme\analysis\resources\$mtrl_checkbox_button_icon_checked_unchecked__2.xml
+  C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\批次10_20260929\542_hookme\analysis\resources\$mtrl_checkbox_button_icon_indeterminate_unchecked__2.xml
+DUPLICATE SHA256 9B0AC791A3FA953E28B526E020FD2E629B40812EE1BC4693FF5FDFEF15044202 (124 bytes)
+  C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\批次10_20260929\542_hookme\analysis\resources\abc_ratingbar_indicator_material.xml
+  C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\批次10_20260929\542_hookme\analysis\resources\abc_ratingbar_material.xml
+  C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\批次10_20260929\542_hookme\analysis\resources\abc_ratingbar_small_material.xml
+DUPLICATE SHA256 9C43C083D3BA8621108B73027FCB70FC74D0A68BC0E01430E80F647B8B783B60 (9325 bytes)
+  C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\OpenHarmony_arkt_559\附件解包\HAP内容\resources\base\media\foreground.png
+  C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\OpenHarmony_easyre_560\hap_extracted\resources\base\media\foreground.png
+  C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\OpenHarmony_secret_561\hap_contents\resources\base\media\foreground.png
+  C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\批次14_20260929\561_OpenHarmony_secret\附件\hap_contents\resources\base\media\foreground.png
+DUPLICATE SHA256 9E76D43C570F5E194E28F97355F80DE4757CD46093631AC33D85ACD12948668E (2539 bytes)
+  C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\OpenHarmony_secret_561\analysis\sha256_manifest_20260929.csv
+  C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\批次14_20260929\561_OpenHarmony_secret\analysis\sha256_manifest_20260929.csv
+DUPLICATE SHA256 A555690CC5563BD62EE13DA8B3D78B6DE9A7264646B5488DF945394E1BC43811 (592 bytes)
+  C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\批次10_20260929\542_hookme\analysis\resources\$mtrl_checkbox_button_checked_unchecked__0.xml
+  C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\批次10_20260929\542_hookme\analysis\resources\$mtrl_checkbox_button_icon_checked_unchecked__0.xml
+  C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\批次10_20260929\542_hookme\analysis\resources\$mtrl_checkbox_button_icon_indeterminate_unchecked__0.xml
+DUPLICATE SHA256 A8D7341C20D07C9FDAB602E7C39187C9ABB9CAF5FBF9B2832CD6D9F18A2C86C2 (320 bytes)
+  C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\批次10_20260929\542_hookme\analysis\resources\btn_radio_to_off_mtrl_animation_interpolator_0.xml
+  C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\批次10_20260929\542_hookme\analysis\resources\btn_radio_to_on_mtrl_animation_interpolator_0.xml
+DUPLICATE SHA256 A98A1FF1EC2C6DDCB8C480860A94F380594EBB55362133DEFDAEF237E40A8B00 (309531 bytes)
+  C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\OpenHarmony_secret_561\analysis\disassemble_app_output.txt
+  C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\批次14_20260929\561_OpenHarmony_secret\analysis\disassemble_app_output.txt
+DUPLICATE SHA256 ACBAF4A986C0918B967644D85CCBA882784F8EA557100322BE0954DB4F74AB6F (85 bytes)
+  C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\Asymmetric_544\analysis\strings_utf16.txt
+  C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\PaluGOGOGO_548\analysis\strings_utf16le.txt
+DUPLICATE SHA256 AEE861E105AFD0DDA6DDBACD27865FAFDC91E2FA225105920DB88DB38A30CAA0 (40719 bytes)
+  C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\批次13_20260929\537_湘岚杯ezbase\analysis\ezbase_upx_work.exe
+  C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\批次13_20260929\537_湘岚杯ezbase\analysis\ezbase.exe
+DUPLICATE SHA256 B44CB885ED79AEE08E839A9909B49AFD15F62EFC5AE149C951EA905C6BD2C2A2 (592 bytes)
+  C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\批次10_20260929\542_hookme\analysis\resources\$mtrl_checkbox_button_icon_unchecked_checked__1.xml
+  C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\批次10_20260929\542_hookme\analysis\resources\$mtrl_checkbox_button_icon_unchecked_indeterminate__1.xml
+  C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\批次10_20260929\542_hookme\analysis\resources\$mtrl_checkbox_button_unchecked_checked__1.xml
+DUPLICATE SHA256 B70DD38B96CFC225936F2E2ACD4304B9C0B4A503363FB99C81ED70DC227F2CE3 (8482 bytes)
+  C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\OpenHarmony_secret_561\analysis\revalidate_561_transcript_20260929.txt
+  C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\批次14_20260929\561_OpenHarmony_secret\analysis\revalidate_561_transcript_20260929.txt
+DUPLICATE SHA256 B8D977D9540F8AF606F0CB0604C932BBEFA5D2FF202422616B06C7FA32DFDB75 (710352 bytes)
+  C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\butterfly_552\analysis\extracted\butterfly
+  C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\批次10_20260929\552_butterfly\analysis\extracted\butterfly
+DUPLICATE SHA256 BAC5B62159B358298C8FCB4BA627DBFD4CE347578B5D6CE9AB60FBC78EFE8D7A (32 bytes)
+  C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\go_for_it_556\probes\b0_p0_bit0.txt
+  C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\go_for_it_556\probes\first_at.txt
+DUPLICATE SHA256 BAFB39AB0834F3F2617265AA6E9601A2B2873364B8AFFC894BF1D3CC5C9A48CE (81 bytes)
+  C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\OpenHarmony_arkt_559\附件解包\HAP内容\resources\base\media\layered_image.json
+  C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\OpenHarmony_easyre_560\hap_extracted\resources\base\media\layered_image.json
+  C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\OpenHarmony_secret_561\hap_contents\resources\base\media\layered_image.json
+  C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\批次14_20260929\561_OpenHarmony_secret\附件\hap_contents\resources\base\media\layered_image.json
+DUPLICATE SHA256 BBB9D4C7EB053E882D1BAE819B24A5D8E2C8F466A45D83C3A84DC1D37BE6CDD7 (70283 bytes)
+  C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\OpenHarmony_arkt_559\附件解包\HAP内容\resources\base\media\background.png
+  C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\OpenHarmony_secret_561\hap_contents\resources\base\media\background.png
+  C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\批次14_20260929\561_OpenHarmony_secret\附件\hap_contents\resources\base\media\background.png
+DUPLICATE SHA256 C222F80B8C1565594F821648EA6FC36625501E213E61C48E22FFF83A3768F6C1 (418600 bytes)
+  C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\hookme_542\代码附件\lib\x86_64\libhookme.so
+  C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\批次10_20260929\542_hookme\analysis\components\lib\x86_64\libhookme.so
+DUPLICATE SHA256 C3CB9DB6ECF2DBBFA9B1C49476B9EE1EDC3085AA6808B5CFF98190EE3FABF0CA (5112 bytes)
+  C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\hookme_542\代码附件\classes4.dex
+  C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\批次10_20260929\542_hookme\analysis\components\classes4.dex
+DUPLICATE SHA256 C86F71012FCA59DE7C733BD5720B6FB45DEDA36CD05F03A2023254658CFEB7C5 (4336 bytes)
+  C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\OpenHarmony_secret_561\hap_contents\resources.index
+  C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\批次14_20260929\561_OpenHarmony_secret\附件\hap_contents\resources.index
+DUPLICATE SHA256 CA890B10B6618F1122F98931B0F36891658194AAD5EEB8824EC68B13E64DF461 (624 bytes)
+  C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\批次10_20260929\542_hookme\analysis\resources\mtrl_navigation_item_icon_tint.xml
+  C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\批次10_20260929\542_hookme\analysis\resources\mtrl_navigation_item_text_color.xml
+DUPLICATE SHA256 CD5B8D84D7E870F5F87AD7B814F99545056C9EB23E1F42492EEFD72A02DE8809 (1294520 bytes)
+  C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\OpenHarmony_secret_561\hap_contents\libs\x86_64\libc++_shared.so
+  C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\批次14_20260929\561_OpenHarmony_secret\附件\hap_contents\libs\x86_64\libc++_shared.so
+DUPLICATE SHA256 CD8E2BE79AAA454F295132B7ECE6AE30D0CC05FF24DA7541639F05F76D482A4D (89088 bytes)
+  C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\PaluArray_546\PaluArray_flag.exe
+  C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\PaluArray_546\extracted\PaluArray_flag.exe
+DUPLICATE SHA256 CE0E81BEF22FFAA96D3FC425BE37CA5CF1F741A935EA529D01BB9CC8587BFCE0 (624 bytes)
+  C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\批次10_20260929\542_hookme\analysis\resources\m3_tabs_icon_color_secondary.xml
+  C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\批次10_20260929\542_hookme\analysis\resources\m3_tabs_text_color_secondary.xml
+DUPLICATE SHA256 D07D904C77C1CE22B2F7204DDCFC3EB7B53016475312AA611AA3F0C04E7A3EC0 (376 bytes)
+  C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\OpenHarmony_secret_561\hap_contents\.pages.info
+  C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\批次14_20260929\561_OpenHarmony_secret\附件\hap_contents\.pages.info
+DUPLICATE SHA256 D44E0B5EB3BD17793EBE57EB41B6C05D629299513682C188921A8B0653E9D1EE (32 bytes)
+  C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\go_for_it_556\probes\b0_p0_bit1.txt
+  C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\go_for_it_556\probes\first_C.txt
+DUPLICATE SHA256 DA87C9A85AB1E99370891AEBC6494A97B4AA1BB6694AF415DC455D68F5E18AE5 (12800 bytes)
+  C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\Maybesignin_540\附件解包\ezsignin.exe
+  C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\批次11_20260929\540_maybesignin\analysis\unpacked\ezsignin.exe
+DUPLICATE SHA256 DCA10BF84905E9078F577BFF396CE20A2EDFB2F817596FD6BD8441406CCFC94C (7955 bytes)
+  C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\PaluMaze_551\extracted\game
+  C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\PaluMaze_551_fresh\archive\game
+  C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\新题批次\PaluMaze_551\game.bin
+  C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\新题批次\PaluMaze_551\game.marshal
+DUPLICATE SHA256 DF0768E7221AB188369F28E5974E247D876075A000FB8671CCCD4CB56B7A2801 (1176 bytes)
+  C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\批次10_20260929\542_hookme\analysis\resources\$avd_hide_password__0.xml
+  C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\批次10_20260929\542_hookme\analysis\resources\$m3_avd_hide_password__0.xml
+DUPLICATE SHA256 E3241701B7B7AF0D5124F2675AF364D31B09201DF969FFED51B114A4D9F909D8 (444 bytes)
+  C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\OpenHarmony_arkt_559\附件解包\HAP内容\pkgContextInfo.json
+  C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\OpenHarmony_easyre_560\hap_extracted\pkgContextInfo.json
+DUPLICATE SHA256 E38108C2F2AE5BDE200065E4946CB92EADE92490742900BFBF9D43A6C637BFFE (1517 bytes)
+  C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\OpenHarmony_secret_561\hap_contents\module.json
+  C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\批次14_20260929\561_OpenHarmony_secret\附件\hap_contents\module.json
+DUPLICATE SHA256 E3B0C44298FC1C149AFBF4C8996FB92427AE41E4649B934CA495991B7852B855 (0 bytes)
+  C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\Maybesignin_540\analysis\gdb_stderr.txt
+  C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\Maybesignin_540\analysis\gdb_stdout.txt
+  C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\PaluMaze_551\extracted\pyi-contents-directory _internal
+  C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\批次10_20260929\543_Base\analysis\objdump_disassembly_intel.txt
+  C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\批次10_20260929\543_Base\analysis\objdump_imports.txt
+  C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\批次10_20260929\543_Base\analysis\objdump_pe_header.txt
+  C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\批次10_20260929\543_Base\analysis\objdump_sections.txt
+  C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\批次11_20260929\540_maybesignin\analysis\strings_wide.txt
+  C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\批次12_20260929\535_往事暗沉不可追\analysis\pyi_extracted\0019_pyi-contents-directory _internal
+DUPLICATE SHA256 E877D7F321DB61FA820DFD9E61A3255832A60025D1F36AF706A531932C55CAE6 (12618 bytes)
+  C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\OpenHarmony_secret_561\analysis\libsecret_init_proc_disassembly.txt
+  C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\批次14_20260929\561_OpenHarmony_secret\analysis\libsecret_init_proc_disassembly.txt
+DUPLICATE SHA256 E9BD15CDB5C8FAE74D05778691EBD67F2D2F606B3D77FDF32D6EE4DD5F40378A (20100 bytes)
+  C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\OpenHarmony_secret_561\WP.md
+  C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\批次14_20260929\561_OpenHarmony_secret\analysis\WP_preexisting_20260929.md
+DUPLICATE SHA256 EF7DEACF6594E9353E934564B38761E8AAF614EBF39DCB17EFED36263DF2C773 (70144 bytes)
+  C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\Base_543\你知道Base么\你知道Base么.exe
+  C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\批次10_20260929\543_Base\analysis\unpacked\你知道Base么\你知道Base么.exe
+DUPLICATE SHA256 F12959DF1A8F6580EE525BB7485A36DE59D80C912D7B62AF0646F0020023CB0B (7747 bytes)
+  C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\OpenHarmony_secret_561\analysis\secret561_resource_flow_findings_20260929.md
+  C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\批次14_20260929\561_OpenHarmony_secret\analysis\secret561_resource_flow_findings_20260929.md
+DUPLICATE SHA256 F533CF01AA2952AB0553BA86235494578A4B4FCF26E9C867BACA9F3A21076DDC (88675 bytes)
+  C:\Users\mzj\Desktop\CTF\玄机刷题\记录\批次14_561_调查记录.txt
+  C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\批次14_20260929\561_OpenHarmony_secret\记录\批次14_561_调查记录.txt
+DUPLICATE SHA256 F8E7D9A07329289EF8450EBE4B2BFB353CB97F938F9384923D6786DCBF54EE2E (592 bytes)
+  C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\批次10_20260929\542_hookme\analysis\resources\$mtrl_checkbox_button_checked_unchecked__1.xml
+  C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\批次10_20260929\542_hookme\analysis\resources\$mtrl_checkbox_button_icon_checked_unchecked__1.xml
+  C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\批次10_20260929\542_hookme\analysis\resources\$mtrl_checkbox_button_icon_indeterminate_unchecked__1.xml
+DUPLICATE SHA256 F97631CDDA22A27934DBC5BA52DDFF1B57AE0D9D10B275B3468A74B162DF9731 (3620034 bytes)
+  C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\批次10_20260929\542_hookme\analysis\components\classes.strings.txt
+  C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\批次10_20260929\542_hookme\analysis\dex\classes.dex.strings.txt
+DUPLICATE SHA256 FACEE7394F35D6DEC4014718EB26B045C1B019B5D4324938807949AC1A8B4622 (59374 bytes)
+  C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\OpenHarmony_secret_561\hap_contents\ets\sourceMaps.map
+  C:\Users\mzj\Desktop\CTF\玄机刷题\题目资料\批次14_20260929\561_OpenHarmony_secret\附件\hap_contents\ets\sourceMaps.map
+**********************
+PowerShell transcript end
+End time: 20260929213213
+**********************
+
+[2026-09-29 后续整理]
+- 已把题目資料\challenge_558\analysis 中独有脚本、WP 和 17,775 字节 transcript 并入题目资料\challenge_558\analysis；保留原来 180,691 字节的同名完整 transcript，并更新 WP 引用。
+- 已把工作区\note_563 归入题目资料\第一届启航杯_note_563。
+- 已重新生成并编译指南 PDF：46 篇、90 页 A4；抽取文本未发现平台提交/验收状态叙述。
+- 删除命令被当前执行策略拦截；tmp\pdfs（231,744,699 字节）、LaTeX 辅助文件、过时总指南和 Python __pycache__ 暂未删除，待手动清理。
+- 题目附件、逐题 WP、脚本和已有 transcript 均保留。

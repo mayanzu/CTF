@@ -1,0 +1,240 @@
+
+Z:\ezbase_unpacked.exe:     file format pei-i386
+Z:\ezbase_unpacked.exe
+architecture: i386, flags 0x0000013a:
+EXEC_P, HAS_DEBUG, HAS_SYMS, HAS_LOCALS, D_PAGED
+start address 0x004012d0
+
+Characteristics 0x107
+	relocations stripped
+	executable
+	line numbers stripped
+	32 bit words
+
+Time/Date		Tue Jan 14 02:15:32 2025
+Magic			010b	(PE32)
+MajorLinkerVersion	2
+MinorLinkerVersion	32
+SizeOfCode		00003400
+SizeOfInitializedData	00005600
+SizeOfUninitializedData	00000200
+AddressOfEntryPoint	000012d0
+BaseOfCode		00001000
+BaseOfData		00005000
+ImageBase		00400000
+SectionAlignment	00001000
+FileAlignment		00000200
+MajorOSystemVersion	4
+MinorOSystemVersion	0
+MajorImageVersion	1
+MinorImageVersion	0
+MajorSubsystemVersion	4
+MinorSubsystemVersion	0
+Win32Version		00000000
+SizeOfImage		0001c000
+SizeOfHeaders		00000400
+CheckSum		00000000
+Subsystem		00000003	(Windows CUI)
+DllCharacteristics	00000000
+SizeOfStackReserve	00200000
+SizeOfStackCommit	00001000
+SizeOfHeapReserve	00100000
+SizeOfHeapCommit	00001000
+LoaderFlags		00000000
+NumberOfRvaAndSizes	00000010
+
+The Data Directory
+Entry 0 00000000 00000000 Export Directory [.edata (or where ever we found it)]
+Entry 1 00009000 00000610 Import Directory [parts of .idata]
+Entry 2 00000000 00000000 Resource Directory [.rsrc]
+Entry 3 00000000 00000000 Exception Directory [.pdata]
+Entry 4 00000000 00000000 Security Directory
+Entry 5 00000000 00000000 Base Relocation Directory [.reloc]
+Entry 6 00000000 00000000 Debug Directory
+Entry 7 00000000 00000000 Description Directory
+Entry 8 00000000 00000000 Special Directory
+Entry 9 0000b004 00000018 Thread Storage Directory [.tls]
+Entry a 00000000 00000000 Load Configuration Directory
+Entry b 00000000 00000000 Bound Import Directory
+Entry c 00000000 00000000 Import Address Table Directory
+Entry d 00000000 00000000 Delay Import Directory
+Entry e 00000000 00000000 CLR Runtime Header
+Entry f 00000000 00000000 Reserved
+
+There is an import table in .idata at 0x409000
+
+The Import Tables (interpreted .idata section contents)
+ vma:            Hint    Time      Forward  DLL       First
+                 Table   Stamp     Chain    Name      Thunk
+ 00009000	00000000 00000000 00000000 00009554 00009138
+
+	DLL Name: KERNEL32.DLL
+	vma:     Ordinal  Hint  Member-Name  Bound-To
+	00009138  <none>  0000  DeleteCriticalSection
+	0000913c  <none>  0000  EnterCriticalSection
+	00009140  <none>  0000  ExitProcess
+	00009144  <none>  0000  FindClose
+	00009148  <none>  0000  FindFirstFileA
+	0000914c  <none>  0000  FindNextFileA
+	00009150  <none>  0000  FreeLibrary
+	00009154  <none>  0000  GetCommandLineA
+	00009158  <none>  0000  GetLastError
+	0000915c  <none>  0000  GetModuleHandleA
+	00009160  <none>  0000  GetProcAddress
+	00009164  <none>  0000  InitializeCriticalSection
+	00009168  <none>  0000  LeaveCriticalSection
+	0000916c  <none>  0000  LoadLibraryA
+	00009170  <none>  0000  SetUnhandledExceptionFilter
+	00009174  <none>  0000  TlsGetValue
+	00009178  <none>  0000  VirtualProtect
+	0000917c  <none>  0000  VirtualQuery
+
+ 00009014	00000000 00000000 00000000 00009604 00009190
+
+	DLL Name: msvcrt.dll
+	vma:     Ordinal  Hint  Member-Name  Bound-To
+	00009190  <none>  0000  __getmainargs
+	00009194  <none>  0000  __mb_cur_max
+	00009198  <none>  0000  __p__environ
+	0000919c  <none>  0000  __p__fmode
+	000091a0  <none>  0000  __set_app_type
+	000091a4  <none>  0000  _cexit
+	000091a8  <none>  0000  _errno
+	000091ac  <none>  0000  _fpreset
+	000091b0  <none>  0000  _fullpath
+	000091b4  <none>  0000  _iob
+	000091b8  <none>  0000  _isctype
+	000091bc  <none>  0000  _msize
+	000091c0  <none>  0000  _onexit
+	000091c4  <none>  0000  _pctype
+	000091c8  <none>  0000  _setmode
+	000091cc  <none>  0000  abort
+	000091d0  <none>  0000  atexit
+	000091d4  <none>  0000  calloc
+	000091d8  <none>  0000  fwrite
+	000091dc  <none>  0000  malloc
+	000091e0  <none>  0000  mbstowcs
+	000091e4  <none>  0000  memcmp
+	000091e8  <none>  0000  memcpy
+	000091ec  <none>  0000  memmove
+	000091f0  <none>  0000  puts
+	000091f4  <none>  0000  scanf
+	000091f8  <none>  0000  setlocale
+	000091fc  <none>  0000  signal
+	00009200  <none>  0000  strcoll
+	00009204  <none>  0000  strlen
+	00009208  <none>  0000  tolower
+	0000920c  <none>  0000  vfprintf
+	00009210  <none>  0000  wcstombs
+	00009214  <none>  0000  free
+	00009218  <none>  0000  realloc
+
+ 00009028	00000000 00000000 00000000 0000956c 00009184
+
+	DLL Name: msvcrt.dll
+	vma:     Ordinal  Hint  Member-Name  Bound-To
+	00009184  <none>  0000  _strdup
+	00009188  <none>  0000  _stricoll
+
+ 0000903c	00000000 00000000 00000000 00000000 00000000
+
+Sections:
+Idx Name          Size      VMA       LMA       File off  Algn
+  0 .text         00003304  00401000  00401000  00000400  2**4
+                  CONTENTS, ALLOC, LOAD, READONLY, CODE, DATA
+  1 .data         00000018  00405000  00405000  00003800  2**2
+                  CONTENTS, ALLOC, LOAD, DATA
+  2 .rdata        000007bc  00406000  00406000  00003a00  2**5
+                  CONTENTS, ALLOC, LOAD, READONLY, DATA
+  3 .eh_frame     00000b0c  00407000  00407000  00004200  2**2
+                  CONTENTS, ALLOC, LOAD, READONLY, DATA
+  4 .bss          00000074  00408000  00408000  00000000  2**2
+                  ALLOC
+  5 .idata        00000610  00409000  00409000  00004e00  2**2
+                  CONTENTS, ALLOC, LOAD, DATA
+  6 .CRT          00000018  0040a000  0040a000  00005600  2**2
+                  CONTENTS, ALLOC, LOAD, DATA
+  7 .tls          00000020  0040b000  0040b000  00005800  2**2
+                  CONTENTS, ALLOC, LOAD, DATA
+  8 .debug_aranges 00000058  0040c000  0040c000  00005a00  2**3
+                  CONTENTS, READONLY, DEBUGGING
+  9 .debug_info   00002b3e  0040d000  0040d000  00005c00  2**0
+                  CONTENTS, READONLY, DEBUGGING
+ 10 .debug_abbrev 0000034d  00410000  00410000  00008800  2**0
+                  CONTENTS, READONLY, DEBUGGING
+ 11 .debug_line   00000634  00411000  00411000  00008c00  2**0
+                  CONTENTS, READONLY, DEBUGGING
+ 12 .debug_frame  00000038  00412000  00412000  00009400  2**2
+                  CONTENTS, READONLY, DEBUGGING
+ 13 .debug_str    00000086  00413000  00413000  00009600  2**0
+                  CONTENTS, READONLY, DEBUGGING
+ 14 .debug_macro  00007687  00414000  00414000  00009800  2**0
+                  CONTENTS, READONLY, DEBUGGING
+SYMBOL TABLE:
+[  0](sec  1)(fl 0x00)(ty   20)(scl   2) (nx 0) 0x00000290 __mingw32_init_mainargs
+[  1](sec  1)(fl 0x00)(ty   20)(scl   2) (nx 0) 0x000002d0 _mainCRTStartup
+[  2](sec  1)(fl 0x00)(ty   20)(scl   2) (nx 0) 0x000002f0 _WinMainCRTStartup
+[  3](sec  1)(fl 0x00)(ty   20)(scl   2) (nx 0) 0x00000310 _atexit
+[  4](sec  1)(fl 0x00)(ty   20)(scl   2) (nx 0) 0x00000320 __onexit
+[  5](sec  1)(fl 0x00)(ty    0)(scl   3) (nx 1) 0x00000000 .text
+AUX scnlen 0x326 nreloc 42 nlnno 0
+[  7](sec  5)(fl 0x00)(ty    0)(scl   3) (nx 1) 0x00000000 .bss
+AUX scnlen 0x8 nreloc 0 nlnno 0
+[  9](sec -2)(fl 0x00)(ty    0)(scl 103) (nx 1) 0x0000001c cygming-crtbegin.c
+File 
+[ 11](sec  5)(fl 0x00)(ty    0)(scl   3) (nx 0) 0x00000008 _obj
+[ 12](sec  2)(fl 0x00)(ty    0)(scl   3) (nx 0) 0x00000000 _deregister_frame_fn
+[ 13](sec  1)(fl 0x00)(ty   20)(scl   2) (nx 1) 0x00000330 ___gcc_register_frame
+AUX tagndx 0 ttlsiz 0x0 lnnos 0 next 0
+[ 15](sec  1)(fl 0x00)(ty   20)(scl   2) (nx 0) 0x000003e0 ___gcc_deregister_frame
+[ 16](sec  1)(fl 0x00)(ty    0)(scl   3) (nx 1) 0x00000330 .text
+AUX scnlen 0xde nreloc 21 nlnno 0
+[ 18](sec  2)(fl 0x00)(ty    0)(scl   3) (nx 1) 0x00000000 .data
+AUX scnlen 0x4 nreloc 0 nlnno 0
+[ 20](sec  5)(fl 0x00)(ty    0)(scl   3) (nx 1) 0x00000008 .bss
+AUX scnlen 0x18 nreloc 0 nlnno 0
+[ 22](sec  4)(fl 0x00)(ty    0)(scl   3) (nx 1) 0x000000c8 .eh_frame
+AUX scnlen 0x64 nreloc 2 nlnno 0
+[ 24](sec  3)(fl 0x00)(ty    0)(scl   3) (nx 1) 0x00000000 .rdata
+AUX scnlen 0x41 nreloc 0 nlnno 0
+[ 26](sec  3)(fl 0x00)(ty    0)(scl   3) (nx 1) 0x000002ec .rdata$zzz
+AUX scnlen 0x32 nreloc 0 nlnno 0
+[ 28](sec -2)(fl 0x00)(ty    0)(scl 103) (nx 1) 0x00000099 hua.cpp
+File 
+[ 30](sec  3)(fl 0x00)(ty    0)(scl   3) (nx 0) 0x00000060 __ZL8base64en
+[ 31](sec  1)(fl 0x00)(ty   20)(scl   2) (nx 1) 0x00000410 __Z13base64_encodePKhjPc
+AUX tagndx 0 ttlsiz 0x0 lnnos 0 next 0
+[ 33](sec  1)(fl 0x00)(ty   20)(scl   2) (nx 0) 0x000005d7 _main
+[ 34](sec  1)(fl 0x00)(ty    0)(scl   3) (nx 1) 0x00000410 .text
+AUX scnlen 0x3f2 nreloc 24 nlnno 0
+[ 36](sec  2)(fl 0x00)(ty    0)(scl   3) (nx 1) 0x00000004 .data
+AUX scnlen 0x0 nreloc 0 nlnno 0
+[ 38](sec  5)(fl 0x00)(ty    0)(scl   3) (nx 1) 0x00000020 .bss
+AUX scnlen 0x0 nreloc 0 nlnno 0
+[ 40](sec  3)(fl 0x00)(ty    0)(scl   3) (nx 1) 0x00000060 .rdata
+AUX scnlen 0x7f nreloc 0 nlnno 0
+[ 42](sec 10)(fl 0x00)(ty    0)(scl   3) (nx 1) 0x00000000 .debug_info
+AUX scnlen 0xc72 nreloc 8 nlnno 0
+[ 44](sec 11)(fl 0x00)(ty    0)(scl   3) (nx 1) 0x00000000 .debug_abbrev
+AUX scnlen 0x204 nreloc 0 nlnno 0
+[ 46](sec  9)(fl 0x00)(ty    0)(scl   3) (nx 1) 0x00000000 .debug_aranges
+AUX scnlen 0x20 nreloc 2 nlnno 0
+[ 48](sec 15)(fl 0x00)(ty    0)(scl   3) (nx 1) 0x00000000 .debug_macro
+AUX scnlen 0x7687 nreloc 1 nlnno 0
+[ 50](sec 12)(fl 0x00)(ty    0)(scl   3) (nx 1) 0x00000000 .debug_line
+AUX scnlen 0x46c nreloc 1 nlnno 0
+[ 52](sec  3)(fl 0x00)(ty    0)(scl   3) (nx 1) 0x00000320 .rdata$zzz
+AUX scnlen 0x23 nreloc 0 nlnno 0
+[ 54](sec  4)(fl 0x00)(ty    0)(scl   3) (nx 1) 0x0000012c .eh_frame
+AUX scnlen 0x58 nreloc 2 nlnno 0
+[ 56](sec  1)(fl 0x00)(ty   20)(scl   2) (nx 1) 0x00000810 __setargv
+AUX tagndx 0 ttlsiz 0x0 lnnos 0 next 0
+[ 58](sec  1)(fl 0x00)(ty    0)(scl   3) (nx 1) 0x00000810 .text
+AUX scnlen 0x39b nreloc 17 nlnno 0
+[ 60](sec  3)(fl 0x00)(ty    0)(scl   3) (nx 1) 0x000000e0 .rdata
+AUX scnlen 0x10c nreloc 67 nlnno 0
+[ 62](sec  1)(fl 0x00)(ty   20)(scl   2) (nx 1) 0x00000bb0 ___cpu_features_init
+AUX tagndx 0 ttlsiz 0x0 lnnos 0 next 0
+[ 64](sec  1)(fl 0x00)(ty    0)(scl   3) (nx 1) 0x00000bb0 .text
+AUX scnlen 0x107 nreloc 2 nlnno 0
+[ 66](sec  5)(fl 0x00)(ty    0)(scl   3) (nx 1) 0x00000024 .bss
